@@ -99,13 +99,11 @@
 		3A930ED7265C1909000FD3EB /* Gainy */ = {
 			isa = PBXGroup;
 			children = (
-				3A930ED8265C1909000FD3EB /* AppDelegate.swift */,
-				3A930EDA265C1909000FD3EB /* SceneDelegate.swift */,
-				3A930EDC265C1909000FD3EB /* ViewController.swift */,
-				3A930EDE265C1909000FD3EB /* Main.storyboard */,
-				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
-				3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */,
-				3A930EE6265C190C000FD3EB /* Info.plist */,
+				3A930F17265C1B8D000FD3EB /* AppCore */,
+				3A930F1C265C1BA2000FD3EB /* View */,
+				3A930F1F265C1BD0000FD3EB /* Controllers */,
+				3A930F1B265C1B96000FD3EB /* Resources */,
+				3A930F1E265C1BBF000FD3EB /* Supporting Files */,
 			);
 			path = Gainy;
 			sourceTree = "<group>";
@@ -126,6 +124,56 @@
 				3A930EFC265C190C000FD3EB /* Info.plist */,
 			);
 			path = GainyUITests;
+			sourceTree = "<group>";
+		};
+		3A930F17265C1B8D000FD3EB /* AppCore */ = {
+			isa = PBXGroup;
+			children = (
+				3A930ED8265C1909000FD3EB /* AppDelegate.swift */,
+				3A930EDA265C1909000FD3EB /* SceneDelegate.swift */,
+			);
+			path = AppCore;
+			sourceTree = "<group>";
+		};
+		3A930F1B265C1B96000FD3EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3A930F1C265C1BA2000FD3EB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A930F1D265C1BA9000FD3EB /* Storyboards */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A930F1D265C1BA9000FD3EB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3A930EDE265C1909000FD3EB /* Main.storyboard */,
+				3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3A930F1E265C1BBF000FD3EB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A930EE6265C190C000FD3EB /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3A930F1F265C1BD0000FD3EB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A930EDC265C1909000FD3EB /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
