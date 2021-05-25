@@ -1,0 +1,1 @@
+typealias HttpParameters = [String: Any]
