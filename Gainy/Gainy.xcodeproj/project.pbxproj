@@ -186,6 +186,7 @@
 				3A930ED1265C1909000FD3EB /* Sources */,
 				3A930ED2265C1909000FD3EB /* Frameworks */,
 				3A930ED3265C1909000FD3EB /* Resources */,
+				3A930F2E265CC679000FD3EB /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -300,6 +301,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3A930F2E265CC679000FD3EB /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"WARNING: SwiftLint not installed, use brew to install it.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A930ED1265C1909000FD3EB /* Sources */ = {
