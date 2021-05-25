@@ -19,7 +19,7 @@
 		3A930F3A265D340F000FD3EB /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F39265D340F000FD3EB /* ApiRouter.swift */; };
 		3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F41265D3429000FD3EB /* NetworkRouter.swift */; };
 		3A930F48265D3454000FD3EB /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F47265D3454000FD3EB /* HttpMethod.swift */; };
-		3A930F51265D3466000FD3EB /* HttpParameterEnconding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F50265D3466000FD3EB /* HttpParameterEnconding.swift */; };
+		3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */; };
 		3A930F59265D3472000FD3EB /* HttpParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F58265D3472000FD3EB /* HttpParameters.swift */; };
 		3A930F5E265D3479000FD3EB /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F5D265D3479000FD3EB /* HttpRequest.swift */; };
 		3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */; };
@@ -62,7 +62,7 @@
 		3A930F39265D340F000FD3EB /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
 		3A930F41265D3429000FD3EB /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		3A930F47265D3454000FD3EB /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		3A930F50265D3466000FD3EB /* HttpParameterEnconding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterEnconding.swift; sourceTree = "<group>"; };
+		3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterEncoding.swift; sourceTree = "<group>"; };
 		3A930F58265D3472000FD3EB /* HttpParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameters.swift; sourceTree = "<group>"; };
 		3A930F5D265D3479000FD3EB /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStatusCode.swift; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				3A930F47265D3454000FD3EB /* HttpMethod.swift */,
-				3A930F50265D3466000FD3EB /* HttpParameterEnconding.swift */,
+				3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */,
 				3A930F58265D3472000FD3EB /* HttpParameters.swift */,
 				3A930F5D265D3479000FD3EB /* HttpRequest.swift */,
 				3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */,
@@ -386,7 +386,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"WARNING: SwiftLint not installed, use brew to install it.\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config \"${SRCROOT}/../.swiftlint.yml\"\nelse\n  echo \"WARNING: SwiftLint not installed, use brew to install it.\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -403,7 +403,7 @@
 				3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */,
 				3A930F48265D3454000FD3EB /* HttpMethod.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
-				3A930F51265D3466000FD3EB /* HttpParameterEnconding.swift in Sources */,
+				3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
 				3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */,
 				3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */,

@@ -224,4 +224,4 @@ vertical_whitespace:
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
  - build
- #- gainy-ios/gainy-app/ThirdParty/**
+ #- Gainy/Gainy/ThirdParty/**
