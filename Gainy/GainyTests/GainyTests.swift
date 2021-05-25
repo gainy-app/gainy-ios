@@ -1,15 +1,7 @@
-//
-//  GainyTests.swift
-//  GainyTests
-//
-//  Created by Dersim Davaod on 5/24/21.
-//
-
-import XCTest
 @testable import Gainy
+import XCTest
 
 class GainyTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -29,5 +21,4 @@ class GainyTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }
