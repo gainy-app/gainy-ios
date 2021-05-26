@@ -8,10 +8,72 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.layer.cornerRadius = 8
-        self.backgroundColor = .orange
+        self.backgroundColor = UIColor.Gainy.white
+
+        self.addSubview(nameLabel)
+        self.addSubview(descriptionLabel)
+        self.addSubview(stocksLabel)
+        self.addSubview(stocksAmountLabel)
+
+        NSLayoutConstraint.activate([
+            nameLabel
+                .leadingAnchor
+                .constraint(equalTo: self.leadingAnchor, constant: 16),
+            nameLabel
+                .trailingAnchor
+                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -96),
+            nameLabel
+                .heightAnchor
+                .constraint(equalToConstant: 20),
+            nameLabel
+                .topAnchor
+                .constraint(equalTo: topAnchor, constant: 16),
+            nameLabel
+                .bottomAnchor
+                .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
+
+            descriptionLabel
+                .leadingAnchor
+                .constraint(equalTo: self.leadingAnchor, constant: 16),
+            descriptionLabel
+                .trailingAnchor
+                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128),
+            descriptionLabel
+                .heightAnchor
+                .constraint(lessThanOrEqualToConstant: 29),
+            descriptionLabel
+                .bottomAnchor
+                .constraint(greaterThanOrEqualTo: self.bottomAnchor, constant: -19),
+
+            stocksLabel
+                .topAnchor
+                .constraint(equalTo: self.topAnchor, constant: 16),
+            stocksLabel
+                .trailingAnchor
+                .constraint(equalTo: self.trailingAnchor, constant: -16),
+            stocksLabel
+                .widthAnchor
+                .constraint(equalToConstant: 50),
+            stocksLabel
+                .bottomAnchor
+                .constraint(equalTo: self.stocksAmountLabel.topAnchor, constant: 0),
+
+            stocksAmountLabel
+                .trailingAnchor
+                .constraint(equalTo: self.trailingAnchor, constant: -16),
+            stocksAmountLabel
+                .widthAnchor
+                .constraint(equalToConstant: 50),
+        ])
 
 //        setupSwipeGesture()
+    }
+
+    override func draw(_ rect: CGRect) {
+        let borderPath = UIBezierPath(roundedRect: self.bounds,
+                                      cornerRadius: cornerRadius)
+        UIColor.orange.set() // TODO: update with a picture
+        borderPath.fill()
     }
 
     @available(*, unavailable)
@@ -31,19 +93,13 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-//        UIFont(name: "SFProDisplay-Bold", size: 20)
-        label.font = UIFont.systemFont(
-            ofSize: 20,
-            weight: .bold
-        )
-        label.textColor = .white
+        // TODO: UIFont(name: "SFProDisplay-Bold", size: 20)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.textColor = UIColor.Gainy.white
+
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
-        label.setContentCompressionResistancePriority(
-            .defaultHigh,
-            for: .horizontal
-        )
 
         return label
     }()
@@ -52,19 +108,13 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-//        UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.font = UIFont.systemFont(
-            ofSize: 0,
-            weight: .regular
-        )
-        label.textColor = .white
+        // TODO: UIFont(name: "SFProDisplay-Regular", size: 14)
+        label.font = UIFont.systemFont(ofSize: 0, weight: .regular)
+        label.textColor = UIColor.Gainy.white
+
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
-        label.setContentCompressionResistancePriority(
-            .defaultHigh,
-            for: .horizontal
-        )
 
         return label
     }()
@@ -73,18 +123,12 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-//        UIFont(name: "SFCompactRounded-Medium", size: 9)
-        label.font = UIFont.systemFont(
-            ofSize: 9,
-            weight: .medium
-        )
-        label.textColor = .white
+        // TODO: UIFont(name: "SFCompactRounded-Medium", size: 9)
+        label.font = UIFont.systemFont(ofSize: 9, weight: .medium)
+        label.textColor = UIColor.Gainy.white
+
         label.numberOfLines = 1
         label.textAlignment = .right
-        label.setContentCompressionResistancePriority(
-            .defaultHigh,
-            for: .horizontal
-        )
 
         return label
     }()
@@ -92,18 +136,13 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-//       UIFont(name: "SFCompactRounded-Semibold", size: 28)
-        label.font = UIFont.systemFont(
-            ofSize: 28,
-            weight: .semibold
-        )
+
+        // TODO: UIFont(name: "SFCompactRounded-Semibold", size: 28)
+        label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         label.textColor = UIColor.Gainy.yellow
+
         label.numberOfLines = 1
         label.textAlignment = .right
-        label.setContentCompressionResistancePriority(
-            .defaultHigh,
-            for: .horizontal
-        )
 
         return label
     }()
@@ -177,81 +216,18 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
     // MARK: Functions
 
     func configureWith(name: String, description: String, stocksAmount: Int) {
-        self.name = name
-        self.desc = description
-        self.stocksAmount = stocksAmount
-
         nameLabel.text = name
         descriptionLabel.text = description
         stocksLabel.text = "STOCKS"
         stocksAmountLabel.text = "\(stocksAmount)"
-
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(stocksLabel)
-        self.addSubview(stocksAmountLabel)
-
-        NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
-                constant: 16
-            ),
-
-            nameLabel.trailingAnchor.constraint(
-                lessThanOrEqualTo: self.stocksAmountLabel.leadingAnchor,
-                constant: -8
-            ),
-            nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            nameLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 24),
-        ])
-
-        NSLayoutConstraint.activate([
-            descriptionLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
-                constant: 16
-            ),
-
-            descriptionLabel.trailingAnchor.constraint(
-                lessThanOrEqualTo: self.trailingAnchor,
-                constant: -72
-            ),
-            descriptionLabel.bottomAnchor.constraint(greaterThanOrEqualTo: self.bottomAnchor, constant: 19),
-        ])
-
-        NSLayoutConstraint.activate([
-            stocksLabel.topAnchor.constraint(
-                equalTo: self.topAnchor,
-                constant: 16
-            ),
-
-            stocksLabel.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor,
-                constant: -16
-            ),
-            stocksLabel.widthAnchor.constraint(equalToConstant: 50),
-        ])
-
-        NSLayoutConstraint.activate([
-            stocksAmountLabel.topAnchor.constraint(
-                equalTo: self.stocksLabel.topAnchor,
-                constant: 8
-            ),
-
-            stocksAmountLabel.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor,
-                constant: -16
-            ),
-        ])
     }
 
     // MARK: Private
 
     // MARK: Properties
 
+    private let cornerRadius: CGFloat = 8
 
-    private var name: String = ""
-    private var desc: String = ""
-    private var stocksAmount: Int = 10
 //    private var swipeGesture: UIPanGestureRecognizer!
 //    private var originalPoint: CGPoint!
 }
