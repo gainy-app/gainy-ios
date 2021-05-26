@@ -10,7 +10,6 @@
 		3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930ED8265C1909000FD3EB /* AppDelegate.swift */; };
 		3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDA265C1909000FD3EB /* SceneDelegate.swift */; };
 		3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */; };
-		3A930EE0265C1909000FD3EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EDE265C1909000FD3EB /* Main.storyboard */; };
 		3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE1265C190C000FD3EB /* Assets.xcassets */; };
 		3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */; };
 		3A930EF0265C190C000FD3EB /* GainyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EEF265C190C000FD3EB /* GainyTests.swift */; };
@@ -74,7 +73,6 @@
 		3A930ED8265C1909000FD3EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A930EDA265C1909000FD3EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewController.swift; sourceTree = "<group>"; };
-		3A930EDF265C1909000FD3EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A930EE1265C190C000FD3EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A930EE4265C190C000FD3EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A930EE6265C190C000FD3EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 		3A930F1D265C1BA9000FD3EB /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				3A930EDE265C1909000FD3EB /* Main.storyboard */,
 				3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
@@ -555,7 +552,6 @@
 			files = (
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
-				3A930EE0265C1909000FD3EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,14 +670,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3A930EDE265C1909000FD3EB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3A930EDF265C1909000FD3EB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
