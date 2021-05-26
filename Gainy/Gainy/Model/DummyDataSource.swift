@@ -1,5 +1,7 @@
 // TODO: remove when testing is completed
-class DummyDataSource {
+enum DummyDataSource {
+    // MARK: Internal
+
     static var collections = [
         Collection(
             id: 0,
@@ -28,14 +30,16 @@ class DummyDataSource {
     ]
 
     static var recommendedCollections = baseData + (400...900)
-            .map { hashId in
-                Collection(
-                    id: hashId,
-                    name: "AI companies",
-                    description: "Technology companies that utilize artificial intelligence",
-                    stocksAmount: 15
-                )
-            }
+        .map { hashId in
+            Collection(
+                id: hashId,
+                name: "AI companies",
+                description: "Technology companies that utilize artificial intelligence",
+                stocksAmount: 15
+            )
+        }
+
+    // MARK: Private
 
     private static var baseData = [
         Collection(

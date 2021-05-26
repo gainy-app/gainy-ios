@@ -1,19 +1,97 @@
 import UIKit
 
+extension DiscoveredCollectionViewCell: UIGestureRecognizerDelegate {
+}
+
 class DiscoveredCollectionViewCell: UICollectionViewCell {
-    // MARK: - Internal
+    private var swipeGesture: UIPanGestureRecognizer!
+    private var originalPoint: CGPoint!
+
+    func setupSwipeGesture() {
+        swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(swiped(_:)))
+        swipeGesture.delegate = self
+
+        self.addGestureRecognizer(swipeGesture)
+    }
+
+    @objc
+    func swiped(_ gestureRecognizer: UIPanGestureRecognizer) {
+        let xDistance: CGFloat = gestureRecognizer.translation(in: self).x
+
+        switch gestureRecognizer.state {
+        case UIGestureRecognizerState.began:
+            self.originalPoint = self.center
+        case UIGestureRecognizerState.changed:
+            let translation: CGPoint = gestureRecognizer.translation(in: self)
+            let displacement = CGPoint(x: translation.x, y: translation.y)
+
+            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
+            if hasMovedToFarLeft {
+                return
+            } else {
+//                resetViewPositionAndTransformations()
+            }
+
+            if displacement.x + self.originalPoint.x < self.originalPoint.x {
+                self.transform = CGAffineTransform.init(translationX: displacement.x, y: 0)
+                self.center = CGPoint(x: self.originalPoint.x + xDistance, y: self.originalPoint.y)
+            }
+        case UIGestureRecognizerState.ended:
+            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
+            if hasMovedToFarLeft {
+                removeViewFromParentWithAnimation()
+            } else {
+                resetViewPositionAndTransformations()
+            }
+        default:
+            break
+        }
+    }
+
+    func resetViewPositionAndTransformations() {
+        UIView.animate(withDuration: 0.8,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.0,
+                       options: UIView.AnimationOptions(),
+                       animations: {
+                            self.center = self.originalPoint
+                            self.transform = CGAffineTransform(rotationAngle: 0)
+                       },
+                       completion: { _ in })
+    }
+
+    func removeViewFromParentWithAnimation() {
+        var animations:(() -> Void)!
+        animations = { self.center.x = UIScreen.main.bounds.width / 2 - 50 }
+
+        UIView.animate(withDuration: 0.2,
+                       animations: animations) { _ in
+        }
+    }
+
+    // TODO: review code above
 
     // MARK: Lifecycle
 
-    override init(frame: CGRect) {
+    override init(frame _: CGRect) {
         super.init(frame: .zero)
 
         self.layer.cornerRadius = 8
         self.backgroundColor = .orange
+
+        setupSwipeGesture()
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Internal
+
+    static var reuseIdentifier: String {
+        String(describing: self)
     }
 
     // MARK: Properties
@@ -99,10 +177,6 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    static var reuseIdentifier: String {
-        String(describing: self)
-    }
-
     // MARK: Functions
 
     func configureWith(name: String, description: String, stocksAmount: Int) {
@@ -157,7 +231,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
                 equalTo: self.trailingAnchor,
                 constant: -16
             ),
-            stocksLabel.widthAnchor.constraint(equalToConstant: 50)
+            stocksLabel.widthAnchor.constraint(equalToConstant: 50),
         ])
 
         NSLayoutConstraint.activate([
@@ -173,7 +247,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    // MARK: - Private
+    // MARK: Private
 
     // MARK: Properties
 

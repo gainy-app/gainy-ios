@@ -1,18 +1,23 @@
 import UIKit
 
 class DiscoveredCollectionsHeaderView: UICollectionReusableView {
-    // MARK: - Internal
-
     // MARK: Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = .white //UIColor(hexRgb: 0xE5E5E5)
+        self.backgroundColor = .white // UIColor(hexRgb: 0xE5E5E5)
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: Internal
+
+    static var reuseIdentifier: String {
+        String(describing: self)
     }
 
     // MARK: Properties
@@ -59,10 +64,6 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
         return label
     }()
 
-    static var reuseIdentifier: String {
-        String(describing: self)
-    }
-
     // MARK: Functions
 
     func configureWith(title: String, description: String) {
@@ -104,7 +105,7 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
         ])
     }
 
-    // MARK: - Private
+    // MARK: Private
 
     // MARK: Properties
 

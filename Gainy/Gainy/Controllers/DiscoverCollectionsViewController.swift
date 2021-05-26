@@ -1,18 +1,20 @@
 import UIKit
 
 typealias CollectionsDataSource = UICollectionViewDiffableDataSource
-    <DiscoverCollectionsViewController.Section, Collection>
+<DiscoverCollectionsViewController.Section, Collection>
 typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
-    <DiscoverCollectionsViewController.Section, Collection>
+<DiscoverCollectionsViewController.Section, Collection>
 
 class DiscoverCollectionsViewController: UIViewController {
-    // MARK: - Internal
+    // MARK: Internal
 
     // MARK: Types
 
     enum Section: Int, CaseIterable {
         case discovered
         case recommended
+
+        // MARK: Internal
 
         var columns: Int {
             switch self {
@@ -22,8 +24,6 @@ class DiscoverCollectionsViewController: UIViewController {
         }
     }
 
-    // MARK: Lifecycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +31,7 @@ class DiscoverCollectionsViewController: UIViewController {
         updateSnapshot()
     }
 
-    // MARK: - Private
+    // MARK: Private
 
     // MARK: IBOutlets
 
@@ -46,7 +46,7 @@ class DiscoverCollectionsViewController: UIViewController {
     private func setUpCollectionView() {
         self.discoverCollectionsCollectionView = UICollectionView(frame: self.view.frame,
                                                                   collectionViewLayout: appleLayout())
-        self.discoverCollectionsCollectionView.backgroundColor = .white// UIColor(hexRgb: 0xE5E5E5)
+        self.discoverCollectionsCollectionView.backgroundColor = .white // UIColor(hexRgb: 0xE5E5E5)
         self.discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         self.discoverCollectionsCollectionView.dataSource = dataSource
 
@@ -107,13 +107,14 @@ class DiscoverCollectionsViewController: UIViewController {
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             guard kind == UICollectionView.elementKindSectionHeader else {
-              return nil
+                return nil
             }
 
             let headerView = collectionView.dequeueReusableSupplementaryView(
-              ofKind: kind,
-              withReuseIdentifier: DiscoveredCollectionsHeaderView.reuseIdentifier,
-              for: indexPath) as? DiscoveredCollectionsHeaderView
+                ofKind: kind,
+                withReuseIdentifier: DiscoveredCollectionsHeaderView.reuseIdentifier,
+                for: indexPath
+            ) as? DiscoveredCollectionsHeaderView
 
 //            let section = self
 //                .dataSource
@@ -135,12 +136,12 @@ class DiscoverCollectionsViewController: UIViewController {
                 assertionFailure("FAILURE")
             }
             return headerView
-          }
+        }
 
         return dataSource
     }
 
-    private func updateSnapshot(animatingChange: Bool = false) {
+    private func updateSnapshot(animatingChange _: Bool = false) {
         var snapshot = CollectionsDataSourceSnapshot()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(DummyDataSource.collections,
@@ -230,5 +231,4 @@ class DiscoverCollectionsViewController: UIViewController {
 }
 
 // TODO: Use UICollectionViewDragDelegate/UICollectionViewDropDelegate
-extension DiscoverCollectionsViewController: UICollectionViewDelegate {
-}
+extension DiscoverCollectionsViewController: UICollectionViewDelegate {}

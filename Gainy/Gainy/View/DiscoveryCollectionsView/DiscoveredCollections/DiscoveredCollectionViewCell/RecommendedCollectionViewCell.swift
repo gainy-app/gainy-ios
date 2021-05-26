@@ -1,20 +1,21 @@
 import UIKit
 
 class RecommendedCollectionViewCell: UICollectionViewCell {
-    // MARK: - Internal
-
     // MARK: Lifecycle
 
-    override init(frame: CGRect) {
+    override init(frame _: CGRect) {
         super.init(frame: .zero)
 
         self.layer.cornerRadius = 8
         self.backgroundColor = .orange
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: Internal
 
     // MARK: Properties
 
@@ -204,7 +205,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    // MARK: - Private
+    // MARK: Private
 
     // MARK: Properties
 
@@ -215,7 +216,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     // MARK: Functions
 
     @objc
-    private func plusButtonTapped(_ sender: UIButton) {
+    private func plusButtonTapped(_: UIButton) {
         print("Plus button tapped")
     }
 }
