@@ -11,7 +11,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 8
         self.backgroundColor = .orange
 
-        setupSwipeGesture()
+//        setupSwipeGesture()
     }
 
     @available(*, unavailable)
@@ -108,68 +108,69 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    func setupSwipeGesture() {
-        swipeGesture = UIPanGestureRecognizer(target: self, action: #selector(swiped(_:)))
-        swipeGesture.delegate = self
+//    func setupSwipeGesture() {
+//        swipeGesture = UIPanGestureRecognizer(target: self,
+//                                              action: #selector(swiped(_:)))
+//        swipeGesture.delegate = self
+//
+//        self.addGestureRecognizer(swipeGesture)
+//    }
 
-        self.addGestureRecognizer(swipeGesture)
-    }
-
-    @objc
-    func swiped(_ gestureRecognizer: UIPanGestureRecognizer) {
-        let xDistance: CGFloat = gestureRecognizer.translation(in: self).x
-
-        switch gestureRecognizer.state {
-        case UIGestureRecognizerState.began:
-            self.originalPoint = self.center
-        case UIGestureRecognizerState.changed:
-            let translation: CGPoint = gestureRecognizer.translation(in: self)
-            let displacement = CGPoint(x: translation.x, y: translation.y)
-
-            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
-            if hasMovedToFarLeft {
-                return
-            } else {
+//    @objc
+//    func swiped(_ gestureRecognizer: UIPanGestureRecognizer) {
+//        let xDistance: CGFloat = gestureRecognizer.translation(in: self).x
+//
+//        switch gestureRecognizer.state {
+//        case UIGestureRecognizerState.began:
+//            self.originalPoint = self.center
+//        case UIGestureRecognizerState.changed:
+//            let translation: CGPoint = gestureRecognizer.translation(in: self)
+//            let displacement = CGPoint(x: translation.x, y: translation.y)
+//
+//            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
+//            if hasMovedToFarLeft {
+//                return
+//            } else {
+////                resetViewPositionAndTransformations()
+//            }
+//
+//            if displacement.x + self.originalPoint.x < self.originalPoint.x {
+//                self.transform = CGAffineTransform(translationX: displacement.x, y: 0)
+//                self.center = CGPoint(x: self.originalPoint.x + xDistance, y: self.originalPoint.y)
+//            }
+//        case UIGestureRecognizerState.ended:
+//            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
+//            if hasMovedToFarLeft {
+//                removeViewFromParentWithAnimation()
+//            } else {
 //                resetViewPositionAndTransformations()
-            }
+//            }
+//        default:
+//            break
+//        }
+//    }
 
-            if displacement.x + self.originalPoint.x < self.originalPoint.x {
-                self.transform = CGAffineTransform(translationX: displacement.x, y: 0)
-                self.center = CGPoint(x: self.originalPoint.x + xDistance, y: self.originalPoint.y)
-            }
-        case UIGestureRecognizerState.ended:
-            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
-            if hasMovedToFarLeft {
-                removeViewFromParentWithAnimation()
-            } else {
-                resetViewPositionAndTransformations()
-            }
-        default:
-            break
-        }
-    }
+//    func resetViewPositionAndTransformations() {
+//        UIView.animate(withDuration: 0.8,
+//                       delay: 0.0,
+//                       usingSpringWithDamping: 0.8,
+//                       initialSpringVelocity: 0.0,
+//                       options: UIView.AnimationOptions(),
+//                       animations: {
+//                           self.center = self.originalPoint
+//                           self.transform = CGAffineTransform(rotationAngle: 0)
+//                       },
+//                       completion: { _ in })
+//    }
 
-    func resetViewPositionAndTransformations() {
-        UIView.animate(withDuration: 0.8,
-                       delay: 0.0,
-                       usingSpringWithDamping: 0.8,
-                       initialSpringVelocity: 0.0,
-                       options: UIView.AnimationOptions(),
-                       animations: {
-                           self.center = self.originalPoint
-                           self.transform = CGAffineTransform(rotationAngle: 0)
-                       },
-                       completion: { _ in })
-    }
-
-    func removeViewFromParentWithAnimation() {
-        var animations: (() -> Void)!
-        animations = { self.center.x = UIScreen.main.bounds.width / 2 - 50 }
-
-        UIView.animate(withDuration: 0.2,
-                       animations: animations) { _ in
-        }
-    }
+//    func removeViewFromParentWithAnimation() {
+//        var animations: (() -> Void)!
+//        animations = { self.center.x = UIScreen.main.bounds.width / 2 - 50 }
+//
+//        UIView.animate(withDuration: 0.2,
+//                       animations: animations) { _ in
+//        }
+//    }
 
     // TODO: review code above
 
@@ -247,10 +248,10 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
 
     // MARK: Properties
 
-    private var swipeGesture: UIPanGestureRecognizer!
-    private var originalPoint: CGPoint!
 
     private var name: String = ""
     private var desc: String = ""
     private var stocksAmount: Int = 10
+//    private var swipeGesture: UIPanGestureRecognizer!
+//    private var originalPoint: CGPoint!
 }
