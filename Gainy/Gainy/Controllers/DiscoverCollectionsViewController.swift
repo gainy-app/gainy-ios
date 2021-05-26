@@ -157,6 +157,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                         print(DummyDataSource.collections.count)
                         DummyDataSource.collections.append(newCollection)
                         DispatchQueue.main.async {
+                            cell.setButtonChecked()
                             self.snapshot.appendItems([newCollection], toSection: .discovered)
                             self.dataSource.apply(self.snapshot, animatingDifferences: true)
                         }
@@ -276,16 +277,22 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             let group = columns == 1 ? discoveredGroup : recommendedGroup
             let section = NSCollectionLayoutSection(group: group)
 
-            let headerFooterSize = NSCollectionLayoutSize(
+            let headerSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .estimated(70)
             )
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-                layoutSize: headerFooterSize,
+                layoutSize: headerSize,
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .top
             )
             section.boundarySupplementaryItems = [sectionHeader]
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 0.0,
+                leading: 0.0,
+                bottom: 12.0,
+                trailing: 0.0
+            )
 
             return section
         }

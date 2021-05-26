@@ -193,15 +193,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         return button
     }()
 
-    lazy var plusImageView: UIImageView = {
-        let imageView = UIImageView()
-
-        imageView.image = UIImage(named: "plus")
-        imageView.contentMode = .center
-
-        return imageView
-    }()
-
     // MARK: Functions
 
     func configureWith(name: String, description: String, stocksAmount: Int) {
@@ -209,6 +200,10 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         stocksLabel.text = "STOCKS"
         stocksAmountLabel.text = "\(stocksAmount)"
+    }
+
+    func setButtonChecked() {
+        plusButton.setImage(UIImage(named: "check"), for: .normal)
     }
 
     // MARK: Private

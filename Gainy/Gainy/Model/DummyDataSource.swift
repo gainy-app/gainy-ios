@@ -33,7 +33,7 @@ enum DummyDataSource {
         ),
     ]
 
-    static var recommendedCollections = baseData + (400...900)
+    static var recommendedCollections = baseData + (400...410)
         .map { hashId in
             Collection(
                 id: hashId,
