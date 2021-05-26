@@ -1,12 +1,16 @@
 final class ApplicationCoordinator: BaseCoordinator {
-    // MARK: - Vars & Lets
+    // MARK: Lifecycle
 
-    private let coordinatorFactory: CoordinatorFactoryProtocol
-    private let router: RouterProtocol
-    private var launchInstructor = LaunchInstructor.configure()
-    private let viewControllerFactory = ViewControllerFactory()
+    // MARK: Init
 
-    // MARK: - Coordinator
+    init(router: Router, coordinatorFactory: CoordinatorFactory) {
+        self.router = router
+        self.coordinatorFactory = coordinatorFactory
+    }
+
+    // MARK: Internal
+
+    // MARK: Coordinator
 
     override func start(with option: DeepLinkOption?) {
         if option != nil {
@@ -20,7 +24,16 @@ final class ApplicationCoordinator: BaseCoordinator {
         }
     }
 
-    // MARK: - Private methods
+    // MARK: Private
+
+    // MARK: Properties
+
+    private let coordinatorFactory: CoordinatorFactoryProtocol
+    private let router: RouterProtocol
+    private var launchInstructor = LaunchInstructor.configure()
+    private let viewControllerFactory = ViewControllerFactory()
+
+    // MARK: Functions
 
     private func runAFlow() {
         let coordinator = self.coordinatorFactory.makeAuthCoordinatorBox(
@@ -50,12 +63,5 @@ final class ApplicationCoordinator: BaseCoordinator {
         }
         self.addDependency(coordinator)
         coordinator.start()
-    }
-
-    // MARK: - Init
-
-    init(router: Router, coordinatorFactory: CoordinatorFactory) {
-        self.router = router
-        self.coordinatorFactory = coordinatorFactory
     }
 }

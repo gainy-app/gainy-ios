@@ -1,17 +1,35 @@
 import UIKit
 
 final class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
-    // MARK: - CoordinatorFinishOutput
+    // MARK: Lifecycle
+
+    init(router: RouterProtocol, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) {
+        self.router = router
+        self.coordinatorFactory = coordinatorFactory
+        self.viewControllerFactory = viewControllerFactory
+    }
+
+    // MARK: Internal
+
+    // MARK: CoordinatorFinishOutput
 
     var finishFlow: (() -> Void)?
 
-    // MARK: - Vars & Lets
+    // MARK: - Coordinator
+
+    override func start() {
+        self.showLoginViewController()
+    }
+
+    // MARK: Private
+
+    // MARK: Properies
 
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private let viewControllerFactory: ViewControllerFactory
 
-    // MARK: - Private methods
+    // MARK: Functions
 
     private func showLoginViewController() {
         let loginVC = self.viewControllerFactory.instantiateLoginViewController()
@@ -38,7 +56,7 @@ final class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        self.router.push(registerVC)
     }
 
-    private func showForgetPassword(module: LoginViewController) {
+    private func showForgetPassword(module _: LoginViewController) {
 //        let coordinator = self.coordinatorFactory.makeChangePasswordCoordinatorBox(router: self.router, viewControllerFactory: self.viewControllerFactory)
 //        coordinator.finishFlow = { [unowned self, weak module, unowned coordinator] in
 //            self.removeDependency(coordinator)
@@ -46,19 +64,5 @@ final class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        }
 //        self.addDependency(coordinator)
 //        coordinator.start()
-    }
-
-    // MARK: - Coordinator
-
-    override func start() {
-        self.showLoginViewController()
-    }
-
-    // MARK: - Init
-
-    init(router: RouterProtocol, coordinatorFactory: CoordinatorFactoryProtocol, viewControllerFactory: ViewControllerFactory) {
-        self.router = router
-        self.coordinatorFactory = coordinatorFactory
-        self.viewControllerFactory = viewControllerFactory
     }
 }

@@ -2,13 +2,11 @@ import UIKit
 
 // M
 
-enum Profile {
-}
+enum Profile {}
 
 // VC
 
-protocol ProfileViewModelProtocol {
-}
+protocol ProfileViewModelProtocol {}
 
 class ProfileViewModel: NSObject, ProfileViewModelProtocol {
     // MARK: - Init

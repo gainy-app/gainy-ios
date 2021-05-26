@@ -6,8 +6,7 @@ enum A {}
 
 // A view model
 
-protocol AViewModelProtocol {
-}
+protocol AViewModelProtocol {}
 
 class AViewModel: NSObject, AViewModelProtocol {
     // MARK: - Init

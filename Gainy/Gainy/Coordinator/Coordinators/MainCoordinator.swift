@@ -1,15 +1,35 @@
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
-    // MARK: - CoordinatorFinishOutput
+    // MARK: Lifecycle
+
+    init(router: RouterProtocol,
+         coordinatorFactory: CoordinatorFactoryProtocol,
+         viewControllerFactory: ViewControllerFactory) {
+        self.router = router
+        self.coordinatorFactory = coordinatorFactory
+        self.viewControllerFactory = viewControllerFactory
+    }
+
+    // MARK: Internal
+
+    // MARK: CoordinatorFinishOutput
 
     var finishFlow: (() -> Void)?
 
-    // MARK: - Vars & Lets
+    // MARK: Coordinator
+
+    override func start() {
+        self.showAViewController()
+    }
+
+    // MARK: Private
+
+    // MARK: Properties
 
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private let viewControllerFactory: ViewControllerFactory
 
-    // MARK: - Private methods
+    // MARK: Functions
 
     private func showAViewController() {
         let aVC = self.viewControllerFactory.instantiateAViewController()
@@ -41,22 +61,5 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        }
 //        self.addDependency(coordinator)
 //        coordinator.start()
-    }
-
-    // MARK: - Coordinator
-
-    override func start() {
-        self.showAViewController()
-    }
-
-    // MARK: - Init
-
-    init(router: RouterProtocol,
-         coordinatorFactory: CoordinatorFactoryProtocol,
-         viewControllerFactory: ViewControllerFactory
-    ) {
-        self.router = router
-        self.coordinatorFactory = coordinatorFactory
-        self.viewControllerFactory = viewControllerFactory
     }
 }

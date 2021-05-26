@@ -30,20 +30,24 @@ protocol RouterProtocol: Presentable {
 }
 
 final class Router: NSObject, RouterProtocol {
+    // MARK: Lifecycle
 
-    // MARK: - Vars & Lets
+    init(rootController: UINavigationController) {
+        self.rootController = rootController
+        self.completions = [:]
+        super.init()
+        self.rootController?.delegate = self
+    }
 
-    private weak var rootController: UINavigationController?
-    private var completions: [UIViewController : () -> Void]
-    private var transition: UIViewControllerAnimatedTransitioning?
+    // MARK: Internal
 
-    // MARK: - Presentable
+    // MARK: Presentable
 
     func toPresent() -> UIViewController? {
         self.rootController
     }
 
-    // MARK: - RouterProtocol
+    // MARK: RouterProtocol
 
     func present(_ module: Presentable?) {
         present(module, animated: true)
@@ -69,8 +73,8 @@ final class Router: NSObject, RouterProtocol {
     func push(_ module: Presentable?, transition: UIViewControllerAnimatedTransitioning?, animated: Bool, completion: (() -> Void)?) {
         self.transition = transition
         guard let controller = module?.toPresent(),
-            (controller is UINavigationController == false)
-            else { assertionFailure("Deprecated push UINavigationController."); return }
+              controller is UINavigationController == false
+        else { assertionFailure("Deprecated push UINavigationController."); return }
 
         if let completion = completion {
             self.completions[controller] = completion
@@ -130,33 +134,33 @@ final class Router: NSObject, RouterProtocol {
         }
     }
 
-    // MARK: - Private methods
+    // MARK: Private
+
+    // MARK: Properties
+
+    private weak var rootController: UINavigationController?
+    private var completions: [UIViewController: () -> Void]
+    private var transition: UIViewControllerAnimatedTransitioning?
+
+    // MARK: Functions
 
     private func runCompletion(for controller: UIViewController) {
         guard let completion = self.completions[controller] else { return }
         completion()
         completions.removeValue(forKey: controller)
     }
-
-    // MARK: - Init methods
-
-    init(rootController: UINavigationController) {
-        self.rootController = rootController
-        self.completions = [:]
-        super.init()
-        self.rootController?.delegate = self
-    }
 }
 
 // MARK: - Extensions
+
 // MARK: - UINavigationControllerDelegate
 
 extension Router: UINavigationControllerDelegate {
     func navigationController(
-        _ navigationController: UINavigationController,
-        animationControllerFor operation: UINavigationController.Operation,
-        from fromVC: UIViewController,
-        to toVC: UIViewController
+        _: UINavigationController,
+        animationControllerFor _: UINavigationController.Operation,
+        from _: UIViewController,
+        to _: UIViewController
     ) -> UIViewControllerAnimatedTransitioning? {
         self.transition
     }

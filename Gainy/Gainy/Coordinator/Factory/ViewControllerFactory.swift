@@ -6,7 +6,7 @@ class ViewControllerFactory {
 //        loginVC.viewModel = LoginViewModel()
 //        return loginVC
 
-        return LoginViewController()
+        LoginViewController()
     }
 
     func instantiateAViewController() -> AViewController {
@@ -14,14 +14,14 @@ class ViewControllerFactory {
 //        aVC.viewModel = AViewModel()
 //        return aVC
 
-        return AViewController()
+        AViewController()
     }
 
     func instantiateProfileViewController() -> ProfileViewController {
 //        let profileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
 //        profileVC.viewModel = ProfileViewModel()
 //        return profileVC
-        return ProfileViewController()
+        ProfileViewController()
     }
 
 //    func instantiateBViewController(delegate: BViewControllerDelegate) -> BViewController {

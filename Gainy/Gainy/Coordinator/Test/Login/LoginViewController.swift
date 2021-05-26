@@ -2,13 +2,11 @@ import UIKit
 
 // M
 
-enum Login {
-}
+enum Login {}
 
 // VM
 
-protocol LoginViewModelProtocol {
-}
+protocol LoginViewModelProtocol {}
 
 class LoginViewModel: NSObject, LoginViewModelProtocol {
     // MARK: - Init

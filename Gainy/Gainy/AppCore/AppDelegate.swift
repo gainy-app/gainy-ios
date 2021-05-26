@@ -7,6 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Properites
 
     var window: UIWindow?
+
     var rootController: UINavigationController {
         guard let root = self.window?.rootViewController as? UINavigationController else {
             return UINavigationController()
@@ -15,13 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return root
     }
 
-    // MARK: Lifecycle
-
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 //        self.applicationCoordinator.start(with: nil)
 
-        return true
+        true
     }
 
     func application(_: UIApplication,

@@ -29,6 +29,5 @@ class BaseCoordinator: Coordinator {
         start(with: nil)
     }
 
-    func start(with option: DeepLinkOption?) {
-    }
+    func start(with _: DeepLinkOption?) {}
 }

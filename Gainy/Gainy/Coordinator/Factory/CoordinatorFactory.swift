@@ -3,8 +3,7 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
 
     func makeAuthCoordinatorBox(router: RouterProtocol,
                                 coordinatorFactory: CoordinatorFactoryProtocol,
-                                viewControllerFactory: ViewControllerFactory
-    ) -> AuthCoordinator {
+                                viewControllerFactory: ViewControllerFactory) -> AuthCoordinator {
         let coordinator = AuthCoordinator(router: router,
                                           coordinatorFactory: coordinatorFactory,
                                           viewControllerFactory: viewControllerFactory)
@@ -13,8 +12,7 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
 
     func makeMainCoordinatorBox(router: RouterProtocol,
                                 coordinatorFactory: CoordinatorFactoryProtocol,
-                                viewControllerFactory: ViewControllerFactory
-    ) -> MainCoordinator {
+                                viewControllerFactory: ViewControllerFactory) -> MainCoordinator {
         let coordinator = MainCoordinator(router: router,
                                           coordinatorFactory: coordinatorFactory,
                                           viewControllerFactory: viewControllerFactory)
@@ -23,8 +21,7 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
 
     func makeProfileCoordinatorBox(router: RouterProtocol,
                                    coordinatorFactory: CoordinatorFactoryProtocol,
-                                   viewControllerFactory: ViewControllerFactory
-    ) -> ProfileCoordinator {
+                                   viewControllerFactory: ViewControllerFactory) -> ProfileCoordinator {
         let coordinator = ProfileCoordinator(router: router,
                                              coordinatorFactory: coordinatorFactory,
                                              viewControllerFactory: viewControllerFactory)
