@@ -1,27 +1,5 @@
 import UIKit
 
-// TODO: move into the separate class
-extension UIColor {
-    convenience init(red: Int, green: Int, blue: Int) {
-        assert((0...255).contains(red), "Invalid red component")
-        assert((0...255).contains(green), "Invalid green component")
-        assert((0...255).contains(blue), "Invalid blue component")
-
-       self.init(red: CGFloat(red) / 255.0,
-                 green: CGFloat(green) / 255.0,
-                 blue: CGFloat(blue) / 255.0,
-                 alpha: 1.0)
-   }
-
-   convenience init(hexRgb: Int) {
-       self.init(
-           red: (hexRgb >> 16) & 0xFF,
-           green: (hexRgb >> 8) & 0xFF,
-           blue: hexRgb & 0xFF
-       )
-   }
-}
-
 class DiscoveredCollectionsHeaderView: UICollectionReusableView {
     // MARK: - Internal
 
@@ -30,7 +8,7 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor(hexRgb: 0xE5E5E5)
+        self.backgroundColor = .white //UIColor(hexRgb: 0xE5E5E5)
     }
 
     required init?(coder: NSCoder) {
@@ -48,7 +26,7 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
             ofSize: 20,
             weight: .semibold
         )
-        label.textColor = UIColor(hexRgb: 0x1F2E35)
+        label.textColor = UIColor.Gainy.textDark
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
@@ -69,7 +47,7 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
             ofSize: 14,
             weight: .regular
         )
-        label.textColor = UIColor(hexRgb: 0x687379)
+        label.textColor = UIColor.Gainy.darkGray
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left

@@ -46,7 +46,7 @@ class DiscoverCollectionsViewController: UIViewController {
     private func setUpCollectionView() {
         self.discoverCollectionsCollectionView = UICollectionView(frame: self.view.frame,
                                                                   collectionViewLayout: appleLayout())
-        self.discoverCollectionsCollectionView.backgroundColor = UIColor(hexRgb: 0xE5E5E5)
+        self.discoverCollectionsCollectionView.backgroundColor = .white// UIColor(hexRgb: 0xE5E5E5)
         self.discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         self.discoverCollectionsCollectionView.dataSource = dataSource
 

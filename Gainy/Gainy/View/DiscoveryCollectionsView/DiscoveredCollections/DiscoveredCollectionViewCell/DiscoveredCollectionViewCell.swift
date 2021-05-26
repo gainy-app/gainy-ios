@@ -88,7 +88,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
             ofSize: 28,
             weight: .semibold
         )
-        label.textColor = UIColor(hexRgb: 0xFFF500)
+        label.textColor = UIColor.Gainy.yellow
         label.numberOfLines = 1
         label.textAlignment = .right
         label.setContentCompressionResistancePriority(
