@@ -1,3 +1,4 @@
+import Foundation
 import UIKit
 
 typealias CollectionsDataSource = UICollectionViewDiffableDataSource
@@ -12,9 +13,18 @@ enum DiscoverCollections {}
 
 // A view model
 
-protocol DiscoverCollectionsViewModelProtocol {}
+class DiscoveredCollectionItemViewModel {}
+class RecommendedCollectionItemViewModel {}
+
+protocol DiscoverCollectionsViewModelProtocol {
+//    var discoveredCollections: [DiscoveredCollectionItemViewModel] { get }
+//    var recommendedCollections: [RecommendedCollectionItemViewModel] { get }
+}
 
 class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtocol {
+//    var discoveredCollections: [DiscoveredCollectionItemViewModel] = []
+//    var recommendedCollections: [RecommendedCollectionItemViewModel] = []
+
     // MARK: - Init
 
     override init() {
@@ -72,7 +82,9 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Properties
 
     private var discoverCollectionsCollectionView: UICollectionView!
+
     private lazy var dataSource = configureDataSource()
+    private var snapshot = CollectionsDataSourceSnapshot()
 
     // MARK: Functions
 
@@ -132,6 +144,24 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                 cell.configureWith(name: collection.name,
                                    description: collection.description,
                                    stocksAmount: collection.stocksAmount)
+                cell.plusButtonPressed = {
+                    let newCollection = Collection(
+                        id: collection.id,
+                        discovered: true,
+                        name: collection.name,
+                        description: collection.description,
+                        stocksAmount: collection.stocksAmount
+                    )
+
+                    if !DummyDataSource.collections.contains(newCollection) {
+                        print(DummyDataSource.collections.count)
+                        DummyDataSource.collections.append(newCollection)
+                        DispatchQueue.main.async {
+                            self.snapshot.appendItems([newCollection], toSection: .discovered)
+                            self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                        }
+                    }
+                }
                 return cell
             default:
                 return UICollectionViewCell()
@@ -175,7 +205,6 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     }
 
     private func updateSnapshot(animatingChange _: Bool = false) {
-        var snapshot = CollectionsDataSourceSnapshot()
         snapshot.appendSections(Section.allCases)
         snapshot.appendItems(DummyDataSource.collections,
                              toSection: .discovered)

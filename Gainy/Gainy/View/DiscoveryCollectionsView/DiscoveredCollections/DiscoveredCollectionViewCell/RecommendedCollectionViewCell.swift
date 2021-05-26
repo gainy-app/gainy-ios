@@ -23,6 +23,8 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         String(describing: self)
     }
 
+    var plusButtonPressed: (() -> Void) = {}
+
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -217,6 +219,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        print("Plus button tapped")
+        plusButtonPressed()
     }
 }
