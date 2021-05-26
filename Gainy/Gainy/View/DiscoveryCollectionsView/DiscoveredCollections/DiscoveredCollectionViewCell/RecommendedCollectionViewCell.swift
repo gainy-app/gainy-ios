@@ -104,23 +104,20 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     }()
 
     lazy var plusButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 28, height: 28))
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 14
+        button.backgroundColor = .white
 
-////        UIFont(name: "SFProDisplay-Bold", size: 16)
-//        label.font = UIFont.systemFont(
-//            ofSize: 16,
-//            weight: .bold
-//        )
-//        label.textColor = .white
-//        label.numberOfLines = 0
-//        label.lineBreakMode = .byWordWrapping
-//        label.textAlignment = .left
-//        label.setContentCompressionResistancePriority(
-//            .defaultHigh,
-//            for: .horizontal
-//        )
-//
+        // TODO: make a robust centering
+        let imageView = UIImageView(frame: CGRect(x: 8.33, y: 8.33, width: 11.33, height: 11.33))
+        imageView.image = UIImage(named: "plus")
+        imageView.contentMode = .center
+
+        button.addTarget(self, action: #selector(self.plusButtonTapped(_:)), for: .touchUpInside)
+
+        button.addSubview(imageView)
+
         return button
     }()
 
@@ -140,7 +137,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         self.addSubview(descriptionLabel)
         self.addSubview(stocksLabel)
         self.addSubview(stocksAmountLabel)
-//        self.addSubview(plusButton)
+        self.addSubview(plusButton)
 
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(
@@ -190,6 +187,21 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
             stocksAmountLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
         ])
+
+        NSLayoutConstraint.activate([
+            plusButton.trailingAnchor.constraint(
+                equalTo: self.trailingAnchor,
+                constant: -8
+            ),
+
+            plusButton.bottomAnchor.constraint(
+                equalTo: self.bottomAnchor,
+                constant: -12
+            ),
+
+            plusButton.widthAnchor.constraint(equalToConstant: 28),
+            plusButton.heightAnchor.constraint(equalToConstant: 28),
+        ])
     }
 
     // MARK: - Private
@@ -199,4 +211,11 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     private var name: String = ""
     private var desc: String = ""
     private var stocksAmount: Int = 0
+
+    // MARK: Functions
+
+    @objc
+    private func plusButtonTapped(_ sender: UIButton) {
+        print("Plus button tapped")
+    }
 }
