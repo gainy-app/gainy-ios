@@ -26,6 +26,8 @@
 		3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F68265D352E000FD3EB /* ApiEndPoint.swift */; };
 		3AE795582662AE80002B40D6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795572662AE80002B40D6 /* Reachability.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
+		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
+		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
 		3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79540266276DC002B40D6 /* RecommendedCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		3A930F68265D352E000FD3EB /* ApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoint.swift; sourceTree = "<group>"; };
 		3AE795572662AE80002B40D6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
+		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
 		3AE79540266276DC002B40D6 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +131,7 @@
 				3A930F21265C1C6B000FD3EB /* Services */,
 				3A930F1C265C1BA2000FD3EB /* View */,
 				3A930F1F265C1BD0000FD3EB /* Controllers */,
+				3AE79523266218B1002B40D6 /* Model */,
 				3A930F1B265C1B96000FD3EB /* Resources */,
 				3A930F1E265C1BBF000FD3EB /* Supporting Files */,
 			);
@@ -171,6 +176,7 @@
 		3A930F1C265C1BA2000FD3EB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3AE79529266222A8002B40D6 /* DiscoveryCollectionsView */,
 				3A930F1D265C1BA9000FD3EB /* Storyboards */,
 			);
 			path = View;
@@ -264,6 +270,40 @@
 				3AE79524266219F3002B40D6 /* Collection.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3AE79529266222A8002B40D6 /* DiscoveryCollectionsView */ = {
+			isa = PBXGroup;
+			children = (
+				3AE7952A266222B2002B40D6 /* DiscoveredCollections */,
+			);
+			path = DiscoveryCollectionsView;
+			sourceTree = "<group>";
+		};
+		3AE7952A266222B2002B40D6 /* DiscoveredCollections */ = {
+			isa = PBXGroup;
+			children = (
+				3AE79534266267A1002B40D6 /* DiscoveredCollectionsHeader */,
+				3AE7952B266222B9002B40D6 /* DiscoveredCollectionViewCell */,
+			);
+			path = DiscoveredCollections;
+			sourceTree = "<group>";
+		};
+		3AE7952B266222B9002B40D6 /* DiscoveredCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */,
+				3AE79540266276DC002B40D6 /* RecommendedCollectionViewCell.swift */,
+			);
+			path = DiscoveredCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		3AE79534266267A1002B40D6 /* DiscoveredCollectionsHeader */ = {
+			isa = PBXGroup;
+			children = (
+				3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */,
+			);
+			path = DiscoveredCollectionsHeader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +469,8 @@
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */,
+				3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */,
+				3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
 				3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */,
 				3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */,
