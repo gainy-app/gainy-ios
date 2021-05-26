@@ -2,13 +2,27 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_: UIApplication,
-                     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        true
+    // MARK: Internal
+
+    // MARK: Properites
+
+    var window: UIWindow?
+    var rootController: UINavigationController {
+        guard let root = self.window?.rootViewController as? UINavigationController else {
+            return UINavigationController()
+        }
+
+        return root
     }
 
-    // MARK: UISceneSession Lifecycle
+    // MARK: Lifecycle
+
+    func application(_: UIApplication,
+                     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+//        self.applicationCoordinator.start(with: nil)
+
+        return true
+    }
 
     func application(_: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,
@@ -17,4 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to select a configuration to create the new scene with.
         UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
+
+    // MARK: Private
+
+    // MARK: Properties
+
+    private lazy var applicationCoordinator: Coordinator = ApplicationCoordinator(
+            router: Router(rootController: self.rootController),
+            coordinatorFactory: CoordinatorFactory()
+        )
 }
