@@ -35,7 +35,7 @@
 		3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7956D26638349002B40D6 /* Coordinator.swift */; };
 		3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7957526638360002B40D6 /* BaseCoordinator.swift */; };
 		3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7957A2663837F002B40D6 /* ViewControllerFactory.swift */; };
-		3AE7958326638406002B40D6 /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7958226638406002B40D6 /* ApplicationCoordinator.swift */; };
+		3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7958226638406002B40D6 /* AppCoordinator.swift */; };
 		3AE7958C2663855C002B40D6 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7958B2663855C002B40D6 /* Router.swift */; };
 		3AE7959526638596002B40D6 /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7959426638596002B40D6 /* Presentable.swift */; };
 		3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79599266385C1002B40D6 /* BaseViewControllerProtocol.swift */; };
@@ -103,7 +103,7 @@
 		3AE7956D26638349002B40D6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		3AE7957526638360002B40D6 /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
 		3AE7957A2663837F002B40D6 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
-		3AE7958226638406002B40D6 /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		3AE7958226638406002B40D6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		3AE7958B2663855C002B40D6 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		3AE7959426638596002B40D6 /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		3AE79599266385C1002B40D6 /* BaseViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerProtocol.swift; sourceTree = "<group>"; };
@@ -352,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				3AE7954B2662A85D002B40D6 /* UIColor+Gainy.swift */,
+				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -365,7 +366,6 @@
 				3AE7959326638586002B40D6 /* Protocols */,
 				3AE7958A26638554002B40D6 /* Router */,
 				3AE7957526638360002B40D6 /* BaseCoordinator.swift */,
-				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 				3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */,
 				3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */,
 			);
@@ -404,7 +404,7 @@
 		3AE795BB26638999002B40D6 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				3AE7958226638406002B40D6 /* ApplicationCoordinator.swift */,
+				3AE7958226638406002B40D6 /* AppCoordinator.swift */,
 				3AE795E626638FBE002B40D6 /* MainCoordinator.swift */,
 				3AE795EB26638FE8002B40D6 /* AuthCoordinator.swift */,
 				3AE795F026639091002B40D6 /* ProfileCoordinator.swift */,
@@ -632,7 +632,7 @@
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
-				3AE7958326638406002B40D6 /* ApplicationCoordinator.swift in Sources */,
+				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				3AE795EC26638FE8002B40D6 /* AuthCoordinator.swift in Sources */,
 				3AE795C526638EAD002B40D6 /* AViewController.swift in Sources */,
 			);

@@ -1,7 +1,7 @@
 import UIKit
 
 class ViewControllerFactory {
-    func instantiateLoginViewController() -> LoginViewController {
+    func instantiateLogin() -> LoginViewController {
 //        let loginVC = UIStoryboard.auth.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
 //        loginVC.viewModel = LoginViewModel()
 //        return loginVC
@@ -9,15 +9,13 @@ class ViewControllerFactory {
         LoginViewController()
     }
 
-    func instantiateAViewController() -> AViewController {
-//        let aVC = UIStoryboard.first.instantiateViewController(withIdentifier: "AViewController") as! AViewController
-//        aVC.viewModel = AViewModel()
-//        return aVC
-
-        AViewController()
+    func instantiateDiscoverCollections() -> DiscoverCollectionsViewController {
+        let vc = DiscoverCollectionsViewController()
+        vc.viewModel = DiscoverCollectionsViewModel()
+        return vc
     }
 
-    func instantiateProfileViewController() -> ProfileViewController {
+    func instantiateProfile() -> ProfileViewController {
 //        let profileVC = UIStoryboard.profile.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
 //        profileVC.viewModel = ProfileViewModel()
 //        return profileVC

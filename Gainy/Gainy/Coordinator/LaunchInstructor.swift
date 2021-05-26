@@ -1,7 +1,7 @@
 import Foundation
 
-private var onboardingWasShown = false
-private var isAutorized = false
+private var onboardingWasShown = true
+private var isAutorized = true
 
 enum LaunchInstructor {
     case main

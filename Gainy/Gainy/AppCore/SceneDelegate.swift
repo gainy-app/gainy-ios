@@ -1,7 +1,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
+    // MARK: Lifecycle
 
     func scene(_ scene: UIScene,
                willConnectTo _: UISceneSession,
@@ -11,8 +11,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
 
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = DiscoverCollectionsViewController()
+        window.rootViewController = UINavigationController()
         self.window = window
         window.makeKeyAndVisible()
+
+        self.appCoordinator.start(with: nil)
     }
+
+    // MARK: Internal
+
+    // MARK: Properites
+
+    var window: UIWindow?
+
+    var rootController: UINavigationController {
+        guard let vc = self.window?.rootViewController as? UINavigationController else {
+            return UINavigationController()
+        }
+
+        return vc
+    }
+
+    // MARK: Private
+
+    // MARK: Properties
+
+    private lazy var appCoordinator: Coordinator = AppCoordinator(
+        router: Router(rootController: self.rootController),
+        coordinatorFactory: CoordinatorFactory()
+    )
 }

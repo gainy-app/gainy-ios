@@ -32,7 +32,7 @@ final class AuthCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Functions
 
     private func showLoginViewController() {
-        let loginVC = self.viewControllerFactory.instantiateLoginViewController()
+        let loginVC = self.viewControllerFactory.instantiateLogin()
         loginVC.onLogin = { [unowned self] in
             self.finishFlow?()
         }

@@ -5,8 +5,51 @@ typealias CollectionsDataSource = UICollectionViewDiffableDataSource
 typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
 <DiscoverCollectionsViewController.Section, Collection>
 
-class DiscoverCollectionsViewController: UIViewController {
+
+// A models
+
+enum DiscoverCollections {}
+
+// A view model
+
+protocol DiscoverCollectionsViewModelProtocol {}
+
+class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtocol {
+    // MARK: - Init
+
+    override init() {
+        super.init()
+    }
+}
+
+protocol DiscoverCollectionsViewControllerProtocol: BaseViewControllerProtocol {
+    var onGoToCollectionDetails: (() -> Void)? { get set }
+}
+
+class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
+    // MARK: Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setUpCollectionView()
+        updateSnapshot()
+    }
+
     // MARK: Internal
+
+    // MARK: Properties
+
+    var viewModel: DiscoverCollectionsViewModelProtocol?
+
+    var onGoToCollectionDetails: (() -> Void)?
+
+    // MARK: Functions
+
+//    @IBAction
+    func goToCollectionDetails() {
+        self.onGoToCollectionDetails?()
+    }
 
     // MARK: Types
 
@@ -24,21 +67,11 @@ class DiscoverCollectionsViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setUpCollectionView()
-        updateSnapshot()
-    }
-
     // MARK: Private
-
-    // MARK: IBOutlets
-
-    private var discoverCollectionsCollectionView: UICollectionView!
 
     // MARK: Properties
 
+    private var discoverCollectionsCollectionView: UICollectionView!
     private lazy var dataSource = configureDataSource()
 
     // MARK: Functions

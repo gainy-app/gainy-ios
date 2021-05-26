@@ -34,7 +34,7 @@ final class ProfileCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Functions
 
     private func showProfileViewController() {
-        let profileVC = self.viewControllerFactory.instantiateProfileViewController()
+        let profileVC = self.viewControllerFactory.instantiateProfile()
         profileVC.onBack = { [unowned self] in
             self.finishFlow?()
         }

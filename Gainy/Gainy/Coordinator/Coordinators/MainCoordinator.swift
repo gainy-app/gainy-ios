@@ -18,7 +18,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Coordinator
 
     override func start() {
-        self.showAViewController()
+        self.showDiscoverCollectionsViewController()
     }
 
     // MARK: Private
@@ -31,18 +31,16 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     // MARK: Functions
 
-    private func showAViewController() {
-        let aVC = self.viewControllerFactory.instantiateAViewController()
-        aVC.onGoToB = { [unowned self] in
-            self.showBViewController()
+    private func showDiscoverCollectionsViewController() {
+        let vc = self.viewControllerFactory.instantiateDiscoverCollections()
+        vc.onGoToCollectionDetails = { [unowned self] in
+            self.showCollectionDetailsViewController()
         }
-        aVC.onGoToProfile = { [unowned self] in
-            self.showProfile()
-        }
-        self.router.setRootModule(aVC, hideBar: true)
+
+        self.router.setRootModule(vc, hideBar: true)
     }
 
-    private func showBViewController() {
+    private func showCollectionDetailsViewController() {
 //        let bVC = self.viewControllerFactory.instantiateBViewController()
 //        bVC.onBack = { [unowned self] in
 //            self.router.popModule()
