@@ -278,7 +278,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
             let headerFooterSize = NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(90)
+                heightDimension: .estimated(70)
             )
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: headerFooterSize,
