@@ -29,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
-        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+        UISceneConfiguration(name: "Default Configuration",
+                             sessionRole: connectingSceneSession.role)
     }
 
     // MARK: Private
@@ -37,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Properties
 
     private lazy var applicationCoordinator: Coordinator = ApplicationCoordinator(
-            router: Router(rootController: self.rootController),
-            coordinatorFactory: CoordinatorFactory()
-        )
+        router: Router(rootController: self.rootController),
+        coordinatorFactory: CoordinatorFactory()
+    )
 }
