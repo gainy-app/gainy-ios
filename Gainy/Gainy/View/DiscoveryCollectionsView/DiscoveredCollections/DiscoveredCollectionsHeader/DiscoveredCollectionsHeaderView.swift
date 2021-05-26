@@ -6,7 +6,7 @@ class DiscoveredCollectionsHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = .white // UIColor(hexRgb: 0xE5E5E5)
+        self.backgroundColor = UIColor.Gainy.white
     }
 
     @available(*, unavailable)

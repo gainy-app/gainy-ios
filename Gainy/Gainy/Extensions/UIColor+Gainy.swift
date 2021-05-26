@@ -2,6 +2,7 @@ import UIKit
 
 extension UIColor {
     enum Gainy {
+        static let white = UIColor.white
 //        static let red
         static let yellow = UIColor(red: 255.0 / 255.0,
                                     green: 245.0 / 255.0,
