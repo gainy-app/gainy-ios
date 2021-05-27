@@ -27,6 +27,7 @@
 		3AA52C91266013E1006A6961 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C90266013E1006A6961 /* Network.swift */; };
 		3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; };
 		3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
 		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
@@ -113,6 +114,7 @@
 		3AA52C85266012D8006A6961 /* Collections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Collections.graphql; sourceTree = "<group>"; };
 		3AA52C90266013E1006A6961 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3AA52C96266014BB006A6961 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AA52C9E26601697006A6961 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
@@ -325,8 +327,8 @@
 		3AA52C7B26600FEC006A6961 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
-				3AA52C7C26600FF2006A6961 /* Schema */,
 				3AA52C90266013E1006A6961 /* Network.swift */,
+				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -334,6 +336,7 @@
 		3AA52C7C26600FF2006A6961 /* Schema */ = {
 			isa = PBXGroup;
 			children = (
+				3AA52C9E26601697006A6961 /* API.swift */,
 				3AA52C7E2660101B006A6961 /* schema.json */,
 				3AA52C85266012D8006A6961 /* Collections.graphql */,
 			);
@@ -660,7 +663,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SCRIPT_PATH=\"${PROJECT_DIR}/../apollo-ios-0.43.0/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" API.swift\n\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://gainy-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: TOKEN\"\n";
+			shellScript = "SCRIPT_PATH=\"${PROJECT_DIR}/../apollo-ios-0.43.0/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" \"${PROJECT_DIR}/Gainy/Services/GraphQL/Schema/API.swift\"\n\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://gainy-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: TOKEN\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -683,6 +686,7 @@
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
+				3AA52C9F26601697006A6961 /* API.swift in Sources */,
 				3AE795CE26638F18002B40D6 /* LoginViewController.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				3A930F48265D3454000FD3EB /* HttpMethod.swift in Sources */,
