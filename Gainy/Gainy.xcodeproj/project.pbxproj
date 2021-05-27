@@ -28,6 +28,7 @@
 		3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; };
 		3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
+		3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40F5C266021BD005679DE /* BundleReader.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
 		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
@@ -115,6 +116,7 @@
 		3AA52C90266013E1006A6961 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3AA52C96266014BB006A6961 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA52C9E26601697006A6961 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3AD40F5C266021BD005679DE /* BundleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleReader.swift; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 		3A930F21265C1C6B000FD3EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
 				3A930F22265C1C78000FD3EB /* Network */,
 			);
@@ -349,6 +352,14 @@
 				3AA52C96266014BB006A6961 /* Apollo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3AD40F5B266021AA005679DE /* LocalBundleReader */ = {
+			isa = PBXGroup;
+			children = (
+				3AD40F5C266021BD005679DE /* BundleReader.swift */,
+			);
+			path = LocalBundleReader;
 			sourceTree = "<group>";
 		};
 		3AE79523266218B1002B40D6 /* Model */ = {
@@ -680,6 +691,7 @@
 				3A930F59265D3472000FD3EB /* HttpParameters.swift in Sources */,
 				3A930F3A265D340F000FD3EB /* ApiRouter.swift in Sources */,
 				3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */,
+				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
