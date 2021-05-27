@@ -23,13 +23,13 @@
 		3A930F5E265D3479000FD3EB /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F5D265D3479000FD3EB /* HttpRequest.swift */; };
 		3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */; };
 		3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F68265D352E000FD3EB /* ApiEndPoint.swift */; };
-		3AE795582662AE80002B40D6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795572662AE80002B40D6 /* Reachability.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
 		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
 		3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79540266276DC002B40D6 /* RecommendedCollectionViewCell.swift */; };
 		3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795452662A0A9002B40D6 /* DummyDataSource.swift */; };
 		3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7954B2662A85D002B40D6 /* UIColor+Gainy.swift */; };
+		3AE795582662AE80002B40D6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795572662AE80002B40D6 /* Reachability.swift */; };
 		3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79560266382B0002B40D6 /* CoordinatorFactoryProtocol.swift */; };
 		3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79568266382EF002B40D6 /* CoordinatorFactory.swift */; };
 		3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7956D26638349002B40D6 /* Coordinator.swift */; };
@@ -91,13 +91,14 @@
 		3A930F5D265D3479000FD3EB /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStatusCode.swift; sourceTree = "<group>"; };
 		3A930F68265D352E000FD3EB /* ApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoint.swift; sourceTree = "<group>"; };
-		3AE795572662AE80002B40D6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3AA52C7E2660101B006A6961 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
 		3AE79540266276DC002B40D6 /* RecommendedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE795452662A0A9002B40D6 /* DummyDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataSource.swift; sourceTree = "<group>"; };
 		3AE7954B2662A85D002B40D6 /* UIColor+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Gainy.swift"; sourceTree = "<group>"; };
+		3AE795572662AE80002B40D6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3AE79560266382B0002B40D6 /* CoordinatorFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactoryProtocol.swift; sourceTree = "<group>"; };
 		3AE79568266382EF002B40D6 /* CoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorFactory.swift; sourceTree = "<group>"; };
 		3AE7956D26638349002B40D6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -251,6 +252,7 @@
 		3A930F21265C1C6B000FD3EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3AA52C7B26600FEC006A6961 /* GraphQL */,
 				3A930F22265C1C78000FD3EB /* Network */,
 			);
 			path = Services;
@@ -297,14 +299,24 @@
 			path = EndPoint;
 			sourceTree = "<group>";
 		};
-		3AE795562662AE65002B40D6 /* Reachability */ = {
+		3AA52C7B26600FEC006A6961 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
-				3AE795572662AE80002B40D6 /* Reachability.swift */,
+				3AA52C7C26600FF2006A6961 /* Schema */,
+				3AA52C90266013E1006A6961 /* Network.swift */,
 			);
-			path = Reachability;
-            sourceTree = "<group>";
-        };
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		3AA52C7C26600FF2006A6961 /* Schema */ = {
+			isa = PBXGroup;
+			children = (
+				3AA52C7E2660101B006A6961 /* schema.json */,
+				3AA52C85266012D8006A6961 /* Collections.graphql */,
+			);
+			path = Schema;
+			sourceTree = "<group>";
+		};
 		3AE79523266218B1002B40D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +367,14 @@
 				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		3AE795562662AE65002B40D6 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				3AE795572662AE80002B40D6 /* Reachability.swift */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		3AE7955F26638264002B40D6 /* Coordinator */ = {
