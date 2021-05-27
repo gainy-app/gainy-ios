@@ -24,6 +24,9 @@
 		3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */; };
 		3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F68265D352E000FD3EB /* ApiEndPoint.swift */; };
 		3AA52C86266012D8006A6961 /* Collections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3AA52C85266012D8006A6961 /* Collections.graphql */; };
+		3AA52C91266013E1006A6961 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C90266013E1006A6961 /* Network.swift */; };
+		3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; };
+		3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
 		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
@@ -69,6 +72,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3AA52C99266014BB006A6961 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3A930ED5265C1909000FD3EB /* Gainy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gainy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A930ED8265C1909000FD3EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +111,8 @@
 		3A930F68265D352E000FD3EB /* ApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoint.swift; sourceTree = "<group>"; };
 		3AA52C7E2660101B006A6961 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		3AA52C85266012D8006A6961 /* Collections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Collections.graphql; sourceTree = "<group>"; };
+		3AA52C90266013E1006A6961 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		3AA52C96266014BB006A6961 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
@@ -127,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,6 +174,7 @@
 				3A930EEE265C190C000FD3EB /* GainyTests */,
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
 				3A930ED6265C1909000FD3EB /* Products */,
+				3AA52C95266014BB006A6961 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -319,6 +340,14 @@
 			path = Schema;
 			sourceTree = "<group>";
 		};
+		3AA52C95266014BB006A6961 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3AA52C96266014BB006A6961 /* Apollo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3AE79523266218B1002B40D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,10 +504,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A930EFF265C190C000FD3EB /* Build configuration list for PBXNativeTarget "Gainy" */;
 			buildPhases = (
+				3AA52C6E26600CCE006A6961 /* Apollo CLI */,
 				3A930ED1265C1909000FD3EB /* Sources */,
 				3A930ED2265C1909000FD3EB /* Frameworks */,
 				3A930ED3265C1909000FD3EB /* Resources */,
 				3A930F2E265CC679000FD3EB /* SwiftLint */,
+				3AA52C99266014BB006A6961 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -613,6 +644,24 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --config \"${SRCROOT}/../.swiftlint.yml\"\nelse\n  echo \"WARNING: SwiftLint not installed, use brew to install it.\"\nfi\n";
 		};
+		3AA52C6E26600CCE006A6961 /* Apollo CLI */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Apollo CLI";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT_PATH=\"${PROJECT_DIR}/../apollo-ios-0.43.0/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" API.swift\n\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://gainy-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: TOKEN\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -646,6 +695,7 @@
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
+				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				3AE795DF26638F84002B40D6 /* ProfileViewController.swift in Sources */,
 				3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
