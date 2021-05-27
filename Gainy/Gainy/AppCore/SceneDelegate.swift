@@ -1,7 +1,19 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    // MARK: Lifecycle
+    // MARK: Internal
+
+    // MARK: Properites
+
+    var window: UIWindow?
+
+    var rootController: UINavigationController {
+        guard let vc = self.window?.rootViewController as? UINavigationController else {
+            return UINavigationController()
+        }
+
+        return vc
+    }
 
     func scene(_ scene: UIScene,
                willConnectTo _: UISceneSession,
@@ -16,20 +28,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
 
         self.appCoordinator.start(with: nil)
-    }
-
-    // MARK: Internal
-
-    // MARK: Properites
-
-    var window: UIWindow?
-
-    var rootController: UINavigationController {
-        guard let vc = self.window?.rootViewController as? UINavigationController else {
-            return UINavigationController()
-        }
-
-        return vc
     }
 
     // MARK: Private
