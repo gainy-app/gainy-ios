@@ -17,12 +17,14 @@ class DiscoveredCollectionItemViewModel {}
 class RecommendedCollectionItemViewModel {}
 
 class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtocol {
-//    var discoveredCollections: [DiscoveredCollectionItemViewModel] = []
-//    var recommendedCollections: [RecommendedCollectionItemViewModel] = []
+    var yourCollections: [YourCollectionViewCellModel]
+    var recommendedCollections: [RecommendedCollectionViewCellModel]
 
     // MARK: - Init
 
     override init() {
+        yourCollections = DummyDataSource.collections.map { CollectionViewModelMapper.map($0) }
+        recommendedCollections = DummyDataSource.recommendedCollections.map { CollectionViewModelMapper.map($0) }
         super.init()
     }
 }
@@ -79,12 +81,49 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
             collectionView: discoverCollectionsCollectionView
         ) { collectionView, indexPath, modelItem -> UICollectionViewCell? in
-            self.sections[indexPath.section].configureCell(
+            let cell = self.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
                 indexPath: indexPath,
                 item: modelItem,
                 position: indexPath.row
             )
+
+            if let cell = cell as? RecommendedCollectionViewCell,
+               let modelItem = modelItem as? RecommendedCollectionViewCellModel {
+
+                // TODO: fix (add field to recommended?)
+                let checkedItem = YourCollectionViewCellModel(
+                    id: modelItem.id,
+                    image: modelItem.image,
+                    name: modelItem.name,
+                    description: modelItem.description,
+                    stocksAmount: modelItem.stocksAmount
+                )
+
+                self.viewModel?.yourCollections.contains(checkedItem) ?? false
+                    ? cell.setButtonChecked()
+                    : cell.setButtonUnchecked()
+
+
+                cell.plusButtonPressed = {
+                    let newCollection = YourCollectionViewCellModel(
+                        id: modelItem.id,
+                        image: modelItem.image,
+                        name: modelItem.name,
+                        description: modelItem.description,
+                        stocksAmount: modelItem.stocksAmount
+                    )
+
+                    self.viewModel?.yourCollections.append(newCollection)
+                    DispatchQueue.main.async {
+                        cell.setButtonChecked()
+                        self.snapshot.appendItems([newCollection], toSection: .yourCollections)
+                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                    }
+                }
+            }
+
+            return cell
         }
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -100,8 +139,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         }
 
         snapshot.appendSections([.yourCollections, .recommendedCollections])
-        snapshot.appendItems(DummyDataSource.collections, toSection: .yourCollections)
-        snapshot.appendItems(DummyDataSource.recommendedCollections, toSection: .recommendedCollections)
+        snapshot.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
+        snapshot.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snapshot, animatingDifferences: false)
 
 //        getData() // TODO: use the network call

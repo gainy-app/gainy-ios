@@ -1,5 +1,7 @@
 import UIKit
 
+// TODO: reanme suffix section to Layout or SectionLayout?
+// TODO: rename LayoutSection to SectionLayout
 struct RecommendedCollectionsSection: LayoutSection {
     private enum Constant {
         static let numberOfColumns = 3
@@ -75,45 +77,12 @@ struct RecommendedCollectionsSection: LayoutSection {
     ) -> UICollectionViewCell {
         let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
-        if let collection = item as? Collection {
-            cell.configureWith(name: collection.name,
-                               description: collection.description,
-                               stocksAmount: collection.stocksAmount,
-                               imageName: collection.image)
-
-            // TODO: fix
-            let collectionToCheck = Collection(
-                id: collection.id,
-                image: collection.image,
-                name: collection.name,
-                description: collection.description,
-                stocksAmount: collection.stocksAmount,
-                discovered: true
-            )
-
-            DummyDataSource.collections.contains(collectionToCheck)
-                ? cell.setButtonChecked()
-                : cell.setButtonUnchecked()
-
-            cell.plusButtonPressed = {
-                let newCollection = Collection(
-                    id: collection.id,
-                    image: collection.image,
-                    name: collection.name,
-                    description: collection.description,
-                    stocksAmount: collection.stocksAmount,
-                    discovered: true
-                )
-
-                if !DummyDataSource.collections.contains(newCollection) {
-                    DummyDataSource.collections.append(newCollection)
-//                    DispatchQueue.main.async {
-//                        cell.setButtonChecked()
-//                        self.snapshot.appendItems([newCollection], toSection: .discovered)
-//                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
-//                    }
-                }
-            }
+        if let viewModel = item as? RecommendedCollectionViewCellModel {
+            cell.configureWith(name: viewModel.name,
+                               description: viewModel.description,
+                               stocksAmount: viewModel.stocksAmount,
+                               imageName: viewModel.image,
+                               plusButtonState: viewModel.buttonState)
         }
 
         return cell

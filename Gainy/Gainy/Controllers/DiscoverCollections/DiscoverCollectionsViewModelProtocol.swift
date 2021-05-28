@@ -1,4 +1,4 @@
 protocol DiscoverCollectionsViewModelProtocol {
-//    var discoveredCollections: [DiscoveredCollectionItemViewModel] { get }
-//    var recommendedCollections: [RecommendedCollectionItemViewModel] { get }
+    var yourCollections: [YourCollectionViewCellModel] { get set }
+    var recommendedCollections: [RecommendedCollectionViewCellModel] { get set }
 }

@@ -95,6 +95,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         String(describing: self)
     }
 
+    private(set) var buttonState: RecommendedCellButtonState = .unchecked {
+        didSet(state) {
+            state == .checked
+                ? setButtonChecked()
+                : setButtonUnchecked()
+        }
+    }
+
     var plusButtonPressed: (() -> Void) = {}
 
     lazy var nameLabel: UILabel = {
@@ -194,7 +202,11 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    func configureWith(name: String, description: String, stocksAmount: Int, imageName: String) {
+    func configureWith(name: String,
+                       description: String,
+                       stocksAmount: Int,
+                       imageName: String,
+                       plusButtonState: RecommendedCellButtonState) {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "\(imageName)-recommended")
         imageView.contentMode = .scaleAspectFill
@@ -206,6 +218,8 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         stocksLabel.text = "STOCKS"
         stocksAmountLabel.text = "\(stocksAmount)"
+
+        buttonState = plusButtonState
     }
 
     func setButtonUnchecked() {
@@ -226,6 +240,8 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        plusButtonPressed()
+        if buttonState == .unchecked {
+            plusButtonPressed()
+        }
     }
 }

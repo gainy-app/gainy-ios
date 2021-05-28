@@ -63,14 +63,13 @@ struct YourCollectionsSection: LayoutSection {
     ) -> UICollectionViewCell {
         let cell: DiscoveredCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
-        if let collection = item as? Collection {
-            cell.configureWith(name: collection.name,
-                               description: collection.description,
-                               stocksAmount: collection.stocksAmount,
-                               imageName: collection.image)
+        if let viewModel = item as? YourCollectionViewCellModel {
+            cell.configureWith(name: viewModel.name,
+                               description: viewModel.description,
+                               stocksAmount: viewModel.stocksAmount,
+                               imageName: viewModel.image)
         }
 
         return cell
-
     }
 }
