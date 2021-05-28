@@ -86,6 +86,36 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     private lazy var dataSource = configureDataSource()
     private var snapshot = CollectionsDataSourceSnapshot()
 
+    private func getData() {
+        Network.shared.apollo.fetch(query: CollectionsQuery()) { result in
+            switch result {
+            case .success(let graphQLResult):
+                DummyDataSource.collectionsRemote = graphQLResult.data!.collections
+
+                let discoveredDto = DummyDataSource.collectionsRemote.filter {
+                    !$0.favoriteCollections.isEmpty
+                }
+                let recommendedDto = DummyDataSource.collectionsRemote.filter {
+                    $0.favoriteCollections.isEmpty
+                }
+                DummyDataSource.collections = discoveredDto.map {
+                    CollectionDTOMapper.map($0)
+                }
+                DummyDataSource.recommendedCollections = recommendedDto.map {
+                    CollectionDTOMapper.map($0)
+                }
+
+                DispatchQueue.main.async {
+                    self.updateSnapshot()
+                }
+
+                print("Success! Result: \(graphQLResult)")
+            case .failure(let error):
+                print("Failure! Error: \(error)")
+            }
+        }
+    }
+
     // MARK: Functions
 
     private func setUpCollectionView() {
