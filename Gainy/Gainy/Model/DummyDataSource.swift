@@ -2,34 +2,40 @@
 enum DummyDataSource {
     // MARK: Internal
 
+    static var collectionsRemote: [CollectionsQuery.Data.Collection] = []
+
     static var collections = [
         Collection(
             id: 0,
-            discovered: true,
+            image: "",
             name: "AI companies",
             description: "Technology companies that utilize artificial intelligence",
-            stocksAmount: 15
+            stocksAmount: 15,
+            discovered: true
         ),
         Collection(
             id: 2,
-            discovered: true,
+            image: "",
             name: "Global EVs",
             description: "Global electric vehicles companies",
-            stocksAmount: 17
+            stocksAmount: 17,
+            discovered: false
         ),
         Collection(
             id: 3,
-            discovered: true,
+            image: "",
             name: "Global Dividend",
             description: "Global top rated dividended companies",
-            stocksAmount: 119
+            stocksAmount: 119,
+            discovered: false
         ),
         Collection(
             id: 4,
-            discovered: true,
+            image: "",
             name: "Recent IPOs",
             description: "Global IPOs that happen over last 6 months",
-            stocksAmount: 33
+            stocksAmount: 33,
+            discovered: false
         ),
     ]
 
@@ -37,10 +43,11 @@ enum DummyDataSource {
         .map { hashId in
             Collection(
                 id: hashId,
-                discovered: false,
+                image: "",
                 name: "AI companies",
                 description: "Technology companies that utilize artificial intelligence",
-                stocksAmount: 15
+                stocksAmount: 15,
+                discovered: false
             )
         }
 
@@ -49,38 +56,43 @@ enum DummyDataSource {
     private static var baseData = [
         Collection(
             id: 10,
-            discovered: false,
+            image: "",
             name: "USA Fintech",
             description: "Fintech companies of USA",
-            stocksAmount: 9
+            stocksAmount: 9,
+            discovered: false
         ),
         Collection(
             id: 12,
-            discovered: false,
+            image: "",
             name: "Global EVs",
             description: "Global electric vehicles companies",
-            stocksAmount: 17
+            stocksAmount: 17,
+            discovered: false
         ),
         Collection(
             id: 13,
-            discovered: false,
+            image: "",
             name: "Small cap ETFs",
             description: "ETFs of the stocks with market cap of $300M to $2B",
-            stocksAmount: 11
+            stocksAmount: 11,
+            discovered: false
         ),
         Collection(
             id: 14,
-            discovered: false,
+            image: "",
             name: "Global Cannabis",
             description: "Global cannabis companies stocks",
-            stocksAmount: 33
+            stocksAmount: 33,
+            discovered: false
         ),
         Collection(
             id: 15,
-            discovered: false,
+            image: "",
             name: "Mid cap stocks",
             description: "Companies with evaluation from $2B to $10B",
-            stocksAmount: 107
+            stocksAmount: 107,
+            discovered: false
         ),
     ]
 }

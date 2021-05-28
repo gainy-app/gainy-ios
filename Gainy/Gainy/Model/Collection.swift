@@ -1,32 +1,20 @@
 struct Collection {
     let id: Int
+    let image: String
+    let name: String
+    let description: String
+    let stocksAmount: Int
     let discovered: Bool
-    let name: String
-    let description: String
-    let stocksAmount: Int
-}
-
-struct CollectionDTO: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case description
-        case stocksAmount
-    }
-
-    let id: Int
-    let name: String
-    let description: String
-    let stocksAmount: Int
 }
 
 enum CollectionDTOMapper {
-    static func map(_ dto: CollectionDTO) -> Collection {
-        Collection(id: dto.id,
-                   discovered: false,
+    static func map(_ dto: CollectionsQuery.Data.Collection) -> Collection {
+        Collection(id: Int(dto.id)!,
+                   image: dto.image,
                    name: dto.name,
                    description: dto.description,
-                   stocksAmount: dto.stocksAmount)
+                   stocksAmount: Int(dto.stocksCount)!,
+                   discovered: dto.favoriteCollections.first?.isDefault ?? false)
     }
 }
 
