@@ -55,5 +55,5 @@ class CustomInterceptor: ApolloInterceptor {
 
     // MARK: Private
 
-    private let accessToken = ""
+    private let accessToken = BundleReader().graphQLToken
 }
