@@ -27,10 +27,6 @@ class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtoc
     }
 }
 
-protocol DiscoverCollectionsViewControllerProtocol: BaseViewControllerProtocol {
-    var onGoToCollectionDetails: (() -> Void)? { get set }
-}
-
 class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
     // MARK: Internal
 
