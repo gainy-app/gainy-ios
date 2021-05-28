@@ -70,7 +70,11 @@ final class Router: NSObject, RouterProtocol {
         self.push(module, transition: transition, animated: animated, completion: nil)
     }
 
-    func push(_ module: Presentable?, transition: UIViewControllerAnimatedTransitioning?, animated: Bool, completion: (() -> Void)?) {
+    func push(_ module: Presentable?,
+              transition: UIViewControllerAnimatedTransitioning?,
+              animated: Bool,
+              completion: (() -> Void)?
+    ) {
         self.transition = transition
         guard let controller = module?.toPresent(),
               controller is UINavigationController == false
@@ -82,7 +86,7 @@ final class Router: NSObject, RouterProtocol {
         self.rootController?.pushViewController(controller, animated: animated)
     }
 
-    func popModule()  {
+    func popModule() {
         self.popModule(transition: nil)
     }
 

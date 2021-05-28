@@ -50,14 +50,4 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        }
 //        self.router.push(bVC)
     }
-
-    private func showProfile() {
-//        let coordinator = self.coordinatorFactory.makeProfileCoordinatorBox(router: self.router, coordinatorFactory: self.coordinatorFactory, viewControllerFactory: self.viewControllerFactory)
-//        coordinator.finishFlow = { [unowned self, unowned coordinator] in
-//            self.removeDependency(coordinator)
-//            self.router.popModule()
-//        }
-//        self.addDependency(coordinator)
-//        coordinator.start()
-    }
 }

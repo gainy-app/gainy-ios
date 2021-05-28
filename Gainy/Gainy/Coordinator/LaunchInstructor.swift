@@ -5,8 +5,6 @@ private var isAutorized = true
 
 enum LaunchInstructor {
     case main
-    case auth
-    case onboarding
 
     // MARK: Internal
 
@@ -14,10 +12,6 @@ enum LaunchInstructor {
 
     static func configure(tutorialWasShown: Bool = onboardingWasShown,
                           isAutorized: Bool = isAutorized) -> LaunchInstructor {
-        switch (tutorialWasShown, isAutorized) {
-        case (true, false), (false, false): return .auth
-        case (false, true): return .onboarding
-        case (true, true): return .main
-        }
+        .main
     }
 }

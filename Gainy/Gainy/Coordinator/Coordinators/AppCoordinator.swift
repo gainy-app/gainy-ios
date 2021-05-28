@@ -17,9 +17,7 @@ final class AppCoordinator: BaseCoordinator {
             // TODO: process
         } else {
             switch launchInstructor {
-            case .auth: break // TODO: use if makes sense: runAFlow()
             case .main: runMainFlow()
-            case .onboarding: break // TODO: remove
             }
         }
     }
@@ -34,21 +32,6 @@ final class AppCoordinator: BaseCoordinator {
     private let viewControllerFactory = ViewControllerFactory()
 
     // MARK: Functions
-
-//    private func runAFlow() {
-//        let coordinator = self.coordinatorFactory.makeAuthCoordinatorBox(
-//            router: self.router,
-//            coordinatorFactory: self.coordinatorFactory,
-//            viewControllerFactory: self.viewControllerFactory
-//        )
-//        coordinator.finishFlow = { [unowned self, unowned coordinator] in
-//            self.removeDependency(coordinator)
-//            self.launchInstructor = LaunchInstructor.configure()
-//            self.start()
-//        }
-//        self.addDependency(coordinator)
-//        coordinator.start()
-//    }
 
     private func runMainFlow() {
         let coordinator = self.coordinatorFactory.makeMainCoordinatorBox(
