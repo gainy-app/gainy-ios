@@ -55,6 +55,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     var viewModel: DiscoverCollectionsViewModelProtocol?
 
     var onGoToCollectionDetails: (() -> Void)?
+    var onAddingCollectionToYourCollections: (() -> Void)?
+    var onRemovingCollectionFromYourCollections: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,12 +67,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         )
         self.view.addSubview(discoverCollectionsCollectionView)
 
-        self.discoverCollectionsCollectionView.register(
-            DiscoveredCollectionsHeaderView.self,
-            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-            withReuseIdentifier: DiscoveredCollectionsHeaderView.reuseIdentifier
-        )
-
+        self.discoverCollectionsCollectionView.registerSectionHeader(DiscoveredCollectionsHeaderView.self)
         self.discoverCollectionsCollectionView.register(DiscoveredCollectionViewCell.self)
         self.discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
 
@@ -91,36 +88,15 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         }
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionHeader else {
-                return nil
-            }
-
-            let headerView = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                withReuseIdentifier: DiscoveredCollectionsHeaderView.reuseIdentifier,
-                for: indexPath
-            ) as? DiscoveredCollectionsHeaderView
-
-//            let section = self
-//                .dataSource
-//                .snapshot()
-//                .sectionIdentifiers[indexPath.section]
-//            headerView?.titleLabel.text = section.title
-            switch indexPath.section {
-            case Section.yourCollections.rawValue:
-                headerView?.configureWith(
-                    title: "Your collections",
-                    description: "Tap to view, swipe to edit or drag & drop to reorder"
-                )
-            case Section.recommendedCollections.rawValue:
-                headerView?.configureWith(
-                    title: "Collections you might like",
-                    description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                return self.sections[indexPath.section].header(
+                    collectionView: collectionView,
+                    indexPath: indexPath
                 )
             default:
-                assertionFailure("FAILURE")
+                return nil
             }
-            return headerView
         }
 
         snapshot.appendSections([.yourCollections, .recommendedCollections])
@@ -133,6 +109,10 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     }
 
     // MARK: Functions
+
+    func addCollectionToYourCollections() {
+        self.onAddingCollectionToYourCollections?()
+    }
 
     func goToCollectionDetails() {
         self.onGoToCollectionDetails?()

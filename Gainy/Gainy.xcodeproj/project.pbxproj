@@ -36,6 +36,7 @@
 		3AD40FBE266923C1005679DE /* RecommendedCollectionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FBD266923C1005679DE /* RecommendedCollectionsSection.swift */; };
 		3AD40FC3266923C1005679DE /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC2266923C1005679DE /* LayoutSection.swift */; };
 		3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */; };
+		3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
 		3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */; };
 		3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */; };
@@ -126,6 +127,7 @@
 		3AD40FBD266923C1005679DE /* RecommendedCollectionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsSection.swift; sourceTree = "<group>"; };
 		3AD40FC2266923C1005679DE /* LayoutSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSection.swift; sourceTree = "<group>"; };
 		3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewControllerProtocol.swift; sourceTree = "<group>"; };
+		3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReusableHeaderSection.swift"; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		3AE7952C266222CC002B40D6 /* DiscoveredCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AE79535266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveredCollectionsHeaderView.swift; sourceTree = "<group>"; };
@@ -276,9 +278,7 @@
 		3A930F1F265C1BD0000FD3EB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */,
-				3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */,
-				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
+				3AD40FCC266923C1005679DE /* DiscoverCollections */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -386,6 +386,16 @@
 			path = CollectionViewLayout;
 			sourceTree = "<group>";
 		};
+		3AD40FCC266923C1005679DE /* DiscoverCollections */ = {
+			isa = PBXGroup;
+			children = (
+				3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */,
+				3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */,
+				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
+			);
+			path = DiscoverCollections;
+			sourceTree = "<group>";
+		};
 		3AE79523266218B1002B40D6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +446,7 @@
 				3AE7954B2662A85D002B40D6 /* UIColor+Gainy.swift */,
 				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 				3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */,
+				3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */,
 				3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */,
 			);
 			path = Extensions;
@@ -674,6 +685,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSection.swift in Sources */,
+				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3A930F5E265D3479000FD3EB /* HttpRequest.swift in Sources */,

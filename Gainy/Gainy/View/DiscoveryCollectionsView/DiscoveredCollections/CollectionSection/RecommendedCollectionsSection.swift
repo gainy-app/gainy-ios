@@ -4,7 +4,7 @@ struct RecommendedCollectionsSection: LayoutSection {
     private enum Constant {
         static let numberOfColumns = 3
     }
-    
+
     var layoutSection: NSCollectionLayoutSection = {
         // Items
         let recommendedItem = NSCollectionLayoutItem(
@@ -56,6 +56,17 @@ struct RecommendedCollectionsSection: LayoutSection {
         return section
     }()
 
+    func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+        let headerView: DiscoveredCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
+
+        headerView.configureWith(
+            title: "Collections you might like",
+            description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
+        )
+
+        return headerView
+    }
+
     func configureCell(
         collectionView: UICollectionView,
         indexPath: IndexPath,
@@ -95,13 +106,12 @@ struct RecommendedCollectionsSection: LayoutSection {
                 )
 
                 if !DummyDataSource.collections.contains(newCollection) {
-                    print(DummyDataSource.collections.count)
                     DummyDataSource.collections.append(newCollection)
-                    DispatchQueue.main.async {
-                        cell.setButtonChecked()
-                        self.snapshot.appendItems([newCollection], toSection: .discovered)
-                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
-                    }
+//                    DispatchQueue.main.async {
+//                        cell.setButtonChecked()
+//                        self.snapshot.appendItems([newCollection], toSection: .discovered)
+//                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
+//                    }
                 }
             }
         }

@@ -45,6 +45,16 @@ struct YourCollectionsSection: LayoutSection {
         return section
     }()
 
+    func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+        let headerView: DiscoveredCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
+
+        headerView.configureWith(
+            title: "Your collections",
+            description: "Tap to view, swipe to edit or drag & drop to reorder"
+        )
+        return headerView
+    }
+
     func configureCell(
         collectionView: UICollectionView,
         indexPath: IndexPath,
