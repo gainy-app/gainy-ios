@@ -16,11 +16,6 @@ enum DiscoverCollections {}
 class DiscoveredCollectionItemViewModel {}
 class RecommendedCollectionItemViewModel {}
 
-protocol DiscoverCollectionsViewModelProtocol {
-//    var discoveredCollections: [DiscoveredCollectionItemViewModel] { get }
-//    var recommendedCollections: [RecommendedCollectionItemViewModel] { get }
-}
-
 class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtocol {
 //    var discoveredCollections: [DiscoveredCollectionItemViewModel] = []
 //    var recommendedCollections: [RecommendedCollectionItemViewModel] = []
