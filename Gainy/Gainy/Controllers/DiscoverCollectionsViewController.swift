@@ -37,29 +37,7 @@ protocol DiscoverCollectionsViewControllerProtocol: BaseViewControllerProtocol {
 }
 
 class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
-    // MARK: Lifecycle
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setUpCollectionView()
-        updateSnapshot()
-    }
-
     // MARK: Internal
-
-    // MARK: Properties
-
-    var viewModel: DiscoverCollectionsViewModelProtocol?
-
-    var onGoToCollectionDetails: (() -> Void)?
-
-    // MARK: Functions
-
-//    @IBAction
-    func goToCollectionDetails() {
-        self.onGoToCollectionDetails?()
-    }
 
     // MARK: Types
 
@@ -75,6 +53,26 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             case .recommended: return 3
             }
         }
+    }
+
+    // MARK: Properties
+
+    var viewModel: DiscoverCollectionsViewModelProtocol?
+
+    var onGoToCollectionDetails: (() -> Void)?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setUpCollectionView()
+        //        getData()
+        self.updateSnapshot()
+    }
+
+    // MARK: Functions
+
+    func goToCollectionDetails() {
+        self.onGoToCollectionDetails?()
     }
 
     // MARK: Private

@@ -82,13 +82,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    override func draw(_ rect: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -191,6 +184,13 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
         return button
     }()
+
+    override func draw(_: CGRect) {
+        let borderPath = UIBezierPath(roundedRect: self.bounds,
+                                      cornerRadius: cornerRadius)
+        UIColor.orange.set() // TODO: update with a picture
+        borderPath.fill()
+    }
 
     // MARK: Functions
 

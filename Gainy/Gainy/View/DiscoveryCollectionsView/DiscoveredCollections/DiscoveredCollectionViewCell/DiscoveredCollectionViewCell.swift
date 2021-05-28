@@ -69,13 +69,6 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
 //        setupSwipeGesture()
     }
 
-    override func draw(_ rect: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -147,6 +140,13 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
+    override func draw(_: CGRect) {
+        let borderPath = UIBezierPath(roundedRect: self.bounds,
+                                      cornerRadius: cornerRadius)
+        UIColor.orange.set() // TODO: update with a picture
+        borderPath.fill()
+    }
+
 //    func setupSwipeGesture() {
 //        swipeGesture = UIPanGestureRecognizer(target: self,
 //                                              action: #selector(swiped(_:)))
@@ -170,7 +170,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
 //            if hasMovedToFarLeft {
 //                return
 //            } else {
-////                resetViewPositionAndTransformations()
+//               resetViewPositionAndTransformations()
 //            }
 //
 //            if displacement.x + self.originalPoint.x < self.originalPoint.x {
