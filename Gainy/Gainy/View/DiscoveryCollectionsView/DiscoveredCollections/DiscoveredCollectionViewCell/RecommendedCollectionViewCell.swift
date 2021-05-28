@@ -13,7 +13,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         self.addSubview(stocksLabel)
         self.addSubview(stocksAmountLabel)
         self.addSubview(plusButton)
-        plusButton.setImage(UIImage(named: "plus"), for: .normal)
 
         NSLayoutConstraint.activate([
             nameLabel
@@ -195,11 +194,22 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    func configureWith(name: String, description: String, stocksAmount: Int) {
+    func configureWith(name: String, description: String, stocksAmount: Int, imageName: String) {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "\(imageName)-recommended")
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
+        self.backgroundView = imageView
+
         nameLabel.text = name
         descriptionLabel.text = description
         stocksLabel.text = "STOCKS"
         stocksAmountLabel.text = "\(stocksAmount)"
+    }
+
+    func setButtonUnchecked() {
+        plusButton.setImage(UIImage(named: "plus"), for: .normal)
     }
 
     func setButtonChecked() {

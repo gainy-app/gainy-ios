@@ -130,7 +130,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
                 cell.configureWith(name: collection.name,
                                    description: collection.description,
-                                   stocksAmount: collection.stocksAmount)
+                                   stocksAmount: collection.stocksAmount,
+                                   imageName: collection.image)
                 return cell
             case Section.recommended.rawValue:
                 guard let cell = collectionView.dequeueReusableCell(
@@ -141,16 +142,32 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                     return UICollectionViewCell()
                 }
 
+                // TODO: fix
+                let collectionToCheck = Collection(
+                    id: collection.id,
+                    image: collection.image,
+                    name: collection.name,
+                    description: collection.description,
+                    stocksAmount: collection.stocksAmount,
+                    discovered: true
+                )
+
+                DummyDataSource.collections.contains(collectionToCheck)
+                    ? cell.setButtonChecked()
+                    : cell.setButtonUnchecked()
+
                 cell.configureWith(name: collection.name,
                                    description: collection.description,
-                                   stocksAmount: collection.stocksAmount)
+                                   stocksAmount: collection.stocksAmount,
+                                   imageName: collection.image)
                 cell.plusButtonPressed = {
                     let newCollection = Collection(
                         id: collection.id,
-                        discovered: true,
+                        image: collection.image,
                         name: collection.name,
                         description: collection.description,
-                        stocksAmount: collection.stocksAmount
+                        stocksAmount: collection.stocksAmount,
+                        discovered: true
                     )
 
                     if !DummyDataSource.collections.contains(newCollection) {

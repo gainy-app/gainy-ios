@@ -215,7 +215,14 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    func configureWith(name: String, description: String, stocksAmount: Int) {
+    func configureWith(name: String, description: String, stocksAmount: Int, imageName: String) {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "\(imageName)-discovered")
+        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
+        self.backgroundView = imageView
+
         nameLabel.text = name
         descriptionLabel.text = description
         stocksLabel.text = "STOCKS"
