@@ -11,7 +11,7 @@ enum DummyDataSource {
             name: "AI companies",
             description: "Technology companies that utilize artificial intelligence",
             stocksAmount: 15,
-            discovered: true
+            isInYourCollections: true
         ),
         Collection(
             id: 2,
@@ -19,7 +19,7 @@ enum DummyDataSource {
             name: "Global EVs",
             description: "Global electric vehicles companies",
             stocksAmount: 17,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 3,
@@ -27,7 +27,7 @@ enum DummyDataSource {
             name: "Global Dividend",
             description: "Global top rated dividended companies",
             stocksAmount: 119,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 4,
@@ -35,7 +35,7 @@ enum DummyDataSource {
             name: "Recent IPOs",
             description: "Global IPOs that happen over last 6 months",
             stocksAmount: 33,
-            discovered: false
+            isInYourCollections: false
         ),
     ]
 
@@ -47,7 +47,7 @@ enum DummyDataSource {
                 name: "AI companies",
                 description: "Technology companies that utilize artificial intelligence",
                 stocksAmount: 15,
-                discovered: false
+                isInYourCollections: false
             )
         }
 
@@ -60,7 +60,7 @@ enum DummyDataSource {
             name: "USA Fintech",
             description: "Fintech companies of USA",
             stocksAmount: 9,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 12,
@@ -68,7 +68,7 @@ enum DummyDataSource {
             name: "Global EVs",
             description: "Global electric vehicles companies",
             stocksAmount: 17,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 13,
@@ -76,7 +76,7 @@ enum DummyDataSource {
             name: "Small cap ETFs",
             description: "ETFs of the stocks with market cap of $300M to $2B",
             stocksAmount: 11,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 14,
@@ -84,7 +84,7 @@ enum DummyDataSource {
             name: "Global Cannabis",
             description: "Global cannabis companies stocks",
             stocksAmount: 33,
-            discovered: false
+            isInYourCollections: false
         ),
         Collection(
             id: 15,
@@ -92,7 +92,7 @@ enum DummyDataSource {
             name: "Mid cap stocks",
             description: "Companies with evaluation from $2B to $10B",
             stocksAmount: 107,
-            discovered: false
+            isInYourCollections: false
         ),
     ]
 }

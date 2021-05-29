@@ -5,6 +5,14 @@ extension DiscoveredCollectionViewCell: UIGestureRecognizerDelegate {}
 class DiscoveredCollectionViewCell: UICollectionViewCell {
     // MARK: Lifecycle
 
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if deleteButton.frame.contains(point) {
+            return deleteButton
+        }
+
+        return super.hitTest(point, with: event)
+    }
+
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
@@ -14,6 +22,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         self.addSubview(descriptionLabel)
         self.addSubview(stocksLabel)
         self.addSubview(stocksAmountLabel)
+        self.addSubview(deleteButton)
 
         NSLayoutConstraint.activate([
             nameLabel
@@ -64,9 +73,22 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
             stocksAmountLabel
                 .widthAnchor
                 .constraint(equalToConstant: 50),
+
+            deleteButton
+                .heightAnchor
+                .constraint(equalToConstant: 48),
+            deleteButton
+                .widthAnchor
+                .constraint(equalToConstant: 48),
+            deleteButton
+                .leadingAnchor
+                .constraint(equalTo: self.trailingAnchor, constant: 16),
+            deleteButton
+                .centerYAnchor
+                .constraint(equalTo: self.centerYAnchor, constant: 0),
         ])
 
-//        setupSwipeGesture()
+        setupSwipeGesture()
     }
 
     @available(*, unavailable)
@@ -140,6 +162,27 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
+    lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.layer.cornerRadius = 6
+        button.backgroundColor = UIColor.Gainy.back
+
+        button.addTarget(self,
+                         action: #selector(self.deleteButtonTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
+
+    var onDeleteButtonPressed: (() -> Void) = {}
+
+    @objc
+    private func deleteButtonTapped(_: UIButton) {
+        onDeleteButtonPressed()
+    }
+
     override func draw(_: CGRect) {
         let borderPath = UIBezierPath(roundedRect: self.bounds,
                                       cornerRadius: cornerRadius)
@@ -147,71 +190,40 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
         borderPath.fill()
     }
 
-//    func setupSwipeGesture() {
-//        swipeGesture = UIPanGestureRecognizer(target: self,
-//                                              action: #selector(swiped(_:)))
-//        swipeGesture.delegate = self
-//
-//        self.addGestureRecognizer(swipeGesture)
-//    }
+    func setupSwipeGesture() {
+        leftSwipeGesture = UISwipeGestureRecognizer(target: self,
+                                                    action: #selector(swipedLeft(_:)))
+        leftSwipeGesture.delegate = self
+        leftSwipeGesture.direction = .left
+        leftSwipeGesture.numberOfTouchesRequired = 1
 
-//    @objc
-//    func swiped(_ gestureRecognizer: UIPanGestureRecognizer) {
-//        let xDistance: CGFloat = gestureRecognizer.translation(in: self).x
-//
-//        switch gestureRecognizer.state {
-//        case UIGestureRecognizerState.began:
-//            self.originalPoint = self.center
-//        case UIGestureRecognizerState.changed:
-//            let translation: CGPoint = gestureRecognizer.translation(in: self)
-//            let displacement = CGPoint(x: translation.x, y: translation.y)
-//
-//            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
-//            if hasMovedToFarLeft {
-//                return
-//            } else {
-//               resetViewPositionAndTransformations()
-//            }
-//
-//            if displacement.x + self.originalPoint.x < self.originalPoint.x {
-//                self.transform = CGAffineTransform(translationX: displacement.x, y: 0)
-//                self.center = CGPoint(x: self.originalPoint.x + xDistance, y: self.originalPoint.y)
-//            }
-//        case UIGestureRecognizerState.ended:
-//            let hasMovedToFarLeft = self.frame.maxX < UIScreen.main.bounds.width * 0.8
-//            if hasMovedToFarLeft {
-//                removeViewFromParentWithAnimation()
-//            } else {
-//                resetViewPositionAndTransformations()
-//            }
-//        default:
-//            break
-//        }
-//    }
+        rightSwipeGesture = UISwipeGestureRecognizer(target: self,
+                                                     action: #selector(swipedRight(_:)))
+        rightSwipeGesture.delegate = self
+        rightSwipeGesture.direction = .right
+        rightSwipeGesture.numberOfTouchesRequired = 1
 
-//    func resetViewPositionAndTransformations() {
-//        UIView.animate(withDuration: 0.8,
-//                       delay: 0.0,
-//                       usingSpringWithDamping: 0.8,
-//                       initialSpringVelocity: 0.0,
-//                       options: UIView.AnimationOptions(),
-//                       animations: {
-//                           self.center = self.originalPoint
-//                           self.transform = CGAffineTransform(rotationAngle: 0)
-//                       },
-//                       completion: { _ in })
-//    }
+        self.addGestureRecognizer(leftSwipeGesture)
+        self.addGestureRecognizer(rightSwipeGesture)
+    }
 
-//    func removeViewFromParentWithAnimation() {
-//        var animations: (() -> Void)!
-//        animations = { self.center.x = UIScreen.main.bounds.width / 2 - 50 }
-//
-//        UIView.animate(withDuration: 0.2,
-//                       animations: animations) { _ in
-//        }
-//    }
+    @objc
+    func swipedLeft(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        self.originalPoint = CGPoint(x: (self.superview?.center.x)!, y: self.center.y)
 
-    // TODO: review code above
+        UIView.animate(withDuration: 0.3) {
+            self.transform = CGAffineTransform(translationX: -40, y: 0)
+            self.center = CGPoint(x: self.originalPoint.x + -40, y: self.originalPoint.y)
+        }
+    }
+
+    @objc
+    func swipedRight(_ gestureRecognizer: UISwipeGestureRecognizer) {
+        UIView.animate(withDuration: 0.3) {
+            self.center = self.originalPoint
+            self.transform = CGAffineTransform(rotationAngle: 0)
+        }
+    }
 
     // MARK: Functions
 
@@ -235,6 +247,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
 
     private let cornerRadius: CGFloat = 8
 
-//    private var swipeGesture: UIPanGestureRecognizer!
-//    private var originalPoint: CGPoint!
+    private var leftSwipeGesture: UISwipeGestureRecognizer!
+    private var rightSwipeGesture: UISwipeGestureRecognizer!
+    private var originalPoint: CGPoint!
 }

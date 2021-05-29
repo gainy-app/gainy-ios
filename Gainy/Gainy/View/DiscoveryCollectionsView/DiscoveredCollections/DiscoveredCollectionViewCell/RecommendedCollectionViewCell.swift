@@ -103,7 +103,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    var plusButtonPressed: (() -> Void) = {}
+    var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -241,7 +241,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     @objc
     private func plusButtonTapped(_: UIButton) {
         if buttonState == .unchecked {
-            plusButtonPressed()
+            onPlusButtonPressed()
         }
     }
 }

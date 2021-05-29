@@ -1,8 +1,6 @@
 import UIKit
 
-// TODO: reanme suffix section to Layout or SectionLayout?
-// TODO: rename LayoutSection to SectionLayout
-struct RecommendedCollectionsSection: LayoutSection {
+struct RecommendedCollectionsSectionLayout: SectionLayout {
     private enum Constant {
         static let numberOfColumns = 3
     }

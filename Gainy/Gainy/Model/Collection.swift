@@ -4,28 +4,31 @@ struct Collection {
     let name: String
     let description: String
     let stocksAmount: Int
-    let discovered: Bool // TODO: rename to recommended and invert
+    let isInYourCollections: Bool
 }
 
+// TODO: check force unwraps
 enum CollectionDTOMapper {
     static func map(_ dto: CollectionsQuery.Data.Collection) -> Collection {
-        Collection(id: Int(dto.id)!,
-                   image: dto.image,
-                   name: dto.name,
-                   description: dto.description,
-                   stocksAmount: Int(dto.stocksCount)!,
-                   discovered: dto.favoriteCollections.first?.isDefault ?? false)
+        Collection(
+            id: Int(dto.id)!,
+            image: dto.image,
+            name: dto.name,
+            description: dto.description,
+            stocksAmount: Int(dto.stocksCount)!,
+            isInYourCollections: dto.favoriteCollections.first?.isDefault ?? false
+        )
     }
 }
 
 extension Collection: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(discovered)
+        hasher.combine(isInYourCollections)
     }
 
     static func == (lhs: Collection, rhs: Collection) -> Bool {
-        lhs.id == rhs.id && lhs.discovered == rhs.discovered
+        lhs.id == rhs.id && lhs.isInYourCollections == rhs.isInYourCollections
     }
 }
 
@@ -92,7 +95,7 @@ enum CollectionViewModelMapper {
             name: model.name,
             description: model.description,
             stocksAmount: model.stocksAmount,
-            buttonState: model.discovered ? .checked : .unchecked
+            buttonState: model.isInYourCollections ? .checked : .unchecked
         )
     }
 }

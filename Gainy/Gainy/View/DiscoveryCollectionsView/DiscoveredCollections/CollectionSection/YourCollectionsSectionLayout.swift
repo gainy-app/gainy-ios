@@ -1,6 +1,6 @@
 import UIKit
 
-struct YourCollectionsSection: LayoutSection {
+struct YourCollectionsSectionLayout: SectionLayout {
     var layoutSection: NSCollectionLayoutSection = {
         // Items
         let discoveryItem = NSCollectionLayoutItem(

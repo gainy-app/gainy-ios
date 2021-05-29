@@ -1,6 +1,6 @@
 import UIKit
 
-protocol LayoutSection {
+protocol SectionLayout {
     var layoutSection: NSCollectionLayoutSection { get }
 
     func configureCell(collectionView: UICollectionView,
@@ -10,7 +10,7 @@ protocol LayoutSection {
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView?
 }
 
-extension LayoutSection {
+extension SectionLayout {
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
          nil
     }

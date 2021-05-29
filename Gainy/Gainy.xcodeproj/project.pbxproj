@@ -32,9 +32,9 @@
 		3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */; };
 		3AD40FA726682B2B005679DE /* UICollectionView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */; };
 		3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */; };
-		3AD40FBA266923C1005679DE /* YourCollectionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB9266923C1005679DE /* YourCollectionsSection.swift */; };
-		3AD40FBE266923C1005679DE /* RecommendedCollectionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FBD266923C1005679DE /* RecommendedCollectionsSection.swift */; };
-		3AD40FC3266923C1005679DE /* LayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC2266923C1005679DE /* LayoutSection.swift */; };
+		3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */; };
+		3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */; };
+		3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC2266923C1005679DE /* SectionLayout.swift */; };
 		3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */; };
 		3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */; };
 		3AE79525266219F3002B40D6 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE79524266219F3002B40D6 /* Collection.swift */; };
@@ -123,9 +123,9 @@
 		3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReuseCells.swift"; sourceTree = "<group>"; };
 		3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReusableView.swift"; sourceTree = "<group>"; };
 		3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModelProtocol.swift; sourceTree = "<group>"; };
-		3AD40FB9266923C1005679DE /* YourCollectionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionsSection.swift; sourceTree = "<group>"; };
-		3AD40FBD266923C1005679DE /* RecommendedCollectionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsSection.swift; sourceTree = "<group>"; };
-		3AD40FC2266923C1005679DE /* LayoutSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutSection.swift; sourceTree = "<group>"; };
+		3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionsSectionLayout.swift; sourceTree = "<group>"; };
+		3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsSectionLayout.swift; sourceTree = "<group>"; };
+		3AD40FC2266923C1005679DE /* SectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLayout.swift; sourceTree = "<group>"; };
 		3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewControllerProtocol.swift; sourceTree = "<group>"; };
 		3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReusableHeaderSection.swift"; sourceTree = "<group>"; };
 		3AE79524266219F3002B40D6 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -372,8 +372,8 @@
 		3AD40FB8266923C1005679DE /* CollectionSection */ = {
 			isa = PBXGroup;
 			children = (
-				3AD40FB9266923C1005679DE /* YourCollectionsSection.swift */,
-				3AD40FBD266923C1005679DE /* RecommendedCollectionsSection.swift */,
+				3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */,
+				3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */,
 			);
 			path = CollectionSection;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 		3AD40FC1266923C1005679DE /* CollectionViewLayout */ = {
 			isa = PBXGroup;
 			children = (
-				3AD40FC2266923C1005679DE /* LayoutSection.swift */,
+				3AD40FC2266923C1005679DE /* SectionLayout.swift */,
 			);
 			path = CollectionViewLayout;
 			sourceTree = "<group>";
@@ -684,7 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AD40FBE266923C1005679DE /* RecommendedCollectionsSection.swift in Sources */,
+				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
@@ -708,7 +708,7 @@
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* DiscoveredCollectionViewCell.swift in Sources */,
-				3AD40FC3266923C1005679DE /* LayoutSection.swift in Sources */,
+				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
 				3AE79536266267C1002B40D6 /* DiscoveredCollectionsHeaderView.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
@@ -722,7 +722,7 @@
 				3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
-				3AD40FBA266923C1005679DE /* YourCollectionsSection.swift in Sources */,
+				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,

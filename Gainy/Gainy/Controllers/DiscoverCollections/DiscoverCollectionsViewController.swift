@@ -42,9 +42,9 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Properties
 
     // Derives the order of the sections
-    lazy var sections: [LayoutSection] = [
-        YourCollectionsSection(),
-        RecommendedCollectionsSection(),
+    lazy var sections: [SectionLayout] = [
+        YourCollectionsSectionLayout(),
+        RecommendedCollectionsSectionLayout(),
     ]
 
     lazy var customLayout: UICollectionViewLayout = {
@@ -88,9 +88,36 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                 position: indexPath.row
             )
 
+            if let cell = cell as? DiscoveredCollectionViewCell,
+               let modelItem = modelItem as? YourCollectionViewCellModel {
+                cell.onDeleteButtonPressed = {
+                    self.viewModel?.yourCollections.removeAll { $0.id == modelItem.id }
+                    if let recModelIdx = self.viewModel?
+                        .recommendedCollections
+                        .firstIndex(where: { $0.id == modelItem.id }
+                    ) {
+                        let recModel = RecommendedCollectionViewCellModel(
+                            id: modelItem.id,
+                            image: modelItem.image,
+                            name: modelItem.name,
+                            description: modelItem.description,
+                            stocksAmount: modelItem.stocksAmount,
+                            buttonState: .unchecked
+                        )
+                        self.viewModel?.recommendedCollections[recModelIdx] = recModel
+                    }
+                    DispatchQueue.main.async {
+                        self.snapshot.deleteItems([modelItem])
+                        self.snapshot.reloadSections([.recommendedCollections])
+//                        self.snapshot.replace??
+                        // TODO: find recommendedModel and update it?
+                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
+                    }
+                }
+            }
+
             if let cell = cell as? RecommendedCollectionViewCell,
                let modelItem = modelItem as? RecommendedCollectionViewCellModel {
-
                 // TODO: fix (add field to recommended?)
                 let checkedItem = YourCollectionViewCellModel(
                     id: modelItem.id,
@@ -105,7 +132,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                     : cell.setButtonUnchecked()
 
 
-                cell.plusButtonPressed = {
+                cell.onPlusButtonPressed = {
                     let newCollection = YourCollectionViewCellModel(
                         id: modelItem.id,
                         image: modelItem.image,
