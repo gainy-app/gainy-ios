@@ -91,10 +91,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     // MARK: Properties
 
-    static var reuseIdentifier: String {
-        String(describing: self)
-    }
-
     private(set) var buttonState: RecommendedCellButtonState = .unchecked
 
     var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and

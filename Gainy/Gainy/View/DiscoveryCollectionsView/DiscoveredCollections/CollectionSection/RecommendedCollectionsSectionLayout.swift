@@ -1,9 +1,7 @@
 import UIKit
 
 struct RecommendedCollectionsSectionLayout: SectionLayout {
-    private enum Constant {
-        static let numberOfColumns = 3
-    }
+    // MARK: Internal
 
     var layoutSection: NSCollectionLayoutSection = {
         // Items
@@ -71,7 +69,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         collectionView: UICollectionView,
         indexPath: IndexPath,
         item: AnyHashable,
-        position: Int
+        position _: Int
     ) -> UICollectionViewCell {
         let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
@@ -84,5 +82,11 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         }
 
         return cell
+    }
+
+    // MARK: Private
+
+    private enum Constant {
+        static let numberOfColumns = 3
     }
 }

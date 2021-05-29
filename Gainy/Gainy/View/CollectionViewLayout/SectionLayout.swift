@@ -11,7 +11,7 @@ protocol SectionLayout {
 }
 
 extension SectionLayout {
-    func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
-         nil
+    func header(collectionView _: UICollectionView, indexPath _: IndexPath) -> UICollectionReusableView? {
+        nil
     }
 }

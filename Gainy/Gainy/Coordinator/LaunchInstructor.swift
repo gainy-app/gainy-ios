@@ -10,8 +10,8 @@ enum LaunchInstructor {
 
     // MARK: - Public methods
 
-    static func configure(tutorialWasShown: Bool = onboardingWasShown,
-                          isAutorized: Bool = isAutorized) -> LaunchInstructor {
+    static func configure(tutorialWasShown _: Bool = onboardingWasShown,
+                          isAutorized _: Bool = isAutorized) -> LaunchInstructor {
         .main
     }
 }

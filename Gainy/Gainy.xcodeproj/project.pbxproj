@@ -35,7 +35,7 @@
 		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
 		3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40F5C266021BD005679DE /* BundleReader.swift */; };
 		3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */; };
-		3AD40FA726682B2B005679DE /* UICollectionView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */; };
+		3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */; };
 		3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */; };
 		3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */; };
 		3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */; };
@@ -132,7 +132,7 @@
 		3AA52C9E26601697006A6961 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3AD40F5C266021BD005679DE /* BundleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleReader.swift; sourceTree = "<group>"; };
 		3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReuseCells.swift"; sourceTree = "<group>"; };
-		3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReusableView.swift"; sourceTree = "<group>"; };
+		3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+ReusableView.swift"; sourceTree = "<group>"; };
 		3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModelProtocol.swift; sourceTree = "<group>"; };
 		3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionsSectionLayout.swift; sourceTree = "<group>"; };
 		3AD40FBD266923C1005679DE /* RecommendedCollectionsSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsSectionLayout.swift; sourceTree = "<group>"; };
@@ -461,7 +461,7 @@
 				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 				3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */,
 				3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */,
-				3AD40FA626682B2B005679DE /* UICollectionView+ReusableView.swift */,
+				3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -742,7 +742,7 @@
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
-				3AD40FA726682B2B005679DE /* UICollectionView+ReusableView.swift in Sources */,
+				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,

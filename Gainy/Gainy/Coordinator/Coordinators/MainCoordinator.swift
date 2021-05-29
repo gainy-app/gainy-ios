@@ -40,14 +40,5 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.router.setRootModule(vc, hideBar: true)
     }
 
-    private func showCollectionDetailsViewController() {
-//        let bVC = self.viewControllerFactory.instantiateBViewController()
-//        bVC.onBack = { [unowned self] in
-//            self.router.popModule()
-//        }
-//        bVC.onLogout = { [unowned self] in
-//            self.finishFlow?()
-//        }
-//        self.router.push(bVC)
-    }
+    private func showCollectionDetailsViewController() {}
 }

@@ -30,6 +30,7 @@ struct BundleReader {
     }
 
     private enum ErrorMessage {
-        static let apiKeyMustBeSet = "Hasura's admin key must be set in the Info.plist as `\(InfoPlistKey.hasuraAdminSecret)`."
+        static let apiKeyMustBeSet =
+            "Hasura's admin key must be set in the Info.plist as `\(InfoPlistKey.hasuraAdminSecret)`."
     }
 }

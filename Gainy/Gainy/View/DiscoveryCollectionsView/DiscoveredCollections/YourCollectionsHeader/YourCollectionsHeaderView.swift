@@ -44,10 +44,6 @@ class YourCollectionsHeaderView: UICollectionReusableView {
 
     // MARK: Internal
 
-    static var reuseIdentifier: String {
-        String(describing: self)
-    }
-
     // MARK: Properties
 
     lazy var titleLabel: UILabel = {

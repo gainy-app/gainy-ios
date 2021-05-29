@@ -14,7 +14,7 @@ extension UIColor {
 //        static let blue
 //        static let white
 //        static let lightBack
-        
+
         static let back = UIColor(red: 238.0 / 255.0,
                                   green: 243.0 / 255.0,
                                   blue: 245.0 / 255.0,

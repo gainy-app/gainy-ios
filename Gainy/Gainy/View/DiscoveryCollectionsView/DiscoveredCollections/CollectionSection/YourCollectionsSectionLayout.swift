@@ -59,7 +59,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         collectionView: UICollectionView,
         indexPath: IndexPath,
         item: AnyHashable,
-        position: Int
+        position _: Int
     ) -> UICollectionViewCell {
         let cell: YourCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 

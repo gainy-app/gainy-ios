@@ -7,26 +7,6 @@ struct YourCollectionViewCellModel {
     let indexInRecommended: Int? // TODO: check
 }
 
-//class YourCollectionViewCellModel {
-//    var id: Int
-//    var image: String
-//    var name: String
-//    var description: String
-//    var stocksAmount: Int
-//
-//    init(id: Int,
-//         image: String,
-//         name: String,
-//         description: String,
-//         stocksAmount: Int) {
-//        self.id = id
-//        self.image = image
-//        self.name = name
-//        self.description = description
-//        self.stocksAmount = stocksAmount
-//    }
-//}
-
 extension YourCollectionViewCellModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)

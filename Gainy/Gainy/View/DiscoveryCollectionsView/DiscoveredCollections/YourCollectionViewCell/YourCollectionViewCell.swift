@@ -5,14 +5,6 @@ extension YourCollectionViewCell: UIGestureRecognizerDelegate {}
 class YourCollectionViewCell: UICollectionViewCell {
     // MARK: Lifecycle
 
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if deleteButton.frame.contains(point) {
-            return deleteButton
-        }
-
-        return super.hitTest(point, with: event)
-    }
-
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
@@ -30,7 +22,7 @@ class YourCollectionViewCell: UICollectionViewCell {
                 .constraint(equalTo: self.leadingAnchor, constant: 16),
             nameLabel
                 .trailingAnchor
-                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128), //96?
+                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128),
             nameLabel
                 .heightAnchor
                 .constraint(equalToConstant: 20),
@@ -97,10 +89,6 @@ class YourCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: Internal
-
-    static var reuseIdentifier: String {
-        String(describing: self)
-    }
 
     // MARK: Properties
 
@@ -180,9 +168,12 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     var onDeleteButtonPressed: (() -> Void) = {}
 
-    @objc
-    private func deleteButtonTapped(_: UIButton) {
-        onDeleteButtonPressed()
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if deleteButton.frame.contains(point) {
+            return deleteButton
+        }
+
+        return super.hitTest(point, with: event)
     }
 
     override func draw(_: CGRect) {
@@ -197,34 +188,13 @@ class YourCollectionViewCell: UICollectionViewCell {
                                                     action: #selector(swipedLeft(_:)))
         leftSwipeGesture.delegate = self
         leftSwipeGesture.direction = .left
-        leftSwipeGesture.numberOfTouchesRequired = 1
 
         rightSwipeGesture = UISwipeGestureRecognizer(target: self,
                                                      action: #selector(swipedRight(_:)))
         rightSwipeGesture.delegate = self
-        rightSwipeGesture.direction = .right
-        rightSwipeGesture.numberOfTouchesRequired = 1
 
         self.addGestureRecognizer(leftSwipeGesture)
         self.addGestureRecognizer(rightSwipeGesture)
-    }
-
-    @objc
-    func swipedLeft(_ gestureRecognizer: UISwipeGestureRecognizer) {
-        self.originalPoint = CGPoint(x: (self.superview?.center.x)!, y: self.center.y)
-
-        UIView.animate(withDuration: 0.3) {
-            self.transform = CGAffineTransform(translationX: -40, y: 0)
-            self.center = CGPoint(x: self.originalPoint.x + -40, y: self.originalPoint.y)
-        }
-    }
-
-    @objc
-    func swipedRight(_ gestureRecognizer: UISwipeGestureRecognizer) {
-        UIView.animate(withDuration: 0.3) {
-            self.center = self.originalPoint
-            self.transform = CGAffineTransform(rotationAngle: 0)
-        }
     }
 
     // MARK: Functions
@@ -245,11 +215,45 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     // MARK: Private
 
+    // MARK: Types
+
+    private enum Constant {
+        static let swipeAnimationDurations: TimeInterval = 0.3
+        static let swipeHorizontalShift: CGFloat = 40.0
+    }
+
     // MARK: Properties
 
     private let cornerRadius: CGFloat = 8
 
     private var leftSwipeGesture: UISwipeGestureRecognizer!
     private var rightSwipeGesture: UISwipeGestureRecognizer!
-    private var originalPoint: CGPoint!
+    private var originalCellCenter: CGPoint!
+
+    // MARK: Functions
+
+    @objc
+    private func swipedLeft(_: UISwipeGestureRecognizer) {
+        self.originalCellCenter = CGPoint(x: (self.superview?.center.x)!, y: self.center.y)
+
+        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+            self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
+                                               y: 0)
+            self.center = CGPoint(x: self.originalCellCenter.x - Constant.swipeHorizontalShift,
+                                  y: self.originalCellCenter.y)
+        }
+    }
+
+    @objc
+    private func swipedRight(_: UISwipeGestureRecognizer) {
+        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+            self.center = self.originalCellCenter
+            self.transform = CGAffineTransform(rotationAngle: 0)
+        }
+    }
+
+    @objc
+    private func deleteButtonTapped(_: UIButton) {
+        onDeleteButtonPressed()
+    }
 }

@@ -150,8 +150,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         )
 
         guard let indexInRecommendedList = viewModel?
-                .recommendedCollections
-                .firstIndex(where: { $0.id == collectionToAdd.id }) else {
+            .recommendedCollections
+            .firstIndex(where: { $0.id == collectionToAdd.id }) else {
             assertionFailure("Expect to have a collection in the recommended list")
             return
         }
@@ -260,7 +260,9 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
         switch indexPath.section {
         case Section.yourCollections.rawValue:
             let item = viewModel!.yourCollections[indexPath.row]
+            // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
+            // swiftlint:enable legacy_objc_type
             let dragItem = UIDragItem(itemProvider: itemProvider)
             return [dragItem]
         default:
