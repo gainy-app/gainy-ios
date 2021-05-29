@@ -213,6 +213,7 @@ identifier_name:
   excluded:
     - id
     - ok
+    - vc
 file_length:
   warning: 750
 function_body_length:
