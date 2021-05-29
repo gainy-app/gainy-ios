@@ -5,7 +5,8 @@ enum CollectionViewModelMapper {
             image: model.image,
             name: model.name,
             description: model.description,
-            stocksAmount: model.stocksAmount
+            stocksAmount: model.stocksAmount,
+            indexInRecommended: nil
         )
     }
 

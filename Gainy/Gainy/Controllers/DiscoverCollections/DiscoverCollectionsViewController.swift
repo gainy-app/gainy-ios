@@ -76,7 +76,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                     : cell.setButtonUnchecked()
 
                 cell.onPlusButtonPressed = {
-                    self.addToYourCollection(collectionToAdd: modelItem)
+                    self.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
                     cell.setButtonChecked()
                 }
             }
@@ -123,13 +123,14 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
     // MARK: Functions
 
-    private func addToYourCollection(collectionToAdd: RecommendedCollectionViewCellModel) {
+    private func addToYourCollection(collectionToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
         let yourCollectionModel = YourCollectionViewCellModel(
             id: collectionToAdd.id,
             image: collectionToAdd.image,
             name: collectionToAdd.name,
             description: collectionToAdd.description,
-            stocksAmount: collectionToAdd.stocksAmount
+            stocksAmount: collectionToAdd.stocksAmount,
+            indexInRecommended: indexRow
         )
         viewModel?.yourCollections.append(yourCollectionModel)
         self.snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
@@ -159,9 +160,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         self.snapshot.deleteItems([collectionToRemove])
         defer { self.dataSource?.apply(self.snapshot, animatingDifferences: true) }
 
-        guard let indexInRecommendedList: Int = viewModel?
-                .recommendedCollections
-                .firstIndex(where: { $0.id == collectionToRemove.id }) else {
+        guard let indexInRecommendedList = collectionToRemove.indexInRecommended else {
             return
         }
 

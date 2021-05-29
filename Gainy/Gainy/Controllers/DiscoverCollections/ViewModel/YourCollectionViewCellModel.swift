@@ -4,6 +4,7 @@ struct YourCollectionViewCellModel {
     let name: String
     let description: String
     let stocksAmount: Int
+    let indexInRecommended: Int? // TODO: check
 }
 
 //class YourCollectionViewCellModel {
