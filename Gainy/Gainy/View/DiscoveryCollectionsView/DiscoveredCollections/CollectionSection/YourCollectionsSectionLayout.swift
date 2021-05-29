@@ -29,7 +29,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(70)
+                heightDimension: .absolute(70)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
@@ -46,7 +46,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
     }()
 
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
-        let headerView: DiscoveredCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
+        let headerView: YourCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
 
         headerView.configureWith(
             title: "Your collections",
@@ -61,7 +61,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         item: AnyHashable,
         position: Int
     ) -> UICollectionViewCell {
-        let cell: DiscoveredCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: YourCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = item as? YourCollectionViewCellModel {
             cell.configureWith(name: viewModel.name,

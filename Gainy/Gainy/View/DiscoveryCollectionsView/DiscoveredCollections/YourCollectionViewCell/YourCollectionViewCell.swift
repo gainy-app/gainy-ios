@@ -1,8 +1,8 @@
 import UIKit
 
-extension DiscoveredCollectionViewCell: UIGestureRecognizerDelegate {}
+extension YourCollectionViewCell: UIGestureRecognizerDelegate {}
 
-class DiscoveredCollectionViewCell: UICollectionViewCell {
+class YourCollectionViewCell: UICollectionViewCell {
     // MARK: Lifecycle
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
@@ -30,7 +30,7 @@ class DiscoveredCollectionViewCell: UICollectionViewCell {
                 .constraint(equalTo: self.leadingAnchor, constant: 16),
             nameLabel
                 .trailingAnchor
-                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -96),
+                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128), //96?
             nameLabel
                 .heightAnchor
                 .constraint(equalToConstant: 20),

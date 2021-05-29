@@ -40,7 +40,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(70)
+                heightDimension: .absolute(70)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
@@ -57,7 +57,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
     }()
 
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
-        let headerView: DiscoveredCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
+        let headerView: YourCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
 
         headerView.configureWith(
             title: "Collections you might like",

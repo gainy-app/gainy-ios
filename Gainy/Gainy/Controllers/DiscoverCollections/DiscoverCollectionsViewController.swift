@@ -6,29 +6,6 @@ typealias CollectionsDataSource = UICollectionViewDiffableDataSource
 typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
 <DiscoverCollectionsViewController.Section, Collection>
 
-
-// A models
-
-enum DiscoverCollections {}
-
-// A view model
-
-class DiscoveredCollectionItemViewModel {}
-class RecommendedCollectionItemViewModel {}
-
-class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModelProtocol {
-    var yourCollections: [YourCollectionViewCellModel]
-    var recommendedCollections: [RecommendedCollectionViewCellModel]
-
-    // MARK: - Init
-
-    override init() {
-        yourCollections = DummyDataSource.collections.map { CollectionViewModelMapper.map($0) }
-        recommendedCollections = DummyDataSource.recommendedCollections.map { CollectionViewModelMapper.map($0) }
-        super.init()
-    }
-}
-
 class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
     // MARK: Internal
 
@@ -57,7 +34,6 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     var viewModel: DiscoverCollectionsViewModelProtocol?
 
     var onGoToCollectionDetails: (() -> Void)?
-    var onAddingCollectionToYourCollections: (() -> Void)?
     var onRemovingCollectionFromYourCollections: (() -> Void)?
 
     override func viewDidLoad() {
@@ -69,8 +45,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         )
         self.view.addSubview(discoverCollectionsCollectionView)
 
-        self.discoverCollectionsCollectionView.registerSectionHeader(DiscoveredCollectionsHeaderView.self)
-        self.discoverCollectionsCollectionView.register(DiscoveredCollectionViewCell.self)
+        self.discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
+        self.discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
         self.discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
 
         self.discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
@@ -88,72 +64,27 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                 position: indexPath.row
             )
 
-            if let cell = cell as? DiscoveredCollectionViewCell,
+            if let cell = cell as? YourCollectionViewCell,
                let modelItem = modelItem as? YourCollectionViewCellModel {
                 cell.onDeleteButtonPressed = {
-                    self.viewModel?.yourCollections.removeAll { $0.id == modelItem.id }
-                    if let recModelIdx = self.viewModel?
-                        .recommendedCollections
-                        .firstIndex(where: { $0.id == modelItem.id }
-                    ) {
-                        let recModel = RecommendedCollectionViewCellModel(
-                            id: modelItem.id,
-                            image: modelItem.image,
-                            name: modelItem.name,
-                            description: modelItem.description,
-                            stocksAmount: modelItem.stocksAmount,
-                            buttonState: .unchecked
-                        )
-                        self.viewModel?.recommendedCollections[recModelIdx] = recModel
-                    }
-                    DispatchQueue.main.async {
-                        self.snapshot.deleteItems([modelItem])
-                        self.snapshot.reloadSections([.recommendedCollections])
-//                        self.snapshot.replace??
-                        // TODO: find recommendedModel and update it?
-                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
-                    }
+                    self.removeFromYourCollection(collectionToRemove: modelItem)
                 }
-            }
-
-            if let cell = cell as? RecommendedCollectionViewCell,
-               let modelItem = modelItem as? RecommendedCollectionViewCellModel {
-                // TODO: fix (add field to recommended?)
-                let checkedItem = YourCollectionViewCellModel(
-                    id: modelItem.id,
-                    image: modelItem.image,
-                    name: modelItem.name,
-                    description: modelItem.description,
-                    stocksAmount: modelItem.stocksAmount
-                )
-
-                self.viewModel?.yourCollections.contains(checkedItem) ?? false
+            } else if let cell = cell as? RecommendedCollectionViewCell,
+                      let modelItem = modelItem as? RecommendedCollectionViewCellModel {
+                self.viewModel?.recommendedCollections[indexPath.row].buttonState == .checked
                     ? cell.setButtonChecked()
                     : cell.setButtonUnchecked()
 
-
                 cell.onPlusButtonPressed = {
-                    let newCollection = YourCollectionViewCellModel(
-                        id: modelItem.id,
-                        image: modelItem.image,
-                        name: modelItem.name,
-                        description: modelItem.description,
-                        stocksAmount: modelItem.stocksAmount
-                    )
-
-                    self.viewModel?.yourCollections.append(newCollection)
-                    DispatchQueue.main.async {
-                        cell.setButtonChecked()
-                        self.snapshot.appendItems([newCollection], toSection: .yourCollections)
-                        self.dataSource.apply(self.snapshot, animatingDifferences: true)
-                    }
+                    self.addToYourCollection(collectionToAdd: modelItem)
+                    cell.setButtonChecked()
                 }
             }
 
             return cell
         }
 
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
                 return self.sections[indexPath.section].header(
@@ -165,20 +96,17 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             }
         }
 
+        getLocalData()
+
+//        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.yourCollections, .recommendedCollections])
         snapshot.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         snapshot.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
-        dataSource.apply(snapshot, animatingDifferences: false)
 
-//        getData() // TODO: use the network call
-
+        dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
     // MARK: Functions
-
-    func addCollectionToYourCollections() {
-        self.onAddingCollectionToYourCollections?()
-    }
 
     func goToCollectionDetails() {
         self.onGoToCollectionDetails?()
@@ -190,10 +118,75 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
     private var discoverCollectionsCollectionView: UICollectionView!
 
-    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
 
-    // MARK: Fucntions
+    // MARK: Functions
+
+    private func addToYourCollection(collectionToAdd: RecommendedCollectionViewCellModel) {
+        let yourCollectionModel = YourCollectionViewCellModel(
+            id: collectionToAdd.id,
+            image: collectionToAdd.image,
+            name: collectionToAdd.name,
+            description: collectionToAdd.description,
+            stocksAmount: collectionToAdd.stocksAmount
+        )
+        viewModel?.yourCollections.append(yourCollectionModel)
+        self.snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
+        defer { self.dataSource?.apply(self.snapshot, animatingDifferences: true) }
+
+        let updatedRecommendedCollectionModel = RecommendedCollectionViewCellModel(
+            id: collectionToAdd.id,
+            image: collectionToAdd.image,
+            name: collectionToAdd.name,
+            description: collectionToAdd.description,
+            stocksAmount: collectionToAdd.stocksAmount,
+            buttonState: .checked
+        )
+
+        guard let indexInRecommendedList = viewModel?
+                .recommendedCollections
+                .firstIndex(where: { $0.id == collectionToAdd.id }) else {
+            assertionFailure("Expect to have a collection in the recommended list")
+            return
+        }
+        viewModel?.recommendedCollections[indexInRecommendedList] = updatedRecommendedCollectionModel
+        self.snapshot.reloadSections([.recommendedCollections])
+    }
+
+    private func removeFromYourCollection(collectionToRemove: YourCollectionViewCellModel) {
+        viewModel?.yourCollections.removeAll { $0.id == collectionToRemove.id }
+        self.snapshot.deleteItems([collectionToRemove])
+        defer { self.dataSource?.apply(self.snapshot, animatingDifferences: true) }
+
+        guard let indexInRecommendedList: Int = viewModel?
+                .recommendedCollections
+                .firstIndex(where: { $0.id == collectionToRemove.id }) else {
+            return
+        }
+
+        let updatedRecommendedCollectionModel = RecommendedCollectionViewCellModel(
+            id: collectionToRemove.id,
+            image: collectionToRemove.image,
+            name: collectionToRemove.name,
+            description: collectionToRemove.description,
+            stocksAmount: collectionToRemove.stocksAmount,
+            buttonState: .unchecked
+        )
+
+        // TODO: remove '!'
+        viewModel!.recommendedCollections[indexInRecommendedList] = updatedRecommendedCollectionModel
+        self.snapshot.reloadItems([updatedRecommendedCollectionModel])
+    }
+
+    private func getLocalData() {
+        viewModel?.yourCollections = DummyDataSource
+            .collections
+            .map { CollectionViewModelMapper.map($0) }
+        viewModel?.recommendedCollections = DummyDataSource
+            .recommendedCollections
+            .map { CollectionViewModelMapper.map($0) }
+    }
 
     private func getData() {
         Network.shared.apollo.fetch(query: CollectionsQuery()) { result in

@@ -95,13 +95,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         String(describing: self)
     }
 
-    private(set) var buttonState: RecommendedCellButtonState = .unchecked {
-        didSet(state) {
-            state == .checked
-                ? setButtonChecked()
-                : setButtonUnchecked()
-        }
-    }
+    private(set) var buttonState: RecommendedCellButtonState = .unchecked
 
     var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and
 
@@ -220,13 +214,18 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         stocksAmountLabel.text = "\(stocksAmount)"
 
         buttonState = plusButtonState
+        buttonState == .checked
+            ? setButtonChecked()
+            : setButtonUnchecked()
     }
 
     func setButtonUnchecked() {
+        buttonState = .unchecked
         plusButton.setImage(UIImage(named: "plus"), for: .normal)
     }
 
     func setButtonChecked() {
+        buttonState = .checked
         plusButton.setImage(UIImage(named: "check"), for: .normal)
     }
 
@@ -241,6 +240,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     @objc
     private func plusButtonTapped(_: UIButton) {
         if buttonState == .unchecked {
+            buttonState = .checked
             onPlusButtonPressed()
         }
     }

@@ -1,6 +1,6 @@
 import UIKit
 
-class DiscoveredCollectionsHeaderView: UICollectionReusableView {
+class YourCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
 
     override init(frame: CGRect) {
