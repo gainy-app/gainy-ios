@@ -213,6 +213,7 @@ identifier_name:
   excluded:
     - id
     - ok
+    - vc
 file_length:
   warning: 750
 function_body_length:
@@ -224,4 +225,6 @@ vertical_whitespace:
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
  - build
+ - Gainy/Gainy/Services/Network/Reachability/Reachability.swift
+ - Gainy/Gainy/Services/GraphQL/Schema/API.swift
  #- Gainy/Gainy/ThirdParty/**

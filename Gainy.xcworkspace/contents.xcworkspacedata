@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:apollo-ios-0.43.0/Apollo.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Gainy/Gainy.xcodeproj">
    </FileRef>
 </Workspace>
