@@ -169,6 +169,8 @@ class YourCollectionViewCell: UICollectionViewCell {
         button.layer.cornerRadius = 6
         button.backgroundColor = UIColor.Gainy.back
 
+        button.setImage(UIImage(named: "trash"), for: .normal)
+
         button.addTarget(self,
                          action: #selector(self.deleteButtonTapped(_:)),
                          for: .touchUpInside)
