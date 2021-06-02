@@ -63,6 +63,7 @@
 		3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */; };
 		3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */; };
 		3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795E626638FBE002B40D6 /* MainCoordinator.swift */; };
+		3AE90348266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */; };
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 		3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInstructor.swift; sourceTree = "<group>"; };
 		3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkOption.swift; sourceTree = "<group>"; };
 		3AE795E626638FBE002B40D6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppsFlyerLib.framework; path = ../../../AppsFlyerLib.framework; sourceTree = "<group>"; };
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */,
+				3AE90348266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +224,7 @@
 				3A930F1F265C1BD0000FD3EB /* Controllers */,
 				3AE79523266218B1002B40D6 /* Model */,
 				3A930F1B265C1B96000FD3EB /* Resources */,
+				3AE90346266A2FDF00574923 /* ThirdParty */,
 				3A930F1E265C1BBF000FD3EB /* Supporting Files */,
 			);
 			path = Gainy;
@@ -524,6 +528,14 @@
 				3AE795E626638FBE002B40D6 /* MainCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		3AE90346266A2FDF00574923 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */,
+			);
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		3AEF69A22662027A00B01BB3 /* ViewModel */ = {
