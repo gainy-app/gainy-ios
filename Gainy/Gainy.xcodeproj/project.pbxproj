@@ -63,7 +63,7 @@
 		3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */; };
 		3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */; };
 		3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795E626638FBE002B40D6 /* MainCoordinator.swift */; };
-		3AE90348266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */; };
+		3AE90354266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */; };
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -161,7 +161,7 @@
 		3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInstructor.swift; sourceTree = "<group>"; };
 		3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkOption.swift; sourceTree = "<group>"; };
 		3AE795E626638FBE002B40D6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppsFlyerLib.framework; path = ../../../AppsFlyerLib.framework; sourceTree = "<group>"; };
+		3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppsFlyerLib.framework; sourceTree = "<group>"; };
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -171,7 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */,
-				3AE90348266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */,
+				3AE90354266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,7 +533,7 @@
 		3AE90346266A2FDF00574923 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				3AE90347266A2FDF00574923 /* AppsFlyerLib.framework */,
+				3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -940,6 +940,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -960,6 +961,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
