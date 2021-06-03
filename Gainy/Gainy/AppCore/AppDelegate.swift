@@ -7,8 +7,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AppsFlyerLib.shared().appsFlyerDevKey = ""
-        AppsFlyerLib.shared().appleAppID = ""
+        AppsFlyerLib.shared().appsFlyerDevKey = BundleReader().appsFlyerDevKey
+        AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
 
         #if DEBUG

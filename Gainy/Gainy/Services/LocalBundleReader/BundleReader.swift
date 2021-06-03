@@ -14,9 +14,19 @@ struct BundleReader {
      Put the key into the Info.plist and assign to the `HasuraAdminSecret` entry.
      */
     private(set) var graphQLToken: String = {
-        let polygonApiKey = Bundle.main.object(forInfoDictionaryKey: InfoPlistKey.hasuraAdminSecret)
-        guard let apiKey = polygonApiKey as? String else {
+        let plistValue = Bundle.main.object(forInfoDictionaryKey: InfoPlistKey.hasuraAdminSecret)
+        guard let apiKey = plistValue as? String else {
             assertionFailure(ErrorMessage.apiKeyMustBeSet)
+            return ""
+        }
+
+        return apiKey
+    }()
+
+    private(set) var appsFlyerDevKey: String = {
+        let plistValue = Bundle.main.object(forInfoDictionaryKey: InfoPlistKey.appsFlyerDevKey)
+        guard let apiKey = plistValue as? String else {
+            assertionFailure(ErrorMessage.appsFlyerDevKeyMustBeSet)
             return ""
         }
 
@@ -27,10 +37,13 @@ struct BundleReader {
 
     private enum InfoPlistKey {
         static let hasuraAdminSecret = "HasuraAdminSecret"
+        static let appsFlyerDevKey = "AppsFlyerDevKey"
     }
 
     private enum ErrorMessage {
         static let apiKeyMustBeSet =
             "Hasura's admin key must be set in the Info.plist as `\(InfoPlistKey.hasuraAdminSecret)`."
+        static let appsFlyerDevKeyMustBeSet =
+            "AppsFlyer dev key must be set in the Info.plist as `\(InfoPlistKey.appsFlyerDevKey)`."
     }
 }
