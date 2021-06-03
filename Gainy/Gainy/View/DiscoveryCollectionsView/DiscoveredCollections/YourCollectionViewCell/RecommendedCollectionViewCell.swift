@@ -20,51 +20,6 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        let hMargin: CGFloat = 8
-        let tMargin: CGFloat = 12
-        let bMargin: CGFloat = 8
-
-        let minNameHeight: CGFloat = nameLabel.text.count > 11 ? 35 : 18
-        nameLabel.frame = CGRect(
-            x: hMargin - 4,
-            y: tMargin,
-            width: bounds.width - (hMargin + hMargin) + 4,
-            height: minNameHeight
-        )
-
-        descriptionLabel.frame = CGRect(
-            x: hMargin - 4,
-            y: tMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + hMargin) + 4,
-            height: 42
-        )
-
-        stocksLabel.frame = CGRect(
-            x: hMargin,
-            y: bounds.height - (10 + 24 + bMargin),
-            width: 60,
-            height: 10
-        )
-
-        stocksAmountLabel.frame = CGRect(
-            x: hMargin,
-            y: bounds.height - (24 + bMargin),
-            width: 60,
-            height: 24
-        )
-
-        plusButton.frame = CGRect(
-            x: bounds.width - (28 + hMargin),
-            y: bounds.height - (28 + bMargin),
-            width: 28,
-            height: 28
-        )
-    }
-
-
     // MARK: Internal
 
     // MARK: Properties
@@ -157,6 +112,51 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
         return button
     }()
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let hMargin: CGFloat = 8
+        let tMargin: CGFloat = 12
+        let bMargin: CGFloat = 8
+
+        let minNameHeight: CGFloat = nameLabel.text.count > 11 ? 35 : 18
+        nameLabel.frame = CGRect(
+            x: hMargin - 4,
+            y: tMargin,
+            width: bounds.width - (hMargin + hMargin) + 4,
+            height: minNameHeight
+        )
+
+        descriptionLabel.frame = CGRect(
+            x: hMargin - 4,
+            y: tMargin + nameLabel.bounds.height + 4,
+            width: bounds.width - (hMargin + hMargin) + 4,
+            height: 42
+        )
+
+        stocksLabel.frame = CGRect(
+            x: hMargin,
+            y: bounds.height - (10 + 24 + bMargin),
+            width: 60,
+            height: 10
+        )
+
+        stocksAmountLabel.frame = CGRect(
+            x: hMargin,
+            y: bounds.height - (24 + bMargin),
+            width: 60,
+            height: 24
+        )
+
+        plusButton.frame = CGRect(
+            x: bounds.width - (28 + hMargin),
+            y: bounds.height - (28 + bMargin),
+            width: 28,
+            height: 28
+        )
+    }
+
 
     // MARK: Functions
 
