@@ -6,13 +6,13 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(stocksLabel)
-        self.addSubview(stocksAmountLabel)
-        self.addSubview(plusButton)
+        addSubview(nameLabel)
+        addSubview(descriptionLabel)
+        addSubview(stocksLabel)
+        addSubview(stocksAmountLabel)
+        addSubview(plusButton)
 
-        self.backgroundColor = UIColor.Gainy.white
+        backgroundColor = UIColor.Gainy.white
     }
 
     @available(*, unavailable)
@@ -91,7 +91,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         button.backgroundColor = UIColor.Gainy.white
 
         button.addTarget(self,
-                         action: #selector(self.plusButtonTapped(_:)),
+                         action: #selector(plusButtonTapped(_:)),
                          for: .touchUpInside)
 
         var shadows = UIView()

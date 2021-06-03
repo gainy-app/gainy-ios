@@ -4,7 +4,7 @@ import UIKit
 
 extension UICollectionView {
     func registerSectionHeader<T: UICollectionReusableView>(_: T.Type) {
-        self.register(
+        register(
             T.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: T.reuseIdentifier
@@ -12,7 +12,7 @@ extension UICollectionView {
     }
 
     func dequeueReusableSectionHeader<T: UICollectionReusableView>(for indexPath: IndexPath) -> T {
-        self.dequeueReusableSupplementaryView(
+        dequeueReusableSupplementaryView(
             ofKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: T.reuseIdentifier,
             for: indexPath

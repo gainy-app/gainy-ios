@@ -26,8 +26,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     ]
 
     lazy var customLayout: UICollectionViewLayout = {
-        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ -> NSCollectionLayoutSection? in
-            self.sections[sectionIndex].layoutSection
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
+            self?.sections[sectionIndex].layoutSection
         }
         return layout
     }()
@@ -40,29 +40,29 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.discoverCollectionsCollectionView = UICollectionView(
-            frame: self.view.frame,
+        discoverCollectionsCollectionView = UICollectionView(
+            frame: view.frame,
             collectionViewLayout: customLayout
         )
-        self.view.addSubview(discoverCollectionsCollectionView)
+        view.addSubview(discoverCollectionsCollectionView)
 
-        self.discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
-        self.discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
-        self.discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
+        discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
+        discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+        discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
+        discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
 
-        self.discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
-        self.discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
-        self.discoverCollectionsCollectionView.dragInteractionEnabled = true
+        discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
+        discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
+        discoverCollectionsCollectionView.dragInteractionEnabled = true
 
-        self.discoverCollectionsCollectionView.dataSource = dataSource
-        self.discoverCollectionsCollectionView.dragDelegate = self
-        self.discoverCollectionsCollectionView.dropDelegate = self
-
+        discoverCollectionsCollectionView.dataSource = dataSource
+        discoverCollectionsCollectionView.dragDelegate = self
+        discoverCollectionsCollectionView.dropDelegate = self
 
         dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(
             collectionView: discoverCollectionsCollectionView
-        ) { collectionView, indexPath, modelItem -> UICollectionViewCell? in
-            let cell = self.sections[indexPath.section].configureCell(
+        ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
+            let cell = self?.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
                 indexPath: indexPath,
                 item: modelItem,
@@ -113,10 +113,10 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             return cell
         }
 
-        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                return self.sections[indexPath.section].header(
+                return self?.sections[indexPath.section].header(
                     collectionView: collectionView,
                     indexPath: indexPath
                 )
@@ -131,7 +131,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Functions
 
     func goToCollectionDetails() {
-        self.onGoToCollectionDetails?()
+        onGoToCollectionDetails?()
     }
 
     // MARK: Private
@@ -248,7 +248,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     }
 
     private func getData() {
-        Network.shared.apollo.fetch(query: CollectionsQuery()) { result in
+        Network.shared.apollo.fetch(query: CollectionsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 DummyDataSource.collectionsRemote = graphQLResult.data!.collections
@@ -266,7 +266,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                     CollectionDTOMapper.map($0)
                 }
 
-                self.getLocalData()
+                self?.getLocalData()
 
                 DispatchQueue.main.async {
                     self.initViewModels()

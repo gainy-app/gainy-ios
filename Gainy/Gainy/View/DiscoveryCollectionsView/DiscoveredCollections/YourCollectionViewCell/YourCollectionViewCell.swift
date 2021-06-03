@@ -8,13 +8,13 @@ class YourCollectionViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(stocksLabel)
-        self.addSubview(stocksAmountLabel)
-        self.addSubview(deleteButton)
+        addSubview(nameLabel)
+        addSubview(descriptionLabel)
+        addSubview(stocksLabel)
+        addSubview(stocksAmountLabel)
+        addSubview(deleteButton)
 
-        self.backgroundColor = UIColor.Gainy.white
+        backgroundColor = UIColor.Gainy.white
 
         setupSwipeGesture()
     }
@@ -131,7 +131,7 @@ class YourCollectionViewCell: UICollectionViewCell {
 
         button.setImage(UIImage(named: "trash"), for: .normal)
         button.addTarget(self,
-                         action: #selector(self.deleteButtonTapped(_:)),
+                         action: #selector(deleteButtonTapped(_:)),
                          for: .touchUpInside)
 
         return button
@@ -156,16 +156,16 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     func setupSwipeGesture() {
         leftSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                    action: #selector(swipedLeft(_:)))
+                                                    action: #selector(leftSwiped(_:)))
         leftSwipeGesture.delegate = self
         leftSwipeGesture.direction = .left
 
         rightSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                     action: #selector(swipedRight(_:)))
+                                                     action: #selector(rightSwiped(_:)))
         rightSwipeGesture.delegate = self
 
-        self.addGestureRecognizer(leftSwipeGesture)
-        self.addGestureRecognizer(rightSwipeGesture)
+        addGestureRecognizer(leftSwipeGesture)
+        addGestureRecognizer(rightSwipeGesture)
     }
 
     // MARK: Functions
@@ -211,8 +211,8 @@ class YourCollectionViewCell: UICollectionViewCell {
     // MARK: Functions
 
     @objc
-    private func swipedLeft(_: UISwipeGestureRecognizer) {
-        self.originalCellCenter = CGPoint(x: (self.superview?.center.x)!, y: self.center.y)
+    private func leftSwiped(_: UISwipeGestureRecognizer) {
+        originalCellCenter = CGPoint(x: (superview?.center.x)!, y: center.y)
 
         UIView.animate(withDuration: Constant.swipeAnimationDurations) {
             self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
@@ -223,7 +223,7 @@ class YourCollectionViewCell: UICollectionViewCell {
     }
 
     @objc
-    private func swipedRight(_: UISwipeGestureRecognizer) {
+    private func rightSwiped(_: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: Constant.swipeAnimationDurations) {
             self.center = self.originalCellCenter
             self.transform = CGAffineTransform(rotationAngle: 0)

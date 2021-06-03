@@ -6,10 +6,10 @@ class YourCollectionsHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor.Gainy.white
+        backgroundColor = UIColor.Gainy.white
 
-        self.addSubview(titleLabel)
-        self.addSubview(descriptionLabel)
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
 
         NSLayoutConstraint.activate([
             titleLabel
