@@ -43,7 +43,7 @@ class CustomInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Swift.Result<GraphQLResult<Operation.Data>, Error>) -> Void
     ) {
-        request.addHeader(name: "x-hasura-admin-secret", value: accessToken)
+        request.addHeader(name: "x-hasura-admin-secret", value: BundleReader().graphQLToken)
 
         print("request :\(request)")
         print("response :\(String(describing: response))")
@@ -52,8 +52,4 @@ class CustomInterceptor: ApolloInterceptor {
                            response: response,
                            completion: completion)
     }
-
-    // MARK: Private
-
-    private let accessToken = BundleReader().graphQLToken
 }

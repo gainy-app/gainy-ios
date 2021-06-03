@@ -125,14 +125,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             }
         }
 
-        getLocalData()
-
-//        var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-        snapshot.appendSections([.yourCollections, .recommendedCollections])
-        snapshot.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
-        snapshot.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
-
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        getData()
     }
 
     // MARK: Functions
@@ -237,6 +230,13 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         coordinator.drop(item.dragItem, toItemAt: destinationPath)
     }
 
+    private func initViewModels() {
+        snapshot.appendSections([.yourCollections, .recommendedCollections])
+        snapshot.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
+        snapshot.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
+
+        dataSource?.apply(snapshot, animatingDifferences: false)
+    }
 
     private func getLocalData() {
         viewModel?.yourCollections = DummyDataSource
@@ -266,8 +266,10 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                     CollectionDTOMapper.map($0)
                 }
 
+                self.getLocalData()
+
                 DispatchQueue.main.async {
-//                    self.updateSnapshot()
+                    self.initViewModels()
                 }
 
                 print("Success! Result: \(graphQLResult)")
