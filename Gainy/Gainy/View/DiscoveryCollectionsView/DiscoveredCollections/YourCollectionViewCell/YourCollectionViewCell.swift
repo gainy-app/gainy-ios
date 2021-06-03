@@ -66,19 +66,6 @@ class YourCollectionViewCell: UICollectionViewCell {
         )
     }
 
-    private func roundedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
-        let systemFont = UIFont.systemFont(ofSize: size, weight: weight)
-
-        let font: UIFont
-        if let descriptor = systemFont.fontDescriptor.withDesign(.rounded) {
-            font = UIFont(descriptor: descriptor, size: size)
-        } else {
-            font = systemFont
-        }
-
-        return font
-    }
-
     // MARK: Internal
 
     // MARK: Properties
@@ -112,7 +99,7 @@ class YourCollectionViewCell: UICollectionViewCell {
     lazy var stocksLabel: UILabel = {
         let label = UILabel()
 
-        label.font = self.roundedFont(ofSize: 9, weight: .medium)
+        label.font = UIFont.roundedFont(ofSize: 9, weight: .medium)
         label.textColor = UIColor.Gainy.white
         label.numberOfLines = 1
         label.textAlignment = .right
@@ -125,7 +112,7 @@ class YourCollectionViewCell: UICollectionViewCell {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = self.roundedFont(ofSize: 28, weight: .semibold)
+        label.font = UIFont.roundedFont(ofSize: 28, weight: .semibold)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
