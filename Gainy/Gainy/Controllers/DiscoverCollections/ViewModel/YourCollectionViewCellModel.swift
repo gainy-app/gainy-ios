@@ -3,7 +3,7 @@ struct YourCollectionViewCellModel {
     let image: String
     let name: String
     let description: String
-    let stocksAmount: Int
+    let stocksAmount: String
     let indexInRecommended: Int? // TODO: check
 }
 

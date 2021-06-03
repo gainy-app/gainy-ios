@@ -185,7 +185,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = "\(stocksAmount)"
+        stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
 
         buttonState = plusButtonState

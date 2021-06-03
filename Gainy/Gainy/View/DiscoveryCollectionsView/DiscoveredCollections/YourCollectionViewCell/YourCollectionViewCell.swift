@@ -184,7 +184,7 @@ class YourCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = "\(stocksAmount)"
+        stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
 
         setNeedsLayout()
