@@ -3,7 +3,7 @@ import UIKit
 struct YourCollectionsSectionLayout: SectionLayout {
     var layoutSection: NSCollectionLayoutSection = {
         // Items
-        let discoveryItem = NSCollectionLayoutItem(
+        let yourCollectionItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
                 heightDimension: .absolute(88)
@@ -11,38 +11,33 @@ struct YourCollectionsSectionLayout: SectionLayout {
         )
 
         // Group
-        let discoveredGroup = NSCollectionLayoutGroup.horizontal(
+        let yourCollectionGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(88 + 8)
+                heightDimension: .absolute(88)
             ),
-            subitems: [discoveryItem]
-        )
-        discoveredGroup.contentInsets = NSDirectionalEdgeInsets(
-            top: 0.0,
-            leading: 16.0,
-            bottom: 8.0,
-            trailing: 16.0
+            subitems: [yourCollectionItem]
         )
 
-        let section = NSCollectionLayoutSection(group: discoveredGroup)
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+        let yourCollectionsSection = NSCollectionLayoutSection(group: yourCollectionGroup)
+        let yourCollectionsHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(78)
+                heightDimension: .estimated(74)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        section.boundarySupplementaryItems = [sectionHeader]
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0.0,
-            leading: 0.0,
-            bottom: 12.0,
-            trailing: 0.0
+        yourCollectionsSection.boundarySupplementaryItems = [yourCollectionsHeader]
+        yourCollectionsSection.interGroupSpacing = 8
+        yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
+            top: 16.0,
+            leading: 16.0,
+            bottom: 32.0,
+            trailing: 16.0
         )
 
-        return section
+        return yourCollectionsSection
     }()
 
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
