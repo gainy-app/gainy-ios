@@ -7,7 +7,7 @@ enum DummyDataSource {
     static var collections = [
         Collection(
             id: 0,
-            image: "",
+            image: "collections-ai",
             name: "AI companies",
             description: "Technology companies that utilize artificial intelligence",
             stocksAmount: 15,
@@ -15,7 +15,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 2,
-            image: "",
+            image: "collections-global-evs",
             name: "Global EVs",
             description: "Global electric vehicles companies",
             stocksAmount: 17,
@@ -23,7 +23,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 3,
-            image: "",
+            image: "collections-global-dividend",
             name: "Global Dividend",
             description: "Global top rated dividended companies",
             stocksAmount: 119,
@@ -31,10 +31,18 @@ enum DummyDataSource {
         ),
         Collection(
             id: 4,
-            image: "",
+            image: "collections-recent-ipos",
             name: "Recent IPOs",
             description: "Global IPOs that happen over last 6 months",
             stocksAmount: 33,
+            isInYourCollections: false
+        ),
+        Collection(
+            id: 5,
+            image: "non-existing-image",
+            name: "Speculative",
+            description: "Speculative assets",
+            stocksAmount: 19,
             isInYourCollections: false
         ),
     ]
@@ -43,7 +51,7 @@ enum DummyDataSource {
         .map { hashId in
             Collection(
                 id: hashId,
-                image: "",
+                image: "non-exisiting-image",
                 name: "AI companies",
                 description: "Technology companies that utilize artificial intelligence",
                 stocksAmount: 15,
@@ -56,7 +64,7 @@ enum DummyDataSource {
     private static var baseData = [
         Collection(
             id: 10,
-            image: "",
+            image: "collections-usa-fintech",
             name: "USA Fintech",
             description: "Fintech companies of USA",
             stocksAmount: 9,
@@ -64,7 +72,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 12,
-            image: "",
+            image: "collections-global-evs",
             name: "Global EVs",
             description: "Global electric vehicles companies",
             stocksAmount: 17,
@@ -72,7 +80,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 13,
-            image: "",
+            image: "collections-small-caps-etf",
             name: "Small cap ETFs",
             description: "ETFs of the stocks with market cap of $300M to $2B",
             stocksAmount: 11,
@@ -80,7 +88,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 14,
-            image: "",
+            image: "collections-global-cannabis",
             name: "Global Cannabis",
             description: "Global cannabis companies stocks",
             stocksAmount: 33,
@@ -88,7 +96,7 @@ enum DummyDataSource {
         ),
         Collection(
             id: 15,
-            image: "",
+            image: "collections-mid-cap-stocks",
             name: "Mid cap stocks",
             description: "Companies with evaluation from $2B to $10B",
             stocksAmount: 107,
