@@ -125,7 +125,11 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             }
         }
 
-        getData()
+        getRemoteData {
+            DispatchQueue.main.async { [weak self] in
+                self?.initViewModels()
+            }
+        }
     }
 
     // MARK: Functions
@@ -234,26 +238,26 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
     private func getLocalData() {
         viewModel?.yourCollections = DummyDataSource
-            .collections
+            .yourCollections
             .map { CollectionViewModelMapper.map($0) }
         viewModel?.recommendedCollections = DummyDataSource
             .recommendedCollections
             .map { CollectionViewModelMapper.map($0) }
     }
 
-    private func getData() {
+    private func getRemoteData(completion: @escaping () -> Void) {
         Network.shared.apollo.fetch(query: CollectionsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 DummyDataSource.collectionsRemote = graphQLResult.data!.collections
 
-                let discoveredDto = DummyDataSource.collectionsRemote.filter {
+                let yourCollectionsDto = DummyDataSource.collectionsRemote.filter {
                     !$0.favoriteCollections.isEmpty
                 }
                 let recommendedDto = DummyDataSource.collectionsRemote.filter {
                     $0.favoriteCollections.isEmpty
                 }
-                DummyDataSource.collections = discoveredDto.map {
+                DummyDataSource.yourCollections = yourCollectionsDto.map {
                     CollectionDTOMapper.map($0)
                 }
                 DummyDataSource.recommendedCollections = recommendedDto.map {
@@ -261,14 +265,13 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                 }
 
                 self?.getLocalData()
+                completion()
 
-                DispatchQueue.main.async {
-                    self.initViewModels()
-                }
 
-                print("Success! Result: \(graphQLResult)")
             case .failure(let error):
-                print("Failure! Error: \(error)")
+                print("Failure when making GraphQL request. Error: \(error)")
+                self?.getLocalData()
+                completion()
             }
         }
     }
