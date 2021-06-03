@@ -1,20 +1,20 @@
 import UIKit
 
-extension YourCollectionViewCell: UIGestureRecognizerDelegate {}
-
-class YourCollectionViewCell: UICollectionViewCell {
+class YourCollectionViewCell: RoundedCornerView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(stocksLabel)
-        self.addSubview(stocksAmountLabel)
-        self.addSubview(deleteButton)
+        addSubview(backImageView)
+        addSubview(nameLabel)
+        addSubview(descriptionLabel)
+        addSubview(stocksLabel)
+        addSubview(stocksAmountLabel)
+        addSubview(deleteButton)
 
-        self.backgroundColor = UIColor.Gainy.white
+        layer.isOpaque = true
+        backgroundColor = UIColor.Gainy.white
 
         setupSwipeGesture()
     }
@@ -24,51 +24,19 @@ class YourCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        let hMargin: CGFloat = 16
-        let topMargin: CGFloat = 16
-
-        nameLabel.frame = CGRect(
-            x: hMargin,
-            y: topMargin,
-            width: bounds.width - (hMargin + 96),
-            height: 20
-        )
-
-        descriptionLabel.frame = CGRect(
-            x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + 128),
-            height: 34
-        )
-
-        stocksLabel.frame = CGRect(
-            x: bounds.width - (60 + hMargin),
-            y: topMargin,
-            width: 60,
-            height: 12
-        )
-
-        stocksAmountLabel.frame = CGRect(
-            x: bounds.width - (60 + hMargin),
-            y: topMargin + stocksLabel.bounds.height,
-            width: 60,
-            height: 24
-        )
-
-        deleteButton.frame = CGRect(
-            x: bounds.width + 16,
-            y: (bounds.height / 2) - 24,
-            width: 48,
-            height: 48
-        )
-    }
-
     // MARK: Internal
 
     // MARK: Properties
+
+    var onDeleteButtonPressed: (() -> Void)?
+
+    lazy var backImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.isOpaque = true
+
+        return imageView
+    }()
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -131,13 +99,60 @@ class YourCollectionViewCell: UICollectionViewCell {
 
         button.setImage(UIImage(named: "trash"), for: .normal)
         button.addTarget(self,
-                         action: #selector(self.deleteButtonTapped(_:)),
+                         action: #selector(deleteButtonTapped(_:)),
                          for: .touchUpInside)
 
         return button
     }()
 
-    var onDeleteButtonPressed: (() -> Void) = {}
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let hMargin: CGFloat = 16
+        let topMargin: CGFloat = 16
+
+        backImageView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds.width,
+            height: bounds.height
+        )
+
+        nameLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin,
+            width: bounds.width - (hMargin + 128),
+            height: 20
+        )
+
+        descriptionLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin + nameLabel.bounds.height + 4,
+            width: bounds.width - (hMargin + 128),
+            height: 34
+        )
+
+        stocksLabel.frame = CGRect(
+            x: bounds.width - (45 + hMargin),
+            y: topMargin,
+            width: 45,
+            height: 12
+        )
+
+        stocksAmountLabel.frame = CGRect(
+            x: bounds.width - (55 + hMargin),
+            y: topMargin + stocksLabel.bounds.height,
+            width: 55,
+            height: 24
+        )
+
+        deleteButton.frame = CGRect(
+            x: bounds.width + 16,
+            y: (bounds.height / 2) - 24,
+            width: 48,
+            height: 48
+        )
+    }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if deleteButton.frame.contains(point) {
@@ -147,36 +162,29 @@ class YourCollectionViewCell: UICollectionViewCell {
         return super.hitTest(point, with: event)
     }
 
-    override func draw(_: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
     func setupSwipeGesture() {
         leftSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                    action: #selector(swipedLeft(_:)))
+                                                    action: #selector(leftSwiped(_:)))
         leftSwipeGesture.delegate = self
         leftSwipeGesture.direction = .left
 
         rightSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                     action: #selector(swipedRight(_:)))
+                                                     action: #selector(rightSwiped(_:)))
         rightSwipeGesture.delegate = self
 
-        self.addGestureRecognizer(leftSwipeGesture)
-        self.addGestureRecognizer(rightSwipeGesture)
+        addGestureRecognizer(leftSwipeGesture)
+        addGestureRecognizer(rightSwipeGesture)
     }
 
     // MARK: Functions
 
-    func configureWith(name: String, description: String, stocksAmount: Int, imageName: String) {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "\(imageName)-discovered")
-        imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = 8
-        imageView.layer.masksToBounds = true
-        self.backgroundView = imageView
+    func configureWith(
+        name: String,
+        description: String,
+        stocksAmount: String,
+        imageName: String
+    ) {
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -184,10 +192,9 @@ class YourCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = "\(stocksAmount)"
+        stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
 
-        setNeedsLayout()
         layoutIfNeeded()
     }
 
@@ -202,8 +209,6 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     // MARK: Properties
 
-    private let cornerRadius: CGFloat = 8
-
     private var leftSwipeGesture: UISwipeGestureRecognizer!
     private var rightSwipeGesture: UISwipeGestureRecognizer!
     private var originalCellCenter: CGPoint!
@@ -211,8 +216,8 @@ class YourCollectionViewCell: UICollectionViewCell {
     // MARK: Functions
 
     @objc
-    private func swipedLeft(_: UISwipeGestureRecognizer) {
-        self.originalCellCenter = CGPoint(x: (self.superview?.center.x)!, y: self.center.y)
+    private func leftSwiped(_: UISwipeGestureRecognizer) {
+        originalCellCenter = CGPoint(x: (superview?.center.x)!, y: center.y)
 
         UIView.animate(withDuration: Constant.swipeAnimationDurations) {
             self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
@@ -223,7 +228,7 @@ class YourCollectionViewCell: UICollectionViewCell {
     }
 
     @objc
-    private func swipedRight(_: UISwipeGestureRecognizer) {
+    private func rightSwiped(_: UISwipeGestureRecognizer) {
         UIView.animate(withDuration: Constant.swipeAnimationDurations) {
             self.center = self.originalCellCenter
             self.transform = CGAffineTransform(rotationAngle: 0)
@@ -232,6 +237,8 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     @objc
     private func deleteButtonTapped(_: UIButton) {
-        onDeleteButtonPressed()
+        onDeleteButtonPressed?()
     }
 }
+
+extension YourCollectionViewCell: UIGestureRecognizerDelegate {}

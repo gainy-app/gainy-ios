@@ -18,7 +18,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Coordinator
 
     override func start() {
-        self.showDiscoverCollectionsViewController()
+        showDiscoverCollectionsViewController()
     }
 
     // MARK: Private
@@ -32,12 +32,12 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Functions
 
     private func showDiscoverCollectionsViewController() {
-        let vc = self.viewControllerFactory.instantiateDiscoverCollections()
-        vc.onGoToCollectionDetails = { [unowned self] in
-            self.showCollectionDetailsViewController()
+        let vc = viewControllerFactory.instantiateDiscoverCollections()
+        vc.onGoToCollectionDetails = { [weak self] in
+            self?.showCollectionDetailsViewController()
         }
 
-        self.router.setRootModule(vc, hideBar: true)
+        router.setRootModule(vc, hideBar: true)
     }
 
     private func showCollectionDetailsViewController() {}

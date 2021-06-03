@@ -34,17 +34,17 @@ final class AppCoordinator: BaseCoordinator {
     // MARK: Functions
 
     private func runMainFlow() {
-        let coordinator = self.coordinatorFactory.makeMainCoordinatorBox(
-            router: self.router,
+        let coordinator = coordinatorFactory.makeMainCoordinatorBox(
+            router: router,
             coordinatorFactory: CoordinatorFactory(),
             viewControllerFactory: ViewControllerFactory()
         )
-        coordinator.finishFlow = { [unowned self, unowned coordinator] in
-            self.removeDependency(coordinator)
-            self.launchInstructor = LaunchInstructor.configure()
-            self.start()
+        coordinator.finishFlow = { [weak self, unowned coordinator] in
+            self?.removeDependency(coordinator)
+            self?.launchInstructor = LaunchInstructor.configure()
+            self?.start()
         }
-        self.addDependency(coordinator)
+        addDependency(coordinator)
         coordinator.start()
     }
 }

@@ -1,6 +1,6 @@
 import UIKit
 
-class YourCollectionsHeaderView: UICollectionReusableView {
+class RecommendedCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
 
     override init(frame: CGRect) {
@@ -22,10 +22,10 @@ class YourCollectionsHeaderView: UICollectionReusableView {
                 .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
             titleLabel
                 .topAnchor
-                .constraint(equalTo: topAnchor, constant: 24),
+                .constraint(equalTo: topAnchor, constant: 0),
             titleLabel
                 .bottomAnchor
-                .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
+                .constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
 
             descriptionLabel
                 .leadingAnchor

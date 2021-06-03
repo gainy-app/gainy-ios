@@ -1,18 +1,20 @@
 import UIKit
 
-class RecommendedCollectionViewCell: UICollectionViewCell {
+class RecommendedCollectionViewCell: RoundedCornerView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.addSubview(nameLabel)
-        self.addSubview(descriptionLabel)
-        self.addSubview(stocksLabel)
-        self.addSubview(stocksAmountLabel)
-        self.addSubview(plusButton)
+        addSubview(backImageView)
+        addSubview(nameLabel)
+        addSubview(descriptionLabel)
+        addSubview(stocksLabel)
+        addSubview(stocksAmountLabel)
+        addSubview(plusButton)
 
-        self.backgroundColor = UIColor.Gainy.white
+        layer.isOpaque = true
+        backgroundColor = UIColor.Gainy.white
     }
 
     @available(*, unavailable)
@@ -26,7 +28,15 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     private(set) var buttonState: RecommendedCellButtonState = .unchecked
 
-    var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and
+    var onPlusButtonPressed: (() -> Void)?
+
+    lazy var backImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.isOpaque = true
+
+        return imageView
+    }()
 
     lazy var nameLabel: UITextView = {
         let label = UITextView()
@@ -91,24 +101,8 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         button.backgroundColor = UIColor.Gainy.white
 
         button.addTarget(self,
-                         action: #selector(self.plusButtonTapped(_:)),
+                         action: #selector(plusButtonTapped(_:)),
                          for: .touchUpInside)
-
-        var shadows = UIView()
-        shadows.frame = button.frame
-        shadows.clipsToBounds = false
-        button.addSubview(shadows)
-
-        let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 0)
-        let layer0 = CALayer()
-        layer0.shadowPath = shadowPath0.cgPath
-        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-        layer0.shadowOpacity = 1
-        layer0.shadowRadius = 6
-        layer0.shadowOffset = CGSize(width: 0, height: 2)
-        layer0.bounds = shadows.bounds
-        layer0.position = shadows.center
-        shadows.layer.addSublayer(layer0)
 
         return button
     }()
@@ -138,14 +132,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         stocksLabel.frame = CGRect(
             x: hMargin,
             y: bounds.height - (10 + 24 + bMargin),
-            width: 60,
+            width: 45,
             height: 10
         )
 
         stocksAmountLabel.frame = CGRect(
             x: hMargin,
             y: bounds.height - (24 + bMargin),
-            width: 60,
+            width: 55,
             height: 24
         )
 
@@ -160,24 +154,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    override func draw(_: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
-    func configureWith(name: String,
-                       description: String,
-                       stocksAmount: Int,
-                       imageName: String,
-                       plusButtonState: RecommendedCellButtonState) {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "\(imageName)-recommend")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
-        imageView.layer.masksToBounds = true
-        self.backgroundView = imageView
+    func configureWith(
+        name: String,
+        description: String,
+        stocksAmount: String,
+        imageName: String,
+        plusButtonState: RecommendedCellButtonState
+    ) {
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -185,7 +169,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = "\(stocksAmount)"
+        stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
 
         buttonState = plusButtonState
@@ -216,9 +200,9 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        if buttonState == .unchecked {
+        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
             buttonState = .checked
-            onPlusButtonPressed()
+            tapHandler()
         }
     }
 }

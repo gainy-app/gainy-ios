@@ -2,21 +2,21 @@ enum CollectionViewModelMapper {
     static func map(_ model: Collection) -> YourCollectionViewCellModel {
         YourCollectionViewCellModel(
             id: model.id,
-            image: model.image,
+            image: model.image + "-discovered",
             name: model.name,
             description: model.description,
-            stocksAmount: model.stocksAmount,
-            indexInRecommended: nil
+            stocksAmount: "\(model.stocksAmount)",
+            recommendedIdentifier: nil
         )
     }
 
     static func map(_ model: Collection) -> RecommendedCollectionViewCellModel {
         RecommendedCollectionViewCellModel(
             id: model.id,
-            image: model.image,
+            image: model.image + "-recommended",
             name: model.name,
             description: model.description,
-            stocksAmount: model.stocksAmount,
+            stocksAmount: "\(model.stocksAmount)",
             buttonState: model.isInYourCollections ? .checked : .unchecked
         )
     }

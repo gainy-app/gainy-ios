@@ -1,12 +1,22 @@
-// TODO: check force unwraps
 enum CollectionDTOMapper {
     static func map(_ dto: CollectionsQuery.Data.Collection) -> Collection {
-        Collection(
-            id: Int(dto.id)!,
+        guard let id = Int(dto.id), let stocksAmount = Int(dto.stocksCount) else {
+            return Collection(
+                id: 0,
+                image: dto.image,
+                name: dto.name,
+                description: dto.description,
+                stocksAmount: 0,
+                isInYourCollections: dto.favoriteCollections.first?.isDefault ?? false
+            )
+        }
+
+        return Collection(
+            id: id,
             image: dto.image,
             name: dto.name,
             description: dto.description,
-            stocksAmount: Int(dto.stocksCount)!,
+            stocksAmount: stocksAmount,
             isInYourCollections: dto.favoriteCollections.first?.isDefault ?? false
         )
     }

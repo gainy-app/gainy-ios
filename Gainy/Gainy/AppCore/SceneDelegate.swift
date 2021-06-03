@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
         window.makeKeyAndVisible()
 
-        self.appCoordinator.start(with: nil)
+        appCoordinator.start(with: nil)
     }
 
     // MARK: Private

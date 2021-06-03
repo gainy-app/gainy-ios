@@ -7,61 +7,50 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         // Items
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0 / CGFloat(Constant.numberOfColumns)),
+                widthDimension: .fractionalWidth(1.0),
                 heightDimension: .absolute(144)
             )
-        )
-        recommendedItem.contentInsets = NSDirectionalEdgeInsets(
-            top: 0.0,
-            leading: 4.0,
-            bottom: 0.0,
-            trailing: 4.0
         )
 
         // Group
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(144 + 8)
+                heightDimension: .absolute(144)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
         )
-        recommendedGroup.contentInsets = NSDirectionalEdgeInsets(
-            top: 8.0,
-            leading: 14.0,
-            bottom: 0.0,
-            trailing: 14.0
-        )
+        recommendedGroup.interItemSpacing = .fixed(8)
 
-        let section = NSCollectionLayoutSection(group: recommendedGroup)
+        let recommendedCollectionsSection = NSCollectionLayoutSection(group: recommendedGroup)
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(78)
+                heightDimension: .estimated(64)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
         )
-        section.boundarySupplementaryItems = [sectionHeader]
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 0.0,
-            leading: 0.0,
-            bottom: 12.0,
-            trailing: 0.0
+        recommendedCollectionsSection.boundarySupplementaryItems = [sectionHeader]
+        recommendedCollectionsSection.interGroupSpacing = 8
+        recommendedCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
+            top: 16.0,
+            leading: 16.0,
+            bottom: 28.0,
+            trailing: 16.0
         )
 
-        return section
+        return recommendedCollectionsSection
     }()
 
     func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
-        let headerView: YourCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
+        let headerView: RecommendedCollectionsHeaderView = collectionView.dequeueReusableSectionHeader(for: indexPath)
 
         headerView.configureWith(
             title: "Collections you might like",
             description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
         )
-
         return headerView
     }
 
