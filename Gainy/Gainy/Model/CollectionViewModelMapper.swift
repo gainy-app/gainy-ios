@@ -6,7 +6,7 @@ enum CollectionViewModelMapper {
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",
-            indexInRecommended: nil
+            recommendedIdentifier: nil
         )
     }
 

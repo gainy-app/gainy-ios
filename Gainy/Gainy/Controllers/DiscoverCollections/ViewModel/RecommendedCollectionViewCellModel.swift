@@ -10,9 +10,10 @@ struct RecommendedCollectionViewCellModel {
 extension RecommendedCollectionViewCellModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
+        hasher.combine(buttonState)
     }
 
     static func == (lhs: RecommendedCollectionViewCellModel, rhs: RecommendedCollectionViewCellModel) -> Bool {
-        lhs.id == rhs.id
+        lhs.id == rhs.id && lhs.buttonState == rhs.buttonState
     }
 }

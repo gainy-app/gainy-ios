@@ -71,8 +71,6 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
             if let cell = cell as? YourCollectionViewCell,
                let modelItem = modelItem as? YourCollectionViewCellModel {
-                cell.onDeleteButtonPressed = {
-                    self.removeFromYourCollection(collectionToRemove: modelItem)
 
                     AppsFlyerLib.shared().logEvent(
                         AFEvent.removeFromYourCollections,
@@ -85,15 +83,16 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                                 "\(self.viewModel?.recommendedCollections.count ?? 0)",
                         ]
                     )
+                cell.onDeleteButtonPressed = { [weak self] in
+                    self?.removeFromYourCollection(collectionToRemove: modelItem)
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
-                self.viewModel?.recommendedCollections[indexPath.row].buttonState == .checked
+                self?.viewModel?.recommendedCollections[indexPath.row].buttonState == .checked
                     ? cell.setButtonChecked()
                     : cell.setButtonUnchecked()
 
-                cell.onPlusButtonPressed = {
-                    self.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
+                cell.onPlusButtonPressed = { [weak self] in
                     cell.setButtonChecked()
 
                     AppsFlyerLib.shared().logEvent(
@@ -107,6 +106,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                                 "\(self.viewModel?.recommendedCollections.count ?? 0)",
                         ]
                     )
+                    self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
                 }
             }
 
@@ -220,8 +220,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
         }
 
 
-        dataSource?.apply(snapshot, animatingDifferences: true)
-        coordinator.drop(item.dragItem, toItemAt: destinationPath)
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
 
     private func initViewModels() {

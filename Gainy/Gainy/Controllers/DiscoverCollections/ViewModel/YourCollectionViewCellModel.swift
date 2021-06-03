@@ -4,7 +4,7 @@ struct YourCollectionViewCellModel {
     let name: String
     let description: String
     let stocksAmount: String
-    let indexInRecommended: Int? // TODO: check
+    let recommendedIdentifier: RecommendedCollectionViewCellModel?
 }
 
 extension YourCollectionViewCellModel: Hashable {
