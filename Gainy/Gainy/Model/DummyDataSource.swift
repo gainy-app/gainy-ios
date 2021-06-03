@@ -2,7 +2,7 @@
 enum DummyDataSource {
     static var collectionsRemote: [CollectionsQuery.Data.Collection] = []
 
-    static var collections = [
+    static var yourCollections = [
         Collection(
             id: 0,
             image: "collections-ai",
@@ -17,7 +17,7 @@ enum DummyDataSource {
             name: "Global EVs",
             description: "Global electric vehicles companies",
             stocksAmount: 17,
-            isInYourCollections: false
+            isInYourCollections: true
         ),
         Collection(
             id: 3,
@@ -25,7 +25,7 @@ enum DummyDataSource {
             name: "Global Dividend",
             description: "Global top rated dividended companies",
             stocksAmount: 119,
-            isInYourCollections: false
+            isInYourCollections: true
         ),
         Collection(
             id: 4,
@@ -33,7 +33,7 @@ enum DummyDataSource {
             name: "Recent IPOs",
             description: "Global IPOs that happen over last 6 months",
             stocksAmount: 33,
-            isInYourCollections: false
+            isInYourCollections: true
         ),
         Collection(
             id: 5,
@@ -41,25 +41,11 @@ enum DummyDataSource {
             name: "Speculative",
             description: "Speculative assets",
             stocksAmount: 19,
-            isInYourCollections: false
+            isInYourCollections: true
         ),
     ]
 
-    static var recommendedCollections = baseData + (400...410)
-        .map { hashId in
-            Collection(
-                id: hashId,
-                image: "non-exisiting-image",
-                name: "AI companies",
-                description: "Technology companies that utilize artificial intelligence",
-                stocksAmount: 15,
-                isInYourCollections: false
-            )
-        }
-
-    // MARK: Private
-
-    private static var baseData = [
+    static var recommendedCollections = [
         Collection(
             id: 10,
             image: "collections-usa-fintech",
@@ -78,6 +64,14 @@ enum DummyDataSource {
         ),
         Collection(
             id: 13,
+            image: "non-exisiting-image",
+            name: "AI companies",
+            description: "Technology companies that utilize artificial intelligence",
+            stocksAmount: 15,
+            isInYourCollections: false
+        ),
+        Collection(
+            id: 14,
             image: "collections-small-caps-etf",
             name: "Small cap ETFs",
             description: "ETFs of the stocks with market cap of $300M to $2B",
@@ -85,7 +79,7 @@ enum DummyDataSource {
             isInYourCollections: false
         ),
         Collection(
-            id: 14,
+            id: 15,
             image: "collections-global-cannabis",
             name: "Global Cannabis",
             description: "Global cannabis companies stocks",
@@ -93,7 +87,7 @@ enum DummyDataSource {
             isInYourCollections: false
         ),
         Collection(
-            id: 15,
+            id: 16,
             image: "collections-mid-cap-stocks",
             name: "Mid cap stocks",
             description: "Companies with evaluation from $2B to $10B",
