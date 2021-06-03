@@ -71,6 +71,8 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
             if let cell = cell as? YourCollectionViewCell,
                let modelItem = modelItem as? YourCollectionViewCellModel {
+                cell.onDeleteButtonPressed = { [weak self] in
+                    self?.removeFromYourCollection(collectionToRemove: modelItem)
 
                     AppsFlyerLib.shared().logEvent(
                         AFEvent.removeFromYourCollections,
@@ -78,13 +80,11 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                             AFParameter.collectionName:
                                 modelItem.name,
                             AFParameter.itemsInYourCollectionsAfterRemoval:
-                                "\(self.viewModel?.yourCollections.count ?? 0)",
+                                "\(self?.viewModel?.yourCollections.count ?? 0)",
                             AFParameter.itemsInRecommendedAfterRemoval:
-                                "\(self.viewModel?.recommendedCollections.count ?? 0)",
+                                "\(self?.viewModel?.recommendedCollections.count ?? 0)",
                         ]
                     )
-                cell.onDeleteButtonPressed = { [weak self] in
-                    self?.removeFromYourCollection(collectionToRemove: modelItem)
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
@@ -94,6 +94,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
 
                 cell.onPlusButtonPressed = { [weak self] in
                     cell.setButtonChecked()
+                    self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
 
                     AppsFlyerLib.shared().logEvent(
                         AFEvent.addToYourCollections,
@@ -101,12 +102,11 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                             AFParameter.collectionName:
                                 modelItem.name,
                             AFParameter.itemsInYourCollectionsAfterAdding:
-                                "\(self.viewModel?.yourCollections.count ?? 0)",
+                                "\(self?.viewModel?.yourCollections.count ?? 0)",
                             AFParameter.itemsInRecommendedAfterAdding:
-                                "\(self.viewModel?.recommendedCollections.count ?? 0)",
+                                "\(self?.viewModel?.recommendedCollections.count ?? 0)",
                         ]
                     )
-                    self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
                 }
             }
 
