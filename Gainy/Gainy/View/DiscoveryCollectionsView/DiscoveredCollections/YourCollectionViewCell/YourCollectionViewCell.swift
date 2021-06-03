@@ -8,77 +8,13 @@ class YourCollectionViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        self.backgroundColor = UIColor.Gainy.white
-
         self.addSubview(nameLabel)
         self.addSubview(descriptionLabel)
         self.addSubview(stocksLabel)
         self.addSubview(stocksAmountLabel)
         self.addSubview(deleteButton)
 
-        NSLayoutConstraint.activate([
-            nameLabel
-                .leadingAnchor
-                .constraint(equalTo: self.leadingAnchor, constant: 16),
-            nameLabel
-                .trailingAnchor
-                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128),
-            nameLabel
-                .heightAnchor
-                .constraint(equalToConstant: 20),
-            nameLabel
-                .topAnchor
-                .constraint(equalTo: topAnchor, constant: 16),
-            nameLabel
-                .bottomAnchor
-                .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
-
-            descriptionLabel
-                .leadingAnchor
-                .constraint(equalTo: self.leadingAnchor, constant: 16),
-            descriptionLabel
-                .trailingAnchor
-                .constraint(lessThanOrEqualTo: self.trailingAnchor, constant: -128),
-            descriptionLabel
-                .heightAnchor
-                .constraint(lessThanOrEqualToConstant: 29),
-            descriptionLabel
-                .bottomAnchor
-                .constraint(greaterThanOrEqualTo: self.bottomAnchor, constant: -19),
-
-            stocksLabel
-                .topAnchor
-                .constraint(equalTo: self.topAnchor, constant: 16),
-            stocksLabel
-                .trailingAnchor
-                .constraint(equalTo: self.trailingAnchor, constant: -16),
-            stocksLabel
-                .widthAnchor
-                .constraint(equalToConstant: 50),
-            stocksLabel
-                .bottomAnchor
-                .constraint(equalTo: self.stocksAmountLabel.topAnchor, constant: 0),
-
-            stocksAmountLabel
-                .trailingAnchor
-                .constraint(equalTo: self.trailingAnchor, constant: -16),
-            stocksAmountLabel
-                .widthAnchor
-                .constraint(equalToConstant: 50),
-
-            deleteButton
-                .heightAnchor
-                .constraint(equalToConstant: 48),
-            deleteButton
-                .widthAnchor
-                .constraint(equalToConstant: 48),
-            deleteButton
-                .leadingAnchor
-                .constraint(equalTo: self.trailingAnchor, constant: 16),
-            deleteButton
-                .centerYAnchor
-                .constraint(equalTo: self.centerYAnchor, constant: 0),
-        ])
+        self.backgroundColor = UIColor.Gainy.white
 
         setupSwipeGesture()
     }
@@ -88,15 +24,68 @@ class YourCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let hMargin: CGFloat = 16
+        let topMargin: CGFloat = 16
+
+        nameLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin,
+            width: bounds.width - (hMargin + 96),
+            height: 20
+        )
+
+        descriptionLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin + nameLabel.bounds.height + 0,
+            width: bounds.width - (hMargin + 128),
+            height: 34
+        )
+
+        stocksLabel.frame = CGRect(
+            x: bounds.width - (60 + hMargin),
+            y: topMargin,
+            width: 60,
+            height: 12
+        )
+
+        stocksAmountLabel.frame = CGRect(
+            x: bounds.width - (60 + hMargin),
+            y: topMargin + stocksLabel.bounds.height,
+            width: 60,
+            height: 24
+        )
+
+        deleteButton.frame = CGRect(
+            x: bounds.width + 16,
+            y: (bounds.height / 2) - 24,
+            width: 48,
+            height: 48
+        )
+    }
+
+    private func roundedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+        let systemFont = UIFont.systemFont(ofSize: size, weight: weight)
+
+        let font: UIFont
+        if let descriptor = systemFont.fontDescriptor.withDesign(.rounded) {
+            font = UIFont(descriptor: descriptor, size: size)
+        } else {
+            font = systemFont
+        }
+
+        return font
+    }
+
     // MARK: Internal
 
     // MARK: Properties
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFProDisplay-Bold", size: 20)
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = UIColor.Gainy.white
 
@@ -109,10 +98,8 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.font = UIFont.systemFont(ofSize: 0, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.Gainy.white
 
         label.numberOfLines = 0
@@ -124,24 +111,21 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     lazy var stocksLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFCompactRounded-Medium", size: 9)
-        label.font = UIFont.systemFont(ofSize: 9, weight: .medium)
+        label.font = self.roundedFont(ofSize: 9, weight: .medium)
         label.textColor = UIColor.Gainy.white
-
         label.numberOfLines = 1
         label.textAlignment = .right
+        label.text = "STOCKS"
+        label.sizeToFit()
 
         return label
     }()
 
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFCompactRounded-Semibold", size: 28)
-        label.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
+        label.font = self.roundedFont(ofSize: 28, weight: .semibold)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
@@ -152,13 +136,11 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
 
         button.layer.cornerRadius = 6
         button.backgroundColor = UIColor.Gainy.back
 
         button.setImage(UIImage(named: "trash"), for: .normal)
-
         button.addTarget(self,
                          action: #selector(self.deleteButtonTapped(_:)),
                          for: .touchUpInside)
@@ -208,9 +190,16 @@ class YourCollectionViewCell: UICollectionViewCell {
         self.backgroundView = imageView
 
         nameLabel.text = name
+        nameLabel.sizeToFit()
+
         descriptionLabel.text = description
-        stocksLabel.text = "STOCKS"
+        descriptionLabel.sizeToFit()
+
         stocksAmountLabel.text = "\(stocksAmount)"
+        stocksAmountLabel.sizeToFit()
+
+        setNeedsLayout()
+        layoutIfNeeded()
     }
 
     // MARK: Private
