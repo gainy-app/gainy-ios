@@ -1,3 +1,4 @@
+import AppsFlyerLib
 import Foundation
 import UIKit
 
@@ -72,6 +73,18 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                let modelItem = modelItem as? YourCollectionViewCellModel {
                 cell.onDeleteButtonPressed = {
                     self.removeFromYourCollection(collectionToRemove: modelItem)
+
+                    AppsFlyerLib.shared().logEvent(
+                        AFEvent.removeFromYourCollections,
+                        withValues: [
+                            AFParameter.collectionName:
+                                modelItem.name,
+                            AFParameter.itemsInYourCollectionsAfterRemoval:
+                                "\(self.viewModel?.yourCollections.count ?? 0)",
+                            AFParameter.itemsInRecommendedAfterRemoval:
+                                "\(self.viewModel?.recommendedCollections.count ?? 0)",
+                        ]
+                    )
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
@@ -82,6 +95,18 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
                 cell.onPlusButtonPressed = {
                     self.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
                     cell.setButtonChecked()
+
+                    AppsFlyerLib.shared().logEvent(
+                        AFEvent.addToYourCollections,
+                        withValues: [
+                            AFParameter.collectionName:
+                                modelItem.name,
+                            AFParameter.itemsInYourCollectionsAfterAdding:
+                                "\(self.viewModel?.yourCollections.count ?? 0)",
+                            AFParameter.itemsInRecommendedAfterAdding:
+                                "\(self.viewModel?.recommendedCollections.count ?? 0)",
+                        ]
+                    )
                 }
             }
 
