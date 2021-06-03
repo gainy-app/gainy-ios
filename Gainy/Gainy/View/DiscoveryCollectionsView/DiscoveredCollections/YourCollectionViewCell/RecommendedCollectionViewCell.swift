@@ -1,17 +1,19 @@
 import UIKit
 
-class RecommendedCollectionViewCell: UICollectionViewCell {
+class RecommendedCollectionViewCell: RoundedCornerView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
+        addSubview(backImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(stocksLabel)
         addSubview(stocksAmountLabel)
         addSubview(plusButton)
 
+        layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
 
@@ -27,6 +29,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
     private(set) var buttonState: RecommendedCellButtonState = .unchecked
 
     var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and
+
+    lazy var backImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.isOpaque = true
+
+        return imageView
+    }()
 
     lazy var nameLabel: UITextView = {
         let label = UITextView()
@@ -138,14 +148,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
         stocksLabel.frame = CGRect(
             x: hMargin,
             y: bounds.height - (10 + 24 + bMargin),
-            width: 60,
+            width: 45,
             height: 10
         )
 
         stocksAmountLabel.frame = CGRect(
             x: hMargin,
             y: bounds.height - (24 + bMargin),
-            width: 60,
+            width: 55,
             height: 24
         )
 
@@ -160,24 +170,14 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    override func draw(_: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
-    func configureWith(name: String,
-                       description: String,
-                       stocksAmount: Int,
-                       imageName: String,
-                       plusButtonState: RecommendedCellButtonState) {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "\(imageName)-recommended")
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 8
-        imageView.layer.masksToBounds = true
-        self.backgroundView = imageView
+    func configureWith(
+        name: String,
+        description: String,
+        stocksAmount: String,
+        imageName: String,
+        plusButtonState: RecommendedCellButtonState
+    ) {
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()

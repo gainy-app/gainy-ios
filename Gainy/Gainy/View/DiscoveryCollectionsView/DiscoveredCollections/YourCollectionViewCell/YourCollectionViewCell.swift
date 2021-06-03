@@ -2,18 +2,20 @@ import UIKit
 
 extension YourCollectionViewCell: UIGestureRecognizerDelegate {}
 
-class YourCollectionViewCell: UICollectionViewCell {
+class YourCollectionViewCell: RoundedCornerView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
+        addSubview(backImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(stocksLabel)
         addSubview(stocksAmountLabel)
         addSubview(deleteButton)
 
+        layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
 
         setupSwipeGesture()
@@ -69,6 +71,14 @@ class YourCollectionViewCell: UICollectionViewCell {
     // MARK: Internal
 
     // MARK: Properties
+
+    lazy var backImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        imageView.isOpaque = true
+
+        return imageView
+    }()
 
     lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -147,13 +157,6 @@ class YourCollectionViewCell: UICollectionViewCell {
         return super.hitTest(point, with: event)
     }
 
-    override func draw(_: CGRect) {
-        let borderPath = UIBezierPath(roundedRect: self.bounds,
-                                      cornerRadius: cornerRadius)
-        UIColor.orange.set() // TODO: update with a picture
-        borderPath.fill()
-    }
-
     func setupSwipeGesture() {
         leftSwipeGesture = UISwipeGestureRecognizer(target: self,
                                                     action: #selector(leftSwiped(_:)))
@@ -170,13 +173,13 @@ class YourCollectionViewCell: UICollectionViewCell {
 
     // MARK: Functions
 
-    func configureWith(name: String, description: String, stocksAmount: Int, imageName: String) {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "\(imageName)-discovered")
-        imageView.contentMode = .scaleToFill
-        imageView.layer.cornerRadius = 8
-        imageView.layer.masksToBounds = true
-        self.backgroundView = imageView
+    func configureWith(
+        name: String,
+        description: String,
+        stocksAmount: String,
+        imageName: String
+    ) {
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -187,7 +190,6 @@ class YourCollectionViewCell: UICollectionViewCell {
         stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
 
-        setNeedsLayout()
         layoutIfNeeded()
     }
 
