@@ -52,7 +52,6 @@ class YourCollectionsHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFProDisplay-Semibold", size: 20)
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor.Gainy.textDark
         label.backgroundColor = UIColor.Gainy.white
@@ -69,7 +68,6 @@ class YourCollectionsHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        // TODO: UIFont(name: "SFProDisplay-Regular", size: 14)
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.Gainy.darkGray
         label.backgroundColor = UIColor.Gainy.white

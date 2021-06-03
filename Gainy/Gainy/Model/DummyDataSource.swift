@@ -1,7 +1,5 @@
 // TODO: remove when testing is completed
 enum DummyDataSource {
-    // MARK: Internal
-
     static var collectionsRemote: [CollectionsQuery.Data.Collection] = []
 
     static var collections = [
