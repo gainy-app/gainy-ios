@@ -209,8 +209,6 @@ class YourCollectionViewCell: RoundedCornerView {
 
     // MARK: Properties
 
-    private let cornerRadius: CGFloat = 8
-
     private var leftSwipeGesture: UISwipeGestureRecognizer!
     private var rightSwipeGesture: UISwipeGestureRecognizer!
     private var originalCellCenter: CGPoint!
