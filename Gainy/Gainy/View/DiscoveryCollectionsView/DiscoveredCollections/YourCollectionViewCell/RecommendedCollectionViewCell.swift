@@ -104,22 +104,6 @@ class RecommendedCollectionViewCell: RoundedCornerView {
                          action: #selector(plusButtonTapped(_:)),
                          for: .touchUpInside)
 
-        var shadows = UIView()
-        shadows.frame = button.frame
-        shadows.clipsToBounds = false
-        button.addSubview(shadows)
-
-        let shadowPath0 = UIBezierPath(roundedRect: shadows.bounds, cornerRadius: 0)
-        let layer0 = CALayer()
-        layer0.shadowPath = shadowPath0.cgPath
-        layer0.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-        layer0.shadowOpacity = 1
-        layer0.shadowRadius = 6
-        layer0.shadowOffset = CGSize(width: 0, height: 2)
-        layer0.bounds = shadows.bounds
-        layer0.position = shadows.center
-        shadows.layer.addSublayer(layer0)
-
         return button
     }()
 
