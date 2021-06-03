@@ -173,7 +173,7 @@ class RecommendedCollectionViewCell: UICollectionViewCell {
                        imageName: String,
                        plusButtonState: RecommendedCellButtonState) {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "\(imageName)-recommend")
+        imageView.image = UIImage(named: "\(imageName)-recommended")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 8
         imageView.layer.masksToBounds = true
