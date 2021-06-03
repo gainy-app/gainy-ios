@@ -8,7 +8,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0 / CGFloat(Constant.numberOfColumns)),
-                heightDimension: .fractionalHeight(1.0)
+                heightDimension: .absolute(144)
             )
         )
         recommendedItem.contentInsets = NSDirectionalEdgeInsets(
@@ -22,7 +22,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(144)
+                heightDimension: .absolute(144 + 8)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
@@ -38,7 +38,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(70)
+                heightDimension: .absolute(78)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
