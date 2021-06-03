@@ -150,19 +150,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Functions
 
     private func addToYourCollection(collectionToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
-        let yourCollectionModel = YourCollectionViewCellModel(
-            id: collectionToAdd.id,
-            image: collectionToAdd.image,
-            name: collectionToAdd.name,
-            description: collectionToAdd.description,
-            stocksAmount: collectionToAdd.stocksAmount,
-            indexInRecommended: indexRow
-        )
-        viewModel?.yourCollections.append(yourCollectionModel)
-        self.snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
-        defer { self.dataSource?.apply(self.snapshot, animatingDifferences: true) }
-
-        let updatedRecommendedCollectionModel = RecommendedCollectionViewCellModel(
+        let updatedRecommendedIdentifier = RecommendedCollectionViewCellModel(
             id: collectionToAdd.id,
             image: collectionToAdd.image,
             name: collectionToAdd.name,
@@ -171,37 +159,56 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
             buttonState: .checked
         )
 
-        guard let indexInRecommendedList = viewModel?
-            .recommendedCollections
-            .firstIndex(where: { $0.id == collectionToAdd.id }) else {
-            assertionFailure("Expect to have a collection in the recommended list")
-            return
-        }
-        viewModel?.recommendedCollections[indexInRecommendedList] = updatedRecommendedCollectionModel
-        self.snapshot.reloadSections([.recommendedCollections])
+        let yourCollectionModel = YourCollectionViewCellModel(
+            id: collectionToAdd.id,
+            image: collectionToAdd.image,
+            name: collectionToAdd.name,
+            description: collectionToAdd.description,
+            stocksAmount: collectionToAdd.stocksAmount,
+            recommendedIdentifier: updatedRecommendedIdentifier
+        )
+
+        viewModel?.recommendedCollections[indexRow] = updatedRecommendedIdentifier
+
+        snapshot.insertItems([updatedRecommendedIdentifier], afterItem: collectionToAdd)
+        snapshot.deleteItems([collectionToAdd])
+        dataSource?.apply(snapshot, animatingDifferences: false)
+
+        viewModel?.yourCollections.append(yourCollectionModel)
+
+        snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 
     private func removeFromYourCollection(collectionToRemove: YourCollectionViewCellModel) {
         viewModel?.yourCollections.removeAll { $0.id == collectionToRemove.id }
-        self.snapshot.deleteItems([collectionToRemove])
-        defer { self.dataSource?.apply(self.snapshot, animatingDifferences: true) }
 
-        guard let indexInRecommendedList = collectionToRemove.indexInRecommended else {
-            return
+        if let recommendedIdentifier = collectionToRemove.recommendedIdentifier {
+            let updatedRecommendedIdentifier = RecommendedCollectionViewCellModel(
+                id: recommendedIdentifier.id,
+                image: recommendedIdentifier.image,
+                name: recommendedIdentifier.name,
+                description: recommendedIdentifier.description,
+                stocksAmount: recommendedIdentifier.stocksAmount,
+                buttonState: .unchecked
+            )
+
+            if let indexToDelete = viewModel?
+                .recommendedCollections
+                .firstIndex(where: { $0.id == collectionToRemove.id }) {
+                viewModel?.recommendedCollections[indexToDelete] = updatedRecommendedIdentifier
+            }
+
+            snapshot.insertItems([updatedRecommendedIdentifier], afterItem: recommendedIdentifier)
+            snapshot.deleteItems([recommendedIdentifier])
+            dataSource?.apply(snapshot, animatingDifferences: false)
+
+            snapshot.deleteItems([collectionToRemove])
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        } else {
+            snapshot.deleteItems([collectionToRemove])
+            dataSource?.apply(snapshot, animatingDifferences: true)
         }
-
-        let updatedRecommendedCollectionModel = RecommendedCollectionViewCellModel(
-            id: collectionToRemove.id,
-            image: collectionToRemove.image,
-            name: collectionToRemove.name,
-            description: collectionToRemove.description,
-            stocksAmount: collectionToRemove.stocksAmount,
-            buttonState: .unchecked
-        )
-
-        // TODO: remove '!'
-        viewModel!.recommendedCollections[indexInRecommendedList] = updatedRecommendedCollectionModel
-        self.snapshot.reloadItems([updatedRecommendedCollectionModel])
     }
 
     private func reorderItems(
