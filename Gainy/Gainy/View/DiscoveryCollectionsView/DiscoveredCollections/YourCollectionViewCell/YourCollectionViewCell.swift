@@ -1,7 +1,5 @@
 import UIKit
 
-extension YourCollectionViewCell: UIGestureRecognizerDelegate {}
-
 class YourCollectionViewCell: RoundedCornerView {
     // MARK: Lifecycle
 
@@ -24,48 +22,6 @@ class YourCollectionViewCell: RoundedCornerView {
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-
-        let hMargin: CGFloat = 16
-        let topMargin: CGFloat = 16
-
-        nameLabel.frame = CGRect(
-            x: hMargin,
-            y: topMargin,
-            width: bounds.width - (hMargin + 96),
-            height: 20
-        )
-
-        descriptionLabel.frame = CGRect(
-            x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + 128),
-            height: 34
-        )
-
-        stocksLabel.frame = CGRect(
-            x: bounds.width - (60 + hMargin),
-            y: topMargin,
-            width: 60,
-            height: 12
-        )
-
-        stocksAmountLabel.frame = CGRect(
-            x: bounds.width - (60 + hMargin),
-            y: topMargin + stocksLabel.bounds.height,
-            width: 60,
-            height: 24
-        )
-
-        deleteButton.frame = CGRect(
-            x: bounds.width + 16,
-            y: (bounds.height / 2) - 24,
-            width: 48,
-            height: 48
-        )
     }
 
     // MARK: Internal
@@ -148,6 +104,55 @@ class YourCollectionViewCell: RoundedCornerView {
     }()
 
     var onDeleteButtonPressed: (() -> Void) = {}
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let hMargin: CGFloat = 16
+        let topMargin: CGFloat = 16
+
+        backImageView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds.width,
+            height: bounds.height
+        )
+
+        nameLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin,
+            width: bounds.width - (hMargin + 128),
+            height: 20
+        )
+
+        descriptionLabel.frame = CGRect(
+            x: hMargin,
+            y: topMargin + nameLabel.bounds.height + 4,
+            width: bounds.width - (hMargin + 128),
+            height: 34
+        )
+
+        stocksLabel.frame = CGRect(
+            x: bounds.width - (45 + hMargin),
+            y: topMargin,
+            width: 45,
+            height: 12
+        )
+
+        stocksAmountLabel.frame = CGRect(
+            x: bounds.width - (55 + hMargin),
+            y: topMargin + stocksLabel.bounds.height,
+            width: 55,
+            height: 24
+        )
+
+        deleteButton.frame = CGRect(
+            x: bounds.width + 16,
+            y: (bounds.height / 2) - 24,
+            width: 48,
+            height: 48
+        )
+    }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if deleteButton.frame.contains(point) {
@@ -237,3 +242,5 @@ class YourCollectionViewCell: RoundedCornerView {
         onDeleteButtonPressed()
     }
 }
+
+extension YourCollectionViewCell: UIGestureRecognizerDelegate {}

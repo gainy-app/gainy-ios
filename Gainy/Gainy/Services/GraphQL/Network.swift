@@ -35,8 +35,6 @@ class NetworkInterceptorProvider: LegacyInterceptorProvider {
 }
 
 class CustomInterceptor: ApolloInterceptor {
-    // MARK: Internal
-
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
