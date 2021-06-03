@@ -29,7 +29,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(70)
+                heightDimension: .absolute(78)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
