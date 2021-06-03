@@ -28,7 +28,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
 
     private(set) var buttonState: RecommendedCellButtonState = .unchecked
 
-    var onPlusButtonPressed: (() -> Void) = {} // TODO: rename onDelete.. here and
+    var onPlusButtonPressed: (() -> Void)?
 
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
@@ -216,9 +216,9 @@ class RecommendedCollectionViewCell: RoundedCornerView {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        if buttonState == .unchecked {
+        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
             buttonState = .checked
-            onPlusButtonPressed()
+            tapHandler()
         }
     }
 }

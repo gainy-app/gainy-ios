@@ -28,6 +28,8 @@ class YourCollectionViewCell: RoundedCornerView {
 
     // MARK: Properties
 
+    var onDeleteButtonPressed: (() -> Void)?
+
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleToFill
@@ -102,8 +104,6 @@ class YourCollectionViewCell: RoundedCornerView {
 
         return button
     }()
-
-    var onDeleteButtonPressed: (() -> Void) = {}
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -237,7 +237,7 @@ class YourCollectionViewCell: RoundedCornerView {
 
     @objc
     private func deleteButtonTapped(_: UIButton) {
-        onDeleteButtonPressed()
+        onDeleteButtonPressed?()
     }
 }
 
