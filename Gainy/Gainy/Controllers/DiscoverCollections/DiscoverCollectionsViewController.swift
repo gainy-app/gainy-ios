@@ -201,27 +201,21 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     }
 
     private func reorderItems(
-        coordinator: UICollectionViewDropCoordinator,
-        destinationIndexPath: IndexPath,
-        collectionView: UICollectionView
+        dropCoordinator: UICollectionViewDropCoordinator,
+        destinationIndexPath: IndexPath
     ) {
-        let items = coordinator.items
-        guard items.count == 1, let item = items.first, let sourcePath = item.sourceIndexPath else {
+        let draggedItems = dropCoordinator.items
+        guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {
             return
         }
 
-        var destinationPath = destinationIndexPath
-        if destinationPath.row >= collectionView.numberOfItems(inSection: destinationPath.section) {
-            destinationPath.row = collectionView.numberOfItems(inSection: destinationPath.section) - 1
-        }
+        let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
 
-        let isDraggingBelow = sourcePath.row < destinationPath.row
-
-        if isDraggingBelow {
-            snapshot.moveItem(dataSource?.itemIdentifier(for: sourcePath)!,
+        if dragDirectionIsTopBottom {
+            snapshot.moveItem(dataSource?.itemIdentifier(for: sourceIndexPath)!,
                               afterItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
         } else {
-            snapshot.moveItem(dataSource?.itemIdentifier(for: sourcePath)!,
+            snapshot.moveItem(dataSource?.itemIdentifier(for: sourceIndexPath)!,
                               beforeItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
         }
 
@@ -305,30 +299,43 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
         } else {
-            let section = Section.yourCollections.rawValue // collectionView.numberOfSections - 1
+            let section = Section.yourCollections.rawValue
             let row = collectionView.numberOfItems(inSection: section)
             destinationIndexPath = IndexPath(row: row, section: section)
         }
 
         if coordinator.proposal.operation == .move {
-            self.reorderItems(coordinator: coordinator,
-                              destinationIndexPath: destinationIndexPath,
-                              collectionView: collectionView)
+            reorderItems(dropCoordinator: coordinator,
+                         destinationIndexPath: destinationIndexPath)
         }
     }
 
     func collectionView(_: UICollectionView,
-                        dropSessionDidUpdate session: UIDropSession,
+                        dropSessionDidUpdate _: UIDropSession,
                         withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        guard session.localDragSession != nil else {
-            return UICollectionViewDropProposal(operation: .forbidden)
-        }
-
         guard destinationIndexPath?.section == Section.yourCollections.rawValue else {
             return UICollectionViewDropProposal(operation: .forbidden)
         }
 
         return UICollectionViewDropProposal(operation: .move,
                                             intent: .insertAtDestinationIndexPath)
+    }
+
+    func collectionView(
+        _: UICollectionView,
+        dragPreviewParametersForItemAt _: IndexPath
+    ) -> UIDragPreviewParameters? {
+        let previewParams = UIDragPreviewParameters()
+
+        let path = UIBezierPath(
+            roundedRect: CGRect(x: 0,
+                                y: 0,
+                                width: UIScreen.main.bounds.width - (16 + 16),
+                                height: 88),
+            cornerRadius: 8
+        )
+        previewParams.visiblePath = path
+
+        return previewParams
     }
 }
