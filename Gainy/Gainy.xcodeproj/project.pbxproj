@@ -31,6 +31,7 @@
 		3A9FB0DD266AAF4A00EC85D4 /* ApolloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; };
 		3A9FB0DE266AAF4A00EC85D4 /* ApolloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB0E1266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift */; };
+		3A9FB0E6266B853200EC85D4 /* RoundedCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB0E5266B853200EC85D4 /* RoundedCornerView.swift */; };
 		3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */; };
 		3AA52C86266012D8006A6961 /* Collections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3AA52C85266012D8006A6961 /* Collections.graphql */; };
 		3AA52C91266013E1006A6961 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C90266013E1006A6961 /* Network.swift */; };
@@ -136,6 +137,7 @@
 		3A930F68265D352E000FD3EB /* ApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoint.swift; sourceTree = "<group>"; };
 		3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ApolloCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9FB0E1266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsHeaderView.swift; sourceTree = "<group>"; };
+		3A9FB0E5266B853200EC85D4 /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
 		3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
 		3AA52C7E2660101B006A6961 /* schema.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		3AA52C85266012D8006A6961 /* Collections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Collections.graphql; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD40FC2266923C1005679DE /* SectionLayout.swift */,
+				3A9FB0E5266B853200EC85D4 /* RoundedCornerView.swift */,
 			);
 			path = CollectionViewLayout;
 			sourceTree = "<group>";
@@ -816,6 +819,7 @@
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
+				3A9FB0E6266B853200EC85D4 /* RoundedCornerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
