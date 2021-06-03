@@ -39,7 +39,7 @@ class YourCollectionViewCell: UICollectionViewCell {
 
         descriptionLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 0,
+            y: topMargin + nameLabel.bounds.height + 4,
             width: bounds.width - (hMargin + 128),
             height: 34
         )
@@ -83,15 +83,17 @@ class YourCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
+    lazy var descriptionLabel: UITextView = {
+        let label = UITextView()
 
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.Gainy.white
-
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .left
+        label.backgroundColor = .clear
+        label.isUserInteractionEnabled = false
+        label.automaticallyAdjustsScrollIndicatorInsets = false
+        label.contentInsetAdjustmentBehavior = .never
+        label.contentInset = UIEdgeInsets(top: -8, left: -4,
+                                          bottom: 0, right: 0)
 
         return label
     }()
