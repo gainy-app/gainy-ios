@@ -11,29 +11,31 @@ class YourCollectionsHeaderView: UICollectionReusableView {
         addSubview(titleLabel)
         addSubview(descriptionLabel)
 
+        let sectionHorizontalInset: CGFloat = 16
+
         NSLayoutConstraint.activate([
             titleLabel
                 .leadingAnchor
-                .constraint(equalTo: self.leadingAnchor, constant: 28),
+                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
             titleLabel
                 .trailingAnchor
-                .constraint(equalTo: self.trailingAnchor, constant: -28),
+                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
             titleLabel
                 .topAnchor
-                .constraint(equalTo: topAnchor, constant: 12),
+                .constraint(equalTo: topAnchor, constant: 24),
             titleLabel
                 .bottomAnchor
                 .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
 
             descriptionLabel
                 .leadingAnchor
-                .constraint(equalTo: self.leadingAnchor, constant: 28),
+                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
             descriptionLabel
                 .trailingAnchor
-                .constraint(equalTo: self.trailingAnchor, constant: -28),
+                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
             descriptionLabel
                 .bottomAnchor
-                .constraint(lessThanOrEqualTo: self.bottomAnchor, constant: 28),
+                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
         ])
     }
 
@@ -54,6 +56,7 @@ class YourCollectionsHeaderView: UICollectionReusableView {
         label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         label.textColor = UIColor.Gainy.textDark
         label.backgroundColor = UIColor.Gainy.white
+        label.isOpaque = true
 
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
@@ -70,6 +73,7 @@ class YourCollectionsHeaderView: UICollectionReusableView {
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.Gainy.darkGray
         label.backgroundColor = UIColor.Gainy.white
+        label.isOpaque = true
 
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
