@@ -29,7 +29,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
     var viewModel: DiscoverCollectionsViewModelProtocol?
 
-    var onGoToCollectionDetails: (() -> Void)?
+    var onGoToDiscoverCards: (() -> Void)?
     var onRemovingCollectionFromYourCollections: (() -> Void)?
 
     override func viewDidLoad() {
@@ -53,6 +53,8 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         discoverCollectionsCollectionView.dragInteractionEnabled = true
 
         discoverCollectionsCollectionView.dataSource = dataSource
+        discoverCollectionsCollectionView.delegate = self
+
         discoverCollectionsCollectionView.dragDelegate = self
         discoverCollectionsCollectionView.dropDelegate = self
 
@@ -143,7 +145,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     // MARK: Functions
 
     func goToCollectionDetails() {
-        onGoToCollectionDetails?()
+        onGoToDiscoverCards?()
     }
 
     // MARK: Private
@@ -331,6 +333,10 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
+    private func goToDiscoverCards() {
+        onGoToDiscoverCards?()
+    }
+
     private func getLocalData() {
         viewModel?.yourCollections = DummyDataSource
             .yourCollections
@@ -369,6 +375,13 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 completion()
             }
         }
+    }
+}
+
+extension DiscoverCollectionsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        self.goToDiscoverCards()
     }
 }
 

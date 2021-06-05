@@ -6,4 +6,10 @@ final class ViewControllerFactory {
         vc.viewModel = DiscoverCollectionsViewModel()
         return vc
     }
+
+    func instantiateDiscoverCards() -> DiscoverCardsViewController {
+        let vc = DiscoverCardsViewController()
+        vc.viewModel = DiscoverCardsViewModel()
+        return vc
+    }
 }

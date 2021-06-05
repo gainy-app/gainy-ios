@@ -33,12 +33,19 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     private func showDiscoverCollectionsViewController() {
         let vc = viewControllerFactory.instantiateDiscoverCollections()
-        vc.onGoToCollectionDetails = { [weak self] in
-            self?.showCollectionDetailsViewController()
+        vc.onGoToDiscoverCards = { [weak self] in
+            self?.showDiscoverCardsViewController()
         }
 
         router.setRootModule(vc, hideBar: true)
     }
 
-    private func showCollectionDetailsViewController() {}
+    private func showDiscoverCardsViewController() {
+        let vc = self.viewControllerFactory.instantiateDiscoverCards()
+        vc.onDiscoverCollections = { [weak self] in
+            self?.router.popModule()
+        }
+
+        router.push(vc)
+    }
 }

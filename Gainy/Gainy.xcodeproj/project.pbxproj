@@ -12,6 +12,10 @@
 		3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A926698FCC00D6778B /* YourCollectionViewCellModel.swift */; };
 		3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214AD26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift */; };
 		3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214B126698FCC00D6778B /* RecommendedCellButtonState.swift */; };
+		3A498F54266C179E008437F1 /* DiscoverCardsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A498F53266C179E008437F1 /* DiscoverCardsViewControllerProtocol.swift */; };
+		3A498F58266C17C6008437F1 /* DiscoverCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A498F57266C17C6008437F1 /* DiscoverCardsViewController.swift */; };
+		3A498F5D266C2E2B008437F1 /* DiscoverCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A498F5C266C2E2B008437F1 /* DiscoverCardsViewModel.swift */; };
+		3A498F63266C2E62008437F1 /* DiscoverCardsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A498F62266C2E62008437F1 /* DiscoverCardsViewModelProtocol.swift */; };
 		3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930ED8265C1909000FD3EB /* AppDelegate.swift */; };
 		3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDA265C1909000FD3EB /* SceneDelegate.swift */; };
 		3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */; };
@@ -111,6 +115,10 @@
 		3A3214A926698FCC00D6778B /* YourCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		3A3214AD26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		3A3214B126698FCC00D6778B /* RecommendedCellButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCellButtonState.swift; sourceTree = "<group>"; };
+		3A498F53266C179E008437F1 /* DiscoverCardsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsViewControllerProtocol.swift; sourceTree = "<group>"; };
+		3A498F57266C17C6008437F1 /* DiscoverCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsViewController.swift; sourceTree = "<group>"; };
+		3A498F5C266C2E2B008437F1 /* DiscoverCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsViewModel.swift; sourceTree = "<group>"; };
+		3A498F62266C2E62008437F1 /* DiscoverCardsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCardsViewModelProtocol.swift; sourceTree = "<group>"; };
 		3A930ED5265C1909000FD3EB /* Gainy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gainy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A930ED8265C1909000FD3EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A930EDA265C1909000FD3EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +214,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A498F4F266C16D7008437F1 /* DiscoveryCardsView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DiscoveryCardsView;
+			sourceTree = "<group>";
+		};
+		3A498F50266C1745008437F1 /* DiscoverCards */ = {
+			isa = PBXGroup;
+			children = (
+				3A498F5B266C2E0D008437F1 /* ViewModel */,
+				3A498F53266C179E008437F1 /* DiscoverCardsViewControllerProtocol.swift */,
+				3A498F57266C17C6008437F1 /* DiscoverCardsViewController.swift */,
+			);
+			path = DiscoverCards;
+			sourceTree = "<group>";
+		};
+		3A498F5B266C2E0D008437F1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3A498F62266C2E62008437F1 /* DiscoverCardsViewModelProtocol.swift */,
+				3A498F5C266C2E2B008437F1 /* DiscoverCardsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3A930ECC265C1909000FD3EB = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +320,7 @@
 			children = (
 				3AD40FC1266923C1005679DE /* CollectionViewLayout */,
 				3AE79529266222A8002B40D6 /* DiscoveryCollectionsView */,
+				3A498F4F266C16D7008437F1 /* DiscoveryCardsView */,
 				3A930F1D265C1BA9000FD3EB /* Storyboards */,
 			);
 			path = View;
@@ -311,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD40FCC266923C1005679DE /* DiscoverCollections */,
+				3A498F50266C1745008437F1 /* DiscoverCards */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -745,6 +781,7 @@
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
+				3A498F54266C179E008437F1 /* DiscoverCardsViewControllerProtocol.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
@@ -759,6 +796,8 @@
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
+				3A498F5D266C2E2B008437F1 /* DiscoverCardsViewModel.swift in Sources */,
+				3A498F58266C17C6008437F1 /* DiscoverCardsViewController.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
@@ -768,6 +807,7 @@
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
+				3A498F63266C2E62008437F1 /* DiscoverCardsViewModelProtocol.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
