@@ -14,19 +14,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
     // MARK: Properties
 
-    // Derives the order of the sections
-    lazy var sections: [SectionLayout] = [
-        YourCollectionsSectionLayout(),
-        RecommendedCollectionsSectionLayout(),
-    ]
-
-    lazy var customLayout: UICollectionViewLayout = {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
-            self?.sections[sectionIndex].layoutSection
-        }
-        return layout
-    }()
-
     var viewModel: DiscoverCollectionsViewModelProtocol?
 
     var onGoToDiscoverCards: (() -> Void)?
@@ -151,6 +138,19 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     // MARK: Private
 
     // MARK: Properties
+
+    // Derives the order of the sections
+    private lazy var sections: [SectionLayout] = [
+        YourCollectionsSectionLayout(),
+        RecommendedCollectionsSectionLayout(),
+    ]
+
+    private lazy var customLayout: UICollectionViewLayout = {
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ -> NSCollectionLayoutSection? in
+            self?.sections[sectionIndex].layoutSection
+        }
+        return layout
+    }()
 
     private var discoverCollectionsCollectionView: UICollectionView!
     private var feedbackGenerator: UIImpactFeedbackGenerator?
