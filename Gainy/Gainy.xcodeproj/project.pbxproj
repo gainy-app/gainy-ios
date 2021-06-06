@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */; };
 		3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A126698FCC00D6778B /* CollectionDTOMapper.swift */; };
 		3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A526698FCC00D6778B /* CollectionViewModelMapper.swift */; };
 		3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A926698FCC00D6778B /* YourCollectionViewCellModel.swift */; };
@@ -110,6 +111,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Regular.otf"; sourceTree = "<group>"; };
 		3A3214A126698FCC00D6778B /* CollectionDTOMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDTOMapper.swift; sourceTree = "<group>"; };
 		3A3214A526698FCC00D6778B /* CollectionViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModelMapper.swift; sourceTree = "<group>"; };
 		3A3214A926698FCC00D6778B /* YourCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionViewCellModel.swift; sourceTree = "<group>"; };
@@ -590,6 +592,7 @@
 			isa = PBXGroup;
 			children = (
 				3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */,
+				3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */,
 				3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */,
 				3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */,
 				3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */,
@@ -706,6 +709,7 @@
 			files = (
 				3AA52C86266012D8006A6961 /* Collections.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
+				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
