@@ -1,4 +1,4 @@
-![Project version](https://img.shields.io/badge/version-0.1.0-brightgreen)
+![Project version](https://img.shields.io/badge/version-0.1.2-brightgreen)
 ![Swift version](https://img.shields.io/static/v1?label=Swift&message=5.3&color=orange&logo=swift)
 ![iOS version](https://img.shields.io/static/v1?label=iOS&message=13.0&color=yellow&logo=apple)
 ![Xcode version](https://img.shields.io/static/v1?label=Xcode&message=12.4&color=blue&logo=xcode)
