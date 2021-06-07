@@ -16,6 +16,10 @@ public final class CollectionsQuery: GraphQLQuery {
         name
         description
         stocks_count
+        collection_tickers_symbols {
+          __typename
+          ticker_symbol
+        }
         favorite_collections {
           __typename
           is_default
@@ -69,6 +73,7 @@ public final class CollectionsQuery: GraphQLQuery {
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
           GraphQLField("description", type: .nonNull(.scalar(String.self))),
           GraphQLField("stocks_count", type: .nonNull(.scalar(String.self))),
+          GraphQLField("collection_tickers_symbols", type: .nonNull(.list(.nonNull(.object(CollectionTickersSymbol.selections))))),
           GraphQLField("favorite_collections", type: .nonNull(.list(.nonNull(.object(FavoriteCollection.selections))))),
         ]
       }
@@ -79,8 +84,8 @@ public final class CollectionsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: String, image: String, name: String, description: String, stocksCount: String, favoriteCollections: [FavoriteCollection]) {
-        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "image": image, "name": name, "description": description, "stocks_count": stocksCount, "favorite_collections": favoriteCollections.map { (value: FavoriteCollection) -> ResultMap in value.resultMap }])
+      public init(id: String, image: String, name: String, description: String, stocksCount: String, collectionTickersSymbols: [CollectionTickersSymbol], favoriteCollections: [FavoriteCollection]) {
+        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "image": image, "name": name, "description": description, "stocks_count": stocksCount, "collection_tickers_symbols": collectionTickersSymbols.map { (value: CollectionTickersSymbol) -> ResultMap in value.resultMap }, "favorite_collections": favoriteCollections.map { (value: FavoriteCollection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -138,12 +143,61 @@ public final class CollectionsQuery: GraphQLQuery {
       }
 
       /// An array relationship
+      public var collectionTickersSymbols: [CollectionTickersSymbol] {
+        get {
+          return (resultMap["collection_tickers_symbols"] as! [ResultMap]).map { (value: ResultMap) -> CollectionTickersSymbol in CollectionTickersSymbol(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: CollectionTickersSymbol) -> ResultMap in value.resultMap }, forKey: "collection_tickers_symbols")
+        }
+      }
+
+      /// An array relationship
       public var favoriteCollections: [FavoriteCollection] {
         get {
           return (resultMap["favorite_collections"] as! [ResultMap]).map { (value: ResultMap) -> FavoriteCollection in FavoriteCollection(unsafeResultMap: value) }
         }
         set {
           resultMap.updateValue(newValue.map { (value: FavoriteCollection) -> ResultMap in value.resultMap }, forKey: "favorite_collections")
+        }
+      }
+
+      public struct CollectionTickersSymbol: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["collection_tickers_symbols"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("ticker_symbol", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(tickerSymbol: String) {
+          self.init(unsafeResultMap: ["__typename": "collection_tickers_symbols", "ticker_symbol": tickerSymbol])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var tickerSymbol: String {
+          get {
+            return resultMap["ticker_symbol"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "ticker_symbol")
+          }
         }
       }
 

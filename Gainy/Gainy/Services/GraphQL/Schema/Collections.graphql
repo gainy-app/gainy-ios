@@ -5,6 +5,9 @@ query Collections {
     name
     description
     stocks_count
+    collection_tickers_symbols {
+      ticker_symbol
+    }
     favorite_collections {
       is_default
     }
