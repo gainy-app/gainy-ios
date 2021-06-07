@@ -192,10 +192,6 @@ class RecommendedCollectionViewCell: RoundedCornerView {
 
     // MARK: Private
 
-    // MARK: Properties
-
-    private let cornerRadius: CGFloat = 8
-
     // MARK: Functions
 
     @objc
