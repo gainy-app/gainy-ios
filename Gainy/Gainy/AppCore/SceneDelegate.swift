@@ -30,7 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         appCoordinator.start(with: nil)
     }
 
-    func sceneWillEnterForeground(_ scene: UIScene) {
+    func sceneWillEnterForeground(_: UIScene) {
         if !UIDevice.current.hasTopNotch {
             if let navController = window?.rootViewController as? UINavigationController {
                 navController.setStatusBar(backgroundColor: .black)

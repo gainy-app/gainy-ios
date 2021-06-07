@@ -307,8 +307,8 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
     }
 
     func collectionView(
-        _ collectionView: UICollectionView,
-        dragSessionIsRestrictedToDraggingApplication session: UIDragSession
+        _: UICollectionView,
+        dragSessionIsRestrictedToDraggingApplication _: UIDragSession
     ) -> Bool {
         true
     }
