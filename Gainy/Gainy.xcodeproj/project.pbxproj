@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */; };
 		3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */; };
 		3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A126698FCC00D6778B /* CollectionDTOMapper.swift */; };
 		3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3214A526698FCC00D6778B /* CollectionViewModelMapper.swift */; };
@@ -111,6 +112,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHorizontalView.swift; sourceTree = "<group>"; };
 		3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Regular.otf"; sourceTree = "<group>"; };
 		3A3214A126698FCC00D6778B /* CollectionDTOMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDTOMapper.swift; sourceTree = "<group>"; };
 		3A3214A526698FCC00D6778B /* CollectionViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewModelMapper.swift; sourceTree = "<group>"; };
@@ -216,6 +218,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A01FBFB26873837007F6FA3 /* CollectionDetailsViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */,
+			);
+			path = CollectionDetailsViewCell;
+			sourceTree = "<group>";
+		};
 		3A498F4F266C16D7008437F1 /* DiscoveryCardsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +837,7 @@
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
+				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
