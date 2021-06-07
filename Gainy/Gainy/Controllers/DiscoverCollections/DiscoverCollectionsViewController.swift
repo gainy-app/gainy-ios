@@ -305,6 +305,13 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
             return []
         }
     }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        dragSessionIsRestrictedToDraggingApplication session: UIDragSession
+    ) -> Bool {
+        true
+    }
 }
 
 extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
@@ -346,7 +353,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
             roundedRect: CGRect(x: 0,
                                 y: 0,
                                 width: UIScreen.main.bounds.width - (16 + 16),
-                                height: 88),
+                                height: 92),
             cornerRadius: 8
         )
         previewParams.visiblePath = path

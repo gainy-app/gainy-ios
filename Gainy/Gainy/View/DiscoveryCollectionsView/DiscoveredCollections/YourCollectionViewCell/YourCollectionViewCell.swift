@@ -127,7 +127,7 @@ class YourCollectionViewCell: RoundedCornerView {
 
         descriptionLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 4,
+            y: topMargin + nameLabel.bounds.height + 8,
             width: bounds.width - (hMargin + 128),
             height: 34
         )
@@ -143,7 +143,7 @@ class YourCollectionViewCell: RoundedCornerView {
             x: bounds.width - (55 + hMargin),
             y: topMargin + stocksLabel.bounds.height,
             width: 55,
-            height: 24
+            height: 33
         )
 
         deleteButton.frame = CGRect(
