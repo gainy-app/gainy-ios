@@ -324,7 +324,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
                         dropSessionDidUpdate _: UIDropSession,
                         withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard destinationIndexPath?.section == Section.yourCollections.rawValue else {
-            return UICollectionViewDropProposal(operation: .forbidden)
+            return UICollectionViewDropProposal(operation: .cancel)
         }
 
         return UICollectionViewDropProposal(operation: .move,
