@@ -41,7 +41,7 @@ class YourCollectionViewCell: RoundedCornerView {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
         label.textColor = UIColor.Gainy.white
 
         label.numberOfLines = 1
@@ -54,7 +54,7 @@ class YourCollectionViewCell: RoundedCornerView {
     lazy var descriptionLabel: UITextView = {
         let label = UITextView()
 
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
@@ -69,7 +69,7 @@ class YourCollectionViewCell: RoundedCornerView {
     lazy var stocksLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 9, weight: .medium)
+        label.font = UIFont(name: "SFCompactRounded-Medium", size: 9)
         label.textColor = UIColor.Gainy.white
         label.numberOfLines = 1
         label.textAlignment = .right
@@ -82,7 +82,7 @@ class YourCollectionViewCell: RoundedCornerView {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 28, weight: .semibold)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 28)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
@@ -95,6 +95,7 @@ class YourCollectionViewCell: RoundedCornerView {
         let button = UIButton()
 
         button.layer.cornerRadius = 6
+        button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor.Gainy.back
 
         button.setImage(UIImage(named: "trash"), for: .normal)
@@ -128,7 +129,7 @@ class YourCollectionViewCell: RoundedCornerView {
         descriptionLabel.frame = CGRect(
             x: hMargin,
             y: topMargin + nameLabel.bounds.height + 8,
-            width: bounds.width - (hMargin + 128),
+            width: bounds.width - (hMargin + 96),
             height: 34
         )
 
@@ -184,7 +185,7 @@ class YourCollectionViewCell: RoundedCornerView {
         stocksAmount: String,
         imageName: String
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.image = UIImage(named: imageName + "-discovered")
 
         nameLabel.text = name
         nameLabel.sizeToFit()

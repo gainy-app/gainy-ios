@@ -41,14 +41,14 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var nameLabel: UITextView = {
         let label = UITextView()
 
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
         label.automaticallyAdjustsScrollIndicatorInsets = false
         label.contentInsetAdjustmentBehavior = .never
-        label.contentInset = UIEdgeInsets(top: -8, left: 0,
-                                          bottom: 0, right: 0)
+        label.textContainerInset = .zero
+        label.textContainer.lineFragmentPadding = 0
 
         return label
     }()
@@ -56,14 +56,14 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var descriptionLabel: UITextView = {
         let label = UITextView()
 
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
         label.automaticallyAdjustsScrollIndicatorInsets = false
         label.contentInsetAdjustmentBehavior = .never
-        label.contentInset = UIEdgeInsets(top: -8, left: 0,
-                                          bottom: 0, right: 0)
+        label.textContainerInset = .zero
+        label.textContainer.lineFragmentPadding = 0
 
         return label
     }()
@@ -71,7 +71,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var stocksLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 9, weight: .medium)
+        label.font = UIFont(name: "SFCompactRounded-Medium", size: 9)
         label.textColor = UIColor.Gainy.white
         label.numberOfLines = 2
         label.textAlignment = .left
@@ -85,7 +85,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 28, weight: .semibold)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 28)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
@@ -114,18 +114,24 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         let tMargin: CGFloat = 12
         let bMargin: CGFloat = 8
 
-        let minNameHeight: CGFloat = nameLabel.text.count >= 11 ? 35 : 18
+        let availableWidth = bounds.width - (hMargin + hMargin)
+        let nameLabelFont = UIFont(name: "SFProDisplay-Bold", size: 16)
+        let neededSize = nameLabel.text.size(
+            withAttributes: [NSAttributedString.Key.font: nameLabelFont]
+        )
+
+        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 35 : 18
         nameLabel.frame = CGRect(
-            x: hMargin - 4,
+            x: hMargin,
             y: tMargin,
-            width: bounds.width - (hMargin + hMargin) + 4,
+            width: bounds.width - (hMargin + hMargin),
             height: minNameHeight
         )
 
         descriptionLabel.frame = CGRect(
-            x: hMargin - 4,
+            x: hMargin,
             y: tMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + hMargin) + 4,
+            width: bounds.width - (hMargin + hMargin),
             height: 43
         )
 
@@ -161,7 +167,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.image = UIImage(named: imageName + "-recommended")
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -191,10 +197,6 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     }
 
     // MARK: Private
-
-    // MARK: Properties
-
-    private let cornerRadius: CGFloat = 8
 
     // MARK: Functions
 

@@ -52,7 +52,7 @@ class RecommendedCollectionsHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
         label.textColor = UIColor.Gainy.textDark
         label.backgroundColor = UIColor.Gainy.white
         label.isOpaque = true

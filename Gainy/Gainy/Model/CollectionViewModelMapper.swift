@@ -2,7 +2,7 @@ enum CollectionViewModelMapper {
     static func map(_ model: Collection) -> YourCollectionViewCellModel {
         YourCollectionViewCellModel(
             id: model.id,
-            image: model.image + "-discovered",
+            image: model.image,
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",
@@ -13,7 +13,7 @@ enum CollectionViewModelMapper {
     static func map(_ model: Collection) -> RecommendedCollectionViewCellModel {
         RecommendedCollectionViewCellModel(
             id: model.id,
-            image: model.image + "-recommended",
+            image: model.image,
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",
