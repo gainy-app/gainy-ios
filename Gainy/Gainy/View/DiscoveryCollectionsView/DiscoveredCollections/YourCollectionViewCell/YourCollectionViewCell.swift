@@ -129,7 +129,7 @@ class YourCollectionViewCell: RoundedCornerView {
         descriptionLabel.frame = CGRect(
             x: hMargin,
             y: topMargin + nameLabel.bounds.height + 8,
-            width: bounds.width - (hMargin + 128),
+            width: bounds.width - (hMargin + 96),
             height: 34
         )
 

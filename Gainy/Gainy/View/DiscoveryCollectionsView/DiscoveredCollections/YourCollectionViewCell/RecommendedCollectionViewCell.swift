@@ -47,7 +47,9 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         label.isUserInteractionEnabled = false
         label.automaticallyAdjustsScrollIndicatorInsets = false
         label.contentInsetAdjustmentBehavior = .never
-        label.contentInset = UIEdgeInsets(top: -8, left: 0,
+        label.textContainerInset = .zero
+        label.textContainer.lineFragmentPadding = 0
+        label.contentInset = UIEdgeInsets(top: -4, left: 0,
                                           bottom: 0, right: 0)
 
         return label
@@ -62,7 +64,9 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         label.isUserInteractionEnabled = false
         label.automaticallyAdjustsScrollIndicatorInsets = false
         label.contentInsetAdjustmentBehavior = .never
-        label.contentInset = UIEdgeInsets(top: -8, left: 0,
+        label.textContainerInset = .zero
+        label.textContainer.lineFragmentPadding = 0
+        label.contentInset = UIEdgeInsets(top: -4, left: 0,
                                           bottom: 0, right: 0)
 
         return label
@@ -114,18 +118,18 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         let tMargin: CGFloat = 12
         let bMargin: CGFloat = 8
 
-        let minNameHeight: CGFloat = nameLabel.text.count >= 11 ? 35 : 18
+        let minNameHeight: CGFloat = nameLabel.text.count > 12 ? 35 : 18
         nameLabel.frame = CGRect(
-            x: hMargin - 4,
+            x: hMargin,
             y: tMargin,
-            width: bounds.width - (hMargin + hMargin) + 4,
+            width: bounds.width - (hMargin + hMargin),
             height: minNameHeight
         )
 
         descriptionLabel.frame = CGRect(
-            x: hMargin - 4,
+            x: hMargin,
             y: tMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + hMargin) + 4,
+            width: bounds.width - (hMargin + hMargin),
             height: 43
         )
 
