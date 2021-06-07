@@ -35,6 +35,7 @@
 		3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; };
 		3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
+		3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */; };
 		3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40F5C266021BD005679DE /* BundleReader.swift */; };
 		3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */; };
 		3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */; };
@@ -145,6 +146,7 @@
 		3AA52C90266013E1006A6961 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3AA52C96266014BB006A6961 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA52C9E26601697006A6961 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsViewCell.swift; sourceTree = "<group>"; };
 		3AD40F5C266021BD005679DE /* BundleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleReader.swift; sourceTree = "<group>"; };
 		3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReuseCells.swift"; sourceTree = "<group>"; };
 		3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionReusableView+ReusableView.swift"; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */,
+				3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */,
 			);
 			path = CollectionDetailsViewCell;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 		3A498F4F266C16D7008437F1 /* DiscoveryCardsView */ = {
 			isa = PBXGroup;
 			children = (
+				3A01FBFB26873837007F6FA3 /* CollectionDetailsViewCell */,
 			);
 			path = DiscoveryCardsView;
 			sourceTree = "<group>";
@@ -808,6 +812,7 @@
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
+				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* DiscoverCardsViewModel.swift in Sources */,
