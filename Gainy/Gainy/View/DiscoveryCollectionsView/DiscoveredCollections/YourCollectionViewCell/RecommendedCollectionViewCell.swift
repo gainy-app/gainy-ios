@@ -49,8 +49,6 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         label.contentInsetAdjustmentBehavior = .never
         label.textContainerInset = .zero
         label.textContainer.lineFragmentPadding = 0
-        label.contentInset = UIEdgeInsets(top: -4, left: 0,
-                                          bottom: 0, right: 0)
 
         return label
     }()
@@ -66,8 +64,6 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         label.contentInsetAdjustmentBehavior = .never
         label.textContainerInset = .zero
         label.textContainer.lineFragmentPadding = 0
-        label.contentInset = UIEdgeInsets(top: -4, left: 0,
-                                          bottom: 0, right: 0)
 
         return label
     }()
@@ -118,7 +114,13 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         let tMargin: CGFloat = 12
         let bMargin: CGFloat = 8
 
-        let minNameHeight: CGFloat = nameLabel.text.count > 12 ? 35 : 18
+        let availableWidth = bounds.width - (hMargin + hMargin)
+        let nameLabelFont = UIFont(name: "SFProDisplay-Bold", size: 16)
+        let neededSize = nameLabel.text.size(
+            withAttributes: [NSAttributedString.Key.font: nameLabelFont]
+        )
+
+        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 35 : 18
         nameLabel.frame = CGRect(
             x: hMargin,
             y: tMargin,
