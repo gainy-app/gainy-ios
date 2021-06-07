@@ -161,7 +161,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.image = UIImage(named: imageName + "-recommended")
 
         nameLabel.text = name
         nameLabel.sizeToFit()

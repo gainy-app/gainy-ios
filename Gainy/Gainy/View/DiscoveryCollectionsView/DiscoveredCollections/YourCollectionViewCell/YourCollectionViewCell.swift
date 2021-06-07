@@ -184,7 +184,7 @@ class YourCollectionViewCell: RoundedCornerView {
         stocksAmount: String,
         imageName: String
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.image = UIImage(named: imageName + "-discovered")
 
         nameLabel.text = name
         nameLabel.sizeToFit()
