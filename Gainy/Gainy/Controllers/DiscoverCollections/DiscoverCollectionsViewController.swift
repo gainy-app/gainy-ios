@@ -143,6 +143,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Properties
 
     private var discoverCollectionsCollectionView: UICollectionView!
+    private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
@@ -290,6 +291,10 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
                         at indexPath: IndexPath) -> [UIDragItem] {
         switch indexPath.section {
         case Section.yourCollections.rawValue:
+            feedbackGenerator = UIImpactFeedbackGenerator()
+            feedbackGenerator?.impactOccurred()
+            feedbackGenerator = nil
+
             let item = viewModel!.yourCollections[indexPath.row]
             // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
