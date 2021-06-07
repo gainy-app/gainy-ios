@@ -6,7 +6,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let yourCollectionItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(88)
+                heightDimension: .fractionalHeight(1.0)
             )
         )
 
@@ -14,7 +14,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let yourCollectionGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(88)
+                heightDimension: .absolute(92) // original is 88
             ),
             subitems: [yourCollectionItem]
         )

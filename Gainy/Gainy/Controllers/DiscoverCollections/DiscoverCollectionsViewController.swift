@@ -143,6 +143,7 @@ class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsVi
     // MARK: Properties
 
     private var discoverCollectionsCollectionView: UICollectionView!
+    private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
@@ -290,6 +291,10 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
                         at indexPath: IndexPath) -> [UIDragItem] {
         switch indexPath.section {
         case Section.yourCollections.rawValue:
+            feedbackGenerator = UIImpactFeedbackGenerator()
+            feedbackGenerator?.impactOccurred()
+            feedbackGenerator = nil
+
             let item = viewModel!.yourCollections[indexPath.row]
             // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
@@ -299,6 +304,13 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
         default:
             return []
         }
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        dragSessionIsRestrictedToDraggingApplication session: UIDragSession
+    ) -> Bool {
+        true
     }
 }
 
@@ -324,7 +336,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
                         dropSessionDidUpdate _: UIDropSession,
                         withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard destinationIndexPath?.section == Section.yourCollections.rawValue else {
-            return UICollectionViewDropProposal(operation: .forbidden)
+            return UICollectionViewDropProposal(operation: .cancel)
         }
 
         return UICollectionViewDropProposal(operation: .move,
@@ -341,7 +353,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
             roundedRect: CGRect(x: 0,
                                 y: 0,
                                 width: UIScreen.main.bounds.width - (16 + 16),
-                                height: 88),
+                                height: 92),
             cornerRadius: 8
         )
         previewParams.visiblePath = path

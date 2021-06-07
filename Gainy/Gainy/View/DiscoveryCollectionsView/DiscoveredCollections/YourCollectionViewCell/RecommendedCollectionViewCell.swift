@@ -114,7 +114,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
         let tMargin: CGFloat = 12
         let bMargin: CGFloat = 8
 
-        let minNameHeight: CGFloat = nameLabel.text.count > 11 ? 35 : 18
+        let minNameHeight: CGFloat = nameLabel.text.count >= 11 ? 35 : 18
         nameLabel.frame = CGRect(
             x: hMargin - 4,
             y: tMargin,
@@ -126,14 +126,14 @@ class RecommendedCollectionViewCell: RoundedCornerView {
             x: hMargin - 4,
             y: tMargin + nameLabel.bounds.height + 4,
             width: bounds.width - (hMargin + hMargin) + 4,
-            height: 42
+            height: 43
         )
 
         stocksLabel.frame = CGRect(
             x: hMargin,
-            y: bounds.height - (10 + 24 + bMargin),
+            y: bounds.height - (12 + 24 + bMargin),
             width: 45,
-            height: 10
+            height: 12
         )
 
         stocksAmountLabel.frame = CGRect(

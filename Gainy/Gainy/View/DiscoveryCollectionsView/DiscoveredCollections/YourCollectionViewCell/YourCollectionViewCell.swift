@@ -127,7 +127,7 @@ class YourCollectionViewCell: RoundedCornerView {
 
         descriptionLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 4,
+            y: topMargin + nameLabel.bounds.height + 8,
             width: bounds.width - (hMargin + 128),
             height: 34
         )
@@ -143,7 +143,7 @@ class YourCollectionViewCell: RoundedCornerView {
             x: bounds.width - (55 + hMargin),
             y: topMargin + stocksLabel.bounds.height,
             width: 55,
-            height: 24
+            height: 33
         )
 
         deleteButton.frame = CGRect(
@@ -203,7 +203,7 @@ class YourCollectionViewCell: RoundedCornerView {
     // MARK: Types
 
     private enum Constant {
-        static let swipeAnimationDurations: TimeInterval = 0.3
+        static let swipeAnimationDurations: TimeInterval = 0.15
         static let swipeHorizontalShift: CGFloat = 40.0
     }
 
@@ -229,9 +229,11 @@ class YourCollectionViewCell: RoundedCornerView {
 
     @objc
     private func rightSwiped(_: UISwipeGestureRecognizer) {
-        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-            self.center = self.originalCellCenter
-            self.transform = CGAffineTransform(rotationAngle: 0)
+        if let originalCellCenter = self.originalCellCenter {
+            UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+                self.center = originalCellCenter
+                self.transform = CGAffineTransform(rotationAngle: 0)
+            }
         }
     }
 
