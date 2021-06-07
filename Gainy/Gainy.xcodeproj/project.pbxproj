@@ -73,6 +73,7 @@
 		3AE9036A266A507900574923 /* AFParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE90369266A507900574923 /* AFParameter.swift */; };
 		3AE9036F266A507A00574923 /* AFConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9036E266A507A00574923 /* AFConfig.swift */; };
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
+		3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		3AE9036D266A507A00574923 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		3AE9036E266A507A00574923 /* AFConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFConfig.swift; sourceTree = "<group>"; };
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
+		3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HasTopNotch.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -490,6 +492,7 @@
 				3AD40FCF26693D75005679DE /* UICollectionView+ReusableHeaderSection.swift */,
 				3AD40FA626682B2B005679DE /* UICollectionReusableView+ReusableView.swift */,
 				3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */,
+				3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
+				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
