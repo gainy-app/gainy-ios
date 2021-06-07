@@ -75,6 +75,11 @@
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
 		3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */; };
 		3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */; };
+		3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */; };
+		3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */; };
+		3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */; };
+		3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */; };
+		3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,6 +189,11 @@
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
 		3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SetStatusBar.swift"; sourceTree = "<group>"; };
 		3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HasTopNotch.swift"; sourceTree = "<group>"; };
+		3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
+		3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Medium.otf"; sourceTree = "<group>"; };
+		3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Semibold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +292,7 @@
 		3A930F1B265C1B96000FD3EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
 				3AE9036D266A507A00574923 /* Config.xcconfig */,
 			);
@@ -598,6 +609,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3AFE1A74266E4F1F0091E799 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */,
+				3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */,
+				3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */,
+				3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */,
+				3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -705,8 +728,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA52C86266012D8006A6961 /* Collections.graphql in Resources */,
+				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
+				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
+				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
+				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
+				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
