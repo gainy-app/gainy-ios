@@ -41,7 +41,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var nameLabel: UITextView = {
         let label = UITextView()
 
-        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
@@ -56,7 +56,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var descriptionLabel: UITextView = {
         let label = UITextView()
 
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
@@ -71,7 +71,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var stocksLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 9, weight: .medium)
+        label.font = UIFont(name: "SFCompactRounded-Medium", size: 9)
         label.textColor = UIColor.Gainy.white
         label.numberOfLines = 2
         label.textAlignment = .left
@@ -85,7 +85,7 @@ class RecommendedCollectionViewCell: RoundedCornerView {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont.roundedFont(ofSize: 28, weight: .semibold)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 28)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
