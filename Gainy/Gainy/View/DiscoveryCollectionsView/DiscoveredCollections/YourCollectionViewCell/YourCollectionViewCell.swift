@@ -203,7 +203,7 @@ class YourCollectionViewCell: RoundedCornerView {
     // MARK: Types
 
     private enum Constant {
-        static let swipeAnimationDurations: TimeInterval = 0.3
+        static let swipeAnimationDurations: TimeInterval = 0.15
         static let swipeHorizontalShift: CGFloat = 40.0
     }
 
