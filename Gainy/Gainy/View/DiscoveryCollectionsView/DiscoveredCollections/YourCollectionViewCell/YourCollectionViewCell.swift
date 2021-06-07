@@ -95,6 +95,7 @@ class YourCollectionViewCell: RoundedCornerView {
         let button = UIButton()
 
         button.layer.cornerRadius = 6
+        button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor.Gainy.back
 
         button.setImage(UIImage(named: "trash"), for: .normal)
