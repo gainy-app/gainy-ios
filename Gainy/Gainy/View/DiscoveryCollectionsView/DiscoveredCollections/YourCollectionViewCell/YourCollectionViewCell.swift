@@ -229,9 +229,11 @@ class YourCollectionViewCell: RoundedCornerView {
 
     @objc
     private func rightSwiped(_: UISwipeGestureRecognizer) {
-        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-            self.center = self.originalCellCenter
-            self.transform = CGAffineTransform(rotationAngle: 0)
+        if let originalCellCenter = self.originalCellCenter {
+            UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+                self.center = originalCellCenter
+                self.transform = CGAffineTransform(rotationAngle: 0)
+            }
         }
     }
 
