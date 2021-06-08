@@ -9,22 +9,45 @@
 
 The repo contains iOS application for [Gainy](https://www.gainy.app).
 
-Gainy is a mobile app that helps you identify the right stock or cryptocurrency depends on your portfolio, personal goals, and fundamental analysis. Digestible, adjustable, and on the go.
+Gainy is a mobile app that helps you identify the right stock or cryptocurrency depends on your portfolio, personal goals, and fundamental analysis.
+Digestible, adjustable, and on the go.
 
-## How to build and run app
+## How to get the app using TestFlight (currently, internal testing only)
+
+<details>
+<summary>&nbsp;&nbsp;How to get an invite</summary>
+<p>
+
+- Ask @dersim-davaod to invite you into AppStore Connect account (if you're not invited yet). You should provide a email associate with the Apple ID you're going to use;
+- Wait for the invitation link into the TestFlight and then accept the invitation;
+- Review https://testflight.apple.com to learn more about how to test the app (in case of any questions, direct them to @dersim-davaod)
+
+</p>
+</details>
+
+## How to build and run the app
 
 <details>
 <summary>&nbsp;&nbsp;Prerequisites</summary>
 <p>
 
-- Install Xcode 12.4+ and Command Line tools;
-- (optionally) Install [brew](https://brew.sh) package manager. It is required to run SwiftLint and SwiftFormat;
-- (optionally) Install [SwiftLint](https://github.com/realm/SwiftLint) and [SwiftFormat](https://github.com/nicklockwood/SwiftFormat):
+1. Install `Xcode 12.4+` and `Command Line Tools for Xcode`;
+2. Make sure you have a configuration file to store API keys at  `Gainy/Gainy/Resources/Config.xcconfig`. If no, please create it. **WARNING: ** do not put this file under the VSC tracking!
+3. Obtain the `GraphQL API key`. To get the data from the remote server and to make network requests, you must provide GraphQL API key. To obrain the key, follow the next steps:
+  - Open [Heroku's API explorer](https://gainy-dev.herokuapp.com/console/api-explorer). Contact @artem-vysotsky if you need an access.
+  - Navigate to `GRAPHIQL` tab and find `Request Headers` section.
+  - Next, in the `Request Headers` section find the `x-hasura-admin-secret-key` field, reveal its value and copy the value, you will need it later.
+4. (optionally) Obtain the `AppsFlyer dev key`. If you want the app to send in-app events, you should provide an AppsFlyer dev key to uniquely identify your account and the app.
+  - Log into the AppsFlyer dashboard.
+  - Navigate to `Configuration` > `App Settings`.
+  - Copy the dev key, you will need it later.
+5. (optionally) Install [brew](https://brew.sh) package manager. It is required to run SwiftLint and SwiftFormat;
+6. (optionally) Install [SwiftLint](https://github.com/realm/SwiftLint) and [SwiftFormat](https://github.com/nicklockwood/SwiftFormat):
 ```bash
 brew install swiftlint
 brew install swiftformat 
 ```
-- (optionally) iPhone device with iOS13.0+ installed;
+7. (optionally) iPhone device with `iOS13.0+` installed (You can build and run the app using an iOS simulator);
 
 </p>
 </details>
@@ -33,10 +56,13 @@ brew install swiftformat
 <summary>&nbsp;&nbsp;Running using Xcode</summary>
 <p>
 
-- Clone the project and navigate into the root dir;
-- Open Xcode project at `gainy-ios/gainy-app.xcodeproj`;
-- Choose `Gainy app` scheme;
-- Build and run the app;
+1. Clone the project and navigate into the root dir;
+1. Provide the `GraphQL API key` required to get the data from the remote endpoint. Add the line `GRAPH_QL_API_KEY = API_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `API_KEY` with the GraphQL admin's secret you obtained at the previous steps;
+1. (optionally) Provide the `AppsFlyer dev key` required to send AppsFlyer analytics. Add the line `APPS_FLYER_DEV_KEY = DEV_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `DEV_KEY` with the AppsFlyer dev key you obtained at the previous steps;
+1. Open the Xcode workspace at `Gainy.xcworkspace`;
+1. Choose the `Gainy` scheme and select iOS simulator to run the app on;
+1. (optionally) Select a device to run the app on (you might need a development certificate, let @dersim-davaod know if you need it);
+1. Build and run the app;
 
 </p>
 </details>
