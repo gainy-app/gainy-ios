@@ -4,12 +4,12 @@
 import Apollo
 import Foundation
 
-public final class CollectioDetailsQuery: GraphQLQuery {
+public final class CollectionDetailsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query CollectioDetails($id: bigint = "1") {
-      collections_by_pk(id: $id) {
+    query CollectionDetails {
+      collections {
         __typename
         id
         image
@@ -36,16 +36,9 @@ public final class CollectioDetailsQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "CollectioDetails"
+  public let operationName: String = "CollectionDetails"
 
-  public var id: String?
-
-  public init(id: String? = nil) {
-    self.id = id
-  }
-
-  public var variables: GraphQLMap? {
-    return ["id": id]
+  public init() {
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -53,7 +46,7 @@ public final class CollectioDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections_by_pk", arguments: ["id": GraphQLVariable("id")], type: .object(CollectionsByPk.selections)),
+        GraphQLField("collections", type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
       ]
     }
 
@@ -63,21 +56,21 @@ public final class CollectioDetailsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(collectionsByPk: CollectionsByPk? = nil) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "collections_by_pk": collectionsByPk.flatMap { (value: CollectionsByPk) -> ResultMap in value.resultMap }])
+    public init(collections: [Collection]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "collections" using primary key columns
-    public var collectionsByPk: CollectionsByPk? {
+    /// fetch data from the table: "collections"
+    public var collections: [Collection] {
       get {
-        return (resultMap["collections_by_pk"] as? ResultMap).flatMap { CollectionsByPk(unsafeResultMap: $0) }
+        return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "collections_by_pk")
+        resultMap.updateValue(newValue.map { (value: Collection) -> ResultMap in value.resultMap }, forKey: "collections")
       }
     }
 
-    public struct CollectionsByPk: GraphQLSelectionSet {
+    public struct Collection: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["collections"]
 
       public static var selections: [GraphQLSelection] {

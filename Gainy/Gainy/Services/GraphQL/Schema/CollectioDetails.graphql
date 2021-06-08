@@ -1,5 +1,5 @@
-query CollectioDetails($id: bigint = "1") {
-  collections_by_pk(id: $id) {
+query CollectionDetails {
+  collections {
     id
     image
     name
