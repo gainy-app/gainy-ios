@@ -32,6 +32,15 @@ Digestible, adjustable, and on the go.
 <p>
 
 - Install Xcode 12.4+ and Command Line tools;
+- Make sure you have a configuration file to store API keys at  `Gainy/Gainy/Resources/Config.xcconfig`. If no, please create it. **WARNING: ** do not put this file under the VSC tracking!
+- Obtain GraphQL API key. To get the data from the remote server and to make network requests, you must provide GraphQL API key. To obrain the key, follow the next steps:
+  - Navigate to `GRAPHIQL` at [Heroku's API explorer](https://gainy-dev.herokuapp.com/console/api-explorer). If you need an access please contact @artem-vysotsky.
+  - Next, in the `Request Headers` section find the `x-hasura-admin-secret-key` field, reveal its value and copy the value, you will need it later.
+- (optionally) Obtain AppsFlyer dev key. If you want to allow sending in-app events, you should provide an AppsFlyer dev key to uniquely identify your account and the app.
+  - Log into the AppsFlyer dashboard.
+  - Navigate to `Configuration` > `App Settings`.
+  - Copy the dev key, you will need it later.
+
 - (optionally) Install [brew](https://brew.sh) package manager. It is required to run SwiftLint and SwiftFormat;
 - (optionally) Install [SwiftLint](https://github.com/realm/SwiftLint) and [SwiftFormat](https://github.com/nicklockwood/SwiftFormat):
 ```bash
@@ -48,15 +57,8 @@ brew install swiftformat
 <p>
 
 - Clone the project and navigate into the root dir;
-- Provide API keys:
-  - Provide API key required to get the data from the remote endpoint:
-    - Create a file `Config.xcconfig` (if is not created yet) and put it at `Gainy/Gainy/Resources` path.
-    - To make requests to remote GraphQL endpoint, it is required to provide an API key. Navigate to `GRAPHIQL` at https://gainy-dev.herokuapp.com/console/api-explorer. In the `Request Headers` section find the `x-hasura-admin-secret-key`, reveal its value and copy the value, you will need it for the next step.
-    - Add the line `GRAPH_QL_API_KEY = API_KEY` into the `Config.xcconfig` file, replacing `API_KEY` with the admin's secret you obtained at the previous step.
-  - (optionally) Provide API key required to send in-app AppsFlyer events:
-    - Create a file `Config.xcconfig` (if is not created yet) and put it at `Gainy/Gainy/Resources` path.
-    - AppsFlyer uses the dev key to uniquely identify your account. The dev key is required because it enables the SDK to securely send and retrieve data that belongs to your account. To get the dev key, log into the AppFlyer dashboard, then go to `Configuration` > `App Settings`. Copy the dev key, you will need it for the next step.
-    - Add the line `APPS_FLYER_DEV_KEY = DEV_KEY` into the `Config.xcconfig` file, replacing `DEV_KEY` with the dev key you have.
+- Provide API key required to get the data from the remote endpoint. Add the line `GRAPH_QL_API_KEY = API_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `API_KEY` with the GraphQL admin's secret you obtained at the previous steps;
+- (optionally) Provide API key required to send in-app AppsFlyer events. Add the line `APPS_FLYER_DEV_KEY = DEV_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `DEV_KEY` with the AppsFlyer dev key you obtained at the previous steps;
 - Open Xcode workspace at `Gainy.xcworkspace`;
 - Choose `Gainy` scheme and select iOS simulator to run the app on;
 - (optionally) Select device to run the app on (you might need a development certificate, let @dersim-davaod know if you need it);
