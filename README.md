@@ -11,6 +11,12 @@ The repo contains iOS application for [Gainy](https://www.gainy.app).
 
 Gainy is a mobile app that helps you identify the right stock or cryptocurrency depends on your portfolio, personal goals, and fundamental analysis. Digestible, adjustable, and on the go.
 
+## How to get the app in TestFlight (currently, internal testing only)
+
+- Ask @dersim-davaod to invite you into AppStore Connect account (if you're not invited yet). You should provide a email associate with the Apple ID you're going to use;
+- Wait for the invitation link into the TestFlight and then accept the invitation;
+- Review https://testflight.apple.com to learn more about how to test the app (in case of any questions, direct them to @dersim-davaod)
+
 ## How to build and run the app
 
 <details>
