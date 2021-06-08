@@ -1,0 +1,22 @@
+query CollectioDetails($id: bigint = "1") {
+  collections_by_pk(id: $id) {
+    id
+    image
+    name
+    description
+    stocks_count
+    collection_tickers_symbols {
+      ticker {
+        symbol
+        name
+        description
+        ticker_financials {
+          dividend_growth
+          price_to_earnings
+          market_cap
+          highlight
+        }
+      }
+    }
+  }
+}
