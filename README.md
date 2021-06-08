@@ -11,7 +11,7 @@ The repo contains iOS application for [Gainy](https://www.gainy.app).
 
 Gainy is a mobile app that helps you identify the right stock or cryptocurrency depends on your portfolio, personal goals, and fundamental analysis. Digestible, adjustable, and on the go.
 
-## How to build and run app
+## How to build and run the app
 
 <details>
 <summary>&nbsp;&nbsp;Prerequisites</summary>
@@ -24,7 +24,7 @@ Gainy is a mobile app that helps you identify the right stock or cryptocurrency 
 brew install swiftlint
 brew install swiftformat 
 ```
-- (optionally) iPhone device with iOS13.0+ installed;
+- (optionally) iPhone device with iOS13.0+ installed (You can build and run the app using iOS simulator);
 
 </p>
 </details>
@@ -34,8 +34,9 @@ brew install swiftformat
 <p>
 
 - Clone the project and navigate into the root dir;
-- Open Xcode project at `gainy-ios/gainy-app.xcodeproj`;
-- Choose `Gainy app` scheme;
+- Open Xcode workspace at `Gainy.xcworkspace`;
+- Choose `Gainy` scheme and select iOS simulator to run the app on;
+- (optionally) Select device to run the app on (you might need a development certificate, let @dersim-davaod know if you need it);
 - Build and run the app;
 
 </p>
