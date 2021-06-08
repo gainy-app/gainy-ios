@@ -31,23 +31,23 @@ Digestible, adjustable, and on the go.
 <summary>&nbsp;&nbsp;Prerequisites</summary>
 <p>
 
-- Install Xcode 12.4+ and Command Line tools;
-- Make sure you have a configuration file to store API keys at  `Gainy/Gainy/Resources/Config.xcconfig`. If no, please create it. **WARNING: ** do not put this file under the VSC tracking!
-- Obtain GraphQL API key. To get the data from the remote server and to make network requests, you must provide GraphQL API key. To obrain the key, follow the next steps:
-  - Navigate to `GRAPHIQL` at [Heroku's API explorer](https://gainy-dev.herokuapp.com/console/api-explorer). If you need an access please contact @artem-vysotsky.
+1. Install `Xcode 12.4+` and `Command Line Tools for Xcode`;
+1. Make sure you have a configuration file to store API keys at  `Gainy/Gainy/Resources/Config.xcconfig`. If no, please create it. **WARNING: ** do not put this file under the VSC tracking!
+1. Obtain the `GraphQL API key`. To get the data from the remote server and to make network requests, you must provide GraphQL API key. To obrain the key, follow the next steps:
+  - Open [Heroku's API explorer](https://gainy-dev.herokuapp.com/console/api-explorer). Contact @artem-vysotsky if you need an access.
+  - Navigate to `GRAPHIQL` tab and find `Request Headers` section.
   - Next, in the `Request Headers` section find the `x-hasura-admin-secret-key` field, reveal its value and copy the value, you will need it later.
-- (optionally) Obtain AppsFlyer dev key. If you want to allow sending in-app events, you should provide an AppsFlyer dev key to uniquely identify your account and the app.
+1. (optionally) Obtain the `AppsFlyer dev key`. If you want the app to send in-app events, you should provide an AppsFlyer dev key to uniquely identify your account and the app.
   - Log into the AppsFlyer dashboard.
   - Navigate to `Configuration` > `App Settings`.
   - Copy the dev key, you will need it later.
-
-- (optionally) Install [brew](https://brew.sh) package manager. It is required to run SwiftLint and SwiftFormat;
-- (optionally) Install [SwiftLint](https://github.com/realm/SwiftLint) and [SwiftFormat](https://github.com/nicklockwood/SwiftFormat):
+1. (optionally) Install [brew](https://brew.sh) package manager. It is required to run SwiftLint and SwiftFormat;
+1. (optionally) Install [SwiftLint](https://github.com/realm/SwiftLint) and [SwiftFormat](https://github.com/nicklockwood/SwiftFormat):
 ```bash
 brew install swiftlint
 brew install swiftformat 
 ```
-- (optionally) iPhone device with iOS13.0+ installed (You can build and run the app using iOS simulator);
+1. (optionally) iPhone device with `iOS13.0+` installed (You can build and run the app using an iOS simulator);
 
 </p>
 </details>
@@ -57,11 +57,11 @@ brew install swiftformat
 <p>
 
 - Clone the project and navigate into the root dir;
-- Provide API key required to get the data from the remote endpoint. Add the line `GRAPH_QL_API_KEY = API_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `API_KEY` with the GraphQL admin's secret you obtained at the previous steps;
-- (optionally) Provide API key required to send in-app AppsFlyer events. Add the line `APPS_FLYER_DEV_KEY = DEV_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `DEV_KEY` with the AppsFlyer dev key you obtained at the previous steps;
-- Open Xcode workspace at `Gainy.xcworkspace`;
-- Choose `Gainy` scheme and select iOS simulator to run the app on;
-- (optionally) Select device to run the app on (you might need a development certificate, let @dersim-davaod know if you need it);
+- Provide the `GraphQL API key` required to get the data from the remote endpoint. Add the line `GRAPH_QL_API_KEY = API_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `API_KEY` with the GraphQL admin's secret you obtained at the previous steps;
+- (optionally) Provide the `AppsFlyer dev key` required to send AppsFlyer analytics. Add the line `APPS_FLYER_DEV_KEY = DEV_KEY` into the `Gainy/Gainy/Resources/Config.xcconfig` file, replacing `DEV_KEY` with the AppsFlyer dev key you obtained at the previous steps;
+- Open the Xcode workspace at `Gainy.xcworkspace`;
+- Choose the `Gainy` scheme and select iOS simulator to run the app on;
+- (optionally) Select a device to run the app on (you might need a development certificate, let @dersim-davaod know if you need it);
 - Build and run the app;
 
 </p>
