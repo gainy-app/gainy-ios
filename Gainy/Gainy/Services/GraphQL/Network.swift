@@ -1,6 +1,6 @@
 import Apollo
 
-class Network {
+final class Network {
     static let shared = Network()
 
     // TODO: normal singletone?
@@ -24,7 +24,7 @@ class Network {
     let graphQLEndpointUrl = URL(string: "https://gainy-dev.herokuapp.com/v1/graphql")!
 }
 
-class NetworkInterceptorProvider: LegacyInterceptorProvider {
+final class NetworkInterceptorProvider: LegacyInterceptorProvider {
     override func interceptors<Operation: GraphQLOperation>(
         for operation: Operation
     ) -> [ApolloInterceptor] {
@@ -34,7 +34,7 @@ class NetworkInterceptorProvider: LegacyInterceptorProvider {
     }
 }
 
-class CustomInterceptor: ApolloInterceptor {
+final class CustomInterceptor: ApolloInterceptor {
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,

@@ -3,7 +3,7 @@ import Foundation
 /**
  Object that manages network requests to an API end point.
  */
-class NetworkRouter<EndPoint: ApiEndPoint>: ApiRouter {
+final class NetworkRouter<EndPoint: ApiEndPoint>: ApiRouter {
     // MARK: Internal
 
     func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {

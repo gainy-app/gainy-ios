@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewControllerFactory {
+final class ViewControllerFactory {
     func instantiateDiscoverCollections() -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
