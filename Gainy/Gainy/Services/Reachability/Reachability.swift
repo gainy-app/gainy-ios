@@ -40,7 +40,7 @@ public extension Notification.Name {
     static let reachabilityChanged = Notification.Name("reachabilityChanged")
 }
 
-public class Reachability {
+public final class Reachability {
     // MARK: Lifecycle
 
     public required init(reachabilityRef: SCNetworkReachability,
@@ -390,7 +390,7 @@ extension SCNetworkReachabilityFlags {
  - don't alter the public API of `Reachability.swift` in any way
  - still allow for automatic stopping of the notifier on `deinit`.
  */
-private class ReachabilityWeakifier {
+private final class ReachabilityWeakifier {
     // MARK: Lifecycle
 
     init(reachability: Reachability) {

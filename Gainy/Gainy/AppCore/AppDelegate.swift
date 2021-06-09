@@ -7,20 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        AppsFlyerLib.shared().appsFlyerDevKey = BundleReader().appsFlyerDevKey
-        AppsFlyerLib.shared().appleAppID = AFConfig.appId
-        AppsFlyerLib.shared().delegate = self
-
-        #if DEBUG
-            AppsFlyerLib.shared().isDebug = true
-        #endif
-
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: NSSelectorFromString("sendLaunch"),
-                         name: UIApplication.didBecomeActiveNotification,
-                         object: nil)
+        initializeAppsFlyer()
 
         return true
     }
@@ -39,6 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc
     private func sendLaunch() {
         AppsFlyerLib.shared().start()
+    }
+
+    private func initializeAppsFlyer() {
+        AppsFlyerLib.shared().appsFlyerDevKey = BundleReader().appsFlyerDevKey
+        AppsFlyerLib.shared().appleAppID = AFConfig.appId
+        AppsFlyerLib.shared().delegate = self
+
+        #if DEBUG
+            AppsFlyerLib.shared().isDebug = true
+        #endif
+
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("sendLaunch"),
+                         name: UIApplication.didBecomeActiveNotification,
+                         object: nil)
     }
 }
 

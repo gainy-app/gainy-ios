@@ -7,7 +7,7 @@ typealias CollectionsDataSource = UICollectionViewDiffableDataSource
 typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
 <DiscoverCollectionsViewController.Section, Collection>
 
-class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
+final class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
     // MARK: Internal
 
     // MARK: Types

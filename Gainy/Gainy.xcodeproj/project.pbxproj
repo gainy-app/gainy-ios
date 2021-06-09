@@ -19,15 +19,6 @@
 		3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */; };
 		3A930EF0265C190C000FD3EB /* GainyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EEF265C190C000FD3EB /* GainyTests.swift */; };
 		3A930EFB265C190C000FD3EB /* GainyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EFA265C190C000FD3EB /* GainyUITests.swift */; };
-		3A930F24265CC5E0000FD3EB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F23265CC5E0000FD3EB /* NetworkError.swift */; };
-		3A930F3A265D340F000FD3EB /* ApiRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F39265D340F000FD3EB /* ApiRouter.swift */; };
-		3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F41265D3429000FD3EB /* NetworkRouter.swift */; };
-		3A930F48265D3454000FD3EB /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F47265D3454000FD3EB /* HttpMethod.swift */; };
-		3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */; };
-		3A930F59265D3472000FD3EB /* HttpParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F58265D3472000FD3EB /* HttpParameters.swift */; };
-		3A930F5E265D3479000FD3EB /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F5D265D3479000FD3EB /* HttpRequest.swift */; };
-		3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */; };
-		3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930F68265D352E000FD3EB /* ApiEndPoint.swift */; };
 		3A9FB0DD266AAF4A00EC85D4 /* ApolloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; };
 		3A9FB0DE266AAF4A00EC85D4 /* ApolloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB0E1266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift */; };
@@ -133,15 +124,6 @@
 		3A930EF6265C190C000FD3EB /* GainyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GainyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A930EFA265C190C000FD3EB /* GainyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyUITests.swift; sourceTree = "<group>"; };
 		3A930EFC265C190C000FD3EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A930F23265CC5E0000FD3EB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		3A930F39265D340F000FD3EB /* ApiRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiRouter.swift; sourceTree = "<group>"; };
-		3A930F41265D3429000FD3EB /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
-		3A930F47265D3454000FD3EB /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
-		3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterEncoding.swift; sourceTree = "<group>"; };
-		3A930F58265D3472000FD3EB /* HttpParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameters.swift; sourceTree = "<group>"; };
-		3A930F5D265D3479000FD3EB /* HttpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
-		3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStatusCode.swift; sourceTree = "<group>"; };
-		3A930F68265D352E000FD3EB /* ApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiEndPoint.swift; sourceTree = "<group>"; };
 		3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ApolloCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9FB0E1266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedCollectionsHeaderView.swift; sourceTree = "<group>"; };
 		3A9FB0E5266B853200EC85D4 /* RoundedCornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerView.swift; sourceTree = "<group>"; };
@@ -336,53 +318,12 @@
 		3A930F21265C1C6B000FD3EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3AE90361266A4EDE00574923 /* Tracker */,
+				3AE90361266A4EDE00574923 /* Analytics */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
-				3A930F22265C1C78000FD3EB /* Network */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		3A930F22265C1C78000FD3EB /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				3A930F23265CC5E0000FD3EB /* NetworkError.swift */,
-				3A930F67265D3518000FD3EB /* EndPoint */,
-				3A930F38265D3401000FD3EB /* Router */,
-				3A930F46265D3447000FD3EB /* Http */,
 				3AE795562662AE65002B40D6 /* Reachability */,
 			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		3A930F38265D3401000FD3EB /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				3A930F39265D340F000FD3EB /* ApiRouter.swift */,
-				3A930F41265D3429000FD3EB /* NetworkRouter.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		3A930F46265D3447000FD3EB /* Http */ = {
-			isa = PBXGroup;
-			children = (
-				3A930F47265D3454000FD3EB /* HttpMethod.swift */,
-				3A930F50265D3466000FD3EB /* HttpParameterEncoding.swift */,
-				3A930F58265D3472000FD3EB /* HttpParameters.swift */,
-				3A930F5D265D3479000FD3EB /* HttpRequest.swift */,
-				3A930F62265D3485000FD3EB /* HttpResponseStatusCode.swift */,
-			);
-			path = Http;
-			sourceTree = "<group>";
-		};
-		3A930F67265D3518000FD3EB /* EndPoint */ = {
-			isa = PBXGroup;
-			children = (
-				3A930F68265D352E000FD3EB /* ApiEndPoint.swift */,
-			);
-			path = EndPoint;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		3AA52C7B26600FEC006A6961 /* GraphQL */ = {
@@ -579,12 +520,12 @@
 			path = ThirdParty;
 			sourceTree = "<group>";
 		};
-		3AE90361266A4EDE00574923 /* Tracker */ = {
+		3AE90361266A4EDE00574923 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
 				3AE90362266A4EEC00574923 /* AppsFlyer */,
 			);
-			path = Tracker;
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		3AE90362266A4EEC00574923 /* AppsFlyer */ = {
@@ -803,13 +744,8 @@
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
-				3A930F5E265D3479000FD3EB /* HttpRequest.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
-				3A930F24265CC5E0000FD3EB /* NetworkError.swift in Sources */,
-				3A930F59265D3472000FD3EB /* HttpParameters.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
-				3A930F3A265D340F000FD3EB /* ApiRouter.swift in Sources */,
-				3A930F63265D3485000FD3EB /* HttpResponseStatusCode.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
@@ -823,11 +759,9 @@
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
-				3A930F48265D3454000FD3EB /* HttpMethod.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
-				3A930F51265D3466000FD3EB /* HttpParameterEncoding.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
@@ -839,10 +773,8 @@
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
-				3A930F42265D3429000FD3EB /* NetworkRouter.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
-				3A930F69265D352E000FD3EB /* ApiEndPoint.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,

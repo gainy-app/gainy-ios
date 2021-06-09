@@ -1,7 +1,7 @@
 @testable import Gainy
 import XCTest
 
-class GainyTests: XCTestCase {
+final class GainyTests: XCTestCase {
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

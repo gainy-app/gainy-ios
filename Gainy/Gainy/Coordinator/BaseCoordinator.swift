@@ -6,8 +6,8 @@ class BaseCoordinator: Coordinator {
     // MARK: - Public methods
 
     func addDependency(_ coordinator: Coordinator) {
-        for element in childCoordinators {
-            if element === coordinator { return }
+        for element in childCoordinators where element === coordinator {
+            return
         }
         childCoordinators.append(coordinator)
     }
@@ -15,11 +15,9 @@ class BaseCoordinator: Coordinator {
     func removeDependency(_ coordinator: Coordinator?) {
         guard childCoordinators.isEmpty == false, let coordinator = coordinator else { return }
 
-        for (index, element) in childCoordinators.enumerated() {
-            if element === coordinator {
-                childCoordinators.remove(at: index)
-                break
-            }
+        for (index, element) in childCoordinators.enumerated() where element === coordinator {
+            childCoordinators.remove(at: index)
+            break
         }
     }
 
