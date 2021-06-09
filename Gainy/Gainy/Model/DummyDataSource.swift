@@ -1,5 +1,7 @@
 // TODO: remove when testing is completed
 enum DummyDataSource {
+    static var collectionDetails: [CollectionDetails] = []
+    static var collectionsRemote: [DiscoverCollectionsQuery.Data.Collection] = []
     static var yourCollections: [Collection] = [
 //        Collection(
 //            id: 0,
