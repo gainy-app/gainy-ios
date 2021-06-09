@@ -102,11 +102,9 @@ final class Router: NSObject, RouterProtocol {
 
     func popToModule(module: Presentable?, animated: Bool) {
         if let controllers = rootController?.viewControllers, let module = module {
-            for controller in controllers {
-                if controller == module as? UIViewController {
-                    rootController?.popToViewController(controller, animated: animated)
-                    break
-                }
+            for controller in controllers where controller == module as? UIViewController {
+                rootController?.popToViewController(controller, animated: animated)
+                break
             }
         }
     }
