@@ -4,20 +4,20 @@ extension UIColor {
     enum Gainy {
         static let white = UIColor.white
 
-        static let red  = UIColor(red: 252.0 / 255.0,
-                                  green: 80.0 / 255.0,
-                                  blue: 88.0 / 255.0,
-                                  alpha: 1)
+        static let red = UIColor(red: 252.0 / 255.0,
+                                 green: 80.0 / 255.0,
+                                 blue: 88.0 / 255.0,
+                                 alpha: 1)
 
         static let yellow = UIColor(red: 255.0 / 255.0,
                                     green: 245.0 / 255.0,
                                     blue: 0.0 / 255.0,
                                     alpha: 1)
 
-        static let green  = UIColor(red: 37.0 / 255.0,
-                                    green: 198.0 / 255.0,
-                                    blue: 133.0 / 255.0,
-                                    alpha: 1)
+        static let green = UIColor(red: 37.0 / 255.0,
+                                   green: 198.0 / 255.0,
+                                   blue: 133.0 / 255.0,
+                                   alpha: 1)
 
 //        static let lightBlue
 
