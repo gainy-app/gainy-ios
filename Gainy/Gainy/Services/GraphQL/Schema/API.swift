@@ -25,6 +25,8 @@ public final class CollectionDetailsQuery: GraphQLQuery {
             description
             ticker_financials {
               __typename
+              price_change_today
+              current_price
               dividend_growth
               price_to_earnings
               market_cap
@@ -273,8 +275,10 @@ public final class CollectionDetailsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("price_change_today", type: .nonNull(.scalar(Double.self))),
+                GraphQLField("current_price", type: .nonNull(.scalar(Double.self))),
                 GraphQLField("dividend_growth", type: .nonNull(.scalar(String.self))),
-                GraphQLField("price_to_earnings", type: .nonNull(.scalar(String.self))),
+                GraphQLField("price_to_earnings", type: .nonNull(.scalar(Double.self))),
                 GraphQLField("market_cap", type: .nonNull(.scalar(String.self))),
                 GraphQLField("highlight", type: .nonNull(.scalar(String.self))),
               ]
@@ -286,8 +290,8 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(dividendGrowth: String, priceToEarnings: String, marketCap: String, highlight: String) {
-              self.init(unsafeResultMap: ["__typename": "ticker_financials", "dividend_growth": dividendGrowth, "price_to_earnings": priceToEarnings, "market_cap": marketCap, "highlight": highlight])
+            public init(priceChangeToday: Double, currentPrice: Double, dividendGrowth: String, priceToEarnings: Double, marketCap: String, highlight: String) {
+              self.init(unsafeResultMap: ["__typename": "ticker_financials", "price_change_today": priceChangeToday, "current_price": currentPrice, "dividend_growth": dividendGrowth, "price_to_earnings": priceToEarnings, "market_cap": marketCap, "highlight": highlight])
             }
 
             public var __typename: String {
@@ -296,6 +300,24 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var priceChangeToday: Double {
+              get {
+                return resultMap["price_change_today"]! as! Double
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "price_change_today")
+              }
+            }
+
+            public var currentPrice: Double {
+              get {
+                return resultMap["current_price"]! as! Double
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "current_price")
               }
             }
 
@@ -308,9 +330,9 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var priceToEarnings: String {
+            public var priceToEarnings: Double {
               get {
-                return resultMap["price_to_earnings"]! as! String
+                return resultMap["price_to_earnings"]! as! Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "price_to_earnings")

@@ -149,6 +149,123 @@
         "possibleTypes": null
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "Float_comparison_exp",
+        "description": "expression to compare columns of type Float. All fields are combined with logical 'AND'.",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "_eq",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_is_null",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_neq",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "_nin",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "ID",
         "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
@@ -13157,6 +13274,22 @@
             "deprecationReason": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -13233,6 +13366,22 @@
             "deprecationReason": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "args": [],
@@ -13241,7 +13390,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "numeric",
+                "name": "Float",
                 "ofType": null
               }
             },
@@ -13703,6 +13852,18 @@
         "description": "aggregate avg on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -13728,6 +13889,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -13763,6 +13936,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -13784,6 +13967,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -13862,6 +14055,16 @@
             "defaultValue": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Float_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -13912,11 +14115,21 @@
             "defaultValue": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Float_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "numeric_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null
@@ -13996,6 +14209,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -14026,11 +14249,21 @@
             "defaultValue": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null
@@ -14052,6 +14285,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "timestamptz",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null
@@ -14107,11 +14350,21 @@
             "defaultValue": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null
@@ -14179,6 +14432,18 @@
             "deprecationReason": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -14239,12 +14504,24 @@
             "deprecationReason": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14309,6 +14586,16 @@
             "defaultValue": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -14350,6 +14637,16 @@
           },
           {
             "name": "period",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14421,6 +14718,18 @@
             "deprecationReason": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -14481,12 +14790,24 @@
             "deprecationReason": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -14551,6 +14872,16 @@
             "defaultValue": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -14592,6 +14923,16 @@
           },
           {
             "name": "period",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14805,6 +15146,16 @@
             "defaultValue": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -14846,6 +15197,16 @@
           },
           {
             "name": "period",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14949,6 +15310,12 @@
             "deprecationReason": null
           },
           {
+            "name": "current_price",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": "column name",
             "isDeprecated": false,
@@ -14974,6 +15341,12 @@
           },
           {
             "name": "period",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -15022,6 +15395,16 @@
             "defaultValue": null
           },
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15072,11 +15455,21 @@
             "defaultValue": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null
@@ -15122,6 +15515,18 @@
         "description": "aggregate stddev on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15147,6 +15552,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15182,6 +15599,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15203,6 +15630,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15232,6 +15669,18 @@
         "description": "aggregate stddev_pop on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15257,6 +15706,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15292,6 +15753,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15313,6 +15784,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15342,6 +15823,18 @@
         "description": "aggregate stddev_samp on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15367,6 +15860,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15402,6 +15907,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15423,6 +15938,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15452,6 +15977,18 @@
         "description": "aggregate sum on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15488,12 +16025,24 @@
             "deprecationReason": null
           },
           {
+            "name": "price_change_today",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price_to_earnings",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "numeric",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -15512,6 +16061,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15533,6 +16092,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15571,6 +16140,12 @@
             "deprecationReason": null
           },
           {
+            "name": "current_price",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": "column name",
             "isDeprecated": false,
@@ -15596,6 +16171,12 @@
           },
           {
             "name": "period",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -15633,6 +16214,18 @@
         "description": "aggregate var_pop on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15658,6 +16251,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15693,6 +16298,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15714,6 +16329,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15743,6 +16368,18 @@
         "description": "aggregate var_samp on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15768,6 +16405,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15803,6 +16452,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15824,6 +16483,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -15853,6 +16522,18 @@
         "description": "aggregate variance on columns",
         "fields": [
           {
+            "name": "current_price",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "args": [],
@@ -15878,6 +16559,18 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "args": [],
             "type": {
@@ -15913,6 +16606,16 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "current_price",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "dividend_growth",
             "description": null,
             "type": {
@@ -15934,6 +16637,16 @@
           },
           {
             "name": "market_cap",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "price_change_today",
             "description": null,
             "type": {
               "kind": "ENUM",
