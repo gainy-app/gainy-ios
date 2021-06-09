@@ -339,6 +339,7 @@
 				3AE90361266A4EDE00574923 /* Tracker */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
+				3AE795562662AE65002B40D6 /* Reachability */,
 				3A930F22265C1C78000FD3EB /* Network */,
 			);
 			path = Services;
@@ -351,7 +352,6 @@
 				3A930F67265D3518000FD3EB /* EndPoint */,
 				3A930F38265D3401000FD3EB /* Router */,
 				3A930F46265D3447000FD3EB /* Http */,
-				3AE795562662AE65002B40D6 /* Reachability */,
 			);
 			path = Network;
 			sourceTree = "<group>";
