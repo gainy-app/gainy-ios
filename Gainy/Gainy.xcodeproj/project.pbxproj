@@ -318,7 +318,7 @@
 		3A930F21265C1C6B000FD3EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3AE90361266A4EDE00574923 /* Tracker */,
+				3AE90361266A4EDE00574923 /* Analytics */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
 				3AE795562662AE65002B40D6 /* Reachability */,
@@ -520,12 +520,12 @@
 			path = ThirdParty;
 			sourceTree = "<group>";
 		};
-		3AE90361266A4EDE00574923 /* Tracker */ = {
+		3AE90361266A4EDE00574923 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
 				3AE90362266A4EEC00574923 /* AppsFlyer */,
 			);
-			path = Tracker;
+			path = Analytics;
 			sourceTree = "<group>";
 		};
 		3AE90362266A4EEC00574923 /* AppsFlyer */ = {
