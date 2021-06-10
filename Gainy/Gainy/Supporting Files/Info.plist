@@ -26,6 +26,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>SFCompactRounded-Regular.otf</string>
 		<string>SFCompactRounded-Semibold.otf</string>
 		<string>SFCompactRounded-Medium.otf</string>
 		<string>SFProDisplay-Regular.ttf</string>

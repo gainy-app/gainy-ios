@@ -1,0 +1,12 @@
+query DiscoverCollections {
+  collections {
+    id
+    image
+    name
+    description
+    stocks_count
+    favorite_collections {
+      is_default
+    }
+  }
+}

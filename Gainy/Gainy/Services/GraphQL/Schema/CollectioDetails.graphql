@@ -1,0 +1,24 @@
+query CollectionDetails {
+  collections {
+    id
+    image
+    name
+    description
+    stocks_count
+    collection_tickers_symbols {
+      ticker {
+        symbol
+        name
+        description
+        ticker_financials {
+          price_change_today
+          current_price
+          dividend_growth
+          price_to_earnings
+          market_cap
+          highlight
+        }
+      }
+    }
+  }
+}
