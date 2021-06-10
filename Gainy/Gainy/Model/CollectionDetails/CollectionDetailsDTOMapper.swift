@@ -1,5 +1,3 @@
-// TODO: 1: avoid force unwraps in the mappers
-
 enum CollectionDetailsDTOMapper {
     static func map(
         _ dto: CollectionDetailsQuery.Data.Collection

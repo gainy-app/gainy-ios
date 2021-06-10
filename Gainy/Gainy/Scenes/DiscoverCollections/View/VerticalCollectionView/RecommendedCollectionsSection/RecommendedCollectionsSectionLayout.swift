@@ -2,7 +2,8 @@ import UIKit
 
 struct RecommendedCollectionsSectionLayout: SectionLayout {
     // MARK: Internal
-    func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+
+    func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(

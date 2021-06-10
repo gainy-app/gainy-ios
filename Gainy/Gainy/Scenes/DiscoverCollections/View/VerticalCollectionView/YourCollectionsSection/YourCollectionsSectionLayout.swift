@@ -1,7 +1,7 @@
 import UIKit
 
 struct YourCollectionsSectionLayout: SectionLayout {
-    func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let yourCollectionItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(

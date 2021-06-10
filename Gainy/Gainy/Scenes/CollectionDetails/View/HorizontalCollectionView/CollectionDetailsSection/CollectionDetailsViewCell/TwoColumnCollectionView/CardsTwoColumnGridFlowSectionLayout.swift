@@ -2,7 +2,7 @@ import UIKit
 
 struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
     // TODO: 1: remove/replace with proper layout
-    func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+    func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let gridItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
