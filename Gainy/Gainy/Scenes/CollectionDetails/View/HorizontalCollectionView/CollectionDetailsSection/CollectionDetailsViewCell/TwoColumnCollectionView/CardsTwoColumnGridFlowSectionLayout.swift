@@ -4,34 +4,41 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
     // TODO: 1: remove/replace with proper layout
     func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
-        let layoutItem = NSCollectionLayoutItem(
+        let gridItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .fractionalWidth(0.5),
                 heightDimension: .fractionalHeight(1)
             )
         )
 
-        layoutItem.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 5,
-            bottom: 0,
-            trailing: 5
+        gridItem.contentInsets = NSDirectionalEdgeInsets(
+            top: 16, leading: 0, bottom: 0, trailing: 0
         )
 
-        // Group
-        let layoutGroup = NSCollectionLayoutGroup.horizontal(
+        // Groups
+        let horizontalTwoItemsGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.95),
-                heightDimension: .estimated(1000)
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(216 + 16)
             ),
-            subitems: [layoutItem]
+            subitem: gridItem,
+            count: 2
         )
+        horizontalTwoItemsGroup.contentInsets = NSDirectionalEdgeInsets(
+            top: 0, leading: 6, bottom: 0, trailing: 6
+        )
+
+        horizontalTwoItemsGroup.interItemSpacing = .fixed(15)
 
         // Section
-        let collectionsFlowSection = NSCollectionLayoutSection(group: layoutGroup)
-        collectionsFlowSection.orthogonalScrollingBehavior = .groupPagingCentered
+        let twoColumnsGridSection = NSCollectionLayoutSection(
+            group: horizontalTwoItemsGroup
+        )
+        twoColumnsGridSection.contentInsets = NSDirectionalEdgeInsets(
+            top: 0, leading: 0, bottom: 13, trailing: 0
+        )
 
-        return collectionsFlowSection
+        return twoColumnsGridSection
     }
 
     func configureCell(

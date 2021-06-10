@@ -108,42 +108,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var internalCollectionView: UICollectionView!
 
     private lazy var customLayout: UICollectionViewLayout = {
-        let layout = UICollectionViewCompositionalLayout { [weak self] (sectionIndex, environment) -> NSCollectionLayoutSection? in
-            let item = NSCollectionLayoutItem(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(0.5),
-                    heightDimension: .fractionalHeight(1)
-                )
-            )
-
-            item.contentInsets = NSDirectionalEdgeInsets(
-                top: 16, leading: 0, bottom: 0, trailing: 0
-            )
-
-            let group = NSCollectionLayoutGroup.horizontal(
-                layoutSize: NSCollectionLayoutSize(
-                    widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(216 + 16)
-                ),
-                subitem: item,
-                count: 2
-            )
-            group.contentInsets = NSDirectionalEdgeInsets(
-                top: 0, leading: 6, bottom: 0, trailing: 6
-            )
-
-            group.interItemSpacing = .fixed(15)
-
-            let section = NSCollectionLayoutSection(
-                group: group
-            )
-            section.contentInsets = NSDirectionalEdgeInsets(
-                top: 0, leading: 0, bottom: 13, trailing: 0
-            )
-
-            return section
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
+            self?.sections[sectionIndex].layoutSection(within: env)
         }
-
         return layout
     }()
 
