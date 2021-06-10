@@ -117,8 +117,5 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private func initViewModels() {
         snapshot.appendSections([.cards])
         snapshot.appendItems([], toSection: .cards)
-//        snapshot.appendItems(DummyDataSource.collectionDetails, toSection: .cards)
-//
-//        dataSource?.apply(snapshot, animatingDifferences: false)
     }
 }
