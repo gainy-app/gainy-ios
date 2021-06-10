@@ -72,7 +72,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
             if let cell = cell as? YourCollectionViewCell,
                let modelItem = modelItem as? YourCollectionViewCellModel {
                 cell.onDeleteButtonPressed = { [weak self] in
-                    self?.removeFromYourCollection(collectionToRemove: modelItem)
+                    self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
@@ -84,7 +84,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                     cell.isUserInteractionEnabled = false
 
                     cell.setButtonChecked()
-                    self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
+                    self?.addToYourCollection(collectionItemToAdd: modelItem, indexRow: indexPath.row)
 
                     cell.isUserInteractionEnabled = true
                 }
@@ -102,7 +102,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                         stocksAmount: modelItem.stocksAmount,
                         recommendedIdentifier: modelItem
                     )
-                    self?.removeFromYourCollection(collectionToRemove: yourCollectionItem)
+                    self?.removeFromYourCollection(yourCollectionItemToRemove: yourCollectionItem)
 
                     cell.isUserInteractionEnabled = true
                 }
@@ -148,41 +148,41 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
     // MARK: Functions
 
-    private func addToYourCollection(collectionToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
-        let updatedRecommendedIdentifier = RecommendedCollectionViewCellModel(
-            id: collectionToAdd.id,
-            image: collectionToAdd.image,
-            name: collectionToAdd.name,
-            description: collectionToAdd.description,
-            stocksAmount: collectionToAdd.stocksAmount,
+    private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
+        let updatedRecommendedItem = RecommendedCollectionViewCellModel(
+            id: collectionItemToAdd.id,
+            image: collectionItemToAdd.image,
+            name: collectionItemToAdd.name,
+            description: collectionItemToAdd.description,
+            stocksAmount: collectionItemToAdd.stocksAmount,
             isInYourCollections: true
         )
 
-        let yourCollectionModel = YourCollectionViewCellModel(
-            id: collectionToAdd.id,
-            image: collectionToAdd.image,
-            name: collectionToAdd.name,
-            description: collectionToAdd.description,
-            stocksAmount: collectionToAdd.stocksAmount,
-            recommendedIdentifier: updatedRecommendedIdentifier
+        let yourCollectionItem = YourCollectionViewCellModel(
+            id: collectionItemToAdd.id,
+            image: collectionItemToAdd.image,
+            name: collectionItemToAdd.name,
+            description: collectionItemToAdd.description,
+            stocksAmount: collectionItemToAdd.stocksAmount,
+            recommendedIdentifier: updatedRecommendedItem
         )
 
-        viewModel?.recommendedCollections[indexRow] = updatedRecommendedIdentifier
+        viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
 
-        snapshot.insertItems([updatedRecommendedIdentifier], afterItem: collectionToAdd)
-        snapshot.deleteItems([collectionToAdd])
+        snapshot.insertItems([updatedRecommendedItem], afterItem: collectionItemToAdd)
+        snapshot.deleteItems([collectionItemToAdd])
         dataSource?.apply(snapshot, animatingDifferences: false)
 
-        viewModel?.yourCollections.append(yourCollectionModel)
+        viewModel?.yourCollections.append(yourCollectionItem)
 
-        snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
+        snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
         dataSource?.apply(snapshot, animatingDifferences: true)
 
         AppsFlyerLib.shared().logEvent(
             AFEvent.addToYourCollections,
             withValues: [
                 AFParameter.collectionName:
-                    collectionToAdd.name,
+                    collectionItemToAdd.name,
                 AFParameter.itemsInYourCollectionsAfterAdding:
                     "\(self.viewModel?.yourCollections.count ?? 0)",
                 AFParameter.itemsInRecommendedAfterAdding:
@@ -191,33 +191,33 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         )
     }
 
-    private func removeFromYourCollection(collectionToRemove: YourCollectionViewCellModel) {
-        viewModel?.yourCollections.removeAll { $0.id == collectionToRemove.id }
+    private func removeFromYourCollection(yourCollectionItemToRemove: YourCollectionViewCellModel) {
+        viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
 
-        if let recommendedIdentifier = collectionToRemove.recommendedIdentifier {
-            let updatedRecommendedIdentifier = RecommendedCollectionViewCellModel(
-                id: recommendedIdentifier.id,
-                image: recommendedIdentifier.image,
-                name: recommendedIdentifier.name,
-                description: recommendedIdentifier.description,
-                stocksAmount: recommendedIdentifier.stocksAmount,
+        if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
+            let updatedRecommendedItem = RecommendedCollectionViewCellModel(
+                id: recommendedItem.id,
+                image: recommendedItem.image,
+                name: recommendedItem.name,
+                description: recommendedItem.description,
+                stocksAmount: recommendedItem.stocksAmount,
                 isInYourCollections: false
             )
 
-            if let indexToDelete = viewModel?
+            if let indexOfRecommendedItemToDelete = viewModel?
                 .recommendedCollections
-                .firstIndex(where: { $0.id == collectionToRemove.id }) {
-                viewModel?.recommendedCollections[indexToDelete] = updatedRecommendedIdentifier
+                .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
+                viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
             }
 
-            snapshot.insertItems([updatedRecommendedIdentifier], afterItem: recommendedIdentifier)
-            snapshot.deleteItems([recommendedIdentifier])
+            snapshot.insertItems([updatedRecommendedItem], afterItem: recommendedItem)
+            snapshot.deleteItems([recommendedItem])
             dataSource?.apply(snapshot, animatingDifferences: false)
 
-            snapshot.deleteItems([collectionToRemove])
+            snapshot.deleteItems([yourCollectionItemToRemove])
             dataSource?.apply(snapshot, animatingDifferences: true)
         } else {
-            snapshot.deleteItems([collectionToRemove])
+            snapshot.deleteItems([yourCollectionItemToRemove])
             dataSource?.apply(snapshot, animatingDifferences: true)
         }
 
@@ -225,7 +225,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
             AFEvent.removeFromYourCollections,
             withValues: [
                 AFParameter.collectionName:
-                    collectionToRemove.name,
+                    yourCollectionItemToRemove.name,
                 AFParameter.itemsInYourCollectionsAfterRemoval:
                     "\(self.viewModel?.yourCollections.count ?? 0)",
                 AFParameter.itemsInRecommendedAfterRemoval:
