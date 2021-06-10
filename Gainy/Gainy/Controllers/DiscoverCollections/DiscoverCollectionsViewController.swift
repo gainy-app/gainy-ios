@@ -81,8 +81,30 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                     : cell.setButtonUnchecked()
 
                 cell.onPlusButtonPressed = { [weak self] in
+                    cell.isUserInteractionEnabled = false
+
                     cell.setButtonChecked()
                     self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
+
+                    cell.isUserInteractionEnabled = true
+                }
+
+                cell.onCheckButtonPressed = { [weak self] in
+                    cell.isUserInteractionEnabled = false
+
+                    cell.setButtonUnchecked()
+                    // TODO: create a func removeFromYourCollection(collectionToRemove: recommendedCollectionItem)
+                    let yourCollectionItem = YourCollectionViewCellModel(
+                        id: modelItem.id,
+                        image: modelItem.image,
+                        name: modelItem.name,
+                        description: modelItem.description,
+                        stocksAmount: modelItem.stocksAmount,
+                        recommendedIdentifier: modelItem
+                    )
+                    self?.removeFromYourCollection(collectionToRemove: yourCollectionItem)
+
+                    cell.isUserInteractionEnabled = true
                 }
             }
 
