@@ -29,6 +29,7 @@
 		3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85944A268B056800CB8DD6 /* TickerDetails.swift */; };
 		3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85944E268B057900CB8DD6 /* TickerFinancialMetrics.swift */; };
 		3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A859458268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift */; };
+		3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A85946E268B74AE00CB8DD6 /* Float+CleanDecimals.swift */; };
 		3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930ED8265C1909000FD3EB /* AppDelegate.swift */; };
 		3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDA265C1909000FD3EB /* SceneDelegate.swift */; };
 		3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */; };
@@ -146,6 +147,7 @@
 		3A85944A268B056800CB8DD6 /* TickerDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetails.swift; sourceTree = "<group>"; };
 		3A85944E268B057900CB8DD6 /* TickerFinancialMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerFinancialMetrics.swift; sourceTree = "<group>"; };
 		3A859458268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsViewModelMapper.swift; sourceTree = "<group>"; };
+		3A85946E268B74AE00CB8DD6 /* Float+CleanDecimals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+CleanDecimals.swift"; sourceTree = "<group>"; };
 		3A930ED5265C1909000FD3EB /* Gainy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gainy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A930ED8265C1909000FD3EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A930EDA265C1909000FD3EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -641,6 +643,7 @@
 				3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */,
 				3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */,
 				3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */,
+				3A85946E268B74AE00CB8DD6 /* Float+CleanDecimals.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -939,6 +942,7 @@
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				3AA52C9F26601697006A6961 /* API.swift in Sources */,
+				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
