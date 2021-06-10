@@ -76,7 +76,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
-                self?.viewModel?.recommendedCollections[indexPath.row].buttonState == .checked
+                self?.viewModel?.recommendedCollections[indexPath.row].isInYourCollections == true
                     ? cell.setButtonChecked()
                     : cell.setButtonUnchecked()
 
@@ -155,7 +155,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
             name: collectionToAdd.name,
             description: collectionToAdd.description,
             stocksAmount: collectionToAdd.stocksAmount,
-            buttonState: .checked
+            isInYourCollections: true
         )
 
         let yourCollectionModel = YourCollectionViewCellModel(
@@ -201,7 +201,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 name: recommendedIdentifier.name,
                 description: recommendedIdentifier.description,
                 stocksAmount: recommendedIdentifier.stocksAmount,
-                buttonState: .unchecked
+                isInYourCollections: false
             )
 
             if let indexToDelete = viewModel?

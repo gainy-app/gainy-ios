@@ -17,7 +17,7 @@ enum CollectionViewModelMapper {
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",
-            buttonState: model.isInYourCollections ? .checked : .unchecked
+            isInYourCollections: model.isInYourCollections
         )
     }
 }

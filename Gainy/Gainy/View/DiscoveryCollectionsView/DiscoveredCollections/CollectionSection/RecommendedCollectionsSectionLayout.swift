@@ -63,11 +63,17 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = item as? RecommendedCollectionViewCellModel {
-            cell.configureWith(name: viewModel.name,
-                               description: viewModel.description,
-                               stocksAmount: viewModel.stocksAmount,
-                               imageName: viewModel.image,
-                               plusButtonState: viewModel.buttonState)
+            let buttonState: RecommendedCellButtonState = viewModel.isInYourCollections
+                ? .checked
+                : .unchecked
+
+            cell.configureWith(
+                name: viewModel.name,
+                description: viewModel.description,
+                stocksAmount: viewModel.stocksAmount,
+                imageName: viewModel.image,
+                plusButtonState: buttonState
+            )
         }
 
         return cell

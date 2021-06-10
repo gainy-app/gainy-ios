@@ -4,16 +4,16 @@ struct RecommendedCollectionViewCellModel {
     let name: String
     let description: String
     let stocksAmount: String
-    let buttonState: RecommendedCellButtonState
+    let isInYourCollections: Bool
 }
 
 extension RecommendedCollectionViewCellModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(buttonState)
+        hasher.combine(isInYourCollections)
     }
 
     static func == (lhs: RecommendedCollectionViewCellModel, rhs: RecommendedCollectionViewCellModel) -> Bool {
-        lhs.id == rhs.id && lhs.buttonState == rhs.buttonState
+        lhs.id == rhs.id && lhs.isInYourCollections == rhs.isInYourCollections
     }
 }
