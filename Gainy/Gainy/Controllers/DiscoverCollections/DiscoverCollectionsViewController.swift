@@ -74,6 +74,9 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 cell.onDeleteButtonPressed = { [weak self] in
                     self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
                 }
+                cell.onDragSessionStarted = { [weak self] in
+                    self?.provideTapticFeedback()
+                }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
                 self?.viewModel?.recommendedCollections[indexPath.row].isInYourCollections == true
@@ -147,6 +150,12 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     private var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
 
     // MARK: Functions
+
+    private func provideTapticFeedback() {
+        feedbackGenerator = UIImpactFeedbackGenerator()
+        feedbackGenerator?.impactOccurred()
+        feedbackGenerator = nil
+    }
 
     private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
@@ -313,10 +322,6 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
                         at indexPath: IndexPath) -> [UIDragItem] {
         switch indexPath.section {
         case Section.yourCollections.rawValue:
-            feedbackGenerator = UIImpactFeedbackGenerator()
-            feedbackGenerator?.impactOccurred()
-            feedbackGenerator = nil
-
             let item = viewModel!.yourCollections[indexPath.row]
             // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
