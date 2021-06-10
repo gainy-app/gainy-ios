@@ -1,15 +1,15 @@
 // TODO: 1: move to separate file
 extension Float {
     var cleanOneDecimal: String {
-       return self.truncatingRemainder(dividingBy: 1) == 0
-        ? String(format: "%.0f", self)
-        : String(format: "%.1f", self)
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self)
+            : String(format: "%.1f", self)
     }
 
     var cleanTwoDecimal: String {
-       return self.truncatingRemainder(dividingBy: 1) == 0
-        ? String(format: "%.0f", self)
-        : String(format: "%.2f", self)
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self)
+            : String(format: "%.2f", self)
     }
 }
 
