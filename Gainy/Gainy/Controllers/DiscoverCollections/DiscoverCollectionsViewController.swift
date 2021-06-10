@@ -73,18 +73,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                let modelItem = modelItem as? YourCollectionViewCellModel {
                 cell.onDeleteButtonPressed = { [weak self] in
                     self?.removeFromYourCollection(collectionToRemove: modelItem)
-
-                    AppsFlyerLib.shared().logEvent(
-                        AFEvent.removeFromYourCollections,
-                        withValues: [
-                            AFParameter.collectionName:
-                                modelItem.name,
-                            AFParameter.itemsInYourCollectionsAfterRemoval:
-                                "\(self?.viewModel?.yourCollections.count ?? 0)",
-                            AFParameter.itemsInRecommendedAfterRemoval:
-                                "\(self?.viewModel?.recommendedCollections.count ?? 0)",
-                        ]
-                    )
                 }
             } else if let cell = cell as? RecommendedCollectionViewCell,
                       let modelItem = modelItem as? RecommendedCollectionViewCellModel {
@@ -95,18 +83,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 cell.onPlusButtonPressed = { [weak self] in
                     cell.setButtonChecked()
                     self?.addToYourCollection(collectionToAdd: modelItem, indexRow: indexPath.row)
-
-                    AppsFlyerLib.shared().logEvent(
-                        AFEvent.addToYourCollections,
-                        withValues: [
-                            AFParameter.collectionName:
-                                modelItem.name,
-                            AFParameter.itemsInYourCollectionsAfterAdding:
-                                "\(self?.viewModel?.yourCollections.count ?? 0)",
-                            AFParameter.itemsInRecommendedAfterAdding:
-                                "\(self?.viewModel?.recommendedCollections.count ?? 0)",
-                        ]
-                    )
                 }
             }
 
@@ -179,6 +155,18 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
         snapshot.appendItems([yourCollectionModel], toSection: .yourCollections)
         dataSource?.apply(snapshot, animatingDifferences: true)
+
+        AppsFlyerLib.shared().logEvent(
+            AFEvent.addToYourCollections,
+            withValues: [
+                AFParameter.collectionName:
+                    collectionToAdd.name,
+                AFParameter.itemsInYourCollectionsAfterAdding:
+                    "\(self.viewModel?.yourCollections.count ?? 0)",
+                AFParameter.itemsInRecommendedAfterAdding:
+                    "\(self.viewModel?.recommendedCollections.count ?? 0)",
+            ]
+        )
     }
 
     private func removeFromYourCollection(collectionToRemove: YourCollectionViewCellModel) {
@@ -210,6 +198,18 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
             snapshot.deleteItems([collectionToRemove])
             dataSource?.apply(snapshot, animatingDifferences: true)
         }
+
+        AppsFlyerLib.shared().logEvent(
+            AFEvent.removeFromYourCollections,
+            withValues: [
+                AFParameter.collectionName:
+                    collectionToRemove.name,
+                AFParameter.itemsInYourCollectionsAfterRemoval:
+                    "\(self.viewModel?.yourCollections.count ?? 0)",
+                AFParameter.itemsInRecommendedAfterRemoval:
+                    "\(self.viewModel?.recommendedCollections.count ?? 0)",
+            ]
+        )
     }
 
     private func reorderItems(
