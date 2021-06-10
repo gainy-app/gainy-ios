@@ -7,9 +7,9 @@ final class ViewControllerFactory {
         return vc
     }
 
-    func instantiateDiscoverCards() -> DiscoverCardsViewController {
-        let vc = DiscoverCardsViewController()
-        vc.viewModel = DiscoverCardsViewModel()
+    func instantiateCollectionDetails() -> CollectionDetailsViewController {
+        let vc = CollectionDetailsViewController()
+        vc.viewModel = CollectionDetailsViewModel()
         return vc
     }
 }

@@ -1,17 +1,21 @@
 import UIKit
 
 protocol SectionLayout {
-    var layoutSection: NSCollectionLayoutSection { get }
+    func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection
 
     func configureCell(collectionView: UICollectionView,
                        indexPath: IndexPath,
-                       item: AnyHashable,
+                       viewModel: AnyHashable,
                        position: Int) -> UICollectionViewCell
-    func header(collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView?
+    func header(collectionView: UICollectionView,
+                indexPath: IndexPath,
+                viewModel: AnyHashable) -> UICollectionReusableView?
 }
 
 extension SectionLayout {
-    func header(collectionView _: UICollectionView, indexPath _: IndexPath) -> UICollectionReusableView? {
+    func header(collectionView _: UICollectionView,
+                indexPath _: IndexPath,
+                viewModel _: AnyHashable) -> UICollectionReusableView? {
         nil
     }
 }
