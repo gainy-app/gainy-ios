@@ -119,7 +119,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         let nameLabelFont = UIFont(name: "SFProDisplay-Bold", size: 16)
         let neededSize = nameLabel.text.size(
             withAttributes: [
-                NSAttributedString.Key.font: nameLabelFont as Any
+                NSAttributedString.Key.font: nameLabelFont as Any,
             ]
         )
 
