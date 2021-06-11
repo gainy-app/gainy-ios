@@ -29,6 +29,7 @@ final class YourCollectionViewCell: RoundedCornerView {
     // MARK: Properties
 
     var onDeleteButtonPressed: (() -> Void)?
+    var onDragSessionStarted: (() -> Void)?
 
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
@@ -178,6 +179,21 @@ final class YourCollectionViewCell: RoundedCornerView {
     }
 
     // MARK: Functions
+
+    override func dragStateDidChange(_ dragState: UICollectionViewCell.DragState) {
+        if dragState == .lifting {
+            onDragSessionStarted?()
+        }
+
+        switch dragState {
+        case .dragging:
+            layer.opacity = 0
+        case .none:
+            layer.opacity = 1
+        default:
+            return
+        }
+    }
 
     func configureWith(
         name: String,
