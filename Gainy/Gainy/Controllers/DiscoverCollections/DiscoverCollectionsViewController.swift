@@ -54,6 +54,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
+        discoverCollectionsCollectionView.reorderingCadence = .fast
 
         discoverCollectionsCollectionView.dataSource = dataSource
         discoverCollectionsCollectionView.dragDelegate = self
@@ -262,7 +263,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                               beforeItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
         }
 
-
         dataSource?.apply(snapshot, animatingDifferences: false)
         dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
@@ -327,6 +327,10 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
             let itemProvider = NSItemProvider(object: item.name as NSString)
             // swiftlint:enable legacy_objc_type
             let dragItem = UIDragItem(itemProvider: itemProvider)
+
+            // TODO: Consider assigning a value to the localObject property of each drag item.
+            // This step is optional but makes it faster to drag and drop content within the same app.
+
             return [dragItem]
         default:
             return []
@@ -345,6 +349,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
         var destinationIndexPath: IndexPath
+
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
         } else {
@@ -359,15 +364,34 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         }
     }
 
-    func collectionView(_: UICollectionView,
-                        dropSessionDidUpdate _: UIDropSession,
+    func collectionView(_ collectionView: UICollectionView,
+                        dropSessionDidUpdate session: UIDropSession,
                         withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        guard destinationIndexPath?.section == Section.yourCollections.rawValue else {
-            return UICollectionViewDropProposal(operation: .cancel)
+        let dragItemLocation = session.location(in: collectionView)
+        var dragItemIndexPath: IndexPath?
+
+        collectionView.performUsingPresentationValues {
+            dragItemIndexPath = collectionView.indexPathForItem(at: dragItemLocation)
         }
 
-        return UICollectionViewDropProposal(operation: .move,
-                                            intent: .insertAtDestinationIndexPath)
+        guard let destination = dragItemIndexPath else {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+
+        guard destination.section == Section.yourCollections.rawValue else {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+
+        return UICollectionViewDropProposal(
+            operation: .move,
+            intent: .insertAtDestinationIndexPath
+        )
     }
 
     func collectionView(
