@@ -366,7 +366,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
 
     func collectionView(_ collectionView: UICollectionView,
                         dropSessionDidUpdate session: UIDropSession,
-                        withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+                        withDestinationIndexPath _: IndexPath?) -> UICollectionViewDropProposal {
         let dragItemLocation = session.location(in: collectionView)
         var dragItemIndexPath: IndexPath?
 
