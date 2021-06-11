@@ -184,6 +184,15 @@ final class YourCollectionViewCell: RoundedCornerView {
         if dragState == .lifting {
             onDragSessionStarted?()
         }
+
+        switch dragState {
+        case .dragging:
+            layer.opacity = 0
+        case .none:
+            layer.opacity = 1
+        default:
+            return
+        }
     }
 
     func configureWith(
