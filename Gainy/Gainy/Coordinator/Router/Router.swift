@@ -4,6 +4,9 @@ protocol RouterProtocol: Presentable {
     func present(_ module: Presentable?)
     func present(_ module: Presentable?, animated: Bool)
 
+    func show(_ module: Presentable?)
+    func showDetailed(_ module: Presentable?)
+
     func push(_ module: Presentable?)
     func push(_ module: Presentable?,
               transition: UIViewControllerAnimatedTransitioning?)
@@ -56,6 +59,16 @@ final class Router: NSObject, RouterProtocol {
     func present(_ module: Presentable?, animated: Bool) {
         guard let controller = module?.toPresent() else { return }
         rootController?.present(controller, animated: animated, completion: nil)
+    }
+
+    func show(_ module: Presentable?) {
+        guard let controller = module?.toPresent() else { return }
+        rootController?.show(controller, sender: nil)
+    }
+
+    func showDetailed(_ module: Presentable?) {
+        guard let controller = module?.toPresent() else { return }
+        rootController?.showDetailViewController(controller, sender: nil)
     }
 
     func push(_ module: Presentable?) {
