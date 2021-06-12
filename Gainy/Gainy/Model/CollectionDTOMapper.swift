@@ -3,7 +3,7 @@ enum CollectionDTOMapper {
         guard let id = Int(dto.id), let stocksAmount = Int(dto.stocksCount) else {
             return Collection(
                 id: 0,
-                image: dto.image,
+                image: dto.name.lowercased(),
                 name: dto.name,
                 description: dto.description,
                 stocksAmount: 0,
@@ -13,7 +13,7 @@ enum CollectionDTOMapper {
 
         return Collection(
             id: id,
-            image: dto.image,
+            image: dto.name.lowercased(),
             name: dto.name,
             description: dto.description,
             stocksAmount: stocksAmount,
