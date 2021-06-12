@@ -9,7 +9,6 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         addSubview(backImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
-        addSubview(stocksLabel)
         addSubview(stocksAmountLabel)
         addSubview(plusButton)
 
@@ -69,20 +68,6 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         return label
     }()
 
-    lazy var stocksLabel: UILabel = {
-        let label = UILabel()
-
-        label.font = UIFont(name: "SFCompactRounded-Medium", size: 9)
-        label.textColor = UIColor.Gainy.white
-        label.numberOfLines = 2
-        label.textAlignment = .left
-
-        label.text = "STOCKS"
-        label.sizeToFit()
-
-        return label
-    }()
-
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
@@ -112,7 +97,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         super.layoutSubviews()
 
         let hMargin: CGFloat = 8
-        let tMargin: CGFloat = 12
+        let tMargin: CGFloat = 8
         let bMargin: CGFloat = 8
 
         let availableWidth = bounds.width - (hMargin + hMargin)
@@ -138,18 +123,11 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
             height: 43
         )
 
-        stocksLabel.frame = CGRect(
-            x: hMargin,
-            y: bounds.height - (12 + 24 + bMargin),
-            width: 45,
-            height: 12
-        )
-
         stocksAmountLabel.frame = CGRect(
             x: hMargin,
-            y: bounds.height - (24 + bMargin),
+            y: bounds.height - (28 + bMargin),
             width: 55,
-            height: 24
+            height: 28
         )
 
         plusButton.frame = CGRect(
