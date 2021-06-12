@@ -12,4 +12,10 @@ final class ViewControllerFactory {
         vc.viewModel = CollectionDetailsViewModel()
         return vc
     }
+
+    func instantiateCardDetails() -> CardDetailsViewController {
+        let vc = CardDetailsViewController()
+        vc.viewModel = CardDetailsViewModel()
+        return vc
+    }
 }

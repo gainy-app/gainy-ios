@@ -103,6 +103,8 @@
 		3AE9036A266A507900574923 /* AFParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE90369266A507900574923 /* AFParameter.swift */; };
 		3AE9036F266A507A00574923 /* AFConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9036E266A507A00574923 /* AFConfig.swift */; };
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
+		3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */; };
+		3AFE0C452690CEA100C25A8F /* CardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */; };
 		3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */; };
 		3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */; };
 		3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */; };
@@ -247,6 +249,8 @@
 		3AE9036D266A507A00574923 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		3AE9036E266A507A00574923 /* AFConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFConfig.swift; sourceTree = "<group>"; };
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
+		3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewControllerProtocol.swift; sourceTree = "<group>"; };
+		3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewController.swift; sourceTree = "<group>"; };
 		3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SetStatusBar.swift"; sourceTree = "<group>"; };
 		3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HasTopNotch.swift"; sourceTree = "<group>"; };
 		3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 			children = (
 				3A85940A268A351900CB8DD6 /* DiscoverCollections */,
 				3A859411268A42F200CB8DD6 /* CollectionDetails */,
+				3AFE0C3C2690CD2700C25A8F /* CardDetails */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -818,6 +823,39 @@
 			path = AppsFlyer;
 			sourceTree = "<group>";
 		};
+		3AFE0C3C2690CD2700C25A8F /* CardDetails */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE0C3D2690CD4500C25A8F /* Controller */,
+				3AFE0C3E2690CD4B00C25A8F /* View */,
+				3AFE0C3F2690CD4E00C25A8F /* Models */,
+			);
+			path = CardDetails;
+			sourceTree = "<group>";
+		};
+		3AFE0C3D2690CD4500C25A8F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */,
+				3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3AFE0C3E2690CD4B00C25A8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3AFE0C3F2690CD4E00C25A8F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3AFE1A74266E4F1F0091E799 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1011,6 +1049,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
+				3AFE0C452690CEA100C25A8F /* CardDetailsViewController.swift in Sources */,
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
@@ -1035,6 +1074,7 @@
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
+				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,

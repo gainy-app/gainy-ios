@@ -47,8 +47,20 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             self?.router.popModule(transition: FadeTransitionAnimator(),
                                    animated: true)
         }
+        vc.onShowCardDetails = { [weak self] in
+            self?.showCardDetailsViewController()
+        }
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
 
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
+    }
+
+    private func showCardDetailsViewController() {
+        let vc = self.viewControllerFactory.instantiateCardDetails()
+        vc.onDismiss = { [weak self] in
+            self?.router.dismissModule()
+        }
+
+        router.showDetailed(vc)
     }
 }

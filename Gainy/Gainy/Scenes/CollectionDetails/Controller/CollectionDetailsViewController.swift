@@ -13,6 +13,7 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
     var viewModel: CollectionDetailsViewModelProtocol?
 
     var onDiscoverCollections: (() -> Void)?
+    var onShowCardDetails: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +124,12 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
                 viewModel: modelItem,
                 position: indexPath.row
             )
+
+            if let cell = cell as? CollectionDetailsViewCell {
+                cell.onCardPressed = { [weak self] in
+                    self?.onShowCardDetails?()
+                }
+            }
 
             return cell
         }

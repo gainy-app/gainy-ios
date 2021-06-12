@@ -39,6 +39,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.showsVerticalScrollIndicator = false
         internalCollectionView.backgroundColor = UIColor.Gainy.white
         internalCollectionView.dataSource = dataSource
+        internalCollectionView.delegate = self
 
         contentView.addSubview(internalCollectionView)
 
@@ -68,6 +69,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Properties
 
     var viewModel: CollectionCardViewCellModel?
+
+    var onCardPressed: (() -> Void)?
 
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -116,4 +119,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
 
     private func initViewModels() {}
+}
+
+extension CollectionDetailsViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onCardPressed?()
+    }
 }
