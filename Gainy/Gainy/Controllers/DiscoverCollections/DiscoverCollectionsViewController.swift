@@ -2,11 +2,6 @@ import AppsFlyerLib
 import Foundation
 import UIKit
 
-typealias CollectionsDataSource = UICollectionViewDiffableDataSource
-<DiscoverCollectionsViewController.Section, Collection>
-typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
-<DiscoverCollectionsViewController.Section, Collection>
-
 final class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
     // MARK: Internal
 
