@@ -32,7 +32,7 @@ final class YourCollectionViewCell: RoundedCornerView {
 
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
 
         return imageView
@@ -200,7 +200,7 @@ final class YourCollectionViewCell: RoundedCornerView {
         stocksAmount: String,
         imageName: String
     ) {
-        backImageView.image = UIImage(named: imageName + "-discovered")
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()
