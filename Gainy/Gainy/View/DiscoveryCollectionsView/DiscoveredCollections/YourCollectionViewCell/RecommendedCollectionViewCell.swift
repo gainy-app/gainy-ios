@@ -32,7 +32,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
 
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
 
         return imageView
@@ -109,6 +109,14 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         )
 
         let minNameHeight: CGFloat = neededSize.width > availableWidth ? 35 : 18
+
+        backImageView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds.width,
+            height: bounds.height
+        )
+
         nameLabel.frame = CGRect(
             x: hMargin,
             y: tMargin,
@@ -148,7 +156,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.image = UIImage(named: imageName + "-recommended")
+        backImageView.image = UIImage(named: imageName)
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -164,7 +172,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
             ? setButtonChecked()
             : setButtonUnchecked()
 
-        setNeedsLayout()
+        layoutIfNeeded()
     }
 
     func setButtonUnchecked() {
