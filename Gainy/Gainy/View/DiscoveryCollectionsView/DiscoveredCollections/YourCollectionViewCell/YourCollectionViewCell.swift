@@ -15,8 +15,6 @@ final class YourCollectionViewCell: RoundedCornerView {
 
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
-
-        setupSwipeGesture()
     }
 
     @available(*, unavailable)
@@ -29,7 +27,8 @@ final class YourCollectionViewCell: RoundedCornerView {
     // MARK: Properties
 
     var onDeleteButtonPressed: (() -> Void)?
-    var onDragSessionStarted: (() -> Void)?
+    var onCellLifted: (() -> Void)?
+    var onCellStopDragging: (() -> Void)?
 
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
@@ -164,32 +163,17 @@ final class YourCollectionViewCell: RoundedCornerView {
         return super.hitTest(point, with: event)
     }
 
-    func setupSwipeGesture() {
-        leftSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                    action: #selector(leftSwiped(_:)))
-        leftSwipeGesture.delegate = self
-        leftSwipeGesture.direction = .left
-
-        rightSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                     action: #selector(rightSwiped(_:)))
-        rightSwipeGesture.delegate = self
-
-        addGestureRecognizer(leftSwipeGesture)
-        addGestureRecognizer(rightSwipeGesture)
-    }
-
     // MARK: Functions
 
     override func dragStateDidChange(_ dragState: UICollectionViewCell.DragState) {
-        if dragState == .lifting {
-            onDragSessionStarted?()
-        }
-
         switch dragState {
+        case .lifting:
+            onCellLifted?()
         case .dragging:
             layer.opacity = 0
         case .none:
             layer.opacity = 1
+            onCellStopDragging?()
         default:
             return
         }
@@ -215,6 +199,26 @@ final class YourCollectionViewCell: RoundedCornerView {
         layoutIfNeeded()
     }
 
+    func shiftCellLeftAndShowDeleteButton() {
+        originalCellCenter = CGPoint(x: (superview?.center.x)!, y: center.y)
+
+        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+            self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
+                                               y: 0)
+            self.center = CGPoint(x: self.originalCellCenter.x - Constant.swipeHorizontalShift,
+                                  y: self.originalCellCenter.y)
+        }
+    }
+
+    func resetCellStateAndHideDeleteButton() {
+        if let originalCellCenter = self.originalCellCenter {
+            UIView.animate(withDuration: Constant.swipeAnimationDurations) {
+                self.center = originalCellCenter
+                self.transform = CGAffineTransform(rotationAngle: 0)
+            }
+        }
+    }
+
     // MARK: Private
 
     // MARK: Types
@@ -226,38 +230,12 @@ final class YourCollectionViewCell: RoundedCornerView {
 
     // MARK: Properties
 
-    private var leftSwipeGesture: UISwipeGestureRecognizer!
-    private var rightSwipeGesture: UISwipeGestureRecognizer!
     private var originalCellCenter: CGPoint!
 
     // MARK: Functions
-
-    @objc
-    private func leftSwiped(_: UISwipeGestureRecognizer) {
-        originalCellCenter = CGPoint(x: (superview?.center.x)!, y: center.y)
-
-        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-            self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
-                                               y: 0)
-            self.center = CGPoint(x: self.originalCellCenter.x - Constant.swipeHorizontalShift,
-                                  y: self.originalCellCenter.y)
-        }
-    }
-
-    @objc
-    private func rightSwiped(_: UISwipeGestureRecognizer) {
-        if let originalCellCenter = self.originalCellCenter {
-            UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-                self.center = originalCellCenter
-                self.transform = CGAffineTransform(rotationAngle: 0)
-            }
-        }
-    }
 
     @objc
     private func deleteButtonTapped(_: UIButton) {
         onDeleteButtonPressed?()
     }
 }
-
-extension YourCollectionViewCell: UIGestureRecognizerDelegate {}

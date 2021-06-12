@@ -2,11 +2,6 @@ import AppsFlyerLib
 import Foundation
 import UIKit
 
-typealias CollectionsDataSource = UICollectionViewDiffableDataSource
-<DiscoverCollectionsViewController.Section, Collection>
-typealias CollectionsDataSourceSnapshot = NSDiffableDataSourceSnapshot
-<DiscoverCollectionsViewController.Section, Collection>
-
 final class DiscoverCollectionsViewController: UIViewController, DiscoverCollectionsViewControllerProtocol {
     // MARK: Internal
 
@@ -46,6 +41,8 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         )
         view.addSubview(discoverCollectionsCollectionView)
 
+        setupSwipeGesture()
+
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
@@ -54,7 +51,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
-        discoverCollectionsCollectionView.reorderingCadence = .fast
 
         discoverCollectionsCollectionView.dataSource = dataSource
         discoverCollectionsCollectionView.dragDelegate = self
@@ -70,20 +66,28 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                 position: indexPath.row
             )
 
-            if let cell = cell as? YourCollectionViewCell,
-               let modelItem = modelItem as? YourCollectionViewCellModel {
+            switch (cell, modelItem) {
+            case let (cell as YourCollectionViewCell, modelItem as YourCollectionViewCellModel):
                 cell.onDeleteButtonPressed = { [weak self] in
-                    self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
+                    if let removalForbidden = self?.isDragAndDropInProgress, !removalForbidden {
+                        self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
+                    }
                 }
-                cell.onDragSessionStarted = { [weak self] in
+
+                cell.onCellLifted = { [weak self] in
+                    self?.isDragAndDropInProgress = true
+                    self?.indexOfCellBeingDragged = indexPath.row
                     self?.provideTapticFeedback()
                 }
-            } else if let cell = cell as? RecommendedCollectionViewCell,
-                      let modelItem = modelItem as? RecommendedCollectionViewCellModel {
-                self?.viewModel?.recommendedCollections[indexPath.row].isInYourCollections == true
-                    ? cell.setButtonChecked()
-                    : cell.setButtonUnchecked()
 
+                cell.onCellStopDragging = { [weak self] in
+                    if let dragCellIndex = self?.indexOfCellBeingDragged, dragCellIndex == indexPath.row {
+                        self?.isDragAndDropInProgress = false
+                        self?.indexOfCellBeingDragged = nil
+                    }
+                }
+
+            case let (cell as RecommendedCollectionViewCell, modelItem as RecommendedCollectionViewCellModel):
                 cell.onPlusButtonPressed = { [weak self] in
                     cell.isUserInteractionEnabled = false
 
@@ -110,6 +114,8 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
                     cell.isUserInteractionEnabled = true
                 }
+            default:
+                break
             }
 
             return cell
@@ -150,7 +156,57 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
 
+    private var leftSwipeGesture: UISwipeGestureRecognizer!
+    private var rightSwipeGesture: UISwipeGestureRecognizer!
+
+    private var isDragAndDropInProgress = false
+    private var indexOfCellBeingDragged: Int?
+
     // MARK: Functions
+
+    private func setupSwipeGesture() {
+        leftSwipeGesture = UISwipeGestureRecognizer(target: self,
+                                                    action: #selector(leftSwiped(swipe:)))
+        leftSwipeGesture.delegate = self
+        leftSwipeGesture.direction = .left
+
+        rightSwipeGesture = UISwipeGestureRecognizer(target: self,
+                                                     action: #selector(rightSwiped(swipe:)))
+        rightSwipeGesture.delegate = self
+
+        view.addGestureRecognizer(leftSwipeGesture)
+        view.addGestureRecognizer(rightSwipeGesture)
+    }
+
+    @objc
+    private func leftSwiped(swipe: UISwipeGestureRecognizer) {
+        guard !isDragAndDropInProgress else { return }
+
+        let location = swipe.location(in: discoverCollectionsCollectionView)
+
+        guard
+            let indexPath = discoverCollectionsCollectionView.indexPathForItem(at: location),
+            indexPath.section == Section.yourCollections.rawValue,
+            let cell = discoverCollectionsCollectionView.cellForItem(at: indexPath) as? YourCollectionViewCell
+        else { return }
+
+        cell.shiftCellLeftAndShowDeleteButton()
+    }
+
+    @objc
+    private func rightSwiped(swipe: UISwipeGestureRecognizer) {
+        guard !isDragAndDropInProgress else { return }
+
+        let location = swipe.location(in: discoverCollectionsCollectionView)
+
+        guard
+            let indexPath = discoverCollectionsCollectionView.indexPathForItem(at: location),
+            indexPath.section == Section.yourCollections.rawValue,
+            let cell = discoverCollectionsCollectionView.cellForItem(at: indexPath) as? YourCollectionViewCell
+        else { return }
+
+        cell.resetCellStateAndHideDeleteButton()
+    }
 
     private func provideTapticFeedback() {
         feedbackGenerator = UIImpactFeedbackGenerator()
@@ -317,9 +373,11 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 }
 
 extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
-    func collectionView(_: UICollectionView,
-                        itemsForBeginning _: UIDragSession,
-                        at indexPath: IndexPath) -> [UIDragItem] {
+    func collectionView(
+        _: UICollectionView,
+        itemsForBeginning _: UIDragSession,
+        at indexPath: IndexPath
+    ) -> [UIDragItem] {
         switch indexPath.section {
         case Section.yourCollections.rawValue:
             let item = viewModel!.yourCollections[indexPath.row]
@@ -343,19 +401,33 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
     ) -> Bool {
         true
     }
+
+    func collectionView(
+        _: UICollectionView,
+        dragPreviewParametersForItemAt _: IndexPath
+    ) -> UIDragPreviewParameters? {
+        let previewParams = UIDragPreviewParameters()
+
+        let path = UIBezierPath(
+            roundedRect: CGRect(
+                x: 0,
+                y: 0,
+                width: UIScreen.main.bounds.width - (16 + 16),
+                height: 92
+            ),
+            cornerRadius: 8
+        )
+        previewParams.visiblePath = path
+
+        return previewParams
+    }
 }
 
 extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
-    func collectionView(_ collectionView: UICollectionView,
+    func collectionView(_: UICollectionView,
                         performDropWith coordinator: UICollectionViewDropCoordinator) {
-        var destinationIndexPath: IndexPath
-
-        if let indexPath = coordinator.destinationIndexPath {
-            destinationIndexPath = indexPath
-        } else {
-            let section = Section.yourCollections.rawValue
-            let row = collectionView.numberOfItems(inSection: section)
-            destinationIndexPath = IndexPath(row: row, section: section)
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
         }
 
         if coordinator.proposal.operation == .move {
@@ -396,15 +468,17 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
 
     func collectionView(
         _: UICollectionView,
-        dragPreviewParametersForItemAt _: IndexPath
+        dropPreviewParametersForItemAt _: IndexPath
     ) -> UIDragPreviewParameters? {
         let previewParams = UIDragPreviewParameters()
 
         let path = UIBezierPath(
-            roundedRect: CGRect(x: 0,
-                                y: 0,
-                                width: UIScreen.main.bounds.width - (16 + 16),
-                                height: 92),
+            roundedRect: CGRect(
+                x: 0,
+                y: 0,
+                width: UIScreen.main.bounds.width - (16 + 16),
+                height: 92
+            ),
             cornerRadius: 8
         )
         previewParams.visiblePath = path
@@ -412,3 +486,5 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         return previewParams
     }
 }
+
+extension DiscoverCollectionsViewController: UIGestureRecognizerDelegate {}
