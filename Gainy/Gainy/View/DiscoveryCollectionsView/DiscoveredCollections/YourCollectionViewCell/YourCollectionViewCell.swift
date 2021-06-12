@@ -82,7 +82,7 @@ final class YourCollectionViewCell: RoundedCornerView {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 28)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 32)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
@@ -110,7 +110,22 @@ final class YourCollectionViewCell: RoundedCornerView {
         super.layoutSubviews()
 
         let hMargin: CGFloat = 16
-        let topMargin: CGFloat = 16
+
+        let availableWidth = bounds.width - (hMargin + 71)
+        let descLabelFont = UIFont(name: "SFProDisplay-Regular", size: 14)
+        let neededSize = descriptionLabel.text.size(
+            withAttributes: [
+                NSAttributedString.Key.font: descLabelFont as Any,
+            ]
+        )
+
+        let nameHeight: CGFloat = 24
+        let minDescHeight: CGFloat = neededSize.width > availableWidth ? 32 : 16
+        let pairedHeight = nameHeight + 4 + minDescHeight
+
+
+        let topMarginRightSide: CGFloat = 20
+        let topMarginLeftSide = (bounds.height - pairedHeight) / 2
 
         backImageView.frame = CGRect(
             x: 0,
@@ -121,35 +136,35 @@ final class YourCollectionViewCell: RoundedCornerView {
 
         nameLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin,
-            width: bounds.width - (hMargin + 128),
-            height: 20
+            y: topMarginLeftSide,
+            width: bounds.width - (hMargin + 71),
+            height: nameHeight
         )
 
         descriptionLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + nameLabel.bounds.height + 8,
-            width: bounds.width - (hMargin + 96),
-            height: 34
+            y: topMarginLeftSide + nameLabel.bounds.height + 4,
+            width: bounds.width - (hMargin + 71),
+            height: minDescHeight
         )
 
         stocksLabel.frame = CGRect(
             x: bounds.width - (45 + hMargin),
-            y: topMargin,
+            y: topMarginRightSide,
             width: 45,
-            height: 12
+            height: 16
         )
 
         stocksAmountLabel.frame = CGRect(
-            x: bounds.width - (55 + hMargin),
-            y: topMargin + stocksLabel.bounds.height,
-            width: 55,
+            x: bounds.width - (80 + hMargin),
+            y: topMarginRightSide + stocksLabel.bounds.height,
+            width: 80,
             height: 33
         )
 
         deleteButton.frame = CGRect(
             x: bounds.width + 16,
-            y: (bounds.height / 2) - 24,
+            y: (bounds.height - 48) / 2,
             width: 48,
             height: 48
         )
