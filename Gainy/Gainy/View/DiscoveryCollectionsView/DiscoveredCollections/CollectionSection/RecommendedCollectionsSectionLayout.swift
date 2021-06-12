@@ -16,7 +16,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(155) // original is 144
+                heightDimension: .absolute(144)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
