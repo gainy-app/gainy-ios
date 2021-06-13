@@ -61,6 +61,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             self?.router.dismissModule()
         }
 
+        vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
     }
 }
