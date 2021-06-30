@@ -31,7 +31,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         addSubview(highlightsContainerView)
         addSubview(highlightLabel)
 
-        layer.isOpaque = false
+        layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
 
