@@ -445,7 +445,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerPercentChangeLabel.sizeToFit()
 
         tickerTotalPriceLabel.text = "$\(tickerPrice)"
-        tickerTotalPriceLabel.textColor = tickerPercentChange.hasPrefix("+")
+        tickerTotalPriceLabel.textColor = tickerPercentChange.hasPrefix(" +")
             ? UIColor.Gainy.green
             : UIColor.Gainy.red
         tickerTotalPriceLabel.sizeToFit()
