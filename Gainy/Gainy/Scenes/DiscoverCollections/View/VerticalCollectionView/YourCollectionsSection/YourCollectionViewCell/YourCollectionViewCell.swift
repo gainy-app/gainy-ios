@@ -14,7 +14,7 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
         addSubview(deleteButton)
 
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = .black
     }
 
     @available(*, unavailable)
