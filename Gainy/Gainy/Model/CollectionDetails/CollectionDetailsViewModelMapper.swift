@@ -27,8 +27,8 @@ enum CollectionDetailsViewModelMapper {
 
         let priceIncreased = model.financialMetrics.todaysPriceChange > 0
         let tickerPercentChangeText = priceIncreased
-            ? "+\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
-            : "\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
+            ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
+            : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
 
         return CollectionCardViewCellModel(
             tickerCompanyName: model.companyName,
