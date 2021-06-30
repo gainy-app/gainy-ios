@@ -408,7 +408,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
 
 //        highlightsContainerView.layer.cornerRadius = 8
         let mask = CAShapeLayer()
-        mask.path =  UIBezierPath(
+        mask.path = UIBezierPath(
             roundedRect: highlightsContainerView.bounds,
             byRoundingCorners: [.bottomLeft, .bottomRight],
             cornerRadii: CGSize(width: 8, height: 8)
