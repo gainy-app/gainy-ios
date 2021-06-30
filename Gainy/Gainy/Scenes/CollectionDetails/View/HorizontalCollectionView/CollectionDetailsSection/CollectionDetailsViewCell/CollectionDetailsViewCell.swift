@@ -26,9 +26,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
         internalCollectionView = UICollectionView(
             frame: CGRect(
-                x: 4,
+                x: 0,
                 y: 144,
-                width: UIScreen.main.bounds.width - (16 + 16),
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             ),
             collectionViewLayout: customLayout
