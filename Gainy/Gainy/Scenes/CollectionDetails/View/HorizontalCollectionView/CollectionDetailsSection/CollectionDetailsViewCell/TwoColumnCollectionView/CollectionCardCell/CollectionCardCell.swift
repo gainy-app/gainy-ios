@@ -1,6 +1,6 @@
 import UIKit
 
-final class CollectionCardCell: UICollectionViewCell {
+final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
@@ -281,8 +281,6 @@ final class CollectionCardCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        setupRoundedCornersAndShadow()
-
         let hMargin: CGFloat = 16
         let topMargin: CGFloat = 18
 
@@ -479,21 +477,4 @@ final class CollectionCardCell: UICollectionViewCell {
 
     @objc
     private func thirdMarketMarkerTapped(_: UIButton) {}
-
-    private func setupRoundedCornersAndShadow() {
-        layer.cornerRadius = 8
-        layer.masksToBounds = true
-
-        contentView.layer.cornerRadius = 8
-        contentView.layer.masksToBounds = true
-        layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-        layer.shadowRadius = 8
-        layer.shadowOpacity = 1
-        layer.position = center
-        layer.masksToBounds = false
-        layer.shadowPath = UIBezierPath(
-            roundedRect: bounds,
-            cornerRadius: 0
-        ).cgPath
-    }
 }

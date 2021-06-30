@@ -1,6 +1,6 @@
 import UIKit
 
-final class YourCollectionViewCell: RoundedCornerView {
+final class YourCollectionViewCell: RoundedCollectionViewCell {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
