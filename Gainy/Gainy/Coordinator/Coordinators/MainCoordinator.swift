@@ -19,6 +19,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     override func start() {
         showDiscoverCollectionsViewController()
+        showCollectionDetailsViewController(with: 0)
     }
 
     // MARK: Private
@@ -43,10 +44,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func showCollectionDetailsViewController(with initialCollectionIndex: Int) {
         let vc = self.viewControllerFactory.instantiateCollectionDetails()
         vc.onDiscoverCollections = { [weak self] in
-            self?.router.popModule()
+            self?.router.popModule(transition: FadeTransitionAnimator(),
+                                   animated: true)
         }
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
 
-        router.push(vc)
+        router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 }
