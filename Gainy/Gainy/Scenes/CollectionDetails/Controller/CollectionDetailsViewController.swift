@@ -44,7 +44,7 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
             )
         )
 
-        discoverCollectionsButton.setImage(UIImage(named: "blue-rectangle"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "discover-collections"), for: .normal)
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
