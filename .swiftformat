@@ -3,7 +3,7 @@
 --header strip
 
 # Exclude from linting
---exclude Gainy/Gainy/Services/Network/Reachability, Gainy/Gainy/Services/GraphQL/Schema/API.swift, apollo-ios-0.43.0
+--exclude Gainy/Gainy/Services/Reachability, Gainy/Gainy/Services/GraphQL/Schema/API.swift, apollo-ios-0.43.0
 
 # Enabled rules
 --rules anyObjectProtocol,blankLinesAroundMark,blankLinesAtEndOfScope,blankLinesAtStartOfScope,blankLinesBetweenScopes,duplicateImports,elseOnSameLine,emptyBraces,enumNamespaces,extensionAccessControl,fileHeader,indent,initCoderUnavailable,isEmpty,leadingDelimiters,linebreakAtEndOfFile,modifierOrder,organizeDeclarations,redundantBackticks,redundantBreak,redundantFileprivate,redundantGet,redundantInit,redundantLet,redundantLetError,redundantNilInit,redundantObjc,redundantParens,redundantPattern,redundantRawValues,redundantReturn,redundantType,redundantVoidReturnType,semicolons,sortedImports,spaceAroundBraces,spaceAroundBrackets,spaceAroundComments,spaceAroundGenerics,spaceAroundOperators,spaceAroundParens,spaceInsideBraces,spaceInsideBrackets,spaceInsideComments,spaceInsideGenerics,spaceInsideParens,strongOutlets,strongifiedSelf,todos,trailingClosures,trailingCommas,trailingSpace,typeSugar,unusedArguments,void,wrapArguments,wrapEnumCases,yodaConditions
