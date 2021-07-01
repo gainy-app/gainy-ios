@@ -6,6 +6,7 @@ enum CollectionDetailsViewModelMapper {
             name: model.collectionName,
             description: model.collectionDescription,
             stocksAmount: "\(model.collectionStocksAmount)",
+            inYourCollectionList: model.isInYourCollectionsList,
             cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
         )
     }

@@ -90,9 +90,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             imageName: collectionImage
         )
 
-//        snapshot.appendSections([.cards])
-        snapshot.appendItems(cards, toSection: .cards)
+        snapshot.deleteAllItems()
 
+        snapshot.appendSections([.cards])
+        snapshot.appendItems(cards, toSection: .cards)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
@@ -114,8 +115,5 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return layout
     }()
 
-    private func initViewModels() {
-        snapshot.appendSections([.cards])
-        snapshot.appendItems([], toSection: .cards)
-    }
+    private func initViewModels() {}
 }

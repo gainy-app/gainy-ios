@@ -1,13 +1,32 @@
 enum CollectionDetailsDTOMapper {
-    static func map(
+    static func mapAsCollectionFromRecommendedCollections(
         _ dto: CollectionDetailsQuery.Data.Collection
     ) -> CollectionDetails {
-        CollectionDetails(
+        return CollectionDetails(
             id: Int(dto.id)!,
             collectionBackgroundImage: dto.name.lowercased(),
             collectionName: dto.name,
             collectionDescription: dto.description,
             collectionStocksAmount: Int(dto.stocksCount)!,
+            isInYourCollectionsList: false,
+            cards: dto.collectionTickersSymbols.map {
+                CollectionDetailsDTOMapper.mapTickerDetails(
+                    $0
+                )
+            }
+        )
+    }
+
+    static func mapAsCollectionFromYourCollections(
+        _ dto: CollectionDetailsQuery.Data.Collection
+    ) -> CollectionDetails {
+        return CollectionDetails(
+            id: Int(dto.id)!,
+            collectionBackgroundImage: dto.name.lowercased(),
+            collectionName: dto.name,
+            collectionDescription: dto.description,
+            collectionStocksAmount: Int(dto.stocksCount)!,
+            isInYourCollectionsList: true,
             cards: dto.collectionTickersSymbols.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
                     $0

@@ -244,6 +244,14 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         dataSource?.apply(snapshot, animatingDifferences: false)
 
         viewModel?.yourCollections.append(yourCollectionItem)
+        DummyDataSource.yourCollections.append(
+            Collection(id: yourCollectionItem.id,
+                       image: yourCollectionItem.image,
+                       name: yourCollectionItem.name,
+                       description: yourCollectionItem.description,
+                       stocksAmount: Int(yourCollectionItem.stocksAmount)!,
+                       isInYourCollections: true)
+        )
 
         snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
         dataSource?.apply(snapshot, animatingDifferences: true)
@@ -263,6 +271,9 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
     private func removeFromYourCollection(yourCollectionItemToRemove: YourCollectionViewCellModel) {
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
+
+        // TODO: make it more robust
+        DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
 
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
             let updatedRecommendedItem = RecommendedCollectionViewCellModel(
@@ -315,6 +326,9 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
 
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
 
+        // TODO: keeping local order, make it more robust and flexible
+        DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+
         if dragDirectionIsTopBottom {
             snapshot.moveItem(dataSource?.itemIdentifier(for: sourceIndexPath)!,
                               afterItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
@@ -339,7 +353,7 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         onGoToCollectionDetails?(collectionPosition)
     }
 
-    private func getLocalData() {
+    private func initViewModelsFromData() {
         viewModel?.yourCollections = DummyDataSource
             .yourCollections
             .map { CollectionViewModelMapper.map($0) }
@@ -352,12 +366,12 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         Network.shared.apollo.fetch(query: DiscoverCollectionsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                DummyDataSource.collectionsRemote = graphQLResult.data!.collections
+                DummyDataSource.remoteRawCollections = graphQLResult.data!.collections
 
-                let yourCollectionsDto = DummyDataSource.collectionsRemote.filter {
+                let yourCollectionsDto = DummyDataSource.remoteRawCollections.filter {
                     !$0.favoriteCollections.isEmpty
                 }
-                let recommendedDto = DummyDataSource.collectionsRemote.filter {
+                let recommendedDto = DummyDataSource.remoteRawCollections.filter {
                     $0.favoriteCollections.isEmpty
                 }
                 DummyDataSource.yourCollections = yourCollectionsDto.map {
@@ -367,13 +381,13 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
                     CollectionDTOMapper.map($0)
                 }
 
-                self?.getLocalData()
+                self?.initViewModelsFromData()
                 completion()
 
 
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
-                self?.getLocalData()
+                self?.initViewModels()
                 completion()
             }
         }
