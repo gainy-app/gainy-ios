@@ -1,6 +1,6 @@
 import UIKit
 
-final class CollectionHorizontalView: RoundedCornerView {
+final class CollectionHorizontalView: UIView {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
@@ -15,6 +15,10 @@ final class CollectionHorizontalView: RoundedCornerView {
         addSubview(sortByButton)
         addSubview(showListViewButton)
         addSubview(showGridViewButton)
+
+        layer.cornerRadius = 8.0
+        layer.cornerCurve = .continuous
+        layer.masksToBounds = true
 
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white

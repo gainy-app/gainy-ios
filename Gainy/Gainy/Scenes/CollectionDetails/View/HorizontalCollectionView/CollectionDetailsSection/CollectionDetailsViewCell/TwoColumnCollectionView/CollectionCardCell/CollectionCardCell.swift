@@ -1,37 +1,37 @@
 import UIKit
 
-final class CollectionCardCell: UICollectionViewCell {
+final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
         // TODO: 1: make order in the init consistent
-        addSubview(companyNameLabel)
-        addSubview(tickerSymbolLabel)
-        addSubview(todayLabel)
-        addSubview(tickerPercentChangeLabel)
-        addSubview(tickerTotalPriceLabel)
+        contentView.addSubview(companyNameLabel)
+        contentView.addSubview(tickerSymbolLabel)
+        contentView.addSubview(todayLabel)
+        contentView.addSubview(tickerPercentChangeLabel)
+        contentView.addSubview(tickerTotalPriceLabel)
 
-        addSubview(marketMarkerOneButton)
-        addSubview(marketMarkerOneTextLabel)
-        addSubview(marketMarkerOneValueLabel)
+        contentView.addSubview(marketMarkerOneButton)
+        contentView.addSubview(marketMarkerOneTextLabel)
+        contentView.addSubview(marketMarkerOneValueLabel)
 
-        addSubview(marketMarkerSecondButton)
-        addSubview(marketMarkerSecondTextLabel)
-        addSubview(marketMarkerSecondValueLabel)
+        contentView.addSubview(marketMarkerSecondButton)
+        contentView.addSubview(marketMarkerSecondTextLabel)
+        contentView.addSubview(marketMarkerSecondValueLabel)
 
-        addSubview(marketMarkerThirdButton)
-        addSubview(marketMarkerThirdTextLabel)
-        addSubview(marketMarkerThirdValueLabel)
+        contentView.addSubview(marketMarkerThirdButton)
+        contentView.addSubview(marketMarkerThirdTextLabel)
+        contentView.addSubview(marketMarkerThirdValueLabel)
 
-        addSubview(leftVerticalSeparator)
-        addSubview(rightVerticalSeparator)
+        contentView.addSubview(leftVerticalSeparator)
+        contentView.addSubview(rightVerticalSeparator)
 
-        addSubview(highlightsContainerView)
-        addSubview(highlightLabel)
+        contentView.addSubview(highlightsContainerView)
+        contentView.addSubview(highlightLabel)
 
-        layer.isOpaque = false
+        layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
 
@@ -281,8 +281,6 @@ final class CollectionCardCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        setupRoundedCornersAndShadow()
-
         let hMargin: CGFloat = 16
         let topMargin: CGFloat = 18
 
@@ -410,7 +408,7 @@ final class CollectionCardCell: UICollectionViewCell {
 
 //        highlightsContainerView.layer.cornerRadius = 8
         let mask = CAShapeLayer()
-        mask.path =  UIBezierPath(
+        mask.path = UIBezierPath(
             roundedRect: highlightsContainerView.bounds,
             byRoundingCorners: [.bottomLeft, .bottomRight],
             cornerRadii: CGSize(width: 8, height: 8)
@@ -447,7 +445,7 @@ final class CollectionCardCell: UICollectionViewCell {
         tickerPercentChangeLabel.sizeToFit()
 
         tickerTotalPriceLabel.text = "$\(tickerPrice)"
-        tickerTotalPriceLabel.textColor = tickerPercentChange.hasPrefix("+")
+        tickerTotalPriceLabel.textColor = tickerPercentChange.hasPrefix(" +")
             ? UIColor.Gainy.green
             : UIColor.Gainy.red
         tickerTotalPriceLabel.sizeToFit()
@@ -479,21 +477,4 @@ final class CollectionCardCell: UICollectionViewCell {
 
     @objc
     private func thirdMarketMarkerTapped(_: UIButton) {}
-
-    private func setupRoundedCornersAndShadow() {
-        layer.cornerRadius = 8
-        layer.masksToBounds = true
-
-        contentView.layer.cornerRadius = 8
-        contentView.layer.masksToBounds = true
-        layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
-        layer.shadowRadius = 8
-        layer.shadowOpacity = 1
-        layer.position = center
-        layer.masksToBounds = false
-        layer.shadowPath = UIBezierPath(
-            roundedRect: bounds,
-            cornerRadius: 0
-        ).cgPath
-    }
 }

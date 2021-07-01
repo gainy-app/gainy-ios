@@ -1,16 +1,16 @@
 import UIKit
 
-final class RecommendedCollectionViewCell: RoundedCornerView {
+final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     // MARK: Lifecycle
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        addSubview(backImageView)
-        addSubview(nameLabel)
-        addSubview(descriptionLabel)
-        addSubview(stocksAmountLabel)
-        addSubview(plusButton)
+        contentView.addSubview(backImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(stocksAmountLabel)
+        contentView.addSubview(plusButton)
 
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
@@ -108,7 +108,7 @@ final class RecommendedCollectionViewCell: RoundedCornerView {
             ]
         )
 
-        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 35 : 18
+        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 40 : 20
 
         backImageView.frame = CGRect(
             x: 0,

@@ -2,7 +2,7 @@ import AppsFlyerLib
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal
 
     func application(_: UIApplication,

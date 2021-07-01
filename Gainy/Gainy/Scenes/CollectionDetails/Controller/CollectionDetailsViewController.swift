@@ -19,16 +19,10 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
 
         view.backgroundColor = UIColor.Gainy.white
 
-        let statusBarHeight = view
-            .window?
-            .windowScene?
-            .statusBarManager?
-            .statusBarFrame.height ?? 20
-
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
-                y: statusBarHeight,
+                y: view.safeAreaInsets.top + 20,
                 width: view.bounds.width,
                 height: 80
             )
@@ -44,7 +38,7 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
             )
         )
 
-        discoverCollectionsButton.setImage(UIImage(named: "blue-rectangle"), for: .normal)
+        discoverCollectionsButton.setImage(UIImage(named: "discover-collections"), for: .normal)
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
@@ -97,7 +91,8 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
 
         view.addSubview(navigationBarContainer)
 
-        let navigationBarTopOffset = navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        let navigationBarTopOffset =
+            navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
 
         collectionDetailsCollectionView = UICollectionView(
             frame: CGRect(
@@ -167,18 +162,43 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
         Network.shared.apollo.fetch(query: CollectionDetailsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                let data = graphQLResult.data!.collections
+                DummyDataSource.remoteRawCollectionDetails = graphQLResult.data!.collections
 
-                DummyDataSource.collectionDetails = data.map {
-                    CollectionDetailsDTOMapper.map($0)
-                }
+                let yourCollectionDetails: [CollectionDetails] = DummyDataSource
+                    .yourCollections
+                    .compactMap { yourCollection in
+                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
+                            DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                Int($0.id)! == yourCollection.id
+                            })!
+                        )
+                    }
 
-                self?.getLocalData()
+                let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
+                    .recommendedCollections
+                    .compactMap { recommendedCollection in
+                        CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
+                            DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                Int($0.id)! == recommendedCollection.id
+                            })!
+                        )
+                    }
+
+                DummyDataSource.collectionDetails.removeAll()
+                DummyDataSource.collectionDetails.append(
+                    contentsOf: yourCollectionDetails
+                )
+
+                DummyDataSource.collectionDetails.append(
+                    contentsOf: recommendedCollectionDetails
+                )
+
+                self?.initViewModelsFromData()
                 completion()
 
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
-                self?.getLocalData()
+                self?.initViewModelsFromData()
                 completion()
             }
         }
@@ -195,18 +215,14 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
     }
 
     private func centerInitialCollectionInTheCollectionView() {
-        collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: 1, section: 0),
-                                                     at: .centeredHorizontally,
-                                                     animated: false)
-
-        let initialItemToShow = 0 // viewModel?.initialCollectionIndex ?? 0
+        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
 
         collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
                                                      at: .centeredHorizontally,
                                                      animated: false)
     }
 
-    private func getLocalData() {
+    private func initViewModelsFromData() {
         viewModel?.collectionDetails = DummyDataSource
             .collectionDetails
             .map { CollectionDetailsViewModelMapper.map($0) }
@@ -214,7 +230,8 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
 
     private func initViewModels() {
         snapshot.appendSections([.collectionWithCards])
-        snapshot.appendItems(viewModel?.collectionDetails ?? [], toSection: .collectionWithCards)
+        snapshot.appendItems(viewModel?.collectionDetails ?? [],
+                             toSection: .collectionWithCards)
 
         dataSource?.apply(snapshot, animatingDifferences: false)
     }

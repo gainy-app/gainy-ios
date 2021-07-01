@@ -6,6 +6,7 @@ enum CollectionDetailsViewModelMapper {
             name: model.collectionName,
             description: model.collectionDescription,
             stocksAmount: "\(model.collectionStocksAmount)",
+            inYourCollectionList: model.isInYourCollectionsList,
             cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
         )
     }
@@ -27,8 +28,8 @@ enum CollectionDetailsViewModelMapper {
 
         let priceIncreased = model.financialMetrics.todaysPriceChange > 0
         let tickerPercentChangeText = priceIncreased
-            ? "+\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
-            : "\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
+            ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
+            : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
 
         return CollectionCardViewCellModel(
             tickerCompanyName: model.companyName,

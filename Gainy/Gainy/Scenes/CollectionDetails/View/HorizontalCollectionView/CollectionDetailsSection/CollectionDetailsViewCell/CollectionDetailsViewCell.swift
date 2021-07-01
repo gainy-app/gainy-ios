@@ -22,13 +22,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
         collectionHorizontalView.backgroundColor = .clear
 
-        addSubview(collectionHorizontalView)
+        contentView.addSubview(collectionHorizontalView)
 
         internalCollectionView = UICollectionView(
             frame: CGRect(
-                x: 4,
+                x: 0,
                 y: 144,
-                width: UIScreen.main.bounds.width - (16 + 16),
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             ),
             collectionViewLayout: customLayout
@@ -40,7 +40,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.backgroundColor = UIColor.Gainy.white
         internalCollectionView.dataSource = dataSource
 
-        addSubview(internalCollectionView)
+        contentView.addSubview(internalCollectionView)
 
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: internalCollectionView
@@ -90,9 +90,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             imageName: collectionImage
         )
 
-//        snapshot.appendSections([.cards])
-        snapshot.appendItems(cards, toSection: .cards)
+        snapshot.deleteAllItems()
 
+        snapshot.appendSections([.cards])
+        snapshot.appendItems(cards, toSection: .cards)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
 
@@ -114,8 +115,5 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return layout
     }()
 
-    private func initViewModels() {
-        snapshot.appendSections([.cards])
-        snapshot.appendItems([], toSection: .cards)
-    }
+    private func initViewModels() {}
 }

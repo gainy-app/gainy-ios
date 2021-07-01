@@ -25,7 +25,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
             count: 2
         )
         horizontalTwoItemsGroup.contentInsets = NSDirectionalEdgeInsets(
-            top: 0, leading: 6, bottom: 0, trailing: 6
+            top: 0, leading: 4, bottom: 0, trailing: 4
         )
 
         horizontalTwoItemsGroup.interItemSpacing = .fixed(15)
