@@ -7,11 +7,13 @@ protocol SwipeExpanding {
     /**
      Asks your object for the animation timing parameters.
 
-     - parameter buttons: The expansion action button, which includes expanding action plus the remaining actions in the view.
+     - parameter buttons: The expansion action button,
+                          which includes expanding action plus the remaining actions in the view.
 
      - parameter expanding: The new expansion state.
 
-     - parameter otherActionButtons: The other action buttons in the view, not including the action button being expanded.
+     - parameter otherActionButtons: The other action buttons in the view,
+                                     not including the action button being expanded.
      */
 
     func animationTimingParameters(buttons: [UIButton], expanding: Bool) -> SwipeExpansionAnimationTimingParameters
@@ -109,10 +111,16 @@ struct ScaleAndAlphaExpansion: SwipeExpanding {
         let buttons = expanding ? otherActionButtons : otherActionButtons.reversed()
 
         buttons.enumerated().forEach { index, button in
-            UIView.animate(withDuration: duration, delay: interButtonDelay * Double(expanding ? index : index + 1), options: [], animations: {
-                button.transform = expanding ? .init(scaleX: self.scale, y: self.scale) : .identity
-                button.alpha = expanding ? 0.0 : 1.0
-            }, completion: nil)
+            UIView.animate(withDuration: duration,
+                           delay: interButtonDelay * Double(expanding ? index : index + 1),
+                           options: [],
+                           animations: {
+                               button.transform = expanding
+                                   ? .init(scaleX: self.scale, y: self.scale)
+                                   : .identity
+                               button.alpha = expanding ? 0.0 : 1.0
+                           },
+                           completion: nil)
         }
     }
 }

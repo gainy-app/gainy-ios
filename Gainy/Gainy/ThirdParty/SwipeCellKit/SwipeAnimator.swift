@@ -59,7 +59,7 @@ class UIViewSpringAnimator: SwipeAnimator {
 
     // MARK: Internal
 
-    var isRunning: Bool = false
+    var isRunning = false
 
     let duration: TimeInterval
     let damping: CGFloat

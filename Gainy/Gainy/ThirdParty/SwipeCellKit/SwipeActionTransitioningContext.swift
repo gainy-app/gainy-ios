@@ -6,7 +6,11 @@ import UIKit
 struct SwipeActionTransitioningContext {
     // MARK: Lifecycle
 
-    init(actionIdentifier: String?, button: UIButton, newPercentVisible: CGFloat, oldPercentVisible: CGFloat, wrapperView: UIView) {
+    init(actionIdentifier: String?,
+         button: UIButton,
+         newPercentVisible: CGFloat,
+         oldPercentVisible: CGFloat,
+         wrapperView: UIView) {
         self.actionIdentifier = actionIdentifier
         self.button = button
         self.newPercentVisible = newPercentVisible

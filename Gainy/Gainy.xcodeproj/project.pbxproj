@@ -25,18 +25,20 @@
 		3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4A98FE2688D554008C1968 /* CollectionDetailsDTOMapper.swift */; };
 		3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA54268DA177008659E8 /* Swipeable.swift */; };
 		3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA55268DA177008659E8 /* SwipeAction.swift */; };
-		3A5ADA6D268DA179008659E8 /* SwipeActionTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA56268DA177008659E8 /* SwipeActionTransitioning.swift */; };
+		3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA56268DA177008659E8 /* SwipeActionTransitioningContext.swift */; };
 		3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA57268DA177008659E8 /* SwipeActionsView.swift */; };
 		3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA58268DA177008659E8 /* SwipeActionButton.swift */; };
 		3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA5A268DA177008659E8 /* SwipeExpanding.swift */; };
 		3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA5C268DA178008659E8 /* SwipeAnimator.swift */; };
 		3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA5D268DA178008659E8 /* SwipeCollectionViewCell+Display.swift */; };
 		3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA5E268DA179008659E8 /* SwipeCollectionViewCell.swift */; };
-		3A5ADA75268DA179008659E8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA5F268DA179008659E8 /* Extensions.swift */; };
 		3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA64268DA179008659E8 /* SwipeTransitionLayout.swift */; };
 		3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA65268DA179008659E8 /* SwipeOptions.swift */; };
 		3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA66268DA179008659E8 /* SwipeController.swift */; };
 		3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADA67268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift */; };
+		3A5ADAF62690B675008659E8 /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADAF52690B675008659E8 /* UICollectionView+Extensions.swift */; };
+		3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADAF92690B68A008659E8 /* UIScrollView+Extensions.swift */; };
+		3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5ADAFD2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift */; };
 		3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A67230B268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift */; };
 		3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A672310268EDAAA00DB04D1 /* FadeTransitionAnimator.swift */; };
 		3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */; };
@@ -161,18 +163,20 @@
 		3A4A98FE2688D554008C1968 /* CollectionDetailsDTOMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsDTOMapper.swift; sourceTree = "<group>"; };
 		3A5ADA54268DA177008659E8 /* Swipeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipeable.swift; sourceTree = "<group>"; };
 		3A5ADA55268DA177008659E8 /* SwipeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeAction.swift; sourceTree = "<group>"; };
-		3A5ADA56268DA177008659E8 /* SwipeActionTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeActionTransitioning.swift; sourceTree = "<group>"; };
+		3A5ADA56268DA177008659E8 /* SwipeActionTransitioningContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeActionTransitioningContext.swift; sourceTree = "<group>"; };
 		3A5ADA57268DA177008659E8 /* SwipeActionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeActionsView.swift; sourceTree = "<group>"; };
 		3A5ADA58268DA177008659E8 /* SwipeActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeActionButton.swift; sourceTree = "<group>"; };
 		3A5ADA5A268DA177008659E8 /* SwipeExpanding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeExpanding.swift; sourceTree = "<group>"; };
 		3A5ADA5C268DA178008659E8 /* SwipeAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeAnimator.swift; sourceTree = "<group>"; };
 		3A5ADA5D268DA178008659E8 /* SwipeCollectionViewCell+Display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwipeCollectionViewCell+Display.swift"; sourceTree = "<group>"; };
 		3A5ADA5E268DA179008659E8 /* SwipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCollectionViewCell.swift; sourceTree = "<group>"; };
-		3A5ADA5F268DA179008659E8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3A5ADA64268DA179008659E8 /* SwipeTransitionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeTransitionLayout.swift; sourceTree = "<group>"; };
 		3A5ADA65268DA179008659E8 /* SwipeOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeOptions.swift; sourceTree = "<group>"; };
 		3A5ADA66268DA179008659E8 /* SwipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeController.swift; sourceTree = "<group>"; };
 		3A5ADA67268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeCollectionViewCellDelegate.swift; sourceTree = "<group>"; };
+		3A5ADAF52690B675008659E8 /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		3A5ADAF92690B68A008659E8 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		3A5ADAFD2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPanGestureRecognizer+Extensions.swift"; sourceTree = "<group>"; };
 		3A67230B268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedWithShadowCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A672310268EDAAA00DB04D1 /* FadeTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeTransitionAnimator.swift; sourceTree = "<group>"; };
 		3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCardViewCellModel.swift; sourceTree = "<group>"; };
@@ -303,12 +307,12 @@
 		3A5ADA51268DA15F008659E8 /* SwipeCellKit */ = {
 			isa = PBXGroup;
 			children = (
-				3A5ADA5F268DA179008659E8 /* Extensions.swift */,
+				3A5ADAF42690B663008659E8 /* Extensions */,
 				3A5ADA54268DA177008659E8 /* Swipeable.swift */,
 				3A5ADA55268DA177008659E8 /* SwipeAction.swift */,
 				3A5ADA58268DA177008659E8 /* SwipeActionButton.swift */,
 				3A5ADA57268DA177008659E8 /* SwipeActionsView.swift */,
-				3A5ADA56268DA177008659E8 /* SwipeActionTransitioning.swift */,
+				3A5ADA56268DA177008659E8 /* SwipeActionTransitioningContext.swift */,
 				3A5ADA5C268DA178008659E8 /* SwipeAnimator.swift */,
 				3A5ADA5E268DA179008659E8 /* SwipeCollectionViewCell.swift */,
 				3A5ADA5D268DA178008659E8 /* SwipeCollectionViewCell+Display.swift */,
@@ -319,6 +323,16 @@
 				3A5ADA64268DA179008659E8 /* SwipeTransitionLayout.swift */,
 			);
 			path = SwipeCellKit;
+			sourceTree = "<group>";
+		};
+		3A5ADAF42690B663008659E8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3A5ADAF52690B675008659E8 /* UICollectionView+Extensions.swift */,
+				3A5ADAF92690B68A008659E8 /* UIScrollView+Extensions.swift */,
+				3A5ADAFD2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		3A67230F268EDAA100DB04D1 /* Animations */ = {
@@ -1022,13 +1036,14 @@
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
-				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioning.swift in Sources */,
+				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
+				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
@@ -1048,6 +1063,7 @@
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
+				3A5ADAF62690B675008659E8 /* UICollectionView+Extensions.swift in Sources */,
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
 				3A498F63266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
@@ -1057,6 +1073,7 @@
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
+				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
@@ -1076,7 +1093,6 @@
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
-				3A5ADA75268DA179008659E8 /* Extensions.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,

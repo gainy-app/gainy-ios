@@ -73,7 +73,11 @@ class SwipeController: NSObject {
 
         switch gesture.state {
         case .began:
-            if let swipeable = scrollView?.swipeables.first(where: { $0.state == .dragging }) as? UIView, self.swipeable != nil, swipeable != self.swipeable! {
+            if let swipeable = scrollView?
+                .swipeables
+                .first { $0.state == .dragging } as? UIView,
+                self.swipeable != nil,
+                swipeable != self.swipeable! {
                 return
             }
 
@@ -209,8 +213,8 @@ class SwipeController: NSObject {
     }
 
     func animate(
-        duration: Double = 0.7,
         toOffset offset: CGFloat,
+        duration: Double = 0.7,
         withInitialVelocity velocity: CGFloat = 0,
         completion: ((Bool) -> Void)? = nil
     ) {
@@ -221,7 +225,12 @@ class SwipeController: NSObject {
         let animator: SwipeAnimator = {
             if velocity != 0 {
                 let velocity = CGVector(dx: velocity, dy: velocity)
-                let parameters = UISpringTimingParameters(mass: 1.0, stiffness: 100, damping: 18, initialVelocity: velocity)
+                let parameters = UISpringTimingParameters(
+                    mass: 1.0,
+                    stiffness: 100,
+                    damping: 18,
+                    initialVelocity: velocity
+                )
                 return UIViewPropertyAnimator(duration: 0.0, timingParameters: parameters)
             } else {
                 return UIViewPropertyAnimator(duration: duration, dampingRatio: 1.0)
@@ -289,12 +298,12 @@ extension SwipeController: UIGestureRecognizerDelegate {
                 scrollView?.hideSwipeables()
             }
 
-            let swipedCell = scrollView?.swipeables.first(where: {
+            let swipedCell = scrollView?.swipeables.first {
                 $0.state.isActive ||
                     $0.panGestureRecognizer.state == .began ||
                     $0.panGestureRecognizer.state == .changed ||
                     $0.panGestureRecognizer.state == .ended
-            })
+            }
             return swipedCell == nil ? false : true
         }
 
@@ -369,7 +378,9 @@ extension SwipeController: SwipeActionsViewDelegate {
         }
 
         let maxOffset = min(swipeable.bounds.width, abs(offset)) * orientation.scale * -1
-        let targetCenter = abs(offset) == CGFloat.greatestFiniteMagnitude ? self.targetCenter(active: true) : swipeable.bounds.midX + maxOffset
+        let targetCenter = abs(offset) == CGFloat.greatestFiniteMagnitude
+            ? self.targetCenter(active: true)
+            : swipeable.bounds.midX + maxOffset
 
         if animated {
             animate(toOffset: targetCenter) { complete in

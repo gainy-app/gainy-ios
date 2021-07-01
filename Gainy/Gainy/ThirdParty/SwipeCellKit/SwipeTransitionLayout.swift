@@ -57,7 +57,7 @@ class BorderTransitionLayout: SwipeTransitionLayout {
         let diff = context.visibleWidth - context.contentSize.width
         view.frame.origin.x =
             (CGFloat(index) * context.contentSize.width /
-            CGFloat(context.numberOfActions) + diff) *
+                CGFloat(context.numberOfActions) + diff) *
             context.orientation.scale
     }
 

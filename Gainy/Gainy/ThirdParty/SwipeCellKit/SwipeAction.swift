@@ -7,7 +7,8 @@ enum SwipeActionStyle: Int {
 }
 
 /**
- The `SwipeAction` object defines a single action to present when the user swipes horizontally in a table/collection item.
+ The `SwipeAction` object defines a single action
+ to present when the user swipes horizontally in a table/collection item.
 
  This class lets you define one or more custom actions to display for a given item in your table/collection.
  Each instance of this class represents a single action to perform and includes the text, formatting information,
@@ -75,23 +76,22 @@ class SwipeAction: NSObject {
     /// The background color of the action button.
     ///
     /// - note: Use this property to specify the background color for your button.
-    ///         If you do not specify a value for this property, the framework assigns a default color based on the value in the style property.
+    ///         If you do not specify a value for this property,
+    ///         the framework assigns a default color based on the value in the style property.
     var backgroundColor: UIColor?
-
-//    /// The visual effect to apply to the action button.
-//    ///
-//    /// - note: Assigning a visual effect object to this property adds that effect to the background of the action button.
-//    var backgroundEffect: UIVisualEffect?
 
     /// A Boolean value that determines whether the actions menu is automatically hidden upon selection.
     ///
-    /// - note: When set to `true`, the actions menu is automatically hidden when the action is selected. The default value is `false`.
+    /// - note: When set to `true`, the actions menu is automatically hidden when the action is selected.
+    ///         The default value is `false`.
     var hidesWhenSelected = false
 
     var completionHandler: ((ExpansionFulfillmentStyle) -> Void)?
 
     /**
-     Calling this method performs the configured expansion completion animation including deletion, if necessary. Calling this method more than once has no effect.
+     Calling this method performs the configured expansion completion animation including deletion,
+     if necessary.
+     Calling this method more than once has no effect.
 
      You should only call this method from the implementation of your action `handler` method.
 

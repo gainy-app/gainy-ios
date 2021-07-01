@@ -48,7 +48,11 @@ protocol SwipeCollectionViewCellDelegate: AnyObject {
  Default implementation of `SwipeCollectionViewCellDelegate` methods
  */
 extension SwipeCollectionViewCellDelegate {
-    func collectionView(_: UICollectionView, editActionsOptionsForItemAt _: IndexPath, for _: SwipeActionsOrientation) -> SwipeOptions {
+    func collectionView(
+        _: UICollectionView,
+        editActionsOptionsForItemAt _: IndexPath,
+        for _: SwipeActionsOrientation
+    ) -> SwipeOptions {
         SwipeOptions()
     }
 }

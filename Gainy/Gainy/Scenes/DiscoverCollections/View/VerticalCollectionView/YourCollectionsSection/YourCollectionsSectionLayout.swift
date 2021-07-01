@@ -83,8 +83,8 @@ class YourCollectionsSectionLayout: SectionLayout {
 
 extension YourCollectionsSectionLayout: SwipeCollectionViewCellDelegate {
     func collectionView(
-        _ collectionView: UICollectionView,
-        editActionsForItemAt position: IndexPath,
+        _: UICollectionView,
+        editActionsForItemAt _: IndexPath,
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
         guard orientation == .right else { return nil }

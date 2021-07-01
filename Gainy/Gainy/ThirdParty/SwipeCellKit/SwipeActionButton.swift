@@ -35,7 +35,10 @@ class SwipeActionButton: UIButton {
     }
 
     override var intrinsicContentSize: CGSize {
-        CGSize(width: UIView.noIntrinsicMetric, height: contentEdgeInsets.top + alignmentRect.height + contentEdgeInsets.bottom)
+        CGSize(
+            width: UIView.noIntrinsicMetric,
+            height: contentEdgeInsets.top + alignmentRect.height + contentEdgeInsets.bottom
+        )
     }
 
     func preferredWidth(maximum: CGFloat) -> CGFloat {
@@ -84,11 +87,11 @@ class SwipeActionButton: UIButton {
 
 extension CGRect {
     func center(size: CGSize) -> CGRect {
-        let dx = width - size.width
-        let dy = height - size.height
+        let deltaX = width - size.width
+        let deltaY = height - size.height
 
-        return CGRect(x: origin.x + dx * 0.5,
-                      y: origin.y + dy * 0.5,
+        return CGRect(x: origin.x + deltaX * 0.5,
+                      y: origin.y + deltaY * 0.5,
                       width: size.width,
                       height: size.height)
     }

@@ -1,7 +1,8 @@
 import UIKit
 
 /**
- The `SwipeCollectionViewCell` class extends `UICollectionViewCell` and provides more flexible options for cell swiping behavior.
+ The `SwipeCollectionViewCell` class extends `UICollectionViewCell`
+ and provides more flexible options for cell swiping behavior.
 
 
  The default behavior closely matches the stock Mail.app.
@@ -30,24 +31,34 @@ class SwipeCollectionViewCell: UICollectionViewCell {
         collectionView?.panGestureRecognizer.removeTarget(self, action: nil)
     }
 
-    // MARK: Open
+    // MARK: Internal
+
+    /// The object that acts as the delegate of the `SwipeCollectionViewCell`.
+    weak var delegate: SwipeCollectionViewCellDelegate?
+
+    var state = SwipeState.center
+    var actionsView: SwipeActionsView?
+    var swipeController: SwipeController!
+    var isPreviouslySelected = false
+
+    weak var collectionView: UICollectionView?
 
     /// :nodoc:
-    override open var frame: CGRect {
+    override var frame: CGRect {
+        get {
+            super.frame
+        }
+
         set {
             super.frame = state.isActive
                 ? CGRect(origin: CGPoint(x: frame.minX, y: newValue.minY),
                          size: newValue.size)
                 : newValue
         }
-
-        get {
-            super.frame
-        }
     }
 
     /// :nodoc:
-    override open var layoutMargins: UIEdgeInsets {
+    override var layoutMargins: UIEdgeInsets {
         get {
             frame.origin.x != 0 ? swipeController.originalLayoutMargins : super.layoutMargins
         }
@@ -56,8 +67,20 @@ class SwipeCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    var scrollView: UIScrollView? {
+        collectionView
+    }
+
+    var indexPath: IndexPath? {
+        collectionView?.indexPath(for: self)
+    }
+
+    var panGestureRecognizer: UIGestureRecognizer {
+        swipeController.panGestureRecognizer
+    }
+
     /// :nodoc:
-    override open func prepareForReuse() {
+    override func prepareForReuse() {
         super.prepareForReuse()
 
         reset()
@@ -65,7 +88,7 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     }
 
     /// :nodoc:
-    override open func didMoveToSuperview() {
+    override func didMoveToSuperview() {
         super.didMoveToSuperview()
 
         var view: UIView = self
@@ -91,7 +114,7 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     }
 
     /// :nodoc:
-    override open func willMove(toWindow newWindow: UIWindow?) {
+    override func willMove(toWindow newWindow: UIWindow?) {
         super.willMove(toWindow: newWindow)
 
         if newWindow == nil {
@@ -103,7 +126,7 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     // This is required to detect touches on the `SwipeActionsView` sitting alongside the
     // `SwipeCollectionViewCell`.
     /// :nodoc:
-    override open func point(inside point: CGPoint, with _: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with _: UIEvent?) -> Bool {
         guard let superview = superview else { return false }
 
         let point = convert(point, to: superview)
@@ -124,7 +147,7 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     //   if it's supposed to, since otherwise, our `contentView` will swallow it and pass it up to
     //   the collection view.
     /// :nodoc:
-    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         guard
             let actionsView = actionsView,
             isHidden == false
@@ -135,32 +158,8 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     }
 
     /// :nodoc:
-    override open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         swipeController.gestureRecognizerShouldBegin(gestureRecognizer)
-    }
-
-    // MARK: Internal
-
-    /// The object that acts as the delegate of the `SwipeCollectionViewCell`.
-    weak var delegate: SwipeCollectionViewCellDelegate?
-
-    var state = SwipeState.center
-    var actionsView: SwipeActionsView?
-    var swipeController: SwipeController!
-    var isPreviouslySelected = false
-
-    weak var collectionView: UICollectionView?
-
-    var scrollView: UIScrollView? {
-        collectionView
-    }
-
-    var indexPath: IndexPath? {
-        collectionView?.indexPath(for: self)
-    }
-
-    var panGestureRecognizer: UIGestureRecognizer {
-        swipeController.panGestureRecognizer
     }
 
     func configure() {
@@ -208,7 +207,7 @@ class SwipeCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension SwipeCollectionViewCell: SwipeControllerDelegate {    
+extension SwipeCollectionViewCell: SwipeControllerDelegate {
     func swipeController(
         _: SwipeController,
         canBeginEditingSwipeableFor _: SwipeActionsOrientation
@@ -220,7 +219,12 @@ extension SwipeCollectionViewCell: SwipeControllerDelegate {
         _: SwipeController,
         editActionsForSwipeableFor orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
-        guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self) else { return nil }
+        guard
+            let collectionView = collectionView,
+            let indexPath = collectionView.indexPath(for: self)
+        else {
+            return nil
+        }
 
         return delegate?.collectionView(collectionView, editActionsForItemAt: indexPath, for: orientation)
     }
@@ -229,9 +233,16 @@ extension SwipeCollectionViewCell: SwipeControllerDelegate {
         _: SwipeController,
         editActionsOptionsForSwipeableFor orientation: SwipeActionsOrientation
     ) -> SwipeOptions {
-        guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self) else { return SwipeOptions() }
+        guard
+            let collectionView = collectionView,
+            let indexPath = collectionView.indexPath(for: self)
+        else {
+            return SwipeOptions()
+        }
 
-        return delegate?.collectionView(collectionView, editActionsOptionsForItemAt: indexPath, for: orientation) ?? SwipeOptions()
+        return delegate?.collectionView(collectionView,
+                                        editActionsOptionsForItemAt: indexPath,
+                                        for: orientation) ?? SwipeOptions()
     }
 
     func swipeController(_: SwipeController, didDeleteSwipeableAt indexPath: IndexPath) {

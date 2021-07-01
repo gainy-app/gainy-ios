@@ -3,8 +3,8 @@ import UIKit
 extension SwipeCollectionViewCell {
     /// The point at which the origin of the cell is offset from the non-swiped origin.
     var swipeOffset: CGFloat {
-        set { setSwipeOffset(newValue, animated: false) }
         get { contentView.frame.midX - bounds.midX }
+        set { setSwipeOffset(newValue, animated: false) }
     }
 
     /**
@@ -28,7 +28,8 @@ extension SwipeCollectionViewCell {
 
      - parameter orientation: The side of the cell on which to show the swipe actions.
 
-     - parameter animated: Specify `true` to animate the showing of the swipe actions or `false` to show them immediately.
+     - parameter animated: Specify `true` to animate the showing of the swipe actions
+                           or `false` to show them immediately.
 
      - parameter completion: The closure to be executed once the animation has finished.
                              A `Boolean` argument indicates whether or not the animations
@@ -49,7 +50,8 @@ extension SwipeCollectionViewCell {
 
      - parameter offset: A point (expressed in points) that is offset from the non-swiped origin.
 
-     - parameter animated: Specify `true` to animate the transition to the new offset, `false` to make the transition immediate.
+     - parameter animated: Specify `true` to animate the transition to the new offset,
+                           `false` to make the transition immediate.
 
      - parameter completion: The closure to be executed once the animation has finished.
                              A `Boolean` argument indicates whether or not the animations

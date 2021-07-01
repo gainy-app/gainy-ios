@@ -61,7 +61,7 @@ class SwipeActionsView: UIView {
     var buttons: [SwipeActionButton] = []
 
     var minimumButtonWidth: CGFloat = 0
-    private(set) var expanded: Bool = false
+    private(set) var expanded = false
 
     var maximumImageHeight: CGFloat {
         actions.reduce(0) { initial, next in
@@ -99,7 +99,11 @@ class SwipeActionsView: UIView {
         CGSize(width: visibleWidth, height: bounds.height)
     }
 
-    func addButtons(for actions: [SwipeAction], withMaximum size: CGSize, contentEdgeInsets: UIEdgeInsets) -> [SwipeActionButton] {
+    func addButtons(
+        for actions: [SwipeAction],
+        withMaximum size: CGSize,
+        contentEdgeInsets: UIEdgeInsets
+    ) -> [SwipeActionButton] {
         let buttons: [SwipeActionButton] = actions.map { action in
             let actionButton = SwipeActionButton(action: action)
             actionButton.addTarget(self,
@@ -107,7 +111,7 @@ class SwipeActionsView: UIView {
                                    for: .touchUpInside)
             actionButton.autoresizingMask = [
                 .flexibleHeight,
-                orientation == .right ? .flexibleRightMargin : .flexibleLeftMargin
+                orientation == .right ? .flexibleRightMargin : .flexibleLeftMargin,
             ]
             actionButton.contentEdgeInsets = buttonEdgeInsets(fromOptions: options)
             return actionButton
@@ -167,7 +171,7 @@ class SwipeActionsView: UIView {
         delegate?.swipeActionsView(self, didSelect: actions[index])
     }
 
-    func buttonEdgeInsets(fromOptions options: SwipeOptions) -> UIEdgeInsets {
+    func buttonEdgeInsets(fromOptions _: SwipeOptions) -> UIEdgeInsets {
         let padding: CGFloat = 8
         return UIEdgeInsets(
             top: padding,
