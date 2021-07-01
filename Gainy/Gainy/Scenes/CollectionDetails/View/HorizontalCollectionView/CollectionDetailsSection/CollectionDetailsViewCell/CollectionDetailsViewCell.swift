@@ -22,7 +22,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
         collectionHorizontalView.backgroundColor = .clear
 
-        addSubview(collectionHorizontalView)
+        contentView.addSubview(collectionHorizontalView)
 
         internalCollectionView = UICollectionView(
             frame: CGRect(
@@ -40,7 +40,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.backgroundColor = UIColor.Gainy.white
         internalCollectionView.dataSource = dataSource
 
-        addSubview(internalCollectionView)
+        contentView.addSubview(internalCollectionView)
 
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: internalCollectionView

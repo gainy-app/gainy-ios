@@ -6,11 +6,11 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
-        addSubview(backImageView)
-        addSubview(nameLabel)
-        addSubview(descriptionLabel)
-        addSubview(stocksAmountLabel)
-        addSubview(plusButton)
+        contentView.addSubview(backImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(stocksAmountLabel)
+        contentView.addSubview(plusButton)
 
         layer.isOpaque = true
         backgroundColor = .black

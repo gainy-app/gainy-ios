@@ -7,29 +7,29 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         super.init(frame: .zero)
 
         // TODO: 1: make order in the init consistent
-        addSubview(companyNameLabel)
-        addSubview(tickerSymbolLabel)
-        addSubview(todayLabel)
-        addSubview(tickerPercentChangeLabel)
-        addSubview(tickerTotalPriceLabel)
+        contentView.addSubview(companyNameLabel)
+        contentView.addSubview(tickerSymbolLabel)
+        contentView.addSubview(todayLabel)
+        contentView.addSubview(tickerPercentChangeLabel)
+        contentView.addSubview(tickerTotalPriceLabel)
 
-        addSubview(marketMarkerOneButton)
-        addSubview(marketMarkerOneTextLabel)
-        addSubview(marketMarkerOneValueLabel)
+        contentView.addSubview(marketMarkerOneButton)
+        contentView.addSubview(marketMarkerOneTextLabel)
+        contentView.addSubview(marketMarkerOneValueLabel)
 
-        addSubview(marketMarkerSecondButton)
-        addSubview(marketMarkerSecondTextLabel)
-        addSubview(marketMarkerSecondValueLabel)
+        contentView.addSubview(marketMarkerSecondButton)
+        contentView.addSubview(marketMarkerSecondTextLabel)
+        contentView.addSubview(marketMarkerSecondValueLabel)
 
-        addSubview(marketMarkerThirdButton)
-        addSubview(marketMarkerThirdTextLabel)
-        addSubview(marketMarkerThirdValueLabel)
+        contentView.addSubview(marketMarkerThirdButton)
+        contentView.addSubview(marketMarkerThirdTextLabel)
+        contentView.addSubview(marketMarkerThirdValueLabel)
 
-        addSubview(leftVerticalSeparator)
-        addSubview(rightVerticalSeparator)
+        contentView.addSubview(leftVerticalSeparator)
+        contentView.addSubview(rightVerticalSeparator)
 
-        addSubview(highlightsContainerView)
-        addSubview(highlightLabel)
+        contentView.addSubview(highlightsContainerView)
+        contentView.addSubview(highlightLabel)
 
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
