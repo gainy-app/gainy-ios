@@ -75,7 +75,7 @@ class SwipeController: NSObject {
         case .began:
             if let swipeable = scrollView?
                 .swipeables
-                .first { $0.state == .dragging } as? UIView,
+                .first(where: { $0.state == .dragging }) as? UIView,
                 self.swipeable != nil,
                 swipeable != self.swipeable! {
                 return
@@ -340,7 +340,7 @@ extension SwipeController: SwipeActionsViewDelegate {
     func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         guard var swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         guard swipeable.state == .left || swipeable.state == .right else { return }
-        guard let actionView = swipeable.actionsView else { return }
+        guard let _ = swipeable.actionsView else { return }
 
         swipeable.state = .animatingToCenter
 
