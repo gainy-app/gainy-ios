@@ -55,23 +55,21 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
             switch (cell, modelItem) {
             case let (cell as YourCollectionViewCell, modelItem as YourCollectionViewCellModel):
                 cell.onDeleteButtonPressed = { [weak self] in
-                    if let removalForbidden = self?.isDragAndDropInProgress, !removalForbidden {
-                        self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
-                    }
+                    self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
                 }
 
                 cell.onCellLifted = { [weak self] in
-                    self?.isDragAndDropInProgress = true
                     self?.indexOfCellBeingDragged = indexPath.row
                     self?.provideTapticFeedback()
                 }
 
                 cell.onCellStopDragging = { [weak self] in
                     if let dragCellIndex = self?.indexOfCellBeingDragged, dragCellIndex == indexPath.row {
-                        self?.isDragAndDropInProgress = false
                         self?.indexOfCellBeingDragged = nil
                     }
                 }
+
+                cell.delegate = cell
 
             case let (cell as RecommendedCollectionViewCell, modelItem as RecommendedCollectionViewCellModel):
                 cell.onPlusButtonPressed = { [weak self] in
@@ -159,7 +157,6 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     private var dataSource: UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<DiscoverCollectionsSection, AnyHashable>()
 
-    private var isDragAndDropInProgress = false
     private var indexOfCellBeingDragged: Int?
 
     // MARK: Functions

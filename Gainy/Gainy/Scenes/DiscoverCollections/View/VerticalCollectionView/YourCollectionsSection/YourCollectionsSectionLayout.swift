@@ -1,6 +1,6 @@
 import UIKit
 
-class YourCollectionsSectionLayout: SectionLayout {
+struct YourCollectionsSectionLayout: SectionLayout {
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let yourCollectionItem = NSCollectionLayoutItem(
@@ -75,23 +75,6 @@ class YourCollectionsSectionLayout: SectionLayout {
                                imageName: viewModel.image)
         }
 
-        cell.delegate = self
-
         return cell
-    }
-}
-
-extension YourCollectionsSectionLayout: SwipeCollectionViewCellDelegate {
-    func collectionView(
-        _: UICollectionView,
-        editActionsForItemAt _: IndexPath,
-        for orientation: SwipeActionsOrientation
-    ) -> [SwipeAction]? {
-        guard orientation == .right else { return nil }
-
-        let deleteAction = SwipeAction(style: .default) { _, _ in }
-        deleteAction.image = UIImage(named: "trash")
-
-        return [deleteAction]
     }
 }

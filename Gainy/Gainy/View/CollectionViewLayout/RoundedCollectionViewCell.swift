@@ -4,9 +4,9 @@ class RoundedCollectionViewCell: UICollectionViewCell {
     // MARK: Internal
 
     override func didMoveToSuperview() {
-        layer.cornerRadius = Constant.cornerRadius
-        layer.cornerCurve = .continuous
-        layer.masksToBounds = true
+        contentView.layer.cornerRadius = Constant.cornerRadius
+        contentView.layer.cornerCurve = .continuous
+        contentView.layer.masksToBounds = true
     }
 
     // MARK: Private

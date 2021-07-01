@@ -12,6 +12,10 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         contentView.addSubview(stocksLabel)
         contentView.addSubview(stocksAmountLabel)
 
+        backImageView.clipsToBounds = true
+        backImageView.layer.cornerRadius = 8
+        backImageView.layer.cornerCurve = .continuous
+
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
@@ -191,5 +195,22 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     private enum Constant {
         static let swipeAnimationDurations: TimeInterval = 0.15
         static let swipeHorizontalShift: CGFloat = 40.0
+    }
+}
+
+extension YourCollectionViewCell: SwipeCollectionViewCellDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        editActionsForItemAt _: IndexPath,
+        for orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .default) { [weak self]  _, position in
+            self?.onDeleteButtonPressed?()
+        }
+        deleteAction.image = UIImage(named: "trash")
+
+        return [deleteAction]
     }
 }
