@@ -19,16 +19,10 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
 
         view.backgroundColor = UIColor.Gainy.white
 
-        let statusBarHeight = view
-            .window?
-            .windowScene?
-            .statusBarManager?
-            .statusBarFrame.height ?? 20
-
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
-                y: statusBarHeight,
+                y: view.safeAreaInsets.top + 20,
                 width: view.bounds.width,
                 height: 80
             )
@@ -97,7 +91,8 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
 
         view.addSubview(navigationBarContainer)
 
-        let navigationBarTopOffset = navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        let navigationBarTopOffset =
+            navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
 
         collectionDetailsCollectionView = UICollectionView(
             frame: CGRect(
