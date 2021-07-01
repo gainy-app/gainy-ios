@@ -12,7 +12,7 @@ final class FadeTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
         using transitionContext: UIViewControllerContextTransitioning
     ) {
         guard let toViewController =
-                transitionContext.viewController(forKey: .to) else { return }
+            transitionContext.viewController(forKey: .to) else { return }
 
         transitionContext.containerView.addSubview(toViewController.view)
         toViewController.view.alpha = 0
@@ -20,11 +20,11 @@ final class FadeTransitionAnimator: NSObject, UIViewControllerAnimatedTransition
         let duration = self.transitionDuration(using: transitionContext)
         UIView.animate(withDuration: duration,
                        animations: {
-                            toViewController.view.alpha = 1
+                           toViewController.view.alpha = 1
                        }, completion: { _ in
-                            transitionContext.completeTransition(
-                                !transitionContext.transitionWasCancelled
-                            )
+                           transitionContext.completeTransition(
+                               !transitionContext.transitionWasCancelled
+                           )
                        })
     }
 }

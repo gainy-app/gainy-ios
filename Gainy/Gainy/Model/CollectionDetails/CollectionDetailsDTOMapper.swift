@@ -2,7 +2,7 @@ enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(
         _ dto: CollectionDetailsQuery.Data.Collection
     ) -> CollectionDetails {
-        return CollectionDetails(
+        CollectionDetails(
             id: Int(dto.id)!,
             collectionBackgroundImage: dto.name.lowercased(),
             collectionName: dto.name,
@@ -20,7 +20,7 @@ enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromYourCollections(
         _ dto: CollectionDetailsQuery.Data.Collection
     ) -> CollectionDetails {
-        return CollectionDetails(
+        CollectionDetails(
             id: Int(dto.id)!,
             collectionBackgroundImage: dto.name.lowercased(),
             collectionName: dto.name,
