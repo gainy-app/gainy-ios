@@ -21,7 +21,7 @@ final class CollectionHorizontalView: UIView {
         layer.masksToBounds = true
 
         layer.isOpaque = true
-        backgroundColor = .black
+        backgroundColor = UIColor.Gainy.white
     }
 
     @available(*, unavailable)
