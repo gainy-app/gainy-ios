@@ -1,20 +1,19 @@
 import UIKit
 
-final class YourCollectionViewCell: RoundedCollectionViewCell {
+final class YourCollectionViewCell: SwipeCollectionViewCell {
     // MARK: Lifecycle
 
-    override init(frame _: CGRect) {
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
-        addSubview(backImageView)
-        addSubview(nameLabel)
-        addSubview(descriptionLabel)
-        addSubview(stocksLabel)
-        addSubview(stocksAmountLabel)
-        addSubview(deleteButton)
+        contentView.addSubview(backImageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(descriptionLabel)
+        contentView.addSubview(stocksLabel)
+        contentView.addSubview(stocksAmountLabel)
 
         layer.isOpaque = true
-        backgroundColor = .black
+        backgroundColor = UIColor.Gainy.white
     }
 
     @available(*, unavailable)
@@ -91,21 +90,6 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
         return label
     }()
 
-    lazy var deleteButton: UIButton = {
-        let button = UIButton()
-
-        button.layer.cornerRadius = 6
-        button.layer.cornerCurve = .continuous
-        button.backgroundColor = UIColor.Gainy.back
-
-        button.setImage(UIImage(named: "trash"), for: .normal)
-        button.addTarget(self,
-                         action: #selector(deleteButtonTapped(_:)),
-                         for: .touchUpInside)
-
-        return button
-    }()
-
     override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -161,21 +145,6 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
             width: 80,
             height: 33
         )
-
-        deleteButton.frame = CGRect(
-            x: bounds.width + 16,
-            y: (bounds.height - 48) / 2,
-            width: 48,
-            height: 48
-        )
-    }
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if deleteButton.frame.contains(point) {
-            return deleteButton
-        }
-
-        return super.hitTest(point, with: event)
     }
 
     // MARK: Functions
@@ -201,6 +170,7 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
         imageName: String
     ) {
         backImageView.image = UIImage(named: imageName)
+        backImageView.contentMode = .scaleAspectFill
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -214,26 +184,6 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
         layoutIfNeeded()
     }
 
-    func shiftCellLeftAndShowDeleteButton() {
-        originalCellCenter = CGPoint(x: (superview?.center.x)!, y: center.y)
-
-        UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-            self.transform = CGAffineTransform(translationX: -Constant.swipeHorizontalShift,
-                                               y: 0)
-            self.center = CGPoint(x: self.originalCellCenter.x - Constant.swipeHorizontalShift,
-                                  y: self.originalCellCenter.y)
-        }
-    }
-
-    func resetCellStateAndHideDeleteButton() {
-        if let originalCellCenter = self.originalCellCenter {
-            UIView.animate(withDuration: Constant.swipeAnimationDurations) {
-                self.center = originalCellCenter
-                self.transform = CGAffineTransform(rotationAngle: 0)
-            }
-        }
-    }
-
     // MARK: Private
 
     // MARK: Types
@@ -241,16 +191,5 @@ final class YourCollectionViewCell: RoundedCollectionViewCell {
     private enum Constant {
         static let swipeAnimationDurations: TimeInterval = 0.15
         static let swipeHorizontalShift: CGFloat = 40.0
-    }
-
-    // MARK: Properties
-
-    private var originalCellCenter: CGPoint!
-
-    // MARK: Functions
-
-    @objc
-    private func deleteButtonTapped(_: UIButton) {
-        onDeleteButtonPressed?()
     }
 }

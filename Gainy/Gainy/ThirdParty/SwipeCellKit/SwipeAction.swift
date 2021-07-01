@@ -20,11 +20,10 @@ class SwipeAction: NSObject {
       Constructs a new `SwipeAction` instance.
 
       - parameter style: The style of the action button.
-      - parameter title: The title of the action button.
       - parameter handler: The closure to execute when the user taps the button associated with this action.
      */
-    init(style: SwipeActionStyle, title: String?, handler: ((SwipeAction, IndexPath) -> Void)?) {
-        self.title = title
+    init(style: SwipeActionStyle, handler: ((SwipeAction, IndexPath) -> Void)?) {
+//        self.title = title
         self.style = style
         self.handler = handler
     }
@@ -34,31 +33,31 @@ class SwipeAction: NSObject {
     /// An optional unique action identifier.
     var identifier: String?
 
-    /// The title of the action button.
-    ///
-    /// - note: You must specify a title or an image.
-    var title: String?
+//    /// The title of the action button.
+//    ///
+//    /// - note: You must specify a title or an image.
+//    var title: String?
 
     /// The style applied to the action button.
     var style: SwipeActionStyle
 
-    /// The object that is notified as transitioning occurs.
-    var transitionDelegate: SwipeActionTransitioning?
+//    /// The object that is notified as transitioning occurs.
+//    var transitionDelegate: SwipeActionTransitioning?
 
-    /// The font to use for the title of the action button.
-    ///
-    /// - note: If you do not specify a font, a 15pt system font is used.
-    var font: UIFont?
+//    /// The font to use for the title of the action button.
+//    ///
+//    /// - note: If you do not specify a font, a 15pt system font is used.
+//    var font: UIFont?
 
-    /// The text color of the action button.
-    ///
-    /// - note: If you do not specify a color, white is used.
-    var textColor: UIColor?
+//    /// The text color of the action button.
+//    ///
+//    /// - note: If you do not specify a color, white is used.
+//    var textColor: UIColor?
 
-    /// The highlighted text color of the action button.
-    ///
-    /// - note: If you do not specify a color, `textColor` is used.
-    var highlightedTextColor: UIColor?
+//    /// The highlighted text color of the action button.
+//    ///
+//    /// - note: If you do not specify a color, `textColor` is used.
+//    var highlightedTextColor: UIColor?
 
     /// The image used for the action button.
     ///
@@ -79,10 +78,10 @@ class SwipeAction: NSObject {
     ///         If you do not specify a value for this property, the framework assigns a default color based on the value in the style property.
     var backgroundColor: UIColor?
 
-    /// The visual effect to apply to the action button.
-    ///
-    /// - note: Assigning a visual effect object to this property adds that effect to the background of the action button.
-    var backgroundEffect: UIVisualEffect?
+//    /// The visual effect to apply to the action button.
+//    ///
+//    /// - note: Assigning a visual effect object to this property adds that effect to the background of the action button.
+//    var backgroundEffect: UIVisualEffect?
 
     /// A Boolean value that determines whether the actions menu is automatically hidden upon selection.
     ///
@@ -108,14 +107,14 @@ enum ExpansionFulfillmentStyle {
     /// Implies the item will be deleted upon action fulfillment.
     case delete
 
-    /// Implies the item will be reset and the actions view hidden upon action fulfillment.
-    case reset
+//    /// Implies the item will be reset and the actions view hidden upon action fulfillment.
+//    case reset
 }
 
 // MARK: - Internal
 
 extension SwipeAction {
     var hasBackgroundColor: Bool {
-        backgroundColor != .clear && backgroundEffect == nil
+        backgroundColor != .clear
     }
 }

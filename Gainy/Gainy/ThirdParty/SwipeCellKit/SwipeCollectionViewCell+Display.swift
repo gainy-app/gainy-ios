@@ -16,7 +16,10 @@ extension SwipeCollectionViewCell {
                              A `Boolean` argument indicates whether or not the animations actually
                              finished before the completion handler was called.
      */
-    func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    func hideSwipe(
+        animated: Bool,
+        completion: ((Bool) -> Void)? = nil
+    ) {
         swipeController.hideSwipe(animated: animated, completion: completion)
     }
 
@@ -31,7 +34,11 @@ extension SwipeCollectionViewCell {
                              A `Boolean` argument indicates whether or not the animations
                              actually finished before the completion handler was called.
      */
-    func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    func showSwipe(
+        orientation: SwipeActionsOrientation,
+        animated: Bool = true,
+        completion: ((Bool) -> Void)? = nil
+    ) {
         setSwipeOffset(.greatestFiniteMagnitude * orientation.scale * -1,
                        animated: animated,
                        completion: completion)
@@ -48,7 +55,11 @@ extension SwipeCollectionViewCell {
                              A `Boolean` argument indicates whether or not the animations
                              actually finished before the completion handler was called.
      */
-    func setSwipeOffset(_ offset: CGFloat, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    func setSwipeOffset(
+        _ offset: CGFloat,
+        animated: Bool = true,
+        completion: ((Bool) -> Void)? = nil
+    ) {
         swipeController.setSwipeOffset(offset, animated: animated, completion: completion)
     }
 }

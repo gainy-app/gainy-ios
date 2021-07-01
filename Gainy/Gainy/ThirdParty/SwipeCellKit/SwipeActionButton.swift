@@ -8,19 +8,8 @@ class SwipeActionButton: UIButton {
 
         contentHorizontalAlignment = .center
 
-        tintColor = action.textColor ?? .white
-        let highlightedTextColor = action.highlightedTextColor ?? tintColor
-
-        titleLabel?.font = action.font ?? UIFont.systemFont(ofSize: 15, weight: UIFont.Weight.medium)
-        titleLabel?.textAlignment = .center
-        titleLabel?.lineBreakMode = .byWordWrapping
-        titleLabel?.numberOfLines = 0
-
         accessibilityLabel = action.accessibilityLabel
 
-        setTitle(action.title, for: .normal)
-        setTitleColor(tintColor, for: .normal)
-        setTitleColor(highlightedTextColor, for: .highlighted)
         setImage(action.image, for: .normal)
         setImage(action.highlightedImage ?? action.image, for: .highlighted)
     }
@@ -51,10 +40,18 @@ class SwipeActionButton: UIButton {
 
     func preferredWidth(maximum: CGFloat) -> CGFloat {
         let width = maximum > 0 ? maximum : CGFloat.greatestFiniteMagnitude
-        let textWidth = titleBoundingRect(with: CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)).width
+        let textWidth = titleBoundingRect(
+            with: CGSize(
+                width: width,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+        ).width
         let imageWidth = currentImage?.size.width ?? 0
 
-        return min(width, max(textWidth, imageWidth) + contentEdgeInsets.left + contentEdgeInsets.right)
+        return min(
+            width,
+            max(textWidth, imageWidth) + contentEdgeInsets.left + contentEdgeInsets.right
+        )
     }
 
     func titleBoundingRect(with size: CGSize) -> CGRect {
@@ -89,6 +86,10 @@ extension CGRect {
     func center(size: CGSize) -> CGRect {
         let dx = width - size.width
         let dy = height - size.height
-        return CGRect(x: origin.x + dx * 0.5, y: origin.y + dy * 0.5, width: size.width, height: size.height)
+
+        return CGRect(x: origin.x + dx * 0.5,
+                      y: origin.y + dy * 0.5,
+                      width: size.width,
+                      height: size.height)
     }
 }

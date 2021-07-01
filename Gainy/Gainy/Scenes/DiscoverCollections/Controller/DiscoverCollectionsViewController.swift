@@ -26,10 +26,9 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
         )
         view.addSubview(discoverCollectionsCollectionView)
 
-        setupSwipeGesture()
-
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+
         discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
         discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
 
@@ -160,57 +159,10 @@ final class DiscoverCollectionsViewController: UIViewController, DiscoverCollect
     private var dataSource: UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<DiscoverCollectionsSection, AnyHashable>()
 
-    private var leftSwipeGesture: UISwipeGestureRecognizer!
-    private var rightSwipeGesture: UISwipeGestureRecognizer!
-
     private var isDragAndDropInProgress = false
     private var indexOfCellBeingDragged: Int?
 
     // MARK: Functions
-
-    private func setupSwipeGesture() {
-        leftSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                    action: #selector(leftSwiped(swipe:)))
-        leftSwipeGesture.delegate = self
-        leftSwipeGesture.direction = .left
-
-        rightSwipeGesture = UISwipeGestureRecognizer(target: self,
-                                                     action: #selector(rightSwiped(swipe:)))
-        rightSwipeGesture.delegate = self
-
-        view.addGestureRecognizer(leftSwipeGesture)
-        view.addGestureRecognizer(rightSwipeGesture)
-    }
-
-    @objc
-    private func leftSwiped(swipe: UISwipeGestureRecognizer) {
-        guard !isDragAndDropInProgress else { return }
-
-        let location = swipe.location(in: discoverCollectionsCollectionView)
-
-        guard
-            let indexPath = discoverCollectionsCollectionView.indexPathForItem(at: location),
-            indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue,
-            let cell = discoverCollectionsCollectionView.cellForItem(at: indexPath) as? YourCollectionViewCell
-        else { return }
-
-        cell.shiftCellLeftAndShowDeleteButton()
-    }
-
-    @objc
-    private func rightSwiped(swipe: UISwipeGestureRecognizer) {
-        guard !isDragAndDropInProgress else { return }
-
-        let location = swipe.location(in: discoverCollectionsCollectionView)
-
-        guard
-            let indexPath = discoverCollectionsCollectionView.indexPathForItem(at: location),
-            indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue,
-            let cell = discoverCollectionsCollectionView.cellForItem(at: indexPath) as? YourCollectionViewCell
-        else { return }
-
-        cell.resetCellStateAndHideDeleteButton()
-    }
 
     private func provideTapticFeedback() {
         feedbackGenerator = UIImpactFeedbackGenerator()

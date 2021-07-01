@@ -9,7 +9,7 @@ import UIKit
  or the expansion style (the behavior when the row is swiped passes a defined threshold),
  you can return the appropriately configured `SwipeOptions` via the `SwipeCollectionViewCellDelegate` delegate.
  */
-class SwipeCollectionViewCell: RoundedCollectionViewCell {
+class SwipeCollectionViewCell: UICollectionViewCell {
     // MARK: Lifecycle
 
     /// :nodoc:
@@ -34,17 +34,16 @@ class SwipeCollectionViewCell: RoundedCollectionViewCell {
 
     /// :nodoc:
     override open var frame: CGRect {
-        set { super.frame = state.isActive ? CGRect(origin: CGPoint(x: frame.minX, y: newValue.minY), size: newValue.size) : newValue }
-        get { super.frame }
-    }
-
-    /// :nodoc:
-    override open var isHighlighted: Bool {
         set {
-            guard state == .center else { return }
-            super.isHighlighted = newValue
+            super.frame = state.isActive
+                ? CGRect(origin: CGPoint(x: frame.minX, y: newValue.minY),
+                         size: newValue.size)
+                : newValue
         }
-        get { super.isHighlighted }
+
+        get {
+            super.frame
+        }
     }
 
     /// :nodoc:
@@ -78,8 +77,14 @@ class SwipeCollectionViewCell: RoundedCollectionViewCell {
 
                 swipeController.scrollView = scrollView
 
-                collectionView.panGestureRecognizer.removeTarget(self, action: nil)
-                collectionView.panGestureRecognizer.addTarget(self, action: #selector(handleCollectionPan(gesture:)))
+                collectionView.panGestureRecognizer.removeTarget(
+                    self,
+                    action: nil
+                )
+                collectionView.panGestureRecognizer.addTarget(
+                    self,
+                    action: #selector(handleCollectionPan(gesture:))
+                )
                 return
             }
         }
@@ -134,13 +139,6 @@ class SwipeCollectionViewCell: RoundedCollectionViewCell {
         swipeController.gestureRecognizerShouldBegin(gestureRecognizer)
     }
 
-    /// :nodoc:
-    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        swipeController.traitCollectionDidChange(from: previousTraitCollection, to: self.traitCollection)
-    }
-
     // MARK: Internal
 
     /// The object that acts as the delegate of the `SwipeCollectionViewCell`.
@@ -161,8 +159,7 @@ class SwipeCollectionViewCell: RoundedCollectionViewCell {
         collectionView?.indexPath(for: self)
     }
 
-    var panGestureRecognizer: UIGestureRecognizer
-    {
+    var panGestureRecognizer: UIGestureRecognizer {
         swipeController.panGestureRecognizer
     }
 
@@ -211,46 +208,30 @@ class SwipeCollectionViewCell: RoundedCollectionViewCell {
     }
 }
 
-extension SwipeCollectionViewCell: SwipeControllerDelegate {
-    func swipeController(_: SwipeController, canBeginEditingSwipeableFor _: SwipeActionsOrientation) -> Bool {
+extension SwipeCollectionViewCell: SwipeControllerDelegate {    
+    func swipeController(
+        _: SwipeController,
+        canBeginEditingSwipeableFor _: SwipeActionsOrientation
+    ) -> Bool {
         true
     }
 
-    func swipeController(_: SwipeController, editActionsForSwipeableFor orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+    func swipeController(
+        _: SwipeController,
+        editActionsForSwipeableFor orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]? {
         guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self) else { return nil }
 
         return delegate?.collectionView(collectionView, editActionsForItemAt: indexPath, for: orientation)
     }
 
-    func swipeController(_: SwipeController, editActionsOptionsForSwipeableFor orientation: SwipeActionsOrientation) -> SwipeOptions {
+    func swipeController(
+        _: SwipeController,
+        editActionsOptionsForSwipeableFor orientation: SwipeActionsOrientation
+    ) -> SwipeOptions {
         guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self) else { return SwipeOptions() }
 
         return delegate?.collectionView(collectionView, editActionsOptionsForItemAt: indexPath, for: orientation) ?? SwipeOptions()
-    }
-
-    func swipeController(_: SwipeController, visibleRectFor _: UIScrollView) -> CGRect? {
-        guard let collectionView = collectionView else { return nil }
-
-        return delegate?.visibleRect(for: collectionView)
-    }
-
-    func swipeController(_: SwipeController, willBeginEditingSwipeableFor orientation: SwipeActionsOrientation) {
-        guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self) else { return }
-
-        // Remove highlight and deselect any selected cells
-        super.isHighlighted = false
-        isPreviouslySelected = isSelected
-        collectionView.deselectItem(at: indexPath, animated: false)
-
-        delegate?.collectionView(collectionView, willBeginEditingItemAt: indexPath, for: orientation)
-    }
-
-    func swipeController(_: SwipeController, didEndEditingSwipeableFor _: SwipeActionsOrientation) {
-        guard let collectionView = collectionView, let indexPath = collectionView.indexPath(for: self), let actionsView = self.actionsView else { return }
-
-        resetSelectedState()
-
-        delegate?.collectionView(collectionView, didEndEditingItemAt: indexPath, for: actionsView.orientation)
     }
 
     func swipeController(_: SwipeController, didDeleteSwipeableAt indexPath: IndexPath) {

@@ -1,8 +1,5 @@
 import UIKit
 
-/// :nodoc:
-typealias SwipeTableOptions = SwipeOptions
-
 /// The `SwipeOptions` class provides options for transistion and expansion behavior for swiped cell.
 struct SwipeOptions {
     // MARK: Lifecycle
@@ -14,19 +11,6 @@ struct SwipeOptions {
 
     /// The transition style. Transition is the style of how the action buttons are exposed during the swipe.
     var transitionStyle: SwipeTransitionStyle = .border
-
-    /// The expansion style. Expansion is the behavior when the cell is swiped past a defined threshold.
-    var expansionStyle: SwipeExpansionStyle?
-
-    /// The object that is notified when expansion changes.
-    ///
-    /// - note: If an `expansionDelegate` is not provided, and the expanding action is configured
-    ///         with a clear background, the system automatically uses the default
-    ///         `ScaleAndAlphaExpansion` to show/hide underlying actions.
-    var expansionDelegate: SwipeExpanding?
-
-    /// The background color behind the action buttons.
-    var backgroundColor: UIColor?
 
     /// The largest allowable button width.
     ///
@@ -43,9 +27,6 @@ struct SwipeOptions {
 
     /// The vertical alignment mode used for when a button image and title are present.
     var buttonVerticalAlignment: SwipeVerticalAlignment = .center
-
-    /// The amount of space, in points, between the border and the button image or title.
-    var buttonPadding: CGFloat?
 }
 
 /// Describes the transition style. Transition is the style of how the action buttons are exposed during the swipe.

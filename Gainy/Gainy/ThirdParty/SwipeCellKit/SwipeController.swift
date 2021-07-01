@@ -2,19 +2,20 @@ import Foundation
 import UIKit
 
 protocol SwipeControllerDelegate: AnyObject {
-    func swipeController(_ controller: SwipeController, canBeginEditingSwipeableFor orientation: SwipeActionsOrientation) -> Bool
+    func swipeController(
+        _ controller: SwipeController,
+        canBeginEditingSwipeableFor orientation: SwipeActionsOrientation
+    ) -> Bool
 
-    func swipeController(_ controller: SwipeController, editActionsForSwipeableFor orientation: SwipeActionsOrientation) -> [SwipeAction]?
+    func swipeController(
+        _ controller: SwipeController,
+        editActionsForSwipeableFor orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]?
 
-    func swipeController(_ controller: SwipeController, editActionsOptionsForSwipeableFor orientation: SwipeActionsOrientation) -> SwipeOptions
-
-    func swipeController(_ controller: SwipeController, willBeginEditingSwipeableFor orientation: SwipeActionsOrientation)
-
-    func swipeController(_ controller: SwipeController, didEndEditingSwipeableFor orientation: SwipeActionsOrientation)
-
-    func swipeController(_ controller: SwipeController, didDeleteSwipeableAt indexPath: IndexPath)
-
-    func swipeController(_ controller: SwipeController, visibleRectFor scrollView: UIScrollView) -> CGRect?
+    func swipeController(
+        _ controller: SwipeController,
+        editActionsOptionsForSwipeableFor orientation: SwipeActionsOrientation
+    ) -> SwipeOptions
 }
 
 class SwipeController: NSObject {
@@ -86,12 +87,22 @@ class SwipeController: NSObject {
                 showActionsView(for: orientation)
             }
         case .changed:
-            guard let actionsView = swipeable.actionsView, let actionsContainerView = self.actionsContainerView else { return }
-            guard swipeable.state.isActive else { return }
+            guard
+                let actionsView = swipeable.actionsView,
+                let actionsContainerView = self.actionsContainerView,
+                swipeable.state.isActive
+            else {
+                return
+            }
 
             if swipeable.state == .animatingToCenter {
-                let swipedCell = scrollView?.swipeables.first(where: { $0.state == .dragging || $0.state == .left || $0.state == .right }) as? UIView
-                if let swipedCell = swipedCell, self.swipeable != nil, swipedCell != self.swipeable! {
+                let swipedCell = scrollView?
+                    .swipeables
+                    .first { $0.state == .dragging || $0.state == .right } as? UIView
+
+                if let swipedCell = swipedCell,
+                   self.swipeable != nil,
+                   swipedCell != self.swipeable! {
                     return
                 }
             }
@@ -104,67 +115,39 @@ class SwipeController: NSObject {
             if (translation + originalCenter - swipeable.bounds.midX) * actionsView.orientation.scale > 0 {
                 target.center.x = gesture.elasticTranslation(in: target,
                                                              withLimit: .zero,
-                                                             fromOriginalCenter: CGPoint(x: originalCenter, y: 0)).x
+                                                             fromOriginalCenter: CGPoint(x: originalCenter,
+                                                                                         y: 0)).x
                 swipeable.actionsView?.visibleWidth = abs((swipeable as Swipeable).frame.minX)
                 scrollRatio = elasticScrollRatio
                 return
             }
 
-            if let expansionStyle = actionsView.options.expansionStyle, let scrollView = scrollView {
-                let referenceFrame = actionsContainerView != swipeable ? actionsContainerView.frame : nil
-                let expanded = expansionStyle.shouldExpand(view: swipeable, gesture: gesture, in: scrollView, within: referenceFrame)
-                let targetOffset = expansionStyle.targetOffset(for: swipeable)
-                let currentOffset = abs(translation + originalCenter - swipeable.bounds.midX)
+            target.center.x = gesture.elasticTranslation(
+                in: target,
+                withLimit: CGSize(width: actionsView.preferredWidth, height: 0),
+                fromOriginalCenter: CGPoint(x: originalCenter, y: 0),
+                applyingRatio: elasticScrollRatio
+            ).x
+            swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
 
-                if expanded && !actionsView.expanded && targetOffset > currentOffset {
-                    let centerForTranslationToEdge = swipeable.bounds.midX - targetOffset * actionsView.orientation.scale
-                    let delta = centerForTranslationToEdge - originalCenter
-
-                    animate(toOffset: centerForTranslationToEdge)
-                    gesture.setTranslation(CGPoint(x: delta, y: 0), in: swipeable.superview!)
-                } else {
-                    target.center.x = gesture.elasticTranslation(in: target,
-                                                                 withLimit: CGSize(width: targetOffset, height: 0),
-                                                                 fromOriginalCenter: CGPoint(x: originalCenter, y: 0),
-                                                                 applyingRatio: expansionStyle.targetOverscrollElasticity).x
-                    swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
-                }
-
-                actionsView.setExpanded(expanded: expanded, feedback: true)
-            } else {
-                target.center.x = gesture.elasticTranslation(in: target,
-                                                             withLimit: CGSize(width: actionsView.preferredWidth, height: 0),
-                                                             fromOriginalCenter: CGPoint(x: originalCenter, y: 0),
-                                                             applyingRatio: elasticScrollRatio).x
-                swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
-
-                if (target.center.x - originalCenter) / translation != 1.0 {
-                    scrollRatio = elasticScrollRatio
-                }
+            if (target.center.x - originalCenter) / translation != 1.0 {
+                scrollRatio = elasticScrollRatio
             }
         case .ended, .cancelled, .failed:
-            guard let actionsView = swipeable.actionsView, let actionsContainerView = self.actionsContainerView else { return }
+            guard let actionsContainerView = self.actionsContainerView else { return }
             if swipeable.state.isActive == false && swipeable.bounds.midX == target.center.x {
                 return
             }
 
             swipeable.state = targetState(forVelocity: velocity)
 
-            if actionsView.expanded == true, let expandedAction = actionsView.expandableAction {
-                perform(action: expandedAction)
-            } else {
-                let targetOffset = targetCenter(active: swipeable.state.isActive)
-                let distance = targetOffset - actionsContainerView.center.x
-                let normalizedVelocity = velocity.x * scrollRatio / distance
+            let targetOffset = targetCenter(active: swipeable.state.isActive)
+            let distance = targetOffset - actionsContainerView.center.x
+            let normalizedVelocity = velocity.x * scrollRatio / distance
 
-                animate(toOffset: targetOffset, withInitialVelocity: normalizedVelocity) { _ in
-                    if self.swipeable?.state == .center {
-                        self.reset()
-                    }
-                }
-
-                if !swipeable.state.isActive {
-                    delegate?.swipeController(self, didEndEditingSwipeableFor: actionsView.orientation)
+            animate(toOffset: targetOffset, withInitialVelocity: normalizedVelocity) { _ in
+                if self.swipeable?.state == .center {
+                    self.reset()
                 }
             }
         default: break
@@ -185,8 +168,6 @@ class SwipeController: NSObject {
 
         configureActionsView(with: actions, for: orientation)
 
-        delegate?.swipeController(self, willBeginEditingSwipeableFor: orientation)
-
         return true
     }
 
@@ -197,21 +178,13 @@ class SwipeController: NSObject {
             return
         }
 
-        let options = delegate?.swipeController(self, editActionsOptionsForSwipeableFor: orientation) ?? SwipeOptions()
+        let options = delegate?
+            .swipeController(self, editActionsOptionsForSwipeableFor: orientation) ?? SwipeOptions()
 
         swipeable.actionsView?.removeFromSuperview()
         swipeable.actionsView = nil
 
-        var contentEdgeInsets = UIEdgeInsets.zero
-        if let visibleTableViewRect = delegate?.swipeController(self, visibleRectFor: scrollView) {
-            let frame = (swipeable as Swipeable).frame
-            let visibleSwipeableRect = frame.intersection(visibleTableViewRect)
-            if visibleSwipeableRect.isNull == false {
-                let top = visibleSwipeableRect.minY > frame.minY ? max(0, visibleSwipeableRect.minY - frame.minY) : 0
-                let bottom = max(0, frame.size.height - visibleSwipeableRect.size.height - top)
-                contentEdgeInsets = UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
-            }
-        }
+        let contentEdgeInsets = UIEdgeInsets.zero
 
         let actionsView = SwipeActionsView(contentEdgeInsets: contentEdgeInsets,
                                            maxSize: swipeable.bounds.size,
@@ -226,7 +199,6 @@ class SwipeController: NSObject {
         actionsView.heightAnchor.constraint(equalTo: swipeable.heightAnchor).isActive = true
         actionsView.widthAnchor.constraint(equalTo: swipeable.widthAnchor, multiplier: 2).isActive = true
         actionsView.topAnchor.constraint(equalTo: swipeable.topAnchor).isActive = true
-
         actionsView.leftAnchor.constraint(equalTo: actionsContainerView.rightAnchor).isActive = true
 
         actionsView.setNeedsUpdateConstraints()
@@ -236,7 +208,12 @@ class SwipeController: NSObject {
         swipeable.state = .dragging
     }
 
-    func animate(duration: Double = 0.7, toOffset offset: CGFloat, withInitialVelocity velocity: CGFloat = 0, completion: ((Bool) -> Void)? = nil) {
+    func animate(
+        duration: Double = 0.7,
+        toOffset offset: CGFloat,
+        withInitialVelocity velocity: CGFloat = 0,
+        completion: ((Bool) -> Void)? = nil
+    ) {
         stopAnimatorIfNeeded()
 
         swipeable?.layoutIfNeeded()
@@ -268,21 +245,6 @@ class SwipeController: NSObject {
         animator.startAnimation()
     }
 
-    func traitCollectionDidChange(from previousTraitCollrection: UITraitCollection?, to _: UITraitCollection) {
-        guard let swipeable = self.swipeable,
-              let actionsContainerView = self.actionsContainerView,
-              previousTraitCollrection != nil else {
-            return
-        }
-
-        if swipeable.state == .left || swipeable.state == .right {
-            let targetOffset = targetCenter(active: swipeable.state.isActive)
-            actionsContainerView.center = CGPoint(x: targetOffset, y: actionsContainerView.center.y)
-            swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
-            swipeable.layoutIfNeeded()
-        }
-    }
-
     func stopAnimatorIfNeeded() {
         if animator?.isRunning == true {
             animator?.stopAnimation(true)
@@ -294,22 +256,10 @@ class SwipeController: NSObject {
         hideSwipe(animated: true)
     }
 
-    @objc
-    func handleTablePan(gesture: UIPanGestureRecognizer) {
-        if gesture.state == .began {
-            hideSwipe(animated: true)
-        }
-    }
-
     func targetState(forVelocity velocity: CGPoint) -> SwipeState {
         guard let actionsView = swipeable?.actionsView else { return .center }
 
-        switch actionsView.orientation {
-        case .left:
-            return (velocity.x < 0 && !actionsView.expanded) ? .center : .left
-        case .right:
-            return (velocity.x > 0 && !actionsView.expanded) ? .center : .right
-        }
+        return (velocity.x > 0 && !actionsView.expanded) ? .center : .right
     }
 
     func targetCenter(active: Bool) -> CGFloat {
@@ -365,21 +315,7 @@ extension SwipeController: SwipeActionsViewDelegate {
     }
 
     func perform(action: SwipeAction) {
-        guard let actionsView = swipeable?.actionsView else { return }
-
-        if action == actionsView.expandableAction, let expansionStyle = actionsView.options.expansionStyle {
-            // Trigger the expansion (may already be expanded from drag)
-            actionsView.setExpanded(expanded: true)
-
-            switch expansionStyle.completionAnimation {
-            case .bounce:
-                perform(action: action, hide: true)
-            case .fill(let fillOption):
-                performFillAction(action: action, fillOption: fillOption)
-            }
-        } else {
-            perform(action: action, hide: action.hidesWhenSelected)
-        }
+        perform(action: action, hide: action.hidesWhenSelected)
     }
 
     func perform(action: SwipeAction, hide: Bool) {
@@ -390,63 +326,6 @@ extension SwipeController: SwipeActionsViewDelegate {
         }
 
         action.handler?(action, indexPath)
-    }
-
-    func performFillAction(action: SwipeAction, fillOption: SwipeExpansionStyle.FillOptions) {
-        guard let swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
-        guard let actionsView = swipeable.actionsView, let indexPath = swipeable.indexPath else { return }
-
-        let newCenter = swipeable.bounds.midX - (swipeable.bounds.width + actionsView.minimumButtonWidth) * actionsView.orientation.scale
-
-        action.completionHandler = { [weak self] style in
-            guard let self = self else { return }
-            action.completionHandler = nil
-
-            self.delegate?.swipeController(self, didEndEditingSwipeableFor: actionsView.orientation)
-
-            switch style {
-            case .delete:
-                actionsContainerView.mask = actionsView.createDeletionMask()
-
-                self.delegate?.swipeController(self, didDeleteSwipeableAt: indexPath)
-
-                UIView.animate(withDuration: 0.3, animations: {
-                    guard let actionsContainerView = self.actionsContainerView else { return }
-
-                    actionsContainerView.center.x = newCenter
-                    actionsContainerView.mask?.frame.size.height = 0
-                    swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
-
-                    if fillOption.timing == .after {
-                        actionsView.alpha = 0
-                    }
-                }) { [weak self] _ in
-                    self?.actionsContainerView?.mask = nil
-                    self?.resetSwipe()
-                    self?.reset()
-                }
-            case .reset:
-                self.hideSwipe(animated: true)
-            }
-        }
-
-        let invokeAction = {
-            action.handler?(action, indexPath)
-
-            if let style = fillOption.autoFulFillmentStyle {
-                action.fulfill(with: style)
-            }
-        }
-
-        animate(duration: 0.3, toOffset: newCenter) { _ in
-            if fillOption.timing == .after {
-                invokeAction()
-            }
-        }
-
-        if fillOption.timing == .with {
-            invokeAction()
-        }
     }
 
     func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
@@ -468,23 +347,6 @@ extension SwipeController: SwipeActionsViewDelegate {
             swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
             reset()
         }
-
-        delegate?.swipeController(self, didEndEditingSwipeableFor: actionView.orientation)
-    }
-
-    func resetSwipe() {
-        guard let swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
-
-        let targetCenter = self.targetCenter(active: false)
-
-        actionsContainerView.center = CGPoint(x: targetCenter, y: actionsContainerView.center.y)
-        swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
-    }
-
-    func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        setSwipeOffset(.greatestFiniteMagnitude * orientation.scale * -1,
-                       animated: animated,
-                       completion: completion)
     }
 
     func setSwipeOffset(_ offset: CGFloat, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {

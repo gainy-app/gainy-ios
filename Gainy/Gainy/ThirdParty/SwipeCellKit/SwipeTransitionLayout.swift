@@ -13,7 +13,13 @@ protocol SwipeTransitionLayout {
 struct ActionsViewLayoutContext {
     // MARK: Lifecycle
 
-    init(numberOfActions: Int, orientation: SwipeActionsOrientation, contentSize: CGSize = .zero, visibleWidth: CGFloat = 0, minimumButtonWidth: CGFloat = 0) {
+    init(
+        numberOfActions: Int,
+        orientation: SwipeActionsOrientation,
+        contentSize: CGSize = .zero,
+        visibleWidth: CGFloat = 0,
+        minimumButtonWidth: CGFloat = 0
+    ) {
         self.numberOfActions = numberOfActions
         self.orientation = orientation
         self.contentSize = contentSize
@@ -43,14 +49,22 @@ struct ActionsViewLayoutContext {
 class BorderTransitionLayout: SwipeTransitionLayout {
     func container(view _: UIView, didChangeVisibleWidthWithContext _: ActionsViewLayoutContext) {}
 
-    func layout(view: UIView, atIndex index: Int, with context: ActionsViewLayoutContext) {
+    func layout(
+        view: UIView,
+        atIndex index: Int,
+        with context: ActionsViewLayoutContext
+    ) {
         let diff = context.visibleWidth - context.contentSize.width
-        view.frame.origin.x = (CGFloat(index) * context.contentSize.width / CGFloat(context.numberOfActions) + diff) * context.orientation.scale
+        view.frame.origin.x =
+            (CGFloat(index) * context.contentSize.width /
+            CGFloat(context.numberOfActions) + diff) *
+            context.orientation.scale
     }
 
     func visibleWidthsForViews(with context: ActionsViewLayoutContext) -> [CGFloat] {
         let diff = context.visibleWidth - context.contentSize.width
-        let visibleWidth = context.contentSize.width / CGFloat(context.numberOfActions) + diff
+        let visibleWidth =
+            context.contentSize.width / CGFloat(context.numberOfActions) + diff
 
         // visible widths are all the same regardless of the action view position
         return (0..<context.numberOfActions).map { _ in visibleWidth }

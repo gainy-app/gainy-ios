@@ -97,7 +97,7 @@ class UIViewSpringAnimator: SwipeAnimator {
                        delay: delay,
                        usingSpringWithDamping: damping,
                        initialSpringVelocity: velocity,
-                       options: [.curveEaseInOut, .allowUserInteraction],
+                       options: [.curveEaseOut, .allowUserInteraction],
                        animations: animations,
                        completion: completion)
     }
