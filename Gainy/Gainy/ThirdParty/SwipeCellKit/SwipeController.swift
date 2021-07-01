@@ -226,8 +226,8 @@ class SwipeController: NSObject {
             if velocity != 0 {
                 let velocity = CGVector(dx: velocity, dy: velocity)
                 let parameters = UISpringTimingParameters(
-                    mass: 1.0,
-                    stiffness: 100,
+                    mass: 0.2,
+                    stiffness: 50,
                     damping: 18,
                     initialVelocity: velocity
                 )
