@@ -13,7 +13,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         contentView.addSubview(plusButton)
 
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = .black
     }
 
     @available(*, unavailable)
