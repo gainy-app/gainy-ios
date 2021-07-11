@@ -223,7 +223,6 @@
 		3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInstructor.swift; sourceTree = "<group>"; };
 		3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkOption.swift; sourceTree = "<group>"; };
 		3AE795E626638FBE002B40D6 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
-		3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppsFlyerLib.framework; sourceTree = "<group>"; };
 		3AE90363266A4EFD00574923 /* AFEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFEvent.swift; sourceTree = "<group>"; };
 		3AE90369266A507900574923 /* AFParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFParameter.swift; sourceTree = "<group>"; };
 		3AE9036D266A507A00574923 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
@@ -776,7 +775,6 @@
 			isa = PBXGroup;
 			children = (
 				3A5ADA51268DA15F008659E8 /* SwipeCellKit */,
-				3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
