@@ -57,15 +57,11 @@
 		3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A930EE3265C190C000FD3EB /* LaunchScreen.storyboard */; };
 		3A930EF0265C190C000FD3EB /* GainyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EEF265C190C000FD3EB /* GainyTests.swift */; };
 		3A930EFB265C190C000FD3EB /* GainyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A930EFA265C190C000FD3EB /* GainyUITests.swift */; };
-		3A9FB0DD266AAF4A00EC85D4 /* ApolloCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; };
-		3A9FB0DE266AAF4A00EC85D4 /* ApolloCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB0E1266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift */; };
 		3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9FB0E5266B853200EC85D4 /* RoundedCollectionViewCell.swift */; };
 		3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */; };
 		3AA52C86266012D8006A6961 /* DiscoverCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3AA52C85266012D8006A6961 /* DiscoverCollections.graphql */; };
 		3AA52C91266013E1006A6961 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C90266013E1006A6961 /* Network.swift */; };
-		3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; };
-		3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA52C96266014BB006A6961 /* Apollo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
 		3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */; };
 		3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40F5C266021BD005679DE /* BundleReader.swift */; };
@@ -127,21 +123,6 @@
 			remoteInfo = Gainy;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		3AA52C99266014BB006A6961 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				3A9FB0DE266AAF4A00EC85D4 /* ApolloCore.framework in Embed Frameworks */,
-				3AA52C98266014BB006A6961 /* Apollo.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHorizontalView.swift; sourceTree = "<group>"; };
@@ -260,8 +241,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */,
-				3A9FB0DD266AAF4A00EC85D4 /* ApolloCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,7 +820,6 @@
 				3A930ED2265C1909000FD3EB /* Frameworks */,
 				3A930ED3265C1909000FD3EB /* Resources */,
 				3A930F2E265CC679000FD3EB /* SwiftLint */,
-				3AA52C99266014BB006A6961 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
