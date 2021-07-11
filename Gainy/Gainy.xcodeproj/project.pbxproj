@@ -98,7 +98,6 @@
 		3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795B6266386B8002B40D6 /* LaunchInstructor.swift */; };
 		3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795D526638F4E002B40D6 /* DeepLinkOption.swift */; };
 		3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE795E626638FBE002B40D6 /* MainCoordinator.swift */; };
-		3AE90354266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE90353266A2FDF00574923 /* AppsFlyerLib.framework */; };
 		3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE90363266A4EFD00574923 /* AFEvent.swift */; };
 		3AE9036A266A507900574923 /* AFParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE90369266A507900574923 /* AFParameter.swift */; };
 		3AE9036F266A507A00574923 /* AFConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9036E266A507A00574923 /* AFConfig.swift */; };
@@ -262,7 +261,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AA52C97266014BB006A6961 /* Apollo.framework in Frameworks */,
-				3AE90354266A2FDF00574923 /* AppsFlyerLib.framework in Frameworks */,
 				3A9FB0DD266AAF4A00EC85D4 /* ApolloCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
