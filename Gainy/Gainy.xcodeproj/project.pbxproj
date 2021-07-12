@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2726A48D4500FAF107 /* Apollo */; };
 		1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2B26A4A51200FAF107 /* AppsFlyerLib */; };
+		1C3A2C3126AEB64700FAF107 /* CollectioDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C2E26AEB64700FAF107 /* CollectioDetails.graphql.swift */; };
+		1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */; };
+		1C3A2C3326AEB64700FAF107 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C3026AEB64700FAF107 /* Types.graphql.swift */; };
 		3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */; };
 		3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A01FBEA26863417007F6FA3 /* CollectionCardCell.swift */; };
 		3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A01FBF2268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift */; };
@@ -64,7 +67,6 @@
 		3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA1CA73266A643C005C0712 /* UIFont+Rounded.swift */; };
 		3AA52C86266012D8006A6961 /* DiscoverCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3AA52C85266012D8006A6961 /* DiscoverCollections.graphql */; };
 		3AA52C91266013E1006A6961 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C90266013E1006A6961 /* Network.swift */; };
-		3AA52C9F26601697006A6961 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA52C9E26601697006A6961 /* API.swift */; };
 		3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */; };
 		3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40F5C266021BD005679DE /* BundleReader.swift */; };
 		3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */; };
@@ -127,6 +129,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C3A2C2E26AEB64700FAF107 /* CollectioDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectioDetails.graphql.swift; sourceTree = "<group>"; };
+		1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollections.graphql.swift; sourceTree = "<group>"; };
+		1C3A2C3026AEB64700FAF107 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHorizontalView.swift; sourceTree = "<group>"; };
 		3A01FBEA26863417007F6FA3 /* CollectionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCardCell.swift; sourceTree = "<group>"; };
 		3A01FBF2268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsTwoColumnGridFlowSectionLayout.swift; sourceTree = "<group>"; };
@@ -191,7 +196,6 @@
 		3AA52C85266012D8006A6961 /* DiscoverCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DiscoverCollections.graphql; sourceTree = "<group>"; };
 		3AA52C90266013E1006A6961 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		3AA52C96266014BB006A6961 /* Apollo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Apollo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AA52C9E26601697006A6961 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetailsViewCell.swift; sourceTree = "<group>"; };
 		3AD40F5C266021BD005679DE /* BundleReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleReader.swift; sourceTree = "<group>"; };
 		3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+ReuseCells.swift"; sourceTree = "<group>"; };
@@ -264,6 +268,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1C3A2C2D26AEB56600FAF107 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				1C3A2C2E26AEB64700FAF107 /* CollectioDetails.graphql.swift */,
+				1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */,
+				1C3A2C3026AEB64700FAF107 /* Types.graphql.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		3A01FBFA26873815007F6FA3 /* CollectionCardCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -649,7 +663,7 @@
 		3AA52C7C26600FF2006A6961 /* Schema */ = {
 			isa = PBXGroup;
 			children = (
-				3AA52C9E26601697006A6961 /* API.swift */,
+				1C3A2C2D26AEB56600FAF107 /* API */,
 				3AA52C7E2660101B006A6961 /* schema.json */,
 				3AA52C85266012D8006A6961 /* DiscoverCollections.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectioDetails.graphql */,
@@ -969,7 +983,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" \"${PROJECT_DIR}/Gainy/Services/GraphQL/Schema/API.swift\"\n";
+			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" \"${PROJECT_DIR}/Gainy/Services/GraphQL/Schema/API\"\n\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"https://gainy-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: TOKEN\"\n#mv \"schema.json\" \"Services/GraphQL/Schema\"\n";
 		};
 		3A930F2E265CC679000FD3EB /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1004,6 +1018,7 @@
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
+				1C3A2C3326AEB64700FAF107 /* Types.graphql.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
@@ -1016,7 +1031,6 @@
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
-				3AA52C9F26601697006A6961 /* API.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
@@ -1053,6 +1067,7 @@
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
 				3A498F63266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
+				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
@@ -1065,6 +1080,7 @@
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,
+				1C3A2C3126AEB64700FAF107 /* CollectioDetails.graphql.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
