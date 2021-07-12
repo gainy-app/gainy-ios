@@ -1,4 +1,5 @@
 import Apollo
+import Foundation
 
 final class Network {
     static let shared = Network()
@@ -7,6 +8,7 @@ final class Network {
 
     private(set) lazy var apollo: ApolloClient = {
         let store = ApolloStore(cache: InMemoryNormalizedCache())
+        
         let provider = NetworkInterceptorProvider(
             client: URLSessionClient(),
             store: store
@@ -24,7 +26,7 @@ final class Network {
     let graphQLEndpointUrl = URL(string: "https://gainy-dev.herokuapp.com/v1/graphql")!
 }
 
-final class NetworkInterceptorProvider: LegacyInterceptorProvider {
+final class NetworkInterceptorProvider: DefaultInterceptorProvider {
     override func interceptors<Operation: GraphQLOperation>(
         for operation: Operation
     ) -> [ApolloInterceptor] {
