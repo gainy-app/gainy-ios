@@ -108,7 +108,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             ]
         )
 
-        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 35 : 18
+        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 40 : 20
 
         backImageView.frame = CGRect(
             x: 0,
