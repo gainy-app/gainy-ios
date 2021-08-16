@@ -1,0 +1,11 @@
+query FetchNews($symbol: String!) {
+    fetchNewsData(symbol: $symbol) {
+        datetime
+        description
+        imageUrl
+        sourceName
+        sourceUrl
+        title
+        url
+    }
+}

@@ -1,12 +1,17 @@
 query DiscoverCollections {
-  collections {
-    id
-    image
-    name
-    description
-    stocks_count
-    favorite_collections {
-      is_default
-    }
+  app_collections {
+  name
+  image_url
+  id
+  description
+  profile_favorite_collections {
+   profile_id
+   collection_id
   }
+  collection_symbols_aggregate {
+   aggregate {
+    count
+   }
+  }
+ }
 }

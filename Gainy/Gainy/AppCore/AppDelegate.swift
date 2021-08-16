@@ -1,5 +1,6 @@
 import AppsFlyerLib
 import UIKit
+import Firebase
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -8,7 +9,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         initializeAppsFlyer()
-
+        initFirebase()
         return true
     }
 
@@ -43,6 +44,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                          selector: NSSelectorFromString("sendLaunch"),
                          name: UIApplication.didBecomeActiveNotification,
                          object: nil)
+    }
+    
+    private func initFirebase() {
+        FirebaseApp.configure()
     }
 }
 

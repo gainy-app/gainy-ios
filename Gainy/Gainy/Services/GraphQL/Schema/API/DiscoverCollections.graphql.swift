@@ -9,16 +9,23 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query DiscoverCollections {
-      collections {
+      app_collections {
         __typename
-        id
-        image
         name
+        image_url
+        id
         description
-        stocks_count
-        favorite_collections {
+        profile_favorite_collections {
           __typename
-          is_default
+          profile_id
+          collection_id
+        }
+        collection_symbols_aggregate {
+          __typename
+          aggregate {
+            __typename
+            count
+          }
         }
       }
     }
@@ -34,7 +41,7 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections", type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
+        GraphQLField("app_collections", type: .nonNull(.list(.nonNull(.object(AppCollection.selections))))),
       ]
     }
 
@@ -44,32 +51,32 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(collections: [Collection]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
+    public init(appCollections: [AppCollection]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "app_collections": appCollections.map { (value: AppCollection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "collections"
-    public var collections: [Collection] {
+    /// fetch data from the table: "app.collections"
+    public var appCollections: [AppCollection] {
       get {
-        return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
+        return (resultMap["app_collections"] as! [ResultMap]).map { (value: ResultMap) -> AppCollection in AppCollection(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: Collection) -> ResultMap in value.resultMap }, forKey: "collections")
+        resultMap.updateValue(newValue.map { (value: AppCollection) -> ResultMap in value.resultMap }, forKey: "app_collections")
       }
     }
 
-    public struct Collection: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["collections"]
+    public struct AppCollection: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["app_collections"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(String.self))),
-          GraphQLField("image", type: .nonNull(.scalar(String.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("description", type: .nonNull(.scalar(String.self))),
-          GraphQLField("stocks_count", type: .nonNull(.scalar(String.self))),
-          GraphQLField("favorite_collections", type: .nonNull(.list(.nonNull(.object(FavoriteCollection.selections))))),
+          GraphQLField("image_url", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("description", type: .scalar(String.self)),
+          GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
+          GraphQLField("collection_symbols_aggregate", type: .nonNull(.object(CollectionSymbolsAggregate.selections))),
         ]
       }
 
@@ -79,8 +86,8 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: String, image: String, name: String, description: String, stocksCount: String, favoriteCollections: [FavoriteCollection]) {
-        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "image": image, "name": name, "description": description, "stocks_count": stocksCount, "favorite_collections": favoriteCollections.map { (value: FavoriteCollection) -> ResultMap in value.resultMap }])
+      public init(name: String, imageUrl: String, id: Int, description: String? = nil, profileFavoriteCollections: [ProfileFavoriteCollection], collectionSymbolsAggregate: CollectionSymbolsAggregate) {
+        self.init(unsafeResultMap: ["__typename": "app_collections", "name": name, "image_url": imageUrl, "id": id, "description": description, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "collection_symbols_aggregate": collectionSymbolsAggregate.resultMap])
       }
 
       public var __typename: String {
@@ -89,24 +96,6 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var id: String {
-        get {
-          return resultMap["id"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "id")
-        }
-      }
-
-      public var image: String {
-        get {
-          return resultMap["image"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "image")
         }
       }
 
@@ -119,41 +108,61 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
         }
       }
 
-      public var description: String {
+      public var imageUrl: String {
         get {
-          return resultMap["description"]! as! String
+          return resultMap["image_url"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "image_url")
+        }
+      }
+
+      public var id: Int {
+        get {
+          return resultMap["id"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var description: String? {
+        get {
+          return resultMap["description"] as? String
         }
         set {
           resultMap.updateValue(newValue, forKey: "description")
         }
       }
 
-      public var stocksCount: String {
-        get {
-          return resultMap["stocks_count"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "stocks_count")
-        }
-      }
-
       /// An array relationship
-      public var favoriteCollections: [FavoriteCollection] {
+      public var profileFavoriteCollections: [ProfileFavoriteCollection] {
         get {
-          return (resultMap["favorite_collections"] as! [ResultMap]).map { (value: ResultMap) -> FavoriteCollection in FavoriteCollection(unsafeResultMap: value) }
+          return (resultMap["profile_favorite_collections"] as! [ResultMap]).map { (value: ResultMap) -> ProfileFavoriteCollection in ProfileFavoriteCollection(unsafeResultMap: value) }
         }
         set {
-          resultMap.updateValue(newValue.map { (value: FavoriteCollection) -> ResultMap in value.resultMap }, forKey: "favorite_collections")
+          resultMap.updateValue(newValue.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, forKey: "profile_favorite_collections")
         }
       }
 
-      public struct FavoriteCollection: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["favorite_collections"]
+      /// An aggregate relationship
+      public var collectionSymbolsAggregate: CollectionSymbolsAggregate {
+        get {
+          return CollectionSymbolsAggregate(unsafeResultMap: resultMap["collection_symbols_aggregate"]! as! ResultMap)
+        }
+        set {
+          resultMap.updateValue(newValue.resultMap, forKey: "collection_symbols_aggregate")
+        }
+      }
+
+      public struct ProfileFavoriteCollection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_profile_favorite_collections"]
 
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("is_default", type: .nonNull(.scalar(Bool.self))),
+            GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("collection_id", type: .nonNull(.scalar(Int.self))),
           ]
         }
 
@@ -163,8 +172,8 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(isDefault: Bool) {
-          self.init(unsafeResultMap: ["__typename": "favorite_collections", "is_default": isDefault])
+        public init(profileId: Int, collectionId: Int) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_favorite_collections", "profile_id": profileId, "collection_id": collectionId])
         }
 
         public var __typename: String {
@@ -176,12 +185,99 @@ public final class DiscoverCollectionsQuery: GraphQLQuery {
           }
         }
 
-        public var isDefault: Bool {
+        public var profileId: Int {
           get {
-            return resultMap["is_default"]! as! Bool
+            return resultMap["profile_id"]! as! Int
           }
           set {
-            resultMap.updateValue(newValue, forKey: "is_default")
+            resultMap.updateValue(newValue, forKey: "profile_id")
+          }
+        }
+
+        public var collectionId: Int {
+          get {
+            return resultMap["collection_id"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "collection_id")
+          }
+        }
+      }
+
+      public struct CollectionSymbolsAggregate: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_collection_symbols_aggregate"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("aggregate", type: .object(Aggregate.selections)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(aggregate: Aggregate? = nil) {
+          self.init(unsafeResultMap: ["__typename": "app_collection_symbols_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var aggregate: Aggregate? {
+          get {
+            return (resultMap["aggregate"] as? ResultMap).flatMap { Aggregate(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "aggregate")
+          }
+        }
+
+        public struct Aggregate: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["app_collection_symbols_aggregate_fields"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("count", type: .nonNull(.scalar(Int.self))),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(count: Int) {
+            self.init(unsafeResultMap: ["__typename": "app_collection_symbols_aggregate_fields", "count": count])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var count: Int {
+            get {
+              return resultMap["count"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "count")
+            }
           }
         }
       }

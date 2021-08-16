@@ -1,11 +1,15 @@
 query CollectionDetails {
-  collections {
+  app_collections {
     id
-    image
+    image_url
     name
     description
-    stocks_count
-    collection_tickers_symbols {
+    collection_symbols_aggregate {
+      aggregate {
+        count
+      }
+    }
+    collection_symbols {
       ticker {
         symbol
         name

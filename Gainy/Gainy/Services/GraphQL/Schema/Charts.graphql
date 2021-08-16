@@ -1,0 +1,9 @@
+query DiscoverCharts($period: String!, $symbol: String!) {
+  fetchChartData(period: $period, symbol: $symbol) {
+    volume
+    open
+    low
+    datetime
+    close
+  }
+}

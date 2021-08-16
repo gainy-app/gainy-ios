@@ -1,23 +1,14 @@
 enum CollectionDTOMapper {
-    static func map(_ dto: DiscoverCollectionsQuery.Data.Collection) -> Collection {
-        guard let id = Int(dto.id), let stocksAmount = Int(dto.stocksCount) else {
-            return Collection(
-                id: 0,
-                image: dto.name.lowercased(),
-                name: dto.name,
-                description: dto.description,
-                stocksAmount: 0,
-                isInYourCollections: dto.favoriteCollections.first?.isDefault ?? false
-            )
-        }
-
+    static func map(_ dto: DiscoverCollectionsQuery.Data.AppCollection) -> Collection {
+        
+        //TODO: - profileFavoriteCollections check current User Profile ID
         return Collection(
-            id: id,
+            id: dto.id,
             image: dto.name.lowercased(),
             name: dto.name,
-            description: dto.description,
-            stocksAmount: stocksAmount,
-            isInYourCollections: dto.favoriteCollections.first?.isDefault ?? false
+            description: dto.description ?? "",
+            stocksAmount: Int(dto.collectionSymbolsAggregate.aggregate?.count ?? 0),
+            isInYourCollections: dto.profileFavoriteCollections.count > 0
         )
     }
 }

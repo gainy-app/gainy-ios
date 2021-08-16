@@ -4,7 +4,7 @@ import Foundation
 final class Network {
     static let shared = Network()
 
-    // TODO: normal singletone?
+    // TODO: normal singletone - yes
 
     private(set) lazy var apollo: ApolloClient = {
         let store = ApolloStore(cache: InMemoryNormalizedCache())
@@ -23,7 +23,7 @@ final class Network {
         )
     }()
 
-    let graphQLEndpointUrl = URL(string: "https://gainy-dev.herokuapp.com/v1/graphql")!
+    let graphQLEndpointUrl = URL(string: "https://gainy-managed-dev.herokuapp.com/v1/graphql")!
 }
 
 final class NetworkInterceptorProvider: DefaultInterceptorProvider {

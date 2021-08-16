@@ -5,7 +5,7 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
 }
 
-final class CollectionDetailsViewController: UIViewController, CollectionDetailsViewControllerProtocol {
+final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {
     // MARK: Internal
 
     // MARK: Properties
@@ -166,17 +166,19 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
     // MARK: Functions
 
     private func getRemoteData(completion: @escaping () -> Void) {
+        showNetworkLoader()
         Network.shared.apollo.fetch(query: CollectionDetailsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                DummyDataSource.remoteRawCollectionDetails = graphQLResult.data!.collections
+                guard let collections = graphQLResult.data?.appCollections else {completion(); return;}
+                DummyDataSource.remoteRawCollectionDetails = collections
 
                 let yourCollectionDetails: [CollectionDetails] = DummyDataSource
                     .yourCollections
                     .compactMap { yourCollection in
                         CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
                             DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                Int($0.id)! == yourCollection.id
+                                $0.id == yourCollection.id
                             })!
                         )
                     }
@@ -186,7 +188,7 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
                     .compactMap { recommendedCollection in
                         CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
                             DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                Int($0.id)! == recommendedCollection.id
+                                $0.id == recommendedCollection.id
                             })!
                         )
                     }
@@ -208,6 +210,7 @@ final class CollectionDetailsViewController: UIViewController, CollectionDetails
                 self?.initViewModelsFromData()
                 completion()
             }
+            self?.hideLoader()
         }
     }
 

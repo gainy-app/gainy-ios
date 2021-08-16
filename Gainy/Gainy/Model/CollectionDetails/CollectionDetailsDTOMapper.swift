@@ -1,15 +1,15 @@
 enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(
-        _ dto: CollectionDetailsQuery.Data.Collection
+        _ dto: CollectionDetailsQuery.Data.AppCollection
     ) -> CollectionDetails {
         CollectionDetails(
-            id: Int(dto.id)!,
+            id: dto.id,
             collectionBackgroundImage: dto.name.lowercased(),
             collectionName: dto.name,
-            collectionDescription: dto.description,
-            collectionStocksAmount: Int(dto.stocksCount)!,
+            collectionDescription: dto.description ?? "",
+            collectionStocksAmount: dto.collectionSymbolsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: false,
-            cards: dto.collectionTickersSymbols.map {
+            cards: dto.collectionSymbols.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
                     $0
                 )
@@ -18,16 +18,16 @@ enum CollectionDetailsDTOMapper {
     }
 
     static func mapAsCollectionFromYourCollections(
-        _ dto: CollectionDetailsQuery.Data.Collection
+        _ dto: CollectionDetailsQuery.Data.AppCollection
     ) -> CollectionDetails {
         CollectionDetails(
-            id: Int(dto.id)!,
+            id: dto.id,
             collectionBackgroundImage: dto.name.lowercased(),
             collectionName: dto.name,
-            collectionDescription: dto.description,
-            collectionStocksAmount: Int(dto.stocksCount)!,
+            collectionDescription: dto.description ?? "",
+            collectionStocksAmount: dto.collectionSymbolsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: true,
-            cards: dto.collectionTickersSymbols.map {
+            cards: dto.collectionSymbols.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
                     $0
                 )
@@ -38,13 +38,13 @@ enum CollectionDetailsDTOMapper {
     static func mapTickerDetails(
         _ dto: CollectionDetailsQuery
             .Data
-            .Collection
-            .CollectionTickersSymbol
+            .AppCollection
+            .CollectionSymbol
     ) -> TickerDetails {
         TickerDetails(
-            tickerSymbol: dto.ticker.symbol,
-            companyName: dto.ticker.name,
-            description: dto.ticker.description,
+            tickerSymbol: dto.ticker.symbol ?? "",
+            companyName: dto.ticker.name ?? "",
+            description: dto.ticker.description ?? "",
             financialMetrics: CollectionDetailsDTOMapper.mapFinancialMetrics(
                 dto.ticker.tickerFinancials.first!
             )
@@ -54,8 +54,8 @@ enum CollectionDetailsDTOMapper {
     static func mapFinancialMetrics(
         _ dto: CollectionDetailsQuery
             .Data
-            .Collection
-            .CollectionTickersSymbol
+            .AppCollection
+            .CollectionSymbol
             .Ticker
             .TickerFinancial
     ) -> TickerFinancialMetrics {
