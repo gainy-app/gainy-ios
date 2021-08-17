@@ -10,6 +10,41 @@ import MBProgressHUD
 
 class BaseViewController: UIViewController {
     
+    //MARK: - Helpers
+    
+    static var topViewController: UIViewController? {
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            return topController
+        }
+        return nil
+    }
+    
+    fileprivate var viewTapGesture: UITapGestureRecognizer?
+    var dismissKeyboardOnTap: Bool = false {
+        didSet {
+            if dismissKeyboardOnTap {
+                if self.viewTapGesture == nil {
+                    self.viewTapGesture = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.viewEndEditing))
+                    self.viewTapGesture?.cancelsTouchesInView = false
+                    self.viewTapGesture?.delegate = self
+                    self.view.addGestureRecognizer(self.viewTapGesture!)
+                }
+            } else {
+                if self.viewTapGesture != nil {
+                    self.view.removeGestureRecognizer(self.viewTapGesture!)
+                    self.viewTapGesture = nil
+                }
+            }
+        }
+    }
+    
+    @objc func viewEndEditing() {
+        self.view.endEditing(true)
+    }
+    
     //MARK: - Haptic
     
     private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
@@ -52,7 +87,15 @@ class BaseViewController: UIViewController {
     func hideLoader() {
         hudProgress?.hide(animated: true)
     }
-    
-    
-    
+}
+
+extension BaseViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if let touchView = touch.view {
+            if touchView is UIButton {
+                return false
+            }
+        }
+        return true
+    }
 }

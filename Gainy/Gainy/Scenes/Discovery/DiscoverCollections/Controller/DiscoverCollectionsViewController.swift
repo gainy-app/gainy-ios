@@ -327,7 +327,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.appCollections else {self.hideLoader(); completion(); return;}
+                guard let collections = graphQLResult.data?.appCollections else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    self.hideLoader()
+                    completion()
+                    return
+                }
                 
                 DummyDataSource.remoteRawCollections = collections
                 
@@ -483,6 +488,4 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         return previewParams
     }
 }
-
-extension DiscoverCollectionsViewController: UIGestureRecognizerDelegate {}
 

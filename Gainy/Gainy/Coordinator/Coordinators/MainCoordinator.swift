@@ -1,3 +1,6 @@
+import Firebase
+
+
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
 
@@ -19,7 +22,16 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     override func start() {
         showMainTabViewController()
-        //showCollectionDetailsViewController(with: 0)
+        if isLoggedIn {
+            //All fine )
+        } else {
+            //Show Onboarding
+        }
+    }
+    
+    /// FIRUser status
+    var isLoggedIn: Bool {
+        Auth.auth().currentUser != nil
     }
 
     // MARK: Private
