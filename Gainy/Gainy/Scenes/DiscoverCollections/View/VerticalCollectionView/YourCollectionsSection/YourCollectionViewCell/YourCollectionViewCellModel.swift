@@ -1,6 +1,7 @@
 struct YourCollectionViewCellModel {
     let id: Int
     let image: String
+    let imageUrl: String
     let name: String
     let description: String
     let stocksAmount: String

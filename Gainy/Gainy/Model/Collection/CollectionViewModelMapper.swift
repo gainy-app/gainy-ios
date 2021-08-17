@@ -3,6 +3,7 @@ enum CollectionViewModelMapper {
         YourCollectionViewCellModel(
             id: model.id,
             image: model.image,
+            imageUrl: model.imageUrl,
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",
@@ -14,6 +15,7 @@ enum CollectionViewModelMapper {
         RecommendedCollectionViewCellModel(
             id: model.id,
             image: model.image,
+            imageUrl: model.imageUrl,
             name: model.name,
             description: model.description,
             stocksAmount: "\(model.stocksAmount)",

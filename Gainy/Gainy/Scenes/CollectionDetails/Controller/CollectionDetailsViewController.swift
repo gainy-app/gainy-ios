@@ -170,7 +170,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         Network.shared.apollo.fetch(query: CollectionDetailsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.appCollections else {completion(); return;}
+                guard let collections = graphQLResult.data?.appCollections else {self?.hideLoader(); completion(); return;}
                 DummyDataSource.remoteRawCollectionDetails = collections
 
                 let yourCollectionDetails: [CollectionDetails] = DummyDataSource

@@ -78,6 +78,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
 
             cell.configureWith(
                 name: viewModel.name,
+                imageUrl: viewModel.imageUrl,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
                 imageName: viewModel.image,

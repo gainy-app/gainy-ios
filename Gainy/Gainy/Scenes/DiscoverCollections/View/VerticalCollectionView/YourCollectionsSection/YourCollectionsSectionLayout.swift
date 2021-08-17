@@ -70,6 +70,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
 
         if let viewModel = viewModel as? YourCollectionViewCellModel {
             cell.configureWith(name: viewModel.name,
+                               imageUrl: viewModel.imageUrl,
                                description: viewModel.description,
                                stocksAmount: viewModel.stocksAmount,
                                imageName: viewModel.image)

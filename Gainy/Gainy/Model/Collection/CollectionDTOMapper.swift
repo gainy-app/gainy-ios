@@ -5,6 +5,7 @@ enum CollectionDTOMapper {
         return Collection(
             id: dto.id,
             image: dto.name.lowercased(),
+            imageUrl: dto.imageUrl,
             name: dto.name,
             description: dto.description ?? "",
             stocksAmount: Int(dto.collectionSymbolsAggregate.aggregate?.count ?? 0),

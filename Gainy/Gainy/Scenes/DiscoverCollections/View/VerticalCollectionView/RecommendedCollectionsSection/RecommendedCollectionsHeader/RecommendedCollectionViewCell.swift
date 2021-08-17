@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     // MARK: Lifecycle
@@ -151,12 +152,13 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     func configureWith(
         name: String,
+        imageUrl: String,
         description: String,
         stocksAmount: String,
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.kf.setImage(with: URL(string: imageUrl))
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -191,12 +193,13 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
-            buttonState = .checked
-            tapHandler()
-        } else if let tapHandler = onCheckButtonPressed, buttonState == .checked {
-            buttonState = .unchecked
-            tapHandler()
-        }
+        //TODO: - Uncomment later
+//        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
+//            buttonState = .checked
+//            tapHandler()
+//        } else if let tapHandler = onCheckButtonPressed, buttonState == .checked {
+//            buttonState = .unchecked
+//            tapHandler()
+//        }
     }
 }

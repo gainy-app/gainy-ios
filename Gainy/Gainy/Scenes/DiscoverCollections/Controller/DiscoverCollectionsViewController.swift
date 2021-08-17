@@ -95,6 +95,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     let yourCollectionItem = YourCollectionViewCellModel(
                         id: modelItem.id,
                         image: modelItem.image,
+                        imageUrl: modelItem.imageUrl,
                         name: modelItem.name,
                         description: modelItem.description,
                         stocksAmount: modelItem.stocksAmount,
@@ -171,6 +172,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
             id: collectionItemToAdd.id,
             image: collectionItemToAdd.image,
+            imageUrl: collectionItemToAdd.imageUrl,
             name: collectionItemToAdd.name,
             description: collectionItemToAdd.description,
             stocksAmount: collectionItemToAdd.stocksAmount,
@@ -180,6 +182,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let yourCollectionItem = YourCollectionViewCellModel(
             id: collectionItemToAdd.id,
             image: collectionItemToAdd.image,
+            imageUrl: collectionItemToAdd.imageUrl,
             name: collectionItemToAdd.name,
             description: collectionItemToAdd.description,
             stocksAmount: collectionItemToAdd.stocksAmount,
@@ -196,6 +199,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         DummyDataSource.yourCollections.append(
             Collection(id: yourCollectionItem.id,
                        image: yourCollectionItem.image,
+                       imageUrl: yourCollectionItem.imageUrl,
                        name: yourCollectionItem.name,
                        description: yourCollectionItem.description,
                        stocksAmount: Int(yourCollectionItem.stocksAmount)!,
@@ -228,6 +232,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             let updatedRecommendedItem = RecommendedCollectionViewCellModel(
                 id: recommendedItem.id,
                 image: recommendedItem.image,
+                imageUrl: recommendedItem.imageUrl,
                 name: recommendedItem.name,
                 description: recommendedItem.description,
                 stocksAmount: recommendedItem.stocksAmount,
@@ -322,13 +327,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.appCollections else {completion(); return;}
+                guard let collections = graphQLResult.data?.appCollections else {self.hideLoader(); completion(); return;}
                 
                 DummyDataSource.remoteRawCollections = collections
                 
                 //TODO: - Check that Profile ID is in
-                let yourCollectionsDto = DummyDataSource.remoteRawCollections.prefix(10)
-                let recommendedDto = DummyDataSource.remoteRawCollections.prefix(20)
+                let yourCollectionsDto = DummyDataSource.remoteRawCollections
+                let recommendedDto = DummyDataSource.remoteRawCollections.prefix(20).shuffled()
                 DummyDataSource.yourCollections = yourCollectionsDto.map {
                     CollectionDTOMapper.map($0)
                 }
@@ -336,11 +341,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     CollectionDTOMapper.map($0)
                 }
                 
-                
                 self.initViewModelsFromData()
-                
                 completion()
-                
                 
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")

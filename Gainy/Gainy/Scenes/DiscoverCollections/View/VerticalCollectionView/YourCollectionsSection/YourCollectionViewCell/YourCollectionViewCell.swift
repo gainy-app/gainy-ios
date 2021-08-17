@@ -169,11 +169,12 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
 
     func configureWith(
         name: String,
+        imageUrl: String,
         description: String,
         stocksAmount: String,
         imageName: String
     ) {
-        backImageView.image = UIImage(named: imageName)
+        backImageView.kf.setImage(with: URL(string: imageUrl))
         backImageView.contentMode = .scaleAspectFill
 
         nameLabel.text = name
