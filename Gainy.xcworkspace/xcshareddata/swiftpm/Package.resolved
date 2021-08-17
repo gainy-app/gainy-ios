@@ -207,6 +207,15 @@
           "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
           "version": "1.17.0"
         }
+      },
+      {
+        "package": "SwiftHEXColors",
+        "repositoryURL": "https://github.com/thii/SwiftHEXColors.git",
+        "state": {
+          "branch": null,
+          "revision": "1f886cb20fedda14a5ac75efd09bc99c95b43a18",
+          "version": "1.4.1"
+        }
       }
     ]
   },
