@@ -2,6 +2,8 @@ import UIKit
 
 final class ViewControllerFactory {
     
+    
+    
     var isLightTheme: Bool {
         false
     }
@@ -16,18 +18,14 @@ final class ViewControllerFactory {
     }
     
     func instantiateMainTab(coordinator: MainCoordinator) -> MainTabBarViewController {
-        let vc = MainTabBarViewController()
-        vc.setViewControllers([instantiateDiscoverCollections(coordinator: coordinator), instantiateDemoController(2), instantiateDemoController(3), instantiateDemoController(4)], animated: false)
+        let vc = MainTabBarViewController.instantiate(.discovery)        
         return vc
     }
     
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
-        vc.tabBarItem = UITabBarItem(title: "Discovery", image: UIImage(named: "tab1_passive")!.withRenderingMode(.alwaysOriginal),
-                                     selectedImage: UIImage(named: "tab1_active")!.withRenderingMode(.alwaysOriginal))
-        vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
-        vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
+        setupTabWithIndex(vc: vc, tab: .discovery)
         vc.onGoToCollectionDetails = { initialPosition in
             coordinator.showCollectionDetailsViewController(with: initialPosition)
         }
@@ -48,11 +46,37 @@ final class ViewControllerFactory {
     
     func instantiateDemoController(_ index: Int) -> BaseViewController {
         let vc = BaseViewController()
-        
-        vc.tabBarItem = UITabBarItem(title: tabNames[index - 1], image: UIImage(named: "tab\(index)_passive")!.withRenderingMode(.alwaysOriginal),
-                                     selectedImage: UIImage(named: "tab\(index)_active")!.withRenderingMode(.alwaysOriginal))
+        setupTabWithIndex(vc: vc, tab: CustomTabBar.Tab.init(rawValue: index) ?? .discovery)
+        return vc
+    }
+    
+    /// Populating TabBarItem for specific tab
+    /// - Parameters:
+    ///   - vc: BaseViewController to update
+    ///   - tab: Tab name
+    private func setupTabWithIndex(vc: BaseViewController, tab: CustomTabBar.Tab) {
+        let index = tab.rawValue
+        vc.tabBarItem = UITabBarItem(title: tabNames[index], image: UIImage(named: "tab\(index + 1)_passive")!.withRenderingMode(.alwaysOriginal),
+                                     selectedImage: UIImage(named: "tab\(index + 1)_active")!.withRenderingMode(.alwaysOriginal))
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
+    }
+    
+    func instantiatePortfolioVC() -> PortfolioViewController {
+        let vc = PortfolioViewController.instantiate(.portfolio)
+        setupTabWithIndex(vc: vc, tab: .portfolio)
+        return vc
+    }
+    
+    func instantiateAnalyticsVC() -> AnalyticsViewController {
+        let vc = AnalyticsViewController.instantiate(.analytics)
+        setupTabWithIndex(vc: vc, tab: .analytics)
+        return vc
+    }
+    
+    func instantiateProfileVC() -> ProfileViewController {
+        let vc = ProfileViewController.instantiate(.profile)
+        setupTabWithIndex(vc: vc, tab: .profile)
         return vc
     }
 }

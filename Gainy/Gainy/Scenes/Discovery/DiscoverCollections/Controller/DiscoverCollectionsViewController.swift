@@ -334,7 +334,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     return
                 }
                 
-                DummyDataSource.remoteRawCollections = collections
+                DummyDataSource.remoteRawCollections = collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0})
                 
                 //TODO: - Check that Profile ID is in
                 let yourCollectionsDto = DummyDataSource.remoteRawCollections

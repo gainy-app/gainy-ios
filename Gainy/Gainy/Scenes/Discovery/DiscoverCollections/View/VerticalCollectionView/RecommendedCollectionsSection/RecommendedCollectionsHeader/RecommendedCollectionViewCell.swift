@@ -158,7 +158,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.kf.setImage(with: URL(string: imageUrl))
+        backImageView.image = UIImage(named: name.lowercased())
 
         nameLabel.text = name
         nameLabel.sizeToFit()
@@ -194,6 +194,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     @objc
     private func plusButtonTapped(_: UIButton) {
         //TODO: - Uncomment later
+        NotificationManager.shared.showMessage(title: "Oops", text: "This will be implemented after recommendation system and onboarding", cancelTitle: "OK", actions: nil)
 //        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
 //            buttonState = .checked
 //            tapHandler()

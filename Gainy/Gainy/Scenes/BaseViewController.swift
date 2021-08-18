@@ -99,3 +99,8 @@ extension BaseViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+//To work with Storyboards
+extension BaseViewController: Storyboarded {
+    
+}

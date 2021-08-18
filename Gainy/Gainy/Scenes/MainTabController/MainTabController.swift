@@ -6,32 +6,43 @@
 //
 import UIKit
 
-enum MainTab: Int {
-    case discover, portfolio, analytics, profile
-}
-
-class MainTabBarViewController: UITabBarController {
-    //Coordinators
+class MainTabBarViewController: UITabBarController, Storyboarded {
     
+    //Coordinators
     weak var coordinator: MainCoordinator?
-    var onboardingCoordinator: MainCoordinator?
     
     fileprivate var tabBarHeight: CGFloat = 49.0
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTabs()
         initialSetup()
     }
     
+    fileprivate func setupTabs() {
+        if let coordinator = coordinator {
+            setViewControllers([coordinator.viewControllerFactory.instantiateDiscoverCollections(coordinator: coordinator),
+                                coordinator.viewControllerFactory.instantiatePortfolioVC(),
+                                coordinator.viewControllerFactory.instantiateAnalyticsVC(),
+                                coordinator.viewControllerFactory.instantiateProfileVC()], animated: false)
+        }
+    }
+    
     fileprivate func initialSetup() {
-        selectedIndex = 1
         self.title = NSLocalizedString("Main", comment: "")
-        
+        tabBar.barStyle = .default
+        tabBar.isTranslucent = false
         //setupTabBarLayout()
-        setupTabBarItems()
+        //setupTabBarItems()
         tabBarHeight = self.tabBar.bounds.height + keyWindow.safeAreaInsets.bottom
+        
+        if let tabBar = self.tabBar as? CustomTabBar {
+            tabBar.customDelegate = self
+        }
     }
     
     lazy var keyWindow: UIView =  { UIApplication.shared.connectedScenes
@@ -62,6 +73,13 @@ class MainTabBarViewController: UITabBarController {
         
     // MARK: - TabBars
     
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let tabBar = self.tabBar as? CustomTabBar {
+            tabBar.selectedIndex = CustomTabBar.Tab(rawValue: item.tag)!
+            tabBar.updateTabs()
+        }
+    }
+    
     let arrayOfImageNameForSelectedState = ["tab1_active", "tab2_active", "tab3_active"]
     let arrayOfImageNameForUnselectedState = ["tab1_passive", "tab2_passive", "tab3_passive"]
     
@@ -69,6 +87,9 @@ class MainTabBarViewController: UITabBarController {
     
     func setupTabBarItems(_ notif: Notification? = nil) {
         
+        if let tabBar = self.tabBar as? CustomTabBar {
+            tabBar.customDelegate = self
+        }
         //        for vc in viewControllers ?? [] {
         //            if #available(iOS 13.0, *) {
         //                vc.tabBarItem.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -84,14 +105,13 @@ class MainTabBarViewController: UITabBarController {
         
         if let count = self.tabBar.items?.count {
             for i in 0...(count-1) {
-                let imageNameForSelectedState   =  isLightTheme ? arrayOfImageNameForSelectedState[i] : arrayOfImageNameForSelectedState[i]
+                let imageNameForSelectedState   = isLightTheme ? arrayOfImageNameForSelectedState[i] : arrayOfImageNameForSelectedState[i]
                 let imageNameForUnselectedState = isLightTheme ? arrayOfImageNameForUnselectedState[i] : arrayOfImageNameForUnselectedState[i]
                 
                 self.tabBar.items?[i].title = NSLocalizedString(tabNames[i], comment: "")
                 
                 self.tabBar.items?[i].selectedImage = UIImage(named: imageNameForSelectedState)?.withRenderingMode(.alwaysOriginal)
                 self.tabBar.items?[i].image = UIImage(named: imageNameForUnselectedState)?.withRenderingMode(.alwaysOriginal)
-                
                 
                 self.tabBar.items?[i].setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
                 self.tabBar.items?[i].setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
@@ -126,4 +146,20 @@ class MainTabBarViewController: UITabBarController {
     deinit {
         //NotificationCenter.default.removeObserver(self)
     }
+}
+
+extension MainTabBarViewController: CustomTabBarDelegate {
+    func profileTabPressed(tabBar: CustomTabBar) {
+        selectedIndex = CustomTabBar.Tab.profile.rawValue
+    }
+    
+    func profileTabPressedLong(tabBar: CustomTabBar) {
+        selectedIndex = CustomTabBar.Tab.profile.rawValue
+    }
+    
+    func otherTabPressedLong(tabBar: CustomTabBar) {
+        
+    }
+    
+    
 }

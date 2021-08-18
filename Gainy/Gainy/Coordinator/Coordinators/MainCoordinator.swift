@@ -40,12 +40,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
-    private let viewControllerFactory: ViewControllerFactory
+    private(set) var viewControllerFactory: ViewControllerFactory
 
     // MARK: Functions
     
     private func showMainTabViewController() {
         let vc = viewControllerFactory.instantiateMainTab(coordinator: self)
+        vc.coordinator = self
         router.setRootModule(vc, hideBar: true)
     }
 
