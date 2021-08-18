@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension UIFont {
     
@@ -35,5 +36,11 @@ extension UIFont {
     
     static func proDisplayBold(_ size: CGFloat = defaultSize) -> UIFont {
         UIFont.init(name: "SFProDisplay-Bold", size: size)!
+    }
+}
+
+extension UIFont {
+    var uiFont: Font {
+        Font(self as CTFont)
     }
 }

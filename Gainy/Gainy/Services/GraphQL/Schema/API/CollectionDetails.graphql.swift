@@ -31,12 +31,13 @@ public final class CollectionDetailsQuery: GraphQLQuery {
             description
             ticker_financials {
               __typename
+              pe_ratio
+              market_capitalization
+              highlight
               price_change_today
               current_price
-              dividend_growth
-              price_to_earnings
-              market_cap
-              highlight
+              divident_growth
+              symbol
             }
           }
         }
@@ -360,12 +361,13 @@ public final class CollectionDetailsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("price_change_today", type: .nonNull(.scalar(Double.self))),
-                GraphQLField("current_price", type: .nonNull(.scalar(Double.self))),
-                GraphQLField("dividend_growth", type: .nonNull(.scalar(String.self))),
-                GraphQLField("price_to_earnings", type: .nonNull(.scalar(Double.self))),
-                GraphQLField("market_cap", type: .nonNull(.scalar(String.self))),
-                GraphQLField("highlight", type: .nonNull(.scalar(String.self))),
+                GraphQLField("pe_ratio", type: .scalar(String.self)),
+                GraphQLField("market_capitalization", type: .scalar(String.self)),
+                GraphQLField("highlight", type: .scalar(String.self)),
+                GraphQLField("price_change_today", type: .scalar(String.self)),
+                GraphQLField("current_price", type: .scalar(String.self)),
+                GraphQLField("divident_growth", type: .scalar(String.self)),
+                GraphQLField("symbol", type: .scalar(String.self)),
               ]
             }
 
@@ -375,8 +377,8 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(priceChangeToday: Double, currentPrice: Double, dividendGrowth: String, priceToEarnings: Double, marketCap: String, highlight: String) {
-              self.init(unsafeResultMap: ["__typename": "ticker_financials", "price_change_today": priceChangeToday, "current_price": currentPrice, "dividend_growth": dividendGrowth, "price_to_earnings": priceToEarnings, "market_cap": marketCap, "highlight": highlight])
+            public init(peRatio: String? = nil, marketCapitalization: String? = nil, highlight: String? = nil, priceChangeToday: String? = nil, currentPrice: String? = nil, dividentGrowth: String? = nil, symbol: String? = nil) {
+              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol])
             }
 
             public var __typename: String {
@@ -388,57 +390,66 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var priceChangeToday: Double {
+            public var peRatio: String? {
               get {
-                return resultMap["price_change_today"]! as! Double
+                return resultMap["pe_ratio"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "pe_ratio")
+              }
+            }
+
+            public var marketCapitalization: String? {
+              get {
+                return resultMap["market_capitalization"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "market_capitalization")
+              }
+            }
+
+            public var highlight: String? {
+              get {
+                return resultMap["highlight"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "highlight")
+              }
+            }
+
+            public var priceChangeToday: String? {
+              get {
+                return resultMap["price_change_today"] as? String
               }
               set {
                 resultMap.updateValue(newValue, forKey: "price_change_today")
               }
             }
 
-            public var currentPrice: Double {
+            public var currentPrice: String? {
               get {
-                return resultMap["current_price"]! as! Double
+                return resultMap["current_price"] as? String
               }
               set {
                 resultMap.updateValue(newValue, forKey: "current_price")
               }
             }
 
-            public var dividendGrowth: String {
+            public var dividentGrowth: String? {
               get {
-                return resultMap["dividend_growth"]! as! String
+                return resultMap["divident_growth"] as? String
               }
               set {
-                resultMap.updateValue(newValue, forKey: "dividend_growth")
+                resultMap.updateValue(newValue, forKey: "divident_growth")
               }
             }
 
-            public var priceToEarnings: Double {
+            public var symbol: String? {
               get {
-                return resultMap["price_to_earnings"]! as! Double
+                return resultMap["symbol"] as? String
               }
               set {
-                resultMap.updateValue(newValue, forKey: "price_to_earnings")
-              }
-            }
-
-            public var marketCap: String {
-              get {
-                return resultMap["market_cap"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "market_cap")
-              }
-            }
-
-            public var highlight: String {
-              get {
-                return resultMap["highlight"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "highlight")
+                resultMap.updateValue(newValue, forKey: "symbol")
               }
             }
           }

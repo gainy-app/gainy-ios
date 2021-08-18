@@ -15,12 +15,13 @@ query CollectionDetails {
         name
         description
         ticker_financials {
+          pe_ratio
+          market_capitalization
+          highlight
           price_change_today
           current_price
-          dividend_growth
-          price_to_earnings
-          market_cap
-          highlight
+          divident_growth
+          symbol
         }
       }
     }

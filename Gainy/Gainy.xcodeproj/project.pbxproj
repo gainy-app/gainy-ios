@@ -28,6 +28,8 @@
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
+		33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */; };
+		33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD626CD475700B11E58 /* CustomHostingController.swift */; };
 		33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33B9886C26CA6E79008B8AC9 /* News.graphql */; };
 		33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9886F26CA8617008B8AC9 /* PureLayout */; };
 		33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9887226CA90D0008B8AC9 /* Kingfisher */; };
@@ -177,6 +179,8 @@
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
+		33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsBottomView.swift; sourceTree = "<group>"; };
+		33787FD626CD475700B11E58 /* CustomHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHostingController.swift; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
@@ -364,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */,
+				33787FD626CD475700B11E58 /* CustomHostingController.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 			children = (
 				3AD40FC8266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift */,
 				3A930EDC265C1909000FD3EB /* DiscoverCollectionsViewController.swift */,
+				33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1312,8 +1318,10 @@
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
+				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
+				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
@@ -1511,7 +1519,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1538,7 +1546,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

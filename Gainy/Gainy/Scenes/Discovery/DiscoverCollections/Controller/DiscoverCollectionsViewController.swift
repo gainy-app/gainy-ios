@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 import MBProgressHUD
 import PureLayout
+import SwiftUI
 
 private enum DiscoverCollectionsSection: Int, CaseIterable {
     case yourCollections
@@ -31,6 +32,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        
+        addBottomView()
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -141,6 +144,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.initViewModels()
             }
         }
+    }
+    
+    fileprivate func addBottomView() {
+        let bottomView = CollectionsBottomView()
+        let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
+        addChild(hosting)
+        hosting.view.frame = CGRect.init(x: 0, y: 0, width: 50, height: 94)
+        hosting.view.backgroundColor = .clear
+        view.addSubview(hosting.view)
+        hosting.view.autoPinEdge(.leading, to: .leading, of: view)
+        hosting.view.autoPinEdge(.trailing, to: .trailing, of: view)
+        hosting.view.autoSetDimension(.height, toSize: 94)
+        hosting.view.autoPinEdge(.bottom, to: .bottom, of: discoverCollectionsCollectionView)
+        hosting.didMove(toParent: self)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: Private

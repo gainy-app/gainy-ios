@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 extension UIColor {
     enum Gainy {
@@ -65,5 +66,11 @@ extension UIColor {
 
 //        static let black
 //        static let purple
+    }
+}
+
+extension UIColor {
+    var uiColor: Color {
+        return Color.init(self)
     }
 }

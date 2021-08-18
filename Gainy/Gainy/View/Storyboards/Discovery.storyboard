@@ -11,6 +11,7 @@
         <scene sceneID="78T-SE-Kus">
             <objects>
                 <tabBarController storyboardIdentifier="MainTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nva-4r-ZU1" customClass="MainTabBarViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Csj-gs-Oyi" customClass="CustomTabBar" customModule="Gainy" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

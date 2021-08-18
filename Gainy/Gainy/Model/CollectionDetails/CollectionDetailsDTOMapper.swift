@@ -60,12 +60,12 @@ enum CollectionDetailsDTOMapper {
             .TickerFinancial
     ) -> TickerFinancialMetrics {
         TickerFinancialMetrics(
-            todaysPriceChange: Float(dto.priceChangeToday),
-            currentPrice: Float(dto.currentPrice),
-            dividendGrowthPercent: Int(dto.dividendGrowth)!,
-            priceToEarnings: Float(dto.priceToEarnings),
-            marketCapitalization: Int64(dto.marketCap)!,
-            highlight: dto.highlight
+            todaysPriceChange: Float(dto.priceChangeToday ?? "0")!,
+            currentPrice: Float(dto.currentPrice ?? "0")!,
+            dividendGrowthPercent: Int(dto.dividentGrowth ?? "0")!,
+            priceToEarnings: Float(dto.peRatio ?? "0")!,
+            marketCapitalization: Int64(dto.marketCapitalization ?? "0")!,
+            highlight: dto.highlight ?? ""
         )
     }
 }
