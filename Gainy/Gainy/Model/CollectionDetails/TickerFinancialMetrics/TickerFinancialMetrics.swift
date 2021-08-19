@@ -1,8 +1,8 @@
 struct TickerFinancialMetrics {
     let todaysPriceChange: Float
     let currentPrice: Float
-    let dividendGrowthPercent: Int
+    let dividendGrowthPercent: Float
     let priceToEarnings: Float
-    let marketCapitalization: Int64
+    let marketCapitalization: Float
     let highlight: String
 }

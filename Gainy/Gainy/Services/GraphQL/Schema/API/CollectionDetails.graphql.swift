@@ -361,12 +361,12 @@ public final class CollectionDetailsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("pe_ratio", type: .scalar(String.self)),
-                GraphQLField("market_capitalization", type: .scalar(String.self)),
+                GraphQLField("pe_ratio", type: .scalar(Double.self)),
+                GraphQLField("market_capitalization", type: .scalar(Double.self)),
                 GraphQLField("highlight", type: .scalar(String.self)),
-                GraphQLField("price_change_today", type: .scalar(String.self)),
-                GraphQLField("current_price", type: .scalar(String.self)),
-                GraphQLField("divident_growth", type: .scalar(String.self)),
+                GraphQLField("price_change_today", type: .scalar(Double.self)),
+                GraphQLField("current_price", type: .scalar(float8.self)),
+                GraphQLField("divident_growth", type: .scalar(Double.self)),
                 GraphQLField("symbol", type: .scalar(String.self)),
               ]
             }
@@ -377,7 +377,7 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(peRatio: String? = nil, marketCapitalization: String? = nil, highlight: String? = nil, priceChangeToday: String? = nil, currentPrice: String? = nil, dividentGrowth: String? = nil, symbol: String? = nil) {
+            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, priceChangeToday: Double? = nil, currentPrice: float8? = nil, dividentGrowth: Double? = nil, symbol: String? = nil) {
               self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol])
             }
 
@@ -390,18 +390,18 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var peRatio: String? {
+            public var peRatio: Double? {
               get {
-                return resultMap["pe_ratio"] as? String
+                return resultMap["pe_ratio"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "pe_ratio")
               }
             }
 
-            public var marketCapitalization: String? {
+            public var marketCapitalization: Double? {
               get {
-                return resultMap["market_capitalization"] as? String
+                return resultMap["market_capitalization"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "market_capitalization")
@@ -417,27 +417,27 @@ public final class CollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var priceChangeToday: String? {
+            public var priceChangeToday: Double? {
               get {
-                return resultMap["price_change_today"] as? String
+                return resultMap["price_change_today"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "price_change_today")
               }
             }
 
-            public var currentPrice: String? {
+            public var currentPrice: float8? {
               get {
-                return resultMap["current_price"] as? String
+                return resultMap["current_price"] as? float8
               }
               set {
                 resultMap.updateValue(newValue, forKey: "current_price")
               }
             }
 
-            public var dividentGrowth: String? {
+            public var dividentGrowth: Double? {
               get {
-                return resultMap["divident_growth"] as? String
+                return resultMap["divident_growth"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "divident_growth")

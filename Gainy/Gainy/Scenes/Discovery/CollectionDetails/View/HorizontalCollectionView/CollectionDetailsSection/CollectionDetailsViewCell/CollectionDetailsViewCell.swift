@@ -40,7 +40,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.backgroundColor = UIColor.Gainy.white
         internalCollectionView.dataSource = dataSource
         internalCollectionView.delegate = self
-
+        internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
+        internalCollectionView.contentInsetAdjustmentBehavior = .never
+        
         contentView.addSubview(internalCollectionView)
 
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(

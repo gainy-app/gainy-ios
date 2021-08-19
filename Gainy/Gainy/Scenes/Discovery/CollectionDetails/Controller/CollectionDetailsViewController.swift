@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import PureLayout
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -105,6 +106,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: customLayout
         )
         view.addSubview(collectionDetailsCollectionView)
+        collectionDetailsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
+        collectionDetailsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        collectionDetailsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
 
         collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
 
@@ -114,7 +119,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         collectionDetailsCollectionView.bounces = false
 
         collectionDetailsCollectionView.dataSource = dataSource
-
+        
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: collectionDetailsCollectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
@@ -177,7 +182,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = collections
+                DummyDataSource.remoteRawCollectionDetails = collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0})
 
                 let yourCollectionDetails: [CollectionDetails] = DummyDataSource
                     .yourCollections
@@ -201,12 +206,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
                 DummyDataSource.collectionDetails.removeAll()
                 DummyDataSource.collectionDetails.append(
-                    contentsOf: yourCollectionDetails
+                    contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
+                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
+                    })
                 )
 
-                DummyDataSource.collectionDetails.append(
-                    contentsOf: recommendedCollectionDetails
-                )
+//                DummyDataSource.collectionDetails.append(
+//                    contentsOf: recommendedCollectionDetails
+//                )
 
                 self?.initViewModelsFromData()
                 completion()
@@ -230,7 +237,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         UIView()
     }
 
-    private func centerInitialCollectionInTheCollectionView() {
+    func centerInitialCollectionInTheCollectionView() {
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
 
         collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),

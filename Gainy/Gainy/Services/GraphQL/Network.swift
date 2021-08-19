@@ -1,6 +1,8 @@
 import Apollo
 import Foundation
 
+public typealias float8 = Float
+
 final class Network {
     static let shared = Network()
 

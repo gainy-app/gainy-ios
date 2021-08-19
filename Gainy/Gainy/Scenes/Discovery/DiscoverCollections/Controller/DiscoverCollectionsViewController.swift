@@ -160,6 +160,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         hosting.didMove(toParent: self)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.view.backgroundColor = .white
     }
     
     // MARK: Private

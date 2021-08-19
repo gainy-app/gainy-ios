@@ -45782,7 +45782,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45794,7 +45794,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45806,7 +45806,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45818,7 +45818,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45830,7 +45830,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45842,7 +45842,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45854,7 +45854,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45866,7 +45866,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45878,7 +45878,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45890,7 +45890,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45902,7 +45902,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45914,7 +45914,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45926,7 +45926,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45950,7 +45950,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45962,7 +45962,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45974,7 +45974,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45986,7 +45986,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -45998,7 +45998,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46010,7 +46010,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46022,7 +46022,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46034,7 +46034,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46046,7 +46046,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46058,7 +46058,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -46094,7 +46094,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -47191,7 +47191,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47203,7 +47203,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47215,7 +47215,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47227,7 +47227,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47239,7 +47239,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47251,7 +47251,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47263,7 +47263,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47275,7 +47275,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47287,7 +47287,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47299,7 +47299,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47311,7 +47311,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47323,7 +47323,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47335,7 +47335,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47359,7 +47359,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47371,7 +47371,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47383,7 +47383,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47395,7 +47395,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47407,7 +47407,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47419,7 +47419,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47431,7 +47431,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47443,7 +47443,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47455,7 +47455,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47467,7 +47467,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47503,7 +47503,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -47545,7 +47545,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47557,7 +47557,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47569,7 +47569,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47581,7 +47581,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47593,7 +47593,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47605,7 +47605,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47617,7 +47617,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47629,7 +47629,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47641,7 +47641,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47653,7 +47653,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47665,7 +47665,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47677,7 +47677,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47689,7 +47689,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47701,7 +47701,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47713,7 +47713,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47725,7 +47725,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47737,7 +47737,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47749,7 +47749,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47761,7 +47761,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47773,7 +47773,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47785,7 +47785,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47797,7 +47797,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47809,7 +47809,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47821,7 +47821,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47845,7 +47845,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47857,7 +47857,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47869,7 +47869,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47881,7 +47881,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47893,7 +47893,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47905,7 +47905,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47917,7 +47917,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47929,7 +47929,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47941,7 +47941,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47953,7 +47953,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47965,7 +47965,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47977,7 +47977,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -47989,7 +47989,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48013,7 +48013,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48025,7 +48025,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48037,7 +48037,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48049,7 +48049,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48061,7 +48061,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48073,7 +48073,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48085,7 +48085,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48097,7 +48097,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48109,7 +48109,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48121,7 +48121,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48157,7 +48157,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -48181,7 +48181,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48193,7 +48193,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48205,7 +48205,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48217,7 +48217,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48229,7 +48229,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48241,7 +48241,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48253,7 +48253,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48265,7 +48265,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48277,7 +48277,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48289,7 +48289,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48301,7 +48301,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48313,7 +48313,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48325,7 +48325,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48349,7 +48349,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48361,7 +48361,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48373,7 +48373,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48385,7 +48385,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48397,7 +48397,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48409,7 +48409,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48421,7 +48421,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48433,7 +48433,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48445,7 +48445,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48457,7 +48457,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48481,7 +48481,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48829,7 +48829,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48841,7 +48841,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48853,7 +48853,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48865,7 +48865,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48877,7 +48877,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48889,7 +48889,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48901,7 +48901,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48913,7 +48913,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48925,7 +48925,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48937,7 +48937,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48949,7 +48949,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48961,7 +48961,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48973,7 +48973,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48997,7 +48997,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49009,7 +49009,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49021,7 +49021,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49033,7 +49033,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49045,7 +49045,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49057,7 +49057,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49069,7 +49069,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49081,7 +49081,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49093,7 +49093,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49105,7 +49105,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -49129,7 +49129,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -50097,7 +50097,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50109,7 +50109,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50121,7 +50121,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50133,7 +50133,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50145,7 +50145,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50157,7 +50157,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50169,7 +50169,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50181,7 +50181,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50193,7 +50193,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50205,7 +50205,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50217,7 +50217,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50229,7 +50229,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50241,7 +50241,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50265,7 +50265,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50277,7 +50277,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50289,7 +50289,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50301,7 +50301,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50313,7 +50313,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50325,7 +50325,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50337,7 +50337,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50349,7 +50349,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50361,7 +50361,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50373,7 +50373,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -50397,7 +50397,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -52221,7 +52221,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52233,7 +52233,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52245,7 +52245,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52257,7 +52257,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52269,7 +52269,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52281,7 +52281,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52293,7 +52293,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52305,7 +52305,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52317,7 +52317,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52329,7 +52329,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52341,7 +52341,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52353,7 +52353,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52365,7 +52365,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52377,7 +52377,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52389,7 +52389,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52401,7 +52401,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52413,7 +52413,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52425,7 +52425,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52437,7 +52437,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52449,7 +52449,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52461,7 +52461,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52473,7 +52473,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52485,7 +52485,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -52497,7 +52497,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -72776,7 +72776,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -72800,7 +72800,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -72812,7 +72812,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -72824,7 +72824,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -73513,7 +73513,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -73537,7 +73537,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -73549,7 +73549,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -73561,7 +73561,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "float8_comparison_exp",
+              "name": "Float_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -73639,7 +73639,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73651,7 +73651,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73663,7 +73663,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73675,7 +73675,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73723,7 +73723,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73747,7 +73747,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73759,7 +73759,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73771,7 +73771,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -73843,7 +73843,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -73867,7 +73867,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -73879,7 +73879,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -73891,7 +73891,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -74059,7 +74059,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -74083,7 +74083,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -74095,7 +74095,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -74107,7 +74107,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -74571,7 +74571,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -74595,7 +74595,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -74607,7 +74607,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -74619,7 +74619,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "defaultValue": null,
@@ -75099,7 +75099,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -75111,7 +75111,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -75123,7 +75123,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -75135,7 +75135,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "float8",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,

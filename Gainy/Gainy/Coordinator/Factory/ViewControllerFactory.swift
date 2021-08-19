@@ -26,21 +26,24 @@ final class ViewControllerFactory {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
         setupTabWithIndex(vc: vc, tab: .discovery)
-        vc.onGoToCollectionDetails = { initialPosition in
-            coordinator.showCollectionDetailsViewController(with: initialPosition)
+        
+        return vc
+    }
+
+    func instantiateCollectionDetails(coordinator: MainCoordinator) -> CollectionDetailsViewController {
+        let vc = CollectionDetailsViewController()
+        vc.viewModel = CollectionDetailsViewModel()
+        setupTabWithIndex(vc: vc, tab: .discovery)
+        vc.onDiscoverCollections = {
+            coordinator.showDiscoverCollectionsViewController {initialCollectionIndex in
+                coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
+            }
         }
         return vc
     }
 
-    func instantiateCollectionDetails() -> CollectionDetailsViewController {
-        let vc = CollectionDetailsViewController()
-        vc.viewModel = CollectionDetailsViewModel()
-        return vc
-    }
-
-    func instantiateCardDetails() -> CardDetailsViewController {
-        let vc = CardDetailsViewController()
-        vc.viewModel = CardDetailsViewModel()
+    func instantiateTickerDetails() -> TickerViewController {
+        let vc = TickerViewController.instantiate(.discovery)
         return vc
     }
     

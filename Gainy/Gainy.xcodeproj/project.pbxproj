@@ -35,6 +35,20 @@
 		33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9887226CA90D0008B8AC9 /* Kingfisher */; };
 		33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */; };
 		33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */; };
+		33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */; };
+		33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */; };
+		33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */; };
+		33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6826CE8AF7000DE770 /* TickerDetailsViewCell.swift */; };
+		33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6A26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift */; };
+		33BDCF6D26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6C26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift */; };
+		33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6E26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift */; };
+		33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7026CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift */; };
+		33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7226CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift */; };
+		33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7426CE8B66000DE770 /* TickerDetailsWSRViewCell.swift */; };
+		33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7626CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift */; };
+		33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */; };
+		33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */; };
+		33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */; };
 		33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */; };
 		33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 33D3D4E726CB8F63005A859B /* SwiftHEXColors */; };
 		33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4EA26CB9D21005A859B /* NotificationManager.swift */; };
@@ -138,7 +152,7 @@
 		3AE9036F266A507A00574923 /* AFConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE9036E266A507A00574923 /* AFConfig.swift */; };
 		3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */; };
 		3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */; };
-		3AFE0C452690CEA100C25A8F /* CardDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */; };
+		3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE0C442690CEA100C25A8F /* TickerViewController.swift */; };
 		3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */; };
 		3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */; };
 		3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */; };
@@ -184,6 +198,20 @@
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
+		33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesA.xcassets; sourceTree = "<group>"; };
+		33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsDataSource.swift; sourceTree = "<group>"; };
+		33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewModel.swift; sourceTree = "<group>"; };
+		33BDCF6826CE8AF7000DE770 /* TickerDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewCell.swift; sourceTree = "<group>"; };
+		33BDCF6A26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsHeaderViewCell.swift; sourceTree = "<group>"; };
+		33BDCF6C26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsChartViewCell.swift; sourceTree = "<group>"; };
+		33BDCF6E26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsAboutViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7026CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsHighlightsViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7226CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsMarketDataViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7426CE8B66000DE770 /* TickerDetailsWSRViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsWSRViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7626CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsRecommendedViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsAlternativeStocksViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsUpcomingViewCell.swift; sourceTree = "<group>"; };
+		33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsWatchlistViewCell.swift; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
 		33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 		33D3D4EA26CB9D21005A859B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -296,7 +324,7 @@
 		3AE9036E266A507A00574923 /* AFConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AFConfig.swift; sourceTree = "<group>"; };
 		3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionsViewModel.swift; sourceTree = "<group>"; };
 		3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewControllerProtocol.swift; sourceTree = "<group>"; };
-		3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailsViewController.swift; sourceTree = "<group>"; };
+		3AFE0C442690CEA100C25A8F /* TickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerViewController.swift; sourceTree = "<group>"; };
 		3AFE1A6C266E4A600091E799 /* UINavigationController+SetStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+SetStatusBar.swift"; sourceTree = "<group>"; };
 		3AFE1A70266E4A7A0091E799 /* UIDevice+HasTopNotch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+HasTopNotch.swift"; sourceTree = "<group>"; };
 		3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Regular.ttf"; sourceTree = "<group>"; };
@@ -373,6 +401,24 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		33BDCF6726CE51ED000DE770 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				33BDCF6826CE8AF7000DE770 /* TickerDetailsViewCell.swift */,
+				33BDCF6A26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift */,
+				33BDCF6C26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift */,
+				33BDCF6E26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift */,
+				33BDCF7026CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift */,
+				33BDCF7226CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift */,
+				33BDCF7426CE8B66000DE770 /* TickerDetailsWSRViewCell.swift */,
+				33BDCF7626CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift */,
+				33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */,
+				33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */,
+				33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		33D3D4E926CB9CFF005A859B /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,7 +432,7 @@
 			children = (
 				3A85940A268A351900CB8DD6 /* DiscoverCollections */,
 				3A859411268A42F200CB8DD6 /* CollectionDetails */,
-				3AFE0C3C2690CD2700C25A8F /* CardDetails */,
+				3AFE0C3C2690CD2700C25A8F /* TickerDetails */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -747,6 +793,7 @@
 				33467CE626C66E9B00811F74 /* GoogleService-Info.plist */,
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
+				33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */,
 				335ECE1B26C3AE8000C6AC71 /* Debug.xcconfig */,
 				335ECE1F26C3B2E500C6AC71 /* Release.xcconfig */,
 			);
@@ -962,19 +1009,22 @@
 			path = AppsFlyer;
 			sourceTree = "<group>";
 		};
-		3AFE0C3C2690CD2700C25A8F /* CardDetails */ = {
+		3AFE0C3C2690CD2700C25A8F /* TickerDetails */ = {
 			isa = PBXGroup;
 			children = (
 				3AFE0C3D2690CD4500C25A8F /* Controller */,
 			);
-			path = CardDetails;
+			path = TickerDetails;
 			sourceTree = "<group>";
 		};
 		3AFE0C3D2690CD4500C25A8F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */,
-				3AFE0C442690CEA100C25A8F /* CardDetailsViewController.swift */,
+				3AFE0C442690CEA100C25A8F /* TickerViewController.swift */,
+				33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */,
+				33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */,
+				33BDCF6726CE51ED000DE770 /* Cells */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1134,6 +1184,7 @@
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
+				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
@@ -1178,7 +1229,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" \"${PROJECT_DIR}/Gainy/Services/GraphQL/Schema/API\"\n\n#TOKEN = \"\"\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"http://gainy-managed-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: ${TOKEN}\"\n#mv \"schema.json\" \"Services/GraphQL/Schema\"\n";
+			shellScript = "# Go to the build root and search up the chain to find the Derived Data Path where the source packages are checked out.\nDERIVED_DATA_CANDIDATE=\"${BUILD_ROOT}\"\n\nwhile ! [ -d \"${DERIVED_DATA_CANDIDATE}/SourcePackages\" ]; do\n  if [ \"${DERIVED_DATA_CANDIDATE}\" = / ]; then\n    echo >&2 \"error: Unable to locate SourcePackages directory from BUILD_ROOT: '${BUILD_ROOT}'\"\n    exit 1\n  fi\n\n  DERIVED_DATA_CANDIDATE=\"$(dirname \"${DERIVED_DATA_CANDIDATE}\")\"\ndone\n\n# Grab a reference to the directory where scripts are checked out\nSCRIPT_PATH=\"${DERIVED_DATA_CANDIDATE}/SourcePackages/checkouts/apollo-ios/scripts\"\n\nif [ -z \"${SCRIPT_PATH}\" ]; then\n    echo >&2 \"error: Couldn't find the CLI script in your checked out SPM packages; make sure to add the framework to your project.\"\n    exit 1\nfi\n\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --passthroughCustomScalars --localSchemaFile=\"Services/GraphQL/Schema/schema.json\" \"${PROJECT_DIR}/Gainy/Services/GraphQL/Schema/API\"\n\n#TOKEN = \"\"\n#\"${SCRIPT_PATH}\"/run-bundled-codegen.sh schema:download --endpoint=\"http://gainy-managed-dev.herokuapp.com/v1/graphql\" --header=\"x-hasura-admin-secret: ${TOKEN}\"\n#mv \"schema.json\" \"Services/GraphQL/Schema\"\n";
 		};
 		33467CF726C6714E00811F74 /* Firebase crashes */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1244,8 +1295,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
-				3AFE0C452690CEA100C25A8F /* CardDetailsViewController.swift in Sources */,
+				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
+				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
+				33BDCF6D26CE8B3B000DE770 /* TickerDetailsChartViewCell.swift in Sources */,
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
@@ -1256,9 +1309,11 @@
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
+				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
+				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
@@ -1280,15 +1335,19 @@
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
+				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
+				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
+				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
+				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				3A67232C268F1D7000DB04D1 /* Array+Move.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
@@ -1307,6 +1366,7 @@
 				3A5ADAF62690B675008659E8 /* UICollectionView+Extensions.swift in Sources */,
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
 				3A498F63266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift in Sources */,
+				33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
@@ -1316,6 +1376,7 @@
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
+				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
 				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
@@ -1333,16 +1394,19 @@
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
+				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
 				33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */,
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
+				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
+				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,

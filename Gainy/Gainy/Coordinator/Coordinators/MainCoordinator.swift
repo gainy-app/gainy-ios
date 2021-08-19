@@ -50,31 +50,40 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.setRootModule(vc, hideBar: true)
     }
 
-    @available(*, deprecated, message: "This is initial Tab 1")
-    private func showDiscoverCollectionsViewController() {
+    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
+        vc.onGoToCollectionDetails = onGoToCollectionDetails
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 
-    func showCollectionDetailsViewController(with initialCollectionIndex: Int) {
-        let vc = self.viewControllerFactory.instantiateCollectionDetails()
-        vc.onDiscoverCollections = { [weak self] in
-            self?.router.popModule(transition: FadeTransitionAnimator(),
-                                   animated: true)
-        }
-        vc.onShowCardDetails = { [weak self] in
-            self?.showCardDetailsViewController()
-        }
+    func showCollectionDetailsViewController(with initialCollectionIndex: Int, for vc: CollectionDetailsViewController) {
+//        let vc = self.viewControllerFactory.instantiateCollectionDetails(coordinator: self)
+//        vc.onDiscoverCollections = { [weak self] in
+//            self?.showDiscoverCollectionsViewController(onGoToCollectionDetails: { [weak self]  initialPosition in
+//                self?.router.popModule(transition: FadeTransitionAnimator(), animated: true)
+//
+//                //Animating to selected position
+//                vc.viewModel?.initialCollectionIndex = initialCollectionIndex
+//                vc.centerInitialCollectionInTheCollectionView()
+//            })
+//        }
+//        vc.onShowCardDetails = { [weak self] in
+//            self?.showCardDetailsViewController(TickerInfo())
+//        }
+//        vc.viewModel?.initialCollectionIndex = initialCollectionIndex
+
+        router.popModule(transition: FadeTransitionAnimator(), animated: true)
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
-
-        router.push(vc, transition: FadeTransitionAnimator(), animated: true)
+        vc.centerInitialCollectionInTheCollectionView()
     }
 
-    private func showCardDetailsViewController() {
-        let vc = self.viewControllerFactory.instantiateCardDetails()
-        vc.onDismiss = { [weak self] in
-            self?.router.dismissModule()
-        }
+    private func showCardDetailsViewController(_ tickerInfo: TickerInfo) {
+        let vc = self.viewControllerFactory.instantiateTickerDetails()
+        vc.coordinator = self
+        vc.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
+//        vc.onDismiss = { [weak self] in
+//            self?.router.dismissModule()
+//        }
 
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
