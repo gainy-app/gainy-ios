@@ -39,7 +39,8 @@ enum CollectionDetailsViewModelMapper {
             dividendGrowthPercent: "\(model.financialMetrics.dividendGrowthPercent)",
             priceToEarnings: "\(model.financialMetrics.priceToEarnings.cleanOneDecimal)",
             marketCapitalization: marketCapitalizationString,
-            highlight: model.financialMetrics.highlight
+            highlight: model.financialMetrics.highlight,
+            rawTicker: model.rawTicker
         )
     }
 }

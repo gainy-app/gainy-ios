@@ -50,9 +50,10 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.setRootModule(vc, hideBar: true)
     }
 
-    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?) {
+    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)? ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
         vc.onGoToCollectionDetails = onGoToCollectionDetails
+        vc.onSwapItems = onSwapItems
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 
@@ -77,14 +78,10 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.centerInitialCollectionInTheCollectionView()
     }
 
-    private func showCardDetailsViewController(_ tickerInfo: TickerInfo) {
+    func showCardDetailsViewController(_ tickerInfo: TickerInfo) {
         let vc = self.viewControllerFactory.instantiateTickerDetails()
         vc.coordinator = self
         vc.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
-//        vc.onDismiss = { [weak self] in
-//            self?.router.dismissModule()
-//        }
-
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
     }

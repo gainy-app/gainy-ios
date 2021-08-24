@@ -9,7 +9,11 @@ import UIKit
 
 final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
+    @IBOutlet private weak var tickerNameLbl: UILabel!
+    @IBOutlet private weak var symbolLbl: UILabel!
+    
     override func updateFromTickerData() {
-        
+        tickerNameLbl.text = tickerInfo?.name
+        symbolLbl.text = tickerInfo?.symbol
     }
 }

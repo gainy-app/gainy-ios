@@ -1,4 +1,4 @@
-query FetchNews($symbol: String!) {
+query DiscoverNews($symbol: String!) {
     fetchNewsData(symbol: $symbol) {
         datetime
         description

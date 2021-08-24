@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFCompactRounded-Regular.otf">
+            <string>SFCompactRounded-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewsViewCell" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsViewCell" id="CME-4C-Oeq" customClass="NewsViewCell" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="268"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yL9-gr-Xng">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="268"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gYh-cg-cv0" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="447" height="268"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ufR-Z3-X7O">
+                                <rect key="frame" x="0.0" y="0.0" width="447" height="268"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="a5K-nG-KB0">
+                                <rect key="frame" x="17" y="13" width="6" height="11"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="11" id="3vp-O0-Qnl"/>
+                                    <constraint firstAttribute="width" constant="6" id="U4D-Hz-CDU"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1h" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-6f-wrG">
+                                <rect key="frame" x="26" y="11.5" width="11.5" height="14.5"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Regular" family="SF Compact Rounded" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuters" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYn-bO-hRc">
+                                <rect key="frame" x="393.5" y="11" width="40.5" height="15"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Regular" family="SF Compact Rounded" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reuters" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AdI-fP-HAl">
+                                <rect key="frame" x="12" y="237.5" width="423" height="14.5"/>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Regular" family="SF Compact Rounded" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ufR-Z3-X7O" secondAttribute="bottom" id="1df-wR-xVA"/>
+                            <constraint firstAttribute="trailing" secondItem="AdI-fP-HAl" secondAttribute="trailing" constant="12" id="55n-E6-AK7"/>
+                            <constraint firstItem="qYn-bO-hRc" firstAttribute="centerY" secondItem="muZ-6f-wrG" secondAttribute="centerY" id="EbH-zn-LkX"/>
+                            <constraint firstItem="muZ-6f-wrG" firstAttribute="leading" secondItem="a5K-nG-KB0" secondAttribute="trailing" constant="3" id="IPY-ZP-SBI"/>
+                            <constraint firstItem="a5K-nG-KB0" firstAttribute="top" secondItem="gYh-cg-cv0" secondAttribute="top" constant="13" id="LqT-gM-ZRt"/>
+                            <constraint firstAttribute="trailing" secondItem="ufR-Z3-X7O" secondAttribute="trailing" id="SPY-Xc-uGq"/>
+                            <constraint firstItem="ufR-Z3-X7O" firstAttribute="leading" secondItem="gYh-cg-cv0" secondAttribute="leading" id="Sb8-nL-yGb"/>
+                            <constraint firstAttribute="bottom" secondItem="AdI-fP-HAl" secondAttribute="bottom" constant="16" id="c11-zS-fHk"/>
+                            <constraint firstItem="ufR-Z3-X7O" firstAttribute="top" secondItem="gYh-cg-cv0" secondAttribute="top" id="cL0-2w-utG"/>
+                            <constraint firstItem="muZ-6f-wrG" firstAttribute="centerY" secondItem="a5K-nG-KB0" secondAttribute="centerY" id="gaN-7n-ReG"/>
+                            <constraint firstItem="AdI-fP-HAl" firstAttribute="leading" secondItem="gYh-cg-cv0" secondAttribute="leading" constant="12" id="n2Y-jQ-KdD"/>
+                            <constraint firstAttribute="trailing" secondItem="qYn-bO-hRc" secondAttribute="trailing" constant="13" id="nbK-Dn-wQA"/>
+                            <constraint firstItem="a5K-nG-KB0" firstAttribute="leading" secondItem="gYh-cg-cv0" secondAttribute="leading" constant="17" id="w9m-4e-qwA"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="20"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="gYh-cg-cv0" secondAttribute="bottom" id="CqC-Fd-h9o"/>
+                    <constraint firstItem="gYh-cg-cv0" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" id="Kgg-f1-IQ2"/>
+                    <constraint firstItem="gYh-cg-cv0" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" id="RX5-lr-UjV"/>
+                    <constraint firstAttribute="trailing" secondItem="gYh-cg-cv0" secondAttribute="trailing" id="tBV-05-bXL"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="447" height="268"/>
+            <connections>
+                <outlet property="infoLbl" destination="AdI-fP-HAl" id="JFR-wn-J8d"/>
+                <outlet property="newsBackImageView" destination="ufR-Z3-X7O" id="ynF-8I-skv"/>
+                <outlet property="sourceLbl" destination="qYn-bO-hRc" id="YKC-SN-SgY"/>
+                <outlet property="timeLbl" destination="muZ-6f-wrG" id="nNW-Rh-bOD"/>
+            </connections>
+            <point key="canvasLocation" x="251.44927536231887" y="183.48214285714286"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="news_arrow" width="6" height="11"/>
+    </resources>
+</document>

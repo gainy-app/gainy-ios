@@ -12,7 +12,7 @@ final class ViewControllerFactory {
     var selectedColor: UIColor {
         isLightTheme ? UIColor(named: "tabbar_tint_color")! : UIColor(named: "tabbar_tint_color")!
     }
-        
+    
     var unselectedColor: UIColor {
         isLightTheme ? UIColor(named: "tabbar_disabled_color")!: UIColor(named: "tabbar_disabled_color")!
     }
@@ -26,10 +26,9 @@ final class ViewControllerFactory {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
         setupTabWithIndex(vc: vc, tab: .discovery)
-        
         return vc
     }
-
+    
     func instantiateCollectionDetails(coordinator: MainCoordinator) -> CollectionDetailsViewController {
         let vc = CollectionDetailsViewController()
         vc.viewModel = CollectionDetailsViewModel()
@@ -37,11 +36,16 @@ final class ViewControllerFactory {
         vc.onDiscoverCollections = {
             coordinator.showDiscoverCollectionsViewController {initialCollectionIndex in
                 coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
+            } onSwapItems:  { source, dest in
+                vc.swapItemsAt(source, destInd: dest)
             }
+        }
+        vc.onShowCardDetails = { ticker in
+            coordinator.showCardDetailsViewController(TickerInfo(ticker: ticker))
         }
         return vc
     }
-
+    
     func instantiateTickerDetails() -> TickerViewController {
         let vc = TickerViewController.instantiate(.discovery)
         return vc

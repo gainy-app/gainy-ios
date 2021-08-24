@@ -13,3 +13,10 @@ extension UICollectionView {
         return cell
     }
 }
+
+extension UICollectionViewCell {
+    
+    class var cellIdentifier: String {
+        return String(describing: self).components(separatedBy: ".").last!
+    }
+}

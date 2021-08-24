@@ -4,11 +4,11 @@
 import Apollo
 import Foundation
 
-public final class CollectionDetailsQuery: GraphQLQuery {
+public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query CollectionDetails {
+    query DiscoverCollectionDetails {
       app_collections {
         __typename
         id
@@ -45,7 +45,7 @@ public final class CollectionDetailsQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "CollectionDetails"
+  public let operationName: String = "DiscoverCollectionDetails"
 
   public init() {
   }

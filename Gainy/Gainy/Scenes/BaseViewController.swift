@@ -7,6 +7,8 @@
 
 import UIKit
 import MBProgressHUD
+import Combine
+import Network
 
 class BaseViewController: UIViewController {
     
@@ -49,11 +51,34 @@ class BaseViewController: UIViewController {
     
     private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
     
+    // MARK: - Properties
+    private var cancellables = Set<AnyCancellable>()
+    private let monitorQueue = DispatchQueue(label: "monitor")
+    
+    @Atomic
+    private var networkStatus: NWPath.Status?
+    
+    /// Actual network status
+    var haveNetwork: Bool {
+        networkStatus == .satisfied
+    }
+    
     //MARK:- Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        observeNetworkStatus()
+    }
+    
+    // MARK: - Network Status Observation
+    private func observeNetworkStatus() {
+        NWPathMonitor()
+            .publisher(queue: monitorQueue)
+            .sink { [weak self] status in
+                self?.networkStatus = status
+            }
+            .store(in: &cancellables)
     }
     
     private func initHaptics() {

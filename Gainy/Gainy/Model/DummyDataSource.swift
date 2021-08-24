@@ -4,6 +4,6 @@ enum DummyDataSource {
     static var yourCollections: [Collection] = []
     static var recommendedCollections: [Collection] = []
 
-    static var remoteRawCollectionDetails: [CollectionDetailsQuery.Data.AppCollection] = []
+    static var remoteRawCollectionDetails: [DiscoverCollectionDetailsQuery.Data.AppCollection] = []
     static var collectionDetails: [CollectionDetails] = []
 }

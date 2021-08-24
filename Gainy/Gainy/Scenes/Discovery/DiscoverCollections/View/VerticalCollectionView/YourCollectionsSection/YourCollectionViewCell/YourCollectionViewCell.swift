@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class YourCollectionViewCell: SwipeCollectionViewCell {
     // MARK: Lifecycle
@@ -178,7 +179,15 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         stocksAmount: String,
         imageName: String
     ) {
-        backImageView.image = UIImage(named: name.lowercased())
+        //backImageView.image =
+        
+        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
+        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ], progressBlock: nil, completionHandler: nil)
         backImageView.contentMode = .scaleAspectFill
         
         nameLabel.text = name

@@ -4,11 +4,11 @@
 import Apollo
 import Foundation
 
-public final class FetchNewsQuery: GraphQLQuery {
+public final class DiscoverNewsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchNews($symbol: String!) {
+    query DiscoverNews($symbol: String!) {
       fetchNewsData(symbol: $symbol) {
         __typename
         datetime
@@ -22,7 +22,7 @@ public final class FetchNewsQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "FetchNews"
+  public let operationName: String = "DiscoverNews"
 
   public var symbol: String
 

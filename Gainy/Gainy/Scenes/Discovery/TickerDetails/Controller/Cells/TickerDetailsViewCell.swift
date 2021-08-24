@@ -10,6 +10,8 @@ import UIKit
 /// Base Ticker TableView cell
 class TickerDetailsViewCell: UITableViewCell {
     
+    var cellHeightChanged: ((CGFloat) -> Void)?
+    
     var tickerInfo: TickerInfo? {
         didSet {
             updateFromTickerData()
@@ -18,5 +20,14 @@ class TickerDetailsViewCell: UITableViewCell {
     
     func updateFromTickerData() {
         
+    }
+    
+    
+    func addSwiftUIIfPossible(_ view: UIView) -> Bool {
+        guard !subviews.contains(where: {$0.tag == TickerDetailsDataSource.hostingTag}) else {
+            return false
+        }
+        addSubview(view)
+        return true
     }
 }

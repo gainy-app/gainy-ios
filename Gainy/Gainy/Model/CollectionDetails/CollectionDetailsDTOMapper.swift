@@ -1,6 +1,6 @@
 enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(
-        _ dto: CollectionDetailsQuery.Data.AppCollection
+        _ dto: DiscoverCollectionDetailsQuery.Data.AppCollection
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id,
@@ -18,7 +18,7 @@ enum CollectionDetailsDTOMapper {
     }
 
     static func mapAsCollectionFromYourCollections(
-        _ dto: CollectionDetailsQuery.Data.AppCollection
+        _ dto: DiscoverCollectionDetailsQuery.Data.AppCollection
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id,
@@ -36,7 +36,7 @@ enum CollectionDetailsDTOMapper {
     }
 
     static func mapTickerDetails(
-        _ dto: CollectionDetailsQuery
+        _ dto: DiscoverCollectionDetailsQuery
             .Data
             .AppCollection
             .CollectionSymbol
@@ -47,12 +47,13 @@ enum CollectionDetailsDTOMapper {
             description: dto.ticker.description ?? "",
             financialMetrics: CollectionDetailsDTOMapper.mapFinancialMetrics(
                 dto.ticker.tickerFinancials.first!
-            )
+            ),
+            rawTicker: dto.ticker
         )
     }
 
     static func mapFinancialMetrics(
-        _ dto: CollectionDetailsQuery
+        _ dto: DiscoverCollectionDetailsQuery
             .Data
             .AppCollection
             .CollectionSymbol

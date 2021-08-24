@@ -6,7 +6,7 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
 }
 
-final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {
+final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {    
     // MARK: Internal
 
     // MARK: Properties
@@ -14,7 +14,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var viewModel: CollectionDetailsViewModelProtocol?
 
     var onDiscoverCollections: (() -> Void)?
-    var onShowCardDetails: (() -> Void)?
+    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,8 +131,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
 
             if let cell = cell as? CollectionDetailsViewCell {
-                cell.onCardPressed = { [weak self] in
-                    self?.onShowCardDetails?()
+                cell.onCardPressed = {[weak self]  ticker in
+                    self?.onShowCardDetails?(ticker)
                 }
             }
 
@@ -171,8 +171,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     // MARK: Functions
 
     private func getRemoteData(completion: @escaping () -> Void) {
+        guard haveNetwork else {
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: CollectionDetailsQuery()) { [weak self] result in
+        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.appCollections else {
@@ -257,5 +261,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                              toSection: .collectionWithCards)
 
         dataSource?.apply(snapshot, animatingDifferences: false)
+    }
+    
+    //MARK: - Swap Items
+    
+    func swapItemsAt(_ sourceInd: Int, destInd: Int) {
+        guard var snapshot = dataSource?.snapshot() else {return}
+        let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[sourceInd]
+        let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[destInd]        
+        snapshot.moveItem(sourceItem, beforeItem: destItem)
+        dataSource?.apply(snapshot)
     }
 }

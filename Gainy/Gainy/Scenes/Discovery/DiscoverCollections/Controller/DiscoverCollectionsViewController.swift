@@ -19,6 +19,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
+    var onSwapItems: ((Int, Int) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,6 +148,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     fileprivate func addBottomView() {
+        let backView = UIView.init(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 40))
+        backView.backgroundColor = UIColor(hexString: "0062FF")!
+        view.addSubview(backView)
+        backView.autoPinEdge(.leading, to: .leading, of: view)
+        backView.autoPinEdge(.trailing, to: .trailing, of: view)
+        backView.autoSetDimension(.height, toSize: 40)
+        backView.autoPinEdge(.bottom, to: .bottom, of: view)
+        
         let bottomView = CollectionsBottomView()
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
         addChild(hosting)
@@ -293,22 +302,25 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         dropCoordinator: UICollectionViewDropCoordinator,
         destinationIndexPath: IndexPath
     ) {
+        guard var snapshot = dataSource?.snapshot() else {return}
         let draggedItems = dropCoordinator.items
         guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {
             return
         }
         
+        let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row]
+        let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row]
+        
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
         
         // TODO: keeping local order, make it more robust and flexible
+        onSwapItems?(sourceIndexPath.row, destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
-            snapshot.moveItem(dataSource?.itemIdentifier(for: sourceIndexPath)!,
-                              afterItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
+            snapshot.moveItem(sourceItem, afterItem: destItem)
         } else {
-            snapshot.moveItem(dataSource?.itemIdentifier(for: sourceIndexPath)!,
-                              beforeItem: dataSource?.itemIdentifier(for: destinationIndexPath)!)
+            snapshot.moveItem(sourceItem, beforeItem: destItem)
         }
         
         dataSource?.apply(snapshot, animatingDifferences: false)
@@ -341,6 +353,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func getRemoteData(completion: @escaping () -> Void) {
+        guard haveNetwork else {
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
         showNetworkLoader()
         Network.shared.apollo.fetch(query: DiscoverCollectionsQuery()) { [weak self] result in
             guard let self = self else {return}

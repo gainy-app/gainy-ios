@@ -1,4 +1,4 @@
-query CollectionDetails {
+query DiscoverCollectionDetails {
   app_collections {
     id
     image_url

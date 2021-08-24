@@ -72,7 +72,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
     var viewModel: CollectionCardViewCellModel?
 
-    var onCardPressed: (() -> Void)?
+    var onCardPressed: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
 
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -94,13 +94,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             stocksAmount: stocksAmount,
             imageName: collectionImage
         )
-
+        self.cards = cards
         snapshot.deleteAllItems()
 
         snapshot.appendSections([.cards])
         snapshot.appendItems(cards, toSection: .cards)
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
+    private var cards: [CollectionCardViewCellModel] = []
 
     // MARK: Private
 
@@ -125,6 +126,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        onCardPressed?()
+        onCardPressed?(cards[indexPath.row].rawTicker)
     }
 }
