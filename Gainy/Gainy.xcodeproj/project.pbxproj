@@ -53,6 +53,9 @@
 		33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */; };
 		33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */; };
 		33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */; };
+		33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */; };
+		33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9F26D6229300E82329 /* Double+Currencies.swift */; };
+		33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 33CDECA226D627ED00E82329 /* SwiftDate */; };
 		33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */; };
 		33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 33D3D4E726CB8F63005A859B /* SwiftHEXColors */; };
 		33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4EA26CB9D21005A859B /* NotificationManager.swift */; };
@@ -239,6 +242,8 @@
 		33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsAlternativeStocksViewCell.swift; sourceTree = "<group>"; };
 		33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsUpcomingViewCell.swift; sourceTree = "<group>"; };
 		33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsWatchlistViewCell.swift; sourceTree = "<group>"; };
+		33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQL+Extensions.swift"; sourceTree = "<group>"; };
+		33CDEC9F26D6229300E82329 /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
 		33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 		33D3D4EA26CB9D21005A859B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -388,6 +393,7 @@
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
+				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
 				33467CF226C66FA300811F74 /* FirebaseCrashlytics in Frameworks */,
 				33467CF626C66FA300811F74 /* FirebaseAuth in Frameworks */,
@@ -1019,6 +1025,8 @@
 				33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */,
 				337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */,
 				33E1827B26D3967F00A1D2AC /* String+Sizes.swift */,
+				33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */,
+				33CDEC9F26D6229300E82329 /* Double+Currencies.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1176,6 +1184,7 @@
 				33B9886F26CA8617008B8AC9 /* PureLayout */,
 				33B9887226CA90D0008B8AC9 /* Kingfisher */,
 				33D3D4E726CB8F63005A859B /* SwiftHEXColors */,
+				33CDECA226D627ED00E82329 /* SwiftDate */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1256,6 +1265,7 @@
 				33B9886E26CA8617008B8AC9 /* XCRemoteSwiftPackageReference "PureLayout" */,
 				33B9887126CA90D0008B8AC9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
+				33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -1408,6 +1418,7 @@
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
+				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
@@ -1429,6 +1440,7 @@
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
+				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
 				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
@@ -1705,7 +1717,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1732,7 +1744,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1920,6 +1932,14 @@
 				minimumVersion = 6.3.1;
 			};
 		};
+		33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.1;
+			};
+		};
 		33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/thii/SwiftHEXColors.git";
@@ -1990,6 +2010,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33B9887126CA90D0008B8AC9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		33CDECA226D627ED00E82329 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
 		};
 		33D3D4E726CB8F63005A859B /* SwiftHEXColors */ = {
 			isa = XCSwiftPackageProductDependency;

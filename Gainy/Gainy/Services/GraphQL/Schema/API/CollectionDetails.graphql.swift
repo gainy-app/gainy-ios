@@ -38,6 +38,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               current_price
               divident_growth
               symbol
+              created_at
             }
           }
         }
@@ -368,6 +369,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
                 GraphQLField("current_price", type: .scalar(float8.self)),
                 GraphQLField("divident_growth", type: .scalar(Double.self)),
                 GraphQLField("symbol", type: .scalar(String.self)),
+                GraphQLField("created_at", type: .scalar(timestamptz.self)),
               ]
             }
 
@@ -377,8 +379,8 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, priceChangeToday: Double? = nil, currentPrice: float8? = nil, dividentGrowth: Double? = nil, symbol: String? = nil) {
-              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol])
+            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, priceChangeToday: Double? = nil, currentPrice: float8? = nil, dividentGrowth: Double? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
+              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol, "created_at": createdAt])
             }
 
             public var __typename: String {
@@ -450,6 +452,15 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "symbol")
+              }
+            }
+
+            public var createdAt: timestamptz? {
+              get {
+                return resultMap["created_at"] as? timestamptz
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "created_at")
               }
             }
           }

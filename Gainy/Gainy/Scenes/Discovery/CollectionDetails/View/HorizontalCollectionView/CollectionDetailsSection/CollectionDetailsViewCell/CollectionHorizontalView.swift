@@ -16,7 +16,7 @@ final class CollectionHorizontalView: UIView {
         addSubview(showListViewButton)
         addSubview(showGridViewButton)
 
-        layer.cornerRadius = 8.0
+        layer.cornerRadius = 16.0
         layer.cornerCurve = .continuous
         layer.masksToBounds = true
 
@@ -100,8 +100,8 @@ final class CollectionHorizontalView: UIView {
     }()
 
     // TODO: 1: use custom SettingsButton
-    lazy var settingsButton: UIButton = {
-        let button = UIButton()
+    lazy var settingsButton: ResponsiveButton = {
+        let button = ResponsiveButton()
 
         button.layer.cornerRadius = 12
         button.layer.cornerCurve = .continuous
@@ -134,8 +134,8 @@ final class CollectionHorizontalView: UIView {
     }()
 
     // TODO: 1: use custom button
-    lazy var sortByButton: UIButton = {
-        let button = UIButton()
+    lazy var sortByButton: ResponsiveButton = {
+        let button = ResponsiveButton()
 
         button.layer.cornerRadius = 12
         button.layer.cornerCurve = .continuous
@@ -182,11 +182,10 @@ final class CollectionHorizontalView: UIView {
     }()
 
     // TODO: 1: use custom button
-    lazy var showListViewButton: UIButton = {
-        let button = UIButton()
+    lazy var showListViewButton: ResponsiveButton = {
+        let button = ResponsiveButton()
 
-        button.backgroundColor = UIColor.Gainy.blue
-
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 4
         button.layer.cornerCurve = .continuous
 
@@ -200,11 +199,11 @@ final class CollectionHorizontalView: UIView {
     }()
 
     // TODO: 1: use custom button
-    lazy var showGridViewButton: UIButton = {
-        let button = UIButton()
+    lazy var showGridViewButton: ResponsiveButton = {
+        let button = ResponsiveButton()
 
         button.backgroundColor = UIColor.Gainy.blue
-
+        
         button.layer.cornerRadius = 4
         button.layer.cornerCurve = .continuous
 
@@ -345,8 +344,14 @@ final class CollectionHorizontalView: UIView {
     }
 
     @objc
-    private func showListViewButtonTapped(_: UIButton) {}
+    private func showListViewButtonTapped(_: UIButton) {
+        showListViewButton.backgroundColor = UIColor.Gainy.blue
+        showGridViewButton.backgroundColor = .clear
+    }
 
     @objc
-    private func showGridViewButtonTapped(_: UIButton) {}
+    private func showGridViewButtonTapped(_: UIButton) {
+        showListViewButton.backgroundColor = .clear
+        showGridViewButton.backgroundColor = UIColor.Gainy.blue
+    }
 }

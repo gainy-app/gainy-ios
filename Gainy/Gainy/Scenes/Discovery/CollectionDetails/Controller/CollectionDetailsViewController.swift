@@ -131,6 +131,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
 
             if let cell = cell as? CollectionDetailsViewCell {
+                if let model = modelItem as? CollectionDetailViewCellModel {
+                    cell.tag = model.id
+                }
                 cell.onCardPressed = {[weak self]  ticker in
                     self?.onShowCardDetails?(ticker)
                 }
@@ -266,10 +269,39 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     //MARK: - Swap Items
     
     func swapItemsAt(_ sourceInd: Int, destInd: Int) {
-        guard var snapshot = dataSource?.snapshot() else {return}
-        let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[sourceInd]
-        let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[destInd]        
+        guard var snapshot = dataSource?.snapshot() else {return}        
+        
+        guard let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == sourceInd
+            }
+            return false
+        }) else {return}
+        
+        guard let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+        if let model = anyHashable as? CollectionDetailViewCellModel {
+            return model.id == destInd
+        }
+        return false
+        }) else {return}
+        
         snapshot.moveItem(sourceItem, beforeItem: destItem)
         dataSource?.apply(snapshot)
+    }
+    
+    //MARK: - Delete Items
+    
+    func deleteItem(_ sourceInd: Int) {
+        guard var snapshot = dataSource?.snapshot() else {return}
+        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == sourceInd
+            }
+            return false
+        }) {
+            snapshot.deleteItems([sourceItem])
+            dataSource?.apply(snapshot)
+        }
+        
     }
 }

@@ -50,10 +50,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.setRootModule(vc, hideBar: true)
     }
 
-    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)? ) {
+    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
         vc.onGoToCollectionDetails = onGoToCollectionDetails
         vc.onSwapItems = onSwapItems
+        vc.onItemDelete = onItemDelete
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 

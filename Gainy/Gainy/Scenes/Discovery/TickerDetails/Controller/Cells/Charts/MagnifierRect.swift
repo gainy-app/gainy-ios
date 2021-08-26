@@ -8,27 +8,17 @@
 import SwiftUI
 
 public struct MagnifierRect: View {
-    @Binding var currentNumber: Double
-    var valueSpecifier:String
+    @Binding var currentNumber: String
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     public var body: some View {
-        ZStack{
-            Text("\(self.currentNumber, specifier: valueSpecifier)")
-                .font(.system(size: 18, weight: .bold))
-                .offset(x: 0, y:-110)
-                .foregroundColor(self.colorScheme == .dark ? Color.white : Color.black)
-            if (self.colorScheme == .dark ){
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white, lineWidth: self.colorScheme == .dark ? 2 : 0)
-                    .frame(width: 60, height: 260)
-            }else{
-                RoundedRectangle(cornerRadius: 16)
-                    .frame(width: 60, height: 280)
-                    .foregroundColor(Color.white)
-                    .shadow(color: Colors.LegendText, radius: 12, x: 0, y: 6 )
-                    .blendMode(.multiply)
-            }
-        }
-        .offset(x: 0, y: -15)
+        VStack(spacing: 0){
+            Text(currentNumber)
+                .font(UIFont.compactRoundedSemibold(10).uiFont)
+                .foregroundColor(UIColor(named: "mainText")?.uiColor)
+            VLine()
+                .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+                .foregroundColor(Color(hex: "E0E6EA"))
+                .frame(width: 1)
+        }.frame(height: 160)
     }
 }

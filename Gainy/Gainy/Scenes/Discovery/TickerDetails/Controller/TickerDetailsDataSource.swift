@@ -22,13 +22,13 @@ final class TickerDetailsDataSource: NSObject {
     private func populateInitialHeights() {
         cellHeights[.header] = 80.0
         cellHeights[.about] = aboutMinHeight
-        cellHeights[.chart] = 291.0 + 200.0
+        cellHeights[.chart] = 291.0
         cellHeights[.highlights] = 169.0
         cellHeights[.marketData] = 284.0
         cellHeights[.wsr] = 230.0
         cellHeights[.recommended] = 156.0
         cellHeights[.news] = 201.0
-        cellHeights[.alternativeStocks] = 253.0
+        cellHeights[.alternativeStocks] = 0.0 //253.0
         cellHeights[.upcomingEvents] = 238.0
         cellHeights[.watchlist] = 120.0
     }
@@ -50,7 +50,8 @@ final class TickerDetailsDataSource: NSObject {
     }()
     
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
-        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: ScatterChartView())
+        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: ScatterChartView(ticker: ticker.ticker,
+                                                                                                              chartData: ticker.localChartData))
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
     }()
@@ -71,7 +72,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsChartViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             if cell.addSwiftUIIfPossible(chartHosting.view) {
-                chartHosting.view.autoSetDimension(.height, toSize: 491.0)
+                chartHosting.view.autoSetDimension(.height, toSize: 291.0)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)

@@ -8,11 +8,12 @@
 import UIKit
 
 /// Ticker model to pupulate cells
+typealias RemoteTicker = DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker
 class TickerInfo {
     
-    let ticker: DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker
+    let ticker: RemoteTicker
     
-    init(ticker: DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) {
+    init(ticker: RemoteTicker) {
         self.ticker = ticker
         
         self.name = ticker.name ?? ""
@@ -67,7 +68,7 @@ class TickerInfo {
         
         //Load Chart
         dispatchGroup.enter()
-        Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: chartRange, symbol: symbol)){[weak self] result in
+        Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: chartRange.rawValue, symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 
@@ -92,6 +93,7 @@ class TickerInfo {
     
     private func updateChartData(_ data: [DiscoverChartsQuery.Data.FetchChartDatum]) {
         self.chartData = data
+        self.localChartData.loadValues(Array(data.suffix(30)), period: chartRange)
     }
     private func updateNewsData(_ data: [DiscoverNewsQuery.Data.FetchNewsDatum]) {
         self.news = data
@@ -103,7 +105,8 @@ class TickerInfo {
     
     //MARK: - Chart
     var chartData: [DiscoverChartsQuery.Data.FetchChartDatum] = []
-    var chartRange: String = "1W"
+    var chartRange: ScatterChartView.ChartPeriod = .d1
+    var localChartData: ChartData =  ChartData.init(points: [0.0])
     
     //MARK: - About
     let about: String

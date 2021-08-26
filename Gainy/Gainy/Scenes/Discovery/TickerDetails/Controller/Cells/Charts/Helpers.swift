@@ -57,11 +57,28 @@ public struct GradientColors {
 }
 
 public struct Styles {
-    public static let lineChartStyleOne = ChartStyle(
-        backgroundColor: Color.white,
-        accentColor: Colors.OrangeStart,
-        secondGradientColor: Colors.OrangeEnd,
-        textColor: Color.black,
+    public static let lineChartStyleGrow = ChartStyle(
+        backgroundColor: Color.clear,
+        accentColor: UIColor(named: "mainGreen")!.uiColor,
+        secondGradientColor: UIColor(named: "mainGreen")!.uiColor,
+        textColor: UIColor(named: "mainText")!.uiColor,
+        legendTextColor: Color.gray,
+        dropShadowColor: Color.gray)
+    
+    public static let lineChartStyleDrop = ChartStyle(
+        backgroundColor: Color.clear,
+        accentColor: UIColor(named: "mainRed")!.uiColor,
+        secondGradientColor: UIColor(named: "mainRed")!.uiColor,
+        textColor: UIColor(named: "mainText")!.uiColor,
+        legendTextColor: Color.gray,
+        dropShadowColor: Color.gray)
+        
+    
+    public static let lineChartStyleMedian = ChartStyle(
+        backgroundColor: Color.clear,
+        accentColor: UIColor(hexString: "0062FF")!.uiColor,
+        secondGradientColor: UIColor(hexString: "0062FF")!.uiColor,
+        textColor: UIColor(named: "mainText")!.uiColor,
         legendTextColor: Color.gray,
         dropShadowColor: Color.gray)
     
@@ -183,10 +200,26 @@ public class ChartStyle {
     }
 }
 
+
+
 public class ChartData: ObservableObject, Identifiable {
     @Published var points: [(String,Double)]
     var valuesGiven: Bool = false
     var ID = UUID()
+    
+    init(points:[RemoteChartData], period: ScatterChartView.ChartPeriod) {
+        self.points = points.map{($0.labelForPeriod(period), Double($0.volume ?? 0.0))}
+    }
+    
+    func loadValues(_ vals: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
+        self.points = vals.compactMap{
+            if let volume = $0.volume  {
+                return ($0.labelForPeriod(period), Double(volume))
+            } else {
+                return nil
+            }
+        }
+    }
     
     public init<N: BinaryFloatingPoint>(points:[N]) {
         self.points = points.map{("", Double($0))}
