@@ -31,18 +31,23 @@ extension Color {
     static let textColor = Color.init(hex: "1F2E35")
 }
 
+
+
 struct ScatterChartView: View {
     
-    init(ticker: RemoteTicker, chartData: ChartData) {
+    init(ticker: RemoteTicker, chartData: ChartData, delegate: ScatterChartDelegate) {
         self.ticker = ticker
         self.chartData = chartData
+        self.delegate = delegate
     }
     
-  
     var ticker: RemoteTicker? = nil
     
     @ObservedObject
     var chartData: ChartData
+    
+    @ObservedObject
+    var delegate: ScatterChartDelegate
     
     enum ChartPeriod: String, CaseIterable {
         case d1 = "1D", w1 = "1W", m1 = "1M", m3 = "3M", y1 = "1Y", y5 = "5Y", all = "ALL"
@@ -52,6 +57,8 @@ struct ScatterChartView: View {
     private var selectedTag: ChartPeriod = .d1 {
         didSet {
             isLeftDurationVis = selectedTag == .d1
+            delegate.range = selectedTag
+            hapticTouch.impactOccurred()
         }
     }
     
@@ -66,14 +73,20 @@ struct ScatterChartView: View {
             VStack {
                 headerView
                 chartView
+                    .padding(.leading, 8)
+                    .padding(.trailing, 8)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 }).frame(maxHeight: 40)
                 
             }
             .background(UIColor.init(hexString: "F8FBFD")!.uiColor)
+        }).onAppear(perform: {
+            hapticTouch.prepare()
         })
     }
+    //MARK:- Haptics
+    private let hapticTouch = UIImpactFeedbackGenerator()
     
     //MARK:- Body sections
     
@@ -167,6 +180,11 @@ struct ScatterChartView: View {
     let medianPoints: [Double] = [8,54,23,32,12,37,7,23,43].shuffled()
     private var chartView: some View {
         ZStack {
+            
+            if chartData.points.count > 1 {
+                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, isMedianVisible: $isMedianVisible).offset(y: -40)
+            }            
+            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, isMedianVisible: $isMedianVisible).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -180,10 +198,6 @@ struct ScatterChartView: View {
             .opacity(isLeftDurationVis ? 1.0 : 0.0)
             .opacity(isMedianVisible ? 0.0 : 1.0)
             .padding(.bottom, -5)
-            if chartData.points.count > 1 {
-                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop).offset(y: -40)
-            }            
-            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             //ScatterChart(symbolColor: Color(hex: "FC5058"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
             //ScatterChart(symbolColor: Color(hex: "0062FF"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
              //   .opacity(isMedianVisible ? 1.0 : 0.0)

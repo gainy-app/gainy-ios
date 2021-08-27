@@ -91,6 +91,22 @@ class TickerInfo {
         
     }
     
+    /// Update Chart only
+    func loadNewChartData(_ completion: ( () -> Void)? = nil) {
+        Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: chartRange.rawValue, symbol: symbol)){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                self?.updateChartData(graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? [])
+                completion?()
+                break
+            case .failure(let error):
+                print("Failure when making GraphQL request. Error: \(error)")
+                completion?()
+                break
+            }
+        }
+    }
+    
     private func updateChartData(_ data: [DiscoverChartsQuery.Data.FetchChartDatum]) {
         self.chartData = data
         self.localChartData.loadValues(Array(data.suffix(30)), period: chartRange)
@@ -164,3 +180,5 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     
     let dataSource: TickerDetailsDataSource
 }
+
+

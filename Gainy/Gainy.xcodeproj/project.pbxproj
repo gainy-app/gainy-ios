@@ -27,6 +27,10 @@
 		33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 33467CF926C6728700811F74 /* MBProgressHUD */; };
 		33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFB26C6786200811F74 /* BaseViewController.swift */; };
 		33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFE26C698BC00811F74 /* MainTabController.swift */; };
+		336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */; };
+		336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */; };
+		336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */; };
+		336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -76,6 +80,7 @@
 		33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */; };
 		33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6626CFD4E000DF1CBE /* CornerView.swift */; };
 		33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */; };
+		33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */; };
 		33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */; };
 		33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3926D518FD00FABC70 /* Legend.swift */; };
 		33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3A26D518FD00FABC70 /* IndicatorPoint.swift */; };
@@ -217,6 +222,10 @@
 		33467CFE26C698BC00811F74 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		335ECE1B26C3AE8000C6AC71 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		335ECE1F26C3B2E500C6AC71 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOneColumnListFlowSectionLayout.swift; sourceTree = "<group>"; };
+		336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionListCardCell.xib; sourceTree = "<group>"; };
+		336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListCardCell.swift; sourceTree = "<group>"; };
+		336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartDelegate.swift; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -264,6 +273,7 @@
 		33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		33E7AA6626CFD4E000DF1CBE /* CornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerView.swift; sourceTree = "<group>"; };
 		33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsNewsViewCell.swift; sourceTree = "<group>"; };
+		33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollictionsListHeaderView.swift; sourceTree = "<group>"; };
 		33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartView.swift; sourceTree = "<group>"; };
 		33FE9E3926D518FD00FABC70 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		33FE9E3A26D518FD00FABC70 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -458,6 +468,7 @@
 		337D611426D50D510048AE62 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */,
 				33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */,
 				33FE9E4626D519A700FABC70 /* LineView.swift */,
 				33FE9E4326D5195800FABC70 /* Helpers.swift */,
@@ -573,6 +584,8 @@
 			children = (
 				3A01FBEA26863417007F6FA3 /* CollectionCardCell.swift */,
 				3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */,
+				336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */,
+				336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */,
 			);
 			path = CollectionCardCell;
 			sourceTree = "<group>";
@@ -581,6 +594,7 @@
 			isa = PBXGroup;
 			children = (
 				3A01FBE42682396F007F6FA3 /* CollectionHorizontalView.swift */,
+				33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */,
 				3ABECD3C26810052003D27D9 /* CollectionDetailsViewCell.swift */,
 				3A859405268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift */,
 				3A85943A268A52AF00CB8DD6 /* TwoColumnCollectionView */,
@@ -777,6 +791,7 @@
 			isa = PBXGroup;
 			children = (
 				3A01FBF2268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift */,
+				336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */,
 				3A01FBFA26873815007F6FA3 /* CollectionCardCell */,
 			);
 			path = TwoColumnCollectionView;
@@ -1284,6 +1299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */,
+				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				3AA52C86266012D8006A6961 /* DiscoverCollections.graphql in Resources */,
@@ -1445,6 +1461,7 @@
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
 				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
+				336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
@@ -1461,6 +1478,7 @@
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
+				336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */,
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
 				33FE9E4826D519A700FABC70 /* MultiLineChartView.swift in Sources */,
@@ -1469,12 +1487,14 @@
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
+				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				3A67232C268F1D7000DB04D1 /* Array+Move.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */,
+				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */,
@@ -1717,7 +1737,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1744,7 +1764,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

@@ -113,7 +113,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
         collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
 
-        collectionDetailsCollectionView.backgroundColor = UIColor.Gainy.white
+        collectionDetailsCollectionView.backgroundColor = .clear
         collectionDetailsCollectionView.showsVerticalScrollIndicator = false
         collectionDetailsCollectionView.dragInteractionEnabled = true
         collectionDetailsCollectionView.bounces = false

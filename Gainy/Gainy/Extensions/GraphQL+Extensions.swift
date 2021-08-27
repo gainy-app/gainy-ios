@@ -103,7 +103,7 @@ extension RemoteChartData: RemoteDateTimeConvertable {
             formatter.dateFormat = "yyyy"
             break
         default:
-            formatter.dateFormat = "dd"
+            formatter.dateFormat = "MM-dd"
             break
         }
         return formatter.string(from: date)

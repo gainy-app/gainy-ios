@@ -1,8 +1,13 @@
 import UIKit
 
+protocol CollectionHorizontalViewDelegate: AnyObject {
+    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool)
+}
+
 final class CollectionHorizontalView: UIView {
     // MARK: Lifecycle
 
+    weak var delegate: CollectionHorizontalViewDelegate?
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
@@ -21,7 +26,7 @@ final class CollectionHorizontalView: UIView {
         layer.masksToBounds = true
 
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = .clear
     }
 
     @available(*, unavailable)
@@ -347,11 +352,13 @@ final class CollectionHorizontalView: UIView {
     private func showListViewButtonTapped(_: UIButton) {
         showListViewButton.backgroundColor = UIColor.Gainy.blue
         showGridViewButton.backgroundColor = .clear
+        delegate?.stocksViewModeChanged(view: self, isGrid: false)
     }
 
     @objc
     private func showGridViewButtonTapped(_: UIButton) {
         showListViewButton.backgroundColor = .clear
         showGridViewButton.backgroundColor = UIColor.Gainy.blue
+        delegate?.stocksViewModeChanged(view: self, isGrid: true)
     }
 }

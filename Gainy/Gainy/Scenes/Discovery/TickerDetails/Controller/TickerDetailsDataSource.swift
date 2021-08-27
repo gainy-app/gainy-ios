@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol TickerDetailsDataSourceDelegate: AnyObject {
+    func loadingState(started: Bool)
+}
+
 final class TickerDetailsDataSource: NSObject {
+    weak var delegate: TickerDetailsDataSourceDelegate?
+    
     let totalRows = 10
     
     init(ticker: TickerInfo) {
@@ -18,11 +24,13 @@ final class TickerDetailsDataSource: NSObject {
     
     
     private let aboutMinHeight: CGFloat = 164.0 + 44.0
+    private let chatHeight: CGFloat = 291.0 + 10
+    
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
         cellHeights[.header] = 80.0
         cellHeights[.about] = aboutMinHeight
-        cellHeights[.chart] = 291.0
+        cellHeights[.chart] = chatHeight
         cellHeights[.highlights] = 169.0
         cellHeights[.marketData] = 284.0
         cellHeights[.wsr] = 230.0
@@ -50,12 +58,21 @@ final class TickerDetailsDataSource: NSObject {
     }()
     
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
-        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: ScatterChartView(ticker: ticker.ticker,
-                                                                                                              chartData: ticker.localChartData))
+        var rootView = ScatterChartView(ticker: ticker.ticker,
+                                        chartData: ticker.localChartData,
+                                        delegate: chartDelegate)
+        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
     }()
+    
+    private lazy var chartDelegate: ScatterChartDelegate = {
+        let delegateObject =  ScatterChartDelegate()
+        delegateObject.delegate = self
+        return delegateObject
+    }()
 }
+
 
 extension TickerDetailsDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,7 +89,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsChartViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             if cell.addSwiftUIIfPossible(chartHosting.view) {
-                chartHosting.view.autoSetDimension(.height, toSize: 291.0)
+                chartHosting.view.autoSetDimension(.height, toSize: chatHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
@@ -134,5 +151,16 @@ extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = Row(rawValue: indexPath.row)!
         return cellHeights[row] ?? 0.0
+    }
+}
+
+
+extension TickerDetailsDataSource: ScatterChartViewDelegate {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
+        delegate?.loadingState(started: true)
+        ticker.chartRange = period
+        ticker.loadNewChartData {[weak self] in
+            self?.delegate?.loadingState(started: false)
+        }
     }
 }
