@@ -19,7 +19,13 @@ public struct LineView: View {
     public var legendSpecifier: String
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    @State private var showLegend = false
+    @State private var showLegend = false {
+        didSet {
+            if showLegend == false {
+                hapticTouch.selectionChanged()
+            }
+        }
+    }
     @State private var dragLocation:CGPoint = .zero
     @State private var indicatorLocation:CGPoint = .zero
     @State private var closestPoint: CGPoint = .zero
@@ -27,6 +33,9 @@ public struct LineView: View {
     @State private var currentDataNumber: String = ""
     @State private var hideHorizontalLines: Bool = false
     @Binding private var isMedianVisible: Bool
+    
+    //MARK:- Haptics
+    private let hapticTouch = UISelectionFeedbackGenerator()
     
     init(data: ChartData,
                 title: String? = nil,
@@ -107,9 +116,12 @@ public struct LineView: View {
                     .onEnded({ value in
                         self.opacity = 0
                         self.hideHorizontalLines = false
-                    })
+                    }
+                    )
                 )
-        }
+        }.onAppear(perform: {
+            hapticTouch.prepare()
+        })
     }
     
     func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {

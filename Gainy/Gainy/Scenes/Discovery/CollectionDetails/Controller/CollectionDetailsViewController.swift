@@ -46,7 +46,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                             for: .touchUpInside)
 
         navigationBarContainer.addSubview(discoverCollectionsButton)
-
+        discoverCollectionsBtn = discoverCollectionsButton
         let searchTextView = UITextField(
             frame: CGRect(
                 x: 16,
@@ -57,10 +57,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         )
 
         searchTextView.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-        searchTextView.textColor = UIColor.Gainy.gray
+        searchTextView.textColor = UIColor(named: "mainText")
         searchTextView.layer.cornerRadius = 16
-        searchTextView.isUserInteractionEnabled = false
-
+        searchTextView.isUserInteractionEnabled = true
+        searchTextView.clearButtonMode = .always
+        searchTextView.clearButtonMode = .whileEditing
+        searchTextView.placeholder = "Search anything"
         let searchIconContainerView = UIView(
             frame: CGRect(
                 x: 0,
@@ -87,10 +89,31 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
         searchTextView.leftView = searchIconContainerView
         searchTextView.leftViewMode = .always
+        searchTextView.rightViewMode = .whileEditing
         searchTextView.backgroundColor = UIColor.Gainy.lightBack
-
+        
+        
+        let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
+        let clearBtn = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 24,
+                height: 24
+            )
+        )
+        clearBtn.setImage(UIImage(named: "search_clear"), for: .normal)
+        clearBtn.addTarget(self, action: #selector(textFieldClear), for: .touchUpInside)
+        btnFrame.addSubview(clearBtn)
+        searchTextView.rightView = btnFrame
+        
+        searchTextView.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
+        searchTextView.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
+        searchTextView.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        searchTextView.delegate = self
         navigationBarContainer.addSubview(searchTextView)
-
+        self.searchTextView = searchTextView
+        
         view.addSubview(navigationBarContainer)
 
         let navigationBarTopOffset =
@@ -141,7 +164,30 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
             return cell
         }
+        
+        searchCollectionView = UICollectionView(
+            frame: CGRect(
+                x: 0,
+                y: navigationBarTopOffset,
+                width: view.bounds.width,
+                height: view.bounds.height - navigationBarTopOffset
+            ),
+            collectionViewLayout: CollectionSearchController.createLayout([.loader])
+        )
+        view.addSubview(searchCollectionView)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
+        searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
 
+        searchCollectionView.backgroundColor = .clear
+        searchCollectionView.showsVerticalScrollIndicator = false
+        searchCollectionView.dragInteractionEnabled = true
+        searchCollectionView.bounces = false
+        searchCollectionView.alpha = 0.0
+        searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
+            self?.onShowCardDetails?(ticker)
+        })
         getRemoteData {
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()
@@ -149,6 +195,59 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.centerInitialCollectionInTheCollectionView()
             }
         }
+    }
+    
+    @objc func textFieldClear() {
+        searchTextView?.text = ""
+        searchController?.searchText = searchTextView?.text ?? ""
+        searchController?.clearAll()
+        
+        let oldFrame = CGRect(
+            x: 16,
+            y: 24,
+            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+            height: 40
+        )
+        UIView.animate(withDuration: 0.3) {
+            self.collectionDetailsCollectionView.alpha = 1.0
+            self.searchCollectionView.alpha = 0.0
+            self.discoverCollectionsBtn?.alpha = 1.0
+            self.searchTextView?.frame = oldFrame
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard (textField.text ?? "").count > 2 else {return}
+        searchController?.searchText = textField.text ?? ""
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3) {
+            self.collectionDetailsCollectionView.alpha = 0.0
+            self.searchCollectionView.alpha = 1.0
+            self.discoverCollectionsBtn?.alpha = 0.0
+            self.searchTextView?.frame = CGRect(
+                x: 16,
+                y: 24,
+                width: self.view.bounds.width - (16 + 16),
+                height: 40
+            )
+        }
+    }
+    
+    @objc func textFieldEditingDidEnd(_ textField: UITextField) {
+//        let oldFrame = CGRect(
+//            x: 16,
+//            y: 24,
+//            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+//            height: 40
+//        )
+//        UIView.animate(withDuration: 0.3) {
+//            self.collectionDetailsCollectionView.alpha = 1.0
+//            self.searchCollectionView.alpha = 0.0
+//            self.discoverCollectionsBtn?.alpha = 1.0
+//            self.searchTextView?.frame = oldFrame
+//        }
     }
 
     // MARK: Private
@@ -167,10 +266,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }()
 
     private var collectionDetailsCollectionView: UICollectionView!
+    private var searchCollectionView: UICollectionView!
 
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
-
+    
+    private var searchController: CollectionSearchController?
+    private var discoverCollectionsBtn: UIButton?
+    private var searchTextView: UITextField?
+    
     // MARK: Functions
 
     private func getRemoteData(completion: @escaping () -> Void) {
@@ -303,5 +407,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             dataSource?.apply(snapshot)
         }
         
+    }
+}
+
+extension CollectionDetailsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

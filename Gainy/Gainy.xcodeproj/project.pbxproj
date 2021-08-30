@@ -10,8 +10,19 @@
 		1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2726A48D4500FAF107 /* Apollo */; };
 		1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2B26A4A51200FAF107 /* AppsFlyerLib */; };
 		1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */; };
+		3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */; };
+		3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */; };
+		3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */; };
+		3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0B426DCBF20008DBC76 /* SearchTickers.graphql.swift */; };
+		3302E0B726DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */; };
+		3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B826DD073F008DBC76 /* SearchLoadingCell.xib */; };
+		3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */; };
+		3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */; };
+		3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
+		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
+		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
 		33467CDD26C6565600811F74 /* Charts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33467CDC26C6565600811F74 /* Charts.graphql */; };
 		33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE026C6575A00811F74 /* Types.graphql.swift */; };
 		33467CE326C6575A00811F74 /* News.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE126C6575A00811F74 /* News.graphql.swift */; };
@@ -211,8 +222,19 @@
 
 /* Begin PBXFileReference section */
 		1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollections.graphql.swift; sourceTree = "<group>"; };
+		3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSearchController.swift; sourceTree = "<group>"; };
+		3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchCollectionDetails.graphql; sourceTree = "<group>"; };
+		3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickers.graphql; sourceTree = "<group>"; };
+		3302E0B426DCBF20008DBC76 /* SearchTickers.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickers.graphql.swift; sourceTree = "<group>"; };
+		3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionDetails.graphql.swift; sourceTree = "<group>"; };
+		3302E0B826DD073F008DBC76 /* SearchLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchLoadingCell.xib; sourceTree = "<group>"; };
+		3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLoadingCell.swift; sourceTree = "<group>"; };
+		3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionHeaderView.xib; sourceTree = "<group>"; };
+		3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
+		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
 		33467CDC26C6565600811F74 /* Charts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Charts.graphql; sourceTree = "<group>"; };
 		33467CE026C6575A00811F74 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		33467CE126C6575A00811F74 /* News.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.graphql.swift; sourceTree = "<group>"; };
@@ -441,8 +463,31 @@
 				33467CE426C6576800811F74 /* Charts.graphql.swift */,
 				33467CE126C6575A00811F74 /* News.graphql.swift */,
 				33467CE026C6575A00811F74 /* Types.graphql.swift */,
+				3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */,
+				3302E0B426DCBF20008DBC76 /* SearchTickers.graphql.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		333CC15D26DCB2B600690245 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				333CC15E26DCB2C100690245 /* Stock Cell */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		333CC15E26DCB2C100690245 /* Stock Cell */ = {
+			isa = PBXGroup;
+			children = (
+				333CC16126DCB34700690245 /* StockViewCell.xib */,
+				333CC15F26DCB2DF00690245 /* StockViewCell.swift */,
+				3302E0B826DD073F008DBC76 /* SearchLoadingCell.xib */,
+				3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */,
+				3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */,
+				3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */,
+			);
+			path = "Stock Cell";
 			sourceTree = "<group>";
 		};
 		33467CFD26C698A200811F74 /* MainTabController */ = {
@@ -696,6 +741,7 @@
 			children = (
 				3A498F53266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift */,
 				3A498F57266C17C6008437F1 /* CollectionDetailsViewController.swift */,
+				3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -773,6 +819,7 @@
 			children = (
 				3A498F62266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift */,
 				3A498F5C266C2E2B008437F1 /* CollectionDetailsViewModel.swift */,
+				333CC15D26DCB2B600690245 /* Search */,
 				3A859439268A529B00CB8DD6 /* CollectionDetailsSection */,
 			);
 			path = HorizontalCollectionView;
@@ -979,6 +1026,8 @@
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
+				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
+				3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -1299,19 +1348,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */,
+				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				3AA52C86266012D8006A6961 /* DiscoverCollections.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
+				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
+				333CC16226DCB34700690245 /* StockViewCell.xib in Resources */,
 				33D3D4F126CBA2B6005A859B /* Discovery.storyboard in Resources */,
+				3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
+				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
@@ -1430,6 +1484,7 @@
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
+				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
@@ -1446,6 +1501,7 @@
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
+				3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
@@ -1453,6 +1509,7 @@
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,
+				3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
@@ -1477,6 +1534,7 @@
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
+				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
 				336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */,
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
@@ -1522,6 +1580,7 @@
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
+				3302E0B726DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift in Sources */,
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
@@ -1544,6 +1603,7 @@
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
+				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
@@ -1737,7 +1797,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1764,7 +1824,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
