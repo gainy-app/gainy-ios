@@ -43,3 +43,15 @@ extension TickerDetailsNewsViewCell: UICollectionViewDelegateFlowLayout {
         .init(top: 0, left: 28, bottom: 0, right: 0)
     }
 }
+
+extension TickerDetailsNewsViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let news = tickerInfo?.news[indexPath.row] {
+            if let url = URL(string: news.sourceUrl ?? "") {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+    }
+}
+
+

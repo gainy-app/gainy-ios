@@ -12,9 +12,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     weak var coordinator: MainCoordinator?
     
     fileprivate var tabBarHeight: CGFloat = 49.0
-    
-    
-    
+      
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +44,11 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     }
     
     lazy var keyWindow: UIView =  { UIApplication.shared.connectedScenes
-            .filter({$0.activationState == .foregroundActive})
-            .map({$0 as? UIWindowScene})
-            .compactMap({$0})
-            .first?.windows
-            .filter({$0.isKeyWindow}).first ?? UIView()
+        .filter({$0.activationState == .foregroundActive})
+        .map({$0 as? UIWindowScene})
+        .compactMap({$0})
+        .first?.windows
+        .filter({$0.isKeyWindow}).first ?? UIView()
     }()
     
     lazy var statusBarHeight: CGFloat = {
@@ -70,7 +68,9 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             self.tabBar.standardAppearance = appearance
         }
     }
-        
+    
+    
+    
     // MARK: - TabBars
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -118,11 +118,11 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             }
         }
         
-//        for vc in self.viewControllers ?? [] where vc is MainCoordinated {
-//            if var vc = vc as? MainCoordinated {
-//                vc.coordinator = self.coordinator
-//            }
-//        }
+        //        for vc in self.viewControllers ?? [] where vc is MainCoordinated {
+        //            if var vc = vc as? MainCoordinated {
+        //                vc.coordinator = self.coordinator
+        //            }
+        //        }
         
         tabBar.isTranslucent = false
     }
@@ -160,6 +160,5 @@ extension MainTabBarViewController: CustomTabBarDelegate {
     func otherTabPressedLong(tabBar: CustomTabBar) {
         
     }
-    
     
 }

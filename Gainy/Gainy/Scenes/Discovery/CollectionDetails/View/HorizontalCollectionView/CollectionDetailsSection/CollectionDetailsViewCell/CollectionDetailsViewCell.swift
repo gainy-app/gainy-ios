@@ -79,6 +79,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var viewModel: CollectionCardViewCellModel?
 
     var onCardPressed: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    var onSortingPressed: (() -> Void)?
 
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -98,15 +99,46 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         image collectionImage: String,
         description collectionDescription: String,
         stocksAmount: String,
-        cards: [CollectionCardViewCellModel]
+        cards: [CollectionCardViewCellModel],
+        collectionId: Int
     ) {
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,
             description: collectionDescription,
             stocksAmount: stocksAmount,
-            imageName: collectionImage
+            imageName: collectionImage,
+            collectionId: collectionId
         )
+        
+        //Gettings settings
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
+        if settings.viewMode == .list {
+            collectionListHeader.isHidden = false
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144 + 36,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
+            )
+            sections = [
+                CardsOneColumnListFlowSectionLayout(),
+                CardsTwoColumnGridFlowSectionLayout()
+            ]
+        } else {
+            collectionListHeader.isHidden = true
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20)
+            )
+            sections =  [
+                CardsTwoColumnGridFlowSectionLayout(),
+                CardsOneColumnListFlowSectionLayout()
+            ]
+        }
+        
         self.cards = cards
         snapshot.deleteAllItems()
 
@@ -169,5 +201,9 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         
         sections.swapAt(0, 1)
         internalCollectionView.reloadData()        
+    }
+    
+    func stockSortPressed(view: CollectionHorizontalView) {
+        onSortingPressed?()
     }
 }

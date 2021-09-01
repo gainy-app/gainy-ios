@@ -23,6 +23,11 @@
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
 		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
 		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
+		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
+		3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 3342C87926DE0E7F0049763E /* FloatingPanel */; };
+		3342C87C26DE2DC00049763E /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* Analytics.swift */; };
+		3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */; };
+		3342C88026DE617D0049763E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87F26DE617D0049763E /* UserDefaults.swift */; };
 		33467CDD26C6565600811F74 /* Charts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33467CDC26C6565600811F74 /* Charts.graphql */; };
 		33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE026C6575A00811F74 /* Types.graphql.swift */; };
 		33467CE326C6575A00811F74 /* News.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE126C6575A00811F74 /* News.graphql.swift */; };
@@ -235,6 +240,10 @@
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
 		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
+		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
+		3342C87B26DE2DC00049763E /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
+		3342C87F26DE617D0049763E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		33467CDC26C6565600811F74 /* Charts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Charts.graphql; sourceTree = "<group>"; };
 		33467CE026C6575A00811F74 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		33467CE126C6575A00811F74 /* News.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.graphql.swift; sourceTree = "<group>"; };
@@ -427,6 +436,7 @@
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
+				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
 				33467CF226C66FA300811F74 /* FirebaseCrashlytics in Frameworks */,
 				33467CF626C66FA300811F74 /* FirebaseAuth in Frameworks */,
 				33467CEE26C66FA300811F74 /* FirebaseAnalytics in Frameworks */,
@@ -490,6 +500,14 @@
 			path = "Stock Cell";
 			sourceTree = "<group>";
 		};
+		3342C87526DE0C5B0049763E /* Popups */ = {
+			isa = PBXGroup;
+			children = (
+				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
+			);
+			path = Popups;
+			sourceTree = "<group>";
+		};
 		33467CFD26C698A200811F74 /* MainTabController */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,6 +551,7 @@
 			isa = PBXGroup;
 			children = (
 				33317F9526D2CFAA009B9371 /* Atomic.swift */,
+				3342C87F26DE617D0049763E /* UserDefaults.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -562,6 +581,8 @@
 			isa = PBXGroup;
 			children = (
 				33D3D4EA26CB9D21005A859B /* NotificationManager.swift */,
+				3342C87B26DE2DC00049763E /* Analytics.swift */,
+				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -696,6 +717,7 @@
 				33D3D4FB26CBA399005A859B /* Portfolio */,
 				33D3D4F926CBA388005A859B /* Analytics */,
 				33D3D4FA26CBA393005A859B /* Profile */,
+				3342C87526DE0C5B0049763E /* Popups */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1249,6 +1271,7 @@
 				33B9887226CA90D0008B8AC9 /* Kingfisher */,
 				33D3D4E726CB8F63005A859B /* SwiftHEXColors */,
 				33CDECA226D627ED00E82329 /* SwiftDate */,
+				3342C87926DE0E7F0049763E /* FloatingPanel */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1330,6 +1353,7 @@
 				33B9887126CA90D0008B8AC9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */,
+				3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -1496,6 +1520,8 @@
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
+				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
+				3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */,
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
@@ -1593,6 +1619,7 @@
 				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
+				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
@@ -1626,6 +1653,7 @@
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
+				3342C87C26DE2DC00049763E /* Analytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1797,7 +1825,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1824,7 +1852,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -1980,6 +2008,14 @@
 				minimumVersion = 6.3.3;
 			};
 		};
+		3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
 		33467CE826C66FA300811F74 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -2040,6 +2076,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C3A2C2A26A4A51200FAF107 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
 			productName = AppsFlyerLib;
+		};
+		3342C87926DE0E7F0049763E /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
 		};
 		33467CE926C66FA300811F74 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;

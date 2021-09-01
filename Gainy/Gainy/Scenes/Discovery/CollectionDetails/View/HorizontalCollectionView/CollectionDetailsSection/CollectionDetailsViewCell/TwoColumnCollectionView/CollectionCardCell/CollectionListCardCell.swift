@@ -25,10 +25,7 @@ final class CollectionListCardCell: UICollectionViewCell {
         tickerSymbol: String,
         tickerPercentChange: String,
         tickerPrice: String,
-        markerMetricFirst: String,
-        marketMetricSecond: String,
-        marketMetricThird: String,
-        highlight: String
+        markerMetrics: [String]
     ) {
         nameLbl.text = companyName
 
@@ -39,14 +36,11 @@ final class CollectionListCardCell: UICollectionViewCell {
             ? UIColor.Gainy.green
             : UIColor.Gainy.red
 
-        growthLbl.text = "\(markerMetricFirst)%"
-
-        yieldLbl.text = marketMetricSecond
+        let lbls = [growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl]
         
-        peLbl.text = "\(Int.random(in: 0...100))"
-
-        marketLbl.text = marketMetricThird
-        mlpLbl.text = ["Yes", "No"].randomElement() ?? ""
+        for (ind, val) in markerMetrics.enumerated() {
+            lbls[ind]?.text = val
+        }
 
         layoutIfNeeded()
     }

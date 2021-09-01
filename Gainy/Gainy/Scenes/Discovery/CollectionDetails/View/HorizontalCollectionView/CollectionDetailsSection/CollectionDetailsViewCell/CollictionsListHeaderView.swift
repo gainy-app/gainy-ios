@@ -20,13 +20,23 @@ class CollictionsListHeaderView: UIView {
         return label
     }()
     
-    lazy var mlpLbl: UILabel = {
+    lazy var netLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
         label.textColor = UIColor(hexString: "687379")!
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "MLP or\nNOT".uppercased()
+        label.text = "Net Profit".uppercased()
+        return label
+    }()
+    
+    lazy var monthPriceLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(9)
+        label.textColor = UIColor(hexString: "687379")!
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "Month to day".uppercased()
         return label
     }()
     
@@ -46,17 +56,7 @@ class CollictionsListHeaderView: UIView {
         label.textColor = UIColor(hexString: "687379")!
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "PE\n"
-        return label
-    }()
-    
-    lazy var yieldLbl: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        label.text = "Dividend\nYield".uppercased()
+        label.text = "EV/S\n".uppercased()
         return label
     }()
     
@@ -66,7 +66,8 @@ class CollictionsListHeaderView: UIView {
         label.textColor = UIColor(hexString: "687379")!
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "Dividend\ngrowth".uppercased()
+        label.text = "Growth rate CAGR".uppercased()
+        label.minimumScaleFactor = 0.1
         return label
     }()
     
@@ -86,25 +87,25 @@ class CollictionsListHeaderView: UIView {
         tickerLbl.autoPinEdge(.left, to: .left, of: self, withOffset: 0)
         tickerLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
-        addSubview(mlpLbl)
-        mlpLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
-        mlpLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 0)
-        mlpLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        addSubview(netLbl)
+        netLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
+        netLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 0)
+        netLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        
+        addSubview(monthPriceLbl)
+        monthPriceLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
+        monthPriceLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -63.0 + 17)
+        monthPriceLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
         addSubview(capLbl)
         capLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
-        capLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -63.0 + 17)
+        capLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -111.0 + 17)
         capLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
         addSubview(peLbl)
         peLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
-        peLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -111.0 + 17)
+        peLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -159.0 + 17)
         peLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
-        
-        addSubview(yieldLbl)
-        yieldLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))
-        yieldLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -159.0 + 17)
-        yieldLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
         addSubview(growLbl)
         growLbl.autoSetDimensions(to: CGSize.init(width: 44, height: 24))

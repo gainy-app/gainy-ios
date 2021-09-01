@@ -63,10 +63,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                 tickerSymbol: viewModel.tickerSymbol,
                 tickerPercentChange: viewModel.priceChange,
                 tickerPrice: viewModel.tickerPrice,
-                markerMetricFirst: viewModel.dividendGrowthPercent,
-                marketMetricSecond: viewModel.priceToEarnings,
-                marketMetricThird: viewModel.marketCapitalization,
-                highlight: viewModel.highlight
+                markerMetrics: [viewModel.dividendGrowthPercent, "\((0...100).randomElement()!)", viewModel.marketCapitalization, "\(Float((0...100).randomElement()!).percent)", "\(Float((0...100).randomElement()!).percent)"]
             )
         }
 

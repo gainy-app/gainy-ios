@@ -23,7 +23,7 @@ query DiscoverCollectionDetails {
           divident_growth
           symbol
           created_at
-        }
+          }
       }
     }
   }

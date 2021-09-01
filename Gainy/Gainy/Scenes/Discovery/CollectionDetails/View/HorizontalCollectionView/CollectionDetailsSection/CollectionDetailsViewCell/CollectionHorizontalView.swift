@@ -1,6 +1,7 @@
 import UIKit
 
 protocol CollectionHorizontalViewDelegate: AnyObject {
+    func stockSortPressed(view: CollectionHorizontalView)
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool)
 }
 
@@ -162,6 +163,7 @@ final class CollectionHorizontalView: UIView {
         sortByLabel.numberOfLines = 1
         sortByLabel.textAlignment = .center
         sortByLabel.text = "Sort by"
+        button.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
 
         button.addSubview(sortByLabel)
 
@@ -173,8 +175,8 @@ final class CollectionHorizontalView: UIView {
         textLabel.textColor = UIColor.Gainy.grayNotDark
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
-        textLabel.text = "Dividend Growth" // TODO: 1: do not hardcode the string
-
+        textLabel.text = "EV/S" // TODO: 1: do not hardcode the string
+        sortLbl = textLabel
         button.addSubview(textLabel)
 
         button.addTarget(self,
@@ -185,6 +187,13 @@ final class CollectionHorizontalView: UIView {
 
         return button
     }()
+    
+    private var sortLbl: UILabel?
+    private var collectionId: Int = 0
+    
+    @objc private func sortTapped() {
+        delegate?.stockSortPressed(view: self)
+    }
 
     // TODO: 1: use custom button
     lazy var showListViewButton: ResponsiveButton = {
@@ -317,7 +326,8 @@ final class CollectionHorizontalView: UIView {
         name: String,
         description: String,
         stocksAmount: String,
-        imageName: String
+        imageName: String,
+        collectionId: Int
     ) {
         backImageView.image = UIImage(named: imageName)
 
@@ -329,6 +339,13 @@ final class CollectionHorizontalView: UIView {
 
         stocksAmountLabel.text = stocksAmount
         stocksAmountLabel.sizeToFit()
+        
+        self.collectionId = collectionId
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
+        sortLbl?.text = settings.sorting
+        
+        showListViewButton.backgroundColor = settings.viewMode == .list ?  UIColor.Gainy.blue : .clear
+        showGridViewButton.backgroundColor = settings.viewMode == .list ?  .clear :  UIColor.Gainy.blue
 
         layoutIfNeeded()
     }
@@ -353,6 +370,7 @@ final class CollectionHorizontalView: UIView {
         showListViewButton.backgroundColor = UIColor.Gainy.blue
         showGridViewButton.backgroundColor = .clear
         delegate?.stocksViewModeChanged(view: self, isGrid: false)
+        CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.collectionId, viewMode: .list)
     }
 
     @objc
@@ -360,5 +378,6 @@ final class CollectionHorizontalView: UIView {
         showListViewButton.backgroundColor = .clear
         showGridViewButton.backgroundColor = UIColor.Gainy.blue
         delegate?.stocksViewModeChanged(view: self, isGrid: true)
+        CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.collectionId, viewMode: .grid)
     }
 }

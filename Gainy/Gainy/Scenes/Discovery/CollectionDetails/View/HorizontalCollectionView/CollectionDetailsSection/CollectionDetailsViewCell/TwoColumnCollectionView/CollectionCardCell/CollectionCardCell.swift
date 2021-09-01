@@ -147,11 +147,11 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
 
         label.backgroundColor = UIColor.Gainy.white
 
-        label.text = "DIVIDEND GROWTH"
+        label.text = "Growth rate CAGR".uppercased()
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
-
+        label.minimumScaleFactor = 0.1
         return label
     }()
 

@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import PureLayout
+import FloatingPanel
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -15,6 +16,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
     var onDiscoverCollections: (() -> Void)?
     var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    
+    //Panel
+    var fpc: FloatingPanelController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,6 +164,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.onCardPressed = {[weak self]  ticker in
                     self?.onShowCardDetails?(ticker)
                 }
+                cell.onSortingPressed = { [weak self] in
+                    guard let self = self else {return}
+                    guard self.presentedViewController == nil else {return}
+                    self.present(self.fpc, animated: true, completion: nil)
+                }
             }
 
             return cell
@@ -195,6 +204,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.centerInitialCollectionInTheCollectionView()
             }
         }
+        setupPanel()
     }
     
     @objc func textFieldClear() {
@@ -280,6 +290,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private func getRemoteData(completion: @escaping () -> Void) {
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
+        guard !isNetworkLoading else {
             return
         }
         showNetworkLoader()
@@ -370,6 +383,61 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        fpc.layout = MyFloatingPanelLayout()
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Assign self as the delegate of the controller.
+        //fpc.delegate = self // Optional
+        
+        // Set a content view controller.
+        let contentVC = SortCollectionDetailsViewController.instantiate(.popups)
+        contentVC.delegate = self
+        fpc.set(contentViewController: contentVC)
+        fpc.isRemovalInteractionEnabled = true
+        
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
+    
+    class MyFloatingPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .top, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCollectionsIfNoneExists()
+    }
+    
+    fileprivate func loadCollectionsIfNoneExists() {
+        if DummyDataSource.collectionDetails.count == 0 {
+            getRemoteData {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+
+                    self?.centerInitialCollectionInTheCollectionView()
+                }
+            }
+        }
+    }
+    
     //MARK: - Swap Items
     
     func swapItemsAt(_ sourceInd: Int, destInd: Int) {
@@ -414,5 +482,11 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        self.fpc.dismiss(animated: true, completion: nil)
     }
 }

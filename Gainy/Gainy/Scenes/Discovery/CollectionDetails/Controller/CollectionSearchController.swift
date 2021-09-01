@@ -382,6 +382,11 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .collections:
             break
         case .news:
+            if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {
+                if let url = URL(string: news.sourceUrl ?? "") {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
             break
         case .loader:
             break
