@@ -1,0 +1,7 @@
+query AppInterests {
+   app_interests {
+    icon_url
+    id
+    name
+  }
+}
