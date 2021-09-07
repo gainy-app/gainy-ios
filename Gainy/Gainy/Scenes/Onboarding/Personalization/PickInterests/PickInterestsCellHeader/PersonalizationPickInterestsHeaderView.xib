@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Bold.ttf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR">
+            <rect key="frame" x="0.0" y="0.0" width="524" height="128"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your interests" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TH-Ze-PIR">
+                    <rect key="frame" x="0.0" y="16" width="524" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="Pta-kF-xX2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJh-LU-gNE">
+                    <rect key="frame" x="0.0" y="88" width="524" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="uIS-sd-fRF"/>
+                    </constraints>
+                    <attributedString key="attributedText">
+                        <fragment content="We need this information to build your personalized stocks collections feed.">
+                            <attributes>
+                                <font key="NSFont" size="16" name="SFProDisplay-Regular"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lJh-LU-gNE" secondAttribute="trailing" id="CS0-As-7rV"/>
+                <constraint firstItem="lJh-LU-gNE" firstAttribute="top" secondItem="9TH-Ze-PIR" secondAttribute="bottom" constant="40" id="M9T-z0-J7Z"/>
+                <constraint firstAttribute="top" secondItem="9TH-Ze-PIR" secondAttribute="top" constant="-16" id="NwU-3e-zqq"/>
+                <constraint firstItem="9TH-Ze-PIR" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="b4p-XV-gcf"/>
+                <constraint firstAttribute="trailing" secondItem="9TH-Ze-PIR" secondAttribute="trailing" id="hRC-aV-0kj"/>
+                <constraint firstItem="lJh-LU-gNE" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="wet-32-NAo"/>
+            </constraints>
+            <point key="canvasLocation" x="166.66666666666669" y="85.044642857142847"/>
+        </collectionReusableView>
+    </objects>
+</document>
