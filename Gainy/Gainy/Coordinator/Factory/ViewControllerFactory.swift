@@ -22,6 +22,36 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateOnboarding(coordinator: OnboardingCoordinator) -> LaunchScreenViewController {
+        let vc = LaunchScreenViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiateIntroduction(coordinator: OnboardingCoordinator) -> IntroductionViewController {
+        let vc = IntroductionViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiatePersonalizationPickInterests(coordinator: OnboardingCoordinator) -> PersonalizationPickInterestsViewController {
+        let vc = PersonalizationPickInterestsViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiatePersonalizationIndicators(coordinator: OnboardingCoordinator) -> PersonalizationIndicatorsViewController {
+        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiateOnboardingFinalizing(coordinator: OnboardingCoordinator) -> OnboardingFinalizingViewController {
+        let vc = OnboardingFinalizingViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()

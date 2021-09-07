@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="PersonalizationPickInterestsFooterView" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select at least 5 options please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YR5-mS-FeE">
+                    <rect key="frame" x="0.0" y="38" width="320" height="24"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                    <color key="textColor" red="0.23564451929999999" green="0.26636815069999997" blue="0.28235581520000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPp-zZ-6O9" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                    <rect key="frame" x="10" y="28" width="300" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="r4u-3p-ErI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                    <state key="normal" title="Next">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onNextButtonTap:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="edJ-q1-zlB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="QEo-ZT-Rq7"/>
+            <color key="backgroundColor" red="0.90605252979999995" green="0.91741710899999995" blue="0.92941474909999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="YR5-mS-FeE" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="38" id="1O4-DP-ArI"/>
+                <constraint firstItem="GPp-zZ-6O9" firstAttribute="leading" secondItem="QEo-ZT-Rq7" secondAttribute="leading" constant="10" id="6e2-Fw-Adu"/>
+                <constraint firstAttribute="bottom" secondItem="YR5-mS-FeE" secondAttribute="bottom" constant="39" id="8Gf-MO-g56"/>
+                <constraint firstItem="QEo-ZT-Rq7" firstAttribute="bottom" secondItem="GPp-zZ-6O9" secondAttribute="bottom" constant="9" id="S3i-WQ-bIG"/>
+                <constraint firstItem="QEo-ZT-Rq7" firstAttribute="trailing" secondItem="GPp-zZ-6O9" secondAttribute="trailing" constant="10" id="Sxa-4q-BBG"/>
+                <constraint firstItem="YR5-mS-FeE" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="hRf-Sy-kMe"/>
+                <constraint firstAttribute="trailing" secondItem="YR5-mS-FeE" secondAttribute="trailing" id="xwb-rl-Rxe"/>
+            </constraints>
+            <connections>
+                <outlet property="nextButton" destination="GPp-zZ-6O9" id="uEj-Yk-PUz"/>
+                <outlet property="textLabel" destination="YR5-mS-FeE" id="Qr7-AZ-kME"/>
+            </connections>
+            <point key="canvasLocation" x="18.840579710144929" y="79.6875"/>
+        </collectionReusableView>
+    </objects>
+    <designables>
+        <designable name="GPp-zZ-6O9">
+            <size key="intrinsicContentSize" width="34" height="31"/>
+        </designable>
+    </designables>
+</document>
