@@ -9,6 +9,7 @@ import UIKit
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func loadingState(started: Bool)
+    func comparedStocksChanged()
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -36,7 +37,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.wsr] = 230.0
         cellHeights[.recommended] = 156.0
         cellHeights[.news] = 201.0
-        cellHeights[.alternativeStocks] = 0.0 //253.0
+        cellHeights[.alternativeStocks] = 253.0 //253.0
         cellHeights[.upcomingEvents] = 238.0
         cellHeights[.watchlist] = 120.0
     }
@@ -134,6 +135,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .alternativeStocks:
             let cell: TickerDetailsAlternativeStocksViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
+            cell.delegate = self
             return cell
         case .upcomingEvents:
             let cell: TickerDetailsUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -162,5 +164,16 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
         ticker.loadNewChartData {[weak self] in
             self?.delegate?.loadingState(started: false)
         }
+    }
+}
+
+extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
+    func comparePressed(stock: SearchTickersQuery.Data.Ticker) {
+        if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
+            ticker.tickersToCompare.remove(at: stockIndex)
+        } else {
+            ticker.tickersToCompare.append(stock)
+        }
+        delegate?.comparedStocksChanged()
     }
 }

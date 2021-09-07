@@ -16,4 +16,8 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
         tickerNameLbl.text = tickerInfo?.name
         symbolLbl.text = tickerInfo?.symbol
     }
+    
+    @IBAction func shareAction() {
+        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none"])
+    }
 }

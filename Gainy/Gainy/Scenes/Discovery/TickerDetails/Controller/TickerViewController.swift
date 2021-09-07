@@ -30,6 +30,7 @@ final class TickerViewController: BaseViewController {
         super.viewDidLoad()
         
         loadTicketInfo()
+        addBottomView()
     }
     
     
@@ -52,6 +53,48 @@ final class TickerViewController: BaseViewController {
         }
         
     }
+    
+    //MARK: - Bottom action
+    
+    /// Model to cahnge bottom view
+    private var bottomViewModel: CollectionsBottomViewModel?
+    
+    private var bottomViews: [UIView] = []
+    
+    /// Bottom action view adding
+    fileprivate func addBottomView() {
+        let backView = UIView.init(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 40))
+        backView.backgroundColor = UIColor(hexString: "0062FF")!
+        view.addSubview(backView)
+        backView.autoPinEdge(.leading, to: .leading, of: view)
+        backView.autoPinEdge(.trailing, to: .trailing, of: view)
+        
+        let window = UIApplication.shared.keyWindow
+        let bottomPadding = window?.safeAreaInsets.bottom
+        backView.autoSetDimension(.height, toSize: bottomPadding ?? 40)
+        backView.autoPinEdge(.bottom, to: .bottom, of: view)
+        bottomViews.append(backView)
+        
+        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Compare \((viewModel?.ticker.tickersToCompare.count ?? 0) + 1) stocks", actionIcon: "compare_icon")
+        var bottomView = CollectionsBottomView(model: bottomViewModel!)
+        bottomView.delegate = self
+        let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
+        addChild(hosting)
+        hosting.view.frame = CGRect.init(x: 0, y: 0, width: 50, height: 94)
+        hosting.view.backgroundColor = .clear
+        view.addSubview(hosting.view)
+        hosting.view.autoPinEdge(.leading, to: .leading, of: view)
+        hosting.view.autoPinEdge(.trailing, to: .trailing, of: view)
+        hosting.view.autoSetDimension(.height, toSize: 94)
+        hosting.view.autoPinEdge(toSuperviewSafeArea: .bottom)
+        hosting.didMove(toParent: self)
+        bottomViews.append(hosting.view)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.view.backgroundColor = .white
+        
+        self.bottomViews.forEach({$0.alpha = 0; $0.isUserInteractionEnabled = false;})
+    }
 
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
@@ -63,5 +106,35 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
                 self?.hideLoader()
             }
         }
+    }
+    
+    func comparedStocksChanged() {
+        let stocksCount = (viewModel?.ticker.tickersToCompare.count ?? 0) + 1
+        if stocksCount == 2 {
+            bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.bottomViews.forEach({$0.alpha = stocksCount > 1 ? 1 : 0; $0.isUserInteractionEnabled = stocksCount > 1 ? true : false;})
+        } completion: { done in
+            if done {
+                self.bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
+            }
+        }
+    }
+}
+
+extension TickerViewController: CollectionsBottomViewDelegate {
+    func bottomActionPressed(view: CollectionsBottomView) {
+        let compareVC = CompareStocksViewController.instantiate(.discovery)
+        
+        
+        if let curStock = viewModel?.ticker.ticker.toSearchTicker() {
+            if !(viewModel?.ticker.tickersToCompare.contains(curStock) ?? false) {
+                viewModel?.ticker.tickersToCompare.insert(curStock, at: 0)
+            }
+        }
+        
+        compareVC.stocks =  viewModel?.ticker.tickersToCompare ?? []
+        present(compareVC, animated: true, completion: nil)
     }
 }

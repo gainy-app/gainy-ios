@@ -82,6 +82,7 @@ class CollictionsListHeaderView: UIView {
     }
     
     fileprivate func setupView() {
+        backgroundColor = .white
         addSubview(tickerLbl)
         tickerLbl.autoSetDimensions(to: CGSize.init(width: 40, height: 24))
         tickerLbl.autoPinEdge(.left, to: .left, of: self, withOffset: 0)

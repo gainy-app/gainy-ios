@@ -68,6 +68,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 cell.tag = modelItem.id
                 cell.onDeleteButtonPressed = { [weak self] in
                     let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
+                        GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id])
                         self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
                     }
                     NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
@@ -94,6 +95,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self?.addToYourCollection(collectionItemToAdd: modelItem, indexRow: indexPath.row)
                     
                     cell.isUserInteractionEnabled = true
+                    GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id])
                 }
                 
                 cell.onCheckButtonPressed = { [weak self] in
@@ -113,6 +115,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
                     
                     cell.isUserInteractionEnabled = true
+                    GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id])
                 }
             default:
                 break
@@ -152,16 +155,24 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
     }
     
+    /// Model to cahnge bottom view
+    private var bottomViewModel: CollectionsBottomViewModel?
+    
+    /// Bottom action view adding
     fileprivate func addBottomView() {
         let backView = UIView.init(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 40))
         backView.backgroundColor = UIColor(hexString: "0062FF")!
         view.addSubview(backView)
         backView.autoPinEdge(.leading, to: .leading, of: view)
         backView.autoPinEdge(.trailing, to: .trailing, of: view)
-        backView.autoSetDimension(.height, toSize: 40)
+        let window = UIApplication.shared.keyWindow
+        let bottomPadding = window?.safeAreaInsets.bottom
+        backView.autoSetDimension(.height, toSize: bottomPadding ?? 40)
         backView.autoPinEdge(.bottom, to: .bottom, of: view)
         
-        let bottomView = CollectionsBottomView()
+        
+        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Add custom\ncollection", actionIcon: "plus_icon")
+        let bottomView = CollectionsBottomView(model: bottomViewModel!)
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
         addChild(hosting)
         hosting.view.frame = CGRect.init(x: 0, y: 0, width: 50, height: 94)
@@ -327,6 +338,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row] as? YourCollectionViewCellModel
         let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row] as? YourCollectionViewCellModel
         
+        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0])
+        
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
         
         
@@ -436,10 +449,14 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             position = collectionView.numberOfItems(
                 inSection: DiscoverCollectionsSection.yourCollections.rawValue
             )
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours"])
+        } else {
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollections[indexPath.row].id, "type" : "recommended"])
         }
         position += indexPath.row
         
         self.goToCollectionDetails(at: position)
+        
     }
 }
 

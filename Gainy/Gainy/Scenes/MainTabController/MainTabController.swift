@@ -12,7 +12,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     weak var coordinator: MainCoordinator?
     
     fileprivate var tabBarHeight: CGFloat = 49.0
-      
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +77,19 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         if let tabBar = self.tabBar as? CustomTabBar {
             tabBar.selectedIndex = CustomTabBar.Tab(rawValue: item.tag)!
             tabBar.updateTabs()
+        }
+        let tab = CustomTabBar.Tab(rawValue: selectedIndex)
+        switch tab {
+        case .discovery:
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery"])
+        case .portfolio:
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio"])
+        case .analytics:
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Analytics"])
+        case .profile:
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile"])
+        case .none:
+            break
         }
     }
     
@@ -160,5 +173,4 @@ extension MainTabBarViewController: CustomTabBarDelegate {
     func otherTabPressedLong(tabBar: CustomTabBar) {
         
     }
-    
 }

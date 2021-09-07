@@ -112,6 +112,8 @@ final class CollectionSearchController: NSObject {
                 
                 //Search for new
                 searchQuery(searchText)
+                
+                GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText])
             }
         }
     }
@@ -338,6 +340,14 @@ extension CollectionSearchController {
     }
 }
 
+extension DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker {
+    func toSearchTicker() -> SearchTickersQuery.Data.Ticker {
+        SearchTickersQuery.Data.Ticker.init(symbol: symbol, name: name, description: description, tickerFinancials: tickerFinancials.compactMap({
+            SearchTickersQuery.Data.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, priceChangeToday: $0.priceChangeToday, currentPrice: $0.currentPrice, dividentGrowth: $0.dividentGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
+        }))
+    }
+}
+
 extension SearchTickersQuery.Data.Ticker: Hashable {
     public static func == (lhs: SearchTickersQuery.Data.Ticker, rhs: SearchTickersQuery.Data.Ticker) -> Bool {
         lhs.symbol == rhs.symbol
@@ -376,6 +386,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
                 let tickerMap = DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker.init(symbol: ticker.symbol, name: ticker.name, description: ticker.description, tickerFinancials: ticker.tickerFinancials.map({
                     DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, priceChangeToday: $0.priceChangeToday, currentPrice: $0.currentPrice, dividentGrowth: $0.dividentGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
                 }))
+                GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol])
                 onShowCardDetails?(tickerMap)
             }
             break
@@ -383,8 +394,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {
-                if let url = URL(string: news.sourceUrl ?? "") {
+                if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.sourceUrl ?? "")) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    GainyAnalytics.logEvent("collections_search_news_pressed", params: ["newsID" : news.title])
                 }
             }
             break

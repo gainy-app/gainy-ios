@@ -19,13 +19,16 @@
 		3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */; };
 		3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */; };
 		3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */; };
+		33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33043DD926E227EF0058887C /* CompareStocksViewController.swift */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
+		3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */; };
+		3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860A26E618BF00D448AA /* CompareScatterChartView.swift */; };
 		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
 		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
 		3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 3342C87926DE0E7F0049763E /* FloatingPanel */; };
-		3342C87C26DE2DC00049763E /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* Analytics.swift */; };
+		3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* GainyAnalytics.swift */; };
 		3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */; };
 		3342C88026DE617D0049763E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87F26DE617D0049763E /* UserDefaults.swift */; };
 		33467CDD26C6565600811F74 /* Charts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33467CDC26C6565600811F74 /* Charts.graphql */; };
@@ -263,12 +266,15 @@
 		3302E0BA26DD0756008DBC76 /* SearchLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLoadingCell.swift; sourceTree = "<group>"; };
 		3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionHeaderView.xib; sourceTree = "<group>"; };
 		3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
+		33043DD926E227EF0058887C /* CompareStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStocksViewController.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStockFieldsView.swift; sourceTree = "<group>"; };
+		3336860A26E618BF00D448AA /* CompareScatterChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareScatterChartView.swift; path = Gainy/Scenes/Discovery/TickerDetails/Controller/Cells/Charts/CompareScatterChartView.swift; sourceTree = SOURCE_ROOT; };
 		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
 		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
-		3342C87B26DE2DC00049763E /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		3342C87B26DE2DC00049763E /* GainyAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalytics.swift; sourceTree = "<group>"; };
 		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
 		3342C87F26DE617D0049763E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		33467CDC26C6565600811F74 /* Charts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Charts.graphql; sourceTree = "<group>"; };
@@ -534,6 +540,16 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		33043DD826E227D80058887C /* Compare Stocks */ = {
+			isa = PBXGroup;
+			children = (
+				33043DD926E227EF0058887C /* CompareStocksViewController.swift */,
+				3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */,
+				3336860A26E618BF00D448AA /* CompareScatterChartView.swift */,
+			);
+			path = "Compare Stocks";
+			sourceTree = "<group>";
+		};
 		333CC15D26DCB2B600690245 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -639,7 +655,7 @@
 			isa = PBXGroup;
 			children = (
 				33D3D4EA26CB9D21005A859B /* NotificationManager.swift */,
-				3342C87B26DE2DC00049763E /* Analytics.swift */,
+				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
 			);
 			path = Managers;
@@ -1275,6 +1291,7 @@
 		3AFE0C3C2690CD2700C25A8F /* TickerDetails */ = {
 			isa = PBXGroup;
 			children = (
+				33043DD826E227D80058887C /* Compare Stocks */,
 				3AFE0C3D2690CD4500C25A8F /* Controller */,
 			);
 			path = TickerDetails;
@@ -1676,7 +1693,9 @@
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
 				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
-                33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
+        33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
+				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
+				33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
@@ -1690,6 +1709,7 @@
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
+				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
@@ -1734,6 +1754,7 @@
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
 				33FE9E4826D519A700FABC70 /* MultiLineChartView.swift in Sources */,
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
+				3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
@@ -1833,7 +1854,7 @@
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
-				3342C87C26DE2DC00049763E /* Analytics.swift in Sources */,
+				3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2005,7 +2026,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2032,7 +2053,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

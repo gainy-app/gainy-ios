@@ -15,6 +15,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
     
     weak var delegate: SortCollectionDetailsViewControllerDelegate?
     
+    
     @IBOutlet var sortBtns: [UIButton]!
     
     @IBAction func sortBtnTapped(_ sender: UIButton) {

@@ -94,6 +94,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return view
     }()
 
+    private var collectionID: Int = 0
     func configureWith(
         name collectionName: String,
         image collectionImage: String,
@@ -102,6 +103,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         cards: [CollectionCardViewCellModel],
         collectionId: Int
     ) {
+        self.collectionID = collectionId
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,
@@ -172,6 +174,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID, "tickerSymbol" : cards[indexPath.row].rawTicker.symbol, "tickerName" : cards[indexPath.row].rawTicker.name])
         onCardPressed?(cards[indexPath.row].rawTicker)
     }
 }
@@ -189,6 +192,8 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             )
+            //stocks_view_changed
+            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "grid"])
         } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
             collectionListHeader.isHidden = false
             internalCollectionView.frame = CGRect(
@@ -197,6 +202,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
                 height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
             )
+            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list"])
         }
         
         sections.swapAt(0, 1)

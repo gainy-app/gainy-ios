@@ -18,7 +18,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
     
     //Panel
-    var fpc: FloatingPanelController!
+    private var fpc: FloatingPanelController!
+    private var currentCollectionToChange: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,6 +169,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard let self = self else {return}
                     guard self.presentedViewController == nil else {return}
                     self.present(self.fpc, animated: true, completion: nil)
+                    if let model = modelItem as? CollectionDetailViewCellModel {
+                        self.currentCollectionToChange = model.id
+                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id])
+                    }
                 }
             }
 
@@ -232,6 +237,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        GainyAnalytics.logEvent("collections_search_started")
         UIView.animate(withDuration: 0.3) {
             self.collectionDetailsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
@@ -246,6 +252,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
+        GainyAnalytics.logEvent("collections_search_ended")
 //        let oldFrame = CGRect(
 //            x: 16,
 //            y: 24,
@@ -353,6 +360,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
     @objc
     private func discoverCollectionsButtonTapped() {
+        GainyAnalytics.logEvent("discover_collections_pressed")
         onDiscoverCollections?()
     }
 
@@ -487,6 +495,7 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
     }
 }

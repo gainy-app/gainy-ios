@@ -45,6 +45,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             sender.setTitle("show more", for: .normal)
         }
         cellHeightChanged?(heightBasedOnString(aboutLbl.text ?? ""))
+        GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none"])
     }
     
     private func heightBasedOnString(_ str: String) -> CGFloat {
