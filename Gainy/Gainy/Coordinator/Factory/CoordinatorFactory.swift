@@ -9,4 +9,14 @@ final class CoordinatorFactory: CoordinatorFactoryProtocol {
                                           viewControllerFactory: viewControllerFactory)
         return coordinator
     }
+    
+    func makeOnboardingCoordinatorBox(router: RouterProtocol,
+                                coordinatorFactory: CoordinatorFactoryProtocol,
+                                viewControllerFactory: ViewControllerFactory) -> OnboardingCoordinator {
+        
+        let coordinator = OnboardingCoordinator(router: router,
+                                          coordinatorFactory: coordinatorFactory,
+                                          viewControllerFactory: viewControllerFactory)
+        return coordinator
+    }
 }
