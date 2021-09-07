@@ -59,11 +59,18 @@ struct ScatterChartView: View {
             isLeftDurationVis = selectedTag == .d1
             delegate.range = selectedTag
             hapticTouch.impactOccurred()
+            GainyAnalytics.logEvent("ticker_chart_period_changed", params: ["tickerSymbol" : self.ticker?.symbol ?? "none", "period" : selectedTag.rawValue])
         }
     }
     
     @State
-    private var isMedianVisible: Bool = false
+    private var isMedianVisible: Bool = false {
+        didSet {
+            if isMedianVisible {
+                GainyAnalytics.logEvent("ticker_chart_period_median_pressed", params: ["tickerSymbol" : self.ticker?.symbol ?? "none", "period" : selectedTag.rawValue])
+            }
+        }
+    }
     
     @State
     private var isLeftDurationVis: Bool = true

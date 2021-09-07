@@ -246,6 +246,16 @@ public class ChartData: ObservableObject, Identifiable {
     }
 }
 
+extension ChartData: Hashable {
+    public static func == (lhs: ChartData, rhs: ChartData) -> Bool {
+        lhs.ID == rhs.ID
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.ID)
+      }
+}
+
 public class MultiLineChartData: ChartData {
     var gradient: GradientColor
     

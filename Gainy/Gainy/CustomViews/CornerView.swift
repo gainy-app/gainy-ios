@@ -36,6 +36,5 @@ class CornerView: UIView {
         self.layer.cornerRadius = self.cornerRadius
         self.layer.borderColor = UIColor.init(hexString: "#FFFFFF")!.cgColor
         self.layer.borderWidth = self.borderWidth
-    }
-    
+    }    
 }

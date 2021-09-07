@@ -82,6 +82,22 @@ class TickerInfo {
             }
         }
         
+        //Load Alt Stocks
+        dispatchGroup.enter()
+        Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%Game%")){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                
+                self?.altStocks = (graphQLResult.data?.tickers ?? []).prefix(20).filter({$0.symbol != self?.ticker.symbol})
+                dispatchGroup.leave()
+                break
+            case .failure(let error):
+                print("Failure when making GraphQL request. Error: \(error)")
+                dispatchGroup.leave()
+                break
+            }
+        }
+        
         //Await for results
         dispatchGroup.notify(queue: queue) {
             DispatchQueue.main.async {
@@ -163,7 +179,9 @@ class TickerInfo {
     var news: [DiscoverNewsQuery.Data.FetchNewsDatum]
     
     //MARK: - Stocks
-    let altStocks: [CollectionCardViewCellModel]
+    var altStocks: [SearchTickersQuery.Data.Ticker]
+    
+    var tickersToCompare: [SearchTickersQuery.Data.Ticker] = []
     
     //MARK: - Upcoming events
     let upcomingEvents: [String]

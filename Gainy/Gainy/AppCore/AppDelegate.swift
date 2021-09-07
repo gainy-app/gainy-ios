@@ -7,7 +7,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal
 
     func application(_: UIApplication,
-                     didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        if launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] != nil {
+            GainyAnalytics.logEvent("first_launch", params: ["source": "push"])
+        } else {
+            GainyAnalytics.logEvent("first_launch", params: ["source": "normal"])
+        }
+        
         initializeAppsFlyer()
         initFirebase()
         return true
