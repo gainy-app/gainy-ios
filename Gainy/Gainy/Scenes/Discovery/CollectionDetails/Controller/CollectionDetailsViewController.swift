@@ -308,7 +308,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.appCollections else {
                     //Going back                    
-                    self?.onDiscoverCollections?()
+                    //self?.onDiscoverCollections?()
                     self?.hideLoader()
                     completion()
                     return

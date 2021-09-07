@@ -6,9 +6,17 @@ final class AppCoordinator: BaseCoordinator {
     init(router: Router, coordinatorFactory: CoordinatorFactory) {
         self.router = router
         self.coordinatorFactory = coordinatorFactory
+        super.init()
+        launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: withOnboardingWasShown, isAutorized: isAutorized)
     }
 
     // MARK: Internal
+    
+    @UserDefaultBool("withOnboardingWasShown")
+    var withOnboardingWasShown: Bool
+    
+    @UserDefaultBool("isAutorized")
+    var isAutorized: Bool
 
     // MARK: Coordinator
 
@@ -54,15 +62,19 @@ final class AppCoordinator: BaseCoordinator {
         )
         self.currentCoordinator = coordinator
         coordinator.finishFlow = { [weak self] in
-            self?.removeDependency(coordinator)
+            guard let self = self else {return}
+            self.removeDependency(coordinator)
+            
+            self.withOnboardingWasShown = true
+            self.isAutorized = true
             
             // TODO: get is authorized
-            self?.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: true, isAutorized: true)
-            if let coordinator = self?.currentCoordinator {
-                self?.removeDependency(coordinator)
-                self?.currentCoordinator = nil
+            self.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: self.withOnboardingWasShown, isAutorized: self.isAutorized)
+            if let coordinator = self.currentCoordinator {
+                self.removeDependency(coordinator)
+                self.currentCoordinator = nil
             }
-            self?.start()
+            self.start()
         }
         addDependency(coordinator)
         coordinator.start()
@@ -76,13 +88,19 @@ final class AppCoordinator: BaseCoordinator {
         )
         self.currentCoordinator = coordinator
         coordinator.finishFlow = { [weak self] in
-            self?.removeDependency(coordinator)
-            self?.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: true, isAutorized: true)
-            if let coordinator = self?.currentCoordinator {
-                self?.removeDependency(coordinator)
-                self?.currentCoordinator = nil
+            guard let self = self else {return}
+                        
+            self.removeDependency(coordinator)
+            
+            self.withOnboardingWasShown = true
+            self.isAutorized = true
+            
+            self.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: true, isAutorized: true)
+            if let coordinator = self.currentCoordinator {
+                self.removeDependency(coordinator)
+                self.currentCoordinator = nil
             }
-            self?.start()
+            self.start()
         }
         addDependency(coordinator)
         coordinator.start()

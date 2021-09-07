@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "FloatingPanel",
+        "repositoryURL": "https://github.com/SCENEE/FloatingPanel.git",
+        "state": {
+          "branch": null,
+          "revision": "b8fcb50874f50bb511173700f87b09344c568c6a",
+          "version": "2.4.0"
+        }
+      },
+      {
         "package": "GoogleAppMeasurement",
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
@@ -206,6 +215,15 @@
           "branch": null,
           "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
           "version": "1.17.0"
+        }
+      },
+      {
+        "package": "SwiftDate",
+        "repositoryURL": "https://github.com/malcommac/SwiftDate.git",
+        "state": {
+          "branch": null,
+          "revision": "6190d0cefff3013e77ed567e6b074f324e5c5bf5",
+          "version": "6.3.1"
         }
       },
       {

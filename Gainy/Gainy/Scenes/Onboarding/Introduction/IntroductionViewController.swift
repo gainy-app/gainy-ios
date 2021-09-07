@@ -151,9 +151,8 @@ class IntroductionViewController: UIViewController, Storyboarded {
     }
     
     public func addIndicatorView() {
-        
         let progressObject = ClockwiseProgressIndicatorViewProgress.init(progress: 0.0)
-        let progressView = ClockwiseProgressIndicatorView().environmentObject(progressObject)
+        let progressView = ClockwiseProgressIndicatorView(progressObject: progressObject)
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: progressView)
         hosting.view.frame = CGRect.init(x: 0, y: 0, width: 35, height: 35)
         hosting.view.backgroundColor = UIColor.clear

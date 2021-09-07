@@ -34,3 +34,21 @@ struct UserDefault<T: Codable> {
         }
     }
 }
+
+@propertyWrapper
+struct UserDefaultBool {
+    let key: String
+    init(_ key: String) {
+        self.key = key
+    }
+
+    var wrappedValue: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: key)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: key)
+            UserDefaults.standard.synchronize()
+        }
+    }
+}

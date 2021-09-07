@@ -40,6 +40,13 @@ struct CollectionsBottomView: View {
     var showingAlert: Bool = false
     
     var body: some View {
+        Button(action: {
+            if delegate == nil {
+                showingAlert.toggle()
+            }
+            delegate?.bottomActionPressed(view: self)
+            GainyAnalytics.logEvent("add_custom_collection_pressed")
+        }, label: {
         ZStack {
             Rectangle().foregroundColor(UIColor(hexString: "0062FF")?.uiColor).cornerRadius(8.0).offset(x: 0, y: topPadding)
             HStack {
@@ -63,6 +70,7 @@ struct CollectionsBottomView: View {
                   message: Text("Will be done later"),
                                 dismissButton: .default(Text("OK")))
         }
+        })
     }
 }
 
