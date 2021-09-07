@@ -182,6 +182,33 @@
 		3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */; };
 		3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */; };
 		3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */; };
+		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
+		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
+		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
+		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
+		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
+		8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */; };
+		8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */; };
+		8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */; };
+		8579517626E26D8F003B751C /* PersonalizationPickInterestsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517426E26D8E003B751C /* PersonalizationPickInterestsHeaderView.xib */; };
+		8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579517726E2740A003B751C /* PersonalizationPickInterestsFooterView.swift */; };
+		8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517826E2740A003B751C /* PersonalizationPickInterestsFooterView.xib */; };
+		857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */; };
+		857D56B926DE5D2A003F96AE /* PersonalizationPickInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */; };
+		857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */; };
+		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
+		85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */; };
+		85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80526E5FFFB004EC21D /* GainySliderView.swift */; };
+		85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */; };
+		85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */; };
+		85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80F26E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift */; };
+		85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */; };
+		85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */; };
+		85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */; };
+		85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */; };
+		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
+		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
+		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +404,33 @@
 		3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Medium.otf"; sourceTree = "<group>"; };
 		3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Semibold.otf"; sourceTree = "<group>"; };
+		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
+		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
+		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionCaptionCell.swift; sourceTree = "<group>"; };
+		8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroductionCaptionCell.xib; sourceTree = "<group>"; };
+		8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsHeaderView.swift; sourceTree = "<group>"; };
+		8579517426E26D8E003B751C /* PersonalizationPickInterestsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalizationPickInterestsHeaderView.xib; sourceTree = "<group>"; };
+		8579517726E2740A003B751C /* PersonalizationPickInterestsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsFooterView.swift; sourceTree = "<group>"; };
+		8579517826E2740A003B751C /* PersonalizationPickInterestsFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalizationPickInterestsFooterView.xib; sourceTree = "<group>"; };
+		857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInterests.graphql.swift; sourceTree = "<group>"; };
+		857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsCell.swift; sourceTree = "<group>"; };
+		857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalizationPickInterestsCell.xib; sourceTree = "<group>"; };
+		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
+		85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockwiseProgressIndicatorView.swift; sourceTree = "<group>"; };
+		85D4F80526E5FFFB004EC21D /* GainySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainySliderView.swift; sourceTree = "<group>"; };
+		85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationIndicatorsViewController.swift; sourceTree = "<group>"; };
+		85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationSliderSectionView.swift; sourceTree = "<group>"; };
+		85D4F80F26E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationMoneySourceSectionView.swift; sourceTree = "<group>"; };
+		85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
+		85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedTextCollectionViewCell.xib; sourceTree = "<group>"; };
+		85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
+		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
+		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
+		85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppInterests.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +474,7 @@
 		1C3A2C2D26AEB56600FAF107 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */,
 				33467CE426C6576800811F74 /* Charts.graphql.swift */,
@@ -445,6 +500,9 @@
 				33E7AA6226CF870600DF1CBE /* LeftAlignedIconButton.swift */,
 				33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */,
 				33E7AA6626CFD4E000DF1CBE /* CornerView.swift */,
+				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
+				85D4F80526E5FFFB004EC21D /* GainySliderView.swift */,
+				85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -541,6 +599,10 @@
 		33D3D4FC26CBA3B9005A859B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */,
+				85F8B8B726DD3784000C73D3 /* Introduction */,
+				85F8B8BA26DD37CC000C73D3 /* Personalization */,
+				8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -891,6 +953,7 @@
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
 				33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */,
+				855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */,
 				335ECE1B26C3AE8000C6AC71 /* Debug.xcconfig */,
 				335ECE1F26C3B2E500C6AC71 /* Release.xcconfig */,
 			);
@@ -954,6 +1017,7 @@
 			children = (
 				1C3A2C2D26AEB56600FAF107 /* API */,
 				3AA52C7E2660101B006A6961 /* schema.json */,
+				85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */,
 				3AA52C85266012D8006A6961 /* DiscoverCollections.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
@@ -982,6 +1046,9 @@
 		3AD40FC1266923C1005679DE /* CollectionViewLayout */ = {
 			isa = PBXGroup;
 			children = (
+				85D4F81826E6A00D004EC21D /* RoundedTextCollectionViewCell */,
+				857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */,
+				85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */,
 				3AD40FC2266923C1005679DE /* SectionLayout.swift */,
 				3A9FB0E5266B853200EC85D4 /* RoundedCollectionViewCell.swift */,
 				3A67230B268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift */,
@@ -1017,6 +1084,7 @@
 				33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */,
 				33D3D4EC26CB9EA4005A859B /* Storyboarded.swift */,
 				33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */,
+				85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */,
 				337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */,
 				33E1827B26D3967F00A1D2AC /* String+Sizes.swift */,
 			);
@@ -1079,6 +1147,7 @@
 			children = (
 				3AE7958226638406002B40D6 /* AppCoordinator.swift */,
 				3AE795E626638FBE002B40D6 /* MainCoordinator.swift */,
+				85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1140,6 +1209,90 @@
 				3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8579516E26E22EFE003B751C /* IntroductionCaptionCell */ = {
+			isa = PBXGroup;
+			children = (
+				8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */,
+				8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */,
+			);
+			path = IntroductionCaptionCell;
+			sourceTree = "<group>";
+		};
+		8579517B26E2741C003B751C /* PickInterestsCellHeader */ = {
+			isa = PBXGroup;
+			children = (
+				8579517426E26D8E003B751C /* PersonalizationPickInterestsHeaderView.xib */,
+				8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */,
+			);
+			path = PickInterestsCellHeader;
+			sourceTree = "<group>";
+		};
+		8579517C26E27425003B751C /* PickInterestsFooter */ = {
+			isa = PBXGroup;
+			children = (
+				8579517826E2740A003B751C /* PersonalizationPickInterestsFooterView.xib */,
+				8579517726E2740A003B751C /* PersonalizationPickInterestsFooterView.swift */,
+			);
+			path = PickInterestsFooter;
+			sourceTree = "<group>";
+		};
+		857D56BA26DE5D2E003F96AE /* PickInterestsCell */ = {
+			isa = PBXGroup;
+			children = (
+				857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */,
+				857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */,
+			);
+			path = PickInterestsCell;
+			sourceTree = "<group>";
+		};
+		85D4F80726E60EA5004EC21D /* PickInterests */ = {
+			isa = PBXGroup;
+			children = (
+				85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */,
+				8579517B26E2741C003B751C /* PickInterestsCellHeader */,
+				8579517C26E27425003B751C /* PickInterestsFooter */,
+				857D56BA26DE5D2E003F96AE /* PickInterestsCell */,
+			);
+			path = PickInterests;
+			sourceTree = "<group>";
+		};
+		85D4F80E26E69701004EC21D /* Indicators */ = {
+			isa = PBXGroup;
+			children = (
+				85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */,
+				85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */,
+				85D4F80F26E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift */,
+			);
+			path = Indicators;
+			sourceTree = "<group>";
+		};
+		85D4F81826E6A00D004EC21D /* RoundedTextCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */,
+				85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */,
+			);
+			path = RoundedTextCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		85F8B8B726DD3784000C73D3 /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */,
+				8579516E26E22EFE003B751C /* IntroductionCaptionCell */,
+			);
+			path = Introduction;
+			sourceTree = "<group>";
+		};
+		85F8B8BA26DD37CC000C73D3 /* Personalization */ = {
+			isa = PBXGroup;
+			children = (
+				85D4F80726E60EA5004EC21D /* PickInterests */,
+				85D4F80E26E69701004EC21D /* Indicators */,
+			);
+			path = Personalization;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1275,14 +1428,20 @@
 			files = (
 				33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
+				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				3AA52C86266012D8006A6961 /* DiscoverCollections.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
+				857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */,
+				85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */,
+				85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */,
+				8579517626E26D8F003B751C /* PersonalizationPickInterestsHeaderView.xib in Resources */,
 				33D3D4F126CBA2B6005A859B /* Discovery.storyboard in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
+				8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */,
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
@@ -1294,6 +1453,7 @@
 				3A8593F02689CC1A00CB8DD6 /* CollectionDetails.graphql in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
+				8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1403,15 +1563,19 @@
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
+				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
+				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
+				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
+				857D56B926DE5D2A003F96AE /* PersonalizationPickInterestsCell.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
@@ -1423,6 +1587,7 @@
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
+				85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */,
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,
@@ -1435,6 +1600,7 @@
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,
+				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
 				33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
@@ -1442,6 +1608,7 @@
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
+				8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */,
 				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
@@ -1459,7 +1626,9 @@
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
+				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
+				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,
 				3A67232C268F1D7000DB04D1 /* Array+Move.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */,
@@ -1473,8 +1642,10 @@
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
 				3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */,
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,
+				85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */,
 				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
+				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
@@ -1487,6 +1658,7 @@
 				33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
+				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
@@ -1494,10 +1666,12 @@
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
+				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */,
+				857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */,
 				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
 				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
@@ -1509,6 +1683,7 @@
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
+				85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
@@ -1516,21 +1691,26 @@
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
+				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,
 				33E1827C26D3967F00A1D2AC /* String+Sizes.swift in Sources */,
 				33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */,
+				8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */,
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
+				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
+				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
+				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
