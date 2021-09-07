@@ -5,7 +5,7 @@ import MBProgressHUD
 import PureLayout
 import SwiftUI
 
-private enum DiscoverCollectionsSection: Int, CaseIterable {
+enum DiscoverCollectionsSection: Int, CaseIterable {
     case yourCollections
     case recommendedCollections
 }
@@ -20,6 +20,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
     var onSwapItems: ((Int, Int) -> Void)?
+    var onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +65,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             switch (cell, modelItem) {
             case let (cell as YourCollectionViewCell, modelItem as YourCollectionViewCellModel):
+                cell.tag = modelItem.id
                 cell.onDeleteButtonPressed = { [weak self] in
-                    self?.removeFromYourCollection(yourCollectionItemToRemove: modelItem)
+                    let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
+                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+                    }
+                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
                 }
                 
                 cell.onCellLifted = { [weak self] in
@@ -105,7 +110,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         stocksAmount: modelItem.stocksAmount,
                         recommendedIdentifier: modelItem
                     )
-                    self?.removeFromYourCollection(yourCollectionItemToRemove: yourCollectionItem)
+                    self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
                     
                     cell.isUserInteractionEnabled = true
                 }
@@ -251,12 +256,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         )
     }
     
-    private func removeFromYourCollection(yourCollectionItemToRemove: YourCollectionViewCellModel) {
+    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel) {
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         
         // TODO: make it more robust
         DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         
+        guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
             let updatedRecommendedItem = RecommendedCollectionViewCellModel(
                 id: recommendedItem.id,
@@ -280,9 +286,19 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             snapshot.deleteItems([yourCollectionItemToRemove])
             dataSource?.apply(snapshot, animatingDifferences: true)
+            onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
         } else {
-            snapshot.deleteItems([yourCollectionItemToRemove])
-            dataSource?.apply(snapshot, animatingDifferences: true)
+            if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
+                if let model = AnyHashable as? YourCollectionViewCellModel {
+                    return model.id == itemId
+                }
+                return false
+            } {
+                snapshot.deleteItems([deleteItems])
+                dataSource?.apply(snapshot, animatingDifferences: true)
+                onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
+            }
+            
         }
         
         AppsFlyerLib.shared().logEvent(
@@ -308,13 +324,16 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             return
         }
         
-        let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row]
-        let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row]
+        let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row] as? YourCollectionViewCellModel
+        let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row] as? YourCollectionViewCellModel
         
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
         
+        
         // TODO: keeping local order, make it more robust and flexible
-        onSwapItems?(sourceIndexPath.row, destinationIndexPath.row)
+        onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
+        
+        DummyDataSource.remoteRawCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
@@ -332,6 +351,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         guard let dataSource = dataSource else {return}
         
         var snap = dataSource.snapshot()
+        if snap.sectionIdentifiers.count > 0 {
+            snap.deleteSections([.yourCollections, .recommendedCollections])
+        }
         snap.appendSections([.yourCollections, .recommendedCollections])
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
@@ -353,6 +375,25 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func getRemoteData(completion: @escaping () -> Void) {
+        
+        func fillSections(){
+            //TODO: - Check that Profile ID is in
+            let yourCollectionsDto = DummyDataSource.remoteRawCollections
+            let recommendedDto = DummyDataSource.remoteRawCollections.prefix(20).shuffled()
+            DummyDataSource.yourCollections = yourCollectionsDto.map {
+                CollectionDTOMapper.map($0)
+            }
+            DummyDataSource.recommendedCollections = recommendedDto.map {
+                CollectionDTOMapper.map($0)
+            }
+        }
+        
+        guard DummyDataSource.remoteRawCollections.count == 0 else {
+            fillSections()
+            initViewModelsFromData()
+            completion()
+            return
+        }
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
@@ -370,17 +411,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     return
                 }
                 
-                DummyDataSource.remoteRawCollections = collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0})
+                DummyDataSource.remoteRawCollections = Array(collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0}).prefix(10))                
                 
-                //TODO: - Check that Profile ID is in
-                let yourCollectionsDto = DummyDataSource.remoteRawCollections
-                let recommendedDto = DummyDataSource.remoteRawCollections.prefix(20).shuffled()
-                DummyDataSource.yourCollections = yourCollectionsDto.map {
-                    CollectionDTOMapper.map($0)
-                }
-                DummyDataSource.recommendedCollections = recommendedDto.map {
-                    CollectionDTOMapper.map($0)
-                }
+                fillSections()
                 
                 self.initViewModelsFromData()
                 completion()

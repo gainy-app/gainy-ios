@@ -49,7 +49,7 @@ public struct MultiLineChartView: View {
     public init(data: [([Double], GradientColor)],
                 title: String,
                 legend: String? = nil,
-                style: ChartStyle = Styles.lineChartStyleOne,
+                style: ChartStyle = Styles.lineChartStyleGrow,
                 form: CGSize = ChartForm.medium,
                 rateValue: Int? = nil,
                 dropShadow: Bool = true,

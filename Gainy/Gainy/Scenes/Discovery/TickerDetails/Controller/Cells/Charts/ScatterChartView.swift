@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftDate
 
 extension Color {
     init(hex: String) {
@@ -30,16 +31,34 @@ extension Color {
     static let textColor = Color.init(hex: "1F2E35")
 }
 
+
+
 struct ScatterChartView: View {
     
-    /// Bottom range tags
-    private let tags: [String] = ["1D", "1W", "1M", "3M", "1Y", "5Y", "ALL"]
+    init(ticker: RemoteTicker, chartData: ChartData, delegate: ScatterChartDelegate) {
+        self.ticker = ticker
+        self.chartData = chartData
+        self.delegate = delegate
+    }
     
+    var ticker: RemoteTicker? = nil
+    
+    @ObservedObject
+    var chartData: ChartData
+    
+    @ObservedObject
+    var delegate: ScatterChartDelegate
+    
+    enum ChartPeriod: String, CaseIterable {
+        case d1 = "1D", w1 = "1W", m1 = "1M", m3 = "3M", y1 = "1Y", y5 = "5Y", all = "ALL"
+    }
     
     @State
-    private var selectedTag: String = "1D" {
+    private var selectedTag: ChartPeriod = .d1 {
         didSet {
-            isLeftDurationVis = selectedTag == "1D"
+            isLeftDurationVis = selectedTag == .d1
+            delegate.range = selectedTag
+            hapticTouch.impactOccurred()
         }
     }
     
@@ -54,14 +73,20 @@ struct ScatterChartView: View {
             VStack {
                 headerView
                 chartView
+                    .padding(.leading, 8)
+                    .padding(.trailing, 8)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 }).frame(maxHeight: 40)
                 
             }
             .background(UIColor.init(hexString: "F8FBFD")!.uiColor)
+        }).onAppear(perform: {
+            hapticTouch.prepare()
         })
     }
+    //MARK:- Haptics
+    private let hapticTouch = UIImpactFeedbackGenerator()
     
     //MARK:- Body sections
     
@@ -120,15 +145,15 @@ struct ScatterChartView: View {
                 Spacer()
                 //Right Stock price
                 VStack {
-                    Text("$93.05")
-                        .foregroundColor(Color(hex: "FC5058"))
+                    Text(ticker?.tickerFinancials.last?.currentPrice?.price ?? "")
+                        .foregroundColor(ticker?.priceColor.uiColor ?? .black)
                         .font(UIFont.compactRoundedMedium(20).uiFont)
-                    HStack(alignment: .center, spacing: 2) {
-                        Text("TODAY")
+                    HStack(alignment: .lastTextBaseline, spacing: 2) {
+                        Text(statsDay)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedRegular(9).uiFont)
                             .padding(.top, 2)
-                        Text("-2.42%")
+                        Text(ticker?.tickerFinancials.last?.priceChangeToday?.percent ?? "")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedRegular(11).uiFont)
                     }
@@ -141,8 +166,25 @@ struct ScatterChartView: View {
         .animation(.easeIn)
     }
     
+    private var statsDay: String {
+        if let date = ticker?.tickerFinancials.last?.date {
+            if date.compare(.isToday) {
+                return "TODAY"
+            }
+            return date.toFormat("MM-dd")
+        } else {
+            return "-"
+        }
+    }
+    
+    let medianPoints: [Double] = [8,54,23,32,12,37,7,23,43].shuffled()
     private var chartView: some View {
         ZStack {
+            
+            if chartData.points.count > 1 {
+                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, isMedianVisible: $isMedianVisible).offset(y: -40)
+            }            
+            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, isMedianVisible: $isMedianVisible).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -155,10 +197,7 @@ struct ScatterChartView: View {
             }
             .opacity(isLeftDurationVis ? 1.0 : 0.0)
             .opacity(isMedianVisible ? 0.0 : 1.0)
-            .padding(.bottom, 10)
-            
-            LineView(data: [8,23,54,32,12,37,7,23,43], title: "Full chart", style: Styles.lineChartStyleOne).background(Rectangle().stroke())
-            
+            .padding(.bottom, -5)
             //ScatterChart(symbolColor: Color(hex: "FC5058"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
             //ScatterChart(symbolColor: Color(hex: "0062FF"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
              //   .opacity(isMedianVisible ? 1.0 : 0.0)
@@ -169,7 +208,7 @@ struct ScatterChartView: View {
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
         HStack(alignment: .center, spacing: 0) {
-            ForEach(tags, id: \.self) { tag in
+            ForEach(ChartPeriod.allCases, id: \.self) { tag in
                 
                 Button(action: {
                     selectedTag = tag
@@ -180,7 +219,7 @@ struct ScatterChartView: View {
                             .cornerRadius(16.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
-                        Text(tag)
+                        Text(tag.rawValue)
                             .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }
@@ -196,14 +235,14 @@ struct ScatterChartView: View {
         48
     }
 }
-
-struct ScatterChartView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            ScatterChartView().previewLayout(.fixed(width: 375, height: 812))
-            ScatterChartView().previewLayout(.fixed(width: 812, height: 375))
-                .environment(\.horizontalSizeClass, .compact)
-                .environment(\.verticalSizeClass, .compact)
-        }
-    }
-}
+//
+//struct ScatterChartView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        Group {
+////            ScatterChartView().previewLayout(.fixed(width: 375, height: 812))
+////            ScatterChartView().previewLayout(.fixed(width: 812, height: 375))
+////                .environment(\.horizontalSizeClass, .compact)
+////                .environment(\.verticalSizeClass, .compact)
+////        }
+//    }
+//}

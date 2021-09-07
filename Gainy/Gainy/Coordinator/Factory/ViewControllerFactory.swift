@@ -68,6 +68,8 @@ final class ViewControllerFactory {
                 coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
             } onSwapItems:  { source, dest in
                 vc.swapItemsAt(source, destInd: dest)
+            } onItemDelete: { section, index in
+                vc.deleteItem(index)
             }
         }
         vc.onShowCardDetails = { ticker in

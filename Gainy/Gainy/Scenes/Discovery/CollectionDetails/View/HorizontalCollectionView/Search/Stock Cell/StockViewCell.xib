@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Bold.ttf">
+            <string>SFProDisplay-Bold</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StockViewCell" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StockViewCell" id="tRW-R8-YzL" customClass="StockViewCell" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oK5-eB-YbD">
+                <rect key="frame" x="0.0" y="0.0" width="399" height="94"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HgU-Pl-DgN">
+                        <rect key="frame" x="0.0" y="12" width="279" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="2h0-cH-FmS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEf-4U-u2L">
+                        <rect key="frame" x="0.0" y="67" width="24" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="mOZ-KT-qfq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-pB-gjL">
+                        <rect key="frame" x="269" y="14" width="90" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="EhF-kM-ijO"/>
+                            <constraint firstAttribute="width" constant="90" id="PrM-Nm-rnI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                        <color key="textColor" name="mainLightGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJW-G7-g4C">
+                        <rect key="frame" x="375" y="35" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="20A-bc-uPt"/>
+                            <constraint firstAttribute="width" constant="24" id="XjA-uE-JzQ"/>
+                        </constraints>
+                        <state key="normal" image="plus-circle"/>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rs-tJ-nMm">
+                        <rect key="frame" x="0.0" y="93" width="399" height="1"/>
+                        <color key="backgroundColor" red="0.8784313725490196" green="0.90196078431372551" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="AX4-vG-y8r"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsu-IW-qba">
+                        <rect key="frame" x="335" y="67" width="24" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="WED-sE-g8v"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="7Rs-tJ-nMm" secondAttribute="bottom" id="2O9-6s-DnJ"/>
+                    <constraint firstAttribute="bottom" secondItem="pEf-4U-u2L" secondAttribute="bottom" constant="11" id="6l9-NJ-m9u"/>
+                    <constraint firstItem="HgU-Pl-DgN" firstAttribute="leading" secondItem="oK5-eB-YbD" secondAttribute="leading" id="86V-Yy-rye"/>
+                    <constraint firstItem="bJW-G7-g4C" firstAttribute="leading" secondItem="Npz-pB-gjL" secondAttribute="trailing" constant="16" id="GVr-8T-Yn2"/>
+                    <constraint firstItem="Npz-pB-gjL" firstAttribute="centerY" secondItem="HgU-Pl-DgN" secondAttribute="centerY" id="HKb-p1-T8P"/>
+                    <constraint firstItem="pEf-4U-u2L" firstAttribute="leading" secondItem="HgU-Pl-DgN" secondAttribute="leading" id="K8Q-cw-o88"/>
+                    <constraint firstAttribute="trailing" secondItem="bJW-G7-g4C" secondAttribute="trailing" id="M7f-QG-j7O"/>
+                    <constraint firstItem="HgU-Pl-DgN" firstAttribute="top" secondItem="oK5-eB-YbD" secondAttribute="top" constant="12" id="OkC-bm-2fo"/>
+                    <constraint firstAttribute="trailing" secondItem="HgU-Pl-DgN" secondAttribute="trailing" constant="120" id="Tvh-QW-Ysu"/>
+                    <constraint firstItem="Jsu-IW-qba" firstAttribute="centerY" secondItem="pEf-4U-u2L" secondAttribute="centerY" id="eSe-KZ-X4h"/>
+                    <constraint firstItem="Jsu-IW-qba" firstAttribute="trailing" secondItem="Npz-pB-gjL" secondAttribute="trailing" id="f6q-22-wYh"/>
+                    <constraint firstItem="7Rs-tJ-nMm" firstAttribute="leading" secondItem="oK5-eB-YbD" secondAttribute="leading" id="mDO-Fo-AKz"/>
+                    <constraint firstAttribute="trailing" secondItem="7Rs-tJ-nMm" secondAttribute="trailing" id="otn-ct-xeo"/>
+                    <constraint firstItem="bJW-G7-g4C" firstAttribute="centerY" secondItem="oK5-eB-YbD" secondAttribute="centerY" id="zPS-cP-OUm"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="399" height="94"/>
+            <connections>
+                <outlet property="growthLbl" destination="Jsu-IW-qba" id="PNn-83-Cd2"/>
+                <outlet property="nameLbl" destination="HgU-Pl-DgN" id="aXr-sO-iyZ"/>
+                <outlet property="priceLbl" destination="Npz-pB-gjL" id="te2-u2-VwT"/>
+                <outlet property="symbolLbl" destination="pEf-4U-u2L" id="MTW-Jq-1jI"/>
+            </connections>
+            <point key="canvasLocation" x="-134.05797101449275" y="72.321428571428569"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="plus-circle" width="24" height="24"/>
+        <namedColor name="mainLightGray">
+            <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mainText">
+            <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

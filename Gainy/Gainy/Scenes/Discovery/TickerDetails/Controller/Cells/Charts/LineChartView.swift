@@ -36,7 +36,7 @@ public struct LineChartView: View {
     public init(data: [Double],
                 title: String,
                 legend: String? = nil,
-                style: ChartStyle = Styles.lineChartStyleOne,
+                style: ChartStyle = Styles.lineChartStyleGrow,
                 form: CGSize? = ChartForm.medium,
                 rateValue: Int?,
                 dropShadow: Bool? = true,

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFCompactRounded-Semibold.otf">
+            <string>SFCompactRounded-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchCollectionHeaderView" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCollectionHeaderView" id="som-Ue-jmS" customClass="SearchCollectionHeaderView" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="590" height="116"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STOCKS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aBQ-Ul-Hpy">
+                    <rect key="frame" x="24" y="51.5" width="542" height="13.5"/>
+                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="11"/>
+                    <color key="textColor" red="0.52941176470588236" green="0.56470588235294117" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Svl-qr-0ow"/>
+            <constraints>
+                <constraint firstItem="aBQ-Ul-Hpy" firstAttribute="leading" secondItem="Svl-qr-0ow" secondAttribute="leading" constant="24" id="A5T-PD-shi"/>
+                <constraint firstItem="aBQ-Ul-Hpy" firstAttribute="centerY" secondItem="som-Ue-jmS" secondAttribute="centerY" id="JYM-g1-NQi"/>
+                <constraint firstItem="aBQ-Ul-Hpy" firstAttribute="centerX" secondItem="som-Ue-jmS" secondAttribute="centerX" id="Z6b-md-pwZ"/>
+            </constraints>
+            <connections>
+                <outlet property="headerLbl" destination="aBQ-Ul-Hpy" id="ZxW-Jt-THR"/>
+            </connections>
+            <point key="canvasLocation" x="188.40579710144928" y="121.875"/>
+        </collectionReusableView>
+    </objects>
+</document>

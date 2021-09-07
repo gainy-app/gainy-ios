@@ -99,6 +99,9 @@ class BaseViewController: UIViewController {
         UIApplication.shared.keyWindow ?? UIView()
     }()
     
+    @Atomic
+    private(set) var isNetworkLoading: Bool = false
+    
     /// Show Network HUD
     func showNetworkLoader() {
         if hudProgress == nil {
@@ -106,11 +109,13 @@ class BaseViewController: UIViewController {
         }
         hudProgress?.mode = .indeterminate;
         hudProgress?.label.text = NSLocalizedString("Loading", comment: "");
+        isNetworkLoading = true
     }
     
     /// Hide HUD
     func hideLoader() {
         hudProgress?.hide(animated: true)
+        isNetworkLoading = false
     }
 }
 

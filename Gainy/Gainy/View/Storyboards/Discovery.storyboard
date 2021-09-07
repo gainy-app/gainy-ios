@@ -46,7 +46,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsHeaderViewCell" id="9Rs-wj-W18" customClass="TickerDetailsHeaderViewCell" customModule="Gainy" customModuleProvider="target">
@@ -110,14 +110,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGb-C2-Unk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                    <rect key="frame" x="8" y="0.0" width="398" height="100"/>
                                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="TGb-C2-Unk" secondAttribute="trailing" id="1e9-zX-XRx"/>
+                                                <constraint firstAttribute="trailing" secondItem="TGb-C2-Unk" secondAttribute="trailing" constant="8" id="1e9-zX-XRx"/>
                                                 <constraint firstAttribute="bottom" secondItem="TGb-C2-Unk" secondAttribute="bottom" id="I8d-6K-FxH"/>
-                                                <constraint firstItem="TGb-C2-Unk" firstAttribute="leading" secondItem="bjb-iO-XyG" secondAttribute="leading" id="h8w-BI-goj"/>
+                                                <constraint firstItem="TGb-C2-Unk" firstAttribute="leading" secondItem="bjb-iO-XyG" secondAttribute="leading" constant="8" id="h8w-BI-goj"/>
                                                 <constraint firstItem="TGb-C2-Unk" firstAttribute="top" secondItem="bjb-iO-XyG" secondAttribute="top" id="miq-NS-7MO"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -197,7 +197,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7h4-Fy-ASY">
-                                                    <rect key="frame" x="28" y="32.5" width="386" height="136"/>
+                                                    <rect key="frame" x="0.0" y="32.5" width="414" height="136"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="136" id="Vec-bG-Kuj"/>
@@ -264,11 +264,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="7h4-Fy-ASY" secondAttribute="trailing" id="3tz-MX-teB"/>
+                                                <constraint firstItem="7h4-Fy-ASY" firstAttribute="leading" secondItem="cvG-fX-Wfk" secondAttribute="leading" id="4G8-9H-nVE"/>
                                                 <constraint firstAttribute="bottom" secondItem="7h4-Fy-ASY" secondAttribute="bottom" id="Dkf-mk-NHC"/>
                                                 <constraint firstItem="Ufh-D7-268" firstAttribute="leading" secondItem="cvG-fX-Wfk" secondAttribute="leading" constant="28" id="JKe-k8-Gjx"/>
                                                 <constraint firstItem="7h4-Fy-ASY" firstAttribute="top" secondItem="Ufh-D7-268" secondAttribute="bottom" constant="8.5" id="jbX-Eg-oWy"/>
                                                 <constraint firstItem="Ufh-D7-268" firstAttribute="top" secondItem="cvG-fX-Wfk" secondAttribute="top" id="reS-EJ-Rzr"/>
-                                                <constraint firstItem="7h4-Fy-ASY" firstAttribute="leading" secondItem="Ufh-D7-268" secondAttribute="leading" id="tiJ-r6-2Fe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -289,7 +289,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KYm-1G-vDX">
-                                                    <rect key="frame" x="28" y="64.5" width="358" height="136"/>
+                                                    <rect key="frame" x="0.0" y="64.5" width="386" height="136"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="136" id="agj-Yc-IHD"/>
@@ -314,11 +314,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="KYm-1G-vDX" firstAttribute="top" secondItem="BdC-iu-DOg" secondAttribute="bottom" constant="8.5" id="3jX-BP-WCz"/>
+                                                <constraint firstItem="KYm-1G-vDX" firstAttribute="leading" secondItem="YNZ-Ez-WX2" secondAttribute="leading" id="5uH-yY-bR8"/>
                                                 <constraint firstAttribute="bottom" secondItem="KYm-1G-vDX" secondAttribute="bottom" id="FJ0-sQ-Yqd"/>
                                                 <constraint firstItem="BdC-iu-DOg" firstAttribute="leading" secondItem="YNZ-Ez-WX2" secondAttribute="leading" constant="28" id="JnO-bl-dip"/>
                                                 <constraint firstAttribute="trailing" secondItem="KYm-1G-vDX" secondAttribute="trailing" constant="28" id="SO8-Zd-YXD"/>
                                                 <constraint firstItem="BdC-iu-DOg" firstAttribute="top" secondItem="YNZ-Ez-WX2" secondAttribute="top" constant="32" id="YiB-v2-8Fn"/>
-                                                <constraint firstItem="KYm-1G-vDX" firstAttribute="leading" secondItem="BdC-iu-DOg" secondAttribute="leading" id="pkM-K0-fbu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -869,7 +869,7 @@
                         <constraints>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="top" secondItem="hTW-H4-wal" secondAttribute="top" id="NPk-3O-WIO"/>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="trailing" secondItem="hTW-H4-wal" secondAttribute="trailing" id="Nxo-hc-FXj"/>
-                            <constraint firstItem="hTW-H4-wal" firstAttribute="bottom" secondItem="CiU-XQ-WcC" secondAttribute="bottom" id="pUX-J4-ySo"/>
+                            <constraint firstAttribute="bottom" secondItem="CiU-XQ-WcC" secondAttribute="bottom" id="qCZ-IF-fKi"/>
                             <constraint firstItem="CiU-XQ-WcC" firstAttribute="leading" secondItem="hTW-H4-wal" secondAttribute="leading" id="ta1-E6-PcH"/>
                         </constraints>
                     </view>

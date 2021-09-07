@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchLoadingCell" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SearchLoadingCell" reuseIdentifier="SearchLoadingCell" id="pOA-3s-mRl" customClass="SearchLoadingCell" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="644" height="143"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EW2-z1-3ru">
+                <rect key="frame" x="0.0" y="0.0" width="644" height="143"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Searching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsi-6n-Ur0">
+                        <rect key="frame" x="277" y="61.5" width="90.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" name="mainLightGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="s25-1P-hBu">
+                        <rect key="frame" x="245" y="61.5" width="20" height="20"/>
+                        <color key="color" name="mainLightGray"/>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="gsi-6n-Ur0" firstAttribute="centerX" secondItem="EW2-z1-3ru" secondAttribute="centerX" id="5To-iZ-0b5"/>
+                    <constraint firstItem="s25-1P-hBu" firstAttribute="centerY" secondItem="gsi-6n-Ur0" secondAttribute="centerY" id="Q0U-bw-oaa"/>
+                    <constraint firstItem="gsi-6n-Ur0" firstAttribute="leading" secondItem="s25-1P-hBu" secondAttribute="trailing" constant="12" id="VdO-iI-ZDL"/>
+                    <constraint firstItem="gsi-6n-Ur0" firstAttribute="centerY" secondItem="EW2-z1-3ru" secondAttribute="centerY" id="pzn-pw-kuW"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="644" height="143"/>
+            <connections>
+                <outlet property="activityIndicator" destination="s25-1P-hBu" id="0sF-aX-wtf"/>
+            </connections>
+            <point key="canvasLocation" x="291.304347826087" y="61.941964285714285"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="mainLightGray">
+            <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

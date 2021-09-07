@@ -11,7 +11,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         super.init(frame: .zero)
 
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = .clear
 
         collectionHorizontalView.frame = CGRect(
             x: 4,
@@ -35,16 +35,22 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         )
 
         internalCollectionView.register(CollectionCardCell.self)
-
+        internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
+        
         internalCollectionView.showsVerticalScrollIndicator = false
-        internalCollectionView.backgroundColor = UIColor.Gainy.white
+        internalCollectionView.backgroundColor = .clear
         internalCollectionView.dataSource = dataSource
         internalCollectionView.delegate = self
         internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
         internalCollectionView.contentInsetAdjustmentBehavior = .never
+        internalCollectionView.clipsToBounds = false
         
         contentView.addSubview(internalCollectionView)
-
+        contentView.bringSubviewToFront(collectionHorizontalView)
+        contentView.addSubview(collectionListHeader)
+        collectionListHeader.frame = CGRect.init(x: 4, y: 144, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
+        collectionListHeader.isHidden = true
+        
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: internalCollectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
@@ -73,10 +79,18 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var viewModel: CollectionCardViewCellModel?
 
     var onCardPressed: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    var onSortingPressed: (() -> Void)?
 
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
-
+        view.backgroundColor = .clear
+        view.delegate = self
+        return view
+    }()
+    
+    lazy var collectionListHeader: CollictionsListHeaderView = {
+        let view = CollictionsListHeaderView()
+        view.frame = CGRect.init(x: 0, y: 0, width: contentView.bounds.width, height: 36.0)
         return view
     }()
 
@@ -85,15 +99,46 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         image collectionImage: String,
         description collectionDescription: String,
         stocksAmount: String,
-        cards: [CollectionCardViewCellModel]
+        cards: [CollectionCardViewCellModel],
+        collectionId: Int
     ) {
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,
             description: collectionDescription,
             stocksAmount: stocksAmount,
-            imageName: collectionImage
+            imageName: collectionImage,
+            collectionId: collectionId
         )
+        
+        //Gettings settings
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
+        if settings.viewMode == .list {
+            collectionListHeader.isHidden = false
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144 + 36,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
+            )
+            sections = [
+                CardsOneColumnListFlowSectionLayout(),
+                CardsTwoColumnGridFlowSectionLayout()
+            ]
+        } else {
+            collectionListHeader.isHidden = true
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20)
+            )
+            sections =  [
+                CardsTwoColumnGridFlowSectionLayout(),
+                CardsOneColumnListFlowSectionLayout()
+            ]
+        }
+        
         self.cards = cards
         snapshot.deleteAllItems()
 
@@ -107,6 +152,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
     private lazy var sections: [SectionLayout] = [
         CardsTwoColumnGridFlowSectionLayout(),
+        CardsOneColumnListFlowSectionLayout()
     ]
 
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
@@ -127,5 +173,37 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         onCardPressed?(cards[indexPath.row].rawTicker)
+    }
+}
+
+extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
+    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
+        if isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout  {return}
+        if !isGrid && sections.first! is CardsOneColumnListFlowSectionLayout {return}
+        
+        if isGrid {
+            collectionListHeader.isHidden = true
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20)
+            )
+        } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
+            collectionListHeader.isHidden = false
+            internalCollectionView.frame = CGRect(
+                x: 0,
+                y: 144 + 36,
+                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
+            )
+        }
+        
+        sections.swapAt(0, 1)
+        internalCollectionView.reloadData()        
+    }
+    
+    func stockSortPressed(view: CollectionHorizontalView) {
+        onSortingPressed?()
     }
 }

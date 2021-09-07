@@ -37,6 +37,10 @@ extension TickerDetailsHighlightsViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize.init(width: 240, height: collectionView.bounds.height)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 0, left: 28, bottom: 0, right: 0)
+    }
 }
 
 final class TickerDetailsHighlightsInnerViewCell: UICollectionViewCell {

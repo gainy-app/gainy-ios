@@ -44,7 +44,8 @@ struct HorizontalFlowSectionLayout: SectionLayout {
                 image: viewModel.image,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
-                cards: viewModel.cards
+                cards: viewModel.cards,
+                collectionId: viewModel.id
             )
         }
 

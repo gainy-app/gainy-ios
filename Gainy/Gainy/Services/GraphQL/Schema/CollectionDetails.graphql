@@ -22,7 +22,8 @@ query DiscoverCollectionDetails {
           current_price
           divident_growth
           symbol
-        }
+          created_at
+          }
       }
     }
   }

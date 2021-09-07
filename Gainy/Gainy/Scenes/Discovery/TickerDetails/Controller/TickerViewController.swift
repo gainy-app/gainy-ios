@@ -21,6 +21,7 @@ final class TickerViewController: BaseViewController {
         didSet {
             tableView.dataSource = viewModel?.dataSource
             tableView.delegate = viewModel?.dataSource
+            viewModel?.dataSource.delegate = self
         }
     }
     
@@ -52,4 +53,15 @@ final class TickerViewController: BaseViewController {
         
     }
 
+}
+extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func loadingState(started: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            if started {
+                self?.showNetworkLoader()
+            } else {
+                self?.hideLoader()
+            }
+        }
+    }
 }

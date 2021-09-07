@@ -2,6 +2,7 @@ import Apollo
 import Foundation
 
 public typealias float8 = Float
+public typealias timestamptz = String
 
 final class Network {
     static let shared = Network()

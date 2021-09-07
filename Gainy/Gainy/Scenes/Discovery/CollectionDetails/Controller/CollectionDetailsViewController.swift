@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import PureLayout
+import FloatingPanel
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -15,6 +16,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
     var onDiscoverCollections: (() -> Void)?
     var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    
+    //Panel
+    var fpc: FloatingPanelController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +50,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                             for: .touchUpInside)
 
         navigationBarContainer.addSubview(discoverCollectionsButton)
-
+        discoverCollectionsBtn = discoverCollectionsButton
         let searchTextView = UITextField(
             frame: CGRect(
                 x: 16,
@@ -57,10 +61,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         )
 
         searchTextView.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-        searchTextView.textColor = UIColor.Gainy.gray
+        searchTextView.textColor = UIColor(named: "mainText")
         searchTextView.layer.cornerRadius = 16
-        searchTextView.isUserInteractionEnabled = false
-
+        searchTextView.isUserInteractionEnabled = true
+        searchTextView.clearButtonMode = .always
+        searchTextView.clearButtonMode = .whileEditing
+        searchTextView.placeholder = "Search anything"
         let searchIconContainerView = UIView(
             frame: CGRect(
                 x: 0,
@@ -87,10 +93,31 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
         searchTextView.leftView = searchIconContainerView
         searchTextView.leftViewMode = .always
+        searchTextView.rightViewMode = .whileEditing
         searchTextView.backgroundColor = UIColor.Gainy.lightBack
-
+        
+        
+        let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
+        let clearBtn = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 24,
+                height: 24
+            )
+        )
+        clearBtn.setImage(UIImage(named: "search_clear"), for: .normal)
+        clearBtn.addTarget(self, action: #selector(textFieldClear), for: .touchUpInside)
+        btnFrame.addSubview(clearBtn)
+        searchTextView.rightView = btnFrame
+        
+        searchTextView.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
+        searchTextView.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
+        searchTextView.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        searchTextView.delegate = self
         navigationBarContainer.addSubview(searchTextView)
-
+        self.searchTextView = searchTextView
+        
         view.addSubview(navigationBarContainer)
 
         let navigationBarTopOffset =
@@ -113,7 +140,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
 
         collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
 
-        collectionDetailsCollectionView.backgroundColor = UIColor.Gainy.white
+        collectionDetailsCollectionView.backgroundColor = .clear
         collectionDetailsCollectionView.showsVerticalScrollIndicator = false
         collectionDetailsCollectionView.dragInteractionEnabled = true
         collectionDetailsCollectionView.bounces = false
@@ -131,14 +158,45 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
 
             if let cell = cell as? CollectionDetailsViewCell {
+                if let model = modelItem as? CollectionDetailViewCellModel {
+                    cell.tag = model.id
+                }
                 cell.onCardPressed = {[weak self]  ticker in
                     self?.onShowCardDetails?(ticker)
+                }
+                cell.onSortingPressed = { [weak self] in
+                    guard let self = self else {return}
+                    guard self.presentedViewController == nil else {return}
+                    self.present(self.fpc, animated: true, completion: nil)
                 }
             }
 
             return cell
         }
+        
+        searchCollectionView = UICollectionView(
+            frame: CGRect(
+                x: 0,
+                y: navigationBarTopOffset,
+                width: view.bounds.width,
+                height: view.bounds.height - navigationBarTopOffset
+            ),
+            collectionViewLayout: CollectionSearchController.createLayout([.loader])
+        )
+        view.addSubview(searchCollectionView)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
+        searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
 
+        searchCollectionView.backgroundColor = .clear
+        searchCollectionView.showsVerticalScrollIndicator = false
+        searchCollectionView.dragInteractionEnabled = true
+        searchCollectionView.bounces = false
+        searchCollectionView.alpha = 0.0
+        searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
+            self?.onShowCardDetails?(ticker)
+        })
         getRemoteData {
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()
@@ -146,6 +204,60 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.centerInitialCollectionInTheCollectionView()
             }
         }
+        setupPanel()
+    }
+    
+    @objc func textFieldClear() {
+        searchTextView?.text = ""
+        searchController?.searchText = searchTextView?.text ?? ""
+        searchController?.clearAll()
+        
+        let oldFrame = CGRect(
+            x: 16,
+            y: 24,
+            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+            height: 40
+        )
+        UIView.animate(withDuration: 0.3) {
+            self.collectionDetailsCollectionView.alpha = 1.0
+            self.searchCollectionView.alpha = 0.0
+            self.discoverCollectionsBtn?.alpha = 1.0
+            self.searchTextView?.frame = oldFrame
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        guard (textField.text ?? "").count > 2 else {return}
+        searchController?.searchText = textField.text ?? ""
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        UIView.animate(withDuration: 0.3) {
+            self.collectionDetailsCollectionView.alpha = 0.0
+            self.searchCollectionView.alpha = 1.0
+            self.discoverCollectionsBtn?.alpha = 0.0
+            self.searchTextView?.frame = CGRect(
+                x: 16,
+                y: 24,
+                width: self.view.bounds.width - (16 + 16),
+                height: 40
+            )
+        }
+    }
+    
+    @objc func textFieldEditingDidEnd(_ textField: UITextField) {
+//        let oldFrame = CGRect(
+//            x: 16,
+//            y: 24,
+//            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+//            height: 40
+//        )
+//        UIView.animate(withDuration: 0.3) {
+//            self.collectionDetailsCollectionView.alpha = 1.0
+//            self.searchCollectionView.alpha = 0.0
+//            self.discoverCollectionsBtn?.alpha = 1.0
+//            self.searchTextView?.frame = oldFrame
+//        }
     }
 
     // MARK: Private
@@ -164,15 +276,23 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }()
 
     private var collectionDetailsCollectionView: UICollectionView!
+    private var searchCollectionView: UICollectionView!
 
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
-
+    
+    private var searchController: CollectionSearchController?
+    private var discoverCollectionsBtn: UIButton?
+    private var searchTextView: UITextField?
+    
     // MARK: Functions
 
     private func getRemoteData(completion: @escaping () -> Void) {
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
+        guard !isNetworkLoading else {
             return
         }
         showNetworkLoader()
@@ -263,13 +383,110 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        fpc.layout = MyFloatingPanelLayout()
+        let appearance = SurfaceAppearance()
+
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Assign self as the delegate of the controller.
+        //fpc.delegate = self // Optional
+        
+        // Set a content view controller.
+        let contentVC = SortCollectionDetailsViewController.instantiate(.popups)
+        contentVC.delegate = self
+        fpc.set(contentViewController: contentVC)
+        fpc.isRemovalInteractionEnabled = true
+        
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
+    
+    class MyFloatingPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .top, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadCollectionsIfNoneExists()
+    }
+    
+    fileprivate func loadCollectionsIfNoneExists() {
+        if DummyDataSource.collectionDetails.count == 0 {
+            getRemoteData {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+
+                    self?.centerInitialCollectionInTheCollectionView()
+                }
+            }
+        }
+    }
+    
     //MARK: - Swap Items
     
     func swapItemsAt(_ sourceInd: Int, destInd: Int) {
-        guard var snapshot = dataSource?.snapshot() else {return}
-        let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[sourceInd]
-        let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards)[destInd]        
+        guard var snapshot = dataSource?.snapshot() else {return}        
+        
+        guard let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == sourceInd
+            }
+            return false
+        }) else {return}
+        
+        guard let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+        if let model = anyHashable as? CollectionDetailViewCellModel {
+            return model.id == destInd
+        }
+        return false
+        }) else {return}
+        
         snapshot.moveItem(sourceItem, beforeItem: destItem)
         dataSource?.apply(snapshot)
+    }
+    
+    //MARK: - Delete Items
+    
+    func deleteItem(_ sourceInd: Int) {
+        guard var snapshot = dataSource?.snapshot() else {return}
+        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == sourceInd
+            }
+            return false
+        }) {
+            snapshot.deleteItems([sourceItem])
+            dataSource?.apply(snapshot)
+        }
+        
+    }
+}
+
+extension CollectionDetailsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        self.fpc.dismiss(animated: true, completion: nil)
     }
 }
