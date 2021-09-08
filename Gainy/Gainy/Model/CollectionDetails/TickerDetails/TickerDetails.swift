@@ -3,7 +3,7 @@ struct TickerDetails {
     let companyName: String
     let description: String
     let financialMetrics: TickerFinancialMetrics
-    let rawTicker: DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker
+    let rawTicker: DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker?
 }
 
 extension TickerDetails: Hashable {

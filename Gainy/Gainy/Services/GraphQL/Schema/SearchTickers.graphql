@@ -7,9 +7,7 @@ query SearchTickers($text: String!) {
           pe_ratio
           market_capitalization
           highlight
-          price_change_today
-          current_price
-          divident_growth
+          dividend_growth
           symbol
           created_at
         }

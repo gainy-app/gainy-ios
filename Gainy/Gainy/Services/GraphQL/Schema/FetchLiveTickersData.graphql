@@ -1,0 +1,9 @@
+query FetchLiveTickersData($symbols: [String!]) {
+  fetchLivePrices(symbols: $symbols) {
+    close
+    daily_change
+    daily_change_p
+    datetime
+    symbol
+  }
+}

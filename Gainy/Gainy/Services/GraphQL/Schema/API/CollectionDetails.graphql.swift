@@ -9,20 +9,20 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query DiscoverCollectionDetails {
-      app_collections {
+      collections {
         __typename
         id
         image_url
         name
         description
-        collection_symbols_aggregate {
+        ticker_collections_aggregate {
           __typename
           aggregate {
             __typename
             count
           }
         }
-        collection_symbols {
+        ticker_collections {
           __typename
           ticker {
             __typename
@@ -34,9 +34,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               pe_ratio
               market_capitalization
               highlight
-              price_change_today
-              current_price
-              divident_growth
+              dividend_growth
               symbol
               created_at
             }
@@ -56,7 +54,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_collections", type: .nonNull(.list(.nonNull(.object(AppCollection.selections))))),
+        GraphQLField("collections", type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
       ]
     }
 
@@ -66,32 +64,32 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(appCollections: [AppCollection]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "app_collections": appCollections.map { (value: AppCollection) -> ResultMap in value.resultMap }])
+    public init(collections: [Collection]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "app.collections"
-    public var appCollections: [AppCollection] {
+    /// fetch data from the table: "collections"
+    public var collections: [Collection] {
       get {
-        return (resultMap["app_collections"] as! [ResultMap]).map { (value: ResultMap) -> AppCollection in AppCollection(unsafeResultMap: value) }
+        return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: AppCollection) -> ResultMap in value.resultMap }, forKey: "app_collections")
+        resultMap.updateValue(newValue.map { (value: Collection) -> ResultMap in value.resultMap }, forKey: "collections")
       }
     }
 
-    public struct AppCollection: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["app_collections"]
+    public struct Collection: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["collections"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("image_url", type: .nonNull(.scalar(String.self))),
-          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("image_url", type: .scalar(String.self)),
+          GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("description", type: .scalar(String.self)),
-          GraphQLField("collection_symbols_aggregate", type: .nonNull(.object(CollectionSymbolsAggregate.selections))),
-          GraphQLField("collection_symbols", type: .nonNull(.list(.nonNull(.object(CollectionSymbol.selections))))),
+          GraphQLField("ticker_collections_aggregate", type: .nonNull(.object(TickerCollectionsAggregate.selections))),
+          GraphQLField("ticker_collections", type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
         ]
       }
 
@@ -101,8 +99,8 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, imageUrl: String, name: String, description: String? = nil, collectionSymbolsAggregate: CollectionSymbolsAggregate, collectionSymbols: [CollectionSymbol]) {
-        self.init(unsafeResultMap: ["__typename": "app_collections", "id": id, "image_url": imageUrl, "name": name, "description": description, "collection_symbols_aggregate": collectionSymbolsAggregate.resultMap, "collection_symbols": collectionSymbols.map { (value: CollectionSymbol) -> ResultMap in value.resultMap }])
+      public init(id: Int? = nil, imageUrl: String? = nil, name: String? = nil, description: String? = nil, tickerCollectionsAggregate: TickerCollectionsAggregate, tickerCollections: [TickerCollection]) {
+        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "image_url": imageUrl, "name": name, "description": description, "ticker_collections_aggregate": tickerCollectionsAggregate.resultMap, "ticker_collections": tickerCollections.map { (value: TickerCollection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -114,27 +112,27 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         }
       }
 
-      public var id: Int {
+      public var id: Int? {
         get {
-          return resultMap["id"]! as! Int
+          return resultMap["id"] as? Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
         }
       }
 
-      public var imageUrl: String {
+      public var imageUrl: String? {
         get {
-          return resultMap["image_url"]! as! String
+          return resultMap["image_url"] as? String
         }
         set {
           resultMap.updateValue(newValue, forKey: "image_url")
         }
       }
 
-      public var name: String {
+      public var name: String? {
         get {
-          return resultMap["name"]! as! String
+          return resultMap["name"] as? String
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
@@ -151,27 +149,27 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       }
 
       /// An aggregate relationship
-      public var collectionSymbolsAggregate: CollectionSymbolsAggregate {
+      public var tickerCollectionsAggregate: TickerCollectionsAggregate {
         get {
-          return CollectionSymbolsAggregate(unsafeResultMap: resultMap["collection_symbols_aggregate"]! as! ResultMap)
+          return TickerCollectionsAggregate(unsafeResultMap: resultMap["ticker_collections_aggregate"]! as! ResultMap)
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "collection_symbols_aggregate")
+          resultMap.updateValue(newValue.resultMap, forKey: "ticker_collections_aggregate")
         }
       }
 
       /// An array relationship
-      public var collectionSymbols: [CollectionSymbol] {
+      public var tickerCollections: [TickerCollection] {
         get {
-          return (resultMap["collection_symbols"] as! [ResultMap]).map { (value: ResultMap) -> CollectionSymbol in CollectionSymbol(unsafeResultMap: value) }
+          return (resultMap["ticker_collections"] as! [ResultMap]).map { (value: ResultMap) -> TickerCollection in TickerCollection(unsafeResultMap: value) }
         }
         set {
-          resultMap.updateValue(newValue.map { (value: CollectionSymbol) -> ResultMap in value.resultMap }, forKey: "collection_symbols")
+          resultMap.updateValue(newValue.map { (value: TickerCollection) -> ResultMap in value.resultMap }, forKey: "ticker_collections")
         }
       }
 
-      public struct CollectionSymbolsAggregate: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["app_collection_symbols_aggregate"]
+      public struct TickerCollectionsAggregate: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ticker_collections_aggregate"]
 
         public static var selections: [GraphQLSelection] {
           return [
@@ -187,7 +185,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         }
 
         public init(aggregate: Aggregate? = nil) {
-          self.init(unsafeResultMap: ["__typename": "app_collection_symbols_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
+          self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -209,7 +207,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         }
 
         public struct Aggregate: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["app_collection_symbols_aggregate_fields"]
+          public static let possibleTypes: [String] = ["ticker_collections_aggregate_fields"]
 
           public static var selections: [GraphQLSelection] {
             return [
@@ -225,7 +223,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
           }
 
           public init(count: Int) {
-            self.init(unsafeResultMap: ["__typename": "app_collection_symbols_aggregate_fields", "count": count])
+            self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate_fields", "count": count])
           }
 
           public var __typename: String {
@@ -248,13 +246,13 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         }
       }
 
-      public struct CollectionSymbol: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["app_collection_symbols"]
+      public struct TickerCollection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ticker_collections"]
 
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("ticker", type: .nonNull(.object(Ticker.selections))),
+            GraphQLField("ticker", type: .object(Ticker.selections)),
           ]
         }
 
@@ -264,8 +262,8 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(ticker: Ticker) {
-          self.init(unsafeResultMap: ["__typename": "app_collection_symbols", "ticker": ticker.resultMap])
+        public init(ticker: Ticker? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ticker_collections", "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -278,12 +276,12 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         }
 
         /// An object relationship
-        public var ticker: Ticker {
+        public var ticker: Ticker? {
           get {
-            return Ticker(unsafeResultMap: resultMap["ticker"]! as! ResultMap)
+            return (resultMap["ticker"] as? ResultMap).flatMap { Ticker(unsafeResultMap: $0) }
           }
           set {
-            resultMap.updateValue(newValue.resultMap, forKey: "ticker")
+            resultMap.updateValue(newValue?.resultMap, forKey: "ticker")
           }
         }
 
@@ -365,9 +363,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
                 GraphQLField("pe_ratio", type: .scalar(Double.self)),
                 GraphQLField("market_capitalization", type: .scalar(Double.self)),
                 GraphQLField("highlight", type: .scalar(String.self)),
-                GraphQLField("price_change_today", type: .scalar(Double.self)),
-                GraphQLField("current_price", type: .scalar(float8.self)),
-                GraphQLField("divident_growth", type: .scalar(Double.self)),
+                GraphQLField("dividend_growth", type: .scalar(float8.self)),
                 GraphQLField("symbol", type: .scalar(String.self)),
                 GraphQLField("created_at", type: .scalar(timestamptz.self)),
               ]
@@ -379,8 +375,8 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, priceChangeToday: Double? = nil, currentPrice: float8? = nil, dividentGrowth: Double? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
-              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol, "created_at": createdAt])
+            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
+              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt])
             }
 
             public var __typename: String {
@@ -419,30 +415,12 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var priceChangeToday: Double? {
+            public var dividendGrowth: float8? {
               get {
-                return resultMap["price_change_today"] as? Double
+                return resultMap["dividend_growth"] as? float8
               }
               set {
-                resultMap.updateValue(newValue, forKey: "price_change_today")
-              }
-            }
-
-            public var currentPrice: float8? {
-              get {
-                return resultMap["current_price"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "current_price")
-              }
-            }
-
-            public var dividentGrowth: Double? {
-              get {
-                return resultMap["divident_growth"] as? Double
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "divident_growth")
+                resultMap.updateValue(newValue, forKey: "dividend_growth")
               }
             }
 

@@ -56,14 +56,16 @@ struct CompareScatterChartView: View {
     var body: some View {
         GeometryReader(content: { rootGeo in
             VStack(alignment: .leading) {
-                headerView.background(Rectangle().stroke().foregroundColor(.red))
-                //chartView
-                //    .padding(.leading, 8)
-                //    .padding(.trailing, 8)
+                headerView
+                Spacer()
+                chartView
+                    .padding(.leading, 8)
+                    .padding(.trailing, 8)
+                    .frame(height: 145)
+                Spacer()
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry).background(Rectangle().stroke())
-                }).frame(maxHeight: 40)
-                
+                }).frame(maxHeight: 40)                
             }
             .background(UIColor.init(hexString: "F8FBFD")!.uiColor)
         }).onAppear(perform: {
@@ -80,11 +82,11 @@ struct CompareScatterChartView: View {
             ForEach(viewModel.comparableStocks) { stock in
                 HStack(alignment: .center, spacing: 16) {
                     Text(stock.symbol)
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                        .foregroundColor(UIColor(hexString: "#3A4448")!.uiColor)
                         .font(UIFont.proDisplayRegular(14).uiFont)
                         .padding(.top, 2)
                     Text("\(stock.growth.percent)")
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                        .foregroundColor(UIColor(hexString: "#1F2E35")!.uiColor)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                 }
             }
@@ -98,7 +100,7 @@ struct CompareScatterChartView: View {
     private var chartView: some View {
         ZStack {
             ForEach(viewModel.comparableStocks) { stock in                
-                LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: Styles.lineChartStyleDrop, isMedianVisible: .constant(false)).offset(y: -40)
+                LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: Styles.lineChartStyleDrop, isMedianVisible: .constant(false))
             }
         }
         .padding(.all, 0)

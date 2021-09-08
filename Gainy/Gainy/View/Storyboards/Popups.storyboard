@@ -211,6 +211,23 @@
             <point key="canvasLocation" x="139" y="123"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="4FW-wy-DAv">
+            <size key="intrinsicContentSize" width="92" height="34"/>
+        </designable>
+        <designable name="ZSX-Kd-21I">
+            <size key="intrinsicContentSize" width="161" height="34"/>
+        </designable>
+        <designable name="acQ-D0-DjJ">
+            <size key="intrinsicContentSize" width="40" height="34"/>
+        </designable>
+        <designable name="gfI-UU-s1W">
+            <size key="intrinsicContentSize" width="153" height="34"/>
+        </designable>
+        <designable name="o2M-Ac-MJ8">
+            <size key="intrinsicContentSize" width="97" height="34"/>
+        </designable>
+    </designables>
     <resources>
         <image name="sort_dots" width="102" height="2"/>
         <namedColor name="mainText">

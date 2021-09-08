@@ -105,8 +105,11 @@ final class CompareStocksViewController: BaseViewController {
     }
     
     private func addChart() {
-        view.addSubview(chartHosting.view)
-        chartHosting.view.frame = CGRect(x: 0, y: 243, width: view.bounds.width, height: view.bounds.height - 243.0)
+        let window = UIApplication.shared.keyWindow
+        let bottomPadding = window?.safeAreaInsets.bottom
+        
+        chartContainer.addSubview(chartHosting.view)
+        chartHosting.view.frame = chartContainer.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,6 +130,11 @@ final class CompareStocksViewController: BaseViewController {
                                             ChartCompareData.init(symbol: bottomStock?.symbol ?? "",
                                                                   growth: bottomStock?.tickerFinancials.last?.priceChangeToday ?? 0.0)
          ]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()        
+        chartHosting.view.frame = chartContainer.bounds
     }
     
     //MARK: - Actions

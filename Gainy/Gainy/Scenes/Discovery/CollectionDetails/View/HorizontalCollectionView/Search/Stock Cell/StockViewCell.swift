@@ -20,7 +20,7 @@ final class StockViewCell: UICollectionViewCell {
                 nameLbl.text = ticker.name
                 symbolLbl.text = ticker.symbol
                 let priceChange = ticker.tickerFinancials.last?.priceChangeToday ?? 0.0
-                priceLbl.text = ticker.tickerFinancials.last?.currentPrice?.price ?? ""
+                priceLbl.text = ticker.tickerFinancials.last?.currentPrice.price ?? ""
                 priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
                 growthLbl.text = priceChange.percent
             }

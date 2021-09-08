@@ -15,7 +15,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var viewModel: CollectionDetailsViewModelProtocol?
 
     var onDiscoverCollections: (() -> Void)?
-    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)?
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -306,49 +306,55 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery()) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.appCollections else {
+                guard let collections = graphQLResult.data?.collections else {
                     //Going back                    
                     //self?.onDiscoverCollections?()
                     self?.hideLoader()
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0})
+                DummyDataSource.remoteRawCollectionDetails = collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0})
 
-                let yourCollectionDetails: [CollectionDetails] = DummyDataSource
-                    .yourCollections
-                    .compactMap { yourCollection in
-                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
-                            DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                $0.id == yourCollection.id
-                            })!
-                        )
-                    }
+                //Fetching Tickers prices
+                var tickerSymbols: [String] = []
+                DummyDataSource.remoteRawCollectionDetails.forEach({
+                    tickerSymbols.append(contentsOf: $0.tickerCollections.compactMap({$0.ticker?.symbol}))
+                })
+                TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
+                    let yourCollectionDetails: [CollectionDetails] = DummyDataSource
+                        .yourCollections
+                        .compactMap { yourCollection in
+                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
+                                DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                    $0.id == yourCollection.id
+                                })!
+                            )
+                        }
 
-                let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
-                    .recommendedCollections
-                    .compactMap { recommendedCollection in
-                        CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
-                            DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                $0.id == recommendedCollection.id
-                            })!
-                        )
-                    }
+                    let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
+                        .recommendedCollections
+                        .compactMap { recommendedCollection in
+                            CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
+                                DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                    $0.id == recommendedCollection.id
+                                })!
+                            )
+                        }
 
-                DummyDataSource.collectionDetails.removeAll()
-                DummyDataSource.collectionDetails.append(
-                    contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
-                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-                    })
-                )
+                    DummyDataSource.collectionDetails.removeAll()
+                    DummyDataSource.collectionDetails.append(
+                        contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
+                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
+                        })
+                    )
 
-//                DummyDataSource.collectionDetails.append(
-//                    contentsOf: recommendedCollectionDetails
-//                )
+    //                DummyDataSource.collectionDetails.append(
+    //                    contentsOf: recommendedCollectionDetails
+    //                )
 
-                self?.initViewModelsFromData()
-                completion()
-
+                    self?.initViewModelsFromData()
+                    completion()
+                }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()

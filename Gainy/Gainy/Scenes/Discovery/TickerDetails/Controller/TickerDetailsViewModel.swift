@@ -8,7 +8,7 @@
 import UIKit
 
 /// Ticker model to pupulate cells
-typealias RemoteTicker = DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker
+typealias RemoteTicker = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
 class TickerInfo {
     
     let ticker: RemoteTicker
@@ -24,9 +24,9 @@ class TickerInfo {
         self.tags = ["DIVIDEND", "GAMING"] //needed
         self.highlights = ["Industry has a huge upside with WFH. Dividend yeild and growth 2x faster industry.", "High growth potential. Dividend yeild and growth 2x faster industry."] //needed
         
-        self.marketData = [MarketData.init(name: "📌 Growth rate CAGR", period: "ANNUAL", value: ticker.tickerFinancials.last!.dividentGrowth ?? 0.0),
+        self.marketData = [MarketData.init(name: "📌 Growth rate CAGR", period: "ANNUAL", value: ticker.tickerFinancials.last!.dividendGrowth ?? 0.0),
                            MarketData.init(name: "📌 EV/S", period: "ANNUAL", value: 14.5),
-                           MarketData.init(name: "📌 Market Capitalization", period: "ANNUAL", value: ticker.tickerFinancials.last!.marketCapitalization ?? 0.0),
+                           MarketData.init(name: "📌 Market Capitalization", period: "ANNUAL", value: Float(ticker.tickerFinancials.last!.marketCapitalization ?? 0.0)),
                            MarketData.init(name: "📌 Month to day", period: "ANNUAL", value: 14.5),
                            MarketData.init(name: "📌 Net Profit Margin", period: "ANNUAL", value: 150.6)] //needed
         
@@ -152,7 +152,7 @@ class TickerInfo {
     struct MarketData {
         let name: String
         let period: String
-        let value: Double
+        let value: Float
     }
     
     let marketData: [MarketData]

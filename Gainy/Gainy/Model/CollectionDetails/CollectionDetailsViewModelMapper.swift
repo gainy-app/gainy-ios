@@ -40,7 +40,7 @@ enum CollectionDetailsViewModelMapper {
             priceToEarnings: "\(model.financialMetrics.priceToEarnings.cleanOneDecimal)",
             marketCapitalization: marketCapitalizationString,
             highlight: model.financialMetrics.highlight,
-            rawTicker: model.rawTicker
+            rawTicker: model.rawTicker!
         )
     }
 }

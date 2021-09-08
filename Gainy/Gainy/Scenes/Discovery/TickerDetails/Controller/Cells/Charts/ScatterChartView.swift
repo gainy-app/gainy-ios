@@ -152,7 +152,7 @@ struct ScatterChartView: View {
                 Spacer()
                 //Right Stock price
                 VStack {
-                    Text(ticker?.tickerFinancials.last?.currentPrice?.price ?? "")
+                    Text(ticker?.tickerFinancials.last?.currentPrice.price ?? "")
                         .foregroundColor(ticker?.priceColor.uiColor ?? .black)
                         .font(UIFont.compactRoundedMedium(20).uiFont)
                     HStack(alignment: .lastTextBaseline, spacing: 2) {
@@ -160,7 +160,7 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedRegular(9).uiFont)
                             .padding(.top, 2)
-                        Text(ticker?.tickerFinancials.last?.priceChangeToday?.percent ?? "")
+                        Text(ticker?.tickerFinancials.last?.priceChangeToday.percent ?? "")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedRegular(11).uiFont)
                     }

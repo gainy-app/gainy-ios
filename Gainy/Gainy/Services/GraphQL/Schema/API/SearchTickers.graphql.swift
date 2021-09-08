@@ -19,9 +19,7 @@ public final class SearchTickersQuery: GraphQLQuery {
           pe_ratio
           market_capitalization
           highlight
-          price_change_today
-          current_price
-          divident_growth
+          dividend_growth
           symbol
           created_at
         }
@@ -148,9 +146,7 @@ public final class SearchTickersQuery: GraphQLQuery {
             GraphQLField("pe_ratio", type: .scalar(Double.self)),
             GraphQLField("market_capitalization", type: .scalar(Double.self)),
             GraphQLField("highlight", type: .scalar(String.self)),
-            GraphQLField("price_change_today", type: .scalar(Double.self)),
-            GraphQLField("current_price", type: .scalar(float8.self)),
-            GraphQLField("divident_growth", type: .scalar(Double.self)),
+            GraphQLField("dividend_growth", type: .scalar(float8.self)),
             GraphQLField("symbol", type: .scalar(String.self)),
             GraphQLField("created_at", type: .scalar(timestamptz.self)),
           ]
@@ -162,8 +158,8 @@ public final class SearchTickersQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, priceChangeToday: Double? = nil, currentPrice: float8? = nil, dividentGrowth: Double? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
-          self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "price_change_today": priceChangeToday, "current_price": currentPrice, "divident_growth": dividentGrowth, "symbol": symbol, "created_at": createdAt])
+        public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt])
         }
 
         public var __typename: String {
@@ -202,30 +198,12 @@ public final class SearchTickersQuery: GraphQLQuery {
           }
         }
 
-        public var priceChangeToday: Double? {
+        public var dividendGrowth: float8? {
           get {
-            return resultMap["price_change_today"] as? Double
+            return resultMap["dividend_growth"] as? float8
           }
           set {
-            resultMap.updateValue(newValue, forKey: "price_change_today")
-          }
-        }
-
-        public var currentPrice: float8? {
-          get {
-            return resultMap["current_price"] as? float8
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "current_price")
-          }
-        }
-
-        public var dividentGrowth: Double? {
-          get {
-            return resultMap["divident_growth"] as? Double
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "divident_growth")
+            resultMap.updateValue(newValue, forKey: "dividend_growth")
           }
         }
 

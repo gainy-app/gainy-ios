@@ -22,12 +22,12 @@ final class CollectionSearchController: NSObject {
     static let sectionHeaderElementKind = "section-header-element-kind"
     //UI updates
     var loading: ((Bool) -> Void)?
-    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)? = nil
+    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)? = nil
     
     //Limits
     private let resultsLimit = 100
     
-    init(collectionView: UICollectionView? = nil, callback: @escaping ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)) {
+    init(collectionView: UICollectionView? = nil, callback: @escaping ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)) {
         self.collectionView = collectionView
         self.onShowCardDetails = callback
         super.init()
@@ -50,11 +50,11 @@ final class CollectionSearchController: NSObject {
                     return cell
                 case .collections:
                     let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                    if self.collections.count > 0, let collection = self.collections[indexPath.row] as? SearchCollectionDetailsQuery.Data.AppCollection {
-                        cell.configureWith(name: collection.name,
-                                           imageUrl: collection.imageUrl,
+                    if self.collections.count > 0, let collection = self.collections[indexPath.row] as? SearchCollectionDetailsQuery.Data.Collection {
+                        cell.configureWith(name: collection.name ?? "",
+                                           imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
-                                           stocksAmount: "\(collection.collectionSymbolsAggregate.aggregate?.count ?? 0)",
+                                           stocksAmount: "\(collection.tickerCollectionsAggregate.aggregate?.count ?? 0)",
                                            imageName: "",
                                            plusButtonState: .unchecked)
                     }
@@ -180,7 +180,7 @@ final class CollectionSearchController: NSObject {
         networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                self?.collections = graphQLResult.data?.appCollections ?? []
+                self?.collections = graphQLResult.data?.collections ?? []
                 dispatchGroup.leave()
                 break
             case .failure(let error):
@@ -340,41 +340,12 @@ extension CollectionSearchController {
     }
 }
 
-extension DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker {
+extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker {
     func toSearchTicker() -> SearchTickersQuery.Data.Ticker {
         SearchTickersQuery.Data.Ticker.init(symbol: symbol, name: name, description: description, tickerFinancials: tickerFinancials.compactMap({
-            SearchTickersQuery.Data.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, priceChangeToday: $0.priceChangeToday, currentPrice: $0.currentPrice, dividentGrowth: $0.dividentGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
+            
+            SearchTickersQuery.Data.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, dividendGrowth: $0.dividendGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
         }))
-    }
-}
-
-extension SearchTickersQuery.Data.Ticker: Hashable {
-    public static func == (lhs: SearchTickersQuery.Data.Ticker, rhs: SearchTickersQuery.Data.Ticker) -> Bool {
-        lhs.symbol == rhs.symbol
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.symbol)
-    }
-}
-
-extension SearchCollectionDetailsQuery.Data.AppCollection: Hashable {
-    public static func == (lhs: SearchCollectionDetailsQuery.Data.AppCollection, rhs: SearchCollectionDetailsQuery.Data.AppCollection) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-}
-
-extension DiscoverNewsQuery.Data.FetchNewsDatum: Hashable {
-    public static func == (lhs: DiscoverNewsQuery.Data.FetchNewsDatum, rhs: DiscoverNewsQuery.Data.FetchNewsDatum) -> Bool {
-        lhs.datetime == rhs.datetime
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(self.datetime)
     }
 }
 
@@ -383,8 +354,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
         switch self.sections[indexPath.section] {
         case .stocks:
             if let ticker = self.stocks[indexPath.row] as? SearchTickersQuery.Data.Ticker {
-                let tickerMap = DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker.init(symbol: ticker.symbol, name: ticker.name, description: ticker.description, tickerFinancials: ticker.tickerFinancials.map({
-                    DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, priceChangeToday: $0.priceChangeToday, currentPrice: $0.currentPrice, dividentGrowth: $0.dividentGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
+                let tickerMap = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.init(symbol: ticker.symbol, name: ticker.name, description: ticker.description, tickerFinancials: ticker.tickerFinancials.map({
+                    DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, dividendGrowth: $0.dividendGrowth, symbol: $0.symbol, createdAt: $0.createdAt)
                 }))
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol])
                 onShowCardDetails?(tickerMap)

@@ -1,15 +1,15 @@
 query DiscoverCollectionDetails {
-  app_collections {
+  collections {
     id
     image_url
     name
     description
-    collection_symbols_aggregate {
+    ticker_collections_aggregate {
       aggregate {
         count
       }
     }
-    collection_symbols {
+    ticker_collections {
       ticker {
         symbol
         name
@@ -18,12 +18,10 @@ query DiscoverCollectionDetails {
           pe_ratio
           market_capitalization
           highlight
-          price_change_today
-          current_price
-          divident_growth
+          dividend_growth
           symbol
           created_at
-          }
+        }
       }
     }
   }

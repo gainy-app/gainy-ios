@@ -78,7 +78,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
     var viewModel: CollectionCardViewCellModel?
 
-    var onCardPressed: ((DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker) -> Void)?
+    var onCardPressed: ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)?
     var onSortingPressed: (() -> Void)?
 
     lazy var collectionHorizontalView: CollectionHorizontalView = {

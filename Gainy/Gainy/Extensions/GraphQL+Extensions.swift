@@ -123,11 +123,11 @@ extension RemoteCreatedAtConvertable {
 }
 
 
-extension DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker.TickerFinancial : RemoteCreatedAtConvertable {
+extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerFinancial : RemoteCreatedAtConvertable {
 }
 
 
-extension DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker {
+extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker {
     var isGrowing: Bool {
         tickerFinancials.last?.priceChangeToday ?? 0.0 >= 0.0
     }

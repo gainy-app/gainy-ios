@@ -40,6 +40,9 @@ struct CollectionsBottomView: View {
     var showingAlert: Bool = false
     
     var body: some View {
+        ZStack {
+            
+                Rectangle().foregroundColor(UIColor(hexString: "0062FF")?.uiColor).cornerRadius(8.0).offset(x: 0, y: 48).frame(height: 96)
         Button(action: {
             if delegate == nil {
                 showingAlert.toggle()
@@ -49,6 +52,7 @@ struct CollectionsBottomView: View {
         }, label: {
         ZStack {
             Rectangle().foregroundColor(UIColor(hexString: "0062FF")?.uiColor).cornerRadius(8.0).offset(x: 0, y: topPadding)
+           
             HStack {
                 Text(model.actionTitle).font(UIFont.proDisplayBold(20).uiFont).foregroundColor(.white).multilineTextAlignment(.leading)
                 Spacer()
@@ -70,7 +74,8 @@ struct CollectionsBottomView: View {
                   message: Text("Will be done later"),
                                 dismissButton: .default(Text("OK")))
         }
-        })
+        }).frame(height: 96)
+        }.frame(height: 96)
     }
 }
 

@@ -160,16 +160,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     /// Bottom action view adding
     fileprivate func addBottomView() {
-        let backView = UIView.init(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 40))
-        backView.backgroundColor = UIColor(hexString: "0062FF")!
-        view.addSubview(backView)
-        backView.autoPinEdge(.leading, to: .leading, of: view)
-        backView.autoPinEdge(.trailing, to: .trailing, of: view)
-        let window = UIApplication.shared.keyWindow
-        let bottomPadding = window?.safeAreaInsets.bottom
-        backView.autoSetDimension(.height, toSize: bottomPadding ?? 40)
-        backView.autoPinEdge(.bottom, to: .bottom, of: view)
-        
         
         bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Add custom\ncollection", actionIcon: "plus_icon")
         let bottomView = CollectionsBottomView(model: bottomViewModel!)
@@ -181,7 +171,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         hosting.view.autoPinEdge(.leading, to: .leading, of: view)
         hosting.view.autoPinEdge(.trailing, to: .trailing, of: view)
         hosting.view.autoSetDimension(.height, toSize: 94)
-        hosting.view.autoPinEdge(.bottom, to: .bottom, of: discoverCollectionsCollectionView)
+        hosting.view.autoPinEdge(.bottom, to: .bottom, of: view)
         hosting.didMove(toParent: self)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -417,14 +407,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.appCollections else {
+                guard let collections = graphQLResult.data?.collections else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     self.hideLoader()
                     completion()
                     return
                 }
                 
-                DummyDataSource.remoteRawCollections = Array(collections.sorted(by: {$0.collectionSymbolsAggregate.aggregate?.count ?? 0 > $1.collectionSymbolsAggregate.aggregate?.count ?? 0}).prefix(10))                
+                DummyDataSource.remoteRawCollections = Array(collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0}).prefix(10))                
                 
                 fillSections()
                 

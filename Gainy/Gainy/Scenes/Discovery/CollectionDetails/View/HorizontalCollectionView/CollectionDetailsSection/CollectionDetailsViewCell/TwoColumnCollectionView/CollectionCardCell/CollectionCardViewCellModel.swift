@@ -7,7 +7,7 @@ struct CollectionCardViewCellModel {
     let priceToEarnings: String
     let marketCapitalization: String
     let highlight: String
-    let rawTicker: DiscoverCollectionDetailsQuery.Data.AppCollection.CollectionSymbol.Ticker
+    let rawTicker: DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
 }
 
 extension CollectionCardViewCellModel: Hashable {

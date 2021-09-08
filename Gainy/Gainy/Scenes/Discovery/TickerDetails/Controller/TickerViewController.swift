@@ -63,18 +63,6 @@ final class TickerViewController: BaseViewController {
     
     /// Bottom action view adding
     fileprivate func addBottomView() {
-        let backView = UIView.init(frame: .init(x: 0, y: 0, width: view.bounds.width, height: 40))
-        backView.backgroundColor = UIColor(hexString: "0062FF")!
-        view.addSubview(backView)
-        backView.autoPinEdge(.leading, to: .leading, of: view)
-        backView.autoPinEdge(.trailing, to: .trailing, of: view)
-        
-        let window = UIApplication.shared.keyWindow
-        let bottomPadding = window?.safeAreaInsets.bottom
-        backView.autoSetDimension(.height, toSize: bottomPadding ?? 40)
-        backView.autoPinEdge(.bottom, to: .bottom, of: view)
-        bottomViews.append(backView)
-        
         bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Compare \((viewModel?.ticker.tickersToCompare.count ?? 0) + 1) stocks", actionIcon: "compare_icon")
         var bottomView = CollectionsBottomView(model: bottomViewModel!)
         bottomView.delegate = self
@@ -86,7 +74,7 @@ final class TickerViewController: BaseViewController {
         hosting.view.autoPinEdge(.leading, to: .leading, of: view)
         hosting.view.autoPinEdge(.trailing, to: .trailing, of: view)
         hosting.view.autoSetDimension(.height, toSize: 94)
-        hosting.view.autoPinEdge(toSuperviewSafeArea: .bottom)
+        hosting.view.autoPinEdge(.bottom, to: .bottom, of: view)
         hosting.didMove(toParent: self)
         bottomViews.append(hosting.view)
         
