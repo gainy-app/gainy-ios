@@ -153,6 +153,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.initViewModels()
             }
         }
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     /// Model to cahnge bottom view
@@ -564,4 +565,3 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         return previewParams
     }
 }
-

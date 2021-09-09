@@ -1,26 +1,14 @@
 //
-//  BorderButton.swift
+//  ResponsiveButton.swift
 //  Gainy
 //
-//  Created by Anton Gubarenko on 20.08.2021.
+//  Created by Anton Gubarenko on 09.09.2021.
 //
+
 import UIKit
 
-@IBDesignable
-class BorderButton: UIButton {
-    
-    @IBInspectable var borderColor: UIColor = UIColor(named: "mainText")! {
-        didSet {
-            self.layer.borderColor = borderColor.cgColor
-        }
-    }
-    
-    @IBInspectable var cornerRadius: CGFloat = 1.0 {
-        didSet {
-            self.layer.cornerRadius = cornerRadius
-        }
-    }
-    
+class ResponsiveButton: UIButton {
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -32,8 +20,6 @@ class BorderButton: UIButton {
     }
     
     func setupView() {
-        layer.cornerRadius = cornerRadius
-        self.layer.borderWidth = 1.0
         addTarget(self, action: #selector(touchDown), for: [.touchDown, .touchDragEnter])
         addTarget(self, action: #selector(touchUp), for: [.touchUpInside, .touchDragExit, .touchCancel])
     }

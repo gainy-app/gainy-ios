@@ -11,7 +11,11 @@ import PureLayout
 final class CompareStocksViewController: BaseViewController {
     
     //MARK: - Outlets
-    
+    @IBOutlet weak var titleLbl: UILabel! {
+        didSet {
+            titleLbl.setKern()
+        }
+    }
     @IBOutlet weak var topStockFld: UITextField! {
         didSet {
             topStockFld.layer.borderWidth = 1.0

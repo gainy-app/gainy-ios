@@ -102,6 +102,7 @@ struct ScatterChartView: View {
             HStack(spacing: 8) {
                 Button(action: {
                     isMedianVisible.toggle()
+                    hapticTouch.impactOccurred()
                 }, label: {
                     HStack {
                         Image(isMedianVisible ? "toggle_on" : "toggle_off")
@@ -117,7 +118,7 @@ struct ScatterChartView: View {
                     .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : Color.white).cornerRadius(20))
                 })
                 Button(action: {
-                    
+                    hapticTouch.impactOccurred()
                 }, label: {
                     HStack {
                         Image("tiny plus")

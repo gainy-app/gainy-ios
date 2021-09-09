@@ -178,9 +178,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         description: String,
         stocksAmount: String,
         imageName: String
-    ) {
-        //backImageView.image =
-        
+    ) {        
         let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
         backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
             .processor(processor),

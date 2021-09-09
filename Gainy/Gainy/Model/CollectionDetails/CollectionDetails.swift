@@ -1,6 +1,7 @@
 struct CollectionDetails {
     let id: Int
     let collectionBackgroundImage: String
+    let collectionBackgroundImageUrl: String
     let collectionName: String
     let collectionDescription: String
     let collectionStocksAmount: Int

@@ -42,6 +42,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
             cell.configureWith(
                 name: viewModel.name,
                 image: viewModel.image,
+                imageUrl: viewModel.imageUrl,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
                 cards: viewModel.cards,

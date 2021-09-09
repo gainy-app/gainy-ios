@@ -128,6 +128,10 @@ extension BaseViewController: UIGestureRecognizerDelegate {
         }
         return true
     }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }
 
 //To work with Storyboards

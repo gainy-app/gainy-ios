@@ -98,6 +98,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     func configureWith(
         name collectionName: String,
         image collectionImage: String,
+        imageUrl: String,
         description collectionDescription: String,
         stocksAmount: String,
         cards: [CollectionCardViewCellModel],
@@ -110,6 +111,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             description: collectionDescription,
             stocksAmount: stocksAmount,
             imageName: collectionImage,
+            imageUrl: imageUrl,
             collectionId: collectionId
         )
         

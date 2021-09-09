@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 protocol CollectionHorizontalViewDelegate: AnyObject {
     func stockSortPressed(view: CollectionHorizontalView)
@@ -327,10 +328,19 @@ final class CollectionHorizontalView: UIView {
         description: String,
         stocksAmount: String,
         imageName: String,
+        imageUrl: String,
         collectionId: Int
     ) {
         backImageView.image = UIImage(named: imageName)
-
+        
+        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
+        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ], progressBlock: nil, completionHandler: nil)
+        
         nameLabel.text = name
         nameLabel.sizeToFit()
 

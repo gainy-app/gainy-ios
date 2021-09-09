@@ -4,7 +4,7 @@ enum CollectionDetailsDTOMapper {
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
-            collectionBackgroundImage: dto.name?.lowercased() ?? "",
+            collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
@@ -22,7 +22,7 @@ enum CollectionDetailsDTOMapper {
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
-            collectionBackgroundImage: dto.name?.lowercased() ?? "",
+            collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,

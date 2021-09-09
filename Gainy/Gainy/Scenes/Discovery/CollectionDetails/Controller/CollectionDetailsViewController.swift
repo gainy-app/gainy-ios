@@ -29,7 +29,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
-                y: view.safeAreaInsets.top + 20,
+                y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
                 height: 80
             )
@@ -65,8 +65,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextView.textColor = UIColor(named: "mainText")
         searchTextView.layer.cornerRadius = 16
         searchTextView.isUserInteractionEnabled = true
-        searchTextView.clearButtonMode = .always
-        searchTextView.clearButtonMode = .whileEditing
         searchTextView.placeholder = "Search anything"
         let searchIconContainerView = UIView(
             frame: CGRect(
@@ -96,7 +94,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextView.leftViewMode = .always
         searchTextView.rightViewMode = .whileEditing
         searchTextView.backgroundColor = UIColor.Gainy.lightBack
-        
+        searchTextView.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
         let clearBtn = UIButton(
@@ -233,7 +231,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard (textField.text ?? "").count > 2 else {return}
-        searchController?.searchText = textField.text ?? ""
+        let text = textField.text ?? ""
+        searchController?.searchText = text
+        
+        if text.count > 0 {
+            searchTextView?.clearButtonMode = .always
+            searchTextView?.clearButtonMode = .whileEditing
+        } else {
+            searchTextView?.clearButtonMode = .never
+        }
     }
     
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
@@ -436,6 +442,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+                switch state {
+                case .full,
+                     .half,
+                     .tip: return 0.3
+                default: return 0.0
+                }
+            }
     }
     
     override func viewWillAppear(_ animated: Bool) {

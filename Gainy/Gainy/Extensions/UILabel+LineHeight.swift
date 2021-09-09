@@ -17,4 +17,17 @@ extension UILabel {
         
         self.attributedText = attributeString
     }
+    
+    public func setKern(kern: CGFloat = 1.25) {
+        guard let text = self.text else { return }
+        let attributeString = NSMutableAttributedString(string: text)
+        let style = NSMutableParagraphStyle()
+        style.alignment = textAlignment
+        let range = NSMakeRange(0, text.count)
+        attributeString.addAttribute(.kern, value: kern, range: range)
+        attributeString.addAttribute(.paragraphStyle, value: style, range: range)
+        attributeString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
+        attributeString.addAttribute(.font, value: self.font, range: range)
+        self.attributedText = attributeString
+    }
 }
