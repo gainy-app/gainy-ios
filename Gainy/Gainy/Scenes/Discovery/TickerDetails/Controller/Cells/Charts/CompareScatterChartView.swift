@@ -59,18 +59,19 @@ struct CompareScatterChartView: View {
                 headerView
                 Spacer()
                 chartView
+                    .offset(y: -80)
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
                     .frame(height: 145)
                 Spacer()
                 GeometryReader(content: { geometry in
-                    bottomMenu(geometry).background(Rectangle().stroke())
+                    bottomMenu(geometry)
                 }).frame(maxHeight: 40)                
             }
             .background(UIColor.init(hexString: "F8FBFD")!.uiColor)
         }).onAppear(perform: {
             hapticTouch.prepare()
-        }).background(Rectangle().stroke())
+        })
     }
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()

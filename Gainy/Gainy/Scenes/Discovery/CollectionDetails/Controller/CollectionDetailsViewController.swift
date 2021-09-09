@@ -313,7 +313,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0})
+                DummyDataSource.remoteRawCollectionDetails = Array(collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0}).prefix(20))
 
                 //Fetching Tickers prices
                 var tickerSymbols: [String] = []
@@ -321,6 +321,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     tickerSymbols.append(contentsOf: $0.tickerCollections.compactMap({$0.ticker?.symbol}))
                 })
                 TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
+                    
                     let yourCollectionDetails: [CollectionDetails] = DummyDataSource
                         .yourCollections
                         .compactMap { yourCollection in
@@ -352,15 +353,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     //                    contentsOf: recommendedCollectionDetails
     //                )
 
-                    self?.initViewModelsFromData()
-                    completion()
+                    DispatchQueue.main.async {
+                        self?.initViewModelsFromData()
+                        completion()
+                        self?.hideLoader()
+                    }
                 }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()
                 completion()
+                self?.hideLoader()
             }
-            self?.hideLoader()
         }
     }
 

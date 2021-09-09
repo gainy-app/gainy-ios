@@ -21,6 +21,10 @@ query SearchCollectionDetails($text: String!) {
           dividend_growth
           symbol
           created_at
+        net_profit_margin
+          sma_30days
+          market_cap_cagr_1years
+          enterprise_value_to_sales
         }
       }
     }

@@ -88,6 +88,7 @@ final class CompareStocksViewController: BaseViewController {
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         chartView = rootView
+        chartHosting.view.backgroundColor = UIColor(hexString: "#F8FBFD")!
         return chartHosting
     }()
     

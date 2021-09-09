@@ -48,7 +48,7 @@ final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
         didSet {
             nameLbl.text = marketData?.name
             periodLbl.text = marketData?.period.uppercased()
-            valueLbl.text = "\((marketData?.value ?? 0.0))"
+            valueLbl.text = "\((marketData?.value ?? 0.0).formatUsingAbbrevation())"
         }
     }
 }

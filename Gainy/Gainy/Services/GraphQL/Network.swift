@@ -3,6 +3,7 @@ import Foundation
 
 public typealias float8 = Float
 public typealias timestamptz = String
+public typealias numeric = Double
 
 final class Network {
     static let shared = Network()

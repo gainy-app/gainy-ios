@@ -37,6 +37,10 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               dividend_growth
               symbol
               created_at
+              net_profit_margin
+              sma_30days
+              market_cap_cagr_1years
+              enterprise_value_to_sales
             }
           }
         }
@@ -366,6 +370,10 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
                 GraphQLField("dividend_growth", type: .scalar(float8.self)),
                 GraphQLField("symbol", type: .scalar(String.self)),
                 GraphQLField("created_at", type: .scalar(timestamptz.self)),
+                GraphQLField("net_profit_margin", type: .scalar(Double.self)),
+                GraphQLField("sma_30days", type: .scalar(numeric.self)),
+                GraphQLField("market_cap_cagr_1years", type: .scalar(numeric.self)),
+                GraphQLField("enterprise_value_to_sales", type: .scalar(String.self)),
               ]
             }
 
@@ -375,8 +383,8 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil) {
-              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt])
+            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: numeric? = nil, marketCapCagr_1years: numeric? = nil, enterpriseValueToSales: String? = nil) {
+              self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "sma_30days": sma_30days, "market_cap_cagr_1years": marketCapCagr_1years, "enterprise_value_to_sales": enterpriseValueToSales])
             }
 
             public var __typename: String {
@@ -439,6 +447,42 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "created_at")
+              }
+            }
+
+            public var netProfitMargin: Double? {
+              get {
+                return resultMap["net_profit_margin"] as? Double
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "net_profit_margin")
+              }
+            }
+
+            public var sma_30days: numeric? {
+              get {
+                return resultMap["sma_30days"] as? numeric
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "sma_30days")
+              }
+            }
+
+            public var marketCapCagr_1years: numeric? {
+              get {
+                return resultMap["market_cap_cagr_1years"] as? numeric
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "market_cap_cagr_1years")
+              }
+            }
+
+            public var enterpriseValueToSales: String? {
+              get {
+                return resultMap["enterprise_value_to_sales"] as? String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
               }
             }
           }
