@@ -14,8 +14,18 @@ struct CollectionSettings: Codable {
         case list = 0, grid
     }
     
-    let sorting: String
+    let sorting: MarketDataField
+    let ascending: Bool
     let viewMode: ViewMode
+    
+    var marketDataToShow: [MarketDataField] {
+        var sortingList = MarketDataField.rawOrder
+        if let index = sortingList.firstIndex(where: {$0 == sorting}) {
+            sortingList.remove(at: index)
+            sortingList.insert(sorting, at: 0)
+        }
+        return sortingList
+    }
 }
 
 final class CollectionsDetailsSettingsManager {
@@ -23,7 +33,7 @@ final class CollectionsDetailsSettingsManager {
     static let shared = CollectionsDetailsSettingsManager()
     
     //All Sortings
-    private(set) var sortings = ["EV/S", "Growth rate", "Market cap", "Month to day price", "Net Profit Margin, %"]
+    private(set) var sortings: [String] = [MarketDataField.evs.title, MarketDataField.growsRateYOY.title, MarketDataField.marketCap.title, MarketDataField.monthToDay.title, MarketDataField.netProfit.title]
     
     
     
@@ -39,19 +49,26 @@ final class CollectionsDetailsSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionSettings(sorting: sortings.first ?? "EV/S", viewMode: .grid)
+            let defSettigns = CollectionSettings(sorting: MarketDataField.evs, ascending: true, viewMode: .grid)
             settings?[id] = defSettigns
             return defSettigns
         }
     }
     
-    func changeSortingForId(_ id: Int, sorting: String) {
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, sorting: MarketDataField) {
         let cur = getSettingByID(id)
-        settings?[id] = CollectionSettings(sorting: sorting, viewMode: cur.viewMode)
+        settings?[id] = CollectionSettings(sorting: sorting, ascending: cur.ascending, viewMode: cur.viewMode)
     }
     
     func changeViewModeForId(_ id: Int, viewMode: CollectionSettings.ViewMode) {
         let cur = getSettingByID(id)
-        settings?[id] = CollectionSettings(sorting: cur.sorting, viewMode: viewMode )
+        settings?[id] = CollectionSettings(sorting: cur.sorting, ascending: cur.ascending, viewMode: viewMode )
+    }
+    
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id] = CollectionSettings(sorting: cur.sorting, ascending: ascending, viewMode: cur.viewMode )
     }
 }

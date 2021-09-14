@@ -31,16 +31,18 @@ enum CollectionDetailsViewModelMapper {
             ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
             : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
 
-        return CollectionCardViewCellModel(
-            tickerCompanyName: model.companyName,
-            tickerSymbol: model.tickerSymbol,
-            priceChange: tickerPercentChangeText,
-            tickerPrice: "\(model.financialMetrics.currentPrice.cleanTwoDecimal)",
-            dividendGrowthPercent: "\(model.financialMetrics.dividendGrowthPercent)",
-            priceToEarnings: "\(model.financialMetrics.priceToEarnings.cleanOneDecimal)",
-            marketCapitalization: marketCapitalizationString,
-            highlight: model.financialMetrics.highlight,
-            rawTicker: model.rawTicker!
-        )
+        
+        return CollectionCardViewCellModel.init(tickerCompanyName: model.companyName,
+                                                tickerSymbol: model.tickerSymbol,
+                                                priceChange: tickerPercentChangeText,
+                                                tickerPrice: "\(model.financialMetrics.currentPrice.cleanTwoDecimal)",
+                                                dividendGrowthPercent: "\(model.financialMetrics.dividendGrowthPercent)",
+                                                growthRateYOY: model.financialMetrics.growthRateYOY.cleanTwoDecimal,
+                                                evs: model.financialMetrics.evs.cleanOneDecimal,
+                                                marketCap: model.financialMetrics.marketCapitalization.formatUsingAbbrevation(),
+                                                monthToDay: "\(model.financialMetrics.monthToDay.cleanTwoDecimal)",
+                                                netProfit: model.financialMetrics.netProfit.percent,
+                                                highlight: model.financialMetrics.highlight,
+                                                rawTicker: model.rawTicker!)        
     }
 }

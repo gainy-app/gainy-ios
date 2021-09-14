@@ -97,6 +97,8 @@
 		33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */; };
 		33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */; };
 		33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D50126CBB8DC005A859B /* ProfileViewController.swift */; };
+		33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */; };
+		33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */; };
 		33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1827926D3804600A1D2AC /* WSRView.swift */; };
 		33E1827C26D3967F00A1D2AC /* String+Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1827B26D3967F00A1D2AC /* String+Sizes.swift */; };
 		33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33E1827E26D3999F00A1D2AC /* NewsViewCell.xib */; };
@@ -341,6 +343,8 @@
 		33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Portfolio.storyboard; sourceTree = "<group>"; };
 		33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController.swift; sourceTree = "<group>"; };
 		33D3D50126CBB8DC005A859B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataFields.swift; sourceTree = "<group>"; };
+		33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTicker.swift; sourceTree = "<group>"; };
 		33E1827926D3804600A1D2AC /* WSRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRView.swift; sourceTree = "<group>"; };
 		33E1827B26D3967F00A1D2AC /* String+Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Sizes.swift"; sourceTree = "<group>"; };
 		33E1827E26D3999F00A1D2AC /* NewsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsViewCell.xib; sourceTree = "<group>"; };
@@ -722,6 +726,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		33DF57EE26EF268000FC1B9A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */,
+				33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		33E1827D26D3998100A1D2AC /* NewsCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1026,6 +1039,7 @@
 				33D3D4E326CB89A4005A859B /* Gainy.entitlements */,
 				3A930F17265C1B8D000FD3EB /* AppCore */,
 				3A930F21265C1C6B000FD3EB /* Services */,
+				33DF57EE26EF268000FC1B9A /* Models */,
 				33D3D4E926CB9CFF005A859B /* Managers */,
 				337F242826D2CEED0087EB58 /* Wrappers */,
 				3AE7954A2662A824002B40D6 /* Extensions */,
@@ -1822,6 +1836,7 @@
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
 				3302E0B726DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift in Sources */,
+				33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */,
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
@@ -1875,6 +1890,7 @@
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
+				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
@@ -2050,7 +2066,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2077,7 +2093,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 18;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

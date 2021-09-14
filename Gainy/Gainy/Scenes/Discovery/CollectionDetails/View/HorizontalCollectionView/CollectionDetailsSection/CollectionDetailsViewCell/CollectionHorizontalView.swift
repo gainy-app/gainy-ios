@@ -176,7 +176,8 @@ final class CollectionHorizontalView: UIView {
         textLabel.textColor = UIColor.Gainy.grayNotDark
         textLabel.numberOfLines = 1
         textLabel.textAlignment = .center
-        textLabel.text = "EV/S" // TODO: 1: do not hardcode the string
+        textLabel.text = ""
+        textLabel.minimumScaleFactor = 0.1
         sortLbl = textLabel
         button.addSubview(textLabel)
 
@@ -190,6 +191,11 @@ final class CollectionHorizontalView: UIView {
     }()
     
     private var sortLbl: UILabel?
+    
+    func updateChargeLbl(_ sort: String) {
+        sortLbl?.text = sort
+    }
+    
     private var collectionId: Int = 0
     
     @objc private func sortTapped() {
@@ -352,7 +358,7 @@ final class CollectionHorizontalView: UIView {
         
         self.collectionId = collectionId
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        sortLbl?.text = settings.sorting
+        sortLbl?.text = settings.sorting.title
         
         showListViewButton.backgroundColor = settings.viewMode == .list ?  UIColor.Gainy.blue : .clear
         showGridViewButton.backgroundColor = settings.viewMode == .list ?  .clear :  UIColor.Gainy.blue

@@ -126,8 +126,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
             )
             sections = [
-                CardsOneColumnListFlowSectionLayout(),
-                CardsTwoColumnGridFlowSectionLayout()
+                CardsOneColumnListFlowSectionLayout(collectionID: collectionID),
+                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID)
             ]
         } else {
             collectionListHeader.isHidden = true
@@ -138,25 +138,41 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             )
             sections =  [
-                CardsTwoColumnGridFlowSectionLayout(),
-                CardsOneColumnListFlowSectionLayout()
+                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
+                CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
             ]
         }
         
+        collectionHorizontalView.updateChargeLbl(settings.sorting.title)
         self.cards = cards
-        snapshot.deleteAllItems()
-
-        snapshot.appendSections([.cards])
-        snapshot.appendItems(cards, toSection: .cards)
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        sortSections()
     }
     private var cards: [CollectionCardViewCellModel] = []
+    
+    func sortSections() {
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
+        collectionHorizontalView.updateChargeLbl(settings.sorting.title)
+        
+        collectionListHeader.updateMetrics(settings.marketDataToShow.prefix(5).map(\.shortTitle))
+        self.cards = self.cards.sorted(by: { lhs, rhs in
+            settings.sorting.sortFunc(isAsc: settings.ascending, lhs, rhs)
+        })
+        snapshot.deleteAllItems()
+        dataSource?.apply(snapshot, animatingDifferences: false)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {[weak self] in
+            guard var snapshot = self?.snapshot else {return}
+            snapshot.appendSections([.cards])
+            snapshot.appendItems(self?.cards ?? [], toSection: .cards)
+            self?.dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+    }
 
     // MARK: Private
 
     private lazy var sections: [SectionLayout] = [
-        CardsTwoColumnGridFlowSectionLayout(),
-        CardsOneColumnListFlowSectionLayout()
+        CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
+        CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
     ]
 
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?

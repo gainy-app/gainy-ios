@@ -1,6 +1,9 @@
 import UIKit
 
 struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
+    
+    let collectionID: Int
+    
     // TODO: 1: remove/replace with proper layout
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
@@ -50,15 +53,36 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
         let cell: CollectionCardCell =
             collectionView.dequeueReusableCell(for: indexPath)
 
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
+        let markers = settings.marketDataToShow.prefix(3)
+                
         if let viewModel = viewModel as? CollectionCardViewCellModel {
+            
+            var vals: [String] = []
+            for marker in markers {
+                switch marker {
+                case .dividendGrowth:
+                    vals.append(viewModel.dividendGrowthPercent)
+                case .evs:
+                    vals.append(viewModel.evs)
+                case .marketCap:
+                    vals.append(viewModel.marketCap)
+                case .monthToDay:
+                    vals.append(viewModel.monthToDay)
+                case .netProfit:
+                    vals.append(viewModel.netProfit)
+                case .growsRateYOY:
+                    vals.append(viewModel.growthRateYOY)
+                }
+            }
+            
             cell.configureWith(
                 companyName: viewModel.tickerCompanyName,
                 tickerSymbol: viewModel.tickerSymbol,
                 tickerPercentChange: viewModel.priceChange,
                 tickerPrice: viewModel.tickerPrice,
-                markerMetricFirst: viewModel.dividendGrowthPercent,
-                marketMetricSecond: viewModel.priceToEarnings,
-                marketMetricThird: viewModel.marketCapitalization,
+                markerMetricHeaders: markers.map(\.shortTitle),
+                markerMetric: vals,
                 highlight: viewModel.highlight
             )
         }

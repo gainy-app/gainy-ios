@@ -192,10 +192,10 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.backgroundColor = UIColor.Gainy.white
 
         label.text = "EV/S"
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
-
+        label.minimumScaleFactor = 0.1
         return label
     }()
 
@@ -239,7 +239,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.numberOfLines = 2
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .center
-
+        label.minimumScaleFactor = 0.1
         return label
     }()
 
@@ -430,9 +430,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerSymbol: String,
         tickerPercentChange: String,
         tickerPrice: String,
-        markerMetricFirst: String,
-        marketMetricSecond: String,
-        marketMetricThird: String,
+        markerMetricHeaders: [String],
+        markerMetric: [String],
         highlight: String
     ) {
         companyNameLabel.text = companyName
@@ -450,15 +449,17 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             : UIColor.Gainy.red
         tickerTotalPriceLabel.sizeToFit()
 
-        marketMarkerOneValueLabel.text = "\(markerMetricFirst)%"
-        marketMarkerOneValueLabel.sizeToFit()
-
-        marketMarkerSecondValueLabel.text = marketMetricSecond
-        marketMarkerSecondValueLabel.sizeToFit()
-
-        marketMarkerThirdValueLabel.text = marketMetricThird
-        marketMarkerThirdValueLabel.sizeToFit()
-
+        
+        let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
+        let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
+        
+        for (ind ,val) in markerMetricHeaders.enumerated() {
+            headers[ind].text = val
+            values[ind].text = markerMetric[ind]
+            headers[ind].sizeToFit()
+            values[ind].sizeToFit()
+        }
+        
         highlightLabel.text = highlight
         highlightLabel.sizeToFit()
 

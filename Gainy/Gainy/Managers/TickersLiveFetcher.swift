@@ -25,6 +25,7 @@ final class TickersLiveFetcher {
     //MARK: - Public
     
     func getSymbolsData(_ symbols: [String], _ completion: @escaping (() -> Void)){
+        guard symbols.count > 0 else {return completion()}
         //Getting only not laoded symbols
         let batchSymbols = TickerLiveStorage.shared.missingSymbolsFrom(symbols).chunked(into: 100)
         

@@ -166,11 +166,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}
                     guard self.presentedViewController == nil else {return}
-                    self.present(self.fpc, animated: true, completion: nil)
                     if let model = modelItem as? CollectionDetailViewCellModel {
+                        self.sortingVS.collectionId = model.id
+                        self.sortingVS.collectionCell = cell
                         self.currentCollectionToChange = model.id
                         GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id])
                     }
+                    self.present(self.fpc, animated: true, completion: nil)
                 }
             }
 
@@ -407,6 +409,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
+    private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)
     private func setupPanel() {
         fpc = FloatingPanelController()
         fpc.layout = MyFloatingPanelLayout()
@@ -423,9 +426,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         //fpc.delegate = self // Optional
         
         // Set a content view controller.
-        let contentVC = SortCollectionDetailsViewController.instantiate(.popups)
-        contentVC.delegate = self
-        fpc.set(contentViewController: contentVC)
+        sortingVS.delegate = self
+        fpc.set(contentViewController: sortingVS)
         fpc.isRemovalInteractionEnabled = true
         
         // Add and show the views managed by the `FloatingPanelController` object to self.view.

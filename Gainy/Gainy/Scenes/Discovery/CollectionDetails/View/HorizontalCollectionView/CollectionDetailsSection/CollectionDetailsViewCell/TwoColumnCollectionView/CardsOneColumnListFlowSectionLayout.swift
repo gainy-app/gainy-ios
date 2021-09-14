@@ -8,6 +8,9 @@
 import UIKit
 
 struct CardsOneColumnListFlowSectionLayout: SectionLayout {
+    
+    let collectionID: Int
+    
     // TODO: 1: remove/replace with proper layout
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
@@ -56,14 +59,35 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
     ) -> UICollectionViewCell {
         let cell: CollectionListCardCell =
             collectionView.dequeueReusableCell(for: indexPath)
-
+        
         if let viewModel = viewModel as? CollectionCardViewCellModel {
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
+            let markers = settings.marketDataToShow.prefix(5)
+            var vals: [String] = []
+            for marker in markers {
+                switch marker {
+                case .dividendGrowth:
+                    vals.append(viewModel.dividendGrowthPercent)
+                case .evs:
+                    vals.append(viewModel.evs)
+                case .marketCap:
+                    vals.append(viewModel.marketCap)
+                case .monthToDay:
+                    vals.append(viewModel.monthToDay)
+                case .netProfit:
+                    vals.append(viewModel.netProfit)
+                case .growsRateYOY:
+                    vals.append(viewModel.growthRateYOY)
+                }
+            }            
+                       
             cell.configureWith(
                 companyName: viewModel.tickerCompanyName,
                 tickerSymbol: viewModel.tickerSymbol,
                 tickerPercentChange: viewModel.priceChange,
                 tickerPrice: viewModel.tickerPrice,
-                markerMetrics: [viewModel.dividendGrowthPercent, "\((0...100).randomElement()!)", viewModel.marketCapitalization, "\(Float((0...100).randomElement()!).percent)", "\(Float((0...100).randomElement()!).percent)"]
+                markerHeaders: markers.map(\.shortTitle),
+                markerMetrics: vals
             )
         }
 

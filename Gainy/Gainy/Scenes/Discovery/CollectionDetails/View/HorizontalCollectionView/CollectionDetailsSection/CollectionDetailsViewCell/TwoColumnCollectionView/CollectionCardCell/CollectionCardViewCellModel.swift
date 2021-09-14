@@ -4,9 +4,13 @@ struct CollectionCardViewCellModel {
     let priceChange: String
     let tickerPrice: String
     let dividendGrowthPercent: String
-    let priceToEarnings: String
-    let marketCapitalization: String
+    let growthRateYOY: String
+    let evs: String
+    let marketCap: String
+    let monthToDay: String
+    let netProfit: String
     let highlight: String
+    
     let rawTicker: DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
 }
 

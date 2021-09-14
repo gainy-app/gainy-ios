@@ -13,6 +13,7 @@ final class CollectionListCardCell: UICollectionViewCell {
     @IBOutlet weak var symbolLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     
+    
     @IBOutlet weak var growthLbl: UILabel!
     @IBOutlet weak var yieldLbl: UILabel!
     @IBOutlet weak var peLbl: UILabel!
@@ -25,6 +26,7 @@ final class CollectionListCardCell: UICollectionViewCell {
         tickerSymbol: String,
         tickerPercentChange: String,
         tickerPrice: String,
+        markerHeaders: [String],
         markerMetrics: [String]
     ) {
         nameLbl.text = companyName

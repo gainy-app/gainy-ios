@@ -15,5 +15,11 @@ query SearchTickers($text: String!) {
           market_cap_cagr_1years
           enterprise_value_to_sales
         }
+                ticker_industries {
+          gainy_industry {
+            id
+            name
+          }
+        }
   }
 }

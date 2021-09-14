@@ -127,13 +127,12 @@ final class CompareStocksViewController: BaseViewController {
         topStock = stocks.first!
         bottomStock = stocks.last!
         
-        let statsPoints: [Double] = [18,54,23,32,42,37,7,53,63].shuffled()
-        let medianPoints: [Double] = [8,54,23,32,12,37,7,23,43].shuffled()
-        
+        let topGrowth = topStock?.tickerFinancials.last?.priceChangeToday ?? 0.0
+        let bottomGrowth = bottomStock?.tickerFinancials.last?.priceChangeToday ?? 0.0
         chartViewModel.comparableStocks = [ChartCompareData.init(symbol: topStock?.symbol ?? "",
-                                                                  growth: topStock?.tickerFinancials.last?.priceChangeToday ?? 0.0),
+                                                                 growth: Double(topGrowth)),
                                             ChartCompareData.init(symbol: bottomStock?.symbol ?? "",
-                                                                  growth: bottomStock?.tickerFinancials.last?.priceChangeToday ?? 0.0)
+                                                                  growth: Double(bottomGrowth))
          ]
     }
     

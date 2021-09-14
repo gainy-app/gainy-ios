@@ -24,7 +24,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagsStack.addSubview(tagView)
                 
                 tagView.tagName = $0
-                let width = 22.0 + $0.widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + 12.0
+                let width = 22.0 + $0.widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + 12.0
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: 24))
                 tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
                 tagView.autoPinEdge(.top, to: .top, of: tagsStack)

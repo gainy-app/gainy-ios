@@ -380,8 +380,8 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
                 GraphQLField("symbol", type: .scalar(String.self)),
                 GraphQLField("created_at", type: .scalar(timestamptz.self)),
                 GraphQLField("net_profit_margin", type: .scalar(Double.self)),
-                GraphQLField("sma_30days", type: .scalar(numeric.self)),
-                GraphQLField("market_cap_cagr_1years", type: .scalar(numeric.self)),
+                GraphQLField("sma_30days", type: .scalar(Double.self)),
+                GraphQLField("market_cap_cagr_1years", type: .scalar(Double.self)),
                 GraphQLField("enterprise_value_to_sales", type: .scalar(String.self)),
               ]
             }
@@ -392,7 +392,7 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: numeric? = nil, marketCapCagr_1years: numeric? = nil, enterpriseValueToSales: String? = nil) {
+            public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: Double? = nil, marketCapCagr_1years: Double? = nil, enterpriseValueToSales: String? = nil) {
               self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "sma_30days": sma_30days, "market_cap_cagr_1years": marketCapCagr_1years, "enterprise_value_to_sales": enterpriseValueToSales])
             }
 
@@ -468,18 +468,18 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
               }
             }
 
-            public var sma_30days: numeric? {
+            public var sma_30days: Double? {
               get {
-                return resultMap["sma_30days"] as? numeric
+                return resultMap["sma_30days"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "sma_30days")
               }
             }
 
-            public var marketCapCagr_1years: numeric? {
+            public var marketCapCagr_1years: Double? {
               get {
-                return resultMap["market_cap_cagr_1years"] as? numeric
+                return resultMap["market_cap_cagr_1years"] as? Double
               }
               set {
                 resultMap.updateValue(newValue, forKey: "market_cap_cagr_1years")

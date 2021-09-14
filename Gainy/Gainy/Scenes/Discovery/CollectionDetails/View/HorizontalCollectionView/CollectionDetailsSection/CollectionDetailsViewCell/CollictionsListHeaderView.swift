@@ -114,4 +114,10 @@ class CollictionsListHeaderView: UIView {
         growLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
     }
     
+    func updateMetrics(_ metrics: [String]) {
+        let lbls = [growLbl, peLbl, capLbl, monthPriceLbl, netLbl]
+        for (ind, val) in metrics.enumerated() {
+            lbls[ind].text = val
+        }
+    }
 }
