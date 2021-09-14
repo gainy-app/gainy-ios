@@ -37,10 +37,10 @@ enum CollectionDetailsViewModelMapper {
                                                 priceChange: tickerPercentChangeText,
                                                 tickerPrice: "\(model.financialMetrics.currentPrice.cleanTwoDecimal)",
                                                 dividendGrowthPercent: "\(model.financialMetrics.dividendGrowthPercent)",
-                                                growthRateYOY: model.financialMetrics.growthRateYOY.cleanTwoDecimal,
+                                                growthRateYOY: model.financialMetrics.growthRateYOY.percent,
                                                 evs: model.financialMetrics.evs.cleanOneDecimal,
                                                 marketCap: model.financialMetrics.marketCapitalization.formatUsingAbbrevation(),
-                                                monthToDay: "\(model.financialMetrics.monthToDay.cleanTwoDecimal)",
+                                                monthToDay: model.financialMetrics.monthToDay.percent,
                                                 netProfit: model.financialMetrics.netProfit.percent,
                                                 highlight: model.financialMetrics.highlight,
                                                 rawTicker: model.rawTicker!)        

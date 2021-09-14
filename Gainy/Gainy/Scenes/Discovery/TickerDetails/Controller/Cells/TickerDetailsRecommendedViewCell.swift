@@ -7,8 +7,14 @@
 
 import UIKit
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
+       
+    @IBOutlet private weak var rotatableImageView: UIImageView!
     
     override func updateFromTickerData() {
         
+    }
+    
+    func setTransform(_ transform: CGAffineTransform) {
+        rotatableImageView.transform = transform
     }
 }

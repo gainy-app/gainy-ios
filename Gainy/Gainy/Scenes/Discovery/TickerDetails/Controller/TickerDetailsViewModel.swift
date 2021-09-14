@@ -8,7 +8,6 @@
 import UIKit
 
 
-
 final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     
     init(ticker: TickerInfo) {

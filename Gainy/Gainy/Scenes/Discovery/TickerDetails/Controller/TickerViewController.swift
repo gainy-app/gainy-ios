@@ -25,6 +25,10 @@ final class TickerViewController: BaseViewController {
         }
     }
     
+    //MARK:- Inner
+    
+    private var lastYOffset = 0.0
+    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()

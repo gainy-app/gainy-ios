@@ -26,22 +26,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-VB-HTb">
-                                <rect key="frame" x="177" y="69" width="60" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="TTy-iw-jLP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
-                                <color key="textColor" name="mainText"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzP-zA-30h">
-                                <rect key="frame" x="192" y="437" width="30" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="1CX-dI-NgQ"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="arrow-down"/>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fKJ-Uh-31o">
                                 <rect key="frame" x="0.0" y="112" width="414" height="228"/>
                                 <subviews>
@@ -189,6 +173,26 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-VB-HTb">
+                                <rect key="frame" x="177" y="69" width="60" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="TTy-iw-jLP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kzP-zA-30h">
+                                <rect key="frame" x="100" y="122" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="1CX-dI-NgQ"/>
+                                    <constraint firstAttribute="height" constant="44" id="T4K-DY-81m"/>
+                                </constraints>
+                                <state key="normal" image="arrow-down"/>
+                                <connections>
+                                    <action selector="ascTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ivo-CF-OsF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

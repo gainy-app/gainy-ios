@@ -55,7 +55,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
-
+        label.minimumScaleFactor = 0.1
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
@@ -287,14 +288,14 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         companyNameLabel.frame = CGRect(
             x: hMargin,
             y: topMargin,
-            width: 85,
+            width: bounds.width - hMargin * 2.0,
             height: 20
         )
 
         tickerSymbolLabel.frame = CGRect(
             x: hMargin,
             y: topMargin + companyNameLabel.bounds.height,
-            width: 45,
+            width: 60,
             height: 20
         )
 
@@ -434,8 +435,9 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         markerMetric: [String],
         highlight: String
     ) {
+        companyNameLabel.minimumScaleFactor = 0.1
+        companyNameLabel.adjustsFontSizeToFitWidth = true
         companyNameLabel.text = companyName
-        companyNameLabel.sizeToFit()
 
         tickerSymbolLabel.text = tickerSymbol
         tickerSymbolLabel.sizeToFit()

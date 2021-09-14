@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func loadingState(started: Bool)
@@ -23,6 +24,8 @@ final class TickerDetailsDataSource: NSObject {
         self.populateInitialHeights()
     }
     
+    //Notifs
+    var cancellable = Set<AnyCancellable>()
     
     private let aboutMinHeight: CGFloat = 164.0 + 44.0
     private let chatHeight: CGFloat = 291.0 + 10
@@ -127,6 +130,14 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .recommended:
             let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
+            
+            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+            } receiveValue: { notif in
+                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                    cell.setTransform(transform)
+                }
+            }.store(in: &cancellable)
+
             return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -145,6 +156,16 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsWatchlistViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        switch Row(rawValue: indexPath.row)! {
+        case .recommended:
+            cancellable.removeAll()
+            break
+        default:
+            break
         }
     }
 }
@@ -175,5 +196,14 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
             ticker.tickersToCompare.append(stock)
         }
         delegate?.comparedStocksChanged()
+    }
+}
+
+extension TickerDetailsDataSource: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       
+        let topOffset = scrollView.contentOffset.y
+        let angle = -topOffset * 2 * CGFloat(Double.pi / 180)
+        NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
     }
 }

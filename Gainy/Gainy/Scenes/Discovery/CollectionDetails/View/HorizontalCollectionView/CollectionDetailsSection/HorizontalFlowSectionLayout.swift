@@ -18,14 +18,22 @@ struct HorizontalFlowSectionLayout: SectionLayout {
             ),
             subitems: [topItem]
         )
-
+        
         // Section
         let collectionsFlowSection = NSCollectionLayoutSection(
             group: group
         )
 
         collectionsFlowSection.orthogonalScrollingBehavior = .groupPagingCentered
-
+        collectionsFlowSection.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            items.forEach { item in
+                let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
+                let minScale: CGFloat = 0.1
+                let maxScale: CGFloat = 1.0
+                let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                item.alpha = scale
+            }
+        }
         return collectionsFlowSection
     }
 
