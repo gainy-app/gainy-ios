@@ -9,7 +9,10 @@ public final class SearchTickersQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query SearchTickers($text: String!) {
-      tickers(where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}]}) {
+      tickers(
+        where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}, {symbol: {_ilike: $text}}]}
+        limit: 50
+      ) {
         __typename
         symbol
         name
@@ -26,6 +29,17 @@ public final class SearchTickersQuery: GraphQLQuery {
           sma_30days
           market_cap_cagr_1years
           enterprise_value_to_sales
+        }
+        ticker_interests {
+          __typename
+          symbol
+          interest_id
+          interest {
+            __typename
+            icon_url
+            id
+            name
+          }
         }
         ticker_industries {
           __typename
@@ -56,7 +70,7 @@ public final class SearchTickersQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("tickers", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["description": ["_ilike": GraphQLVariable("text")]]]]], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
+        GraphQLField("tickers", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["description": ["_ilike": GraphQLVariable("text")]], ["symbol": ["_ilike": GraphQLVariable("text")]]]], "limit": 50], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
       ]
     }
 
@@ -90,6 +104,7 @@ public final class SearchTickersQuery: GraphQLQuery {
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("description", type: .scalar(String.self)),
           GraphQLField("ticker_financials", type: .nonNull(.list(.nonNull(.object(TickerFinancial.selections))))),
+          GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
           GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
         ]
       }
@@ -100,8 +115,8 @@ public final class SearchTickersQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerIndustries: [TickerIndustry]) {
-        self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
+      public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry]) {
+        self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -151,6 +166,16 @@ public final class SearchTickersQuery: GraphQLQuery {
       }
 
       /// An array relationship
+      public var tickerInterests: [TickerInterest] {
+        get {
+          return (resultMap["ticker_interests"] as! [ResultMap]).map { (value: ResultMap) -> TickerInterest in TickerInterest(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: TickerInterest) -> ResultMap in value.resultMap }, forKey: "ticker_interests")
+        }
+      }
+
+      /// An array relationship
       public var tickerIndustries: [TickerIndustry] {
         get {
           return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }
@@ -175,7 +200,7 @@ public final class SearchTickersQuery: GraphQLQuery {
             GraphQLField("net_profit_margin", type: .scalar(Double.self)),
             GraphQLField("sma_30days", type: .scalar(Double.self)),
             GraphQLField("market_cap_cagr_1years", type: .scalar(Double.self)),
-            GraphQLField("enterprise_value_to_sales", type: .scalar(String.self)),
+            GraphQLField("enterprise_value_to_sales", type: .scalar(Double.self)),
           ]
         }
 
@@ -185,7 +210,7 @@ public final class SearchTickersQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: Double? = nil, marketCapCagr_1years: Double? = nil, enterpriseValueToSales: String? = nil) {
+        public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: Double? = nil, marketCapCagr_1years: Double? = nil, enterpriseValueToSales: Double? = nil) {
           self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "sma_30days": sma_30days, "market_cap_cagr_1years": marketCapCagr_1years, "enterprise_value_to_sales": enterpriseValueToSales])
         }
 
@@ -279,12 +304,131 @@ public final class SearchTickersQuery: GraphQLQuery {
           }
         }
 
-        public var enterpriseValueToSales: String? {
+        public var enterpriseValueToSales: Double? {
           get {
-            return resultMap["enterprise_value_to_sales"] as? String
+            return resultMap["enterprise_value_to_sales"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+          }
+        }
+      }
+
+      public struct TickerInterest: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["ticker_interests"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("symbol", type: .scalar(String.self)),
+            GraphQLField("interest_id", type: .scalar(Int.self)),
+            GraphQLField("interest", type: .object(Interest.selections)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(symbol: String? = nil, interestId: Int? = nil, interest: Interest? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ticker_interests", "symbol": symbol, "interest_id": interestId, "interest": interest.flatMap { (value: Interest) -> ResultMap in value.resultMap }])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var symbol: String? {
+          get {
+            return resultMap["symbol"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "symbol")
+          }
+        }
+
+        public var interestId: Int? {
+          get {
+            return resultMap["interest_id"] as? Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "interest_id")
+          }
+        }
+
+        /// An object relationship
+        public var interest: Interest? {
+          get {
+            return (resultMap["interest"] as? ResultMap).flatMap { Interest(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "interest")
+          }
+        }
+
+        public struct Interest: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["interests"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("icon_url", type: .scalar(String.self)),
+              GraphQLField("id", type: .scalar(Int.self)),
+              GraphQLField("name", type: .scalar(String.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+            self.init(unsafeResultMap: ["__typename": "interests", "icon_url": iconUrl, "id": id, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var iconUrl: String? {
+            get {
+              return resultMap["icon_url"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "icon_url")
+            }
+          }
+
+          public var id: Int? {
+            get {
+              return resultMap["id"] as? Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "id")
+            }
+          }
+
+          public var name: String? {
+            get {
+              return resultMap["name"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }

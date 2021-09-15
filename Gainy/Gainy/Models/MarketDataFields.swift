@@ -67,7 +67,7 @@ enum MarketDataField: Int, Codable {
             case .dividendGrowth:
                 return lhs.rawTicker.tickerFinancials.last!.dividendGrowth ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.dividendGrowth ?? 0.0
             case .evs:
-                return Double(lhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? "0.0") ?? 0.0 < Double(rhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? "0.0") ?? 0.0
+                return (lhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0) < (rhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0)
             case .marketCap:
                 return lhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0
             case .monthToDay:
@@ -82,7 +82,7 @@ enum MarketDataField: Int, Codable {
             case .dividendGrowth:
                 return lhs.rawTicker.tickerFinancials.last!.dividendGrowth ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.dividendGrowth ?? 0.0
             case .evs:
-                return Double(lhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? "0.0") ?? 0.0 > Double(rhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? "0.0") ?? 0.0
+                return (lhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0) > (rhs.rawTicker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0)
             case .marketCap:
                 return lhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0
             case .monthToDay:

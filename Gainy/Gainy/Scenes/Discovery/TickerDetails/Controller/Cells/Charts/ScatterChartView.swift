@@ -122,7 +122,7 @@ struct ScatterChartView: View {
                 }, label: {
                     HStack {
                         Image("tiny plus")
-                        Text("Compare stocks")
+                        Text("Compare")
                             .padding(.all, 0)
                             .font(UIFont.proDisplayRegular(13).uiFont)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -153,20 +153,22 @@ struct ScatterChartView: View {
                 Spacer()
                 //Right Stock price
                 VStack {
-                    Text(ticker?.tickerFinancials.last?.currentPrice.price ?? "")
-                        .foregroundColor(ticker?.priceColor.uiColor ?? .black)
-                        .font(UIFont.compactRoundedMedium(20).uiFont)
                     HStack(alignment: .lastTextBaseline, spacing: 2) {
                         Text(statsDay)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                            .font(UIFont.compactRoundedRegular(9).uiFont)
+                            .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
                         Text(ticker?.tickerFinancials.last?.priceChangeToday.percent ?? "")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                            .font(UIFont.compactRoundedRegular(11).uiFont)
+                            .font(UIFont.compactRoundedMedium(12).uiFont)
                     }
+                    Text(ticker?.tickerFinancials.last?.currentPrice.price ?? "")
+                        .foregroundColor(ticker?.priceColor.uiColor ?? .black)
+                        .font(UIFont.compactRoundedMedium(20).uiFont)
+                    
                 }
                 .padding(.trailing, 20)
+                .offset(y: -25)
             }
         }
         .padding(.all, 0)

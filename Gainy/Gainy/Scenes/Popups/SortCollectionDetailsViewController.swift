@@ -51,7 +51,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
     
     private func preloadSorting() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        ascBtn.autoSetDimensions(to: CGSize.init(width: 44, height: 4))
+        ascBtn.autoSetDimensions(to: CGSize.init(width: 44, height: 44))
                                  
         view.removeConstraints(ascConstraints)
         

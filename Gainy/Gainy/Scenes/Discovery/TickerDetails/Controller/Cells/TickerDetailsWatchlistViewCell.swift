@@ -17,4 +17,9 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     override func updateFromTickerData() {
         
     }
+    
+    @IBAction func addToWatchAction(_ sender: Any) {
+        GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : tickerInfo?.symbol ?? ""])
+        NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
+    }
 }

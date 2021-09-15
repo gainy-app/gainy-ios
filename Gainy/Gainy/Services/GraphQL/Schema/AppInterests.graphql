@@ -1,5 +1,5 @@
 query AppInterests {
-   app_interests {
+   interests {
     icon_url
     id
     name

@@ -26,6 +26,15 @@ query DiscoverCollectionDetails {
           market_cap_cagr_1years
           enterprise_value_to_sales
         }
+        ticker_interests {
+          symbol
+          interest_id
+          interest {
+            icon_url
+            id
+            name
+          }
+        }
         ticker_industries {
           gainy_industry {
             id

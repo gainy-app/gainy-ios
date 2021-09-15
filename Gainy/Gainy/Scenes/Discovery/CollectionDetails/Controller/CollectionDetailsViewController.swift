@@ -25,7 +25,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.Gainy.white
-
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
@@ -217,6 +216,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController?.searchText = searchTextView?.text ?? ""
         searchController?.clearAll()
         
+        searchTextView?.resignFirstResponder()
+        
         let oldFrame = CGRect(
             x: 16,
             y: 24,
@@ -232,7 +233,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard (textField.text ?? "").count > 2 else {return}
+        guard (textField.text ?? "").count > 0 else {return}
         let text = textField.text ?? ""
         searchController?.searchText = text
         
@@ -423,7 +424,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         fpc.surfaceView.appearance = appearance
         
         // Assign self as the delegate of the controller.
-        //fpc.delegate = self // Optional
+        fpc.delegate = self // Optional
         
         // Set a content view controller.
         sortingVS.delegate = self
@@ -439,7 +440,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .top, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
                 .half: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
                 .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
             ]
@@ -518,11 +519,28 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+      }
 }
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension CollectionDetailsViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y - 6.0
+            let maxY = vc.surfaceLocation(for: .tip).y + 6.0
+            print(min(max(loc.y, minY), maxY))
+            vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+        }
     }
 }

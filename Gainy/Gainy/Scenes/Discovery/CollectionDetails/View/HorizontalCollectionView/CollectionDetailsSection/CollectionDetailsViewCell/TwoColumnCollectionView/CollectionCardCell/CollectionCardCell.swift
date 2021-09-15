@@ -52,7 +52,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         label.textColor = UIColor.Gainy.textDark
 
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         label.minimumScaleFactor = 0.1
@@ -289,7 +289,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             x: hMargin,
             y: topMargin,
             width: bounds.width - hMargin * 2.0,
-            height: 20
+            height: 20 * 2.0
         )
 
         tickerSymbolLabel.frame = CGRect(
@@ -315,7 +315,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
 
         tickerTotalPriceLabel.frame = CGRect(
             x: hMargin,
-            y: 80,
+            y: 80 + 20,
             width: 127,
             height: 20
         )
@@ -325,84 +325,84 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
 
         marketMarkerOneButton.frame = CGRect(
             x: hMargin - 4,
-            y: 110,
+            y: 110 + 20,
             width: markerMarkerWidth,
             height: 40
         )
 
         marketMarkerOneTextLabel.frame = CGRect(
             x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
-            y: 110,
+            y: 110 + 20,
             width: markerTextWidth, // markerMarkerWidth,
             height: 24
         )
 
         marketMarkerOneValueLabel.frame = CGRect(
             x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
-            y: 134,
+            y: 134 + 20,
             width: markerTextWidth, // markerMarkerWidth,
             height: 16
         )
 
         marketMarkerSecondButton.frame = CGRect(
             x: (hMargin - 4) + markerMarkerWidth + 2 + 1 + 2,
-            y: 110,
+            y: 110 + 20,
             width: markerMarkerWidth,
             height: 40
         )
 
         marketMarkerSecondTextLabel.frame = CGRect(
             x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
-            y: 110,
+            y: 110 + 20,
             width: markerTextWidth,
             height: 24
         )
 
         marketMarkerSecondValueLabel.frame = CGRect(
             x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
-            y: 134,
+            y: 134 + 20,
             width: markerTextWidth,
             height: 16
         )
 
         marketMarkerThirdButton.frame = CGRect(
             x: bounds.width - (markerMarkerWidth + (hMargin - 4)),
-            y: 110,
+            y: 110 + 20,
             width: markerMarkerWidth,
             height: 40
         )
 
         marketMarkerThirdTextLabel.frame = CGRect(
             x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
-            y: 110,
+            y: 110 + 20,
             width: markerTextWidth,
             height: 24
         )
 
         marketMarkerThirdValueLabel.frame = CGRect(
             x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
-            y: 134,
+            y: 134 + 20,
             width: markerTextWidth,
             height: 16
         )
 
         leftVerticalSeparator.frame = CGRect(
             x: (hMargin - 4) + marketMarkerOneButton.bounds.width + 2,
-            y: 112,
+            y: 112 + 20,
             width: 1,
             height: 38
         )
 
         rightVerticalSeparator.frame = CGRect(
             x: bounds.width - (2 + 1 + markerMarkerWidth + (hMargin - 4)),
-            y: 112,
+            y: 112 + 20,
             width: 1,
             height: 38
         )
 
         highlightsContainerView.frame = CGRect(
             x: 0,
-            y: 160,
+            y: 160 + 20,
             width: bounds.width,
             height: 56
         )
@@ -418,7 +418,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
 
         highlightLabel.frame = CGRect(
             x: hMargin,
-            y: 160 + 4,
+            y: 160 + 4 + 20,
             width: bounds.width - (hMargin + hMargin),
             height: highlightsContainerView.bounds.height - (4 + 4)
         )

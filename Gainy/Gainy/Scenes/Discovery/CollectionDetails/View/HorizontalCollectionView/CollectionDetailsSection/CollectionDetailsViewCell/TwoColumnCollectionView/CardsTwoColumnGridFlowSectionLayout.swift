@@ -22,7 +22,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
         let horizontalTwoItemsGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(216 + 16)
+                heightDimension: .absolute(232 + 16)
             ),
             subitem: gridItem,
             count: 2

@@ -66,7 +66,7 @@ enum CollectionDetailsDTOMapper {
             dividendGrowthPercent: Float(dto.dividendGrowth ?? 0.0),
             priceToEarnings: Float(dto.peRatio ?? 0.0),
             marketCapitalization: Float(dto.marketCapitalization ?? 0.0),
-            evs: Float(dto.enterpriseValueToSales ?? "0.0") ?? 0.0,
+            evs: Float(dto.enterpriseValueToSales ?? 0.0),
             growthRateYOY: Float(dto.marketCapCagr_1years ?? 0.0),
             monthToDay: Float(dto.sma_30days ?? 0.0),
             netProfit : Float(dto.netProfitMargin ?? 0.0),

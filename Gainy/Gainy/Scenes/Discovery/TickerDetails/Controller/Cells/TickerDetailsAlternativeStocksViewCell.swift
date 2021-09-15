@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
-    func comparePressed(stock: SearchTickersQuery.Data.Ticker)
+    func comparePressed(stock: AltStockTicker)
 }
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
@@ -89,7 +89,7 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
         }
     }
     
-    var stock: SearchTickersQuery.Data.Ticker? {
+    var stock: AltStockTicker? {
         didSet {
             guard let stock = stock else {return}
             nameLbl.text = stock.name
@@ -114,7 +114,7 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
 }
 
 extension TickerDetailsAlternativeStocksViewCell: TickerDetailsAlternativeStocksViewCellDelegate {
-    func comparePressed(stock: SearchTickersQuery.Data.Ticker) {
+    func comparePressed(stock: AltStockTicker) {
         delegate?.comparePressed(stock: stock)
     }
 }

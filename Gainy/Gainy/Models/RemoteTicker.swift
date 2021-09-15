@@ -9,6 +9,7 @@ import UIKit
 
 /// Ticker model to pupulate cells
 typealias RemoteTicker = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
+typealias AltStockTicker = FetchAltStocksQuery.Data.TickerInterest.Interest.TickerInterest.Ticker
 class TickerInfo {
     
     let ticker: RemoteTicker
@@ -21,7 +22,9 @@ class TickerInfo {
         self.about = String((ticker.description ?? "").dropFirst().dropLast())
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
-        self.tags = ticker.tickerIndustries.compactMap({$0.gainyIndustry?.name})
+        let industries = ticker.tickerIndustries.compactMap({$0.gainyIndustry?.name})
+        let interests = ticker.tickerInterests.compactMap({$0.interest?.name})
+        self.tags = industries + interests
         self.highlights = ticker.tickerFinancials.compactMap(\.highlight)  
         
         var markers: [MarketData] = []
@@ -31,7 +34,7 @@ class TickerInfo {
             case .dividendGrowth:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: Double(ticker.tickerFinancials.last!.dividendGrowth ?? 0.0).formatUsingAbbrevation()))
             case .evs:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (Double(ticker.tickerFinancials.last!.enterpriseValueToSales ?? "0.0") ?? 0.0).formatUsingAbbrevation()))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).formatUsingAbbrevation()))
             case .marketCap:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
             case .monthToDay:
@@ -53,7 +56,7 @@ class TickerInfo {
         self.recommendedScore = 75.0 //needed
         
         self.news = []
-        self.altStocks = [] //needed
+        self.altStocks = []
         self.upcomingEvents = [] //needed
     }
     
@@ -98,11 +101,12 @@ class TickerInfo {
         
         //Load Alt Stocks
         dispatchGroup.enter()
-        Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%Game%")){[weak self] result in
+        Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 
-                self?.altStocks = (graphQLResult.data?.tickers ?? []).prefix(20).filter({$0.symbol != self?.ticker.symbol})
+                let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker})}) ?? []
+                self?.altStocks = tickers.flatMap({$0})
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
                     dispatchGroup.leave()
@@ -142,7 +146,7 @@ class TickerInfo {
     
     private func updateChartData(_ data: [DiscoverChartsQuery.Data.FetchChartDatum]) {
         self.chartData = data
-        self.localChartData.loadValues(Array(data.suffix(30)), period: chartRange)
+        self.localChartData.loadValues(data, period: chartRange)
     }
     private func updateNewsData(_ data: [DiscoverNewsQuery.Data.FetchNewsDatum]) {
         self.news = data
@@ -196,9 +200,9 @@ class TickerInfo {
     var news: [DiscoverNewsQuery.Data.FetchNewsDatum]
     
     //MARK: - Stocks
-    var altStocks: [SearchTickersQuery.Data.Ticker]
+    var altStocks: [AltStockTicker]
     
-    var tickersToCompare: [SearchTickersQuery.Data.Ticker] = []
+    var tickersToCompare: [AltStockTicker] = []
     
     //MARK: - Upcoming events
     let upcomingEvents: [String]

@@ -26,13 +26,14 @@ final class TickerDetailsDataSource: NSObject {
     
     //Notifs
     var cancellable = Set<AnyCancellable>()
+    fileprivate var lastOffset: CGFloat = 0.0
     
     private let aboutMinHeight: CGFloat = 164.0 + 44.0
     private let chatHeight: CGFloat = 291.0 + 10
     
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
-        cellHeights[.header] = 80.0
+        cellHeights[.header] = 120.0
         cellHeights[.about] = aboutMinHeight
         cellHeights[.chart] = chatHeight
         cellHeights[.highlights] = 169.0
@@ -189,7 +190,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
-    func comparePressed(stock: SearchTickersQuery.Data.Ticker) {
+    func comparePressed(stock: AltStockTicker) {
         if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
             ticker.tickersToCompare.remove(at: stockIndex)
         } else {
@@ -203,7 +204,10 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
        
         let topOffset = scrollView.contentOffset.y
-        let angle = -topOffset * 2 * CGFloat(Double.pi / 180)
-        NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
+        if abs(lastOffset - topOffset) > 10 {
+            lastOffset = topOffset
+            let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
+            NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
+        }
     }
 }

@@ -213,8 +213,8 @@ public class ChartData: ObservableObject, Identifiable {
     
     func loadValues(_ vals: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
         self.points = vals.compactMap{
-            if let volume = $0.volume  {
-                return ($0.labelForPeriod(period), Double(volume))
+            if let close = $0.close  {
+                return ($0.labelForPeriod(period), Double(close))
             } else {
                 return nil
             }

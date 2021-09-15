@@ -13,7 +13,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     public weak var coordinator: OnboardingCoordinator?
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private var appInterests: [AppInterestsQuery.Data.AppInterest]?
+    private var appInterests: [AppInterestsQuery.Data.Interest]?
     private weak var footerView: PersonalizationPickInterestsFooterView?
     
     override func viewDidLoad() {
@@ -101,7 +101,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
             switch result {
             case .success(let graphQLResult):
                 
-                guard let appInterests = graphQLResult.data?.appInterests else {
+                guard let appInterests = graphQLResult.data?.interests else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     self.hideLoader()
                     completion()
@@ -136,7 +136,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     
         
         let cell: PersonalizationPickInterestsCell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalizationPickInterestsCell.reuseIdentifier, for: indexPath) as! PersonalizationPickInterestsCell
-        let appInterest: AppInterestsQuery.Data.AppInterest? = self.appInterests?[indexPath.row]
+        let appInterest: AppInterestsQuery.Data.Interest? = self.appInterests?[indexPath.row]
         cell.appInterest = appInterest
         
         return cell
@@ -149,12 +149,12 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        guard let appInterest: AppInterestsQuery.Data.AppInterest = self.appInterests?[indexPath.row] else {
+        guard let appInterest: AppInterestsQuery.Data.Interest = self.appInterests?[indexPath.row] else {
             return CGSize.zero
         }
         
         let name = appInterest.name
-        let width = name.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width
+        let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
         var size = CGSize.init(width: (ceil(width) + CGFloat(64.0)), height: CGFloat(40))
         let maxWidth = UIScreen.main.bounds.size.width - 32.0
         if size.width > maxWidth {

@@ -13,8 +13,8 @@ struct Legend: View {
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    var specifier: String = "$%.2f"
-    var bigSpecifier: String = "$%.0f"
+    var specifier: String = "%.2f"
+    var bigSpecifier: String = "%.0f"
     let padding:CGFloat = 3
     
     var stepWidth: CGFloat {
@@ -49,7 +49,7 @@ struct Legend: View {
         ZStack(alignment: .topLeading){
             ForEach((0...1), id: \.self) { height in
                 HStack(alignment: .center){
-                        Text("\(self.getYLegendSafe(height: height), specifier: (max - min) > 1.0 ? bigSpecifier : specifier)")
+                        Text("$\(self.getYLegendSafe(height: height), specifier: (max - min) > 1.0 ? bigSpecifier : specifier)")
                             .frame(maxHeight: 12)
                             .minimumScaleFactor(0.1)
                             .offset(x: getXposition(height: height), y: self.getYposition(height: height) + (height == 0 ? 7 : -3) )

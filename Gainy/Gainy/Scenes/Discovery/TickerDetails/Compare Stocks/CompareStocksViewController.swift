@@ -63,16 +63,16 @@ final class CompareStocksViewController: BaseViewController {
     
     //MARK: - Fields
     
-    var stocks: [SearchTickersQuery.Data.Ticker] = []
+    var stocks: [AltStockTicker] = []
     
-    var topStock: SearchTickersQuery.Data.Ticker? {
+    var topStock: AltStockTicker? {
         didSet {
             guard let topStock = topStock else {return}
             topStockFld.text = topStock.name
         }
     }
     
-    var bottomStock: SearchTickersQuery.Data.Ticker? {
+    var bottomStock: AltStockTicker? {
         didSet {
             guard let bottomStock = bottomStock else {return}
             bottomStockFld.text = bottomStock.name

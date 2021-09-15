@@ -58,6 +58,10 @@ final class TickerViewController: BaseViewController {
         
     }
     
+    @IBAction func closeViewAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Bottom action
     
     /// Model to cahnge bottom view
@@ -120,7 +124,7 @@ extension TickerViewController: CollectionsBottomViewDelegate {
         let compareVC = CompareStocksViewController.instantiate(.discovery)
         
         
-        if let curStock = viewModel?.ticker.ticker.toSearchTicker() {
+        if let curStock = viewModel?.ticker.ticker.toAltTicker() {
             if !(viewModel?.ticker.tickersToCompare.contains(curStock) ?? false) {
                 viewModel?.ticker.tickersToCompare.insert(curStock, at: 0)
             }

@@ -15,18 +15,34 @@ query SearchCollectionDetails($text: String!) {
         name
         description
         ticker_financials {
-        pe_ratio
+          pe_ratio
           market_capitalization
           highlight
           dividend_growth
           symbol
           created_at
-        net_profit_margin
+          net_profit_margin
           sma_30days
           market_cap_cagr_1years
           enterprise_value_to_sales
+        }
+        ticker_interests {
+          symbol
+          interest_id
+          interest {
+            icon_url
+            id
+            name
+          }
+        }
+        ticker_industries {
+          gainy_industry {
+            id
+            name
+          }
         }
       }
     }
   }
 }
+

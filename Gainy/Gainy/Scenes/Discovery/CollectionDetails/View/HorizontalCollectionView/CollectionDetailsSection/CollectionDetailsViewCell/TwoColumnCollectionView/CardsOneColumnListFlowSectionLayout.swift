@@ -29,7 +29,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
         let horizontalTwoItemsGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(60)
+                heightDimension: .absolute(64)
             ),
             subitem: gridItem,
             count: 1

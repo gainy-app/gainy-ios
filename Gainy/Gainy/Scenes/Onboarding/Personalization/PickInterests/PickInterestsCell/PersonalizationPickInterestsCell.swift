@@ -15,7 +15,7 @@ final class PersonalizationPickInterestsCell: UICollectionViewCell {
     @IBOutlet weak var cornerView: CornerView!
     @IBOutlet weak var textLabel: UILabel!
     
-    var appInterest: AppInterestsQuery.Data.AppInterest? {
+    var appInterest: AppInterestsQuery.Data.Interest? {
         didSet {
             self.updateUI()
         }

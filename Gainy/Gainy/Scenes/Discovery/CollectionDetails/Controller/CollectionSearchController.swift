@@ -352,7 +352,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             if let ticker = self.stocks[indexPath.row] as? SearchTickersQuery.Data.Ticker {
                 let tickerMap = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.init(symbol: ticker.symbol, name: ticker.name, description: ticker.description, tickerFinancials: ticker.tickerFinancials.map({
                     DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, dividendGrowth: $0.dividendGrowth, symbol: $0.symbol, createdAt: $0.createdAt, netProfitMargin: $0.netProfitMargin, sma_30days: $0.sma_30days, marketCapCagr_1years: $0.marketCapCagr_1years, enterpriseValueToSales: $0.enterpriseValueToSales)
-                }), tickerIndustries: ticker.tickerIndustries.compactMap({$0.toDiscovery()}))
+                }), tickerInterests: ticker.tickerInterests.compactMap({$0.toDiscovery()}), tickerIndustries: ticker.tickerIndustries.compactMap({$0.toDiscovery()}))
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol])
                 onShowCardDetails?(tickerMap)
             }
