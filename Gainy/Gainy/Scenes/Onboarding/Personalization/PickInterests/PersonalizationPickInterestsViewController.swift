@@ -203,14 +203,6 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PersonalizationPickInterestsHeaderView.reuseIdentifier, for: indexPath)
             result = headerView
-//        case UICollectionView.elementKindSectionFooter:
-//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier, for: indexPath)
-//            footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
-//            self.footerView = footerView as? PersonalizationPickInterestsFooterView
-//            self.footerView?.delegate = self
-//            guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return footerView}
-//            self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
-//            result = footerView
         default: fatalError("Unhandlad behaviour")
         }
         return result
