@@ -18,10 +18,13 @@ final class GainySliderView: UIView {
     
     public weak var delegate: GainySliderViewDelegate?
     
-    private let slider: UISlider = CustomSlider.newAutoLayout()
+    private let slider: UISlider = UISlider.newAutoLayout()
     private let minLabel: UILabel = UILabel.newAutoLayout()
     private let maxLabel: UILabel = UILabel.newAutoLayout()
-    private let valueLabel: UILabel = UILabel.init()
+    private let valueLabel: TextInsetsLabel = TextInsetsLabel.newAutoLayout()
+    private let valueLabelArrow: UIImageView = UIImageView.newAutoLayout()
+    
+    private var isInitialLayout: Bool = true
     
     override init(frame: CGRect) {
         
@@ -55,11 +58,24 @@ final class GainySliderView: UIView {
         self.maxLabel.text = maxLabelText
     }
     
+    private func configureWithInitialLayout(isInitial: Bool) {
+        
+        self.isInitialLayout = isInitial
+        self.valueLabel.backgroundColor = UIColor(hexString: (isInitial ? "#B1BDC8" : "#09141F"))
+        self.valueLabelArrow.tintColor = UIColor(hexString: (isInitial ? "#B1BDC8" : "#09141F"))
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
     private func updateUIWithCurrentValue(currentValue: Float) {
         
-        self.valueLabel.text = self.delegate?.gainySliderFormattedValueString(sender: self, currentValue: currentValue)
-        self.valueLabel.sizeToFit()
-        self.valueLabel.center = self.adjustValueLabelPosition(slider: self.slider)
+        if self.isInitialLayout {
+            self.valueLabel.text = NSLocalizedString("Select your answer", comment: "Select your answer")
+        } else {
+            self.valueLabel.text = self.delegate?.gainySliderFormattedValueString(sender: self, currentValue: currentValue)
+        }
+        
+        self.adjustValueLabelPosition(slider: self.slider)
     }
     
     private func setUp() {
@@ -69,6 +85,7 @@ final class GainySliderView: UIView {
         self.setUpMinLabel()
         self.setUpMaxLabel()
         self.setUpValueLabel()
+        self.setUpValueLabelArrow()
     }
     
     private func setUpSlider() {
@@ -82,7 +99,7 @@ final class GainySliderView: UIView {
         self.slider.minimumTrackTintColor = UIColor.init(hexString: "#0261FF")
         self.slider.minimumValue = 0.0
         self.slider.maximumValue = 1.0
-        self.slider.value = 0.5
+        self.slider.value = 0.0
         self.slider.isContinuous = true
         self.slider.setThumbImage(UIImage(named: "sliderThumb"), for: UIControl.State.normal)
         self.slider.addTarget(self, action: #selector(onSliderValueChanged(slider:event:)), for: .valueChanged)
@@ -117,14 +134,27 @@ final class GainySliderView: UIView {
         self.addSubview(self.valueLabel)
         self.valueLabel.font = UIFont.compactRoundedMedium(12.0)
         self.valueLabel.textAlignment = .center
-        self.valueLabel.textColor = UIColor.black
+        self.valueLabel.textColor = UIColor.white
+        self.valueLabel.backgroundColor = UIColor(hexString: "#B1BDC8")
+        self.valueLabel.layer.cornerRadius = 8.0
+        self.valueLabel.layer.masksToBounds = true
+        self.valueLabel.textInsets = UIEdgeInsets(top: 3.0, left: 8.0, bottom: 5.0, right: 8.0)
+        self.valueLabel.autoSetDimension(.height, toSize: 28.0)
+    }
+    
+    private func setUpValueLabelArrow() {
+        
+        self.addSubview(self.valueLabelArrow)
+        self.valueLabelArrow.image = UIImage(named: "iconArrowDown")?.withRenderingMode(.alwaysTemplate)
+        self.valueLabelArrow.tintColor = UIColor(hexString: "#B1BDC8")
+        self.valueLabelArrow.autoSetDimensions(to: CGSize(width: 8, height: 4))
     }
     
     @objc func onSliderValueChanged(slider: UISlider, event: UIEvent) {
         if let touchEvent = event.allTouches?.first {
             switch touchEvent.phase {
             case .began:
-                self.updateUIWithCurrentValue(currentValue: slider.value)
+                self.configureWithInitialLayout(isInitial: false)
             case .moved:
                 self.updateUIWithCurrentValue(currentValue: slider.value)
             case .ended:
@@ -135,31 +165,28 @@ final class GainySliderView: UIView {
         }
     }
     
-    private func adjustValueLabelPosition(slider: UISlider) -> CGPoint {
+    private func adjustValueLabelPosition(slider: UISlider)  {
+        
+        let edgeInsets = self.valueLabel.textInsets.left + self.valueLabel.textInsets.right
+        var frame = self.valueLabel.frame
+        frame.size.width += edgeInsets
+        self.valueLabel.frame = frame
         
         let sliderTrack = slider.trackRect(forBounds: slider.bounds)
         let sliderThumb = slider.thumbRect(forBounds: slider.bounds, trackRect: sliderTrack, value: slider.value)
         let textWidth = self.valueLabel.text?.sizeOfString(usingFont: self.valueLabel.font).width ?? 0.0
         var centerX = sliderThumb.origin.x + slider.frame.origin.x + 12
-        let centerY = slider.frame.origin.y - 14.0
-        let halfWidth = textWidth / 2.0
+        let centerY = slider.frame.origin.y - 28.0
+        
+        self.valueLabelArrow.center = CGPoint(x: centerX, y: slider.frame.origin.y - 12.0)
+        
+        let halfWidth = (textWidth + edgeInsets) / 2.0
         if centerX <= halfWidth {
             centerX = halfWidth
         } else if centerX >= self.slider.frame.width - halfWidth {
             centerX = self.slider.frame.width - halfWidth
         }
-        return CGPoint(x: centerX, y: centerY)
+        
+        self.valueLabel.center = CGPoint(x: centerX, y: centerY)
     }
-}
-
-final private class CustomSlider: UISlider {
-   
-       override func trackRect(forBounds bounds: CGRect) -> CGRect {
-           var customBounds = CGRect(origin: bounds.origin, size: CGSize(width: bounds.size.width, height: 2.0))
-        customBounds.origin.y += 12.0
-        customBounds.origin.x += 2.0
-        customBounds.size.width -= 4.0
-           super.trackRect(forBounds: customBounds)
-           return customBounds
-       }
 }

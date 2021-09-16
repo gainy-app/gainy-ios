@@ -101,11 +101,10 @@ final class PersonalizationSliderSectionView: UIView {
         self.gainySliderView.autoPinEdge(toSuperviewEdge: .leading, withInset: 28.0)
         self.gainySliderView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 28.0)
         self.gainySliderView.autoPinEdge(toSuperviewEdge: .bottom)
-        self.gainySliderView.autoSetDimension(.height, toSize: 60.0)
+        self.gainySliderView.autoSetDimension(.height, toSize: 80.0)
         self.gainySliderView.autoPinEdge(.top, to: .bottom, of: self.descriptionLabel, withOffset: 38.0)
         self.gainySliderView.configureWith(minLabelText: "MIN", maxLabelText: "MAX")
         self.gainySliderView.delegate = self
-        self.gainySliderView.configureWith(currentValue: 0.5)
     }
 }
 

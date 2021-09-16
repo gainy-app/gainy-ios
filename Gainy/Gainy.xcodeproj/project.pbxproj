@@ -235,6 +235,7 @@
 		857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */; };
 		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
 		85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */; };
+		85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD14E226F3650A001C060C /* TextInsetsLabel.swift */; };
 		85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80526E5FFFB004EC21D /* GainySliderView.swift */; };
 		85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */; };
 		85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */; };
@@ -492,6 +493,7 @@
 		857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalizationPickInterestsCell.xib; sourceTree = "<group>"; };
 		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
 		85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockwiseProgressIndicatorView.swift; sourceTree = "<group>"; };
+		85CD14E226F3650A001C060C /* TextInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInsetsLabel.swift; sourceTree = "<group>"; };
 		85D4F80526E5FFFB004EC21D /* GainySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainySliderView.swift; sourceTree = "<group>"; };
 		85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationIndicatorsViewController.swift; sourceTree = "<group>"; };
 		85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationSliderSectionView.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				33787FD626CD475700B11E58 /* CustomHostingController.swift */,
 				33E7AA6226CF870600DF1CBE /* LeftAlignedIconButton.swift */,
 				33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */,
+				85CD14E226F3650A001C060C /* TextInsetsLabel.swift */,
 				331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */,
 				33E7AA6626CFD4E000DF1CBE /* CornerView.swift */,
 				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
@@ -1863,6 +1866,7 @@
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
+				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
