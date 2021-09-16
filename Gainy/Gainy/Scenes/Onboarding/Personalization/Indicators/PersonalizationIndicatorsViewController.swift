@@ -74,12 +74,6 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.backgroundColor = self.view.backgroundColor
-    }
-    
     // MARK: - Status Bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent

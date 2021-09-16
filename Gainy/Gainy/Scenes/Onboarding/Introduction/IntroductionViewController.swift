@@ -32,7 +32,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         NSLocalizedString("Search,\nfilters,\nand stock\ncomparison", comment: "Search, filters, and stock comparison"),
         NSLocalizedString("Yes, it's\npersonalized", comment: "Yes, it's personalized")
     ]
-    private let captionSizes = [Float(156), Float(204), Float(204), Float(108)]
+    private let captionSizes: [Float] = [176, 224, 224, 128]
     
     
     override func viewDidLoad() {

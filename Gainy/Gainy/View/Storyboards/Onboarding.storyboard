@@ -88,7 +88,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-ck-xOZ">
-                                <rect key="frame" x="46.5" y="562.5" width="321" height="95.5"/>
+                                <rect key="frame" x="46.5" y="564.5" width="321" height="93.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="hDd-yX-cVg"/>
                                 </constraints>
@@ -249,8 +249,11 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9K7-6E-QR2">
-                                <rect key="frame" x="0.0" y="410" width="414" height="452"/>
+                                <rect key="frame" x="0.0" y="410" width="414" height="220"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="yec-V9-65i"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vkg-d4-aZM">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -259,7 +262,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="JX5-tx-Cvq">
-                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <rect key="frame" x="0.0" y="46" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0vr-QV-awb">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -302,7 +305,6 @@
                             <constraint firstItem="k2A-ik-Er1" firstAttribute="top" secondItem="0Px-EE-4DE" secondAttribute="top" id="SI7-o3-d2K"/>
                             <constraint firstAttribute="trailing" secondItem="k2A-ik-Er1" secondAttribute="trailing" id="Sdu-VB-63G"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="trailing" secondItem="Xzu-k0-XRA" secondAttribute="trailing" constant="24" id="TL4-bH-ORr"/>
-                            <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="9K7-6E-QR2" secondAttribute="bottom" id="hAj-gz-cGr"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="Xzu-k0-XRA" secondAttribute="bottom" constant="19" id="kwe-FO-jbF"/>
                             <constraint firstItem="yxh-N1-svG" firstAttribute="centerX" secondItem="zFk-4A-9Vb" secondAttribute="centerX" id="oJL-11-qw3"/>
                             <constraint firstItem="9K7-6E-QR2" firstAttribute="leading" secondItem="zFk-4A-9Vb" secondAttribute="leading" id="q8a-HJ-94P"/>
@@ -332,9 +334,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="h3x-Y7-YV2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TKP-Cc-QvB">
-                                <rect key="frame" x="4" y="44" width="406" height="818"/>
-                                <color key="backgroundColor" red="0.90605252979999995" green="0.91741710899999995" blue="0.92941474909999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="4" y="44" width="406" height="717"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jzi-rU-084">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -345,12 +351,12 @@
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tlc-YS-tf5"/>
-                        <color key="backgroundColor" red="0.90605252979999995" green="0.91741710899999995" blue="0.92941474909999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TKP-Cc-QvB" firstAttribute="leading" secondItem="khA-J7-gRR" secondAttribute="leading" constant="4" id="RdJ-Nj-VBY"/>
                             <constraint firstAttribute="trailing" secondItem="TKP-Cc-QvB" secondAttribute="trailing" constant="4" id="dRU-AX-rgQ"/>
                             <constraint firstItem="tlc-YS-tf5" firstAttribute="top" secondItem="TKP-Cc-QvB" secondAttribute="top" id="dgu-CY-Tnn"/>
-                            <constraint firstItem="TKP-Cc-QvB" firstAttribute="bottom" secondItem="tlc-YS-tf5" secondAttribute="bottom" id="jxZ-g7-tJX"/>
+                            <constraint firstItem="TKP-Cc-QvB" firstAttribute="bottom" secondItem="tlc-YS-tf5" secondAttribute="bottom" constant="-101" id="jxZ-g7-tJX"/>
                         </constraints>
                     </view>
                     <connections>
@@ -585,16 +591,16 @@
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
         <designable name="UZm-4s-wQX">
-            <size key="intrinsicContentSize" width="81" height="32"/>
+            <size key="intrinsicContentSize" width="83" height="31"/>
         </designable>
         <designable name="Vqi-7P-fK5">
-            <size key="intrinsicContentSize" width="48" height="32"/>
+            <size key="intrinsicContentSize" width="50" height="31"/>
         </designable>
         <designable name="Xzu-k0-XRA">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
     </designables>
     <resources>

@@ -23,7 +23,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.setUpNavigationBar()
         self.setUpCollectionView()
         self.getRemoteData {
-            
+            self.setUpFooterView()
         }
     }
     
@@ -33,12 +33,6 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.backgroundColor = self.view.backgroundColor
     }
     
     // MARK: - Status Bar
@@ -81,12 +75,29 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.collectionView.dataSource = self
         self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsCell", bundle: Bundle.main), forCellWithReuseIdentifier: PersonalizationPickInterestsCell.reuseIdentifier)
         self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonalizationPickInterestsHeaderView.reuseIdentifier)
-        self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsFooterView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier)
+//        self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsFooterView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier)
         self.collectionView.allowsSelection = true
         self.collectionView.allowsMultipleSelection = true
         let layout = UICollectionViewCenterAlignedLayout()
         layout.sectionFootersPinToVisibleBounds = true
         self.collectionView.collectionViewLayout = layout
+    }
+    
+    private func setUpFooterView() {
+        
+        let footerView = UINib(nibName:"PersonalizationPickInterestsFooterView",bundle:.main).instantiate(withOwner: nil, options: nil).first as! PersonalizationPickInterestsFooterView
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(footerView)
+        
+        footerView.autoPinEdge(toSuperviewEdge: .leading)
+        footerView.autoPinEdge(toSuperviewEdge: .trailing)
+        footerView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        footerView.autoSetDimension(.height, toSize: 101)
+        self.footerView = footerView
+        self.footerView?.delegate = self
+        footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
+        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
+        self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
     }
     
     private func getRemoteData(completion: @escaping () -> Void) {
@@ -183,12 +194,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         
         return CGSize.init(width: collectionView.frame.size.width, height: 128.0)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        
-        let height: CGFloat = ((self.appInterests?.count ?? 0) > 0 ? 101.0 : 0.0)
-        return CGSize.init(width: collectionView.frame.size.width, height: height)
-    }
+
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -197,14 +203,14 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PersonalizationPickInterestsHeaderView.reuseIdentifier, for: indexPath)
             result = headerView
-        case UICollectionView.elementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier, for: indexPath)
-            footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
-            self.footerView = footerView as? PersonalizationPickInterestsFooterView
-            self.footerView?.delegate = self
-            guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return footerView}
-            self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
-            result = footerView
+//        case UICollectionView.elementKindSectionFooter:
+//            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier, for: indexPath)
+//            footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
+//            self.footerView = footerView as? PersonalizationPickInterestsFooterView
+//            self.footerView?.delegate = self
+//            guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return footerView}
+//            self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+//            result = footerView
         default: fatalError("Unhandlad behaviour")
         }
         return result
