@@ -12,12 +12,12 @@ protocol PersonalizationPickInterestsFooterViewDelegate: AnyObject {
     func personalizationPickInterestsFooterDidTapNext(sender: Any)
 }
 
-final class PersonalizationPickInterestsFooterView: UICollectionReusableView {
+final class PersonalizationPickInterestsFooterView: UIView {
 
     public weak var delegate: PersonalizationPickInterestsFooterViewDelegate?
     
-    @IBOutlet weak var nextButton: BorderButton!
-    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet private weak var nextButton: BorderButton!
+    @IBOutlet private weak var textLabel: UILabel!
     
     public func setNextButtonHidden(hidden: Bool) {
         
@@ -28,7 +28,7 @@ final class PersonalizationPickInterestsFooterView: UICollectionReusableView {
         }
     }
     
-    @IBAction func onNextButtonTap(_ sender: Any) {
+    @IBAction private func onNextButtonTap(_ sender: Any) {
         
         self.delegate?.personalizationPickInterestsFooterDidTapNext(sender: self)
     }

@@ -110,7 +110,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
         self.collectionView?.dataSource = self
         self.collectionView?.register(UINib.init(nibName: "RoundedTextCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: RoundedTextCollectionViewCell.reuseIdentifier)
         self.collectionView?.allowsSelection = true
-        self.collectionView?.allowsMultipleSelection = true
+        self.collectionView?.allowsMultipleSelection = false
     }
 }
 
@@ -166,20 +166,6 @@ extension PersonalizationTitlePickerSectionView: UICollectionViewDelegate, UICol
         
         guard let sources = sources else {return}
         guard let indexPaths = self.collectionView?.indexPathsForSelectedItems else {return}
-        let selected = indexPaths.map { indexPath in
-            sources[indexPath.row]
-        }
-        self.delegate?.personalizationTitlePickerDidPickSources(sender: self, sources: selected)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
-        guard let sources = sources else {return}
-        guard let indexPaths = self.collectionView?.indexPathsForSelectedItems else {
-            self.delegate?.personalizationTitlePickerDidPickSources(sender: self, sources: nil)
-            return
-        }
-        
         let selected = indexPaths.map { indexPath in
             sources[indexPath.row]
         }

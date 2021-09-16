@@ -23,14 +23,14 @@ final class RoundedTextCollectionViewCell: UICollectionViewCell {
         didSet {
             guard let textLabel = textLabel else {return}
             guard let cornerView = cornerView else {return}
-            cornerView.backgroundColor = UIColor.init(hexString: isSelected ? "#000000" : "#FFFFFF")
+            cornerView.backgroundColor = UIColor.init(hexString: isSelected ? "#0062FF" : "#FFFFFF")
             textLabel.textColor = UIColor.init(hexString: isSelected ? "#FFFFFF" : "#09141F")
         }
     }
     
     override var isHighlighted: Bool {
         didSet {
-            cornerView.backgroundColor = UIColor.init(hexString: self.isSelected ? "#000000" : "#FFFFFF", alpha: isHighlighted ? 0.7 : 1.0)
+            cornerView.backgroundColor = UIColor.init(hexString: self.isSelected ? "#0062FF" : "#FFFFFF", alpha: isHighlighted ? 0.7 : 1.0)
             textLabel.textColor = UIColor.init(hexString: self.isSelected ? "#FFFFFF" : "#09141F", alpha: isHighlighted ? 0.7 : 1.0)
         }
     }
