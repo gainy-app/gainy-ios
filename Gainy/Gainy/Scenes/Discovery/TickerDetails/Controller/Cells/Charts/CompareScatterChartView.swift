@@ -99,13 +99,19 @@ struct CompareScatterChartView: View {
     }
     
     private var chartView: some View {
+        GeometryReader{ geometry in
+        ZStack {
+            Rectangle().fill().foregroundColor(Color.green)
         ZStack {
             ForEach(viewModel.comparableStocks) { stock in                
-                LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: Styles.lineChartStyleDrop, isMedianVisible: .constant(false))
+                LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: Styles.lineChartStyleDrop, viewModel: LineViewModel())
             }
         }
         .padding(.all, 0)
         .animation(.linear)
+        }        
+        .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
+        }
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {

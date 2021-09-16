@@ -73,6 +73,7 @@ final class ViewControllerFactory {
             }
         }
         vc.onShowCardDetails = { ticker in
+            vc.postLeaveAnalytics()
             coordinator.showCardDetailsViewController(TickerInfo(ticker: ticker))
         }
         return vc

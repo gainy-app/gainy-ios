@@ -10,7 +10,7 @@ import PureLayout
 
 class CompareStockFieldsView: UIView {
     
-    private let fields = ["Stock price", "Growth rate", "Revenues", "Net Income"]
+    private let fields = ["Stock price", MarketDataField.evs.title, MarketDataField.growsRateYOY.title, MarketDataField.netProfit.title, MarketDataField.marketCap.title, MarketDataField.monthToDay.title ]
     
     private func makeBtn(_ title: String) -> ResponsiveButton {
         let btn = ResponsiveButton()

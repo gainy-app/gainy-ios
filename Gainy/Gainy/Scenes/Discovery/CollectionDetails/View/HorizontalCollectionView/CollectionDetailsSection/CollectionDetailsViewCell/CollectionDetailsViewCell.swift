@@ -192,7 +192,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID, "tickerSymbol" : cards[indexPath.row].rawTicker.symbol, "tickerName" : cards[indexPath.row].rawTicker.name])
+        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID,
+                                                           "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
+                                                           "tickerName" : cards[indexPath.row].rawTicker.name])
         onCardPressed?(cards[indexPath.row].rawTicker)
     }
 }
@@ -211,7 +213,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             )
             //stocks_view_changed
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "grid"])
+            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid"])
         } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
             collectionListHeader.isHidden = false
             internalCollectionView.frame = CGRect(

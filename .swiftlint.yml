@@ -222,6 +222,9 @@ type_body_length:
   warning: 500
 vertical_whitespace:
   max_empty_lines: 2
+  
+# implicitly
+line_length: 300
 
 excluded: # paths to ignore during linting. Takes precedence over `included`.
  - build

@@ -19,6 +19,6 @@ public struct MagnifierRect: View {
                 .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                 .foregroundColor(Color(hex: "E0E6EA"))
                 .frame(width: 1)
-        }.frame(height: 160)
+        }.frame(height: 180)
     }
 }

@@ -33,75 +33,74 @@ protocol RemotePricable {
     }
 }
 
-//Adding missing fields from old Model
+// Adding missing fields from old Model
 extension SearchTickersQuery.Data.Ticker: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
     
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 
 extension SearchTickersQuery.Data.Ticker.TickerFinancial: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
     
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 
 //MARK: - Fetching extra fields for Tickrs from other storage
 extension FetchLiveTickersDataQuery.Data.FetchLivePrice: RemotePricable {
     var currentPrice: Float {
-        return Float(close ?? 0.0) + Float(dailyChange ?? 0.0)
+        Float(close ?? 0.0) + Float(dailyChange ?? 0.0)
     }
     
     var priceChangeToday: Float {
-        return Float(dailyChangeP ?? 0.0)
+        Float(dailyChangeP ?? 0.0)
     }
 }
 
 extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
-    
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 
 extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerFinancial: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
     
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 
 extension AltStockTicker: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
     
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 
 extension FetchAltStocksQuery.Data.TickerInterest.Interest.TickerInterest.Ticker.TickerFinancial: RemotePricable {
     var currentPrice: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
     }
     
     var priceChangeToday: Float {
-        return TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
+        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
 }
 

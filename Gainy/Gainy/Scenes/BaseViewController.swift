@@ -117,6 +117,36 @@ class BaseViewController: UIViewController {
         hudProgress?.hide(animated: true)
         isNetworkLoading = false
     }
+    
+    //MARK: - Analytics
+    
+    private var loadTime: Date = Date()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadTime = Date()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        postLeaveAnalytics()
+    }
+    
+    func postLeaveAnalytics() {
+        var initialParams = ["screen_id" : String(describing: self).components(separatedBy: ".").last!,
+                             "user_id" : "anonymous",
+                             "start_ts" : loadTime.timeIntervalSinceReferenceDate,
+                             "end_ts" : Date().timeIntervalSinceReferenceDate,
+                             "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate] as [String : AnyHashable]
+        if let tickerVC = self as? TickerViewController {
+            initialParams["ticker_symbol"] = tickerVC.viewModel?.ticker.symbol ?? "-"
+        }
+        if let collectionsVC = self as? CollectionDetailsViewController {
+            initialParams["collection_id"] = collectionsVC.collectionID
+        }
+        GainyAnalytics.logEvent("gios_screen_view", params: initialParams)
+    }
 }
 
 extension BaseViewController: UIGestureRecognizerDelegate {

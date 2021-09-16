@@ -152,19 +152,23 @@ struct ScatterChartView: View {
                 
                 Spacer()
                 //Right Stock price
-                VStack {
+                VStack(alignment: .trailing) {
                     HStack(alignment: .lastTextBaseline, spacing: 2) {
                         Text(statsDay)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
-                        Text(ticker?.tickerFinancials.last?.priceChangeToday.percent ?? "")
+                        Text(ticker?.priceChangeToday.percent ?? "")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
+                    }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                    HStack {
+                        Spacer()
+                        Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (ticker?.currentPrice.price ?? ""))
+                            .foregroundColor(ticker?.priceColor.uiColor ?? .black)
+                            .font(UIFont.compactRoundedMedium(20).uiFont)
+                            .animation(.none)
                     }
-                    Text(ticker?.tickerFinancials.last?.currentPrice.price ?? "")
-                        .foregroundColor(ticker?.priceColor.uiColor ?? .black)
-                        .font(UIFont.compactRoundedMedium(20).uiFont)
                     
                 }
                 .padding(.trailing, 20)
@@ -187,14 +191,20 @@ struct ScatterChartView: View {
         }
     }
     
+    @ObservedObject
+    var lineViewModel: LineViewModel = LineViewModel()
+    
+    private let chartHeight: CGFloat = 147.0
+    private let chartOffset: CGFloat = 0.0
+    
     let medianPoints: [Double] = [8,54,23,32,12,37,7,23,43].shuffled()
     private var chartView: some View {
+        GeometryReader{ geometry in
         ZStack {
-            
             if chartData.points.count > 1 {
-                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, isMedianVisible: $isMedianVisible).offset(y: -40)
+                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
             }            
-            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, isMedianVisible: $isMedianVisible).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
+            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, viewModel: lineViewModel).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -208,12 +218,40 @@ struct ScatterChartView: View {
             .opacity(isLeftDurationVis ? 1.0 : 0.0)
             .opacity(isMedianVisible ? 0.0 : 1.0)
             .padding(.bottom, -5)
-            //ScatterChart(symbolColor: Color(hex: "FC5058"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
-            //ScatterChart(symbolColor: Color(hex: "0062FF"), isMedianVisible: $isMedianVisible, selectedTag: $selectedTag)
-             //   .opacity(isMedianVisible ? 1.0 : 0.0)
         }
         .padding(.all, 0)
         .animation(.linear)
+        .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
+        .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
+        .onChanged({ value in
+            lineViewModel.dragLocation = value.location
+            lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+            lineViewModel.opacity = 1
+            lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+            lineViewModel.hideHorizontalLines = true
+        })
+            .onEnded({ value in
+                lineViewModel.opacity = 0
+                lineViewModel.hideHorizontalLines = false
+                lineViewModel.indicatorLocation = .zero
+            }
+            )
+        )
+        }
+    }
+    
+    func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
+        let points = chartData.onlyPoints()
+        let stepWidth: CGFloat = width / CGFloat(points.count-1)
+        let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
+        
+        let index:Int = Int(floor((toPoint.x-15)/stepWidth))
+        if (index >= 0 && index < points.count){
+            lineViewModel.currentDataNumber = chartData.points[index].0
+            lineViewModel.currentDataValue = Float(chartData.points[index].1).price
+            return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
+        }
+        return .zero
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {

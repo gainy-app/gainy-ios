@@ -56,6 +56,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initFirebase() {
         FirebaseApp.configure()
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        GainyAnalytics.logEvent("app_open", params: ["user_id" : "anonymous"])
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        GainyAnalytics.logEvent("app_close", params: ["user_id" : "anonymous"])
+    }
 }
 
 extension AppDelegate: AppsFlyerLibDelegate {

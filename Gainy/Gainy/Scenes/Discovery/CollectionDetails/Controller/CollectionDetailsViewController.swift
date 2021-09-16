@@ -21,6 +21,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var fpc: FloatingPanelController!
     private var currentCollectionToChange: Int = 0
 
+    
+    //Analytics
+    var collectionID: Int {
+        let visibleRect = CGRect(origin: collectionDetailsCollectionView.contentOffset, size: collectionDetailsCollectionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint)
+        return viewModel?.collectionDetails[visibleIndexPath?.row ?? 0].id ?? 0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
