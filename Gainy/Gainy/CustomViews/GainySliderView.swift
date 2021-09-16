@@ -176,9 +176,9 @@ final class GainySliderView: UIView {
         let sliderThumb = slider.thumbRect(forBounds: slider.bounds, trackRect: sliderTrack, value: slider.value)
         let textWidth = self.valueLabel.text?.sizeOfString(usingFont: self.valueLabel.font).width ?? 0.0
         var centerX = sliderThumb.origin.x + slider.frame.origin.x + 12
-        let centerY = slider.frame.origin.y - 28.0
+        let centerY = slider.frame.origin.y - 22.0
         
-        self.valueLabelArrow.center = CGPoint(x: centerX, y: slider.frame.origin.y - 12.0)
+        self.valueLabelArrow.center = CGPoint(x: centerX, y: slider.frame.origin.y - 6.0)
         
         let halfWidth = (textWidth + edgeInsets) / 2.0
         if centerX <= halfWidth {
