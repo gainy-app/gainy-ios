@@ -9,18 +9,18 @@ private enum CollectionDetailsSection: Int, CaseIterable {
 
 final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {    
     // MARK: Internal
-
+    
     // MARK: Properties
-
+    
     var viewModel: CollectionDetailsViewModelProtocol?
-
+    
     var onDiscoverCollections: (() -> Void)?
     var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)?
     
     //Panel
     private var fpc: FloatingPanelController!
     private var currentCollectionToChange: Int = 0
-
+    
     
     //Analytics
     var collectionID: Int {
@@ -32,7 +32,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.Gainy.white
         let navigationBarContainer = UIView(
             frame: CGRect(
@@ -43,7 +43,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
         )
         navigationBarContainer.backgroundColor = UIColor.Gainy.white
-
+        
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
                 x: navigationBarContainer.bounds.width - (32 + 20),
@@ -52,12 +52,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 height: 32
             )
         )
-
+        
         discoverCollectionsButton.setImage(UIImage(named: "discover-collections"), for: .normal)
         discoverCollectionsButton.addTarget(self,
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
-
+        
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
         let searchTextView = UITextField(
@@ -68,7 +68,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 height: 40
             )
         )
-
+        
         searchTextView.font = UIFont(name: "SFProDisplay-Regular", size: 16)
         searchTextView.textColor = UIColor(named: "mainText")
         searchTextView.layer.cornerRadius = 16
@@ -82,7 +82,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 height: 24
             )
         )
-
+        
         let searchIconImageView = UIImageView(
             frame: CGRect(
                 x: 14,
@@ -91,13 +91,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 height: 24
             )
         )
-
+        
         searchIconContainerView.addSubview(searchIconImageView)
-
+        
         searchIconImageView.contentMode = .center
         searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
         searchIconImageView.image = UIImage(named: "search")
-
+        
         searchTextView.leftView = searchIconContainerView
         searchTextView.leftViewMode = .always
         searchTextView.rightViewMode = .whileEditing
@@ -126,10 +126,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         self.searchTextView = searchTextView
         
         view.addSubview(navigationBarContainer)
-
+        
         let navigationBarTopOffset =
             navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
-
+        
         collectionDetailsCollectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
@@ -144,14 +144,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         collectionDetailsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         collectionDetailsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-
+        
         collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
-
+        
         collectionDetailsCollectionView.backgroundColor = .clear
         collectionDetailsCollectionView.showsVerticalScrollIndicator = false
         collectionDetailsCollectionView.dragInteractionEnabled = true
         collectionDetailsCollectionView.bounces = false
-
+        
         collectionDetailsCollectionView.dataSource = dataSource
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
@@ -163,7 +163,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 viewModel: modelItem,
                 position: indexPath.row
             )
-
+            
             if let cell = cell as? CollectionDetailsViewCell {
                 if let model = modelItem as? CollectionDetailViewCellModel {
                     cell.tag = model.id
@@ -183,7 +183,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.present(self.fpc, animated: true, completion: nil)
                 }
             }
-
+            
+            //Paging
+            if (indexPath.row + 1 == self?.viewModel?.collectionDetails.count ?? 0) && (self?.viewModel?.hasMorePages ?? false) {
+                self?.loadNextCollections()
+            }
+            
             return cell
         }
         
@@ -201,7 +206,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-
+        
         searchCollectionView.backgroundColor = .clear
         searchCollectionView.showsVerticalScrollIndicator = false
         searchCollectionView.dragInteractionEnabled = true
@@ -213,7 +218,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         getRemoteData {
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()
-
+                
                 self?.centerInitialCollectionInTheCollectionView()
             }
         }
@@ -271,38 +276,38 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
         GainyAnalytics.logEvent("collections_search_ended")
-//        let oldFrame = CGRect(
-//            x: 16,
-//            y: 24,
-//            width: self.view.bounds.width - (16 + 16 + 32 + 20),
-//            height: 40
-//        )
-//        UIView.animate(withDuration: 0.3) {
-//            self.collectionDetailsCollectionView.alpha = 1.0
-//            self.searchCollectionView.alpha = 0.0
-//            self.discoverCollectionsBtn?.alpha = 1.0
-//            self.searchTextView?.frame = oldFrame
-//        }
+        //        let oldFrame = CGRect(
+        //            x: 16,
+        //            y: 24,
+        //            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+        //            height: 40
+        //        )
+        //        UIView.animate(withDuration: 0.3) {
+        //            self.collectionDetailsCollectionView.alpha = 1.0
+        //            self.searchCollectionView.alpha = 0.0
+        //            self.discoverCollectionsBtn?.alpha = 1.0
+        //            self.searchTextView?.frame = oldFrame
+        //        }
     }
-
+    
     // MARK: Private
-
+    
     // MARK: Properties
-
+    
     private lazy var sections: [SectionLayout] = [
         HorizontalFlowSectionLayout(),
     ]
-
+    
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
             self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
     }()
-
+    
     private var collectionDetailsCollectionView: UICollectionView!
     private var searchCollectionView: UICollectionView!
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     
@@ -311,8 +316,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var searchTextView: UITextField?
     
     // MARK: Functions
-
-    private func getRemoteData(completion: @escaping () -> Void) {
+    
+    private func getRemoteData( completion: @escaping () -> Void) {
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
@@ -331,8 +336,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = Array(collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0}).prefix(20))
-
+                DummyDataSource.remoteRawCollectionDetails = collections
+                
+                //Paging
+                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
+                self?.viewModel?.hasMorePages = (collections.count == 20)
+                
                 //Fetching Tickers prices
                 var tickerSymbols: [String] = []
                 DummyDataSource.remoteRawCollectionDetails.forEach({
@@ -349,7 +358,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                 })!
                             )
                         }
-
+                    
                     let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
                         .recommendedCollections
                         .compactMap { recommendedCollection in
@@ -359,18 +368,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                 })!
                             )
                         }
-
+                    
                     DummyDataSource.collectionDetails.removeAll()
                     DummyDataSource.collectionDetails.append(
                         contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
                             CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
                         })
                     )
-
-    //                DummyDataSource.collectionDetails.append(
-    //                    contentsOf: recommendedCollectionDetails
-    //                )
-
+                    
+                    //                DummyDataSource.collectionDetails.append(
+                    //                    contentsOf: recommendedCollectionDetails
+                    //                )
+                    
+                    
                     DispatchQueue.main.async {
                         self?.initViewModelsFromData()
                         completion()
@@ -385,37 +395,116 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
         }
     }
-
+    
+    fileprivate func loadNextCollections() {
+        guard haveNetwork else {
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
+        guard !isNetworkLoading else {
+            return
+        }
+        guard viewModel?.hasMorePages ?? false else {
+            return
+        }
+        DispatchQueue.main.async { [weak self] in
+            self?.showNetworkLoader()
+        }
+        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: viewModel?.collectionOffset ?? 0)) { [weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let collections = graphQLResult.data?.collections else {
+                    self?.hideLoader()
+                    return
+                }
+                DummyDataSource.remoteRawCollectionDetails.append(contentsOf: collections)
+                
+                //Paging
+                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
+                self?.viewModel?.hasMorePages = (collections.count == 20)
+                
+                //Fetching Tickers prices
+                var tickerSymbols: [String] = []
+                collections.forEach({
+                    tickerSymbols.append(contentsOf: $0.tickerCollections.compactMap({$0.ticker?.symbol}))
+                })
+                TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
+                    
+                    //                    let yourCollectionDetails: [CollectionDetails] = collections
+                    //                        .compactMap { yourCollection in
+                    //                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
+                    //                                DummyDataSource.remoteRawCollectionDetails.first(where: {
+                    //                                    $0.id == yourCollection.id
+                    //                                })!
+                    //                            )
+                    //                        }
+                    //
+                    //                    let recommendedCollectionDetails: [CollectionDetails] = collections
+                    //                        .compactMap { recommendedCollection in
+                    //                            CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
+                    //                                DummyDataSource.remoteRawCollectionDetails.first(where: {
+                    //                                    $0.id == recommendedCollection.id
+                    //                                })!
+                    //                            )
+                    //                        }
+                    
+                    //Adding to storage
+                    let newDetails = collections.compactMap( {
+                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
+                    })
+                    DummyDataSource.collectionDetails.append(contentsOf: newDetails)
+                    
+                    //Adding to View Model
+                    let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
+                    self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
+                    
+                    DispatchQueue.main.async {
+                        if var snapshot = self?.dataSource?.snapshot() {
+                            snapshot.appendItems(detailsDTO,
+                                                 toSection: .collectionWithCards)
+                            
+                            self?.dataSource?.apply(snapshot, animatingDifferences: false)
+                        }
+                        self?.hideLoader()
+                    }
+                }
+            case .failure(let error):
+                print("Failure when making GraphQL request. Error: \(error)")
+                self?.hideLoader()
+            }
+        }
+    }
+    
     @objc
     private func discoverCollectionsButtonTapped() {
         GainyAnalytics.logEvent("discover_collections_pressed")
         onDiscoverCollections?()
     }
-
+    
     // TODO: 1: implement class to have navBarContainer view
     private func createNavigationBarContainer() -> UIView {
         UIView()
     }
-
+    
     func centerInitialCollectionInTheCollectionView() {
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
-
+        
         collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
                                                      at: .centeredHorizontally,
                                                      animated: false)
     }
-
+    
     private func initViewModelsFromData() {
         viewModel?.collectionDetails = DummyDataSource
             .collectionDetails
             .map { CollectionDetailsViewModelMapper.map($0) }
     }
-
+    
     private func initViewModels() {
         snapshot.appendSections([.collectionWithCards])
         snapshot.appendItems(viewModel?.collectionDetails ?? [],
                              toSection: .collectionWithCards)
-
+        
         dataSource?.apply(snapshot, animatingDifferences: false)
     }
     
@@ -424,11 +513,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         fpc = FloatingPanelController()
         fpc.layout = MyFloatingPanelLayout()
         let appearance = SurfaceAppearance()
-
+        
         // Define corner radius and background color
         appearance.cornerRadius = 16.0
         appearance.backgroundColor = .clear
-
+        
         // Set the new appearance
         fpc.surfaceView.appearance = appearance
         
@@ -456,13 +545,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
-                switch state {
-                case .full,
-                     .half,
-                     .tip: return 0.3
-                default: return 0.0
-                }
+            switch state {
+            case .full,
+                 .half,
+                 .tip: return 0.3
+            default: return 0.0
             }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -476,7 +565,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             getRemoteData {
                 DispatchQueue.main.async { [weak self] in
                     self?.initViewModels()
-
+                    
                     self?.centerInitialCollectionInTheCollectionView()
                 }
             }
@@ -496,10 +585,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }) else {return}
         
         guard let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
-        if let model = anyHashable as? CollectionDetailViewCellModel {
-            return model.id == destInd
-        }
-        return false
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == destInd
+            }
+            return false
         }) else {return}
         
         snapshot.moveItem(sourceItem, beforeItem: destItem)
@@ -532,7 +621,7 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-      }
+    }
 }
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {

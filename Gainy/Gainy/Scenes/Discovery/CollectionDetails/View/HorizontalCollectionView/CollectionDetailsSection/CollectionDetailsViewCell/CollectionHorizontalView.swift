@@ -59,7 +59,7 @@ final class CollectionHorizontalView: UIView {
         label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textColor = UIColor.Gainy.white
 
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
 
@@ -253,7 +253,7 @@ final class CollectionHorizontalView: UIView {
             ]
         )
 
-        let nameHeight: CGFloat = 24
+        let nameHeight: CGFloat = 27
         let minDescHeight: CGFloat = neededSize.width > availableWidth ? 32 : 16
 //        let pairedHeight = nameHeight + 4 + minDescHeight
 

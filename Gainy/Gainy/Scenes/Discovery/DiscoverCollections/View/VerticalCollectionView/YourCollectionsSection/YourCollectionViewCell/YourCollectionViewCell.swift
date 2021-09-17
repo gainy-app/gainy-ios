@@ -52,7 +52,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
         label.textColor = UIColor.Gainy.white
         
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         

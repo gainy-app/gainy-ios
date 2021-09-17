@@ -337,7 +337,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         // TODO: keeping local order, make it more robust and flexible
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
-        DummyDataSource.remoteRawCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        DummyDataSource.remoteRawCollectionDetails.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
@@ -382,8 +382,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         func fillSections(){
             //TODO: - Check that Profile ID is in
-            let yourCollectionsDto = DummyDataSource.remoteRawCollections
-            let recommendedDto = DummyDataSource.remoteRawCollections.prefix(20).shuffled()
+            let yourCollectionsDto = DummyDataSource.remoteRawCollectionDetails
+            let recommendedDto = DummyDataSource.remoteRawCollectionDetails.prefix(20).shuffled()
             DummyDataSource.yourCollections = yourCollectionsDto.map {
                 CollectionDTOMapper.map($0)
             }
@@ -392,43 +392,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
-        guard DummyDataSource.remoteRawCollections.count == 0 else {
-            fillSections()
-            initViewModelsFromData()
-            completion()
-            return
-        }
-        guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            return
-        }
-        showNetworkLoader()
-        Network.shared.apollo.fetch(query: DiscoverCollectionsQuery()) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let graphQLResult):
-                
-                guard let collections = graphQLResult.data?.collections else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
-                    self.hideLoader()
-                    completion()
-                    return
-                }
-                
-                DummyDataSource.remoteRawCollections = Array(collections.sorted(by: {$0.tickerCollectionsAggregate.aggregate?.count ?? 0 > $1.tickerCollectionsAggregate.aggregate?.count ?? 0}).prefix(10))                
-                
-                fillSections()
-                
-                self.initViewModelsFromData()
-                completion()
-                
-            case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
-                self.initViewModels()
-                completion()
-            }
-            self.hideLoader()
-        }
+        fillSections()
+        self.initViewModelsFromData()
+        completion()        
     }
 }
 
@@ -442,7 +408,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             )
             GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours"])
         } else {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollections[indexPath.row].id, "type" : "recommended"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollectionDetails[indexPath.row].id, "type" : "recommended"])
         }
         position += indexPath.row
         

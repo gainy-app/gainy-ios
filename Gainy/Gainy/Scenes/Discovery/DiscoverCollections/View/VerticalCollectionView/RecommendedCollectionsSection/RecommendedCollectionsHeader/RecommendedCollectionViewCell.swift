@@ -34,8 +34,8 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.isOpaque = true
-
+        imageView.isOpaque = true        
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
 
@@ -158,7 +158,14 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
-        backImageView.image = UIImage(named: name.lowercased())
+        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
+        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ], progressBlock: nil, completionHandler: nil)
+        backImageView.contentMode = .scaleAspectFill
 
         nameLabel.text = name
         nameLabel.sizeToFit()

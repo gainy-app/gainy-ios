@@ -1,5 +1,5 @@
 enum CollectionDTOMapper {
-    static func map(_ dto: DiscoverCollectionsQuery.Data.Collection) -> Collection {
+    static func map(_ dto: DiscoverCollectionDetailsQuery.Data.Collection) -> Collection {
         
         //TODO: - profileFavoriteCollections check current User Profile ID
         return Collection(
