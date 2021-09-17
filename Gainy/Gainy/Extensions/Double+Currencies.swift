@@ -25,9 +25,26 @@ extension Double {
         formatter.maximumFractionDigits = 2
         formatter.locale = Locale.init(identifier: "en_US")
 
+        let number = NSNumber(value: self * 100)
+        let formattedValue = formatter.string(from: number)!
+        if (self == 0.0) {
+            return "\(formattedValue)%"
+        }
+        return "\(formattedValue)%"
+    }
+    
+    var percentRaw: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.init(identifier: "en_US")
+
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!
-        return "\(self > 0 ? "+" : "-")\(formattedValue)%"
+        if (self == 0.0) {
+            return "\(formattedValue)%"
+        }
+        return "\(formattedValue)%"
     }
     
     func formatUsingAbbrevation () -> String {
@@ -59,7 +76,7 @@ extension Double {
             numFormatter.minimumFractionDigits = 0
             numFormatter.maximumFractionDigits = 2
 
-        return numFormatter.string(from: NSNumber(value:value))!
+        return "$" + numFormatter.string(from: NSNumber(value:value))!
     }
 }
 
@@ -76,6 +93,17 @@ extension Float {
     }
     
     var percent: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.init(identifier: "en_US")
+
+        let number = NSNumber(value: self * 100.0)
+        let formattedValue = formatter.string(from: number)!
+        return "\(formattedValue)%"
+    }
+    
+    var percentRaw: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -115,6 +143,6 @@ extension Float {
             numFormatter.minimumFractionDigits = 0
             numFormatter.maximumFractionDigits = 2
 
-        return numFormatter.string(from: NSNumber(value:value))!
+        return "$" + numFormatter.string(from: NSNumber(value:value))!
     }
 }

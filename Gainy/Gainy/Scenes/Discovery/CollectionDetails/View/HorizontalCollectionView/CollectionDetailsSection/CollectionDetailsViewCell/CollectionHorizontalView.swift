@@ -49,7 +49,7 @@ final class CollectionHorizontalView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
-
+        imageView.backgroundColor = .lightGray
         return imageView
     }()
 

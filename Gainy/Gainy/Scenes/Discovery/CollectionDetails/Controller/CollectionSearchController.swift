@@ -148,19 +148,6 @@ final class CollectionSearchController: NSObject {
         
         loading?(true)
         let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                self?.news = graphQLResult.data?.fetchNewsData ?? []
-                dispatchGroup.leave()
-                break
-            case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
-                break
-            }
-        })
         
         dispatchGroup.enter()
         networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
@@ -168,7 +155,7 @@ final class CollectionSearchController: NSObject {
             case .success(let graphQLResult):
                 
                 self?.stocks = graphQLResult.data?.tickers ?? []
-                TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap(\.symbol)) {                    
+                TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap(\.symbol)) {
                     dispatchGroup.leave()
                 }
                 
@@ -180,19 +167,38 @@ final class CollectionSearchController: NSObject {
             }
         })
         
-        dispatchGroup.enter()
-        networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                self?.collections = graphQLResult.data?.collections ?? []
-                dispatchGroup.leave()
-                break
-            case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
-                break
-            }
-        })
+        //Searching for news and collection only in this case
+        if text.count > 2 {
+            dispatchGroup.enter()
+            networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    self?.news = graphQLResult.data?.fetchNewsData ?? []
+                    dispatchGroup.leave()
+                    break
+                case .failure(let error):
+                    print("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup.leave()
+                    break
+                }
+            })
+            
+            
+            
+            dispatchGroup.enter()
+            networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    self?.collections = graphQLResult.data?.collections ?? []
+                    dispatchGroup.leave()
+                    break
+                case .failure(let error):
+                    print("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup.leave()
+                    break
+                }
+            })
+        }
         
         dispatchGroup.notify(queue: searchQueue) {
             print("SEARCH ENDED")

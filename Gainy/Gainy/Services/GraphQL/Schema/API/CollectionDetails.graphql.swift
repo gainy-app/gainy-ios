@@ -8,8 +8,12 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query DiscoverCollectionDetails {
-      collections {
+    query DiscoverCollectionDetails($offset: Int!) {
+      collections(
+        limit: 20
+        offset: $offset
+        order_by: {ticker_collections_aggregate: {count: desc}}
+      ) {
         __typename
         id
         image_url
@@ -69,7 +73,14 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
 
   public let operationName: String = "DiscoverCollectionDetails"
 
-  public init() {
+  public var offset: Int
+
+  public init(offset: Int) {
+    self.offset = offset
+  }
+
+  public var variables: GraphQLMap? {
+    return ["offset": offset]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -77,7 +88,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections", type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
+        GraphQLField("collections", arguments: ["limit": 20, "offset": GraphQLVariable("offset"), "order_by": ["ticker_collections_aggregate": ["count": "desc"]]], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
       ]
     }
 

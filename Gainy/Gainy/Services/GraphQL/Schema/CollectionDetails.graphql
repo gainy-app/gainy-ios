@@ -1,5 +1,5 @@
-query DiscoverCollectionDetails {
-  collections {
+query DiscoverCollectionDetails($offset: Int!) {
+  collections(limit: 20, offset: $offset, order_by: {ticker_collections_aggregate: {count: desc}}) {
     id
     image_url
     name

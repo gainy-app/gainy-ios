@@ -158,7 +158,7 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
-                        Text(ticker?.priceChangeToday.percent ?? "")
+                        Text(ticker?.priceChangeToday.percentRaw ?? "")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)

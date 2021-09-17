@@ -321,7 +321,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery()) { [weak self] result in
+        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: 0)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections else {

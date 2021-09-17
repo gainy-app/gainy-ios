@@ -28,7 +28,7 @@ final class TickerDetailsDataSource: NSObject {
     var cancellable = Set<AnyCancellable>()
     fileprivate var lastOffset: CGFloat = 0.0
     
-    private let aboutMinHeight: CGFloat = 164.0 + 44.0
+    private var aboutMinHeight: CGFloat = 164.0 + 44.0
     private let chatHeight: CGFloat = 291.0 + 10
     
     private var cellHeights: [Row: CGFloat] = [:]
@@ -45,7 +45,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.upcomingEvents] = 238.0
         cellHeights[.watchlist] = 120.0
     }
-
+    
     let ticker: TickerInfo
     
     enum Row: Int {
@@ -102,13 +102,24 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .about:
             let cell: TickerDetailsAboutViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.tickerInfo = ticker
             
             cell.cellHeightChanged = { [weak self] newHeight in
-                tableView.beginUpdates()
-                self?.cellHeights[.about] = max((self?.aboutMinHeight ?? 240.0), newHeight)
-                tableView.endUpdates()
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.about] = max((self?.aboutMinHeight ?? 208.0), newHeight)
+                    tableView.endUpdates()
+                }
             }
+            cell.minHeightUpdated = { [weak self] minHeight in
+                DispatchQueue.main.async {
+                    print("New min height: \(minHeight)")
+                    self?.aboutMinHeight = max(minHeight, self?.aboutMinHeight ?? 0.0)
+                    tableView.beginUpdates()
+                    self?.cellHeights[.about] = minHeight
+                    tableView.endUpdates()
+                }
+            }
+            cell.tickerInfo = ticker
             return cell
         case .highlights:
             let cell: TickerDetailsHighlightsViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -138,7 +149,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                     cell.setTransform(transform)
                 }
             }.store(in: &cancellable)
-
+            
             return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -202,7 +213,7 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
 
 extension TickerDetailsDataSource: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-       
+        
         let topOffset = scrollView.contentOffset.y
         if abs(lastOffset - topOffset) > 10 {
             lastOffset = topOffset

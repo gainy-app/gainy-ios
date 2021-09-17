@@ -86,7 +86,7 @@ struct CompareScatterChartView: View {
                         .foregroundColor(UIColor(hexString: "#3A4448")!.uiColor)
                         .font(UIFont.proDisplayRegular(14).uiFont)
                         .padding(.top, 2)
-                    Text("\(stock.growth.percent)")
+                    Text(stock.growth.percentRaw)
                         .foregroundColor(UIColor(hexString: "#1F2E35")!.uiColor)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                 }
