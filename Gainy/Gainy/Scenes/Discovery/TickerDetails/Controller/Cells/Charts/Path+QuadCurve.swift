@@ -145,6 +145,8 @@ extension Path {
         path.move(to: .zero)
         var p1 = CGPoint(x: 0, y: CGFloat(points[0]-offset)*step.y)
         path.addLine(to: p1)
+        path.addLine(to: CGPoint(x: 300, y: CGFloat(points[0]-offset)*step.y))
+        path.move(to: p1)
         for pointIndex in 1..<points.count {
             let p2 = CGPoint(x: step.x * CGFloat(pointIndex), y: step.y*CGFloat(points[pointIndex]-offset))
             let midPoint = CGPoint.midPointForPoints(p1: p1, p2: p2)

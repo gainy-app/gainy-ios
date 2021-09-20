@@ -16,6 +16,7 @@ public struct Line: View {
     @Binding var minDataValue: Double?
     @Binding var maxDataValue: Double?
     @Binding var indicatorVal: String
+    
     @State private var showFull: Bool = false
     @State var showBackground: Bool = true
     var gradient: GradientColor = GradientColor(start: Colors.GradientPurple, end: Colors.GradientNeonBlue)
@@ -51,7 +52,7 @@ public struct Line: View {
         return 0
     }
     var path: Path {
-        let points = self.data.onlyPoints()
+        let points = self.data.onlyPoints()        
         return curvedLines ? Path.quadCurvedPathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight), globalOffset: minDataValue) : Path.linePathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
     }
     var closedPath: Path {

@@ -70,7 +70,7 @@ enum CollectionDetailsDTOMapper {
             growthRateYOY: Float(dto.marketCapCagr_1years ?? 0.0),
             monthToDay: Float(dto.sma_30days ?? 0.0),
             netProfit : Float(dto.netProfitMargin ?? 0.0),
-            highlight: dto.highlight ?? "Highlighted text missing"
+            highlight: dto.highlight ?? ""
         )
     }
 }

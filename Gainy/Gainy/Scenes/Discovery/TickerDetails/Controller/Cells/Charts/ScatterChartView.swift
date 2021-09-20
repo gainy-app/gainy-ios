@@ -56,6 +56,7 @@ struct ScatterChartView: View {
     @State
     private var selectedTag: ChartPeriod = .d1 {
         didSet {
+            lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             delegate.range = selectedTag
             hapticTouch.impactOccurred()

@@ -27,6 +27,8 @@
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
 		3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */; };
 		3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860A26E618BF00D448AA /* CompareScatterChartView.swift */; };
+		33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */; };
+		33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33376FAC26F8AED100618CD7 /* LineViewModel.swift */; };
 		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
 		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
@@ -285,6 +287,18 @@
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStockFieldsView.swift; sourceTree = "<group>"; };
 		3336860A26E618BF00D448AA /* CompareScatterChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareScatterChartView.swift; path = Gainy/Scenes/Discovery/TickerDetails/Controller/Cells/Charts/CompareScatterChartView.swift; sourceTree = SOURCE_ROOT; };
+		33376F9626F8A75300618CD7 /* GainyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GainyModel.xcdatamodel; sourceTree = "<group>"; };
+		33376FAC26F8AED100618CD7 /* LineViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewModel.swift; sourceTree = "<group>"; };
+		33376FEB26F916D700618CD7 /* LocalTicker+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTicker+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33376FEC26F916D700618CD7 /* LocalTickerInterest+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerInterest+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33376FED26F916D700618CD7 /* LocalTickerFinancials+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerFinancials+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33376FEE26F916D700618CD7 /* LocalCollection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalCollection+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33376FEF26F916D700618CD7 /* LocalTickerIndustry+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerIndustry+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33376FF026F916D700618CD7 /* LocalCollection+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalCollection+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33376FF126F916D800618CD7 /* LocalTickerIndustry+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerIndustry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33376FF226F916D800618CD7 /* LocalTickerInterest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerInterest+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33376FF326F916D800618CD7 /* LocalTickerFinancials+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerFinancials+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33376FF426F916D800618CD7 /* LocalTicker+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTicker+CoreDataClass.swift"; sourceTree = "<group>"; };
 		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
 		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
@@ -574,6 +588,24 @@
 			path = "Compare Stocks";
 			sourceTree = "<group>";
 		};
+		33376FAE26F8AFCD00618CD7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				33376FF426F916D800618CD7 /* LocalTicker+CoreDataClass.swift */,
+				33376FEB26F916D700618CD7 /* LocalTicker+CoreDataProperties.swift */,
+				33376FEF26F916D700618CD7 /* LocalTickerIndustry+CoreDataClass.swift */,
+				33376FF126F916D800618CD7 /* LocalTickerIndustry+CoreDataProperties.swift */,
+				33376FEC26F916D700618CD7 /* LocalTickerInterest+CoreDataClass.swift */,
+				33376FF226F916D800618CD7 /* LocalTickerInterest+CoreDataProperties.swift */,
+				33376FED26F916D700618CD7 /* LocalTickerFinancials+CoreDataClass.swift */,
+				33376FF326F916D800618CD7 /* LocalTickerFinancials+CoreDataProperties.swift */,
+				33376FEE26F916D700618CD7 /* LocalCollection+CoreDataClass.swift */,
+				33376FF026F916D700618CD7 /* LocalCollection+CoreDataProperties.swift */,
+				33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		333CC15D26DCB2B600690245 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,6 +666,7 @@
 				336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */,
 				33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */,
 				33FE9E4626D519A700FABC70 /* LineView.swift */,
+				33376FAC26F8AED100618CD7 /* LineViewModel.swift */,
 				33FE9E4326D5195800FABC70 /* Helpers.swift */,
 				337D612926D514AE0048AE62 /* VHLines.swift */,
 				33FE9E3A26D518FD00FABC70 /* IndicatorPoint.swift */,
@@ -739,6 +772,7 @@
 			children = (
 				33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */,
 				33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */,
+				33376FAE26F8AFCD00618CD7 /* CoreData */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1732,6 +1766,7 @@
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
+				33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
@@ -1820,6 +1855,7 @@
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
+				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3A4A98FB2688D495008C1968 /* CollectionDetails.swift in Sources */,
@@ -2078,7 +2114,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2105,7 +2141,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 25;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2396,6 +2432,19 @@
 			productName = SwiftHEXColors;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				33376F9626F8A75300618CD7 /* GainyModel.xcdatamodel */,
+			);
+			currentVersion = 33376F9626F8A75300618CD7 /* GainyModel.xcdatamodel */;
+			path = GainyModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A930ECD265C1909000FD3EB /* Project object */;
 }

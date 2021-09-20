@@ -8,32 +8,6 @@
 
 import SwiftUI
 
-class LineViewModel: ObservableObject {
-    @Published
-    var dragLocation:CGPoint = .zero
-    
-    @Published
-    var indicatorLocation:CGPoint = .zero
-    
-    @Published
-    var closestPoint: CGPoint = .zero
-    
-    @Published
-    var opacity:Double = 0
-    
-    @Published
-    var currentDataNumber: String = ""
-    
-    @Published
-    var currentDataValue: String = ""
-    
-    @Published
-    var hideHorizontalLines: Bool = false
-    
-    @Published
-    var isMedianVisible: Bool = false
-}
-
 public struct LineView: View {
     
     @ObservedObject var data: ChartData
@@ -88,7 +62,8 @@ public struct LineView: View {
                             .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                             .foregroundColor(Color(hex: "E0E6EA"))
                             .frame(height: 1)
-                            .offset(x: 0, y: 40 + 40)
+                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
+                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
                             .opacity(viewModel.hideHorizontalLines ? 0.0 : 1.0)
                         
                         if(self.showLegend && viewModel.isMedianVisible == false && viewModel.indicatorLocation == .zero){
@@ -96,7 +71,6 @@ public struct LineView: View {
                                    frame: .constant(reader.frame(in: .local)), hideHorizontalLines: $viewModel.hideHorizontalLines, specifier: legendSpecifier)
                                 .animation(.none)
                         }
-                        
                                                 
                         Line(data: self.data,
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)),
@@ -125,6 +99,15 @@ public struct LineView: View {
         }.onAppear(perform: {
             hapticTouch.prepare()
         })
+    }
+    
+    
+    func getOpenLinePoint(frame: CGRect) -> CGPoint {
+        guard data.points.count > 0 else {return .zero}
+        
+        let points = data.onlyPoints()
+        let stepHeight: CGFloat = (frame.size.height - 30) / CGFloat(points.max()! - points.min()!)
+        return CGPoint(x: 0, y: (frame.size.height - 25) - CGFloat(points[0] - points.min()!) * stepHeight)
     }
 }
 

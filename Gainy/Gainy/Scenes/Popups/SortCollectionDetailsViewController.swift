@@ -75,6 +75,14 @@ final class SortCollectionDetailsViewController: BaseViewController {
     //MARK: - Actions
     @IBAction func sortBtnTapped(_ sender: UIButton) {
         
+        guard !sender.isSelected else {
+            ascBtn.isSelected.toggle()
+            CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
+            
+            delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sender.tag) ?? .evs).title)
+            return
+        }
+        
         view.removeConstraints(ascBtn.constraints)
         
         for (ind, val) in sortBtns.enumerated() {

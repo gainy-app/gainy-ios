@@ -34,15 +34,15 @@ class TickerInfo {
             case .dividendGrowth:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: Double(ticker.tickerFinancials.last!.dividendGrowth ?? 0.0).formatUsingAbbrevation()))
             case .evs:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).formatUsingAbbrevation()))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).formatUsingAbbrevation()))
             case .marketCap:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
             case .monthToDay:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.sma_30days ?? 0.0).percent))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.sma_30days ?? 0.0).percent))
             case .netProfit:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value:  (ticker.tickerFinancials.last!.netProfitMargin ?? 0.0).percent))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "TTM, ANNUAL", value:  (ticker.tickerFinancials.last!.netProfitMargin ?? 0.0).percent))
             case .growsRateYOY:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: (ticker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0).percent))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "TTM, ANNUAL", value: (ticker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0).percent))
             }
         }
         self.marketData = markers

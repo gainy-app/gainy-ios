@@ -165,6 +165,12 @@ extension  DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticke
     }
 }
 
+extension AltStockTicker{
+//    func toDiscovery() -> FetchAltStocksQuery.Data.TickerInterest.Interest.TickerInterest.Ticker.TickerIndustry.GainyIndustry {
+//        FetchAltStocksQuery.Data.TickerInterest.Interest.TickerInterest.Ticker.TickerIndustry.GainyIndustry.init(id: id, name: name)
+//    }
+}
+
 extension DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerInterest {
     func toSearch() -> SearchTickersQuery.Data.Ticker.TickerInterest {
         SearchTickersQuery.Data.Ticker.TickerInterest.init(symbol: symbol, interestId: interestId, interest: interest?.toSearch())
