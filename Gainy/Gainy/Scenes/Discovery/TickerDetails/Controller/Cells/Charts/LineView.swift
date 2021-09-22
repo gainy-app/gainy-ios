@@ -58,6 +58,7 @@ public struct LineView: View {
                 ZStack{
                     GeometryReader{ reader in
                         
+                        if viewModel.showCloseLine {
                         HLine()
                             .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                             .foregroundColor(Color(hex: "E0E6EA"))
@@ -65,6 +66,7 @@ public struct LineView: View {
                             .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
                             .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
                             .opacity(viewModel.hideHorizontalLines ? 0.0 : 1.0)
+                        }
                         
                         if(self.showLegend && viewModel.isMedianVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,

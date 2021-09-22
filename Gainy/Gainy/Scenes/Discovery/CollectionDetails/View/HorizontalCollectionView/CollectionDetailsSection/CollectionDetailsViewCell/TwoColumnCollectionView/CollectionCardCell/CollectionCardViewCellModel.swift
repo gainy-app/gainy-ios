@@ -11,7 +11,7 @@ struct CollectionCardViewCellModel {
     let netProfit: String
     let highlight: String
     
-    let rawTicker: DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
+    let rawTicker: RemoteTickerDetails
 }
 
 extension CollectionCardViewCellModel: Hashable {

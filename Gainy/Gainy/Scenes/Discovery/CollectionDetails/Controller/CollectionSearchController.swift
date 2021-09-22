@@ -22,12 +22,12 @@ final class CollectionSearchController: NSObject {
     static let sectionHeaderElementKind = "section-header-element-kind"
     //UI updates
     var loading: ((Bool) -> Void)?
-    var onShowCardDetails: ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)? = nil
+    var onShowCardDetails: ((RemoteTickerDetails) -> Void)? = nil
     
     //Limits
     private let resultsLimit = 100
     
-    init(collectionView: UICollectionView? = nil, callback: @escaping ((DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker) -> Void)) {
+    init(collectionView: UICollectionView? = nil, callback: @escaping ((RemoteTickerDetails) -> Void)) {
         self.collectionView = collectionView
         self.onShowCardDetails = callback
         super.init()
@@ -46,11 +46,11 @@ final class CollectionSearchController: NSObject {
                 switch self.sections[indexPath.section] {
                 case .stocks:
                     let cell: StockViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                    cell.ticker = self.stocks[indexPath.row] as? SearchTickersQuery.Data.Ticker
+                    cell.ticker = self.stocks[indexPath.row] as? RemoteTickerDetails
                     return cell
                 case .collections:
                     let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
-                    if self.collections.count > 0, let collection = self.collections[indexPath.row] as? SearchCollectionDetailsQuery.Data.Collection {
+                    if self.collections.count > 0, let collection = self.collections[indexPath.row] as? RemoteCollectionDetails {
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
@@ -154,8 +154,8 @@ final class CollectionSearchController: NSObject {
             switch result {
             case .success(let graphQLResult):
                 
-                self?.stocks = graphQLResult.data?.tickers ?? []
-                TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap(\.symbol)) {
+                self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
                     dispatchGroup.leave()
                 }
                 
@@ -189,7 +189,7 @@ final class CollectionSearchController: NSObject {
             networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
-                    self?.collections = graphQLResult.data?.collections ?? []
+                    self?.collections = (graphQLResult.data?.collections ?? []).compactMap({$0.fragments.remoteCollectionDetails})
                     dispatchGroup.leave()
                     break
                 case .failure(let error):
@@ -355,12 +355,9 @@ extension CollectionSearchController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch self.sections[indexPath.section] {
         case .stocks:
-            if let ticker = self.stocks[indexPath.row] as? SearchTickersQuery.Data.Ticker {
-                let tickerMap = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.init(symbol: ticker.symbol, name: ticker.name, description: ticker.description, tickerFinancials: ticker.tickerFinancials.map({
-                    DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker.TickerFinancial.init(peRatio: $0.peRatio, marketCapitalization: $0.marketCapitalization, highlight: $0.highlight, dividendGrowth: $0.dividendGrowth, symbol: $0.symbol, createdAt: $0.createdAt, netProfitMargin: $0.netProfitMargin, sma_30days: $0.sma_30days, marketCapCagr_1years: $0.marketCapCagr_1years, enterpriseValueToSales: $0.enterpriseValueToSales)
-                }), tickerInterests: ticker.tickerInterests.compactMap({$0.toDiscovery()}), tickerIndustries: ticker.tickerIndustries.compactMap({$0.toDiscovery()}))
+            if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol])
-                onShowCardDetails?(tickerMap)
+                onShowCardDetails?(ticker)
             }
             break
         case .collections:

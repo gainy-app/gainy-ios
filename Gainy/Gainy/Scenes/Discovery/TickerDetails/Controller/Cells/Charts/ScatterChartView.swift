@@ -106,7 +106,8 @@ struct ScatterChartView: View {
                     hapticTouch.impactOccurred()
                 }, label: {
                     HStack {
-                        Image(isMedianVisible ? "toggle_on" : "toggle_off")
+                            Image(isMedianVisible ? "toggle_on" : "toggle_off")
+                                .renderingMode(.original)
                         Text("Industry median")
                             .padding(.all, 0)
                             .font(UIFont.proDisplayRegular(13).uiFont)
@@ -123,6 +124,7 @@ struct ScatterChartView: View {
                 }, label: {
                     HStack {
                         Image("tiny plus")
+                            .renderingMode(.original)
                         Text("Compare")
                             .padding(.all, 0)
                             .font(UIFont.proDisplayRegular(13).uiFont)

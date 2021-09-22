@@ -74,7 +74,7 @@ extension Double {
             numFormatter.allowsFloats = true
             numFormatter.minimumIntegerDigits = 1
             numFormatter.minimumFractionDigits = 0
-            numFormatter.maximumFractionDigits = 2
+            numFormatter.maximumFractionDigits = 0
 
         return "$" + numFormatter.string(from: NSNumber(value:value))!
     }
@@ -141,7 +141,7 @@ extension Float {
             numFormatter.allowsFloats = true
             numFormatter.minimumIntegerDigits = 1
             numFormatter.minimumFractionDigits = 0
-            numFormatter.maximumFractionDigits = 2
+            numFormatter.maximumFractionDigits = 0
 
         return "$" + numFormatter.string(from: NSNumber(value:value))!
     }

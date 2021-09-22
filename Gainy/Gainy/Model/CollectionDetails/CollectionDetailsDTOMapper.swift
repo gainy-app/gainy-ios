@@ -1,6 +1,6 @@
 enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(
-        _ dto: DiscoverCollectionDetailsQuery.Data.Collection
+        _ dto: RemoteCollectionDetails
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
@@ -11,14 +11,14 @@ enum CollectionDetailsDTOMapper {
             isInYourCollectionsList: false,
             cards: dto.tickerCollections.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
-                    $0
+                    $0.ticker
                 )
             }
         )
     }
 
     static func mapAsCollectionFromYourCollections(
-        _ dto: DiscoverCollectionDetailsQuery.Data.Collection
+        _ dto: RemoteCollectionDetails
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
@@ -29,36 +29,28 @@ enum CollectionDetailsDTOMapper {
             isInYourCollectionsList: true,
             cards: dto.tickerCollections.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
-                    $0
+                    $0.ticker
                 )
             }
         )
     }
 
     static func mapTickerDetails(
-        _ dto: DiscoverCollectionDetailsQuery
-            .Data
-            .Collection
-            .TickerCollection
+        _ dto: RemoteCollectionDetails.TickerCollection.Ticker?
     ) -> TickerDetails {
         TickerDetails(
-            tickerSymbol: dto.ticker?.symbol ?? "",
-            companyName: dto.ticker?.name ?? "",
-            description: dto.ticker?.description ?? "",
+            tickerSymbol: dto?.fragments.remoteTickerDetails.symbol ?? "",
+            companyName: dto?.fragments.remoteTickerDetails.name ?? "",
+            description: dto?.fragments.remoteTickerDetails.description ?? "",
             financialMetrics: CollectionDetailsDTOMapper.mapFinancialMetrics(
-                (dto.ticker?.tickerFinancials.first)!
+                (dto?.fragments.remoteTickerDetails.tickerFinancials.first)!
             ),
-            rawTicker: dto.ticker ?? nil
+            rawTicker: dto?.fragments.remoteTickerDetails ?? nil
         )
     }
 
     static func mapFinancialMetrics(
-        _ dto: DiscoverCollectionDetailsQuery
-            .Data
-            .Collection
-            .TickerCollection
-            .Ticker
-            .TickerFinancial
+        _ dto: RemoteTickerDetails.TickerFinancial
     ) -> TickerFinancialMetrics {
         TickerFinancialMetrics(
             todaysPriceChange: Float(dto.priceChangeToday),

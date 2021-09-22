@@ -1,35 +1,6 @@
 query SearchTickers($text: String!) {
   tickers(where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}, {symbol: {_ilike: $text}}]}, limit: 50) {
-    symbol
-    name
-    description
-    ticker_financials {
-      pe_ratio
-      market_capitalization
-      highlight
-      dividend_growth
-      symbol
-      created_at
-      net_profit_margin
-      sma_30days
-      market_cap_cagr_1years
-      enterprise_value_to_sales
-    }
-    ticker_interests {
-      symbol
-      interest_id
-      interest {
-        icon_url
-        id
-        name
-      }
-    }
-    ticker_industries {
-      gainy_industry {
-        id
-        name
-      }
-    }
+    ...RemoteTickerDetails
   }
 }
 

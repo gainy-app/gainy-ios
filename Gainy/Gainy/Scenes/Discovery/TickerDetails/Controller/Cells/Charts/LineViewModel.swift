@@ -35,4 +35,7 @@ class LineViewModel: ObservableObject {
     
     @Published
     var chartPeriod: ScatterChartView.ChartPeriod = .d1
+    
+    @Published
+    var showCloseLine: Bool = true
 }

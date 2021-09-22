@@ -14,7 +14,7 @@ final class StockViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var growthLbl: UILabel!
     
-    var ticker: SearchTickersQuery.Data.Ticker? {
+    var ticker: RemoteTickerDetails? {
         didSet {
             if let ticker = ticker {
                 nameLbl.text = ticker.name

@@ -1,0 +1,14 @@
+query FetchStockMedianWeek($symbol: String!, $date: timestamp!) {
+    tickers(where: {symbol: {_eq: $symbol}}) {
+        ticker_industries {
+            gainy_industry {
+              ticker_industry_median_1w(where: {date: {_gte: $date}}) {
+                    median_growth_rate
+                    median_price
+                    date
+                }              
+            }
+        }
+    }
+}
+

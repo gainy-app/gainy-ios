@@ -127,7 +127,7 @@ extension TickerViewController: CollectionsBottomViewDelegate {
         let compareVC = CompareStocksViewController.instantiate(.discovery)
         
         
-        if let curStock = viewModel?.ticker.ticker.toAltTicker() {
+        if let curStock = viewModel?.ticker.ticker {
             if !(viewModel?.ticker.tickersToCompare.contains(curStock) ?? false) {
                 viewModel?.ticker.tickersToCompare.insert(curStock, at: 0)
             }

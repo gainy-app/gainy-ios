@@ -34,7 +34,7 @@ final class CompareScatterChartViewModel: ObservableObject {
 }
 
 struct CompareScatterChartView: View {
-        
+    
     @ObservedObject
     var viewModel: CompareScatterChartViewModel
     
@@ -66,7 +66,7 @@ struct CompareScatterChartView: View {
                 Spacer()
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
-                }).frame(maxHeight: 40)                
+                }).frame(maxHeight: 40)
             }
             .background(UIColor.init(hexString: "F8FBFD")!.uiColor)
         }).onAppear(perform: {
@@ -98,19 +98,22 @@ struct CompareScatterChartView: View {
         .frame(height: 48.0 + 16.0)
     }
     
+    @ObservedObject
+    var lineViewModel = LineViewModel()
+    
     private var chartView: some View {
         GeometryReader{ geometry in
-        ZStack {
-            Rectangle().fill().foregroundColor(Color.green)
-        ZStack {
-            ForEach(viewModel.comparableStocks) { stock in                
-                LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: Styles.lineChartStyleDrop, viewModel: LineViewModel())
+            ZStack {
+                ZStack {
+                    ForEach((0..<viewModel.comparableStocks.count).reversed(), id: \.self) { stockIdx in
+                        LineView(data: ChartData(points: [18,54,23,32,42,37,7,53,63].shuffled()), title: "Full chart", style: stockIdx == 0 ? Styles.lineChartStyleDrop : Styles.lineChartStyleMedian, viewModel: lineViewModel)
+                    }
+                }
+                .padding(.all, 0)
+                .animation(.linear)
             }
-        }
-        .padding(.all, 0)
-        .animation(.linear)
-        }        
-        .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
+        }.onAppear {
+            lineViewModel.showCloseLine = false
         }
     }
     
@@ -135,8 +138,8 @@ struct CompareScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }.padding(.leading, 20)
-        .padding(.trailing, 20)
-        .padding(.top, 8)
+            .padding(.trailing, 20)
+            .padding(.top, 8)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {

@@ -5,6 +5,30 @@ public typealias float8 = Float
 public typealias timestamptz = String
 public typealias numeric = Double
 
+public typealias date = Foundation.Date
+
+private let iso8601DateFormatter = ISO8601DateFormatter()
+
+extension date: JSONDecodable, JSONEncodable {
+
+    public init(jsonValue value: JSONValue) throws {
+        guard let string = value as? String else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: String.self)
+        }
+
+        guard let date = iso8601DateFormatter.date(from: string) else {
+            throw JSONDecodingError.couldNotConvert(value: value, to: Date.self)
+        }
+
+        self = date
+    }
+
+    public var jsonValue: JSONValue {
+        return iso8601DateFormatter.string(from: self)
+    }
+
+}
+
 final class Network {
     static let shared = Network()
 
@@ -27,7 +51,7 @@ final class Network {
         )
     }()
 
-    let graphQLEndpointUrl = URL(string: "https://gainy-managed-dev.herokuapp.com/v1/graphql")!
+    let graphQLEndpointUrl = URL(string: "https://hasura-production.gainy-infra.net/v1/graphql")!
 }
 
 final class NetworkInterceptorProvider: DefaultInterceptorProvider {

@@ -8,8 +8,8 @@
 import UIKit
 
 /// Ticker model to pupulate cells
-typealias RemoteTicker = DiscoverCollectionDetailsQuery.Data.Collection.TickerCollection.Ticker
-typealias AltStockTicker = FetchAltStocksQuery.Data.TickerInterest.Interest.TickerInterest.Ticker
+typealias RemoteTicker = RemoteTickerDetails
+typealias AltStockTicker = RemoteTickerDetails
 class TickerInfo {
     
     let ticker: RemoteTicker
@@ -34,7 +34,7 @@ class TickerInfo {
             case .dividendGrowth:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: Double(ticker.tickerFinancials.last!.dividendGrowth ?? 0.0).formatUsingAbbrevation()))
             case .evs:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).formatUsingAbbrevation()))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: Float(ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).cleanOneDecimal))
             case .marketCap:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
             case .monthToDay:
@@ -105,7 +105,7 @@ class TickerInfo {
             switch result {
             case .success(let graphQLResult):
                 
-                let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker})}) ?? []
+                let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
                 self?.altStocks = tickers.flatMap({$0})
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
