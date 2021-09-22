@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,22 +20,19 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_back" translatesAutoresizingMaskIntoConstraints="NO" id="gtr-WF-jbb">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVx-Fq-a39">
-                                <rect key="frame" x="109.5" y="408" width="195" height="80.5"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="70"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="aZ8-5e-GOY">
+                                <rect key="frame" x="131.5" y="421.5" width="151" height="53"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="aZ8-5e-GOY" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6WA-aC-VYz"/>
+                            <constraint firstItem="aZ8-5e-GOY" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7Mq-nV-VBf"/>
                             <constraint firstAttribute="bottom" secondItem="gtr-WF-jbb" secondAttribute="bottom" id="ABf-gN-8WH"/>
                             <constraint firstItem="gtr-WF-jbb" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="JEZ-ug-mcJ"/>
                             <constraint firstItem="gtr-WF-jbb" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="MZR-ht-rkc"/>
-                            <constraint firstItem="eVx-Fq-a39" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Tl3-d5-Sk8"/>
                             <constraint firstAttribute="trailing" secondItem="gtr-WF-jbb" secondAttribute="trailing" id="a36-r2-jjC"/>
-                            <constraint firstItem="eVx-Fq-a39" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="v7w-Zm-Q6M"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,6 +43,7 @@
     </scenes>
     <resources>
         <image name="splash_back" width="375" height="812"/>
+        <image name="splash_logo" width="151" height="53"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

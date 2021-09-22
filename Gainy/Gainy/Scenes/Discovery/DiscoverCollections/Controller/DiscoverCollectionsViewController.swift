@@ -68,7 +68,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 cell.tag = modelItem.id
                 cell.onDeleteButtonPressed = { [weak self] in
                     let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
-                        GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id])
+                        GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                         self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
                     }
                     NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
@@ -95,7 +95,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self?.addToYourCollection(collectionItemToAdd: modelItem, indexRow: indexPath.row)
                     
                     cell.isUserInteractionEnabled = true
-                    GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id])
+                    GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 }
                 
                 cell.onCheckButtonPressed = { [weak self] in
@@ -115,7 +115,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
                     
                     cell.isUserInteractionEnabled = true
-                    GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id])
+                    GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 }
             default:
                 break
@@ -326,7 +326,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row] as? YourCollectionViewCellModel
         let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row] as? YourCollectionViewCellModel
         
-        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0])
+        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
         
@@ -437,9 +437,9 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             position = collectionView.numberOfItems(
                 inSection: DiscoverCollectionsSection.yourCollections.rawValue
             )
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         } else {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollectionDetails[indexPath.row].id, "type" : "recommended"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollectionDetails[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
         position += indexPath.row
         

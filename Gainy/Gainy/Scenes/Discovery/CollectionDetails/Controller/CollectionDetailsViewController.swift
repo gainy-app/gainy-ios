@@ -178,7 +178,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self.sortingVS.collectionId = model.id
                         self.sortingVS.collectionCell = cell
                         self.currentCollectionToChange = model.id
-                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id])
+                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     }
                     self.present(self.fpc, animated: true, completion: nil)
                 }
@@ -260,7 +260,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
-        GainyAnalytics.logEvent("collections_search_started")
+        GainyAnalytics.logEvent("collections_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         UIView.animate(withDuration: 0.3) {
             self.collectionDetailsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
@@ -275,7 +275,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
-        GainyAnalytics.logEvent("collections_search_ended")
+        GainyAnalytics.logEvent("collections_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         //        let oldFrame = CGRect(
         //            x: 16,
         //            y: 24,
@@ -477,7 +477,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func discoverCollectionsButtonTapped() {
-        GainyAnalytics.logEvent("discover_collections_pressed")
+        GainyAnalytics.logEvent("discover_collections_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onDiscoverCollections?()
     }
     
@@ -626,7 +626,7 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
-        GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting])
+        GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         self.fpc.dismiss(animated: true, completion: nil)
     }
 }

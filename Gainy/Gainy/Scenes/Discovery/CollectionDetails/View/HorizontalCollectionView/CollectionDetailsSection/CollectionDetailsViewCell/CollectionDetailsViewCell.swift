@@ -194,7 +194,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID,
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
-                                                           "tickerName" : cards[indexPath.row].rawTicker.name])
+                                                           "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onCardPressed?(cards[indexPath.row].rawTicker)
     }
 }
@@ -213,7 +213,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
                 height: UIScreen.main.bounds.height - (80 + 144 + 20)
             )
             //stocks_view_changed
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid"])
+            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
             collectionListHeader.isHidden = false
             internalCollectionView.frame = CGRect(
@@ -222,7 +222,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
                 height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
             )
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list"])
+            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         }
         
         sections.swapAt(0, 1)

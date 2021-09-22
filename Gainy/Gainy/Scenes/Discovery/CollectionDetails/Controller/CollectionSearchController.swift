@@ -113,7 +113,7 @@ final class CollectionSearchController: NSObject {
                 //Search for new
                 searchQuery(searchText)
                 
-                GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText])
+                GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
             }
         }
     }
@@ -356,7 +356,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
         switch self.sections[indexPath.section] {
         case .stocks:
             if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
-                GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol])
+                GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 onShowCardDetails?(ticker)
             }
             break
@@ -366,7 +366,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {
                 if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.sourceUrl ?? "")) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    GainyAnalytics.logEvent("collections_search_news_pressed", params: ["newsID" : news.title])
+                    GainyAnalytics.logEvent("collections_search_news_pressed", params: ["newsID" : news.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 }
             }
             break

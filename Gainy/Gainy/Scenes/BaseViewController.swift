@@ -138,7 +138,8 @@ class BaseViewController: UIViewController {
                              "user_id" : "anonymous",
                              "start_ts" : loadTime.timeIntervalSinceReferenceDate,
                              "end_ts" : Date().timeIntervalSinceReferenceDate,
-                             "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate] as [String : AnyHashable]
+                             "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate,
+                             "sn": String(describing: self).components(separatedBy: ".").last!] as [String : AnyHashable]
         if let tickerVC = self as? TickerViewController {
             initialParams["ticker_symbol"] = tickerVC.viewModel?.ticker.symbol ?? "-"
         }

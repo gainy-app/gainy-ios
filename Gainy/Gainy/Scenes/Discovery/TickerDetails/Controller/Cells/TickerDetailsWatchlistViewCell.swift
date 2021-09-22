@@ -19,7 +19,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     }
     
     @IBAction func addToWatchAction(_ sender: Any) {
-        GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : tickerInfo?.symbol ?? ""])
+        GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : tickerInfo?.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
     }
 }

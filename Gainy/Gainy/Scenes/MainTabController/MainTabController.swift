@@ -81,13 +81,13 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
         switch tab {
         case .discovery:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .portfolio:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .analytics:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Analytics"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Analytics", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .profile:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile"])
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .none:
             break
         }

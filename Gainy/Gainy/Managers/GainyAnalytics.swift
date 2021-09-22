@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAnalytics
 import AppsFlyerLib
+import FirebaseAuth
 
 enum AnalyticFields: String {
     case ProtocolVersion = "v", TrackingID = "tid", ClientID = "cid", HitType = "t", CacheBuster = "z", DataSource = "ds",
@@ -28,8 +29,26 @@ final class GainyAnalytics {
     static let shared = GainyAnalytics()
     
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
-        Analytics.logEvent(name, parameters: params)
-        AppsFlyerLib.shared().logEvent(name, withValues: params)
+        var newParams = params ?? [:]
+        
+        newParams["v"] = 1
+        newParams["tid"] = UUID().uuidString
+        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
+            newParams["t"] = "screen_view"
+        } else {
+            newParams["t"] = "event"
+        }
+        newParams["ds"] = "app"
+        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
+        newParams["ul"] = Locale.current.identifier
+        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
+        if  let user = Auth.auth().currentUser {
+            newParams["uid"] = user.uid
+        }
+        newParams["ul"] = Locale.current.identifier
+        Analytics.logEvent(name, parameters: newParams)
+        AppsFlyerLib.shared().logEvent(name, withValues: newParams)
     }
     
     /// Add marketing info to extrnal link

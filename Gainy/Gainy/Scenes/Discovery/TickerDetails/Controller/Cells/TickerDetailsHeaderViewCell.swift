@@ -18,6 +18,6 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     }
     
     @IBAction func shareAction() {
-        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none"])
+        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
 }

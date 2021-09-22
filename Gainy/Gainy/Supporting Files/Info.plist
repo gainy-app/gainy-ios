@@ -28,6 +28,16 @@
 				<string>com.googleusercontent.apps.557982716849-8a791r580so1ceej43ftpqb64l68gpu6</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.gainy.application.ios</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gainyios</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>

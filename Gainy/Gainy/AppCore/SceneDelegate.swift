@@ -17,7 +17,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene,
                willConnectTo _: UISceneSession,
-               options _: UIScene.ConnectionOptions) {
+               options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else {
             return
         }
@@ -28,6 +28,34 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
 
         appCoordinator.start(with: nil)
+        
+        var isFromPush = connectionOptions.notificationResponse != nil
+        var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
+        // Determine who sent the URL.
+        if let urlContext = connectionOptions.urlContexts.first {
+
+            let sendingAppID = urlContext.options.sourceApplication
+            let url = urlContext.url
+            print("source application = \(sendingAppID ?? "Unknown")")
+            print("url = \(url)")
+
+            guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+                    let params = components.queryItems else {
+                        GainyAnalytics.logEvent("first_launch", params: fbParams)
+                        return
+                }
+
+                if let cmVal = params.first(where: { $0.name == "сm" })?.value {
+                    fbParams["cm"] = cmVal
+                }
+            if let cnVal = params.first(where: { $0.name == "cn" })?.value {
+                fbParams["cn"] = cnVal
+            }
+            if let csVal = params.first(where: { $0.name == "cs" })?.value {
+                fbParams["cs"] = csVal
+            }
+        }
+        GainyAnalytics.logEvent("first_launch", params: fbParams)
     }
 
     func sceneWillEnterForeground(_: UIScene) {
@@ -47,4 +75,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         router: Router(rootController: self.rootController),
         coordinatorFactory: CoordinatorFactory()
     )
+    
+    //MARK: - UTM/Deeplink
+        
 }
