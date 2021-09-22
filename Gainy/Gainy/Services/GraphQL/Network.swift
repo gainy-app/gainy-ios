@@ -1,9 +1,11 @@
 import Apollo
 import Foundation
+import FirebaseAuth
 
 public typealias float8 = Float
 public typealias timestamptz = String
 public typealias numeric = Double
+public typealias smallint = Int
 
 public typealias date = Foundation.Date
 
