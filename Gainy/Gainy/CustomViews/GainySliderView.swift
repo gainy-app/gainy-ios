@@ -24,7 +24,7 @@ final class GainySliderView: UIView {
     private let valueLabel: TextInsetsLabel = TextInsetsLabel.newAutoLayout()
     private let valueLabelArrow: UIImageView = UIImageView.newAutoLayout()
     
-    private var isInitialLayout: Bool = true
+    private(set) var isInitialLayout: Bool = true
     
     override init(frame: CGRect) {
         

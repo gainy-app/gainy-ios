@@ -1,0 +1,39 @@
+mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: String!, $gender: Int!, $lastName: String!, $userID: String!, $legalAddress: String!, $interests0: Int!, $interests1: Int!, $interests2: Int!, $interests3: Int!, $interests4: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!){
+  insert_app_profiles(objects: {
+    avatar_url: $avatarURL,
+    email: $email,
+    first_name: $firstName,
+    gender: $gender,
+    last_name: $lastName,
+    user_id: $userID,
+    legal_address: $legalAddress
+    profile_interests: {
+      data: [
+       { interest_id: $interests0 },
+       { interest_id: $interests1 },
+       { interest_id: $interests2 },
+       { interest_id: $interests3 },
+       { interest_id: $interests4 }
+      ]
+    },
+    profile_scoring_setting: {
+      data: {
+        average_market_return: $averageMarketReturn,
+        damage_of_failure: $damageOfFailure,
+        if_market_drops_20_i_will_buy: $marketLoss20,
+        if_market_drops_40_i_will_buy: $marketLoss40,
+        investment_horizon: $investemtHorizon,
+        risk_level: $riskLevel,
+        stock_market_risk_level: $stockMarketRiskLevel,
+        trading_experience: $tradingExperience,
+        unexpected_purchases_source: $unexpectedPurchaseSource
+      }
+    }
+  }) {
+    returning {
+      id
+    }
+  }
+}
+
+

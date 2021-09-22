@@ -2,6 +2,7 @@ import AppsFlyerLib
 import UIKit
 import Firebase
 import CoreData
+import GoogleSignIn
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -119,4 +120,14 @@ extension AppDelegate: AppsFlyerLibDelegate {
     func onConversionDataSuccess(_: [AnyHashable: Any]) {}
 
     func onConversionDataFail(_: Error) {}
+}
+
+// Google SignIn
+extension AppDelegate {
+    
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
+    }
 }

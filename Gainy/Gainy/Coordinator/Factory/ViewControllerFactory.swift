@@ -52,6 +52,18 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateAuthorization(coordinator: OnboardingCoordinator) -> AuthorizationViewController {
+        let vc = AuthorizationViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiatePersonalInfo(coordinator: OnboardingCoordinator) -> PersonalInfoViewController {
+        let vc = PersonalInfoViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()

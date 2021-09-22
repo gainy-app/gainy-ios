@@ -31,6 +31,20 @@ class BorderButton: UIButton {
         setupView()
     }
     
+    override var isHighlighted: Bool {
+        
+        didSet {
+            self.titleLabel?.alpha = isHighlighted ? 0.5 : 1.0
+        }
+    }
+    
+    override var isEnabled: Bool {
+        
+        didSet {
+            self.alpha = isEnabled ? 1.0 : 0.3
+        }
+    }
+    
     func setupView() {
         layer.cornerRadius = cornerRadius
         self.layer.borderWidth = 1.0

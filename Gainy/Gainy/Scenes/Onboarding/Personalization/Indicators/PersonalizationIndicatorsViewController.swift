@@ -44,8 +44,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private var indicatorView: UIView?
     private var currentTab: PersonalizationTab = .investmentGoals
     
-    private var selectedSources: [String]?
-    private var selectedApproaches: [String]?
+    private var selectedSources: [PersonalizationInfoValue]?
+    private var selectedApproaches: [PersonalizationInfoValue]?
     
     override func viewDidLoad() {
         
@@ -101,7 +101,16 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         
         if self.currentTab == .investingApproach {
             
-            self.coordinator?.pushOnboardingFinalizingViewController()
+            if let email = self.coordinator?.profileInfoBuilder.email {
+                if email.count > 0 {
+                    self.coordinator?.pushOnboardingFinalizingViewController()
+                } else {
+                    self.coordinator?.presentAuthorizationViewController(isOnboardingDone: true)
+                }
+            } else {
+                self.coordinator?.presentAuthorizationViewController(isOnboardingDone: true)
+            }
+            
             return
         }
         
@@ -125,6 +134,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         case .marketReturns:
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMarketReturnsHidden(isHidden: false)
+            self.setNextButtonHidden(isHidden: self.sliderViewMarketReturns.isInitialLayout)
         case .investmentHorizon:
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMoneySourceViewHidden(isHidden: true)
@@ -142,6 +152,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         case .stockMarketRisks:
             self.indicatorViewProgressObject?.progress = Float(0.75)
             self.setStockMarketRisksHidden(isHidden: false)
+            self.setNextButtonHidden(isHidden: self.sliderViewStockMarketRisks.isInitialLayout)
         case .investingApproach:
             self.indicatorViewProgressObject?.progress = Float(0.90)
             let doneButtonTitle = NSLocalizedString("Done", comment: "Done button title")
@@ -234,10 +245,10 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("Where do you get money for unexpected large\npurchases", comment: "Urgent Money Source Description")
         self.urgentMoneySourceView.configureWith(title: title)
         self.urgentMoneySourceView.configureWith(description: description)
-        let sources = [NSLocalizedString("Checking/savings", comment: "Checking/savings"),
-                       NSLocalizedString("Stock investments", comment: "Stock investments"),
-                       NSLocalizedString("Credit card", comment: "Credit card"),
-                       NSLocalizedString("Other loans", comment: "Other loans")]
+        let sources: [PersonalizationInfoValue] = [.checking_savings,
+                                                   .stock_investments,
+                                                   .credit_card,
+                                                   .other_loans]
         self.urgentMoneySourceView.configureWith(sources: sources)
         self.urgentMoneySourceView.delegate = self
     }
@@ -274,15 +285,15 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("Your experience with trading", comment: "Investing approach Description")
         self.investingApproachSourceView.configureWith(title: title)
         self.investingApproachSourceView.configureWith(description: description)
-        let sources = [NSLocalizedString("Never tried but curious", comment: "Never tried but curious"),
-                       NSLocalizedString("Have very little experience", comment: "Have very little experience"),
-                       NSLocalizedString("Invest in companies I believe in", comment: "Invest in companies I believe in"),
-                       NSLocalizedString("Invest in ETFs or safe stocks (blue chips)", comment: "Invest in ETFs or safe stocks (blue chips)"),
-                       NSLocalizedString("Advanced trader", comment: "Advanced trader"),
-                       NSLocalizedString("Daily trader", comment: "Daily trader"),
-                       NSLocalizedString("Investment funds manage for me", comment: "Investment funds manage for me"),
-                       NSLocalizedString("Professional trader (work)", comment: "Professional trader (work)"),
-                       NSLocalizedString("Don’t trade after bad experience", comment: "Don’t trade after bad experience")]
+        let sources: [PersonalizationInfoValue] = [.never_tried,
+                                                   .very_little,
+                                                   .companies_i_believe_in,
+                                                   .etfs_and_safe_stocks,
+                                                   .advanced,
+                                                   .daily_trader,
+                                                   .investment_funds,
+                                                   .professional,
+                                                   .dont_trade_after_bad_experience]
         self.investingApproachSourceView.configureWith(sources: sources)
         self.investingApproachSourceView.delegate = self
     }
@@ -323,23 +334,44 @@ extension PersonalizationIndicatorsViewController {
     }
 }
 
-extension  PersonalizationIndicatorsViewController: PersonalizationTitlePickerSectionViewDelegate {
-    func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [String]?) {
+extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSectionViewDelegate {
+    func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [PersonalizationInfoValue]?) {
         
         if self.urgentMoneySourceView == sender {
             self.selectedSources = sources
             if let selectedSources = self.selectedSources {
                 self.setNextButtonHidden(isHidden: selectedSources.count == 0)
+                if (selectedSources.count == 0) {
+                    self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = nil
+                } else {
+                    if let source = sources?.first {
+                        let unexpectedPurchasesSource = "\(source)"
+                        self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
+                    }
+                }
             } else {
                 self.setNextButtonHidden(isHidden: true)
+                self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = nil
             }
         } else if self.investingApproachSourceView == sender {
             self.selectedApproaches = sources
             if let selectedApproaches = self.selectedApproaches {
                 self.setNextButtonHidden(isHidden: selectedApproaches.count == 0)
+                if (selectedApproaches.count == 0) {
+                    self.coordinator?.profileInfoBuilder.tradingExperience = nil
+                } else {
+                    if let selectedApproach = sources?.first {
+                        let tradingExperience = "\(selectedApproach)"
+                        self.coordinator?.profileInfoBuilder.tradingExperience = tradingExperience
+                    }
+                }
             } else {
                 self.setNextButtonHidden(isHidden: true)
+                self.coordinator?.profileInfoBuilder.tradingExperience = nil
             }
+            // TODO: Borysov - Add UI with next 2 sliders in the collection view, if the first (never tried) value is selected
+            self.coordinator?.profileInfoBuilder.ifMarketDrops20IWillBuy = 0.5
+            self.coordinator?.profileInfoBuilder.ifMarketDrops40IWillBuy = 0.5
         }
     }
 }
@@ -363,7 +395,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             
         } else if sender == self.sliderViewMarketReturns {
             let valueDescriptionFormat = NSLocalizedString("%@%%", comment: "Market Returns")
-            let value = 100 * currentValue
+            let value = 50 * currentValue
             let valueString = String.init(format: valueDescriptionFormat,  "\(Int(value))")
             return valueString
         } else if sender == self.sliderViewInvestmentHorizon {
@@ -426,10 +458,46 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
         
         if sender == self.sliderViewInvestmentGoals {
             self.setCurrentTab(newTab: .marketReturns)
+            self.coordinator?.profileInfoBuilder.riskLevel = currentValue
         } else if sender == self.sliderViewInvestmentHorizon {
             self.setCurrentTab(newTab: .moneySourceView)
+            self.coordinator?.profileInfoBuilder.investmentHorizon = currentValue
         } else if sender == self.sliderViewDamageOfFailure {
             self.setCurrentTab(newTab: .stockMarketRisks)
+            self.coordinator?.profileInfoBuilder.damageOfFailure = ( 1.0 - currentValue)
+        } else {
+            self.setNextButtonHidden(isHidden: false)
+            if sender == self.sliderViewMarketReturns {
+                var averageMarketReturn = 6
+                if currentValue > 0 && currentValue <= 0.25 {
+                    averageMarketReturn = 6
+                }
+                if currentValue > 0.25 && currentValue <= 0.5 {
+                    averageMarketReturn = 15
+                }
+                if currentValue > 0.5 && currentValue <= 0.75 {
+                    averageMarketReturn = 25
+                }
+                if currentValue > 0.75 && currentValue <= 1.0 {
+                    averageMarketReturn = 50
+                }
+                self.coordinator?.profileInfoBuilder.averageMarketReturn = averageMarketReturn
+            } else if sender == self.sliderViewStockMarketRisks {
+                var stockMarketRisks = "very_safe"
+                let value = Int(100 * currentValue)
+                if value >= 0 && value <= 15 {
+                    stockMarketRisks = "very_safe"
+                } else if value >= 15 && value <= 30 {
+                    stockMarketRisks = "somewhat_safe"
+                } else if value >= 30 && value <= 60 {
+                    stockMarketRisks = "neutral"
+                } else if value >= 60 && value <= 85 {
+                    stockMarketRisks = "somewhat_risky"
+                } else if value > 85 && value <= 100 {
+                    stockMarketRisks = "very_risky"
+                }
+                self.coordinator?.profileInfoBuilder.stockMarketRiskLevel = stockMarketRisks
+            }
         }
     }
 }
