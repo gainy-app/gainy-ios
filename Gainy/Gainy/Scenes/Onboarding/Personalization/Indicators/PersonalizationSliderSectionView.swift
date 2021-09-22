@@ -22,6 +22,12 @@ final class PersonalizationSliderSectionView: UIView {
     private let descriptionLabel: UILabel = UILabel.newAutoLayout()
     private let gainySliderView: GainySliderView = GainySliderView.newAutoLayout()
     
+    public var isInitialLayout: Bool {
+        get {
+            return self.gainySliderView.isInitialLayout
+        }
+    }
+    
     override init(frame: CGRect) {
         
         super.init(frame: frame)

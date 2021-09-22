@@ -226,6 +226,7 @@
 		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
+		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
 		8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */; };
@@ -238,8 +239,21 @@
 		857D56B926DE5D2A003F96AE /* PersonalizationPickInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */; };
 		857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */; };
 		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
+		85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */; };
 		85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */; };
+		85C5926A26FA2A82001EBABC /* CreateProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85C5926926FA2A82001EBABC /* CreateProfile.graphql */; };
+		85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */; };
 		85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD14E226F3650A001C060C /* TextInsetsLabel.swift */; };
+		85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD14E426F37009001C060C /* AuthorizationViewController.swift */; };
+		85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD153E26F874F2001C060C /* AuthorizationManager.swift */; };
+		85CD154126F8A929001C060C /* AppleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD154026F8A928001C060C /* AppleAuth.swift */; };
+		85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD154326F8A951001C060C /* GoogleAuth.swift */; };
+		85CD154626F8A988001C060C /* AuthorizationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD154526F8A988001C060C /* AuthorizationProtocol.swift */; };
+		85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 85CD154826F8B22C001C060C /* GoogleSignIn */; };
+		85CD154B26F8CED7001C060C /* AppProfilesUserIDs.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85CD154A26F8CED6001C060C /* AppProfilesUserIDs.graphql */; };
+		85CD154D26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */; };
+		85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD154E26F8FC4A001C060C /* ProfileInfo.swift */; };
+		85CD155126F95022001C060C /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD155026F95022001C060C /* PersonalInfoViewController.swift */; };
 		85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80526E5FFFB004EC21D /* GainySliderView.swift */; };
 		85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */; };
 		85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */; };
@@ -498,6 +512,7 @@
 		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionCaptionCell.swift; sourceTree = "<group>"; };
@@ -510,8 +525,20 @@
 		857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsCell.swift; sourceTree = "<group>"; };
 		857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalizationPickInterestsCell.xib; sourceTree = "<group>"; };
 		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
+		85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfile.graphql.swift; sourceTree = "<group>"; };
 		85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockwiseProgressIndicatorView.swift; sourceTree = "<group>"; };
+		85C5926926FA2A82001EBABC /* CreateProfile.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CreateProfile.graphql; sourceTree = "<group>"; };
+		85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+DoneButton.swift"; sourceTree = "<group>"; };
 		85CD14E226F3650A001C060C /* TextInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInsetsLabel.swift; sourceTree = "<group>"; };
+		85CD14E426F37009001C060C /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		85CD153E26F874F2001C060C /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
+		85CD154026F8A928001C060C /* AppleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuth.swift; sourceTree = "<group>"; };
+		85CD154326F8A951001C060C /* GoogleAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuth.swift; sourceTree = "<group>"; };
+		85CD154526F8A988001C060C /* AuthorizationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationProtocol.swift; sourceTree = "<group>"; };
+		85CD154A26F8CED6001C060C /* AppProfilesUserIDs.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AppProfilesUserIDs.graphql; sourceTree = "<group>"; };
+		85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppProfilesUserIDs.graphql.swift; sourceTree = "<group>"; };
+		85CD154E26F8FC4A001C060C /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		85CD155026F95022001C060C /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
 		85D4F80526E5FFFB004EC21D /* GainySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainySliderView.swift; sourceTree = "<group>"; };
 		85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationIndicatorsViewController.swift; sourceTree = "<group>"; };
 		85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationSliderSectionView.swift; sourceTree = "<group>"; };
@@ -531,6 +558,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
+				85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */,
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
@@ -569,7 +597,9 @@
 			isa = PBXGroup;
 			children = (
 				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
+				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
+				85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */,
 				1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */,
 				33467CE426C6576800811F74 /* Charts.graphql.swift */,
 				33467CE126C6575A00811F74 /* News.graphql.swift */,
@@ -655,6 +685,7 @@
 				33E7AA6226CF870600DF1CBE /* LeftAlignedIconButton.swift */,
 				33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */,
 				85CD14E226F3650A001C060C /* TextInsetsLabel.swift */,
+				8531030426F9ECA500AAAA91 /* GainyTextField.swift */,
 				331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */,
 				33E7AA6626CFD4E000DF1CBE /* CornerView.swift */,
 				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
@@ -718,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				33D3D4EA26CB9D21005A859B /* NotificationManager.swift */,
+				85CD154226F8A937001C060C /* Authorization */,
 				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
@@ -766,6 +798,8 @@
 				85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */,
 				85F8B8B726DD3784000C73D3 /* Introduction */,
 				85F8B8BA26DD37CC000C73D3 /* Personalization */,
+				85CD14E426F37009001C060C /* AuthorizationViewController.swift */,
+				85CD155026F95022001C060C /* PersonalInfoViewController.swift */,
 				8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */,
 			);
 			path = Onboarding;
@@ -1201,7 +1235,9 @@
 				1C3A2C2D26AEB56600FAF107 /* API */,
 				3AA52C7E2660101B006A6961 /* schema.json */,
 				85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */,
+				85CD154A26F8CED6001C060C /* AppProfilesUserIDs.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
+				85C5926926FA2A82001EBABC /* CreateProfile.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
 				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
@@ -1249,6 +1285,7 @@
 			isa = PBXGroup;
 			children = (
 				3AE795452662A0A9002B40D6 /* DummyDataSource.swift */,
+				85CD154E26F8FC4A001C060C /* ProfileInfo.swift */,
 				3A859452268B058900CB8DD6 /* Collection */,
 				3A859453268B059500CB8DD6 /* CollectionDetails */,
 			);
@@ -1259,6 +1296,7 @@
 			isa = PBXGroup;
 			children = (
 				3AE7954B2662A85D002B40D6 /* UIColor+Gainy.swift */,
+				85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */,
 				3AE795AA2663866E002B40D6 /* UIViewController+Presentable.swift */,
 				3AD40FA226682A27005679DE /* UICollectionView+ReuseCells.swift */,
 				332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */,
@@ -1439,6 +1477,17 @@
 			path = PickInterestsCell;
 			sourceTree = "<group>";
 		};
+		85CD154226F8A937001C060C /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				85CD153E26F874F2001C060C /* AuthorizationManager.swift */,
+				85CD154026F8A928001C060C /* AppleAuth.swift */,
+				85CD154326F8A951001C060C /* GoogleAuth.swift */,
+				85CD154526F8A988001C060C /* AuthorizationProtocol.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
 		85D4F80726E60EA5004EC21D /* PickInterests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1523,6 +1572,7 @@
 				33D3D4E726CB8F63005A859B /* SwiftHEXColors */,
 				33CDECA226D627ED00E82329 /* SwiftDate */,
 				3342C87926DE0E7F0049763E /* FloatingPanel */,
+				85CD154826F8B22C001C060C /* GoogleSignIn */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1605,6 +1655,7 @@
 				33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */,
 				33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -1646,6 +1697,8 @@
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
 				8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */,
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
+				85CD154B26F8CED7001C060C /* AppProfilesUserIDs.graphql in Resources */,
+				85C5926A26FA2A82001EBABC /* CreateProfile.graphql in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
@@ -1782,6 +1835,7 @@
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */,
+				85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
@@ -1833,6 +1887,7 @@
 				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
+				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
@@ -1872,6 +1927,9 @@
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,
 				85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */,
 				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
+				8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */,
+				85CD154126F8A929001C060C /* AppleAuth.swift in Sources */,
+				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
@@ -1879,6 +1937,7 @@
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
 				332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
+				85CD154626F8A988001C060C /* AuthorizationProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
 				3A5ADAF62690B675008659E8 /* UICollectionView+Extensions.swift in Sources */,
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
@@ -1898,6 +1957,7 @@
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
+				85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */,
 				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */,
@@ -1915,12 +1975,14 @@
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,
+				85CD155126F95022001C060C /* PersonalInfoViewController.swift in Sources */,
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
 				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
+				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
@@ -1934,12 +1996,14 @@
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
+				85CD154D26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift in Sources */,
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
+				85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */,
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
@@ -2361,6 +2425,14 @@
 				minimumVersion = 1.4.1;
 			};
 		};
+		85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2438,6 +2510,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;
 			productName = SwiftHEXColors;
+		};
+		85CD154826F8B22C001C060C /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -75,7 +75,6 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.collectionView.dataSource = self
         self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsCell", bundle: Bundle.main), forCellWithReuseIdentifier: PersonalizationPickInterestsCell.reuseIdentifier)
         self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonalizationPickInterestsHeaderView.reuseIdentifier)
-//        self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsFooterView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PersonalizationPickInterestsFooterView.reuseIdentifier)
         self.collectionView.allowsSelection = true
         self.collectionView.allowsMultipleSelection = true
         let layout = UICollectionViewCenterAlignedLayout()
@@ -137,6 +136,14 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
     
     func personalizationPickInterestsFooterDidTapNext(sender: Any) {
         
+        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
+        var profileInterestIDs: [Int] = Array()
+        for indexPath in indexPaths {
+            if let appInterest = self.appInterests?[indexPath.row], let id = appInterest.id  {
+                profileInterestIDs.append(id)
+            }
+        }
+        self.coordinator?.profileInfoBuilder.profileInterestIDs = profileInterestIDs
         self.coordinator?.pushPersonalizationIndicatorsViewController()
     }
 }

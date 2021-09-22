@@ -1,34 +1,32 @@
+import FirebaseAuth
+
 final class AppCoordinator: BaseCoordinator {
     // MARK: Lifecycle
 
     // MARK: Init
 
-    init(router: Router, coordinatorFactory: CoordinatorFactory) {
+    init(authorizationManager: AuthorizationManager, router: Router, coordinatorFactory: CoordinatorFactory) {
+        
+        self.authorizationManager = authorizationManager
         self.router = router
         self.coordinatorFactory = coordinatorFactory
         super.init()
-        launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: withOnboardingWasShown, isAutorized: isAutorized)
     }
-
-    // MARK: Internal
-    
-    @UserDefaultBool("withOnboardingWasShown")
-    var withOnboardingWasShown: Bool
-    
-    @UserDefaultBool("isAutorized")
-    var isAutorized: Bool
 
     // MARK: Coordinator
 
     override func start(with option: DeepLinkOption?) {
-        if option != nil {
-            // TODO: process
-        } else {
-            switch launchInstructor {
-            case .main: runMainFlow()
-            case .onboarding: runOnboardingFlow()
-            case .signin: runSignInFlow()
-            case .signup: runSignUpFlow()
+        
+        self.updateLaunchInstructor()
+        
+        if let launchInstructor = self.launchInstructor {
+            if option != nil {
+                // TODO: process
+            } else {
+                switch launchInstructor {
+                case .main: runMainFlow()
+                case .onboarding: runOnboardingFlow()
+                }
             }
         }
     }
@@ -37,25 +35,19 @@ final class AppCoordinator: BaseCoordinator {
 
     // MARK: Properties
 
+    private let authorizationManager: AuthorizationManager
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private let router: RouterProtocol
-    private var launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: false, isAutorized: false)
+    private var launchInstructor: LaunchInstructor?
     private let viewControllerFactory = ViewControllerFactory()
 
     private var currentCoordinator: Coordinator?
     
     // MARK: Functions
     
-    private func runSignUpFlow() {
-        
-    }
-    
-    private func runSignInFlow() {
-        
-    }
-    
     private func runOnboardingFlow() {
         let coordinator = coordinatorFactory.makeOnboardingCoordinatorBox(
+            authorizationManager: authorizationManager,
             router: router,
             coordinatorFactory: CoordinatorFactory(),
             viewControllerFactory: ViewControllerFactory()
@@ -65,11 +57,6 @@ final class AppCoordinator: BaseCoordinator {
             guard let self = self else {return}
             self.removeDependency(coordinator)
             
-            self.withOnboardingWasShown = true
-            self.isAutorized = true
-            
-            // TODO: get is authorized
-            self.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: self.withOnboardingWasShown, isAutorized: self.isAutorized)
             if let coordinator = self.currentCoordinator {
                 self.removeDependency(coordinator)
                 self.currentCoordinator = nil
@@ -92,10 +79,6 @@ final class AppCoordinator: BaseCoordinator {
                         
             self.removeDependency(coordinator)
             
-            self.withOnboardingWasShown = true
-            self.isAutorized = true
-            
-            self.launchInstructor = LaunchInstructor.configure(withOnboardingWasShown: true, isAutorized: true)
             if let coordinator = self.currentCoordinator {
                 self.removeDependency(coordinator)
                 self.currentCoordinator = nil
@@ -104,5 +87,11 @@ final class AppCoordinator: BaseCoordinator {
         }
         addDependency(coordinator)
         coordinator.start()
+    }
+    
+    private func updateLaunchInstructor() {
+        
+        let isAutorized = (self.authorizationManager.authorizationStatus == .authorizedFully)
+        self.launchInstructor = LaunchInstructor.configure(isAutorized: isAutorized)
     }
 }

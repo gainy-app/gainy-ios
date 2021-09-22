@@ -43,6 +43,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Properties
 
     private lazy var appCoordinator: Coordinator = AppCoordinator(
+        authorizationManager: AuthorizationManager(),
         router: Router(rootController: self.rootController),
         coordinatorFactory: CoordinatorFactory()
     )

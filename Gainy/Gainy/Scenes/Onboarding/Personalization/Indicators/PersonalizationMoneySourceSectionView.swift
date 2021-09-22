@@ -8,9 +8,45 @@
 import UIKit
 import PureLayout
 
+enum PersonalizationInfoValue: Int {
+    
+    case checking_savings
+    case stock_investments
+    case credit_card
+    case other_loans
+    case never_tried
+    case very_little
+    case companies_i_believe_in
+    case etfs_and_safe_stocks
+    case advanced
+    case daily_trader
+    case investment_funds
+    case professional
+    case dont_trade_after_bad_experience
+    
+    func description() -> String {
+        switch self {
+        case .checking_savings: return NSLocalizedString("Checking/savings", comment: "Checking/savings")
+        case .stock_investments: return NSLocalizedString("Stock investments", comment: "Stock investments")
+        case .credit_card: return NSLocalizedString("Credit card", comment: "Credit card")
+        case .other_loans: return NSLocalizedString("Other loans", comment: "Other loans")
+        case .never_tried: return NSLocalizedString("Never tried but curious", comment: "Never tried but curious")
+        case .very_little: return NSLocalizedString("Have very little experience", comment: "Have very little experience")
+        case .companies_i_believe_in: return NSLocalizedString("Invest in companies I believe in", comment: "Invest in companies I believe in")
+        case .etfs_and_safe_stocks: return NSLocalizedString("Invest in ETFs or safe stocks (blue chips)", comment: "Invest in ETFs or safe stocks (blue chips)")
+        case .advanced: return NSLocalizedString("Advanced trader", comment: "Advanced trader")
+        case .daily_trader: return NSLocalizedString("Daily trader", comment: "Daily trader")
+        case .investment_funds: return NSLocalizedString("Investment funds manage for me", comment: "Investment funds manage for me")
+        case .professional: return NSLocalizedString("Professional trader (work)", comment: "Professional trader (work)")
+        case .dont_trade_after_bad_experience: return NSLocalizedString("Don’t trade after bad experience", comment: "Don’t trade after bad experience")
+            
+        }
+    }
+}
+
 protocol PersonalizationTitlePickerSectionViewDelegate: AnyObject {
     
-    func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [String]?)
+    func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [PersonalizationInfoValue]?)
 }
 
 final class PersonalizationTitlePickerSectionView: UIView {
@@ -21,7 +57,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
     private let descriptionLabel: UILabel = UILabel.newAutoLayout()
     private var collectionView: UICollectionView?
     
-    private var sources: [String]?
+    private var sources: [PersonalizationInfoValue]?
     
     override init(frame: CGRect) {
         
@@ -37,7 +73,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
         self.setUp()
     }
     
-    public func configureWith(sources: [String]?) {
+    public func configureWith(sources: [PersonalizationInfoValue]?) {
         
         self.sources = sources
         self.collectionView?.reloadData()
@@ -120,8 +156,9 @@ extension PersonalizationTitlePickerSectionView: UICollectionViewDelegate, UICol
     
         
         let cell: RoundedTextCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: RoundedTextCollectionViewCell.reuseIdentifier, for: indexPath) as! RoundedTextCollectionViewCell
-        let title: String? = self.sources?[indexPath.row]
-        cell.title = title
+        if let source: PersonalizationInfoValue = self.sources?[indexPath.row] {
+            cell.title = source.description()
+        }
         
         return cell
     }
@@ -133,10 +170,11 @@ extension PersonalizationTitlePickerSectionView: UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        guard let title: String = self.sources?[indexPath.row] else {
+        guard let source: PersonalizationInfoValue = self.sources?[indexPath.row] else {
             return CGSize.zero
         }
         
+        let title = source.description()
         let width = title.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width
         var size = CGSize.init(width: (ceil(width) + CGFloat(24.0)), height: CGFloat(40))
         let maxWidth = UIScreen.main.bounds.size.width - 26.0

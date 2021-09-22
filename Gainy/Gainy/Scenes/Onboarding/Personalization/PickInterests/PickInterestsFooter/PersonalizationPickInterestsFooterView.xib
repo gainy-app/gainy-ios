@@ -45,7 +45,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select at least 5 options please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVS-81-J14">
-                    <rect key="frame" x="95.5" y="52" width="223.5" height="19"/>
+                    <rect key="frame" x="104" y="51.5" width="206.5" height="19.5"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                     <color key="textColor" red="0.91161090140000001" green="0.3636762798" blue="0.44705456500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
     </objects>
     <designables>
         <designable name="SM2-6B-RJx">
-            <size key="intrinsicContentSize" width="34" height="31"/>
+            <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
     </designables>
 </document>
