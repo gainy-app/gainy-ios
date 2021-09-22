@@ -31,13 +31,46 @@ final class AuthorizationManager {
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
     private(set) var authorizationStatus: AuthorizationStatus
     
+    public var firstName: String? {
+        get {
+            if appleAuth.isAuthorized() {
+                return appleAuth.firstName
+            } else if googleAuth.isAuthorized() {
+                return googleAuth.firstName
+            }
+            return nil
+        }
+    }
+    
+    public var lastName: String? {
+        get {
+            if appleAuth.isAuthorized() {
+                return appleAuth.lastName
+            } else if googleAuth.isAuthorized() {
+                return googleAuth.lastName
+            }
+            return nil
+        }
+    }
+    
+    public var email: String? {
+        get {
+            if appleAuth.isAuthorized() {
+                return appleAuth.email
+            } else if googleAuth.isAuthorized() {
+                return googleAuth.email
+            }
+            return nil
+        }
+    }
+    
     private let appleAuth: AppleAuth = AppleAuth.init()
     private let googleAuth: GoogleAuth = GoogleAuth.init()
     private var completion: ((AuthorizationStatus) -> Void)?
     
     init() {
         
-        self.updateAuthorizationStatus()
+        self.updateAuthorizationStatus {}
     }
     
     public func authorizeWithApple(completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
@@ -191,7 +224,7 @@ final class AuthorizationManager {
         }
     }
     
-    private func updateAuthorizationStatus() {
+    public func updateAuthorizationStatus(completion: @escaping () -> Void) {
         
         guard let userID = Auth.auth().currentUser?.uid  else {
             self.authorizationStatus = .notAuthorized

@@ -162,6 +162,10 @@ final class PersonalInfoViewController: BaseViewController {
         
         let doneTitle = NSLocalizedString("Done", comment: "Done")
         self.legalAddressTextView.addDoneButton(title: doneTitle, target: self, selector: #selector(didTapDone(sender:)))
+        
+        self.firstNameTextField.text = self.authorizationManager?.firstName
+        self.lastNameTextField.text = self.authorizationManager?.lastName
+        self.emailTextField.text = self.authorizationManager?.email
     }
 }
 
@@ -172,15 +176,14 @@ extension PersonalInfoViewController: UITextFieldDelegate {
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-        textField.text = updatedText
-        self.updatePlaceholderStatesFortextFiled(textField, updatedText)
-        self.updateRegisterButtonEnabledState()
-        return false
+        self.updatePlaceholderStates(textField, updatedText)
+        self.updateRegisterButtonEnabledState(textField, updatedText)
+        return true
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         
-        self.updatePlaceholderStatesFortextFiled(textField, textField.text ?? "")
+        self.updatePlaceholderStates(textField, textField.text ?? "")
         self.updateRegisterButtonEnabledState()
         return true
     }
@@ -212,7 +215,7 @@ extension PersonalInfoViewController: UITextFieldDelegate {
         return true
     }
     
-    private func updatePlaceholderStatesFortextFiled(_ textField: UITextField, _ text: String) {
+    private func updatePlaceholderStates(_ textField: UITextField, _ text: String) {
         
         var gainyTextField: GainyTextField? = nil
         var placeholderLabel: UILabel? = nil
@@ -238,11 +241,27 @@ extension PersonalInfoViewController: UITextFieldDelegate {
         }
     }
     
-    private func updateRegisterButtonEnabledState() {
+    private func updateRegisterButtonEnabledState(_ textField: UITextField? = nil, _ updatedText: String? = nil) {
         
-        let filled = self.firstNameTextField.text?.count ?? 0 > 0
-        && self.lastNameTextField.text?.count ?? 0 > 0
-        && self.emailTextField.text?.count ?? 0 > 0
+        var firstName = self.firstNameTextField.text
+        var lastName = self.lastNameTextField.text
+        var email = self.emailTextField.text
+        
+        if let textField = textField {
+            if textField == self.firstNameTextField {
+                firstName = updatedText
+            }
+            if textField == self.lastNameTextField {
+                lastName = updatedText
+            }
+            if textField == self.emailTextField {
+                email = updatedText
+            }
+        }
+        
+        let filled = firstName?.count ?? 0 > 0
+        && lastName?.count ?? 0 > 0
+        && email?.count ?? 0 > 0
         && self.legalAddressTextView.text?.count ?? 0 > 0
      
    

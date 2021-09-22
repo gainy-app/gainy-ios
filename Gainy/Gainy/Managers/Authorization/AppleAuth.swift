@@ -28,6 +28,15 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
     @UserDefault<String>("appleAuthorizedUserIdKey")
     private(set) var appleAuthorizedUserId: String?
     
+    @UserDefault<String>("appleAuthorizedUserFirstName")
+    private(set) var firstName: String?
+    
+    @UserDefault<String>("appleAuthorizedUserLastName")
+    private(set) var lastName: String?
+    
+    @UserDefault<String>("appleAuthorizedUserEmailName")
+    private(set) var email: String?
+    
     func signIn(_ fromViewController: UIViewController?, completion: @escaping (Bool, Error?) -> Void) {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -85,6 +94,15 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
             
             // Save authorised user ID for future reference
             self.appleAuthorizedUserId = appleIDCredential.user
+            if let firstName = appleIDCredential.fullName?.givenName {
+                self.firstName = firstName
+            }
+            if let lastName = appleIDCredential.fullName?.familyName {
+                self.lastName = lastName
+            }
+            if let email = appleIDCredential.email {
+                self.email = email
+            }
             
             // Retrieve the secure nonce generated during Apple sign in
             guard let nonce = self.currentNonce else {
