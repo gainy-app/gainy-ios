@@ -87,13 +87,13 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchGainy" translatesAutoresizingMaskIntoConstraints="NO" id="OGq-oP-UmZ">
-                                <rect key="frame" x="25" y="144" width="364" height="48"/>
+                                <rect key="frame" x="25" y="144" width="364" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="vf4-qO-NQR"/>
+                                    <constraint firstAttribute="height" constant="55" id="vf4-qO-NQR"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-ck-xOZ">
-                                <rect key="frame" x="46.5" y="564.5" width="321" height="93.5"/>
+                                <rect key="frame" x="46.5" y="562.5" width="321" height="95.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="hDd-yX-cVg"/>
                                 </constraints>
@@ -1091,19 +1091,19 @@
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
-            <size key="intrinsicContentSize" width="34" height="31"/>
+            <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
         <designable name="Q4h-3q-Pkb">
             <size key="intrinsicContentSize" width="132" height="19"/>
         </designable>
         <designable name="UZm-4s-wQX">
-            <size key="intrinsicContentSize" width="83" height="31"/>
+            <size key="intrinsicContentSize" width="81" height="32"/>
         </designable>
         <designable name="Vqi-7P-fK5">
-            <size key="intrinsicContentSize" width="50" height="31"/>
+            <size key="intrinsicContentSize" width="48" height="32"/>
         </designable>
         <designable name="Xzu-k0-XRA">
-            <size key="intrinsicContentSize" width="34" height="31"/>
+            <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
         <designable name="hlB-m7-gpl">
             <size key="intrinsicContentSize" width="144" height="19"/>
@@ -1116,7 +1116,7 @@
         <image name="iconApple" width="14" height="16"/>
         <image name="iconGoogle" width="16" height="16"/>
         <image name="launchBackground" width="375" height="812"/>
-        <image name="launchGainy" width="141" height="48"/>
+        <image name="launchGainy" width="151" height="53"/>
         <image name="onboardingGradient" width="375" height="812"/>
     </resources>
 </document>
