@@ -88,6 +88,7 @@ final class AuthorizationViewController: BaseViewController {
         self.hideLoader()
         if authorizationStatus == .authorizedFully {
             if let finishFlow = self.coordinator?.finishFlow {
+                self.coordinator?.dismissModule()
                 finishFlow()
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
