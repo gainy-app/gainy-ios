@@ -3,7 +3,8 @@ protocol CoordinatorFactoryProtocol {
                                 coordinatorFactory: CoordinatorFactoryProtocol,
                                 viewControllerFactory: ViewControllerFactory) -> MainCoordinator
     
-    func makeOnboardingCoordinatorBox(router: RouterProtocol,
-                                coordinatorFactory: CoordinatorFactoryProtocol,
-                                viewControllerFactory: ViewControllerFactory) -> OnboardingCoordinator
+    func makeOnboardingCoordinatorBox(authorizationManager: AuthorizationManager,
+                                      router: RouterProtocol,
+                                      coordinatorFactory: CoordinatorFactoryProtocol,
+                                      viewControllerFactory: ViewControllerFactory) -> OnboardingCoordinator
 }

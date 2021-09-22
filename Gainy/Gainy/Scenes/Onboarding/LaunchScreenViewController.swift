@@ -29,15 +29,8 @@ class LaunchScreenViewController: BaseViewController {
     }
     
     @IBAction func signInTouchUpInside(_ sender: Any) {
-        // TODO: Finalize the signin
-        showNetworkLoader()
-        let item = DispatchWorkItem { [weak self] in
-            self?.hideLoader()
-            if let flow = self?.coordinator?.finishFlow {
-                flow()
-            }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: item)
+        
+        self.coordinator?.presentAuthorizationViewController()
     }
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {

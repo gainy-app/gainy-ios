@@ -4,12 +4,17 @@ import UIKit
 final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
 
-    init(router: RouterProtocol,
+    init(authorizationManager: AuthorizationManager,
+         router: RouterProtocol,
          coordinatorFactory: CoordinatorFactoryProtocol,
          viewControllerFactory: ViewControllerFactory) {
+        self.authorizationManager = authorizationManager
         self.router = router
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
+        self.profileInfoBuilder = ProfileInfoBuilder.init()
+        self.profileInfoBuilder.avatarURLString = ""
+        self.profileInfoBuilder.gender = 0
     }
 
     // MARK: Internal
@@ -21,11 +26,18 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Coordinator
 
     override func start() {
-        if !isLoggedIn {
+        if self.authorizationManager.authorizationStatus != .authorizedFully {
             showLaunchScreenViewController()
         } else {
             assertionFailure("Error: Onboarding flow should not be launched if the user is already logged in!")
         }
+    }
+    
+    public func setRootIntroductionViewController() {
+        let vc = viewControllerFactory.instantiateIntroduction(coordinator: self)
+        vc.coordinator = self
+        self.dismissModule()
+        router.setRootModule(vc)
     }
     
     public func pushIntroductionViewController() {
@@ -49,7 +61,61 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     public func pushOnboardingFinalizingViewController() {
         let vc = viewControllerFactory.instantiateOnboardingFinalizing(coordinator: self)
         vc.coordinator = self
+        vc.authorizationManager = self.authorizationManager
         router.push(vc)
+    }
+    
+    public func presentAuthorizationViewController(isOnboardingDone: Bool? = nil) {
+        
+        if self.authorizationManager.isAuthorized() {
+            self.pushPersonalInfoViewController(isOnboardingDone: isOnboardingDone)
+            return
+        }
+        
+        let vc = viewControllerFactory.instantiateAuthorization(coordinator: self)
+        vc.coordinator = self
+        vc.authorizationManager = self.authorizationManager
+        vc.onboardingDone = isOnboardingDone
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        navigationController.modalPresentationStyle = .fullScreen
+        router.present(navigationController)
+        self.authenticationNavigationController = navigationController
+    }
+    
+    public func pushPersonalInfoViewController(isOnboardingDone: Bool? = nil) {
+        let vc = viewControllerFactory.instantiatePersonalInfo(coordinator: self)
+        vc.coordinator = self
+        vc.authorizationManager = self.authorizationManager
+        vc.onboardingDone = isOnboardingDone
+        if let authenticationNavigationController = self.authenticationNavigationController {
+            authenticationNavigationController.pushViewController(vc, animated: true)
+        } else {
+            let navigationController = UINavigationController.init(rootViewController: vc)
+            navigationController.modalPresentationStyle = .fullScreen
+            router.present(navigationController)
+            self.authenticationNavigationController = navigationController
+        }
+    }
+    
+    public func presentOnboardingFinalizingViewController() {
+        let vc = viewControllerFactory.instantiateOnboardingFinalizing(coordinator: self)
+        vc.coordinator = self
+        vc.coordinator = self
+        vc.authorizationManager = self.authorizationManager
+        if let authenticationNavigationController = self.authenticationNavigationController {
+            authenticationNavigationController.pushViewController(vc, animated: true)
+        } else {
+            let navigationController = UINavigationController.init(rootViewController: vc)
+            navigationController.modalPresentationStyle = .fullScreen
+            router.present(navigationController)
+            self.authenticationNavigationController = navigationController
+        }
+    }
+    
+    public func dismissModule() {
+        
+        router.dismissModule()
+        self.authenticationNavigationController = nil
     }
     
     public func popModule() {
@@ -61,21 +127,18 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         
         router.popToRootModule(animated: true)
     }
-    
-    /// FIRUser status
-    var isLoggedIn: Bool {
-        let currentUser: User? = Auth.auth().currentUser
-        return currentUser != nil
-    }
 
     // MARK: Private
 
     // MARK: Properties
 
+    private let authorizationManager: AuthorizationManager
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
-
+    private var authenticationNavigationController: UINavigationController?
+    private(set) var profileInfoBuilder: ProfileInfoBuilder
+    
     // MARK: Functions
     
     private func showLaunchScreenViewController() {

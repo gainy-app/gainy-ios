@@ -2,23 +2,18 @@ import Foundation
 
 enum LaunchInstructor {
    
-    case main, onboarding, signin, signup
+    case main, onboarding
     
     // MARK: Internal
 
     // MARK: - Public methods
 
-    static func configure(withOnboardingWasShown onboardingWasShown: Bool,
-                          isAutorized autorized: Bool) -> LaunchInstructor {
+    static func configure(isAutorized autorized: Bool) -> LaunchInstructor {
         
         if autorized {
             return .main
         }
         
-        if !onboardingWasShown {
-            return .onboarding
-        }
-        
-        return .signin
+        return .onboarding
     }
 }
