@@ -156,12 +156,12 @@ struct ScatterChartView: View {
                 Spacer()
                 //Right Stock price
                 VStack(alignment: .trailing) {
-                    HStack(alignment: .lastTextBaseline, spacing: 2) {
-                        Text(statsDay)
+                    HStack(alignment: .lastTextBaseline, spacing: 4) {
+                        Text(statsDayName)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
-                        Text(ticker?.priceChangeToday.percentRaw ?? "")
+                        Text(statsDayValue)
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
@@ -183,16 +183,37 @@ struct ScatterChartView: View {
         .animation(.easeIn)
     }
     
-    private var statsDay: String {
-        if let date = ticker?.tickerFinancials.last?.date {
-            if date.compare(.isToday) {
-                return "TODAY"
-            }
-            return date.toFormat("MM-dd")
-        } else {
-            return "-"
+    private var statsDayName: String {
+        switch selectedTag {
+        case .d1:
+            return "TODAY"
+        case .w1:
+            return "WEEK"
+        case .m1:
+            return "MONTH"
+        case .m3:
+            return "3M"
+        case .y1:
+            return "YEAR"
+        case .y5:
+            return "5Y"
+        case .all:
+            return "ALL"
+            
         }
     }
+    
+    private var statsDayValue: String {
+        switch selectedTag {
+        case .d1:
+            return ticker?.priceChangeToday.percentRaw ?? ""
+        default:
+            return chartData.startEndDiff
+            
+        }
+    }
+    
+    
     
     @ObservedObject
     var lineViewModel: LineViewModel = LineViewModel()

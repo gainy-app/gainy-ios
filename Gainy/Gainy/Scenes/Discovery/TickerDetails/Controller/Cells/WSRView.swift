@@ -50,7 +50,7 @@ struct WSRView: View {
                     ).fill(pie.color).frame(width: 119, height: 119)
                 }.scaleEffect(CGSize(width: 1.0, height: -1.0))
                 VStack {
-                    Text("\(totalPriceString)")
+                    Text("-")
                         .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
                         .font(UIFont.compactRoundedSemibold(28).uiFont)
                     Text("BULLISH")
@@ -68,7 +68,7 @@ struct WSRView: View {
                             .foregroundColor(UIColor(hexString: "687379")!.uiColor)
                             .font(UIFont.compactRoundedRegular(11).uiFont)
                         Spacer()
-                        Text("\(curProgress.count)")
+                        Text("-")
                             .foregroundColor(curProgress.color)
                             .font(UIFont.compactRoundedSemibold(15).uiFont)
                     }

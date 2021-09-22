@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
+    func altStockPressed(stock: AltStockTicker)
     func loadingState(started: Bool)
     func comparedStocksChanged()
 }
@@ -201,6 +202,11 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
+    
+    func altStockPressed(stock: AltStockTicker) {
+        delegate?.altStockPressed(stock: stock)
+    }
+    
     func comparePressed(stock: AltStockTicker) {
         if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
             ticker.tickersToCompare.remove(at: stockIndex)

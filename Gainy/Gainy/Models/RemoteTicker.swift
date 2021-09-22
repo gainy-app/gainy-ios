@@ -23,8 +23,8 @@ class TickerInfo {
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         let industries = ticker.tickerIndustries.compactMap({$0.gainyIndustry?.name})
-        let interests = ticker.tickerInterests.compactMap({$0.interest?.name})
-        self.tags = industries + interests
+        let categories = ticker.tickerCategories.compactMap({$0.categories?.name})
+        self.tags = categories + industries
         self.highlights = ticker.tickerFinancials.compactMap(\.highlight)  
         
         var markers: [MarketData] = []

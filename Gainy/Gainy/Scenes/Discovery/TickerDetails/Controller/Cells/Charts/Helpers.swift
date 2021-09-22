@@ -244,6 +244,17 @@ public class ChartData: ObservableObject, Identifiable {
     public func onlyPoints() -> [Double] {
         return self.points.map{ $0.1 }
     }
+    
+    var startEndDiff: String {
+        func pctDiff(_ x1: Double, _ x2: Double) -> Double {
+            let diff = (x2 - x1) / x1
+            return Double(round(100 * (diff * 100)) / 100)
+        }
+        
+        let points = onlyPoints()
+        guard points.count > 1 else { return "-"}
+        return pctDiff(points.first!, points.last!).percentRaw
+    }
 }
 
 extension ChartData: Hashable {

@@ -32,8 +32,6 @@ final class TickerViewController: BaseViewController {
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadTicketInfo()
         addBottomView()
     }
     
@@ -47,6 +45,7 @@ final class TickerViewController: BaseViewController {
     }
     
     func loadTicketInfo() {
+        tableView.contentOffset = .zero
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
@@ -97,6 +96,23 @@ final class TickerViewController: BaseViewController {
 
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    
+    func altStockPressed(stock: AltStockTicker) {
+        let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
+            DispatchQueue.main.async {[weak self] in
+                guard let self = self else {return}
+                let viewModel = TickerDetailsViewModel(ticker: TickerInfo(ticker: stock))
+                self.viewModel = viewModel
+                self.tableView.dataSource = viewModel.dataSource
+                self.tableView.delegate = viewModel.dataSource
+                viewModel.dataSource.delegate = self
+                self.loadTicketInfo()
+            }
+            
+        }
+        NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to load \(stock.name ?? "") stock?", cancelTitle: "No", actions: [yesAction])
+    }
+    
     func loadingState(started: Bool) {
         DispatchQueue.main.async { [weak self] in
             if started {

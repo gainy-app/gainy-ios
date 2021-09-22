@@ -174,9 +174,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         hosting.view.autoSetDimension(.height, toSize: 94)
         hosting.view.autoPinEdge(.bottom, to: .bottom, of: view)
         hosting.didMove(toParent: self)
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.navigationController?.view.backgroundColor = .white
     }
     
     // MARK: Private
@@ -392,9 +389,43 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
-        fillSections()
-        self.initViewModelsFromData()
-        completion()        
+        guard DummyDataSource.remoteRawCollectionDetails.count == 0 else {
+            fillSections()
+            initViewModelsFromData()
+            completion()
+            return
+        }
+        guard haveNetwork else {
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            return
+        }
+        showNetworkLoader()
+        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: 0)) { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let graphQLResult):
+                
+                guard let collections = graphQLResult.data?.collections else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    self.hideLoader()
+                    completion()
+                    return
+                }
+                
+                DummyDataSource.remoteRawCollectionDetails = collections.compactMap({$0.fragments.remoteCollectionDetails})
+                
+                fillSections()
+                
+                self.initViewModelsFromData()
+                completion()
+                
+            case .failure(let error):
+                print("Failure when making GraphQL request. Error: \(error)")
+                self.initViewModels()
+                completion()
+            }
+            self.hideLoader()
+        }
     }
 }
 

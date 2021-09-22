@@ -8,6 +8,7 @@
 import UIKit
 
 protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
+    func altStockPressed(stock: AltStockTicker)
     func comparePressed(stock: AltStockTicker)
 }
 
@@ -48,6 +49,14 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDelegateFlowLa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         .init(top: 0, left: 28, bottom: 0, right: 0)
+    }
+}
+
+extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let stock = tickerInfo?.altStocks[indexPath.row] {
+            delegate?.altStockPressed(stock: stock)
+        }
     }
 }
 
@@ -114,6 +123,10 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
 }
 
 extension TickerDetailsAlternativeStocksViewCell: TickerDetailsAlternativeStocksViewCellDelegate {
+    func altStockPressed(stock: AltStockTicker) {
+        delegate?.altStockPressed(stock: stock)
+    }
+    
     func comparePressed(stock: AltStockTicker) {
         delegate?.comparePressed(stock: stock)
     }

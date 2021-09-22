@@ -32,7 +32,6 @@ final class GainyAnalytics {
         AppsFlyerLib.shared().logEvent(name, withValues: params)
     }
     
-    
     /// Add marketing info to extrnal link
     /// - Parameter url:
     /// - Returns:

@@ -37,6 +37,11 @@ fragment RemoteTickerDetails on tickers {
       market_cap_cagr_1years
       enterprise_value_to_sales
     }
+    ticker_categories {
+      categories {
+        name
+      }
+    }
     ticker_interests {
       symbol
       interest_id
