@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -23,6 +23,91 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Beta Disclaimer View Controller-->
+        <scene sceneID="xT2-Yh-1dI">
+            <objects>
+                <viewController storyboardIdentifier="BetaDisclaimerViewController" id="LA0-bM-NQp" customClass="BetaDisclaimerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ayN-nQ-hC9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="WJh-39-t3m">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="e27-O5-jCU">
+                                <rect key="frame" x="38" y="136.5" width="338" height="553"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beta disclaimer" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7G-cN-LFS" userLabel="beta disclaimer">
+                                        <rect key="frame" x="0.0" y="0.0" width="338" height="136"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="136" id="Qu7-sB-nO0"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="56"/>
+                                        <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfM-Gi-b6D">
+                                        <rect key="frame" x="0.0" y="176" width="338" height="377"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="377" id="fCC-hm-Ndv"/>
+                                        </constraints>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <mutableString key="content">Please note that this is an unstable beta version of the application. gainy inc. does not give any warranties, whether express or implied, as to the suitability or usability of the app, its software or any of its content. gainy inc. will not be liable for any loss, whether such loss is direct, indirect, special or consequential, suffered by any party as a result of their use of the beta app, its content and functionalities.
+
+BETA testing is free for users, Gainy Inc. does not demand any remuneration for access to the BETA Version of the application.</mutableString>
+                                                <attributes>
+                                                    <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <font key="NSFont" size="16" name="SFProDisplay-Regular"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8J-Tc-Hjf" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="40" y="783" width="334" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="YxC-0c-vGH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <state key="normal" title="Accept">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onAcceptButtonTap:" destination="LA0-bM-NQp" eventType="touchUpInside" id="g45-LD-Ur8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ujz-sJ-Je3"/>
+                        <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="e27-O5-jCU" firstAttribute="leading" secondItem="ujz-sJ-Je3" secondAttribute="leading" constant="38" id="EqQ-gq-Gbc"/>
+                            <constraint firstItem="e27-O5-jCU" firstAttribute="centerY" secondItem="ujz-sJ-Je3" secondAttribute="centerY" constant="-40" id="Oac-Hs-tu5"/>
+                            <constraint firstItem="ujz-sJ-Je3" firstAttribute="trailing" secondItem="k8J-Tc-Hjf" secondAttribute="trailing" constant="40" id="ix5-7V-vPG"/>
+                            <constraint firstItem="ujz-sJ-Je3" firstAttribute="bottom" secondItem="k8J-Tc-Hjf" secondAttribute="bottom" constant="15" id="ocV-jO-Ygn"/>
+                            <constraint firstItem="ujz-sJ-Je3" firstAttribute="trailing" secondItem="e27-O5-jCU" secondAttribute="trailing" constant="38" id="ou6-rY-A8i"/>
+                            <constraint firstItem="k8J-Tc-Hjf" firstAttribute="leading" secondItem="ujz-sJ-Je3" secondAttribute="leading" constant="40" id="yij-QV-7L6"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wrR-AQ-ich" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1041" y="100"/>
+        </scene>
         <!--Launch Screen View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -1107,6 +1192,9 @@
         </designable>
         <designable name="hlB-m7-gpl">
             <size key="intrinsicContentSize" width="144" height="19"/>
+        </designable>
+        <designable name="k8J-Tc-Hjf">
+            <size key="intrinsicContentSize" width="51" height="31"/>
         </designable>
         <designable name="wXf-gr-Gu1">
             <size key="intrinsicContentSize" width="60" height="31"/>

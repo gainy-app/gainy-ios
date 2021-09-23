@@ -22,9 +22,16 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiateOnboarding(coordinator: OnboardingCoordinator) -> LaunchScreenViewController {
+    func instantiateLaunchScreen(coordinator: OnboardingCoordinator) -> LaunchScreenViewController {
         let vc = LaunchScreenViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
+        if let betaDisclaimerWasShown = BetaDisclaimerViewController.betaDisclaimerWasShown {
+            if !betaDisclaimerWasShown {
+                vc.betaDisclaimerViewController = self.initializeBetaDisclaimer(coordinator: coordinator)
+            }
+        } else {
+            vc.betaDisclaimerViewController = self.initializeBetaDisclaimer(coordinator: coordinator)
+        }
         return vc
     }
     
@@ -54,6 +61,12 @@ final class ViewControllerFactory {
     
     func instantiateAuthorization(coordinator: OnboardingCoordinator) -> AuthorizationViewController {
         let vc = AuthorizationViewController.instantiate(.onboarding)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func initializeBetaDisclaimer(coordinator: OnboardingCoordinator) -> BetaDisclaimerViewController {
+        let vc = BetaDisclaimerViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
         return vc
     }

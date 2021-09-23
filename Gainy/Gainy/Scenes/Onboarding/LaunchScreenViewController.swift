@@ -15,6 +15,17 @@ class LaunchScreenViewController: BaseViewController {
     
     //Coordinators
     weak var coordinator: OnboardingCoordinator?
+    var betaDisclaimerViewController: BetaDisclaimerViewController?
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        if let betaDisclaimerViewController = self.betaDisclaimerViewController {
+            betaDisclaimerViewController.modalPresentationStyle = .fullScreen
+            self.present(betaDisclaimerViewController, animated: false, completion: nil)
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         

@@ -142,7 +142,7 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Functions
     
     private func showLaunchScreenViewController() {
-        let vc = viewControllerFactory.instantiateOnboarding(coordinator: self)
+        let vc = viewControllerFactory.instantiateLaunchScreen(coordinator: self)
         vc.coordinator = self
         router.setRootModule(vc, hideBar: true)
     }

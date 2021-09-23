@@ -226,6 +226,7 @@
 		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
+		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
@@ -512,6 +513,7 @@
 		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
@@ -795,6 +797,7 @@
 		33D3D4FC26CBA3B9005A859B /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */,
 				85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */,
 				85F8B8B726DD3784000C73D3 /* Introduction */,
 				85F8B8BA26DD37CC000C73D3 /* Personalization */,
@@ -1949,6 +1952,7 @@
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
+				851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */,
 				3302E0B726DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift in Sources */,
 				33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */,
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
