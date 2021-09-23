@@ -10,4 +10,31 @@ extension Float {
             ? String(format: "%.0f", self)
             : String(format: "%.2f", self)
     }
+    
+    var cleanOneDecimalP: String {
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self) + "%"
+            : String(format: "%.1f", self) + "%"
+    }
+}
+
+extension Double {   
+    
+    var cleanOneDecimal: String {
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self)
+            : String(format: "%.1f", self)
+    }
+
+    var cleanTwoDecimal: String {
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self)
+            : String(format: "%.2f", self)
+    }
+    
+    var cleanOneDecimalP: String {
+        self.truncatingRemainder(dividingBy: 1) == 0
+            ? String(format: "%.0f", self) + "%"
+            : String(format: "%.1f", self) + "%"
+    }
 }

@@ -208,12 +208,9 @@ struct ScatterChartView: View {
         case .d1:
             return ticker?.priceChangeToday.percentRaw ?? ""
         default:
-            return chartData.startEndDiff
-            
+            return chartData.startEndDiffString
         }
     }
-    
-    
     
     @ObservedObject
     var lineViewModel: LineViewModel = LineViewModel()
@@ -226,7 +223,7 @@ struct ScatterChartView: View {
         GeometryReader{ geometry in
         ZStack {
             if chartData.points.count > 1 {
-                LineView(data: chartData, title: "Full chart", style: (ticker?.isGrowing ?? false) ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
+                LineView(data: chartData, title: "Full chart", style: chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
             }            
             LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, viewModel: lineViewModel).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             VStack(alignment: .leading) {

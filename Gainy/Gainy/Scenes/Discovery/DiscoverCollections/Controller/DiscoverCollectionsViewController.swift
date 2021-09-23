@@ -34,9 +34,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        
-        addBottomView()
-        
+                
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         
@@ -47,6 +45,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
         
+        addBottomView()
         
         discoverCollectionsCollectionView.delegate = self
         
@@ -159,6 +158,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     /// Model to cahnge bottom view
     private var bottomViewModel: CollectionsBottomViewModel?
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     /// Bottom action view adding
     fileprivate func addBottomView() {
         
@@ -174,6 +177,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         hosting.view.autoSetDimension(.height, toSize: 94)
         hosting.view.autoPinEdge(.bottom, to: .bottom, of: view)
         hosting.didMove(toParent: self)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
     }
     
     // MARK: Private

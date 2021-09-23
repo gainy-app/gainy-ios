@@ -36,12 +36,12 @@ enum CollectionDetailsViewModelMapper {
                                                 tickerSymbol: model.tickerSymbol,
                                                 priceChange: tickerPercentChangeText,
                                                 tickerPrice: "\(model.financialMetrics.currentPrice.cleanTwoDecimal)",
-                                                dividendGrowthPercent: "\(model.financialMetrics.dividendGrowthPercent)",
-                                                growthRateYOY: model.financialMetrics.growthRateYOY.percent,
+                                                dividendGrowthPercent: model.financialMetrics.dividendGrowthPercent.cleanOneDecimalP,
+                                                growthRateYOY: model.financialMetrics.growthRateYOY.cleanOneDecimalP,
                                                 evs: model.financialMetrics.evs.cleanOneDecimal,
                                                 marketCap: model.financialMetrics.marketCapitalization.formatUsingAbbrevation(),
-                                                monthToDay: model.financialMetrics.monthToDay.percent,
-                                                netProfit: model.financialMetrics.netProfit.percent,
+                                                monthToDay: model.financialMetrics.monthToDay.cleanOneDecimalP,
+                                                netProfit: model.financialMetrics.netProfit.cleanOneDecimalP,
                                                 highlight: model.financialMetrics.highlight,
                                                 rawTicker: model.rawTicker!)        
     }

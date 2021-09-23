@@ -245,15 +245,19 @@ public class ChartData: ObservableObject, Identifiable {
         return self.points.map{ $0.1 }
     }
     
-    var startEndDiff: String {
+    var startEndDiffString: String {
+        return startEndDiff.percentRaw
+    }
+    
+    var startEndDiff: Double {
         func pctDiff(_ x1: Double, _ x2: Double) -> Double {
             let diff = (x2 - x1) / x1
             return Double(round(100 * (diff * 100)) / 100)
         }
         
         let points = onlyPoints()
-        guard points.count > 1 else { return "-"}
-        return pctDiff(points.first!, points.last!).percentRaw
+        guard points.count > 1 else { return 0.0}
+        return pctDiff(points.first!, points.last!)
     }
 }
 

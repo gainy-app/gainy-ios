@@ -11,7 +11,7 @@ import UIKit
 class CustomHostingController <Content>: UIHostingController<AnyView> where Content : View {
 
   public init(shouldShowNavigationBar: Bool, rootView: Content) {
-      super.init(rootView: AnyView(rootView.navigationBarHidden(!shouldShowNavigationBar)))
+      super.init(rootView: AnyView(rootView.navigationBarHidden(true)))
   }
 
   @objc required dynamic init?(coder aDecoder: NSCoder) {
