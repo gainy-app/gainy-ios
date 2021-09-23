@@ -51,6 +51,34 @@ final class PersonalInfoViewController: BaseViewController {
         self.didTapDone(sender: nil)
     }
     
+    @IBAction private func formCRSTap(_ sender: Any) {
+        
+        if let url = URL(string: "https://www.gainy.app/form-adv") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction private func contentToEDelivatyTap(_ sender: Any) {
+        
+        if let url = URL(string: "https://drive.google.com/file/d/1y6Llkc8wNiUetPvqd9XH9zQATR7LMAek/view?usp=sharing") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction private func privacyNoticeTap(_ sender: Any) {
+        
+        if let url = URL(string: "https://www.gainy.app/privacy-notice") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    @IBAction private func clientAgreementTap(_ sender: Any) {
+        
+        if let url = URL(string: "https://drive.google.com/file/d/1faoz7rAh6dw7wa0BQYRhokLPGou9CW-L/view?usp=sharing") {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     @IBAction private func privacyPolicyTap(_ sender: Any) {
         
         if let url = URL(string: "https://www.gainy.app/privacy-policy") {
