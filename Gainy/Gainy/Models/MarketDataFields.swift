@@ -19,11 +19,11 @@ enum MarketDataField: Int, Codable {
         case .marketCap:
             return "Market Capitalization"
         case .monthToDay:
-            return "Price change Month to Day"
+            return "30 days price change"
         case .netProfit:
             return "Net Profit Margin"
         case .growsRateYOY:
-            return "Revenue Growth Rate"
+            return "Revenue Growth"
         }
     }
     

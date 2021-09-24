@@ -329,14 +329,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: 0)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections else {
+                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
                     //Going back                    
                     //self?.onDiscoverCollections?()
                     self?.hideLoader()
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = collections.compactMap({$0.fragments.remoteCollectionDetails})
+                DummyDataSource.remoteRawCollectionDetails = collections
                 
                 //Paging
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
@@ -344,9 +344,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 //Fetching Tickers prices
                 var tickerSymbols: [String] = []
-                DummyDataSource.remoteRawCollectionDetails.forEach({
-                    tickerSymbols.append(contentsOf: $0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.symbol}))
+                collections.forEach({
+                    let symbolsInitial = $0.tickerCollections.compactMap({
+                        $0.ticker?.fragments.remoteTickerDetails.symbol
+                    })
+                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(10))
                 })
+                
                 TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
                     
                     let yourCollectionDetails: [CollectionDetails] = DummyDataSource
@@ -426,7 +430,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 //Fetching Tickers prices
                 var tickerSymbols: [String] = []
                 collections.forEach({
-                    tickerSymbols.append(contentsOf: $0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.symbol}))
+                    let symbolsInitial = $0.tickerCollections.compactMap({
+                        $0.ticker?.fragments.remoteTickerDetails.symbol
+                    })
+                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(10))
                 })
                 TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
                     

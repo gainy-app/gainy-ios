@@ -9,11 +9,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query DiscoverCollectionDetails($offset: Int!) {
-      collections(
-        limit: 20
-        offset: $offset
-        order_by: {ticker_collections_aggregate: {count: desc}}
-      ) {
+      collections(limit: 20, offset: $offset) {
         __typename
         ...RemoteCollectionDetails
       }
@@ -44,7 +40,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections", arguments: ["limit": 20, "offset": GraphQLVariable("offset"), "order_by": ["ticker_collections_aggregate": ["count": "desc"]]], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
+        GraphQLField("collections", arguments: ["limit": 20, "offset": GraphQLVariable("offset")], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
       ]
     }
 
@@ -436,6 +432,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         categories {
           __typename
           name
+          icon_url
         }
       }
       ticker_interests {
@@ -736,6 +733,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("icon_url", type: .scalar(String.self)),
         ]
       }
 
@@ -745,8 +743,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "categories", "name": name])
+      public init(name: String? = nil, iconUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "categories", "name": name, "icon_url": iconUrl])
       }
 
       public var __typename: String {
@@ -764,6 +762,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var iconUrl: String? {
+        get {
+          return resultMap["icon_url"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "icon_url")
         }
       }
     }

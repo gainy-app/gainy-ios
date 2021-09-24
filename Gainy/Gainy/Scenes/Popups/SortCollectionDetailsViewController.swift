@@ -89,7 +89,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
             val.isSelected = ind == sender.tag
             
             if val.isSelected {
-                ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 80))
+                ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 100))
                 ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 40.0 * CGFloat(btnsMapping[btnsMapping.key(forValue: ind)!] ?? 0)))
             }
         }

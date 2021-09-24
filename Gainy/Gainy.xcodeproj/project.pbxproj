@@ -70,6 +70,10 @@
 		337D612A26D514AE0048AE62 /* VHLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D612926D514AE0048AE62 /* VHLines.swift */; };
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
+		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
+		339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */; };
+		339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */; };
+		339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */; };
 		33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33B9886C26CA6E79008B8AC9 /* News.graphql */; };
 		33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9886F26CA8617008B8AC9 /* PureLayout */; };
 		33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9887226CA90D0008B8AC9 /* Kingfisher */; };
@@ -351,6 +355,10 @@
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
+		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
+		339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersNoSpace.graphql; sourceTree = "<group>"; };
+		339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickersWithSpace.graphql.swift; sourceTree = "<group>"; };
+		339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickersNoSpace.graphql.swift; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
@@ -608,6 +616,8 @@
 				33467CE026C6575A00811F74 /* Types.graphql.swift */,
 				3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */,
 				3302E0B426DCBF20008DBC76 /* SearchTickers.graphql.swift */,
+				339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */,
+				339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */,
 				33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */,
 				330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */,
 			);
@@ -1245,6 +1255,8 @@
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
 				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
 				3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */,
+				339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */,
+				339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */,
 				33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */,
 				330B986126F1E93A00099A46 /* FetchAltStocks.graphql */,
 				3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */,
@@ -1685,6 +1697,7 @@
 				3330BD0F26FA6B850079C899 /* FetchStockMedianDay.graphql in Resources */,
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
+				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
 				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
 				857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */,
@@ -1706,6 +1719,7 @@
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
+				339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
@@ -1910,6 +1924,7 @@
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
+				339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */,
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,
@@ -1971,6 +1986,7 @@
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
+				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,

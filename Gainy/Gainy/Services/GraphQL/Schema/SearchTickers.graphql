@@ -1,5 +1,5 @@
 query SearchTickers($text: String!) {
-  tickers(where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}, {symbol: {_ilike: $text}}]}, limit: 50) {
+  tickers(where: {symbol: {_ilike: $text}}, limit: 50) {
     ...RemoteTickerDetails
   }
 }

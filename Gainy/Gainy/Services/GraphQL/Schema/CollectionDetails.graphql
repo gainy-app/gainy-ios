@@ -1,5 +1,5 @@
 query DiscoverCollectionDetails($offset: Int!) {
-  collections(limit: 20, offset: $offset, order_by: {ticker_collections_aggregate: {count: desc}}) {
+  collections(limit: 20, offset: $offset) {
     ...RemoteCollectionDetails
   }
 }
@@ -40,6 +40,7 @@ fragment RemoteTickerDetails on tickers {
     ticker_categories {
       categories {
         name
+        icon_url
       }
     }
     ticker_interests {

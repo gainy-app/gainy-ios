@@ -149,6 +149,7 @@ final class CollectionSearchController: NSObject {
         loading?(true)
         let dispatchGroup = DispatchGroup()
         
+        if text.count <= 3 {
         dispatchGroup.enter()
         networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
             switch result {
@@ -165,10 +166,46 @@ final class CollectionSearchController: NSObject {
                 dispatchGroup.leave()
                 break
             }
-        })
+        })            
+        } else if text.contains(" ") {
+            dispatchGroup.enter()
+            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersWithSpaceQuery.init(text: "%\(text)%") ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
+                        dispatchGroup.leave()
+                    }
+                    
+                    break
+                case .failure(let error):
+                    print("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup.leave()
+                    break
+                }
+            })
+        } else {
+            dispatchGroup.enter()
+            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersNoSpaceQuery.init(text: "%\(text)%") ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
+                        dispatchGroup.leave()
+                    }
+                    
+                    break
+                case .failure(let error):
+                    print("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup.leave()
+                    break
+                }
+            })
+        }
         
         //Searching for news and collection only in this case
-        if text.count > 2 {
             dispatchGroup.enter()
             networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
                 switch result {
@@ -182,9 +219,10 @@ final class CollectionSearchController: NSObject {
                     break
                 }
             })
+       
             
             
-            
+        if text.count > 3 {
             dispatchGroup.enter()
             networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
                 switch result {

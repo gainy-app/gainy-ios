@@ -38,13 +38,14 @@ enum CollectionDetailsDTOMapper {
     static func mapTickerDetails(
         _ dto: RemoteCollectionDetails.TickerCollection.Ticker?
     ) -> TickerDetails {
-        TickerDetails(
+        let tickerFinancials = dto?.fragments.remoteTickerDetails.tickerFinancials.first
+        return TickerDetails(
             tickerSymbol: dto?.fragments.remoteTickerDetails.symbol ?? "",
             companyName: dto?.fragments.remoteTickerDetails.name ?? "",
             description: dto?.fragments.remoteTickerDetails.description ?? "",
-            financialMetrics: CollectionDetailsDTOMapper.mapFinancialMetrics(
-                (dto?.fragments.remoteTickerDetails.tickerFinancials.first)!
-            ),
+            financialMetrics: tickerFinancials != nil ? CollectionDetailsDTOMapper.mapFinancialMetrics(
+                tickerFinancials!
+            ) : TickerFinancialMetrics.init(todaysPriceChange: 0.0, currentPrice: 0.0, dividendGrowthPercent: 0.0, priceToEarnings: 0.0, marketCapitalization: 0.0, evs: 0.0, growthRateYOY: 0.0, monthToDay: 0.0, netProfit: 0.0, highlight: "ERROR"),
             rawTicker: dto?.fragments.remoteTickerDetails ?? nil
         )
     }

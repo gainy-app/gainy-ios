@@ -9,10 +9,7 @@ public final class SearchTickersQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query SearchTickers($text: String!) {
-      tickers(
-        where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}, {symbol: {_ilike: $text}}]}
-        limit: 50
-      ) {
+      tickers(where: {symbol: {_ilike: $text}}, limit: 50) {
         __typename
         ...RemoteTickerDetails
       }
@@ -42,7 +39,7 @@ public final class SearchTickersQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("tickers", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["description": ["_ilike": GraphQLVariable("text")]], ["symbol": ["_ilike": GraphQLVariable("text")]]]], "limit": 50], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
+        GraphQLField("tickers", arguments: ["where": ["symbol": ["_ilike": GraphQLVariable("text")]], "limit": 50], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
       ]
     }
 

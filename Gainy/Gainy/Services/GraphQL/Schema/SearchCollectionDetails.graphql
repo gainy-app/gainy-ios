@@ -1,5 +1,5 @@
 query SearchCollectionDetails($text: String!) {
-  collections(where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}]}) {
+  collections(where:  {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}} ]}) {
     ...RemoteCollectionDetails
   }
 }
