@@ -31,6 +31,9 @@ final class AuthorizationManager {
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
     private(set) var authorizationStatus: AuthorizationStatus
     
+    @UserDefault<String>("firebaseAuthToken")
+    private(set) var firebaseAuthToken: String?
+    
     public var firstName: String? {
         get {
             if appleAuth.isAuthorized() {
@@ -71,6 +74,7 @@ final class AuthorizationManager {
     init() {
         
         self.updateAuthorizationStatus {}
+        self.updateFirebaseAuthToken {}
     }
     
     public func authorizeWithApple(completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
@@ -205,22 +209,37 @@ final class AuthorizationManager {
             completion(self.authorizationStatus)
             return
         }
+        guard let user = Auth.auth().currentUser else {
+            self.authorizationStatus = .authorizingFailed
+            completion(self.authorizationStatus)
+            return
+        }
         guard let userID = Auth.auth().currentUser?.uid  else {
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
         }
         
-        self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+        user.getIDToken { token, error in
             
-            if (hasProfiles) {
-                self.authorizationStatus = .authorizedFully
+            guard let token = token else {
+                self.authorizationStatus = .authorizingFailed
                 completion(self.authorizationStatus)
                 return
             }
             
-            self.authorizationStatus = .authorizedNeedCreateProfile
-            completion(self.authorizationStatus)
+            self.firebaseAuthToken = token
+            self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+                
+                if (hasProfiles) {
+                    self.authorizationStatus = .authorizedFully
+                    completion(self.authorizationStatus)
+                    return
+                }
+                
+                self.authorizationStatus = .authorizedNeedCreateProfile
+                completion(self.authorizationStatus)
+            }
         }
     }
     
@@ -239,6 +258,25 @@ final class AuthorizationManager {
             }
             
             self.authorizationStatus = .authorizedNeedCreateProfile
+        }
+    }
+    
+    private func updateFirebaseAuthToken(completion: @escaping () -> Void) {
+        
+        guard let user = Auth.auth().currentUser else {
+            completion()
+            return
+        }
+        
+        user.getIDToken { token, error in
+            
+            guard let token = token else {
+                completion()
+                return
+            }
+            
+            self.firebaseAuthToken = token
+            completion()
         }
     }
     
