@@ -348,48 +348,44 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     let symbolsInitial = $0.tickerCollections.compactMap({
                         $0.ticker?.fragments.remoteTickerDetails.symbol
                     })
-                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(10))
+                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(20))
                 })
-                
-                TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
-                    
-                    let yourCollectionDetails: [CollectionDetails] = DummyDataSource
-                        .yourCollections
-                        .compactMap { yourCollection in
-                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
-                                DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                    $0.id == yourCollection.id
-                                })!
-                            )
-                        }
-                    
-                    let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
-                        .recommendedCollections
-                        .compactMap { recommendedCollection in
-                            CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
-                                DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                    $0.id == recommendedCollection.id
-                                })!
-                            )
-                        }
-                    
-                    DummyDataSource.collectionDetails.removeAll()
-                    DummyDataSource.collectionDetails.append(
-                        contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
-                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-                        })
-                    )
-                    
-                    //                DummyDataSource.collectionDetails.append(
-                    //                    contentsOf: recommendedCollectionDetails
-                    //                )
-                    
-                    
-                    DispatchQueue.main.async {
-                        self?.initViewModelsFromData()
-                        completion()
-                        self?.hideLoader()
+                let yourCollectionDetails: [CollectionDetails] = DummyDataSource
+                    .yourCollections
+                    .compactMap { yourCollection in
+                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
+                            DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                $0.id == yourCollection.id
+                            })!
+                        )
                     }
+                
+                let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
+                    .recommendedCollections
+                    .compactMap { recommendedCollection in
+                        CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
+                            DummyDataSource.remoteRawCollectionDetails.first(where: {
+                                $0.id == recommendedCollection.id
+                            })!
+                        )
+                    }
+                
+                DummyDataSource.collectionDetails.removeAll()
+                DummyDataSource.collectionDetails.append(
+                    contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
+                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
+                    })
+                )
+                
+                //                DummyDataSource.collectionDetails.append(
+                //                    contentsOf: recommendedCollectionDetails
+                //                )
+                
+                
+                DispatchQueue.main.async {
+                    self?.initViewModelsFromData()
+                    completion()
+                    self?.hideLoader()
                 }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
@@ -427,53 +423,23 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
-                //Fetching Tickers prices
-                var tickerSymbols: [String] = []
-                collections.forEach({
-                    let symbolsInitial = $0.tickerCollections.compactMap({
-                        $0.ticker?.fragments.remoteTickerDetails.symbol
-                    })
-                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(10))
+                let newDetails = collections.compactMap( {
+                    CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
                 })
-                TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
-                    
-                    //                    let yourCollectionDetails: [CollectionDetails] = collections
-                    //                        .compactMap { yourCollection in
-                    //                            CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
-                    //                                DummyDataSource.remoteRawCollectionDetails.first(where: {
-                    //                                    $0.id == yourCollection.id
-                    //                                })!
-                    //                            )
-                    //                        }
-                    //
-                    //                    let recommendedCollectionDetails: [CollectionDetails] = collections
-                    //                        .compactMap { recommendedCollection in
-                    //                            CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
-                    //                                DummyDataSource.remoteRawCollectionDetails.first(where: {
-                    //                                    $0.id == recommendedCollection.id
-                    //                                })!
-                    //                            )
-                    //                        }
-                    
-                    //Adding to storage
-                    let newDetails = collections.compactMap( {
-                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-                    })
-                    DummyDataSource.collectionDetails.append(contentsOf: newDetails)
-                    
-                    //Adding to View Model
-                    let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
-                    self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
-                    
-                    DispatchQueue.main.async {
-                        if var snapshot = self?.dataSource?.snapshot() {
-                            snapshot.appendItems(detailsDTO,
-                                                 toSection: .collectionWithCards)
-                            
-                            self?.dataSource?.apply(snapshot, animatingDifferences: false)
-                        }
-                        self?.hideLoader()
+                DummyDataSource.collectionDetails.append(contentsOf: newDetails)
+                
+                //Adding to View Model
+                let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
+                self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
+                
+                DispatchQueue.main.async {
+                    if var snapshot = self?.dataSource?.snapshot() {
+                        snapshot.appendItems(detailsDTO,
+                                             toSection: .collectionWithCards)
+                        
+                        self?.dataSource?.apply(snapshot, animatingDifferences: false)
                     }
+                    self?.hideLoader()
                 }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
