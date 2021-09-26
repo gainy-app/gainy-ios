@@ -18,40 +18,61 @@ extension Array {
 
 final class TickersLiveFetcher {
     
-   static let shared = TickersLiveFetcher()
+    static let shared = TickersLiveFetcher()
     
     //MARK: - Inner
- 
+    
+    @Atomic
+    private var currentlyFetching: Set<String> = []
+    
     //MARK: - Public
     
     func getSymbolsData(_ symbols: [String], _ completion: @escaping (() -> Void)){
         guard symbols.count > 0 else {return completion()}
         //Getting only not laoded symbols
-        let batchSymbols = TickerLiveStorage.shared.missingSymbolsFrom(symbols).chunked(into: 100)
+        let batchSymbols = TickerLiveStorage.shared.missingSymbolsFrom(symbols, inProgress: currentlyFetching).chunked(into: 100)
         
-        let group = DispatchGroup.init()
-        
-        for batch in batchSymbols {
-            group.enter()
-            Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: batch)) { result in
-                switch result {
-                case .success(let graphQLResult):
-                    for data in (graphQLResult.data?.fetchLivePrices ?? []) {
-                        if let data = data {
-                            TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
+        if batchSymbols.count > 0 {
+            
+            let group = DispatchGroup.init()
+            
+            for batch in batchSymbols {
+                print("Fetching \(batch.joined(separator: ","))")
+                batch.forEach({
+                    currentlyFetching.insert($0)
+                })
+                if batch.count > 0 {
+                    group.enter()
+                    Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: batch)) { result in
+                        switch result {
+                        case .success(let graphQLResult):
+                            for data in (graphQLResult.data?.fetchLivePrices ?? []) {
+                                if let data = data {
+                                    TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
+                                    self.currentlyFetching.remove(data.symbol ?? "")
+                                }
+                            }
+                            group.leave()
+                        case .failure(let error):
+                            print("Failure when making GraphQL request. Error: \(error)")
+                            group.leave()
                         }
                     }
-                    group.leave()
-                case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
-                    group.leave()
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                        completion()
+                    })
                 }
             }
-        }
-        group.notify(queue: DispatchQueue(label: "TickersLiveFetcher")) {
-            DispatchQueue.main.async {
-                completion()
+            group.notify(queue: DispatchQueue(label: "TickersLiveFetcher")) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    completion()
+                })
             }
-        }        
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                completion()
+            })
+        }
     }
 }

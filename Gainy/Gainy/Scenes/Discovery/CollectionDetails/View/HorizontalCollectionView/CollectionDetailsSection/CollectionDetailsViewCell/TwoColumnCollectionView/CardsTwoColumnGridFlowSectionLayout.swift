@@ -79,8 +79,8 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
             cell.configureWith(
                 companyName: viewModel.tickerCompanyName,
                 tickerSymbol: viewModel.tickerSymbol,
-                tickerPercentChange: viewModel.priceChange,
-                tickerPrice: viewModel.tickerPrice,
+                tickerPercentChange: viewModel.priceChangeToday > 0.0 ? " +" + viewModel.priceChangeToday.percentRaw : viewModel.priceChangeToday.percentRaw,
+                tickerPrice: viewModel.currentPrice.cleanTwoDecimal,
                 markerMetricHeaders: markers.map(\.shortTitle),
                 markerMetric: vals,
                 highlight: viewModel.highlight

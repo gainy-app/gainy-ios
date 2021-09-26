@@ -38,11 +38,11 @@ class TickerInfo {
             case .marketCap:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
             case .monthToDay:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.sma_30days ?? 0.0).cleanOneDecimalP))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.monthPricePerformance ?? 0.0).cleanOneDecimalP))
             case .netProfit:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "TTM, ANNUAL", value:  (ticker.tickerFinancials.last!.netProfitMargin ?? 0.0).percent))
             case .growsRateYOY:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "Quarterly, YOY", value: (ticker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0).cleanOneDecimalP))
+                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "Quarterly, YOY", value: (ticker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0).cleanOneDecimalP))
             }
         }
         self.marketData = markers

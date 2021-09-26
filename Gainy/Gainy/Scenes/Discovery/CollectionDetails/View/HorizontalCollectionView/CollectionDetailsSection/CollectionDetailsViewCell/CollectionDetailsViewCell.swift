@@ -50,6 +50,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         contentView.addSubview(collectionListHeader)
         collectionListHeader.frame = CGRect.init(x: 4, y: 144, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
         collectionListHeader.isHidden = true
+        contentView.addSubview(tickersLoadIndicator)
+        tickersLoadIndicator.center = internalCollectionView.center
+        
+        let recurLock = NSRecursiveLock()
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: internalCollectionView
@@ -60,6 +64,24 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 viewModel: modelItem,
                 position: indexPath.row
             )
+            
+            //Loading tickers data!
+            recurLock.lock()
+            if let model = modelItem as? CollectionCardViewCellModel, !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) && !(self?.isLoadingTickers ?? false) {
+                self?.isLoadingTickers = true
+                TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                    DispatchQueue.main.async {
+                        guard let self = self else {return}
+                        self.isLoadingTickers = false
+                        if var snapshot = self.dataSource?.snapshot() {
+                            let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                            snapshot.reloadItems(ids)
+                            self.dataSource?.apply(snapshot, animatingDifferences: true)
+                        }
+                    }
+                }
+            }
+            recurLock.unlock()
 
             return cell
         }
@@ -73,6 +95,23 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
 
     // MARK: Internal
+    
+    private var isLoadingTickers: Bool = false {
+        didSet {
+            if isLoadingTickers {
+                tickersLoadIndicator.startAnimating()
+                internalCollectionView.isScrollEnabled = false
+                internalCollectionView.isUserInteractionEnabled = false
+                internalCollectionView.alpha = 0.3
+                internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
+            } else {
+                tickersLoadIndicator.stopAnimating()
+                internalCollectionView.isScrollEnabled = true
+                internalCollectionView.isUserInteractionEnabled = true
+                internalCollectionView.alpha = 1.0
+            }
+        }
+    }
 
     // MARK: Properties
 
@@ -185,6 +224,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
+    }()
+    
+    private lazy var tickersLoadIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        indicator.tintColor = UIColor(named: "mainText")
+        indicator.hidesWhenStopped = true
+        return indicator
     }()
 
     private func initViewModels() {}

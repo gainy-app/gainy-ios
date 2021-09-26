@@ -1,8 +1,6 @@
 struct CollectionCardViewCellModel {
     let tickerCompanyName: String
     let tickerSymbol: String
-    let priceChange: String
-    let tickerPrice: String
     let dividendGrowthPercent: String
     let growthRateYOY: String
     let evs: String
@@ -21,5 +19,15 @@ extension CollectionCardViewCellModel: Hashable {
 
     static func == (lhs: CollectionCardViewCellModel, rhs: CollectionCardViewCellModel) -> Bool {
         lhs.tickerSymbol == rhs.tickerSymbol
+    }
+}
+
+extension CollectionCardViewCellModel: RemotePricable {
+    var currentPrice: Float {
+        TickerLiveStorage.shared.getSymbolData(tickerSymbol)?.currentPrice ?? 0.0
+    }
+    
+    var priceChangeToday: Float {
+        TickerLiveStorage.shared.getSymbolData(tickerSymbol)?.priceChangeToday ?? 0.0
     }
 }

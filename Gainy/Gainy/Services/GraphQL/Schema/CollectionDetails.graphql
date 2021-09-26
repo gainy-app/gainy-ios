@@ -33,8 +33,8 @@ fragment RemoteTickerDetails on tickers {
       symbol
       created_at
       net_profit_margin
-      sma_30days
-      market_cap_cagr_1years
+      quarterly_revenue_growth_yoy
+      month_price_performance
       enterprise_value_to_sales
     }
     ticker_categories {

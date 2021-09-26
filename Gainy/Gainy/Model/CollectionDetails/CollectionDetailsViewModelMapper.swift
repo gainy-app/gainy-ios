@@ -34,8 +34,6 @@ enum CollectionDetailsViewModelMapper {
         
         return CollectionCardViewCellModel.init(tickerCompanyName: model.companyName,
                                                 tickerSymbol: model.tickerSymbol,
-                                                priceChange: tickerPercentChangeText,
-                                                tickerPrice: "\(model.financialMetrics.currentPrice.cleanTwoDecimal)",
                                                 dividendGrowthPercent: model.financialMetrics.dividendGrowthPercent.cleanOneDecimalP,
                                                 growthRateYOY: model.financialMetrics.growthRateYOY.cleanOneDecimalP,
                                                 evs: model.financialMetrics.evs.cleanOneDecimal,

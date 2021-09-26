@@ -23,6 +23,8 @@
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
+		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
+		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
 		3330BD0F26FA6B850079C899 /* FetchStockMedianDay.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */; };
 		3330BD1026FA6B850079C899 /* FetchStockMedianMonth.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0D26FA6B850079C899 /* FetchStockMedianMonth.graphql */; };
@@ -304,6 +306,7 @@
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
+		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianDay.graphql; sourceTree = "<group>"; };
 		3330BD0D26FA6B850079C899 /* FetchStockMedianMonth.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianMonth.graphql; sourceTree = "<group>"; };
@@ -567,6 +570,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
 				85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */,
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
@@ -1171,6 +1175,7 @@
 			children = (
 				3A930ED8265C1909000FD3EB /* AppDelegate.swift */,
 				3A930EDA265C1909000FD3EB /* SceneDelegate.swift */,
+				331FB0F6270104050031A8EF /* Constants.swift */,
 			);
 			path = AppCore;
 			sourceTree = "<group>";
@@ -1588,6 +1593,7 @@
 				33CDECA226D627ED00E82329 /* SwiftDate */,
 				3342C87926DE0E7F0049763E /* FloatingPanel */,
 				85CD154826F8B22C001C060C /* GoogleSignIn */,
+				331FB0F927011D4B0031A8EF /* Cache */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1671,6 +1677,7 @@
 				33CDECA126D627ED00E82329 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 				3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2031,6 +2038,7 @@
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,
+				331FB0F7270104050031A8EF /* Constants.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
@@ -2389,6 +2397,14 @@
 				minimumVersion = 6.3.3;
 			};
 		};
+		331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hyperoslo/Cache.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
@@ -2465,6 +2481,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1C3A2C2A26A4A51200FAF107 /* XCRemoteSwiftPackageReference "AppsFlyerFramework" */;
 			productName = AppsFlyerLib;
+		};
+		331FB0F927011D4B0031A8EF /* Cache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */;
+			productName = Cache;
 		};
 		3342C87926DE0E7F0049763E /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;

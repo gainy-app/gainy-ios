@@ -423,8 +423,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
         symbol
         created_at
         net_profit_margin
-        sma_30days
-        market_cap_cagr_1years
+        quarterly_revenue_growth_yoy
+        month_price_performance
         enterprise_value_to_sales
       }
       ticker_categories {
@@ -571,8 +571,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("symbol", type: .scalar(String.self)),
         GraphQLField("created_at", type: .scalar(timestamptz.self)),
         GraphQLField("net_profit_margin", type: .scalar(Double.self)),
-        GraphQLField("sma_30days", type: .scalar(Double.self)),
-        GraphQLField("market_cap_cagr_1years", type: .scalar(Double.self)),
+        GraphQLField("quarterly_revenue_growth_yoy", type: .scalar(Double.self)),
+        GraphQLField("month_price_performance", type: .scalar(Double.self)),
         GraphQLField("enterprise_value_to_sales", type: .scalar(Double.self)),
       ]
     }
@@ -583,8 +583,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, sma_30days: Double? = nil, marketCapCagr_1years: Double? = nil, enterpriseValueToSales: Double? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "sma_30days": sma_30days, "market_cap_cagr_1years": marketCapCagr_1years, "enterprise_value_to_sales": enterpriseValueToSales])
+    public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, quarterlyRevenueGrowthYoy: Double? = nil, monthPricePerformance: Double? = nil, enterpriseValueToSales: Double? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "month_price_performance": monthPricePerformance, "enterprise_value_to_sales": enterpriseValueToSales])
     }
 
     public var __typename: String {
@@ -659,21 +659,21 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
     }
 
-    public var sma_30days: Double? {
+    public var quarterlyRevenueGrowthYoy: Double? {
       get {
-        return resultMap["sma_30days"] as? Double
+        return resultMap["quarterly_revenue_growth_yoy"] as? Double
       }
       set {
-        resultMap.updateValue(newValue, forKey: "sma_30days")
+        resultMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
       }
     }
 
-    public var marketCapCagr_1years: Double? {
+    public var monthPricePerformance: Double? {
       get {
-        return resultMap["market_cap_cagr_1years"] as? Double
+        return resultMap["month_price_performance"] as? Double
       }
       set {
-        resultMap.updateValue(newValue, forKey: "market_cap_cagr_1years")
+        resultMap.updateValue(newValue, forKey: "month_price_performance")
       }
     }
 

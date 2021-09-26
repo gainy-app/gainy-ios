@@ -71,11 +71,11 @@ enum MarketDataField: Int, Codable {
             case .marketCap:
                 return lhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0
             case .monthToDay:
-                return lhs.rawTicker.tickerFinancials.last!.sma_30days ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.sma_30days ?? 0.0
+                return lhs.rawTicker.tickerFinancials.last!.monthPricePerformance ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.monthPricePerformance ?? 0.0
             case .netProfit:
                 return lhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0
             case .growsRateYOY:
-                return lhs.rawTicker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0
+                return lhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0
             }
         } else {
             switch self {
@@ -86,11 +86,11 @@ enum MarketDataField: Int, Codable {
             case .marketCap:
                 return lhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.marketCapitalization ?? 0.0
             case .monthToDay:
-                return lhs.rawTicker.tickerFinancials.last!.sma_30days ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.sma_30days ?? 0.0
+                return lhs.rawTicker.tickerFinancials.last!.monthPricePerformance ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.monthPricePerformance ?? 0.0
             case .netProfit:
                 return lhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0
             case .growsRateYOY:
-                return lhs.rawTicker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.marketCapCagr_1years ?? 0.0
+                return lhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0
             }
         }
     }

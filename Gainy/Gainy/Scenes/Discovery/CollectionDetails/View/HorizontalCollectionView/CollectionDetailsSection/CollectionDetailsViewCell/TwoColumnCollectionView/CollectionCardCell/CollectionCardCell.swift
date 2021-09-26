@@ -419,7 +419,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         highlightLabel.frame = CGRect(
             x: hMargin,
             y: 160 + 4 + 20,
-            width: bounds.width - (hMargin + hMargin),
+            width: bounds.width - (hMargin + hMargin) - 16.0,
             height: highlightsContainerView.bounds.height - (4 + 4)
         )
     }
