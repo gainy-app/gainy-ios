@@ -70,8 +70,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
                 if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
                     self?.isLoadingTickers = true
+                    print("Fetching started \(model.tickerSymbol)")
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
                         DispatchQueue.main.async {
+                            print("Fetching ended \(model.tickerSymbol)")
                             guard let self = self else {return}
                             self.isLoadingTickers = false
                             if var snapshot = self.dataSource?.snapshot() {

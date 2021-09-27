@@ -46,7 +46,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
         
-        addBottomView()
         
         discoverCollectionsCollectionView.delegate = self
         
@@ -148,18 +147,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
         discoverCollectionsCollectionView.dataSource = dataSource
         if Auth.auth().currentUser != nil {
+            showNetworkLoader()
             getRemoteData {
                 DispatchQueue.main.async { [weak self] in
                     self?.initViewModels()
+                    self?.hideLoader()
                 }
             }
         }
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink {[weak self] _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
+                self?.showNetworkLoader()
                 self?.getRemoteData {
                     DispatchQueue.main.async {
                         self?.initViewModels()
+                        self?.hideLoader()
                     }
                 }
             }
@@ -379,6 +382,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snap, animatingDifferences: false)
         discoverCollectionsCollectionView.reloadData()
+        addBottomView()
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {

@@ -227,7 +227,7 @@ final class AuthorizationManager {
         // TODO: Borysov - Cleanup get Auth code
         user.getIDTokenResult { authTokenResult, error in
             
-            if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] {
+            if let claimsToken = authTokenResult?.claims[Constants.Auth.claims] {
                 
                 self.getFirebaseAuthToken { success in
                     
@@ -257,8 +257,8 @@ final class AuthorizationManager {
                 }
                 
             } else {
+                let url = URL(string: "\(Constants.Auth.claimsPost)\(user.uid)")!
                 let session = URLSession.shared
-                let url = URL(string: "https://us-central1-gainyapp.cloudfunctions.net/refresh_token?uid=\(user.uid)")!
                 let task = session.dataTask(with: url, completionHandler: { data, response, error in
 
                     if error != nil {

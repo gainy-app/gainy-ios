@@ -403,6 +403,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.initViewModelsFromData()
                     completion()
                     self?.hideLoader()
+                    self?.onDiscoverCollections?()
                 }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")

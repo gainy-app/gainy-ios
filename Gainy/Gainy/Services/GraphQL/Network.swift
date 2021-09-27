@@ -2,6 +2,7 @@ import Apollo
 import Foundation
 import FirebaseAuth
 import Combine
+import Accelerate
 
 public typealias float8 = Float
 public typealias timestamptz = String
@@ -55,6 +56,26 @@ final class Network {
     }()
 
     let graphQLEndpointUrl = URL(string: "https://hasura-production.gainy-infra.net/v1/graphql")!
+    
+    //MARK: - REST
+    
+    func makeAuthRequest(_ url: URL, completion: @escaping (Result<AuthorizationStatus, Error>) -> Void) {
+        let session = URLSession.shared
+        let task = session.dataTask(with: url, completionHandler: { data, response, error in
+
+            if error != nil {
+                completion(.success(.authorizingFailed))
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                      completion(.success(.authorizingFailed))
+                      return
+            }
+            completion(.success(.authorizedFully))
+        })
+        task.resume()
+    }
 }
 
 final class NetworkInterceptorProvider: DefaultInterceptorProvider {
