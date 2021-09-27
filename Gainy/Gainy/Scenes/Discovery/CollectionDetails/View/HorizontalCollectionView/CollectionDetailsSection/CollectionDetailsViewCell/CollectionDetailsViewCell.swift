@@ -6,24 +6,24 @@ private enum CollectionDetailsSection: Int, CaseIterable {
 
 final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Lifecycle
-
+    
     override init(frame _: CGRect) {
         super.init(frame: .zero)
-
+        
         layer.isOpaque = true
         backgroundColor = .clear
-
+        
         collectionHorizontalView.frame = CGRect(
             x: 4,
             y: 0,
             width: UIScreen.main.bounds.width - (16 + 16),
             height: 144
         )
-
+        
         collectionHorizontalView.backgroundColor = .clear
-
+        
         contentView.addSubview(collectionHorizontalView)
-
+        
         internalCollectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
@@ -33,7 +33,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             ),
             collectionViewLayout: customLayout
         )
-
+        
         internalCollectionView.register(CollectionCardCell.self)
         internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
         
@@ -67,33 +67,35 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             
             //Loading tickers data!
             recurLock.lock()
-            if let model = modelItem as? CollectionCardViewCellModel, !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) && !(self?.isLoadingTickers ?? false) {
-                self?.isLoadingTickers = true
-                TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
-                    DispatchQueue.main.async {
-                        guard let self = self else {return}
-                        self.isLoadingTickers = false
-                        if var snapshot = self.dataSource?.snapshot() {
-                            let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                            snapshot.reloadItems(ids)
-                            self.dataSource?.apply(snapshot, animatingDifferences: true)
+            if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
+                if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
+                    self?.isLoadingTickers = true
+                    TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                        DispatchQueue.main.async {
+                            guard let self = self else {return}
+                            self.isLoadingTickers = false
+                            if var snapshot = self.dataSource?.snapshot() {
+                                let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                                snapshot.reloadItems(ids)
+                                self.dataSource?.apply(snapshot, animatingDifferences: true)
+                            }
                         }
                     }
                 }
             }
             recurLock.unlock()
-
+            
             return cell
         }
-
+        
         initViewModels()
     }
-
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: Internal
     
     private var isLoadingTickers: Bool = false {
@@ -112,14 +114,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
     }
-
+    
     // MARK: Properties
-
+    
     var viewModel: CollectionCardViewCellModel?
-
+    
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
-
+    
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
         view.backgroundColor = .clear
@@ -132,7 +134,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         view.frame = CGRect.init(x: 0, y: 0, width: contentView.bounds.width, height: 36.0)
         return view
     }()
-
+    
     private var collectionID: Int = 0
     func configureWith(
         name collectionName: String,
@@ -206,19 +208,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             self?.dataSource?.apply(snapshot, animatingDifferences: true)
         }
     }
-
+    
     // MARK: Private
-
+    
     private lazy var sections: [SectionLayout] = [
         CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
         CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
     ]
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
-
+    
     private var internalCollectionView: UICollectionView!
-
+    
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
             self?.sections[sectionIndex].layoutSection(within: env)
@@ -232,7 +234,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         indicator.hidesWhenStopped = true
         return indicator
     }()
-
+    
     private func initViewModels() {}
 }
 
@@ -272,7 +274,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         }
         
         sections.swapAt(0, 1)
-        internalCollectionView.reloadData()        
+        internalCollectionView.reloadData()
     }
     
     func stockSortPressed(view: CollectionHorizontalView) {

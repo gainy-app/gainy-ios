@@ -89,7 +89,8 @@ final class TickerLiveStorage {
     }
     
     func haveSymbol(_ symbol: String) -> Bool {
-        ((try? storage?.existsObject(forKey: symbol) ?? false) != nil)
+        let isExist = try? storage?.existsObject(forKey: symbol)
+        return (isExist ?? false)
     }
     
     func getSymbolData(_ symbol: String) -> CachedLivePrice? {
