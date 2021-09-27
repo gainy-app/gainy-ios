@@ -225,10 +225,9 @@ final class AuthorizationManager {
         }
         
         // TODO: Borysov - Cleanup get Auth code
-        user.getIDTokenResult { authTokenResult, error in
+        user.getIDTokenResult(forcingRefresh: true) { authTokenResult, error in
             
-            if let claimsToken = authTokenResult?.claims[Constants.Auth.claims] {
-                
+            if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] {
                 self.getFirebaseAuthToken { success in
                     
                     if !success {
@@ -257,8 +256,8 @@ final class AuthorizationManager {
                 }
                 
             } else {
-                let url = URL(string: "\(Constants.Auth.claimsPost)\(user.uid)")!
                 let session = URLSession.shared
+                let url = URL(string: "\(Constants.Auth.claimsPost)\(user.uid)")!
                 let task = session.dataTask(with: url, completionHandler: { data, response, error in
 
                     if error != nil {
@@ -330,7 +329,7 @@ final class AuthorizationManager {
             return
         }
         
-        user.getIDToken { token, error in
+        user.getIDTokenForcingRefresh(true) { token, error in
             
             guard let token = token else {
                 completion(false)
