@@ -31,7 +31,7 @@ final class AuthorizationManager {
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
     private(set) var authorizationStatus: AuthorizationStatus
     
-    @UserDefault<String>("firebaseAuthToken")
+    @KeychainString("firebaseAuthToken")
     private(set) var firebaseAuthToken: String?
     
     public var firstName: String? {
@@ -118,6 +118,8 @@ final class AuthorizationManager {
             } else if self.googleAuth.isAuthorized() {
                 try self.googleAuth.signOut()
             }
+            self.firebaseAuthToken = nil
+            NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
@@ -229,6 +231,8 @@ final class AuthorizationManager {
             }
             
             self.firebaseAuthToken = token
+            NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: token)
+            
             self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
                 
                 if (hasProfiles) {
@@ -276,6 +280,7 @@ final class AuthorizationManager {
             }
             
             self.firebaseAuthToken = token
+            NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: token)
             completion()
         }
     }

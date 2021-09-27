@@ -268,6 +268,9 @@
 		85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */; };
 		85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */; };
 		85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */; };
+		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
+		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
+		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
 		85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */; };
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
@@ -559,6 +562,9 @@
 		85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
 		85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
+		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
 		85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
 		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
@@ -736,6 +742,7 @@
 			children = (
 				33317F9526D2CFAA009B9371 /* Atomic.swift */,
 				3342C87F26DE617D0049763E /* UserDefaults.swift */,
+				85ED4DD82701B82B00FE6926 /* Keychain.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -1232,6 +1239,7 @@
 				3AE90361266A4EDE00574923 /* Analytics */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
+				85ED4DD72701B77900FE6926 /* Keychain */,
 				3AE795562662AE65002B40D6 /* Reachability */,
 			);
 			path = Services;
@@ -1336,6 +1344,7 @@
 				33E1827B26D3967F00A1D2AC /* String+Sizes.swift */,
 				33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */,
 				33CDEC9F26D6229300E82329 /* Double+Currencies.swift */,
+				85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1536,6 +1545,14 @@
 				85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */,
 			);
 			path = RoundedTextCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		85ED4DD72701B77900FE6926 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				85ED4DD52701B77100FE6926 /* GainyKeychain.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		85F8B8B726DD3784000C73D3 /* Introduction */ = {
@@ -1901,6 +1918,7 @@
 				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
 				33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */,
+				85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
@@ -1937,6 +1955,7 @@
 				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,
 				3A67232C268F1D7000DB04D1 /* Array+Move.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
+				85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */,
 				33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */,
 				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
@@ -1985,6 +2004,7 @@
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */,
 				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
+				85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */,
 				857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */,

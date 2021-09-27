@@ -61,12 +61,34 @@ final class NetworkInterceptorProvider: DefaultInterceptorProvider {
         for operation: Operation
     ) -> [ApolloInterceptor] {
         var interceptors = super.interceptors(for: operation)
-        interceptors.insert(CustomInterceptor(), at: 0)
+        let customInteractor = CustomInterceptor()
+        customInteractor.subscribeOnFirebaseAuth()
+        interceptors.insert(customInteractor, at: 0)
         return interceptors
     }
 }
 
 final class CustomInterceptor: ApolloInterceptor {
+    
+    
+    @KeychainString("firebaseAuthToken")
+    private(set) var firebaseAuthToken: String?
+    
+    func subscribeOnFirebaseAuth() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveFirebaseAuthToken), name: Notification.Name.didReceiveFirebaseAuthToken, object: nil)
+    }
+    
+    @objc func didReceiveFirebaseAuthToken(_ notification: Notification) {
+        
+        if let token = notification.object as? String {
+            
+            self.firebaseAuthToken = token
+        } else {
+            self.firebaseAuthToken = nil
+        }
+    }
+    
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
@@ -75,7 +97,10 @@ final class CustomInterceptor: ApolloInterceptor {
     ) {
         //request.addHeader(name: "x-hasura-admin-secret", value: Auth.auth().currentUser?.uid ?? BundleReader().graphQLToken)
         request.addHeader(name: "x-hasura-admin-secret", value: BundleReader().graphQLToken)
-        
+        if let token = self.firebaseAuthToken {
+            let bearer = "Bearer " + token
+            request.addHeader(name: "Authorization", value: bearer)
+        }
         print("request :\(request)")
         print("response :\(String(describing: response))")
 
