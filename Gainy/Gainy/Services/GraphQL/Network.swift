@@ -89,16 +89,6 @@ final class CustomInterceptor: ApolloInterceptor {
         }.store(in: &cancellables)
     }
     
-    @objc func didReceiveFirebaseAuthToken(_ notification: Notification) {
-        
-        if let token = notification.object as? String {
-            
-            self.firebaseAuthToken = token
-        } else {
-            self.firebaseAuthToken = nil
-        }
-    }
-    
     func interceptAsync<Operation: GraphQLOperation>(
         chain: RequestChain,
         request: HTTPRequest<Operation>,
