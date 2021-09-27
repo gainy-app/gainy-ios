@@ -74,7 +74,9 @@ final class AuthorizationManager {
     init() {
         
         self.updateAuthorizationStatus {}
-        self.updateFirebaseAuthToken {}
+        self.getFirebaseAuthToken { success in
+            
+        }
     }
     
     public func authorizeWithApple(completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
@@ -222,27 +224,68 @@ final class AuthorizationManager {
             return
         }
         
-        user.getIDToken { token, error in
+        user.getIDTokenResult { authTokenResult, error in
             
-            guard let token = token else {
-                self.authorizationStatus = .authorizingFailed
-                completion(self.authorizationStatus)
-                return
-            }
-            
-            self.firebaseAuthToken = token
-            NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: token)
-            
-            self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
-                
-                if (hasProfiles) {
-                    self.authorizationStatus = .authorizedFully
+            if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] as? String {
+                self.firebaseAuthToken = claimsToken
+                NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: claimsToken)
+                self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+                    
+                    if (hasProfiles) {
+                        self.authorizationStatus = .authorizedFully
+                        completion(self.authorizationStatus)
+                        return
+                    }
+                    
+                    self.authorizationStatus = .authorizedNeedCreateProfile
                     completion(self.authorizationStatus)
-                    return
                 }
                 
-                self.authorizationStatus = .authorizedNeedCreateProfile
-                completion(self.authorizationStatus)
+            } else {
+                let session = URLSession.shared
+                let url = URL(string: "https://us-central1-gainyapp.cloudfunctions.net/refresh_token?uid=\(user.uid)")!
+                let task = session.dataTask(with: url, completionHandler: { data, response, error in
+
+                    if error != nil {
+                        self.authorizationStatus = .authorizingFailed
+                        completion(self.authorizationStatus)
+                        return
+                    }
+                    guard let httpResponse = response as? HTTPURLResponse,
+                          (200...299).contains(httpResponse.statusCode) else {
+                              self.authorizationStatus = .authorizingFailed
+                              completion(self.authorizationStatus)
+                              return
+                    }
+                    
+                    self.getFirebaseAuthToken { success in
+                        
+                        if !success {
+                            self.authorizationStatus = .authorizingFailed
+                            completion(self.authorizationStatus)
+                            return
+                        }
+                        
+                        guard let token = self.firebaseAuthToken else {
+                            self.authorizationStatus = .authorizingFailed
+                            completion(self.authorizationStatus)
+                            return
+                        }
+                        
+                        self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+                            
+                            if (hasProfiles) {
+                                self.authorizationStatus = .authorizedFully
+                                completion(self.authorizationStatus)
+                                return
+                            }
+                            
+                            self.authorizationStatus = .authorizedNeedCreateProfile
+                            completion(self.authorizationStatus)
+                        }
+                    }
+                })
+                task.resume()
             }
         }
     }
@@ -265,23 +308,23 @@ final class AuthorizationManager {
         }
     }
     
-    private func updateFirebaseAuthToken(completion: @escaping () -> Void) {
+    private func getFirebaseAuthToken(completion: @escaping (_ success: Bool) -> Void) {
         
         guard let user = Auth.auth().currentUser else {
-            completion()
+            completion(false)
             return
         }
         
         user.getIDToken { token, error in
             
             guard let token = token else {
-                completion()
+                completion(false)
                 return
             }
             
             self.firebaseAuthToken = token
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: token)
-            completion()
+            completion(true)
         }
     }
     
