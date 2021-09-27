@@ -119,6 +119,10 @@ class CustomTabBar: UITabBar {
     override func layoutSubviews() {
         super.layoutSubviews()
         bringSubviewToFront(profileView)
+        layer.shadowOffset = CGSize.init(width: 0.0, height: 0.5)
+        layer.shadowRadius = 10.0
+        layer.shadowOpacity = 1.0
+        layer.shadowColor = UIColor(hexString: "#4F6169", alpha: Float(0.1))?.cgColor
     }
     
     override var selectedItem: UITabBarItem? {
