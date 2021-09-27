@@ -224,6 +224,7 @@ final class AuthorizationManager {
             return
         }
         
+        // TODO: Borysov - Cleanup get Auth code 
         user.getIDTokenResult { authTokenResult, error in
             
             if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] as? String {
