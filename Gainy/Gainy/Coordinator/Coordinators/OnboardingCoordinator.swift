@@ -67,11 +67,6 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     public func presentAuthorizationViewController(isOnboardingDone: Bool? = nil) {
         
-        if self.authorizationManager.isAuthorized() {
-            self.pushPersonalInfoViewController(isOnboardingDone: isOnboardingDone)
-            return
-        }
-        
         let vc = viewControllerFactory.instantiateAuthorization(coordinator: self)
         vc.coordinator = self
         vc.authorizationManager = self.authorizationManager

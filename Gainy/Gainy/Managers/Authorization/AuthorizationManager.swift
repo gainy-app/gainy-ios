@@ -224,22 +224,36 @@ final class AuthorizationManager {
             return
         }
         
-        // TODO: Borysov - Cleanup get Auth code 
+        // TODO: Borysov - Cleanup get Auth code
         user.getIDTokenResult { authTokenResult, error in
             
-            if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] as? String {
-                self.firebaseAuthToken = claimsToken
-                NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: claimsToken)
-                self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+            if let claimsToken = authTokenResult?.claims["https://hasura.io/jwt/claims"] {
+                
+                self.getFirebaseAuthToken { success in
                     
-                    if (hasProfiles) {
-                        self.authorizationStatus = .authorizedFully
+                    if !success {
+                        self.authorizationStatus = .authorizingFailed
                         completion(self.authorizationStatus)
                         return
                     }
                     
-                    self.authorizationStatus = .authorizedNeedCreateProfile
-                    completion(self.authorizationStatus)
+                    guard let token = self.firebaseAuthToken else {
+                        self.authorizationStatus = .authorizingFailed
+                        completion(self.authorizationStatus)
+                        return
+                    }
+                    
+                    self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
+                        
+                        if (hasProfiles) {
+                            self.authorizationStatus = .authorizedFully
+                            completion(self.authorizationStatus)
+                            return
+                        }
+                        
+                        self.authorizationStatus = .authorizedNeedCreateProfile
+                        completion(self.authorizationStatus)
+                    }
                 }
                 
             } else {
