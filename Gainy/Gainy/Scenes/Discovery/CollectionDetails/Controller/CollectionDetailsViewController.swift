@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import PureLayout
 import FloatingPanel
+import Firebase
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -26,8 +27,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var collectionID: Int {
         let visibleRect = CGRect(origin: collectionDetailsCollectionView.contentOffset, size: collectionDetailsCollectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint)
-        return viewModel?.collectionDetails[visibleIndexPath?.row ?? 0].id ?? 0
+        if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint) {
+            return viewModel?.collectionDetails[visibleIndexPath.row].id ?? 0
+        } else {
+            return -1
+        }
     }
     
     override func viewDidLoad() {
@@ -128,7 +132,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         view.addSubview(navigationBarContainer)
         
         let navigationBarTopOffset =
-            navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
         
         collectionDetailsCollectionView = UICollectionView(
             frame: CGRect(
@@ -215,13 +219,26 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
             self?.onShowCardDetails?(ticker)
         })
-        getRemoteData {
-            DispatchQueue.main.async { [weak self] in
-                self?.initViewModels()
-                
-                self?.centerInitialCollectionInTheCollectionView()
+        if Auth.auth().currentUser != nil {
+            getRemoteData {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+                    
+                    self?.centerInitialCollectionInTheCollectionView()
+                }
             }
         }
+        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let token = notification.object as? String {
+                self?.getRemoteData {
+                    DispatchQueue.main.async {
+                        self?.initViewModels()
+                        self?.centerInitialCollectionInTheCollectionView()
+                    }
+                }
+            }
+        }.store(in: &cancellables)
         setupPanel()
     }
     
@@ -330,7 +347,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back                    
+                    //Going back
                     //self?.onDiscoverCollections?()
                     self?.hideLoader()
                     completion()
@@ -520,8 +537,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
             switch state {
             case .full,
-                 .half,
-                 .tip: return 0.3
+                    .half,
+                    .tip: return 0.3
             default: return 0.0
             }
         }
@@ -548,7 +565,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     //MARK: - Swap Items
     
     func swapItemsAt(_ sourceInd: Int, destInd: Int) {
-        guard var snapshot = dataSource?.snapshot() else {return}        
+        guard var snapshot = dataSource?.snapshot() else {return}
         
         guard let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
             if let model = anyHashable as? CollectionDetailViewCellModel {

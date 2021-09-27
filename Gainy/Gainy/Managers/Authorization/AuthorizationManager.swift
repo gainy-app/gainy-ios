@@ -296,7 +296,6 @@ final class AuthorizationManager {
             case .success(let graphQLResult):
                 
                 guard let appProfiles = graphQLResult.data?.appProfiles else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
                     completion(false)
                     return
                 }

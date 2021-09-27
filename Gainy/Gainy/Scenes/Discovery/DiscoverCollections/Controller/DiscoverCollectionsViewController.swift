@@ -4,6 +4,7 @@ import UIKit
 import MBProgressHUD
 import PureLayout
 import SwiftUI
+import Firebase
 
 enum DiscoverCollectionsSection: Int, CaseIterable {
     case yourCollections
@@ -34,7 +35,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-                
+        
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         
@@ -127,14 +128,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             switch kind {
             case UICollectionView.elementKindSectionHeader:
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue
-                    ? CollectionHeaderViewModel(
-                        title: "Your collections",
-                        description: "Tap to view, swipe to edit or drag & drop to reorder"
-                    )
-                    : CollectionHeaderViewModel(
-                        title: "Collections you might like",
-                        description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
-                    )
+                ? CollectionHeaderViewModel(
+                    title: "Your collections",
+                    description: "Tap to view, swipe to edit or drag & drop to reorder"
+                )
+                : CollectionHeaderViewModel(
+                    title: "Collections you might like",
+                    description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
+                )
                 
                 return self?.sections[indexPath.section].header(
                     collectionView: collectionView,
@@ -146,12 +147,24 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         discoverCollectionsCollectionView.dataSource = dataSource
-        
-        getRemoteData {
-            DispatchQueue.main.async { [weak self] in
-                self?.initViewModels()
+        if Auth.auth().currentUser != nil {
+            getRemoteData {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+                }
             }
         }
+        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink {[weak self] _ in
+        } receiveValue: {[weak self] notification in
+            if let token = notification.object as? String {
+                self?.getRemoteData {
+                    DispatchQueue.main.async {
+                        self?.initViewModels()
+                    }
+                }
+            }
+        }.store(in: &cancellables)
+        
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     

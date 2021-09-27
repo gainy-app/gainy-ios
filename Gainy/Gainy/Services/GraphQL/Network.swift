@@ -1,6 +1,7 @@
 import Apollo
 import Foundation
 import FirebaseAuth
+import Combine
 
 public typealias float8 = Float
 public typealias timestamptz = String
@@ -74,9 +75,18 @@ final class CustomInterceptor: ApolloInterceptor {
     @KeychainString("firebaseAuthToken")
     private(set) var firebaseAuthToken: String?
     
+    private var cancellables = Set<AnyCancellable>()
+    
     func subscribeOnFirebaseAuth() {
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveFirebaseAuthToken), name: Notification.Name.didReceiveFirebaseAuthToken, object: nil)
+        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
+        } receiveValue: { notification in
+            if let token = notification.object as? String {
+                self.firebaseAuthToken = token
+            } else {
+                self.firebaseAuthToken = nil
+            }
+        }.store(in: &cancellables)
     }
     
     @objc func didReceiveFirebaseAuthToken(_ notification: Notification) {
@@ -95,8 +105,6 @@ final class CustomInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Swift.Result<GraphQLResult<Operation.Data>, Error>) -> Void
     ) {
-        //request.addHeader(name: "x-hasura-admin-secret", value: Auth.auth().currentUser?.uid ?? BundleReader().graphQLToken)
-        request.addHeader(name: "x-hasura-admin-secret", value: BundleReader().graphQLToken)
         if let token = self.firebaseAuthToken {
             let bearer = "Bearer " + token
             request.addHeader(name: "Authorization", value: bearer)

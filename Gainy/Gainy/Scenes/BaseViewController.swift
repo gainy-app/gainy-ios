@@ -52,7 +52,7 @@ class BaseViewController: UIViewController {
     private(set) var feedbackGenerator: UIImpactFeedbackGenerator?
     
     // MARK: - Properties
-    private var cancellables = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>()
     private let monitorQueue = DispatchQueue(label: "monitor")
     
     @Atomic
