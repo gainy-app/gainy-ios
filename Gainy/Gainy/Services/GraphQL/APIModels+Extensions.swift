@@ -27,6 +27,16 @@ protocol RemotePricable {
     }
 }
 
+protocol RemoteMatchable {
+    var matchScore: String {
+        get
+    }
+    
+    var isMatch: Bool {
+        get
+    }
+}
+
 // Adding missing fields from old Model
 extension RemoteTickerDetails: RemotePricable {
     var currentPrice: Float {
@@ -46,6 +56,28 @@ extension RemoteTickerDetails.TickerFinancial: RemotePricable {
     var priceChangeToday: Float {
         TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
     }
+}
+
+extension RemoteTickerDetails: RemoteMatchable {
+    var matchScore: String {
+        "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
+    }
+    
+    var isMatch: Bool {
+        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
+    }
+    
+}
+
+extension RemoteTickerDetails.TickerFinancial: RemoteMatchable {
+    var matchScore: String {
+        "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
+    }
+    
+    var isMatch: Bool {
+        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
+    }
+    
 }
 
 //MARK: - Fetching extra fields for Tickrs from other storage

@@ -87,7 +87,9 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                 tickerPercentChange: viewModel.priceChangeToday > 0.0 ? " +" + viewModel.priceChangeToday.percentRaw : viewModel.priceChangeToday.percentRaw,
                 tickerPrice: viewModel.currentPrice.cleanTwoDecimal,
                 markerHeaders: markers.map(\.shortTitle),
-                markerMetrics: vals
+                markerMetrics: vals,
+                matchScore: viewModel.matchScore,
+                isMatch: viewModel.isMatch
             )
         }
 

@@ -9,17 +9,17 @@ import UIKit
 
 final class CollectionListCardCell: UICollectionViewCell {
 
-    @IBOutlet weak var nameLbl: UILabel!
-    @IBOutlet weak var symbolLbl: UILabel!
-    @IBOutlet weak var priceLbl: UILabel!
+    @IBOutlet private weak var nameLbl: UILabel!
+    @IBOutlet private weak var symbolLbl: UILabel!
+    @IBOutlet private weak var priceLbl: UILabel!
     
     
-    @IBOutlet weak var growthLbl: UILabel!
-    @IBOutlet weak var yieldLbl: UILabel!
-    @IBOutlet weak var peLbl: UILabel!
-    @IBOutlet weak var marketLbl: UILabel!
-    @IBOutlet weak var mlpLbl: UILabel!
-    
+    @IBOutlet private weak var growthLbl: UILabel!
+    @IBOutlet private weak var yieldLbl: UILabel!
+    @IBOutlet private weak var peLbl: UILabel!
+    @IBOutlet private weak var marketLbl: UILabel!
+    @IBOutlet private weak var mlpLbl: UILabel!
+    @IBOutlet private weak var effectsView: UIVisualEffectView!
     
     func configureWith(
         companyName: String,
@@ -27,7 +27,9 @@ final class CollectionListCardCell: UICollectionViewCell {
         tickerPercentChange: String,
         tickerPrice: String,
         markerHeaders: [String],
-        markerMetrics: [String]
+        markerMetrics: [String],
+        matchScore: String,
+        isMatch: Bool
     ) {
         nameLbl.text = companyName
 
@@ -43,7 +45,8 @@ final class CollectionListCardCell: UICollectionViewCell {
         for (ind, val) in markerMetrics.enumerated() {
             lbls[ind]?.text = val
         }
-
+        effectsView.isHidden = isMatch
+        
         layoutIfNeeded()
     }
 }

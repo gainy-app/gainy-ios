@@ -1,5 +1,5 @@
 query DiscoverCollectionDetails($offset: Int!) {
-  collections(limit: 20, offset: $offset) {
+  collections(limit: 20, offset: $offset, where: {enabled: {_eq: "1"}}) {
     ...RemoteCollectionDetails
   }
 }

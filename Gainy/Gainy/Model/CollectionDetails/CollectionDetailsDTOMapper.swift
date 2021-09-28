@@ -60,7 +60,7 @@ enum CollectionDetailsDTOMapper {
             priceToEarnings: Float(dto.peRatio ?? 0.0),
             marketCapitalization: Float(dto.marketCapitalization ?? 0.0),
             evs: Float(dto.enterpriseValueToSales ?? 0.0),
-            growthRateYOY: Float(dto.quarterlyRevenueGrowthYoy ?? 0.0),
+            growthRateYOY: Float(dto.quarterlyRevenueGrowthYoy ?? 0.0) * 100.0,
             monthToDay: Float(dto.monthPricePerformance ?? 0.0),
             netProfit : Float(dto.netProfitMargin ?? 0.0),
             highlight: dto.highlight ?? ""

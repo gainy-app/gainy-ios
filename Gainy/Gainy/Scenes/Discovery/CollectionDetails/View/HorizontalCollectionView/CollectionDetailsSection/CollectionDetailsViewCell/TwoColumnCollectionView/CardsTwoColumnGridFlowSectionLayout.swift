@@ -83,7 +83,9 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
                 tickerPrice: viewModel.currentPrice.cleanTwoDecimal,
                 markerMetricHeaders: markers.map(\.shortTitle),
                 markerMetric: vals,
-                highlight: viewModel.highlight
+                highlight: viewModel.highlight,
+                matchScore: viewModel.matchScore,
+                isMatch: viewModel.isMatch
             )
         }
 

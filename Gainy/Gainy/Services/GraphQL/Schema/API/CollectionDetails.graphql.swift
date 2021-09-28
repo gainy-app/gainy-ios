@@ -9,7 +9,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query DiscoverCollectionDetails($offset: Int!) {
-      collections(limit: 20, offset: $offset) {
+      collections(limit: 20, offset: $offset, where: {enabled: {_eq: "1"}}) {
         __typename
         ...RemoteCollectionDetails
       }
@@ -40,7 +40,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections", arguments: ["limit": 20, "offset": GraphQLVariable("offset")], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
+        GraphQLField("collections", arguments: ["limit": 20, "offset": GraphQLVariable("offset"), "where": ["enabled": ["_eq": "1"]]], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
       ]
     }
 

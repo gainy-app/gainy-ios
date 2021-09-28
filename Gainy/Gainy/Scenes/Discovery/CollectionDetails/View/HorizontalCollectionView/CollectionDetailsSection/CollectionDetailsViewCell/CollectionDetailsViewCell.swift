@@ -71,18 +71,27 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
                     self?.isLoadingTickers = true
                     print("Fetching started \(model.tickerSymbol)")
+                    let dispatchGroup = DispatchGroup()
+                    dispatchGroup.enter()
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
-                        DispatchQueue.main.async {
-                            print("Fetching ended \(model.tickerSymbol)")
-                            guard let self = self else {return}
-                            self.isLoadingTickers = false
-                            if var snapshot = self.dataSource?.snapshot() {
-                                let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                                snapshot.reloadItems(ids)
-                                self.dataSource?.apply(snapshot, animatingDifferences: true)
-                            }
-                        }
+                        dispatchGroup.leave()
+                        print("Fetching ended \(model.tickerSymbol)")
                     }
+                    dispatchGroup.enter()
+                    TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
+                        dispatchGroup.leave()
+                        print("Fetching match ended \(model.tickerSymbol)")
+                    }
+                    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                        print("Fetching ended \(model.tickerSymbol)")
+                        guard let self = self else {return}
+                        self.isLoadingTickers = false
+                        if var snapshot = self.dataSource?.snapshot() {
+                            let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                            snapshot.reloadItems(ids)
+                            self.dataSource?.apply(snapshot, animatingDifferences: true)
+                        }
+                    })
                 }
             }
             recurLock.unlock()

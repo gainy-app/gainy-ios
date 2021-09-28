@@ -31,3 +31,13 @@ extension CollectionCardViewCellModel: RemotePricable {
         TickerLiveStorage.shared.getSymbolData(tickerSymbol)?.priceChangeToday ?? 0.0
     }
 }
+
+extension CollectionCardViewCellModel: RemoteMatchable {
+    var matchScore: String {
+        "\(TickerLiveStorage.shared.getMatchData(tickerSymbol)?.matchScore ?? 0)"
+    }
+    
+    var isMatch: Bool {
+        TickerLiveStorage.shared.getMatchData(tickerSymbol)?.isMatch ?? false
+    } 
+}

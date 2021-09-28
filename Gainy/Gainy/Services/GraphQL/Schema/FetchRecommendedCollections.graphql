@@ -1,0 +1,8 @@
+query FetchRecommendedCollections($profileId: Int!) {
+    get_recommended_collections(profile_id: $profileId) {
+        id
+        collection {
+            ...RemoteCollectionDetails
+        }
+    }
+}

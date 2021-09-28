@@ -1,7 +1,6 @@
 enum CollectionDTOMapper {
     static func map(_ dto: RemoteCollectionDetails) -> Collection {
         
-        //TODO: - profileFavoriteCollections check current User Profile ID
         return Collection(
             id: dto.id ?? -1,
             image: dto.name?.lowercased() ?? "",
@@ -9,7 +8,7 @@ enum CollectionDTOMapper {
             name: dto.name ?? "",
             description: dto.description ?? "",
             stocksAmount: Int(dto.tickerCollectionsAggregate.aggregate?.count ?? 0),
-            isInYourCollections: false
+            isInYourCollections: DemoUserContainer.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }
 }

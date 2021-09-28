@@ -71,3 +71,24 @@ struct UserDefaultAuthorizationStatus {
         }
     }
 }
+
+@propertyWrapper
+struct UserDefaultArray<T: Codable> {
+    let key: String
+    
+    init(key: String) {
+        self.key = key
+    }
+
+    var wrappedValue: [T] {
+        get {
+            guard let arrayData = UserDefaults.standard.object(forKey: key) as? Data else {return []}
+            guard let value = try? JSONDecoder().decode([T].self, from: arrayData) else {return []}
+            return value
+        }
+        set {
+            let data = try? JSONEncoder().encode(newValue)
+            UserDefaults.standard.set(data, forKey: key)
+        }
+    }
+}

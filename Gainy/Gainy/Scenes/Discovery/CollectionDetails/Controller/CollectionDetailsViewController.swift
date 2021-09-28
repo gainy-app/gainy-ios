@@ -173,7 +173,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     cell.tag = model.id
                 }
                 cell.onCardPressed = {[weak self]  ticker in
-                    self?.onShowCardDetails?(ticker)
+                    if ticker.isMatch {
+                        self?.onShowCardDetails?(ticker)
+                    } else {
+                        let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
+                            self?.onShowCardDetails?(ticker)
+                        }
+                        NotificationManager.shared.showMessage(title: "Hidden stock 💎", text: "Looks like this stock is not a perfect match for you. Let's unveil it?", cancelTitle: "No", actions: [yesAction])
+                        GainyAnalytics.logEvent("blurred_stock_pressed", params: ["symbol" : ticker.symbol ?? "", "collectionId" : self?.currentCollectionToChange ?? 0])
+                    }
                 }
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}
@@ -189,9 +197,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
             
             //Paging
-            if (indexPath.row + 1 == self?.viewModel?.collectionDetails.count ?? 0) && (self?.viewModel?.hasMorePages ?? false) {
-                self?.loadNextCollections()
-            }
+            //            if (indexPath.row + 1 == self?.viewModel?.collectionDetails.count ?? 0) && (self?.viewModel?.hasMorePages ?? false) {
+            //                self?.loadNextCollections()
+            //            }
             
             return cell
         }
@@ -220,21 +228,28 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self?.onShowCardDetails?(ticker)
         })
         if Auth.auth().currentUser != nil {
-            getRemoteData {
-                DispatchQueue.main.async { [weak self] in
-                    self?.initViewModels()
-                    
-                    self?.centerInitialCollectionInTheCollectionView()
+            if DemoUserContainer.shared.favoriteCollections.isEmpty {
+                self.onDiscoverCollections?()
+            } else {
+                getRemoteData {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.initViewModels()
+                        self?.centerInitialCollectionInTheCollectionView()
+                    }
                 }
             }
         }
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
-                self?.getRemoteData {
-                    DispatchQueue.main.async {
-                        self?.initViewModels()
-                        self?.centerInitialCollectionInTheCollectionView()
+                if DemoUserContainer.shared.favoriteCollections.isEmpty {
+                    self?.onDiscoverCollections?()
+                } else {
+                    self?.getRemoteData {
+                        DispatchQueue.main.async {
+                            self?.initViewModels()
+                            self?.centerInitialCollectionInTheCollectionView()
+                        }
                     }
                 }
             }
@@ -343,7 +358,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: 0)) { [weak self] result in
+        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: DemoUserContainer.shared.favoriteCollections)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
@@ -353,57 +368,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawCollectionDetails = collections
+                DummyDataSource.remoteRawYourCollections = collections
                 
                 //Paging
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
-                //Fetching Tickers prices
-                var tickerSymbols: [String] = []
-                collections.forEach({
-                    let symbolsInitial = $0.tickerCollections.compactMap({
-                        $0.ticker?.fragments.remoteTickerDetails.symbol
-                    })
-                    tickerSymbols.append(contentsOf: symbolsInitial.prefix(20))
-                })
-                let yourCollectionDetails: [CollectionDetails] = DummyDataSource
-                    .yourCollections
-                    .compactMap { yourCollection in
-                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(
-                            DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                $0.id == yourCollection.id
-                            })!
-                        )
-                    }
-                
-                let recommendedCollectionDetails: [CollectionDetails] = DummyDataSource
-                    .recommendedCollections
-                    .compactMap { recommendedCollection in
-                        CollectionDetailsDTOMapper.mapAsCollectionFromRecommendedCollections(
-                            DummyDataSource.remoteRawCollectionDetails.first(where: {
-                                $0.id == recommendedCollection.id
-                            })!
-                        )
-                    }
-                
-                DummyDataSource.collectionDetails.removeAll()
-                DummyDataSource.collectionDetails.append(
-                    contentsOf: DummyDataSource.remoteRawCollectionDetails.compactMap( {
-                        CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-                    })
-                )
-                
-                //                DummyDataSource.collectionDetails.append(
-                //                    contentsOf: recommendedCollectionDetails
-                //                )
-                
-                
                 DispatchQueue.main.async {
                     self?.initViewModelsFromData()
                     completion()
                     self?.hideLoader()
-                    self?.onDiscoverCollections?()
                 }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
@@ -414,57 +388,57 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
-    fileprivate func loadNextCollections() {
-        guard haveNetwork else {
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            return
-        }
-        guard !isNetworkLoading else {
-            return
-        }
-        guard viewModel?.hasMorePages ?? false else {
-            return
-        }
-        DispatchQueue.main.async { [weak self] in
-            self?.showNetworkLoader()
-        }
-        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: viewModel?.collectionOffset ?? 0)) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    self?.hideLoader()
-                    return
-                }
-                DummyDataSource.remoteRawCollectionDetails.append(contentsOf: collections)
-                
-                //Paging
-                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
-                self?.viewModel?.hasMorePages = (collections.count == 20)
-                
-                let newDetails = collections.compactMap( {
-                    CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-                })
-                DummyDataSource.collectionDetails.append(contentsOf: newDetails)
-                
-                //Adding to View Model
-                let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
-                self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
-                
-                DispatchQueue.main.async {
-                    if var snapshot = self?.dataSource?.snapshot() {
-                        snapshot.appendItems(detailsDTO,
-                                             toSection: .collectionWithCards)
-                        
-                        self?.dataSource?.apply(snapshot, animatingDifferences: false)
-                    }
-                    self?.hideLoader()
-                }
-            case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
-                self?.hideLoader()
-            }
-        }
-    }
+    //    fileprivate func loadNextCollections() {
+    //        guard haveNetwork else {
+    //            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+    //            return
+    //        }
+    //        guard !isNetworkLoading else {
+    //            return
+    //        }
+    //        guard viewModel?.hasMorePages ?? false else {
+    //            return
+    //        }
+    //        DispatchQueue.main.async { [weak self] in
+    //            self?.showNetworkLoader()
+    //        }
+    //        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: viewModel?.collectionOffset ?? 0)) { [weak self] result in
+    //            switch result {
+    //            case .success(let graphQLResult):
+    //                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+    //                    self?.hideLoader()
+    //                    return
+    //                }
+    //                DummyDataSource.remoteRawCollectionDetails.append(contentsOf: collections)
+    //
+    //                //Paging
+    //                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
+    //                self?.viewModel?.hasMorePages = (collections.count == 20)
+    //
+    //                let newDetails = collections.compactMap( {
+    //                    CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
+    //                })
+    //                DummyDataSource.collectionDetails.append(contentsOf: newDetails)
+    //
+    //                //Adding to View Model
+    //                let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
+    //                self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
+    //
+    //                DispatchQueue.main.async {
+    //                    if var snapshot = self?.dataSource?.snapshot() {
+    //                        snapshot.appendItems(detailsDTO,
+    //                                             toSection: .collectionWithCards)
+    //
+    //                        self?.dataSource?.apply(snapshot, animatingDifferences: false)
+    //                    }
+    //                    self?.hideLoader()
+    //                }
+    //            case .failure(let error):
+    //                print("Failure when making GraphQL request. Error: \(error)")
+    //                self?.hideLoader()
+    //            }
+    //        }
+    //    }
     
     @objc
     private func discoverCollectionsButtonTapped() {
@@ -486,8 +460,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
-        viewModel?.collectionDetails = DummyDataSource
-            .collectionDetails
+        
+        let yourCollections = DummyDataSource
+            .remoteRawYourCollections
+            .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
+        
+        viewModel?.collectionDetails = yourCollections
             .map { CollectionDetailsViewModelMapper.map($0) }
     }
     
@@ -547,20 +525,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        loadCollectionsIfNoneExists()
-    }
-    
-    fileprivate func loadCollectionsIfNoneExists() {
-        if DummyDataSource.collectionDetails.count == 0 {
-            getRemoteData {
-                DispatchQueue.main.async { [weak self] in
-                    self?.initViewModels()
-                    
-                    self?.centerInitialCollectionInTheCollectionView()
-                }
-            }
-        }
     }
     
     //MARK: - Swap Items

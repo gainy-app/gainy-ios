@@ -200,14 +200,12 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     @objc
     private func plusButtonTapped(_: UIButton) {
-        //TODO: - Uncomment later
-        NotificationManager.shared.showMessage(title: "Oops", text: "This will be implemented after recommendation system and onboarding", cancelTitle: "OK", actions: nil)
-//        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
-//            buttonState = .checked
-//            tapHandler()
-//        } else if let tapHandler = onCheckButtonPressed, buttonState == .checked {
-//            buttonState = .unchecked
-//            tapHandler()
-//        }
+        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
+            buttonState = .checked
+            tapHandler()
+        } else if let tapHandler = onCheckButtonPressed, buttonState == .checked {
+            buttonState = .unchecked
+            tapHandler()
+        }
     }
 }

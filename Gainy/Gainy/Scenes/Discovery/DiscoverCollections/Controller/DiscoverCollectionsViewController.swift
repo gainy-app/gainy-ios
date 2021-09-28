@@ -244,13 +244,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             recommendedIdentifier: updatedRecommendedItem
         )
         
-        viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
-        
-        snapshot.insertItems([updatedRecommendedItem], afterItem: collectionItemToAdd)
-        snapshot.deleteItems([collectionItemToAdd])
-        dataSource?.apply(snapshot, animatingDifferences: false)
-        
         viewModel?.yourCollections.append(yourCollectionItem)
+        viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
+        if var snapshot = dataSource?.snapshot() {
+            snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
+        
+        DemoUserContainer.shared.favoriteCollections.append(yourCollectionItem.id)
         DummyDataSource.yourCollections.append(
             Collection(id: yourCollectionItem.id,
                        image: yourCollectionItem.image,
@@ -260,10 +261,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                        stocksAmount: Int(yourCollectionItem.stocksAmount)!,
                        isInYourCollections: true)
         )
-        
-        snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-        dataSource?.apply(snapshot, animatingDifferences: true)
-        
+        DummyDataSource.remoteRawYourCollections = DummyDataSource.remoteRawCollectionDetails.filter({DemoUserContainer.shared.favoriteCollections.contains($0.id ?? 0)})
         AppsFlyerLib.shared().logEvent(
             AFEvent.addToYourCollections,
             withValues: [
@@ -280,9 +278,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel) {
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         
-        // TODO: make it more robust
         DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
-        
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
             let updatedRecommendedItem = RecommendedCollectionViewCellModel(
@@ -301,12 +297,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
             }
             
-            snapshot.insertItems([updatedRecommendedItem], afterItem: recommendedItem)
-            snapshot.deleteItems([recommendedItem])
-            dataSource?.apply(snapshot, animatingDifferences: false)
-            
-            snapshot.deleteItems([yourCollectionItemToRemove])
-            dataSource?.apply(snapshot, animatingDifferences: true)
+            if var snapshot = dataSource?.snapshot() {
+                snapshot.deleteItems([yourCollectionItemToRemove])
+                dataSource?.apply(snapshot, animatingDifferences: true)
+            }
             onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
@@ -401,13 +395,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func getRemoteData(completion: @escaping () -> Void) {
         
         func fillSections(){
-            //TODO: - Check that Profile ID is in
+            
             let yourCollectionsDto = DummyDataSource.remoteRawCollectionDetails
             let recommendedDto = DummyDataSource.remoteRawCollectionDetails.prefix(20).shuffled()
             DummyDataSource.yourCollections = yourCollectionsDto.map {
                 CollectionDTOMapper.map($0)
             }
-            DummyDataSource.recommendedCollections = recommendedDto.map {
+            DummyDataSource.recommendedCollections = yourCollectionsDto.map {
                 CollectionDTOMapper.map($0)
             }
         }
@@ -423,21 +417,26 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             return
         }
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: 0)) { [weak self] result in
+        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: DemoUserContainer.shared.porfileID)) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.collections else {
+                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteCollectionDetails}) else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     self.hideLoader()
                     completion()
                     return
                 }
                 
-                DummyDataSource.remoteRawCollectionDetails = collections.compactMap({$0.fragments.remoteCollectionDetails})
+                DummyDataSource.remoteRawCollectionDetails = collections
+                DummyDataSource.recommendedCollections = collections.map {
+                    CollectionDTOMapper.map($0)
+                }
+                DummyDataSource.yourCollections = collections.filter({DemoUserContainer.shared.favoriteCollections.contains($0.id ?? 0)}).map {
+                    CollectionDTOMapper.map($0)
+                }
                 
-                fillSections()
                 
                 self.initViewModelsFromData()
                 completion()
