@@ -43,9 +43,6 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         matchLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         matchLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         
-        effectsView.isHidden = true
-        contentView.addSubview(effectsView)
-        
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
@@ -284,7 +281,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     lazy var matchCircle: UIImageView = {
         let view = UIImageView()
         view.backgroundColor = .clear
-        view.image = UIImage(named: "match_circle")!
+        view.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+        view.tintColor = UIColor(named: "mainGreen")
         return view
     }()
     
@@ -297,12 +295,6 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.textAlignment = .center
         label.text = "-"
         return label
-    }()
-    
-    lazy var effectsView: UIVisualEffectView = {
-        let effectsView = UIVisualEffectView.init(effect: UIBlurEffect.init(style: .light))
-        effectsView.layer.masksToBounds = true
-        return effectsView
     }()
 
     lazy var highlightLabel: UILabel = {
@@ -461,7 +453,6 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             width: bounds.width - (hMargin + hMargin) - 16.0,
             height: highlightsContainerView.bounds.height - (4 + 4)
         )
-        effectsView.frame = self.bounds
     }
 
     // MARK: Functions
@@ -508,7 +499,13 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         highlightLabel.sizeToFit()
         
         matchLabel.text = matchScore
-        effectsView.isHidden = isMatch
+        if (Int(matchScore) ?? 0) > 50 {
+            matchLabel.textColor = UIColor(named: "mainGreen")
+            matchCircle.tintColor = UIColor(named: "mainGreen")
+        } else {
+            matchLabel.textColor = UIColor(named: "mainRed")
+            matchCircle.tintColor = UIColor(named: "mainRed")
+        }
 
         layoutIfNeeded()
     }

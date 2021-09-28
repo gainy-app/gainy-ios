@@ -19,7 +19,6 @@ final class CollectionListCardCell: UICollectionViewCell {
     @IBOutlet private weak var peLbl: UILabel!
     @IBOutlet private weak var marketLbl: UILabel!
     @IBOutlet private weak var mlpLbl: UILabel!
-    @IBOutlet private weak var effectsView: UIVisualEffectView!
     
     func configureWith(
         companyName: String,
@@ -45,7 +44,6 @@ final class CollectionListCardCell: UICollectionViewCell {
         for (ind, val) in markerMetrics.enumerated() {
             lbls[ind]?.text = val
         }
-        effectsView.isHidden = isMatch
         
         layoutIfNeeded()
     }

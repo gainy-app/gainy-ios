@@ -149,7 +149,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         )
         
         stocksAmountLabel.frame = CGRect(
-            x: bounds.width - (80 + hMargin),
+            x: bounds.width - (40 + hMargin),
             y: topMarginRightSide + stocksLabel.bounds.height,
             width: 80,
             height: 33
