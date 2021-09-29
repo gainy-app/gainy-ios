@@ -45,7 +45,7 @@ final class AuthorizationViewController: BaseViewController {
             return
         }
         showNetworkLoader()
-        
+        GainyAnalytics.logEvent("enter_with_apple_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.authorizationManager?.authorizeWithApple(completion: { authorizationStatus in
             
             self.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
@@ -58,28 +58,16 @@ final class AuthorizationViewController: BaseViewController {
             return
         }
         showNetworkLoader()
+        GainyAnalytics.logEvent("enter_with_google_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.authorizationManager?.authorizeWithGoogle(self, completion: { authorizationStatus in
             
             self.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
         })
     }
     
-    @IBAction func privacyPolicyTap(_ sender: Any) {
-        
-        if let url = URL(string: "https://www.gainy.app/privacy-policy") {
-            UIApplication.shared.open(url)
-        }
-    }
-    
-    @IBAction func termsOfServiceTap(_ sender: Any) {
-        
-        if let url = URL(string: "https://www.gainy.app/terms-of-service") {
-            UIApplication.shared.open(url)
-        }
-    }
-    
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("authorization_close_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.coordinator?.dismissModule()
     }
     
@@ -87,13 +75,16 @@ final class AuthorizationViewController: BaseViewController {
         
         self.hideLoader()
         if authorizationStatus == .authorizedFully {
+            GainyAnalytics.logEvent("authorization_fully_authorized", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             if let finishFlow = self.coordinator?.finishFlow {
                 self.coordinator?.dismissModule()
                 finishFlow()
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
+            GainyAnalytics.logEvent("authorization_need_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             self.coordinator?.pushPersonalInfoViewController(isOnboardingDone: self.onboardingDone)
         } else if authorizationStatus != .authorizingCancelled {
+            GainyAnalytics.logEvent("authorization_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.")
         }
     }

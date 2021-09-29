@@ -81,6 +81,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("indicators_back_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         if self.currentTab == .investmentGoals {
             
             self.coordinator?.popModule()
@@ -94,11 +95,13 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("indicators_close_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         self.coordinator?.popToRootModule()
     }
     
     @IBAction func nextButtonTap(_ sender: Any) {
         
+        GainyAnalytics.logEvent("indicators_next_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         if self.currentTab == .investingApproach {
             
             if let email = self.coordinator?.profileInfoBuilder.email {
@@ -129,16 +132,20 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         
         switch self.currentTab {
         case .investmentGoals:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentGoals", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.0)
             self.setMarketReturnsHidden(isHidden: true)
         case .marketReturns:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "marketReturns", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMarketReturnsHidden(isHidden: false)
             self.setNextButtonHidden(isHidden: self.sliderViewMarketReturns.isInitialLayout)
         case .investmentHorizon:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentHorizon", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMoneySourceViewHidden(isHidden: true)
         case .moneySourceView:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "moneySourceView", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.50)
             self.setMoneySourceViewHidden(isHidden: false)
             if let selectedSources = self.selectedSources {
@@ -147,13 +154,16 @@ class PersonalizationIndicatorsViewController: BaseViewController {
                 self.setNextButtonHidden(isHidden: true)
             }
         case .damageOfFailure:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "damageOfFailure", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.50)
             self.setStockMarketRisksHidden(isHidden: true)
         case .stockMarketRisks:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.75)
             self.setStockMarketRisksHidden(isHidden: false)
             self.setNextButtonHidden(isHidden: self.sliderViewStockMarketRisks.isInitialLayout)
         case .investingApproach:
+            GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investingApproach", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.90)
             let doneButtonTitle = NSLocalizedString("Done", comment: "Done button title")
             self.nextButton.setTitle(doneButtonTitle, for: UIControl.State.normal)
@@ -347,6 +357,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                     if let source = sources?.first {
                         let unexpectedPurchasesSource = "\(source)"
                         self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
+                        GainyAnalytics.logEvent("unexpected_purchases_source_picked", params: ["source" : unexpectedPurchasesSource, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
                     }
                 }
             } else {
@@ -363,6 +374,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                     if let selectedApproach = sources?.first {
                         let tradingExperience = "\(selectedApproach)"
                         self.coordinator?.profileInfoBuilder.tradingExperience = tradingExperience
+                        GainyAnalytics.logEvent("trading_experience_picked", params: ["experience" : tradingExperience, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
                     }
                 }
             } else {
@@ -459,12 +471,15 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
         if sender == self.sliderViewInvestmentGoals {
             self.setCurrentTab(newTab: .marketReturns)
             self.coordinator?.profileInfoBuilder.riskLevel = currentValue
+            GainyAnalytics.logEvent("risk_level_picked", params: ["risk_level" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else if sender == self.sliderViewInvestmentHorizon {
             self.setCurrentTab(newTab: .moneySourceView)
             self.coordinator?.profileInfoBuilder.investmentHorizon = currentValue
+            GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else if sender == self.sliderViewDamageOfFailure {
             self.setCurrentTab(newTab: .stockMarketRisks)
-            self.coordinator?.profileInfoBuilder.damageOfFailure = ( 1.0 - currentValue)
+            self.coordinator?.profileInfoBuilder.damageOfFailure = (1.0 - currentValue)
+            GainyAnalytics.logEvent("damage_of_failure_picked", params: ["damage_of_failure" : "\((1.0 - currentValue))", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else {
             self.setNextButtonHidden(isHidden: false)
             if sender == self.sliderViewMarketReturns {
@@ -482,6 +497,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                     averageMarketReturn = 50
                 }
                 self.coordinator?.profileInfoBuilder.averageMarketReturn = averageMarketReturn
+                GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturn)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             } else if sender == self.sliderViewStockMarketRisks {
                 var stockMarketRisks = "very_safe"
                 let value = Int(100 * currentValue)
@@ -497,6 +513,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                     stockMarketRisks = "very_risky"
                 }
                 self.coordinator?.profileInfoBuilder.stockMarketRiskLevel = stockMarketRisks
+                GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             }
         }
     }

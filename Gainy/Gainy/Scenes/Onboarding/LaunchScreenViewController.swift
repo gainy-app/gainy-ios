@@ -41,11 +41,13 @@ class LaunchScreenViewController: BaseViewController {
     
     @IBAction func signInTouchUpInside(_ sender: Any) {
         
+        GainyAnalytics.logEvent("sign_in_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.presentAuthorizationViewController()
     }
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {
         
+        GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
     }
     

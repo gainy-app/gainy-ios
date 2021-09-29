@@ -29,6 +29,7 @@ final class BetaDisclaimerViewController: BaseViewController {
     
     @IBAction func onAcceptButtonTap(_ sender: Any) {
         
+        GainyAnalytics.logEvent("accept_beta_disclaimer_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "BetaDisclaimer"])
         BetaDisclaimerViewController.betaDisclaimerWasShown = true
         self.dismiss(animated: true, completion: nil)
     }

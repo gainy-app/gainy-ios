@@ -23,6 +23,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
             return
         }
         
+        GainyAnalytics.logEvent("finalizing_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
         self.coordinator?.profileInfoBuilder.userID = self.authorizationManager?.userID()
         self.authorizationManager?.finalizeSignUp(builder, completion: { authorizationStatus in
             
@@ -31,7 +32,9 @@ final class OnboardingFinalizingViewController: BaseViewController {
                 if let finishFlow = self.coordinator?.finishFlow {
                     finishFlow()
                 }
+                GainyAnalytics.logEvent("finalizing_profile_created", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
             } else {
+                GainyAnalytics.logEvent("finalizing_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationFinalizing"])
                 self.coordinator?.popToRootModule()
                 NotificationManager.shared.showError("Sorry... Failed to finalize the authorization. Please try again later.")
             }

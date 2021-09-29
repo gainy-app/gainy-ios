@@ -42,11 +42,13 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("personalization_interests_back", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
         self.coordinator?.popModule()
     }
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("personalization_interests_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
         self.coordinator?.popToRootModule()
     }
     
@@ -101,6 +103,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     
     private func getRemoteData(completion: @escaping () -> Void) {
         guard haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             completion()
             return
@@ -112,6 +115,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
             case .success(let graphQLResult):
                 
                 guard let appInterests = graphQLResult.data?.interests else {
+                    GainyAnalytics.logEvent("no_interests", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     self.hideLoader()
                     completion()
@@ -123,6 +127,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                 completion()
 
             case .failure(let error):
+                GainyAnalytics.logEvent("request_error", params: ["error" : "\(error)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
                 print("Failure when making GraphQL request. Error: \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion()
@@ -217,13 +222,17 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        guard let interest = self.appInterests?[indexPath.row] else {return}
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
         self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+        GainyAnalytics.logEvent("personalization_select_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
+        guard let interest = self.appInterests?[indexPath.row] else {return}
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
         self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+        GainyAnalytics.logEvent("personalization_deselect_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
 }

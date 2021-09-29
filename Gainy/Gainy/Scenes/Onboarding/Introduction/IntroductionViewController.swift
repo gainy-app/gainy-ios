@@ -59,18 +59,23 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("introduction_back_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
         switch self.currentCaptionIndex {
         case 0:
+            GainyAnalytics.logEvent("back_to_launch_screen", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.coordinator?.popModule()
         case 1:
+            GainyAnalytics.logEvent("back_to_first_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 0
             self.indicatorViewProgressObject?.progress = Float(0.0)
         case 2:
+            GainyAnalytics.logEvent("back_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 1
             self.indicatorViewProgressObject?.progress = Float(0.25)
         case 3:
+            GainyAnalytics.logEvent("back_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 2, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 2
             self.indicatorViewProgressObject?.progress = Float(0.75)
@@ -83,28 +88,33 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
+        GainyAnalytics.logEvent("introduction_close_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
         self.coordinator?.popToRootModule()
     }
     
     @IBAction func nextButtonTap(_ sender: Any) {
         
+        GainyAnalytics.logEvent("introduction_next_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
         switch self.currentCaptionIndex {
         case 0:
+            GainyAnalytics.logEvent("next_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 1
             self.indicatorViewProgressObject?.progress = Float(0.25)
         case 1:
+            GainyAnalytics.logEvent("next_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 2, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 2
             self.indicatorViewProgressObject?.progress = Float(0.75)
         case 2:
+            GainyAnalytics.logEvent("next_to_last_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 3, section: 0), at: .centeredHorizontally, animated: true)
             self.currentCaptionIndex = 3
             self.indicatorViewProgressObject?.progress = Float(1.0)
             self.setProgressIndicatorHidden(hidden: true)
             
         case 3:
-            
+            GainyAnalytics.logEvent("next_to_personalization", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.coordinator?.pushPersonalizationPickInterestsViewController()
         default: fatalError("Unhandled behaviour")
         }
