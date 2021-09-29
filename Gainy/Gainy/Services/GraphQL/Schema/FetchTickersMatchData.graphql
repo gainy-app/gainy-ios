@@ -1,8 +1,11 @@
-query FetchTickersMatchData($profileId: Int!, $collectionIds: [Int!]) {
-  get_match_scores_by_collections(profile_id: $profileId, collection_ids: $collectionIds) {
-    is_match
-    match_score
-    symbol
-    collection_id
-  }
+query FetchTickersMatchData($profileId: Int!, $collectionId: Int!) {
+ get_match_scores_by_collection(profile_id: $profileId, collection_id: $collectionId) {
+        is_match
+        match_score
+        symbol
+        fits_risk
+        fits_categories
+        fits_interests
+ }
 }
+

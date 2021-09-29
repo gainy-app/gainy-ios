@@ -153,14 +153,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym5-lw-anw">
-                                                    <rect key="frame" x="28" y="64" width="358" height="84"/>
+                                                    <rect key="frame" x="28" y="64" width="358" height="82"/>
                                                     <string key="text"> Activision Inc. operates as a holding company, which engages in the development of data integration and software solutions. Activision Inc. operates as a holding company, which engages in the development of data integration and software solutions.</string>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCS-y1-hIY">
-                                                    <rect key="frame" x="28" y="148" width="68" height="40"/>
+                                                    <rect key="frame" x="28" y="146" width="70" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="0B1-8M-PVf"/>
                                                     </constraints>
@@ -200,20 +200,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsHighlightsViewCell" id="9HG-yh-u6N" customClass="TickerDetailsHighlightsViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="428.5" width="414" height="168.5"/>
+                                        <rect key="frame" x="0.0" y="428.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9HG-yh-u6N" id="cvG-fX-Wfk">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="168.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufh-D7-268">
-                                                    <rect key="frame" x="28" y="0.0" width="90.5" height="24"/>
+                                                    <rect key="frame" x="28" y="0.0" width="89.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7h4-Fy-ASY">
-                                                    <rect key="frame" x="0.0" y="32.5" width="414" height="136"/>
+                                                    <rect key="frame" x="0.0" y="8.5" width="414" height="35.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="136" id="Vec-bG-Kuj"/>
@@ -226,7 +226,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TickerDetailsHighlightsInnerViewCell" id="i4U-wR-rig" customClass="TickerDetailsHighlightsInnerViewCell" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="4" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="-46.5" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="uUe-7K-Wi7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -292,20 +292,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsNewsViewCell" id="Lno-YN-tiB" customClass="TickerDetailsNewsViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="597" width="414" height="200.5"/>
+                                        <rect key="frame" x="0.0" y="472.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lno-YN-tiB" id="YNZ-Ez-WX2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="200.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="News" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdC-iu-DOg">
-                                                    <rect key="frame" x="28" y="32" width="50.5" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="50.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KYm-1G-vDX">
-                                                    <rect key="frame" x="0.0" y="64.5" width="414" height="136"/>
+                                                    <rect key="frame" x="0.0" y="40.5" width="414" height="3.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="136" id="agj-Yc-IHD"/>
@@ -318,7 +318,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TickerDetailsNewsInnerViewCell" id="dto-kR-pKb" customClass="TickerDetailsNewsInnerViewCell" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="4" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="-62.5" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2sj-lQ-PXA">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -342,14 +342,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsMarketDataViewCell" id="OnQ-Y7-jo1" customClass="TickerDetailsMarketDataViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="797.5" width="414" height="284"/>
+                                        <rect key="frame" x="0.0" y="516.5" width="414" height="284"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OnQ-Y7-jo1" id="TcR-SE-s3S">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WQu-qu-Sqx">
-                                                    <rect key="frame" x="28" y="32" width="107.5" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="110" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="GUO-7c-d1O"/>
                                                     </constraints>
@@ -399,7 +399,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data Market Data Market Data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpo-ET-jEn">
-                                                                        <rect key="frame" x="8" y="8" width="112" height="29"/>
+                                                                        <rect key="frame" x="8" y="8" width="112" height="28"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                         <color key="textColor" name="mainText"/>
                                                                         <nil key="highlightedColor"/>
@@ -465,14 +465,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWSRViewCell" id="BOc-Sr-OeK" customClass="TickerDetailsWSRViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1081.5" width="414" height="230"/>
+                                        <rect key="frame" x="0.0" y="800.5" width="414" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BOc-Sr-OeK" id="EPX-im-HK4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wall Street Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1fG-He-EsU">
-                                                    <rect key="frame" x="28" y="32" width="156.5" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="160" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="fEx-RW-s9N"/>
                                                     </constraints>
@@ -481,7 +481,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="39 analyst in the last 90 days" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HcZ-PK-ihh">
-                                                    <rect key="frame" x="28" y="64" width="146.5" height="24"/>
+                                                    <rect key="frame" x="28" y="64" width="155.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="gOZ-CC-RLw"/>
                                                     </constraints>
@@ -500,14 +500,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsRecommendedViewCell" id="FC0-zv-JCu" customClass="TickerDetailsRecommendedViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1311.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1030.5" width="414" height="156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FC0-zv-JCu" id="x9l-EW-Ljd">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended for you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5X5-MH-OwW">
-                                                    <rect key="frame" x="28" y="32" width="199.5" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="205" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="WYD-gj-hof"/>
                                                     </constraints>
@@ -515,8 +515,8 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XVA-df-Mad">
-                                                    <rect key="frame" x="56" y="72" width="6.5" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fit your risk profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XVA-df-Mad">
+                                                    <rect key="frame" x="56" y="72" width="115.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="m2P-Qw-lgR"/>
                                                     </constraints>
@@ -524,8 +524,8 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uGc-vo-rMU">
-                                                    <rect key="frame" x="56" y="101" width="6.5" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fit your Interests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uGc-vo-rMU">
+                                                    <rect key="frame" x="56" y="101" width="104.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="zjX-Md-xet"/>
                                                     </constraints>
@@ -533,8 +533,8 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9KU-dR-m2m">
-                                                    <rect key="frame" x="56" y="129" width="6.5" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fit your Investment categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9KU-dR-m2m">
+                                                    <rect key="frame" x="56" y="129" width="189.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="zIz-S8-k3u"/>
                                                     </constraints>
@@ -543,7 +543,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bbb-9l-r24">
-                                                    <rect key="frame" x="331.5" y="99" width="33" height="24"/>
+                                                    <rect key="frame" x="332.5" y="99" width="31.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="QeU-Af-Oj1"/>
                                                     </constraints>
@@ -614,20 +614,20 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsAlternativeStocksViewCell" id="VEf-P1-4m6" customClass="TickerDetailsAlternativeStocksViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1355.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1186.5" width="414" height="252.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEf-P1-4m6" id="OjT-VH-nQx">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="252.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alternative stocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhJ-IH-SQx">
-                                                    <rect key="frame" x="28" y="28" width="158.5" height="0.0"/>
+                                                    <rect key="frame" x="28" y="28" width="159.5" height="24"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8sA-mC-Reu">
-                                                    <rect key="frame" x="0.0" y="36.5" width="414" height="7.5"/>
+                                                    <rect key="frame" x="0.0" y="60.5" width="414" height="192"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="192" id="J1h-ql-LMc"/>
@@ -640,7 +640,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TickerDetailsAlternativeInnerStocksViewCell" id="5V3-r0-x5Y" customClass="TickerDetailsAlternativeInnerStocksViewCell" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="-60.5" width="128" height="128"/>
+                                                            <rect key="frame" x="0.0" y="32" width="128" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cPF-PC-CGZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -656,13 +656,13 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="VLz-Fq-BHu">
-                                                                                <rect key="frame" x="12" y="40" width="63.5" height="17"/>
+                                                                                <rect key="frame" x="12" y="40" width="62.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="57v-Sz-Se4">
-                                                                                <rect key="frame" x="12" y="60" width="90.5" height="24"/>
+                                                                                <rect key="frame" x="12" y="60" width="89.5" height="24"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
                                                                                 <color key="textColor" name="mainGreen"/>
                                                                                 <nil key="highlightedColor"/>
@@ -674,7 +674,7 @@
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="3a9-PT-1yA">
-                                                                                <rect key="frame" x="12" y="116" width="104" height="14.5"/>
+                                                                                <rect key="frame" x="12" y="116" width="104" height="14"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
@@ -763,14 +763,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsUpcomingViewCell" id="R5J-Kv-TkC" customClass="TickerDetailsUpcomingViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1399.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1439" width="414" height="238"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R5J-Kv-TkC" id="FO8-SI-ijb">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="238"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZwT-AM-M6i">
-                                                    <rect key="frame" x="28" y="32" width="155" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="157.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Y1b-X9-NNB"/>
                                                     </constraints>
@@ -779,7 +779,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb 18, 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XAe-5d-jTB">
-                                                    <rect key="frame" x="250.5" y="75" width="84.5" height="24"/>
+                                                    <rect key="frame" x="246.5" y="77" width="88.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Eqi-dR-9G0"/>
                                                     </constraints>
@@ -788,14 +788,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ege-cC-rFk">
-                                                    <rect key="frame" x="30" y="110.5" width="366" height="1"/>
+                                                    <rect key="frame" x="30" y="115" width="366" height="1"/>
                                                     <color key="backgroundColor" red="0.94901960784313721" green="0.97254901960784312" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="bmb-Yf-knP"/>
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lock-up period" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hc0-YN-wYw">
-                                                    <rect key="frame" x="28" y="77" width="102" height="19.5"/>
+                                                    <rect key="frame" x="28" y="77" width="110" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="6tO-gU-8sb"/>
                                                     </constraints>
@@ -804,7 +804,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Q1 earnings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ra1-2h-edI">
-                                                    <rect key="frame" x="28" y="-60.5" width="80" height="19.5"/>
+                                                    <rect key="frame" x="28" y="129" width="87" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="mFc-9p-kEm"/>
                                                     </constraints>
@@ -813,11 +813,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KDW-um-tg6">
-                                                    <rect key="frame" x="347" y="71.5" width="51" height="31"/>
+                                                    <rect key="frame" x="347" y="73.5" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.34901960784313724" green="0.59999999999999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feb 18, 2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jfk-0W-XEI">
-                                                    <rect key="frame" x="250.5" y="-63" width="84.5" height="24"/>
+                                                    <rect key="frame" x="246.5" y="129" width="88.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="NcC-tR-c3d"/>
                                                     </constraints>
@@ -826,11 +826,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wie-vH-uRa">
-                                                    <rect key="frame" x="347" y="-66.5" width="51" height="31"/>
+                                                    <rect key="frame" x="347" y="125.5" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.34901960780000002" green="0.59999999999999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </switch>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VNl-m0-Zoe" customClass="LeftAlignedIconButton" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="-32.5" width="120" height="44"/>
+                                                    <rect key="frame" x="28" y="161.5" width="120" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="F6P-DL-n5S"/>
                                                         <constraint firstAttribute="width" constant="120" id="eA5-G5-yiJ"/>
@@ -867,14 +867,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWatchlistViewCell" id="Aqi-Q5-n3g" customClass="TickerDetailsWatchlistViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1443.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1677" width="414" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aqi-Q5-n3g" id="oYl-nw-A2V">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTS-4x-R9i" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="28" width="358" height="32"/>
+                                                    <rect key="frame" x="28" y="28" width="358" height="64"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="64" id="GHS-lG-tiT"/>
                                                     </constraints>
@@ -1030,10 +1030,10 @@
     </scenes>
     <designables>
         <designable name="VNl-m0-Zoe">
-            <size key="intrinsicContentSize" width="111" height="20"/>
+            <size key="intrinsicContentSize" width="119" height="20"/>
         </designable>
         <designable name="qTS-4x-R9i">
-            <size key="intrinsicContentSize" width="110" height="32"/>
+            <size key="intrinsicContentSize" width="118" height="31"/>
         </designable>
     </designables>
     <resources>

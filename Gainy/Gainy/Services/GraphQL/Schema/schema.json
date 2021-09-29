@@ -479,15 +479,15 @@
         "specifiedByUrl": null,
         "fields": [
           {
-            "name": "collection",
-            "description": "An object relationship",
+            "name": "fits_categories",
+            "description": null,
             "args": [],
             "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "collections",
+                "kind": "SCALAR",
+                "name": "Int",
                 "ofType": null
               }
             },
@@ -495,32 +495,32 @@
             "deprecationReason": null
           },
           {
-            "name": "collection_id",
+            "name": "fits_interests",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "explanation",
+            "name": "fits_risk",
             "description": null,
             "args": [],
             "type": {
-              "kind": "LIST",
+              "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -47005,23 +47005,19 @@
             "deprecationReason": null
           },
           {
-            "name": "get_match_scores_by_collections",
+            "name": "get_match_scores_by_collection",
             "description": null,
             "args": [
               {
-                "name": "collection_ids",
+                "name": "collection_id",
                 "description": null,
                 "type": {
-                  "kind": "LIST",
+                  "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   }
                 },
                 "defaultValue": null,
@@ -57161,7 +57157,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_categories_symbol__category_id_20210927_112354",
+            "name": "public_ticker_categories_symbol__category_id_20210929_130855",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -58596,7 +58592,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_collections_symbol__collection_id_20210927_112354",
+            "name": "public_ticker_collections_symbol__collection_id_20210929_130855",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -59839,7 +59835,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_events_symbol_20210927_112354",
+            "name": "public_ticker_events_symbol_20210929_130855",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -66576,7 +66572,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_industries_industry_id__symbol_20210927_112354",
+            "name": "public_ticker_industries_industry_id__symbol_20210929_130855",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -68059,7 +68055,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_interests_symbol__interest_id_20210927_112354",
+            "name": "public_ticker_interests_symbol__interest_id_20210929_130855",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null

@@ -11,12 +11,16 @@ struct CachedMatchScore: Codable {
     let symbol: String
     let isMatch: Bool
     let matchScore: Int
-    let explanation: [String]
+    let fitsRisk: Int
+    let fitsCategories: Int
+    let fitsInterests: Int
     
     init(remoteMatch: LiveMatch) {
         symbol = remoteMatch.symbol
         isMatch = remoteMatch.isMatch
         matchScore = remoteMatch.matchScore
-        explanation = ["will be soon"]
+        fitsRisk = remoteMatch.fitsRisk
+        fitsCategories = remoteMatch.fitsCategories
+        fitsInterests = remoteMatch.fitsInterests
     }
 }

@@ -16,7 +16,12 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         let symbol = tickerInfo?.symbol ?? ""
-        scoreLbl.text = "\(TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0)"
+        if let matchData  = TickerLiveStorage.shared.getMatchData(symbol) {
+            scoreLbl.text = "\(matchData.matchScore)"
+            recImgs[0].image = UIImage(named: "fits_risk\(matchData.fitsRisk)")
+            recImgs[1].image = UIImage(named: "fits_risk\(matchData.fitsInterests)")
+            recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
+        }
     }
     
     func setTransform(_ transform: CGAffineTransform) {

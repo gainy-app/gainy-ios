@@ -8,16 +8,18 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchTickersMatchData($profileId: Int!, $collectionIds: [Int!]) {
-      get_match_scores_by_collections(
+    query FetchTickersMatchData($profileId: Int!, $collectionId: Int!) {
+      get_match_scores_by_collection(
         profile_id: $profileId
-        collection_ids: $collectionIds
+        collection_id: $collectionId
       ) {
         __typename
         is_match
         match_score
         symbol
-        collection_id
+        fits_risk
+        fits_categories
+        fits_interests
       }
     }
     """
@@ -25,15 +27,15 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
   public let operationName: String = "FetchTickersMatchData"
 
   public var profileId: Int
-  public var collectionIds: [Int]?
+  public var collectionId: Int
 
-  public init(profileId: Int, collectionIds: [Int]?) {
+  public init(profileId: Int, collectionId: Int) {
     self.profileId = profileId
-    self.collectionIds = collectionIds
+    self.collectionId = collectionId
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "collectionIds": collectionIds]
+    return ["profileId": profileId, "collectionId": collectionId]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -41,7 +43,7 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_match_scores_by_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "collection_ids": GraphQLVariable("collectionIds")], type: .list(.object(GetMatchScoresByCollection.selections))),
+        GraphQLField("get_match_scores_by_collection", arguments: ["profile_id": GraphQLVariable("profileId"), "collection_id": GraphQLVariable("collectionId")], type: .list(.object(GetMatchScoresByCollection.selections))),
       ]
     }
 
@@ -51,16 +53,16 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(getMatchScoresByCollections: [GetMatchScoresByCollection?]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "get_match_scores_by_collections": getMatchScoresByCollections.flatMap { (value: [GetMatchScoresByCollection?]) -> [ResultMap?] in value.map { (value: GetMatchScoresByCollection?) -> ResultMap? in value.flatMap { (value: GetMatchScoresByCollection) -> ResultMap in value.resultMap } } }])
+    public init(getMatchScoresByCollection: [GetMatchScoresByCollection?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "get_match_scores_by_collection": getMatchScoresByCollection.flatMap { (value: [GetMatchScoresByCollection?]) -> [ResultMap?] in value.map { (value: GetMatchScoresByCollection?) -> ResultMap? in value.flatMap { (value: GetMatchScoresByCollection) -> ResultMap in value.resultMap } } }])
     }
 
-    public var getMatchScoresByCollections: [GetMatchScoresByCollection?]? {
+    public var getMatchScoresByCollection: [GetMatchScoresByCollection?]? {
       get {
-        return (resultMap["get_match_scores_by_collections"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [GetMatchScoresByCollection?] in value.map { (value: ResultMap?) -> GetMatchScoresByCollection? in value.flatMap { (value: ResultMap) -> GetMatchScoresByCollection in GetMatchScoresByCollection(unsafeResultMap: value) } } }
+        return (resultMap["get_match_scores_by_collection"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [GetMatchScoresByCollection?] in value.map { (value: ResultMap?) -> GetMatchScoresByCollection? in value.flatMap { (value: ResultMap) -> GetMatchScoresByCollection in GetMatchScoresByCollection(unsafeResultMap: value) } } }
       }
       set {
-        resultMap.updateValue(newValue.flatMap { (value: [GetMatchScoresByCollection?]) -> [ResultMap?] in value.map { (value: GetMatchScoresByCollection?) -> ResultMap? in value.flatMap { (value: GetMatchScoresByCollection) -> ResultMap in value.resultMap } } }, forKey: "get_match_scores_by_collections")
+        resultMap.updateValue(newValue.flatMap { (value: [GetMatchScoresByCollection?]) -> [ResultMap?] in value.map { (value: GetMatchScoresByCollection?) -> ResultMap? in value.flatMap { (value: GetMatchScoresByCollection) -> ResultMap in value.resultMap } } }, forKey: "get_match_scores_by_collection")
       }
     }
 
@@ -73,7 +75,9 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
           GraphQLField("is_match", type: .nonNull(.scalar(Bool.self))),
           GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
           GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
-          GraphQLField("collection_id", type: .scalar(String.self)),
+          GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
         ]
       }
 
@@ -83,8 +87,8 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(isMatch: Bool, matchScore: Int, symbol: String, collectionId: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "collection_id": collectionId])
+      public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
+        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
       }
 
       public var __typename: String {
@@ -123,12 +127,30 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         }
       }
 
-      public var collectionId: String? {
+      public var fitsRisk: Int {
         get {
-          return resultMap["collection_id"] as? String
+          return resultMap["fits_risk"]! as! Int
         }
         set {
-          resultMap.updateValue(newValue, forKey: "collection_id")
+          resultMap.updateValue(newValue, forKey: "fits_risk")
+        }
+      }
+
+      public var fitsCategories: Int {
+        get {
+          return resultMap["fits_categories"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "fits_categories")
+        }
+      }
+
+      public var fitsInterests: Int {
+        get {
+          return resultMap["fits_interests"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "fits_interests")
         }
       }
     }
