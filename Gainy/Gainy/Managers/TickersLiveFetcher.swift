@@ -20,6 +20,10 @@ final class TickersLiveFetcher {
     
     static let shared = TickersLiveFetcher()
     
+    // TODO: Borysov - remove this when profile is saved to CoreData
+    @UserDefault<Int>("currentProfileID")
+    private(set) var currentProfileID: Int?
+    
     //MARK: - Inner
     
     @Atomic
@@ -81,8 +85,15 @@ final class TickersLiveFetcher {
     ///   - profileId: User Profile ID
     ///   - collectionId: Collection ID
     ///   - completion: callback for loading end action
-    func getMatchScores(profileId: Int = DemoUserContainer.shared.porfileID, collectionId: Int, _ completion: @escaping (() -> Void)) {
-        Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileId, collectionIds: [collectionId])) { result in
+    func getMatchScores(collectionId: Int, _ completion: @escaping (() -> Void)) {
+        
+        guard let profileID = self.currentProfileID else {
+            print("Missing profileID")
+            completion()
+            return
+        }
+        
+        Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileID, collectionIds: [collectionId])) { result in
             switch result {
             case .success(let graphQLResult):
                 for data in (graphQLResult.data?.getMatchScoresByCollections ?? []) {

@@ -31,6 +31,9 @@ final class AuthorizationManager {
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
     private(set) var authorizationStatus: AuthorizationStatus
     
+    @UserDefault<Int>("currentProfileID")
+    private(set) var currentProfileID: Int?
+    
     @KeychainString("firebaseAuthToken")
     private(set) var firebaseAuthToken: String?
     
@@ -359,6 +362,10 @@ final class AuthorizationManager {
                 
                 let filteredProfiles = appProfiles.filter { profile in
                     profile.userId == userID
+                }
+                if filteredProfiles.count > 0 {
+                    let profile = filteredProfiles.first
+                    self?.currentProfileID = profile?.id
                 }
                 completion(filteredProfiles.count > 0)
                 

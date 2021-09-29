@@ -1,0 +1,7 @@
+mutation InsertProfileCategory($profileID: Int!, $categoryID: Int!){
+  insert_app_profile_categories(objects: {category_id: $categoryID, profile_id: $profileID}) {
+    returning {
+      category_id
+    }
+  }
+}

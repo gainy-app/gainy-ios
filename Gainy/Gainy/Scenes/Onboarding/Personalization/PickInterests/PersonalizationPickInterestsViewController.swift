@@ -73,7 +73,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
-        self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsCell", bundle: Bundle.main), forCellWithReuseIdentifier: PersonalizationPickInterestsCell.reuseIdentifier)
+        self.collectionView.register(UINib.init(nibName: "PickInterestOrCategoryCell", bundle: Bundle.main), forCellWithReuseIdentifier: PickInterestOrCategoryCell.reuseIdentifier)
         self.collectionView.register(UINib.init(nibName: "PersonalizationPickInterestsHeaderView", bundle: Bundle.main), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: PersonalizationPickInterestsHeaderView.reuseIdentifier)
         self.collectionView.allowsSelection = true
         self.collectionView.allowsMultipleSelection = true
@@ -153,7 +153,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
         
-        let cell: PersonalizationPickInterestsCell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalizationPickInterestsCell.reuseIdentifier, for: indexPath) as! PersonalizationPickInterestsCell
+        let cell: PickInterestOrCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: PickInterestOrCategoryCell.reuseIdentifier, for: indexPath) as! PickInterestOrCategoryCell
         let appInterest: AppInterestsQuery.Data.Interest? = self.appInterests?[indexPath.row]
         cell.appInterest = appInterest
         

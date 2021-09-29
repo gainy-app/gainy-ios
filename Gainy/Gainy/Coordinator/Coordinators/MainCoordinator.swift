@@ -4,9 +4,11 @@ import Firebase
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
 
-    init(router: RouterProtocol,
+    init(authorizationManager: AuthorizationManager,
+         router: RouterProtocol,
          coordinatorFactory: CoordinatorFactoryProtocol,
          viewControllerFactory: ViewControllerFactory) {
+        self.authorizationManager = authorizationManager
         self.router = router
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
@@ -31,13 +33,15 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     
     /// FIRUser status
     var isLoggedIn: Bool {
-        Auth.auth().currentUser != nil
+        
+        return self.authorizationManager.isAuthorized()
     }
 
     // MARK: Private
 
     // MARK: Properties
 
+    private let authorizationManager: AuthorizationManager
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory

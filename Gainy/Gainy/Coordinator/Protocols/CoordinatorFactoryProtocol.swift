@@ -1,5 +1,6 @@
 protocol CoordinatorFactoryProtocol {
-    func makeMainCoordinatorBox(router: RouterProtocol,
+    func makeMainCoordinatorBox(authorizationManager: AuthorizationManager,
+                                router: RouterProtocol,
                                 coordinatorFactory: CoordinatorFactoryProtocol,
                                 viewControllerFactory: ViewControllerFactory) -> MainCoordinator
     

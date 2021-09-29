@@ -128,7 +128,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
     
     private func setUpCollectionView() {
         
-        let layout = UICollectionViewLeftAlignedLayout()
+        let layout = UICollectionViewLeftAlignedVerticalLayout()
         layout.sectionFootersPinToVisibleBounds = true
         self.collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         guard let collectionView = self.collectionView else {

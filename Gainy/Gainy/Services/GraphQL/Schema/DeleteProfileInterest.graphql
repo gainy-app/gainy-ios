@@ -1,0 +1,12 @@
+mutation DeleteProfileInterest($profileID: Int!, $interestID: Int!){
+    delete_app_profile_interests(
+        where: {
+            interest_id: {_eq: $interestID},
+            profile_id: {_eq: $profileID}
+        }
+    ) {
+        returning {
+            interest_id
+        }
+    }
+}

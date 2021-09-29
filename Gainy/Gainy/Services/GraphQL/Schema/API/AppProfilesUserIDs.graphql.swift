@@ -12,6 +12,7 @@ public final class AppProfilesUserIDsQuery: GraphQLQuery {
       app_profiles {
         __typename
         user_id
+        id
       }
     }
     """
@@ -57,6 +58,7 @@ public final class AppProfilesUserIDsQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("user_id", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
         ]
       }
 
@@ -66,8 +68,8 @@ public final class AppProfilesUserIDsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(userId: String) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "user_id": userId])
+      public init(userId: String, id: Int) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "user_id": userId, "id": id])
       }
 
       public var __typename: String {
@@ -85,6 +87,15 @@ public final class AppProfilesUserIDsQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "user_id")
+        }
+      }
+
+      public var id: Int {
+        get {
+          return resultMap["id"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
         }
       }
     }

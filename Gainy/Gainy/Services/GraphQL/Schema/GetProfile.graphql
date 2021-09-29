@@ -1,0 +1,16 @@
+  query GetProfile($profileID: Int!) {
+  app_profiles(where: {id: {_eq: $profileID}}) {
+    avatar_url
+    email
+    first_name
+    last_name
+    legal_address
+    id
+    profile_interests {
+      interest_id
+    }
+    profile_categories {
+      category_id
+    }
+  }
+}

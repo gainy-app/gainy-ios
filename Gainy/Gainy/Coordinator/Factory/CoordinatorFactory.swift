@@ -1,10 +1,12 @@
 final class CoordinatorFactory: CoordinatorFactoryProtocol {
     // MARK: - CoordinatorFactoryProtocol
 
-    func makeMainCoordinatorBox(router: RouterProtocol,
+    func makeMainCoordinatorBox(authorizationManager: AuthorizationManager,
+                                router: RouterProtocol,
                                 coordinatorFactory: CoordinatorFactoryProtocol,
                                 viewControllerFactory: ViewControllerFactory) -> MainCoordinator {
-        let coordinator = MainCoordinator(router: router,
+        let coordinator = MainCoordinator(authorizationManager: authorizationManager,
+                                          router: router,
                                           coordinatorFactory: coordinatorFactory,
                                           viewControllerFactory: viewControllerFactory)
         return coordinator

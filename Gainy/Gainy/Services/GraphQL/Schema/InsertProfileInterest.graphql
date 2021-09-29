@@ -1,0 +1,7 @@
+mutation InsertProfileInterest($profileID: Int!, $interestID: Int!){
+  insert_app_profile_interests(objects: {interest_id: $interestID, profile_id: $profileID}) {
+    returning {
+      interest_id
+    }
+  }
+}

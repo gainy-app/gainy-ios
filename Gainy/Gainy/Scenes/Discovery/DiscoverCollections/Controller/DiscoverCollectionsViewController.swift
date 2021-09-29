@@ -16,6 +16,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     // MARK: Properties
     
+    // TODO: Borysov - remove this when profile is saved to CoreData
+    @UserDefault<Int>("currentProfileID")
+    private(set) var currentProfileID: Int?
+    
     var viewModel: DiscoverCollectionsViewModelProtocol?
     
     var onGoToCollectionDetails: ((Int) -> Void)?
@@ -402,8 +406,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
         }
+        guard let profileID = self.currentProfileID else {
+            return
+        }
+        
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: DemoUserContainer.shared.porfileID)) { [weak self] result in
+        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) { [weak self] result in
             guard let self = self else {return}
             switch result {
             case .success(let graphQLResult):
