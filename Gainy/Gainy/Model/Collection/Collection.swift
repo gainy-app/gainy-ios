@@ -18,3 +18,8 @@ extension Collection: Hashable {
         lhs.id == rhs.id && lhs.isInYourCollections == rhs.isInYourCollections
     }
 }
+
+extension Collection: Reorderable {
+    typealias OrderElement = Int
+    var orderElement: OrderElement { id }
+}

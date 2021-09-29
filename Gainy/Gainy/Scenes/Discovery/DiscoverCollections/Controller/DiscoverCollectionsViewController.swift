@@ -276,11 +276,27 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel) {
-        viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         
+        if let delIndex = DemoUserContainer.shared.favoriteCollections.firstIndex(of: itemId) {
+            DemoUserContainer.shared.favoriteCollections.remove(at: delIndex)
+        }
+        
+        viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
+            
+            
+            let reloadItem = RecommendedCollectionViewCellModel(
+                id: recommendedItem.id,
+                image: recommendedItem.image,
+                imageUrl: recommendedItem.imageUrl,
+                name: recommendedItem.name,
+                description: recommendedItem.description,
+                stocksAmount: recommendedItem.stocksAmount,
+                isInYourCollections: true
+            )
+            
             let updatedRecommendedItem = RecommendedCollectionViewCellModel(
                 id: recommendedItem.id,
                 image: recommendedItem.image,
@@ -297,10 +313,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
             }
             
-            if var snapshot = dataSource?.snapshot() {
-                snapshot.deleteItems([yourCollectionItemToRemove])
-                dataSource?.apply(snapshot, animatingDifferences: true)
-            }
+            snapshot.deleteItems([yourCollectionItemToRemove])
+            snapshot.reloadItems([reloadItem])
+            dataSource?.apply(snapshot, animatingDifferences: true)
+            
             onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
@@ -309,7 +325,35 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 return false
             } {
+                
+                let reloadItem = RecommendedCollectionViewCellModel(
+                    id: yourCollectionItemToRemove.id,
+                    image: yourCollectionItemToRemove.image,
+                    imageUrl: yourCollectionItemToRemove.imageUrl,
+                    name: yourCollectionItemToRemove.name,
+                    description: yourCollectionItemToRemove.description,
+                    stocksAmount: yourCollectionItemToRemove.stocksAmount,
+                    isInYourCollections: true
+                )
+                
+                let updatedRecommendedItem = RecommendedCollectionViewCellModel(
+                    id: yourCollectionItemToRemove.id,
+                    image: yourCollectionItemToRemove.image,
+                    imageUrl: yourCollectionItemToRemove.imageUrl,
+                    name: yourCollectionItemToRemove.name,
+                    description: yourCollectionItemToRemove.description,
+                    stocksAmount: yourCollectionItemToRemove.stocksAmount,
+                    isInYourCollections: false
+                )
+                
+                if let indexOfRecommendedItemToDelete = viewModel?
+                    .recommendedCollections
+                    .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
+                    viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
+                }
+                
                 snapshot.deleteItems([deleteItems])
+                snapshot.reloadItems([reloadItem])
                 dataSource?.apply(snapshot, animatingDifferences: true)
                 onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
             }
@@ -358,7 +402,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.moveItem(sourceItem, beforeItem: destItem)
         }
         
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        dataSource?.apply(snapshot, animatingDifferences: true)
         dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
     
@@ -373,7 +417,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         snap.appendSections([.yourCollections, .recommendedCollections])
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
-        dataSource.apply(snap, animatingDifferences: false)
+        dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
         addBottomView()
     }
@@ -419,7 +463,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 DummyDataSource.yourCollections = collections.filter({DemoUserContainer.shared.favoriteCollections.contains($0.id ?? 0)}).map {
                     CollectionDTOMapper.map($0)
-                }
+                }.reorder(by: DemoUserContainer.shared.favoriteCollections)
                 
                 
                 self.initViewModelsFromData()
