@@ -25,8 +25,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         if let coordinator = coordinator {
             setViewControllers([coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator),
                                 coordinator.viewControllerFactory.instantiatePortfolioVC(),
-                                coordinator.viewControllerFactory.instantiateAnalyticsVC(),
-                                coordinator.viewControllerFactory.instantiateProfileVC()], animated: false)
+                                coordinator.viewControllerFactory.instantiateProfileVC(coordinator: coordinator)], animated: false)
         }
     }
     
@@ -84,8 +83,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .portfolio:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
-        case .analytics:
-            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Analytics", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .profile:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .none:

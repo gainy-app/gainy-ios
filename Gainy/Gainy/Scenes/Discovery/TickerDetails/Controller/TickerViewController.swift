@@ -35,10 +35,6 @@ final class TickerViewController: BaseViewController {
         addBottomView()
     }
     
-    func reloadTicker(_ ticker: RemoteTicker) {
-        
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         loadTicketInfo()

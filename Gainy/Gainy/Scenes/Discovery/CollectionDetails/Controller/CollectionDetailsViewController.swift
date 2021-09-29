@@ -193,15 +193,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     cell.tag = model.id
                 }
                 cell.onCardPressed = {[weak self]  ticker in
-                    if ticker.isMatch {
-                        self?.onShowCardDetails?(ticker)
-                    } else {
-                        let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
-                            self?.onShowCardDetails?(ticker)
-                        }
-                        NotificationManager.shared.showMessage(title: "Hidden stock 💎", text: "Looks like this stock is not a perfect match for you. Let's unveil it?", cancelTitle: "No", actions: [yesAction])
-                        GainyAnalytics.logEvent("blurred_stock_pressed", params: ["symbol" : ticker.symbol ?? "", "collectionId" : self?.currentCollectionToChange ?? 0])
-                    }
+                    self?.onShowCardDetails?(ticker)
                 }
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}

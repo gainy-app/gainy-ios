@@ -5,7 +5,7 @@ struct RecommendedCollectionViewCellModel {
     let name: String
     let description: String
     let stocksAmount: String
-    let isInYourCollections: Bool
+    var isInYourCollections: Bool
 }
 
 extension RecommendedCollectionViewCellModel: Hashable {
@@ -15,6 +15,7 @@ extension RecommendedCollectionViewCellModel: Hashable {
     }
 
     static func == (lhs: RecommendedCollectionViewCellModel, rhs: RecommendedCollectionViewCellModel) -> Bool {
-        lhs.id == rhs.id && lhs.isInYourCollections == rhs.isInYourCollections
+        lhs.id == rhs.id
     }
 }
+

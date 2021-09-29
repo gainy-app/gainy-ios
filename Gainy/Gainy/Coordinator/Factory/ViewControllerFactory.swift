@@ -151,7 +151,7 @@ final class ViewControllerFactory {
     
     func instantiateAnalyticsVC() -> AnalyticsViewController {
         let vc = AnalyticsViewController.instantiate(.analytics)
-        setupTabWithIndex(vc: vc, tab: .analytics)
+        //setupTabWithIndex(vc: vc, tab: .analytics)
         return vc
     }
     

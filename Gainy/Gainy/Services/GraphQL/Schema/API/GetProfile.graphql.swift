@@ -25,6 +25,10 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           category_id
         }
+        profile_favorite_collections {
+          __typename
+          collection_id
+        }
       }
     }
     """
@@ -84,6 +88,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("profile_interests", type: .nonNull(.list(.nonNull(.object(ProfileInterest.selections))))),
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
+          GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
         ]
       }
 
@@ -93,8 +98,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection]) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -180,6 +185,16 @@ public final class GetProfileQuery: GraphQLQuery {
         }
       }
 
+      /// An array relationship
+      public var profileFavoriteCollections: [ProfileFavoriteCollection] {
+        get {
+          return (resultMap["profile_favorite_collections"] as! [ResultMap]).map { (value: ResultMap) -> ProfileFavoriteCollection in ProfileFavoriteCollection(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, forKey: "profile_favorite_collections")
+        }
+      }
+
       public struct ProfileInterest: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["app_profile_interests"]
 
@@ -254,6 +269,45 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "category_id")
+          }
+        }
+      }
+
+      public struct ProfileFavoriteCollection: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_profile_favorite_collections"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("collection_id", type: .nonNull(.scalar(Int.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(collectionId: Int) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_favorite_collections", "collection_id": collectionId])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var collectionId: Int {
+          get {
+            return resultMap["collection_id"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "collection_id")
           }
         }
       }

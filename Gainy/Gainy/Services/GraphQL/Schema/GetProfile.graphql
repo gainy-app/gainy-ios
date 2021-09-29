@@ -12,5 +12,8 @@
     profile_categories {
       category_id
     }
+    profile_favorite_collections {
+      collection_id
+    }
   }
 }

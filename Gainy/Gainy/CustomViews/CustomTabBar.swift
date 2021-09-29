@@ -7,6 +7,7 @@
 
 import UIKit
 import PureLayout
+import Combine
 
 protocol CustomTabBarDelegate: AnyObject {
     func profileTabPressed(tabBar: CustomTabBar)
@@ -16,10 +17,11 @@ protocol CustomTabBarDelegate: AnyObject {
 
 class CustomTabBar: UITabBar {
     
+    private var cancellables = Set<AnyCancellable>()
     weak var customDelegate: CustomTabBarDelegate?
     
     enum Tab: Int {
-        case discovery = 0, portfolio, analytics, profile
+        case discovery = 0, portfolio, profile
     }
     
     private let profileWidth: CGFloat = 24.0
@@ -76,37 +78,22 @@ class CustomTabBar: UITabBar {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        cancellables.removeAll()
     }
     
     fileprivate func setupView() {
         addSubview(profileView)
-        profileView.autoPinEdge(.top, to: .top, of: self, withOffset: 8.0)
-        profileView.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -35)
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))
         profileView.addSubview(profileImageView)
         profileImageView.autoPinEdgesToSuperviewEdges()
-        NotificationCenter.default.addObserver(self, selector: #selector(didPickProfilePicture), name: NSNotification.Name.didPickProfileImage, object: nil)
-        
-//        let panRecognizer = UIPanGestureRecognizer(target:self, action:#selector(detectPan))
-//        addGestureRecognizer(panRecognizer)
-//        NotificationCenter.default.addObserver(self, selector: #selector(MainTabBarController.babyChanged), name: NSNotification.Name(rawValue: NotificationManager.currentBabyChangedNotification), object: nil)
-
-//        addSubview(feedingIndicator)
-//        feedingIndicator.snp.makeConstraints { make in
-//            make.left.equalTo(self).offset(UIScreen.main.bounds.width / 5.0 * 1.5 - 6.0)
-//            make.top.equalTo(self).offset(-6.0)
-//            make.width.equalTo(12.0)
-//            make.height.equalTo(12.0)
-//        }
+        NotificationCenter.default.publisher(for: Notification.Name.didPickProfileImage)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.profileImageView.image = self?.getProfileImage()
+        }.store(in: &cancellables)
     }
     
-    @objc func babyChanged() {
-    }
-    
-    @objc func didPickProfilePicture() {
-        
-        profileImageView.image = getProfileImage()
-    }
     
     @objc func detectPan(_ recognizer:UIPanGestureRecognizer) {
         let translation  = recognizer.translation(in: self.superview)
@@ -132,6 +119,23 @@ class CustomTabBar: UITabBar {
         layer.shadowRadius = 10.0
         layer.shadowOpacity = 1.0
         layer.shadowColor = UIColor(hexString: "#4F6169", alpha: Float(0.1))?.cgColor
+        
+        let lastTabFrame = frameForTab(atIndex: 2)
+        profileView.center = CGPoint(x: lastTabFrame.midX, y: lastTabFrame.midY - 5)
+    }
+    
+    private func frameForTab(atIndex index: Int) -> CGRect {
+        var frames = subviews.compactMap { (view:UIView) -> CGRect? in
+            if let view = view as? UIControl {
+                return view.frame
+            }
+            return nil
+        }
+        frames.sort { $0.origin.x < $1.origin.x }
+        if frames.count > index {
+            return frames[index]
+        }
+        return frames.last ?? CGRect.zero
     }
     
     override var selectedItem: UITabBarItem? {
@@ -172,10 +176,4 @@ class CustomTabBar: UITabBar {
             return UIImage.init(named: "profilePlaceholder")
         }
     }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard let touch = touches.first else {return}
-//
-//        print(touch.location(in: self).y)
-//    }
 }

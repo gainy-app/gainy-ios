@@ -148,6 +148,10 @@ class BaseViewController: UIViewController {
         }
         GainyAnalytics.logEvent("gios_screen_view", params: initialParams)
     }
+    
+    deinit {
+        cancellables.removeAll()
+    }
 }
 
 extension BaseViewController: UIGestureRecognizerDelegate {

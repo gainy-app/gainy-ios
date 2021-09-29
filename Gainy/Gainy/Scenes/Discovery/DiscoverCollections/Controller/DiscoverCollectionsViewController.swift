@@ -250,10 +250,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         viewModel?.yourCollections.append(yourCollectionItem)
         viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
-        if var snapshot = dataSource?.snapshot() {
-            snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-            dataSource?.apply(snapshot, animatingDifferences: true)
-        }
+        DummyDataSource.recommendedCollections[indexRow].isInYourCollections = true
+        
         
         DemoUserContainer.shared.favoriteCollections.append(yourCollectionItem.id)
         DummyDataSource.yourCollections.append(
@@ -265,6 +263,21 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                        stocksAmount: Int(yourCollectionItem.stocksAmount)!,
                        isInYourCollections: true)
         )
+        
+        if var snapshot = dataSource?.snapshot() {
+            snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+            
+            if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
+                if let item = $0 as? RecommendedCollectionViewCellModel {
+                    return item.id == collectionItemToAdd.id
+                }
+                   return false
+            }) as? RecommendedCollectionViewCellModel {
+                snapshot.reloadItems([itemToReload])
+            }
+            
+            dataSource?.apply(snapshot, animatingDifferences: true)
+        }
         
         AppsFlyerLib.shared().logEvent(
             AFEvent.addToYourCollections,
@@ -287,6 +300,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
+        
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
             
@@ -315,10 +329,18 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 .recommendedCollections
                 .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                 viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
+                DummyDataSource.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
             }
             
             snapshot.deleteItems([yourCollectionItemToRemove])
-            snapshot.reloadItems([reloadItem])
+            if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
+                if let item = $0 as? RecommendedCollectionViewCellModel {
+                    return item.id == itemId
+                }
+                   return false
+            }) as? RecommendedCollectionViewCellModel {
+                snapshot.reloadItems([itemToReload])
+            }
             dataSource?.apply(snapshot, animatingDifferences: true)
             
             onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
@@ -354,6 +376,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     .recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                     viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
+                    DummyDataSource.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
                 }
                 
                 snapshot.deleteItems([deleteItems])
@@ -396,8 +419,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         
         // TODO: keeping local order, make it more robust and flexible
-        onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
-        
+        //onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
+        DemoUserContainer.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
@@ -424,6 +447,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
         addBottomView()
+        hideLoader()
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {
@@ -482,7 +506,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.initViewModels()
                 completion()
             }
-            self.hideLoader()
         }
     }
 }
@@ -490,6 +513,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
 extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == 0 else {return}
         var position = 0
         if indexPath.section == DiscoverCollectionsSection.recommendedCollections.rawValue {
             position = collectionView.numberOfItems(
@@ -501,7 +525,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
         }
         position += indexPath.row
         
-        self.goToCollectionDetails(at: position)
+        self.goToCollectionDetails(at: indexPath.row)
         
     }
 }
