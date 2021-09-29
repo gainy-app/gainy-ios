@@ -22,6 +22,7 @@
 		33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33043DD926E227EF0058887C /* CompareStocksViewController.swift */; };
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
+		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
 		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
@@ -317,6 +318,7 @@
 		33043DD926E227EF0058887C /* CompareStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStocksViewController.swift; sourceTree = "<group>"; };
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
+		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
@@ -1372,6 +1374,7 @@
 				33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */,
 				33CDEC9F26D6229300E82329 /* Double+Currencies.swift */,
 				85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */,
+				331675072704623400CA92F6 /* Array-Reorder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1915,6 +1918,7 @@
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
+				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
 				3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */,
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,

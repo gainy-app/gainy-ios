@@ -1,5 +1,5 @@
 enum CollectionDTOMapper {
-    static func map(_ dto: RemoteCollectionDetails) -> Collection {
+    static func map(_ dto: RemoteShortCollectionDetails) -> Collection {
         
         return Collection(
             id: dto.id ?? -1,

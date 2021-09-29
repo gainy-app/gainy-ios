@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import PureLayout
 
 final class YourCollectionViewCell: SwipeCollectionViewCell {
     // MARK: Lifecycle
@@ -19,6 +20,13 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
+                
+        stocksLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 20)
+        stocksLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
+        
+        stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
+        stocksAmountLabel.autoAlignAxis(.vertical, toSameAxisOf: stocksLabel)
+        
     }
     
     @available(*, unavailable)
@@ -140,20 +148,6 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             width: bounds.width - (hMargin + 71),
             height: minDescHeight
         )
-        
-        stocksLabel.frame = CGRect(
-            x: bounds.width - (45 + hMargin),
-            y: topMarginRightSide,
-            width: 45,
-            height: 16
-        )
-        
-        stocksAmountLabel.frame = CGRect(
-            x: bounds.width - (40 + hMargin),
-            y: topMarginRightSide + stocksLabel.bounds.height,
-            width: 80,
-            height: 33
-        )
     }
     
     // MARK: Functions
@@ -169,7 +163,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             onCellStopDragging?()
         default:
             return
-        }
+        } 
     }
     
     func configureWith(

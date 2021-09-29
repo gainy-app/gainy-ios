@@ -34,6 +34,26 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
+    fileprivate func handleLoginEvent() {
+        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let token = notification.object as? String {
+                if DemoUserContainer.shared.favoriteCollections.isEmpty {
+                    self?.onDiscoverCollections?()
+                } else {
+                    if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
+                        self?.getRemoteData {
+                            DispatchQueue.main.async {
+                                self?.initViewModels()
+                                self?.centerInitialCollectionInTheCollectionView()
+                            }
+                        }
+                    }
+                }
+            }
+        }.store(in: &cancellables)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -227,33 +247,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
             self?.onShowCardDetails?(ticker)
         })
-        if Auth.auth().currentUser != nil {
-            if DemoUserContainer.shared.favoriteCollections.isEmpty {
-                self.onDiscoverCollections?()
-            } else {
-                getRemoteData {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.initViewModels()
-                        self?.centerInitialCollectionInTheCollectionView()
-                    }
-                }
-            }
-        }
-        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
-        } receiveValue: {[weak self] notification in
-            if let token = notification.object as? String {
-                if DemoUserContainer.shared.favoriteCollections.isEmpty {
-                    self?.onDiscoverCollections?()
-                } else {
-                    self?.getRemoteData {
-                        DispatchQueue.main.async {
-                            self?.initViewModels()
-                            self?.centerInitialCollectionInTheCollectionView()
-                        }
-                    }
-                }
-            }
-        }.store(in: &cancellables)
+        
+        handleLoginEvent()
         setupPanel()
     }
     
@@ -363,12 +358,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
                     //Going back
-                    //self?.onDiscoverCollections?()
                     self?.hideLoader()
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawYourCollections = collections
+                DummyDataSource.remoteRawYourCollections = collections.reorder(by: DemoUserContainer.shared.favoriteCollections)
                 
                 //Paging
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
@@ -387,58 +381,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
         }
     }
-    
-    //    fileprivate func loadNextCollections() {
-    //        guard haveNetwork else {
-    //            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-    //            return
-    //        }
-    //        guard !isNetworkLoading else {
-    //            return
-    //        }
-    //        guard viewModel?.hasMorePages ?? false else {
-    //            return
-    //        }
-    //        DispatchQueue.main.async { [weak self] in
-    //            self?.showNetworkLoader()
-    //        }
-    //        Network.shared.apollo.fetch(query: DiscoverCollectionDetailsQuery(offset: viewModel?.collectionOffset ?? 0)) { [weak self] result in
-    //            switch result {
-    //            case .success(let graphQLResult):
-    //                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-    //                    self?.hideLoader()
-    //                    return
-    //                }
-    //                DummyDataSource.remoteRawCollectionDetails.append(contentsOf: collections)
-    //
-    //                //Paging
-    //                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
-    //                self?.viewModel?.hasMorePages = (collections.count == 20)
-    //
-    //                let newDetails = collections.compactMap( {
-    //                    CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0)
-    //                })
-    //                DummyDataSource.collectionDetails.append(contentsOf: newDetails)
-    //
-    //                //Adding to View Model
-    //                let detailsDTO = newDetails.compactMap { CollectionDetailsViewModelMapper.map($0) }
-    //                self?.viewModel?.collectionDetails.append(contentsOf: detailsDTO)
-    //
-    //                DispatchQueue.main.async {
-    //                    if var snapshot = self?.dataSource?.snapshot() {
-    //                        snapshot.appendItems(detailsDTO,
-    //                                             toSection: .collectionWithCards)
-    //
-    //                        self?.dataSource?.apply(snapshot, animatingDifferences: false)
-    //                    }
-    //                    self?.hideLoader()
-    //                }
-    //            case .failure(let error):
-    //                print("Failure when making GraphQL request. Error: \(error)")
-    //                self?.hideLoader()
-    //            }
-    //        }
-    //    }
     
     @objc
     private func discoverCollectionsButtonTapped() {
@@ -460,7 +402,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
-        
         let yourCollections = DummyDataSource
             .remoteRawYourCollections
             .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
@@ -470,11 +411,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModels() {
-        snapshot.appendSections([.collectionWithCards])
-        snapshot.appendItems(viewModel?.collectionDetails ?? [],
-                             toSection: .collectionWithCards)
-        
-        dataSource?.apply(snapshot, animatingDifferences: false)
+        if var snapshot = dataSource?.snapshot() {
+            if snapshot.sectionIdentifiers.count > 0 {
+                snapshot.deleteSections([.collectionWithCards])
+            }
+            snapshot.appendSections([.collectionWithCards])
+            snapshot.appendItems(viewModel?.collectionDetails ?? [],
+                                 toSection: .collectionWithCards)
+            
+            dataSource?.apply(snapshot, animatingDifferences: false)
+        }
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)
@@ -525,6 +471,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        relaodCollectionIfNeeded()
+    }
+    
+    private func relaodCollectionIfNeeded() {
+        if Auth.auth().currentUser != nil {
+            if DemoUserContainer.shared.favoriteCollections.isEmpty {
+                self.onDiscoverCollections?()
+            } else {
+                getRemoteData {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.initViewModels()
+                        self?.centerInitialCollectionInTheCollectionView()
+                    }
+                }
+            }
+        }
     }
     
     //MARK: - Swap Items

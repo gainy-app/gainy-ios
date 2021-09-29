@@ -2,7 +2,20 @@ query FetchRecommendedCollections($profileId: Int!) {
     get_recommended_collections(profile_id: $profileId) {
         id
         collection {
-            ...RemoteCollectionDetails
+            ...RemoteShortCollectionDetails
         }
     }
+}
+
+fragment RemoteShortCollectionDetails on collections {
+  id
+  name
+  image_url
+  enabled
+  description
+  ticker_collections_aggregate {
+    aggregate {
+      count
+    }
+  }
 }

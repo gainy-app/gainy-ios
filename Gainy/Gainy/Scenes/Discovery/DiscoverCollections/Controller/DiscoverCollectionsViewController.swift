@@ -34,7 +34,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -261,7 +261,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                        stocksAmount: Int(yourCollectionItem.stocksAmount)!,
                        isInYourCollections: true)
         )
-        DummyDataSource.remoteRawYourCollections = DummyDataSource.remoteRawCollectionDetails.filter({DemoUserContainer.shared.favoriteCollections.contains($0.id ?? 0)})
+        
         AppsFlyerLib.shared().logEvent(
             AFEvent.addToYourCollections,
             withValues: [
@@ -350,7 +350,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         // TODO: keeping local order, make it more robust and flexible
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
-        DummyDataSource.remoteRawCollectionDetails.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
@@ -394,20 +393,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     private func getRemoteData(completion: @escaping () -> Void) {
         
-        func fillSections(){
-            
-            let yourCollectionsDto = DummyDataSource.remoteRawCollectionDetails
-            let recommendedDto = DummyDataSource.remoteRawCollectionDetails.prefix(20).shuffled()
-            DummyDataSource.yourCollections = yourCollectionsDto.map {
-                CollectionDTOMapper.map($0)
-            }
-            DummyDataSource.recommendedCollections = yourCollectionsDto.map {
-                CollectionDTOMapper.map($0)
-            }
-        }
-        
-        guard DummyDataSource.remoteRawCollectionDetails.count == 0 else {
-            fillSections()
+        guard DummyDataSource.recommendedCollections.count == 0 else {
             initViewModelsFromData()
             completion()
             return
@@ -422,14 +408,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteCollectionDetails}) else {
+                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     self.hideLoader()
                     completion()
                     return
                 }
-                
-                DummyDataSource.remoteRawCollectionDetails = collections
                 DummyDataSource.recommendedCollections = collections.map {
                     CollectionDTOMapper.map($0)
                 }
@@ -461,7 +445,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             )
             GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         } else {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.remoteRawCollectionDetails[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.yourCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
         position += indexPath.row
         
