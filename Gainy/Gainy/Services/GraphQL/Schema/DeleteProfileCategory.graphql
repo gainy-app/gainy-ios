@@ -1,0 +1,12 @@
+mutation DeleteProfileCategory($profileID: Int!, $categoryID: Int!){
+    delete_app_profile_categories(
+        where: {
+            category_id: {_eq: $categoryID},
+            profile_id: {_eq: $profileID}
+        }
+    ) {
+        returning {
+            category_id
+        }
+    }
+}

@@ -77,14 +77,11 @@
 		339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */; };
 		339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */; };
 		339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */; };
-		33A1F56D2702F139000DAF33 /* FetchTickersMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33A1F56C2702F139000DAF33 /* FetchTickersMatchData.graphql */; };
 		33A1F56F2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F56E2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift */; };
 		33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */; };
 		33A1F5732702F5F6000DAF33 /* CachedMatchScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */; };
 		33A1F57527032390000DAF33 /* DemoUserContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57427032390000DAF33 /* DemoUserContainer.swift */; };
-		33A1F5772703259D000DAF33 /* FetchRecommendedCollections.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5762703259D000DAF33 /* FetchRecommendedCollections.graphql */; };
 		33A1F57927032721000DAF33 /* FetchRecommendedCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */; };
-		33A1F57B2703289D000DAF33 /* FetchSelectedCollections.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57A2703289D000DAF33 /* FetchSelectedCollections.graphql */; };
 		33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */; };
 		33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33B9886C26CA6E79008B8AC9 /* News.graphql */; };
 		33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9886F26CA8617008B8AC9 /* PureLayout */; };
@@ -253,8 +250,8 @@
 		8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579517726E2740A003B751C /* PersonalizationPickInterestsFooterView.swift */; };
 		8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517826E2740A003B751C /* PersonalizationPickInterestsFooterView.xib */; };
 		857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */; };
-		857D56B926DE5D2A003F96AE /* PersonalizationPickInterestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */; };
-		857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */; };
+		857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */; };
+		857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */; };
 		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
 		85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */; };
 		85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */; };
@@ -275,12 +272,34 @@
 		85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */; };
 		85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */; };
 		85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F80F26E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift */; };
-		85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */; };
+		85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift */; };
 		85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */; };
 		85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */; };
 		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
 		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
+		85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */; };
+		85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */; };
+		85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */; };
+		85ED4DE52701FEC300FE6926 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */; };
+		85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85ED4DE6270314B300FE6926 /* GetProfile.graphql */; };
+		85ED4DE92703166B00FE6926 /* GetProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */; };
+		85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */; };
+		85ED4DED2703481C00FE6926 /* Categories.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85ED4DEC2703481B00FE6926 /* Categories.graphql */; };
+		85ED4DEF2703486600FE6926 /* Categories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DEE2703486600FE6926 /* Categories.graphql.swift */; };
+		85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */; };
+		85F2594A2703C58F009DEFFD /* DeleteProfileInterest.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */; };
+		85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */; };
+		85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */; };
+		85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */; };
+		85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */; };
+		85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */; };
+		85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */; };
+		85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595527045966009DEFFD /* UpdateProfile.graphql */; };
+		85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */; };
+		85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */; };
+		85F2595D27046D5E009DEFFD /* FetchRecommendedCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595B27046D5E009DEFFD /* FetchRecommendedCollections.graphql */; };
+		85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595C27046D5E009DEFFD /* FetchSelectedCollections.graphql */; };
 		85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */; };
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
@@ -368,7 +387,6 @@
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
 		33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsBottomView.swift; sourceTree = "<group>"; };
 		33787FD626CD475700B11E58 /* CustomHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHostingController.swift; sourceTree = "<group>"; };
-		337D611726D514820048AE62 /* ScatterChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScatterChartView.swift; sourceTree = "<group>"; };
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
@@ -376,14 +394,11 @@
 		339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersNoSpace.graphql; sourceTree = "<group>"; };
 		339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickersWithSpace.graphql.swift; sourceTree = "<group>"; };
 		339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickersNoSpace.graphql.swift; sourceTree = "<group>"; };
-		33A1F56C2702F139000DAF33 /* FetchTickersMatchData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTickersMatchData.graphql; sourceTree = "<group>"; };
 		33A1F56E2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickersMatchData.graphql.swift; sourceTree = "<group>"; };
 		33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedLivePrice.swift; sourceTree = "<group>"; };
 		33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedMatchScore.swift; sourceTree = "<group>"; };
 		33A1F57427032390000DAF33 /* DemoUserContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUserContainer.swift; sourceTree = "<group>"; };
-		33A1F5762703259D000DAF33 /* FetchRecommendedCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchRecommendedCollections.graphql; sourceTree = "<group>"; };
 		33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRecommendedCollections.graphql.swift; sourceTree = "<group>"; };
-		33A1F57A2703289D000DAF33 /* FetchSelectedCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchSelectedCollections.graphql; sourceTree = "<group>"; };
 		33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchSelectedCollections.graphql.swift; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
@@ -558,8 +573,8 @@
 		8579517726E2740A003B751C /* PersonalizationPickInterestsFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsFooterView.swift; sourceTree = "<group>"; };
 		8579517826E2740A003B751C /* PersonalizationPickInterestsFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalizationPickInterestsFooterView.xib; sourceTree = "<group>"; };
 		857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInterests.graphql.swift; sourceTree = "<group>"; };
-		857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsCell.swift; sourceTree = "<group>"; };
-		857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalizationPickInterestsCell.xib; sourceTree = "<group>"; };
+		857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickInterestOrCategoryCell.swift; sourceTree = "<group>"; };
+		857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickInterestOrCategoryCell.xib; sourceTree = "<group>"; };
 		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
 		85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfile.graphql.swift; sourceTree = "<group>"; };
 		85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockwiseProgressIndicatorView.swift; sourceTree = "<group>"; };
@@ -579,12 +594,34 @@
 		85D4F80826E60F79004EC21D /* PersonalizationIndicatorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationIndicatorsViewController.swift; sourceTree = "<group>"; };
 		85D4F80C26E66AA8004EC21D /* PersonalizationSliderSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationSliderSectionView.swift; sourceTree = "<group>"; };
 		85D4F80F26E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationMoneySourceSectionView.swift; sourceTree = "<group>"; };
-		85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedLayout.swift; sourceTree = "<group>"; };
+		85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedVerticalLayout.swift; sourceTree = "<group>"; };
 		85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
 		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
+		85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Serialization.swift"; sourceTree = "<group>"; };
+		85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileCollectionViewController.swift; sourceTree = "<group>"; };
+		85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		85ED4DE6270314B300FE6926 /* GetProfile.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetProfile.graphql; sourceTree = "<group>"; };
+		85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfile.graphql.swift; sourceTree = "<group>"; };
+		85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedHorizontalLayout.swift; sourceTree = "<group>"; };
+		85ED4DEC2703481B00FE6926 /* Categories.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Categories.graphql; sourceTree = "<group>"; };
+		85ED4DEE2703486600FE6926 /* Categories.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Categories.graphql.swift; sourceTree = "<group>"; };
+		85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertProfileCategory.graphql; sourceTree = "<group>"; };
+		85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteProfileInterest.graphql; sourceTree = "<group>"; };
+		85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteProfileCategory.graphql; sourceTree = "<group>"; };
+		85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertProfileInterest.graphql; sourceTree = "<group>"; };
+		85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfileCategory.graphql.swift; sourceTree = "<group>"; };
+		85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfileInterest.graphql.swift; sourceTree = "<group>"; };
+		85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertProfileCategory.graphql.swift; sourceTree = "<group>"; };
+		85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertProfileInterest.graphql.swift; sourceTree = "<group>"; };
+		85F2595527045966009DEFFD /* UpdateProfile.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpdateProfile.graphql; sourceTree = "<group>"; };
+		85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfile.graphql.swift; sourceTree = "<group>"; };
+		85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchTickersMatchData.graphql; sourceTree = "<group>"; };
+		85F2595B27046D5E009DEFFD /* FetchRecommendedCollections.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchRecommendedCollections.graphql; sourceTree = "<group>"; };
+		85F2595C27046D5E009DEFFD /* FetchSelectedCollections.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchSelectedCollections.graphql; sourceTree = "<group>"; };
 		85F8B8AD26DD2527000C73D3 /* UILabel+LineHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+LineHeight.swift"; sourceTree = "<group>"; };
 		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
@@ -638,10 +675,16 @@
 			children = (
 				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
 				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
+				85ED4DEE2703486600FE6926 /* Categories.graphql.swift */,
+				33467CE426C6576800811F74 /* Charts.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */,
+				85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */,
+				85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */,
+				85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */,
+				85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */,
+				85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */,
 				1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */,
-				33467CE426C6576800811F74 /* Charts.graphql.swift */,
 				33467CE126C6575A00811F74 /* News.graphql.swift */,
 				33467CE026C6575A00811F74 /* Types.graphql.swift */,
 				3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */,
@@ -653,6 +696,7 @@
 				33A1F56E2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift */,
 				33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */,
 				33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */,
+				85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -826,6 +870,9 @@
 			isa = PBXGroup;
 			children = (
 				33D3D50126CBB8DC005A859B /* ProfileViewController.swift */,
+				85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */,
+				85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */,
+				85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -872,14 +919,6 @@
 				33E1828026D399BB00A1D2AC /* NewsViewCell.swift */,
 			);
 			path = NewsCell;
-			sourceTree = "<group>";
-		};
-		33FE9E3526D5165100FABC70 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				337D611726D514820048AE62 /* ScatterChartView.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		3A01FBFA26873815007F6FA3 /* CollectionCardCell */ = {
@@ -1149,7 +1188,6 @@
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
 				3A930ED6265C1909000FD3EB /* Products */,
 				3AA52C95266014BB006A6961 /* Frameworks */,
-				33FE9E3526D5165100FABC70 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1288,9 +1326,15 @@
 				3AA52C7E2660101B006A6961 /* schema.json */,
 				85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */,
 				85CD154A26F8CED6001C060C /* AppProfilesUserIDs.graphql */,
+				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
+				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
 				85C5926926FA2A82001EBABC /* CreateProfile.graphql */,
-				33467CDC26C6565600811F74 /* Charts.graphql */,
+				85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */,
+				85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */,
+				85ED4DE6270314B300FE6926 /* GetProfile.graphql */,
+				85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */,
+				85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
 				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
 				3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */,
@@ -1301,9 +1345,10 @@
 				3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */,
 				3330BD0D26FA6B850079C899 /* FetchStockMedianMonth.graphql */,
 				3330BD0E26FA6B850079C899 /* FetchStockMedianWeek.graphql */,
-				33A1F56C2702F139000DAF33 /* FetchTickersMatchData.graphql */,
-				33A1F5762703259D000DAF33 /* FetchRecommendedCollections.graphql */,
-				33A1F57A2703289D000DAF33 /* FetchSelectedCollections.graphql */,
+				85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */,
+				85F2595B27046D5E009DEFFD /* FetchRecommendedCollections.graphql */,
+				85F2595C27046D5E009DEFFD /* FetchSelectedCollections.graphql */,
+				85F2595527045966009DEFFD /* UpdateProfile.graphql */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -1330,7 +1375,8 @@
 			children = (
 				85D4F81826E6A00D004EC21D /* RoundedTextCollectionViewCell */,
 				857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */,
-				85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift */,
+				85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift */,
+				85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */,
 				3AD40FC2266923C1005679DE /* SectionLayout.swift */,
 				3A9FB0E5266B853200EC85D4 /* RoundedCollectionViewCell.swift */,
 				3A67230B268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift */,
@@ -1375,6 +1421,7 @@
 				33CDEC9F26D6229300E82329 /* Double+Currencies.swift */,
 				85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */,
 				331675072704623400CA92F6 /* Array-Reorder.swift */,
+				85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1530,8 +1577,8 @@
 		857D56BA26DE5D2E003F96AE /* PickInterestsCell */ = {
 			isa = PBXGroup;
 			children = (
-				857D56BD26DE7407003F96AE /* PersonalizationPickInterestsCell.xib */,
-				857D56B826DE5D29003F96AE /* PersonalizationPickInterestsCell.swift */,
+				857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */,
+				857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */,
 			);
 			path = PickInterestsCell;
 			sourceTree = "<group>";
@@ -1745,16 +1792,20 @@
 				33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */,
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
+				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
+				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
+				85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */,
 				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				3330BD0F26FA6B850079C899 /* FetchStockMedianDay.graphql in Resources */,
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
+				85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */,
 				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
-				857D56BE26DE7407003F96AE /* PersonalizationPickInterestsCell.xib in Resources */,
+				857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */,
 				3330BD1126FA6B850079C899 /* FetchStockMedianWeek.graphql in Resources */,
 				85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */,
 				85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */,
@@ -1773,9 +1824,13 @@
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
-				33A1F56D2702F139000DAF33 /* FetchTickersMatchData.graphql in Resources */,
+				85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */,
 				339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
+				85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */,
+				85ED4DED2703481C00FE6926 /* Categories.graphql in Resources */,
+				85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */,
+				85F2595D27046D5E009DEFFD /* FetchRecommendedCollections.graphql in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
@@ -1783,6 +1838,7 @@
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
 				3330BD1026FA6B850079C899 /* FetchStockMedianMonth.graphql in Resources */,
+				85F2594A2703C58F009DEFFD /* DeleteProfileInterest.graphql in Resources */,
 				8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1885,6 +1941,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
 				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
@@ -1895,7 +1952,7 @@
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
-				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedLayout.swift in Sources */,
+				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
@@ -1911,12 +1968,14 @@
 				33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */,
 				85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
+				85ED4DE92703166B00FE6926 /* GetProfile.graphql.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
-				857D56B926DE5D2A003F96AE /* PersonalizationPickInterestsCell.swift in Sources */,
+				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
+				85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
@@ -1929,7 +1988,6 @@
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
-				33A1F57B2703289D000DAF33 /* FetchSelectedCollections.graphql in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				3AE795462662A0A9002B40D6 /* DummyDataSource.swift in Sources */,
 				33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */,
@@ -1937,14 +1995,15 @@
 				85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */,
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
+				85ED4DEF2703486600FE6926 /* Categories.graphql.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,
 				3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
+				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
-				33A1F5772703259D000DAF33 /* FetchRecommendedCollections.graphql in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
 				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
@@ -1966,11 +2025,13 @@
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
+				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
 				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
+				85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */,
 				336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */,
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
@@ -2017,6 +2078,7 @@
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
 				332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */,
+				85ED4DE52701FEC300FE6926 /* PrivacyViewController.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
 				85CD154626F8A988001C060C /* AuthorizationProtocol.swift in Sources */,
 				3A930EDB265C1909000FD3EB /* SceneDelegate.swift in Sources */,
@@ -2065,12 +2127,15 @@
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
+				85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */,
+				85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */,
 				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
 				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
+				85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */,
 				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,
 				33E1827C26D3967F00A1D2AC /* String+Sizes.swift in Sources */,
 				33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */,
@@ -2083,6 +2148,7 @@
 				85CD154D26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift in Sources */,
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
+				85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,

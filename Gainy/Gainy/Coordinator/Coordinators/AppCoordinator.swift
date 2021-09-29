@@ -46,11 +46,12 @@ final class AppCoordinator: BaseCoordinator {
     // MARK: Functions
     
     private func runOnboardingFlow() {
+        viewControllerFactory.authorizationManager = authorizationManager
         let coordinator = coordinatorFactory.makeOnboardingCoordinatorBox(
             authorizationManager: authorizationManager,
             router: router,
-            coordinatorFactory: CoordinatorFactory(),
-            viewControllerFactory: ViewControllerFactory()
+            coordinatorFactory: coordinatorFactory,
+            viewControllerFactory: viewControllerFactory
         )
         self.currentCoordinator = coordinator
         coordinator.finishFlow = { [weak self] in
@@ -68,10 +69,12 @@ final class AppCoordinator: BaseCoordinator {
     }
     
     private func runMainFlow() {
+        viewControllerFactory.authorizationManager = authorizationManager
         let coordinator = coordinatorFactory.makeMainCoordinatorBox(
+            authorizationManager: authorizationManager,
             router: router,
-            coordinatorFactory: CoordinatorFactory(),
-            viewControllerFactory: ViewControllerFactory()
+            coordinatorFactory: coordinatorFactory,
+            viewControllerFactory: viewControllerFactory
         )
         self.currentCoordinator = coordinator
         coordinator.finishFlow = { [weak self] in

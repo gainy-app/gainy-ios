@@ -12,7 +12,7 @@ import UIKit
  *
  *  Based on https://stackoverflow.com/questions/13017257/how-do-you-determine-spacing-between-cells-in-uicollectionview-flowlayout
  */
-open class UICollectionViewLeftAlignedLayout: UICollectionViewFlowLayout {
+open class UICollectionViewLeftAlignedVerticalLayout: UICollectionViewFlowLayout {
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return super.layoutAttributesForElements(in: rect)?.map { $0.representedElementKind == nil ? layoutAttributesForItem(at: $0.indexPath)! : $0 }
     }

@@ -41,8 +41,8 @@ class CustomTabBar: UITabBar {
         let profileView = UIImageView()
         profileView.clipsToBounds = true
         profileView.layer.cornerRadius = 8
-        profileView.image = UIImage(named: "demoUser\((1...3).randomElement() ?? 1)")
         profileView.contentMode = .scaleAspectFill
+        profileView.image = getProfileImage()
         return profileView
     }()
     
@@ -74,6 +74,10 @@ class CustomTabBar: UITabBar {
         self.setupView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     fileprivate func setupView() {
         addSubview(profileView)
         profileView.autoPinEdge(.top, to: .top, of: self, withOffset: 8.0)
@@ -81,6 +85,7 @@ class CustomTabBar: UITabBar {
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))
         profileView.addSubview(profileImageView)
         profileImageView.autoPinEdgesToSuperviewEdges()
+        NotificationCenter.default.addObserver(self, selector: #selector(didPickProfilePicture), name: NSNotification.Name.didPickProfileImage, object: nil)
         
 //        let panRecognizer = UIPanGestureRecognizer(target:self, action:#selector(detectPan))
 //        addGestureRecognizer(panRecognizer)
@@ -98,6 +103,10 @@ class CustomTabBar: UITabBar {
     @objc func babyChanged() {
     }
     
+    @objc func didPickProfilePicture() {
+        
+        profileImageView.image = getProfileImage()
+    }
     
     @objc func detectPan(_ recognizer:UIPanGestureRecognizer) {
         let translation  = recognizer.translation(in: self.superview)
@@ -136,13 +145,31 @@ class CustomTabBar: UITabBar {
         }
     }
     
-    
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard let location = touches.first?.location(in: self) else {return}
         if firstTabFrame.contains(location) {
             
+        }
+    }
+    
+    private func getProfileImage() -> UIImage? {
+        
+        let fileName = "profile.png"
+        do {
+            let documentsDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
+                                                                    appropriateFor: nil,
+                                                                    create: false)
+            let fileURL = documentsDirectory.appendingPathComponent(fileName)
+            if let image = UIImage.init(fileURLWithPath: fileURL) {
+                return image
+                NotificationCenter.default.post(name: NSNotification.Name.didPickProfileImage, object: nil)
+            } else {
+                return UIImage.init(named: "profilePlaceholder")
+            }
+        }
+        catch {
+            return UIImage.init(named: "profilePlaceholder")
         }
     }
 //

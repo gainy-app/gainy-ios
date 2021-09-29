@@ -2,7 +2,7 @@ import UIKit
 
 final class ViewControllerFactory {
     
-    
+    weak var authorizationManager: AuthorizationManager?
     
     var isLightTheme: Bool {
         false
@@ -77,6 +77,22 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateEditProfileCollectionInfo(coordinator: MainCoordinator) -> EditProfileCollectionViewController {
+        let vc = EditProfileCollectionViewController.instantiate(.profile)
+        vc.coordinator = coordinator
+        return vc
+    }
+    
+    func instantiateEditPersonalInfo() -> EditPersonalInfoViewController {
+        let vc = EditPersonalInfoViewController.instantiate(.profile)
+        return vc
+    }
+    
+    func instantiatePrivacy() -> PrivacyViewController {
+        let vc = PrivacyViewController.instantiate(.profile)
+        return vc
+    }
+    
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
@@ -139,8 +155,10 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiateProfileVC() -> ProfileViewController {
+    func instantiateProfileVC(coordinator: MainCoordinator) -> ProfileViewController {
         let vc = ProfileViewController.instantiate(.profile)
+        vc.mainCoordinator = coordinator
+        vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .profile)
         return vc
     }
