@@ -386,6 +386,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     func centerInitialCollectionInTheCollectionView() {
+        guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {return}
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
         
         collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),

@@ -38,7 +38,7 @@ final class GainyAnalytics {
         } else {
             newParams["t"] = "event"
         }
-        newParams["ds"] = "app"
+        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
         newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
         newParams["ul"] = Locale.current.identifier

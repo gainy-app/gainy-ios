@@ -93,7 +93,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     let arrayOfImageNameForSelectedState = ["tab1_active", "tab2_active", "tab3_active"]
     let arrayOfImageNameForUnselectedState = ["tab1_passive", "tab2_passive", "tab3_passive"]
     
-    private let tabNames: [String] = ["Discovery", "Portfolio", "Analytics", "Profile"]
+    private let tabNames: [String] = ["Discovery", "Portfolio", "Profile"]
     
     func setupTabBarItems(_ notif: Notification? = nil) {
         

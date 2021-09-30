@@ -38,7 +38,7 @@ enum CollectionDetailsViewModelMapper {
                                                 growthRateYOY: model.financialMetrics.growthRateYOY.cleanOneDecimalP,
                                                 evs: model.financialMetrics.evs.cleanOneDecimal,
                                                 marketCap: model.financialMetrics.marketCapitalization.formatUsingAbbrevation(),
-                                                monthToDay: model.financialMetrics.monthToDay.cleanOneDecimalP,
+                                                monthToDay: (model.financialMetrics.monthToDay * 100.0).cleanOneDecimalP,
                                                 netProfit: model.financialMetrics.netProfit.cleanOneDecimalP,
                                                 highlight: model.financialMetrics.highlight,
                                                 rawTicker: model.rawTicker!)        
