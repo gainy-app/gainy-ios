@@ -25,7 +25,7 @@ final class PrivacyViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        let backImage = UIImage(named: "iconArrowLeft")
+        let backImage = UIImage(named: "iconClose")
         let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
         backItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]

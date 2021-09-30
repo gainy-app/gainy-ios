@@ -52,6 +52,7 @@ final class EditPersonalInfoViewController: BaseViewController {
         scrollView.contentInset.bottom = 0
         unregisterNotifications()
         self.didTapDone(sender: nil)
+        self.finishEditing()
     }
     
     public func cinfigureWithProfile(_ profile: GetProfileQuery.Data.AppProfile) {
@@ -61,19 +62,7 @@ final class EditPersonalInfoViewController: BaseViewController {
     
     @objc private func backButtonTap(sender: UIBarButtonItem) {
         
-        guard
-        let firstName = self.firstNameTextField.text,
-        let lastName = self.lastNameTextField.text,
-        let email = self.emailTextField.text,
-        let legalAddress = self.legalAddressTextView.text else {
-            self.dismiss(animated: true, completion: nil)
-            return
-        }
-        
-        if self.hasValidChanges() {
-            self.delegate?.didUpdateProfile(with: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
-        }
-        
+        self.finishEditing()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -112,6 +101,22 @@ final class EditPersonalInfoViewController: BaseViewController {
         
     }
     
+    private func finishEditing() {
+        
+        guard
+        let firstName = self.firstNameTextField.text,
+        let lastName = self.lastNameTextField.text,
+        let email = self.emailTextField.text,
+        let legalAddress = self.legalAddressTextView.text else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        if self.hasValidChanges() {
+            self.delegate?.didUpdateProfile(with: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
+        }
+    }
+    
     private func fillTextFields() {
        
         guard let profile = self.profile else {
@@ -144,7 +149,7 @@ final class EditPersonalInfoViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        let backImage = UIImage(named: "iconArrowLeft")
+        let backImage = UIImage(named: "iconClose")
         let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
         backItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]

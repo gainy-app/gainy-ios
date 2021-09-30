@@ -60,23 +60,25 @@ class IntroductionViewController: UIViewController, Storyboarded {
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("introduction_back_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
+        let rect = CGRect(x: self.view.bounds.width * CGFloat(self.currentCaptionIndex - 1), y: 0.0, width: self.view.bounds.width, height: self.view.bounds.height)
+        self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
         switch self.currentCaptionIndex {
         case 0:
             GainyAnalytics.logEvent("back_to_launch_screen", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.coordinator?.popModule()
         case 1:
             GainyAnalytics.logEvent("back_to_first_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 0, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 0
             self.indicatorViewProgressObject?.progress = Float(0.0)
         case 2:
             GainyAnalytics.logEvent("back_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 1
             self.indicatorViewProgressObject?.progress = Float(0.25)
         case 3:
             GainyAnalytics.logEvent("back_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 2, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 2
             self.indicatorViewProgressObject?.progress = Float(0.75)
             self.setProgressIndicatorHidden(hidden: false)
@@ -95,20 +97,21 @@ class IntroductionViewController: UIViewController, Storyboarded {
     @IBAction func nextButtonTap(_ sender: Any) {
         
         GainyAnalytics.logEvent("introduction_next_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
+        let rect = CGRect(x: self.view.bounds.width * CGFloat(self.currentCaptionIndex + 1), y: 0.0, width: self.view.bounds.width, height: self.view.bounds.height)
         switch self.currentCaptionIndex {
         case 0:
             GainyAnalytics.logEvent("next_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 1, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 1
             self.indicatorViewProgressObject?.progress = Float(0.25)
         case 1:
             GainyAnalytics.logEvent("next_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 2, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 2
             self.indicatorViewProgressObject?.progress = Float(0.75)
         case 2:
             GainyAnalytics.logEvent("next_to_last_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-            self.captionsCollectionView.scrollToItem(at: IndexPath.init(row: 3, section: 0), at: .centeredHorizontally, animated: true)
+            self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
             self.currentCaptionIndex = 3
             self.indicatorViewProgressObject?.progress = Float(1.0)
             self.setProgressIndicatorHidden(hidden: true)
@@ -128,7 +131,8 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.captionsCollectionView.contentInset = UIEdgeInsets.init(top: CGFloat(0.0), left: CGFloat(0.0), bottom: CGFloat(0.0), right: CGFloat(0.0))
         self.captionsCollectionView.contentInsetAdjustmentBehavior = .never
         self.captionsTopConstraint.constant = UIScreen.main.bounds.height * 0.5 - 72
-        
+        self.captionsCollectionView.isScrollEnabled = true
+        self.captionsCollectionView.isPagingEnabled = true
         let layout = UICollectionViewFlowLayout.init()
         layout.headerReferenceSize = CGSize.zero
         layout.footerReferenceSize = CGSize.zero
@@ -232,4 +236,34 @@ extension IntroductionViewController: UICollectionViewDelegate, UICollectionView
 
         return size
     }
+}
+
+extension IntroductionViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let middle = scrollView.contentOffset.x + (self.view.bounds.width / 2.0)
+        let width = self.view.bounds.width
+        let currentIndex = Int(middle) / Int(width)
+        switch currentIndex {
+        case 0:
+            self.setProgressIndicatorHidden(hidden: false)
+            self.indicatorViewProgressObject?.progress = Float(0.0)
+        case 1:
+            self.setProgressIndicatorHidden(hidden: false)
+            self.indicatorViewProgressObject?.progress = Float(0.25)
+        case 2:
+            self.setProgressIndicatorHidden(hidden: false)
+            self.indicatorViewProgressObject?.progress = Float(0.75)
+        
+        case 3:
+            self.indicatorViewProgressObject?.progress = Float(1.0)
+            self.setProgressIndicatorHidden(hidden: true)
+        
+        default: break
+        }
+        self.currentCaptionIndex = currentIndex
+    }
+    
+    
 }

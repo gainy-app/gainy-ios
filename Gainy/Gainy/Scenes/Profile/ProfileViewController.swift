@@ -53,9 +53,7 @@ final class ProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.loadProfileData()
-        self.interestsCollectionView.reloadData()
-        self.categoriesCollectionView.reloadData()
+        self.reloadData()
     }
     
     public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
@@ -208,7 +206,6 @@ final class ProfileViewController: BaseViewController {
         GainyAnalytics.logEvent("profile_privacy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiatePrivacy() {
             let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         } else if let url = URL(string: "https://www.gainy.app/privacy-policy") {
             UIApplication.shared.open(url)
@@ -226,7 +223,6 @@ final class ProfileViewController: BaseViewController {
             vc.cinfigureWithProfile(profile)
             vc.delegate = self
             let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         }
     }
@@ -276,8 +272,10 @@ final class ProfileViewController: BaseViewController {
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
             vc.configure(with: categories, categoriesSelected: selected)
             vc.delegate = self
+            vc.dismissHandler = {
+                self.reloadData()
+            }
             let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         }
     }
@@ -295,8 +293,10 @@ final class ProfileViewController: BaseViewController {
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditProfileCollectionInfo(coordinator: coordinator) {
             vc.configure(with: interests, interestsSelected: selected)
             vc.delegate = self
+            vc.dismissHandler = {
+                self.reloadData()
+            }
             let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
             self.present(navigationController, animated: true, completion: nil)
         }
     }
@@ -347,6 +347,13 @@ final class ProfileViewController: BaseViewController {
             if !success { return }
             self.updateProfileCategoriesUI()
         }
+    }
+    
+    private func reloadData() {
+        
+        self.loadProfileData()
+        self.interestsCollectionView.reloadData()
+        self.categoriesCollectionView.reloadData()
     }
     
     private func updateProfileInterestsUI() {

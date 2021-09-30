@@ -14,6 +14,8 @@ class BaseViewController: UIViewController {
     
     //MARK: - Helpers
     
+    var dismissHandler: (() -> ())? = nil
+    
     static var topViewController: UIViewController? {
         if var topController = UIApplication.shared.keyWindow?.rootViewController {
             while let presentedViewController = topController.presentedViewController {
@@ -79,6 +81,15 @@ class BaseViewController: UIViewController {
                 self?.networkStatus = status
             }
             .store(in: &cancellables)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        
+        if let dismissHandler = dismissHandler {
+            dismissHandler()
+            self.dismissHandler = nil
+        }
+        super.dismiss(animated: flag, completion: completion)
     }
     
     private func initHaptics() {

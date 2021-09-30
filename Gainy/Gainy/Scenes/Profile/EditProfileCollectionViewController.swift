@@ -40,6 +40,15 @@ final class EditProfileCollectionViewController: BaseViewController {
         self.setUpNavigationBar()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        if let dismissHandler = dismissHandler {
+            dismissHandler()
+            self.dismissHandler = nil
+        }
+    }
+    
     public func configure(with interests:[AppInterestsQuery.Data.Interest], interestsSelected selected:[AppInterestsQuery.Data.Interest]) {
         
         self.collectionType = ProfileCollectionType.AppInterests
@@ -65,7 +74,7 @@ final class EditProfileCollectionViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
-        let backImage = UIImage(named: "iconArrowLeft")
+        let backImage = UIImage(named: "iconClose")
         let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
         backItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]

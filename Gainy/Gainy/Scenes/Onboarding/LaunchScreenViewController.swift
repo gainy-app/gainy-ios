@@ -13,7 +13,7 @@ class LaunchScreenViewController: BaseViewController {
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    //Coordinators
+    weak var authorizationManager: AuthorizationManager?
     weak var coordinator: OnboardingCoordinator?
     var betaDisclaimerViewController: BetaDisclaimerViewController?
     
@@ -47,6 +47,7 @@ class LaunchScreenViewController: BaseViewController {
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {
         
+        self.authorizationManager?.resetStatus()
         GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
     }

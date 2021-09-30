@@ -114,6 +114,11 @@ final class AuthorizationManager {
         }
     }
     
+    public func resetStatus() {
+        
+        self.authorizationStatus = .none
+    }
+    
     public func signOut() {
         
         do {
@@ -138,18 +143,13 @@ final class AuthorizationManager {
             return
         }
         
-        if profileInfo.profileInterestIDs.count != 5 {
+        if profileInfo.profileInterestIDs.count < 5 {
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
         }
         
-        if self.authorizationStatus != .authorizedNeedCreateProfile {
-            self.authorizationStatus = .authorizingFailed
-            completion(self.authorizationStatus)
-            return
-        }
-        
+        self.authorizationStatus = .authorizedNeedCreateProfile
         let query = CreateAppProfileMutation(avatarURL: profileInfo.avatarURLString,
                                              email: profileInfo.email,
                                              firstName: profileInfo.firstName,
