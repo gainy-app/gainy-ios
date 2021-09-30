@@ -97,6 +97,7 @@ final class ViewControllerFactory {
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()
+        vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .discovery)
         return vc
     }

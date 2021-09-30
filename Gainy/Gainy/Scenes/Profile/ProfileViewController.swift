@@ -18,7 +18,6 @@ final class ProfileViewController: BaseViewController {
     weak var authorizationManager: AuthorizationManager?
     weak var mainCoordinator: MainCoordinator?
     
-    private var profile: GetProfileQuery.Data.AppProfile?
     private var profileInterests: [AppInterestsQuery.Data.Interest]?
     private var profileInterestsSelected: [AppInterestsQuery.Data.Interest]?
     private var appInterests: [AppInterestsQuery.Data.Interest]?
@@ -53,12 +52,12 @@ final class ProfileViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.reloadData()
+        self.reloadData(refetchProfile: true)
     }
     
     public func loadProfileInterestsIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
         
-        guard self.profile != nil else {
+        guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
@@ -72,7 +71,7 @@ final class ProfileViewController: BaseViewController {
     
     public func loadProfileCategoriesIfNeeded(completion: @escaping (_ success: Bool) -> Void) {
         
-        guard self.profile != nil else {
+        guard UserProfileManager.shared.profileID != nil else {
             completion(false)
             return
         }
@@ -86,7 +85,8 @@ final class ProfileViewController: BaseViewController {
     
     public func loadProfileInterests(completion: @escaping (_ success: Bool) -> Void) {
         
-        guard let profile = self.profile else {
+        let profileInterestsIds = UserProfileManager.shared.interests
+        guard profileInterestsIds.count > 0 else {
             completion(false)
             return
         }
@@ -105,7 +105,6 @@ final class ProfileViewController: BaseViewController {
                 }
                 
                 self.appInterests = appInterests
-                let profileInterestsIds = profile.profileInterests.map( {$0.interestId})
                 self.profileInterests = self.appInterests?.filter({ interest in
                     guard let interestID = interest.id else {
                         return false
@@ -125,7 +124,8 @@ final class ProfileViewController: BaseViewController {
     
     public func loadProfileCategories(completion: @escaping (_ success: Bool) -> Void) {
         
-        guard let profile = self.profile else {
+        let profileCategoryIds = UserProfileManager.shared.categories
+        guard profileCategoryIds.count > 0 else {
             completion(false)
             return
         }
@@ -143,7 +143,6 @@ final class ProfileViewController: BaseViewController {
                 }
                 
                 self.appCategories = appCategories
-                let profileCategoryIds = profile.profileCategories.map( {$0.categoryId})
                 self.profileCategories = self.appCategories?.filter({ category in
                     guard let categoryID = category.id else {
                         return false
@@ -163,31 +162,10 @@ final class ProfileViewController: BaseViewController {
     
     public func loadProfile(completion: @escaping (_ success: Bool) -> Void) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
-            completion(false)
-            return
-        }
-        
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
-            guard let self = self else {return}
+        UserProfileManager.shared.fetchProfile { success in
             self.hideLoader()
-            switch result {
-            case .success(let graphQLResult):
-                
-                print("Success \(graphQLResult)")
-                guard let appProfile = graphQLResult.data?.appProfiles.first else {
-                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
-                    completion(false)
-                    return
-                }
-                self.profile = appProfile
-                completion(true)
-                
-            case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
-                completion(false)
-            }
+            completion(success)
         }
     }
     
@@ -214,13 +192,8 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func personalInfoButtonTap(_ sender: Any) {
         
-        guard let profile = self.profile else {
-            return
-        }
-        
         GainyAnalytics.logEvent("profile_personal_info_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiateEditPersonalInfo() {
-            vc.cinfigureWithProfile(profile)
             vc.delegate = self
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
@@ -303,36 +276,36 @@ final class ProfileViewController: BaseViewController {
     
     public func refreshProfileData() {
         
-        guard (self.authorizationManager?.currentProfileID) != nil else {
+        guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
         loadProfile { success in
-            if success {
-                if let profile = self.profile {
-                    self.fullNameTitle.text = profile.firstName + " " + profile.lastName
-                    self.loadProfileSpecificContent()
-                }
+            guard success, let firstName = UserProfileManager.shared.firstName, let lastName = UserProfileManager.shared.lastName else {
+                return
             }
+
+            self.fullNameTitle.text = firstName + " " + lastName
+            self.loadProfileSpecificContent()
         }
     }
     
     private func loadProfileData() {
         
-        guard (self.authorizationManager?.currentProfileID) != nil else {
+        guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
-        if profile == nil {
+        guard let profileLoaded = UserProfileManager.shared.profileLoaded, profileLoaded == true else {
             self.refreshProfileData()
-        } else {
-            self.loadProfileSpecificContent()
+            return
         }
+        self.loadProfileSpecificContent()
     }
     
     private func loadProfileSpecificContent() {
         
-        guard self.profile != nil else {
+        guard UserProfileManager.shared.profileID != nil else {
             return
         }
         
@@ -349,7 +322,12 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    private func reloadData() {
+    private func reloadData(refetchProfile: Bool = false) {
+        
+        if (refetchProfile) {
+            self.refreshProfileData()
+            return
+        }
         
         self.loadProfileData()
         self.interestsCollectionView.reloadData()
@@ -645,7 +623,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
     
     func didSelectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
         guard let interestID = interest.id else {
@@ -667,12 +645,14 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
             }
+            
+            NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
         }
     }
     
     func didDeselectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
         guard let interestID = interest.id else {
@@ -692,13 +672,14 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
                 }
+                NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
             }
         }
     }
     
     func didSelectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
         guard let categoryID = category.id else {
@@ -720,12 +701,13 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
             }
+            NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
         }
     }
     
     func didDeselectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
         guard let categoryID = category.id else {
@@ -745,6 +727,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
                 }
+                NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
             }
         }
     }
@@ -754,7 +737,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
     
     func didUpdateProfile(with firstName:String, lastName:String, email:String, legalAddress:String) {
         
-        guard let profileID = self.authorizationManager?.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
   
@@ -770,10 +753,10 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
             
             GainyAnalytics.logEvent("profile_did_change_personal_info", params: ["profileID" : "\(profileID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.fullNameTitle.text = firstName + " " + lastName
-            self.profile?.firstName = firstName
-            self.profile?.lastName = lastName
-            self.profile?.email = email
-            self.profile?.legalAddress = legalAddress
+            UserProfileManager.shared.firstName = firstName
+            UserProfileManager.shared.lastName = lastName
+            UserProfileManager.shared.email = email
+            UserProfileManager.shared.address = legalAddress
         }
     }
 }

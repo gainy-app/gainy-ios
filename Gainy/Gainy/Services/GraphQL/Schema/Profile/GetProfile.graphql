@@ -6,6 +6,7 @@
     last_name
     legal_address
     id
+    user_id
     profile_interests {
       interest_id
     }

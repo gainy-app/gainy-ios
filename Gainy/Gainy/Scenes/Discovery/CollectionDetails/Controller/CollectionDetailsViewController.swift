@@ -38,7 +38,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
-                if DemoUserContainer.shared.favoriteCollections.isEmpty {
+                if UserProfileManager.shared.favoriteCollections.isEmpty {
                     self?.onDiscoverCollections?()
                 } else {
                     if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
@@ -345,7 +345,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: DemoUserContainer.shared.favoriteCollections)) { [weak self] result in
+        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
@@ -354,7 +354,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawYourCollections = collections.reorder(by: DemoUserContainer.shared.favoriteCollections)
+                DummyDataSource.remoteRawYourCollections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
                 
                 //Paging
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
@@ -469,7 +469,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func relaodCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
-            if DemoUserContainer.shared.favoriteCollections.isEmpty {
+            if UserProfileManager.shared.favoriteCollections.isEmpty {
                 self.onDiscoverCollections?()
             } else {
                 getRemoteData {
@@ -509,6 +509,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     func deleteItem(_ sourceInd: Int) {
         guard var snapshot = dataSource?.snapshot() else {return}
+        guard let indexOfSectionIdentifier = snapshot.indexOfSection(.collectionWithCards) else {return}
         if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
             if let model = anyHashable as? CollectionDetailViewCellModel {
                 return model.id == sourceInd

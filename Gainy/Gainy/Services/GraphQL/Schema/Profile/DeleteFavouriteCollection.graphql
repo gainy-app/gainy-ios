@@ -1,0 +1,12 @@
+mutation DeleteProfileFavoriteCollection($profileID: Int!, $collectionID: Int!){
+    delete_app_profile_favorite_collections(
+        where: {
+            collection_id: {_eq: $collectionID},
+            profile_id: {_eq: $profileID}
+        }
+    ) {
+        returning {
+            collection_id
+        }
+    }
+}

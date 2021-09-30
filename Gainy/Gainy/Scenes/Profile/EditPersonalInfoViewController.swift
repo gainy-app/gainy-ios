@@ -15,8 +15,6 @@ final class EditPersonalInfoViewController: BaseViewController {
     
     weak var delegate: EditPersonalInfoViewControllerDelegate?
     
-    private var profile: GetProfileQuery.Data.AppProfile?
-    
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var firstNameTextField: GainyTextField!
     @IBOutlet private weak var lastNameTextField: GainyTextField!
@@ -53,11 +51,6 @@ final class EditPersonalInfoViewController: BaseViewController {
         unregisterNotifications()
         self.didTapDone(sender: nil)
         self.finishEditing()
-    }
-    
-    public func cinfigureWithProfile(_ profile: GetProfileQuery.Data.AppProfile) {
-        
-        self.profile = profile
     }
     
     @objc private func backButtonTap(sender: UIBarButtonItem) {
@@ -119,14 +112,17 @@ final class EditPersonalInfoViewController: BaseViewController {
     
     private func fillTextFields() {
        
-        guard let profile = self.profile else {
+        guard let firstName = UserProfileManager.shared.firstName,
+        let lastName = UserProfileManager.shared.lastName,
+        let email = UserProfileManager.shared.email,
+        let legalAddress = UserProfileManager.shared.address else {
             return
         }
         
-        self.firstNameTextField.text = profile.firstName
-        self.lastNameTextField.text = profile.lastName
-        self.emailTextField.text = profile.email
-        self.legalAddressTextView.text = profile.legalAddress
+        self.firstNameTextField.text = firstName
+        self.lastNameTextField.text = lastName
+        self.emailTextField.text = email
+        self.legalAddressTextView.text = legalAddress
     }
     
     private func registerNotifications() {

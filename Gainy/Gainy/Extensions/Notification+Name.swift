@@ -12,4 +12,6 @@ extension Notification.Name {
     static let didReceiveFirebaseAuthToken = Notification.Name("didReceiveFirebaseAuthToken")
     static let didRequestFirebaseAuthToken = Notification.Name("didRequestFirebaseAuthToken")
     static let didPickProfileImage = Notification.Name("didPickProfileImage")
+    static let didChangeProfileCategories = Notification.Name("didChangeProfileCategories")
+    static let didChangeProfileInterests = Notification.Name("didChangeProfileInterests")
 }

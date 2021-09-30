@@ -72,7 +72,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = viewModel as? RecommendedCollectionViewCellModel {
-            let buttonState: RecommendedCellButtonState = DemoUserContainer.shared.favoriteCollections.contains(viewModel.id)
+            let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(viewModel.id)
                 ? .checked
                 : .unchecked
 

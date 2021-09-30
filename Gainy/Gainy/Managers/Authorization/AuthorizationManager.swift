@@ -31,9 +31,6 @@ final class AuthorizationManager {
     @UserDefaultAuthorizationStatus("AuthorizationStatus")
     private(set) var authorizationStatus: AuthorizationStatus
     
-    @UserDefault<Int>("currentProfileID")
-    private(set) var currentProfileID: Int?
-    
     @KeychainString("firebaseAuthToken")
     private(set) var firebaseAuthToken: String?
     
@@ -76,9 +73,13 @@ final class AuthorizationManager {
     
     init() {
         
-        self.updateAuthorizationStatus {}
-        self.getFirebaseAuthToken { success in
+    }
+    
+    public func refreshAuthorizationStatus(completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
+        
+        self.updateAuthorizationStatus {
             
+            completion(self.authorizationStatus)
         }
     }
     
@@ -129,6 +130,7 @@ final class AuthorizationManager {
                 try self.googleAuth.signOut()
             }
             self.firebaseAuthToken = nil
+            UserProfileManager.shared.cleanup()
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -171,7 +173,7 @@ final class AuthorizationManager {
                                              stockMarketRiskLevel: profileInfo.stockMarketRiskLevel,
                                              tradingExperience: profileInfo.tradingExperience,
                                              unexpectedPurchaseSource: profileInfo.unexpectedPurchasesSource)
-        
+        Network.shared.apollo.clearCache()
         Network.shared.apollo.perform(mutation: query) { result in
             
             guard (try? result.get().data) != nil else {
@@ -179,9 +181,38 @@ final class AuthorizationManager {
                 completion(self.authorizationStatus)
                 return
             }
-          
-            self.authorizationStatus = .authorizedFully
-            completion(self.authorizationStatus)
+            guard let resultData = (try? result.get().data) else {
+                self.authorizationStatus = .authorizingFailed
+                completion(self.authorizationStatus)
+                return
+            }
+            guard let insert_app_profiles = resultData.resultMap["insert_app_profiles"] as? [String : Any] else  {
+                self.authorizationStatus = .authorizingFailed
+                completion(self.authorizationStatus)
+                return
+            }
+            guard let returning = (insert_app_profiles["returning"] as? [Any])?.first else {
+                self.authorizationStatus = .authorizingFailed
+                completion(self.authorizationStatus)
+                return
+            }
+            guard let profileID = ((returning as? [String : Any?])?["id"]) as? Int else {
+                self.authorizationStatus = .authorizingFailed
+                completion(self.authorizationStatus)
+                return
+            }
+            
+            UserProfileManager.shared.profileID = profileID
+            UserProfileManager.shared.fetchProfile { success in
+                guard success == true else {
+                    self.authorizationStatus = .authorizingFailed
+                    completion(self.authorizationStatus)
+                    return
+                }
+                
+                self.authorizationStatus = .authorizedFully
+                completion(self.authorizationStatus)
+            }
         }
     }
     
@@ -248,8 +279,17 @@ final class AuthorizationManager {
                     self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
                         
                         if (hasProfiles) {
-                            self.authorizationStatus = .authorizedFully
-                            completion(self.authorizationStatus)
+                            
+                            UserProfileManager.shared.fetchProfile { success in
+                                guard success == true else {
+                                    self.authorizationStatus = .authorizingFailed
+                                    completion(self.authorizationStatus)
+                                    return
+                                }
+                                
+                                self.authorizationStatus = .authorizedFully
+                                completion(self.authorizationStatus)
+                            }
                             return
                         }
                         
@@ -292,8 +332,16 @@ final class AuthorizationManager {
                         self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
                             
                             if (hasProfiles) {
-                                self.authorizationStatus = .authorizedFully
-                                completion(self.authorizationStatus)
+                                UserProfileManager.shared.fetchProfile { success in
+                                    guard success == true else {
+                                        self.authorizationStatus = .authorizingFailed
+                                        completion(self.authorizationStatus)
+                                        return
+                                    }
+                                    
+                                    self.authorizationStatus = .authorizedFully
+                                    completion(self.authorizationStatus)
+                                }
                                 return
                             }
                             
@@ -307,17 +355,35 @@ final class AuthorizationManager {
         }
     }
     
-    public func updateAuthorizationStatus(completion: @escaping () -> Void) {
+    private func updateAuthorizationStatus(completion: @escaping () -> Void) {
         
         guard let userID = Auth.auth().currentUser?.uid  else {
             self.authorizationStatus = .notAuthorized
+            completion()
             return
         }
         
         self.hasProfilesMatchingUserID(userID: userID) { hasProfiles in
             
             if (hasProfiles) {
-                self.authorizationStatus = .authorizedFully
+                UserProfileManager.shared.fetchProfile { success in
+                    guard success == true else {
+                        self.authorizationStatus = .authorizingFailed
+                        completion()
+                        return
+                    }
+                    
+                    self.getFirebaseAuthToken { success in
+                        guard success == true else {
+                            self.authorizationStatus = .authorizingFailed
+                            completion()
+                            return
+                        }
+                        
+                        self.authorizationStatus = .authorizedFully
+                        completion()
+                    }
+                }
                 return
             }
             
@@ -366,7 +432,7 @@ final class AuthorizationManager {
                 }
                 if filteredProfiles.count > 0 {
                     let profile = filteredProfiles.first
-                    self?.currentProfileID = profile?.id
+                    UserProfileManager.shared.profileID = profile?.id
                 }
                 completion(filteredProfiles.count > 0)
                 

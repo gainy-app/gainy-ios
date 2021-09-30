@@ -17,6 +17,7 @@ public final class GetProfileQuery: GraphQLQuery {
         last_name
         legal_address
         id
+        user_id
         profile_interests {
           __typename
           interest_id
@@ -86,6 +87,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("last_name", type: .nonNull(.scalar(String.self))),
           GraphQLField("legal_address", type: .scalar(String.self)),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("user_id", type: .nonNull(.scalar(String.self))),
           GraphQLField("profile_interests", type: .nonNull(.list(.nonNull(.object(ProfileInterest.selections))))),
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
           GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
@@ -98,8 +100,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection]) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -162,6 +164,15 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var userId: String {
+        get {
+          return resultMap["user_id"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "user_id")
         }
       }
 

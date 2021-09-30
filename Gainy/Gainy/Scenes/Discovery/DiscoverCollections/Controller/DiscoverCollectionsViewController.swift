@@ -16,10 +16,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     // MARK: Properties
     
-    // TODO: Borysov - remove this when profile is saved to CoreData
-    @UserDefault<Int>("currentProfileID")
-    private(set) var currentProfileID: Int?
-    
+    weak var authorizationManager: AuthorizationManager?
     var viewModel: DiscoverCollectionsViewModelProtocol?
     
     var onGoToCollectionDetails: ((Int) -> Void)?
@@ -150,29 +147,21 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         discoverCollectionsCollectionView.dataSource = dataSource
-        if Auth.auth().currentUser != nil {
-            showNetworkLoader()
-            getRemoteData {
-                DispatchQueue.main.async { [weak self] in
-                    self?.initViewModels()
-                    self?.hideLoader()
-                }
-            }
-        }
-        NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink {[weak self] _ in
-        } receiveValue: {[weak self] notification in
-            if let token = notification.object as? String {
-                self?.showNetworkLoader()
-                self?.getRemoteData {
-                    DispatchQueue.main.async {
-                        self?.initViewModels()
-                        self?.hideLoader()
-                    }
-                }
-            }
-        }.store(in: &cancellables)
         
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        showNetworkLoader()
+        getRemoteData(loadProfile: true ) {
+            DispatchQueue.main.async { [weak self] in
+                self?.initViewModels()
+                self?.hideLoader()
+            }
+        }
     }
     
     /// Model to cahnge bottom view
@@ -248,54 +237,63 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             recommendedIdentifier: updatedRecommendedItem
         )
         
-        viewModel?.yourCollections.append(yourCollectionItem)
-        viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
-        DummyDataSource.recommendedCollections[indexRow].isInYourCollections = true
-        
-        
-        DemoUserContainer.shared.favoriteCollections.append(yourCollectionItem.id)
-        DummyDataSource.yourCollections.append(
-            Collection(id: yourCollectionItem.id,
-                       image: yourCollectionItem.image,
-                       imageUrl: yourCollectionItem.imageUrl,
-                       name: yourCollectionItem.name,
-                       description: yourCollectionItem.description,
-                       stocksAmount: Int(yourCollectionItem.stocksAmount)!,
-                       isInYourCollections: true)
-        )
-        
-        if var snapshot = dataSource?.snapshot() {
-            snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+        showNetworkLoader()
+        UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
-            if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
-                if let item = $0 as? RecommendedCollectionViewCellModel {
-                    return item.id == collectionItemToAdd.id
+            self.viewModel?.yourCollections.append(yourCollectionItem)
+            self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
+            DummyDataSource.recommendedCollections[indexRow].isInYourCollections = true
+            
+            self.hideLoader()
+            DummyDataSource.yourCollections.append(
+                Collection(id: yourCollectionItem.id,
+                           image: yourCollectionItem.image,
+                           imageUrl: yourCollectionItem.imageUrl,
+                           name: yourCollectionItem.name,
+                           description: yourCollectionItem.description,
+                           stocksAmount: Int(yourCollectionItem.stocksAmount)!,
+                           isInYourCollections: true)
+            )
+            
+            if var snapshot = self.dataSource?.snapshot() {
+                snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+                
+                if var itemToReload = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
+                    if let item = $0 as? RecommendedCollectionViewCellModel {
+                        return item.id == collectionItemToAdd.id
+                    }
+                       return false
+                }) as? RecommendedCollectionViewCellModel {
+                    snapshot.reloadItems([itemToReload])
                 }
-                   return false
-            }) as? RecommendedCollectionViewCellModel {
-                snapshot.reloadItems([itemToReload])
+                
+                self.dataSource?.apply(snapshot, animatingDifferences: true)
             }
             
-            dataSource?.apply(snapshot, animatingDifferences: true)
+            AppsFlyerLib.shared().logEvent(
+                AFEvent.addToYourCollections,
+                withValues: [
+                    AFParameter.collectionName:
+                        collectionItemToAdd.name,
+                    AFParameter.itemsInYourCollectionsAfterAdding:
+                        "\(self.viewModel?.yourCollections.count ?? 0)",
+                    AFParameter.itemsInRecommendedAfterAdding:
+                        "\(self.viewModel?.recommendedCollections.count ?? 0)",
+                ]
+            )
         }
-        
-        AppsFlyerLib.shared().logEvent(
-            AFEvent.addToYourCollections,
-            withValues: [
-                AFParameter.collectionName:
-                    collectionItemToAdd.name,
-                AFParameter.itemsInYourCollectionsAfterAdding:
-                    "\(self.viewModel?.yourCollections.count ?? 0)",
-                AFParameter.itemsInRecommendedAfterAdding:
-                    "\(self.viewModel?.recommendedCollections.count ?? 0)",
-            ]
-        )
     }
     
-    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel) {
+    private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true) {
         
-        if let delIndex = DemoUserContainer.shared.favoriteCollections.firstIndex(of: itemId) {
-            DemoUserContainer.shared.favoriteCollections.remove(at: delIndex)
+        if let delIndex = UserProfileManager.shared.favoriteCollections.firstIndex(of: itemId) {
+            if removeFavourite {
+                showNetworkLoader()
+                UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
+                    self.hideLoader()
+                    self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
+                }
+            }
         }
         
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
@@ -420,7 +418,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         // TODO: keeping local order, make it more robust and flexible
         //onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
-        DemoUserContainer.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
@@ -463,20 +461,50 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             .map { CollectionViewModelMapper.map($0) }
     }
     
-    private func getRemoteData(completion: @escaping () -> Void) {
+    private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         
-        guard DummyDataSource.recommendedCollections.count == 0 else {
-            initViewModelsFromData()
-            completion()
-            return
-        }
         guard haveNetwork else {
+            completion()
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
         }
-        guard let profileID = self.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            
+            if let authorizationManager = self.authorizationManager {
+                authorizationManager.refreshAuthorizationStatus { status in
+                    if status == .authorizedFully {
+                        guard UserProfileManager.shared.profileID != nil else {
+                            completion()
+                            return
+                        }
+                        self.getRemoteData(completion: completion)
+                    } else {
+                        completion()
+                        return
+                    }
+                }
+                return
+            }
+            completion()
             return
         }
+        
+        if (loadProfile) {
+            showNetworkLoader()
+            Network.shared.apollo.clearCache()
+            UserProfileManager.shared.fetchProfile { success in
+                
+                self.hideLoader()
+                guard success == true else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    completion()
+                    return
+                }
+                
+                self.getRemoteData(completion: completion)
+            }
+        }
+        
         
         showNetworkLoader()
         Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) { [weak self] result in
@@ -493,9 +521,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 DummyDataSource.recommendedCollections = collections.map {
                     CollectionDTOMapper.map($0)
                 }
-                DummyDataSource.yourCollections = collections.filter({DemoUserContainer.shared.favoriteCollections.contains($0.id ?? 0)}).map {
+                DummyDataSource.yourCollections = collections.filter({UserProfileManager.shared.favoriteCollections.contains($0.id ?? 0)}).map {
                     CollectionDTOMapper.map($0)
-                }.reorder(by: DemoUserContainer.shared.favoriteCollections)
+                }.reorder(by: UserProfileManager.shared.favoriteCollections)
                 
                 
                 self.initViewModelsFromData()

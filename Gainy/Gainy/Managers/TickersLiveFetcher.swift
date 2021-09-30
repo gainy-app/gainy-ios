@@ -20,10 +20,6 @@ final class TickersLiveFetcher {
     
     static let shared = TickersLiveFetcher()
     
-    // TODO: Borysov - remove this when profile is saved to CoreData
-    @UserDefault<Int>("currentProfileID")
-    private(set) var currentProfileID: Int?
-    
     //MARK: - Inner
     
     @Atomic
@@ -87,7 +83,7 @@ final class TickersLiveFetcher {
     ///   - completion: callback for loading end action
     func getMatchScores(collectionId: Int, _ completion: @escaping (() -> Void)) {
         
-        guard let profileID = self.currentProfileID else {
+        guard let profileID = UserProfileManager.shared.profileID else {
             print("Missing profileID")
             completion()
             return
