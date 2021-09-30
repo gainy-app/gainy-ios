@@ -14,17 +14,18 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         collection_id: $collectionId
       ) {
         __typename
-        is_match
-        match_score
-        symbol
-        fits_risk
-        fits_categories
-        fits_interests
+        ...LiveMatch
       }
     }
     """
 
   public let operationName: String = "FetchTickersMatchData"
+
+  public var queryDocument: String {
+    var document: String = operationDefinition
+    document.append("\n" + LiveMatch.fragmentDefinition)
+    return document
+  }
 
   public var profileId: Int
   public var collectionId: Int
@@ -72,12 +73,7 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("is_match", type: .nonNull(.scalar(Bool.self))),
-          GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
-          GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+          GraphQLFragmentSpread(LiveMatch.self),
         ]
       }
 
@@ -100,59 +96,134 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         }
       }
 
-      public var isMatch: Bool {
+      public var fragments: Fragments {
         get {
-          return resultMap["is_match"]! as! Bool
+          return Fragments(unsafeResultMap: resultMap)
         }
         set {
-          resultMap.updateValue(newValue, forKey: "is_match")
+          resultMap += newValue.resultMap
         }
       }
 
-      public var matchScore: Int {
-        get {
-          return resultMap["match_score"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "match_score")
-        }
-      }
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
 
-      public var symbol: String {
-        get {
-          return resultMap["symbol"]! as! String
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
         }
-        set {
-          resultMap.updateValue(newValue, forKey: "symbol")
-        }
-      }
 
-      public var fitsRisk: Int {
-        get {
-          return resultMap["fits_risk"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "fits_risk")
+        public var liveMatch: LiveMatch {
+          get {
+            return LiveMatch(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
         }
       }
+    }
+  }
+}
 
-      public var fitsCategories: Int {
-        get {
-          return resultMap["fits_categories"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "fits_categories")
-        }
-      }
+public struct LiveMatch: GraphQLFragment {
+  /// The raw GraphQL definition of this fragment.
+  public static let fragmentDefinition: String =
+    """
+    fragment LiveMatch on MatchScore {
+      __typename
+      is_match
+      match_score
+      symbol
+      fits_risk
+      fits_categories
+      fits_interests
+    }
+    """
 
-      public var fitsInterests: Int {
-        get {
-          return resultMap["fits_interests"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "fits_interests")
-        }
-      }
+  public static let possibleTypes: [String] = ["MatchScore"]
+
+  public static var selections: [GraphQLSelection] {
+    return [
+      GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+      GraphQLField("is_match", type: .nonNull(.scalar(Bool.self))),
+      GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+      GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+    ]
+  }
+
+  public private(set) var resultMap: ResultMap
+
+  public init(unsafeResultMap: ResultMap) {
+    self.resultMap = unsafeResultMap
+  }
+
+  public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
+    self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
+  }
+
+  public var __typename: String {
+    get {
+      return resultMap["__typename"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "__typename")
+    }
+  }
+
+  public var isMatch: Bool {
+    get {
+      return resultMap["is_match"]! as! Bool
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "is_match")
+    }
+  }
+
+  public var matchScore: Int {
+    get {
+      return resultMap["match_score"]! as! Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "match_score")
+    }
+  }
+
+  public var symbol: String {
+    get {
+      return resultMap["symbol"]! as! String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var fitsRisk: Int {
+    get {
+      return resultMap["fits_risk"]! as! Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "fits_risk")
+    }
+  }
+
+  public var fitsCategories: Int {
+    get {
+      return resultMap["fits_categories"]! as! Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "fits_categories")
+    }
+  }
+
+  public var fitsInterests: Int {
+    get {
+      return resultMap["fits_interests"]! as! Int
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "fits_interests")
     }
   }
 }

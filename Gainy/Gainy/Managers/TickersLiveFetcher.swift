@@ -96,10 +96,8 @@ final class TickersLiveFetcher {
         Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileID, collectionId: collectionId)) { result in
             switch result {
             case .success(let graphQLResult):
-                for data in (graphQLResult.data?.getMatchScoresByCollection ?? []) {
-                    if let data = data {
-                        TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
-                    }
+                for data in (graphQLResult.data?.getMatchScoresByCollection?.compactMap({$0?.fragments.liveMatch}) ?? []) {
+                    TickerLiveStorage.shared.setMatchData(data.symbol, data: data)                    
                 }
                 completion()
             case .failure(let error):

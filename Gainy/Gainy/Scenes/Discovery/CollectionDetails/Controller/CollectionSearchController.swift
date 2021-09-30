@@ -399,6 +399,10 @@ extension CollectionSearchController: UICollectionViewDelegate {
             }
             break
         case .collections:
+            if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
+                GainyAnalytics.logEvent("collections_search_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
+            }
+            NotificationManager.shared.showMessage(title: "Sorry", text: "Collection browsing will be implemented in future...", cancelTitle: "OK", actions: nil)
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {

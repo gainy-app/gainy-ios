@@ -14,6 +14,9 @@ class TickerInfo {
     
     let ticker: RemoteTicker
     
+    @UserDefault<Int>("currentProfileID")
+    private(set) var currentProfileID: Int?
+    
     init(ticker: RemoteTicker) {
         self.ticker = ticker
         
@@ -25,7 +28,7 @@ class TickerInfo {
         let industries = ticker.tickerIndustries.compactMap({$0.gainyIndustry?.name})
         let categories = ticker.tickerCategories.compactMap({$0.categories?.name})
         self.tags = categories + industries
-        self.highlights = ticker.tickerFinancials.compactMap(\.highlight)  
+        self.highlights = ticker.tickerFinancials.compactMap(\.highlight)
         
         var markers: [MarketData] = []
         
@@ -116,6 +119,26 @@ class TickerInfo {
                 print("Failure when making GraphQL request. Error: \(error)")
                 dispatchGroup.leave()
                 break
+            }
+        }
+        
+        //Load updated MatchData
+        if let profileID = self.currentProfileID {
+            dispatchGroup.enter()
+            Network.shared.apollo.fetch(query: FetchTickerMatchDataQuery.init(profielId: profileID, symbol: symbol)){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    if let matchData = graphQLResult.data?.getMatchScoreByTicker?.fragments.liveMatch {
+                        TickerLiveStorage.shared.setMatchData(self?.symbol ?? "", data: matchData)
+                    }
+                    dispatchGroup.leave()
+                    break
+                case .failure(let error):
+                    print("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup.leave()
+                    break
+                }
             }
         }
         

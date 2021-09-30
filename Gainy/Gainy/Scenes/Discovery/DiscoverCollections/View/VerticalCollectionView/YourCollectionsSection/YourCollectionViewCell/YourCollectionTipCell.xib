@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YourCollectionTipCell" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="YourCollectionTipCell" reuseIdentifier="YourCollectionTipCell" id="akA-OJ-3TE" customClass="YourCollectionTipCell" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="945" height="293"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kqa-wh-0IS">
+                <rect key="frame" x="0.0" y="0.0" width="945" height="293"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have nothing to browse. Please select recommended collections from below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dIp-W7-C5z">
+                        <rect key="frame" x="32" y="136" width="881" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="dIp-W7-C5z" secondAttribute="trailing" constant="32" id="Ek6-0W-p0N"/>
+                    <constraint firstItem="dIp-W7-C5z" firstAttribute="leading" secondItem="Kqa-wh-0IS" secondAttribute="leading" constant="32" id="Tmf-eF-rKz"/>
+                    <constraint firstItem="dIp-W7-C5z" firstAttribute="centerY" secondItem="Kqa-wh-0IS" secondAttribute="centerY" id="h9O-kp-fbr"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="945" height="293"/>
+            <point key="canvasLocation" x="396.37681159420293" y="39.174107142857139"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="mainText">
+            <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

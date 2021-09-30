@@ -1,0 +1,6 @@
+
+query FetchTickerMatchData($profielId: Int!, $symbol: String!){
+  get_match_score_by_ticker(profile_id: $profielId, symbol: $symbol) {
+            ...LiveMatch
+  }
+}

@@ -2,6 +2,8 @@ import UIKit
 import Kingfisher
 import PureLayout
 
+
+
 final class YourCollectionViewCell: SwipeCollectionViewCell {
     // MARK: Lifecycle
     

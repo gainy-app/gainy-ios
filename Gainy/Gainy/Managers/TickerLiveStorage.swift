@@ -9,9 +9,6 @@ import UIKit
 import Cache
 
 typealias LivePrice = FetchLiveTickersDataQuery.Data.FetchLivePrice
-typealias LiveMatch = FetchTickersMatchDataQuery.Data.GetMatchScoresByCollection
-
-
 
 final class TickerLiveStorage {
         

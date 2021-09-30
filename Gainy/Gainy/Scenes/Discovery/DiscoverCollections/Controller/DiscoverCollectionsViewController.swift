@@ -133,7 +133,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue
                 ? CollectionHeaderViewModel(
                     title: "Your collections",
-                    description: "Tap to view, swipe to edit or drag & drop to reorder"
+                    description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(
                     title: "Collections you might like",
