@@ -347,6 +347,7 @@ final class AuthorizationManager {
     
     private func hasProfilesMatchingUserID(userID: String, completion: @escaping (_ success: Bool) -> Void) {
         
+        Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: AppProfilesUserIDsQuery()) { [weak self] result in
             guard self != nil else {
                 completion(false)
