@@ -13,10 +13,7 @@ typealias AltStockTicker = RemoteTickerDetails
 class TickerInfo {
     
     let ticker: RemoteTicker
-    
-    @UserDefault<Int>("currentProfileID")
-    private(set) var currentProfileID: Int?
-    
+        
     init(ticker: RemoteTicker) {
         self.ticker = ticker
         
@@ -121,9 +118,8 @@ class TickerInfo {
                 break
             }
         }
-        
         //Load updated MatchData
-        if let profileID = self.currentProfileID {
+        if let profileID = UserProfileManager.shared.profileID {
             dispatchGroup.enter()
             Network.shared.apollo.fetch(query: FetchTickerMatchDataQuery.init(profielId: profileID, symbol: symbol)){[weak self] result in
                 switch result {

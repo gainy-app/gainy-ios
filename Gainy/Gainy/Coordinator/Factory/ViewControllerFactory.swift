@@ -8,13 +8,13 @@ final class ViewControllerFactory {
         false
     }
     
-    private let tabNames: [String] = ["Discovery", "Portfolio", "Analytics", "Profile"]
+    private let tabNames: [String] = ["Discovery", "Portfolio", "Profile"]
     var selectedColor: UIColor {
-        isLightTheme ? UIColor(named: "tabbar_tint_color")! : UIColor(named: "tabbar_tint_color")!
+        isLightTheme ? UIColor(named: "mainText")! : UIColor(named: "tabbar_tint_color")!
     }
     
     var unselectedColor: UIColor {
-        isLightTheme ? UIColor(named: "tabbar_disabled_color")!: UIColor(named: "tabbar_disabled_color")!
+        isLightTheme ? UIColor.init(hexString: "#687379", alpha: 1.0)!: UIColor(named: "tabbar_disabled_color")!
     }
     
     func instantiateMainTab(coordinator: MainCoordinator) -> MainTabBarViewController {
