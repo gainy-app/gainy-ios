@@ -136,7 +136,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             if cell.addSwiftUIIfPossible(wsrHosting.view) {
                 wsrHosting.view.autoSetDimension(.height, toSize: 119.0)
                 wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
-                wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 10)
                 wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
             }
             return cell
