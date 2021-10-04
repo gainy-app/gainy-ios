@@ -547,18 +547,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     //MARK: - Delete Items
     
     func deleteItem(_ sourceInd: Int) {
-        guard var snapshot = dataSource?.snapshot() else {return}
-        guard let indexOfSectionIdentifier = snapshot.indexOfSection(.collectionWithCards) else {return}
-        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
-            if let model = anyHashable as? CollectionDetailViewCellModel {
-                return model.id == sourceInd
-            }
-            return false
-        }) {
-            snapshot.deleteItems([sourceItem])
-            dataSource?.apply(snapshot)
-        }
-        
+//        guard var snapshot = dataSource?.snapshot() else {return}
+//        guard snapshot.sectionIdentifiers.contains(.collectionWithCards) else {return}
+//        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+//            if let model = anyHashable as? CollectionDetailViewCellModel {
+//                return model.id == sourceInd
+//            }
+//            return false
+//        }) {
+//            snapshot.deleteItems([sourceItem])
+//            dataSource?.apply(snapshot)
+//        }
     }
 }
 

@@ -162,13 +162,13 @@ struct ScatterChartView: View {
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
                         Text(statsDayValue)
-                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                            .foregroundColor(ticker?.priceColor.uiColor ?? .black)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     HStack {
                         Spacer()
                         Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (ticker?.currentPrice.price ?? ""))
-                            .foregroundColor(ticker?.priceColor.uiColor ?? .black)
+                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(20).uiFont)
                             .animation(.none)
                     }
@@ -263,6 +263,7 @@ struct ScatterChartView: View {
     
     func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
         let points = chartData.onlyPoints()
+        guard points.count > 1 else { return .zero}
         let stepWidth: CGFloat = width / CGFloat(points.count-1)
         let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
         

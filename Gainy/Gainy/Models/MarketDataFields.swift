@@ -36,7 +36,7 @@ enum MarketDataField: Int, Codable {
         case .marketCap:
             return "Market\nCap".uppercased()
         case .monthToDay:
-            return "Price\nchange".uppercased()
+            return "30 Days\nprice change".uppercased()
         case .netProfit:
             return "Net\nProfit".uppercased()
         case .growsRateYOY:

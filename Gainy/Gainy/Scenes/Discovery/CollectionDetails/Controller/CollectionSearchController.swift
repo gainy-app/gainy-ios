@@ -210,7 +210,7 @@ final class CollectionSearchController: NSObject {
             networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
-                    self?.news = graphQLResult.data?.fetchNewsData ?? []
+                    self?.news = (graphQLResult.data?.fetchNewsData ?? []).uniqued()
                     dispatchGroup.leave()
                     break
                 case .failure(let error):

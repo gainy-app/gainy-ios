@@ -52,7 +52,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         discoverCollectionsCollectionView.dragDelegate = self
         discoverCollectionsCollectionView.dropDelegate = self
-        
+        discoverCollectionsCollectionView.contentInset = .init(top: 0, left: 0, bottom: 150.0, right: 0)
         dataSource = UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>(
             collectionView: discoverCollectionsCollectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in

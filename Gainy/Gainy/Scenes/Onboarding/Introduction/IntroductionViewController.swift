@@ -182,7 +182,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     private func setProgressIndicatorHidden(hidden: Bool) {
         
         let nextTitle = NSLocalizedString("Next", comment: "Next")
-        let personaliseTitle = NSLocalizedString("Let's personalise it!", comment: "Let's personalise it!")
+        let personaliseTitle = NSLocalizedString("Let's personalize it!", comment: "Let's personalize it!")
         let nextButtonTitle = hidden ? personaliseTitle : nextTitle
         
         UIView.animate(withDuration: 0.175) {
