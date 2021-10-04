@@ -105,6 +105,7 @@ final class ViewControllerFactory {
     func instantiateCollectionDetails(coordinator: MainCoordinator) -> CollectionDetailsViewController {
         let vc = CollectionDetailsViewController()
         vc.viewModel = CollectionDetailsViewModel()
+        vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .discovery)
         vc.onDiscoverCollections = {
             coordinator.showDiscoverCollectionsViewController {initialCollectionIndex in

@@ -13,6 +13,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     // MARK: Properties
     
+    weak var authorizationManager: AuthorizationManager?
     var viewModel: CollectionDetailsViewModelProtocol?
     
     var onDiscoverCollections: (() -> Void)?
@@ -42,7 +43,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.onDiscoverCollections?()
                 } else {
                     if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
-                        self?.getRemoteData {
+                        self?.getRemoteData(loadProfile: true) {
                             DispatchQueue.main.async {
                                 self?.initViewModels()
                                 self?.centerInitialCollectionInTheCollectionView()
@@ -336,7 +337,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     // MARK: Functions
     
-    private func getRemoteData( completion: @escaping () -> Void) {
+    private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
@@ -344,6 +345,44 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         guard !isNetworkLoading else {
             return
         }
+        guard let profileID = UserProfileManager.shared.profileID else {
+            
+            if let authorizationManager = self.authorizationManager {
+                authorizationManager.refreshAuthorizationStatus { status in
+                    if status == .authorizedFully {
+                        guard UserProfileManager.shared.profileID != nil else {
+                            completion()
+                            return
+                        }
+                        self.getRemoteData(completion: completion)
+                    } else {
+                        completion()
+                        return
+                    }
+                }
+                return
+            }
+            completion()
+            return
+        }
+        
+        if (loadProfile) {
+            showNetworkLoader()
+            Network.shared.apollo.clearCache()
+            UserProfileManager.shared.fetchProfile { success in
+                
+                self.hideLoader()
+                guard success == true else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    completion()
+                    return
+                }
+                
+                self.getRemoteData(completion: completion)
+            }
+        }
+        
+        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
             switch result {
@@ -472,7 +511,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 self.onDiscoverCollections?()
             } else {
-                getRemoteData {
+                getRemoteData(loadProfile: true) {
                     DispatchQueue.main.async { [weak self] in
                         self?.initViewModels()
                         self?.centerInitialCollectionInTheCollectionView()
