@@ -11,8 +11,8 @@ final class UserProfileManager {
         
     static let shared = UserProfileManager()
         
-
-    var favoriteCollections: [Int] = Array()
+    @UserDefaultArray(key: "favoriteCollections")
+    var favoriteCollections: [Int]
     
     var interests: [Int] = Array()
     
@@ -27,6 +27,7 @@ final class UserProfileManager {
     var address: String?
     
     var userID: String?
+    
     
     var profileID: Int?
     

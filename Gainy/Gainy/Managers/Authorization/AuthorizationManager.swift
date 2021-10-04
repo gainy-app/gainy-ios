@@ -391,7 +391,7 @@ final class AuthorizationManager {
         }
     }
     
-    private func getFirebaseAuthToken(completion: @escaping (_ success: Bool) -> Void) {
+    func getFirebaseAuthToken(completion: @escaping (_ success: Bool) -> Void) {
         
         guard let user = Auth.auth().currentUser else {
             completion(false)

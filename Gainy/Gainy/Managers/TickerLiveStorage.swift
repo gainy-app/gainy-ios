@@ -127,4 +127,8 @@ final class TickerLiveStorage {
             try? matchesStorage?.setObject(CachedMatchScore(remoteMatch: data), forKey: symbol)
         }
     }
+    
+    func clearMatchData() {
+        try? matchesStorage?.removeAll()
+    }
 }

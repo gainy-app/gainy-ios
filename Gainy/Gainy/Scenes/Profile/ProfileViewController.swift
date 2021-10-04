@@ -630,6 +630,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        TickerLiveStorage.shared.clearMatchData()
         GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         self.profileInterestsSelected?.append(interest)
         let index = self.profileInterests?.lastIndex(where: { element in
@@ -659,6 +660,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        TickerLiveStorage.shared.clearMatchData()
         GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         let index = self.profileInterestsSelected?.lastIndex(where: { element in
             element.id == interest.id
@@ -686,6 +688,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        TickerLiveStorage.shared.clearMatchData()
         GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         self.profileCategoriesSelected?.append(category)
         let index = self.profileCategories?.lastIndex(where: { element in
@@ -714,6 +717,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        TickerLiveStorage.shared.clearMatchData()
         GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         let index = self.profileCategoriesSelected?.lastIndex(where: { element in
             element.id == category.id

@@ -106,7 +106,7 @@ class TickerInfo {
             case .success(let graphQLResult):
                 
                 let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
-                self?.altStocks = tickers.flatMap({$0})
+                self?.altStocks = tickers.flatMap({$0}).filter({$0.symbol != self?.symbol}).uniqued()
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
                     dispatchGroup.leave()

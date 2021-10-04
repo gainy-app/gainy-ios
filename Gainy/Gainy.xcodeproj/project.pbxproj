@@ -136,6 +136,8 @@
 		33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6626CFD4E000DF1CBE /* CornerView.swift */; };
 		33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */; };
 		33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */; };
+		33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBDE84270ADE55003B6DDB /* FirebaseTokenValidator.swift */; };
+		33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 33FBDE87270ADEEA003B6DDB /* JWTDecode */; };
 		33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */; };
 		33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3926D518FD00FABC70 /* Legend.swift */; };
 		33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3A26D518FD00FABC70 /* IndicatorPoint.swift */; };
@@ -461,6 +463,7 @@
 		33E7AA6626CFD4E000DF1CBE /* CornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerView.swift; sourceTree = "<group>"; };
 		33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsNewsViewCell.swift; sourceTree = "<group>"; };
 		33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollictionsListHeaderView.swift; sourceTree = "<group>"; };
+		33FBDE84270ADE55003B6DDB /* FirebaseTokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTokenValidator.swift; sourceTree = "<group>"; };
 		33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartView.swift; sourceTree = "<group>"; };
 		33FE9E3926D518FD00FABC70 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
 		33FE9E3A26D518FD00FABC70 /* IndicatorPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorPoint.swift; sourceTree = "<group>"; };
@@ -672,6 +675,7 @@
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
+				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
@@ -1633,6 +1637,7 @@
 				85CD154026F8A928001C060C /* AppleAuth.swift */,
 				85CD154326F8A951001C060C /* GoogleAuth.swift */,
 				85CD154526F8A988001C060C /* AuthorizationProtocol.swift */,
+				33FBDE84270ADE55003B6DDB /* FirebaseTokenValidator.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -1732,6 +1737,7 @@
 				85CD154826F8B22C001C060C /* GoogleSignIn */,
 				331FB0F927011D4B0031A8EF /* Cache */,
 				33B911732706ED3000C00B0D /* SwiftyJSON */,
+				33FBDE87270ADEEA003B6DDB /* JWTDecode */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1817,6 +1823,7 @@
 				85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */,
 				33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2024,6 +2031,7 @@
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
+				33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
 				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
@@ -2396,7 +2404,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2423,7 +2431,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 38;
+				CURRENT_PROJECT_VERSION = 37;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2651,6 +2659,14 @@
 				minimumVersion = 1.4.1;
 			};
 		};
+		33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -2746,6 +2762,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33D3D4E626CB8F62005A859B /* XCRemoteSwiftPackageReference "SwiftHEXColors" */;
 			productName = SwiftHEXColors;
+		};
+		33FBDE87270ADEEA003B6DDB /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
+			productName = JWTDecode;
 		};
 		85CD154826F8B22C001C060C /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

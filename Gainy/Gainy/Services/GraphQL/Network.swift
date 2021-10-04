@@ -116,15 +116,39 @@ final class CustomInterceptor: ApolloInterceptor {
         response: HTTPResponse<Operation>?,
         completion: @escaping (Swift.Result<GraphQLResult<Operation.Data>, Error>) -> Void
     ) {
+        func makeRequest() {
+            chain.proceedAsync(request: request,
+                               response: response,
+                               completion: completion)
+        }
+        
         if let token = self.firebaseAuthToken {
             let bearer = "Bearer " + token
             request.addHeader(name: "Authorization", value: bearer)
+            
+            //TO-DO: Borysov compare Just dates stored after login
+            let tokenValidator = FirebaseTokenValidator(token: token)
+            if tokenValidator.isValidToken() {
+                makeRequest()
+            } else {
+                let authManager =  AuthorizationManager()
+                authManager.getFirebaseAuthToken { success in
+                    if success {
+                        let bearer = "Bearer " + (authManager.firebaseAuthToken ?? token)
+                        request.addHeader(name: "Authorization", value: bearer)
+                        makeRequest()
+                    } else {
+                        //TO-DO: Borysov logout
+                        
+                    }
+                }
+            }
+            
+        } else {
+            makeRequest()
         }
+        
         print("request :\(request)")
         print("response :\(String(describing: response))")
-
-        chain.proceedAsync(request: request,
-                           response: response,
-                           completion: completion)
     }
 }

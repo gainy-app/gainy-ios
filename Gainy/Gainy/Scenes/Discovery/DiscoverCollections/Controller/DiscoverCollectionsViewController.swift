@@ -148,7 +148,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
         discoverCollectionsCollectionView.dataSource = dataSource
         
-        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
