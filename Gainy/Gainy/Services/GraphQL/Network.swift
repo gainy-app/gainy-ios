@@ -138,8 +138,7 @@ final class CustomInterceptor: ApolloInterceptor {
                         request.addHeader(name: "Authorization", value: bearer)
                         makeRequest()
                     } else {
-                        //TO-DO: Borysov logout
-                        
+                        NotificationCenter.default.post(name: NSNotification.Name.didFailToRefreshToken, object: nil)
                     }
                 }
             }

@@ -1,5 +1,5 @@
 import Firebase
-
+import Combine
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
@@ -15,7 +15,9 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
 
     // MARK: Internal
-
+    
+    private var cancellables = Set<AnyCancellable>()
+    
     // MARK: CoordinatorFinishOutput
 
     var finishFlow: (() -> Void)?
@@ -24,11 +26,24 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     override func start() {
         showMainTabViewController()
-        if isLoggedIn {
-            //All fine )
-        } else {
-            //Show Onboarding
-        }
+        // TODO: Borysov - is this logic deprecated already? Need back to this and cleanup
+//        if isLoggedIn {
+//            //All fine )
+//        } else {
+//            //Show Onboarding
+//        }
+        self.subscribeOnFailToRefreshToken()
+    }
+    
+    func subscribeOnFailToRefreshToken() {
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didFailToRefreshToken).sink { _ in
+        } receiveValue: { notification in
+            if let finishFlow = self.finishFlow {
+                self.authorizationManager.signOut()
+                finishFlow()
+            }
+        }.store(in: &cancellables)
     }
     
     /// FIRUser status
