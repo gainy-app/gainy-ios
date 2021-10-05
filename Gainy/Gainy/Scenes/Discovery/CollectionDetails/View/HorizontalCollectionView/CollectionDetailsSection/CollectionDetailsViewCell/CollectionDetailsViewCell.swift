@@ -85,11 +85,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol) {
                     loadingItems += 1
                     self?.isLoadingTickers = true
-                    print("Fetching match started \(model.tickerSymbol)")
+                    print("Fetching match started \(self?.collectionID ?? 0)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
                         dispatchGroup.leave()
-                        print("Fetching match ended \(model.tickerSymbol)")
+                        print("Fetching match ended \(self?.collectionID ?? 0)")
                     }
                 }
                 if loadingItems > 0 {

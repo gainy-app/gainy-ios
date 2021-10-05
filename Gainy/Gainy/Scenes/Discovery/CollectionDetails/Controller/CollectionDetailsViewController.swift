@@ -369,12 +369,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if (loadProfile) {
             showNetworkLoader()
             Network.shared.apollo.clearCache()
-            UserProfileManager.shared.fetchProfile { success in
+            UserProfileManager.shared.fetchProfile { success in                
                 
-                self.hideLoader()
                 guard success == true else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     completion()
+                    self.hideLoader()
                     return
                 }
                 

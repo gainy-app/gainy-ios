@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import PureLayout
 
 final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     // MARK: Lifecycle
@@ -12,7 +13,15 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(stocksAmountLabel)
         contentView.addSubview(plusButton)
-
+        
+        nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
+        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 8)
+        nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 8)
+        
+        descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
+        descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 8)
+        descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
+        //h - 43
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
@@ -50,7 +59,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         label.contentInsetAdjustmentBehavior = .never
         label.textContainerInset = .zero
         label.textContainer.lineFragmentPadding = 0
-
+        label.textContainer.lineBreakMode = .byTruncatingTail
         return label
     }()
 
@@ -116,20 +125,6 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             y: 0,
             width: bounds.width,
             height: bounds.height
-        )
-
-        nameLabel.frame = CGRect(
-            x: hMargin,
-            y: tMargin,
-            width: bounds.width - (hMargin + hMargin),
-            height: minNameHeight
-        )
-
-        descriptionLabel.frame = CGRect(
-            x: hMargin,
-            y: tMargin + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + hMargin),
-            height: 43
         )
 
         stocksAmountLabel.frame = CGRect(
