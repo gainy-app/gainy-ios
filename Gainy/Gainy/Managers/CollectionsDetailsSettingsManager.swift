@@ -33,7 +33,7 @@ final class CollectionsDetailsSettingsManager {
     static let shared = CollectionsDetailsSettingsManager()
     
     //All Sortings
-    private(set) var sortings: [String] = [MarketDataField.evs.title, MarketDataField.growsRateYOY.title, MarketDataField.marketCap.title, MarketDataField.monthToDay.title, MarketDataField.netProfit.title]
+    private(set) var sortings: [String] = [MarketDataField.matchScore.title, MarketDataField.evs.title, MarketDataField.growsRateYOY.title, MarketDataField.marketCap.title, MarketDataField.monthToDay.title, MarketDataField.netProfit.title]
     
     
     
@@ -49,7 +49,7 @@ final class CollectionsDetailsSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionSettings(sorting: MarketDataField.evs, ascending: true, viewMode: .grid)
+            let defSettigns = CollectionSettings(sorting: MarketDataField.matchScore, ascending: true, viewMode: .grid)
             settings?[id] = defSettigns
             return defSettigns
         }

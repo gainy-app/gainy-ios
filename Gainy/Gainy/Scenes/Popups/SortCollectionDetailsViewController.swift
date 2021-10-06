@@ -46,7 +46,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
         preloadSorting()
     }
     
-    private let btnsMapping: [MarketDataField: Int] = [.evs : 0, .growsRateYOY: 1, .marketCap: 2, .monthToDay: 3, .netProfit: 4]
+    private let btnsMapping: [MarketDataField: Int] = [.matchScore: 5, .evs : 0, .growsRateYOY: 1, .marketCap: 2, .monthToDay: 3, .netProfit: 4]
     private var ascConstraints: [NSLayoutConstraint] = []
     
     private func preloadSorting() {
@@ -62,7 +62,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
                 if val.tag == storedBtnIdx {
                     
                     ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 80))
-                    ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 46.0 * CGFloat(btnsMapping[btnsMapping.key(forValue: storedBtnIdx)!] ?? 0)))
+                    ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 46.0 * CGFloat(idx)))
                 }
             }
         }
@@ -79,7 +79,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
             ascBtn.isSelected.toggle()
             CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
             
-            delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sender.tag) ?? .evs).title)
+            delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sender.tag) ?? .matchScore).title)
             return
         }
         
@@ -104,6 +104,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
             CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .monthToDay)
         case 4:
             CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .netProfit)
+        case 5:
+            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .matchScore)
         default:
             break
         }

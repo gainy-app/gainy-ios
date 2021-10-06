@@ -14,14 +14,18 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         contentView.addSubview(stocksAmountLabel)
         contentView.addSubview(plusButton)
         
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
-        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 8)
+        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
         nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 8)
         
+        
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
-        descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 8)
+        descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
-        //h - 43
+        descriptionLabel.autoSetDimension(.height, toSize: 43)
+        
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
     }
@@ -48,18 +52,14 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         return imageView
     }()
 
-    lazy var nameLabel: UITextView = {
-        let label = UITextView()
-
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
-        label.automaticallyAdjustsScrollIndicatorInsets = false
-        label.contentInsetAdjustmentBehavior = .never
-        label.textContainerInset = .zero
-        label.textContainer.lineFragmentPadding = 0
-        label.textContainer.lineBreakMode = .byTruncatingTail
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 0
         return label
     }()
 
@@ -86,7 +86,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
         label.numberOfLines = 1
         label.textAlignment = .left
-
+        label.minimumScaleFactor = 0.1
         return label
     }()
 
@@ -110,15 +110,6 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         let tMargin: CGFloat = 8
         let bMargin: CGFloat = 8
 
-        let availableWidth = bounds.width - (hMargin + hMargin)
-        let nameLabelFont = UIFont(name: "SFProDisplay-Bold", size: 16)
-        let neededSize = nameLabel.text.size(
-            withAttributes: [
-                NSAttributedString.Key.font: nameLabelFont as Any,
-            ]
-        )
-
-        let minNameHeight: CGFloat = neededSize.width > availableWidth ? 40 : 20
 
         backImageView.frame = CGRect(
             x: 0,
@@ -163,13 +154,11 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         backImageView.contentMode = .scaleAspectFill
 
         nameLabel.text = name
-        nameLabel.sizeToFit()
 
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
         stocksAmountLabel.text = stocksAmount
-        stocksAmountLabel.sizeToFit()
 
         buttonState = plusButtonState
         buttonState == .checked

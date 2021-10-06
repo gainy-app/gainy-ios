@@ -27,17 +27,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fKJ-Uh-31o">
-                                <rect key="frame" x="0.0" y="112" width="414" height="228"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="274"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acQ-D0-DjJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="187" y="0.0" width="40" height="44"/>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acQ-D0-DjJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="155" y="0.0" width="104" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1fm-PB-N2R"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="EV/S">
+                                        <state key="normal" title="Match Score">
                                             <color key="titleColor" red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <state key="selected">
@@ -58,8 +58,37 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="dmY-G6-PBW">
                                         <rect key="frame" x="156" y="44" width="102" height="2"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9wq-O2-coc" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="187" y="46" width="40" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="lx1-w8-rLp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="18"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="EV/S">
+                                            <color key="titleColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" name="mainText"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="0.0"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sortBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ubl-nW-gzY"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="zLa-Xy-dZp">
+                                        <rect key="frame" x="156" y="90" width="102" height="2"/>
+                                    </imageView>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2M-Ac-MJ8" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="139.5" y="46" width="135" height="44"/>
+                                        <rect key="frame" x="139" y="92" width="136" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1ka-OJ-pmN"/>
@@ -85,10 +114,10 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="lUN-Mg-4Sx">
-                                        <rect key="frame" x="156" y="90" width="102" height="2"/>
+                                        <rect key="frame" x="156" y="136" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4FW-wy-DAv" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="161" y="92" width="92" height="44"/>
+                                        <rect key="frame" x="161" y="138" width="92" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="NIQ-Ke-6uS"/>
@@ -114,10 +143,10 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="BLx-gk-jCl">
-                                        <rect key="frame" x="156" y="136" width="102" height="2"/>
+                                        <rect key="frame" x="156" y="182" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-UU-s1W" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="120.5" y="138" width="173" height="44"/>
+                                        <rect key="frame" x="119" y="184" width="176" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uBi-iR-wN3"/>
@@ -143,10 +172,10 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sort_dots" translatesAutoresizingMaskIntoConstraints="NO" id="TEN-Ry-09s">
-                                        <rect key="frame" x="156" y="182" width="102" height="2"/>
+                                        <rect key="frame" x="156" y="228" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSX-Kd-21I" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="124.5" y="184" width="165" height="44"/>
+                                        <rect key="frame" x="126.5" y="230" width="161" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="lTx-P9-pWB"/>
@@ -174,7 +203,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-VB-HTb">
-                                <rect key="frame" x="177" y="69" width="60" height="24"/>
+                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="TTy-iw-jLP"/>
                                 </constraints>
@@ -208,11 +237,12 @@
                     <connections>
                         <outlet property="ascBtn" destination="kzP-zA-30h" id="zfq-Ce-oLA"/>
                         <outlet property="titleLbl" destination="7cz-VB-HTb" id="yf1-dg-N9v"/>
-                        <outletCollection property="sortBtns" destination="o2M-Ac-MJ8" collectionClass="NSMutableArray" id="WUA-7w-Hvk"/>
-                        <outletCollection property="sortBtns" destination="4FW-wy-DAv" collectionClass="NSMutableArray" id="IOT-fL-zig"/>
-                        <outletCollection property="sortBtns" destination="gfI-UU-s1W" collectionClass="NSMutableArray" id="Wsu-52-CLN"/>
-                        <outletCollection property="sortBtns" destination="ZSX-Kd-21I" collectionClass="NSMutableArray" id="n0W-Vm-jnt"/>
-                        <outletCollection property="sortBtns" destination="acQ-D0-DjJ" collectionClass="NSMutableArray" id="5o7-fe-W2F"/>
+                        <outletCollection property="sortBtns" destination="acQ-D0-DjJ" collectionClass="NSMutableArray" id="7Kz-Qj-VPz"/>
+                        <outletCollection property="sortBtns" destination="9wq-O2-coc" collectionClass="NSMutableArray" id="l07-Uv-ply"/>
+                        <outletCollection property="sortBtns" destination="o2M-Ac-MJ8" collectionClass="NSMutableArray" id="zUi-kA-rZW"/>
+                        <outletCollection property="sortBtns" destination="4FW-wy-DAv" collectionClass="NSMutableArray" id="Gi2-EA-cfp"/>
+                        <outletCollection property="sortBtns" destination="gfI-UU-s1W" collectionClass="NSMutableArray" id="jH4-qK-G12"/>
+                        <outletCollection property="sortBtns" destination="ZSX-Kd-21I" collectionClass="NSMutableArray" id="OnS-lF-nAf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -222,19 +252,22 @@
     </scenes>
     <designables>
         <designable name="4FW-wy-DAv">
-            <size key="intrinsicContentSize" width="92" height="33"/>
+            <size key="intrinsicContentSize" width="92" height="34"/>
+        </designable>
+        <designable name="9wq-O2-coc">
+            <size key="intrinsicContentSize" width="40" height="34"/>
         </designable>
         <designable name="ZSX-Kd-21I">
-            <size key="intrinsicContentSize" width="165" height="33"/>
+            <size key="intrinsicContentSize" width="161" height="34"/>
         </designable>
         <designable name="acQ-D0-DjJ">
-            <size key="intrinsicContentSize" width="40" height="33"/>
+            <size key="intrinsicContentSize" width="104" height="34"/>
         </designable>
         <designable name="gfI-UU-s1W">
-            <size key="intrinsicContentSize" width="173" height="33"/>
+            <size key="intrinsicContentSize" width="176" height="34"/>
         </designable>
         <designable name="o2M-Ac-MJ8">
-            <size key="intrinsicContentSize" width="135" height="33"/>
+            <size key="intrinsicContentSize" width="136" height="34"/>
         </designable>
     </designables>
     <resources>

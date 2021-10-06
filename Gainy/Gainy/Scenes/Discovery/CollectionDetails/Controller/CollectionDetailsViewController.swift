@@ -369,7 +369,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if (loadProfile) {
             showNetworkLoader()
             Network.shared.apollo.clearCache()
-            UserProfileManager.shared.fetchProfile { success in                
+            UserProfileManager.shared.fetchProfile { success in
                 
                 guard success == true else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
@@ -395,15 +395,20 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 DummyDataSource.remoteRawYourCollections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
                 
+                let collectionIDs = DummyDataSource.remoteRawYourCollections.compactMap(\.id)
+                
+                TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
+                    DispatchQueue.main.async {
+                        self?.initViewModelsFromData()
+                        completion()
+                        self?.hideLoader()
+                    }
+                }
+                
                 //Paging
                 self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
-                DispatchQueue.main.async {
-                    self?.initViewModelsFromData()
-                    completion()
-                    self?.hideLoader()
-                }
             case .failure(let error):
                 print("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()
@@ -547,17 +552,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     //MARK: - Delete Items
     
     func deleteItem(_ sourceInd: Int) {
-//        guard var snapshot = dataSource?.snapshot() else {return}
-//        guard snapshot.sectionIdentifiers.contains(.collectionWithCards) else {return}
-//        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
-//            if let model = anyHashable as? CollectionDetailViewCellModel {
-//                return model.id == sourceInd
-//            }
-//            return false
-//        }) {
-//            snapshot.deleteItems([sourceItem])
-//            dataSource?.apply(snapshot)
-//        }
+        //        guard var snapshot = dataSource?.snapshot() else {return}
+        //        guard snapshot.sectionIdentifiers.contains(.collectionWithCards) else {return}
+        //        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+        //            if let model = anyHashable as? CollectionDetailViewCellModel {
+        //                return model.id == sourceInd
+        //            }
+        //            return false
+        //        }) {
+        //            snapshot.deleteItems([sourceItem])
+        //            dataSource?.apply(snapshot)
+        //        }
     }
 }
 

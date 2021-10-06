@@ -8,7 +8,7 @@
 import Foundation
 
 enum MarketDataField: Int, Codable {
-    case dividendGrowth = 0, evs, marketCap, monthToDay, netProfit, growsRateYOY
+    case dividendGrowth = 0, evs, marketCap, monthToDay, netProfit, growsRateYOY, matchScore
     
     var title: String {
         switch self {
@@ -24,6 +24,8 @@ enum MarketDataField: Int, Codable {
             return "Net Profit Margin"
         case .growsRateYOY:
             return "Revenue Growth"
+        case .matchScore:
+            return "Match Score"
         }
     }
     
@@ -41,6 +43,8 @@ enum MarketDataField: Int, Codable {
             return "Net\nProfit".uppercased()
         case .growsRateYOY:
             return "Rev\nGrowth".uppercased()
+        case .matchScore:
+            return "Match\nScore"
         }
     }
     
@@ -57,6 +61,8 @@ enum MarketDataField: Int, Codable {
         case .netProfit:
             return true
         case .growsRateYOY:
+            return false
+        case .matchScore:
             return false
         }
     }
@@ -76,6 +82,8 @@ enum MarketDataField: Int, Codable {
                 return lhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0
             case .growsRateYOY:
                 return lhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0 < rhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0
+            case .matchScore:
+                return lhs.rawTicker.matchScore < rhs.rawTicker.matchScore
             }
         } else {
             switch self {
@@ -91,12 +99,14 @@ enum MarketDataField: Int, Codable {
                 return lhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.netProfitMargin ?? 0.0
             case .growsRateYOY:
                 return lhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0 > rhs.rawTicker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0
+            case .matchScore:
+                return lhs.rawTicker.matchScore > rhs.rawTicker.matchScore
             }
         }
     }
     
     /// Order to place on sorting
-    static let rawOrder: [MarketDataField] = [growsRateYOY, evs, marketCap, monthToDay, netProfit, growsRateYOY, dividendGrowth]
+    static let rawOrder: [MarketDataField] = [matchScore, growsRateYOY, evs, marketCap, monthToDay, netProfit, growsRateYOY, dividendGrowth]
     
-    static let metricsOrder: [MarketDataField] = [growsRateYOY, evs, marketCap, monthToDay, netProfit]
+    static let metricsOrder: [MarketDataField] = [matchScore, growsRateYOY, evs, marketCap, monthToDay, netProfit]
 }

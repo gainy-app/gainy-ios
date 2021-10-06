@@ -80,26 +80,28 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         dispatchGroup.leave()
                         print("Fetching dt ended \(model.tickerSymbol)")
                     }
-                }
-                
-                if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol) {
-                    loadingItems += 1
-                    self?.isLoadingTickers = true
-                    print("Fetching match started \(self?.collectionID ?? 0)")
-                    dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
-                        dispatchGroup.leave()
-                        print("Fetching match ended \(self?.collectionID ?? 0)")
-                    }
-                }
+                }                
+//                if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol) {
+//                    loadingItems += 1
+//                    self?.isLoadingTickers = true
+//                    print("Fetching match started \(self?.collectionID ?? 0)")
+//                    dispatchGroup.enter()
+//                    TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
+//                        dispatchGroup.leave()
+//                        print("Fetching match ended \(self?.collectionID ?? 0)")
+//                        self?.sortSections()
+//                    }
+//                }
                 if loadingItems > 0 {
                 dispatchGroup.notify(queue: DispatchQueue.main, execute: {
                     print("Fetching ended \(model.tickerSymbol)")
                     guard let self = self else {return}
                     self.isLoadingTickers = false
                     if var snapshot = self.dataSource?.snapshot() {
-                        let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                        snapshot.reloadItems(ids)
+                        if snapshot.itemIdentifiers.count > 0 {
+                            let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                            snapshot.reloadItems(ids)
+                        }
                         self.dataSource?.apply(snapshot, animatingDifferences: true)
                     }
                 })

@@ -43,6 +43,8 @@ class TickerInfo {
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "TTM, ANNUAL", value:  (ticker.tickerFinancials.last!.netProfitMargin ?? 0.0).percent))
             case .growsRateYOY:
                 markers.append(MarketData.init(name: "📌 \(metric.title)", period: "Quarterly, YOY", value: ((ticker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0) * 100.0).cleanOneDecimalP))
+            default:
+                break
             }
         }
         self.marketData = markers

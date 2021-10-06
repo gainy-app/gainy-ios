@@ -78,6 +78,8 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                     vals.append(viewModel.netProfit)
                 case .growsRateYOY:
                     vals.append(viewModel.growthRateYOY)
+                case .matchScore:
+                    vals.append(viewModel.matchScore)
                 }
             }            
                        
