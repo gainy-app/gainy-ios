@@ -20,6 +20,7 @@ final class CollectionSearchController: NSObject {
     private var dataSource: SearchSource?
     
     static let sectionHeaderElementKind = "section-header-element-kind"
+    
     //UI updates
     var loading: ((Bool) -> Void)?
     var onShowCardDetails: ((RemoteTickerDetails) -> Void)? = nil

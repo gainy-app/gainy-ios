@@ -208,12 +208,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.present(self.fpc, animated: true, completion: nil)
                 }
             }
-            
-            //Paging
-            //            if (indexPath.row + 1 == self?.viewModel?.collectionDetails.count ?? 0) && (self?.viewModel?.hasMorePages ?? false) {
-            //                self?.loadNextCollections()
-            //            }
-            
             return cell
         }
         

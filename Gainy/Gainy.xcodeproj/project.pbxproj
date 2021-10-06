@@ -71,6 +71,8 @@
 		336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */; };
 		336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */; };
 		336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */; };
+		33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */; };
+		33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -402,6 +404,8 @@
 		336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionListCardCell.xib; sourceTree = "<group>"; };
 		336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListCardCell.swift; sourceTree = "<group>"; };
 		336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartDelegate.swift; sourceTree = "<group>"; };
+		33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewController.swift; sourceTree = "<group>"; };
+		33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewModel.swift; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -797,6 +801,15 @@
 			path = MainTabController;
 			sourceTree = "<group>";
 		};
+		33722495270D9E9600C8C18F /* SingleCollectionDetails */ = {
+			isa = PBXGroup;
+			children = (
+				33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */,
+				33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */,
+			);
+			path = SingleCollectionDetails;
+			sourceTree = "<group>";
+		};
 		33787FCD26CD0DB500B11E58 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -883,6 +896,7 @@
 		33D3D4F826CBA2E2005A859B /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				33722495270D9E9600C8C18F /* SingleCollectionDetails */,
 				3A85940A268A351900CB8DD6 /* DiscoverCollections */,
 				3A859411268A42F200CB8DD6 /* CollectionDetails */,
 				3AFE0C3C2690CD2700C25A8F /* TickerDetails */,
@@ -2189,6 +2203,7 @@
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
+				33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
 				85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */,
@@ -2218,6 +2233,7 @@
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				33A1F56F2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift in Sources */,
+				33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */,
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,
