@@ -13,7 +13,7 @@ protocol CollectionsBottomViewDelegate: AnyObject {
 }
 
 class CollectionsBottomViewModel: ObservableObject {
-    //"Add custom\ncollection"
+    //"See\nrecommendations"
     @Published
     var actionTitle: String = ""
     
@@ -81,6 +81,6 @@ struct CollectionsBottomView: View {
 
 struct CollectionsBottomView_Previews: PreviewProvider {
     static var previews: some View {
-        CollectionsBottomView(model: CollectionsBottomViewModel.init(actionTitle: "Add custom\ncollection", actionIcon: "plus_icon")).frame(width: 375, height: 96)
+        CollectionsBottomView(model: CollectionsBottomViewModel.init(actionTitle: "See\nrecommendations", actionIcon: "check_icon")).frame(width: 375, height: 96)
     }
 }

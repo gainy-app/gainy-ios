@@ -133,8 +133,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(
-                    title: "Collections you might like",
-                    description: "Tap on collection for preview, or tap on plus icon to add to your discovery"
+                    title: "Recommended collections",
+                    description: "All collections are sorted by relevancy based on your profile and goals "
                 )
                 
                 return self?.sections[indexPath.section].header(
@@ -174,7 +174,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     /// Bottom action view adding
     fileprivate func addBottomView() {
         
-        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Add custom\ncollection", actionIcon: "plus_icon")
+        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "See\nrecommendations", actionIcon: "check_icon")
         let bottomView = CollectionsBottomView(model: bottomViewModel!)
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
         addChild(hosting)
