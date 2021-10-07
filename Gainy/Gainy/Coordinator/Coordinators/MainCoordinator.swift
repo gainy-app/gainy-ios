@@ -71,6 +71,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
+        vc.coordinator = self
         vc.onGoToCollectionDetails = onGoToCollectionDetails
         vc.onSwapItems = onSwapItems
         vc.onItemDelete = onItemDelete
@@ -102,6 +103,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         let vc = self.viewControllerFactory.instantiateTickerDetails()
         vc.coordinator = self
         vc.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
+    
+    func showCollectionDetails(collectionID: Int) {
+        let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID)
+        vc.coordinator = self
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
     }

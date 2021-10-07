@@ -127,6 +127,11 @@ final class ViewControllerFactory {
         let vc = TickerViewController.instantiate(.discovery)
         return vc
     }
+    func instantiateCollectionDetails(colID: Int) -> SingleCollectionDetailsViewController {
+        let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
+        vc.collectionId = colID
+        return vc
+    }
     
     func instantiateDemoController(_ index: Int) -> BaseViewController {
         let vc = BaseViewController()

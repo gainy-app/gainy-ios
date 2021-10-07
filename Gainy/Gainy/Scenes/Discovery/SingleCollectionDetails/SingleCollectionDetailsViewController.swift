@@ -6,30 +6,186 @@
 //
 
 import UIKit
+import FloatingPanel
 
 final class SingleCollectionDetailsViewController: BaseViewController {
     
     //MARK: - Outlets
+    @IBOutlet weak var toggleBtn: UIButton!
     
     // MARK: Properties
+    private var viewModel: SingleCollectionDetailsViewModel?
+    private var collectionDetailsCollectionView: UICollectionView!
     
-   
+    //Panel
+    private var fpc: FloatingPanelController!
+    private var currentCollectionToChange: Int = 0
+    private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)
     
-    @IBOutlet private weak var collectionDetailsCollectionView: UICollectionView!
-    
-    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
-    private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     
     //MARK: - DI
     var coordiantor: MainCoordinator?
     var collectionId: Int!
-        
+    weak var coordinator: MainCoordinator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewModel()
+        initCollectionView()
+        setupPanel()
+    }
+    
+    fileprivate func initCollectionView() {
+        if let layout = viewModel?.customLayout {
+        collectionDetailsCollectionView = UICollectionView(
+            frame: CGRect.zero,
+            collectionViewLayout: layout
+        )
+        view.addSubview(collectionDetailsCollectionView)
+        collectionDetailsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 72)
+        collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
+        collectionDetailsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        collectionDetailsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        
+        collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
+        
+        collectionDetailsCollectionView.backgroundColor = .clear
+        collectionDetailsCollectionView.showsVerticalScrollIndicator = false
+        collectionDetailsCollectionView.dragInteractionEnabled = true
+        collectionDetailsCollectionView.bounces = false
+            
+            viewModel?.initCollectionView(collectionView: collectionDetailsCollectionView)
+        }
+        
+    }
+    
+    fileprivate func setupViewModel() {
+        viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
+        viewModel?.loadingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            
+        }, receiveValue: {[weak self] isLoading in
+            if isLoading {
+                self?.showNetworkLoader()
+            } else {
+                self?.hideLoader()
+            }
+        })
+            .store(in: &cancellables)
+        viewModel?.loadCollectionDetails({            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                self?.centerInitialCollectionInTheCollectionView()
+            })
+        })
+        viewModel?.delegate = self
+    }
+    
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        fpc.layout = MyFloatingPanelLayout()
+        let appearance = SurfaceAppearance()
+        
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+        
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Assign self as the delegate of the controller.
+        fpc.delegate = self // Optional
+        
+        // Set a content view controller.
+        sortingVS.delegate = self
+        fpc.set(contentViewController: sortingVS)
+        fpc.isRemovalInteractionEnabled = true
+        
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
+    
+    class MyFloatingPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
+    }
+    
+    fileprivate func centerInitialCollectionInTheCollectionView() {
+        guard viewModel?.haveCollection ?? false else {return}
+        collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                                     at: .centeredHorizontally,
+                                                     animated: false)
+    }
+    
+    //MARK: - Actions
+    
+    @IBAction func closeAction(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func shareAction(_ sender: Any) {
+        
+    }
+    
+    @IBAction func toggleCollectionAction(_ sender: Any) {
+        toggleBtn.isSelected.toggle()
+    }
+}
+
+
+extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
+    func tickerPressed(source: SingleCollectionDetailsViewModel, ticker: RemoteTickerDetails) {
+        self.postLeaveAnalytics()
+        coordinator?.showCardDetailsViewController(TickerInfo(ticker: ticker))
+    }
+    
+    func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell) {
+        guard self.presentedViewController == nil else {return}
+            self.sortingVS.collectionId = model.id
+            self.sortingVS.collectionCell = cell
+            self.currentCollectionToChange = model.id
+            GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+}
+
+extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": collectionId, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        self.fpc.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y - 6.0
+            let maxY = vc.surfaceLocation(for: .tip).y + 6.0
+            print(min(max(loc.y, minY), maxY))
+            vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+        }
     }
 }

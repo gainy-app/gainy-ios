@@ -8,15 +8,27 @@
 import UIKit
 import Combine
 
+protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
+    func tickerPressed(source: SingleCollectionDetailsViewModel, ticker: RemoteTickerDetails)
+    func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
+}
+
 final class SingleCollectionDetailsViewModel: NSObject {
           
+    weak var delegate: SingleCollectionDetailsViewModelDelegate?
+    private enum CollectionDetailSection: Int, CaseIterable {
+        case collectionWithCards
+    }    
+    
     let collectionId: Int
     
-    init(collectionId: Int, collectionView: UICollectionView) {
+    init(collectionId: Int) {
         self.collectionId = collectionId
+    }
+    
+    func initCollectionView(collectionView: UICollectionView) {
         
-        super.init()
-        self.dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
+        self.dataSource = UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
         ) {[weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
             let cell = self?.sections[indexPath.section].configureCell(
@@ -26,20 +38,15 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 position: indexPath.row
             )
             
-            if let cell = cell as? CollectionDetailsViewCell {
-                
+            if let cell = cell as? CollectionDetailsViewCell {                
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
-                    //self?.onShowCardDetails?(ticker)
+                    guard let self = self else {return}
+                    self.delegate?.tickerPressed(source: self, ticker: ticker)
                 }
                 cell.onSortingPressed = { [weak self] in
-//                    guard let self = self else {return}
-//                    guard self.presentedViewController == nil else {return}
-//                        self.sortingVS.collectionId = modelItem.id
-//                        self.sortingVS.collectionCell = cell
-//                        self.currentCollectionToChange = modelItem.id
-//                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-//                    self.present(self.fpc, animated: true, completion: nil)
+                    guard let self = self else {return}
+                    self.delegate?.sortingPressed(source: self, model: modelItem, cell: cell)
                 }
             }
             return cell
@@ -57,21 +64,22 @@ final class SingleCollectionDetailsViewModel: NSObject {
     
     
     //MARK: - Models
-    private(set) var collectionDetails: RemoteCollectionDetails?
     private var collectionDetailsModels: [CollectionDetailViewCellModel] = []
-    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>?
+    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>?
+    
+    var haveCollection: Bool {
+        collectionDetailsModels.count > 0
+    }
     
     //MARK: - Collection Layout
     
-    private enum CollectionDetailsSection: Int, CaseIterable {
-        case collectionWithCards
-    }
+    
     
     private lazy var sections: [SectionLayout] = [
         HorizontalFlowSectionLayout()
     ]
     
-    private lazy var customLayout: UICollectionViewLayout = {
+    lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
             self?.sections[sectionIndex].layoutSection(within: env)
         }
@@ -81,7 +89,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
     
     //MARK: - Loading
     
-    fileprivate func loadCollectionDetails() {
+    func loadCollectionDetails(_ completed: (() -> Void)? = nil) {
         loadingSubject.send(true)
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: [collectionId])) { [weak self] result in
             switch result {
@@ -98,6 +106,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                     DispatchQueue.main.async {
                         self?.convertToModels(selectedCollections)
                         self?.loadingSubject.send(false)
+                        completed?()
                     }
                 }
                 
@@ -105,6 +114,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 print("Failure when making GraphQL request. Error: \(error)")
                 self?.convertToModels([])
                 self?.loadingSubject.send(false)
+                completed?()
             }
         }
     }
@@ -127,5 +137,9 @@ final class SingleCollectionDetailsViewModel: NSObject {
             
             dataSource?.apply(snapshot, animatingDifferences: false)
         }
+        
+        
     }
+    
+    
 }

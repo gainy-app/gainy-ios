@@ -34,6 +34,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
                 item.alpha = scale
             }
         }
+        collectionsFlowSection.contentInsets = .zero
         return collectionsFlowSection
     }
 

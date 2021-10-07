@@ -18,6 +18,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     weak var authorizationManager: AuthorizationManager?
     var viewModel: DiscoverCollectionsViewModelProtocol?
+    weak var coordinator: MainCoordinator?
     
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
@@ -541,20 +542,15 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
 extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.section == 0 else {return}
-        var position = 0
-        if indexPath.section == DiscoverCollectionsSection.recommendedCollections.rawValue {
-            position = collectionView.numberOfItems(
-                inSection: DiscoverCollectionsSection.yourCollections.rawValue
-            )
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+        if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            self.goToCollectionDetails(at: indexPath.row)
         } else {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.yourCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            if let recColl = viewModel?.recommendedCollections[indexPath.row] {
+                coordinator?.showCollectionDetails(collectionID: recColl.id)
+            }
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
-        position += indexPath.row
-        
-        self.goToCollectionDetails(at: indexPath.row)
-        
     }
 }
 
