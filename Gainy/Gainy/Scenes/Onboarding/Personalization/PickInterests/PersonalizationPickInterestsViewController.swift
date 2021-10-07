@@ -204,7 +204,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize.init(width: collectionView.frame.size.width, height: 128.0)
+        return CGSize.init(width: collectionView.frame.size.width, height: 138.0)
     }
 
     
