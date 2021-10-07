@@ -1,4 +1,4 @@
-mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: String!, $gender: Int!, $lastName: String!, $userID: String!, $legalAddress: String!, $interests0: Int!, $interests1: Int!, $interests2: Int!, $interests3: Int!, $interests4: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!){
+mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: String!, $gender: Int!, $lastName: String!, $userID: String!, $legalAddress: String!, $interests: [app_profile_interests_insert_input!]!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!){
   insert_app_profiles(objects: {
     avatar_url: $avatarURL,
     email: $email,
@@ -8,13 +8,7 @@ mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: Stri
     user_id: $userID,
     legal_address: $legalAddress
     profile_interests: {
-      data: [
-       { interest_id: $interests0 },
-       { interest_id: $interests1 },
-       { interest_id: $interests2 },
-       { interest_id: $interests3 },
-       { interest_id: $interests4 }
-      ]
+      data: $interests
     },
     profile_scoring_setting: {
       data: {
@@ -35,5 +29,3 @@ mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: Stri
     }
   }
 }
-
-

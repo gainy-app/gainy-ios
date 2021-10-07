@@ -8,9 +8,9 @@ public final class CreateAppProfileMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: String!, $gender: Int!, $lastName: String!, $userID: String!, $legalAddress: String!, $interests0: Int!, $interests1: Int!, $interests2: Int!, $interests3: Int!, $interests4: Int!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!) {
+    mutation CreateAppProfile($avatarURL: String!, $email: String!, $firstName: String!, $gender: Int!, $lastName: String!, $userID: String!, $legalAddress: String!, $interests: [app_profile_interests_insert_input!]!, $averageMarketReturn: Int!, $damageOfFailure: Float!, $marketLoss20: Float!, $marketLoss40: Float!, $investemtHorizon: Float!, $riskLevel: Float!, $stockMarketRiskLevel: String!, $tradingExperience: String!, $unexpectedPurchaseSource: String!) {
       insert_app_profiles(
-        objects: {avatar_url: $avatarURL, email: $email, first_name: $firstName, gender: $gender, last_name: $lastName, user_id: $userID, legal_address: $legalAddress, profile_interests: {data: [{interest_id: $interests0}, {interest_id: $interests1}, {interest_id: $interests2}, {interest_id: $interests3}, {interest_id: $interests4}]}, profile_scoring_setting: {data: {average_market_return: $averageMarketReturn, damage_of_failure: $damageOfFailure, if_market_drops_20_i_will_buy: $marketLoss20, if_market_drops_40_i_will_buy: $marketLoss40, investment_horizon: $investemtHorizon, risk_level: $riskLevel, stock_market_risk_level: $stockMarketRiskLevel, trading_experience: $tradingExperience, unexpected_purchases_source: $unexpectedPurchaseSource}}}
+        objects: {avatar_url: $avatarURL, email: $email, first_name: $firstName, gender: $gender, last_name: $lastName, user_id: $userID, legal_address: $legalAddress, profile_interests: {data: $interests}, profile_scoring_setting: {data: {average_market_return: $averageMarketReturn, damage_of_failure: $damageOfFailure, if_market_drops_20_i_will_buy: $marketLoss20, if_market_drops_40_i_will_buy: $marketLoss40, investment_horizon: $investemtHorizon, risk_level: $riskLevel, stock_market_risk_level: $stockMarketRiskLevel, trading_experience: $tradingExperience, unexpected_purchases_source: $unexpectedPurchaseSource}}}
       ) {
         __typename
         returning {
@@ -30,11 +30,7 @@ public final class CreateAppProfileMutation: GraphQLMutation {
   public var lastName: String
   public var userID: String
   public var legalAddress: String
-  public var interests0: Int
-  public var interests1: Int
-  public var interests2: Int
-  public var interests3: Int
-  public var interests4: Int
+  public var interests: [app_profile_interests_insert_input]
   public var averageMarketReturn: Int
   public var damageOfFailure: Double
   public var marketLoss20: Double
@@ -45,7 +41,7 @@ public final class CreateAppProfileMutation: GraphQLMutation {
   public var tradingExperience: String
   public var unexpectedPurchaseSource: String
 
-  public init(avatarURL: String, email: String, firstName: String, gender: Int, lastName: String, userID: String, legalAddress: String, interests0: Int, interests1: Int, interests2: Int, interests3: Int, interests4: Int, averageMarketReturn: Int, damageOfFailure: Double, marketLoss20: Double, marketLoss40: Double, investemtHorizon: Double, riskLevel: Double, stockMarketRiskLevel: String, tradingExperience: String, unexpectedPurchaseSource: String) {
+  public init(avatarURL: String, email: String, firstName: String, gender: Int, lastName: String, userID: String, legalAddress: String, interests: [app_profile_interests_insert_input], averageMarketReturn: Int, damageOfFailure: Double, marketLoss20: Double, marketLoss40: Double, investemtHorizon: Double, riskLevel: Double, stockMarketRiskLevel: String, tradingExperience: String, unexpectedPurchaseSource: String) {
     self.avatarURL = avatarURL
     self.email = email
     self.firstName = firstName
@@ -53,11 +49,7 @@ public final class CreateAppProfileMutation: GraphQLMutation {
     self.lastName = lastName
     self.userID = userID
     self.legalAddress = legalAddress
-    self.interests0 = interests0
-    self.interests1 = interests1
-    self.interests2 = interests2
-    self.interests3 = interests3
-    self.interests4 = interests4
+    self.interests = interests
     self.averageMarketReturn = averageMarketReturn
     self.damageOfFailure = damageOfFailure
     self.marketLoss20 = marketLoss20
@@ -70,7 +62,7 @@ public final class CreateAppProfileMutation: GraphQLMutation {
   }
 
   public var variables: GraphQLMap? {
-    return ["avatarURL": avatarURL, "email": email, "firstName": firstName, "gender": gender, "lastName": lastName, "userID": userID, "legalAddress": legalAddress, "interests0": interests0, "interests1": interests1, "interests2": interests2, "interests3": interests3, "interests4": interests4, "averageMarketReturn": averageMarketReturn, "damageOfFailure": damageOfFailure, "marketLoss20": marketLoss20, "marketLoss40": marketLoss40, "investemtHorizon": investemtHorizon, "riskLevel": riskLevel, "stockMarketRiskLevel": stockMarketRiskLevel, "tradingExperience": tradingExperience, "unexpectedPurchaseSource": unexpectedPurchaseSource]
+    return ["avatarURL": avatarURL, "email": email, "firstName": firstName, "gender": gender, "lastName": lastName, "userID": userID, "legalAddress": legalAddress, "interests": interests, "averageMarketReturn": averageMarketReturn, "damageOfFailure": damageOfFailure, "marketLoss20": marketLoss20, "marketLoss40": marketLoss40, "investemtHorizon": investemtHorizon, "riskLevel": riskLevel, "stockMarketRiskLevel": stockMarketRiskLevel, "tradingExperience": tradingExperience, "unexpectedPurchaseSource": unexpectedPurchaseSource]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -78,7 +70,7 @@ public final class CreateAppProfileMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("insert_app_profiles", arguments: ["objects": ["avatar_url": GraphQLVariable("avatarURL"), "email": GraphQLVariable("email"), "first_name": GraphQLVariable("firstName"), "gender": GraphQLVariable("gender"), "last_name": GraphQLVariable("lastName"), "user_id": GraphQLVariable("userID"), "legal_address": GraphQLVariable("legalAddress"), "profile_interests": ["data": [["interest_id": GraphQLVariable("interests0")], ["interest_id": GraphQLVariable("interests1")], ["interest_id": GraphQLVariable("interests2")], ["interest_id": GraphQLVariable("interests3")], ["interest_id": GraphQLVariable("interests4")]]], "profile_scoring_setting": ["data": ["average_market_return": GraphQLVariable("averageMarketReturn"), "damage_of_failure": GraphQLVariable("damageOfFailure"), "if_market_drops_20_i_will_buy": GraphQLVariable("marketLoss20"), "if_market_drops_40_i_will_buy": GraphQLVariable("marketLoss40"), "investment_horizon": GraphQLVariable("investemtHorizon"), "risk_level": GraphQLVariable("riskLevel"), "stock_market_risk_level": GraphQLVariable("stockMarketRiskLevel"), "trading_experience": GraphQLVariable("tradingExperience"), "unexpected_purchases_source": GraphQLVariable("unexpectedPurchaseSource")]]]], type: .object(InsertAppProfile.selections)),
+        GraphQLField("insert_app_profiles", arguments: ["objects": ["avatar_url": GraphQLVariable("avatarURL"), "email": GraphQLVariable("email"), "first_name": GraphQLVariable("firstName"), "gender": GraphQLVariable("gender"), "last_name": GraphQLVariable("lastName"), "user_id": GraphQLVariable("userID"), "legal_address": GraphQLVariable("legalAddress"), "profile_interests": ["data": GraphQLVariable("interests")], "profile_scoring_setting": ["data": ["average_market_return": GraphQLVariable("averageMarketReturn"), "damage_of_failure": GraphQLVariable("damageOfFailure"), "if_market_drops_20_i_will_buy": GraphQLVariable("marketLoss20"), "if_market_drops_40_i_will_buy": GraphQLVariable("marketLoss40"), "investment_horizon": GraphQLVariable("investemtHorizon"), "risk_level": GraphQLVariable("riskLevel"), "stock_market_risk_level": GraphQLVariable("stockMarketRiskLevel"), "trading_experience": GraphQLVariable("tradingExperience"), "unexpected_purchases_source": GraphQLVariable("unexpectedPurchaseSource")]]]], type: .object(InsertAppProfile.selections)),
       ]
     }
 

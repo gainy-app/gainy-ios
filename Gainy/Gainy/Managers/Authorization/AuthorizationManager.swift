@@ -151,6 +151,9 @@ final class AuthorizationManager {
             return
         }
         
+        let appInterests: [app_profile_interests_insert_input]! = profileInfo.profileInterestIDs.map { interestID in
+            return app_profile_interests_insert_input.init(interestId: interestID, profile: nil, profileId: nil)
+        }
         self.authorizationStatus = .authorizedNeedCreateProfile
         let query = CreateAppProfileMutation(avatarURL: profileInfo.avatarURLString,
                                              email: profileInfo.email,
@@ -159,11 +162,7 @@ final class AuthorizationManager {
                                              lastName: profileInfo.lastName,
                                              userID: profileInfo.userID,
                                              legalAddress: profileInfo.legalAddress,
-                                             interests0: profileInfo.profileInterestIDs[0],
-                                             interests1: profileInfo.profileInterestIDs[1],
-                                             interests2: profileInfo.profileInterestIDs[2],
-                                             interests3: profileInfo.profileInterestIDs[3],
-                                             interests4: profileInfo.profileInterestIDs[4],
+                                             interests: appInterests,
                                              averageMarketReturn: profileInfo.averageMarketReturn,
                                              damageOfFailure: Double(profileInfo.damageOfFailure),
                                              marketLoss20: Double(profileInfo.ifMarketDrops20IWillBuy),

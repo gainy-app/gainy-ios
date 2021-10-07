@@ -98,7 +98,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.footerView?.delegate = self
         footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
     }
     
     private func getRemoteData(completion: @escaping () -> Void) {
@@ -224,7 +224,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         
         guard let interest = self.appInterests?[indexPath.row] else {return}
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
         GainyAnalytics.logEvent("personalization_select_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
     
@@ -232,7 +232,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         
         guard let interest = self.appInterests?[indexPath.row] else {return}
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count < 5)
+        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
         GainyAnalytics.logEvent("personalization_deselect_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
 }
