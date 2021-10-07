@@ -4,7 +4,7 @@ import PureLayout
 import FloatingPanel
 import Firebase
 
-private enum CollectionDetailsSection: Int, CaseIterable {
+enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
 }
 
