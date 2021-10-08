@@ -79,7 +79,7 @@ class TickerInfo {
                 dispatchGroup.leave()
                 break
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 dispatchGroup.leave()
                 break
             }
@@ -95,7 +95,7 @@ class TickerInfo {
                 dispatchGroup.leave()
                 break
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 dispatchGroup.leave()
                 break
             }
@@ -115,7 +115,7 @@ class TickerInfo {
                 }
                 break
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 dispatchGroup.leave()
                 break
             }
@@ -133,7 +133,7 @@ class TickerInfo {
                     dispatchGroup.leave()
                     break
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
                     break
                 }
@@ -158,7 +158,7 @@ class TickerInfo {
                 completion?()
                 break
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion?()
                 break
             }

@@ -113,7 +113,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             }
             cell.minHeightUpdated = { [weak self] minHeight in
                 DispatchQueue.main.async {
-                    print("New min height: \(minHeight)")
+                    dprint("New min height: \(minHeight)")
                     self?.aboutMinHeight = max(minHeight, self?.aboutMinHeight ?? 0.0)
                     tableView.beginUpdates()
                     self?.cellHeights[.about] = minHeight
@@ -213,6 +213,7 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
         } else {
             ticker.tickersToCompare.append(stock)
         }
+        GainyAnalytics.logEvent("ticker_alt_stock_compared", params: ["tickerSymbol" : stock.symbol ?? ""])
         delegate?.comparedStocksChanged()
     }
 }

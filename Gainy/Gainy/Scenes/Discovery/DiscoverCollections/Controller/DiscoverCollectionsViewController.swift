@@ -263,7 +263,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     if let item = $0 as? RecommendedCollectionViewCellModel {
                         return item.id == collectionItemToAdd.id
                     }
-                       return false
+                    return false
                 }) as? RecommendedCollectionViewCellModel {
                     snapshot.reloadItems([itemToReload])
                 }
@@ -336,7 +336,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 if let item = $0 as? RecommendedCollectionViewCellModel {
                     return item.id == itemId
                 }
-                   return false
+                return false
             }) as? RecommendedCollectionViewCellModel {
                 snapshot.reloadItems([itemToReload])
             }
@@ -531,7 +531,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 completion()
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 self.initViewModels()
                 completion()
             }
@@ -547,7 +547,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: indexPath.row)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
-                coordinator?.showCollectionDetails(collectionID: recColl.id)
+                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
             }
             GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
@@ -668,3 +668,34 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
         return previewParams
     }
 }
+
+extension DiscoverCollectionsViewController : SingleCollectionDetailsViewControllerDelegate {
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        guard let snapshot = dataSource?.snapshot() else {return}
+        
+        if isAdded {
+            if let index = snapshot.itemIdentifiers(inSection: .recommendedCollections).firstIndex(where: {
+                if let model = $0 as? RecommendedCollectionViewCellModel {
+                    return model.id == collectionID
+                }
+                return false
+            }) {
+                if let rightModel = snapshot.itemIdentifiers(inSection: .recommendedCollections)[index] as? RecommendedCollectionViewCellModel {
+                    addToYourCollection(collectionItemToAdd: rightModel, indexRow: index)
+                }
+            }
+        } else {
+            if let index = snapshot.itemIdentifiers(inSection: .yourCollections).firstIndex(where: {
+                if let model = $0 as? YourCollectionViewCellModel {
+                    return model.id == collectionID
+                }
+                return false
+            }) {
+                if let rightModel = snapshot.itemIdentifiers(inSection: .yourCollections)[index] as? YourCollectionViewCellModel {
+                    removeFromYourCollection(itemId: collectionID, yourCollectionItemToRemove: rightModel)
+                }
+            }
+        }
+    }
+}
+

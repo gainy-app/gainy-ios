@@ -115,7 +115,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
 
             // Retrieve Apple identity token
             guard let appleIDToken = appleIDCredential.identityToken else {
-                print("Failed to fetch identity token")
+                dprint("Failed to fetch identity token")
                 if let completion = self.completion {
                     completion(false, AppleAuthError.noToken)
                     self.completion = nil
@@ -125,7 +125,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
 
             // Convert Apple identity token to string
             guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                print("Failed to decode identity token")
+                dprint("Failed to decode identity token")
                 if let completion = self.completion {
                     completion(false, AppleAuthError.tokenDecodingError)
                     self.completion = nil
@@ -146,7 +146,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
                         completion(false, AppleAuthError.authorizationFailed)
                         self.completion = nil
                     }
-                    print(error.localizedDescription)
+                    dprint(error.localizedDescription)
                     return
                 }
                 
@@ -162,9 +162,9 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
                     changeRequest?.commitChanges(completion: { (error) in
                         
                         if let error = error {
-                            print(error.localizedDescription)
+                            dprint(error.localizedDescription)
                         } else {
-                            print("Updated display name: \(Auth.auth().currentUser!.displayName!)")
+                            dprint("Updated display name: \(Auth.auth().currentUser!.displayName!)")
                         }
                     })
                 }

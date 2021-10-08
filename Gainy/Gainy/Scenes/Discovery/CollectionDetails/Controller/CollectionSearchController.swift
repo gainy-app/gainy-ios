@@ -18,6 +18,7 @@ final class CollectionSearchController: NSObject {
     
     weak var collectionView: UICollectionView?
     private var dataSource: SearchSource?
+    var coordinator: MainCoordinator?
     
     static let sectionHeaderElementKind = "section-header-element-kind"
     
@@ -144,7 +145,7 @@ final class CollectionSearchController: NSObject {
     
     private let searchQueue = DispatchQueue.init(label: "CollectionSearchController.searchQuery")
     private func searchQuery(_ text: String) {
-        print("SEARCH STARTED")
+        dprint("SEARCH STARTED")
         clearAll()
         
         loading?(true)
@@ -163,7 +164,7 @@ final class CollectionSearchController: NSObject {
                 
                 break
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 dispatchGroup.leave()
                 break
             }
@@ -181,7 +182,7 @@ final class CollectionSearchController: NSObject {
                     
                     break
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
                     break
                 }
@@ -199,7 +200,7 @@ final class CollectionSearchController: NSObject {
                     
                     break
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
                     break
                 }
@@ -215,7 +216,7 @@ final class CollectionSearchController: NSObject {
                     dispatchGroup.leave()
                     break
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
                     break
                 }
@@ -232,7 +233,7 @@ final class CollectionSearchController: NSObject {
                     dispatchGroup.leave()
                     break
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
                     break
                 }
@@ -240,8 +241,8 @@ final class CollectionSearchController: NSObject {
         }
         
         dispatchGroup.notify(queue: searchQueue) {
-            print("SEARCH ENDED")
-            print("\(self.stocks.count) \(self.collections.count) \(self.news.count)")
+            dprint("SEARCH ENDED")
+            dprint("\(self.stocks.count) \(self.collections.count) \(self.news.count)")
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else {return}
                 
@@ -402,8 +403,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .collections:
             if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
                 GainyAnalytics.logEvent("collections_search_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
+                coordinator?.showCollectionDetails(collectionID: collection.id ?? 0)
             }
-            NotificationManager.shared.showMessage(title: "Sorry", text: "Collection browsing will be implemented in future...", cancelTitle: "OK", actions: nil)
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {

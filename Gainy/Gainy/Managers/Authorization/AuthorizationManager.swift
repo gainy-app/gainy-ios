@@ -133,7 +133,7 @@ final class AuthorizationManager {
             UserProfileManager.shared.cleanup()
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
         } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
+            dprint("Error signing out: %@", signOutError)
         }
     }
     
@@ -436,7 +436,7 @@ final class AuthorizationManager {
                 completion(filteredProfiles.count > 0)
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion(false)
             }

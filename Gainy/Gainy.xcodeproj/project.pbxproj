@@ -73,6 +73,8 @@
 		336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */; };
 		33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */; };
 		33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */; };
+		3372ED332710480D00D8D8E1 /* Datadog in Frameworks */ = {isa = PBXBuildFile; productRef = 3372ED322710480D00D8D8E1 /* Datadog */; };
+		3372ED352710490300D8D8E1 /* DDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372ED342710490300D8D8E1 /* DDLog.swift */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -406,6 +408,7 @@
 		336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartDelegate.swift; sourceTree = "<group>"; };
 		33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewModel.swift; sourceTree = "<group>"; };
+		3372ED342710490300D8D8E1 /* DDLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLog.swift; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -670,6 +673,7 @@
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
+				3372ED332710480D00D8D8E1 /* Datadog in Frameworks */,
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
@@ -889,6 +893,7 @@
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
 				33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */,
 				3316750927048A9800CA92F6 /* ImagePickerManager.swift */,
+				3372ED342710490300D8D8E1 /* DDLog.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1752,6 +1757,7 @@
 				331FB0F927011D4B0031A8EF /* Cache */,
 				33B911732706ED3000C00B0D /* SwiftyJSON */,
 				33FBDE87270ADEEA003B6DDB /* JWTDecode */,
+				3372ED322710480D00D8D8E1 /* Datadog */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1838,6 +1844,7 @@
 				331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */,
 				33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				3372ED312710480C00D8D8E1 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2136,6 +2143,7 @@
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */,
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
+				3372ED352710490300D8D8E1 /* DDLog.swift in Sources */,
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
@@ -2635,6 +2643,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		3372ED312710480C00D8D8E1 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Datadog/dd-sdk-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -2753,6 +2769,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33467CF826C6728600811F74 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
+		};
+		3372ED322710480D00D8D8E1 /* Datadog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3372ED312710480C00D8D8E1 /* XCRemoteSwiftPackageReference "dd-sdk-ios" */;
+			productName = Datadog;
 		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -111,7 +111,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 }
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 self?.convertToModels([])
                 self?.loadingSubject.send(false)
                 completed?()

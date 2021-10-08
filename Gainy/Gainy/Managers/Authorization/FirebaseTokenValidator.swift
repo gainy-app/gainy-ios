@@ -34,7 +34,7 @@ final class FirebaseTokenValidator {
             }
             return false
         } catch {
-            print(error)
+            dprint(error.localizedDescription)
         }
         return false
     }
@@ -49,7 +49,7 @@ final class FirebaseTokenValidator {
             }
             return nil
         } catch {
-            print(error)
+            dprint(error.localizedDescription)
         }
         return nil
     }

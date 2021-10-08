@@ -70,7 +70,7 @@ open class GainyKeychain {
     
     private func logPrint(_ items: Any...) {
         if loggingEnabled {
-            print(items)
+            dprint(items)
         }
     }
 }

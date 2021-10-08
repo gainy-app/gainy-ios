@@ -37,7 +37,7 @@ final class TickersLiveFetcher {
             let group = DispatchGroup.init()
             
             for batch in batchSymbols {
-                print("Fetching \(batch.joined(separator: ","))")
+                dprint("Fetching \(batch.joined(separator: ","))")
                 batch.forEach({
                     currentlyFetching.insert($0)
                 })
@@ -54,7 +54,7 @@ final class TickersLiveFetcher {
                             }
                             group.leave()
                         case .failure(let error):
-                            print("Failure when making GraphQL request. Error: \(error)")
+                            dprint("Failure when making GraphQL request. Error: \(error)")
                             group.leave()
                         }
                     }
@@ -84,7 +84,7 @@ final class TickersLiveFetcher {
     func getMatchScores(collectionId: Int, _ completion: @escaping (() -> Void)) {
         
         guard let profileID = UserProfileManager.shared.profileID else {
-            print("Missing profileID")
+            dprint("Missing profileID")
             completion()
             return
         }
@@ -97,7 +97,7 @@ final class TickersLiveFetcher {
                 }
                 completion()
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion()
             }
         }
@@ -109,7 +109,7 @@ final class TickersLiveFetcher {
     ///   - completion: when loading completed/failed
     func getMatchScores(collectionIds: [Int], _ completion: @escaping (() -> Void)) {        
         guard let profileID = UserProfileManager.shared.profileID else {
-            print("Missing profileID")
+            dprint("Missing profileID")
             completion()
             return
         }
@@ -117,17 +117,17 @@ final class TickersLiveFetcher {
         let group = DispatchGroup()
         for collectionId in collectionIds {
             group.enter()
-            print("Fetching match started \(collectionId)")
+            dprint("Fetching match started \(collectionId)")
             Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileID, collectionId: collectionId)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     for data in (graphQLResult.data?.getMatchScoresByCollection?.compactMap({$0?.fragments.liveMatch}) ?? []) {
                         TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
                     }
-                    print("Fetching match ended \(collectionId)")
+                    dprint("Fetching match ended \(collectionId)")
                     group.leave()
                 case .failure(let error):
-                    print("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     group.leave()
                 }
             }

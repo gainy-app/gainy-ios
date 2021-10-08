@@ -147,7 +147,7 @@ final class CustomInterceptor: ApolloInterceptor {
             makeRequest()
         }
         
-        print("request :\(request)")
-        print("response :\(String(describing: response))")
+        dprint("request :\(request)")
+        dprint("response :\(String(describing: response))")
     }
 }

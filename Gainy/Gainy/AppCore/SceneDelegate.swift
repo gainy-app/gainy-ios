@@ -36,8 +36,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             let sendingAppID = urlContext.options.sourceApplication
             let url = urlContext.url
-            print("source application = \(sendingAppID ?? "Unknown")")
-            print("url = \(url)")
 
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
                     let params = components.queryItems else {

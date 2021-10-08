@@ -127,7 +127,7 @@ final class GoogleAuth: NSObject {
              
               if let error = error {
                   completion(false, GoogleAuthError.authorizationFailed)
-                  print(error.localizedDescription)
+                  dprint(error.localizedDescription)
                   return
               }
               

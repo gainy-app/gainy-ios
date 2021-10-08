@@ -8,6 +8,10 @@
 import UIKit
 import FloatingPanel
 
+protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
+}
+
 final class SingleCollectionDetailsViewController: BaseViewController {
     
     //MARK: - Outlets
@@ -26,7 +30,10 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     //MARK: - DI
     var coordiantor: MainCoordinator?
     var collectionId: Int!
+    var model: RecommendedCollectionViewCellModel!
+    
     weak var coordinator: MainCoordinator?
+    weak var delegate: SingleCollectionDetailsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,14 +150,18 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     @IBAction func closeAction(_ sender: Any) {
         dismiss(animated: true)
+        GainyAnalytics.logEvent("close_single_collection", params: ["collectionID" : collectionId])
     }
     
     @IBAction func shareAction(_ sender: Any) {
-        
+        NotificationManager.shared.showMessage(title: "Sorry", text: "Sharing will be added soon", cancelTitle: "OK", actions: nil)
+        GainyAnalytics.logEvent("close_single_collection", params: ["collectionID" : collectionId])
     }
     
     @IBAction func toggleCollectionAction(_ sender: Any) {
         toggleBtn.isSelected.toggle()
+        delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)
+        GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
     }
 }
 
@@ -184,7 +195,7 @@ extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate
             let loc = vc.surfaceLocation
             let minY = vc.surfaceLocation(for: .full).y - 6.0
             let maxY = vc.surfaceLocation(for: .tip).y + 6.0
-            print(min(max(loc.y, minY), maxY))
+            dprint(min(max(loc.y, minY), maxY))
             vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
         }
     }

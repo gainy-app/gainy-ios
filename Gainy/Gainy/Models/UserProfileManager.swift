@@ -62,7 +62,7 @@ final class UserProfileManager {
             switch result {
             case .success(let graphQLResult):
                 
-                print("Success \(graphQLResult)")
+                dprint("Success \(graphQLResult)")
                 guard let appProfile = graphQLResult.data?.appProfiles.first else {
                     NotificationManager.shared.showError("Sorry... Failed to load profile info.")
                     completion(false)
@@ -88,7 +88,7 @@ final class UserProfileManager {
                 completion(true)
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 self.profileLoaded = false
                 completion(false)
             }
@@ -104,7 +104,7 @@ final class UserProfileManager {
         
         let query = InsertProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
-            print("\(result)")
+            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
                 completion(false)
@@ -125,7 +125,7 @@ final class UserProfileManager {
         
         let query = DeleteProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
-            print("\(result)")
+            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.")
                 completion(false)

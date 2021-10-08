@@ -15,6 +15,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     weak var authorizationManager: AuthorizationManager?
     var viewModel: CollectionDetailsViewModelProtocol?
+    var coordinator: MainCoordinator?
     
     var onDiscoverCollections: (() -> Void)?
     var onShowCardDetails: ((RemoteTickerDetails) -> Void)?
@@ -234,7 +235,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
             self?.onShowCardDetails?(ticker)
         })
-        
+        searchController?.coordinator = coordinator
         handleLoginEvent()
         setupPanel()
     }
@@ -404,7 +405,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()
                 completion()
                 self?.hideLoader()
@@ -585,7 +586,7 @@ extension CollectionDetailsViewController: FloatingPanelControllerDelegate {
             let loc = vc.surfaceLocation
             let minY = vc.surfaceLocation(for: .full).y - 6.0
             let maxY = vc.surfaceLocation(for: .tip).y + 6.0
-            print(min(max(loc.y, minY), maxY))
+            dprint(min(max(loc.y, minY), maxY))
             vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
         }
     }

@@ -96,8 +96,6 @@ class CustomTabBar: UITabBar {
     
     
     @objc func detectPan(_ recognizer:UIPanGestureRecognizer) {
-        let translation  = recognizer.translation(in: self.superview)
-        print(translation)
     }
     
     var firstTabFrame: CGRect {

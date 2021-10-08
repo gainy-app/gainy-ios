@@ -128,7 +128,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
 
             case .failure(let error):
                 GainyAnalytics.logEvent("request_error", params: ["error" : "\(error)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion()
             }

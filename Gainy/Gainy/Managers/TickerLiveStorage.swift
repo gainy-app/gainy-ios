@@ -72,7 +72,7 @@ final class TickerLiveStorage {
           case .removeAll:
               self.tickerKeys.removeAll()
           case .removeExpired:
-            print("Removed expired")
+            dprint("Removed expired")
           }
         }
     }

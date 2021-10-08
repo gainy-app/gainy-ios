@@ -115,7 +115,7 @@ final class ProfileViewController: BaseViewController {
                 completion(true)
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion(false)
             }
@@ -153,7 +153,7 @@ final class ProfileViewController: BaseViewController {
                 completion(true)
                 
             case .failure(let error):
-                print("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion(false)
             }
@@ -641,7 +641,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         let query = InsertProfileInterestMutation.init(profileID: profileID, interestID: interestID)
         Network.shared.apollo.perform(mutation: query) { result in
-            print("\(result)")
+            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
@@ -669,7 +669,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             self.profileInterestsSelected?.remove(at: index!)
             let query = DeleteProfileInterestMutation.init(profileID: profileID, interestID: interestID)
             Network.shared.apollo.perform(mutation: query) { result in
-                print("\(result)")
+                dprint("\(result)")
                 guard (try? result.get().data) != nil else {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
@@ -699,7 +699,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         let query = InsertProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
         Network.shared.apollo.perform(mutation: query) { result in
-            print("\(result)")
+            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
@@ -726,7 +726,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             self.profileCategoriesSelected?.remove(at: index!)
             let query = DeleteProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
             Network.shared.apollo.perform(mutation: query) { result in
-                print("\(result)")
+                dprint("\(result)")
                 guard (try? result.get().data) != nil else {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
@@ -748,7 +748,7 @@ extension ProfileViewController: EditPersonalInfoViewControllerDelegate {
         let query = UpdateProfileMutation.init(profileID: profileID, firstName: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
         showNetworkLoader()
         Network.shared.apollo.perform(mutation: query) { result in
-            print("\(result)")
+            dprint("\(result)")
             self.hideLoader()
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")

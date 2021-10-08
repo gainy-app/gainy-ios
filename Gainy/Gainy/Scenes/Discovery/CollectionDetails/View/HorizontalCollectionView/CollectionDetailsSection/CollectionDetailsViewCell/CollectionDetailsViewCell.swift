@@ -74,27 +74,27 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
                     loadingItems += 1
                     self?.isLoadingTickers = true
-                    print("Fetching dt started \(model.tickerSymbol)")
+                    dprint("Fetching dt started \(model.tickerSymbol)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
                         dispatchGroup.leave()
-                        print("Fetching dt ended \(model.tickerSymbol)")
+                        dprint("Fetching dt ended \(model.tickerSymbol)")
                     }
                 }                
 //                if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol) {
 //                    loadingItems += 1
 //                    self?.isLoadingTickers = true
-//                    print("Fetching match started \(self?.collectionID ?? 0)")
+//                    dprint("Fetching match started \(self?.collectionID ?? 0)")
 //                    dispatchGroup.enter()
 //                    TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
 //                        dispatchGroup.leave()
-//                        print("Fetching match ended \(self?.collectionID ?? 0)")
+//                        dprint("Fetching match ended \(self?.collectionID ?? 0)")
 //                        self?.sortSections()
 //                    }
 //                }
                 if loadingItems > 0 {
                 dispatchGroup.notify(queue: DispatchQueue.main, execute: {
-                    print("Fetching ended \(model.tickerSymbol)")
+                    dprint("Fetching ended \(model.tickerSymbol)")
                     guard let self = self else {return}
                     self.isLoadingTickers = false
                     if var snapshot = self.dataSource?.snapshot() {

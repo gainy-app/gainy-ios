@@ -24,7 +24,7 @@ final class CompareScatterChartViewModel: ObservableObject {
     @Published
     var comparableStocks: [ChartCompareData] = [] {
         didSet {
-            print("set")
+            dprint("set")
         }
     }
     
