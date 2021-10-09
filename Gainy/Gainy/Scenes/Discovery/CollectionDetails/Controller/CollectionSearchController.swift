@@ -24,10 +24,12 @@ final class CollectionSearchController: NSObject {
     
     //UI updates
     var loading: ((Bool) -> Void)?
+    var collectionsUpdated: (() -> Void)?
     var onShowCardDetails: ((RemoteTickerDetails) -> Void)? = nil
     
     //Limits
     private let resultsLimit = 100
+    private var localFavHash: String = UserProfileManager.shared.favHash
     
     init(collectionView: UICollectionView? = nil, callback: @escaping ((RemoteTickerDetails) -> Void)) {
         self.collectionView = collectionView
@@ -152,23 +154,23 @@ final class CollectionSearchController: NSObject {
         let dispatchGroup = DispatchGroup()
         
         if text.count <= 3 {
-        dispatchGroup.enter()
-        networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                
-                self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
+            dispatchGroup.enter()
+            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
+                        dispatchGroup.leave()
+                    }
+                    
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
                     dispatchGroup.leave()
+                    break
                 }
-                
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
-                break
-            }
-        })            
+            })
         } else if text.contains(" ") {
             dispatchGroup.enter()
             networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersWithSpaceQuery.init(text: "%\(text)%") ){[weak self] result in
@@ -208,22 +210,22 @@ final class CollectionSearchController: NSObject {
         }
         
         //Searching for news and collection only in this case
-            dispatchGroup.enter()
-            networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    self?.news = (graphQLResult.data?.fetchNewsData ?? []).uniqued()
-                    dispatchGroup.leave()
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
-                    break
-                }
-            })
-       
-            
-            
+        dispatchGroup.enter()
+        networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                self?.news = (graphQLResult.data?.fetchNewsData ?? []).uniqued()
+                dispatchGroup.leave()
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                dispatchGroup.leave()
+                break
+            }
+        })
+        
+        
+        
         if text.count > 3 {
             dispatchGroup.enter()
             networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
@@ -403,7 +405,8 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .collections:
             if let collection = self.collections[indexPath.row] as? RemoteCollectionDetails{
                 GainyAnalytics.logEvent("collections_search_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
-                coordinator?.showCollectionDetails(collectionID: collection.id ?? 0)
+                localFavHash = UserProfileManager.shared.favHash
+                coordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate:  self)
             }
             break
         case .news:
@@ -416,6 +419,27 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .loader:
             break
+        }
+    }
+}
+
+extension CollectionSearchController: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.favoriteCollections.append(collectionID)
+            }
+        } else {
+            if let firstIndex = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.favoriteCollections.remove(at: firstIndex)
+            }
+        }
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        if UserProfileManager.shared.favHash != localFavHash {
+            collectionsUpdated?()
         }
     }
 }

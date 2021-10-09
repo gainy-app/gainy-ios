@@ -235,6 +235,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
             self?.onShowCardDetails?(ticker)
         })
+        searchController?.collectionsUpdated = { [weak self] in
+            self?.getRemoteData(loadProfile: true) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+                    self?.centerInitialCollectionInTheCollectionView()
+                }
+            }
+        }
         searchController?.coordinator = coordinator
         handleLoginEvent()
         setupPanel()
@@ -503,10 +511,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        relaodCollectionIfNeeded()
+        reloadCollectionIfNeeded()
     }
     
-    private func relaodCollectionIfNeeded() {
+    private func reloadCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 self.onDiscoverCollections?()

@@ -14,6 +14,10 @@ final class UserProfileManager {
     @UserDefaultArray(key: "favoriteCollections")
     var favoriteCollections: [Int]
     
+    var favHash: String {
+        favoriteCollections.compactMap({String($0)}).joined()
+    }
+    
     var interests: [Int] = Array()
     
     var categories: [Int] = Array()

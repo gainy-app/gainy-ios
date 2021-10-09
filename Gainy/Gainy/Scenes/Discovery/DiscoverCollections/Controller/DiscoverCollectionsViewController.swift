@@ -697,5 +697,9 @@ extension DiscoverCollectionsViewController : SingleCollectionDetailsViewControl
             }
         }
     }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+    }
 }
 

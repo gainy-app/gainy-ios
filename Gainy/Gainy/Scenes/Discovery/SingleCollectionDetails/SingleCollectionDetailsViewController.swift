@@ -10,6 +10,7 @@ import FloatingPanel
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int)
 }
 
 final class SingleCollectionDetailsViewController: BaseViewController {
@@ -81,9 +82,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         })
             .store(in: &cancellables)
         viewModel?.loadCollectionDetails({            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.centerInitialCollectionInTheCollectionView()
-            })
+            }
         })
         viewModel?.delegate = self
     }
@@ -146,11 +147,17 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                                                      animated: false)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.collectionClosed(vc: self, collectionID: collectionId)
+    }
+    
     //MARK: - Actions
     
     @IBAction func closeAction(_ sender: Any) {
         dismiss(animated: true)
         GainyAnalytics.logEvent("close_single_collection", params: ["collectionID" : collectionId])
+        
     }
     
     @IBAction func shareAction(_ sender: Any) {
@@ -160,7 +167,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     @IBAction func toggleCollectionAction(_ sender: Any) {
         toggleBtn.isSelected.toggle()
-        delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)
+        delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)       
         GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
     }
 }
