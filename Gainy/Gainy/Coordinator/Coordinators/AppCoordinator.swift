@@ -10,6 +10,7 @@ final class AppCoordinator: BaseCoordinator {
         self.authorizationManager = authorizationManager
         self.router = router
         self.coordinatorFactory = coordinatorFactory
+        UserProfileManager.shared.authorizationManager = self.authorizationManager
         super.init()
     }
 

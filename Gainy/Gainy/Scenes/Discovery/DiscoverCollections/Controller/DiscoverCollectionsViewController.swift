@@ -243,10 +243,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
             self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
-            DummyDataSource.recommendedCollections[indexRow].isInYourCollections = true
+            UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
             
             self.hideLoader()
-            DummyDataSource.yourCollections.append(
+            UserProfileManager.shared.yourCollections.append(
                 Collection(id: yourCollectionItem.id,
                            image: yourCollectionItem.image,
                            imageUrl: yourCollectionItem.imageUrl,
@@ -298,7 +298,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
         
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
-        DummyDataSource.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
+        UserProfileManager.shared.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
@@ -328,7 +328,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 .recommendedCollections
                 .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                 viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
-                DummyDataSource.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
+                UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
             }
             
             snapshot.deleteItems([yourCollectionItemToRemove])
@@ -375,7 +375,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     .recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                     viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
-                    DummyDataSource.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
+                    UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
                 }
                 
                 snapshot.deleteItems([deleteItems])
@@ -420,7 +420,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         // TODO: keeping local order, make it more robust and flexible
         //onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        DummyDataSource.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        UserProfileManager.shared.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         
         if dragDirectionIsTopBottom {
             snapshot.moveItem(sourceItem, afterItem: destItem)
@@ -454,10 +454,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func initViewModelsFromData() {
-        viewModel?.yourCollections = DummyDataSource
+        viewModel?.yourCollections = UserProfileManager.shared
             .yourCollections
             .map { CollectionViewModelMapper.map($0) }
-        viewModel?.recommendedCollections = DummyDataSource
+        viewModel?.recommendedCollections = UserProfileManager.shared
             .recommendedCollections
             .map { CollectionViewModelMapper.map($0) }
     }
@@ -469,72 +469,19 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
         }
-        guard let profileID = UserProfileManager.shared.profileID else {
-            
-            if let authorizationManager = self.authorizationManager {
-                authorizationManager.refreshAuthorizationStatus { status in
-                    if status == .authorizedFully {
-                        guard UserProfileManager.shared.profileID != nil else {
-                            completion()
-                            return
-                        }
-                        self.getRemoteData(completion: completion)
-                    } else {
-                        completion()
-                        return
-                    }
-                }
-                return
-            }
-            completion()
-            return
-        }
-        
-        if (loadProfile) {
-            showNetworkLoader()
-            Network.shared.apollo.clearCache()
-            UserProfileManager.shared.fetchProfile { success in
-                
-                self.hideLoader()
-                guard success == true else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
-                    completion()
-                    return
-                }
-                
-                self.getRemoteData(completion: completion)
-            }
-        }
-        
         
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) { [weak self] result in
-            guard let self = self else {return}
-            switch result {
-            case .success(let graphQLResult):
-                
-                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
-                    self.hideLoader()
-                    completion()
-                    return
-                }
-                DummyDataSource.recommendedCollections = collections.map {
-                    CollectionDTOMapper.map($0)
-                }
-                DummyDataSource.yourCollections = collections.filter({UserProfileManager.shared.favoriteCollections.contains($0.id ?? 0)}).map {
-                    CollectionDTOMapper.map($0)
-                }.reorder(by: UserProfileManager.shared.favoriteCollections)
-                
-                
-                self.initViewModelsFromData()
-                completion()
-                
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile) { success in
+            
+            self.hideLoader()
+            guard success == true  else {
                 self.initViewModels()
                 completion()
+                return
             }
+            
+            self.initViewModelsFromData()
+            completion()
         }
     }
 }
@@ -543,13 +490,13 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             self.goToCollectionDetails(at: indexPath.row)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
             }
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": DummyDataSource.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         }
     }
 }

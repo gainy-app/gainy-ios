@@ -271,7 +271,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        guard (textField.text ?? "").count > 0 else {return}
+        
         let text = textField.text ?? ""
         searchController?.searchText = text
         
@@ -285,6 +285,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc func textFieldEditingDidBegin(_ textField: UITextField) {
         GainyAnalytics.logEvent("collections_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        searchController?.searchText =  ""
         UIView.animate(withDuration: 0.3) {
             self.collectionDetailsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
@@ -398,9 +399,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                DummyDataSource.remoteRawYourCollections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+                UserProfileManager.shared.remoteRawYourCollections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
                 
-                let collectionIDs = DummyDataSource.remoteRawYourCollections.compactMap(\.id)
+                let collectionIDs = UserProfileManager.shared.remoteRawYourCollections.compactMap(\.id)
                 
                 TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
                     DispatchQueue.main.async {
@@ -411,7 +412,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 //Paging
-                self?.viewModel?.collectionOffset = DummyDataSource.remoteRawCollectionDetails.count + 1
+                self?.viewModel?.collectionOffset = UserProfileManager.shared.remoteRawCollectionDetails.count + 1
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
             case .failure(let error):
@@ -444,7 +445,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
-        let yourCollections = DummyDataSource
+        let yourCollections = UserProfileManager.shared
             .remoteRawYourCollections
             .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
         

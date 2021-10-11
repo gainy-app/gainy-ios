@@ -130,7 +130,7 @@ final class CustomInterceptor: ApolloInterceptor {
             if tokenValidator.isValidToken() {
                 makeRequest()
             } else {
-                let authManager =  AuthorizationManager()
+                let authManager = AuthorizationManager()
                 authManager.getFirebaseAuthToken { success in
                     if success {
                         let bearer = "Bearer " + (authManager.firebaseAuthToken ?? token)
