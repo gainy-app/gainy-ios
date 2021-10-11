@@ -10,7 +10,7 @@ import UIKit
 final class UserProfileManager {
         
     static let shared = UserProfileManager()
-        
+    weak var authorizationManager: AuthorizationManager?
     @UserDefaultArray(key: "favoriteCollections")
     var favoriteCollections: [Int]
     
@@ -36,6 +36,14 @@ final class UserProfileManager {
     var profileID: Int?
     
     var profileLoaded: Bool?
+    
+    
+    /// Kind of data source for recommended collections and your collections
+    /// TODO: Borysov - implement the data source instead of using this
+    var recommendedCollections: [Collection] = []
+    var yourCollections: [Collection] = []
+    var remoteRawCollectionDetails: [RemoteCollectionDetails] = []
+    var remoteRawYourCollections: [RemoteCollectionDetails] = []
     
     public func cleanup() {
         
@@ -94,6 +102,71 @@ final class UserProfileManager {
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
                 self.profileLoaded = false
+                completion(false)
+            }
+        }
+    }
+    
+    public func getProfileCollections(loadProfile: Bool = false, completion: @escaping (Bool) -> Void) {
+        
+        guard let profileID = self.profileID else {
+            
+            if let authorizationManager = self.authorizationManager {
+                authorizationManager.refreshAuthorizationStatus { status in
+                    if status == .authorizedFully {
+                        guard self.profileID != nil else {
+                            completion(false)
+                            return
+                        }
+                        self.getProfileCollections(completion: completion)
+                    } else {
+                        completion(false)
+                        return
+                    }
+                }
+                return
+            }
+            completion(false)
+            return
+        }
+        
+        if (loadProfile) {
+            Network.shared.apollo.clearCache()
+            self.fetchProfile { success in
+                
+                guard success == true else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    completion(false)
+                    return
+                }
+                
+                self.getProfileCollections(completion: completion)
+            }
+        }
+        
+        
+        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) { [weak self] result in
+            
+            guard let self = self else { return }
+            switch result {
+            case .success(let graphQLResult):
+                
+                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    completion(false)
+                    return
+                }
+                self.recommendedCollections = collections.map {
+                    CollectionDTOMapper.map($0)
+                }
+                self.yourCollections = collections.filter({self.favoriteCollections.contains($0.id ?? 0)}).map {
+                    CollectionDTOMapper.map($0)
+                }.reorder(by: self.favoriteCollections)
+                
+                completion(true)
+                
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion(false)
             }
         }

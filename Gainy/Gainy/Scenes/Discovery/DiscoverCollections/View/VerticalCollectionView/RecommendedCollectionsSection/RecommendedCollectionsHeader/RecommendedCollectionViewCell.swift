@@ -167,6 +167,14 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
         layoutIfNeeded()
     }
+    
+    func setButtonChecked(isChecked: Bool) {
+        if isChecked {
+            setButtonChecked()
+        } else {
+            setButtonUnchecked()
+        }
+    }
 
     func setButtonUnchecked() {
         buttonState = .unchecked
