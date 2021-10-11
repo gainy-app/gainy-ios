@@ -58,6 +58,12 @@ fragment RemoteTickerDetails on tickers {
         name
       }
     }
+    ticker_events {
+      created_at
+      description
+      symbol
+      type
+    }
 }
 
 

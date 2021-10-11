@@ -9,6 +9,8 @@ import UIKit
 
 final class TickerDetailsNewsViewCell: TickerDetailsViewCell {
     
+    static let cellHeight: CGFloat = 201.0
+    
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.register(UINib(nibName: "NewsViewCell", bundle: nil), forCellWithReuseIdentifier: NewsViewCell.cellIdentifier)
@@ -19,6 +21,11 @@ final class TickerDetailsNewsViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
+        if tickerInfo?.news.count ?? 0 > 0 {
+            cellHeightChanged?(TickerDetailsNewsViewCell.cellHeight)
+        } else {
+            cellHeightChanged?(0.0)
+        }
     }
 }
 

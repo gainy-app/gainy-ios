@@ -7,7 +7,9 @@
 
 import UIKit
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
-       
+    
+    static let cellHeight: CGFloat = 156.0
+    
     @IBOutlet private weak var rotatableImageView: UIImageView!
     
     @IBOutlet private var recLbls: [UILabel]!

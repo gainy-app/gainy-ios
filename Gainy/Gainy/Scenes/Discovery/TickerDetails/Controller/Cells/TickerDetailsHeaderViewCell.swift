@@ -9,6 +9,8 @@ import UIKit
 
 final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
+    static let cellHeight: CGFloat = 120.0
+    
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
     

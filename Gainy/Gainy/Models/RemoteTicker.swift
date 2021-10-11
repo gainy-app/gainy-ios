@@ -55,11 +55,11 @@ class TickerInfo {
                                                                               WSRData.WSRDataDetails(name: "BEARISH", count: 2),
                                                                               WSRData.WSRDataDetails(name: "VERY BEARISH", count: 1)]) //needed
         
-        self.recommendedScore = 75.0 //needed
+        self.recommendedScore = 75.0
         
         self.news = []
         self.altStocks = []
-        self.upcomingEvents = [] //needed
+        self.upcomingEvents = ticker.tickerEvents
     }
     
     let debugStr =
@@ -226,5 +226,5 @@ class TickerInfo {
     var tickersToCompare: [AltStockTicker] = []
     
     //MARK: - Upcoming events
-    let upcomingEvents: [String]
+    let upcomingEvents: [RemoteTickerDetails.TickerEvent]
 }

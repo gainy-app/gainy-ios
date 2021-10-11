@@ -19,5 +19,6 @@ struct Constants {
     
     struct UserDefaults {
         static let favKey = "favKey"
+        static let scheduledSymbolEvents = "scheduledSymbolEvents"
     }
 }

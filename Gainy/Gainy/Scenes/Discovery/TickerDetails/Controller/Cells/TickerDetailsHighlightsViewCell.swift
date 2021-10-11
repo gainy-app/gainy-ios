@@ -9,6 +9,8 @@ import UIKit
 
 final class TickerDetailsHighlightsViewCell: TickerDetailsViewCell {
     
+    static let cellHeight: CGFloat = 169.0
+    
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self
@@ -18,6 +20,11 @@ final class TickerDetailsHighlightsViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
+        if tickerInfo?.highlights.count ?? 0 > 0 {
+            cellHeightChanged?(TickerDetailsHighlightsViewCell.cellHeight)
+        } else {
+            cellHeightChanged?(0.0)
+        }
     }
 }
 

@@ -8,6 +8,8 @@
 import UIKit
 final class TickerDetailsMarketDataViewCell: TickerDetailsViewCell {
     
+    static let cellHeight: CGFloat = 284.0
+    
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self

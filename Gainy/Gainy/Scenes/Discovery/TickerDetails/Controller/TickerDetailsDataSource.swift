@@ -34,17 +34,17 @@ final class TickerDetailsDataSource: NSObject {
     
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
-        cellHeights[.header] = 120.0
+        cellHeights[.header] = TickerDetailsHeaderViewCell.cellHeight
         cellHeights[.about] = aboutMinHeight
         cellHeights[.chart] = chatHeight
-        cellHeights[.highlights] = 169.0
-        cellHeights[.marketData] = 284.0
-        cellHeights[.wsr] = 230.0
-        cellHeights[.recommended] = 156.0
-        cellHeights[.news] = 201.0
-        cellHeights[.alternativeStocks] = 253.0 //253.0
-        cellHeights[.upcomingEvents] = 238.0
-        cellHeights[.watchlist] = 120.0
+        cellHeights[.highlights] = TickerDetailsHighlightsViewCell.cellHeight
+        cellHeights[.marketData] = TickerDetailsMarketDataViewCell.cellHeight
+        cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
+        cellHeights[.recommended] = TickerDetailsRecommendedViewCell.cellHeight
+        cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
+        cellHeights[.alternativeStocks] = TickerDetailsAlternativeStocksViewCell.cellHeight
+        cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
+        cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeight
     }
     
     let ticker: TickerInfo
@@ -124,6 +124,13 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .highlights:
             let cell: TickerDetailsHighlightsViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.highlights] = newHeight
+                    tableView.endUpdates()
+                }
+            }
             cell.tickerInfo = ticker
             return cell
         case .marketData:
@@ -154,15 +161,36 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.news] = newHeight
+                    tableView.endUpdates()
+                }
+            }
             cell.tickerInfo = ticker
             return cell
         case .alternativeStocks:
             let cell: TickerDetailsAlternativeStocksViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.alternativeStocks] = newHeight
+                    tableView.endUpdates()
+                }
+            }
             cell.tickerInfo = ticker
             cell.delegate = self
             return cell
         case .upcomingEvents:
             let cell: TickerDetailsUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.upcomingEvents] = newHeight
+                    tableView.endUpdates()
+                }
+            }
             cell.tickerInfo = ticker
             return cell
         case .watchlist:

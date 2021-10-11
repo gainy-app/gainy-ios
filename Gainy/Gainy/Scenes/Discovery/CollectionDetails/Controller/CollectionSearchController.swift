@@ -102,6 +102,9 @@ final class CollectionSearchController: NSObject {
     //DiscoverNewsQuery.Data.FetchNewsDatum
     private var news: [AnyHashable] = []
     
+    //Search
+    private var searchBlock: DispatchWorkItem?
+    
     //MARK: - API Calls
     
     private var networkCalls: [Cancellable] = []
@@ -113,11 +116,17 @@ final class CollectionSearchController: NSObject {
                 //Cancel old requests
                 networkCalls.forEach({$0.cancel()})
                 networkCalls.removeAll()
+                if let searchBlock = searchBlock {
+                    searchBlock.cancel()
+                }
                 
                 //Search for new
-                searchQuery(searchText)
-                
-                GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                searchBlock = DispatchWorkItem.init {
+                    print("Searching \(Date())")
+                    self.searchQuery(self.searchText)
+                    GainyAnalytics.logEvent("collections_search_term", params: ["term" : self.searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                }
+                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.0, execute: searchBlock!)
             }
         }
     }

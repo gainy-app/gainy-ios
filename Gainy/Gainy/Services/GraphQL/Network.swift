@@ -8,7 +8,6 @@ public typealias float8 = Float
 public typealias timestamptz = String
 public typealias numeric = Double
 public typealias smallint = Int
-
 public typealias date = Foundation.Date
 
 private let iso8601DateFormatter = ISO8601DateFormatter()

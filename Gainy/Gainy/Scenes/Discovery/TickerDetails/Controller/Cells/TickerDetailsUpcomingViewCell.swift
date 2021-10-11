@@ -9,7 +9,63 @@ import UIKit
 
 final class TickerDetailsUpcomingViewCell: TickerDetailsViewCell {
     
-    override func updateFromTickerData() {
-        
+    static let cellHeight: CGFloat = 253.0
+    
+    @IBOutlet weak var innerTableView: UITableView! {
+        didSet {
+            innerTableView.dataSource = self
+            innerTableView.delegate = self
+        }
     }
+    
+    override func updateFromTickerData() {
+        if tickerInfo?.upcomingEvents.count ?? 0 > 0 {
+            cellHeightChanged?(32.0 + 24.0 + 16.0 + CGFloat(tickerInfo?.upcomingEvents.count ?? 0) * 44.0 + 16.0)
+        } else {
+            cellHeightChanged?(0.0)
+        }
+    }
+}
+
+extension TickerDetailsUpcomingViewCell: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tickerInfo?.upcomingEvents.count ?? 0 
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: TickerDetailsInnerUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.upcomingEvent = tickerInfo?.upcomingEvents[indexPath.row]
+        return cell
+    }
+}
+
+extension TickerDetailsUpcomingViewCell: UITableViewDelegate {
+    
+}
+
+final class TickerDetailsInnerUpcomingViewCell: UITableViewCell {
+    
+    //MARK: - Outlets
+    
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var enabledSwitch: UISwitch!
+    
+    var upcomingEvent: RemoteTicker.TickerEvent? {
+        didSet {
+            guard let event = upcomingEvent else {return}
+            nameLbl.text = event.description
+            dateLbl.text = "?"
+            enabledSwitch.setOn(LocalNotificationsManager.shared.isScheduled(event), animated: true)
+        }
+    }
+    
+    @IBAction func switchChanged (sender: UISwitch) {
+        guard let event = upcomingEvent else {return}
+        if sender.isOn {
+            LocalNotificationsManager.shared.scheduleSymbolEvent(event)
+        } else {
+            LocalNotificationsManager.shared.removeSchedule(event)
+        }
+     }
 }

@@ -40,6 +40,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
+                NotificationManager.registerNotifications()
                 if UserProfileManager.shared.favoriteCollections.isEmpty {
                     self?.onDiscoverCollections?()
                 } else {
@@ -348,6 +349,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         guard !isNetworkLoading else {
             return
         }
+        NotificationManager.registerNotifications()
         guard let profileID = UserProfileManager.shared.profileID else {
             
             if let authorizationManager = self.authorizationManager {

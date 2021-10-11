@@ -14,6 +14,8 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
+    static let cellHeight: CGFloat = 258.0
+    
     weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
     
     @IBOutlet weak var innerCollectionView: UICollectionView! {
@@ -25,6 +27,12 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
+        
+        if tickerInfo?.altStocks.count ?? 0 > 0 {
+            cellHeightChanged?(TickerDetailsAlternativeStocksViewCell.cellHeight)
+        } else {
+            cellHeightChanged?(0.0)
+        }
     }
 }
 

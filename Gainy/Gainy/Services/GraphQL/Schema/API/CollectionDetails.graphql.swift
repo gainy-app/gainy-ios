@@ -454,6 +454,13 @@ public struct RemoteTickerDetails: GraphQLFragment {
           name
         }
       }
+      ticker_events {
+        __typename
+        created_at
+        description
+        symbol
+        type
+      }
     }
     """
 
@@ -469,6 +476,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
       GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
+      GraphQLField("ticker_events", type: .nonNull(.list(.nonNull(.object(TickerEvent.selections))))),
     ]
   }
 
@@ -478,8 +486,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry]) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent]) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -555,6 +563,16 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, forKey: "ticker_industries")
+    }
+  }
+
+  /// An array relationship
+  public var tickerEvents: [TickerEvent] {
+    get {
+      return (resultMap["ticker_events"] as! [ResultMap]).map { (value: ResultMap) -> TickerEvent in TickerEvent(unsafeResultMap: value) }
+    }
+    set {
+      resultMap.updateValue(newValue.map { (value: TickerEvent) -> ResultMap in value.resultMap }, forKey: "ticker_events")
     }
   }
 
@@ -980,6 +998,75 @@ public struct RemoteTickerDetails: GraphQLFragment {
         set {
           resultMap.updateValue(newValue, forKey: "name")
         }
+      }
+    }
+  }
+
+  public struct TickerEvent: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ticker_events"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("created_at", type: .scalar(timestamptz.self)),
+        GraphQLField("description", type: .scalar(String.self)),
+        GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("type", type: .scalar(String.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String? = nil, type: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_events", "created_at": createdAt, "description": description, "symbol": symbol, "type": type])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var createdAt: timestamptz? {
+      get {
+        return resultMap["created_at"] as? timestamptz
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "created_at")
+      }
+    }
+
+    public var description: String? {
+      get {
+        return resultMap["description"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "description")
+      }
+    }
+
+    public var symbol: String? {
+      get {
+        return resultMap["symbol"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "symbol")
+      }
+    }
+
+    public var type: String? {
+      get {
+        return resultMap["type"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "type")
       }
     }
   }

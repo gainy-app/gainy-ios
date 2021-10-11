@@ -8,6 +8,9 @@
 import UIKit
 
 final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
+    
+    static let cellHeight: CGFloat = 120.0
+    
     @IBOutlet weak var watchBtn: UIButton! {
         didSet {
             watchBtn.layer.borderWidth = 2.0

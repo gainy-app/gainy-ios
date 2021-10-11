@@ -3,7 +3,7 @@ import UIKit
 import Firebase
 import CoreData
 import GoogleSignIn
-import Datadog
+//import Datadog
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -56,17 +56,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initDataDog() {
-        Datadog.initialize(
-            appContext: .init(),
-            trackingConsent: .granted,
-            configuration: Datadog.Configuration
-                .builderUsing(clientToken: "pub0e6507a595775f78e400ca18143aab43", environment: "production")
-                .set(serviceName: "gainy-ios")
-                .build()
-        )
-#if DEBUG
-        Datadog.verbosityLevel = .debug
-#endif
+//        Datadog.initialize(
+//            appContext: .init(),
+//            trackingConsent: .granted,
+//            configuration: Datadog.Configuration
+//                .builderUsing(clientToken: "pub0e6507a595775f78e400ca18143aab43", environment: "production")
+//                .set(serviceName: "gainy-ios")
+//                .build()
+//        )
+//#if DEBUG
+//        Datadog.verbosityLevel = .debug
+//#endif
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
