@@ -47,6 +47,12 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We will use Calendar to inform about upcoming financial events</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We will use Contacts to inform about upcoming financial events</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>We will use Reminders to inform about upcoming financial events</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you</string>
 	<key>UIAppFonts</key>
