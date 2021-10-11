@@ -162,6 +162,10 @@ final class CollectionSearchController: NSObject {
                 networkCalls.removeAll()
                 //Search for new
                 searchBlock = DispatchWorkItem.init {
+                    guard !self.searchText.isEmpty else {
+                        return
+                    }
+                    
                     print("Searching \(Date())")
                     self.searchQuery(self.searchText)
                     GainyAnalytics.logEvent("collections_search_term", params: ["term" : self.searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
@@ -228,56 +232,33 @@ final class CollectionSearchController: NSObject {
         
         
         if text.count == 0 {
-            
-            loading?(true)
-            self.collectionView?.delegate = self
-            if var snapshot = self.dataSource?.snapshot() {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {return}
                 
-                if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
-                }
-                
-                if self.stocks.count > 0 {
+                self.loading?(true)
+                self.collectionView?.delegate = self
+                if var snapshot = self.dataSource?.snapshot() {
                     
-                    if !snapshot.sectionIdentifiers.contains(.stocks) {
-                        snapshot.appendSections([.stocks])
+                    if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
+                        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
                     }
-                    self.sections.append(.stocks)
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .stocks))
-                    snapshot.appendItems(Array(self.stocks.prefix(self.resultsLimit)), toSection: .stocks)
-                }
-                
-                if self.collections.count > 0 {
-                    if !snapshot.sectionIdentifiers.contains(.collections) {
-                        snapshot.appendSections([.collections])
-                    }
-                    self.sections.append(.collections)
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .collections))
-                    snapshot.appendItems(Array(self.collections.prefix(self.resultsLimit)), toSection: .collections)
-                }
-                
-                if self.recommendedCollections.count > 0 {
                     
-                    if !snapshot.sectionIdentifiers.contains(.suggestedCollection) {
-                        snapshot.appendSections([.suggestedCollection])
+                    
+                    if self.recommendedCollections.count > 0 {
+                        
+                        if !snapshot.sectionIdentifiers.contains(.suggestedCollection) {
+                            snapshot.appendSections([.suggestedCollection])
+                        }
+                        self.sections.append(.suggestedCollection)
+                        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .suggestedCollection))
+                        snapshot.appendItems(Array(self.recommendedCollections.prefix(self.resultsLimit)), toSection: .suggestedCollection)
                     }
-                    self.sections.append(.suggestedCollection)
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .suggestedCollection))
-                    snapshot.appendItems(Array(self.recommendedCollections.prefix(self.resultsLimit)), toSection: .suggestedCollection)
+                    
+                    self.collectionView?.collectionViewLayout = CollectionSearchController.createLayout(self.sections)
+                    self.dataSource?.apply(snapshot, animatingDifferences: true)
                 }
-                
-                if self.news.count > 0 {
-                    if !snapshot.sectionIdentifiers.contains(.news) {
-                        snapshot.appendSections([.news])
-                    }
-                    self.sections.append(.news)
-                    snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .news))
-                    snapshot.appendItems(Array(self.news.prefix(self.resultsLimit)), toSection: .news)
-                }
-                self.collectionView?.collectionViewLayout = CollectionSearchController.createLayout(self.sections)
-                self.dataSource?.apply(snapshot, animatingDifferences: true)
+                self.loading?(false)
             }
-            self.loading?(false)
             
             return
         }
