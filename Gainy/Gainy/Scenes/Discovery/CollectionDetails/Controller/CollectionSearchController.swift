@@ -232,8 +232,10 @@ final class CollectionSearchController: NSObject {
                 self.collectionView?.delegate = self
                 if var snapshot = self.dataSource?.snapshot() {
                     
-                    if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
-                        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
+                    if snapshot.indexOfSection(.loader) != nil {
+                        if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
+                            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
+                        }
                     }
                     
                     if self.recommendedCollections.count > 0 {
@@ -354,8 +356,10 @@ final class CollectionSearchController: NSObject {
                 self.collectionView?.delegate = self
                 if var snapshot = self.dataSource?.snapshot() {
                     
-                    if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
-                        snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
+                    if snapshot.indexOfSection(.loader) != nil {
+                        if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
+                            snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
+                        }
                     }
                     
                     if self.stocks.count > 0 {
