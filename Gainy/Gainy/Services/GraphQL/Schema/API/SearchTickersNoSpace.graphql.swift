@@ -10,7 +10,7 @@ public final class SearchTickersNoSpaceQuery: GraphQLQuery {
     """
     query SearchTickersNoSpace($text: String!) {
       tickers(
-        where: {_or: [{name: {_ilike: $text}}, {symbol: {_ilike: $text}}]}
+        where: {_or: [{name: {_ilike: $text}}, {symbol: {_ilike: $text}}, {ticker_industries: {gainy_industry: {name: {_ilike: $text}}}}]}
         limit: 50
         order_by: {ipo_date: asc}
       ) {
@@ -43,7 +43,7 @@ public final class SearchTickersNoSpaceQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("tickers", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["symbol": ["_ilike": GraphQLVariable("text")]]]], "limit": 50, "order_by": ["ipo_date": "asc"]], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
+        GraphQLField("tickers", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["symbol": ["_ilike": GraphQLVariable("text")]], ["ticker_industries": ["gainy_industry": ["name": ["_ilike": GraphQLVariable("text")]]]]]], "limit": 50, "order_by": ["ipo_date": "asc"]], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
       ]
     }
 
