@@ -460,6 +460,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         description
         symbol
         type
+        timestamp
       }
     }
     """
@@ -1012,6 +1013,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("description", type: .scalar(String.self)),
         GraphQLField("symbol", type: .scalar(String.self)),
         GraphQLField("type", type: .scalar(String.self)),
+        GraphQLField("timestamp", type: .scalar(timestamptz.self)),
       ]
     }
 
@@ -1021,8 +1023,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String? = nil, type: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_events", "created_at": createdAt, "description": description, "symbol": symbol, "type": type])
+    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String? = nil, type: String? = nil, timestamp: timestamptz? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_events", "created_at": createdAt, "description": description, "symbol": symbol, "type": type, "timestamp": timestamp])
     }
 
     public var __typename: String {
@@ -1067,6 +1069,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "type")
+      }
+    }
+
+    public var timestamp: timestamptz? {
+      get {
+        return resultMap["timestamp"] as? timestamptz
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "timestamp")
       }
     }
   }

@@ -12,6 +12,9 @@ import EventKitUI
 
 class CalendarEventsManager: NSObject {
     
+    
+    static let shared = CalendarEventsManager()
+    
     var eventStore: EKEventStore!
     
     override init() {
@@ -47,6 +50,16 @@ class CalendarEventsManager: NSObject {
     }
     
     private func addEvent(event: RemoteTicker.TickerEvent) {
+        let storeEvent: EKEvent = EKEvent(eventStore: eventStore)              
+        storeEvent.title = "[\(event.symbol ?? "")] \(event.description ?? "")"
+        storeEvent.startDate = event.am9Time
+        storeEvent.isAllDay = true
+        storeEvent.calendar = eventStore.defaultCalendarForNewEvents
+              do {
+                  try eventStore.save(storeEvent, span: .thisEvent)
+              } catch let error as NSError {
+                  print("failed to save event with error : \(error)")
+              }
     }
     
     func deleteEvent(event: RemoteTicker.TickerEvent) {
@@ -59,7 +72,7 @@ class CalendarEventsManager: NSObject {
         }
     }
     
-    private func eventAlreadyExists(event eventToAdd: RemoteTicker.TickerEvent) -> Bool {
+    func isScheduled(event eventToAdd: RemoteTicker.TickerEvent) -> Bool {
         return eventStore.event(withIdentifier: eventToAdd.notifID) != nil
     }
 }

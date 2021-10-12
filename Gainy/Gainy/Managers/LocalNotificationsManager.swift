@@ -31,7 +31,7 @@ final class LocalNotificationsManager {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.notifID])
             scheduledSymbolEvents.removeAll(where: {$0 == event.notifID})
         }
-        createBasePushRequest(uuidString: event.notifID, title: event.symbol ?? "", body: event.description ?? "", date: Date().addingTimeInterval(60), repeats: false, threadIdentifier: threadID)
+        //createBasePushRequest(uuidString: event.notifID, title: event.symbol ?? "", body: event.description ?? "", date: Date().addingTimeInterval(60), repeats: false, threadIdentifier: threadID)
     }
     
     fileprivate func createBasePushRequest(uuidString: String, title: String, body: String, date: Date) {

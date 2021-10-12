@@ -7,6 +7,16 @@
 
 import Foundation
 
+func runOnMain(_ closure: @autoclosure @escaping () -> Void) {
+    if Thread.current.isMainThread {
+        closure()
+        return
+    }
+    DispatchQueue.main.async {
+        closure()
+    }
+}
+
 struct Constants {
     struct CollectionDetails {
         static let tickersPreloadCount = 20

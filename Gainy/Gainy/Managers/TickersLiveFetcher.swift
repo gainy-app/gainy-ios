@@ -52,6 +52,12 @@ final class TickersLiveFetcher {
                                     self.currentlyFetching.remove(data.symbol ?? "")
                                 }
                             }
+                            if !self.currentlyFetching.isEmpty {
+                                for unfetched in self.currentlyFetching {
+                                    TickerLiveStorage.shared.setSymbolData(unfetched, data: LivePrice.init(close: 0.0, dailyChange: 0.0, dailyChangeP: 0.0, datetime: "", symbol: unfetched))
+                                }
+                                self.currentlyFetching.removeAll()
+                            }
                             group.leave()
                         case .failure(let error):
                             dprint("Failure when making GraphQL request. Error: \(error)")

@@ -56,16 +56,16 @@ final class TickerDetailsInnerUpcomingViewCell: UITableViewCell {
             guard let event = upcomingEvent else {return}
             nameLbl.text = event.description
             dateLbl.text = "?"
-            enabledSwitch.setOn(LocalNotificationsManager.shared.isScheduled(event), animated: true)
+            enabledSwitch.setOn(CalendarEventsManager.shared.isScheduled(event: event), animated: true)
         }
     }
     
     @IBAction func switchChanged (sender: UISwitch) {
         guard let event = upcomingEvent else {return}
         if sender.isOn {
-            LocalNotificationsManager.shared.scheduleSymbolEvent(event)
+            CalendarEventsManager.shared.addEventToCalendar(event: event)
         } else {
-            LocalNotificationsManager.shared.removeSchedule(event)
+            CalendarEventsManager.shared.deleteEvent(event: event)
         }
      }
 }

@@ -32,7 +32,7 @@ final class TickerLiveStorage {
         let memoryConfig = MemoryConfig(
           // Expiry date that will be applied by default for every added object
           // if it's not overridden in the `setObject(forKey:expiry:)` method
-          expiry: .date(Date().addingTimeInterval(15*60)),
+          expiry: .date(Date().addingTimeInterval(60)),
           /// The maximum number of objects in memory the cache should hold
           countLimit: 5000,
           /// The maximum total cost that the cache can hold before it starts evicting objects

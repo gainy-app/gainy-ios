@@ -40,7 +40,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
-                NotificationManager.registerNotifications()
                 if UserProfileManager.shared.favoriteCollections.isEmpty {
                     self?.onDiscoverCollections?()
                 } else {
@@ -301,18 +300,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc func textFieldEditingDidEnd(_ textField: UITextField) {
         GainyAnalytics.logEvent("collections_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        //        let oldFrame = CGRect(
-        //            x: 16,
-        //            y: 24,
-        //            width: self.view.bounds.width - (16 + 16 + 32 + 20),
-        //            height: 40
-        //        )
-        //        UIView.animate(withDuration: 0.3) {
-        //            self.collectionDetailsCollectionView.alpha = 1.0
-        //            self.searchCollectionView.alpha = 0.0
-        //            self.discoverCollectionsBtn?.alpha = 1.0
-        //            self.searchTextView?.frame = oldFrame
-        //        }
     }
     
     // MARK: Private
@@ -350,7 +337,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         guard !isNetworkLoading else {
             return
         }
-        NotificationManager.registerNotifications()
         guard let profileID = UserProfileManager.shared.profileID else {
             
             if let authorizationManager = self.authorizationManager {

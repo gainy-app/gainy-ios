@@ -86,7 +86,6 @@ final class CollectionSearchController: NSObject {
                 case .loader:
                     let cell: SearchLoadingCell = collectionView.dequeueReusableCell(for: indexPath)
                     cell.activityIndicator.startAnimating()
-                    cell.isHidden = true
                     return cell
                 case .suggestedCollection:
                     let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
@@ -160,6 +159,10 @@ final class CollectionSearchController: NSObject {
                 //Cancel old requests
                 networkCalls.forEach({$0.cancel()})
                 networkCalls.removeAll()
+                
+                loading?(true)
+                clearAll()
+                
                 //Search for new
                 searchBlock = DispatchWorkItem.init {
                     guard !self.searchText.isEmpty else {
@@ -170,7 +173,7 @@ final class CollectionSearchController: NSObject {
                     self.searchQuery(self.searchText)
                     GainyAnalytics.logEvent("collections_search_term", params: ["term" : self.searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 }
-                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.0, execute: searchBlock!)
+                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: searchBlock!)
                 GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
             } else {
                 //Fetch recommended collections for the empty search term
@@ -191,16 +194,9 @@ final class CollectionSearchController: NSObject {
     }
     
     func clearAll() {
-        
-        if Thread.current.isMainThread {
-            performClearAll()
-            return
-        }
-        
-        DispatchQueue.main.async {
-            
+        runOnMain(
             self.performClearAll()
-        }
+        )
     }
     
     func performClearAll() {
@@ -217,7 +213,6 @@ final class CollectionSearchController: NSObject {
             if snapshot.itemIdentifiers(inSection: .loader).count == 0 {
                 snapshot.appendItems(["loader"], toSection: .loader)
             }
-            
             self.dataSource?.apply(snapshot, animatingDifferences: true, completion: nil)
         }
         self.stocks.removeAll()
@@ -228,8 +223,6 @@ final class CollectionSearchController: NSObject {
     private let searchQueue = DispatchQueue.init(label: "CollectionSearchController.searchQuery")
     private func searchQuery(_ text: String) {
         dprint("SEARCH STARTED")
-        clearAll()
-        
         
         if text.count == 0 {
             DispatchQueue.main.async { [weak self] in
@@ -242,7 +235,6 @@ final class CollectionSearchController: NSObject {
                     if snapshot.itemIdentifiers(inSection: .loader).count > 0 {
                         snapshot.deleteItems(snapshot.itemIdentifiers(inSection: .loader))
                     }
-                    
                     
                     if self.recommendedCollections.count > 0 {
                         
@@ -262,8 +254,6 @@ final class CollectionSearchController: NSObject {
             
             return
         }
-        
-        loading?(true)
         let dispatchGroup = DispatchGroup()
         
         if text.count <= 3 {
@@ -576,6 +566,10 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
     }
     
     func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        compareHashes()
+    }
+    
+    fileprivate func compareHashes() {
         if UserProfileManager.shared.favHash != localFavHash {
             collectionsUpdated?()
         }
@@ -589,6 +583,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     if let cell = senderCell {
                         cell.setButtonChecked(isChecked: success)
                     }
+                    self.collectionsUpdated?()
                 }
             }
         } else {
@@ -597,6 +592,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     if let cell = senderCell {
                         cell.setButtonChecked(isChecked: !success)
                     }
+                    self.collectionsUpdated?()
                 }
             }
         }

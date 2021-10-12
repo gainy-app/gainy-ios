@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftDate
 
 extension RemoteTickerDetails: Hashable {
     public static func == (lhs: RemoteTickerDetails, rhs: RemoteTickerDetails) -> Bool {
@@ -115,4 +116,14 @@ extension RemoteCollectionDetails: Hashable {
 extension RemoteCollectionDetails: Reorderable {
     typealias OrderElement = Int
         var orderElement: OrderElement { id ?? 0 }
+}
+
+extension RemoteTicker.TickerEvent {
+    var date: Date {
+        return (timestamp ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+    }
+    
+    var am9Time: Date {
+        date.dateAtStartOf(.day).date
+    }
 }
