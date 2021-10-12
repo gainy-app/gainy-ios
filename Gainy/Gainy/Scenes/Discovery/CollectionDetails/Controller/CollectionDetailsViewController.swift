@@ -248,6 +248,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         setupPanel()
     }
     
+    public func cancelSearchAsNeeded() {
+        
+        if searchCollectionView.alpha > 0.0 {
+            textFieldClear()
+        }
+    }
+    
     @objc func textFieldClear() {
         searchTextView?.text = ""
         searchController?.searchText = searchTextView?.text ?? ""

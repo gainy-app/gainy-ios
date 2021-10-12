@@ -225,11 +225,21 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func onLogOutTap(_ sender: Any) {
         
-        GainyAnalytics.logEvent("profile_log_out_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-        self.authorizationManager?.signOut()
-        if let finishFlow = self.mainCoordinator?.finishFlow {
-            finishFlow()
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to log out?", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action) in
+            
         }
+        let okAction = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default) { (action) in
+            
+            GainyAnalytics.logEvent("profile_log_out_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.authorizationManager?.signOut()
+            if let finishFlow = self.mainCoordinator?.finishFlow {
+                finishFlow()
+            }
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func onViewAllCategoriesTap(_ sender: Any) {

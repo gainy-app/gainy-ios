@@ -12,7 +12,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     weak var coordinator: MainCoordinator?
     
     fileprivate var tabBarHeight: CGFloat = 49.0
-    
+    fileprivate var collectionDetailsViewController: CollectionDetailsViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     
     fileprivate func setupTabs() {
         if let coordinator = coordinator {
-            setViewControllers([coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator),
+            collectionDetailsViewController = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
+            setViewControllers([collectionDetailsViewController as! UIViewController,
                                 coordinator.viewControllerFactory.instantiatePortfolioVC(),
                                 coordinator.viewControllerFactory.instantiateProfileVC(coordinator: coordinator)], animated: false)
         }
@@ -81,6 +82,9 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         switch tab {
         case .discovery:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+            if let vc = self.collectionDetailsViewController {
+                vc.cancelSearchAsNeeded()
+            }
         case .portfolio:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Portfolio", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .profile:
