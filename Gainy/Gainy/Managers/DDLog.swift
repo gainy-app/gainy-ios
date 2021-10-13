@@ -5,10 +5,10 @@
 //  Created by Anton Gubarenko on 08.10.2021.
 //
 
-//import Datadog
+@_exported import BugfenderSDK
 
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil) {
-    //DDLog.logger.debug(msg.description, error: error, attributes: nil)
+    bfprint(msg.description)
 }
 
 //final class DDLog {

@@ -124,6 +124,15 @@ extension RemoteTicker.TickerEvent {
     }
     
     var am9Time: Date {
-        date.dateAtStartOf(.day).date
+        date.dateAtStartOf(.day).startOfDay + 9.hours
+    }
+    var pm11Time: Date {
+        date.dateAtStartOf(.day).startOfDay + 23.hours
+    }
+}
+
+extension Date {
+    var startOfDay: Date {
+        return Calendar.current.startOfDay(for: self)
     }
 }

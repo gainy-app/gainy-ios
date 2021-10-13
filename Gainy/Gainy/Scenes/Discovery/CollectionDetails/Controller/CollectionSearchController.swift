@@ -118,7 +118,7 @@ final class CollectionSearchController: NSObject {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: CollectionSearchController.sectionHeaderElementKind, withReuseIdentifier: SearchCollectionHeaderView.identifier, for: indexPath) as? SearchCollectionHeaderView
                 switch self.sections[indexPath.section] {
                 case .suggestedCollection:
-                    headerView?.headerLbl.text = "Recommended collections (\(min(self.resultsLimit, self.suggestedCollections.count)))"
+                    headerView?.headerLbl.text = "RECOMMENDED COLLECTIONS (\(min(self.resultsLimit, self.suggestedCollections.count)))"
                 case .stocks:
                     headerView?.headerLbl.text = "STOCKS (\(min(self.resultsLimit, self.stocks.count)))"
                 case .collections:
@@ -164,7 +164,12 @@ final class CollectionSearchController: NSObject {
                 clearAll()
                 
                 //Search for new
-                searchBlock = DispatchWorkItem.init {
+                if searchBlock != nil {
+                    searchBlock?.cancel()
+                    searchBlock = nil
+                }
+                searchBlock = DispatchWorkItem.init { [weak self] in
+                    guard let self = self else {return}
                     guard !self.searchText.isEmpty else {
                         return
                     }
@@ -172,7 +177,7 @@ final class CollectionSearchController: NSObject {
                     print("Searching \(Date())")
                     self.searchQuery(self.searchText)
                     GainyAnalytics.logEvent("collections_search_term", params: ["term" : self.searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-                }
+                }                
                 DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5, execute: searchBlock!)
                 GainyAnalytics.logEvent("collections_search_term", params: ["term" : searchText, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
             } else {
@@ -193,7 +198,10 @@ final class CollectionSearchController: NSObject {
         }
     }
     
-    func clearAll() {
+    func clearAll() {        
+        self.stocks.removeAll()
+        self.collections.removeAll()
+        self.news.removeAll()
         runOnMain(
             self.performClearAll()
         )
@@ -213,16 +221,15 @@ final class CollectionSearchController: NSObject {
             if snapshot.itemIdentifiers(inSection: .loader).count == 0 {
                 snapshot.appendItems(["loader"], toSection: .loader)
             }
+            
             self.dataSource?.apply(snapshot, animatingDifferences: true, completion: nil)
         }
-        self.stocks.removeAll()
-        self.collections.removeAll()
-        self.news.removeAll()
     }
     
     private let searchQueue = DispatchQueue.init(label: "CollectionSearchController.searchQuery")
     private func searchQuery(_ text: String) {
         dprint("SEARCH STARTED")
+        clearAll()
         
         if text.count == 0 {
             DispatchQueue.main.async { [weak self] in

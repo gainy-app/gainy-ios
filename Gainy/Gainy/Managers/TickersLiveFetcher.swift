@@ -30,33 +30,27 @@ final class TickersLiveFetcher {
     func getSymbolsData(_ symbols: [String], _ completion: @escaping (() -> Void)){
         guard symbols.count > 0 else {return completion()}
         //Getting only not laoded symbols
-        let batchSymbols = TickerLiveStorage.shared.missingSymbolsFrom(symbols, inProgress: currentlyFetching).chunked(into: 100)
-        
+        let batchSymbols = TickerLiveStorage.shared.missingSymbolsFrom(symbols, inProgress: currentlyFetching).chunked(into: 50)
         if batchSymbols.count > 0 {
             
             let group = DispatchGroup.init()
             
             for batch in batchSymbols {
                 dprint("Fetching \(batch.joined(separator: ","))")
-                batch.forEach({
-                    currentlyFetching.insert($0)
-                })
+                currentlyFetching.union(Set.init(batch))   
+                
                 if batch.count > 0 {
                     group.enter()
                     Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: batch)) { result in
                         switch result {
                         case .success(let graphQLResult):
+                            dprint("LiveData returned: \((graphQLResult.data?.fetchLivePrices ?? []).compactMap{$0?.symbol}.joined(separator: ", "))")
                             for data in (graphQLResult.data?.fetchLivePrices ?? []) {
+                                
                                 if let data = data {
                                     TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
                                     self.currentlyFetching.remove(data.symbol ?? "")
                                 }
-                            }
-                            if !self.currentlyFetching.isEmpty {
-                                for unfetched in self.currentlyFetching {
-                                    TickerLiveStorage.shared.setSymbolData(unfetched, data: LivePrice.init(close: 0.0, dailyChange: 0.0, dailyChangeP: 0.0, datetime: "", symbol: unfetched))
-                                }
-                                self.currentlyFetching.removeAll()
                             }
                             group.leave()
                         case .failure(let error):
@@ -65,17 +59,29 @@ final class TickersLiveFetcher {
                         }
                     }
                 } else {
+                    dprint("Small batch")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                         completion()
                     })
                 }
             }
             group.notify(queue: DispatchQueue(label: "TickersLiveFetcher")) {
+                dprint("All batched done")
+                
+                if !self.currentlyFetching.isEmpty {
+                    dprint("Left after get: \(self.currentlyFetching.joined(separator: ", "))")
+                    for unfetched in self.currentlyFetching {
+                        TickerLiveStorage.shared.setSymbolData(unfetched, data: LivePrice.init(close: 0.0, dailyChange: 0.0, dailyChangeP: 0.0, datetime: "", symbol: unfetched))
+                    }
+                    self.currentlyFetching.removeAll()
+                }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                     completion()
                 })
             }
         } else {
+            dprint("Nothing to fetch")
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 completion()
             })

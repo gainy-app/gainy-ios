@@ -9,11 +9,17 @@ import UIKit
 import EventKit
 import EventKitUI
 
+struct EventMatch: Codable {
+    let remoteEventID: String
+    let localEventID: String
+}
 
 class CalendarEventsManager: NSObject {
     
-    
     static let shared = CalendarEventsManager()
+    
+    @UserDefaultArray(key: Constants.UserDefaults.scheduledCalendarEvents)
+    var scheduledEvents: [EventMatch]
     
     var eventStore: EKEventStore!
     
@@ -51,28 +57,38 @@ class CalendarEventsManager: NSObject {
     
     private func addEvent(event: RemoteTicker.TickerEvent) {
         let storeEvent: EKEvent = EKEvent(eventStore: eventStore)              
-        storeEvent.title = "[\(event.symbol ?? "")] \(event.description ?? "")"
+        storeEvent.title = "\(event.description ?? "")"
         storeEvent.startDate = event.am9Time
+        storeEvent.endDate = event.pm11Time
         storeEvent.isAllDay = true
         storeEvent.calendar = eventStore.defaultCalendarForNewEvents
               do {
                   try eventStore.save(storeEvent, span: .thisEvent)
+                  scheduledEvents.append(EventMatch.init(remoteEventID: event.notifID, localEventID: storeEvent.eventIdentifier))
               } catch let error as NSError {
                   print("failed to save event with error : \(error)")
               }
     }
     
     func deleteEvent(event: RemoteTicker.TickerEvent) {
-        if let event = eventStore.event(withIdentifier: event.notifID) {
-            do {
-                try eventStore.remove(event, span: .thisEvent)
-            } catch let error as NSError {
-                print("failed to save event with error : \(error)")
+        
+        if let eventStored = scheduledEvents.first(where: {$0.remoteEventID == event.notifID}) {
+            if let eventLocal = eventStore.event(withIdentifier: eventStored.localEventID) {
+                do {
+                    try eventStore.remove(eventLocal, span: .thisEvent)
+                    scheduledEvents.removeAll(where: {$0.remoteEventID == event.notifID})
+                } catch let error as NSError {
+                    print("failed to save event with error : \(error)")
+                }
             }
-        }
+        }        
     }
     
     func isScheduled(event eventToAdd: RemoteTicker.TickerEvent) -> Bool {
-        return eventStore.event(withIdentifier: eventToAdd.notifID) != nil
+        if let event = scheduledEvents.first(where: {$0.remoteEventID == eventToAdd.notifID}) {
+            return eventStore.event(withIdentifier: event.localEventID) != nil
+        } else {
+            return false
+        }
     }
 }

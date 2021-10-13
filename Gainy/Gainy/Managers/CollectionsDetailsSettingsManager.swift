@@ -49,7 +49,7 @@ final class CollectionsDetailsSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionSettings(sorting: MarketDataField.matchScore, ascending: true, viewMode: .grid)
+            let defSettigns = CollectionSettings(sorting: MarketDataField.matchScore, ascending: false, viewMode: .grid)
             settings?[id] = defSettigns
             return defSettigns
         }

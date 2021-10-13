@@ -4,6 +4,7 @@ import Firebase
 import CoreData
 import GoogleSignIn
 //import Datadog
+@_exported import BugfenderSDK
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initializeAppsFlyer()
         initFirebase()
         initDataDog()
+        
+        Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
+        Bugfender.enableCrashReporting()
+        Bugfender.enableUIEventLogging()
         return true
     }
     

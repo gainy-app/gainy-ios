@@ -47,6 +47,15 @@
         }
       },
       {
+        "package": "BugfenderPackage",
+        "repositoryURL": "https://github.com/bugfender/BugfenderSDK-iOS",
+        "state": {
+          "branch": null,
+          "revision": "b66de98cb2aa437f1f325d9ab0fbec0605c26f13",
+          "version": "1.10.3"
+        }
+      },
+      {
         "package": "Cache",
         "repositoryURL": "https://github.com/hyperoslo/Cache.git",
         "state": {

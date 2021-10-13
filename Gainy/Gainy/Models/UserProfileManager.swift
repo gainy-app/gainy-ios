@@ -151,7 +151,7 @@ final class UserProfileManager {
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
+                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}).prefix(24) else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     completion(false)
                     return

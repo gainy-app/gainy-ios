@@ -67,6 +67,12 @@
 		335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */; };
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
+		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
+		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
+		336970B52716BA5C0001625C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970B02716B9920001625C /* libc++.tbd */; };
+		336970B62716BA5C0001625C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AC2716B96D0001625C /* MobileCoreServices.framework */; };
+		336970B72716BA5C0001625C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AA2716B9640001625C /* Security.framework */; };
+		336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970A82716B9560001625C /* SystemConfiguration.framework */; };
 		336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */; };
 		336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */; };
 		336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */; };
@@ -403,6 +409,12 @@
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
 		335ECE1B26C3AE8000C6AC71 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		335ECE1F26C3B2E500C6AC71 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
+		336970A82716B9560001625C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		336970AA2716B9640001625C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		336970AC2716B96D0001625C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		336970AE2716B97A0001625C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		336970B02716B9920001625C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOneColumnListFlowSectionLayout.swift; sourceTree = "<group>"; };
 		336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionListCardCell.xib; sourceTree = "<group>"; };
 		336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListCardCell.swift; sourceTree = "<group>"; };
@@ -672,6 +684,7 @@
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
+				336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */,
 				85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */,
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
@@ -679,14 +692,19 @@
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
+				336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */,
 				33467CF226C66FA300811F74 /* FirebaseCrashlytics in Frameworks */,
+				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
 				33467CF626C66FA300811F74 /* FirebaseAuth in Frameworks */,
 				33467CEE26C66FA300811F74 /* FirebaseAnalytics in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
+				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
+				336970B62716BA5C0001625C /* MobileCoreServices.framework in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
+				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1411,6 +1429,12 @@
 		3AA52C95266014BB006A6961 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				336970B02716B9920001625C /* libc++.tbd */,
+				336970AE2716B97A0001625C /* CoreGraphics.framework */,
+				336970AC2716B96D0001625C /* MobileCoreServices.framework */,
+				336970AA2716B9640001625C /* Security.framework */,
+				336970A82716B9560001625C /* SystemConfiguration.framework */,
+				336970A42716B9440001625C /* BugfenderSDK.framework */,
 				3A9FB0DC266AAF4A00EC85D4 /* ApolloCore.framework */,
 				3AA52C96266014BB006A6961 /* Apollo.framework */,
 			);
@@ -1761,6 +1785,7 @@
 				331FB0F927011D4B0031A8EF /* Cache */,
 				33B911732706ED3000C00B0D /* SwiftyJSON */,
 				33FBDE87270ADEEA003B6DDB /* JWTDecode */,
+				336970B22716BA2F0001625C /* BugfenderLibrary */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1847,6 +1872,7 @@
 				331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */,
 				33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2432,7 +2458,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2459,7 +2485,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 44;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2647,6 +2673,14 @@
 				minimumVersion = 1.2.0;
 			};
 		};
+		336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bugfender/BugfenderSDK-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -2765,6 +2799,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33467CF826C6728600811F74 /* XCRemoteSwiftPackageReference "MBProgressHUD" */;
 			productName = MBProgressHUD;
+		};
+		336970B22716BA2F0001625C /* BugfenderLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */;
+			productName = BugfenderLibrary;
 		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
