@@ -67,6 +67,7 @@
 		335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */; };
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
+		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
 		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
 		336970B52716BA5C0001625C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970B02716B9920001625C /* libc++.tbd */; };
@@ -409,6 +410,7 @@
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
 		335ECE1B26C3AE8000C6AC71 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		335ECE1F26C3B2E500C6AC71 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
 		336970A82716B9560001625C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		336970AA2716B9640001625C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1391,6 +1393,7 @@
 			children = (
 				3AA52C90266013E1006A6961 /* Network.swift */,
 				3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */,
+				33626A97271826190013EE6C /* APIModels+Caching.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
 			path = GraphQL;
@@ -2114,6 +2117,7 @@
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
+				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
 				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
@@ -2458,7 +2462,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2485,7 +2489,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
