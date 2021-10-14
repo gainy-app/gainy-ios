@@ -166,6 +166,32 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
     }
     
+    public func snapshotForYourCollectionCell(at index: Int) -> UIImage? {
+        
+        if let cell = discoverCollectionsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
+            return cell.asImage()
+        }
+        
+        return nil
+    }
+    
+    public func frameForYourCollectionCell(at index: Int) -> CGRect {
+        
+        if let cell = discoverCollectionsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
+            let frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y - discoverCollectionsCollectionView.contentOffset.y, width: cell.frame.width, height: cell.frame.height)
+            return frame
+        }
+        
+        return CGRect.zero
+    }
+    
+    public func hideYourCollectionCell(at index: Int) {
+        
+        if let cell = discoverCollectionsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
+            cell.isHidden = true
+        }
+    }
+    
     /// Model to cahnge bottom view
     private var bottomViewModel: CollectionsBottomViewModel?
     private var bottomViewButton: BorderButton?
@@ -484,6 +510,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {
+        
         onGoToCollectionDetails?(collectionPosition)
     }
     
@@ -504,10 +531,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             return
         }
         
-        showNetworkLoader()
         UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile) { success in
             
-            self.hideLoader()
             guard success == true  else {
                 self.initViewModels()
                 completion()

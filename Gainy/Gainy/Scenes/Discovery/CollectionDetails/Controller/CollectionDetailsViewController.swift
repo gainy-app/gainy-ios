@@ -448,6 +448,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                                      animated: false)
     }
     
+    func currentBackgroundImageFrame() -> CGRect {
+        
+        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
+        if let cell: CollectionDetailsViewCell = collectionDetailsCollectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
+            let horizontalView = cell.collectionHorizontalView
+            return self.view.convert(horizontalView.frame, from: horizontalView)
+        } else {
+            return CGRect.zero
+        }
+    }
+    
     private func initViewModelsFromData() {
         let yourCollections = UserProfileManager.shared
             .remoteRawYourCollections

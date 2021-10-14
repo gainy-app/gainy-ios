@@ -130,6 +130,16 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         self.imageLoaded = true
     }
     
+    override func didMoveToWindow() {
+        
+        super.didMoveToWindow()
+        
+        if window != nil {
+            self.imageLoaded = false
+            loadImage()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         

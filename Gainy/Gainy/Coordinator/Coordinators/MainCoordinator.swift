@@ -1,5 +1,6 @@
 import Firebase
 import Combine
+import UIKit
 
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
@@ -17,6 +18,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Internal
     
     private var cancellables = Set<AnyCancellable>()
+    private var lastDiscoverCollectionsVC: DiscoverCollectionsViewController?
     
     // MARK: CoordinatorFinishOutput
 
@@ -76,6 +78,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.onSwapItems = onSwapItems
         vc.onItemDelete = onItemDelete
         vc.showNextButton = showNextButton
+        lastDiscoverCollectionsVC = vc
         // TODO: Borysov - custom transition
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
@@ -96,10 +99,38 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        }
 //        vc.viewModel?.initialCollectionIndex = initialCollectionIndex
 
-        // TODO: Borysov - custom transition
-        router.popModule(transition: FadeTransitionAnimator(), animated: true)
+        // TODO: Borysov - custom transition make it better and move out of here
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
         vc.centerInitialCollectionInTheCollectionView()
+        let frame = vc.currentBackgroundImageFrame()
+        
+        if let lastDiscoverCollections = lastDiscoverCollectionsVC {
+            if let image = lastDiscoverCollections.snapshotForYourCollectionCell(at: initialCollectionIndex) {
+                let imageFrame = lastDiscoverCollections.frameForYourCollectionCell(at: initialCollectionIndex)
+                let imageView = UIImageView.init(image: image)
+                imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                lastDiscoverCollections.view.addSubview(imageView)
+                imageView.frame = imageFrame
+                lastDiscoverCollections.hideYourCollectionCell(at: initialCollectionIndex)
+                
+                UIView.animate(withDuration: 0.35) {
+                    
+                    self.router.popModule(transition: FadeTransitionAnimator(), animated: true)
+                    imageView.frame.origin.y = frame.origin.y
+                    
+                } completion: { finished in
+                    
+                    imageView.removeFromSuperview()
+                }
+
+            } else {
+                router.popModule(transition: FadeTransitionAnimator(), animated: true)
+            }
+        } else {
+            router.popModule(transition: FadeTransitionAnimator(), animated: true)
+        }
+        print("\(frame)")
     }
 
     func showCardDetailsViewController(_ tickerInfo: TickerInfo) {
