@@ -24,6 +24,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     var onRemoveCollectionFromYourCollections: (() -> Void)?
     var onSwapItems: ((Int, Int) -> Void)?
     var onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?
+    var showNextButton: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +54,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         discoverCollectionsCollectionView.dragDelegate = self
         discoverCollectionsCollectionView.dropDelegate = self
-        discoverCollectionsCollectionView.contentInset = .init(top: 0, left: 0, bottom: 150.0, right: 0)
+        discoverCollectionsCollectionView.contentInset = .init(top: 0, left: 0, bottom: (showNextButton ? 87.0 : 45.0), right: 0)
         dataSource = UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>(
             collectionView: discoverCollectionsCollectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
@@ -167,6 +168,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     /// Model to cahnge bottom view
     private var bottomViewModel: CollectionsBottomViewModel?
+    private var bottomViewButton: BorderButton?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -189,6 +191,36 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         hosting.didMove(toParent: self)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+    
+    fileprivate func addBottomButton() {
+        
+        bottomViewButton = BorderButton.newAutoLayout()
+        if let button = bottomViewButton {
+            view.addSubview(button)
+            button.autoSetDimension(ALDimension.height, toSize: 60.0)
+            button.autoPinEdge(toSuperviewEdge: ALEdge.leading, withInset: 32.0)
+            button.autoPinEdge(toSuperviewEdge: ALEdge.trailing, withInset: 32.0)
+            button.autoPinEdge(toSuperviewSafeArea: ALEdge.bottom, withInset: 0.0)
+            button.borderColor = UIColor.clear
+            button.setTitle("Next", for: .normal)
+            button.backgroundColor = UIColor(hexString: "#0062FF", alpha: 1.0)
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.addTarget(self, action: #selector(bottomButtonTapped(_:)),
+                             for: .touchUpInside)
+            button.cornerRadius = 20.0
+            button.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
+        }
+    }
+    
+    @objc private func bottomButtonTapped(_: UIButton) {
+        
+        let yourCollectionsCount = discoverCollectionsCollectionView.numberOfItems(inSection: DiscoverCollectionsSection.yourCollections.rawValue)
+        if yourCollectionsCount > 0 {
+            self.goToCollectionDetails(at: 0)
+        } else {
+            NotificationManager.shared.showMessage(title: "", text: "Please, in order to proceed, add at least one recommended collection to your collections.", cancelTitle: "Ok", actions: [])
         }
     }
     
@@ -445,7 +477,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
-        addBottomView()
+        if showNextButton {
+            addBottomButton()
+        }
         hideLoader()
     }
     

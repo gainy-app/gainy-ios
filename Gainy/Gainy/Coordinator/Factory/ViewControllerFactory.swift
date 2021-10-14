@@ -108,8 +108,8 @@ final class ViewControllerFactory {
         vc.coordinator = coordinator
         vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .discovery)
-        vc.onDiscoverCollections = {
-            coordinator.showDiscoverCollectionsViewController {initialCollectionIndex in
+        vc.onDiscoverCollections = { showNextButton in
+            coordinator.showDiscoverCollectionsViewController(showNextButton: showNextButton) {initialCollectionIndex in
                 coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
             } onSwapItems:  { source, dest in
                 vc.swapItemsAt(source, destInd: dest)

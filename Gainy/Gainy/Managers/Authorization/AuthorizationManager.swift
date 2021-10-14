@@ -145,7 +145,7 @@ final class AuthorizationManager {
             return
         }
         
-        if profileInfo.profileInterestIDs.count < 5 {
+        if profileInfo.profileInterestIDs.count < 1 {
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return

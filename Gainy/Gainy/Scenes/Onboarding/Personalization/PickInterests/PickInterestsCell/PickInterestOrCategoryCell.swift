@@ -15,6 +15,9 @@ final class PickInterestOrCategoryCell: UICollectionViewCell {
     @IBOutlet weak var cornerView: CornerView!
     @IBOutlet weak var textLabel: UILabel!
     
+    private var imageUrl: String = ""
+    private var imageLoaded: Bool = false
+    
     var appInterest: AppInterestsQuery.Data.Interest? {
         didSet {
             self.updateUI()
@@ -57,13 +60,32 @@ final class PickInterestOrCategoryCell: UICollectionViewCell {
         textLabel.text = name
         textLabel.adjustsFontSizeToFitWidth = true
         textLabel.minimumScaleFactor = 0.8
+        imageUrl = iconUrl
+        imageLoaded = false
+        iconImageView.contentMode = .scaleAspectFit
+        self.setNeedsLayout()
+    }
+    
+    
+    private func loadImage() {
+        
+        guard self.imageLoaded == false, iconImageView.bounds.size.width > 0, iconImageView.bounds.size.height > 0 else {
+            return
+        }
+        
         let processor = DownsamplingImageProcessor(size: iconImageView.bounds.size)
-        iconImageView.kf.setImage(with: URL(string: iconUrl), options: [
+        iconImageView.kf.setImage(with: URL(string: imageUrl), options: [
             .processor(processor),
             .scaleFactor(UIScreen.main.scale),
             .transition(.fade(1)),
             .cacheOriginalImage
         ], progressBlock: nil, completionHandler: nil)
-        iconImageView.contentMode = .scaleAspectFit
+        self.imageLoaded = true
+    }
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        loadImage()
     }
 }

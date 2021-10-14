@@ -17,7 +17,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var viewModel: CollectionDetailsViewModelProtocol?
     var coordinator: MainCoordinator?
     
-    var onDiscoverCollections: (() -> Void)?
+    var onDiscoverCollections: ((Bool) -> Void)?
     var onShowCardDetails: ((RemoteTickerDetails) -> Void)?
     
     //Panel
@@ -40,14 +40,25 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
-                if UserProfileManager.shared.favoriteCollections.isEmpty {
-                    self?.onDiscoverCollections?()
-                } else {
-                    if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
-                        self?.getRemoteData(loadProfile: true) {
-                            DispatchQueue.main.async {
-                                self?.initViewModels()
-                                self?.centerInitialCollectionInTheCollectionView()
+                if let profileID = UserProfileManager.shared.profileID {
+                 
+                    let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
+                    let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
+                    if !shown {
+                        UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                        self?.onDiscoverCollections?(true)
+                        return
+                    }
+                    
+                    if UserProfileManager.shared.favoriteCollections.isEmpty {
+                        self?.onDiscoverCollections?(false)
+                    } else {
+                        if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
+                            self?.getRemoteData(loadProfile: true) {
+                                DispatchQueue.main.async {
+                                    self?.initViewModels()
+                                    self?.centerInitialCollectionInTheCollectionView()
+                                }
                             }
                         }
                     }
@@ -420,7 +431,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     @objc
     private func discoverCollectionsButtonTapped() {
         GainyAnalytics.logEvent("discover_collections_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        onDiscoverCollections?()
+        onDiscoverCollections?(false)
     }
     
     // TODO: 1: implement class to have navBarContainer view
@@ -512,13 +523,25 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func reloadCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
-            if UserProfileManager.shared.favoriteCollections.isEmpty {
-                self.onDiscoverCollections?()
-            } else {
-                getRemoteData(loadProfile: true) {
-                    DispatchQueue.main.async { [weak self] in
-                        self?.initViewModels()
-                        self?.centerInitialCollectionInTheCollectionView()
+            
+            if let profileID = UserProfileManager.shared.profileID {
+             
+                let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
+                let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
+                if !shown {
+                    UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                    self.onDiscoverCollections?(true)
+                    return
+                }
+                
+                if UserProfileManager.shared.favoriteCollections.isEmpty {
+                    self.onDiscoverCollections?(false)
+                } else {
+                    getRemoteData(loadProfile: true) {
+                        DispatchQueue.main.async { [weak self] in
+                            self?.initViewModels()
+                            self?.centerInitialCollectionInTheCollectionView()
+                        }
                     }
                 }
             }

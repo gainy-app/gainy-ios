@@ -45,6 +45,9 @@ final class CollectionHorizontalView: UIView {
     var onShowListViewButtonPressed: (() -> Void)?
     var onShowGridViewButtonPressed: (() -> Void)?
 
+    private var imageUrl: String = ""
+    private var imageLoaded: Bool = false
+    
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -237,9 +240,41 @@ final class CollectionHorizontalView: UIView {
         return button
     }()
 
+    private func loadImage() {
+        
+        guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
+            return
+        }
+
+        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
+        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ]) { receivedSize, totalSize in
+            print("-----\(receivedSize), \(totalSize)")
+        } completionHandler: { result in
+            print("-----\(result)")
+        }
+        self.imageLoaded = true
+    }
+    
+    override func didMoveToWindow() {
+        
+        super.didMoveToWindow()
+        
+        if window != nil {
+            self.imageLoaded = false
+            loadImage()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        loadImage()
+        
         let hMargin: CGFloat = 16
         let topMarginLeftSide: CGFloat = 16
         let topMarginRightSide: CGFloat = 19
@@ -339,13 +374,8 @@ final class CollectionHorizontalView: UIView {
     ) {
         backImageView.image = UIImage(named: imageName)
         
-        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
-        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
-            .processor(processor),
-            .scaleFactor(UIScreen.main.scale),
-            .transition(.fade(1)),
-            .cacheOriginalImage
-        ], progressBlock: nil, completionHandler: nil)
+        self.imageLoaded = false
+        self.imageUrl = imageUrl
         
         nameLabel.text = name
         nameLabel.sizeToFit()

@@ -69,12 +69,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.setRootModule(vc, hideBar: true)
     }
 
-    func showDiscoverCollectionsViewController(onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
+    func showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
         vc.coordinator = self
         vc.onGoToCollectionDetails = onGoToCollectionDetails
         vc.onSwapItems = onSwapItems
         vc.onItemDelete = onItemDelete
+        vc.showNextButton = showNextButton
+        // TODO: Borysov - custom transition
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 
@@ -94,6 +96,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 //        }
 //        vc.viewModel?.initialCollectionIndex = initialCollectionIndex
 
+        // TODO: Borysov - custom transition
         router.popModule(transition: FadeTransitionAnimator(), animated: true)
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
         vc.centerInitialCollectionInTheCollectionView()

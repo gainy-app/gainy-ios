@@ -41,7 +41,8 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     private var shadowLayer: CAShapeLayer!
     private var cornerRadius: CGFloat = 8.0
     private var fillColor: UIColor = .blue
-    
+    private var imageUrl: String = ""
+    private var imageLoaded: Bool = false
     // MARK: Properties
     
     var onDeleteButtonPressed: (() -> Void)?
@@ -109,8 +110,30 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         return label
     }()
     
+    private func loadImage() {
+        
+        guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
+            return
+        }
+        
+        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
+        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ]) { receivedSize, totalSize in
+//            print("-----\(receivedSize), \(totalSize)")
+        } completionHandler: { result in
+//            print("-----\(result)")
+        }
+        self.imageLoaded = true
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        self.loadImage()
         
         let hMargin: CGFloat = 16
         
@@ -174,15 +197,11 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         description: String,
         stocksAmount: String,
         imageName: String
-    ) {        
-        let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
-        backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(named: name.lowercased()), options: [
-            .processor(processor),
-            .scaleFactor(UIScreen.main.scale),
-            .transition(.fade(1)),
-            .cacheOriginalImage
-        ], progressBlock: nil, completionHandler: nil)
+    ) {
         backImageView.contentMode = .scaleAspectFill
+        self.imageLoaded = false
+        self.imageUrl = imageUrl
+        setNeedsLayout()
         
         nameLabel.text = name
         nameLabel.sizeToFit()

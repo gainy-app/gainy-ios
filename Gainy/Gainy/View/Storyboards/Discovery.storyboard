@@ -43,7 +43,7 @@
             <objects>
                 <viewController storyboardIdentifier="TickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfJ-n1-GhL" customClass="TickerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qp4-Xo-X4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">

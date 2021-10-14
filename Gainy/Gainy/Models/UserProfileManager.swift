@@ -151,14 +151,22 @@ final class UserProfileManager {
             switch result {
             case .success(let graphQLResult):
                 
-                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}).prefix(24) else {
+                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     completion(false)
                     return
                 }
-                self.recommendedCollections = collections.map {
+                
+                guard let firstCollections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}).prefix(24) else {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    completion(false)
+                    return
+                }
+                
+                self.recommendedCollections = firstCollections.map {
                     CollectionDTOMapper.map($0)
                 }
+                
                 self.yourCollections = collections.filter({self.favoriteCollections.contains($0.id ?? 0)}).map {
                     CollectionDTOMapper.map($0)
                 }.reorder(by: self.favoriteCollections)
