@@ -14,5 +14,5 @@ extension Notification.Name {
     static let didPickProfileImage = Notification.Name("didPickProfileImage")
     static let didChangeProfileCategories = Notification.Name("didChangeProfileCategories")
     static let didChangeProfileInterests = Notification.Name("didChangeProfileInterests")
-    static let didFailToRefreshToken = Notification.Name("didChangeProfileInterests")
+    static let didFailToRefreshToken = Notification.Name("didFailToRefreshToken")
 }

@@ -434,10 +434,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                     viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
                     UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
+                    snapshot.reloadItems([reloadItem])
                 }
                 
                 snapshot.deleteItems([deleteItems])
-                snapshot.reloadItems([reloadItem])
                 dataSource?.apply(snapshot, animatingDifferences: true)
                 onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
             }
