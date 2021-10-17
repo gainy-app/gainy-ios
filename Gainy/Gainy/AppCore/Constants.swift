@@ -32,4 +32,10 @@ struct Constants {
         static let scheduledSymbolEvents = "scheduledSymbolEvents"
         static let scheduledCalendarEvents = "scheduledCalendarEvents"
     }
+    
+    struct Links {
+        static let privacy = "https://www.gainy.app/privacy-policy"
+        static let tos = "https://www.gainy.app/terms-of-service"
+        static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
+    }
 }

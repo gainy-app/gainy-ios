@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct WSRView: View {
-    init(totalScore: Double, progress: [TickerInfo.WSRData.WSRDataDetails], lastAngle: Angle = .degrees(0)) {
+    init(totalScore: Float, progress: [TickerInfo.WSRData.WSRDataDetails], lastAngle: Angle = .degrees(0)) {
         self.totalScore = totalScore
         self.progress = progress
         self.lastAngle = .degrees(0)
@@ -20,7 +20,7 @@ struct WSRView: View {
     @State
     var pieData: [PieData] = []
     
-    let totalScore: Double
+    let totalScore: Float
     let progress: [TickerInfo.WSRData.WSRDataDetails]
     
     struct PieData: Hashable {
@@ -53,7 +53,7 @@ struct WSRView: View {
                     Text("\(totalPriceString)")
                         .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
                         .font(UIFont.compactRoundedSemibold(28).uiFont)
-                    Text("BULLISH")
+                    Text(totalText)
                         .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
                         .font(UIFont.compactRoundedRegular(11).uiFont)
                 }                
@@ -93,6 +93,12 @@ struct WSRView: View {
                 lastAngle = .degrees(lastAngle.degrees + (360 * progress))
             })
         })
+    }
+    
+    var totalText: String {
+        let list = ["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"]
+        let index = Int(round(totalScore / 5 ))
+        return index > -1 && index < 4 ? list[index] : ""
     }
 }
 

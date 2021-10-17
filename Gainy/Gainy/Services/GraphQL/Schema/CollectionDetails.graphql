@@ -9,11 +9,7 @@ fragment RemoteCollectionDetails on collections {
   name
   image_url
   description
-  ticker_collections_aggregate {
-    aggregate {
-      count
-    }
-  }
+  size
   ticker_collections {
     ticker {
     ...RemoteTickerDetails
@@ -64,6 +60,14 @@ fragment RemoteTickerDetails on tickers {
       symbol
       type
       timestamp
+    }
+    ticker_analyst_ratings{
+      strong_buy
+      buy
+      hold
+      sell
+      strong_sell
+      rating
     }
 }
 

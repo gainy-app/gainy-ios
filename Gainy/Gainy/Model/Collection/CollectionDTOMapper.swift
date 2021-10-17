@@ -7,7 +7,7 @@ enum CollectionDTOMapper {
             imageUrl: dto.imageUrl ?? "",
             name: dto.name ?? "",
             description: dto.description ?? "",
-            stocksAmount: Int(dto.tickerCollectionsAggregate.aggregate?.count ?? 0),
+            stocksAmount: Int(dto.size ?? 0),
             isInYourCollections: UserProfileManager.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }

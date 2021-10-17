@@ -128,13 +128,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       name
       image_url
       description
-      ticker_collections_aggregate {
-        __typename
-        aggregate {
-          __typename
-          count
-        }
-      }
+      size
       ticker_collections {
         __typename
         ticker {
@@ -154,7 +148,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("ticker_collections_aggregate", type: .nonNull(.object(TickerCollectionsAggregate.selections))),
+      GraphQLField("size", type: .scalar(Int.self)),
       GraphQLField("ticker_collections", type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
     ]
   }
@@ -165,8 +159,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, tickerCollectionsAggregate: TickerCollectionsAggregate, tickerCollections: [TickerCollection]) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "ticker_collections_aggregate": tickerCollectionsAggregate.resultMap, "ticker_collections": tickerCollections.map { (value: TickerCollection) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, tickerCollections: [TickerCollection]) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size, "ticker_collections": tickerCollections.map { (value: TickerCollection) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -214,13 +208,12 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
   }
 
-  /// An aggregate relationship
-  public var tickerCollectionsAggregate: TickerCollectionsAggregate {
+  public var size: Int? {
     get {
-      return TickerCollectionsAggregate(unsafeResultMap: resultMap["ticker_collections_aggregate"]! as! ResultMap)
+      return resultMap["size"] as? Int
     }
     set {
-      resultMap.updateValue(newValue.resultMap, forKey: "ticker_collections_aggregate")
+      resultMap.updateValue(newValue, forKey: "size")
     }
   }
 
@@ -231,84 +224,6 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue.map { (value: TickerCollection) -> ResultMap in value.resultMap }, forKey: "ticker_collections")
-    }
-  }
-
-  public struct TickerCollectionsAggregate: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["ticker_collections_aggregate"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("aggregate", type: .object(Aggregate.selections)),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(aggregate: Aggregate? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var aggregate: Aggregate? {
-      get {
-        return (resultMap["aggregate"] as? ResultMap).flatMap { Aggregate(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "aggregate")
-      }
-    }
-
-    public struct Aggregate: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["ticker_collections_aggregate_fields"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("count", type: .nonNull(.scalar(Int.self))),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(count: Int) {
-        self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate_fields", "count": count])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var count: Int {
-        get {
-          return resultMap["count"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "count")
-        }
-      }
     }
   }
 
@@ -462,6 +377,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
         type
         timestamp
       }
+      ticker_analyst_ratings {
+        __typename
+        strong_buy
+        buy
+        hold
+        sell
+        strong_sell
+        rating
+      }
     }
     """
 
@@ -478,6 +402,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
       GraphQLField("ticker_events", type: .nonNull(.list(.nonNull(.object(TickerEvent.selections))))),
+      GraphQLField("ticker_analyst_ratings", type: .object(TickerAnalystRating.selections)),
     ]
   }
 
@@ -487,8 +412,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent]) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -574,6 +499,16 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue.map { (value: TickerEvent) -> ResultMap in value.resultMap }, forKey: "ticker_events")
+    }
+  }
+
+  /// An object relationship
+  public var tickerAnalystRatings: TickerAnalystRating? {
+    get {
+      return (resultMap["ticker_analyst_ratings"] as? ResultMap).flatMap { TickerAnalystRating(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "ticker_analyst_ratings")
     }
   }
 
@@ -1078,6 +1013,95 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "timestamp")
+      }
+    }
+  }
+
+  public struct TickerAnalystRating: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["analyst_ratings"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("strong_buy", type: .scalar(Int.self)),
+        GraphQLField("buy", type: .scalar(Int.self)),
+        GraphQLField("hold", type: .scalar(Int.self)),
+        GraphQLField("sell", type: .scalar(Int.self)),
+        GraphQLField("strong_sell", type: .scalar(Int.self)),
+        GraphQLField("rating", type: .scalar(float8.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(strongBuy: Int? = nil, buy: Int? = nil, hold: Int? = nil, sell: Int? = nil, strongSell: Int? = nil, rating: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "analyst_ratings", "strong_buy": strongBuy, "buy": buy, "hold": hold, "sell": sell, "strong_sell": strongSell, "rating": rating])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var strongBuy: Int? {
+      get {
+        return resultMap["strong_buy"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "strong_buy")
+      }
+    }
+
+    public var buy: Int? {
+      get {
+        return resultMap["buy"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "buy")
+      }
+    }
+
+    public var hold: Int? {
+      get {
+        return resultMap["hold"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "hold")
+      }
+    }
+
+    public var sell: Int? {
+      get {
+        return resultMap["sell"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "sell")
+      }
+    }
+
+    public var strongSell: Int? {
+      get {
+        return resultMap["strong_sell"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "strong_sell")
+      }
+    }
+
+    public var rating: float8? {
+      get {
+        return resultMap["rating"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "rating")
       }
     }
   }

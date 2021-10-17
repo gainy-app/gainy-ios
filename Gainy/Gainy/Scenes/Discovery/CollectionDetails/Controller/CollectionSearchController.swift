@@ -72,7 +72,7 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
-                                           stocksAmount: "\(collection.tickerCollectionsAggregate.aggregate?.count ?? 0)",
+                                           stocksAmount: "\(collection.size ?? 0)",
                                            imageName: "",
                                            plusButtonState: .unchecked)
                     }

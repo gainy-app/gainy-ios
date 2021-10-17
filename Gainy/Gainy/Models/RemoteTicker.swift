@@ -49,13 +49,13 @@ class TickerInfo {
         }
         self.marketData = markers
         
-        self.wsjData = WSRData(rate: 4.23, analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: 22),
-                                                                              WSRData.WSRDataDetails(name: "BULLISH", count: 8),
-                                                                              WSRData.WSRDataDetails(name: "NEUTRAL", count: 6),
-                                                                              WSRData.WSRDataDetails(name: "BEARISH", count: 2),
-                                                                              WSRData.WSRDataDetails(name: "VERY BEARISH", count: 1)]) //needed
+        self.wsjData = WSRData(rate: ticker.tickerAnalystRatings?.rating ?? 0.0, analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: ticker.tickerAnalystRatings?.strongBuy ?? 0),
+                                                                              WSRData.WSRDataDetails(name: "BULLISH", count: ticker.tickerAnalystRatings?.buy ?? 0),
+                                                                              WSRData.WSRDataDetails(name: "NEUTRAL", count: ticker.tickerAnalystRatings?.hold ?? 0),
+                                                                              WSRData.WSRDataDetails(name: "BEARISH", count: ticker.tickerAnalystRatings?.sell ?? 0),
+                                                                              WSRData.WSRDataDetails(name: "VERY BEARISH", count: ticker.tickerAnalystRatings?.strongSell ?? 0)])
         
-        self.recommendedScore = 75.0
+        self.recommendedScore = 0.0
         
         self.news = []
         self.altStocks = []
@@ -207,7 +207,7 @@ class TickerInfo {
             let count: Int
         }
         
-        let rate: Double
+        let rate: Float
         let analystsCount: Int
         let detailedStats: [WSRDataDetails]
     }

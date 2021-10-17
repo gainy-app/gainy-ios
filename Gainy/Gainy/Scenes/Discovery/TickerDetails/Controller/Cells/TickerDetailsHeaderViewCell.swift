@@ -20,6 +20,9 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     }
     
     @IBAction func shareAction() {
+        if let url = URL(string: Constants.Links.rhLink + (tickerInfo?.symbol ?? "")) {
+            UIApplication.shared.openURL(url)
+        }
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
 }
