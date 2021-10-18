@@ -26,7 +26,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     private var fpc: FloatingPanelController!
     private var currentCollectionToChange: Int = 0
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)
-    
+    private var shouldDismissFloatingPanel = false
+    private var floatingPanelPreviousYPosition: CGFloat? = nil
     
     //MARK: - DI
     var coordiantor: MainCoordinator?
@@ -200,11 +201,21 @@ extension SingleCollectionDetailsViewController: SortCollectionDetailsViewContro
 extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate {
     func floatingPanelDidMove(_ vc: FloatingPanelController) {
         if vc.isAttracting == false {
+            
+            if let prevY = floatingPanelPreviousYPosition {
+                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+            }
             let loc = vc.surfaceLocation
-            let minY = vc.surfaceLocation(for: .full).y - 6.0
-            let maxY = vc.surfaceLocation(for: .tip).y + 6.0
-            dprint(min(max(loc.y, minY), maxY))
-            vc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
+            let minY = vc.surfaceLocation(for: .full).y
+            let maxY = vc.surfaceLocation(for: .tip).y
+            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+            floatingPanelPreviousYPosition = max(loc.y, minY)
+        }
+    }
+    
+    func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+        if shouldDismissFloatingPanel {
+            self.fpc.dismiss(animated: true, completion: nil)
         }
     }
 }
