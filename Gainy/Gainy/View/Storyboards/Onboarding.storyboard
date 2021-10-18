@@ -31,9 +31,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="WJh-39-t3m">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="WJh-39-t3m">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="e27-O5-jCU">
                                 <rect key="frame" x="38" y="136.5" width="338" height="553"/>
@@ -96,10 +95,14 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="e27-O5-jCU" firstAttribute="leading" secondItem="ujz-sJ-Je3" secondAttribute="leading" constant="38" id="EqQ-gq-Gbc"/>
+                            <constraint firstAttribute="trailing" secondItem="WJh-39-t3m" secondAttribute="trailing" id="MMF-ME-Ugm"/>
+                            <constraint firstItem="WJh-39-t3m" firstAttribute="leading" secondItem="ayN-nQ-hC9" secondAttribute="leading" id="N6N-ra-Ntq"/>
                             <constraint firstItem="e27-O5-jCU" firstAttribute="centerY" secondItem="ujz-sJ-Je3" secondAttribute="centerY" constant="-40" id="Oac-Hs-tu5"/>
+                            <constraint firstAttribute="bottom" secondItem="WJh-39-t3m" secondAttribute="bottom" id="eqD-l8-agq"/>
                             <constraint firstItem="ujz-sJ-Je3" firstAttribute="trailing" secondItem="k8J-Tc-Hjf" secondAttribute="trailing" constant="40" id="ix5-7V-vPG"/>
                             <constraint firstItem="ujz-sJ-Je3" firstAttribute="bottom" secondItem="k8J-Tc-Hjf" secondAttribute="bottom" constant="15" id="ocV-jO-Ygn"/>
                             <constraint firstItem="ujz-sJ-Je3" firstAttribute="trailing" secondItem="e27-O5-jCU" secondAttribute="trailing" constant="38" id="ou6-rY-A8i"/>
+                            <constraint firstItem="WJh-39-t3m" firstAttribute="top" secondItem="ayN-nQ-hC9" secondAttribute="top" id="pxS-oj-W0k"/>
                             <constraint firstItem="k8J-Tc-Hjf" firstAttribute="leading" secondItem="ujz-sJ-Je3" secondAttribute="leading" constant="40" id="yij-QV-7L6"/>
                         </constraints>
                     </view>
@@ -425,9 +428,8 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="h3x-Y7-YV2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="h3x-Y7-YV2">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TKP-Cc-QvB">
                                 <rect key="frame" x="4" y="44" width="406" height="717"/>
@@ -444,10 +446,14 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="tlc-YS-tf5"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="h3x-Y7-YV2" secondAttribute="trailing" id="BDo-eI-Juf"/>
+                            <constraint firstItem="h3x-Y7-YV2" firstAttribute="top" secondItem="khA-J7-gRR" secondAttribute="top" id="JKg-VI-9NP"/>
                             <constraint firstItem="TKP-Cc-QvB" firstAttribute="leading" secondItem="khA-J7-gRR" secondAttribute="leading" constant="4" id="RdJ-Nj-VBY"/>
                             <constraint firstAttribute="trailing" secondItem="TKP-Cc-QvB" secondAttribute="trailing" constant="4" id="dRU-AX-rgQ"/>
                             <constraint firstItem="tlc-YS-tf5" firstAttribute="top" secondItem="TKP-Cc-QvB" secondAttribute="top" id="dgu-CY-Tnn"/>
+                            <constraint firstAttribute="bottom" secondItem="h3x-Y7-YV2" secondAttribute="bottom" id="fQn-Kp-b1a"/>
                             <constraint firstItem="TKP-Cc-QvB" firstAttribute="bottom" secondItem="tlc-YS-tf5" secondAttribute="bottom" constant="-101" id="jxZ-g7-tJX"/>
+                            <constraint firstItem="h3x-Y7-YV2" firstAttribute="leading" secondItem="khA-J7-gRR" secondAttribute="leading" id="mEt-J5-rnR"/>
                         </constraints>
                     </view>
                     <connections>
