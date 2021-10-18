@@ -199,7 +199,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets.init(top: 48.0, left: 10.0, bottom: 0.0, right: 10.0)
+        return UIEdgeInsets.init(top: 16.0, left: 10.0, bottom: 0.0, right: 10.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
