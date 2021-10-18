@@ -54,7 +54,8 @@ class TickerInfo {
                                                                               WSRData.WSRDataDetails(name: "NEUTRAL", count: ticker.tickerAnalystRatings?.hold ?? 0),
                                                                               WSRData.WSRDataDetails(name: "BEARISH", count: ticker.tickerAnalystRatings?.sell ?? 0),
                                                                               WSRData.WSRDataDetails(name: "VERY BEARISH", count: ticker.tickerAnalystRatings?.strongSell ?? 0)])
-        
+        let wsrParts = [(ticker.tickerAnalystRatings?.strongBuy ?? 0), (ticker.tickerAnalystRatings?.buy ?? 0), (ticker.tickerAnalystRatings?.hold ?? 0), (ticker.tickerAnalystRatings?.sell ?? 0), (ticker.tickerAnalystRatings?.strongSell ?? 0)]
+        self.wsrAnalystsCount = wsrParts.reduce(0, +)
         self.recommendedScore = 0.0
         
         self.news = []
@@ -213,6 +214,7 @@ class TickerInfo {
     }
     
     let wsjData: WSRData
+    let wsrAnalystsCount: Int
     
     //MARK: - Recommended
     let recommendedScore: Float

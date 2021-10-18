@@ -55,19 +55,22 @@ class CalendarEventsManager: NSObject {
         }
     }
     
+    private var storableEventId: String = ""
     private func addEvent(event: RemoteTicker.TickerEvent) {
-        let storeEvent: EKEvent = EKEvent(eventStore: eventStore)              
+        let storeEvent: EKEvent = EKEvent(eventStore: eventStore)
         storeEvent.title = "\(event.description ?? "")"
         storeEvent.startDate = event.am9Time
         storeEvent.endDate = event.pm11Time
         storeEvent.isAllDay = true
         storeEvent.calendar = eventStore.defaultCalendarForNewEvents
-              do {
-                  try eventStore.save(storeEvent, span: .thisEvent)
-                  scheduledEvents.append(EventMatch.init(remoteEventID: event.notifID, localEventID: storeEvent.eventIdentifier))
-              } catch let error as NSError {
-                  print("failed to save event with error : \(error)")
-              }
+        
+        let eventModalVC = EKEventEditViewController()
+        eventModalVC.event = storeEvent
+        eventModalVC.eventStore = eventStore
+        eventModalVC.editViewDelegate = self
+        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+            rootVC.presentedViewController?.present(eventModalVC, animated: true, completion: nil)
+        }
     }
     
     func deleteEvent(event: RemoteTicker.TickerEvent) {
@@ -81,7 +84,7 @@ class CalendarEventsManager: NSObject {
                     print("failed to save event with error : \(error)")
                 }
             }
-        }        
+        }
     }
     
     func isScheduled(event eventToAdd: RemoteTicker.TickerEvent) -> Bool {
@@ -90,5 +93,15 @@ class CalendarEventsManager: NSObject {
         } else {
             return false
         }
+    }
+}
+
+extension CalendarEventsManager: EKEventEditViewDelegate {
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        if action == .saved {
+            scheduledEvents.append(EventMatch.init(remoteEventID: storableEventId, localEventID: controller.event?.eventIdentifier ?? ""))
+        }
+        controller.dismiss(animated: true, completion: nil)
     }
 }

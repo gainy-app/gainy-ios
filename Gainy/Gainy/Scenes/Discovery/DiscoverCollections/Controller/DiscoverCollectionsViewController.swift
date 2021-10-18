@@ -296,6 +296,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             recommendedIdentifier: updatedRecommendedItem
         )
         
+        //Prefetching
+        CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id)
+        
         showNetworkLoader()
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
@@ -476,7 +479,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         
         // TODO: keeping local order, make it more robust and flexible
-        //onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
+        onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
+        
         UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         UserProfileManager.shared.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
         

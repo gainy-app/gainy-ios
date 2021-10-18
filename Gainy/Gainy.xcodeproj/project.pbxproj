@@ -88,6 +88,7 @@
 		33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD626CD475700B11E58 /* CustomHostingController.swift */; };
 		337D612A26D514AE0048AE62 /* VHLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D612926D514AE0048AE62 /* VHLines.swift */; };
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
+		3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381A56F271D48CA001A1EDA /* CollectionsManager.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
 		339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */; };
 		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
@@ -431,6 +432,7 @@
 		33787FD626CD475700B11E58 /* CustomHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHostingController.swift; sourceTree = "<group>"; };
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		3381A56F271D48CA001A1EDA /* CollectionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
 		339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventsManager.swift; sourceTree = "<group>"; };
 		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
@@ -1394,6 +1396,7 @@
 				3AA52C90266013E1006A6961 /* Network.swift */,
 				3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */,
 				33626A97271826190013EE6C /* APIModels+Caching.swift */,
+				3381A56F271D48CA001A1EDA /* CollectionsManager.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
 			path = GraphQL;
@@ -2089,6 +2092,7 @@
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
 				85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */,
+				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
@@ -2462,7 +2466,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2489,7 +2493,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 49;
+				CURRENT_PROJECT_VERSION = 50;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

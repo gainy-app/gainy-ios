@@ -115,7 +115,7 @@ extension RemoteCollectionDetails: Hashable {
 
 extension RemoteCollectionDetails: Reorderable {
     typealias OrderElement = Int
-        var orderElement: OrderElement { id ?? 0 }
+    var orderElement: OrderElement { id ?? 0 }
 }
 
 extension RemoteTicker.TickerEvent {
@@ -124,10 +124,10 @@ extension RemoteTicker.TickerEvent {
     }
     
     var am9Time: Date {
-        date.dateAtStartOf(.day).startOfDay + 9.hours
+        date.startOfDay + 9.hours
     }
     var pm11Time: Date {
-        date.dateAtStartOf(.day).startOfDay + 23.hours
+        date.startOfDay + 23.hours
     }
 }
 

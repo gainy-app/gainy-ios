@@ -97,8 +97,8 @@ struct WSRView: View {
     
     var totalText: String {
         let list = ["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"]
-        let index = Int(round(totalScore / 5 ))
-        return index > -1 && index < 4 ? list[index] : ""
+        let index = Int(round(totalScore)) - 1
+        return index >= 0 && index <= 4 ? list[index] : ""
     }
 }
 

@@ -42,8 +42,6 @@ final class UserProfileManager {
     /// TODO: Borysov - implement the data source instead of using this
     var recommendedCollections: [Collection] = []
     var yourCollections: [Collection] = []
-    var remoteRawCollectionDetails: [RemoteCollectionDetails] = []
-    var remoteRawYourCollections: [RemoteCollectionDetails] = []
     
     public func cleanup() {
         
@@ -81,9 +79,10 @@ final class UserProfileManager {
                     self.profileLoaded = false
                     return
                 }
+                let oldFavs = self.favoriteCollections
                 self.favoriteCollections = appProfile.profileFavoriteCollections.map({ item in
                     item.collectionId
-                })
+                }).reorder(by: oldFavs)
                 self.interests = appProfile.profileInterests.map({ item in
                     item.interestId
                 })

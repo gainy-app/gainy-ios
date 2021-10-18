@@ -43,7 +43,7 @@
             <objects>
                 <viewController storyboardIdentifier="TickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfJ-n1-GhL" customClass="TickerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qp4-Xo-X4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">
@@ -506,6 +506,9 @@
                                                 <constraint firstItem="HcZ-PK-ihh" firstAttribute="leading" secondItem="1fG-He-EsU" secondAttribute="leading" id="vZL-eq-9Mk"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="analyticsLbl" destination="HcZ-PK-ihh" id="MqJ-sL-TWI"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsRecommendedViewCell" id="FC0-zv-JCu" customClass="TickerDetailsRecommendedViewCell" customModule="Gainy" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1391.5" width="414" height="156"/>

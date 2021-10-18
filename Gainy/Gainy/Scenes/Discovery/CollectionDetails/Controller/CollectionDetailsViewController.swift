@@ -41,7 +41,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
                 if let profileID = UserProfileManager.shared.profileID {
-                 
+                    
                     let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
                     let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
                     if !shown {
@@ -257,6 +257,29 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController?.coordinator = coordinator
         handleLoginEvent()
         setupPanel()
+        
+        CollectionsManager.shared.newCollectionsPublisher.sink {[unowned self] result in
+            switch result {
+            case .fetched(let model):
+                self.addNewCollections([model])
+                break
+            case .fetchedFailed:
+                break
+            }
+        }.store(in: &self.cancellables)
+    }
+    
+    private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
+        self.viewModel?.collectionDetails.append(contentsOf: models)
+        if var snapshot = self.dataSource?.snapshot() {
+            if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
+                snapshot.insertItems(models, afterItem: last)
+            } else {
+                snapshot.appendItems(models,
+                                 toSection: .collectionWithCards)
+            }
+            self.dataSource?.apply(snapshot, animatingDifferences: false)
+        }
     }
     
     public func cancelSearchAsNeeded() {
@@ -393,6 +416,21 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         
+        //Using Cache
+        guard !CollectionsManager.shared.haveUnfetchedItems else {
+            showNetworkLoader()
+            fetchFailedCollections {
+                DispatchQueue.main.async { [weak self] in
+                    self?.centerInitialCollectionInTheCollectionView()
+                }
+            }
+            return
+        }
+        
+        guard CollectionsManager.shared.collections.isEmpty else {
+            return
+        }       
+        
         showNetworkLoader()
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
             switch result {
@@ -403,9 +441,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
-                UserProfileManager.shared.remoteRawYourCollections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+                CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
                 
-                let collectionIDs = UserProfileManager.shared.remoteRawYourCollections.compactMap(\.id)
+                let collectionIDs = CollectionsManager.shared.collections.compactMap(\.id)
                 
                 TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
                     DispatchQueue.main.async {
@@ -416,12 +454,47 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 //Paging
-                self?.viewModel?.collectionOffset = UserProfileManager.shared.remoteRawCollectionDetails.count + 1
+                self?.viewModel?.collectionOffset = CollectionsManager.shared.collections.count + 1
                 self?.viewModel?.hasMorePages = (collections.count == 20)
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()
+                completion()
+                self?.hideLoader()
+            }
+        }
+    }
+    
+    private func fetchFailedCollections(completion: @escaping () -> Void) {
+        showNetworkLoader()
+        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: Array(CollectionsManager.shared.failedToLoad))) { [weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                    //Going back
+                    self?.hideLoader()
+                    completion()
+                    return
+                }
+                CollectionsManager.shared.collections.append(contentsOf: collections)
+                CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+                
+                let collectionIDs = collections.compactMap(\.id)
+                
+                TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
+                    DispatchQueue.main.async {
+                        
+                        let newModels = CollectionsManager.shared.convertToModel(collections)
+                        self?.addNewCollections(newModels)
+                        
+                        completion()
+                        self?.hideLoader()
+                    }
+                }
+                
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion()
                 self?.hideLoader()
             }
@@ -460,12 +533,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
-        let yourCollections = UserProfileManager.shared
-            .remoteRawYourCollections
-            .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
-        
-        viewModel?.collectionDetails = yourCollections
-            .map { CollectionDetailsViewModelMapper.map($0) }
+        viewModel?.collectionDetails =  CollectionsManager.shared.convertToModel(CollectionsManager.shared.collections)
     }
     
     private func initViewModels() {
@@ -536,7 +604,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if Auth.auth().currentUser != nil {
             
             if let profileID = UserProfileManager.shared.profileID {
-             
+                
                 let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
                 let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
                 if !shown {
@@ -561,19 +629,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     //MARK: - Swap Items
     
-    func swapItemsAt(_ sourceInd: Int, destInd: Int) {
+    func swapItemsAt(_ sourceId: Int, destId: Int) {
+        
+        CollectionsManager.shared.collections.swapIDs(sourceId, destId)
+        viewModel?.collectionDetails.swapIDs(sourceId, destId)
         guard var snapshot = dataSource?.snapshot() else {return}
         
         guard let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
             if let model = anyHashable as? CollectionDetailViewCellModel {
-                return model.id == sourceInd
+                return model.id == sourceId
             }
             return false
         }) else {return}
         
         guard let destItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
             if let model = anyHashable as? CollectionDetailViewCellModel {
-                return model.id == destInd
+                return model.id == destId
             }
             return false
         }) else {return}
@@ -584,18 +655,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     //MARK: - Delete Items
     
-    func deleteItem(_ sourceInd: Int) {
-        //        guard var snapshot = dataSource?.snapshot() else {return}
-        //        guard snapshot.sectionIdentifiers.contains(.collectionWithCards) else {return}
-        //        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
-        //            if let model = anyHashable as? CollectionDetailViewCellModel {
-        //                return model.id == sourceInd
-        //            }
-        //            return false
-        //        }) {
-        //            snapshot.deleteItems([sourceItem])
-        //            dataSource?.apply(snapshot)
-        //        }
+    func deleteItem(_ sourceItemID: Int) {
+        //Sources delete
+        CollectionsManager.shared.collections.removeAll(where: {$0.id == sourceItemID})
+        viewModel?.collectionDetails.removeAll(where: {$0.id == sourceItemID})
+        
+        guard var snapshot = dataSource?.snapshot() else {return}
+        guard snapshot.sectionIdentifiers.contains(.collectionWithCards) else {return}
+        if let sourceItem = snapshot.itemIdentifiers(inSection: .collectionWithCards).first(where: { anyHashable in
+            if let model = anyHashable as? CollectionDetailViewCellModel {
+                return model.id == sourceItemID
+            }
+            return false
+        }) {
+            snapshot.deleteItems([sourceItem])
+            dataSource?.apply(snapshot)
+        }
     }
 }
 

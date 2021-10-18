@@ -29,6 +29,11 @@ extension Array where Element: Reorderable {
     }
 }
 
+extension Int: Reorderable {
+    typealias OrderElement = Int
+    var orderElement: OrderElement { self }
+}
+
 extension Array where Element: Hashable {
     func uniqued() -> Array {
         var buffer = Array()

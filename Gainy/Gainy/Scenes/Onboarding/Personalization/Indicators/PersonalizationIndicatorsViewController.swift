@@ -226,7 +226,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpMarketReturnsView() {
         
         let title = NSLocalizedString("Average market returns", comment: "Market Returns Title")
-        let description = NSLocalizedString("Please tell us, what is an average market\nreturn is in your opinion", comment: "Market Returns Description")
+        let description = NSLocalizedString("Please tell us, what is an average market\nreturn in your opinion", comment: "Market Returns Description")
         self.sliderViewMarketReturns.configureWith(title: title)
         self.sliderViewMarketReturns.configureWith(description: description)
         let minValueCaption = NSLocalizedString("less", comment: "Market Returns Min Caption").uppercased()
