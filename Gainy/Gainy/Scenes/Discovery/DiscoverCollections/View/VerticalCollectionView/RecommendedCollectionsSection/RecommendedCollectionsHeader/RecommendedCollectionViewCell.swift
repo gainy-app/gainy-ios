@@ -62,7 +62,9 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
         label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 0
+        label.numberOfLines = 2
+        label.minimumScaleFactor = 0.75
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
 
