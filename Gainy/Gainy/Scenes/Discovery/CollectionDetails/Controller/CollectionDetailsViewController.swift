@@ -272,13 +272,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
         self.viewModel?.collectionDetails.append(contentsOf: models)
         if var snapshot = self.dataSource?.snapshot() {
-            if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
-                snapshot.insertItems(models, afterItem: last)
-            } else {
-                snapshot.appendItems(models,
-                                 toSection: .collectionWithCards)
+            if snapshot.indexOfSection(.collectionWithCards) != nil {
+                if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
+                    snapshot.insertItems(models, afterItem: last)
+                } else {
+                    snapshot.appendItems(models,
+                                     toSection: .collectionWithCards)
+                }
+                self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
-            self.dataSource?.apply(snapshot, animatingDifferences: false)
         }
     }
     
