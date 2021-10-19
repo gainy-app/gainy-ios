@@ -267,7 +267,7 @@ struct ScatterChartView: View {
         let stepWidth: CGFloat = width / CGFloat(points.count-1)
         let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
         
-        let index:Int = Int(floor((toPoint.x-15)/stepWidth))
+        let index:Int = Int(floor((toPoint.x)/stepWidth))
         if (index >= 0 && index < points.count){
             lineViewModel.currentDataNumber = chartData.points[index].0
             lineViewModel.currentDataValue = Float(chartData.points[index].1).price

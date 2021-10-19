@@ -402,13 +402,8 @@ final class CollectionHorizontalView: UIView {
 
     @objc
     private func settingsButtonTapped(_: UIButton) {
-//        if let tapHandler = onPlusButtonPressed, buttonState == .unchecked {
-//            buttonState = .checked
-//            tapHandler()
-//        } else if let tapHandler = onCheckButtonPressed, buttonState == .checked {
-//            buttonState = .unchecked
-//            tapHandler()
-//        }
+        NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
+        GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
     }
 
     @objc

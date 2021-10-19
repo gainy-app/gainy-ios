@@ -37,7 +37,7 @@ final class TickersLiveFetcher {
             
             for batch in batchSymbols {
                 dprint("Fetching \(batch.joined(separator: ","))")
-                currentlyFetching.union(Set.init(batch))   
+                currentlyFetching = currentlyFetching.union(Set.init(batch))
                 
                 if batch.count > 0 {
                     group.enter()
@@ -82,9 +82,34 @@ final class TickersLiveFetcher {
             }
         } else {
             dprint("Nothing to fetch")
+            dprint("Left: \(Array(currentlyFetching))")
+            if !currentlyFetching.isEmpty {
+                Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: Array(currentlyFetching))) { result in
+                    switch result {
+                    case .success(let graphQLResult):
+                        dprint("LiveData returned: \((graphQLResult.data?.fetchLivePrices ?? []).compactMap{$0?.symbol}.joined(separator: ", "))")
+                        for data in (graphQLResult.data?.fetchLivePrices ?? []) {
+                            
+                            if let data = data {
+                                TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
+                                self.currentlyFetching.remove(data.symbol ?? "")
+                            }
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                            completion()
+                        })
+                    case .failure(let error):
+                        dprint("Failure when making GraphQL request. Error: \(error)")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                            completion()
+                        })
+                    }
+                }
+            } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 completion()
             })
+            }
         }
     }
     

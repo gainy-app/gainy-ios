@@ -26,6 +26,7 @@ final class CollectionSearchController: NSObject {
     var loading: ((Bool) -> Void)?
     var collectionsUpdated: (() -> Void)?
     var onShowCardDetails: ((RemoteTickerDetails) -> Void)? = nil
+    var onCollectionDelete: ((Int) -> Void)? = nil
     
     var recommendedCollections: [RecommendedCollectionViewCellModel] {
         get {
@@ -69,12 +70,24 @@ final class CollectionSearchController: NSObject {
                 case .collections:
                     let cell: RecommendedCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
                     if self.collections.count > 0, let collection = self.collections[indexPath.row] as? RemoteCollectionDetails {
+                        
+                        let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0)
+                            ? .checked
+                            : .unchecked
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
                                            stocksAmount: "\(collection.size ?? 0)",
                                            imageName: "",
-                                           plusButtonState: .unchecked)
+                                           plusButtonState: buttonState)
+                        
+                        cell.onPlusButtonPressed = { [weak self] in                            
+                            self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id ?? 0)
+                        }
+                        
+                        cell.onCheckButtonPressed = { [weak self] in
+                            self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id ?? 0)
+                        }
                     }
                     return cell
                 case .news:
@@ -596,6 +609,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID)
             }
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
@@ -605,6 +619,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
+                onCollectionDelete?(collectionID)
             }
         }
     }

@@ -255,6 +255,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }
         }
+        searchController?.onCollectionDelete = {[weak self] collectionId in
+            self?.deleteItem(collectionId)
+        }
+        
         searchController?.coordinator = coordinator
         handleLoginEvent()
         setupPanel()

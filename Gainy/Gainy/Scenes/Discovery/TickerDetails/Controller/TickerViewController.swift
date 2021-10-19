@@ -59,7 +59,9 @@ final class TickerViewController: BaseViewController {
     //MARK: - Actions
     
     @IBAction func shareAction(_ sender: Any) {
-        NotificationManager.shared.showMessage(title: "Sorry", text: "Sharing will be added soon", cancelTitle: "OK", actions: nil)
+        if let url = URL(string: Constants.Links.rhLink + (viewModel?.dataSource.ticker.symbol ?? "")) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : viewModel?.dataSource.ticker.symbol ?? ""])
     }
     
