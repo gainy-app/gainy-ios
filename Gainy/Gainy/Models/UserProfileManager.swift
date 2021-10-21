@@ -141,6 +141,7 @@ final class UserProfileManager {
                 
                 self.getProfileCollections(completion: completion)
             }
+            return
         }
         
         
