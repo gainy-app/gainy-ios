@@ -68,9 +68,11 @@ class CalendarEventsManager: NSObject {
         eventModalVC.event = storeEvent
         eventModalVC.eventStore = eventStore
         eventModalVC.editViewDelegate = self
-        if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
-            rootVC.presentedViewController?.present(eventModalVC, animated: true, completion: nil)
-        }
+        DispatchQueue.main.async {
+            if let rootVC = UIApplication.shared.keyWindow?.rootViewController {
+                 rootVC.presentedViewController?.present(eventModalVC, animated: true, completion: nil)
+            }
+        }        
     }
     
     func deleteEvent(event: RemoteTicker.TickerEvent) {

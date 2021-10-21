@@ -7,6 +7,7 @@
 
 import UIKit
 import Cache
+import Combine
 
 typealias LivePrice = FetchLiveTickersDataQuery.Data.FetchLivePrice
 
@@ -29,10 +30,11 @@ final class TickerLiveStorage {
     
     init() {
         let diskConfig = DiskConfig(name: "SmallCache")
+        let diskConfig1 = DiskConfig(name: "SmallCache")
         let memoryConfig = MemoryConfig(
           // Expiry date that will be applied by default for every added object
           // if it's not overridden in the `setObject(forKey:expiry:)` method
-          expiry: .date(Date().addingTimeInterval(60)),
+          expiry: .date(Date().addingTimeInterval(60 * 15)),
           /// The maximum number of objects in memory the cache should hold
           countLimit: 5000,
           /// The maximum total cost that the cache can hold before it starts evicting objects
@@ -56,7 +58,7 @@ final class TickerLiveStorage {
         )
         
         matchesStorage = try? Storage<String, CachedMatchScore>(
-          diskConfig: diskConfig,
+          diskConfig: diskConfig1,
           memoryConfig: memoryLongConfig,
           transformer: TransformerFactory.forCodable(ofType: CachedMatchScore.self) // Storage<String, User>
         )
@@ -81,13 +83,20 @@ final class TickerLiveStorage {
     @Atomic
     private var tickerKeys: [String] = []
  
+    //MARK: - Informing
+    
+    private let matchScoreCleared: PassthroughSubject<Void, Never> = PassthroughSubject()
+    
+    var matchScoreClearedPublisher: AnyPublisher<Void, Never> {
+        matchScoreCleared.share().eraseToAnyPublisher()
+    }
+    
     //MARK: - Tickers Data
     
     func missingSymbolsFrom(_ fullReq: [String], inProgress: Set<String>) -> [String] {
-        let storedSet = Set(tickerKeys)
+        //let storedSet = Set(tickerKeys)
         let searchSet = Set(fullReq)
-        let loadSet = Set(inProgress)
-        return Array(searchSet.subtracting(storedSet).subtracting(loadSet))
+        return Array(searchSet)
     }
     
     func haveSymbol(_ symbol: String) -> Bool {
@@ -130,5 +139,6 @@ final class TickerLiveStorage {
     
     func clearMatchData() {
         try? matchesStorage?.removeAll()
+        matchScoreCleared.send()
     }
 }

@@ -9,7 +9,11 @@ fragment RemoteCollectionDetails on collections {
   name
   image_url
   description
-  size
+  ticker_collections_aggregate {
+    aggregate {
+      count
+    }
+  }
   ticker_collections {
     ticker {
     ...RemoteTickerDetails

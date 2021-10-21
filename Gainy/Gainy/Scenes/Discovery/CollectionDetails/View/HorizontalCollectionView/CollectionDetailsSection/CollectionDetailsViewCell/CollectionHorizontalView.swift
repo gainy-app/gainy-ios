@@ -184,10 +184,6 @@ final class CollectionHorizontalView: UIView {
         sortLbl = textLabel
         button.addSubview(textLabel)
 
-        button.addTarget(self,
-                         action: #selector(settingsButtonTapped(_:)),
-                         for: .touchUpInside)
-
 //        button.bounds = button.frame.insetBy(dx: 4, dy: 8)
 
         return button
@@ -402,8 +398,8 @@ final class CollectionHorizontalView: UIView {
 
     @objc
     private func settingsButtonTapped(_: UIButton) {
-        NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
         GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
+        NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
     }
 
     @objc

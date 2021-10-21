@@ -61,7 +61,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
                 
                 if val.tag == storedBtnIdx {
                     
-                    ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 80))
+                    ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 60))
                     ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 46.0 * CGFloat(idx)))
                 }
             }

@@ -29,6 +29,13 @@ struct WSRView: View {
         let color: Color
         let name: String
         let count: Int
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+        }
+        static func == (lhs: PieData, rhs: PieData) -> Bool {
+            return lhs.name == rhs.name
+        }
     }
     
     private var lastAngle: Angle = .degrees(0)
@@ -56,7 +63,7 @@ struct WSRView: View {
                     Text(totalText)
                         .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
                         .font(UIFont.compactRoundedRegular(11).uiFont)
-                }                
+                }
             }
             .frame(width: 119, height: 119)
             
@@ -76,23 +83,23 @@ struct WSRView: View {
             }
             
         }.fixedSize(horizontal: false, vertical: false)
-        .onAppear(perform: {
-            
-            var lastAngle: Angle = .degrees(0.0)
-            var colors = [UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "FFD600")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor, UIColor(hexString: "009459")!.uiColor]
-            
-            let totalCount = Double(progress.map(\.count).reduce(0, +))
-            
-            progress.forEach({
-                let progress = Double($0.count) / totalCount
-                pieData.append(PieData.init(startAngle: lastAngle,
-                                            progress: progress,
-                                            color: colors.popLast()!,
-                                            name: $0.name,
-                                            count: $0.count))
-                lastAngle = .degrees(lastAngle.degrees + (360 * progress))
+            .onAppear(perform: {
+                
+                var lastAngle: Angle = .degrees(0.0)
+                var colors = [UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "FFD600")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor, UIColor(hexString: "009459")!.uiColor]
+                
+                let totalCount = Double(progress.map(\.count).reduce(0, +))
+                
+                progress.forEach({
+                    let progress = Double($0.count) / totalCount
+                    pieData.append(PieData.init(startAngle: lastAngle,
+                                                progress: progress,
+                                                color: colors.popLast()!,
+                                                name: $0.name,
+                                                count: $0.count))
+                    lastAngle = .degrees(lastAngle.degrees + (360 * progress))
+                })
             })
-        })
     }
     
     var totalText: String {

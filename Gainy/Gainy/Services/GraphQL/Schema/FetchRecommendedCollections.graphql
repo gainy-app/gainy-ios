@@ -13,5 +13,9 @@ fragment RemoteShortCollectionDetails on collections {
   image_url
   enabled
   description
-  size
+  ticker_collections_aggregate {
+    aggregate {
+      count
+    }
+  }
 }

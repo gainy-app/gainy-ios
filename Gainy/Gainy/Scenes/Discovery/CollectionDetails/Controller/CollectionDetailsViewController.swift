@@ -263,13 +263,28 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         handleLoginEvent()
         setupPanel()
         
-        CollectionsManager.shared.newCollectionsPublisher.sink {[unowned self] result in
+        CollectionsManager.shared.newCollectionsPublisher
+            .receive(on: RunLoop.main)
+            .sink {[unowned self] result in
             switch result {
             case .fetched(let model):
                 self.addNewCollections([model])
                 break
             case .fetchedFailed:
                 break
+            }
+        }.store(in: &self.cancellables)
+        
+        TickerLiveStorage.shared.matchScoreClearedPublisher
+            .receive(on: RunLoop.main)
+            .sink {[unowned self] _ in
+            dprint("Reloading visible cells after MS clear")
+            if var snapshot = self.dataSource?.snapshot() {
+                if snapshot.itemIdentifiers.count > 0 {
+                    let ids =  self.collectionDetailsCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                    snapshot.reloadItems(ids)
+                }
+                self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }.store(in: &self.cancellables)
     }
@@ -282,7 +297,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     snapshot.insertItems(models, afterItem: last)
                 } else {
                     snapshot.appendItems(models,
-                                     toSection: .collectionWithCards)
+                                         toSection: .collectionWithCards)
                 }
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
@@ -520,12 +535,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     func centerInitialCollectionInTheCollectionView() {
+        guard let snap = dataSource?.snapshot() else {return}
         guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {return}
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
         
-        collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
-                                                     at: .centeredHorizontally,
-                                                     animated: false)
+        if snap.sectionIdentifiers.count > 0 {
+            collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
+                                                         at: .centeredHorizontally,
+                                                         animated: false)
+        }
     }
     
     func currentBackgroundImageFrame() -> CGRect {

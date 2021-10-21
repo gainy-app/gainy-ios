@@ -162,7 +162,7 @@ struct ScatterChartView: View {
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.top, 2)
                         Text(statsDayValue)
-                            .foregroundColor(ticker?.priceColor.uiColor ?? .black)
+                            .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     HStack {
@@ -218,14 +218,13 @@ struct ScatterChartView: View {
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
     
-    let medianPoints: [Double] = [8,54,23,32,12,37,7,23,43].shuffled()
+    let medianPoints: [Double] = [34, 35, 36, 37].shuffled()
     private var chartView: some View {
         GeometryReader{ geometry in
         ZStack {
             if chartData.points.count > 1 {
                 LineView(data: chartData, title: "Full chart", style: chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
             }            
-            LineView(data: ChartData.init(points: medianPoints), title: "Full chart", style: Styles.lineChartStyleMedian, viewModel: lineViewModel).offset(y: -40).opacity(isMedianVisible ? 1.0 : 0.0)
             VStack(alignment: .leading) {
                 Spacer()
                 HStack {
@@ -243,7 +242,7 @@ struct ScatterChartView: View {
         .padding(.all, 0)
         .animation(.linear)
         .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
-        .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
+        .gesture(DragGesture(minimumDistance: 0)
         .onChanged({ value in
             lineViewModel.dragLocation = value.location
             lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)

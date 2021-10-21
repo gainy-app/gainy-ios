@@ -55,7 +55,7 @@ final class TickerDetailsInnerUpcomingViewCell: UITableViewCell {
         didSet {
             guard let event = upcomingEvent else {return}
             nameLbl.text = event.description
-            dateLbl.text = "?"
+            dateLbl.text = ""
             enabledSwitch.setOn(CalendarEventsManager.shared.isScheduled(event: event), animated: true)
         }
     }

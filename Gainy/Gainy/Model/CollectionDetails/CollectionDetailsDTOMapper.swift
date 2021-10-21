@@ -7,7 +7,7 @@ enum CollectionDetailsDTOMapper {
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
-            collectionStocksAmount: dto.size ?? 0,
+            collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: false,
             cards: dto.tickerCollections.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
@@ -25,7 +25,7 @@ enum CollectionDetailsDTOMapper {
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
-            collectionStocksAmount: dto.size ?? 0,
+            collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: true,
             cards: dto.tickerCollections.map {
                 CollectionDetailsDTOMapper.mapTickerDetails(
