@@ -21,3 +21,6 @@ extension CollectionDetailViewCellModel: Hashable {
         lhs.id == rhs.id && lhs.inYourCollectionList == rhs.inYourCollectionList
     }
 }
+
+extension CollectionDetailViewCellModel : CustomStringConvertible {
+}

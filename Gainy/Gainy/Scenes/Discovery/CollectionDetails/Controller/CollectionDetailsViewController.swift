@@ -192,7 +192,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         collectionDetailsCollectionView.dataSource = dataSource
         
-        dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
+        dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
             collectionView: collectionDetailsCollectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
             let cell = self?.sections[indexPath.section].configureCell(
@@ -203,21 +203,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
             
             if let cell = cell as? CollectionDetailsViewCell {
-                if let model = modelItem as? CollectionDetailViewCellModel {
-                    cell.tag = model.id
-                }
+                cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     self?.onShowCardDetails?(ticker)
                 }
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}
                     guard self.presentedViewController == nil else {return}
-                    if let model = modelItem as? CollectionDetailViewCellModel {
-                        self.sortingVS.collectionId = model.id
+                    
+                        self.sortingVS.collectionId = modelItem.id
                         self.sortingVS.collectionCell = cell
-                        self.currentCollectionToChange = model.id
-                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-                    }
+                        self.currentCollectionToChange = modelItem.id
+                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                    
                     self.present(self.fpc, animated: true, completion: nil)
                 }
             }
@@ -383,8 +381,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var collectionDetailsCollectionView: UICollectionView!
     private var searchCollectionView: UICollectionView!
     
-    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
-    private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
+    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>?
+    private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, CollectionDetailViewCellModel>()
     
     private var searchController: CollectionSearchController?
     private var discoverCollectionsBtn: UIButton?
@@ -467,12 +465,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 let collectionIDs = CollectionsManager.shared.collections.compactMap(\.id)
                 
-                TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
-                    DispatchQueue.main.async {
-                        self?.initViewModelsFromData()
-                        completion()
-                        self?.hideLoader()
-                    }
+                DispatchQueue.main.async {
+                    self?.initViewModelsFromData()
+                    completion()
+                    self?.hideLoader()
                 }
                 
                 //Paging
@@ -504,15 +500,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 let collectionIDs = collections.compactMap(\.id)
                 
-                TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
-                    DispatchQueue.main.async {
-                        
-                        let newModels = CollectionsManager.shared.convertToModel(collections)
-                        self?.addNewCollections(newModels)
-                        
-                        completion()
-                        self?.hideLoader()
-                    }
+                DispatchQueue.main.async {
+                    
+                    let newModels = CollectionsManager.shared.convertToModel(collections)
+                    self?.addNewCollections(newModels)
+                    
+                    completion()
+                    self?.hideLoader()
                 }
                 
             case .failure(let error):
@@ -632,12 +626,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
                 let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-                if !shown {
-                    UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
-                    self.onDiscoverCollections?(true)
-                    return
-                }
-                
+                                
                 if UserProfileManager.shared.favoriteCollections.isEmpty {
                     self.onDiscoverCollections?(false)
                 } else {
@@ -645,6 +634,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         DispatchQueue.main.async { [weak self] in
                             self?.initViewModels()
                             self?.centerInitialCollectionInTheCollectionView()
+                            
+                            if !shown {
+                                UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                                self?.onDiscoverCollections?(true)
+                                return
+                            }
                         }
                     }
                 }

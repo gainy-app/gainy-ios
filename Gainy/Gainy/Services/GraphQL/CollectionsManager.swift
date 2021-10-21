@@ -46,16 +46,13 @@ final class CollectionsManager {
                     return
                 }
                 for newCol in collections {
-                    TickersLiveFetcher.shared.getMatchScores(collectionIds: [colID]) {
-                        
-                        self.collections.append(newCol)                        
-                        
-                        let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
-                        newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                        
-                        if self.failedToLoad.contains(colID) {
-                            self.failedToLoad.remove(colID)
-                        }
+                    self.collections.append(newCol)
+                    
+                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                    newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    
+                    if self.failedToLoad.contains(colID) {
+                        self.failedToLoad.remove(colID)
                     }
                 }
                 

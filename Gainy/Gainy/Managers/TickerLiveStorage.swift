@@ -30,7 +30,20 @@ final class TickerLiveStorage {
     
     init() {
         let diskConfig = DiskConfig(name: "SmallCache")
-        let diskConfig1 = DiskConfig(name: "SmallCache")
+        let diskConfigLong = DiskConfig(
+          // The name of disk storage, this will be used as folder name within directory
+          name: "Floppy",
+          // Expiry date that will be applied by default for every added object
+          // if it's not overridden in the `setObject(forKey:expiry:)` method
+          expiry: .never,
+          // Maximum size of the disk cache storage (in bytes)
+          maxSize: 1000,
+          // Where to store the disk cache. If nil, it is placed in `cachesDirectory` directory.
+          directory: try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
+            appropriateFor: nil, create: true).appendingPathComponent("MatchScoreCache"),
+          // Data protection is used to store files in an encrypted format on disk and to decrypt them on demand
+          protectionType: .complete
+        )
         let memoryConfig = MemoryConfig(
           // Expiry date that will be applied by default for every added object
           // if it's not overridden in the `setObject(forKey:expiry:)` method
@@ -58,7 +71,7 @@ final class TickerLiveStorage {
         )
         
         matchesStorage = try? Storage<String, CachedMatchScore>(
-          diskConfig: diskConfig1,
+          diskConfig: diskConfigLong,
           memoryConfig: memoryLongConfig,
           transformer: TransformerFactory.forCodable(ofType: CachedMatchScore.self) // Storage<String, User>
         )

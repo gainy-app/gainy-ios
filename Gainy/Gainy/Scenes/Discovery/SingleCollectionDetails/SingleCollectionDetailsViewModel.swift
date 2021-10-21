@@ -102,12 +102,10 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 let selectedCollections = collections
                 let collectionIDs = selectedCollections.compactMap(\.id)
                 
-                TickersLiveFetcher.shared.getMatchScores(collectionIds: collectionIDs) {
-                    DispatchQueue.main.async {
-                        self?.convertToModels(selectedCollections)
-                        self?.loadingSubject.send(false)
-                        completed?()
-                    }
+                DispatchQueue.main.async {
+                    self?.convertToModels(selectedCollections)
+                    self?.loadingSubject.send(false)
+                    completed?()
                 }
                 
             case .failure(let error):
