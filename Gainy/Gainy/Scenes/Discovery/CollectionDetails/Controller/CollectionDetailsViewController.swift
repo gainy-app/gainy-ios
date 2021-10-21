@@ -382,9 +382,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
         }
-        guard !isNetworkLoading else {
-            return
-        }
         guard let profileID = UserProfileManager.shared.profileID else {
             
             if let authorizationManager = self.authorizationManager {
@@ -420,6 +417,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 self.getRemoteData(completion: completion)
             }
+            return
         }
         
         
@@ -435,6 +433,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         guard CollectionsManager.shared.collections.isEmpty else {
+            self.hideLoader()
+            completion()
             return
         }       
         

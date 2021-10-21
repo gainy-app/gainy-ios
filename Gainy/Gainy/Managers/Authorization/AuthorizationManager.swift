@@ -131,6 +131,7 @@ final class AuthorizationManager {
             }
             self.firebaseAuthToken = nil
             UserProfileManager.shared.cleanup()
+            CollectionsManager.shared.collections = []
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)
