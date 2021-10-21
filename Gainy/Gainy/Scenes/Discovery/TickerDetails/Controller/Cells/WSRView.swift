@@ -103,7 +103,7 @@ struct WSRView: View {
     }
     
     var totalText: String {
-        let list = ["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"]
+        let list = Array(["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"].reversed())
         let index = Int(round(totalScore)) - 1
         return index >= 0 && index <= 4 ? list[index] : ""
     }
