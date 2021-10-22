@@ -221,8 +221,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("An indicator of how much you are willing to take\nrisks in order to obtain greater rewards\npotentially", comment: "Investment Goals Description")
         self.sliderViewInvestmentGoals.configureWith(title: title)
         self.sliderViewInvestmentGoals.configureWith(description: description)
-        let minValueCaption = NSLocalizedString("less risky", comment: "Investment Goals Min Caption").uppercased()
-        let maxValueCaption = NSLocalizedString("more rewards", comment: "Investment Goals Max Caption").uppercased()
+        let minValueCaption = NSLocalizedString("Less risky", comment: "Investment Goals Min Caption")
+        let maxValueCaption = NSLocalizedString("More rewards", comment: "Investment Goals Max Caption")
         self.sliderViewInvestmentGoals.configureWith(minLabelText: minValueCaption, maxLabelText: maxValueCaption)
         self.sliderViewInvestmentGoals.delegate = self
         self.sliderViewInvestmentGoals.configureWith(currentValue: 0.5)
@@ -250,8 +250,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("When do you plan to use money that you\ninvested", comment: "Investment Horizon Description")
         self.sliderViewInvestmentHorizon.configureWith(title: title)
         self.sliderViewInvestmentHorizon.configureWith(description: description)
-        let minValueCaption = NSLocalizedString("sooner", comment: "Investment Horizon Min Caption").uppercased()
-        let maxValueCaption = NSLocalizedString("later", comment: "Investment Horizon Max Caption").uppercased()
+        let minValueCaption = NSLocalizedString("Short", comment: "Investment Horizon Min Caption")
+        let maxValueCaption = NSLocalizedString("Long", comment: "Investment Horizon Max Caption")
         self.sliderViewInvestmentHorizon.configureWith(minLabelText: minValueCaption, maxLabelText: maxValueCaption)
         self.sliderViewInvestmentHorizon.delegate = self
         self.sliderViewInvestmentHorizon.configureWith(currentValue: 0.5)
@@ -277,8 +277,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("If the investment doesn’t pan out, how serious\nis the consequence", comment: "Damage of failure Description")
         self.sliderViewDamageOfFailure.configureWith(title: title)
         self.sliderViewDamageOfFailure.configureWith(description: description)
-        let minValueCaption = NSLocalizedString("very sensitive", comment: "Damage of failure Min Caption").uppercased()
-        let maxValueCaption = NSLocalizedString("less sensitive", comment: "Damage of failure Max Caption").uppercased()
+        let minValueCaption = NSLocalizedString("Very sensitive", comment: "Damage of failure Min Caption")
+        let maxValueCaption = NSLocalizedString("Less sensitive", comment: "Damage of failure Max Caption")
         self.sliderViewDamageOfFailure.configureWith(minLabelText: minValueCaption, maxLabelText: maxValueCaption)
         self.sliderViewDamageOfFailure.delegate = self
         self.sliderViewDamageOfFailure.configureWith(currentValue: 0.5)
@@ -290,8 +290,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let description = NSLocalizedString("How risky do you think stock market is?", comment: "Stock market risks Description")
         self.sliderViewStockMarketRisks.configureWith(title: title)
         self.sliderViewStockMarketRisks.configureWith(description: description)
-        let minValueCaption = NSLocalizedString("less risky", comment: "Stock market risks Min Caption").uppercased()
-        let maxValueCaption = NSLocalizedString("very risky", comment: "Stock market risks Max Caption").uppercased()
+        let minValueCaption = NSLocalizedString("Less risky", comment: "Stock market risks Min Caption")
+        let maxValueCaption = NSLocalizedString("Very risky", comment: "Stock market risks Max Caption")
         self.sliderViewStockMarketRisks.configureWith(minLabelText: minValueCaption, maxLabelText: maxValueCaption)
         self.sliderViewStockMarketRisks.delegate = self
         self.sliderViewStockMarketRisks.configureWith(currentValue: 0.5)
@@ -425,63 +425,55 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             let valueDescriptionFormat = NSLocalizedString("%@ %@%%", comment: "Investment Goals Value Format")
             let minValue = 3 + 20 * currentValue
             let maxValue = 15 + 20 * currentValue
-            var descriptionString = NSLocalizedString("Moderate", comment: "Moderate").uppercased()
+            var descriptionString = NSLocalizedString("Moderate", comment: "Moderate")
             if minValue <= 9 {
-                descriptionString = NSLocalizedString("Low", comment: "Low").uppercased()
+                descriptionString = NSLocalizedString("Low", comment: "Low")
             } else if minValue >= 18 {
-                descriptionString = NSLocalizedString("High", comment: "High").uppercased()
+                descriptionString = NSLocalizedString("High", comment: "High")
             }
             let valueString = String.init(format: valueDescriptionFormat, descriptionString,  "\(Int(minValue))-\(Int(maxValue))")
             return valueString
         } else if sender == self.sliderViewInvestmentHorizon {
-            let value = Int(1 + 119 * currentValue)
-            let months = value % 12
-            let years = value / 12
-            var yearsString: String?
-            var monthsString: String?
-            if years > 0 {
-                let yearsFormat = NSLocalizedString("within %@ %@", comment: "Market Returns Value Years Format")
-                let yearStringPart = NSLocalizedString("year", comment: "Market Returns Year")
-                let yearsStringPart = NSLocalizedString("years", comment: "Market Returns Years")
-                yearsString = String.init(format: yearsFormat, "\(years)", (years == 1 ? yearStringPart : yearsStringPart)).uppercased()
+            var investmentHorizonMessage = NSLocalizedString("Might need it urgently", comment: "Investment Horizon Might need it urgently")
+            let value = Int(100 * currentValue)
+            if value >= 0 && value <= 25 {
+                investmentHorizonMessage = NSLocalizedString("Might need it urgently", comment: "Investment Horizon Might need it urgently")
+            } else if value > 25 && value <= 50 {
+                investmentHorizonMessage = NSLocalizedString("Within 1 year", comment: "Investment Horizon Within 1 year")
+            } else if value > 50 && value <= 75 {
+                investmentHorizonMessage = NSLocalizedString("Within 5 years", comment: "Investment Horizon Within 5 years")
+            } else if value >= 75 && value <= 100 {
+                investmentHorizonMessage = NSLocalizedString("After 10+ years", comment: "Investment Horizon After 10+ years")
             }
-            if months > 0 {
-                let monthsFormat = NSLocalizedString("%@ %@ %@", comment: "Market Returns Value Months Format")
-                let monthStringPart = NSLocalizedString("month", comment: "Market Returns Month")
-                let monthsStringPart = NSLocalizedString("months", comment: "Market Returns Months")
-                monthsString = String.init(format: monthsFormat, ((yearsString != nil) ? "" : "within"), "\(months)", (months == 1 ? monthStringPart : monthsStringPart)).uppercased()
-            }
-            var result = yearsString ?? ""
-            result += monthsString ?? ""
-            return result
+            return investmentHorizonMessage
         } else if sender == self.sliderViewDamageOfFailure {
-            var damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less").uppercased()
+            var damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less")
             let value = Int(100 * currentValue)
             if value >= 0 && value <= 15 {
-                damageOfFailureMessage = NSLocalizedString("I will need to survive", comment: "Damage Of Failure Survive").uppercased()
+                damageOfFailureMessage = NSLocalizedString("I will need to survive", comment: "Damage Of Failure Survive")
             } else if value >= 15 && value <= 30 {
-                damageOfFailureMessage = NSLocalizedString("I will need to work hard", comment: "Damage Of Failure Work Hard").uppercased()
+                damageOfFailureMessage = NSLocalizedString("I will need to work hard", comment: "Damage Of Failure Work Hard")
             } else if value >= 30 && value <= 60 {
-                damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less").uppercased()
+                damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less")
             } else if value >= 60 && value <= 85 {
-                damageOfFailureMessage = NSLocalizedString("I will still be able to invest", comment: "Damage Of Failure Invest").uppercased()
+                damageOfFailureMessage = NSLocalizedString("I will still be able to invest", comment: "Damage Of Failure Invest")
             } else if value > 85 && value <= 100 {
-                damageOfFailureMessage = NSLocalizedString("I will not feel the change", comment: "Damage Of Failure Тot Аeel Еhe Сhange").uppercased()
+                damageOfFailureMessage = NSLocalizedString("I will not feel the change", comment: "Damage Of Failure Тot Аeel Еhe Сhange")
             }
             return damageOfFailureMessage
         } else if sender == self.sliderViewStockMarketRisks {
-            var damageOfFailureMessage = NSLocalizedString("somewhat risky", comment: "Stock market risks somewhat").uppercased()
+            var damageOfFailureMessage = NSLocalizedString("Somewhat risky", comment: "Stock market risks somewhat")
             let value = Int(100 * currentValue)
             if value >= 0 && value <= 15 {
-                damageOfFailureMessage = NSLocalizedString("mostly safe", comment: "Stock market risks mostly safe").uppercased()
+                damageOfFailureMessage = NSLocalizedString("Mostly safe", comment: "Stock market risks mostly safe")
             } else if value >= 15 && value <= 30 {
-                damageOfFailureMessage = NSLocalizedString("less risky", comment: "Stock market risks less risky").uppercased()
+                damageOfFailureMessage = NSLocalizedString("Less risky", comment: "Stock market risks less risky")
             } else if value >= 30 && value <= 60 {
-                damageOfFailureMessage = NSLocalizedString("somewhat risky", comment: "Stock market risks somewhat").uppercased()
+                damageOfFailureMessage = NSLocalizedString("Somewhat risky", comment: "Stock market risks somewhat")
             } else if value >= 60 && value <= 85 {
-                damageOfFailureMessage = NSLocalizedString("risky", comment: "Stock market risks risky").uppercased()
+                damageOfFailureMessage = NSLocalizedString("Risky", comment: "Stock market risks risky")
             } else if value > 85 && value <= 100 {
-                damageOfFailureMessage = NSLocalizedString("very risky", comment: "Stock market risks very risky").uppercased()
+                damageOfFailureMessage = NSLocalizedString("Very risky", comment: "Stock market risks very risky")
             }
             return damageOfFailureMessage
         }
