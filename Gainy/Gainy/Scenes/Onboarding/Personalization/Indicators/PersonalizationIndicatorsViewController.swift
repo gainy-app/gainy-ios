@@ -27,7 +27,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @IBOutlet weak var lastSectionStackView: UIStackView!
     
     @IBOutlet weak var sliderViewInvestmentGoals: PersonalizationSliderSectionView!
-    @IBOutlet weak var sliderViewMarketReturns: PersonalizationSliderSectionView!
+    @IBOutlet weak var marketReturnsSourceView: PersonalizationTitlePickerSectionView!
     
     @IBOutlet weak var sliderViewInvestmentHorizon: PersonalizationSliderSectionView!
     @IBOutlet weak var urgentMoneySourceView: PersonalizationTitlePickerSectionView!
@@ -44,6 +44,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private var indicatorView: UIView?
     private var currentTab: PersonalizationTab = .investmentGoals
     
+    private var selectedMarketReturns: [PersonalizationInfoValue]?
     private var selectedSources: [PersonalizationInfoValue]?
     private var selectedApproaches: [PersonalizationInfoValue]?
     
@@ -139,7 +140,11 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "marketReturns", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMarketReturnsHidden(isHidden: false)
-            self.setNextButtonHidden(isHidden: self.sliderViewMarketReturns.isInitialLayout)
+            if let selectedMarketReturns = self.selectedMarketReturns {
+                self.setNextButtonHidden(isHidden: selectedMarketReturns.count == 0)
+            } else {
+                self.setNextButtonHidden(isHidden: true)
+            }
         case .investmentHorizon:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentHorizon", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
@@ -227,13 +232,16 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         
         let title = NSLocalizedString("Average market returns", comment: "Market Returns Title")
         let description = NSLocalizedString("Please tell us, what is an average market\nreturn in your opinion", comment: "Market Returns Description")
-        self.sliderViewMarketReturns.configureWith(title: title)
-        self.sliderViewMarketReturns.configureWith(description: description)
-        let minValueCaption = NSLocalizedString("less", comment: "Market Returns Min Caption").uppercased()
-        let maxValueCaption = NSLocalizedString("more", comment: "Market Returns Max Caption").uppercased()
-        self.sliderViewMarketReturns.configureWith(minLabelText: minValueCaption, maxLabelText: maxValueCaption)
-        self.sliderViewMarketReturns.delegate = self
-        self.sliderViewMarketReturns.configureWith(currentValue: 0.15)
+        
+        self.marketReturnsSourceView.configureWith(title: title)
+        self.marketReturnsSourceView.configureWith(description: description)
+        self.marketReturnsSourceView.itemSpacing = CGFloat(16.0)
+        let sources: [PersonalizationInfoValue] = [.market_return_6,
+                                                   .market_return_15,
+                                                   .market_return_25,
+                                                   .market_return_50]
+        self.marketReturnsSourceView.configureWith(sources: sources)
+        self.marketReturnsSourceView.delegate = self
     }
     
     private func setUpInvestmentHorizonView() {
@@ -322,8 +330,8 @@ extension PersonalizationIndicatorsViewController {
     func setMarketReturnsHidden(isHidden: Bool) {
         
         UIView.animate(withDuration: 0.25) {
-            self.sliderViewMarketReturns.isHidden = isHidden
-            self.sliderViewMarketReturns.alpha = isHidden ? 0.0 : 1.0
+            self.marketReturnsSourceView.isHidden = isHidden
+            self.marketReturnsSourceView.alpha = isHidden ? 0.0 : 1.0
         }
     }
     
@@ -347,7 +355,28 @@ extension PersonalizationIndicatorsViewController {
 extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSectionViewDelegate {
     func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [PersonalizationInfoValue]?) {
         
-        if self.urgentMoneySourceView == sender {
+        if marketReturnsSourceView == sender {
+            self.selectedMarketReturns = sources
+            if let selectedMarketReturns = self.selectedMarketReturns {
+                self.setNextButtonHidden(isHidden: selectedMarketReturns.count == 0)
+                if (selectedMarketReturns.count == 0) {
+                    self.coordinator?.profileInfoBuilder.averageMarketReturn = nil
+                } else {
+                    if let source = sources?.first {
+                        var averageMarketReturn = source.description()
+                        averageMarketReturn.removeLast()
+                        if let averageMarketReturnValue = Int(averageMarketReturn) {
+                            self.coordinator?.profileInfoBuilder.averageMarketReturn = averageMarketReturnValue
+                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                        }
+                    }
+                }
+            } else {
+                self.setNextButtonHidden(isHidden: true)
+                self.coordinator?.profileInfoBuilder.averageMarketReturn = nil
+            }
+        }
+        else if self.urgentMoneySourceView == sender {
             self.selectedSources = sources
             if let selectedSources = self.selectedSources {
                 self.setNextButtonHidden(isHidden: selectedSources.count == 0)
@@ -403,12 +432,6 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                 descriptionString = NSLocalizedString("High", comment: "High").uppercased()
             }
             let valueString = String.init(format: valueDescriptionFormat, descriptionString,  "\(Int(minValue))-\(Int(maxValue))")
-            return valueString
-            
-        } else if sender == self.sliderViewMarketReturns {
-            let valueDescriptionFormat = NSLocalizedString("%@%%", comment: "Market Returns")
-            let value = 50 * currentValue
-            let valueString = String.init(format: valueDescriptionFormat,  "\(Int(value))")
             return valueString
         } else if sender == self.sliderViewInvestmentHorizon {
             let value = Int(1 + 119 * currentValue)
@@ -482,23 +505,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             GainyAnalytics.logEvent("damage_of_failure_picked", params: ["damage_of_failure" : "\((1.0 - currentValue))", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else {
             self.setNextButtonHidden(isHidden: false)
-            if sender == self.sliderViewMarketReturns {
-                var averageMarketReturn = 6
-                if currentValue > 0 && currentValue <= 0.25 {
-                    averageMarketReturn = 6
-                }
-                if currentValue > 0.25 && currentValue <= 0.5 {
-                    averageMarketReturn = 15
-                }
-                if currentValue > 0.5 && currentValue <= 0.75 {
-                    averageMarketReturn = 25
-                }
-                if currentValue > 0.75 && currentValue <= 1.0 {
-                    averageMarketReturn = 50
-                }
-                self.coordinator?.profileInfoBuilder.averageMarketReturn = averageMarketReturn
-                GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturn)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
-            } else if sender == self.sliderViewStockMarketRisks {
+            if sender == self.sliderViewStockMarketRisks {
                 var stockMarketRisks = "very_safe"
                 let value = Int(100 * currentValue)
                 if value >= 0 && value <= 15 {
