@@ -218,7 +218,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
         collectionHorizontalView.updateChargeLbl(settings.sorting.title)
         
-        collectionListHeader.updateMetrics(settings.marketDataToShow.prefix(5).map(\.shortTitle))
+        collectionListHeader.updateMetrics(settings.marketDataToShow)
         self.cards = self.cards.sorted(by: { lhs, rhs in
             settings.sorting.sortFunc(isAsc: settings.ascending, lhs, rhs)
         })

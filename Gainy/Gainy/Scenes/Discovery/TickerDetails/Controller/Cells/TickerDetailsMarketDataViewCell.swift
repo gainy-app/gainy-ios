@@ -103,7 +103,7 @@ final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
         self.showExplanationWith(title: title, description: description, height: height, linkText: linkString, link: link)
     }
     
-    public func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
+    private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
         
         let explanationVc = FeatureDescriptionViewController.init()
         explanationVc.configureWith(title: title)
