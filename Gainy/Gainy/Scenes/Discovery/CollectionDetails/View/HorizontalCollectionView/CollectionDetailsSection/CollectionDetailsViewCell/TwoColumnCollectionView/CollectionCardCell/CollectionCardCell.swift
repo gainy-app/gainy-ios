@@ -32,12 +32,16 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         contentView.addSubview(highlightsContainerView)
         contentView.addSubview(highlightLabel)
 
+        contentView.addSubview(matchScoreButton)
         contentView.addSubview(matchCircle)
         contentView.addSubview(matchLabel)
         
         matchCircle.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
         matchLabel.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
+        matchScoreButton.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
         
+        matchScoreButton.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
+        matchScoreButton.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         matchCircle.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         matchCircle.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         matchLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
@@ -139,6 +143,18 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         return view
     }()
 
+    lazy var matchScoreButton: UIButton = {
+        let button = UIButton()
+
+        button.backgroundColor = UIColor.Gainy.white
+
+        button.addTarget(self,
+                         action: #selector(firstMarketMarkerTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
+    
     // TODO: 1: use custom Button
     lazy var marketMarkerOneButton: UIButton = {
         let button = UIButton()
@@ -515,11 +531,38 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     // MARK: Functions
 
     @objc
-    private func firstMarketMarkerTapped(_: UIButton) {}
+    private func firstMarketMarkerTapped(_: UIButton) {
+        let matchScoreExmplanationVc = FeatureDescriptionViewController.init()
+        let title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
+        let description = NSLocalizedString("This metric is built based on your profile. We use data like your investment goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
+        matchScoreExmplanationVc.configureWith(title: title)
+        matchScoreExmplanationVc.configureWith(description: description)
+        FloatingPanelManager.shared.configureWithHeight(height: 135.0)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: matchScoreExmplanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
 
     @objc
-    private func secondMarketMarkerTapped(_: UIButton) {}
+    private func secondMarketMarkerTapped(_: UIButton) {
+        let revenuGrowthVc = FeatureDescriptionViewController.init()
+        let title = NSLocalizedString("Quarterly Revenue Growth, Year over Year", comment: "revenu growth explanation title")
+        let description = NSLocalizedString("Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter.\nUsually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on investopedia.", comment: "revenu growth explanation description")
+        revenuGrowthVc.configureWith(title: title)
+        revenuGrowthVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp")
+        FloatingPanelManager.shared.configureWithHeight(height: 185.0)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: revenuGrowthVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
 
     @objc
-    private func thirdMarketMarkerTapped(_: UIButton) {}
+    private func thirdMarketMarkerTapped(_: UIButton) {
+        let evsVc = FeatureDescriptionViewController.init()
+        let title = NSLocalizedString("Enterprise Value-to-Sales", comment: "Enterprise Value-to-Sales explanation title")
+        let description = NSLocalizedString("In simple terms, it shows how much the company is valued compared to its sales (revenue) results.\nUsually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on investopedia.", comment: "Enterprise Value-to-Sales explanation description")
+        evsVc.configureWith(title: title)
+        evsVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/e/enterprisevaluesales.asp")
+        FloatingPanelManager.shared.configureWithHeight(height: 175.0)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: evsVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
 }

@@ -21,6 +21,7 @@ final class PersonalizationSliderSectionView: UIView {
     private let titleLabel: UILabel = UILabel.newAutoLayout()
     private let descriptionLabel: UILabel = UILabel.newAutoLayout()
     private let gainySliderView: GainySliderView = GainySliderView.newAutoLayout()
+    private let explanationLabel: UILabel = UILabel.newAutoLayout()
     
     public var isInitialLayout: Bool {
         get {
@@ -63,11 +64,17 @@ final class PersonalizationSliderSectionView: UIView {
         self.descriptionLabel.sizeToFit()
     }
     
+    public func configureWith(explanation: String) {
+        
+        self.explanationLabel.text = explanation
+    }
+    
     private func setUp() {
         
         self.setUpTitleLabel()
         self.setUpDescriptionLabel()
         self.setUpSliderView()
+        self.setUpExplanationLabel()
     }
     
     private func setUpTitleLabel() {
@@ -98,6 +105,20 @@ final class PersonalizationSliderSectionView: UIView {
         self.descriptionLabel.textAlignment = .left
         self.descriptionLabel.text = "Description Description Description Description Description Description Description Description"
         self.descriptionLabel.sizeToFit()
+    }
+    
+    private func setUpExplanationLabel() {
+        
+        self.addSubview(self.explanationLabel)
+        self.explanationLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 28.0)
+        self.explanationLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 28.0)
+        self.explanationLabel.autoPinEdge(.top, to: .bottom, of: self.gainySliderView, withOffset: 14.0)
+        self.explanationLabel.autoSetDimension(.height, toSize: 16.0, relation: .greaterThanOrEqual)
+        
+        self.explanationLabel.font = UIFont.proDisplayRegular(14.0)
+        self.explanationLabel.textColor = UIColor(hexString: "#09141F")
+        self.explanationLabel.textAlignment = .left
+        self.explanationLabel.text = ""
     }
     
     private func setUpSliderView() {

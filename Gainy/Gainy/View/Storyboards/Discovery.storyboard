@@ -43,7 +43,7 @@
             <objects>
                 <viewController storyboardIdentifier="TickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfJ-n1-GhL" customClass="TickerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qp4-Xo-X4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">
@@ -406,6 +406,14 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ky7-vY-QgR">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                        <connections>
+                                                                            <action selector="onActionButtonTouchUpInside:" destination="Zu8-Zp-a1g" eventType="touchUpInside" id="RQW-Z1-4yP"/>
+                                                                        </connections>
+                                                                    </button>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data Market Data Market Data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpo-ET-jEn">
                                                                         <rect key="frame" x="8" y="8" width="112" height="29"/>
                                                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
@@ -435,19 +443,24 @@
                                                                     <constraint firstAttribute="trailing" secondItem="sqr-oa-LAS" secondAttribute="trailing" constant="8" id="1iM-J3-VyN"/>
                                                                     <constraint firstAttribute="trailing" secondItem="aqI-4y-eBY" secondAttribute="trailing" constant="8" id="2vw-aX-gsZ"/>
                                                                     <constraint firstAttribute="trailing" secondItem="bpo-ET-jEn" secondAttribute="trailing" constant="8" id="46H-Cg-a12"/>
+                                                                    <constraint firstItem="Ky7-vY-QgR" firstAttribute="top" secondItem="gSK-2m-vH6" secondAttribute="top" id="EG1-68-7rk"/>
                                                                     <constraint firstItem="aqI-4y-eBY" firstAttribute="top" secondItem="sqr-oa-LAS" secondAttribute="bottom" constant="-10" id="GWz-rP-xDm"/>
                                                                     <constraint firstItem="bpo-ET-jEn" firstAttribute="top" secondItem="gSK-2m-vH6" secondAttribute="top" constant="8" id="Ggn-Cr-XBc"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Ky7-vY-QgR" secondAttribute="trailing" id="JNW-dh-2bY"/>
                                                                     <constraint firstItem="oUs-dd-2wV" firstAttribute="top" secondItem="gSK-2m-vH6" secondAttribute="top" id="Pnq-gs-vfF"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Ky7-vY-QgR" secondAttribute="bottom" id="Tq2-bX-AJU"/>
                                                                     <constraint firstItem="oUs-dd-2wV" firstAttribute="leading" secondItem="gSK-2m-vH6" secondAttribute="leading" id="Wm6-3B-paU"/>
                                                                     <constraint firstAttribute="bottom" secondItem="aqI-4y-eBY" secondAttribute="bottom" constant="8" id="awM-Dp-kNV"/>
                                                                     <constraint firstAttribute="trailing" secondItem="oUs-dd-2wV" secondAttribute="trailing" id="bkU-Bt-M8i"/>
                                                                     <constraint firstItem="sqr-oa-LAS" firstAttribute="leading" secondItem="gSK-2m-vH6" secondAttribute="leading" constant="8" id="eHG-EJ-Ztc"/>
+                                                                    <constraint firstItem="Ky7-vY-QgR" firstAttribute="leading" secondItem="gSK-2m-vH6" secondAttribute="leading" id="jfy-Qs-QXQ"/>
                                                                     <constraint firstItem="bpo-ET-jEn" firstAttribute="leading" secondItem="gSK-2m-vH6" secondAttribute="leading" constant="8" id="kaR-FD-DVk"/>
                                                                     <constraint firstItem="aqI-4y-eBY" firstAttribute="leading" secondItem="gSK-2m-vH6" secondAttribute="leading" constant="8" id="m3H-2M-Sw8"/>
                                                                     <constraint firstAttribute="bottom" secondItem="oUs-dd-2wV" secondAttribute="bottom" id="tpb-aJ-yMd"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <connections>
+                                                                <outlet property="actionButton" destination="Ky7-vY-QgR" id="foV-xD-9J0"/>
                                                                 <outlet property="nameLbl" destination="bpo-ET-jEn" id="cET-4x-Hf5"/>
                                                                 <outlet property="periodLbl" destination="sqr-oa-LAS" id="1ri-SO-Q02"/>
                                                                 <outlet property="valueLbl" destination="aqI-4y-eBY" id="0xO-6i-7tG"/>

@@ -10,6 +10,10 @@ import PureLayout
 
 enum PersonalizationInfoValue: Int {
     
+    case market_return_6
+    case market_return_15
+    case market_return_25
+    case market_return_50
     case checking_savings
     case stock_investments
     case credit_card
@@ -26,6 +30,11 @@ enum PersonalizationInfoValue: Int {
     
     func description() -> String {
         switch self {
+            
+        case .market_return_6: return NSLocalizedString ("6%", comment: "6%")
+        case .market_return_15: return NSLocalizedString("15%", comment: "15%")
+        case .market_return_25: return NSLocalizedString("25%", comment: "25%")
+        case .market_return_50: return NSLocalizedString("50%", comment: "50%")
         case .checking_savings: return NSLocalizedString("Checking/savings", comment: "Checking/savings")
         case .stock_investments: return NSLocalizedString("Stock investments", comment: "Stock investments")
         case .credit_card: return NSLocalizedString("Credit card", comment: "Credit card")
@@ -53,6 +62,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
     
     public weak var delegate: PersonalizationTitlePickerSectionViewDelegate?
     
+    public var itemSpacing: CGFloat = CGFloat(13.0)
     private let titleLabel: UILabel = UILabel.newAutoLayout()
     private let descriptionLabel: UILabel = UILabel.newAutoLayout()
     private var collectionView: UICollectionView?
@@ -174,6 +184,14 @@ extension PersonalizationTitlePickerSectionView: UICollectionViewDelegate, UICol
             return CGSize.zero
         }
         
+        if source == .market_return_6 {
+            return CGSize(width: 56.0, height: 40)
+        } else if source == .market_return_15 {
+            return CGSize(width: 63.0, height: 40)
+        } else if source == .market_return_25 || source == .market_return_50 {
+            return CGSize(width: 64.0, height: 40)
+        }
+        
         let title = source.description()
         let width = title.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width
         var size = CGSize.init(width: (ceil(width) + CGFloat(24.0)), height: CGFloat(40))
@@ -186,12 +204,12 @@ extension PersonalizationTitlePickerSectionView: UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
 
-        return CGFloat(13.0)
+        return itemSpacing
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
 
-        return CGFloat(13.0)
+        return itemSpacing
     }
     
     
