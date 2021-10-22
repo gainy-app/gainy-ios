@@ -422,28 +422,35 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
     func sliderSectionViewFormattedValueString(sender: PersonalizationSliderSectionView, currentValue: Float) -> String {
         
         if sender == self.sliderViewInvestmentGoals {
-            let valueDescriptionFormat = NSLocalizedString("%@ %@%%", comment: "Investment Goals Value Format")
-            let minValue = 3 + 20 * currentValue
-            let maxValue = 15 + 20 * currentValue
-            var descriptionString = NSLocalizedString("Moderate", comment: "Moderate")
-            if minValue <= 9 {
-                descriptionString = NSLocalizedString("Low", comment: "Low")
-            } else if minValue >= 18 {
-                descriptionString = NSLocalizedString("High", comment: "High")
-            }
-            let valueString = String.init(format: valueDescriptionFormat, descriptionString,  "\(Int(minValue))-\(Int(maxValue))")
-            return valueString
-        } else if sender == self.sliderViewInvestmentHorizon {
-            var investmentHorizonMessage = NSLocalizedString("Might need it urgently", comment: "Investment Horizon Might need it urgently")
+            var investmentGoalsMessage = NSLocalizedString("Safe 6-12%", comment: "Investment Goals Safe 6-12%")
+            var investmentGoalsExplanation = NSLocalizedString("Passive trading", comment: "passive trading")
             let value = Int(100 * currentValue)
             if value >= 0 && value <= 25 {
-                investmentHorizonMessage = NSLocalizedString("Might need it urgently", comment: "Investment Horizon Might need it urgently")
+                investmentGoalsMessage = NSLocalizedString("Safe (6-12%)", comment: "Investment Goals Safe 6-12%")
+                investmentGoalsExplanation = NSLocalizedString("Passive trading", comment: "passive trading")
             } else if value > 25 && value <= 50 {
-                investmentHorizonMessage = NSLocalizedString("Within 1 year", comment: "Investment Horizon Within 1 year")
+                investmentGoalsMessage = NSLocalizedString("Moderate (12-24%)", comment: "Investment Goals Moderate 12-24%")
+                investmentGoalsExplanation = NSLocalizedString("Mix of single stocks and ETFs", comment: "mix of single stocks and ETFs")
             } else if value > 50 && value <= 75 {
-                investmentHorizonMessage = NSLocalizedString("Within 5 years", comment: "Investment Horizon Within 5 years")
+                investmentGoalsMessage = NSLocalizedString("Growth (25-50%)", comment: "Investment Goals Growth 25-50%")
+                investmentGoalsExplanation = NSLocalizedString("Trading once a while and follow major events", comment: "trading once a while and follow major events")
             } else if value >= 75 && value <= 100 {
-                investmentHorizonMessage = NSLocalizedString("After 10+ years", comment: "Investment Horizon After 10+ years")
+                investmentGoalsMessage = NSLocalizedString("Speculative play (50%+)", comment: "Investment Goals Speculative play 50%+")
+                investmentGoalsExplanation = NSLocalizedString("Daily market analysis and high risks", comment: "daily market analysis and high risks")
+            }
+            self.sliderViewInvestmentGoals.configureWith(explanation: investmentGoalsExplanation)
+            return investmentGoalsMessage
+        } else if sender == self.sliderViewInvestmentHorizon {
+            var investmentHorizonMessage = NSLocalizedString("Might need it urgently (ex. bills or savings)", comment: "Investment Horizon Might need it urgently")
+            let value = Int(100 * currentValue)
+            if value >= 0 && value <= 25 {
+                investmentHorizonMessage = NSLocalizedString("Might need it urgently (ex. bills or savings)", comment: "Investment Horizon Might need it urgently")
+            } else if value > 25 && value <= 50 {
+                investmentHorizonMessage = NSLocalizedString("Within 1 year (ex. car)", comment: "Investment Horizon Within 1 year")
+            } else if value > 50 && value <= 75 {
+                investmentHorizonMessage = NSLocalizedString("Within 5 years (ex. house)", comment: "Investment Horizon Within 5 years")
+            } else if value >= 75 && value <= 100 {
+                investmentHorizonMessage = NSLocalizedString("After 10+ years (ex. retirement)", comment: "Investment Horizon After 10+ years")
             }
             return investmentHorizonMessage
         } else if sender == self.sliderViewDamageOfFailure {

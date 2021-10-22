@@ -479,14 +479,14 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                         <rect key="frame" x="0.0" y="0.0" width="1656" height="806.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalCentering" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-oW-fvz">
+                                    <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalCentering" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-oW-fvz">
                                         <rect key="frame" x="0.0" y="270" width="414" height="196"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7N1-VY-kom" customClass="PersonalizationSliderSectionView" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="196"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="196" id="eH2-d1-zB3"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="236" id="eH2-d1-zB3"/>
                                                 </constraints>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycn-tZ-v55" customClass="PersonalizationTitlePickerSectionView" customModule="Gainy" customModuleProvider="target">
