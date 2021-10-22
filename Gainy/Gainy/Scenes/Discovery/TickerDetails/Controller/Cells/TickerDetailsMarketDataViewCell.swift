@@ -98,6 +98,8 @@ final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
             linkString = "Read more on investopedia"
             link = "https://www.investopedia.com/terms/n/net_margin.asp"
             height = 135.0
+        } else {
+            return
         }
         
         self.showExplanationWith(title: title, description: description, height: height, linkText: linkString, link: link)
