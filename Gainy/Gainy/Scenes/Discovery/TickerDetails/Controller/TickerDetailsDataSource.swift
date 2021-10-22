@@ -63,14 +63,22 @@ final class TickerDetailsDataSource: NSObject {
         return wsrHosting
     }()
     
+    private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
-        var rootView = ScatterChartView(ticker: ticker.ticker,
-                                        chartData: ticker.localChartData,
+        
+        chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData)
+        var rootView = ScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
     }()
+    
+    func updateChart() {
+        chartViewModel.ticker = ticker.ticker
+        chartViewModel.localTicker = ticker
+        chartViewModel.chartData = ticker.localChartData
+    }
     
     private lazy var chartDelegate: ScatterChartDelegate = {
         let delegateObject =  ScatterChartDelegate()

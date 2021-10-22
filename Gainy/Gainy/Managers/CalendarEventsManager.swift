@@ -41,11 +41,15 @@ class CalendarEventsManager: NSObject {
         let authStatus = getAuthorizationStatus()
         switch authStatus {
         case .authorized:
-            self.addEvent(event: event)
+            DispatchQueue.main.async { [weak self] in
+                self?.addEvent(event: event)
+            }
         case .notDetermined:
             requestAccess { (accessGranted, error) in
                 if accessGranted {
-                    self.addEvent(event: event)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.addEvent(event: event)
+                    }
                 }
             }
         case .denied, .restricted:

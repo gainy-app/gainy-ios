@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftDate
 
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
@@ -102,6 +103,30 @@ class TickerInfo {
             }
         }
         
+        //Load day median
+        dispatchGroup.enter()
+        dprint("Date for median: \((Date().startOfDay - 1.days).toFormat("yyyy-MM-dd"))")
+        Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                if let tickers = graphQLResult.data?.tickers.first {
+                    if let industries  = tickers.tickerIndustries.first {
+                        if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}) {
+                            let firstDay = dailyStats.first ?? 0.0
+                            let lastDay = dailyStats.last ?? 0.0
+                            self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                        }
+                    }
+                }
+                dispatchGroup.leave()
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                dispatchGroup.leave()
+                break
+            }
+        }
+        
         //Load Alt Stocks
         dispatchGroup.enter()
         Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: symbol)){[weak self] result in
@@ -166,10 +191,16 @@ class TickerInfo {
         }
     }
     
+    private func pctDiff(_ x1: Float, _ x2: Float) -> Float {
+        let diff = (x2 - x1) / x1
+        return Float(round(100 * (diff * 100)) / 100)
+    }
+    
     private func updateChartData(_ data: [DiscoverChartsQuery.Data.FetchChartDatum]) {
         self.chartData = data
         self.localChartData.loadValues(data, period: chartRange)
     }
+    
     private func updateNewsData(_ data: [DiscoverNewsQuery.Data.FetchNewsDatum]) {
         self.news = data
     }
@@ -229,4 +260,8 @@ class TickerInfo {
     
     //MARK: - Upcoming events
     let upcomingEvents: [RemoteTickerDetails.TickerEvent]
+      
+    //MARK: -  Median Data
+    
+    var medianGrow: Float = 0.0
 }

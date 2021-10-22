@@ -35,16 +35,13 @@ extension Color {
 
 struct ScatterChartView: View {
     
-    init(ticker: RemoteTicker, chartData: ChartData, delegate: ScatterChartDelegate) {
-        self.ticker = ticker
-        self.chartData = chartData
+    init(viewModel: ScatterChartViewModel, delegate: ScatterChartDelegate) {
+        self.viewModel = viewModel
         self.delegate = delegate
     }
     
-    var ticker: RemoteTicker? = nil
-    
     @ObservedObject
-    var chartData: ChartData
+    var viewModel: ScatterChartViewModel
     
     @ObservedObject
     var delegate: ScatterChartDelegate
@@ -60,7 +57,7 @@ struct ScatterChartView: View {
             isLeftDurationVis = selectedTag == .d1
             delegate.range = selectedTag
             hapticTouch.impactOccurred()
-            GainyAnalytics.logEvent("ticker_chart_period_changed", params: ["tickerSymbol" : self.ticker?.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            GainyAnalytics.logEvent("ticker_chart_period_changed", params: ["tickerSymbol" : self.viewModel.ticker.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         }
     }
     
@@ -68,7 +65,7 @@ struct ScatterChartView: View {
     private var isMedianVisible: Bool = false {
         didSet {
             if isMedianVisible {
-                GainyAnalytics.logEvent("ticker_chart_period_median_pressed", params: ["tickerSymbol" : self.ticker?.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                GainyAnalytics.logEvent("ticker_chart_period_median_pressed", params: ["tickerSymbol" : self.viewModel.ticker.symbol ?? "none", "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
             }
         }
     }
@@ -142,15 +139,33 @@ struct ScatterChartView: View {
             .frame(height: 24)
             HStack {
                 //Left median
-                HStack(alignment: .center, spacing: 2) {
-                    Text("MEDIAN")
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                        .font(UIFont.proDisplayRegular(9).uiFont)
-                        .padding(.top, 2)
-                    Text("+2.34%")
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                        .font(UIFont.proDisplayRegular(11).uiFont)
+                VStack(spacing: 2) {
+                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        Text("MEDIAN")
+                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(9).uiFont)
+                            .padding(.top, 2)
+                            .frame(width: 40)
+                        Spacer()
+                        Text("\(viewModel.localTicker.medianGrow >= 0 ? "+" : "")\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%")
+                            .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(11).uiFont)
+                            .frame(maxWidth: 40)
+                    }.frame(height: 12)
+                    HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        Text("% Diff".uppercased())
+                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(9).uiFont)
+                            .padding(.top, 2)
+                            .frame(width: 40)
+                        Spacer()
+                        Text("\((statsDayValueRaw - viewModel.localTicker.medianGrow).cleanTwoDecimal)%")
+                            .foregroundColor(UIColor(named: (statsDayValueRaw -  viewModel.localTicker.medianGrow) >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(11).uiFont)
+                            
+                    }.frame(height: 12)
                 }.padding(.leading, 20)
+                .frame(maxWidth: 80)
                 .opacity(isMedianVisible ? 1.0 : 0.0)
                 
                 Spacer()
@@ -167,7 +182,7 @@ struct ScatterChartView: View {
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     HStack {
                         Spacer()
-                        Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (ticker?.currentPrice.price ?? ""))
+                        Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedMedium(20).uiFont)
                             .animation(.none)
@@ -206,9 +221,18 @@ struct ScatterChartView: View {
     private var statsDayValue: String {
         switch selectedTag {
         case .d1:
-            return ticker?.priceChangeToday.percentRaw ?? ""
+            return viewModel.ticker.priceChangeToday.percentRaw
         default:
-            return chartData.startEndDiffString
+            return viewModel.chartData.startEndDiffString
+        }
+    }
+    
+    private var statsDayValueRaw: Float {
+        switch selectedTag {
+        case .d1:
+            return viewModel.ticker.priceChangeToday
+        default:
+            return Float(viewModel.chartData.startEndDiff)
         }
     }
     
@@ -218,26 +242,25 @@ struct ScatterChartView: View {
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
     
-    let medianPoints: [Double] = [34, 35, 36, 37].shuffled()
     private var chartView: some View {
         GeometryReader{ geometry in
         ZStack {
-            if chartData.points.count > 1 {
-                LineView(data: chartData, title: "Full chart", style: chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
+            if viewModel.chartData.points.count > 1 {
+                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
             }            
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack {
-                    Text("Market closes in 15 MIN".uppercased())
-                        .padding(.leading, 20)
-                        .foregroundColor(Color(hex: "879095"))
-                        .font(UIFont.proDisplayRegular(9).uiFont)
-                    Spacer()
-                }
-            }
-            .opacity(isLeftDurationVis ? 1.0 : 0.0)
-            .opacity(isMedianVisible ? 0.0 : 1.0)
-            .padding(.bottom, -5)
+//            VStack(alignment: .leading) {
+//                Spacer()
+//                HStack {
+//                    Text("Market closes in 15 MIN".uppercased())
+//                        .padding(.leading, 20)
+//                        .foregroundColor(Color(hex: "879095"s))
+//                        .font(UIFont.proDisplayRegular(9).uiFont)
+//                    Spacer()
+//                }
+//            }
+//            .opacity(isLeftDurationVis ? 1.0 : 0.0)
+//            .opacity(isMedianVisible ? 0.0 : 1.0)
+//            .padding(.bottom, -5)
         }
         .padding(.all, 0)
         .animation(.linear)
@@ -261,15 +284,15 @@ struct ScatterChartView: View {
     }
     
     func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
-        let points = chartData.onlyPoints()
+        let points = viewModel.chartData.onlyPoints()
         guard points.count > 1 else { return .zero}
         let stepWidth: CGFloat = width / CGFloat(points.count-1)
         let stepHeight: CGFloat = height / CGFloat(points.max()! + points.min()!)
         
         let index:Int = Int(floor((toPoint.x)/stepWidth))
         if (index >= 0 && index < points.count){
-            lineViewModel.currentDataNumber = chartData.points[index].0
-            lineViewModel.currentDataValue = Float(chartData.points[index].1).price
+            lineViewModel.currentDataNumber = viewModel.chartData.points[index].0
+            lineViewModel.currentDataValue = Float(viewModel.chartData.points[index].1).price
             return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
         }
         return .zero

@@ -50,6 +50,7 @@ final class TickerViewController: BaseViewController {
         dprint("SHOWING LOADIER")
         viewModel?.dataSource.ticker.loadDetails {[weak self] in
             dprint("DISMISS LOADIER")
+            self?.viewModel?.dataSource.updateChart()
             self?.hideLoader()
             self?.tableView.reloadData()
         }

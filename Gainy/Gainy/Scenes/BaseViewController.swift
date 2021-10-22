@@ -125,8 +125,10 @@ class BaseViewController: UIViewController {
     
     /// Hide HUD
     func hideLoader() {
-        hudProgress?.hide(animated: true)
-        isNetworkLoading = false
+        DispatchQueue.main.async { [weak self] in            
+            self?.hudProgress?.hide(animated: true)
+            self?.isNetworkLoading = false
+        }
     }
     
     //MARK: - Analytics

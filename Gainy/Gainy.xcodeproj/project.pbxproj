@@ -24,6 +24,10 @@
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
+		3316C8DF2722929000B59D5E /* FetchStockMedianDay.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316C8DC2722929000B59D5E /* FetchStockMedianDay.graphql.swift */; };
+		3316C8E02722929000B59D5E /* FetchStockMedianWeek.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316C8DD2722929000B59D5E /* FetchStockMedianWeek.graphql.swift */; };
+		3316C8E12722929000B59D5E /* FetchStockMedianMonth.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316C8DE2722929000B59D5E /* FetchStockMedianMonth.graphql.swift */; };
+		3316C8E327229B3800B59D5E /* ScatterChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316C8E227229B3800B59D5E /* ScatterChartViewModel.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
 		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
@@ -366,6 +370,10 @@
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
+		3316C8DC2722929000B59D5E /* FetchStockMedianDay.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianDay.graphql.swift; sourceTree = "<group>"; };
+		3316C8DD2722929000B59D5E /* FetchStockMedianWeek.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianWeek.graphql.swift; sourceTree = "<group>"; };
+		3316C8DE2722929000B59D5E /* FetchStockMedianMonth.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianMonth.graphql.swift; sourceTree = "<group>"; };
+		3316C8E227229B3800B59D5E /* ScatterChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartViewModel.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
@@ -760,6 +768,9 @@
 				33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */,
 				33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */,
 				85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */,
+				3316C8DC2722929000B59D5E /* FetchStockMedianDay.graphql.swift */,
+				3316C8DE2722929000B59D5E /* FetchStockMedianMonth.graphql.swift */,
+				3316C8DD2722929000B59D5E /* FetchStockMedianWeek.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -861,6 +872,7 @@
 			children = (
 				336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */,
 				33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */,
+				3316C8E227229B3800B59D5E /* ScatterChartViewModel.swift */,
 				33FE9E4626D519A700FABC70 /* LineView.swift */,
 				33376FAC26F8AED100618CD7 /* LineViewModel.swift */,
 				33FE9E4326D5195800FABC70 /* Helpers.swift */,
@@ -2119,6 +2131,7 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
+				3316C8E12722929000B59D5E /* FetchStockMedianMonth.graphql.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
@@ -2164,6 +2177,7 @@
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
+				3316C8E327229B3800B59D5E /* ScatterChartViewModel.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
@@ -2200,6 +2214,7 @@
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
 				3A5ADA6F268DA179008659E8 /* SwipeActionButton.swift in Sources */,
+				3316C8DF2722929000B59D5E /* FetchStockMedianDay.graphql.swift in Sources */,
 				332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */,
 				85ED4DE52701FEC300FE6926 /* PrivacyViewController.swift in Sources */,
 				3AD40FB5266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift in Sources */,
@@ -2238,6 +2253,7 @@
 				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
+				3316C8E02722929000B59D5E /* FetchStockMedianWeek.graphql.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
@@ -2466,7 +2482,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2493,7 +2509,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 56;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
