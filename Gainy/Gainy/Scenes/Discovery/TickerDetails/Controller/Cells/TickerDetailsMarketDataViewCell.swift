@@ -42,6 +42,7 @@ extension TickerDetailsMarketDataViewCell: UICollectionViewDelegateFlowLayout {
 
 final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
     
+    @IBOutlet private weak var actionButton: UIButton!
     @IBOutlet private weak var nameLbl: UILabel!
     @IBOutlet private weak var periodLbl: UILabel!
     @IBOutlet private weak var valueLbl: UILabel!
@@ -52,5 +53,63 @@ final class TickerDetailsMarketInnerViewCell: UICollectionViewCell {
             periodLbl.text = marketData?.period.uppercased()
             valueLbl.text = marketData?.value
         }
+    }
+    
+    @IBAction func onActionButtonTouchUpInside(_ sender: Any) {
+        
+        guard let name = nameLbl.text, name.count > 0 else {
+            return
+        }
+        
+        var title = NSLocalizedString("Title", comment: "title")
+        var description = NSLocalizedString("Description", comment: "description")
+        var height: CGFloat = CGFloat(135.0)
+        var linkString: String? = nil
+        var link: String? = nil
+        
+        // TODO: Get the type of market data, instead of using name
+        let nameLowercased = name.lowercased()
+        if nameLowercased.contains("Revenue Growth".lowercased()) {
+            title = NSLocalizedString("Quarterly Revenue Growth, Year over Year", comment: "revenu growth explanation title")
+            description = NSLocalizedString("Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter.\nUsually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on investopedia.", comment: "revenu growth explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp"
+            height = 185.0
+            
+        } else if nameLowercased.contains("EV/S".lowercased()) {
+            title = NSLocalizedString("Enterprise Value-to-Sales", comment: "Enterprise Value-to-Sales explanation title")
+            description = NSLocalizedString("In simple terms, it shows how much the company is valued compared to its sales (revenue) results.\nUsually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on investopedia.", comment: "Enterprise Value-to-Sales explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/e/enterprisevaluesales.asp"
+            height = 175.0
+        } else if nameLowercased.contains("Market Capitalization".lowercased()) {
+            title = NSLocalizedString("Market Capitalization", comment: "Market Capitalization explanation title")
+            description = NSLocalizedString("Market capitalization, or \"market cap\" is the aggregate market value of a company represented in dollar amount. Read more on investopedia.", comment: "Market Capitalization explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/investing/market-capitalization-defined/"
+            height = 135.0
+        } else if nameLowercased.contains("30 days price change".lowercased()) {
+            title = NSLocalizedString("30 days price change", comment: "30 days price change explanation title")
+            description = NSLocalizedString("This simple metric shows how a price changed in percentage over the past 30 days to give a perspective on how an asset moved. ", comment: "30 days price change explanation description")
+            height = 135.0
+        } else if nameLowercased.contains("Net Profit Margin".lowercased()) {
+            title = NSLocalizedString("Net Profit Margin", comment:"Net Profit Margin title")
+            description = NSLocalizedString("The net profit margin, or simply net margin, measures how much net income or profit is generated as a percentage of revenue. Read more on investopedia.", comment: "Net Profit Margin explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/n/net_margin.asp"
+            height = 135.0
+        }
+        
+        self.showExplanationWith(title: title, description: description, height: height, linkText: linkString, link: link)
+    }
+    
+    public func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: title)
+        explanationVc.configureWith(description: description, linkString: linkText, link: link)
+        FloatingPanelManager.shared.configureWithHeight(height: height)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
     }
 }

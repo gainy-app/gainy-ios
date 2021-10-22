@@ -263,6 +263,9 @@
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
+		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
+		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
+		8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9FA2722C5A8002234B2 /* LinkTextView.swift */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
@@ -611,6 +614,9 @@
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
+		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
+		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
+		8520F9FA2722C5A8002234B2 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
@@ -817,6 +823,7 @@
 			isa = PBXGroup;
 			children = (
 				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
+				8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -847,6 +854,7 @@
 				33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */,
 				85CD14E226F3650A001C060C /* TextInsetsLabel.swift */,
 				8531030426F9ECA500AAAA91 /* GainyTextField.swift */,
+				8520F9FA2722C5A8002234B2 /* LinkTextView.swift */,
 				331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */,
 				33E7AA6626CFD4E000DF1CBE /* CornerView.swift */,
 				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
@@ -911,6 +919,7 @@
 			isa = PBXGroup;
 			children = (
 				33D3D4EA26CB9D21005A859B /* NotificationManager.swift */,
+				8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */,
 				85CD154226F8A937001C060C /* Authorization */,
 				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
@@ -2175,6 +2184,7 @@
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */,
 				33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */,
+				8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */,
 				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
@@ -2184,6 +2194,7 @@
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
+				8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */,
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3A4A98FB2688D495008C1968 /* CollectionDetails.swift in Sources */,
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
@@ -2232,6 +2243,7 @@
 				857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */,
 				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
 				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
+				8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */,
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
