@@ -122,6 +122,11 @@
 		33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */; };
 		33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */; };
 		33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */; };
+		33BEB93527235ADE005237CB /* FetchStockMedianWeek.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93127235ADD005237CB /* FetchStockMedianWeek.graphql.swift */; };
+		33BEB93627235ADE005237CB /* FetchStockMedianMonth.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */; };
+		33BEB93727235ADE005237CB /* FetchStockMedianDay.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */; };
+		33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93927235B02005237CB /* ScatterChartViewModel.swift */; };
+		33C4E9782726A782008D3006 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4E9772726A782008D3006 /* Configuration.swift */; };
 		33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */; };
 		33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9F26D6229300E82329 /* Double+Currencies.swift */; };
 		33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 33CDECA226D627ED00E82329 /* SwiftDate */; };
@@ -466,6 +471,11 @@
 		33BDCF7826CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsAlternativeStocksViewCell.swift; sourceTree = "<group>"; };
 		33BDCF7A26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsUpcomingViewCell.swift; sourceTree = "<group>"; };
 		33BDCF7C26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsWatchlistViewCell.swift; sourceTree = "<group>"; };
+		33BEB93127235ADD005237CB /* FetchStockMedianWeek.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianWeek.graphql.swift; sourceTree = "<group>"; };
+		33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianMonth.graphql.swift; sourceTree = "<group>"; };
+		33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianDay.graphql.swift; sourceTree = "<group>"; };
+		33BEB93927235B02005237CB /* ScatterChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScatterChartViewModel.swift; sourceTree = "<group>"; };
+		33C4E9772726A782008D3006 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQL+Extensions.swift"; sourceTree = "<group>"; };
 		33CDEC9F26D6229300E82329 /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
@@ -766,6 +776,9 @@
 				33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */,
 				33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */,
 				85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */,
+				33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */,
+				33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */,
+				33BEB93127235ADD005237CB /* FetchStockMedianWeek.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -869,6 +882,7 @@
 			children = (
 				336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */,
 				33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */,
+				33BEB93927235B02005237CB /* ScatterChartViewModel.swift */,
 				33FE9E4626D519A700FABC70 /* LineView.swift */,
 				33376FAC26F8AED100618CD7 /* LineViewModel.swift */,
 				33FE9E4326D5195800FABC70 /* Helpers.swift */,
@@ -1336,6 +1350,7 @@
 				3A930ED8265C1909000FD3EB /* AppDelegate.swift */,
 				3A930EDA265C1909000FD3EB /* SceneDelegate.swift */,
 				331FB0F6270104050031A8EF /* Constants.swift */,
+				33C4E9772726A782008D3006 /* Configuration.swift */,
 			);
 			path = AppCore;
 			sourceTree = "<group>";
@@ -2080,6 +2095,7 @@
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
+				33BEB93527235ADE005237CB /* FetchStockMedianWeek.graphql.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
 				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
@@ -2156,6 +2172,7 @@
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
+				33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
 				859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */,
@@ -2231,12 +2248,14 @@
 				33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */,
 				3A4A98FF2688D554008C1968 /* CollectionDetailsDTOMapper.swift in Sources */,
 				3AD40FA726682B2B005679DE /* UICollectionReusableView+ReusableView.swift in Sources */,
+				33BEB93627235ADE005237CB /* FetchStockMedianMonth.graphql.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */,
 				33BDCF7126CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift in Sources */,
+				33BEB93727235ADE005237CB /* FetchStockMedianDay.graphql.swift in Sources */,
 				85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */,
 				3AA52C91266013E1006A6961 /* Network.swift in Sources */,
 				33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */,
@@ -2244,6 +2263,7 @@
 				3A5ADAFE2690B6A0008659E8 /* UIPanGestureRecognizer+Extensions.swift in Sources */,
 				33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */,
 				8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */,
+				33C4E9782726A782008D3006 /* Configuration.swift in Sources */,
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
@@ -2478,7 +2498,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2505,7 +2525,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 55;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

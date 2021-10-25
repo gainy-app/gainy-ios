@@ -104,28 +104,7 @@ class TickerInfo {
         }
         
         //Load day median
-        dispatchGroup.enter()
-        dprint("Date for median: \((Date().startOfDay - 1.days).toFormat("yyyy-MM-dd"))")
-        Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                if let tickers = graphQLResult.data?.tickers.first {
-                    if let industries  = tickers.tickerIndustries.first {
-                        if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}) {
-                            let firstDay = dailyStats.first ?? 0.0
-                            let lastDay = dailyStats.last ?? 0.0
-                            self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
-                        }
-                    }
-                }
-                dispatchGroup.leave()
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
-                break
-            }
-        }
+        loadMedianForRange(.d1, dispatchGroup: dispatchGroup)
         
         //Load Alt Stocks
         dispatchGroup.enter()
@@ -177,11 +156,26 @@ class TickerInfo {
     
     /// Update Chart only
     func loadNewChartData(_ completion: ( () -> Void)? = nil) {
+        
         Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: chartRange.rawValue, symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                self?.updateChartData(graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? [])
-                completion?()
+                let chartRemData = graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []
+                self?.updateChartData(chartRemData)
+                if chartRemData.count > 0 {
+                    if let datetime = chartRemData.first?.datetime {
+                        self?.loadMedianForRange(self?.chartRange ?? .d1, explicitDate: String(datetime.prefix(while: { $0 != "T"}))) {
+                            completion?()
+                        }
+                    } else {
+                        self?.loadMedianForRange(self?.chartRange ?? .d1) {
+                            completion?()
+                        }
+                    }
+                } else {
+                    self?.medianGrow = 0.0
+                    completion?()
+                }
                 break
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
@@ -189,6 +183,188 @@ class TickerInfo {
                 break
             }
         }
+    }
+    
+    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, explicitDate: String = "",  dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)? = nil) {
+        dispatchGroup?.enter()
+        haveMedian = false
+        
+        switch range {
+        case .d1:
+            dprint("Date for median: \((Date().startOfDay - 1.days).toFormat("yyyy-MM-dd"))")
+            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+            
+        case .w1:
+            dprint("Date for median: \((Date().startOfDay - 7.days).toFormat("yyyy-MM-dd"))")
+            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+        case .m1:
+            var loadDate: String = explicitDate
+            if explicitDate.isEmpty {
+                loadDate = (Date().startOfDay - 1.months).toFormat("yyyy-MM-dd")
+            }
+            dprint("Date for median: \(loadDate)")
+            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+        case .m3:
+            var loadDate: String = explicitDate
+            if explicitDate.isEmpty {
+                loadDate = (Date().startOfDay - 3.months).toFormat("yyyy-MM-dd")
+            }
+            dprint("Date for median: \(loadDate)")
+            Network.shared.apollo.fetch(query: FetchStockMedianWeekQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1w.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+        case .y1:
+            var loadDate: String = explicitDate
+            if explicitDate.isEmpty {
+                loadDate = (Date().startOfDay - 1.years).toFormat("yyyy-MM-dd")
+            }
+            dprint("Date for median: \(loadDate)")
+            Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1m.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+        case .y5, .all:
+            var loadDate: String = explicitDate
+            if explicitDate.isEmpty {
+                loadDate = (Date().startOfDay - 5.years).toFormat("yyyy-MM-dd")
+            }
+            dprint("Date for median: \(loadDate)")
+            Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let tickers = graphQLResult.data?.tickers.first {
+                        if let industries  = tickers.tickerIndustries.first {
+                            if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1m.compactMap({$0.medianPrice}), dailyStats.count > 1 {
+                                let firstDay = dailyStats.first ?? 0.0
+                                let lastDay = dailyStats.last ?? 0.0
+                                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                                self?.haveMedian = true
+                            }
+                        }
+                    }
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dispatchGroup?.leave()
+                    completion?()
+                    break
+                }
+            }
+            break
+        }
+        
     }
     
     private func pctDiff(_ x1: Float, _ x2: Float) -> Float {
@@ -264,4 +440,5 @@ class TickerInfo {
     //MARK: -  Median Data
     
     var medianGrow: Float = 0.0
+    var haveMedian: Bool = false
 }

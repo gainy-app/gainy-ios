@@ -351,7 +351,7 @@ final class CollectionSearchController: NSObject {
         
         
         
-        if text.count > 3 {
+        if text.count >= 3 {
             dispatchGroup.enter()
             networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
                 switch result {

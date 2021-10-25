@@ -49,13 +49,12 @@ final class Network {
         return ApolloClient(
             networkTransport: RequestChainNetworkTransport(
                 interceptorProvider: provider,
-                endpointURL: graphQLEndpointUrl
+                endpointURL: URL(string: self.config.environment.baseURL)!
             ),
             store: store
         )
     }()
-
-    let graphQLEndpointUrl = URL(string: "https://hasura-production.gainy-infra.net/v1/graphql")!
+    private var config = Configuration()
     
     //MARK: - REST
     

@@ -115,7 +115,7 @@ struct ScatterChartView: View {
                     .padding(.top, 4)
                     .padding(.bottom, 4)
                     .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : Color.white).cornerRadius(20))
-                })
+                }).opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
                 Button(action: {
                     hapticTouch.impactOccurred()
                 }, label: {
@@ -146,27 +146,27 @@ struct ScatterChartView: View {
                             .font(UIFont.proDisplaySemibold(9).uiFont)
                             .padding(.top, 2)
                             .frame(width: 40)
-                        Spacer()
                         Text("\(viewModel.localTicker.medianGrow >= 0 ? "+" : "")\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%")
                             .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                             .font(UIFont.proDisplaySemibold(11).uiFont)
-                            .frame(maxWidth: 40)
+                            .frame(width: 45)
                     }.frame(height: 12)
+                        .frame(width: 70)
                     HStack(alignment: .firstTextBaseline, spacing: 2) {
                         Text("% Diff".uppercased())
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.proDisplaySemibold(9).uiFont)
                             .padding(.top, 2)
                             .frame(width: 40)
-                        Spacer()
                         Text("\((statsDayValueRaw - viewModel.localTicker.medianGrow).cleanTwoDecimal)%")
                             .foregroundColor(UIColor(named: (statsDayValueRaw -  viewModel.localTicker.medianGrow) >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                             .font(UIFont.proDisplaySemibold(11).uiFont)
+                            .frame(width: 45)
                             
                     }.frame(height: 12)
+                        .frame(width: 70)
                 }.padding(.leading, 20)
-                .frame(maxWidth: 80)
-                .opacity(isMedianVisible ? 1.0 : 0.0)
+                    .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
                 
                 Spacer()
                 //Right Stock price
