@@ -54,7 +54,7 @@ extension TickerDetailsNewsViewCell: UICollectionViewDelegateFlowLayout {
 extension TickerDetailsNewsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let news = tickerInfo?.news[indexPath.row] {
-            if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.sourceUrl ?? "")) {
+            if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.url ?? "")) {
                 GainyAnalytics.logEvent("ticker_news_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "newsID" : news.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

@@ -55,6 +55,8 @@
 	<string>We will use Reminders to inform about upcoming financial events</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you</string>
+	<key>SchemeName</key>
+	<string>$(SCHEME_CONFIGURATION)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SFCompactRounded-Regular.otf</string>

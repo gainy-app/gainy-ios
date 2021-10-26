@@ -570,7 +570,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .news:
             if let news = self.news[indexPath.row] as? DiscoverNewsQuery.Data.FetchNewsDatum {
-                if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.sourceUrl ?? "")) {
+                if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.url ?? "")) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     GainyAnalytics.logEvent("collections_search_news_pressed", params: ["newsID" : news.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                 }

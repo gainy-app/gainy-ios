@@ -231,8 +231,9 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         delegate?.loadingState(started: true)
         ticker.chartRange = period
-        ticker.loadNewChartData {[weak self] in
-            self?.delegate?.loadingState(started: false)
+        ticker.loadNewChartData {[unowned self] in
+            self.chartViewModel.localTicker = self.ticker
+            self.delegate?.loadingState(started: false)
         }
     }
 }

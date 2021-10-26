@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftDate
+import Apollo
 
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
@@ -155,8 +156,7 @@ class TickerInfo {
     }
     
     /// Update Chart only
-    func loadNewChartData(_ completion: ( () -> Void)? = nil) {
-        
+    func loadNewChartData(_ completion: ( () -> Void)? = nil) {        
         Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: chartRange.rawValue, symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
@@ -165,6 +165,7 @@ class TickerInfo {
                 if chartRemData.count > 0 {
                     if let datetime = chartRemData.first?.datetime {
                         self?.loadMedianForRange(self?.chartRange ?? .d1, explicitDate: String(datetime.prefix(while: { $0 != "T"}))) {
+                            dprint("Date for median: \(self?.haveMedian ?? false)")
                             completion?()
                         }
                     } else {
@@ -174,6 +175,7 @@ class TickerInfo {
                     }
                 } else {
                     self?.medianGrow = 0.0
+                    self?.haveMedian = false
                     completion?()
                 }
                 break
@@ -185,14 +187,16 @@ class TickerInfo {
         }
     }
     
+    private var medianLoader: Cancellable?
     func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, explicitDate: String = "",  dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)? = nil) {
         dispatchGroup?.enter()
         haveMedian = false
+        medianLoader?.cancel()
         
         switch range {
         case .d1:
             dprint("Date for median: \((Date().startOfDay - 1.days).toFormat("yyyy-MM-dd"))")
-            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
@@ -219,7 +223,7 @@ class TickerInfo {
             
         case .w1:
             dprint("Date for median: \((Date().startOfDay - 7.days).toFormat("yyyy-MM-dd"))")
-            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
@@ -249,7 +253,7 @@ class TickerInfo {
                 loadDate = (Date().startOfDay - 1.months).toFormat("yyyy-MM-dd")
             }
             dprint("Date for median: \(loadDate)")
-            Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianDayQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
@@ -279,7 +283,7 @@ class TickerInfo {
                 loadDate = (Date().startOfDay - 3.months).toFormat("yyyy-MM-dd")
             }
             dprint("Date for median: \(loadDate)")
-            Network.shared.apollo.fetch(query: FetchStockMedianWeekQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianWeekQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
@@ -309,7 +313,7 @@ class TickerInfo {
                 loadDate = (Date().startOfDay - 1.years).toFormat("yyyy-MM-dd")
             }
             dprint("Date for median: \(loadDate)")
-            Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
@@ -339,7 +343,7 @@ class TickerInfo {
                 loadDate = (Date().startOfDay - 5.years).toFormat("yyyy-MM-dd")
             }
             dprint("Date for median: \(loadDate)")
-            Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
+            medianLoader = Network.shared.apollo.fetch(query: FetchStockMedianMonthQuery.init(symbol: symbol, date: loadDate) ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {

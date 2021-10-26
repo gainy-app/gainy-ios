@@ -1,0 +1,58 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Uploads to the Gainy Dev"
+  lane :beta_lane do
+    match(app_identifier: ["app.gainy.application.ios.dev"])
+    gym(
+    workspace: "Gainy.xcworkspace",
+    scheme: "Gainy Staging",
+    clean: true,
+    export_xcargs: "-allowProvisioningUpdates",
+    output_name: "GainyStaging.ipa",
+    output_directory: "IPAs"
+    )
+  end
+  
+  desc "Uploads to the Gainy Prod"
+  lane :prod_lane do        
+    gym(
+    workspace: "Gainy.xcworkspace",
+    scheme: "Gainy",
+    clean: true,
+    export_xcargs: "-allowProvisioningUpdates",
+    output_name: "GainyRelease.ipa",
+    output_directory: "./IPAs"
+    )    
+    
+    deliver(
+    ipa: "./IPAs/GainyRelease.ipa",
+    skip_metadata: true,
+    skip_screenshots: true,
+    skip_binary_upload: true,
+    force: true
+    )
+    
+    slack(
+    message: "App successfully uploaded to PROD TF",
+    success: true,
+   slack_url: "https://hooks.slack.com/workflows/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"
+    )
+    
+  end
+end

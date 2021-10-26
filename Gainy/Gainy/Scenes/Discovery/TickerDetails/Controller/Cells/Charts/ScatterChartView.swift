@@ -115,7 +115,9 @@ struct ScatterChartView: View {
                     .padding(.top, 4)
                     .padding(.bottom, 4)
                     .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : Color.white).cornerRadius(20))
-                }).opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
+                })
+                .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
+                
                 Button(action: {
                     hapticTouch.impactOccurred()
                 }, label: {
@@ -166,6 +168,7 @@ struct ScatterChartView: View {
                     }.frame(height: 12)
                         .frame(width: 70)
                 }.padding(.leading, 20)
+                    .offset(x: 10)
                     .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
                 
                 Spacer()

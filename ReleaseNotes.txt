@@ -1,0 +1,14 @@
+iOS v0.3.1 #57 available
+General improvements - MVP
+
+:новинка: New:
+Median
+:молот_и_гаечный_ключ: Improvements
+CI/CD testing
+:красный_круг: Important Notes:
+If feature is not listed in New or in Improvements - IT’S NOT DONE
+:глаза: What to check:
+General flow
+
+
+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
