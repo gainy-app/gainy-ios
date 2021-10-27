@@ -18,15 +18,28 @@ default_platform(:ios)
 platform :ios do
   desc "Uploads to the Gainy Dev"
   lane :beta_lane do
-    match(app_identifier: ["app.gainy.application.ios.dev"])
+        
     gym(
     workspace: "Gainy.xcworkspace",
     scheme: "Gainy Staging",
     clean: true,
     export_xcargs: "-allowProvisioningUpdates",
     output_name: "GainyStaging.ipa",
-    output_directory: "IPAs"
+    output_directory: "./IPAs"
     )
+
+    upload_to_app_store(
+    ipa: "./IPAs/GainyStaging.ipa",
+    skip_metadata: true,
+    skip_screenshots: true
+    )   
+     
+    slack(
+    message: "App successfully uploaded to TEST TF",
+    success: true,
+   slack_url: "https://hooks.slack.com/services/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"
+    )
+    
   end
   
   desc "Uploads to the Gainy Prod"
@@ -34,24 +47,21 @@ platform :ios do
     gym(
     workspace: "Gainy.xcworkspace",
     scheme: "Gainy",
-    clean: true,
     export_xcargs: "-allowProvisioningUpdates",
     output_name: "GainyRelease.ipa",
     output_directory: "./IPAs"
     )    
     
-    deliver(
+    upload_to_app_store(
     ipa: "./IPAs/GainyRelease.ipa",
     skip_metadata: true,
-    skip_screenshots: true,
-    skip_binary_upload: true,
-    force: true
+    skip_screenshots: true
     )
     
     slack(
     message: "App successfully uploaded to PROD TF",
     success: true,
-   slack_url: "https://hooks.slack.com/workflows/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"
+   slack_url: "https://hooks.slack.com/services/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"
     )
     
   end

@@ -1,5 +1,5 @@
 git_url("https://github.com/gainy-app/gainy-ios.git")
-
+git_branch("develop")
 storage_mode("git")
 
 type("appstore") # The default type, can be: appstore, adhoc, enterprise or development

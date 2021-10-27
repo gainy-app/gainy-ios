@@ -9,6 +9,3 @@ CI/CD testing
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 :глаза: What to check:
 General flow
-
-
-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
