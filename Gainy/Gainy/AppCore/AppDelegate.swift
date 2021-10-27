@@ -40,7 +40,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initializeAppsFlyer() {
-        AppsFlyerLib.shared().appsFlyerDevKey = BundleReader().appsFlyerDevKey
+        AppsFlyerLib.shared().appsFlyerDevKey = "z6SeiLgYCSRpeqK27zouo5"
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
         
