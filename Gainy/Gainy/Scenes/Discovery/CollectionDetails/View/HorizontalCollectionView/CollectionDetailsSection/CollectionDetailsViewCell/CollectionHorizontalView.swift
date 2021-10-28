@@ -46,6 +46,7 @@ final class CollectionHorizontalView: UIView {
     var onShowGridViewButtonPressed: (() -> Void)?
 
     private var imageUrl: String = ""
+    private var imageName: String = ""
     private var imageLoaded: Bool = false
     
     lazy var backImageView: UIImageView = {
@@ -241,6 +242,16 @@ final class CollectionHorizontalView: UIView {
         guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
             return
         }
+        
+        var image = UIImage(named: imageName)
+        if image == nil {
+            image = UIImage(named: imageUrl)
+        }
+        backImageView.image = image
+        self.imageLoaded = (image != nil)
+        if imageLoaded {
+            return
+        }
 
         let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
         backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
@@ -269,7 +280,6 @@ final class CollectionHorizontalView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        loadImage()
         
         let hMargin: CGFloat = 16
         let topMarginLeftSide: CGFloat = 16
@@ -294,6 +304,8 @@ final class CollectionHorizontalView: UIView {
             width: bounds.width,
             height: bounds.height
         )
+        
+        loadImage()
 
         nameLabel.frame = CGRect(
             x: hMargin,
@@ -368,10 +380,10 @@ final class CollectionHorizontalView: UIView {
         imageUrl: String,
         collectionId: Int
     ) {
-        backImageView.image = UIImage(named: imageName)
         
-        self.imageLoaded = false
+        self.imageName = imageName
         self.imageUrl = imageUrl
+        self.imageLoaded = false
         
         nameLabel.text = name
         nameLabel.sizeToFit()

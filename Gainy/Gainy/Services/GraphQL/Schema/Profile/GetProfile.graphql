@@ -16,5 +16,8 @@
     profile_favorite_collections {
       collection_id
     }
+    profile_watchlist_tickers {
+      symbol
+    }
   }
 }

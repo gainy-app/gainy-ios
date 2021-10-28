@@ -43,7 +43,7 @@
             <objects>
                 <viewController storyboardIdentifier="TickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfJ-n1-GhL" customClass="TickerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qp4-Xo-X4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">
@@ -78,7 +78,7 @@
                                                     <state key="normal" image="ticket_plus"/>
                                                     <state key="selected" image="collection_added"/>
                                                     <connections>
-                                                        <action selector="compareToggleAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="CP4-l5-wXu"/>
+                                                        <action selector="addToWatchlistToggleAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="UT1-Db-aeY"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOe-EY-ZVb">
@@ -120,6 +120,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="addToWatchlistToggle" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
                                             <outlet property="symbolLbl" destination="IbE-jA-16s" id="As9-ts-Iz3"/>
                                             <outlet property="tickerNameLbl" destination="fVb-yA-YhU" id="1Dw-VB-nVj"/>
                                         </connections>
@@ -406,7 +407,7 @@
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                     </view>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ky7-vY-QgR">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ky7-vY-QgR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>

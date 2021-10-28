@@ -33,7 +33,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint) {
             return viewModel?.collectionDetails[visibleIndexPath.row].id ?? 0
         } else {
-            return -1
+            // Let it be not found, -1 is reserved for my collection (watchlist)
+            return -404
         }
     }
     
@@ -268,6 +269,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             case .fetched(let model):
                 self.addNewCollections([model])
                 break
+            case .deleted(let model):
+                self.deleteCollections([model])
+                break
             case .fetchedFailed:
                 break
             }
@@ -287,16 +291,62 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }.store(in: &self.cancellables)
     }
     
+    private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
+        
+        let collections = models.filter { item in
+            item.id >= 0
+        }
+        if collections.count > 0 {
+            self.viewModel?.collectionDetails.append(contentsOf: collections)
+            if var snapshot = self.dataSource?.snapshot() {
+                if snapshot.indexOfSection(.collectionWithCards) != nil {
+                    if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
+                        snapshot.insertItems(collections, afterItem: last)
+                    } else {
+                        snapshot.appendItems(collections,
+                                             toSection: .collectionWithCards)
+                    }
+                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                }
+            }
+        }
+    }
+    
+    private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
+        
+        let watchlistCollections = models.filter { item in
+            item.id < 0
+        }
+        if let firstItem = watchlistCollections.first {
+            deleteCollections(watchlistCollections)
+            self.viewModel?.collectionDetails.insert(firstItem, at: 0)
+            if var snapshot = self.dataSource?.snapshot() {
+                if snapshot.indexOfSection(.collectionWithCards) != nil {
+                    if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+                        snapshot.insertItems(watchlistCollections, beforeItem: first)
+                    } else {
+                        snapshot.appendItems(watchlistCollections,
+                                             toSection: .collectionWithCards)
+                    }
+                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                }
+            }
+        }
+    }
+    
     private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
-        self.viewModel?.collectionDetails.append(contentsOf: models)
+        
+        self.appendNewCollectionsFromModels(models)
+        self.appendWatchlistCollectionsFromModels(models)
+    }
+    
+    private func deleteCollections(_ models: [CollectionDetailViewCellModel]) {
+        self.viewModel?.collectionDetails.removeAll(where: { item in
+            models.contains(item)
+        })
         if var snapshot = self.dataSource?.snapshot() {
             if snapshot.indexOfSection(.collectionWithCards) != nil {
-                if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
-                    snapshot.insertItems(models, afterItem: last)
-                } else {
-                    snapshot.appendItems(models,
-                                         toSection: .collectionWithCards)
-                }
+                snapshot.deleteItems(models)
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }
@@ -449,7 +499,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self.hideLoader()
             completion()
             return
-        }       
+        }
         
         showNetworkLoader()
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
@@ -462,13 +512,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     return
                 }
                 CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                
-                let collectionIDs = CollectionsManager.shared.collections.compactMap(\.id)
-                
+
                 DispatchQueue.main.async {
                     self?.initViewModelsFromData()
-                    completion()
                     self?.hideLoader()
+                    CollectionsManager.shared.loadWatchlistCollection {
+                    }
+                    completion()
                 }
                 
                 //Paging
@@ -497,8 +547,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 CollectionsManager.shared.collections.append(contentsOf: collections)
                 CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                
-                let collectionIDs = collections.compactMap(\.id)
                 
                 DispatchQueue.main.async {
                     
@@ -552,7 +600,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModelsFromData() {
-        viewModel?.collectionDetails =  CollectionsManager.shared.convertToModel(CollectionsManager.shared.collections)
+        var array = CollectionsManager.shared.collections
+        
+        if let watchlist = CollectionsManager.shared.watchlistCollection {
+            array.insert(watchlist, at: 0)
+        }
+        viewModel?.collectionDetails = CollectionsManager.shared.convertToModel(array)
     }
     
     private func initViewModels() {

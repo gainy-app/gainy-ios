@@ -4,37 +4,34 @@
 import Apollo
 import Foundation
 
-public final class SearchCollectionDetailsQuery: GraphQLQuery {
+public final class FetchTickersQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query SearchCollectionDetails($text: String!) {
-      collections(
-        where: {_or: [{name: {_ilike: $text}}, {description: {_ilike: $text}}]}
-      ) {
+    query FetchTickers($symbols: [String!]) {
+      tickers(where: {symbol: {_in: $symbols}}) {
         __typename
-        ...RemoteCollectionDetails
+        ...RemoteTickerDetails
       }
     }
     """
 
-  public let operationName: String = "SearchCollectionDetails"
+  public let operationName: String = "FetchTickers"
 
   public var queryDocument: String {
     var document: String = operationDefinition
-    document.append("\n" + RemoteCollectionDetails.fragmentDefinition)
     document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
   }
 
-  public var text: String
+  public var symbols: [String]?
 
-  public init(text: String) {
-    self.text = text
+  public init(symbols: [String]?) {
+    self.symbols = symbols
   }
 
   public var variables: GraphQLMap? {
-    return ["text": text]
+    return ["symbols": symbols]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -42,7 +39,7 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collections", arguments: ["where": ["_or": [["name": ["_ilike": GraphQLVariable("text")]], ["description": ["_ilike": GraphQLVariable("text")]]]]], type: .nonNull(.list(.nonNull(.object(Collection.selections))))),
+        GraphQLField("tickers", arguments: ["where": ["symbol": ["_in": GraphQLVariable("symbols")]]], type: .nonNull(.list(.nonNull(.object(Ticker.selections))))),
       ]
     }
 
@@ -52,27 +49,27 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(collections: [Collection]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
+    public init(tickers: [Ticker]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "app.profile_collections"
-    public var collections: [Collection] {
+    /// fetch data from the table: "tickers"
+    public var tickers: [Ticker] {
       get {
-        return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
+        return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: Collection) -> ResultMap in value.resultMap }, forKey: "collections")
+        resultMap.updateValue(newValue.map { (value: Ticker) -> ResultMap in value.resultMap }, forKey: "tickers")
       }
     }
 
-    public struct Collection: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["collections"]
+    public struct Ticker: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["tickers"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(RemoteCollectionDetails.self),
+          GraphQLFragmentSpread(RemoteTickerDetails.self),
         ]
       }
 
@@ -107,9 +104,9 @@ public final class SearchCollectionDetailsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public var remoteCollectionDetails: RemoteCollectionDetails {
+        public var remoteTickerDetails: RemoteTickerDetails {
           get {
-            return RemoteCollectionDetails(unsafeResultMap: resultMap)
+            return RemoteTickerDetails(unsafeResultMap: resultMap)
           }
           set {
             resultMap += newValue.resultMap

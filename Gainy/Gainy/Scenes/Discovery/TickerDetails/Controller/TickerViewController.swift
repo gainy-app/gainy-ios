@@ -66,8 +66,31 @@ final class TickerViewController: BaseViewController {
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : viewModel?.dataSource.ticker.symbol ?? ""])
     }
     
-    @IBAction func compareToggleAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
+    @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
+        
+        guard let symbol = viewModel?.dataSource.ticker.symbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == symbol
+        }
+        if addedToWatchlist {
+            GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = false
+                }
+            }
+        } else {
+            GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = true
+                }
+            }
+        }
+        
         if let curStock = viewModel?.ticker.ticker {
             if !(viewModel?.ticker.tickersToCompare.contains(curStock) ?? false) {
                 viewModel?.ticker.tickersToCompare.insert(curStock, at: 0)
@@ -110,7 +133,6 @@ final class TickerViewController: BaseViewController {
         
         self.bottomViews.forEach({$0.alpha = 0; $0.isUserInteractionEnabled = false;})
     }
-
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
     

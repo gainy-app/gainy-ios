@@ -13,10 +13,18 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
+    @IBOutlet private weak var addToWatchlistToggle: UIButton!
     
     override func updateFromTickerData() {
         tickerNameLbl.text = tickerInfo?.name
         symbolLbl.text = tickerInfo?.symbol
+    }
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        updateAddToWatchlistToggle()
     }
     
     @IBAction func shareAction() {
@@ -24,5 +32,17 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+    }
+    
+    fileprivate func updateAddToWatchlistToggle() {
+       
+        guard let symbol = tickerInfo?.symbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == symbol
+        }
+        self.addToWatchlistToggle.isSelected = addedToWatchlist
     }
 }

@@ -30,6 +30,10 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           collection_id
         }
+        profile_watchlist_tickers {
+          __typename
+          symbol
+        }
       }
     }
     """
@@ -91,6 +95,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("profile_interests", type: .nonNull(.list(.nonNull(.object(ProfileInterest.selections))))),
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
           GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
+          GraphQLField("profile_watchlist_tickers", type: .nonNull(.list(.nonNull(.object(ProfileWatchlistTicker.selections))))),
         ]
       }
 
@@ -100,8 +105,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker]) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -203,6 +208,16 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, forKey: "profile_favorite_collections")
+        }
+      }
+
+      /// An array relationship
+      public var profileWatchlistTickers: [ProfileWatchlistTicker] {
+        get {
+          return (resultMap["profile_watchlist_tickers"] as! [ResultMap]).map { (value: ResultMap) -> ProfileWatchlistTicker in ProfileWatchlistTicker(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, forKey: "profile_watchlist_tickers")
         }
       }
 
@@ -319,6 +334,45 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "collection_id")
+          }
+        }
+      }
+
+      public struct ProfileWatchlistTicker: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_profile_watchlist_tickers"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(symbol: String) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_watchlist_tickers", "symbol": symbol])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var symbol: String {
+          get {
+            return resultMap["symbol"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "symbol")
           }
         }
       }

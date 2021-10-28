@@ -554,7 +554,11 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
             GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            self.goToCollectionDetails(at: indexPath.row)
+            var index = indexPath.row
+            if CollectionsManager.shared.watchlistCollection != nil {
+                index = index + 1
+            }
+            self.goToCollectionDetails(at: index)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
