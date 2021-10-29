@@ -92,9 +92,10 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
   ///   - profileFavoriteCollections
   ///   - profileInterests
   ///   - profileScoringSetting
+  ///   - profileWatchlistTickers
   ///   - userId
-  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, userId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_interests": profileInterests, "profile_scoring_setting": profileScoringSetting, "user_id": userId]
+  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> = nil, userId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_interests": profileInterests, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
   }
 
   public var avatarUrl: Swift.Optional<String?> {
@@ -202,6 +203,15 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_scoring_setting")
+    }
+  }
+
+  public var profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> {
+    get {
+      return graphQLMap["profile_watchlist_tickers"] as? Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> ?? Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers")
     }
   }
 
@@ -596,9 +606,10 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
   ///   - profileFavoriteCollections
   ///   - profileInterests
   ///   - profileScoringSetting
+  ///   - profileWatchlistTickers
   ///   - userId
-  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_interests": profileInterests, "profile_scoring_setting": profileScoringSetting, "user_id": userId]
+  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_interests": profileInterests, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
   }
 
   public var _and: Swift.Optional<[app_profiles_bool_exp]?> {
@@ -733,6 +744,15 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_scoring_setting")
+    }
+  }
+
+  public var profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> {
+    get {
+      return graphQLMap["profile_watchlist_tickers"] as? Swift.Optional<app_profile_watchlist_tickers_bool_exp?> ?? Swift.Optional<app_profile_watchlist_tickers_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers")
     }
   }
 
@@ -1456,6 +1476,76 @@ public struct Float_comparison_exp: GraphQLMapConvertible {
   }
 }
 
+/// Boolean expression to filter rows from the table "app.profile_watchlist_tickers". All fields are combined with a logical 'AND'.
+public struct app_profile_watchlist_tickers_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - profile
+  ///   - profileId
+  ///   - symbol
+  public init(_and: Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> = nil, _not: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, _or: Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "profile": profile, "profile_id": profileId, "symbol": symbol]
+  }
+
+  public var _and: Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> ?? Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<app_profile_watchlist_tickers_bool_exp?> ?? Swift.Optional<app_profile_watchlist_tickers_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?> ?? Swift.Optional<[app_profile_watchlist_tickers_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_bool_exp?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
 /// input type for inserting array relation for remote table "app.profile_favorite_collections"
 public struct app_profile_favorite_collections_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -2129,6 +2219,197 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
       .stockMarketRiskLevel,
       .tradingExperience,
       .unexpectedPurchasesSource,
+    ]
+  }
+}
+
+/// input type for inserting array relation for remote table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_arr_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: [app_profile_watchlist_tickers_insert_input], onConflict: Swift.Optional<app_profile_watchlist_tickers_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: [app_profile_watchlist_tickers_insert_input] {
+    get {
+      return graphQLMap["data"] as! [app_profile_watchlist_tickers_insert_input]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<app_profile_watchlist_tickers_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_watchlist_tickers_on_conflict?> ?? Swift.Optional<app_profile_watchlist_tickers_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profile
+  ///   - profileId
+  ///   - symbol
+  public init(profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, symbol: Swift.Optional<String?> = nil) {
+    graphQLMap = ["profile": profile, "profile_id": profileId, "symbol": symbol]
+  }
+
+  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<String?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// on conflict condition type for table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: app_profile_watchlist_tickers_constraint, updateColumns: [app_profile_watchlist_tickers_update_column], `where`: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: app_profile_watchlist_tickers_constraint {
+    get {
+      return graphQLMap["constraint"] as! app_profile_watchlist_tickers_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [app_profile_watchlist_tickers_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [app_profile_watchlist_tickers_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<app_profile_watchlist_tickers_bool_exp?> ?? Swift.Optional<app_profile_watchlist_tickers_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "app.profile_watchlist_tickers"
+public enum app_profile_watchlist_tickers_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case profileWatchlistTickersPkey
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "profile_watchlist_tickers_pkey": self = .profileWatchlistTickersPkey
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .profileWatchlistTickersPkey: return "profile_watchlist_tickers_pkey"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_watchlist_tickers_constraint, rhs: app_profile_watchlist_tickers_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.profileWatchlistTickersPkey, .profileWatchlistTickersPkey): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_watchlist_tickers_constraint] {
+    return [
+      .profileWatchlistTickersPkey,
+    ]
+  }
+}
+
+/// update columns of table "app.profile_watchlist_tickers"
+public enum app_profile_watchlist_tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case profileId
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "profile_id": self = .profileId
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .profileId: return "profile_id"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_watchlist_tickers_update_column, rhs: app_profile_watchlist_tickers_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.profileId, .profileId): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_watchlist_tickers_update_column] {
+    return [
+      .profileId,
+      .symbol,
     ]
   }
 }

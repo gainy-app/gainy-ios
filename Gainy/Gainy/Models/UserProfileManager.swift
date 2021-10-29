@@ -22,6 +22,8 @@ final class UserProfileManager {
     
     var categories: [Int] = Array()
     
+    var watchlist: [String] = Array()
+    
     var firstName: String?
     
     var lastName: String?
@@ -48,6 +50,7 @@ final class UserProfileManager {
         favoriteCollections.removeAll()
         interests.removeAll()
         categories.removeAll()
+        watchlist.removeAll()
         
         firstName = nil
         lastName = nil
@@ -88,6 +91,9 @@ final class UserProfileManager {
                 })
                 self.categories = appProfile.profileCategories.map({ item in
                     item.categoryId
+                })
+                self.watchlist = appProfile.profileWatchlistTickers.map({ item in
+                    item.symbol
                 })
                 
                 self.firstName = appProfile.firstName
@@ -224,4 +230,52 @@ final class UserProfileManager {
         }
     }
 
+    
+    public func addTickerToWatchlist(_ symbol: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        guard let profileID = self.profileID else {
+            completion(false)
+            return
+        }
+        
+        let query = InsertTickerToWatchlistMutation(profileID: profileID, symbol: symbol)
+        Network.shared.apollo.perform(mutation: query) { result in
+            dprint("\(result)")
+            guard (try? result.get().data) != nil else {
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                completion(false)
+                return
+            }
+            
+            self.watchlist.append(symbol)
+            CollectionsManager.shared.loadWatchlistCollection {
+                completion(true)
+            }
+        }
+    }
+    
+    public func removeTickerFromWatchlist(_ symbol: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        guard let profileID = self.profileID else {
+            completion(false)
+            return
+        }
+        
+        let query = DeleteTickerFromWatchlistMutation(profileID: profileID, symbol: symbol)
+        Network.shared.apollo.perform(mutation: query) { result in
+            dprint("\(result)")
+            guard (try? result.get().data) != nil else {
+                NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
+                completion(false)
+                return
+            }
+            
+            self.watchlist.removeAll { element in
+                element == symbol
+            }
+            CollectionsManager.shared.loadWatchlistCollection {
+                completion(true)
+            }
+        }
+    }
 }

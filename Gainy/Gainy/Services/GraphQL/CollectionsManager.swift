@@ -16,10 +16,12 @@ final class CollectionsManager {
     
     enum FetchResult {
         case fetched(model: CollectionDetailViewCellModel)
+        case deleted(model: CollectionDetailViewCellModel)
         case fetchedFailed
     }
     
     var collections: [RemoteCollectionDetails] = []
+    var watchlistCollection: RemoteCollectionDetails?
     
     private var newCollectionFetched: PassthroughSubject<FetchResult, Never> = PassthroughSubject.init()
     var newCollectionsPublisher: AnyPublisher<FetchResult, Never> {
@@ -35,9 +37,7 @@ final class CollectionsManager {
     }
     
     //MARK: - Fetching
-    @Atomic
-    var isFetching: Bool = false
-        
+
     func loadNewCollectionDetails(_ colID: Int) {
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery.init(ids: [colID])) {[unowned self] result in
             switch result {
@@ -60,6 +60,54 @@ final class CollectionsManager {
                 self.failedToLoad.insert(colID)
                 newCollectionFetched.send(.fetchedFailed)
                 break
+            }
+        }
+    }
+    
+    func loadWatchlistCollection(completion: @escaping () -> Void) {
+        
+        let watchlistCollectionDefaultID = -1
+        guard UserProfileManager.shared.watchlist.count > 0 else {
+            
+            if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
+                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+                self.newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                CollectionsManager.shared.watchlistCollection = nil
+            }
+            completion()
+            return
+        }
+            
+        Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { [weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let tickers = graphQLResult.data?.tickers else {
+                    completion()
+                    return
+                }
+                
+                let tickerCollection = tickers.map { remoteTicker -> RemoteCollectionDetails.TickerCollection in
+                    
+                    let ticker = RemoteCollectionDetails.TickerCollection.Ticker.init(unsafeResultMap: remoteTicker.resultMap)
+                    return RemoteCollectionDetails.TickerCollection.init(ticker: ticker)
+                }
+                
+                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
+                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+                    self?.newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    CollectionsManager.shared.watchlistCollection = nil
+                }
+                
+                let collectionRemoteDetails = RemoteCollectionDetails.init(id: watchlistCollectionDefaultID, name: "My Collection", imageUrl: "watchlistCollectionBackgroundImage", description: "Companies added to your watchlist", tickerCollectionsAggregate: RemoteCollectionDetails.TickerCollectionsAggregate.init(aggregate: RemoteCollectionDetails.TickerCollectionsAggregate.Aggregate.init(count: UserProfileManager.shared.watchlist.count)), tickerCollections: tickerCollection)
+                CollectionsManager.shared.watchlistCollection = collectionRemoteDetails
+                
+                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+                self?.newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                completion()
+                
+            case .failure(let error):
+                completion()
+                dprint("Failure when making GraphQL request. Error: \(error)")
             }
         }
     }
