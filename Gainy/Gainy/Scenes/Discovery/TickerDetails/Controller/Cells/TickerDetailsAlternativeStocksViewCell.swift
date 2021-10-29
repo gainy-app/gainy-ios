@@ -18,12 +18,13 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
     weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
     
-    @IBOutlet weak var innerCollectionView: UICollectionView! {
+    @IBOutlet private weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
         }
     }
+    
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
@@ -92,6 +93,13 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
             compareBtn.addTarget(self, action: #selector(compareAction), for: .touchUpInside)
         }
     }
+    @IBOutlet private weak var matchCircle: UIImageView! {
+        didSet {
+            matchCircle.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+            matchCircle.tintColor = UIColor(named: "mainGreen")
+        }
+    }
+    @IBOutlet private weak var matchLabel: UILabel!
     
     //MARK: - Properties
     var isInCompare: Bool = false {
@@ -117,6 +125,19 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
             priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
             
             highlightLbl.text = stock.tickerFinancials.compactMap(\.highlight).first(where: {!$0.isEmpty}) ?? ""
+            
+            if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
+                matchLabel.text = "\(matchScore)"
+                if matchScore > 50 {
+                    matchLabel.textColor = UIColor(named: "mainGreen")
+                    matchCircle.tintColor = UIColor(named: "mainGreen")
+                } else {
+                    matchLabel.textColor = UIColor(named: "mainRed")
+                    matchCircle.tintColor = UIColor(named: "mainRed")
+                }
+            } else {
+                matchLabel.text = "-"
+            }
         }
     }
     

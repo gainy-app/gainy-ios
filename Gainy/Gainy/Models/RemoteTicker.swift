@@ -117,6 +117,7 @@ class TickerInfo {
                 self?.altStocks = tickers.flatMap({$0}).filter({$0.symbol != self?.symbol}).uniqued()
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
+                    self?.altStocks.sort(by: {$0.matchScore > $1.matchScore})
                     dispatchGroup.leave()
                 }
                 break

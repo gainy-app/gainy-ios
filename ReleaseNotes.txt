@@ -1,11 +1,14 @@
-iOS v0.3.1 #57 available
-General improvements - MVP
+*iOS v0.3.1 #61* available
+*General improvements* - MVP
 
-:новинка: New:
-Median
-:молот_и_гаечный_ключ: Improvements
-CI/CD testing
-:красный_круг: Important Notes:
-If feature is not listed in New or in Improvements - IT’S NOT DONE
-:глаза: What to check:
+:new: *New:*
+• Stock Card View: Alt Stocks have Match Score and sorted
+
+:hammer_and_wrench: *Improvements*
+• CI/CD messaging
+
+:red_circle: *Important Notes:*
+If feature is not listed in New or in Improvements - *IT’S NOT DONE*
+
+:eyes: *What to check:*
 General flow

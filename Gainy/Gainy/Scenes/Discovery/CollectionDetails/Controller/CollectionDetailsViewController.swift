@@ -375,6 +375,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
             self?.sections[sectionIndex].layoutSection(within: env)
         }
+        layout.configuration.scrollDirection = .horizontal
         return layout
     }()
     
