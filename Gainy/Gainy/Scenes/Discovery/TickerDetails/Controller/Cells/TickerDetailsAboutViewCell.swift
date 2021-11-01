@@ -28,13 +28,20 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 28.0 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
-            //            for tag in ["Defensive", "Speculation", "Penny", "Dividend", "Momentum", "Value", "Growth",] {
+            let categories = ["defensive", "speculation", "penny", "dividend", "momentum", "value", "growth"]
+            
             for tag in tickerInfo?.tags ?? [] {
                 let tagView = TagView()
                 tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
-                
+                if !categories.contains(where: { element in
+                    element.isEqual(tag.lowercased())
+                }) {
+                    tagView.backgroundColor = UIColor.lightGray
+                } else {
+                    tagView.backgroundColor = UIColor(hex: 0x3A4448)
+                }
                 tagView.tagName = tag
                 let width = 22.0 + tag.widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
