@@ -8,7 +8,7 @@
 import UIKit
 
 enum PersonalizationTab: Int {
-    case investmentGoals = 0
+    case investmentsGoals = 0
     case marketReturns
     case investmentHorizon
     case moneySourceView
@@ -42,7 +42,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewProgress?
     private var indicatorView: UIView?
-    private var currentTab: PersonalizationTab = .investmentGoals
+    private var currentTab: PersonalizationTab = .investmentsGoals
     
     private var selectedMarketReturns: [PersonalizationInfoValue]?
     private var selectedSources: [PersonalizationInfoValue]?
@@ -83,7 +83,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("indicators_back_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
-        if self.currentTab == .investmentGoals {
+        if self.currentTab == .investmentsGoals {
             
             self.coordinator?.popModule()
             return
@@ -132,7 +132,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         self.nextButton.setTitle(nextButtonTitle, for: UIControl.State.normal)
         
         switch self.currentTab {
-        case .investmentGoals:
+        case .investmentsGoals:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentGoals", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.0)
             self.setMarketReturnsHidden(isHidden: true)
@@ -217,8 +217,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     private func setUpInvestmentGoalsView() {
         
-        let title = NSLocalizedString("Investment goals", comment: "Investment Goals Title")
-        let description = NSLocalizedString("An indicator of how much you are willing to take\nrisks in order to obtain greater rewards\npotentially", comment: "Investment Goals Description")
+        let title = NSLocalizedString("Investments goals", comment: "Investment Goals Title")
+        let description = NSLocalizedString("What are your annual return expectations? Usually, the riskier you go than more money you make but the chance to lose increases as well.", comment: "Investment Goals Description")
         self.sliderViewInvestmentGoals.configureWith(title: title)
         self.sliderViewInvestmentGoals.configureWith(description: description)
         let minValueCaption = NSLocalizedString("Less risky", comment: "Investment Goals Min Caption")
@@ -230,8 +230,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     private func setUpMarketReturnsView() {
         
-        let title = NSLocalizedString("Average market returns", comment: "Market Returns Title")
-        let description = NSLocalizedString("Please tell us, what is an average market\nreturn in your opinion", comment: "Market Returns Description")
+        let title = NSLocalizedString("Average annual market return", comment: "Market Returns Title")
+        let description = NSLocalizedString("Please tell us, what is an average market\nreturn in your opinion.", comment: "Market Returns Description")
         
         self.marketReturnsSourceView.configureWith(title: title)
         self.marketReturnsSourceView.configureWith(description: description)
@@ -247,7 +247,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpInvestmentHorizonView() {
         
         let title = NSLocalizedString("Investment horizon", comment: "Investment Horizon Title")
-        let description = NSLocalizedString("When do you plan to use money that you\ninvested", comment: "Investment Horizon Description")
+        let description = NSLocalizedString("When do you plan to use money that you\ninvested?", comment: "Investment Horizon Description")
         self.sliderViewInvestmentHorizon.configureWith(title: title)
         self.sliderViewInvestmentHorizon.configureWith(description: description)
         let minValueCaption = NSLocalizedString("Short", comment: "Investment Horizon Min Caption")
@@ -260,7 +260,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpUrgentMoneySourceView() {
         
         let title = NSLocalizedString("Urgent money source", comment: "Urgent Money Source Title")
-        let description = NSLocalizedString("Where do you get money for unexpected large\npurchases", comment: "Urgent Money Source Description")
+        let description = NSLocalizedString("Where do you get money for unexpected large\npurchases?", comment: "Urgent Money Source Description")
         self.urgentMoneySourceView.configureWith(title: title)
         self.urgentMoneySourceView.configureWith(description: description)
         let sources: [PersonalizationInfoValue] = [.checking_savings,
@@ -300,7 +300,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpInvestingApproachSourceView() {
         
         let title = NSLocalizedString("Investing approach", comment: "Investing approach Title")
-        let description = NSLocalizedString("Your experience with trading", comment: "Investing approach Description")
+        let description = NSLocalizedString("What is your experience with trading?", comment: "Investing approach Description")
         self.investingApproachSourceView.configureWith(title: title)
         self.investingApproachSourceView.configureWith(description: description)
         let sources: [PersonalizationInfoValue] = [.never_tried,
@@ -456,16 +456,14 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
         } else if sender == self.sliderViewDamageOfFailure {
             var damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less")
             let value = Int(100 * currentValue)
-            if value >= 0 && value <= 15 {
-                damageOfFailureMessage = NSLocalizedString("I will need to survive", comment: "Damage Of Failure Survive")
-            } else if value >= 15 && value <= 30 {
-                damageOfFailureMessage = NSLocalizedString("I will need to work hard", comment: "Damage Of Failure Work Hard")
-            } else if value >= 30 && value <= 60 {
-                damageOfFailureMessage = NSLocalizedString("I will need to spend less", comment: "Damage Of Failure Spend Less")
-            } else if value >= 60 && value <= 85 {
-                damageOfFailureMessage = NSLocalizedString("I will still be able to invest", comment: "Damage Of Failure Invest")
-            } else if value > 85 && value <= 100 {
-                damageOfFailureMessage = NSLocalizedString("I will not feel the change", comment: "Damage Of Failure Тot Аeel Еhe Сhange")
+            if value >= 0 && value < 25 {
+                damageOfFailureMessage = NSLocalizedString("I won’t have rent/food money", comment: "Damage Of Failure I won’t have rent/food money")
+            } else if value >= 25 && value < 50 {
+                damageOfFailureMessage = NSLocalizedString("I will need to save more and spend less", comment: "Damage Of Failure I will need to save more and spend less")
+            } else if value >= 50 && value < 75 {
+                damageOfFailureMessage = NSLocalizedString("I will have to delay large purchases", comment: "Damage Of Failure I will have to delay large purchases")
+            } else if value >= 75 && value <= 100 {
+                damageOfFailureMessage = NSLocalizedString("This is complete funny money I can los", comment: "Damage Of Failure This is complete funny money I can los")
             }
             return damageOfFailureMessage
         } else if sender == self.sliderViewStockMarketRisks {

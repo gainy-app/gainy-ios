@@ -534,7 +534,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     private func firstMarketMarkerTapped(_: UIButton) {
         let matchScoreExmplanationVc = FeatureDescriptionViewController.init()
         let title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
-        let description = NSLocalizedString("This metric is built based on your profile. We use data like your investment goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
+        let description = NSLocalizedString("This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
         matchScoreExmplanationVc.configureWith(title: title)
         matchScoreExmplanationVc.configureWith(description: description)
         FloatingPanelManager.shared.configureWithHeight(height: 135.0)

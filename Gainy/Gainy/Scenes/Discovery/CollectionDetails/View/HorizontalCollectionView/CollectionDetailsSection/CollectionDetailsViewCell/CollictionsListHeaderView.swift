@@ -278,7 +278,7 @@ class CollictionsListHeaderView: UIView {
             height = 135.0
         } else if marketData == .matchScore {
             title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
-            description = NSLocalizedString("This metric is built based on your profile. We use data like your investment goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
+            description = NSLocalizedString("This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
             height = 135.0
         } else if marketData == .netProfit {
             title = NSLocalizedString("Net Profit Margin", comment:"Net Profit Margin title")
