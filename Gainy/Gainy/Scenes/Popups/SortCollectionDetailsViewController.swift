@@ -31,8 +31,20 @@ final class SortCollectionDetailsViewController: BaseViewController {
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
-            ascBtn.setImage(UIImage(named: "arrow-down"), for: .selected)
-            ascBtn.setImage(UIImage(named: "arrow-up"), for: .normal)
+            ascBtn.setImage(UIImage(named: "arrow-up-green"), for: .selected)
+            ascBtn.setTitle("ascending".uppercased(), for: UIControl.State.selected)
+            
+            ascBtn.setImage(UIImage(named: "arrow-down-red"), for: .normal)
+            ascBtn.setTitle("descending".uppercased(), for: UIControl.State.normal)
+            ascBtn.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 8.0)
+            ascBtn.titleLabel?.font = UIFont.compactRoundedMedium(9.0)
+            
+            var colorHex = "#0FC642"
+            var color = UIColor.init(hexString: colorHex, alpha: 1.0)
+            ascBtn.setTitleColor(color, for: UIControl.State.selected)
+            colorHex = "#FC506F"
+            color = UIColor.init(hexString: colorHex, alpha: 1.0)
+            ascBtn.setTitleColor(color, for: UIControl.State.normal)
         }
     }
     
@@ -51,25 +63,28 @@ final class SortCollectionDetailsViewController: BaseViewController {
     
     private func preloadSorting() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        ascBtn.autoSetDimensions(to: CGSize.init(width: 44, height: 44))
-                                 
         view.removeConstraints(ascConstraints)
+        ascConstraints.removeAll()
         
+        ascConstraints.append(contentsOf: ascBtn.autoSetDimensions(to: CGSize.init(width: 84, height: 24)))
         if let storedBtnIdx = btnsMapping[settings.sorting] {
-            for (idx, val) in sortBtns.enumerated() {
+            for (_, val) in sortBtns.enumerated() {
                 val.isSelected = val.tag == storedBtnIdx
                 
                 if val.tag == storedBtnIdx {
                     
-                    ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 60))
-                    ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 46.0 * CGFloat(idx)))
+                    ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .trailing, of: val, withOffset: 34))
+                    ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
                 }
             }
         }
         
         //Setting Asc/Desc
         ascBtn.isSelected = settings.ascending
-        ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up" : "arrow-down"), for: .normal)
+        ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up-green" : "arrow-down-red"), for: .normal)
+        let colorHex = settings.ascending ? "#25EA5C" : "#FC506F"
+        let color = UIColor.init(hexString: colorHex, alpha: 0.1)
+        ascBtn.backgroundColor = color
     }
     
     //MARK: - Actions
@@ -78,19 +93,24 @@ final class SortCollectionDetailsViewController: BaseViewController {
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
             CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
+                self?.collectionCell?.sortSections()
+            }
             delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sender.tag) ?? .matchScore).title)
             return
         }
         
-        view.removeConstraints(ascBtn.constraints)
+        view.removeConstraints(ascConstraints)
+        ascConstraints.removeAll()
+        
+        ascConstraints.append(contentsOf: ascBtn.autoSetDimensions(to: CGSize.init(width: 84, height: 24)))
         
         for (ind, val) in sortBtns.enumerated() {
             val.isSelected = ind == sender.tag
             
             if val.isSelected {
-                ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .leading, of: view, withOffset: 100))
-                ascConstraints.append(ascBtn.autoPinEdge(.top, to: .top, of: view, withOffset: 68.0 + 40.0 * CGFloat(btnsMapping[btnsMapping.key(forValue: ind)!] ?? 0)))
+                ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .trailing, of: val, withOffset: 34))
+                ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
             }
         }
         switch sender.tag {
