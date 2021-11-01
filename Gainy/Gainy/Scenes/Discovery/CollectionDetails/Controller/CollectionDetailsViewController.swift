@@ -33,7 +33,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint) {
             return viewModel?.collectionDetails[visibleIndexPath.row].id ?? 0
         } else {
-            // Let it be not found, -1 is reserved for my collection (watchlist)
+            // Let it be not found, -1 is reserved for the watchlist
             return -404
         }
     }
