@@ -13,7 +13,8 @@ final class StockViewCell: UICollectionViewCell {
     @IBOutlet weak var symbolLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var growthLbl: UILabel!
-    @IBOutlet weak var addToWatchlistToggle: UIButton!
+   
+    @IBOutlet private weak var addToWatchlistToggle: UIButton!
     
     override func layoutSubviews() {
         
@@ -31,11 +32,13 @@ final class StockViewCell: UICollectionViewCell {
                 priceLbl.text = ticker.tickerFinancials.last?.currentPrice.price ?? ""
                 priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
                 growthLbl.text = priceChange.percentRaw
+                
+                addToWatchlistToggle.addTarget(self, action: #selector(addToWatchlistToggleAction(_:)), for: .touchUpInside)
             }
         }
     }
     
-    @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
+    @objc fileprivate func addToWatchlistToggleAction(_ sender: UIButton) {
         
         guard let ticker  = self.ticker else {
             return

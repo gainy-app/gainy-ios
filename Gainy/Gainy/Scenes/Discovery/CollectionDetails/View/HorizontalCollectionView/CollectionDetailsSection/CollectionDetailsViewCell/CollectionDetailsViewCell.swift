@@ -81,14 +81,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         dprint("Fetching dt ended \(model.tickerSymbol)")
                     }
                 }
-                if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol) {
+                if let collectionID = self?.collectionID, !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol), collectionID >= 0 {
                     loadingItems += 1
                     self?.isLoadingTickers = true
-                    dprint("Fetching match started \(self?.collectionID ?? 0)")
+                    dprint("Fetching match started \(collectionID)")
                     dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getMatchScores(collectionId: self?.collectionID ?? 0) {
+                    TickersLiveFetcher.shared.getMatchScores(collectionId: collectionID) {
                         dispatchGroup.leave()
-                        dprint("Fetching match ended \(self?.collectionID ?? 0)")
+                        dprint("Fetching match ended \(collectionID)")
                         self?.sortSections()
                     }
                 }
