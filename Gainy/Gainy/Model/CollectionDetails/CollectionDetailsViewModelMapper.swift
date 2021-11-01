@@ -2,7 +2,8 @@ enum CollectionDetailsViewModelMapper {
     static func map(_ model: CollectionDetails) -> CollectionDetailViewCellModel {
         CollectionDetailViewCellModel(
             id: model.id,
-            image: model.collectionBackgroundImage, imageUrl: model.collectionBackgroundImageUrl,
+            image: model.collectionBackgroundImage,
+            imageUrl: model.collectionBackgroundImageUrl,
             name: model.collectionName,
             description: model.collectionDescription,
             stocksAmount: "\(model.collectionStocksAmount)",

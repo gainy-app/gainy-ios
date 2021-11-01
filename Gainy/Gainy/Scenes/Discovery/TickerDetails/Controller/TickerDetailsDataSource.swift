@@ -244,12 +244,7 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
         delegate?.altStockPressed(stock: stock)
     }
     
-    func comparePressed(stock: AltStockTicker) {
-        if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
-            ticker.tickersToCompare.remove(at: stockIndex)
-        } else {
-            ticker.tickersToCompare.append(stock)
-        }
+    func comparePressed(stock: AltStockTicker) {        
         GainyAnalytics.logEvent("ticker_alt_stock_compared", params: ["tickerSymbol" : stock.symbol ?? ""])
         delegate?.comparedStocksChanged()
     }

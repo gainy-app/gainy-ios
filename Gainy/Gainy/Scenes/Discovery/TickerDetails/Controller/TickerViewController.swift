@@ -90,14 +90,6 @@ final class TickerViewController: BaseViewController {
                 }
             }
         }
-        
-        if let curStock = viewModel?.ticker.ticker {
-            if !(viewModel?.ticker.tickersToCompare.contains(curStock) ?? false) {
-                viewModel?.ticker.tickersToCompare.insert(curStock, at: 0)
-            } else {
-                viewModel?.ticker.tickersToCompare.removeAll(where: {$0.symbol == curStock.symbol})
-            }
-        }
     }
     
     @IBAction func closeViewAction(_ sender: Any) {
@@ -164,7 +156,9 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     
     func comparedStocksChanged() {
         
-        let stocksCount = (viewModel?.ticker.tickersToCompare.count ?? 0) + 1
+        viewModel?.compareToggled(stock)
+        
+        let stocksCount = (viewModel?.tickersToCompare.count ?? 0) + 1
         if stocksCount == 2 {
             bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
         }
@@ -180,8 +174,10 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
 
 extension TickerViewController: CollectionsBottomViewDelegate {
     func bottomActionPressed(view: CollectionsBottomView) {
-        let compareVC = CompareStocksViewController.instantiate(.discovery)
-        compareVC.stocks =  viewModel?.ticker.tickersToCompare ?? []
-        present(compareVC, animated: true, completion: nil)
+        
+//        let compareVC = CompareStocksViewController.instantiate(.discovery)
+//        compareVC.stocks =  viewModel?.ticker.tickersToCompare ?? []
+//        present(compareVC, animated: true, completion: nil)
+        
     }
 }

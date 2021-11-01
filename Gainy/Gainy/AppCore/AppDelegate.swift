@@ -17,9 +17,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initFirebase()
         initDataDog()
         
-        Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
-        Bugfender.enableCrashReporting()
-        Bugfender.enableUIEventLogging()
+        
+        
         return true
     }
     
@@ -72,6 +71,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 //#if DEBUG
 //        Datadog.verbosityLevel = .debug
 //#endif
+    }
+    
+    private initBugfender() {
+        if Configuration().environment == .staging {
+            Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
+            Bugfender.enableCrashReporting()
+            Bugfender.enableUIEventLogging()
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

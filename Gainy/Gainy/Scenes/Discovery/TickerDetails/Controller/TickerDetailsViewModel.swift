@@ -14,10 +14,41 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
         self.ticker = ticker
         self.dataSource = TickerDetailsDataSource(ticker: ticker)
     }
-
-    let ticker: TickerInfo
     
+    let ticker: TickerInfo
     let dataSource: TickerDetailsDataSource
+    
+    //MARK: - Compare Logic
+    
+    var tickersToCompare: [AltStockTicker] = []
+    
+    func compareToggled(_ stock: AltStockTicker) {
+        
+        //Always adding current stock to compare
+        
+        if !(tickersToCompare.contains(ticker.ticker) ?? false) {
+            tickersToCompare.insert(curStock, at: 0)
+        }
+        
+        if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
+            tickersToCompare.remove(at: stockIndex)
+        } else {
+            tickersToCompare.append(stock)
+        }
+    }
+    
+    func compareCollectionDTO() -> CollectionDetailViewCellModel {
+        CollectionDetailViewCellModel(
+            id: -2,
+            image: "compare_stocks",
+            imageUrl: "",
+            name: "Compared Stocks",
+            description: "List of stock to compare",
+            stocksAmount: "\(tickersToCompare.count)",
+            inYourCollectionList: false,
+            cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map($0) }
+        )
+    }
 }
 
 

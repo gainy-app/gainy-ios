@@ -436,8 +436,7 @@ class TickerInfo {
     
     //MARK: - Stocks
     var altStocks: [AltStockTicker]
-    
-    var tickersToCompare: [AltStockTicker] = []
+     
     
     //MARK: - Upcoming events
     let upcomingEvents: [RemoteTickerDetails.TickerEvent]
