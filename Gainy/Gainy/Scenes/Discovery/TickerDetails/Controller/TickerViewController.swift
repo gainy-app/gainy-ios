@@ -161,19 +161,19 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     
     func comparedStocksChanged(stock: AltStockTicker) {
         
-        viewModel?.compareToggled(stock)
-        
-        let stocksCount = (viewModel?.tickersToCompare.count ?? 0) + 1
-        if stocksCount == 2 {
-            bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
-        }
-        UIView.animate(withDuration: 0.3) {
-            self.bottomViews.forEach({$0.alpha = stocksCount > 1 ? 1 : 0; $0.isUserInteractionEnabled = stocksCount > 1 ? true : false;})
-        } completion: { done in
-            if done {
-                self.bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
-            }
-        }
+//        viewModel?.compareToggled(stock)
+//        
+//        let stocksCount = (viewModel?.tickersToCompare.count ?? 0) + 1
+//        if stocksCount == 2 {
+//            bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
+//        }
+//        UIView.animate(withDuration: 0.3) {
+//            self.bottomViews.forEach({$0.alpha = stocksCount > 1 ? 1 : 0; $0.isUserInteractionEnabled = stocksCount > 1 ? true : false;})
+//        } completion: { done in
+//            if done {
+//                self.bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
+//            }
+//        }
     }
 }
 
