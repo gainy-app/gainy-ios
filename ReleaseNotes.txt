@@ -2,12 +2,13 @@
 *General improvements* - MVP
 
 :new: *New:*
-• Sorting: Added ascending/descending buttons;
+• Sorting: Added ascending/descending buttons
+• Compare Stocks: plain view added
 
 :hammer_and_wrench: *Improvements*
-• Watchlist: "My Collection" renamed to "Watchlist";
-• Watchlist: Added possibility to add to watchlist from the search results;
-• Watchlist: Infinity loading bug fixed;
+• Watchlist: "My Collection" renamed to "Watchlist"
+• Watchlist: Added possibility to add to watchlist from the search results
+• Watchlist: Infinity loading bug fixed
 • Obboarding: Texts updates and bugs fixes
 
 :red_circle: *Important Notes:*
