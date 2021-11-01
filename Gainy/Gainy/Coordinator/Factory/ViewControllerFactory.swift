@@ -137,8 +137,8 @@ final class ViewControllerFactory {
     
     func instantiateCompareDetails(model: CollectionDetailViewCellModel) -> SingleCollectionDetailsViewController {
         let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
-        vc.collectionId = -1
-        
+        vc.collectionId = Constants.CollectionDetails.compareCollectionID
+        vc.model = model
         return vc
     }
     

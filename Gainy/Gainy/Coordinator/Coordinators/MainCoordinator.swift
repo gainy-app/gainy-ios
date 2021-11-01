@@ -149,4 +149,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])
     }
+    
+    func showCompareDetails(model: CollectionDetailViewCellModel, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {
+        let vc = self.viewControllerFactory.instantiateCompareDetails(model: model)
+        vc.delegate = delegate
+        vc.coordinator = self
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_compare_collection")
+    }
 }

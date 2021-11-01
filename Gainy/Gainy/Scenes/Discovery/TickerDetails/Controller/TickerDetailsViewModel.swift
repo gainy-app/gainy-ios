@@ -39,9 +39,8 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     }
     
     func compareCollectionDTO() -> CollectionDetailViewCellModel {
-        let models: [CollectionCardViewCellModel] = []
         return CollectionDetailViewCellModel(
-            id: -2,
+            id: Constants.CollectionDetails.compareCollectionID,
             image: "compare_stocks",
             imageUrl: "",
             name: "Compared Stocks",

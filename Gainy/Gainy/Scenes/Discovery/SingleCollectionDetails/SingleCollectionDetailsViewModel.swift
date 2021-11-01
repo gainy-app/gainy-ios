@@ -27,12 +27,12 @@ final class SingleCollectionDetailsViewModel: NSObject {
     }
     
     init(model: CollectionDetailViewCellModel) {
-        self.collectionId = -1
+        self.collectionId = Constants.CollectionDetails.compareCollectionID
         self.collectionDetailsModels = [model]
     }
     
     private var isCompareView: Bool {
-        collectionId == -1
+        collectionId == Constants.CollectionDetails.compareCollectionID
     }
     
     func initCollectionView(collectionView: UICollectionView) {

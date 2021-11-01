@@ -32,7 +32,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     //MARK: - DI
     var coordiantor: MainCoordinator?
     var collectionId: Int!
-    //var model: RecommendedCollectionViewCellModel!
+    var model: CollectionDetailViewCellModel!
     
     weak var coordinator: MainCoordinator?
     weak var delegate: SingleCollectionDetailsViewControllerDelegate?
@@ -42,6 +42,29 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         setupViewModel()
         initCollectionView()
         setupPanel()
+    }
+        
+    fileprivate func setupViewModel() {
+        if collectionId == Constants.CollectionDetails.compareCollectionID {
+            viewModel = SingleCollectionDetailsViewModel.init(model: model)
+            toggleBtn.isHidden = true
+        } else {
+            viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
+        }
+        viewModel?.loadingPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+            
+        }, receiveValue: {[weak self] isLoading in
+            if isLoading {
+                self?.showNetworkLoader()
+            } else {
+                self?.hideLoader()
+            }
+        })
+        .store(in: &cancellables)
+        
+        viewModel?.delegate = self
     }
     
     fileprivate func initCollectionView() {
@@ -62,32 +85,14 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         collectionDetailsCollectionView.showsVerticalScrollIndicator = false
         collectionDetailsCollectionView.dragInteractionEnabled = true
         collectionDetailsCollectionView.bounces = false
-            
-            viewModel?.initCollectionView(collectionView: collectionDetailsCollectionView)
+        viewModel?.initCollectionView(collectionView: collectionDetailsCollectionView)
         }
         
-    }
-    
-    fileprivate func setupViewModel() {
-        viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
-        viewModel?.loadingPublisher
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { _ in
-            
-        }, receiveValue: {[weak self] isLoading in
-            if isLoading {
-                self?.showNetworkLoader()
-            } else {
-                self?.hideLoader()
-            }
-        })
-            .store(in: &cancellables)
-        viewModel?.loadCollectionDetails({            
+        viewModel?.loadCollectionDetails({
             DispatchQueue.main.async { [weak self] in
                 self?.centerInitialCollectionInTheCollectionView()
             }
         })
-        viewModel?.delegate = self
     }
     
     private func setupPanel() {

@@ -20,6 +20,7 @@ func runOnMain(_ closure: @autoclosure @escaping () -> Void) {
 struct Constants {
     struct CollectionDetails {
         static let tickersPreloadCount = 20
+        static let compareCollectionID = -2
     }
     
     struct Auth {
