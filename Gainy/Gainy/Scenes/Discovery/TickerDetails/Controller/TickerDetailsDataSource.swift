@@ -11,7 +11,8 @@ import Combine
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
     func loadingState(started: Bool)
-    func comparedStocksChanged()
+    func comparedStocksChanged(stock: AltStockTicker)
+    func isStockCompared(stock: AltStockTicker) -> Bool
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -239,6 +240,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
+    func isStockCompared(stock: AltStockTicker) -> Bool {
+        delegate?.isStockCompared(stock: stock) ?? false
+    }
+    
     
     func altStockPressed(stock: AltStockTicker) {
         delegate?.altStockPressed(stock: stock)
@@ -246,7 +251,7 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
     
     func comparePressed(stock: AltStockTicker) {        
         GainyAnalytics.logEvent("ticker_alt_stock_compared", params: ["tickerSymbol" : stock.symbol ?? ""])
-        delegate?.comparedStocksChanged()
+        delegate?.comparedStocksChanged(stock: stock)
     }
 }
 

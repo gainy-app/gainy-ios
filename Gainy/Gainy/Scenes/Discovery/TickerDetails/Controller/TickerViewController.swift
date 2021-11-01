@@ -105,7 +105,7 @@ final class TickerViewController: BaseViewController {
     
     /// Bottom action view adding
     fileprivate func addBottomView() {
-        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Compare \((viewModel?.ticker.tickersToCompare.count ?? 0) + 1) stocks", actionIcon: "compare_icon")
+        bottomViewModel = CollectionsBottomViewModel.init(actionTitle: "Compare \((viewModel?.tickersToCompare.count ?? 0) + 1) stocks", actionIcon: "compare_icon")
         var bottomView = CollectionsBottomView(model: bottomViewModel!)
         bottomView.delegate = self
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: bottomView)
@@ -127,6 +127,11 @@ final class TickerViewController: BaseViewController {
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    
+    func isStockCompared(stock: AltStockTicker) -> Bool {
+        viewModel?.tickersToCompare.contains(where: {$0.symbol == stock.symbol}) ?? false
+    }
+    
     
     func altStockPressed(stock: AltStockTicker) {
         let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
@@ -154,7 +159,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         }
     }
     
-    func comparedStocksChanged() {
+    func comparedStocksChanged(stock: AltStockTicker) {
         
         viewModel?.compareToggled(stock)
         

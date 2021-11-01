@@ -73,8 +73,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 //#endif
     }
     
-    private initBugfender() {
-        if Configuration().environment == .staging {
+    private var config = Configuration()
+    private func initBugfender() {
+        if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()

@@ -26,11 +26,11 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
         
         //Always adding current stock to compare
         
-        if !(tickersToCompare.contains(ticker.ticker) ?? false) {
-            tickersToCompare.insert(curStock, at: 0)
+        if !(tickersToCompare.contains(ticker.ticker)) {
+            tickersToCompare.insert(ticker.ticker, at: 0)
         }
         
-        if let stockIndex = ticker.tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
+        if let stockIndex = tickersToCompare.firstIndex(where: {$0.symbol == stock.symbol}) {
             tickersToCompare.remove(at: stockIndex)
         } else {
             tickersToCompare.append(stock)
@@ -46,7 +46,9 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
             description: "List of stock to compare",
             stocksAmount: "\(tickersToCompare.count)",
             inYourCollectionList: false,
-            cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map($0) }
+            cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(
+                $0
+            ))}
         )
     }
 }

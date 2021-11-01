@@ -10,6 +10,7 @@ import UIKit
 protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
     func comparePressed(stock: AltStockTicker)
+    func isStockCompared(stock: AltStockTicker) -> Bool
 }
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
@@ -45,7 +46,9 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: TickerDetailsAlternativeInnerStocksViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.stock = tickerInfo?.altStocks[indexPath.row]
-        cell.isInCompare = tickerInfo?.tickersToCompare.contains(where: {$0.symbol == cell.stock?.symbol}) ?? false
+        if let stock = tickerInfo?.altStocks[indexPath.row] {
+            cell.isInCompare = delegate?.isStockCompared(stock: stock) ?? false
+        }       
         cell.delegate = self
         return cell
     }
@@ -152,6 +155,10 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
 }
 
 extension TickerDetailsAlternativeStocksViewCell: TickerDetailsAlternativeStocksViewCellDelegate {
+    func isStockCompared(stock: AltStockTicker) -> Bool {
+        delegate?.isStockCompared(stock: stock) ?? false
+    }
+    
     func altStockPressed(stock: AltStockTicker) {
         delegate?.altStockPressed(stock: stock)
     }
