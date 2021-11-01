@@ -128,9 +128,17 @@ final class ViewControllerFactory {
         let vc = TickerViewController.instantiate(.discovery)
         return vc
     }
+    
     func instantiateCollectionDetails(colID: Int) -> SingleCollectionDetailsViewController {
         let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
         vc.collectionId = colID
+        return vc
+    }
+    
+    func instantiateCompareDetails(model: CollectionDetailViewCellModel) -> SingleCollectionDetailsViewController {
+        let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
+        vc.collectionId = -1
+        
         return vc
     }
     

@@ -32,7 +32,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     //MARK: - DI
     var coordiantor: MainCoordinator?
     var collectionId: Int!
-    var model: RecommendedCollectionViewCellModel!
+    //var model: RecommendedCollectionViewCellModel!
     
     weak var coordinator: MainCoordinator?
     weak var delegate: SingleCollectionDetailsViewControllerDelegate?

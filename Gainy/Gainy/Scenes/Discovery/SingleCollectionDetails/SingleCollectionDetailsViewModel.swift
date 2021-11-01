@@ -14,11 +14,11 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
-          
+    
     weak var delegate: SingleCollectionDetailsViewModelDelegate?
     private enum CollectionDetailSection: Int, CaseIterable {
         case collectionWithCards
-    }    
+    }
     
     let collectionId: Int
     
@@ -26,8 +26,16 @@ final class SingleCollectionDetailsViewModel: NSObject {
         self.collectionId = collectionId
     }
     
+    init(model: CollectionDetailViewCellModel) {
+        self.collectionId = -1
+        self.collectionDetailsModels = [model]
+    }
+    
+    private var isCompareView: Bool {
+        collectionId == -1
+    }
+    
     func initCollectionView(collectionView: UICollectionView) {
-        
         self.dataSource = UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
         ) {[weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
@@ -38,7 +46,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 position: indexPath.row
             )
             
-            if let cell = cell as? CollectionDetailsViewCell {                
+            if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}
@@ -57,8 +65,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
     
     
     var loadingPublisher: AnyPublisher<Bool, Error> {
-        loadingSubject.eraseToAnyPublisher()
-    }
+        loadingSubject.eraseToAnyPublisher()    }
     
     private let loadingSubject = PassthroughSubject<Bool,Error>()
     
@@ -72,7 +79,6 @@ final class SingleCollectionDetailsViewModel: NSObject {
     }
     
     //MARK: - Collection Layout
-    
     
     
     private lazy var sections: [SectionLayout] = [
@@ -90,39 +96,50 @@ final class SingleCollectionDetailsViewModel: NSObject {
     //MARK: - Loading
     
     func loadCollectionDetails(_ completed: (() -> Void)? = nil) {
-        loadingSubject.send(true)
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: [collectionId])) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back
-                    self?.loadingSubject.send(false)
-                    return
+        if isCompareView {
+            if var snapshot = dataSource?.snapshot() {
+                if snapshot.sectionIdentifiers.count > 0 {
+                    snapshot.deleteSections([.collectionWithCards])
                 }
-                let selectedCollections = collections
-                let collectionIDs = selectedCollections.compactMap(\.id)
+                snapshot.appendSections([.collectionWithCards])
+                snapshot.appendItems(collectionDetailsModels, toSection: .collectionWithCards)
                 
-                DispatchQueue.main.async {
-                    self?.convertToModels(selectedCollections)
+                dataSource?.apply(snapshot, animatingDifferences: false)
+            }
+            completed?()
+        } else {
+            loadingSubject.send(true)
+            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: [collectionId])) { [weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                        //Going back
+                        self?.loadingSubject.send(false)
+                        return
+                    }
+                    let selectedCollections = collections
+                    DispatchQueue.main.async {
+                        self?.convertToModels(selectedCollections)
+                        self?.loadingSubject.send(false)
+                        completed?()
+                    }
+                    
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    self?.convertToModels([])
                     self?.loadingSubject.send(false)
                     completed?()
                 }
-                
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                self?.convertToModels([])
-                self?.loadingSubject.send(false)
-                completed?()
             }
         }
     }
     
     fileprivate func convertToModels(_ collection: [RemoteCollectionDetails]) {
-            let yourCollections = collection
-                .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
-            
+        let yourCollections = collection
+            .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
+        
         collectionDetailsModels = yourCollections
-                .map { CollectionDetailsViewModelMapper.map($0) }
+            .map { CollectionDetailsViewModelMapper.map($0) }
         
         //Append items
         
