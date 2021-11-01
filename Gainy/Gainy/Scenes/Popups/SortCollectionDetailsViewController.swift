@@ -73,7 +73,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
                 
                 if val.tag == storedBtnIdx {
                     
-                    ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .trailing, of: val, withOffset: 34))
+                    ascConstraints.append(ascBtn.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -24))
                     ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
                 }
             }
@@ -109,7 +109,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
             val.isSelected = ind == sender.tag
             
             if val.isSelected {
-                ascConstraints.append(ascBtn.autoPinEdge(.leading, to: .trailing, of: val, withOffset: 34))
+                ascConstraints.append(ascBtn.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -24))
                 ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
             }
         }
