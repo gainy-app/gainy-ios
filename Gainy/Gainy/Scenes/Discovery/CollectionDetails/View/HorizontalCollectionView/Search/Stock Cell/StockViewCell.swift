@@ -13,6 +13,14 @@ final class StockViewCell: UICollectionViewCell {
     @IBOutlet weak var symbolLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var growthLbl: UILabel!
+    @IBOutlet weak var addToWatchlistToggle: UIButton!
+    
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+        
+        updateAddToWatchlistToggle()
+    }
     
     var ticker: RemoteTickerDetails? {
         didSet {
@@ -25,5 +33,49 @@ final class StockViewCell: UICollectionViewCell {
                 growthLbl.text = priceChange.percentRaw
             }
         }
+    }
+    
+    @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
+        
+        guard let ticker  = self.ticker else {
+            return
+        }
+        guard let symbol = ticker.symbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == symbol
+        }
+        if addedToWatchlist {
+            GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = false
+                }
+            }
+        } else {
+            GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = true
+                }
+            }
+        }
+    }
+    
+    fileprivate func updateAddToWatchlistToggle() {
+       
+        guard let ticker  = self.ticker else {
+            return
+        }
+        guard let symbol = ticker.symbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == symbol
+        }
+        self.addToWatchlistToggle.isSelected = addedToWatchlist
     }
 }
