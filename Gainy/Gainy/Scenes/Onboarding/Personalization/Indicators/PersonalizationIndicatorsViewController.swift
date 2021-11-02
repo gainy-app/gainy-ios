@@ -463,7 +463,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             } else if value >= 50 && value < 75 {
                 damageOfFailureMessage = NSLocalizedString("I will have to delay large purchases", comment: "Damage Of Failure I will have to delay large purchases")
             } else if value >= 75 && value <= 100 {
-                damageOfFailureMessage = NSLocalizedString("This is complete funny money I can los", comment: "Damage Of Failure This is complete funny money I can los")
+                damageOfFailureMessage = NSLocalizedString("This is complete funny money I can lose", comment: "Damage Of Failure This is complete funny money I can lose")
             }
             return damageOfFailureMessage
         } else if sender == self.sliderViewStockMarketRisks {
