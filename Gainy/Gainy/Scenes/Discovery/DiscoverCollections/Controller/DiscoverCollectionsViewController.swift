@@ -476,9 +476,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
-        
-        
-        // TODO: keeping local order, make it more robust and flexible
+                
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
         UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)

@@ -21,6 +21,7 @@ struct Constants {
     struct CollectionDetails {
         static let tickersPreloadCount = 20
         static let compareCollectionID = -2
+        static let top20ID = 231
     }
     
     struct Auth {

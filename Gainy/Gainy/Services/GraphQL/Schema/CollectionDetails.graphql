@@ -66,6 +66,7 @@ fragment RemoteTickerDetails on tickers {
       timestamp
     }
     ticker_analyst_ratings{
+      target_price
       strong_buy
       buy
       hold

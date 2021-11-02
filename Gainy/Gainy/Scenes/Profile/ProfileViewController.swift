@@ -699,6 +699,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         
         TickerLiveStorage.shared.clearMatchData()
+        CollectionsManager.shared.reloadTop20()
         GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         self.profileCategoriesSelected?.append(category)
         let index = self.profileCategories?.lastIndex(where: { element in
@@ -728,6 +729,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         
         TickerLiveStorage.shared.clearMatchData()
+        CollectionsManager.shared.reloadTop20()
         GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         let index = self.profileCategoriesSelected?.lastIndex(where: { element in
             element.id == category.id

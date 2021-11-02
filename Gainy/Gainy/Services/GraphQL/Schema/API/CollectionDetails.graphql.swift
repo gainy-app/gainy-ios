@@ -464,6 +464,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       ticker_analyst_ratings {
         __typename
+        target_price
         strong_buy
         buy
         hold
@@ -1108,6 +1109,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("target_price", type: .scalar(float8.self)),
         GraphQLField("strong_buy", type: .scalar(Int.self)),
         GraphQLField("buy", type: .scalar(Int.self)),
         GraphQLField("hold", type: .scalar(Int.self)),
@@ -1123,8 +1125,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(strongBuy: Int? = nil, buy: Int? = nil, hold: Int? = nil, sell: Int? = nil, strongSell: Int? = nil, rating: float8? = nil) {
-      self.init(unsafeResultMap: ["__typename": "analyst_ratings", "strong_buy": strongBuy, "buy": buy, "hold": hold, "sell": sell, "strong_sell": strongSell, "rating": rating])
+    public init(targetPrice: float8? = nil, strongBuy: Int? = nil, buy: Int? = nil, hold: Int? = nil, sell: Int? = nil, strongSell: Int? = nil, rating: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "analyst_ratings", "target_price": targetPrice, "strong_buy": strongBuy, "buy": buy, "hold": hold, "sell": sell, "strong_sell": strongSell, "rating": rating])
     }
 
     public var __typename: String {
@@ -1133,6 +1135,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var targetPrice: float8? {
+      get {
+        return resultMap["target_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "target_price")
       }
     }
 

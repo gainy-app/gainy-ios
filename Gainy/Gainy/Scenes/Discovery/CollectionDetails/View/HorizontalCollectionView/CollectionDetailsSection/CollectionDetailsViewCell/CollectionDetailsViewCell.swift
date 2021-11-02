@@ -64,7 +64,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 viewModel: modelItem,
                 position: indexPath.row
             )
-            
+            TickerLiveStorage.shared.clearAllExpiredLiveData()
             //Loading tickers data!
             recurLock.lock()
             if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {

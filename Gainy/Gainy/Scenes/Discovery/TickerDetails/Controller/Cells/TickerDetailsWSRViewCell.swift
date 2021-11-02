@@ -8,7 +8,7 @@
 import UIKit
 final class TickerDetailsWSRViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 230.0
+    static let cellHeight: CGFloat = 270.0
     
     @IBOutlet weak var analyticsLbl: UILabel!
     

@@ -62,6 +62,8 @@ class CalendarEventsManager: NSObject {
     private var storableEventId: String = ""
     private func addEvent(event: RemoteTicker.TickerEvent) {
         let storeEvent: EKEvent = EKEvent(eventStore: eventStore)
+        dprint("Adding event")
+        dprint("\(event.description ?? "") \(event.am9Time) \(event.pm11Time) \(event.timestamp ?? "")")
         storeEvent.title = "\(event.description ?? "")"
         storeEvent.startDate = event.am9Time
         storeEvent.endDate = event.pm11Time

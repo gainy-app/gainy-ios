@@ -59,7 +59,7 @@ final class TickerDetailsDataSource: NSObject {
     static let hostingTag: Int = 7
     
     private lazy var wsrHosting: CustomHostingController<WSRView> = {
-        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(totalScore: ticker.wsjData.rate, progress: ticker.wsjData.detailedStats))
+        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(totalScore: ticker.wsjData.rate, priceTarget: ticker.wsjData.targetPrice, progress: ticker.wsjData.detailedStats))
         wsrHosting.view.tag = TickerDetailsDataSource.hostingTag
         return wsrHosting
     }()
@@ -149,8 +149,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .wsr:
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
+            wsrHosting.view.clipsToBounds = false
             if cell.addSwiftUIIfPossible(wsrHosting.view) {
-                wsrHosting.view.autoSetDimension(.height, toSize: 129.0)
+                wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
                 wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
                 wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
                 wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
@@ -232,7 +233,8 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         delegate?.loadingState(started: true)
         ticker.chartRange = period
-        ticker.loadNewChartData {[unowned self] in
+        ticker.loadNewChartData {[weak self] in
+            guard let self = self else {return}
             self.chartViewModel.localTicker = self.ticker
             self.delegate?.loadingState(started: false)
         }

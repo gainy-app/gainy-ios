@@ -272,6 +272,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             case .deleted(let model):
                 self.deleteCollections([model])
                 break
+            case .updated(model: let model):
+                self.updateCollections([model])
+                break
             case .fetchedFailed:
                 break
             }
@@ -347,6 +350,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if var snapshot = self.dataSource?.snapshot() {
             if snapshot.indexOfSection(.collectionWithCards) != nil {
                 snapshot.deleteItems(models)
+                self.dataSource?.apply(snapshot, animatingDifferences: false)
+            }
+        }
+    }
+    
+    private func updateCollections(_ models: [CollectionDetailViewCellModel]) {
+        for model in models {
+            if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
+                self.viewModel?.collectionDetails[modelIndex] = model
+            }
+            if var snapshot = self.dataSource?.snapshot() {
+                
+                if let modelIndex = snapshot.itemIdentifiers(inSection: .collectionWithCards).firstIndex(where: {$0.id == model.id}) {
+                    snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
+                    snapshot.insertItems([model], afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+                }
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }

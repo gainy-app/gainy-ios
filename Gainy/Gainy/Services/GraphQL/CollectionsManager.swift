@@ -17,6 +17,7 @@ final class CollectionsManager {
     enum FetchResult {
         case fetched(model: CollectionDetailViewCellModel)
         case deleted(model: CollectionDetailViewCellModel)
+        case updated(model: CollectionDetailViewCellModel)
         case fetchedFailed
     }
     
@@ -46,10 +47,20 @@ final class CollectionsManager {
                     return
                 }
                 for newCol in collections {
+                    if !self.collections.contains(where: {$0.id == newCol.id}) {
                     self.collections.append(newCol)
                     
                     let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
                     newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    
+                    
+                    } else {
+                        if let index = self.collections.firstIndex(where: {$0.id == newCol.id}) {
+                            self.collections[index] = newCol
+                            let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                            newCollectionFetched.send(.updated(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                        }
+                    }
                     
                     if self.failedToLoad.contains(colID) {
                         self.failedToLoad.remove(colID)
@@ -62,6 +73,11 @@ final class CollectionsManager {
                 break
             }
         }
+    }
+    
+    func reloadTop20() {
+        guard collections.contains(where: {$0.id == Constants.CollectionDetails.top20ID}) else {return}
+        loadNewCollectionDetails(Constants.CollectionDetails.top20ID)
     }
     
     func loadWatchlistCollection(completion: @escaping () -> Void) {

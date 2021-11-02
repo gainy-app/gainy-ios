@@ -51,7 +51,7 @@ class TickerInfo {
         }
         self.marketData = markers
         
-        self.wsjData = WSRData(rate: ticker.tickerAnalystRatings?.rating ?? 0.0, analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: ticker.tickerAnalystRatings?.strongBuy ?? 0),
+        self.wsjData = WSRData(rate: ticker.tickerAnalystRatings?.rating ?? 0.0, targetPrice: ticker.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: ticker.tickerAnalystRatings?.strongBuy ?? 0),
                                                                               WSRData.WSRDataDetails(name: "BULLISH", count: ticker.tickerAnalystRatings?.buy ?? 0),
                                                                               WSRData.WSRDataDetails(name: "NEUTRAL", count: ticker.tickerAnalystRatings?.hold ?? 0),
                                                                               WSRData.WSRDataDetails(name: "BEARISH", count: ticker.tickerAnalystRatings?.sell ?? 0),
@@ -113,8 +113,15 @@ class TickerInfo {
             switch result {
             case .success(let graphQLResult):
                 
-                let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
-                self?.altStocks = tickers.flatMap({$0}).filter({$0.symbol != self?.symbol}).uniqued()
+                //let tickers = graphQLResult.data?.tickerInterests.compactMap({$0.interest?.tickerInterests.compactMap({$0.ticker?.fragments.remoteTickerDetails})}) ?? []
+                var tickers: [AltStockTicker] = []
+                
+                for tickInd1 in graphQLResult.data?.tickerIndustries ?? [] {
+                    tickers.append(contentsOf: (tickInd1.gainyIndustry?.tickerIndustries ?? []).compactMap({$0.ticker?.fragments.remoteTickerDetails}))
+                }
+                
+                //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
+                self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued()
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
                     self?.altStocks.sort(by: {$0.matchScore > $1.matchScore})
@@ -421,6 +428,7 @@ class TickerInfo {
         }
         
         let rate: Float
+        let targetPrice: Float
         let analystsCount: Int
         let detailedStats: [WSRDataDetails]
     }

@@ -25,6 +25,7 @@ final class TickerLiveStorage {
     
     private let matchesQueue = DispatchQueue.init(label: "TickerLiveMatchStorage")
     private var matchesStorage: Storage<String, CachedMatchScore>?
+    private var token: ObservationToken?
     
     //MARK: - Inner
     
@@ -35,7 +36,7 @@ final class TickerLiveStorage {
           name: "Floppy",
           // Expiry date that will be applied by default for every added object
           // if it's not overridden in the `setObject(forKey:expiry:)` method
-          expiry: .never,
+          expiry: .seconds(60 * 15),
           // Maximum size of the disk cache storage (in bytes)
           maxSize: 1000,
           // Where to store the disk cache. If nil, it is placed in `cachesDirectory` directory.
@@ -47,7 +48,7 @@ final class TickerLiveStorage {
         let memoryConfig = MemoryConfig(
           // Expiry date that will be applied by default for every added object
           // if it's not overridden in the `setObject(forKey:expiry:)` method
-          expiry: .date(Date().addingTimeInterval(60 * 15)),
+          expiry: .seconds(60 * 15),
           /// The maximum number of objects in memory the cache should hold
           countLimit: 5000,
           /// The maximum total cost that the cache can hold before it starts evicting objects
@@ -76,7 +77,7 @@ final class TickerLiveStorage {
           transformer: TransformerFactory.forCodable(ofType: CachedMatchScore.self) // Storage<String, User>
         )
         
-        _ = dataStorage?.addStorageObserver(self) { observer, storage, change in
+        token = dataStorage?.addStorageObserver(self) { observer, storage, change in
           switch change {
           case .add(let key):
               self.tickerKeys.append(key)
@@ -87,7 +88,7 @@ final class TickerLiveStorage {
           case .removeAll:
               self.tickerKeys.removeAll()
           case .removeExpired:
-            dprint("Removed expired")
+            break
           }
         }
     }
@@ -105,6 +106,14 @@ final class TickerLiveStorage {
     }
     
     //MARK: - Tickers Data
+    
+    func clearAllExpiredLiveData() {
+        try? dataStorage?.removeExpiredObjects()
+    }
+    
+    func clearAllLiveData() {
+        try? dataStorage?.removeAll()
+    }
     
     func missingSymbolsFrom(_ fullReq: [String], inProgress: Set<String>) -> [String] {
         //let storedSet = Set(tickerKeys)

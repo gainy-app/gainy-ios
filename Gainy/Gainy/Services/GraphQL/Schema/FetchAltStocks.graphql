@@ -1,11 +1,10 @@
 query FetchAltStocks($symbol: String!) {
-  ticker_interests(where: {symbol: {_eq: $symbol}}) {
-    symbol
-    interest_id
-    interest {
-      ticker_interests {
+  ticker_industries(where: {symbol: {_eq: $symbol}}) {
+    gainy_industry {
+      name
+      ticker_industries {
         ticker {
-          ...RemoteTickerDetails
+              ...RemoteTickerDetails
         }
       }
     }

@@ -9,13 +9,12 @@ public final class FetchAltStocksQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query FetchAltStocks($symbol: String!) {
-      ticker_interests(where: {symbol: {_eq: $symbol}}) {
+      ticker_industries(where: {symbol: {_eq: $symbol}}) {
         __typename
-        symbol
-        interest_id
-        interest {
+        gainy_industry {
           __typename
-          ticker_interests {
+          name
+          ticker_industries {
             __typename
             ticker {
               __typename
@@ -50,7 +49,7 @@ public final class FetchAltStocksQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("ticker_interests", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")]]], type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
+        GraphQLField("ticker_industries", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")]]], type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
       ]
     }
 
@@ -60,29 +59,27 @@ public final class FetchAltStocksQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(tickerInterests: [TickerInterest]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }])
+    public init(tickerIndustries: [TickerIndustry]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
     }
 
     /// An array relationship
-    public var tickerInterests: [TickerInterest] {
+    public var tickerIndustries: [TickerIndustry] {
       get {
-        return (resultMap["ticker_interests"] as! [ResultMap]).map { (value: ResultMap) -> TickerInterest in TickerInterest(unsafeResultMap: value) }
+        return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: TickerInterest) -> ResultMap in value.resultMap }, forKey: "ticker_interests")
+        resultMap.updateValue(newValue.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, forKey: "ticker_industries")
       }
     }
 
-    public struct TickerInterest: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["ticker_interests"]
+    public struct TickerIndustry: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["ticker_industries"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("symbol", type: .scalar(String.self)),
-          GraphQLField("interest_id", type: .scalar(Int.self)),
-          GraphQLField("interest", type: .object(Interest.selections)),
+          GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
         ]
       }
 
@@ -92,8 +89,8 @@ public final class FetchAltStocksQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String? = nil, interestId: Int? = nil, interest: Interest? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ticker_interests", "symbol": symbol, "interest_id": interestId, "interest": interest.flatMap { (value: Interest) -> ResultMap in value.resultMap }])
+      public init(gainyIndustry: GainyIndustry? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ticker_industries", "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -105,41 +102,24 @@ public final class FetchAltStocksQuery: GraphQLQuery {
         }
       }
 
-      public var symbol: String? {
-        get {
-          return resultMap["symbol"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "symbol")
-        }
-      }
-
-      public var interestId: Int? {
-        get {
-          return resultMap["interest_id"] as? Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "interest_id")
-        }
-      }
-
       /// An object relationship
-      public var interest: Interest? {
+      public var gainyIndustry: GainyIndustry? {
         get {
-          return (resultMap["interest"] as? ResultMap).flatMap { Interest(unsafeResultMap: $0) }
+          return (resultMap["gainy_industry"] as? ResultMap).flatMap { GainyIndustry(unsafeResultMap: $0) }
         }
         set {
-          resultMap.updateValue(newValue?.resultMap, forKey: "interest")
+          resultMap.updateValue(newValue?.resultMap, forKey: "gainy_industry")
         }
       }
 
-      public struct Interest: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["interests"]
+      public struct GainyIndustry: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["gainy_industries"]
 
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
+            GraphQLField("name", type: .scalar(String.self)),
+            GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
           ]
         }
 
@@ -149,8 +129,8 @@ public final class FetchAltStocksQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(tickerInterests: [TickerInterest]) {
-          self.init(unsafeResultMap: ["__typename": "interests", "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }])
+        public init(name: String? = nil, tickerIndustries: [TickerIndustry]) {
+          self.init(unsafeResultMap: ["__typename": "gainy_industries", "name": name, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -162,18 +142,27 @@ public final class FetchAltStocksQuery: GraphQLQuery {
           }
         }
 
-        /// An array relationship
-        public var tickerInterests: [TickerInterest] {
+        public var name: String? {
           get {
-            return (resultMap["ticker_interests"] as! [ResultMap]).map { (value: ResultMap) -> TickerInterest in TickerInterest(unsafeResultMap: value) }
+            return resultMap["name"] as? String
           }
           set {
-            resultMap.updateValue(newValue.map { (value: TickerInterest) -> ResultMap in value.resultMap }, forKey: "ticker_interests")
+            resultMap.updateValue(newValue, forKey: "name")
           }
         }
 
-        public struct TickerInterest: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["ticker_interests"]
+        /// An array relationship
+        public var tickerIndustries: [TickerIndustry] {
+          get {
+            return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }
+          }
+          set {
+            resultMap.updateValue(newValue.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, forKey: "ticker_industries")
+          }
+        }
+
+        public struct TickerIndustry: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["ticker_industries"]
 
           public static var selections: [GraphQLSelection] {
             return [
@@ -189,7 +178,7 @@ public final class FetchAltStocksQuery: GraphQLQuery {
           }
 
           public init(ticker: Ticker? = nil) {
-            self.init(unsafeResultMap: ["__typename": "ticker_interests", "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
+            self.init(unsafeResultMap: ["__typename": "ticker_industries", "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
           }
 
           public var __typename: String {
