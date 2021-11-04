@@ -1,13 +1,12 @@
-*iOS v0.3.1 #64* available
+*iOS v0.3.1 #65* available
 *General improvements* - MVP
 
 :new: *New:*
-• Stock Card: Target Price
+•
 
 :hammer_and_wrench: *Improvements*
-• Stock Card: Alts stocks fetching changed
-• Stock Card: Chart colors improved
-• Live Ticker Data: general improvements
+• Hotfix crashes
+• Charts caching
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*
