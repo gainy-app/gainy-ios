@@ -57,6 +57,11 @@ class SwipeCollectionViewCell: UICollectionViewCell {
         }
     }
 
+    override func layoutSubviews() {
+        
+        super.layoutSubviews()
+    }
+    
     /// :nodoc:
     override var layoutMargins: UIEdgeInsets {
         get {
