@@ -32,7 +32,6 @@ enum CollectionDetailsViewModelMapper {
             ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
             : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
         
-        assert(model.rawTicker != nil, "RawTicker Can't be nil")
         return CollectionCardViewCellModel.init(tickerCompanyName: model.companyName,
                                                 tickerSymbol: model.tickerSymbol,
                                                 dividendGrowthPercent: model.financialMetrics.dividendGrowthPercent.cleanOneDecimalP,
@@ -42,6 +41,6 @@ enum CollectionDetailsViewModelMapper {
                                                 monthToDay: (model.financialMetrics.monthToDay * 100.0).cleanOneDecimalP,
                                                 netProfit: model.financialMetrics.netProfit.cleanOneDecimalP,
                                                 highlight: model.financialMetrics.highlight,
-                                                rawTicker: model.rawTicker!)
+                                                rawTicker: model.rawTicker)
     }
 }

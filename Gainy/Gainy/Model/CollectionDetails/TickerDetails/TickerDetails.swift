@@ -3,7 +3,7 @@ struct TickerDetails {
     let companyName: String
     let description: String
     let financialMetrics: TickerFinancialMetrics
-    let rawTicker: RemoteTickerDetails?
+    let rawTicker: RemoteTickerDetails
 }
 
 extension TickerDetails: Hashable {

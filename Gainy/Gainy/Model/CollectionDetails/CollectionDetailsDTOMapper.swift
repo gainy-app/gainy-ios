@@ -9,10 +9,14 @@ enum CollectionDetailsDTOMapper {
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: false,
-            cards: dto.tickerCollections.map {
-                CollectionDetailsDTOMapper.mapTickerDetails(
-                    $0.ticker?.fragments.remoteTickerDetails
+            cards: dto.tickerCollections.compactMap {
+                if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
+                return CollectionDetailsDTOMapper.mapTickerDetails(
+                    remoteTickerDetails
                 )
+                } else {
+                    return nil
+                }
             }
         )
     }
@@ -27,22 +31,26 @@ enum CollectionDetailsDTOMapper {
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
             isInYourCollectionsList: true,
-            cards: dto.tickerCollections.map {
-                CollectionDetailsDTOMapper.mapTickerDetails(
-                    $0.ticker?.fragments.remoteTickerDetails
+            cards: dto.tickerCollections.compactMap {
+                if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
+                return CollectionDetailsDTOMapper.mapTickerDetails(
+                    remoteTickerDetails
                 )
+                } else {
+                    return nil
+                }
             }
         )
     }
 
     static func mapTickerDetails(
-        _ dto: RemoteTickerDetails?
+        _ dto: RemoteTickerDetails
     ) -> TickerDetails {
-        let tickerFinancials = dto?.tickerFinancials.first
+        let tickerFinancials = dto.tickerFinancials.first
         return TickerDetails(
-            tickerSymbol: dto?.symbol ?? "",
-            companyName: dto?.name ?? "",
-            description: dto?.description ?? "",
+            tickerSymbol: dto.symbol ?? "",
+            companyName: dto.name ?? "",
+            description: dto.description ?? "",
             financialMetrics: tickerFinancials != nil ? CollectionDetailsDTOMapper.mapFinancialMetrics(
                 tickerFinancials!
             ) : TickerFinancialMetrics.init(todaysPriceChange: 0.0, currentPrice: 0.0, dividendGrowthPercent: 0.0, priceToEarnings: 0.0, marketCapitalization: 0.0, evs: 0.0, growthRateYOY: 0.0, monthToDay: 0.0, netProfit: 0.0, highlight: "ERROR"),
