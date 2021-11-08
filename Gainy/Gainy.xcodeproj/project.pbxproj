@@ -47,7 +47,6 @@
 		33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE026C6575A00811F74 /* Types.graphql.swift */; };
 		33467CE326C6575A00811F74 /* News.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE126C6575A00811F74 /* News.graphql.swift */; };
 		33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE426C6576800811F74 /* Charts.graphql.swift */; };
-		33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33467CE626C66E9B00811F74 /* GoogleService-Info.plist */; };
 		33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 33467CE926C66FA300811F74 /* FirebaseFirestore */; };
 		33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 33467CEB26C66FA300811F74 /* FirebaseDatabase */; };
 		33467CEE26C66FA300811F74 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 33467CED26C66FA300811F74 /* FirebaseAnalytics */; };
@@ -416,7 +415,6 @@
 		33467CE026C6575A00811F74 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		33467CE126C6575A00811F74 /* News.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.graphql.swift; sourceTree = "<group>"; };
 		33467CE426C6576800811F74 /* Charts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Charts.graphql.swift; sourceTree = "<group>"; };
-		33467CE626C66E9B00811F74 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33467CFB26C6786200811F74 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		33467CFE26C698BC00811F74 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchLiveTickersData.graphql; sourceTree = "<group>"; };
@@ -1394,7 +1392,6 @@
 		3A930F1B265C1B96000FD3EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				33467CE626C66E9B00811F74 /* GoogleService-Info.plist */,
 				33B9116C2706E21E00C00B0D /* UploadDsym */,
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
@@ -1819,6 +1816,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A930EFF265C190C000FD3EB /* Build configuration list for PBXNativeTarget "Gainy" */;
 			buildPhases = (
+				8505FCF1273924130061AB36 /* Choose Firebase Info Plist */,
 				1C3A2C2926A4A51200FAF107 /* Generate Apollo GraphQL API */,
 				3A930ED1265C1909000FD3EB /* Sources */,
 				3A930ED2265C1909000FD3EB /* Frameworks */,
@@ -1957,7 +1955,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33467CE726C66E9B00811F74 /* GoogleService-Info.plist in Resources */,
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
@@ -2110,6 +2107,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#if which swiftlint >/dev/null; then\n  #swiftlint --config \"${SRCROOT}/../.swiftlint.yml\"\n#else\n#  echo \"WARNING: SwiftLint not installed, use brew to install it.\"\n#fi\n";
+		};
+		8505FCF1273924130061AB36 /* Choose Firebase Info Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Choose Firebase Info Plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH_TO_CONFIG=$SRCROOT/Gainy/Config/GoogleService-Info-$PRODUCT_BUNDLE_IDENTIFIER.plist\nFILENAME_IN_BUNDLE=GoogleService-Info.plist\nBUILD_APP_DIR=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho cp $PATH_TO_CONFIG \"$BUILD_APP_DIR/$FILENAME_IN_BUNDLE\"\ncp $PATH_TO_CONFIG \"$BUILD_APP_DIR/$FILENAME_IN_BUNDLE\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

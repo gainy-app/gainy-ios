@@ -27,6 +27,7 @@ struct Constants {
     struct Auth {
         static let claims = "https://hasura.io/jwt/claims"
         static let claimsPost = "https://us-central1-gainyapp.cloudfunctions.net/refresh_token?uid="
+        static let claimsPostStaging = "https://us-central1-gainyapp-test.cloudfunctions.net/refresh_token?uid="
     }
     
     struct UserDefaults {

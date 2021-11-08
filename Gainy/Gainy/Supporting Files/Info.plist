@@ -33,8 +33,26 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.378836078681-r7mrqbqj5a6e09r7vgjedu11udukjo8l</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string>app.gainy.application.ios</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gainyios</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.gainy.application.ios.dev</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>gainyios</string>
