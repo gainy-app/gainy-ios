@@ -10,6 +10,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="SFCompactRounded-Regular.otf">
+            <string>SFCompactRounded-Regular</string>
+        </array>
+        <array key="SFCompactRounded-Semibold.otf">
+            <string>SFCompactRounded-Semibold</string>
+        </array>
         <array key="SFProDisplay-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
@@ -253,6 +259,144 @@
             </objects>
             <point key="canvasLocation" x="139" y="123"/>
         </scene>
+        <!--Search Stocks View Controller-->
+        <scene sceneID="cIS-AY-hzW">
+            <objects>
+                <viewController storyboardIdentifier="SearchStocksViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cHD-cW-iKr" customClass="SearchStocksViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EkA-M3-bqc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STOCK TO COMPARE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8MS-ye-TTR">
+                                <rect key="frame" x="144" y="72" width="126" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="6U7-fj-cNt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="STOCK" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="axq-H6-u3x">
+                                <rect key="frame" x="20" y="112" width="374" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="jbB-2p-rv2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QFa-Ri-B5L">
+                                <rect key="frame" x="0.0" y="172" width="414" height="690"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SearchStockTableViewCell" id="INT-XJ-s9H" customClass="SearchStockTableViewCell" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="INT-XJ-s9H" id="w1m-uj-cCu">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nintendo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="irC-Q4-uhP">
+                                                    <rect key="frame" x="24" y="0.0" width="290" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="kS1-nJ-fGP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
+                                                    <color key="textColor" name="mainText"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTDOY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wTU-hG-Iev">
+                                                    <rect key="frame" x="24" y="24" width="35.5" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="acH-NF-2le"/>
+                                                        <constraint firstAttribute="height" constant="20" id="hPJ-YL-riV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Regular" family="SF Compact Rounded" pointSize="12"/>
+                                                    <color key="textColor" red="0.22745098039215686" green="0.26666666666666666" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nintendo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cBV-Xd-T4m">
+                                                    <rect key="frame" x="323" y="0.0" width="67" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="fHf-jm-bAg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
+                                                    <color key="textColor" name="mainText"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTDOY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPc-wO-BkZ">
+                                                    <rect key="frame" x="354.5" y="24" width="35.5" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="P1O-KS-CoZ"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="twN-0w-4iQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Regular" family="SF Compact Rounded" pointSize="12"/>
+                                                    <color key="textColor" red="0.2274509804" green="0.2666666667" blue="0.28235294119999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJm-Zm-9Qy">
+                                                    <rect key="frame" x="24" y="43" width="366" height="1"/>
+                                                    <color key="backgroundColor" name="mainLightGray"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="T9p-Fy-zaJ"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wTU-hG-Iev" secondAttribute="bottom" id="BQh-Lf-WPY"/>
+                                                <constraint firstItem="wTU-hG-Iev" firstAttribute="leading" secondItem="w1m-uj-cCu" secondAttribute="leading" constant="24" id="ESF-zv-IKZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="oPc-wO-BkZ" secondAttribute="bottom" id="KdT-P1-gsR"/>
+                                                <constraint firstAttribute="trailing" secondItem="irC-Q4-uhP" secondAttribute="trailing" constant="100" id="Qgg-7Q-qeb"/>
+                                                <constraint firstAttribute="trailing" secondItem="oPc-wO-BkZ" secondAttribute="trailing" constant="24" id="RhZ-Pz-3Sg"/>
+                                                <constraint firstItem="gJm-Zm-9Qy" firstAttribute="leading" secondItem="w1m-uj-cCu" secondAttribute="leading" constant="24" id="Vhu-sE-mpx"/>
+                                                <constraint firstItem="irC-Q4-uhP" firstAttribute="leading" secondItem="w1m-uj-cCu" secondAttribute="leading" constant="24" id="Zjw-be-bbb"/>
+                                                <constraint firstItem="irC-Q4-uhP" firstAttribute="top" secondItem="w1m-uj-cCu" secondAttribute="top" id="ege-ly-jPQ"/>
+                                                <constraint firstItem="cBV-Xd-T4m" firstAttribute="top" secondItem="w1m-uj-cCu" secondAttribute="top" id="f1S-0g-8pN"/>
+                                                <constraint firstAttribute="trailing" secondItem="gJm-Zm-9Qy" secondAttribute="trailing" constant="24" id="fq4-AB-HyN"/>
+                                                <constraint firstAttribute="trailing" secondItem="cBV-Xd-T4m" secondAttribute="trailing" constant="24" id="iwj-dK-vGp"/>
+                                                <constraint firstAttribute="bottom" secondItem="gJm-Zm-9Qy" secondAttribute="bottom" id="kV0-JD-hEP"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="stockDiffLbl" destination="oPc-wO-BkZ" id="D7f-i5-CWl"/>
+                                            <outlet property="stockNameLbl" destination="irC-Q4-uhP" id="XHO-yw-jEc"/>
+                                            <outlet property="stockPriceLbl" destination="cBV-Xd-T4m" id="xHn-UI-hdN"/>
+                                            <outlet property="stockSymLbl" destination="wTU-hG-Iev" id="uTl-Ig-IpB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="pmC-QX-cK0">
+                                <rect key="frame" x="188.5" y="172" width="37" height="37"/>
+                                <color key="color" name="mainText"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aTR-AD-OIM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aTR-AD-OIM" firstAttribute="trailing" secondItem="axq-H6-u3x" secondAttribute="trailing" constant="20" id="4aZ-Wu-9Te"/>
+                            <constraint firstItem="pmC-QX-cK0" firstAttribute="top" secondItem="QFa-Ri-B5L" secondAttribute="top" id="4mP-2a-iJq"/>
+                            <constraint firstItem="8MS-ye-TTR" firstAttribute="top" secondItem="aTR-AD-OIM" secondAttribute="top" constant="28" id="AHD-aR-7hu"/>
+                            <constraint firstItem="axq-H6-u3x" firstAttribute="leading" secondItem="aTR-AD-OIM" secondAttribute="leading" constant="20" id="Cqe-RW-PFT"/>
+                            <constraint firstItem="aTR-AD-OIM" firstAttribute="bottom" secondItem="QFa-Ri-B5L" secondAttribute="bottom" id="EzI-AB-pRU"/>
+                            <constraint firstItem="pmC-QX-cK0" firstAttribute="centerX" secondItem="QFa-Ri-B5L" secondAttribute="centerX" id="Ltw-uR-i2Z"/>
+                            <constraint firstItem="axq-H6-u3x" firstAttribute="top" secondItem="8MS-ye-TTR" secondAttribute="bottom" constant="16" id="MeS-bb-jUz"/>
+                            <constraint firstItem="aTR-AD-OIM" firstAttribute="trailing" secondItem="QFa-Ri-B5L" secondAttribute="trailing" id="V7p-aL-gJO"/>
+                            <constraint firstItem="QFa-Ri-B5L" firstAttribute="top" secondItem="axq-H6-u3x" secondAttribute="bottom" constant="16" id="hch-Q2-kjk"/>
+                            <constraint firstItem="QFa-Ri-B5L" firstAttribute="leading" secondItem="aTR-AD-OIM" secondAttribute="leading" id="lYu-cz-qTa"/>
+                            <constraint firstItem="8MS-ye-TTR" firstAttribute="centerX" secondItem="EkA-M3-bqc" secondAttribute="centerX" id="r8K-St-Xvt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loaderView" destination="pmC-QX-cK0" id="KNa-yZ-v3Y"/>
+                        <outlet property="searchFld" destination="axq-H6-u3x" id="yYz-Yf-1Go"/>
+                        <outlet property="tableView" destination="QFa-Ri-B5L" id="f2Y-ok-kzr"/>
+                        <outlet property="titleLbl" destination="8MS-ye-TTR" id="sZY-Tl-YK2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9uD-EY-CQo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="843" y="123"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="4FW-wy-DAv">
@@ -279,6 +423,9 @@
     </designables>
     <resources>
         <image name="sort_dots" width="102" height="2"/>
+        <namedColor name="mainLightGray">
+            <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="mainText">
             <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

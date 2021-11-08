@@ -120,6 +120,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var isCompare: Bool = false {
+        didSet {
+            collectionHorizontalView.isCompare = isCompare
+        }
+    }
+    
     // MARK: Internal
     
     private var isLoadingTickers: Bool = false {
@@ -145,6 +151,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
+    var onAddStockPressed: (() -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -213,6 +220,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         sortSections()
     }
     private var cards: [CollectionCardViewCellModel] = []
+    
+    func addRemoteStock(_ stock: RemoteTickerDetails) {
+        let cardDTO = CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(stock))
+        cards.append(cardDTO)
+        if var snap = dataSource?.snapshot() {
+            snap.appendItems([cardDTO], toSection: .cards)
+            dataSource?.apply(snap, animatingDifferences: true)
+        }
+    }
     
     func sortSections() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
@@ -304,5 +320,9 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
     
     func stockSortPressed(view: CollectionHorizontalView) {
         onSortingPressed?()
+    }
+    
+    func settingsPressed(view: CollectionHorizontalView) {
+        onAddStockPressed?()
     }
 }

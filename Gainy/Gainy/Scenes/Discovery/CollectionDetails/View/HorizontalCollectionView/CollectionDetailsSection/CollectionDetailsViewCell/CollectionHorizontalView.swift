@@ -2,6 +2,7 @@ import UIKit
 import Kingfisher
 
 protocol CollectionHorizontalViewDelegate: AnyObject {
+    func settingsPressed(view: CollectionHorizontalView)
     func stockSortPressed(view: CollectionHorizontalView)
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool)
 }
@@ -111,9 +112,10 @@ final class CollectionHorizontalView: UIView {
     }()
 
     // TODO: 1: use custom SettingsButton
+    private var settingsViews: [UIView] = []
     lazy var settingsButton: ResponsiveButton = {
         let button = ResponsiveButton()
-
+        settingsViews.removeAll()
         button.layer.cornerRadius = 12
         button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor.Gainy.white
@@ -124,7 +126,7 @@ final class CollectionHorizontalView: UIView {
         slidersIconImageView.image = UIImage(named: "sliders")
 
         button.addSubview(slidersIconImageView)
-
+        settingsViews.append(slidersIconImageView)
         let textLabel = UILabel(
             frame: CGRect(x: 8 + 16 + 2, y: 4, width: 42, height: 16)
         )
@@ -136,13 +138,20 @@ final class CollectionHorizontalView: UIView {
         textLabel.text = "Settings"
 
         button.addSubview(textLabel)
-
+        settingsViews.append(textLabel)
         button.addTarget(self,
                          action: #selector(settingsButtonTapped(_:)),
                          for: .touchUpInside)
 
         return button
     }()
+    
+    func setSettingsTitle(_ title: String) {
+        settingsButton.setTitle(title, for: .normal)
+        settingsButton.setTitleColor(UIColor.Gainy.grayNotDark, for: .normal)
+        settingsButton.titleLabel?.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
+        settingsViews.forEach({$0.alpha = 0.0})
+    }
 
     // TODO: 1: use custom button
     lazy var sortByButton: ResponsiveButton = {
@@ -194,6 +203,12 @@ final class CollectionHorizontalView: UIView {
     
     func updateChargeLbl(_ sort: String) {
         sortLbl?.text = sort
+    }
+    
+    var isCompare: Bool = false {
+        didSet {
+            setSettingsTitle("Add Stocks")
+        }
     }
     
     private var collectionId: Int = 0
@@ -410,8 +425,13 @@ final class CollectionHorizontalView: UIView {
 
     @objc
     private func settingsButtonTapped(_: UIButton) {
-        GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
-        NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
+        if isCompare {
+            GainyAnalytics.logEvent("add_stock_to_compare_pressed", params: ["collectionID" : collectionId])
+            delegate?.settingsPressed(view: self)
+        } else {
+            GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
+            NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
+        }
     }
 
     @objc

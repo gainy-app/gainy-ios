@@ -40,7 +40,6 @@ final class EditPersonalInfoViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        registerNotifications()
         fillTextFields()
     }
 
@@ -48,7 +47,6 @@ final class EditPersonalInfoViewController: BaseViewController {
         
         super.viewDidDisappear(animated)
         scrollView.contentInset.bottom = 0
-        unregisterNotifications()
         self.didTapDone(sender: nil)
         self.finishEditing()
     }
@@ -65,14 +63,15 @@ final class EditPersonalInfoViewController: BaseViewController {
          scrollView.contentInset.bottom = 0
     }
     
-    @objc private func keyboardWillShow(notification: NSNotification){
-       
-        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        guard let animationDuration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
         
+        guard let keyboardFrame = self.keyboardSize else { return }
+        guard let animationDuration = notification.userInfo![UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber else { return }
+
         if let inputView = self.activeInputView {
             let viewHeight = self.view.bounds.height
-            let keyboardHeight = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+            let keyboardHeight = view.convert(keyboardFrame, from: nil).size.height
             let inputViewMaxY = inputView.frame.maxY + scrollView.frame.origin.y
             let keyboardTopY = (viewHeight - keyboardHeight)
             let offset = CGFloat(40.0)
@@ -88,10 +87,6 @@ final class EditPersonalInfoViewController: BaseViewController {
             }
         }
  
-    }
-
-    @objc private func keyboardWillHide(notification: NSNotification){
-        
     }
     
     private func finishEditing() {
@@ -123,17 +118,6 @@ final class EditPersonalInfoViewController: BaseViewController {
         self.lastNameTextField.text = lastName
         self.emailTextField.text = email
         self.legalAddressTextView.text = legalAddress
-    }
-    
-    private func registerNotifications() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func unregisterNotifications() {
-        
-        NotificationCenter.default.removeObserver(self)
     }
     
     private func setUpNavigationBar() {

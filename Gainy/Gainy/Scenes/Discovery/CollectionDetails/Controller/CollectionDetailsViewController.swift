@@ -372,7 +372,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     public func cancelSearchAsNeeded() {
-        
         if searchCollectionView.alpha > 0.0 {
             textFieldClear()
         }

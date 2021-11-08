@@ -9,6 +9,7 @@ import UIKit
 import Combine
 
 protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
+    func addStockPressed(source: SingleCollectionDetailsViewModel)
     func tickerPressed(source: SingleCollectionDetailsViewModel, ticker: RemoteTickerDetails)
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
 }
@@ -39,12 +40,17 @@ final class SingleCollectionDetailsViewModel: NSObject {
         self.dataSource = UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
         ) {[weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
-            let cell = self?.sections[indexPath.section].configureCell(
+            let cell = (self?.collectionId ?? 0 != Constants.CollectionDetails.compareCollectionID ? self?.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
                 indexPath: indexPath,
                 viewModel: modelItem,
                 position: indexPath.row
-            )
+            ) : self?.compareSections[indexPath.section].configureCell(
+                collectionView: collectionView,
+                indexPath: indexPath,
+                viewModel: modelItem,
+                position: indexPath.row
+            ))
             
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
@@ -55,6 +61,10 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}
                     self.delegate?.sortingPressed(source: self, model: modelItem, cell: cell)
+                }
+                cell.onAddStockPressed = { [weak self] in
+                    guard let self = self else {return}
+                    self.delegate?.addStockPressed(source: self)
                 }
             }
             return cell
@@ -92,6 +102,17 @@ final class SingleCollectionDetailsViewModel: NSObject {
         return layout
     }()
     
+    
+    private lazy var compareSections: [SectionLayout] = [
+        HorizontalCompareFlowSectionLayout()
+    ]
+    
+    lazy var customCompareLayout: UICollectionViewLayout = {
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
+            self?.compareSections[sectionIndex].layoutSection(within: env)
+        }
+        return layout
+    }()
     
     //MARK: - Loading
     

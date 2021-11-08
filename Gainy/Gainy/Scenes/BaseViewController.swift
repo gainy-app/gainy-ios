@@ -138,6 +138,26 @@ class BaseViewController: UIViewController {
         }
     }
     
+    //MARK: - Keyboard
+    
+    var keyboardSize: CGRect?
+    
+    fileprivate func addKeyboardEventsListeners() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let userInfo = (notification as NSNotification).userInfo {
+            if let keyboardSize =  (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                self.keyboardSize = keyboardSize
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+    }
+    
     //MARK: - Analytics
     
     private var loadTime: Date = Date()
@@ -146,6 +166,7 @@ class BaseViewController: UIViewController {
         super.viewWillAppear(animated)
         
         loadTime = Date()
+        addKeyboardEventsListeners()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -171,6 +192,12 @@ class BaseViewController: UIViewController {
     
     deinit {
         cancellables.removeAll()
+        removeKeyboardEventListeners()
+    }
+    
+    fileprivate func removeKeyboardEventListeners() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 

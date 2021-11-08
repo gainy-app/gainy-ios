@@ -37,6 +37,7 @@ enum CollectionDetailsDTOMapper {
                     remoteTickerDetails
                 )
                 } else {
+                    dprint("Missing ticker: \(dto.name ?? "")")
                     return nil
                 }
             }
