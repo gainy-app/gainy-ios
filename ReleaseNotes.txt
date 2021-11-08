@@ -1,15 +1,11 @@
-*iOS v0.3.1 #64* available
+*iOS v0.3.1 #66* available
 *General improvements* - MVP
 
 :new: *New:*
-• Stock Card: Target Price
+• Switch Firebase App depending on environment
 
 :hammer_and_wrench: *Improvements*
 • Hotfix crashes
-• Charts caching
-• Stock Card: Alts stocks fetching changed
-• Stock Card: Chart colors improved
-• Live Ticker Data: general improvements
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*
