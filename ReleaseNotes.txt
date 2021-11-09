@@ -3,9 +3,10 @@
 
 :new: *New:*
 • Switch Firebase App depending on environment
+• Trade button flow
 
 :hammer_and_wrench: *Improvements*
-• Hotfix crashes
+• Hotfix a few glitches and crash
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*
