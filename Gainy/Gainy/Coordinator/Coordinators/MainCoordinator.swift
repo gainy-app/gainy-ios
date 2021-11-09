@@ -141,6 +141,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
+    func showBrokersViewController(symbol: String, delegate: BrokersViewControllerDelegate?) {
+        let vc = self.viewControllerFactory.instantiateBrokersList()
+        vc.symbol = symbol
+        vc.delegate = delegate
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
+    
     func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {
         let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID)
         vc.delegate = delegate

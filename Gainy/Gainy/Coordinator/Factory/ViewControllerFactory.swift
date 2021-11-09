@@ -124,6 +124,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateBrokersList() -> BrokersViewController {
+        let vc = BrokersViewController.instantiate(.discovery)
+        return vc
+    }
+    
     func instantiateTickerDetails() -> TickerViewController {
         let vc = TickerViewController.instantiate(.discovery)
         return vc

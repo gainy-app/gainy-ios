@@ -14,6 +14,9 @@ final class UserProfileManager {
     @UserDefaultArray(key: "favoriteCollections")
     var favoriteCollections: [Int]
     
+    @UserDefault<BrokerData>("selectedBrokerToTrade")
+    public var selectedBrokerToTrade: BrokerData?
+    
     var favHash: String {
         favoriteCollections.compactMap({String($0)}).joined()
     }

@@ -60,10 +60,31 @@ final class TickerViewController: BaseViewController {
     //MARK: - Actions
     
     @IBAction func shareAction(_ sender: Any) {
-        if let url = URL(string: Constants.Links.rhLink + (viewModel?.dataSource.ticker.symbol ?? "")) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        
+        guard let symbol = viewModel?.dataSource.ticker.symbol else {
+            return
         }
-        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : viewModel?.dataSource.ticker.symbol ?? ""])
+        if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
+            if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, completionHandler: { (success) in
+                        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
+                    })
+                }
+            }
+            return
+        }
+        
+        self.showBrokersList()
+    }
+    
+    private func showBrokersList() {
+        
+        guard let symbol = viewModel?.dataSource.ticker.symbol else {
+            return
+        }
+        
+        self.coordinator?.showBrokersViewController(symbol: symbol, delegate: self)
     }
     
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
@@ -128,10 +149,14 @@ final class TickerViewController: BaseViewController {
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
     
+    func didRequestShowBrokersListForSymbol(symbol: String) {
+        
+        self.coordinator?.showBrokersViewController(symbol: symbol, delegate: self)
+    }
+    
     func isStockCompared(stock: AltStockTicker) -> Bool {
         viewModel?.tickersToCompare.contains(where: {$0.symbol == stock.symbol}) ?? false
     }
-    
     
     func altStockPressed(stock: AltStockTicker) {
         let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
@@ -174,6 +199,14 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
                 self.bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
             }
         }
+    }
+}
+
+extension TickerViewController: BrokersViewControllerDelegate {
+    
+    func didDismissBrokersViewController() {
+        
+        self.tableView.reloadData()
     }
 }
 

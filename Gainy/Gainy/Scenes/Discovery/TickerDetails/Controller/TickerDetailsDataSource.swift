@@ -13,6 +13,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func loadingState(started: Bool)
     func comparedStocksChanged(stock: AltStockTicker)
     func isStockCompared(stock: AltStockTicker) -> Bool
+    func didRequestShowBrokersListForSymbol(symbol: String)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -45,7 +46,15 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
         cellHeights[.alternativeStocks] = TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
-        cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeight
+        updateWatchlistCellHeight()
+    }
+    
+    private func updateWatchlistCellHeight() {
+        if UserProfileManager.shared.selectedBrokerToTrade != nil {
+            cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeightExpanded
+        } else {
+            cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeight
+        }
     }
     
     let ticker: TickerInfo
@@ -206,6 +215,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .watchlist:
             let cell: TickerDetailsWatchlistViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
+            cell.delegate = self
             return cell
         }
     }
@@ -254,6 +264,14 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
     func comparePressed(stock: AltStockTicker) {        
         GainyAnalytics.logEvent("ticker_alt_stock_compared", params: ["tickerSymbol" : stock.symbol ?? ""])
         delegate?.comparedStocksChanged(stock: stock)
+    }
+}
+
+extension TickerDetailsDataSource: TickerDetailsWatchlistViewCellDelegate {
+    
+    func didRequestShowBrokersListForSymbol(symbol: String) {
+        
+        self.delegate?.didRequestShowBrokersListForSymbol(symbol: symbol)
     }
 }
 

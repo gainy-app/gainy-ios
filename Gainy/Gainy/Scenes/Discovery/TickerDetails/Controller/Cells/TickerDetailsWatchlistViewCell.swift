@@ -7,11 +7,21 @@
 
 import UIKit
 
+protocol TickerDetailsWatchlistViewCellDelegate: AnyObject {
+    
+    func didRequestShowBrokersListForSymbol(symbol: String)
+}
+
 final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 120.0
+    static let cellHeight: CGFloat = 123.0
+    static let cellHeightExpanded: CGFloat = 153.0
     
-    @IBOutlet weak var watchBtn: UIButton!
+    public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
+    
+    @IBOutlet weak var watchBtn: BorderButton!
+    @IBOutlet weak var tradeBtn: BorderButton!
+    @IBOutlet weak var changeCurrentBrokerBtn: BorderButton!
     
     override func updateFromTickerData() {
         
@@ -23,6 +33,13 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         
         watchBtn.layer.borderWidth = 2.0
         updateTitle()
+        
+        if let selectedBroker = UserProfileManager.shared.selectedBrokerToTrade {
+            changeCurrentBrokerBtn.isHidden = false
+            changeCurrentBrokerBtn.setTitle("Cange current broker — " + selectedBroker.brokerName, for: .normal)
+        } else {
+            changeCurrentBrokerBtn.isHidden = true
+        }
     }
     
     @IBAction func addToWatchAction(_ sender: Any) {
@@ -45,6 +62,39 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
                 self.updateTitle()
             }
         }
+    }
+    
+    @IBAction func tradeAction(_ sender: Any) {
+        
+        guard let symbol = tickerInfo?.symbol else {
+            return
+        }
+        if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
+            if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, completionHandler: { (success) in
+                        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
+                    })
+                }
+            }
+            return
+        }
+        
+        self.showBrokersList()
+    }
+    
+    @IBAction func changeCurrentBrokerAction(_ sender: Any) {
+        
+        self.showBrokersList()
+    }
+    
+    private func showBrokersList() {
+        
+        guard let symbol = tickerInfo?.symbol else {
+            return
+        }
+        
+        self.delegate?.didRequestShowBrokersListForSymbol(symbol: symbol)
     }
     
     private func updateTitle() {

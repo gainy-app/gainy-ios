@@ -271,6 +271,12 @@
 		8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */; };
 		85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */; };
 		85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */; };
+		8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCF22739648C0061AB36 /* BrokersViewController.swift */; };
+		8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCF4273965170061AB36 /* BrokerDataSource.swift */; };
+		8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCF727399DEF0061AB36 /* BrokerViewCell.swift */; };
+		8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCF827399DF00061AB36 /* BrokerViewCell.xib */; };
+		8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */; };
+		8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
@@ -635,6 +641,12 @@
 		8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFinalizingViewController.swift; sourceTree = "<group>"; };
 		85059CBE26D910010034A9E4 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		85059CC026D9114C0034A9E4 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		8505FCF22739648C0061AB36 /* BrokersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokersViewController.swift; sourceTree = "<group>"; };
+		8505FCF4273965170061AB36 /* BrokerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokerDataSource.swift; sourceTree = "<group>"; };
+		8505FCF727399DEF0061AB36 /* BrokerViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerViewCell.swift; sourceTree = "<group>"; };
+		8505FCF827399DF00061AB36 /* BrokerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerViewCell.xib; sourceTree = "<group>"; };
+		8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerFooterView.swift; sourceTree = "<group>"; };
+		8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerFooterView.xib; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
@@ -1666,6 +1678,7 @@
 		3AFE0C3D2690CD4500C25A8F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8505FCF6273965220061AB36 /* Brokers */,
 				3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */,
 				3AFE0C442690CEA100C25A8F /* TickerViewController.swift */,
 				33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */,
@@ -1686,6 +1699,19 @@
 				3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8505FCF6273965220061AB36 /* Brokers */ = {
+			isa = PBXGroup;
+			children = (
+				8505FCF22739648C0061AB36 /* BrokersViewController.swift */,
+				8505FCF4273965170061AB36 /* BrokerDataSource.swift */,
+				8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */,
+				8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */,
+				8505FCF727399DEF0061AB36 /* BrokerViewCell.swift */,
+				8505FCF827399DF00061AB36 /* BrokerViewCell.xib */,
+			);
+			path = Brokers;
 			sourceTree = "<group>";
 		};
 		8579516E26E22EFE003B751C /* IntroductionCaptionCell */ = {
@@ -1967,6 +1993,7 @@
 				3330BD0F26FA6B850079C899 /* FetchStockMedianDay.graphql in Resources */,
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
+				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
@@ -2006,6 +2033,7 @@
 				85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */,
 				85F2595D27046D5E009DEFFD /* FetchRecommendedCollections.graphql in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
+				8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
 				3A8593F02689CC1A00CB8DD6 /* CollectionDetails.graphql in Resources */,
@@ -2164,6 +2192,8 @@
 				33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */,
 				85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
+				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
+				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,
 				85ED4DE92703166B00FE6926 /* GetProfile.graphql.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
 				859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */,
@@ -2230,6 +2260,7 @@
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
+				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
@@ -2373,6 +2404,7 @@
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				33A1F56F2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift in Sources */,
 				33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */,
+				8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */,
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */,
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,

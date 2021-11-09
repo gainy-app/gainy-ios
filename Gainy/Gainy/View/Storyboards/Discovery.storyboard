@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -64,7 +64,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbE-jA-16s">
-                                                    <rect key="frame" x="28" y="96" width="24" height="14"/>
+                                                    <rect key="frame" x="28" y="96" width="24" height="14.5"/>
                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                     <color key="textColor" red="0.22745098039215686" green="0.26666666666666666" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -153,7 +153,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3pf-pf-xFH">
-                                                    <rect key="frame" x="28" y="32" width="54" height="24"/>
+                                                    <rect key="frame" x="28" y="32" width="54.5" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="WOA-a6-JRb"/>
                                                     </constraints>
@@ -674,7 +674,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOl-XY-yv3">
-                                                                                <rect key="frame" x="12" y="16" width="86" height="19"/>
+                                                                                <rect key="frame" x="12" y="16" width="86" height="19.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
@@ -901,42 +901,106 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWatchlistViewCell" id="Aqi-Q5-n3g" customClass="TickerDetailsWatchlistViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1658" width="414" height="120"/>
+                                        <rect key="frame" x="0.0" y="1658" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aqi-Q5-n3g" id="oYl-nw-A2V">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTS-4x-R9i" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="28" y="28" width="358" height="64"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="64" id="GHS-lG-tiT"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
-                                                    <state key="normal" title="Add to Watchlist">
-                                                        <color key="titleColor" name="mainText"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                            <color key="value" name="mainText"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="20"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="addToWatchAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="b5H-Yk-ESN"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iuz-8n-m7h">
+                                                    <rect key="frame" x="0.0" y="25" width="414" height="128"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9B-Qo-jQw">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="hf2-oz-6u6">
+                                                                    <rect key="frame" x="24" y="0.0" width="366" height="64"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTS-4x-R9i" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="171.5" height="64"/>
+                                                                            <color key="backgroundColor" red="0.15990483759999999" green="0.3759166598" blue="0.96475762129999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="64" id="GHS-lG-tiT"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                                            <state key="normal" title="Add to Watchlist">
+                                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="20"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                            <connections>
+                                                                                <action selector="addToWatchAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="b5H-Yk-ESN"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-Wt-bCC" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                                                            <rect key="frame" x="194.5" y="0.0" width="171.5" height="64"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="64" id="ygO-7U-R0L"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                                            <state key="normal" title="Trade">
+                                                                                <color key="titleColor" name="mainText"/>
+                                                                            </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                                    <color key="value" name="mainText"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                                    <real key="value" value="20"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                            <connections>
+                                                                                <action selector="tradeAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="Xkf-KV-SPb"/>
+                                                                            </connections>
+                                                                        </button>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="64" id="Aqa-NH-DnD"/>
+                                                                <constraint firstAttribute="trailing" secondItem="hf2-oz-6u6" secondAttribute="trailing" constant="24" id="JtR-OX-W3L"/>
+                                                                <constraint firstItem="hf2-oz-6u6" firstAttribute="top" secondItem="w9B-Qo-jQw" secondAttribute="top" id="TKG-UQ-Y8V"/>
+                                                                <constraint firstAttribute="bottom" secondItem="hf2-oz-6u6" secondAttribute="bottom" id="hz8-Oe-hbw"/>
+                                                                <constraint firstItem="hf2-oz-6u6" firstAttribute="leading" secondItem="w9B-Qo-jQw" secondAttribute="leading" constant="24" id="wCU-xs-9zO"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t3-Xo-fXL" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="64" width="414" height="64"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" title="Cange current broker — Robinhood">
+                                                                <fontDescription key="titleFontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                            </buttonConfiguration>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="0.0"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                            <connections>
+                                                                <action selector="changeCurrentBrokerAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="JoJ-Ao-xDH"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="qTS-4x-R9i" secondAttribute="trailing" constant="28" id="4a4-ur-9dt"/>
-                                                <constraint firstItem="qTS-4x-R9i" firstAttribute="leading" secondItem="oYl-nw-A2V" secondAttribute="leading" constant="28" id="PVz-gm-Gby"/>
-                                                <constraint firstAttribute="bottom" secondItem="qTS-4x-R9i" secondAttribute="bottom" constant="28" id="XbM-yd-oZM"/>
-                                                <constraint firstItem="qTS-4x-R9i" firstAttribute="top" secondItem="oYl-nw-A2V" secondAttribute="top" constant="28" id="bH2-AV-N9R"/>
+                                                <constraint firstItem="iuz-8n-m7h" firstAttribute="top" secondItem="oYl-nw-A2V" secondAttribute="top" constant="25" id="091-GO-JrA"/>
+                                                <constraint firstItem="iuz-8n-m7h" firstAttribute="leading" secondItem="oYl-nw-A2V" secondAttribute="leading" id="Boo-Mz-fwJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="iuz-8n-m7h" secondAttribute="trailing" id="zln-Sc-j3C"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="changeCurrentBrokerBtn" destination="0t3-Xo-fXL" id="0fe-61-l4A"/>
+                                            <outlet property="tradeBtn" destination="6LO-Wt-bCC" id="R08-Ii-fNs"/>
                                             <outlet property="watchBtn" destination="qTS-4x-R9i" id="Ehj-O5-tnF"/>
                                         </connections>
                                     </tableViewCell>
@@ -1124,8 +1188,91 @@
             </objects>
             <point key="canvasLocation" x="1653.6231884057972" y="122.54464285714285"/>
         </scene>
+        <!--Brokers View Controller-->
+        <scene sceneID="QU8-XP-ZTy">
+            <objects>
+                <viewController storyboardIdentifier="BrokersViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PcE-Q5-RUz" customClass="BrokersViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TNn-rT-DJY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your broker to make a trade " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTo-5l-VVT">
+                                <rect key="frame" x="24" y="84" width="366" height="24"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy is not a trading app but a recomendation system, so please choose your option. " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrZ-i8-xjP">
+                                <rect key="frame" x="24" y="116" width="366" height="38.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gg9-pY-FmF">
+                                <rect key="frame" x="14" y="186.5" width="386" height="665.5"/>
+                                <color key="backgroundColor" red="1" green="0.99999994039999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HoP-mS-s1y">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Wsg-i9-Gz4" customClass="BrokerViewCell" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kto-4K-giI">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zev-Ib-4Sj">
+                                <rect key="frame" x="181.5" y="36" width="51" height="4"/>
+                                <color key="backgroundColor" red="0.70251518489999998" green="0.74046611790000005" blue="0.78039813039999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="eU9-zF-qKA"/>
+                                    <constraint firstAttribute="width" constant="51" id="r9s-Ls-I1z"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="q3a-ry-jYG"/>
+                        <color key="backgroundColor" red="1" green="0.99999994039999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="gg9-pY-FmF" firstAttribute="leading" secondItem="q3a-ry-jYG" secondAttribute="leading" constant="14" id="3R9-SJ-4Zu"/>
+                            <constraint firstItem="BTo-5l-VVT" firstAttribute="leading" secondItem="q3a-ry-jYG" secondAttribute="leading" constant="24" id="4g5-9D-3S2"/>
+                            <constraint firstItem="BTo-5l-VVT" firstAttribute="top" secondItem="q3a-ry-jYG" secondAttribute="top" constant="40" id="5kg-Yn-TN1"/>
+                            <constraint firstItem="gg9-pY-FmF" firstAttribute="top" secondItem="QrZ-i8-xjP" secondAttribute="bottom" constant="32" id="9fW-KM-OYS"/>
+                            <constraint firstItem="q3a-ry-jYG" firstAttribute="trailing" secondItem="BTo-5l-VVT" secondAttribute="trailing" constant="24" id="D6O-sZ-04a"/>
+                            <constraint firstItem="q3a-ry-jYG" firstAttribute="bottom" secondItem="gg9-pY-FmF" secondAttribute="bottom" constant="10" id="F2Y-6B-5Ot"/>
+                            <constraint firstItem="zev-Ib-4Sj" firstAttribute="centerX" secondItem="q3a-ry-jYG" secondAttribute="centerX" id="Irn-K7-8xl"/>
+                            <constraint firstItem="q3a-ry-jYG" firstAttribute="trailing" secondItem="QrZ-i8-xjP" secondAttribute="trailing" constant="24" id="Jpq-oy-7Cx"/>
+                            <constraint firstItem="q3a-ry-jYG" firstAttribute="top" secondItem="zev-Ib-4Sj" secondAttribute="top" constant="8" id="LwP-cd-8Ed"/>
+                            <constraint firstItem="q3a-ry-jYG" firstAttribute="trailing" secondItem="gg9-pY-FmF" secondAttribute="trailing" constant="14" id="mhl-sh-t5b"/>
+                            <constraint firstItem="QrZ-i8-xjP" firstAttribute="top" secondItem="BTo-5l-VVT" secondAttribute="bottom" constant="8" id="z8e-Lk-RF2"/>
+                            <constraint firstItem="QrZ-i8-xjP" firstAttribute="leading" secondItem="q3a-ry-jYG" secondAttribute="leading" constant="24" id="znc-CI-CEO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="brokersCollectionView" destination="gg9-pY-FmF" id="Uln-h1-ORF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6MI-aU-FiS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2477" y="131"/>
+        </scene>
     </scenes>
     <designables>
+        <designable name="6LO-Wt-bCC">
+            <size key="intrinsicContentSize" width="38" height="32"/>
+        </designable>
         <designable name="qTS-4x-R9i">
             <size key="intrinsicContentSize" width="110" height="32"/>
         </designable>
