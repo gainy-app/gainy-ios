@@ -19,11 +19,7 @@ final class TickerDetailsUpcomingViewCell: TickerDetailsViewCell {
     }
     
     override func updateFromTickerData() {
-        if tickerInfo?.upcomingEvents.count ?? 0 > 0 {
-            cellHeightChanged?(32.0 + 24.0 + 16.0 + CGFloat(tickerInfo?.upcomingEvents.count ?? 0) * 44.0 + 16.0)
-        } else {
-            cellHeightChanged?(0.0)
-        }
+
     }
 }
 

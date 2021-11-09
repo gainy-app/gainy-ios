@@ -83,29 +83,31 @@ class TickerInfo {
         }
     }
     
-    func loadDetails(_ completion:  @escaping () -> Void) {
+    func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
-        let dispatchGroup = DispatchGroup()
+        let mainDS = DispatchGroup()
+        let chartsDS = DispatchGroup()
+        
         //Load News data
-        dispatchGroup.enter()
+        mainDS.enter()
         Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: symbol)){ result in
             switch result {
             case .success(let graphQLResult):
                 self.updateNewsData(graphQLResult.data?.fetchNewsData?.compactMap({$0}) ?? [])
-                dispatchGroup.leave()
+                mainDS.leave()
                 break
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
+                mainDS.leave()
                 break
             }
         }
         
         //Load Chart
-        loadAllCharts(dispatchGroup: dispatchGroup)
+        loadAllCharts(dispatchGroup: chartsDS)
         
         //Load Alt Stocks
-        dispatchGroup.enter()
+        mainDS.enter()
         Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
@@ -122,18 +124,18 @@ class TickerInfo {
                 
                 TickersLiveFetcher.shared.getSymbolsData(self?.altStocks.compactMap(\.symbol) ?? []) {
                     self?.altStocks.sort(by: {$0.matchScore > $1.matchScore})
-                    dispatchGroup.leave()
+                    mainDS.leave()
                 }
                 break
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
+                mainDS.leave()
                 break
             }
         }
         //Load updated MatchData
         if let profileID = UserProfileManager.shared.profileID {
-            dispatchGroup.enter()
+            mainDS.enter()
             Network.shared.apollo.fetch(query: FetchTickerMatchDataQuery.init(profielId: profileID, symbol: symbol)){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
@@ -141,23 +143,26 @@ class TickerInfo {
                     if let matchData = graphQLResult.data?.getMatchScoreByTicker?.fragments.liveMatch {
                         TickerLiveStorage.shared.setMatchData(self?.symbol ?? "", data: matchData)
                     }
-                    dispatchGroup.leave()
+                    mainDS.leave()
                     break
                 case .failure(let error):
                     dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
+                    mainDS.leave()
                     break
                 }
             }
         }
         
         //Await for results
-        dispatchGroup.notify(queue: queue) {
-            self.chartsCache.values.forEach({
-                print($0.description)
-            })
+        mainDS.notify(queue: queue) {
             DispatchQueue.main.async {
-                completion()
+                mainDataLoaded()
+            }
+        }
+        
+        chartsDS.notify(queue: queue) {
+            DispatchQueue.main.async {
+                chartsLoaded()
             }
         }
     }
@@ -175,8 +180,10 @@ class TickerInfo {
             switch result {
             case .success(let graphQLResult):
                 
-                var fetchedData = graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []
-                //fetchedData.removeAll(where: {!$0.date.isToday && !$0.date.isYesterday})
+                var fetchedData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
+                if let lastDay = fetchedData.last {
+                    fetchedData = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                }
                 self?.setChartsCache(.d1, chartData: fetchedData)
                 self?.updateChartData(fetchedData)
                 dispatchGroup.leave()
@@ -230,9 +237,11 @@ class TickerInfo {
         Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: period.rawValue, symbol: symbol)){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                var chartRemData = graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []
+                var chartRemData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
                 if period == .d1 {
-                    //chartRemData.removeAll(where: {!$0.date.isToday})
+                    if let lastDay = chartRemData.last {
+                        chartRemData = chartRemData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                    }
                 }
                 self?.setChartsCache(period, chartData: chartRemData)
                 

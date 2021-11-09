@@ -21,11 +21,6 @@ final class TickerDetailsNewsViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
-        if tickerInfo?.news.count ?? 0 > 0 {
-            cellHeightChanged?(TickerDetailsNewsViewCell.cellHeight)
-        } else {
-            cellHeightChanged?(0.0)
-        }
     }
 }
 

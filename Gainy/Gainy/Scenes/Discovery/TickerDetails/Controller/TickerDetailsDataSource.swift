@@ -73,6 +73,19 @@ final class TickerDetailsDataSource: NSObject {
         return wsrHosting
     }()
     
+    private(set) lazy var chartLoader: UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(style: .large)
+        loader.color = .lightGray
+        loader.hidesWhenStopped = true
+        loader.startAnimating()
+        return loader
+    }()
+    
+    func stopLoader() {
+        chartLoader.stopAnimating()
+        chartHosting.view.alpha = 1.0
+    }
+    
     private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
         
@@ -84,10 +97,41 @@ final class TickerDetailsDataSource: NSObject {
         return chartHosting
     }()
     
+    
+    //MARK: - Updating UI
+    
     func updateChart() {
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
+    }
+    
+    func calculateHeights() {
+        //Highlights
+        if ticker.highlights.count > 0 {
+            cellHeights[.highlights] = TickerDetailsHighlightsViewCell.cellHeight
+        } else {
+            cellHeights[.highlights] = 0.0
+        }
+        
+        if ticker.news.count > 0 {
+            cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
+        } else {
+            cellHeights[.news] = 0.0
+        }
+        
+        if ticker.altStocks.count > 0 {
+            cellHeights[.alternativeStocks] = TickerDetailsAlternativeStocksViewCell.cellHeight
+        } else {
+            cellHeights[.alternativeStocks] = 0.0
+        }
+        
+        
+        if ticker.upcomingEvents.count > 0 {
+            cellHeights[.upcomingEvents] = 32.0 + 24.0 + 16.0 + CGFloat(ticker.upcomingEvents.count) * 44.0 + 16.0
+        } else {
+            cellHeights[.upcomingEvents] = 0.0
+        }
     }
     
     private lazy var chartDelegate: ScatterChartDelegate = {
@@ -95,6 +139,7 @@ final class TickerDetailsDataSource: NSObject {
         delegateObject.delegate = self
         return delegateObject
     }()
+    
 }
 
 
@@ -117,7 +162,15 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+                chartHosting.view.alpha = 0.0
             }
+            
+        
+                cell.contentView.addSubview(chartLoader)
+                chartLoader.translatesAutoresizingMaskIntoConstraints = false
+                chartLoader.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
+                chartLoader.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+            cell.contentView.bringSubviewToFront(chartLoader)
             return cell
         case .about:
             let cell: TickerDetailsAboutViewCell = tableView.dequeueReusableCell(for: indexPath)
@@ -142,13 +195,6 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .highlights:
             let cell: TickerDetailsHighlightsViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    tableView.beginUpdates()
-                    self?.cellHeights[.highlights] = newHeight
-                    tableView.endUpdates()
-                }
-            }
             cell.tickerInfo = ticker
             return cell
         case .marketData:
@@ -180,36 +226,15 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .news:
             let cell: TickerDetailsNewsViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    tableView.beginUpdates()
-                    self?.cellHeights[.news] = newHeight
-                    tableView.endUpdates()
-                }
-            }
             cell.tickerInfo = ticker
             return cell
         case .alternativeStocks:
             let cell: TickerDetailsAlternativeStocksViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    tableView.beginUpdates()
-                    self?.cellHeights[.alternativeStocks] = newHeight
-                    tableView.endUpdates()
-                }
-            }
             cell.tickerInfo = ticker
             cell.delegate = self
             return cell
         case .upcomingEvents:
             let cell: TickerDetailsUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)
-            cell.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    tableView.beginUpdates()
-                    self?.cellHeights[.upcomingEvents] = newHeight
-                    tableView.endUpdates()
-                }
-            }
             cell.tickerInfo = ticker
             return cell
         case .watchlist:

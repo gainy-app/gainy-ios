@@ -29,12 +29,6 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
-        
-        if tickerInfo?.altStocks.count ?? 0 > 0 {
-            cellHeightChanged?(TickerDetailsAlternativeStocksViewCell.cellHeight)
-        } else {
-            cellHeightChanged?(0.0)
-        }
     }
 }
 

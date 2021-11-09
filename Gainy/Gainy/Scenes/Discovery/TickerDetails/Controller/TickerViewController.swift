@@ -47,14 +47,21 @@ final class TickerViewController: BaseViewController {
             return
         }
         showNetworkLoader()
-        dprint("SHOWING LOADIER")
-        viewModel?.dataSource.ticker.loadDetails {[weak self] in
+        dprint("SHOWING LOADER")
+        viewModel?.dataSource.ticker.loadDetails(mainDataLoaded: {[weak self] in
             dprint("DISMISS LOADIER")
-            self?.viewModel?.dataSource.updateChart()
+            DispatchQueue.main.async {
             self?.hideLoader()
-            self?.tableView.reloadData()
-        }
-        
+            self?.viewModel?.dataSource.calculateHeights()
+            //self?.tableView.reloadData()
+            }
+        }, chartsLoaded: { [weak self] in
+            DispatchQueue.main.async {
+                dprint("DISMISS chart loader")
+                self?.viewModel?.dataSource.stopLoader()
+                self?.viewModel?.dataSource.updateChart()
+            }
+        })
     }
     
     //MARK: - Actions
