@@ -590,7 +590,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         onDiscoverCollections?(false)
     }
     
-    // TODO: 1: implement class to have navBarContainer view
     private func createNavigationBarContainer() -> UIView {
         UIView()
     }

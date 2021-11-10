@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="21A559" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="LocalCollection" representedClassName="LocalCollection" syncable="YES" codeGenerationType="class">
         <attribute name="desc" attributeType="String" defaultValueString=""/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -13,9 +13,9 @@
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="symbol" attributeType="String" defaultValueString=""/>
         <relationship name="collection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalCollection" inverseName="tickers" inverseEntity="LocalCollection"/>
-        <relationship name="financials" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerFinancials"/>
-        <relationship name="industries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerIndustry"/>
-        <relationship name="interests" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerInterest"/>
+        <relationship name="financials" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerFinancials" inverseName="ticker" inverseEntity="LocalTickerFinancials"/>
+        <relationship name="industries" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerIndustry" inverseName="ticker" inverseEntity="LocalTickerIndustry"/>
+        <relationship name="interests" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTickerInterest" inverseName="ticker" inverseEntity="LocalTickerInterest"/>
     </entity>
     <entity name="LocalTickerFinancials" representedClassName="LocalTickerFinancials" syncable="YES" codeGenerationType="class">
         <attribute name="created_at" attributeType="String" defaultValueString=""/>
@@ -28,23 +28,26 @@
         <attribute name="pe_ratio" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sma_30days" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="symbol" attributeType="String" defaultValueString=""/>
+        <relationship name="ticker" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTicker" inverseName="financials" inverseEntity="LocalTicker"/>
     </entity>
     <entity name="LocalTickerIndustry" representedClassName="LocalTickerIndustry" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="symbol" attributeType="String" defaultValueString=""/>
+        <relationship name="ticker" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTicker" inverseName="industries" inverseEntity="LocalTicker"/>
     </entity>
     <entity name="LocalTickerInterest" representedClassName="LocalTickerInterest" syncable="YES" codeGenerationType="class">
         <attribute name="icon_url" attributeType="String" defaultValueString=""/>
         <attribute name="interest_id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString=""/>
         <attribute name="symbol" attributeType="String" defaultValueString=""/>
+        <relationship name="ticker" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocalTicker" inverseName="interests" inverseEntity="LocalTicker"/>
     </entity>
     <elements>
         <element name="LocalCollection" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="LocalTicker" positionX="-54" positionY="27" width="128" height="134"/>
-        <element name="LocalTickerFinancials" positionX="-36" positionY="45" width="128" height="179"/>
-        <element name="LocalTickerInterest" positionX="-18" positionY="54" width="128" height="89"/>
-        <element name="LocalTickerIndustry" positionX="0" positionY="63" width="128" height="74"/>
+        <element name="LocalTickerFinancials" positionX="-36" positionY="45" width="128" height="194"/>
+        <element name="LocalTickerIndustry" positionX="0" positionY="63" width="128" height="89"/>
+        <element name="LocalTickerInterest" positionX="-18" positionY="54" width="128" height="104"/>
     </elements>
 </model>

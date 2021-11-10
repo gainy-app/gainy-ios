@@ -61,6 +61,7 @@
 		33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */; };
 		33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */; };
 		33559B6426E8C08600E61D71 /* TickersLiveFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */; };
+		33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F20273B9F57007B587F /* CoreServices.framework */; };
 		335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D76270617CF00337262 /* YourCollectionTipCell.swift */; };
 		335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D78270619D500337262 /* YourCollectionTipCell.xib */; };
 		335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */; };
@@ -70,7 +71,6 @@
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
 		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
 		336970B52716BA5C0001625C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970B02716B9920001625C /* libc++.tbd */; };
-		336970B62716BA5C0001625C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AC2716B96D0001625C /* MobileCoreServices.framework */; };
 		336970B72716BA5C0001625C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AA2716B9640001625C /* Security.framework */; };
 		336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970A82716B9560001625C /* SystemConfiguration.framework */; };
 		336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */; };
@@ -427,6 +427,7 @@
 		33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerLiveStorage.swift; sourceTree = "<group>"; };
 		33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLiveTickersData.graphql.swift; sourceTree = "<group>"; };
 		33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersLiveFetcher.swift; sourceTree = "<group>"; };
+		33571F20273B9F57007B587F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		335D7D76270617CF00337262 /* YourCollectionTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionTipCell.swift; sourceTree = "<group>"; };
 		335D7D78270619D500337262 /* YourCollectionTipCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourCollectionTipCell.xib; sourceTree = "<group>"; };
 		335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCollectionsSectionLayout.swift; sourceTree = "<group>"; };
@@ -739,6 +740,7 @@
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
+				33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */,
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
@@ -752,7 +754,6 @@
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
-				336970B62716BA5C0001625C /* MobileCoreServices.framework in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
@@ -1503,6 +1504,7 @@
 		3AA52C95266014BB006A6961 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33571F20273B9F57007B587F /* CoreServices.framework */,
 				336970B02716B9920001625C /* libc++.tbd */,
 				336970AE2716B97A0001625C /* CoreGraphics.framework */,
 				336970AC2716B96D0001625C /* MobileCoreServices.framework */,
@@ -2537,7 +2539,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2660,7 +2662,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2844,7 +2846,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2872,7 +2874,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 66;
+				CURRENT_PROJECT_VERSION = 67;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

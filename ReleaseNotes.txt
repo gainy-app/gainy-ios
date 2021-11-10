@@ -1,12 +1,15 @@
-*iOS v0.3.1 #66* available
+*iOS v0.3.1 #67* available
 *General improvements* - MVP
 
 :new: *New:*
-• Switch Firebase App depending on environment
-• Trade button flow
+-
 
 :hammer_and_wrench: *Improvements*
-• Hotfix a few glitches and crash
+• Stock Card: Charts async loading
+• Stock Card: Chart color improved
+• Stock Card: Events label improved
+• New Tab icons
+• Hotfix a few glitches
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

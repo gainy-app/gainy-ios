@@ -82,7 +82,7 @@ final class CollectionHorizontalView: UIView {
         label.contentInsetAdjustmentBehavior = .never
         label.contentInset = UIEdgeInsets(top: -8, left: -4,
                                           bottom: 0, right: 0)
-
+        label.isScrollEnabled = false
         return label
     }()
 
@@ -94,7 +94,7 @@ final class CollectionHorizontalView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .right
         label.text = "STOCKS"
-        label.sizeToFit() // TODO: 1: if there's such code?
+        label.sizeToFit()
 
         return label
     }()
@@ -111,7 +111,6 @@ final class CollectionHorizontalView: UIView {
         return label
     }()
 
-    // TODO: 1: use custom SettingsButton
     private var settingsViews: [UIView] = []
     lazy var settingsButton: ResponsiveButton = {
         let button = ResponsiveButton()
@@ -153,7 +152,6 @@ final class CollectionHorizontalView: UIView {
         settingsViews.forEach({$0.alpha = 0.0})
     }
 
-    // TODO: 1: use custom button
     lazy var sortByButton: ResponsiveButton = {
         let button = ResponsiveButton()
 
@@ -217,7 +215,6 @@ final class CollectionHorizontalView: UIView {
         delegate?.stockSortPressed(view: self)
     }
 
-    // TODO: 1: use custom button
     lazy var showListViewButton: ResponsiveButton = {
         let button = ResponsiveButton()
 
@@ -234,7 +231,6 @@ final class CollectionHorizontalView: UIView {
         return button
     }()
 
-    // TODO: 1: use custom button
     lazy var showGridViewButton: ResponsiveButton = {
         let button = ResponsiveButton()
 
@@ -335,6 +331,8 @@ final class CollectionHorizontalView: UIView {
             width: bounds.width - (hMargin + 71),
             height: minDescHeight
         )
+        
+        resize(textView: descriptionLabel)
 
         stocksLabel.frame = CGRect(
             x: bounds.width - (45 + hMargin),
@@ -377,6 +375,15 @@ final class CollectionHorizontalView: UIView {
             width: 24,
             height: 24
         )
+    }
+    
+    fileprivate func resize(textView: UITextView) {
+        var newFrame = textView.frame
+        let width = newFrame.size.width
+        let newSize = textView.sizeThatFits(CGSize(width: width,
+                                                   height: CGFloat.greatestFiniteMagnitude))
+        newFrame.size = CGSize(width: width, height: newSize.height)
+        textView.frame = newFrame
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
