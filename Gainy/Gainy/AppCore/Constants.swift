@@ -41,4 +41,8 @@ struct Constants {
         static let tos = "https://www.gainy.app/terms-of-service"
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }
+    
+    struct Plaid {
+        static let redirectURI = "https://app.gainy.application.ios"
+    }
 }

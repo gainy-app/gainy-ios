@@ -62,6 +62,9 @@
 		33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */; };
 		33559B6426E8C08600E61D71 /* TickersLiveFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */; };
 		33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F20273B9F57007B587F /* CoreServices.framework */; };
+		33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33571F22273BE463007B587F /* PortfolioViewModel.swift */; };
+		33571F28273BF5AE007B587F /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
+		33571F2A273BF830007B587F /* BaseViewController+LinkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */; };
 		335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D76270617CF00337262 /* YourCollectionTipCell.swift */; };
 		335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D78270619D500337262 /* YourCollectionTipCell.xib */; };
 		335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */; };
@@ -428,6 +431,10 @@
 		33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLiveTickersData.graphql.swift; sourceTree = "<group>"; };
 		33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersLiveFetcher.swift; sourceTree = "<group>"; };
 		33571F20273B9F57007B587F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		33571F22273BE463007B587F /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
+		33571F25273BEADA007B587F /* LinkKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LinkKit.xcframework; path = "../../../Downloads/plaid-link-ios-master-2/LinkKit.xcframework"; sourceTree = "<group>"; };
+		33571F27273BF5AE007B587F /* LinkKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = LinkKit.xcframework; sourceTree = "<group>"; };
+		33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController+LinkToken.swift"; sourceTree = "<group>"; };
 		335D7D76270617CF00337262 /* YourCollectionTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionTipCell.swift; sourceTree = "<group>"; };
 		335D7D78270619D500337262 /* YourCollectionTipCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourCollectionTipCell.xib; sourceTree = "<group>"; };
 		335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCollectionsSectionLayout.swift; sourceTree = "<group>"; };
@@ -756,6 +763,7 @@
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
+				33571F28273BF5AE007B587F /* LinkKit.xcframework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1017,6 +1025,7 @@
 			isa = PBXGroup;
 			children = (
 				33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */,
+				33571F22273BE463007B587F /* PortfolioViewModel.swift */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -1133,6 +1142,7 @@
 			isa = PBXGroup;
 			children = (
 				33467CFB26C6786200811F74 /* BaseViewController.swift */,
+				33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */,
 				33D3D4FC26CBA3B9005A859B /* Onboarding */,
 				33467CFD26C698A200811F74 /* MainTabController */,
 				33D3D4F826CBA2E2005A859B /* Discovery */,
@@ -1504,6 +1514,7 @@
 		3AA52C95266014BB006A6961 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33571F25273BEADA007B587F /* LinkKit.xcframework */,
 				33571F20273B9F57007B587F /* CoreServices.framework */,
 				336970B02716B9920001625C /* libc++.tbd */,
 				336970AE2716B97A0001625C /* CoreGraphics.framework */,
@@ -1645,6 +1656,7 @@
 		3AE90346266A2FDF00574923 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				33571F27273BF5AE007B587F /* LinkKit.xcframework */,
 				3A5ADA51268DA15F008659E8 /* SwipeCellKit */,
 			);
 			path = ThirdParty;
@@ -2193,6 +2205,7 @@
 				33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */,
 				33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */,
 				85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */,
+				33571F2A273BF830007B587F /* BaseViewController+LinkToken.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
 				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,
@@ -2284,6 +2297,7 @@
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
+				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
 				339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */,
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,

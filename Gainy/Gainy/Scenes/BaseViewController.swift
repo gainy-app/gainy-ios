@@ -9,10 +9,16 @@ import UIKit
 import MBProgressHUD
 import Combine
 import Network
+import LinkKit
 
-class BaseViewController: UIViewController {
+protocol LinkOAuthHandling {
+    var linkHandler: Handler? { get }
+}
+
+class BaseViewController: UIViewController, LinkOAuthHandling {
     
     //MARK: - Helpers
+    var linkHandler: Handler?
     
     var dismissHandler: (() -> ())? = nil
     
