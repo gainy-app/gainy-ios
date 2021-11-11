@@ -77,7 +77,6 @@ final class TickerDetailsDataSource: NSObject {
         let loader = UIActivityIndicatorView(style: .large)
         loader.color = .lightGray
         loader.hidesWhenStopped = true
-        loader.startAnimating()
         return loader
     }()
     

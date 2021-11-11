@@ -3,6 +3,7 @@ import UIKit
 import PureLayout
 import FloatingPanel
 import Firebase
+import SkeletonView
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -178,6 +179,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             ),
             collectionViewLayout: customLayout
         )
+        collectionDetailsCollectionView.isSkeletonable = true
         view.addSubview(collectionDetailsCollectionView)
         collectionDetailsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
@@ -292,6 +294,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }.store(in: &self.cancellables)
+        
+        addLoaders()
     }
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
@@ -484,9 +488,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             completion()
             return
         }
-        
         if (loadProfile) {
-            showNetworkLoader()
             Network.shared.apollo.clearCache()
             UserProfileManager.shared.fetchProfile { success in
                 
@@ -505,7 +507,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         //Using Cache
         guard !CollectionsManager.shared.haveUnfetchedItems else {
-            showNetworkLoader()
             fetchFailedCollections {
                 DispatchQueue.main.async { [weak self] in
                     self?.centerInitialCollectionInTheCollectionView()
@@ -520,7 +521,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         
-        showNetworkLoader()
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):
@@ -637,6 +637,26 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             dataSource?.apply(snapshot, animatingDifferences: false)
         }
+        searchTextView?.isEnabled = true
+        discoverCollectionsBtn?.isEnabled = true
+    }
+    
+    private func addLoaders() {
+        if var snapshot = dataSource?.snapshot() {
+            if snapshot.sectionIdentifiers.count > 0 {
+                snapshot.deleteSections([.collectionWithCards])
+            }
+            snapshot.appendSections([.collectionWithCards])
+            
+            //Demo cells
+            snapshot.appendItems(CollectionDetailsDTOMapper.loaderModels(),
+                                 toSection: .collectionWithCards)
+            
+            dataSource?.apply(snapshot, animatingDifferences: false)
+        }
+        searchTextView?.isEnabled = false
+        discoverCollectionsBtn?.isEnabled = false
+        centerInitialCollectionInTheCollectionView()
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)

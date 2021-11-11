@@ -47,6 +47,7 @@ final class TickerViewController: BaseViewController {
             return
         }
         showNetworkLoader()
+        viewModel?.dataSource.chartLoader.startAnimating()
         dprint("SHOWING LOADER")
         viewModel?.dataSource.ticker.loadDetails(mainDataLoaded: {[weak self] in
             dprint("DISMISS LOADIER")

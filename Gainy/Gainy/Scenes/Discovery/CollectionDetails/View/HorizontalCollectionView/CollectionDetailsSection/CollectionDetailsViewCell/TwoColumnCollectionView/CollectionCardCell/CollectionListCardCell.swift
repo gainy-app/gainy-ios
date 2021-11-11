@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class CollectionListCardCell: UICollectionViewCell {
+    
 
     @IBOutlet private weak var nameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
@@ -46,5 +48,23 @@ final class CollectionListCardCell: UICollectionViewCell {
         }
         
         layoutIfNeeded()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.isSkeletonable = true
+        skeletonCornerRadius = 6
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        contentView.subviews.forEach({
+            $0.isSkeletonable = true
+            if let tf = $0 as? UILabel {
+                tf.linesCornerRadius = 6
+                tf.numberOfLines = 1
+            }
+        })
     }
 }

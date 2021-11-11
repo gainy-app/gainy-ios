@@ -57,6 +57,11 @@ struct HorizontalFlowSectionLayout: SectionLayout {
                 cards: viewModel.cards,
                 collectionId: viewModel.id
             )
+            if Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.collectionHorizontalView.hideSkeleton()                
+            }
         }
 
         return cell

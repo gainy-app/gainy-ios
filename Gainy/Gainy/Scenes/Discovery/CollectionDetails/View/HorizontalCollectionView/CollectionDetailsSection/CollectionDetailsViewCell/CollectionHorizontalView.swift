@@ -1,5 +1,6 @@
 import UIKit
 import Kingfisher
+import SkeletonView
 
 protocol CollectionHorizontalViewDelegate: AnyObject {
     func settingsPressed(view: CollectionHorizontalView)
@@ -14,6 +15,7 @@ final class CollectionHorizontalView: UIView {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
 
+        isSkeletonable = true
         addSubview(backImageView)
         addSubview(nameLabel)
         addSubview(descriptionLabel)

@@ -17,11 +17,18 @@ func runOnMain(_ closure: @autoclosure @escaping () -> Void) {
     }
 }
 
+func delay(_ delay: Double, closure:@escaping ()->()) {
+    let when = DispatchTime.now() + delay
+    DispatchQueue.main.asyncAfter(deadline: when, execute: closure)
+}
+
 struct Constants {
     struct CollectionDetails {
         static let tickersPreloadCount = 20
         static let compareCollectionID = -2
         static let top20ID = 231
+        static let loadingCellIDs = [-10, -11, -12]
+        static let demoNamePrefix = "GDEMO:"
     }
     
     struct Auth {

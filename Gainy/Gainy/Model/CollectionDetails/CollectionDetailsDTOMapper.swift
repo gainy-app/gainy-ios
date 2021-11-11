@@ -1,3 +1,5 @@
+import SkeletonView
+
 enum CollectionDetailsDTOMapper {
     static func mapAsCollectionFromRecommendedCollections(
         _ dto: RemoteCollectionDetails
@@ -11,16 +13,16 @@ enum CollectionDetailsDTOMapper {
             isInYourCollectionsList: false,
             cards: dto.tickerCollections.compactMap {
                 if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
-                return CollectionDetailsDTOMapper.mapTickerDetails(
-                    remoteTickerDetails
-                )
+                    return CollectionDetailsDTOMapper.mapTickerDetails(
+                        remoteTickerDetails
+                    )
                 } else {
                     return nil
                 }
             }
         )
     }
-
+    
     static func mapAsCollectionFromYourCollections(
         _ dto: RemoteCollectionDetails
     ) -> CollectionDetails {
@@ -33,9 +35,9 @@ enum CollectionDetailsDTOMapper {
             isInYourCollectionsList: true,
             cards: dto.tickerCollections.compactMap {
                 if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
-                return CollectionDetailsDTOMapper.mapTickerDetails(
-                    remoteTickerDetails
-                )
+                    return CollectionDetailsDTOMapper.mapTickerDetails(
+                        remoteTickerDetails
+                    )
                 } else {
                     dprint("Missing ticker: \(dto.name ?? "")")
                     return nil
@@ -43,7 +45,7 @@ enum CollectionDetailsDTOMapper {
             }
         )
     }
-
+    
     static func mapTickerDetails(
         _ dto: RemoteTickerDetails
     ) -> TickerDetails {
@@ -58,7 +60,7 @@ enum CollectionDetailsDTOMapper {
             rawTicker: dto
         )
     }
-
+    
     static func mapFinancialMetrics(
         _ dto: RemoteTickerDetails.TickerFinancial
     ) -> TickerFinancialMetrics {
@@ -74,5 +76,36 @@ enum CollectionDetailsDTOMapper {
             netProfit : Float(dto.netProfitMargin ?? 0.0),
             highlight: dto.highlight ?? ""
         )
+    }
+    
+    //MARK:- Loaders
+    
+    static func loaderModels() -> [CollectionDetailViewCellModel] {
+        var collections: [CollectionDetailViewCellModel] = []
+        for hCell in 0...2 {
+            var cards: [CollectionCardViewCellModel] = []
+            for _ in 0...6 {
+                cards.append(CollectionCardViewCellModel.init(tickerCompanyName: Constants.CollectionDetails.demoNamePrefix + randomString(10), tickerSymbol: randomString(4), dividendGrowthPercent: "", growthRateYOY: "", evs: "", marketCap: "", monthToDay: "", netProfit: "", highlight: "", rawTicker: RemoteTickerDetails.init(symbol: randomString(4), name: randomString(10), description: randomString(20), tickerFinancials: [], tickerCategories: [], tickerInterests: [], tickerIndustries: [], tickerEvents: [], tickerAnalystRatings: nil)))
+            }
+            
+            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: "1", inYourCollectionList: false, cards: cards))
+        }
+        return collections
+    }
+    
+    private static func randomString(_ length: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
     }
 }
