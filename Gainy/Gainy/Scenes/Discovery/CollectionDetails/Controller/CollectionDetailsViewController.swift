@@ -31,8 +31,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var collectionID: Int {
         let visibleRect = CGRect(origin: collectionDetailsCollectionView.contentOffset, size: collectionDetailsCollectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint) {
-            return viewModel?.collectionDetails[visibleIndexPath.row].id ?? 0
+        if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint), let collectionDetails = viewModel?.collectionDetails, collectionDetails.count > visibleIndexPath.row  {
+            return collectionDetails[visibleIndexPath.row].id
         } else {
             // Let it be not found, -1 is reserved for the watchlist
             return -404
@@ -208,7 +208,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
-                    self?.onShowCardDetails?(ticker)
+                    if !(ticker.name?.hasPrefix(Constants.CollectionDetails.demoNamePrefix) ?? false) {
+                        self?.onShowCardDetails?(ticker)
+                    }
                 }
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}

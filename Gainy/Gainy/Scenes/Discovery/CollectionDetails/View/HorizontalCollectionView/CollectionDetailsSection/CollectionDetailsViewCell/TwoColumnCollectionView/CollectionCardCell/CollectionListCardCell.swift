@@ -36,7 +36,11 @@ final class CollectionListCardCell: UICollectionViewCell {
 
         symbolLbl.text = tickerSymbol
 
-        priceLbl.text = "$\(tickerPrice)"
+        if companyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) || tickerPrice.isEmpty {
+            priceLbl.text = ""
+        } else {
+            priceLbl.text = "$\(tickerPrice)"
+        }
         priceLbl.textColor = tickerPercentChange.hasPrefix(" +")
             ? UIColor.Gainy.green
             : UIColor.Gainy.red
@@ -52,19 +56,16 @@ final class CollectionListCardCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.isSkeletonable = true
-        skeletonCornerRadius = 6
+        isSkeletonable = true
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        contentView.subviews.forEach({
-            $0.isSkeletonable = true
-            if let tf = $0 as? UILabel {
-                tf.linesCornerRadius = 6
-                tf.numberOfLines = 1
-            }
+        [nameLbl, symbolLbl, priceLbl, growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl].forEach({
+            $0?.isSkeletonable = true
+            $0?.linesCornerRadius = 6
+            $0?.numberOfLines = 1
         })
     }
 }

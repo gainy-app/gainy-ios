@@ -85,7 +85,7 @@ enum CollectionDetailsDTOMapper {
         for hCell in 0...2 {
             var cards: [CollectionCardViewCellModel] = []
             for _ in 0...6 {
-                cards.append(CollectionCardViewCellModel.init(tickerCompanyName: Constants.CollectionDetails.demoNamePrefix + randomString(10), tickerSymbol: randomString(4), dividendGrowthPercent: "", growthRateYOY: "", evs: "", marketCap: "", monthToDay: "", netProfit: "", highlight: "", rawTicker: RemoteTickerDetails.init(symbol: randomString(4), name: randomString(10), description: randomString(20), tickerFinancials: [], tickerCategories: [], tickerInterests: [], tickerIndustries: [], tickerEvents: [], tickerAnalystRatings: nil)))
+                cards.append(CollectionCardViewCellModel.init(tickerCompanyName: Constants.CollectionDetails.demoNamePrefix + randomString(10), tickerSymbol: randomString(4), dividendGrowthPercent: "", growthRateYOY: "", evs: "", marketCap: "", monthToDay: "", netProfit: "", highlight: "", rawTicker: RemoteTickerDetails.init(symbol: randomString(4), name: Constants.CollectionDetails.demoNamePrefix + randomString(10), description: randomString(20), tickerFinancials: [], tickerCategories: [], tickerInterests: [], tickerIndustries: [], tickerEvents: [], tickerAnalystRatings: nil)))
             }
             
             collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: "1", inYourCollectionList: false, cards: cards))

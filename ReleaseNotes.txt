@@ -1,12 +1,12 @@
-*iOS v0.3.1 #68* available
+*iOS v0.3.1 #69* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
 
 :new: *New:*
-• Initial loaders
+-
 
 :hammer_and_wrench: *Improvements*
-• Hotfix a few glitches
+• Hotfix a few crashes
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*
