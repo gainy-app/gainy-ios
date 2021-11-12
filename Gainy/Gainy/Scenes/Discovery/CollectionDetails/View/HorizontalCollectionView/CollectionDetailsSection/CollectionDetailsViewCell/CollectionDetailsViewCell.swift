@@ -1,4 +1,5 @@
 import UIKit
+import SkeletonView
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case cards
@@ -10,6 +11,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
+        isSkeletonable = true
         layer.isOpaque = true
         backgroundColor = .clear
         
@@ -65,6 +67,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 position: indexPath.row
             )
             TickerLiveStorage.shared.clearAllExpiredLiveData()
+            
+            if let model = modelItem as? CollectionCardViewCellModel, model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
+                cell?.showAnimatedGradientSkeleton()
+                return cell
+            }
             //Loading tickers data!
             recurLock.lock()
             if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
@@ -73,7 +80,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 var loadingItems: Int  = 0
                 if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
                     loadingItems += 1
-                    self?.isLoadingTickers = true
+                    if collectionView.visibleCells.count == 0 {
+                        cell?.showAnimatedGradientSkeleton()
+                    } else {
+                        self?.isLoadingTickers = true
+                    }
                     dprint("Fetching dt started \(model.tickerSymbol)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
@@ -83,7 +94,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
                 if let collectionID = self?.collectionID, !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol), collectionID >= 0 {
                     loadingItems += 1
-                    self?.isLoadingTickers = true
+                    if collectionView.visibleCells.count == 0 {
+                        cell?.showAnimatedGradientSkeleton()
+                    } else {
+                        self?.isLoadingTickers = true
+                    }
                     dprint("Fetching match started \(collectionID)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getMatchScores(collectionId: collectionID) {
@@ -105,7 +120,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         self.dataSource?.apply(snapshot, animatingDifferences: true)
                     }
                 })
+                } else {
+                    cell?.hideSkeleton()
                 }
+            } else {
+                cell?.showAnimatedGradientSkeleton()
             }
             recurLock.unlock()
             
@@ -131,16 +150,30 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var isLoadingTickers: Bool = false {
         didSet {
             if isLoadingTickers {
-                tickersLoadIndicator.startAnimating()
+                
+                for cell in internalCollectionView.visibleCells {
+                    if let rightCell = cell as? CollectionCardCell {
+                        rightCell.showAnimatedGradientSkeleton()
+                    }
+                    if let rightCell = cell as? CollectionListCardCell {
+                        rightCell.showAnimatedGradientSkeleton()
+                    }
+                }
+                
                 internalCollectionView.isScrollEnabled = false
                 internalCollectionView.isUserInteractionEnabled = false
-                internalCollectionView.alpha = 0.3
                 internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
             } else {
-                tickersLoadIndicator.stopAnimating()
+                for cell in internalCollectionView.visibleCells {
+                    if let rightCell = cell as? CollectionCardCell {
+                        rightCell.hideSkeleton()
+                    }
+                    if let rightCell = cell as? CollectionListCardCell {
+                        rightCell.hideSkeleton()
+                    }
+                }
                 internalCollectionView.isScrollEnabled = true
                 internalCollectionView.isUserInteractionEnabled = true
-                internalCollectionView.alpha = 1.0
             }
         }
     }

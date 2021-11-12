@@ -32,6 +32,7 @@
 		3330BD1026FA6B850079C899 /* FetchStockMedianMonth.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0D26FA6B850079C899 /* FetchStockMedianMonth.graphql */; };
 		3330BD1126FA6B850079C899 /* FetchStockMedianWeek.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0E26FA6B850079C899 /* FetchStockMedianWeek.graphql */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
+		3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 3332BCD2273CFCC3001222A7 /* SkeletonView */; };
 		3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */; };
 		3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860A26E618BF00D448AA /* CompareScatterChartView.swift */; };
 		33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */; };
@@ -759,6 +760,7 @@
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
+				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
@@ -1891,6 +1893,7 @@
 				33B911732706ED3000C00B0D /* SwiftyJSON */,
 				33FBDE87270ADEEA003B6DDB /* JWTDecode */,
 				336970B22716BA2F0001625C /* BugfenderLibrary */,
+				3332BCD2273CFCC3001222A7 /* SkeletonView */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -1978,6 +1981,7 @@
 				33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 				336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */,
+				3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2553,7 +2557,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2676,7 +2680,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2860,7 +2864,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2888,7 +2892,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 67;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3062,6 +3066,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.7.0;
+			};
+		};
 		3342C87826DE0E7E0049763E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
@@ -3167,6 +3179,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 331FB0F827011D4A0031A8EF /* XCRemoteSwiftPackageReference "Cache" */;
 			productName = Cache;
+		};
+		3332BCD2273CFCC3001222A7 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		3342C87926DE0E7F0049763E /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;

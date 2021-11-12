@@ -580,11 +580,21 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return
             }
             self.didDeselectInterest(nil, profileInterest)
+            self.profileInterests?.removeAll(where: { element in
+                element.id == profileInterest.id
+            })
+            collectionView.reloadData()
+            self.updateProfileInterestsUI()
         } else {
             guard let profileCategory: CategoriesQuery.Data.Category = self.profileCategories?[indexPath.row] else {
                 return
             }
             self.didDeselectCategory(nil, profileCategory)
+            self.profileCategories?.removeAll(where: { element in
+                element.id == profileCategory.id
+            })
+            collectionView.reloadData()
+            self.updateProfileCategoriesUI()
         }
     }
     

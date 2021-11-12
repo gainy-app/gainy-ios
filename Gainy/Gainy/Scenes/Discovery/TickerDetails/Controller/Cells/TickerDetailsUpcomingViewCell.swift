@@ -19,7 +19,7 @@ final class TickerDetailsUpcomingViewCell: TickerDetailsViewCell {
     }
     
     override func updateFromTickerData() {
-
+        innerTableView.reloadData()
     }
 }
 

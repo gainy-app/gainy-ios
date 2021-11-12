@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import SkeletonView
 
 /// Base Ticker TableView cell
 class TickerDetailsViewCell: UITableViewCell {
     
     var cellHeightChanged: ((CGFloat) -> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isSkeletonable = true
+    }
     
     var tickerInfo: TickerInfo? {
         didSet {

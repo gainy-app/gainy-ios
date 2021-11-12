@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class CollectionListCardCell: UICollectionViewCell {
+    
 
     @IBOutlet private weak var nameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
@@ -34,7 +36,11 @@ final class CollectionListCardCell: UICollectionViewCell {
 
         symbolLbl.text = tickerSymbol
 
-        priceLbl.text = "$\(tickerPrice)"
+        if companyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) || tickerPrice.isEmpty {
+            priceLbl.text = ""
+        } else {
+            priceLbl.text = "$\(tickerPrice)"
+        }
         priceLbl.textColor = tickerPercentChange.hasPrefix(" +")
             ? UIColor.Gainy.green
             : UIColor.Gainy.red
@@ -46,5 +52,20 @@ final class CollectionListCardCell: UICollectionViewCell {
         }
         
         layoutIfNeeded()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isSkeletonable = true
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        [nameLbl, symbolLbl, priceLbl, growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl].forEach({
+            $0?.isSkeletonable = true
+            $0?.linesCornerRadius = 6
+            $0?.numberOfLines = 1
+        })
     }
 }
