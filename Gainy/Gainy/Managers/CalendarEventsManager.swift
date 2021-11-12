@@ -65,8 +65,8 @@ class CalendarEventsManager: NSObject {
         dprint("Adding event")
         dprint("\(event.description ?? "") \(event.am9Time) \(event.pm11Time) \(event.timestamp ?? "")")
         storeEvent.title = "\(event.description ?? "")"
-        storeEvent.startDate = event.date
-        storeEvent.endDate = event.date
+        storeEvent.startDate = event.am9Time
+        storeEvent.endDate = event.am9Time
         storeEvent.isAllDay = true
         storeEvent.calendar = eventStore.defaultCalendarForNewEvents
         

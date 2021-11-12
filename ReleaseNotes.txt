@@ -1,12 +1,12 @@
-*iOS v0.3.1 #69* available
+*iOS v0.3.1 #70* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
 
 :new: *New:*
--
+• Stock Card: loaders added
 
 :hammer_and_wrench: *Improvements*
-• Hotfix a few crashes
+• Stock Card: adding correct dates to Calendar
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

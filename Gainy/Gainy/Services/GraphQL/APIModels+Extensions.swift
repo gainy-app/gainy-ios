@@ -120,11 +120,12 @@ extension RemoteCollectionDetails: Reorderable {
 
 extension RemoteTicker.TickerEvent {
     var date: Date {
-        return (timestamp ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+        return ((timestamp ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date
     }
     
     var am9Time: Date {
-        date.startOfDay + 9.hours
+        let curDate = date
+        return DateInRegion(year: curDate.year, month: curDate.month, day: curDate.day, hour: 9, minute: 0, second: 0, region: Region.current).date
     }
     var pm11Time: Date {
         date.startOfDay + 23.hours

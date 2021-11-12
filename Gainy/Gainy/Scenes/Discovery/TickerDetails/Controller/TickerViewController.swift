@@ -1,4 +1,5 @@
 import UIKit
+import SkeletonView
 
 // TODO: move into a separate file
 protocol CardDetailsViewModelProtocol {
@@ -33,11 +34,11 @@ final class TickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
+        loadTicketInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadTicketInfo()
     }
     
     func loadTicketInfo() {
@@ -46,15 +47,17 @@ final class TickerViewController: BaseViewController {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             return
         }
-        showNetworkLoader()
+        delay(0.3) {
+            self.isLoadingInfo = true
+        }
         viewModel?.dataSource.chartLoader.startAnimating()
         dprint("SHOWING LOADER")
         viewModel?.dataSource.ticker.loadDetails(mainDataLoaded: {[weak self] in
             dprint("DISMISS LOADIER")
             DispatchQueue.main.async {
-            self?.hideLoader()
-            self?.viewModel?.dataSource.calculateHeights()
-            //self?.tableView.reloadData()
+                self?.isLoadingInfo = false
+                self?.viewModel?.dataSource.calculateHeights()
+                //self?.tableView.reloadData()
             }
         }, chartsLoaded: { [weak self] in
             DispatchQueue.main.async {
@@ -63,6 +66,29 @@ final class TickerViewController: BaseViewController {
                 self?.viewModel?.dataSource.updateChart()
             }
         })
+    }
+    
+    private var isLoadingInfo: Bool = false {
+        didSet {
+            if isLoadingInfo {
+                
+                for cell in tableView.visibleCells {
+                    if let rightCell = cell as? TickerDetailsViewCell {
+                        rightCell.showAnimatedGradientSkeleton()
+                    }
+                }
+                tableView.isScrollEnabled = false
+                tableView.isUserInteractionEnabled = false
+            } else {
+                for cell in tableView.visibleCells {
+                    if let rightCell = cell as? TickerDetailsViewCell {
+                        rightCell.hideSkeleton()
+                    }
+                }
+                tableView.isScrollEnabled = true
+                tableView.isUserInteractionEnabled = true
+            }
+        }
     }
     
     //MARK: - Actions
