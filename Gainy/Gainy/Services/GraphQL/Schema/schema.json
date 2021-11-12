@@ -107,6 +107,34 @@
         "possibleTypes": null
       },
       {
+        "kind": "OBJECT",
+        "name": "CreatePlaidLinkTokenOutput",
+        "description": null,
+        "specifiedByUrl": null,
+        "fields": [
+          {
+            "name": "link_token",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "SCALAR",
         "name": "Float",
         "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
@@ -45940,7 +45968,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_historical_prices_code__date_20211109_210542",
+            "name": "public_historical_prices_code__date_20211112_091543",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -66637,6 +66665,51 @@
             "deprecationReason": null
           },
           {
+            "name": "create_plaid_link_token",
+            "description": null,
+            "args": [
+              {
+                "name": "profile_id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "redirect_uri",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "CreatePlaidLinkTokenOutput",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "fetchChartData",
             "description": null,
             "args": [
@@ -78517,7 +78590,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_categories_symbol__category_id_20211109_210542",
+            "name": "public_ticker_categories_symbol__category_id_20211112_091543",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -81331,7 +81404,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_events_symbol_20211109_210542",
+            "name": "public_ticker_events_symbol_20211112_091543",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -88164,7 +88237,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_industries_industry_id__symbol_20211109_210542",
+            "name": "public_ticker_industries_industry_id__symbol_20211112_091543",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
@@ -89647,7 +89720,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "public_ticker_interests_symbol__interest_id_20211109_210542",
+            "name": "public_ticker_interests_symbol__interest_id_20211112_091543",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null

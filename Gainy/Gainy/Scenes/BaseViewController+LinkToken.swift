@@ -9,13 +9,33 @@ import UIKit
 import LinkKit
 
 extension BaseViewController {
-
-    func createLinkTokenConfiguration(_ linkToken: String) -> LinkTokenConfiguration {
+    
+    func createLinkTokenConfiguration(_ linkToken: String)  -> LinkTokenConfiguration {
         // With custom configuration using a link_token
         var linkConfiguration = LinkTokenConfiguration(token: linkToken) { success in
-            print("public-token: \(success.publicToken) metadata: \(success.metadata)")
-            
-            
+            dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
+            if let profileID = UserProfileManager.shared.profileID {
+                Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken)) {[weak self] result in
+                    switch result {
+                    case .success(let graphQLResult):
+                        guard let isAccountLinked = graphQLResult.data?.linkPlaidAccount?.result else {
+                            return
+                        }
+                        if isAccountLinked {
+                            self?.plaidLinked()
+                        } else {
+                            self?.plaidLinkFailed()
+                        }
+                        
+                        break
+                    case .failure(let error):
+                        dprint("Failure when making GraphQL request. Error: \(error)")
+                        
+                        self?.plaidLinkFailed()
+                        break
+                    }
+                }
+            }
         }
         linkConfiguration.onExit = { exit in
             if let error = exit.error {
@@ -26,15 +46,25 @@ extension BaseViewController {
         }
         return linkConfiguration
     }
-
+    
+    //MARK: - Result functions
+    @objc  func plaidLinked() {
+        
+    }
+    
+    @objc  func plaidLinkFailed() {
+        
+    }
+    
     // MARK: Start Plaid Link using a Link token
     // For details please see https://plaid.com/docs/#create-link-token
     func presentPlaidLinkUsingLinkToken(_ linkToken: String) {
         let linkConfiguration = createLinkTokenConfiguration(linkToken)
         let result = Plaid.create(linkConfiguration)
+        
         switch result {
         case .failure(let error):
-            print("Unable to create Plaid handler due to: \(error)")
+            dprint("Unable to create Plaid handler due to: \(error)")
         case .success(let handler):
             handler.open(presentUsing: .viewController(self))
             linkHandler = handler

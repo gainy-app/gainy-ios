@@ -10,6 +10,9 @@
 		1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2726A48D4500FAF107 /* Apollo */; };
 		1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */ = {isa = PBXBuildFile; productRef = 1C3A2C2B26A4A51200FAF107 /* AppsFlyerLib */; };
 		1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */; };
+		33019615273E836700BE4FDC /* CreatePlaidLink.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */; };
+		33019617273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */; };
+		3301961A273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */; };
 		3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */; };
 		3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */; };
 		3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */; };
@@ -380,6 +383,12 @@
 
 /* Begin PBXFileReference section */
 		1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollections.graphql.swift; sourceTree = "<group>"; };
+		33019612273E825C00BE4FDC /* CreatePlaidLink.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = CreatePlaidLink.graphql; sourceTree = "<group>"; };
+		33019613273E82EC00BE4FDC /* LinkPlaidAccount.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = LinkPlaidAccount.graphql; sourceTree = "<group>"; };
+		33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaidLink.graphql.swift; sourceTree = "<group>"; };
+		33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkPlaidAccount.graphql.swift; sourceTree = "<group>"; };
+		33019618273E9B7F00BE4FDC /* GetPlaidHolding.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPlaidHolding.graphql; sourceTree = "<group>"; };
+		33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHolding.graphql.swift; sourceTree = "<group>"; };
 		3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSearchController.swift; sourceTree = "<group>"; };
 		3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchCollectionDetails.graphql; sourceTree = "<group>"; };
 		3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickers.graphql; sourceTree = "<group>"; };
@@ -823,8 +832,21 @@
 				33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */,
 				33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */,
 				33BEB93127235ADD005237CB /* FetchStockMedianWeek.graphql.swift */,
+				33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */,
+				33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */,
+				33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		33019611273E824100BE4FDC /* Plaid */ = {
+			isa = PBXGroup;
+			children = (
+				33019612273E825C00BE4FDC /* CreatePlaidLink.graphql */,
+				33019613273E82EC00BE4FDC /* LinkPlaidAccount.graphql */,
+				33019618273E9B7F00BE4FDC /* GetPlaidHolding.graphql */,
+			);
+			path = Plaid;
 			sourceTree = "<group>";
 		};
 		33043DD826E227D80058887C /* Compare Stocks */ = {
@@ -1492,6 +1514,7 @@
 				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
+				33019611273E824100BE4FDC /* Plaid */,
 				859B2EC6270605430084CCDC /* Profile */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
 				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
@@ -2377,6 +2400,7 @@
 				33C4E9782726A782008D3006 /* Configuration.swift in Sources */,
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
+				3301961A273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
 				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
@@ -2396,6 +2420,7 @@
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
 				85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */,
+				33019617273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift in Sources */,
 				85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */,
 				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
 				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
@@ -2412,6 +2437,7 @@
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
+				33019615273E836700BE4FDC /* CreatePlaidLink.graphql.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
 				85CD154D26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift in Sources */,

@@ -6281,27 +6281,27 @@ public struct historical_prices_on_conflict: GraphQLMapConvertible {
 public enum historical_prices_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicHistoricalPricesCodeDate_20211109_210542
+  case publicHistoricalPricesCodeDate_20211112_091543
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_historical_prices_code__date_20211109_210542": self = .publicHistoricalPricesCodeDate_20211109_210542
+      case "public_historical_prices_code__date_20211112_091543": self = .publicHistoricalPricesCodeDate_20211112_091543
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicHistoricalPricesCodeDate_20211109_210542: return "public_historical_prices_code__date_20211109_210542"
+      case .publicHistoricalPricesCodeDate_20211112_091543: return "public_historical_prices_code__date_20211112_091543"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: historical_prices_constraint, rhs: historical_prices_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicHistoricalPricesCodeDate_20211109_210542, .publicHistoricalPricesCodeDate_20211109_210542): return true
+      case (.publicHistoricalPricesCodeDate_20211112_091543, .publicHistoricalPricesCodeDate_20211112_091543): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -6309,7 +6309,7 @@ public enum historical_prices_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [historical_prices_constraint] {
     return [
-      .publicHistoricalPricesCodeDate_20211109_210542,
+      .publicHistoricalPricesCodeDate_20211112_091543,
     ]
   }
 }
@@ -6998,27 +6998,27 @@ public struct ticker_categories_on_conflict: GraphQLMapConvertible {
 public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerCategoriesSymbolCategoryId_20211109_210542
+  case publicTickerCategoriesSymbolCategoryId_20211112_091543
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_categories_symbol__category_id_20211109_210542": self = .publicTickerCategoriesSymbolCategoryId_20211109_210542
+      case "public_ticker_categories_symbol__category_id_20211112_091543": self = .publicTickerCategoriesSymbolCategoryId_20211112_091543
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerCategoriesSymbolCategoryId_20211109_210542: return "public_ticker_categories_symbol__category_id_20211109_210542"
+      case .publicTickerCategoriesSymbolCategoryId_20211112_091543: return "public_ticker_categories_symbol__category_id_20211112_091543"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_categories_constraint, rhs: ticker_categories_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerCategoriesSymbolCategoryId_20211109_210542, .publicTickerCategoriesSymbolCategoryId_20211109_210542): return true
+      case (.publicTickerCategoriesSymbolCategoryId_20211112_091543, .publicTickerCategoriesSymbolCategoryId_20211112_091543): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -7026,7 +7026,7 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_categories_constraint] {
     return [
-      .publicTickerCategoriesSymbolCategoryId_20211109_210542,
+      .publicTickerCategoriesSymbolCategoryId_20211112_091543,
     ]
   }
 }
@@ -7299,27 +7299,27 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerEventsSymbol_20211109_210542
+  case publicTickerEventsSymbol_20211112_091543
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_events_symbol_20211109_210542": self = .publicTickerEventsSymbol_20211109_210542
+      case "public_ticker_events_symbol_20211112_091543": self = .publicTickerEventsSymbol_20211112_091543
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerEventsSymbol_20211109_210542: return "public_ticker_events_symbol_20211109_210542"
+      case .publicTickerEventsSymbol_20211112_091543: return "public_ticker_events_symbol_20211112_091543"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_events_constraint, rhs: ticker_events_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerEventsSymbol_20211109_210542, .publicTickerEventsSymbol_20211109_210542): return true
+      case (.publicTickerEventsSymbol_20211112_091543, .publicTickerEventsSymbol_20211112_091543): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -7327,7 +7327,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static var allCases: [ticker_events_constraint] {
     return [
-      .publicTickerEventsSymbol_20211109_210542,
+      .publicTickerEventsSymbol_20211112_091543,
     ]
   }
 }
@@ -8788,27 +8788,27 @@ public struct ticker_industries_on_conflict: GraphQLMapConvertible {
 public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerIndustriesIndustryIdSymbol_20211109_210542
+  case publicTickerIndustriesIndustryIdSymbol_20211112_091543
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_industries_industry_id__symbol_20211109_210542": self = .publicTickerIndustriesIndustryIdSymbol_20211109_210542
+      case "public_ticker_industries_industry_id__symbol_20211112_091543": self = .publicTickerIndustriesIndustryIdSymbol_20211112_091543
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerIndustriesIndustryIdSymbol_20211109_210542: return "public_ticker_industries_industry_id__symbol_20211109_210542"
+      case .publicTickerIndustriesIndustryIdSymbol_20211112_091543: return "public_ticker_industries_industry_id__symbol_20211112_091543"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_industries_constraint, rhs: ticker_industries_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerIndustriesIndustryIdSymbol_20211109_210542, .publicTickerIndustriesIndustryIdSymbol_20211109_210542): return true
+      case (.publicTickerIndustriesIndustryIdSymbol_20211112_091543, .publicTickerIndustriesIndustryIdSymbol_20211112_091543): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -8816,7 +8816,7 @@ public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_industries_constraint] {
     return [
-      .publicTickerIndustriesIndustryIdSymbol_20211109_210542,
+      .publicTickerIndustriesIndustryIdSymbol_20211112_091543,
     ]
   }
 }
@@ -9212,27 +9212,27 @@ public struct ticker_interests_on_conflict: GraphQLMapConvertible {
 public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerInterestsSymbolInterestId_20211109_210542
+  case publicTickerInterestsSymbolInterestId_20211112_091543
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_interests_symbol__interest_id_20211109_210542": self = .publicTickerInterestsSymbolInterestId_20211109_210542
+      case "public_ticker_interests_symbol__interest_id_20211112_091543": self = .publicTickerInterestsSymbolInterestId_20211112_091543
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerInterestsSymbolInterestId_20211109_210542: return "public_ticker_interests_symbol__interest_id_20211109_210542"
+      case .publicTickerInterestsSymbolInterestId_20211112_091543: return "public_ticker_interests_symbol__interest_id_20211112_091543"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_interests_constraint, rhs: ticker_interests_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerInterestsSymbolInterestId_20211109_210542, .publicTickerInterestsSymbolInterestId_20211109_210542): return true
+      case (.publicTickerInterestsSymbolInterestId_20211112_091543, .publicTickerInterestsSymbolInterestId_20211112_091543): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -9240,7 +9240,7 @@ public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, 
 
   public static var allCases: [ticker_interests_constraint] {
     return [
-      .publicTickerInterestsSymbolInterestId_20211109_210542,
+      .publicTickerInterestsSymbolInterestId_20211112_091543,
     ]
   }
 }

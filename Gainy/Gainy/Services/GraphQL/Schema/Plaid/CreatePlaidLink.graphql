@@ -1,0 +1,5 @@
+query CreatePlaidLink($profileId: Int!, $redirectUri: String!) {
+        create_plaid_link_token(profile_id: $profileId, redirect_uri: $redirectUri){
+        link_token
+    }
+}

@@ -11,7 +11,7 @@ final class PortfolioViewModel {
     
     //MARK: - Plaid
     
-    func linkAccount() {
+    func loadHoldings() {
         
     }
 }

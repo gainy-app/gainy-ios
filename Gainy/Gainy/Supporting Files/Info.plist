@@ -126,5 +126,18 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>PLKPlaidLinkConfiguration</key>
+	<dict>
+		<key>clientName</key>
+		<string>$(PRODUCT_NAME)</string>
+		<key>env</key>
+		<string>Sandbox</string>
+		<key>key</key>
+		<string></string>
+		<key>product</key>
+		<string>auth</string>
+		<key>selectAccount</key>
+		<false/>
+	</dict>
 </dict>
 </plist>
