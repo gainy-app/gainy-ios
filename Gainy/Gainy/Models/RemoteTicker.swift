@@ -186,7 +186,15 @@ class TickerInfo {
                 
                 var fetchedData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
                 if let lastDay = fetchedData.last {
-                    fetchedData = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                    let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                    
+                    if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+                        if index == 0 {
+                            fetchedData = filtered
+                        } else {
+                            fetchedData = Array(fetchedData[(index-1)...])
+                        }
+                    }
                 }
                 self?.setChartsCache(.d1, chartData: fetchedData)
                 self?.updateChartData(fetchedData)
@@ -244,7 +252,14 @@ class TickerInfo {
                 var chartRemData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
                 if period == .d1 {
                     if let lastDay = chartRemData.last {
-                        chartRemData = chartRemData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                        let filtered = chartRemData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                        if let index = chartRemData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+                            if index == 0 {
+                                chartRemData = filtered
+                            } else {
+                                chartRemData = Array(chartRemData[(index-1)...])
+                            }
+                        }
                     }
                 }
                 self?.setChartsCache(period, chartData: chartRemData)

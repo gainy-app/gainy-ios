@@ -6,54 +6,77 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class PortfolioViewController: BaseViewController {
     
-    //MARK: - Outlets
-    @IBOutlet weak var plaidLinkBtn: UIButton!
+    //MARK: - Child VCs
+    lazy var noPlaidVC = NoPlaidViewController.instantiate(.portfolio)
+    lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
     
-    //MARK: - Plaid Listeners
-        
-    override func plaidLinked() {
-        super.plaidLinked()
-        if let profileID = UserProfileManager.shared.profileID {
-            Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings?.count else {
-                    return
+    //MARK: - Outlets
+    
+    @IBOutlet private weak var containerView: UIView!
+    
+    //MARK: - State
+    enum LinkState {
+        case noLink, linkedNoHoldings, linkHasHoldings
+    }
+    
+    private var state: LinkState = .noLink {
+        didSet {
+            switch state {
+            case .noLink:
+                if !children.contains(noPlaidVC) {
+                    removeAllChildVCs()
+                    noPlaidVC.delegate = self
+                    addViewController(noPlaidVC, view: containerView)
                 }
-                dprint("Got \(holdingsCount) holding from Plaid")
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                break
+            case .linkedNoHoldings:
+                if !children.contains(holdingsVC) {
+                    removeAllChildVCs()
+                    addViewController(holdingsVC, view: containerView)
+                }
+            case .linkHasHoldings:
+                if !children.contains(holdingsVC) {
+                    removeAllChildVCs()
+                    addViewController(holdingsVC, view: containerView)
+                }
             }
-        }
         }
     }
     
-    
-    //MARK: - Action
-    @IBAction func plaidLinkAction(_ sender: Any) {
-        if let profileID = UserProfileManager.shared.profileID {
-        
-        showNetworkLoader()
-        
-            Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                        return
-                    }
-                    self?.presentPlaidLinkUsingLinkToken(linkToken)
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    break
-                }
-            }
+    private func removeAllChildVCs() {
+        for childVC in children {
+            removeViewController(childVC)
         }
+    }
+    
+    //MARK: - Life Cycle
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadBasedOnState()
+    }
+    
+    private func loadBasedOnState() {
+        if UserProfileManager.shared.isPlaidLinked {
+            state = .linkHasHoldings
+        } else {
+            state = .noLink
+        }
+    }
+    
+    override func plaidLinked() {
+        super.plaidLinked()
         
+        state = .linkHasHoldings
+    }
+}
+
+extension PortfolioViewController: NoPlaidViewControllerDelegate {
+    func plaidLinked(controller: NoPlaidViewController) {
+        UserProfileManager.shared.isPlaidLinked = true        
+        state = .linkHasHoldings
     }
 }

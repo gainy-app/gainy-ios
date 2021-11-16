@@ -10,6 +10,7 @@ public typealias timestamp = String
 public typealias numeric = Double
 public typealias smallint = Int
 public typealias date = Foundation.Date
+public typealias bigint = Int
 
 private let iso8601DateFormatter = ISO8601DateFormatter()
 

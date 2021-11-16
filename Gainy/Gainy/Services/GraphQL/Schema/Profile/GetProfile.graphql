@@ -19,5 +19,9 @@
     profile_watchlist_tickers {
       symbol
     }
+    profile_plaid_access_tokens {
+      id
+      created_at
+    }
   }
 }

@@ -1,0 +1,20 @@
+query GetPlaidTransactions($profileId: Int!) {
+  get_portfolio_transactions(profile_id: $profileId) {
+    id
+    quantity
+    iso_currency_code
+    profile_id
+    security_id
+    security {
+      ...PortfolioSecurity
+    }
+    account {
+      ...PortfolioAccount
+    }
+    amount
+    date
+    fees
+    name
+    price
+  }
+}

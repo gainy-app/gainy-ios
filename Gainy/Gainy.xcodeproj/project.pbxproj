@@ -23,6 +23,11 @@
 		3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */; };
 		3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */; };
 		33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33043DD926E227EF0058887C /* CompareStocksViewController.swift */; };
+		3305EAB22743983B00A95FA0 /* HoldingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */; };
+		3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */; };
+		3305EAB6274399EB00A95FA0 /* HoldingChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */; };
+		3305EAB8274399F800A95FA0 /* HoldingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */; };
+		3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */; };
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
@@ -159,6 +164,8 @@
 		33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */; };
 		33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6626CFD4E000DF1CBE /* CornerView.swift */; };
 		33E7AA6926CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */; };
+		33EEECD427423E68004C41FE /* NoPlaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECD327423E68004C41FE /* NoPlaidViewController.swift */; };
+		33EEECD827424696004C41FE /* HoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECD727424696004C41FE /* HoldingsViewController.swift */; };
 		33F1947B27143A2B00C438AA /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F1947A27143A2B00C438AA /* LocalNotificationsManager.swift */; };
 		33F1947D27143BE200C438AA /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F1947C27143BE200C438AA /* String+Hash.swift */; };
 		33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */; };
@@ -387,7 +394,7 @@
 		33019613273E82EC00BE4FDC /* LinkPlaidAccount.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = LinkPlaidAccount.graphql; sourceTree = "<group>"; };
 		33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaidLink.graphql.swift; sourceTree = "<group>"; };
 		33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkPlaidAccount.graphql.swift; sourceTree = "<group>"; };
-		33019618273E9B7F00BE4FDC /* GetPlaidHolding.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPlaidHolding.graphql; sourceTree = "<group>"; };
+		33019618273E9B7F00BE4FDC /* GetPlaidHoldings.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPlaidHoldings.graphql; sourceTree = "<group>"; };
 		33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHolding.graphql.swift; sourceTree = "<group>"; };
 		3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSearchController.swift; sourceTree = "<group>"; };
 		3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchCollectionDetails.graphql; sourceTree = "<group>"; };
@@ -399,6 +406,11 @@
 		3302E0BC26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchCollectionHeaderView.xib; sourceTree = "<group>"; };
 		3302E0BE26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
 		33043DD926E227EF0058887C /* CompareStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStocksViewController.swift; sourceTree = "<group>"; };
+		3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsViewModel.swift; sourceTree = "<group>"; };
+		3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsDataSource.swift; sourceTree = "<group>"; };
+		3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartTableViewCell.swift; sourceTree = "<group>"; };
+		3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingTableViewCell.swift; sourceTree = "<group>"; };
+		3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityTableViewCell.swift; sourceTree = "<group>"; };
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
@@ -532,6 +544,9 @@
 		33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderButton.swift; sourceTree = "<group>"; };
 		33E7AA6626CFD4E000DF1CBE /* CornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerView.swift; sourceTree = "<group>"; };
 		33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsNewsViewCell.swift; sourceTree = "<group>"; };
+		33EEECD0274237A4004C41FE /* GetPlaidTransactions.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPlaidTransactions.graphql; sourceTree = "<group>"; };
+		33EEECD327423E68004C41FE /* NoPlaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoPlaidViewController.swift; sourceTree = "<group>"; };
+		33EEECD727424696004C41FE /* HoldingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsViewController.swift; sourceTree = "<group>"; };
 		33F1947A27143A2B00C438AA /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
 		33F1947C27143BE200C438AA /* String+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
 		33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollictionsListHeaderView.swift; sourceTree = "<group>"; };
@@ -844,7 +859,8 @@
 			children = (
 				33019612273E825C00BE4FDC /* CreatePlaidLink.graphql */,
 				33019613273E82EC00BE4FDC /* LinkPlaidAccount.graphql */,
-				33019618273E9B7F00BE4FDC /* GetPlaidHolding.graphql */,
+				33019618273E9B7F00BE4FDC /* GetPlaidHoldings.graphql */,
+				33EEECD0274237A4004C41FE /* GetPlaidTransactions.graphql */,
 			);
 			path = Plaid;
 			sourceTree = "<group>";
@@ -1050,6 +1066,8 @@
 			children = (
 				33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */,
 				33571F22273BE463007B587F /* PortfolioViewModel.swift */,
+				33EEECD127423E49004C41FE /* NoPlaid */,
+				33EEECD227423E52004C41FE /* Plaid */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -1088,6 +1106,27 @@
 				33E1828026D399BB00A1D2AC /* NewsViewCell.swift */,
 			);
 			path = NewsCell;
+			sourceTree = "<group>";
+		};
+		33EEECD127423E49004C41FE /* NoPlaid */ = {
+			isa = PBXGroup;
+			children = (
+				33EEECD327423E68004C41FE /* NoPlaidViewController.swift */,
+			);
+			path = NoPlaid;
+			sourceTree = "<group>";
+		};
+		33EEECD227423E52004C41FE /* Plaid */ = {
+			isa = PBXGroup;
+			children = (
+				33EEECD727424696004C41FE /* HoldingsViewController.swift */,
+				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
+				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
+				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
+				3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */,
+				3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */,
+			);
+			path = Plaid;
 			sourceTree = "<group>";
 		};
 		33F6DC3B2738FDF300CBE4DA /* SearchStocks */ = {
@@ -2202,6 +2241,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
@@ -2254,6 +2294,7 @@
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
 				3AE795B7266386B8002B40D6 /* LaunchInstructor.swift in Sources */,
 				33FE9E4A26D519A700FABC70 /* LineChartView.swift in Sources */,
+				3305EAB6274399EB00A95FA0 /* HoldingChartTableViewCell.swift in Sources */,
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
@@ -2301,6 +2342,7 @@
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
+				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
@@ -2345,6 +2387,7 @@
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
 				8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */,
+				33EEECD427423E68004C41FE /* NoPlaidViewController.swift in Sources */,
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3A4A98FB2688D495008C1968 /* CollectionDetails.swift in Sources */,
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
@@ -2415,10 +2458,12 @@
 				3AE795582662AE80002B40D6 /* Reachability.swift in Sources */,
 				33F1947B27143A2B00C438AA /* LocalNotificationsManager.swift in Sources */,
 				85D4F80926E60F79004EC21D /* PersonalizationIndicatorsViewController.swift in Sources */,
+				33EEECD827424696004C41FE /* HoldingsViewController.swift in Sources */,
 				3A5ADA6E268DA179008659E8 /* SwipeActionsView.swift in Sources */,
 				33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */,
 				3AD40FBA266923C1005679DE /* YourCollectionsSectionLayout.swift in Sources */,
 				3AE9036A266A507900574923 /* AFParameter.swift in Sources */,
+				3305EAB8274399F800A95FA0 /* HoldingTableViewCell.swift in Sources */,
 				85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */,
 				33019617273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift in Sources */,
 				85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */,
@@ -2436,6 +2481,7 @@
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */,
+				3305EAB22743983B00A95FA0 /* HoldingsViewModel.swift in Sources */,
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				33019615273E836700BE4FDC /* CreatePlaidLink.graphql.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,

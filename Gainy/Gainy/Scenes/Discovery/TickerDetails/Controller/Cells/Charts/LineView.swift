@@ -109,7 +109,7 @@ public struct LineView: View {
         
         let points = data.onlyPoints()
         let stepHeight: CGFloat = (frame.size.height - 30) / CGFloat(points.max()! - points.min()!)
-        return CGPoint(x: 0, y: (frame.size.height - 25) - CGFloat(points[0] - points.min()!) * stepHeight)
+        return CGPoint(x: 0, y: (frame.size.height - 25) - CGFloat(points[1] - points.min()!) * stepHeight)
     }
 }
 

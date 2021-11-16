@@ -205,6 +205,23 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    //MARK: - Child VCs
+    
+    func addViewController(_ controller: UIViewController, view: UIView) {
+        if (!view.subviews.contains(controller.view)) {
+            self.addChild(controller)
+            view.addSubview(controller.view)
+            controller.view.frame = view.bounds
+            controller.didMove(toParent: self)
+        }
+    }
+    
+    func removeViewController(_ controller: UIViewController) {
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
+    }
 }
 
 extension BaseViewController: UIGestureRecognizerDelegate {

@@ -34,6 +34,11 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           symbol
         }
+        profile_plaid_access_tokens {
+          __typename
+          id
+          created_at
+        }
       }
     }
     """
@@ -96,6 +101,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
           GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
           GraphQLField("profile_watchlist_tickers", type: .nonNull(.list(.nonNull(.object(ProfileWatchlistTicker.selections))))),
+          GraphQLField("profile_plaid_access_tokens", type: .nonNull(.list(.nonNull(.object(ProfilePlaidAccessToken.selections))))),
         ]
       }
 
@@ -105,8 +111,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker], profilePlaidAccessTokens: [ProfilePlaidAccessToken]) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, "profile_plaid_access_tokens": profilePlaidAccessTokens.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -218,6 +224,16 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, forKey: "profile_watchlist_tickers")
+        }
+      }
+
+      /// An array relationship
+      public var profilePlaidAccessTokens: [ProfilePlaidAccessToken] {
+        get {
+          return (resultMap["profile_plaid_access_tokens"] as! [ResultMap]).map { (value: ResultMap) -> ProfilePlaidAccessToken in ProfilePlaidAccessToken(unsafeResultMap: value) }
+        }
+        set {
+          resultMap.updateValue(newValue.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }, forKey: "profile_plaid_access_tokens")
         }
       }
 
@@ -373,6 +389,55 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "symbol")
+          }
+        }
+      }
+
+      public struct ProfilePlaidAccessToken: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["app_profile_plaid_access_tokens"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(id: Int, createdAt: timestamptz) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "created_at": createdAt])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var id: Int {
+          get {
+            return resultMap["id"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "id")
+          }
+        }
+
+        public var createdAt: timestamptz {
+          get {
+            return resultMap["created_at"]! as! timestamptz
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "created_at")
           }
         }
       }

@@ -42,6 +42,8 @@ final class UserProfileManager {
     
     var profileLoaded: Bool?
     
+    var isPlaidLinked: Bool = false
+    
     
     /// Kind of data source for recommended collections and your collections
     /// TODO: Borysov - implement the data source instead of using this
@@ -62,6 +64,7 @@ final class UserProfileManager {
         userID = nil
         profileID = nil
         profileLoaded = false
+        isPlaidLinked = false
     }
     
     public func fetchProfile(completion: @escaping (_ success: Bool) -> Void) {
@@ -105,6 +108,7 @@ final class UserProfileManager {
                 self.address = appProfile.legalAddress
                 self.userID = appProfile.userId
                 self.profileLoaded = true
+                self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
                 completion(true)
                 
             case .failure(let error):
