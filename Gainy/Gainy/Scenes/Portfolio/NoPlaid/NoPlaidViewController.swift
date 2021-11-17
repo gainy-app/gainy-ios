@@ -22,29 +22,13 @@ final class NoPlaidViewController: BaseViewController {
         
     override func plaidLinked() {
         super.plaidLinked()
-        if let profileID = UserProfileManager.shared.profileID {
-            Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings?.count else {
-                    NotificationManager.shared.showError("Sorry, you have no holdings")
-                    self?.hideLoader()
-                    return
-                }
-                dprint("Got \(holdingsCount) holding from Plaid")
-                self?.hideLoader()
-                if let self = self {
-                    self.delegate?.plaidLinked(controller: self)
-                }
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError(error.localizedDescription)
-                self?.hideLoader()
-                break
-            }
-        }
-        }
+        
+        delegate?.plaidLinked(controller: self)
+    }
+    
+    override func plaidLinkFailed() {
+        super.plaidLinkFailed()
+        
     }
     
     

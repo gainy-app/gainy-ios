@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
@@ -13,7 +14,22 @@ final class HoldingsDataSource: NSObject {
     private var cellHeights: [Int: CGFloat] = [:]
 }
 
-extension HoldingsDataSource: UITableViewDataSource {
+extension HoldingsDataSource: SkeletonTableViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return HoldingsSkeletonTableViewCell.cellIdentifier
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
+        let cell = skeletonView.dequeueReusableCell(withIdentifier: HoldingsSkeletonTableViewCell.cellIdentifier, for: indexPath) as? HoldingsSkeletonTableViewCell
+        cell?.isSkeletonable = true
+        return cell
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
@@ -35,4 +51,8 @@ extension HoldingsDataSource: UITableViewDataSource {
             return cell
         }
     }
+}
+
+extension HoldingsDataSource: UITableViewDelegate {
+    
 }

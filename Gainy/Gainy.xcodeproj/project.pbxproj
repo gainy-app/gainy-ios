@@ -139,6 +139,9 @@
 		33BEB93727235ADE005237CB /* FetchStockMedianDay.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */; };
 		33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93927235B02005237CB /* ScatterChartViewModel.swift */; };
 		33C4E9782726A782008D3006 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4E9772726A782008D3006 /* Configuration.swift */; };
+		33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */; };
+		33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */; };
+		33CD8DB92744E4150032C1F2 /* GetPlaidTransactions.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */; };
 		33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */; };
 		33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9F26D6229300E82329 /* Double+Currencies.swift */; };
 		33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 33CDECA226D627ED00E82329 /* SwiftDate */; };
@@ -520,6 +523,9 @@
 		33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedianDay.graphql.swift; sourceTree = "<group>"; };
 		33BEB93927235B02005237CB /* ScatterChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScatterChartViewModel.swift; sourceTree = "<group>"; };
 		33C4E9772726A782008D3006 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsSkeletonTableViewCell.swift; sourceTree = "<group>"; };
+		33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularDashedView.swift; sourceTree = "<group>"; };
+		33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidTransactions.graphql.swift; sourceTree = "<group>"; };
 		33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQL+Extensions.swift"; sourceTree = "<group>"; };
 		33CDEC9F26D6229300E82329 /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
@@ -850,6 +856,7 @@
 				33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */,
 				33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */,
 				33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */,
+				33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -957,6 +964,7 @@
 				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
 				85D4F80526E5FFFB004EC21D /* GainySliderView.swift */,
 				85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */,
+				33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1124,6 +1132,7 @@
 				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
 				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
 				3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */,
+				33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */,
 				3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */,
 			);
 			path = Plaid;
@@ -2358,6 +2367,7 @@
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
 				33FE9E4826D519A700FABC70 /* MultiLineChartView.swift in Sources */,
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
+				33CD8DB92744E4150032C1F2 /* GetPlaidTransactions.graphql.swift in Sources */,
 				3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
 				33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */,
@@ -2385,6 +2395,7 @@
 				3372ED352710490300D8D8E1 /* DDLog.swift in Sources */,
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
+				33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
 				8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */,
 				33EEECD427423E68004C41FE /* NoPlaidViewController.swift in Sources */,
@@ -2451,6 +2462,7 @@
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
+				33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,

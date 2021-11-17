@@ -6,10 +6,29 @@ query GetPlaidTransactions($profileId: Int!) {
     profile_id
     security_id
     security {
-      ...PortfolioSecurity
+        created_at
+  iso_currency_code
+  id
+  name
+  ticker_symbol
+    tickers {
+  ...RemoteTickerDetails
+}
+  type
+  updated_at
     }
     account {
-      ...PortfolioAccount
+        balance_available
+  balance_current
+  balance_iso_currency_code
+  balance_limit
+  created_at
+  id
+  mask
+  name
+  official_name
+  subtype
+  type
     }
     amount
     date
@@ -18,3 +37,4 @@ query GetPlaidTransactions($profileId: Int!) {
     price
   }
 }
+

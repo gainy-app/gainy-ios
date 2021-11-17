@@ -94,12 +94,11 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
   ///   - profileHoldings
   ///   - profileInterests
   ///   - profilePlaidAccessTokens
-  ///   - profilePortfolioAccounts
   ///   - profileScoringSetting
   ///   - profileWatchlistTickers
   ///   - userId
-  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, portfolioSecurities: Swift.Optional<app_portfolio_securities_arr_rel_insert_input?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_arr_rel_insert_input?> = nil, profilePortfolioAccounts: Swift.Optional<app_profile_portfolio_accounts_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> = nil, userId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_securities": portfolioSecurities, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_portfolio_accounts": profilePortfolioAccounts, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
+  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, portfolioSecurities: Swift.Optional<app_portfolio_securities_arr_rel_insert_input?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> = nil, userId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_securities": portfolioSecurities, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
   }
 
   public var avatarUrl: Swift.Optional<String?> {
@@ -225,15 +224,6 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_plaid_access_tokens")
-    }
-  }
-
-  public var profilePortfolioAccounts: Swift.Optional<app_profile_portfolio_accounts_arr_rel_insert_input?> {
-    get {
-      return graphQLMap["profile_portfolio_accounts"] as? Swift.Optional<app_profile_portfolio_accounts_arr_rel_insert_input?> ?? Swift.Optional<app_profile_portfolio_accounts_arr_rel_insert_input?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_portfolio_accounts")
     }
   }
 
@@ -1738,12 +1728,11 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
   ///   - profileHoldings
   ///   - profileInterests
   ///   - profilePlaidAccessTokens
-  ///   - profilePortfolioAccounts
   ///   - profileScoringSetting
   ///   - profileWatchlistTickers
   ///   - userId
-  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, portfolioSecurities: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, profilePortfolioAccounts: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_securities": portfolioSecurities, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_portfolio_accounts": profilePortfolioAccounts, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
+  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, portfolioSecurities: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_securities": portfolioSecurities, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
   }
 
   public var _and: Swift.Optional<[app_profiles_bool_exp]?> {
@@ -1896,15 +1885,6 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_plaid_access_tokens")
-    }
-  }
-
-  public var profilePortfolioAccounts: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
-    get {
-      return graphQLMap["profile_portfolio_accounts"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_portfolio_accounts")
     }
   }
 
@@ -2740,9 +2720,10 @@ public struct historical_growth_rate_bool_exp: GraphQLMapConvertible {
   ///   - growthRate_1w
   ///   - growthRate_1y
   ///   - growthRate_3m
+  ///   - id
   ///   - symbol
-  public init(_and: Swift.Optional<[historical_growth_rate_bool_exp]?> = nil, _not: Swift.Optional<historical_growth_rate_bool_exp?> = nil, _or: Swift.Optional<[historical_growth_rate_bool_exp]?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, growthRate_1d: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1m: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1w: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1y: Swift.Optional<float8_comparison_exp?> = nil, growthRate_3m: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "symbol": symbol]
+  public init(_and: Swift.Optional<[historical_growth_rate_bool_exp]?> = nil, _not: Swift.Optional<historical_growth_rate_bool_exp?> = nil, _or: Swift.Optional<[historical_growth_rate_bool_exp]?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, growthRate_1d: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1m: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1w: Swift.Optional<float8_comparison_exp?> = nil, growthRate_1y: Swift.Optional<float8_comparison_exp?> = nil, growthRate_3m: Swift.Optional<float8_comparison_exp?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "id": id, "symbol": symbol]
   }
 
   public var _and: Swift.Optional<[historical_growth_rate_bool_exp]?> {
@@ -2826,6 +2807,15 @@ public struct historical_growth_rate_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var id: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
   public var symbol: Swift.Optional<String_comparison_exp?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
@@ -2849,11 +2839,12 @@ public struct historical_prices_bool_exp: GraphQLMapConvertible {
   ///   - code
   ///   - date
   ///   - high
+  ///   - id
   ///   - low
   ///   - open
   ///   - volume
-  public init(_and: Swift.Optional<[historical_prices_bool_exp]?> = nil, _not: Swift.Optional<historical_prices_bool_exp?> = nil, _or: Swift.Optional<[historical_prices_bool_exp]?> = nil, adjustedClose: Swift.Optional<float8_comparison_exp?> = nil, close: Swift.Optional<float8_comparison_exp?> = nil, code: Swift.Optional<String_comparison_exp?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, high: Swift.Optional<float8_comparison_exp?> = nil, low: Swift.Optional<float8_comparison_exp?> = nil, `open`: Swift.Optional<float8_comparison_exp?> = nil, volume: Swift.Optional<numeric_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "adjusted_close": adjustedClose, "close": close, "code": code, "date": date, "high": high, "low": low, "open": `open`, "volume": volume]
+  public init(_and: Swift.Optional<[historical_prices_bool_exp]?> = nil, _not: Swift.Optional<historical_prices_bool_exp?> = nil, _or: Swift.Optional<[historical_prices_bool_exp]?> = nil, adjustedClose: Swift.Optional<float8_comparison_exp?> = nil, close: Swift.Optional<float8_comparison_exp?> = nil, code: Swift.Optional<String_comparison_exp?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, high: Swift.Optional<float8_comparison_exp?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, low: Swift.Optional<float8_comparison_exp?> = nil, `open`: Swift.Optional<float8_comparison_exp?> = nil, volume: Swift.Optional<numeric_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "adjusted_close": adjustedClose, "close": close, "code": code, "date": date, "high": high, "id": id, "low": low, "open": `open`, "volume": volume]
   }
 
   public var _and: Swift.Optional<[historical_prices_bool_exp]?> {
@@ -2925,6 +2916,15 @@ public struct historical_prices_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "high")
+    }
+  }
+
+  public var id: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
     }
   }
 
@@ -4485,6 +4485,7 @@ public struct industry_stats_daily_bool_exp: GraphQLMapConvertible {
   ///   - _not
   ///   - _or
   ///   - date
+  ///   - id
   ///   - industryId
   ///   - medianGrowthRate_1d
   ///   - medianGrowthRate_1m
@@ -4492,8 +4493,8 @@ public struct industry_stats_daily_bool_exp: GraphQLMapConvertible {
   ///   - medianGrowthRate_1y
   ///   - medianGrowthRate_3m
   ///   - medianPrice
-  public init(_and: Swift.Optional<[industry_stats_daily_bool_exp]?> = nil, _not: Swift.Optional<industry_stats_daily_bool_exp?> = nil, _or: Swift.Optional<[industry_stats_daily_bool_exp]?> = nil, date: Swift.Optional<timestamp_comparison_exp?> = nil, industryId: Swift.Optional<Int_comparison_exp?> = nil, medianGrowthRate_1d: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1m: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1w: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1y: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_3m: Swift.Optional<float8_comparison_exp?> = nil, medianPrice: Swift.Optional<float8_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "date": date, "industry_id": industryId, "median_growth_rate_1d": medianGrowthRate_1d, "median_growth_rate_1m": medianGrowthRate_1m, "median_growth_rate_1w": medianGrowthRate_1w, "median_growth_rate_1y": medianGrowthRate_1y, "median_growth_rate_3m": medianGrowthRate_3m, "median_price": medianPrice]
+  public init(_and: Swift.Optional<[industry_stats_daily_bool_exp]?> = nil, _not: Swift.Optional<industry_stats_daily_bool_exp?> = nil, _or: Swift.Optional<[industry_stats_daily_bool_exp]?> = nil, date: Swift.Optional<timestamp_comparison_exp?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, industryId: Swift.Optional<Int_comparison_exp?> = nil, medianGrowthRate_1d: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1m: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1w: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_1y: Swift.Optional<float8_comparison_exp?> = nil, medianGrowthRate_3m: Swift.Optional<float8_comparison_exp?> = nil, medianPrice: Swift.Optional<float8_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "date": date, "id": id, "industry_id": industryId, "median_growth_rate_1d": medianGrowthRate_1d, "median_growth_rate_1m": medianGrowthRate_1m, "median_growth_rate_1w": medianGrowthRate_1w, "median_growth_rate_1y": medianGrowthRate_1y, "median_growth_rate_3m": medianGrowthRate_3m, "median_price": medianPrice]
   }
 
   public var _and: Swift.Optional<[industry_stats_daily_bool_exp]?> {
@@ -4529,6 +4530,15 @@ public struct industry_stats_daily_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var id: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
     }
   }
 
@@ -5014,22 +5024,63 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   ///   - _and
   ///   - _not
   ///   - _or
+  ///   - absoluteHistoricalVolatilityAdjustedCurrent
+  ///   - absoluteHistoricalVolatilityAdjustedMax_1y
+  ///   - absoluteHistoricalVolatilityAdjustedMin_1y
+  ///   - addressCity
+  ///   - addressCounty
+  ///   - addressFull
+  ///   - addressState
+  ///   - assetCashAndEquivalents
   ///   - avgVolume_10d
   ///   - avgVolume_90d
+  ///   - beatenQuarterlyEpsEstimationCountTtm
   ///   - beta
+  ///   - dividendFrequency
+  ///   - dividendPayoutRatio
+  ///   - dividendYield
+  ///   - dividendsPerShare
+  ///   - ebitda
+  ///   - ebitdaGrowthYoy
+  ///   - enterpriseValueToEbitda
   ///   - enterpriseValueToSales
+  ///   - epsActual
+  ///   - epsEstimate
+  ///   - epsGrowthFwd
+  ///   - epsGrowthYoy
+  ///   - epsSurprise
+  ///   - exchangeName
+  ///   - impliedVolatility
   ///   - marketCapitalization
-  ///   - monthPriceChange
+  ///   - netDebt
+  ///   - netIncome
+  ///   - priceChange_1m
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceToBookValue
+  ///   - priceToEarningsTtm
+  ///   - priceToSalesTtm
   ///   - profitMargin
-  ///   - quarterlyRevenueGrowthYoy
+  ///   - relativeHistoricalVolatilityAdjustedCurrent
+  ///   - relativeHistoricalVolatilityAdjustedMax_1y
+  ///   - relativeHistoricalVolatilityAdjustedMin_1y
+  ///   - revenueEstimateAvg_0y
+  ///   - revenueGrowthFwd
+  ///   - revenueGrowthYoy
+  ///   - revenuePerShareTtm
+  ///   - revenueTtm
+  ///   - roa
+  ///   - roi
   ///   - sharesFloat
   ///   - sharesOutstanding
   ///   - shortPercentOutstanding
   ///   - shortRatio
   ///   - symbol
   ///   - ticker
-  public init(_and: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, avgVolume_10d: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_90d: Swift.Optional<float8_comparison_exp?> = nil, beta: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToSales: Swift.Optional<float8_comparison_exp?> = nil, marketCapitalization: Swift.Optional<bigint_comparison_exp?> = nil, monthPriceChange: Swift.Optional<float8_comparison_exp?> = nil, profitMargin: Swift.Optional<float8_comparison_exp?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, sharesFloat: Swift.Optional<bigint_comparison_exp?> = nil, sharesOutstanding: Swift.Optional<bigint_comparison_exp?> = nil, shortPercentOutstanding: Swift.Optional<float8_comparison_exp?> = nil, shortRatio: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beta": beta, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_change": monthPriceChange, "profit_margin": profitMargin, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker]
+  ///   - totalAssets
+  ///   - yearsOfConsecutiveDividendGrowth
+  public init(_and: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, addressCity: Swift.Optional<String_comparison_exp?> = nil, addressCounty: Swift.Optional<String_comparison_exp?> = nil, addressFull: Swift.Optional<String_comparison_exp?> = nil, addressState: Swift.Optional<String_comparison_exp?> = nil, assetCashAndEquivalents: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_10d: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_90d: Swift.Optional<float8_comparison_exp?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int_comparison_exp?> = nil, beta: Swift.Optional<float8_comparison_exp?> = nil, dividendFrequency: Swift.Optional<String_comparison_exp?> = nil, dividendPayoutRatio: Swift.Optional<float8_comparison_exp?> = nil, dividendYield: Swift.Optional<float8_comparison_exp?> = nil, dividendsPerShare: Swift.Optional<float8_comparison_exp?> = nil, ebitda: Swift.Optional<float8_comparison_exp?> = nil, ebitdaGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToEbitda: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToSales: Swift.Optional<float8_comparison_exp?> = nil, epsActual: Swift.Optional<float8_comparison_exp?> = nil, epsEstimate: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, epsSurprise: Swift.Optional<float8_comparison_exp?> = nil, exchangeName: Swift.Optional<String_comparison_exp?> = nil, impliedVolatility: Swift.Optional<float8_comparison_exp?> = nil, marketCapitalization: Swift.Optional<bigint_comparison_exp?> = nil, netDebt: Swift.Optional<float8_comparison_exp?> = nil, netIncome: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1y: Swift.Optional<float8_comparison_exp?> = nil, priceChange_3m: Swift.Optional<float8_comparison_exp?> = nil, priceToBookValue: Swift.Optional<float8_comparison_exp?> = nil, priceToEarningsTtm: Swift.Optional<float8_comparison_exp?> = nil, priceToSalesTtm: Swift.Optional<float8_comparison_exp?> = nil, profitMargin: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, revenuePerShareTtm: Swift.Optional<float8_comparison_exp?> = nil, revenueTtm: Swift.Optional<float8_comparison_exp?> = nil, roa: Swift.Optional<float8_comparison_exp?> = nil, roi: Swift.Optional<float8_comparison_exp?> = nil, sharesFloat: Swift.Optional<bigint_comparison_exp?> = nil, sharesOutstanding: Swift.Optional<bigint_comparison_exp?> = nil, shortPercentOutstanding: Swift.Optional<float8_comparison_exp?> = nil, shortRatio: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, totalAssets: Swift.Optional<float8_comparison_exp?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
   }
 
   public var _and: Swift.Optional<[ticker_metrics_bool_exp]?> {
@@ -5059,6 +5110,78 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_current"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_max_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_min_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var addressCity: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["address_city"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_city")
+    }
+  }
+
+  public var addressCounty: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["address_county"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_county")
+    }
+  }
+
+  public var addressFull: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["address_full"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_full")
+    }
+  }
+
+  public var addressState: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["address_state"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_state")
+    }
+  }
+
+  public var assetCashAndEquivalents: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["asset_cash_and_equivalents"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_cash_and_equivalents")
+    }
+  }
+
   public var avgVolume_10d: Swift.Optional<float8_comparison_exp?> {
     get {
       return graphQLMap["avg_volume_10d"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
@@ -5077,12 +5200,84 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["beaten_quarterly_eps_estimation_count_ttm"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "beaten_quarterly_eps_estimation_count_ttm")
+    }
+  }
+
   public var beta: Swift.Optional<float8_comparison_exp?> {
     get {
       return graphQLMap["beta"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "beta")
+    }
+  }
+
+  public var dividendFrequency: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["dividend_frequency"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_frequency")
+    }
+  }
+
+  public var dividendPayoutRatio: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["dividend_payout_ratio"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_payout_ratio")
+    }
+  }
+
+  public var dividendYield: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["dividend_yield"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_yield")
+    }
+  }
+
+  public var dividendsPerShare: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["dividends_per_share"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividends_per_share")
+    }
+  }
+
+  public var ebitda: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["ebitda"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda")
+    }
+  }
+
+  public var ebitdaGrowthYoy: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["ebitda_growth_yoy"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda_growth_yoy")
+    }
+  }
+
+  public var enterpriseValueToEbitda: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["enterprise_value_to_ebitda"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_ebitda")
     }
   }
 
@@ -5095,6 +5290,69 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var epsActual: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["eps_actual"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_actual")
+    }
+  }
+
+  public var epsEstimate: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["eps_estimate"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_estimate")
+    }
+  }
+
+  public var epsGrowthFwd: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["eps_growth_fwd"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_fwd")
+    }
+  }
+
+  public var epsGrowthYoy: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["eps_growth_yoy"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_yoy")
+    }
+  }
+
+  public var epsSurprise: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["eps_surprise"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_surprise")
+    }
+  }
+
+  public var exchangeName: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["exchange_name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_name")
+    }
+  }
+
+  public var impliedVolatility: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["implied_volatility"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "implied_volatility")
+    }
+  }
+
   public var marketCapitalization: Swift.Optional<bigint_comparison_exp?> {
     get {
       return graphQLMap["market_capitalization"] as? Swift.Optional<bigint_comparison_exp?> ?? Swift.Optional<bigint_comparison_exp?>.none
@@ -5104,12 +5362,75 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var monthPriceChange: Swift.Optional<float8_comparison_exp?> {
+  public var netDebt: Swift.Optional<float8_comparison_exp?> {
     get {
-      return graphQLMap["month_price_change"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+      return graphQLMap["net_debt"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "month_price_change")
+      graphQLMap.updateValue(newValue, forKey: "net_debt")
+    }
+  }
+
+  public var netIncome: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["net_income"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_income")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceToBookValue: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_to_book_value"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_book_value")
+    }
+  }
+
+  public var priceToEarningsTtm: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_to_earnings_ttm"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_earnings_ttm")
+    }
+  }
+
+  public var priceToSalesTtm: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_to_sales_ttm"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_sales_ttm")
     }
   }
 
@@ -5122,12 +5443,93 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var quarterlyRevenueGrowthYoy: Swift.Optional<float8_comparison_exp?> {
+  public var relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> {
     get {
-      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+      return graphQLMap["relative_historical_volatility_adjusted_current"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_max_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_min_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var revenueEstimateAvg_0y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["revenue_estimate_avg_0y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_estimate_avg_0y")
+    }
+  }
+
+  public var revenueGrowthFwd: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["revenue_growth_fwd"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_fwd")
+    }
+  }
+
+  public var revenueGrowthYoy: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["revenue_growth_yoy"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_yoy")
+    }
+  }
+
+  public var revenuePerShareTtm: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["revenue_per_share_ttm"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_per_share_ttm")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+
+  public var roa: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["roa"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roa")
+    }
+  }
+
+  public var roi: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["roi"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roi")
     }
   }
 
@@ -5182,6 +5584,24 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "ticker")
+    }
+  }
+
+  public var totalAssets: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["total_assets"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_assets")
+    }
+  }
+
+  public var yearsOfConsecutiveDividendGrowth: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["years_of_consecutive_dividend_growth"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "years_of_consecutive_dividend_growth")
     }
   }
 }
@@ -6562,8 +6982,9 @@ public struct historical_growth_rate_arr_rel_insert_input: GraphQLMapConvertible
 
   /// - Parameters:
   ///   - data
-  public init(data: [historical_growth_rate_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [historical_growth_rate_insert_input], onConflict: Swift.Optional<historical_growth_rate_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [historical_growth_rate_insert_input] {
@@ -6572,6 +6993,16 @@ public struct historical_growth_rate_arr_rel_insert_input: GraphQLMapConvertible
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<historical_growth_rate_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<historical_growth_rate_on_conflict?> ?? Swift.Optional<historical_growth_rate_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -6587,9 +7018,10 @@ public struct historical_growth_rate_insert_input: GraphQLMapConvertible {
   ///   - growthRate_1w
   ///   - growthRate_1y
   ///   - growthRate_3m
+  ///   - id
   ///   - symbol
-  public init(date: Swift.Optional<date?> = nil, growthRate_1d: Swift.Optional<float8?> = nil, growthRate_1m: Swift.Optional<float8?> = nil, growthRate_1w: Swift.Optional<float8?> = nil, growthRate_1y: Swift.Optional<float8?> = nil, growthRate_3m: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil) {
-    graphQLMap = ["date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "symbol": symbol]
+  public init(date: Swift.Optional<date?> = nil, growthRate_1d: Swift.Optional<float8?> = nil, growthRate_1m: Swift.Optional<float8?> = nil, growthRate_1w: Swift.Optional<float8?> = nil, growthRate_1y: Swift.Optional<float8?> = nil, growthRate_3m: Swift.Optional<float8?> = nil, id: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil) {
+    graphQLMap = ["date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "id": id, "symbol": symbol]
   }
 
   public var date: Swift.Optional<date?> {
@@ -6646,6 +7078,15 @@ public struct historical_growth_rate_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var id: Swift.Optional<String?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
   public var symbol: Swift.Optional<String?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
@@ -6653,6 +7094,162 @@ public struct historical_growth_rate_insert_input: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "symbol")
     }
+  }
+}
+
+/// on conflict condition type for table "historical_growth_rate"
+public struct historical_growth_rate_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: historical_growth_rate_constraint, updateColumns: [historical_growth_rate_update_column], `where`: Swift.Optional<historical_growth_rate_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: historical_growth_rate_constraint {
+    get {
+      return graphQLMap["constraint"] as! historical_growth_rate_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [historical_growth_rate_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [historical_growth_rate_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<historical_growth_rate_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<historical_growth_rate_bool_exp?> ?? Swift.Optional<historical_growth_rate_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "historical_growth_rate"
+public enum historical_growth_rate_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case historicalGrowthRateUniqueId
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "historical_growth_rate_unique_id": self = .historicalGrowthRateUniqueId
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .historicalGrowthRateUniqueId: return "historical_growth_rate_unique_id"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: historical_growth_rate_constraint, rhs: historical_growth_rate_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.historicalGrowthRateUniqueId, .historicalGrowthRateUniqueId): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [historical_growth_rate_constraint] {
+    return [
+      .historicalGrowthRateUniqueId,
+    ]
+  }
+}
+
+/// update columns of table "historical_growth_rate"
+public enum historical_growth_rate_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case date
+  /// column name
+  case growthRate_1d
+  /// column name
+  case growthRate_1m
+  /// column name
+  case growthRate_1w
+  /// column name
+  case growthRate_1y
+  /// column name
+  case growthRate_3m
+  /// column name
+  case id
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "date": self = .date
+      case "growth_rate_1d": self = .growthRate_1d
+      case "growth_rate_1m": self = .growthRate_1m
+      case "growth_rate_1w": self = .growthRate_1w
+      case "growth_rate_1y": self = .growthRate_1y
+      case "growth_rate_3m": self = .growthRate_3m
+      case "id": self = .id
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .date: return "date"
+      case .growthRate_1d: return "growth_rate_1d"
+      case .growthRate_1m: return "growth_rate_1m"
+      case .growthRate_1w: return "growth_rate_1w"
+      case .growthRate_1y: return "growth_rate_1y"
+      case .growthRate_3m: return "growth_rate_3m"
+      case .id: return "id"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: historical_growth_rate_update_column, rhs: historical_growth_rate_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.date, .date): return true
+      case (.growthRate_1d, .growthRate_1d): return true
+      case (.growthRate_1m, .growthRate_1m): return true
+      case (.growthRate_1w, .growthRate_1w): return true
+      case (.growthRate_1y, .growthRate_1y): return true
+      case (.growthRate_3m, .growthRate_3m): return true
+      case (.id, .id): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [historical_growth_rate_update_column] {
+    return [
+      .date,
+      .growthRate_1d,
+      .growthRate_1m,
+      .growthRate_1w,
+      .growthRate_1y,
+      .growthRate_3m,
+      .id,
+      .symbol,
+    ]
   }
 }
 
@@ -6697,11 +7294,12 @@ public struct historical_prices_insert_input: GraphQLMapConvertible {
   ///   - code
   ///   - date
   ///   - high
+  ///   - id
   ///   - low
   ///   - open
   ///   - volume
-  public init(adjustedClose: Swift.Optional<float8?> = nil, close: Swift.Optional<float8?> = nil, code: Swift.Optional<String?> = nil, date: Swift.Optional<date?> = nil, high: Swift.Optional<float8?> = nil, low: Swift.Optional<float8?> = nil, `open`: Swift.Optional<float8?> = nil, volume: Swift.Optional<numeric?> = nil) {
-    graphQLMap = ["adjusted_close": adjustedClose, "close": close, "code": code, "date": date, "high": high, "low": low, "open": `open`, "volume": volume]
+  public init(adjustedClose: Swift.Optional<float8?> = nil, close: Swift.Optional<float8?> = nil, code: Swift.Optional<String?> = nil, date: Swift.Optional<date?> = nil, high: Swift.Optional<float8?> = nil, id: Swift.Optional<String?> = nil, low: Swift.Optional<float8?> = nil, `open`: Swift.Optional<float8?> = nil, volume: Swift.Optional<numeric?> = nil) {
+    graphQLMap = ["adjusted_close": adjustedClose, "close": close, "code": code, "date": date, "high": high, "id": id, "low": low, "open": `open`, "volume": volume]
   }
 
   public var adjustedClose: Swift.Optional<float8?> {
@@ -6746,6 +7344,15 @@ public struct historical_prices_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "high")
+    }
+  }
+
+  public var id: Swift.Optional<String?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
     }
   }
 
@@ -6821,27 +7428,42 @@ public struct historical_prices_on_conflict: GraphQLMapConvertible {
 public enum historical_prices_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicHistoricalPricesCodeDate_20211112_232523
+  case historicalPricesUniqueId
+  /// unique or primary key constraint
+  case publicHistoricalPricesCodeDate_20211115_232234
+  /// unique or primary key constraint
+  case publicHistoricalPricesCodeDate_20211116_072306
+  /// unique or primary key constraint
+  case publicHistoricalPricesCodeDate_20211116_114423
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_historical_prices_code__date_20211112_232523": self = .publicHistoricalPricesCodeDate_20211112_232523
+      case "historical_prices_unique_id": self = .historicalPricesUniqueId
+      case "public_historical_prices_code__date_20211115_232234": self = .publicHistoricalPricesCodeDate_20211115_232234
+      case "public_historical_prices_code__date_20211116_072306": self = .publicHistoricalPricesCodeDate_20211116_072306
+      case "public_historical_prices_code__date_20211116_114423": self = .publicHistoricalPricesCodeDate_20211116_114423
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicHistoricalPricesCodeDate_20211112_232523: return "public_historical_prices_code__date_20211112_232523"
+      case .historicalPricesUniqueId: return "historical_prices_unique_id"
+      case .publicHistoricalPricesCodeDate_20211115_232234: return "public_historical_prices_code__date_20211115_232234"
+      case .publicHistoricalPricesCodeDate_20211116_072306: return "public_historical_prices_code__date_20211116_072306"
+      case .publicHistoricalPricesCodeDate_20211116_114423: return "public_historical_prices_code__date_20211116_114423"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: historical_prices_constraint, rhs: historical_prices_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicHistoricalPricesCodeDate_20211112_232523, .publicHistoricalPricesCodeDate_20211112_232523): return true
+      case (.historicalPricesUniqueId, .historicalPricesUniqueId): return true
+      case (.publicHistoricalPricesCodeDate_20211115_232234, .publicHistoricalPricesCodeDate_20211115_232234): return true
+      case (.publicHistoricalPricesCodeDate_20211116_072306, .publicHistoricalPricesCodeDate_20211116_072306): return true
+      case (.publicHistoricalPricesCodeDate_20211116_114423, .publicHistoricalPricesCodeDate_20211116_114423): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -6849,7 +7471,10 @@ public enum historical_prices_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [historical_prices_constraint] {
     return [
-      .publicHistoricalPricesCodeDate_20211112_232523,
+      .historicalPricesUniqueId,
+      .publicHistoricalPricesCodeDate_20211115_232234,
+      .publicHistoricalPricesCodeDate_20211116_072306,
+      .publicHistoricalPricesCodeDate_20211116_114423,
     ]
   }
 }
@@ -6868,6 +7493,8 @@ public enum historical_prices_update_column: RawRepresentable, Equatable, Hashab
   /// column name
   case high
   /// column name
+  case id
+  /// column name
   case low
   /// column name
   case `open`
@@ -6883,6 +7510,7 @@ public enum historical_prices_update_column: RawRepresentable, Equatable, Hashab
       case "code": self = .code
       case "date": self = .date
       case "high": self = .high
+      case "id": self = .id
       case "low": self = .low
       case "open": self = .open
       case "volume": self = .volume
@@ -6897,6 +7525,7 @@ public enum historical_prices_update_column: RawRepresentable, Equatable, Hashab
       case .code: return "code"
       case .date: return "date"
       case .high: return "high"
+      case .id: return "id"
       case .low: return "low"
       case .open: return "open"
       case .volume: return "volume"
@@ -6911,6 +7540,7 @@ public enum historical_prices_update_column: RawRepresentable, Equatable, Hashab
       case (.code, .code): return true
       case (.date, .date): return true
       case (.high, .high): return true
+      case (.id, .id): return true
       case (.low, .low): return true
       case (.open, .open): return true
       case (.volume, .volume): return true
@@ -6926,6 +7556,7 @@ public enum historical_prices_update_column: RawRepresentable, Equatable, Hashab
       .code,
       .date,
       .high,
+      .id,
       .low,
       .open,
       .volume,
@@ -7538,27 +8169,27 @@ public struct ticker_categories_on_conflict: GraphQLMapConvertible {
 public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerCategoriesSymbolCategoryId_20211112_232523
+  case publicTickerCategoriesSymbolCategoryId_20211116_114423
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_categories_symbol__category_id_20211112_232523": self = .publicTickerCategoriesSymbolCategoryId_20211112_232523
+      case "public_ticker_categories_symbol__category_id_20211116_114423": self = .publicTickerCategoriesSymbolCategoryId_20211116_114423
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerCategoriesSymbolCategoryId_20211112_232523: return "public_ticker_categories_symbol__category_id_20211112_232523"
+      case .publicTickerCategoriesSymbolCategoryId_20211116_114423: return "public_ticker_categories_symbol__category_id_20211116_114423"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_categories_constraint, rhs: ticker_categories_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerCategoriesSymbolCategoryId_20211112_232523, .publicTickerCategoriesSymbolCategoryId_20211112_232523): return true
+      case (.publicTickerCategoriesSymbolCategoryId_20211116_114423, .publicTickerCategoriesSymbolCategoryId_20211116_114423): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -7566,7 +8197,7 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_categories_constraint] {
     return [
-      .publicTickerCategoriesSymbolCategoryId_20211112_232523,
+      .publicTickerCategoriesSymbolCategoryId_20211116_114423,
     ]
   }
 }
@@ -7839,27 +8470,27 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerEventsSymbol_20211112_232523
+  case publicTickerEventsSymbol_20211116_114423
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_events_symbol_20211112_232523": self = .publicTickerEventsSymbol_20211112_232523
+      case "public_ticker_events_symbol_20211116_114423": self = .publicTickerEventsSymbol_20211116_114423
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerEventsSymbol_20211112_232523: return "public_ticker_events_symbol_20211112_232523"
+      case .publicTickerEventsSymbol_20211116_114423: return "public_ticker_events_symbol_20211116_114423"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_events_constraint, rhs: ticker_events_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerEventsSymbol_20211112_232523, .publicTickerEventsSymbol_20211112_232523): return true
+      case (.publicTickerEventsSymbol_20211116_114423, .publicTickerEventsSymbol_20211116_114423): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -7867,7 +8498,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static var allCases: [ticker_events_constraint] {
     return [
-      .publicTickerEventsSymbol_20211112_232523,
+      .publicTickerEventsSymbol_20211116_114423,
     ]
   }
 }
@@ -8844,8 +9475,9 @@ public struct industry_stats_daily_arr_rel_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - data
-  public init(data: [industry_stats_daily_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [industry_stats_daily_insert_input], onConflict: Swift.Optional<industry_stats_daily_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [industry_stats_daily_insert_input] {
@@ -8856,6 +9488,16 @@ public struct industry_stats_daily_arr_rel_insert_input: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "data")
     }
   }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<industry_stats_daily_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<industry_stats_daily_on_conflict?> ?? Swift.Optional<industry_stats_daily_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
 }
 
 /// input type for inserting data into table "industry_stats_daily"
@@ -8864,6 +9506,7 @@ public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - date
+  ///   - id
   ///   - industryId
   ///   - medianGrowthRate_1d
   ///   - medianGrowthRate_1m
@@ -8871,8 +9514,8 @@ public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
   ///   - medianGrowthRate_1y
   ///   - medianGrowthRate_3m
   ///   - medianPrice
-  public init(date: Swift.Optional<timestamp?> = nil, industryId: Swift.Optional<Int?> = nil, medianGrowthRate_1d: Swift.Optional<float8?> = nil, medianGrowthRate_1m: Swift.Optional<float8?> = nil, medianGrowthRate_1w: Swift.Optional<float8?> = nil, medianGrowthRate_1y: Swift.Optional<float8?> = nil, medianGrowthRate_3m: Swift.Optional<float8?> = nil, medianPrice: Swift.Optional<float8?> = nil) {
-    graphQLMap = ["date": date, "industry_id": industryId, "median_growth_rate_1d": medianGrowthRate_1d, "median_growth_rate_1m": medianGrowthRate_1m, "median_growth_rate_1w": medianGrowthRate_1w, "median_growth_rate_1y": medianGrowthRate_1y, "median_growth_rate_3m": medianGrowthRate_3m, "median_price": medianPrice]
+  public init(date: Swift.Optional<timestamp?> = nil, id: Swift.Optional<String?> = nil, industryId: Swift.Optional<Int?> = nil, medianGrowthRate_1d: Swift.Optional<float8?> = nil, medianGrowthRate_1m: Swift.Optional<float8?> = nil, medianGrowthRate_1w: Swift.Optional<float8?> = nil, medianGrowthRate_1y: Swift.Optional<float8?> = nil, medianGrowthRate_3m: Swift.Optional<float8?> = nil, medianPrice: Swift.Optional<float8?> = nil) {
+    graphQLMap = ["date": date, "id": id, "industry_id": industryId, "median_growth_rate_1d": medianGrowthRate_1d, "median_growth_rate_1m": medianGrowthRate_1m, "median_growth_rate_1w": medianGrowthRate_1w, "median_growth_rate_1y": medianGrowthRate_1y, "median_growth_rate_3m": medianGrowthRate_3m, "median_price": medianPrice]
   }
 
   public var date: Swift.Optional<timestamp?> {
@@ -8881,6 +9524,15 @@ public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var id: Swift.Optional<String?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
     }
   }
 
@@ -8945,6 +9597,168 @@ public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "median_price")
     }
+  }
+}
+
+/// on conflict condition type for table "industry_stats_daily"
+public struct industry_stats_daily_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: industry_stats_daily_constraint, updateColumns: [industry_stats_daily_update_column], `where`: Swift.Optional<industry_stats_daily_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: industry_stats_daily_constraint {
+    get {
+      return graphQLMap["constraint"] as! industry_stats_daily_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [industry_stats_daily_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [industry_stats_daily_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<industry_stats_daily_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<industry_stats_daily_bool_exp?> ?? Swift.Optional<industry_stats_daily_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "industry_stats_daily"
+public enum industry_stats_daily_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case industryStatsDailyUniqueId
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "industry_stats_daily_unique_id": self = .industryStatsDailyUniqueId
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .industryStatsDailyUniqueId: return "industry_stats_daily_unique_id"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: industry_stats_daily_constraint, rhs: industry_stats_daily_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.industryStatsDailyUniqueId, .industryStatsDailyUniqueId): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [industry_stats_daily_constraint] {
+    return [
+      .industryStatsDailyUniqueId,
+    ]
+  }
+}
+
+/// update columns of table "industry_stats_daily"
+public enum industry_stats_daily_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case date
+  /// column name
+  case id
+  /// column name
+  case industryId
+  /// column name
+  case medianGrowthRate_1d
+  /// column name
+  case medianGrowthRate_1m
+  /// column name
+  case medianGrowthRate_1w
+  /// column name
+  case medianGrowthRate_1y
+  /// column name
+  case medianGrowthRate_3m
+  /// column name
+  case medianPrice
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "date": self = .date
+      case "id": self = .id
+      case "industry_id": self = .industryId
+      case "median_growth_rate_1d": self = .medianGrowthRate_1d
+      case "median_growth_rate_1m": self = .medianGrowthRate_1m
+      case "median_growth_rate_1w": self = .medianGrowthRate_1w
+      case "median_growth_rate_1y": self = .medianGrowthRate_1y
+      case "median_growth_rate_3m": self = .medianGrowthRate_3m
+      case "median_price": self = .medianPrice
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .date: return "date"
+      case .id: return "id"
+      case .industryId: return "industry_id"
+      case .medianGrowthRate_1d: return "median_growth_rate_1d"
+      case .medianGrowthRate_1m: return "median_growth_rate_1m"
+      case .medianGrowthRate_1w: return "median_growth_rate_1w"
+      case .medianGrowthRate_1y: return "median_growth_rate_1y"
+      case .medianGrowthRate_3m: return "median_growth_rate_3m"
+      case .medianPrice: return "median_price"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: industry_stats_daily_update_column, rhs: industry_stats_daily_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.date, .date): return true
+      case (.id, .id): return true
+      case (.industryId, .industryId): return true
+      case (.medianGrowthRate_1d, .medianGrowthRate_1d): return true
+      case (.medianGrowthRate_1m, .medianGrowthRate_1m): return true
+      case (.medianGrowthRate_1w, .medianGrowthRate_1w): return true
+      case (.medianGrowthRate_1y, .medianGrowthRate_1y): return true
+      case (.medianGrowthRate_3m, .medianGrowthRate_3m): return true
+      case (.medianPrice, .medianPrice): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [industry_stats_daily_update_column] {
+    return [
+      .date,
+      .id,
+      .industryId,
+      .medianGrowthRate_1d,
+      .medianGrowthRate_1m,
+      .medianGrowthRate_1w,
+      .medianGrowthRate_1y,
+      .medianGrowthRate_3m,
+      .medianPrice,
+    ]
   }
 }
 
@@ -9328,27 +10142,27 @@ public struct ticker_industries_on_conflict: GraphQLMapConvertible {
 public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerIndustriesIndustryIdSymbol_20211112_232523
+  case publicTickerIndustriesIndustryIdSymbol_20211116_114423
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_industries_industry_id__symbol_20211112_232523": self = .publicTickerIndustriesIndustryIdSymbol_20211112_232523
+      case "public_ticker_industries_industry_id__symbol_20211116_114423": self = .publicTickerIndustriesIndustryIdSymbol_20211116_114423
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerIndustriesIndustryIdSymbol_20211112_232523: return "public_ticker_industries_industry_id__symbol_20211112_232523"
+      case .publicTickerIndustriesIndustryIdSymbol_20211116_114423: return "public_ticker_industries_industry_id__symbol_20211116_114423"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_industries_constraint, rhs: ticker_industries_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerIndustriesIndustryIdSymbol_20211112_232523, .publicTickerIndustriesIndustryIdSymbol_20211112_232523): return true
+      case (.publicTickerIndustriesIndustryIdSymbol_20211116_114423, .publicTickerIndustriesIndustryIdSymbol_20211116_114423): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -9356,7 +10170,7 @@ public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_industries_constraint] {
     return [
-      .publicTickerIndustriesIndustryIdSymbol_20211112_232523,
+      .publicTickerIndustriesIndustryIdSymbol_20211116_114423,
     ]
   }
 }
@@ -9752,27 +10566,27 @@ public struct ticker_interests_on_conflict: GraphQLMapConvertible {
 public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerInterestsSymbolInterestId_20211112_232523
+  case publicTickerInterestsSymbolInterestId_20211116_114423
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_interests_symbol__interest_id_20211112_232523": self = .publicTickerInterestsSymbolInterestId_20211112_232523
+      case "public_ticker_interests_symbol__interest_id_20211116_114423": self = .publicTickerInterestsSymbolInterestId_20211116_114423
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerInterestsSymbolInterestId_20211112_232523: return "public_ticker_interests_symbol__interest_id_20211112_232523"
+      case .publicTickerInterestsSymbolInterestId_20211116_114423: return "public_ticker_interests_symbol__interest_id_20211116_114423"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_interests_constraint, rhs: ticker_interests_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerInterestsSymbolInterestId_20211112_232523, .publicTickerInterestsSymbolInterestId_20211112_232523): return true
+      case (.publicTickerInterestsSymbolInterestId_20211116_114423, .publicTickerInterestsSymbolInterestId_20211116_114423): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -9780,7 +10594,7 @@ public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, 
 
   public static var allCases: [ticker_interests_constraint] {
     return [
-      .publicTickerInterestsSymbolInterestId_20211112_232523,
+      .publicTickerInterestsSymbolInterestId_20211116_114423,
     ]
   }
 }
@@ -9864,22 +10678,135 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
+  ///   - absoluteHistoricalVolatilityAdjustedCurrent
+  ///   - absoluteHistoricalVolatilityAdjustedMax_1y
+  ///   - absoluteHistoricalVolatilityAdjustedMin_1y
+  ///   - addressCity
+  ///   - addressCounty
+  ///   - addressFull
+  ///   - addressState
+  ///   - assetCashAndEquivalents
   ///   - avgVolume_10d
   ///   - avgVolume_90d
+  ///   - beatenQuarterlyEpsEstimationCountTtm
   ///   - beta
+  ///   - dividendFrequency
+  ///   - dividendPayoutRatio
+  ///   - dividendYield
+  ///   - dividendsPerShare
+  ///   - ebitda
+  ///   - ebitdaGrowthYoy
+  ///   - enterpriseValueToEbitda
   ///   - enterpriseValueToSales
+  ///   - epsActual
+  ///   - epsEstimate
+  ///   - epsGrowthFwd
+  ///   - epsGrowthYoy
+  ///   - epsSurprise
+  ///   - exchangeName
+  ///   - impliedVolatility
   ///   - marketCapitalization
-  ///   - monthPriceChange
+  ///   - netDebt
+  ///   - netIncome
+  ///   - priceChange_1m
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceToBookValue
+  ///   - priceToEarningsTtm
+  ///   - priceToSalesTtm
   ///   - profitMargin
-  ///   - quarterlyRevenueGrowthYoy
+  ///   - relativeHistoricalVolatilityAdjustedCurrent
+  ///   - relativeHistoricalVolatilityAdjustedMax_1y
+  ///   - relativeHistoricalVolatilityAdjustedMin_1y
+  ///   - revenueEstimateAvg_0y
+  ///   - revenueGrowthFwd
+  ///   - revenueGrowthYoy
+  ///   - revenuePerShareTtm
+  ///   - revenueTtm
+  ///   - roa
+  ///   - roi
   ///   - sharesFloat
   ///   - sharesOutstanding
   ///   - shortPercentOutstanding
   ///   - shortRatio
   ///   - symbol
   ///   - ticker
-  public init(avgVolume_10d: Swift.Optional<float8?> = nil, avgVolume_90d: Swift.Optional<float8?> = nil, beta: Swift.Optional<float8?> = nil, enterpriseValueToSales: Swift.Optional<float8?> = nil, marketCapitalization: Swift.Optional<bigint?> = nil, monthPriceChange: Swift.Optional<float8?> = nil, profitMargin: Swift.Optional<float8?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<float8?> = nil, sharesFloat: Swift.Optional<bigint?> = nil, sharesOutstanding: Swift.Optional<bigint?> = nil, shortPercentOutstanding: Swift.Optional<float8?> = nil, shortRatio: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil) {
-    graphQLMap = ["avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beta": beta, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_change": monthPriceChange, "profit_margin": profitMargin, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker]
+  ///   - totalAssets
+  ///   - yearsOfConsecutiveDividendGrowth
+  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, addressCity: Swift.Optional<String?> = nil, addressCounty: Swift.Optional<String?> = nil, addressFull: Swift.Optional<String?> = nil, addressState: Swift.Optional<String?> = nil, assetCashAndEquivalents: Swift.Optional<float8?> = nil, avgVolume_10d: Swift.Optional<float8?> = nil, avgVolume_90d: Swift.Optional<float8?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int?> = nil, beta: Swift.Optional<float8?> = nil, dividendFrequency: Swift.Optional<String?> = nil, dividendPayoutRatio: Swift.Optional<float8?> = nil, dividendYield: Swift.Optional<float8?> = nil, dividendsPerShare: Swift.Optional<float8?> = nil, ebitda: Swift.Optional<float8?> = nil, ebitdaGrowthYoy: Swift.Optional<float8?> = nil, enterpriseValueToEbitda: Swift.Optional<float8?> = nil, enterpriseValueToSales: Swift.Optional<float8?> = nil, epsActual: Swift.Optional<float8?> = nil, epsEstimate: Swift.Optional<float8?> = nil, epsGrowthFwd: Swift.Optional<float8?> = nil, epsGrowthYoy: Swift.Optional<float8?> = nil, epsSurprise: Swift.Optional<float8?> = nil, exchangeName: Swift.Optional<String?> = nil, impliedVolatility: Swift.Optional<float8?> = nil, marketCapitalization: Swift.Optional<bigint?> = nil, netDebt: Swift.Optional<float8?> = nil, netIncome: Swift.Optional<float8?> = nil, priceChange_1m: Swift.Optional<float8?> = nil, priceChange_1y: Swift.Optional<float8?> = nil, priceChange_3m: Swift.Optional<float8?> = nil, priceToBookValue: Swift.Optional<float8?> = nil, priceToEarningsTtm: Swift.Optional<float8?> = nil, priceToSalesTtm: Swift.Optional<float8?> = nil, profitMargin: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8?> = nil, revenueGrowthFwd: Swift.Optional<float8?> = nil, revenueGrowthYoy: Swift.Optional<float8?> = nil, revenuePerShareTtm: Swift.Optional<float8?> = nil, revenueTtm: Swift.Optional<float8?> = nil, roa: Swift.Optional<float8?> = nil, roi: Swift.Optional<float8?> = nil, sharesFloat: Swift.Optional<bigint?> = nil, sharesOutstanding: Swift.Optional<bigint?> = nil, shortPercentOutstanding: Swift.Optional<float8?> = nil, shortRatio: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, totalAssets: Swift.Optional<float8?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int?> = nil) {
+    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_current"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_max_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_min_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var addressCity: Swift.Optional<String?> {
+    get {
+      return graphQLMap["address_city"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_city")
+    }
+  }
+
+  public var addressCounty: Swift.Optional<String?> {
+    get {
+      return graphQLMap["address_county"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_county")
+    }
+  }
+
+  public var addressFull: Swift.Optional<String?> {
+    get {
+      return graphQLMap["address_full"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_full")
+    }
+  }
+
+  public var addressState: Swift.Optional<String?> {
+    get {
+      return graphQLMap["address_state"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_state")
+    }
+  }
+
+  public var assetCashAndEquivalents: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["asset_cash_and_equivalents"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_cash_and_equivalents")
+    }
   }
 
   public var avgVolume_10d: Swift.Optional<float8?> {
@@ -9900,12 +10827,84 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["beaten_quarterly_eps_estimation_count_ttm"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "beaten_quarterly_eps_estimation_count_ttm")
+    }
+  }
+
   public var beta: Swift.Optional<float8?> {
     get {
       return graphQLMap["beta"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "beta")
+    }
+  }
+
+  public var dividendFrequency: Swift.Optional<String?> {
+    get {
+      return graphQLMap["dividend_frequency"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_frequency")
+    }
+  }
+
+  public var dividendPayoutRatio: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["dividend_payout_ratio"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_payout_ratio")
+    }
+  }
+
+  public var dividendYield: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["dividend_yield"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_yield")
+    }
+  }
+
+  public var dividendsPerShare: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["dividends_per_share"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividends_per_share")
+    }
+  }
+
+  public var ebitda: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["ebitda"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda")
+    }
+  }
+
+  public var ebitdaGrowthYoy: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["ebitda_growth_yoy"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda_growth_yoy")
+    }
+  }
+
+  public var enterpriseValueToEbitda: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["enterprise_value_to_ebitda"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_ebitda")
     }
   }
 
@@ -9918,6 +10917,69 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var epsActual: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["eps_actual"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_actual")
+    }
+  }
+
+  public var epsEstimate: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["eps_estimate"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_estimate")
+    }
+  }
+
+  public var epsGrowthFwd: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["eps_growth_fwd"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_fwd")
+    }
+  }
+
+  public var epsGrowthYoy: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["eps_growth_yoy"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_yoy")
+    }
+  }
+
+  public var epsSurprise: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["eps_surprise"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_surprise")
+    }
+  }
+
+  public var exchangeName: Swift.Optional<String?> {
+    get {
+      return graphQLMap["exchange_name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_name")
+    }
+  }
+
+  public var impliedVolatility: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["implied_volatility"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "implied_volatility")
+    }
+  }
+
   public var marketCapitalization: Swift.Optional<bigint?> {
     get {
       return graphQLMap["market_capitalization"] as? Swift.Optional<bigint?> ?? Swift.Optional<bigint?>.none
@@ -9927,12 +10989,75 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var monthPriceChange: Swift.Optional<float8?> {
+  public var netDebt: Swift.Optional<float8?> {
     get {
-      return graphQLMap["month_price_change"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+      return graphQLMap["net_debt"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "month_price_change")
+      graphQLMap.updateValue(newValue, forKey: "net_debt")
+    }
+  }
+
+  public var netIncome: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["net_income"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_income")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceToBookValue: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_to_book_value"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_book_value")
+    }
+  }
+
+  public var priceToEarningsTtm: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_to_earnings_ttm"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_earnings_ttm")
+    }
+  }
+
+  public var priceToSalesTtm: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_to_sales_ttm"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_sales_ttm")
     }
   }
 
@@ -9945,12 +11070,93 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var quarterlyRevenueGrowthYoy: Swift.Optional<float8?> {
+  public var relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> {
     get {
-      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+      return graphQLMap["relative_historical_volatility_adjusted_current"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_max_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_min_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var revenueEstimateAvg_0y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["revenue_estimate_avg_0y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_estimate_avg_0y")
+    }
+  }
+
+  public var revenueGrowthFwd: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["revenue_growth_fwd"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_fwd")
+    }
+  }
+
+  public var revenueGrowthYoy: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["revenue_growth_yoy"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_yoy")
+    }
+  }
+
+  public var revenuePerShareTtm: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["revenue_per_share_ttm"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_per_share_ttm")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+
+  public var roa: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["roa"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roa")
+    }
+  }
+
+  public var roi: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["roi"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roi")
     }
   }
 
@@ -10005,6 +11211,24 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "ticker")
+    }
+  }
+
+  public var totalAssets: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["total_assets"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_assets")
+    }
+  }
+
+  public var yearsOfConsecutiveDividendGrowth: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["years_of_consecutive_dividend_growth"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "years_of_consecutive_dividend_growth")
     }
   }
 }
@@ -10090,21 +11314,99 @@ public enum ticker_metrics_constraint: RawRepresentable, Equatable, Hashable, Ca
 public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
+  case absoluteHistoricalVolatilityAdjustedCurrent
+  /// column name
+  case absoluteHistoricalVolatilityAdjustedMax_1y
+  /// column name
+  case absoluteHistoricalVolatilityAdjustedMin_1y
+  /// column name
+  case addressCity
+  /// column name
+  case addressCounty
+  /// column name
+  case addressFull
+  /// column name
+  case addressState
+  /// column name
+  case assetCashAndEquivalents
+  /// column name
   case avgVolume_10d
   /// column name
   case avgVolume_90d
   /// column name
+  case beatenQuarterlyEpsEstimationCountTtm
+  /// column name
   case beta
+  /// column name
+  case dividendFrequency
+  /// column name
+  case dividendPayoutRatio
+  /// column name
+  case dividendYield
+  /// column name
+  case dividendsPerShare
+  /// column name
+  case ebitda
+  /// column name
+  case ebitdaGrowthYoy
+  /// column name
+  case enterpriseValueToEbitda
   /// column name
   case enterpriseValueToSales
   /// column name
+  case epsActual
+  /// column name
+  case epsEstimate
+  /// column name
+  case epsGrowthFwd
+  /// column name
+  case epsGrowthYoy
+  /// column name
+  case epsSurprise
+  /// column name
+  case exchangeName
+  /// column name
+  case impliedVolatility
+  /// column name
   case marketCapitalization
   /// column name
-  case monthPriceChange
+  case netDebt
+  /// column name
+  case netIncome
+  /// column name
+  case priceChange_1m
+  /// column name
+  case priceChange_1y
+  /// column name
+  case priceChange_3m
+  /// column name
+  case priceToBookValue
+  /// column name
+  case priceToEarningsTtm
+  /// column name
+  case priceToSalesTtm
   /// column name
   case profitMargin
   /// column name
-  case quarterlyRevenueGrowthYoy
+  case relativeHistoricalVolatilityAdjustedCurrent
+  /// column name
+  case relativeHistoricalVolatilityAdjustedMax_1y
+  /// column name
+  case relativeHistoricalVolatilityAdjustedMin_1y
+  /// column name
+  case revenueEstimateAvg_0y
+  /// column name
+  case revenueGrowthFwd
+  /// column name
+  case revenueGrowthYoy
+  /// column name
+  case revenuePerShareTtm
+  /// column name
+  case revenueTtm
+  /// column name
+  case roa
+  /// column name
+  case roi
   /// column name
   case sharesFloat
   /// column name
@@ -10115,62 +11417,189 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
   case shortRatio
   /// column name
   case symbol
+  /// column name
+  case totalAssets
+  /// column name
+  case yearsOfConsecutiveDividendGrowth
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
+      case "absolute_historical_volatility_adjusted_current": self = .absoluteHistoricalVolatilityAdjustedCurrent
+      case "absolute_historical_volatility_adjusted_max_1y": self = .absoluteHistoricalVolatilityAdjustedMax_1y
+      case "absolute_historical_volatility_adjusted_min_1y": self = .absoluteHistoricalVolatilityAdjustedMin_1y
+      case "address_city": self = .addressCity
+      case "address_county": self = .addressCounty
+      case "address_full": self = .addressFull
+      case "address_state": self = .addressState
+      case "asset_cash_and_equivalents": self = .assetCashAndEquivalents
       case "avg_volume_10d": self = .avgVolume_10d
       case "avg_volume_90d": self = .avgVolume_90d
+      case "beaten_quarterly_eps_estimation_count_ttm": self = .beatenQuarterlyEpsEstimationCountTtm
       case "beta": self = .beta
+      case "dividend_frequency": self = .dividendFrequency
+      case "dividend_payout_ratio": self = .dividendPayoutRatio
+      case "dividend_yield": self = .dividendYield
+      case "dividends_per_share": self = .dividendsPerShare
+      case "ebitda": self = .ebitda
+      case "ebitda_growth_yoy": self = .ebitdaGrowthYoy
+      case "enterprise_value_to_ebitda": self = .enterpriseValueToEbitda
       case "enterprise_value_to_sales": self = .enterpriseValueToSales
+      case "eps_actual": self = .epsActual
+      case "eps_estimate": self = .epsEstimate
+      case "eps_growth_fwd": self = .epsGrowthFwd
+      case "eps_growth_yoy": self = .epsGrowthYoy
+      case "eps_surprise": self = .epsSurprise
+      case "exchange_name": self = .exchangeName
+      case "implied_volatility": self = .impliedVolatility
       case "market_capitalization": self = .marketCapitalization
-      case "month_price_change": self = .monthPriceChange
+      case "net_debt": self = .netDebt
+      case "net_income": self = .netIncome
+      case "price_change_1m": self = .priceChange_1m
+      case "price_change_1y": self = .priceChange_1y
+      case "price_change_3m": self = .priceChange_3m
+      case "price_to_book_value": self = .priceToBookValue
+      case "price_to_earnings_ttm": self = .priceToEarningsTtm
+      case "price_to_sales_ttm": self = .priceToSalesTtm
       case "profit_margin": self = .profitMargin
-      case "quarterly_revenue_growth_yoy": self = .quarterlyRevenueGrowthYoy
+      case "relative_historical_volatility_adjusted_current": self = .relativeHistoricalVolatilityAdjustedCurrent
+      case "relative_historical_volatility_adjusted_max_1y": self = .relativeHistoricalVolatilityAdjustedMax_1y
+      case "relative_historical_volatility_adjusted_min_1y": self = .relativeHistoricalVolatilityAdjustedMin_1y
+      case "revenue_estimate_avg_0y": self = .revenueEstimateAvg_0y
+      case "revenue_growth_fwd": self = .revenueGrowthFwd
+      case "revenue_growth_yoy": self = .revenueGrowthYoy
+      case "revenue_per_share_ttm": self = .revenuePerShareTtm
+      case "revenue_ttm": self = .revenueTtm
+      case "roa": self = .roa
+      case "roi": self = .roi
       case "shares_float": self = .sharesFloat
       case "shares_outstanding": self = .sharesOutstanding
       case "short_percent_outstanding": self = .shortPercentOutstanding
       case "short_ratio": self = .shortRatio
       case "symbol": self = .symbol
+      case "total_assets": self = .totalAssets
+      case "years_of_consecutive_dividend_growth": self = .yearsOfConsecutiveDividendGrowth
       default: self = .__unknown(rawValue)
     }
   }
 
   public var rawValue: RawValue {
     switch self {
+      case .absoluteHistoricalVolatilityAdjustedCurrent: return "absolute_historical_volatility_adjusted_current"
+      case .absoluteHistoricalVolatilityAdjustedMax_1y: return "absolute_historical_volatility_adjusted_max_1y"
+      case .absoluteHistoricalVolatilityAdjustedMin_1y: return "absolute_historical_volatility_adjusted_min_1y"
+      case .addressCity: return "address_city"
+      case .addressCounty: return "address_county"
+      case .addressFull: return "address_full"
+      case .addressState: return "address_state"
+      case .assetCashAndEquivalents: return "asset_cash_and_equivalents"
       case .avgVolume_10d: return "avg_volume_10d"
       case .avgVolume_90d: return "avg_volume_90d"
+      case .beatenQuarterlyEpsEstimationCountTtm: return "beaten_quarterly_eps_estimation_count_ttm"
       case .beta: return "beta"
+      case .dividendFrequency: return "dividend_frequency"
+      case .dividendPayoutRatio: return "dividend_payout_ratio"
+      case .dividendYield: return "dividend_yield"
+      case .dividendsPerShare: return "dividends_per_share"
+      case .ebitda: return "ebitda"
+      case .ebitdaGrowthYoy: return "ebitda_growth_yoy"
+      case .enterpriseValueToEbitda: return "enterprise_value_to_ebitda"
       case .enterpriseValueToSales: return "enterprise_value_to_sales"
+      case .epsActual: return "eps_actual"
+      case .epsEstimate: return "eps_estimate"
+      case .epsGrowthFwd: return "eps_growth_fwd"
+      case .epsGrowthYoy: return "eps_growth_yoy"
+      case .epsSurprise: return "eps_surprise"
+      case .exchangeName: return "exchange_name"
+      case .impliedVolatility: return "implied_volatility"
       case .marketCapitalization: return "market_capitalization"
-      case .monthPriceChange: return "month_price_change"
+      case .netDebt: return "net_debt"
+      case .netIncome: return "net_income"
+      case .priceChange_1m: return "price_change_1m"
+      case .priceChange_1y: return "price_change_1y"
+      case .priceChange_3m: return "price_change_3m"
+      case .priceToBookValue: return "price_to_book_value"
+      case .priceToEarningsTtm: return "price_to_earnings_ttm"
+      case .priceToSalesTtm: return "price_to_sales_ttm"
       case .profitMargin: return "profit_margin"
-      case .quarterlyRevenueGrowthYoy: return "quarterly_revenue_growth_yoy"
+      case .relativeHistoricalVolatilityAdjustedCurrent: return "relative_historical_volatility_adjusted_current"
+      case .relativeHistoricalVolatilityAdjustedMax_1y: return "relative_historical_volatility_adjusted_max_1y"
+      case .relativeHistoricalVolatilityAdjustedMin_1y: return "relative_historical_volatility_adjusted_min_1y"
+      case .revenueEstimateAvg_0y: return "revenue_estimate_avg_0y"
+      case .revenueGrowthFwd: return "revenue_growth_fwd"
+      case .revenueGrowthYoy: return "revenue_growth_yoy"
+      case .revenuePerShareTtm: return "revenue_per_share_ttm"
+      case .revenueTtm: return "revenue_ttm"
+      case .roa: return "roa"
+      case .roi: return "roi"
       case .sharesFloat: return "shares_float"
       case .sharesOutstanding: return "shares_outstanding"
       case .shortPercentOutstanding: return "short_percent_outstanding"
       case .shortRatio: return "short_ratio"
       case .symbol: return "symbol"
+      case .totalAssets: return "total_assets"
+      case .yearsOfConsecutiveDividendGrowth: return "years_of_consecutive_dividend_growth"
       case .__unknown(let value): return value
     }
   }
 
   public static func == (lhs: ticker_metrics_update_column, rhs: ticker_metrics_update_column) -> Bool {
     switch (lhs, rhs) {
+      case (.absoluteHistoricalVolatilityAdjustedCurrent, .absoluteHistoricalVolatilityAdjustedCurrent): return true
+      case (.absoluteHistoricalVolatilityAdjustedMax_1y, .absoluteHistoricalVolatilityAdjustedMax_1y): return true
+      case (.absoluteHistoricalVolatilityAdjustedMin_1y, .absoluteHistoricalVolatilityAdjustedMin_1y): return true
+      case (.addressCity, .addressCity): return true
+      case (.addressCounty, .addressCounty): return true
+      case (.addressFull, .addressFull): return true
+      case (.addressState, .addressState): return true
+      case (.assetCashAndEquivalents, .assetCashAndEquivalents): return true
       case (.avgVolume_10d, .avgVolume_10d): return true
       case (.avgVolume_90d, .avgVolume_90d): return true
+      case (.beatenQuarterlyEpsEstimationCountTtm, .beatenQuarterlyEpsEstimationCountTtm): return true
       case (.beta, .beta): return true
+      case (.dividendFrequency, .dividendFrequency): return true
+      case (.dividendPayoutRatio, .dividendPayoutRatio): return true
+      case (.dividendYield, .dividendYield): return true
+      case (.dividendsPerShare, .dividendsPerShare): return true
+      case (.ebitda, .ebitda): return true
+      case (.ebitdaGrowthYoy, .ebitdaGrowthYoy): return true
+      case (.enterpriseValueToEbitda, .enterpriseValueToEbitda): return true
       case (.enterpriseValueToSales, .enterpriseValueToSales): return true
+      case (.epsActual, .epsActual): return true
+      case (.epsEstimate, .epsEstimate): return true
+      case (.epsGrowthFwd, .epsGrowthFwd): return true
+      case (.epsGrowthYoy, .epsGrowthYoy): return true
+      case (.epsSurprise, .epsSurprise): return true
+      case (.exchangeName, .exchangeName): return true
+      case (.impliedVolatility, .impliedVolatility): return true
       case (.marketCapitalization, .marketCapitalization): return true
-      case (.monthPriceChange, .monthPriceChange): return true
+      case (.netDebt, .netDebt): return true
+      case (.netIncome, .netIncome): return true
+      case (.priceChange_1m, .priceChange_1m): return true
+      case (.priceChange_1y, .priceChange_1y): return true
+      case (.priceChange_3m, .priceChange_3m): return true
+      case (.priceToBookValue, .priceToBookValue): return true
+      case (.priceToEarningsTtm, .priceToEarningsTtm): return true
+      case (.priceToSalesTtm, .priceToSalesTtm): return true
       case (.profitMargin, .profitMargin): return true
-      case (.quarterlyRevenueGrowthYoy, .quarterlyRevenueGrowthYoy): return true
+      case (.relativeHistoricalVolatilityAdjustedCurrent, .relativeHistoricalVolatilityAdjustedCurrent): return true
+      case (.relativeHistoricalVolatilityAdjustedMax_1y, .relativeHistoricalVolatilityAdjustedMax_1y): return true
+      case (.relativeHistoricalVolatilityAdjustedMin_1y, .relativeHistoricalVolatilityAdjustedMin_1y): return true
+      case (.revenueEstimateAvg_0y, .revenueEstimateAvg_0y): return true
+      case (.revenueGrowthFwd, .revenueGrowthFwd): return true
+      case (.revenueGrowthYoy, .revenueGrowthYoy): return true
+      case (.revenuePerShareTtm, .revenuePerShareTtm): return true
+      case (.revenueTtm, .revenueTtm): return true
+      case (.roa, .roa): return true
+      case (.roi, .roi): return true
       case (.sharesFloat, .sharesFloat): return true
       case (.sharesOutstanding, .sharesOutstanding): return true
       case (.shortPercentOutstanding, .shortPercentOutstanding): return true
       case (.shortRatio, .shortRatio): return true
       case (.symbol, .symbol): return true
+      case (.totalAssets, .totalAssets): return true
+      case (.yearsOfConsecutiveDividendGrowth, .yearsOfConsecutiveDividendGrowth): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -10178,19 +11607,60 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_metrics_update_column] {
     return [
+      .absoluteHistoricalVolatilityAdjustedCurrent,
+      .absoluteHistoricalVolatilityAdjustedMax_1y,
+      .absoluteHistoricalVolatilityAdjustedMin_1y,
+      .addressCity,
+      .addressCounty,
+      .addressFull,
+      .addressState,
+      .assetCashAndEquivalents,
       .avgVolume_10d,
       .avgVolume_90d,
+      .beatenQuarterlyEpsEstimationCountTtm,
       .beta,
+      .dividendFrequency,
+      .dividendPayoutRatio,
+      .dividendYield,
+      .dividendsPerShare,
+      .ebitda,
+      .ebitdaGrowthYoy,
+      .enterpriseValueToEbitda,
       .enterpriseValueToSales,
+      .epsActual,
+      .epsEstimate,
+      .epsGrowthFwd,
+      .epsGrowthYoy,
+      .epsSurprise,
+      .exchangeName,
+      .impliedVolatility,
       .marketCapitalization,
-      .monthPriceChange,
+      .netDebt,
+      .netIncome,
+      .priceChange_1m,
+      .priceChange_1y,
+      .priceChange_3m,
+      .priceToBookValue,
+      .priceToEarningsTtm,
+      .priceToSalesTtm,
       .profitMargin,
-      .quarterlyRevenueGrowthYoy,
+      .relativeHistoricalVolatilityAdjustedCurrent,
+      .relativeHistoricalVolatilityAdjustedMax_1y,
+      .relativeHistoricalVolatilityAdjustedMin_1y,
+      .revenueEstimateAvg_0y,
+      .revenueGrowthFwd,
+      .revenueGrowthYoy,
+      .revenuePerShareTtm,
+      .revenueTtm,
+      .roa,
+      .roi,
       .sharesFloat,
       .sharesOutstanding,
       .shortPercentOutstanding,
       .shortRatio,
       .symbol,
+      .totalAssets,
+      .yearsOfConsecutiveDividendGrowth,
     ]
   }
 }
@@ -11168,37 +12638,6 @@ public enum app_profile_plaid_access_tokens_update_column: RawRepresentable, Equ
       .itemId,
       .profileId,
     ]
-  }
-}
-
-/// input type for inserting array relation for remote table "app.profile_portfolio_accounts"
-public struct app_profile_portfolio_accounts_arr_rel_insert_input: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - data
-  ///   - onConflict: on conflict condition
-  public init(data: [app_profile_portfolio_accounts_insert_input], onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> = nil) {
-    graphQLMap = ["data": data, "on_conflict": onConflict]
-  }
-
-  public var data: [app_profile_portfolio_accounts_insert_input] {
-    get {
-      return graphQLMap["data"] as! [app_profile_portfolio_accounts_insert_input]
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "data")
-    }
-  }
-
-  /// on conflict condition
-  public var onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> {
-    get {
-      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_portfolio_accounts_on_conflict?> ?? Swift.Optional<app_profile_portfolio_accounts_on_conflict?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "on_conflict")
-    }
   }
 }
 
