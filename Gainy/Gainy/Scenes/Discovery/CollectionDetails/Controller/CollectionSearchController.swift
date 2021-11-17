@@ -25,7 +25,7 @@ final class CollectionSearchController: NSObject {
     //UI updates
     var loading: ((Bool) -> Void)?
     var collectionsUpdated: (() -> Void)?
-    var onShowCardDetails: ((RemoteTickerDetails) -> Void)? = nil
+    var onShowCardDetails: (([RemoteTickerDetails], RemoteTickerDetails) -> Void)? = nil
     var onCollectionDelete: ((Int) -> Void)? = nil
     
     var recommendedCollections: [RecommendedCollectionViewCellModel] {
@@ -41,7 +41,7 @@ final class CollectionSearchController: NSObject {
     private let resultsLimit = 100
     private var localFavHash: String = UserProfileManager.shared.favHash
     
-    init(collectionView: UICollectionView? = nil, callback: @escaping ((RemoteTickerDetails) -> Void)) {
+    init(collectionView: UICollectionView? = nil, callback: @escaping (([RemoteTickerDetails], RemoteTickerDetails) -> Void)) {
         self.collectionView = collectionView
         self.onShowCardDetails = callback
         super.init()
@@ -550,7 +550,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
         case .stocks:
             if let ticker = self.stocks[indexPath.row] as? RemoteTickerDetails {
                 GainyAnalytics.logEvent("collections_search_ticker_pressed", params: ["tickerSymbol" : ticker.symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-                onShowCardDetails?(ticker)
+                onShowCardDetails?(stocks.compactMap({$0 as? RemoteTickerDetails}), ticker)
             }
             break
         case .collections:

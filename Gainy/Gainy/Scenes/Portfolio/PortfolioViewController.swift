@@ -37,11 +37,13 @@ final class PortfolioViewController: BaseViewController {
                     removeAllChildVCs()
                     addViewController(holdingsVC, view: containerView)
                 }
+                holdingsVC.loadData()
             case .linkHasHoldings:
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     addViewController(holdingsVC, view: containerView)
                 }
+                holdingsVC.loadData()
             }
         }
     }

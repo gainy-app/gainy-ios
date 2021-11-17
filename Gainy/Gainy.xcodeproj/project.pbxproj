@@ -12,7 +12,6 @@
 		1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */; };
 		33019615273E836700BE4FDC /* CreatePlaidLink.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */; };
 		33019617273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */; };
-		3301961A273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */; };
 		3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */; };
 		3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */; };
 		3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */; };
@@ -100,6 +99,8 @@
 		337D612A26D514AE0048AE62 /* VHLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D612926D514AE0048AE62 /* VHLines.swift */; };
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
 		3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381A56F271D48CA001A1EDA /* CollectionsManager.swift */; };
+		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
+		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
 		339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */; };
 		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
@@ -398,7 +399,6 @@
 		33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePlaidLink.graphql.swift; sourceTree = "<group>"; };
 		33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkPlaidAccount.graphql.swift; sourceTree = "<group>"; };
 		33019618273E9B7F00BE4FDC /* GetPlaidHoldings.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPlaidHoldings.graphql; sourceTree = "<group>"; };
-		33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHolding.graphql.swift; sourceTree = "<group>"; };
 		3302E0AE26DCB4B5008DBC76 /* CollectionSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSearchController.swift; sourceTree = "<group>"; };
 		3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchCollectionDetails.graphql; sourceTree = "<group>"; };
 		3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickers.graphql; sourceTree = "<group>"; };
@@ -487,6 +487,8 @@
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		3381A56F271D48CA001A1EDA /* CollectionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
+		338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHoldings.graphql.swift; sourceTree = "<group>"; };
+		338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersDetailsViewController.swift; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
 		339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventsManager.swift; sourceTree = "<group>"; };
 		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
@@ -855,7 +857,7 @@
 				33BEB93127235ADD005237CB /* FetchStockMedianWeek.graphql.swift */,
 				33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */,
 				33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */,
-				33019619273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift */,
+				338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */,
 				33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */,
 			);
 			path = API;
@@ -1000,6 +1002,14 @@
 			path = Wrappers;
 			sourceTree = "<group>";
 		};
+		338464FA274585D1000DE5BC /* TickersDetails */ = {
+			isa = PBXGroup;
+			children = (
+				338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */,
+			);
+			path = TickersDetails;
+			sourceTree = "<group>";
+		};
 		33BDCF6726CE51ED000DE770 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,6 +1052,7 @@
 		33D3D4F826CBA2E2005A859B /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				338464FA274585D1000DE5BC /* TickersDetails */,
 				33722495270D9E9600C8C18F /* SingleCollectionDetails */,
 				3A85940A268A351900CB8DD6 /* DiscoverCollections */,
 				3A859411268A42F200CB8DD6 /* CollectionDetails */,
@@ -2266,6 +2277,7 @@
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
+				338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,
 				3AE7958C2663855C002B40D6 /* Router.swift in Sources */,
 				33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */,
@@ -2410,6 +2422,7 @@
 				8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */,
 				85CD154126F8A929001C060C /* AppleAuth.swift in Sources */,
 				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
+				338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
@@ -2454,7 +2467,6 @@
 				33C4E9782726A782008D3006 /* Configuration.swift in Sources */,
 				331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */,
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
-				3301961A273E9BC100BE4FDC /* GetPlaidHolding.graphql.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
 				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
@@ -2641,7 +2653,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2764,7 +2776,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2948,7 +2960,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2976,7 +2988,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 70;
+				CURRENT_PROJECT_VERSION = 71;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

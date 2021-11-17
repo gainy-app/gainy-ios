@@ -208,9 +208,11 @@ final class SingleCollectionDetailsViewController: BaseViewController {
 
 
 extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewModelDelegate {
-    func tickerPressed(source: SingleCollectionDetailsViewModel, ticker: RemoteTickerDetails) {
-        self.postLeaveAnalytics()
-        coordinator?.showCardDetailsViewController(TickerInfo(ticker: ticker))
+    func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails) {
+        if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
+            self.postLeaveAnalytics()
+            coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
+        }
     }
     
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell) {

@@ -1244,6 +1244,14 @@
             </objects>
             <point key="canvasLocation" x="937.68115942028987" y="122.54464285714285"/>
         </scene>
+        <!--Tickers Details View Controller-->
+        <scene sceneID="3oI-Lf-Cpg">
+            <objects>
+                <pageViewController storyboardIdentifier="TickersDetailsViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rIK-8R-CEf" customClass="TickersDetailsViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QYZ-0x-Ngx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="938" y="781"/>
+        </scene>
         <!--Single Collection Details View Controller-->
         <scene sceneID="evU-Zu-MMv">
             <objects>

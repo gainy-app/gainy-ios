@@ -8,8 +8,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetPlaidHoldings {
-      get_portfolio_holdings(profile_id: 15) {
+    query GetPlaidHoldings($profileId: Int!) {
+      get_portfolio_holdings(profile_id: $profileId) {
         __typename
         id
         quantity
@@ -56,7 +56,14 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
     return document
   }
 
-  public init() {
+  public var profileId: Int
+
+  public init(profileId: Int) {
+    self.profileId = profileId
+  }
+
+  public var variables: GraphQLMap? {
+    return ["profileId": profileId]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -64,7 +71,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_portfolio_holdings", arguments: ["profile_id": 15], type: .list(.object(GetPortfolioHolding.selections))),
+        GraphQLField("get_portfolio_holdings", arguments: ["profile_id": GraphQLVariable("profileId")], type: .list(.object(GetPortfolioHolding.selections))),
       ]
     }
 

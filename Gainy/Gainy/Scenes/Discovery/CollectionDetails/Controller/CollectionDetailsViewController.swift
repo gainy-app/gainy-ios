@@ -19,7 +19,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var coordinator: MainCoordinator?
     
     var onDiscoverCollections: ((Bool) -> Void)?
-    var onShowCardDetails: ((RemoteTickerDetails) -> Void)?
+    var onShowCardDetails: (([RemoteTickerDetails], Int) -> Void)?
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -209,7 +209,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     if !(ticker.name?.hasPrefix(Constants.CollectionDetails.demoNamePrefix) ?? false) {
-                        self?.onShowCardDetails?(ticker)
+                        if let index = modelItem.cards.firstIndex(where: {$0.tickerSymbol == ticker.symbol}) {
+                            self?.onShowCardDetails?(modelItem.cards.map(\.rawTicker), index)
+                        }
                     }
                 }
                 cell.onSortingPressed = { [weak self] in
@@ -247,8 +249,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchCollectionView.dragInteractionEnabled = true
         searchCollectionView.bounces = false
         searchCollectionView.alpha = 0.0
-        searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] ticker in
-            self?.onShowCardDetails?(ticker)
+        searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] tickers, ticker in
+            if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
+                self?.onShowCardDetails?(tickers, index)
+            }
         })
         searchController?.collectionsUpdated = { [weak self] in
             self?.getRemoteData(loadProfile: true) {

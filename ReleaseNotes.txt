@@ -1,12 +1,14 @@
 *iOS v0.3.1 #70* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
-:globe_with_meridians: Server - TEST
+
 :new: *New:*
-• Stock Card: loaders added
+• Stock Card: you can swipe between them
 
 :hammer_and_wrench: *Improvements*
-• Stock Card: adding correct dates to Calendar
+• Portfolio: loaders
+• Portfolio: demo UI
+• Portfolio: fetching of Holdings and Transactions
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

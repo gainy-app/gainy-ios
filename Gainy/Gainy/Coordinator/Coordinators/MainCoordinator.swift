@@ -133,10 +133,27 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         print("\(frame)")
     }
 
-    func showCardDetailsViewController(_ tickerInfo: TickerInfo) {
+    func _showCardDetailsViewController(_ tickerInfo: TickerInfo) {
         let vc = self.viewControllerFactory.instantiateTickerDetails()
         vc.coordinator = self
         vc.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
+    
+    func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int) {
+        
+        let vc = viewControllerFactory.instantiateTickersPages()
+        
+        var controllers: [UIViewController] = []
+        for tickerInfo in tickerInfos {
+            let vcInner = self.viewControllerFactory.instantiateTickerDetails()
+            vcInner.coordinator = self
+            vcInner.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
+            controllers.append(vcInner)
+        }
+        vc.stockControllers = controllers
+        vc.initialIndex = index
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
     }

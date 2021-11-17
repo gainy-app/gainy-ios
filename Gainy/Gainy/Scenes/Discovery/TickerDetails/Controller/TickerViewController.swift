@@ -34,7 +34,6 @@ final class TickerViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
-        loadTicketInfo()
     }
     
     override func viewDidAppear(_ animated: Bool) {

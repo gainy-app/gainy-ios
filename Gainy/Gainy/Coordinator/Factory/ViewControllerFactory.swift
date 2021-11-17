@@ -117,9 +117,9 @@ final class ViewControllerFactory {
                 vc.deleteItem(itemId)
             }
         }
-        vc.onShowCardDetails = { ticker in
+        vc.onShowCardDetails = { tickers, index in
             vc.postLeaveAnalytics()
-            coordinator.showCardDetailsViewController(TickerInfo(ticker: ticker))
+            coordinator.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
         }
         return vc
     }
@@ -131,6 +131,11 @@ final class ViewControllerFactory {
     
     func instantiateTickerDetails() -> TickerViewController {
         let vc = TickerViewController.instantiate(.discovery)
+        return vc
+    }
+    
+    func instantiateTickersPages() -> TickersDetailsViewController {
+        let vc = TickersDetailsViewController.instantiate(.discovery)
         return vc
     }
     
