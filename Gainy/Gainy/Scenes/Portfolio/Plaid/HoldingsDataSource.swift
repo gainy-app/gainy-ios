@@ -7,11 +7,15 @@
 
 import UIKit
 import SkeletonView
+import Apollo
 
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
     
     private var cellHeights: [Int: CGFloat] = [:]
+    
+    var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = []
+    var transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
 }
 
 extension HoldingsDataSource: SkeletonTableViewDataSource {
@@ -34,7 +38,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return 4
+            return holdings.count
         }
     }
     
@@ -47,7 +51,8 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
+            cell.holding = holdings[indexPath.row]
             return cell
         }
     }

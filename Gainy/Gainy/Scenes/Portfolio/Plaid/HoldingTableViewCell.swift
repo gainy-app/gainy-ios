@@ -11,6 +11,12 @@ final class HoldingTableViewCell: UITableViewCell {
     var cellHeightChanged: ((CGFloat) -> Void)?
     
     //MARK: - Outlet
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var amountLbl: UILabel!
+    @IBOutlet weak var symbolLbl: UILabel!
+    
+    @IBOutlet weak var lttView: CornerView!
+    
     @IBOutlet weak var shadowView: CornerView! {
         didSet {
             shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
@@ -22,6 +28,14 @@ final class HoldingTableViewCell: UITableViewCell {
             var bounds = shadowView.bounds
             bounds.size = CGSize.init(width: UIScreen.main.bounds.width - 16.0 * 2.0, height: bounds.height)
             shadowView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        }
+    }
+    
+    var holding: GetPlaidHoldingsQuery.Data.GetPortfolioHolding? {
+        didSet {
+            if let holding = holding {
+                print(holding)
+            }
         }
     }
     
