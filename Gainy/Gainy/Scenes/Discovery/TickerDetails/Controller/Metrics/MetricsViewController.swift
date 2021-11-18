@@ -214,8 +214,7 @@ class MetricsViewController: BaseViewController {
         self.bottomView?.delegate = self
         bottomView.alpha = 1.0
         
-        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.bottomView?.setSaveButtonHidden(hidden: indexPaths.count < self.maxSelectedElements)
+        self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
         let text = "Select \(self.maxSelectedElements) metrics please"
         self.bottomView?.setText(text: text)
     }
@@ -604,7 +603,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
         if collectionView == self.searchCollectionView {
-            if (self.collectionView.indexPathsForSelectedItems?.count ?? 0) >= self.maxSelectedElements {
+            if self.selectedSection.count >= self.maxSelectedElements {
                 return false
             }
             return true
@@ -615,7 +614,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return false
             }
             
-            if (collectionView.indexPathsForSelectedItems?.count ?? 0) >= self.maxSelectedElements {
+            if self.selectedSection.count >= self.maxSelectedElements {
                 return false
             }
         }
