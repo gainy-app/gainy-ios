@@ -1,14 +1,14 @@
-*iOS v0.3.1 #72* available
+*iOS v0.3.1 #74* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
 
 :new: *New:*
-• Stock Card: you can swipe between them
+• Metrics: List all metrics
+• Metrics: Change ticker metrics settings
+• Metrics: Change collection metrics settings
 
 :hammer_and_wrench: *Improvements*
-• Portfolio: loaders
-• Portfolio: demo UI
-• Portfolio: fetching of Holdings and Transactions
+• 
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*
