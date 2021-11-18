@@ -23,11 +23,11 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
-                        guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings?.count else {
+                        guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             return
                         }
-                        dprint("Got \(holdingsCount) holding from Plaid")
+                        self?.dataSource.holdings = holdingsCount.compactMap({$0})
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -41,11 +41,11 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetPlaidTransactionsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
-                        guard let holdingsCount = graphQLResult.data?.getPortfolioTransactions?.count else {
+                        guard let holdingsCount = graphQLResult.data?.getPortfolioTransactions else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             return
                         }
-                        dprint("Got \(holdingsCount) transactions from Plaid")
+                        self?.dataSource.transactions = holdingsCount.compactMap({$0})
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
