@@ -71,7 +71,6 @@
 		33559B6426E8C08600E61D71 /* TickersLiveFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */; };
 		33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F20273B9F57007B587F /* CoreServices.framework */; };
 		33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33571F22273BE463007B587F /* PortfolioViewModel.swift */; };
-		33571F28273BF5AE007B587F /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
 		33571F2A273BF830007B587F /* BaseViewController+LinkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */; };
 		335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D76270617CF00337262 /* YourCollectionTipCell.swift */; };
 		335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D78270619D500337262 /* YourCollectionTipCell.xib */; };
@@ -139,6 +138,8 @@
 		33BEB93627235ADE005237CB /* FetchStockMedianMonth.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */; };
 		33BEB93727235ADE005237CB /* FetchStockMedianDay.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */; };
 		33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93927235B02005237CB /* ScatterChartViewModel.swift */; };
+		33BF83762746330600643C97 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
+		33BF83772746330600643C97 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33C4E9782726A782008D3006 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4E9772726A782008D3006 /* Configuration.swift */; };
 		33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */; };
 		33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */; };
@@ -391,6 +392,20 @@
 			remoteInfo = Gainy;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		33BF83782746330700643C97 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				33BF83772746330600643C97 /* LinkKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollections.graphql.swift; sourceTree = "<group>"; };
@@ -796,8 +811,8 @@
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
+				33BF83762746330600643C97 /* LinkKit.xcframework in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
-				33571F28273BF5AE007B587F /* LinkKit.xcframework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1948,6 +1963,7 @@
 				3A930F2E265CC679000FD3EB /* SwiftLint */,
 				33467CF726C6714E00811F74 /* Firebase crashes */,
 				33B9887626CA995C008B8AC9 /* TODO Warnings */,
+				33BF83782746330700643C97 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
