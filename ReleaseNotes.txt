@@ -1,4 +1,4 @@
-*iOS v0.3.1 #70* available
+*iOS v0.3.1 #72* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
 
