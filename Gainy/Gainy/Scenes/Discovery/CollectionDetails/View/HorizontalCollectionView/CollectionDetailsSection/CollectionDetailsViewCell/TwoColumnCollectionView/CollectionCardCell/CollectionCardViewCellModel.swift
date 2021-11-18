@@ -1,12 +1,54 @@
 struct CollectionCardViewCellModel {
     let tickerCompanyName: String
     let tickerSymbol: String
-    let dividendGrowthPercent: String
-    let growthRateYOY: String
-    let evs: String
-    let marketCap: String
-    let monthToDay: String
-    let netProfit: String
+    
+    let sharesOutstanding: String
+    let shortPercentOutstanding: String
+    let avgVolume10d: String
+    let avgVolume90d: String
+    let sharesFloat: String
+    let shortRatio: String
+    let beta: String
+    let impliedVolatility : String
+    let volatility52Weeks: String
+    let revenueGrowthYoy: String
+    let revenueGrowthFwd: String
+    let ebitdaGrowthYoy: String
+    let epsGrowthYoy: String
+    let epsGrowthFwd: String
+    let address: String
+    let exchangeName: String
+    let marketCapitalization: String
+    let enterpriseValueToSales: String
+    let priceToEarningsTtm: String
+    let priceToSalesTtm: String
+    let priceToBookValue: String
+    let enterpriseValueToEbitda: String
+    let priceChange1m: String
+    let priceChange3m: String
+    let priceChange1y: String
+    let dividendYield: String
+    let dividendsPerShare: String
+    let dividendPayoutRatio: String
+    let yearsOfConsecutiveDividendGrowth: String
+    let dividendFrequency: String
+    let epsActual: String
+    let epsEstimate: String
+    let beatenQuarterlyEpsEstimationCountTtm: String
+    let epsSurprise: String
+    let revenueEstimateAvg0y: String
+    let revenueTtmActual: String
+    let revenueTtm: String
+    let revenuePerShareTtm: String
+    let roi: String
+    let netIncome: String
+    let assetCashAndEquivalents: String
+    let roa: String
+    let totalAssets: String
+    let ebitda: String
+    let profitMargin: String
+    let netDebt: String
+    
     let highlight: String
     
     let rawTicker: RemoteTickerDetails

@@ -40,6 +40,13 @@ public final class GetProfileQuery: GraphQLQuery {
           created_at
         }
       }
+      app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
+        __typename
+        id
+        field_name
+        collection_id
+        order
+      }
     }
     """
 
@@ -61,6 +68,7 @@ public final class GetProfileQuery: GraphQLQuery {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("app_profiles", arguments: ["where": ["id": ["_eq": GraphQLVariable("profileID")]]], type: .nonNull(.list(.nonNull(.object(AppProfile.selections))))),
+        GraphQLField("app_profile_ticker_metrics_settings", arguments: ["where": ["profile": ["id": ["_eq": GraphQLVariable("profileID")]]]], type: .nonNull(.list(.nonNull(.object(AppProfileTickerMetricsSetting.selections))))),
       ]
     }
 
@@ -70,8 +78,8 @@ public final class GetProfileQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(appProfiles: [AppProfile]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }])
+    public init(appProfiles: [AppProfile], appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }, "app_profile_ticker_metrics_settings": appProfileTickerMetricsSettings.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }])
     }
 
     /// fetch data from the table: "app.profiles"
@@ -81,6 +89,16 @@ public final class GetProfileQuery: GraphQLQuery {
       }
       set {
         resultMap.updateValue(newValue.map { (value: AppProfile) -> ResultMap in value.resultMap }, forKey: "app_profiles")
+      }
+    }
+
+    /// fetch data from the table: "app.profile_ticker_metrics_settings"
+    public var appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting] {
+      get {
+        return (resultMap["app_profile_ticker_metrics_settings"] as! [ResultMap]).map { (value: ResultMap) -> AppProfileTickerMetricsSetting in AppProfileTickerMetricsSetting(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }, forKey: "app_profile_ticker_metrics_settings")
       }
     }
 
@@ -439,6 +457,75 @@ public final class GetProfileQuery: GraphQLQuery {
           set {
             resultMap.updateValue(newValue, forKey: "created_at")
           }
+        }
+      }
+    }
+
+    public struct AppProfileTickerMetricsSetting: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["app_profile_ticker_metrics_settings"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("field_name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
+          GraphQLField("order", type: .nonNull(.scalar(Int.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: Int, fieldName: String, collectionId: Int? = nil, order: Int) {
+        self.init(unsafeResultMap: ["__typename": "app_profile_ticker_metrics_settings", "id": id, "field_name": fieldName, "collection_id": collectionId, "order": order])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: Int {
+        get {
+          return resultMap["id"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var fieldName: String {
+        get {
+          return resultMap["field_name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "field_name")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
+        }
+      }
+
+      public var order: Int {
+        get {
+          return resultMap["order"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "order")
         }
       }
     }

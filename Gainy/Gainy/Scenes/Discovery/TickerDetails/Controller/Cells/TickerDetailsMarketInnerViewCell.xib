@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TickerDetailsMarketInnerViewCell" customModule="Gainy" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TickerDetailsMarketInnerViewCell" id="CME-4C-Oeq" customClass="TickerDetailsMarketInnerViewCell" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="134"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yL9-gr-Xng">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="134"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WN0-rX-yuH" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="134"/>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="IjT-e4-KRd">
+                        <rect key="frame" x="127" y="8" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="faG-WA-0ef"/>
+                            <constraint firstAttribute="width" constant="16" id="v8N-7h-Rkj"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1px-uR-BkK">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="134"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <connections>
+                            <action selector="onActionButtonTouchUpInside:" destination="CME-4C-Oeq" eventType="touchUpInside" id="RGh-kR-CmZ"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data Market Data Market Data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l1y-dO-yui">
+                        <rect key="frame" x="8" y="8" width="117" height="29"/>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
+                        <color key="textColor" name="mainText"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KVc-p6-0hP">
+                        <rect key="frame" x="8" y="88" width="134" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Z2X-b0-pJY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="9"/>
+                        <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0So-wB-bOp">
+                        <rect key="frame" x="8" y="102" width="134" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="KSp-DI-osd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="1px-uR-BkK" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" id="5ld-rB-Bzw"/>
+                    <constraint firstItem="1px-uR-BkK" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" id="9Av-Is-Tm1"/>
+                    <constraint firstAttribute="trailing" secondItem="1px-uR-BkK" secondAttribute="trailing" id="BEv-nP-rVj"/>
+                    <constraint firstItem="l1y-dO-yui" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" constant="8" id="Ohq-cI-d4w"/>
+                    <constraint firstAttribute="bottom" secondItem="0So-wB-bOp" secondAttribute="bottom" constant="8" id="R01-Yn-l6D"/>
+                    <constraint firstAttribute="trailing" secondItem="KVc-p6-0hP" secondAttribute="trailing" constant="8" id="RTH-yK-InY"/>
+                    <constraint firstItem="WN0-rX-yuH" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" id="UQT-dx-JRa"/>
+                    <constraint firstAttribute="trailing" secondItem="WN0-rX-yuH" secondAttribute="trailing" id="UYC-Zj-W30"/>
+                    <constraint firstAttribute="trailing" secondItem="IjT-e4-KRd" secondAttribute="trailing" constant="7" id="VQI-Lq-N1u"/>
+                    <constraint firstAttribute="trailing" secondItem="0So-wB-bOp" secondAttribute="trailing" constant="8" id="aep-WM-TK8"/>
+                    <constraint firstItem="l1y-dO-yui" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" constant="8" id="auD-Vx-Nup"/>
+                    <constraint firstAttribute="bottom" secondItem="WN0-rX-yuH" secondAttribute="bottom" id="bYU-4i-1zN"/>
+                    <constraint firstItem="KVc-p6-0hP" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" constant="8" id="hL3-g9-TlU"/>
+                    <constraint firstAttribute="bottom" secondItem="1px-uR-BkK" secondAttribute="bottom" id="jnO-D7-JZl"/>
+                    <constraint firstItem="WN0-rX-yuH" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" id="l9Q-AY-cCN"/>
+                    <constraint firstItem="IjT-e4-KRd" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" constant="8" id="lM1-jW-Njo"/>
+                    <constraint firstItem="0So-wB-bOp" firstAttribute="top" secondItem="KVc-p6-0hP" secondAttribute="bottom" constant="-10" id="rch-lL-82G"/>
+                    <constraint firstAttribute="trailing" secondItem="l1y-dO-yui" secondAttribute="trailing" constant="25" id="vu0-lP-V6G"/>
+                    <constraint firstItem="0So-wB-bOp" firstAttribute="leading" secondItem="yL9-gr-Xng" secondAttribute="leading" constant="8" id="yqZ-zn-0eG"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="150" height="184"/>
+            <connections>
+                <outlet property="actionButton" destination="1px-uR-BkK" id="cD4-AE-bpk"/>
+                <outlet property="cornerView" destination="WN0-rX-yuH" id="2Jf-1e-f8M"/>
+                <outlet property="nameLbl" destination="l1y-dO-yui" id="wyM-1Y-SXF"/>
+                <outlet property="periodLbl" destination="KVc-p6-0hP" id="g1c-vf-cyk"/>
+                <outlet property="pinImageView" destination="IjT-e4-KRd" id="MS6-X5-oyL"/>
+                <outlet property="valueLbl" destination="0So-wB-bOp" id="PK2-Dn-ZTa"/>
+            </connections>
+            <point key="canvasLocation" x="34.782608695652179" y="66.964285714285708"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="pin" width="16" height="16"/>
+        <namedColor name="mainText">
+            <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

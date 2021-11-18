@@ -27,30 +27,7 @@ class TickerInfo {
         let industries = ticker.tickerIndustries.compactMap({$0.gainyIndustry?.name})
         let categories = ticker.tickerCategories.compactMap({$0.categories?.name})
         self.tags = categories + industries
-        self.highlights = ticker.tickerFinancials.compactMap(\.highlight)
-        
-        var markers: [MarketData] = []
-        
-        for metric in MarketDataField.metricsOrder {
-            switch metric {
-            case .dividendGrowth:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "ANNUAL", value: Double(ticker.tickerFinancials.last!.dividendGrowth ?? 0.0).formatUsingAbbrevation()))
-            case .evs:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: Float(ticker.tickerFinancials.last!.enterpriseValueToSales ?? 0.0).cleanOneDecimal))
-            case .marketCap:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: (ticker.tickerFinancials.last!.marketCapitalization ?? 0.0).formatUsingAbbrevation()))
-            case .monthToDay:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "", value: ((ticker.tickerFinancials.last!.monthPricePerformance ?? 0.0) * 100.0).cleanOneDecimalP))
-            case .netProfit:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "TTM, ANNUAL", value:  (ticker.tickerFinancials.last!.netProfitMargin ?? 0.0).percent))
-            case .growsRateYOY:
-                markers.append(MarketData.init(name: "📌 \(metric.title)", period: "Quarterly, YOY", value: ((ticker.tickerFinancials.last!.quarterlyRevenueGrowthYoy ?? 0.0) * 100.0).cleanOneDecimalP))
-            default:
-                break
-            }
-        }
-        self.marketData = markers
-        
+        self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
         self.wsjData = WSRData(rate: ticker.tickerAnalystRatings?.rating ?? 0.0, targetPrice: ticker.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: ticker.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                    WSRData.WSRDataDetails(name: "BULLISH", count: ticker.tickerAnalystRatings?.buy ?? 0),
                                                                                                                                                                                    WSRData.WSRDataDetails(name: "NEUTRAL", count: ticker.tickerAnalystRatings?.hold ?? 0),
@@ -63,6 +40,8 @@ class TickerInfo {
         self.news = []
         self.altStocks = []
         self.upcomingEvents = ticker.tickerEvents
+        
+        self.updateMarketData()
     }
     
     let debugStr =
@@ -81,6 +60,38 @@ class TickerInfo {
         var description: String {
             "Have M: \(haveMedian) M: \(medianGrow) CD: \(chartData.count)"
         }
+    }
+    
+    func updateMarketData() {
+        var markers: [MarketData] = []
+        for metric in MarketDataField.allCases {
+            
+            let marketData = metric.mapToMarketData(ticker: ticker)
+            guard let marketData = marketData else {
+                continue
+            }
+            
+            var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+                item.collectionId == nil
+            }
+            tickerMetrics = tickerMetrics.sorted { left, right in
+                left.order < right.order
+            }
+            if tickerMetrics.count == 0 {
+                if MarketDataField.metricsOrder.contains(where: { item in
+                    item == metric
+                }) {
+                    markers.append(marketData)
+                }
+            } else {
+                if tickerMetrics.contains(where: { item in
+                    item.fieldName == metric.fieldName
+                }) {
+                    markers.append(marketData)
+                }
+            }
+        }
+        self.marketData = markers
     }
     
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
@@ -516,13 +527,14 @@ class TickerInfo {
     let highlights: [String]
     
     //MARK: - Market data
-    struct MarketData {
+    public struct MarketData {
         let name: String
         let period: String
         let value: String
+        let marketDataField: MarketDataField
     }
     
-    let marketData: [MarketData]
+    var marketData: [MarketData] = []
     
     //MARK: - WSJ
     struct WSRData: Hashable {

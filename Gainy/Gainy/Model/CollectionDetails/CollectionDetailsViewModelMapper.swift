@@ -13,7 +13,7 @@ enum CollectionDetailsViewModelMapper {
     }
 
     static func map(_ model: TickerDetails) -> CollectionCardViewCellModel {
-        let marketCapValue = model.financialMetrics.marketCapitalization
+        let marketCapValue = model.tickerMetrics.marketCapitalization
         var marketCapitalizationString = ""
         if marketCapValue >= 1_000_000_000_000 {
             marketCapitalizationString = "$\(marketCapValue / 1_000_000_000_000)T"
@@ -32,15 +32,56 @@ enum CollectionDetailsViewModelMapper {
             ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
             : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
         
-        return CollectionCardViewCellModel.init(tickerCompanyName: model.companyName,
-                                                tickerSymbol: model.tickerSymbol,
-                                                dividendGrowthPercent: model.financialMetrics.dividendGrowthPercent.cleanOneDecimalP,
-                                                growthRateYOY: model.financialMetrics.growthRateYOY.cleanOneDecimalP,
-                                                evs: model.financialMetrics.evs.cleanOneDecimal,
-                                                marketCap: model.financialMetrics.marketCapitalization.formatUsingAbbrevation(),
-                                                monthToDay: (model.financialMetrics.monthToDay * 100.0).cleanOneDecimalP,
-                                                netProfit: model.financialMetrics.netProfit.cleanOneDecimalP,
-                                                highlight: model.financialMetrics.highlight,
-                                                rawTicker: model.rawTicker)
+        return CollectionCardViewCellModel.init(
+            tickerCompanyName: model.companyName,
+            tickerSymbol: model.tickerSymbol,
+            sharesOutstanding: Float(model.tickerMetrics.sharesOutstanding).formatUsingAbbrevation(),
+            shortPercentOutstanding: (model.tickerMetrics.shortPercentOutstanding * 100.0).cleanOneDecimalP,
+            avgVolume10d: model.tickerMetrics.avgVolume10d.formatUsingAbbrevation(),
+            avgVolume90d: model.tickerMetrics.avgVolume90d.formatUsingAbbrevation(),
+            sharesFloat: model.tickerMetrics.sharesFloat.formatUsingAbbrevation(),
+            shortRatio: model.tickerMetrics.shortRatio.formatUsingAbbrevation(),
+            beta: model.tickerMetrics.beta.formatUsingAbbrevation(),
+            impliedVolatility: model.tickerMetrics.impliedVolatility.cleanOneDecimalP,
+            volatility52Weeks: model.tickerMetrics.volatility52Weeks,
+            revenueGrowthYoy: (model.tickerMetrics.revenueGrowthYoy * 100.0).cleanOneDecimalP,
+            revenueGrowthFwd: (model.tickerMetrics.revenueGrowthFwd * 100.0).cleanOneDecimalP,
+            ebitdaGrowthYoy: (model.tickerMetrics.ebitdaGrowthYoy * 100.0).cleanOneDecimalP,
+            epsGrowthYoy: (model.tickerMetrics.epsGrowthYoy * 100.0).cleanOneDecimalP,
+            epsGrowthFwd: (model.tickerMetrics.epsGrowthFwd * 100.0).cleanOneDecimalP,
+            address: model.tickerMetrics.address,
+            exchangeName: model.tickerMetrics.exchangeName,
+            marketCapitalization: model.tickerMetrics.marketCapitalization.formatUsingAbbrevation(),
+            enterpriseValueToSales: model.tickerMetrics.enterpriseValueToSales.formatUsingAbbrevation(),
+            priceToEarningsTtm: model.tickerMetrics.priceToEarningsTtm.cleanOneDecimal,
+            priceToSalesTtm: model.tickerMetrics.priceToSalesTtm.formatUsingAbbrevation(),
+            priceToBookValue: model.tickerMetrics.priceToBookValue.cleanOneDecimal,
+            enterpriseValueToEbitda: model.tickerMetrics.enterpriseValueToEbitda.formatUsingAbbrevation(),
+            priceChange1m: (model.tickerMetrics.priceChange1m * 100.0).cleanOneDecimalP,
+            priceChange3m: (model.tickerMetrics.priceChange3m * 100.0).cleanOneDecimalP,
+            priceChange1y: (model.tickerMetrics.priceChange1y * 100.0).cleanOneDecimalP,
+            dividendYield: (model.tickerMetrics.dividendYield * 100.0).cleanOneDecimalP,
+            dividendsPerShare: model.tickerMetrics.dividendsPerShare.cleanOneDecimal,
+            dividendPayoutRatio: (model.tickerMetrics.dividendPayoutRatio * 100.0).cleanOneDecimalP,
+            yearsOfConsecutiveDividendGrowth: model.tickerMetrics.yearsOfConsecutiveDividendGrowth.cleanOneDecimal,
+            dividendFrequency: model.tickerMetrics.dividendFrequency,
+            epsActual: model.tickerMetrics.epsActual.formatUsingAbbrevation(),
+            epsEstimate: model.tickerMetrics.epsEstimate.formatUsingAbbrevation(),
+            beatenQuarterlyEpsEstimationCountTtm: model.tickerMetrics.beatenQuarterlyEpsEstimationCountTtm.cleanOneDecimal,
+            epsSurprise: model.tickerMetrics.epsSurprise.formatUsingAbbrevation(),
+            revenueEstimateAvg0y: model.tickerMetrics.revenueEstimateAvg0y.formatUsingAbbrevation(),
+            revenueTtmActual: model.tickerMetrics.revenueTtmActual.formatUsingAbbrevation(),
+            revenueTtm: model.tickerMetrics.revenueTtm.formatUsingAbbrevation(),
+            revenuePerShareTtm: model.tickerMetrics.revenuePerShareTtm.cleanOneDecimal,
+            roi: model.tickerMetrics.roi.percent,
+            netIncome: model.tickerMetrics.netIncome.formatUsingAbbrevation(),
+            assetCashAndEquivalents: model.tickerMetrics.assetCashAndEquivalents.formatUsingAbbrevation(),
+            roa: model.tickerMetrics.roa.percent,
+            totalAssets: model.tickerMetrics.totalAssets.formatUsingAbbrevation(),
+            ebitda: model.tickerMetrics.ebitda.formatUsingAbbrevation(),
+            profitMargin: model.tickerMetrics.profitMargin.percent,
+            netDebt: model.tickerMetrics.netDebt.formatUsingAbbrevation(),
+            highlight: model.tickerMetrics.highlight,
+            rawTicker: model.rawTicker)
     }
 }

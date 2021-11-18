@@ -3,6 +3,7 @@ import Kingfisher
 import SkeletonView
 
 protocol CollectionHorizontalViewDelegate: AnyObject {
+    func comparePressed(view: CollectionHorizontalView)
     func settingsPressed(view: CollectionHorizontalView)
     func stockSortPressed(view: CollectionHorizontalView)
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool)
@@ -420,7 +421,7 @@ final class CollectionHorizontalView: UIView {
         
         self.collectionId = collectionId
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        sortLbl?.text = settings.sorting.title
+        sortLbl?.text = settings.sortingText()
         
         showListViewButton.backgroundColor = settings.viewMode == .list ?  UIColor.Gainy.blue : .clear
         showGridViewButton.backgroundColor = settings.viewMode == .list ?  .clear :  UIColor.Gainy.blue
@@ -436,10 +437,10 @@ final class CollectionHorizontalView: UIView {
     private func settingsButtonTapped(_: UIButton) {
         if isCompare {
             GainyAnalytics.logEvent("add_stock_to_compare_pressed", params: ["collectionID" : collectionId])
-            delegate?.settingsPressed(view: self)
+            delegate?.comparePressed(view: self)
         } else {
             GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
-            NotificationManager.shared.showMessage(title: "Beta version", text: "Sorry, feature in development", cancelTitle: "OK", actions: nil)
+            delegate?.settingsPressed(view: self)
         }
     }
 

@@ -58,8 +58,37 @@ final class SortCollectionDetailsViewController: BaseViewController {
         preloadSorting()
     }
     
-    private let btnsMapping: [MarketDataField: Int] = [.matchScore: 5, .evs : 0, .growsRateYOY: 1, .marketCap: 2, .monthToDay: 3, .netProfit: 4]
     private var ascConstraints: [NSLayoutConstraint] = []
+    
+    private func btnsMapping() ->  [MarketDataField: Int]  {
+        
+        let defaultSortingList = MarketDataField.rawOrder
+        var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+            item.collectionId == self.collectionId
+        }
+        tickerMetrics = tickerMetrics.sorted { left, right in
+            left.order < right.order
+        }
+        var sortingList: [MarketDataField] = []
+        if tickerMetrics.count == 0 {
+            sortingList = defaultSortingList
+        } else {
+            sortingList.append(.matchScore)
+            for metric in MarketDataField.allCases {
+                for item in tickerMetrics {
+                    if metric.fieldName == item.fieldName {
+                        sortingList.append(metric)
+                    }
+                }
+            }
+        }
+        
+        var result: [MarketDataField: Int] = [:]
+        for (index, item) in sortingList.enumerated() {
+            result[item] = index
+        }
+        return result
+    }
     
     private func preloadSorting() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
@@ -67,7 +96,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
         ascConstraints.removeAll()
         
         ascConstraints.append(contentsOf: ascBtn.autoSetDimensions(to: CGSize.init(width: 84, height: 24)))
-        if let storedBtnIdx = btnsMapping[settings.sorting] {
+        if let storedBtnIdx = btnsMapping()[settings.sortingValue()] {
             for (_, val) in sortBtns.enumerated() {
                 val.isSelected = val.tag == storedBtnIdx
                 
@@ -85,6 +114,13 @@ final class SortCollectionDetailsViewController: BaseViewController {
         let colorHex = settings.ascending ? "#25EA5C" : "#FC506F"
         let color = UIColor.init(hexString: colorHex, alpha: 0.1)
         ascBtn.backgroundColor = color
+        
+        for (index, val) in sortBtns.enumerated() {
+            
+            if let key = btnsMapping().key(forValue: index) {
+                val.setTitle(key.title, for: .normal)
+            }
+        }
     }
     
     //MARK: - Actions
@@ -96,7 +132,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
                 self?.collectionCell?.sortSections()
             }
-            delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sender.tag) ?? .matchScore).title)
+            delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
             return
         }
         
@@ -113,27 +149,15 @@ final class SortCollectionDetailsViewController: BaseViewController {
                 ascConstraints.append(ascBtn.autoAlignAxis(.horizontal, toSameAxisOf: val))
             }
         }
-        switch sender.tag {
-        case 0:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .evs)
-        case 1:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .growsRateYOY)
-        case 2:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .marketCap)
-        case 3:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .monthToDay)
-        case 4:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .netProfit)
-        case 5:
-            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: .matchScore)
-        default:
-            break
+        
+        if let key = btnsMapping().key(forValue: sender.tag) {
+            CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: key)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
             self?.collectionCell?.sortSections()
         }
         
-        delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortings[sender.tag])
+        delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortingsForCollectionID(collectionID: collectionId)[sender.tag])
     }
     
     @IBAction func ascTapped(_ sender: UIButton) {
@@ -142,6 +166,6 @@ final class SortCollectionDetailsViewController: BaseViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
             self?.collectionCell?.sortSections()
         }
-        delegate?.selectionChanged(vc: self, sorting: (btnsMapping.key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .evs).title)
+        delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .enterpriseValueToSales).title)
     }
 }

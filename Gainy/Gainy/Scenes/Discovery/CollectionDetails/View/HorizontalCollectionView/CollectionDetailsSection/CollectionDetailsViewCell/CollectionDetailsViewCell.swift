@@ -185,6 +185,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
+    var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -248,7 +249,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             ]
         }
         
-        collectionHorizontalView.updateChargeLbl(settings.sorting.title)
+        collectionHorizontalView.updateChargeLbl(settings.sortingText())
         self.cards = cards
         sortSections()
     }
@@ -265,11 +266,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func sortSections() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
-        collectionHorizontalView.updateChargeLbl(settings.sorting.title)
+        collectionHorizontalView.updateChargeLbl(settings.sortingText())
         
         collectionListHeader.updateMetrics(settings.marketDataToShow)
         self.cards = self.cards.sorted(by: { lhs, rhs in
-            settings.sorting.sortFunc(isAsc: settings.ascending, lhs, rhs)
+            settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
         })
         snapshot.deleteAllItems()
         dataSource?.apply(snapshot, animatingDifferences: false)
@@ -355,7 +356,14 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         onSortingPressed?()
     }
     
-    func settingsPressed(view: CollectionHorizontalView) {
+    func comparePressed(view: CollectionHorizontalView) {
         onAddStockPressed?()
+    }
+    
+    func settingsPressed(view: CollectionHorizontalView) {
+        guard cards.count > 0 else {
+            return
+        }
+        onSettingsPressed?(cards[0].rawTicker)
     }
 }

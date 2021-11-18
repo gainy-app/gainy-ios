@@ -28,12 +28,6 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     override func start() {
         showMainTabViewController()
-        // TODO: Borysov - is this logic deprecated already? Need back to this and cleanup
-//        if isLoggedIn {
-//            //All fine )
-//        } else {
-//            //Show Onboarding
-//        }
         self.subscribeOnFailToRefreshToken()
     }
     
@@ -161,6 +155,15 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     func showBrokersViewController(symbol: String, delegate: BrokersViewControllerDelegate?) {
         let vc = self.viewControllerFactory.instantiateBrokersList()
         vc.symbol = symbol
+        vc.delegate = delegate
+        vc.modalTransitionStyle = .coverVertical
+        router.showDetailed(vc)
+    }
+    
+    func showMetricsViewController(ticker: RemoteTicker, collectionID: Int?, delegate: MetricsViewControllerDelegate?) {
+        let vc = self.viewControllerFactory.instantiateMetricsList()
+        vc.ticker = ticker
+        vc.collectionID = collectionID
         vc.delegate = delegate
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)

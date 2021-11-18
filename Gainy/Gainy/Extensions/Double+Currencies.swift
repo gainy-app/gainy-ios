@@ -76,6 +76,9 @@ extension Double {
             numFormatter.minimumFractionDigits = 0
             numFormatter.maximumFractionDigits = 0
 
+        if self < 0 {
+            return "-$" + numFormatter.string(from: NSNumber(value:(value * -1.0)))!
+        }
         return "$" + numFormatter.string(from: NSNumber(value:value))!
     }
 }
@@ -123,7 +126,7 @@ extension Float {
                                            (100_000.0, 1_000_000.0, "M"),
                                            (999_999_999.0, 1_000_000_000.0, "B")]
                                                // you can add more !
-            let startValue = self
+            let startValue = Float (abs(self))
             let abbreviation:Abbrevation = {
                 var prevAbbreviation = abbreviations[0]
                 for tmpAbbreviation in abbreviations {
@@ -143,6 +146,9 @@ extension Float {
             numFormatter.minimumFractionDigits = 0
             numFormatter.maximumFractionDigits = 0
 
+        if self < 0 {
+            return "-$" + numFormatter.string(from: NSNumber(value:(value * -1.0)))!
+        }
         return "$" + numFormatter.string(from: NSNumber(value:value))!
     }
 }

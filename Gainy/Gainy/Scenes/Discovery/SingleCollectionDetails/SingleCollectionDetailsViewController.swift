@@ -20,7 +20,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     // MARK: Properties
     private var viewModel: SingleCollectionDetailsViewModel?
-    private var collectionDetailsCollectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -73,23 +73,23 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     fileprivate func initCollectionView() {
         if let layout = viewModel?.customLayout , let cmpLayout = viewModel?.customCompareLayout {
-            collectionDetailsCollectionView = UICollectionView(
+            collectionView = UICollectionView(
                 frame: CGRect.zero,
                 collectionViewLayout: collectionId == Constants.CollectionDetails.compareCollectionID ? cmpLayout : layout
             )
-            view.addSubview(collectionDetailsCollectionView)
-            collectionDetailsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 72)
-            collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
-            collectionDetailsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-            collectionDetailsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+            view.addSubview(collectionView)
+            collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 72)
+            collectionView.autoPinEdge(.leading, to: .leading, of: view)
+            collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+            collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
             
-            collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
+            collectionView.register(CollectionDetailsViewCell.self)
             
-            collectionDetailsCollectionView.backgroundColor = .clear
-            collectionDetailsCollectionView.showsVerticalScrollIndicator = false
-            collectionDetailsCollectionView.dragInteractionEnabled = true
-            collectionDetailsCollectionView.bounces = false
-            viewModel?.initCollectionView(collectionView: collectionDetailsCollectionView)
+            collectionView.backgroundColor = .clear
+            collectionView.showsVerticalScrollIndicator = false
+            collectionView.dragInteractionEnabled = true
+            collectionView.bounces = false
+            viewModel?.initCollectionView(collectionView: collectionView)
         }
         
         
@@ -175,7 +175,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     fileprivate func centerInitialCollectionInTheCollectionView() {
         guard viewModel?.haveCollection ?? false else {return}
-        collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
                                                      at: .centeredHorizontally,
                                                      animated: false)
     }
@@ -234,6 +234,11 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         self.fpc.set(contentViewController: searchStocksVC)
         self.present(self.fpc, animated: true, completion: nil)
     }
+    
+    func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails) {
+        
+        self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: collectionID, delegate: self)
+    }
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
@@ -267,9 +272,17 @@ extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate
 
 extension SingleCollectionDetailsViewController: SearchStocksViewControllerDelegate {
     func stockSelected(source: SearchStocksViewController, stock: RemoteTickerDetails) {
-        if let cell = collectionDetailsCollectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell {
+        if let cell = collectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell {
             cell.addRemoteStock(stock)
         }
         self.fpc.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SingleCollectionDetailsViewController: MetricsViewControllerDelegate {
+    
+    func didDismissMetricsViewController() {
+        
+        self.collectionView.reloadData()
     }
 }

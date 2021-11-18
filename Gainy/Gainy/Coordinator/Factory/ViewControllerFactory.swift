@@ -139,6 +139,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateMetricsList() -> MetricsViewController {
+        let vc = MetricsViewController.instantiate(.discovery)
+        return vc
+    }
+    
     func instantiateCollectionDetails(colID: Int) -> SingleCollectionDetailsViewController {
         let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
         vc.collectionId = colID
