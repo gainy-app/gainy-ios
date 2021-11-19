@@ -3,10 +3,19 @@
 *General improvements* - MVP
 
 :new: *New:*
+<<<<<<< HEAD
 • CI
 
 :hammer_and_wrench: *Improvements*
 • -
+=======
+• Metrics: List all metrics
+• Metrics: Change ticker metrics settings
+• Metrics: Change collection metrics settings
+
+:hammer_and_wrench: *Improvements*
+• 
+>>>>>>> develop
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

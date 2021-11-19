@@ -29,9 +29,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     //Analytics
     var collectionID: Int {
-        let visibleRect = CGRect(origin: collectionDetailsCollectionView.contentOffset, size: collectionDetailsCollectionView.bounds.size)
+        let visibleRect = CGRect(origin: collectionView.contentOffset, size: collectionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-        if let visibleIndexPath = collectionDetailsCollectionView.indexPathForItem(at: visiblePoint), let collectionDetails = viewModel?.collectionDetails, collectionDetails.count > visibleIndexPath.row  {
+        if let visibleIndexPath = collectionView.indexPathForItem(at: visiblePoint), let collectionDetails = viewModel?.collectionDetails, collectionDetails.count > visibleIndexPath.row  {
             return collectionDetails[visibleIndexPath.row].id
         } else {
             // Let it be not found, -1 is reserved for the watchlist
@@ -100,7 +100,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
-        let searchTextView = UITextField(
+        let searchTextField = UITextField(
             frame: CGRect(
                 x: 16,
                 y: 24,
@@ -109,11 +109,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             )
         )
         
-        searchTextView.font = UIFont(name: "SFProDisplay-Regular", size: 16)
-        searchTextView.textColor = UIColor(named: "mainText")
-        searchTextView.layer.cornerRadius = 16
-        searchTextView.isUserInteractionEnabled = true
-        searchTextView.placeholder = "Search anything"
+        searchTextField.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        searchTextField.textColor = UIColor(named: "mainText")
+        searchTextField.layer.cornerRadius = 16
+        searchTextField.isUserInteractionEnabled = true
+        searchTextField.placeholder = "Search anything"
         let searchIconContainerView = UIView(
             frame: CGRect(
                 x: 0,
@@ -138,11 +138,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
         searchIconImageView.image = UIImage(named: "search")
         
-        searchTextView.leftView = searchIconContainerView
-        searchTextView.leftViewMode = .always
-        searchTextView.rightViewMode = .whileEditing
-        searchTextView.backgroundColor = UIColor.Gainy.lightBack
-        searchTextView.returnKeyType = .done
+        searchTextField.leftView = searchIconContainerView
+        searchTextField.leftViewMode = .always
+        searchTextField.rightViewMode = .whileEditing
+        searchTextField.backgroundColor = UIColor.Gainy.lightBack
+        searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
         let clearBtn = UIButton(
@@ -156,21 +156,21 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         clearBtn.setImage(UIImage(named: "search_clear"), for: .normal)
         clearBtn.addTarget(self, action: #selector(textFieldClear), for: .touchUpInside)
         btnFrame.addSubview(clearBtn)
-        searchTextView.rightView = btnFrame
+        searchTextField.rightView = btnFrame
         
-        searchTextView.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
-        searchTextView.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
-        searchTextView.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        searchTextView.delegate = self
-        navigationBarContainer.addSubview(searchTextView)
-        self.searchTextView = searchTextView
+        searchTextField.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
+        searchTextField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        searchTextField.delegate = self
+        navigationBarContainer.addSubview(searchTextField)
+        self.searchTextField = searchTextField
         
         view.addSubview(navigationBarContainer)
         
         let navigationBarTopOffset =
         navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
         
-        collectionDetailsCollectionView = UICollectionView(
+        collectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
                 y: navigationBarTopOffset,
@@ -179,24 +179,24 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             ),
             collectionViewLayout: customLayout
         )
-        collectionDetailsCollectionView.isSkeletonable = true
-        view.addSubview(collectionDetailsCollectionView)
-        collectionDetailsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
-        collectionDetailsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
-        collectionDetailsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        collectionDetailsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        collectionView.isSkeletonable = true
+        view.addSubview(collectionView)
+        collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        collectionView.autoPinEdge(.leading, to: .leading, of: view)
+        collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
         
-        collectionDetailsCollectionView.register(CollectionDetailsViewCell.self)
+        collectionView.register(CollectionDetailsViewCell.self)
         
-        collectionDetailsCollectionView.backgroundColor = .clear
-        collectionDetailsCollectionView.showsVerticalScrollIndicator = false
-        collectionDetailsCollectionView.dragInteractionEnabled = true
-        collectionDetailsCollectionView.bounces = false
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.dragInteractionEnabled = true
+        collectionView.bounces = false
         
-        collectionDetailsCollectionView.dataSource = dataSource
+        collectionView.dataSource = dataSource
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
-            collectionView: collectionDetailsCollectionView
+            collectionView: collectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
             let cell = self?.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
@@ -224,6 +224,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     
                     self.present(self.fpc, animated: true, completion: nil)
+                }
+                cell.onSettingsPressed = {[weak self]  ticker in
+                    guard let self = self else {return}        
+                    self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
                 }
             }
             return cell
@@ -294,7 +298,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             dprint("Reloading visible cells after MS clear")
             if var snapshot = self.dataSource?.snapshot() {
                 if snapshot.itemIdentifiers.count > 0 {
-                    let ids =  self.collectionDetailsCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                    let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
                     snapshot.reloadItems(ids)
                 }
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
@@ -388,11 +392,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     @objc func textFieldClear() {
-        searchTextView?.text = ""
-        searchController?.searchText = searchTextView?.text ?? ""
+        searchTextField?.text = ""
+        searchController?.searchText = searchTextField?.text ?? ""
         searchController?.clearAll()
         
-        searchTextView?.resignFirstResponder()
+        searchTextField?.resignFirstResponder()
         
         let oldFrame = CGRect(
             x: 16,
@@ -401,10 +405,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             height: 40
         )
         UIView.animate(withDuration: 0.3) {
-            self.collectionDetailsCollectionView.alpha = 1.0
+            self.collectionView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.discoverCollectionsBtn?.alpha = 1.0
-            self.searchTextView?.frame = oldFrame
+            self.searchTextField?.frame = oldFrame
         }
     }
     
@@ -414,10 +418,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController?.searchText = text
         
         if text.count > 0 {
-            searchTextView?.clearButtonMode = .always
-            searchTextView?.clearButtonMode = .whileEditing
+            searchTextField?.clearButtonMode = .always
+            searchTextField?.clearButtonMode = .whileEditing
         } else {
-            searchTextView?.clearButtonMode = .never
+            searchTextField?.clearButtonMode = .never
         }
     }
     
@@ -425,10 +429,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         GainyAnalytics.logEvent("collections_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         searchController?.searchText =  ""
         UIView.animate(withDuration: 0.3) {
-            self.collectionDetailsCollectionView.alpha = 0.0
+            self.collectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.discoverCollectionsBtn?.alpha = 0.0
-            self.searchTextView?.frame = CGRect(
+            self.searchTextField?.frame = CGRect(
                 x: 16,
                 y: 24,
                 width: self.view.bounds.width - (16 + 16),
@@ -457,7 +461,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         return layout
     }()
     
-    private var collectionDetailsCollectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     private var searchCollectionView: UICollectionView!
     
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>?
@@ -465,7 +469,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private var searchController: CollectionSearchController?
     private var discoverCollectionsBtn: UIButton?
-    private var searchTextView: UITextField?
+    private var searchTextField: UITextField?
     
     // MARK: Functions
     
@@ -606,7 +610,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
         
         if snap.sectionIdentifiers.count > 0 {
-            collectionDetailsCollectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
+            collectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
                                                          at: .centeredHorizontally,
                                                          animated: false)
         }
@@ -615,7 +619,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     func currentBackgroundImageFrame() -> CGRect {
         
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
-        if let cell: CollectionDetailsViewCell = collectionDetailsCollectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
+        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
             let horizontalView = cell.collectionHorizontalView
             return self.view.convert(horizontalView.frame, from: horizontalView)
         } else {
@@ -643,7 +647,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             dataSource?.apply(snapshot, animatingDifferences: false)
         }
-        searchTextView?.isEnabled = true
+        searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
     }
     
@@ -660,7 +664,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             dataSource?.apply(snapshot, animatingDifferences: false)
         }
-        searchTextView?.isEnabled = false
+        searchTextField?.isEnabled = false
         discoverCollectionsBtn?.isEnabled = false
         centerInitialCollectionInTheCollectionView()
     }
@@ -830,5 +834,14 @@ extension CollectionDetailsViewController: FloatingPanelControllerDelegate {
         if shouldDismissFloatingPanel {
             self.fpc.dismiss(animated: true, completion: nil)
         }
+    }
+}
+
+
+extension CollectionDetailsViewController: MetricsViewControllerDelegate {
+    
+    func didDismissMetricsViewController() {
+        
+        self.collectionView.reloadData()
     }
 }

@@ -7,6 +7,14 @@
 
 import UIKit
 
+struct AppProfileMetricsSetting {
+    
+    var id: Int
+    var fieldName: String
+    var collectionId: Int? = nil
+    var order: Int
+}
+
 final class UserProfileManager {
         
     static let shared = UserProfileManager()
@@ -20,6 +28,8 @@ final class UserProfileManager {
     var favHash: String {
         favoriteCollections.compactMap({String($0)}).joined()
     }
+    
+    var profileMetricsSettings: [AppProfileMetricsSetting] = Array()
     
     var interests: [Int] = Array()
     
@@ -46,7 +56,6 @@ final class UserProfileManager {
     
     
     /// Kind of data source for recommended collections and your collections
-    /// TODO: Borysov - implement the data source instead of using this
     var recommendedCollections: [Collection] = []
     var yourCollections: [Collection] = []
     
@@ -56,6 +65,7 @@ final class UserProfileManager {
         interests.removeAll()
         categories.removeAll()
         watchlist.removeAll()
+        profileMetricsSettings.removeAll()
         
         firstName = nil
         lastName = nil
@@ -88,6 +98,18 @@ final class UserProfileManager {
                     self.profileLoaded = false
                     return
                 }
+                guard let profileMetricsSettings = graphQLResult.data?.appProfileTickerMetricsSettings else {
+                    NotificationManager.shared.showError("Sorry... Failed to load profile info.")
+                    completion(false)
+                    self.profileLoaded = false
+                    return
+                }
+                
+                self.profileMetricsSettings = profileMetricsSettings.map({ item in
+                    let result = AppProfileMetricsSetting.init(id: item.id, fieldName: item.fieldName, collectionId: item.collectionId, order: item.order)
+                    return result
+                })
+                
                 let oldFavs = self.favoriteCollections
                 self.favoriteCollections = appProfile.profileFavoriteCollections.map({ item in
                     item.collectionId
@@ -282,6 +304,78 @@ final class UserProfileManager {
             }
             CollectionsManager.shared.loadWatchlistCollection {
                 completion(true)
+            }
+        }
+    }
+    
+    public func updateMetricsForTicker(_ f1: String,
+                                       _ f2: String,
+                                       _ f3: String,
+                                       _ f4: String,
+                                       _ f5: String,
+                                       _ f6: String,
+                                       completion: @escaping (_ success: Bool) -> Void) {
+        
+        guard let profileID = self.profileID else {
+            completion(false)
+            return
+        }
+        
+        let query = DeleteMetricsSessingsForTickerMutation.init(profileID: profileID)
+        Network.shared.apollo.perform(mutation: query) { result in
+            dprint("\(result)")
+            guard (try? result.get().data) != nil else {
+//                NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
+                completion(false)
+                return
+            }
+            
+            let updateQuery = InsertMetricsSessingsForTickerMutation.init(profileID: profileID, f1: f1, f2: f2, f3: f3, f4: f4, f5: f5, f6: f6)
+            Network.shared.apollo.perform(mutation: updateQuery) { updateResult in
+                dprint("\(updateResult)")
+                guard (try? updateResult.get().data) != nil else {
+//                    NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
+                    completion(false)
+                    return
+                }
+                
+                self.fetchProfile(completion: completion)
+            }
+        }
+    }
+    
+    public func updateMetricsForCollection(_ collectionID: Int,
+                                           _ f1: String,
+                                           _ f2: String,
+                                           _ f3: String,
+                                           _ f4: String,
+                                           _ f5: String,
+                                           completion: @escaping (_ success: Bool) -> Void) {
+        
+        guard let profileID = self.profileID else {
+            completion(false)
+            return
+        }
+        
+        let query = DeleteMetricsSessingsForCollectionMutation.init(profileID: profileID, collectionID: collectionID)
+        Network.shared.apollo.perform(mutation: query) { result in
+            dprint("\(result)")
+            guard (try? result.get().data) != nil else {
+//                NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
+                completion(false)
+                return
+            }
+            
+            let updateQuery = InsertMetricsSessingsForCollectionMutation.init(profileID: profileID, collectionID: collectionID,  f1: f1, f2: f2, f3: f3, f4: f4, f5: f5)
+            Network.shared.apollo.perform(mutation: updateQuery) { updateResult in
+                dprint("\(updateResult)")
+                guard (try? updateResult.get().data) != nil else {
+//                    NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
+                    completion(false)
+                    return
+                }
+                
+                self.fetchProfile(completion: completion)
             }
         }
     }

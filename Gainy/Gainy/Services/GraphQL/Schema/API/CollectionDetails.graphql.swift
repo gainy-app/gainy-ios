@@ -416,16 +416,68 @@ public struct RemoteTickerDetails: GraphQLFragment {
       description
       ticker_financials {
         __typename
-        pe_ratio
-        market_capitalization
-        highlight
-        dividend_growth
         symbol
         created_at
-        net_profit_margin
-        quarterly_revenue_growth_yoy
-        month_price_performance
+      }
+      ticker_highlights {
+        __typename
+        highlight
+      }
+      ticker_metrics {
+        __typename
+        profit_margin
+        avg_volume_10d
+        short_percent_outstanding
+        shares_outstanding
+        avg_volume_90d
+        shares_float
+        short_ratio
+        beta
+        absolute_historical_volatility_adjusted_current
+        relative_historical_volatility_adjusted_current
+        absolute_historical_volatility_adjusted_min_1y
+        absolute_historical_volatility_adjusted_max_1y
+        relative_historical_volatility_adjusted_min_1y
+        relative_historical_volatility_adjusted_max_1y
+        implied_volatility
+        revenue_growth_yoy
+        revenue_growth_fwd
+        ebitda_growth_yoy
+        eps_growth_yoy
+        eps_growth_fwd
+        address_city
+        address_state
+        address_county
+        address_full
+        exchange_name
+        market_capitalization
         enterprise_value_to_sales
+        price_to_earnings_ttm
+        price_to_sales_ttm
+        price_to_book_value
+        enterprise_value_to_ebitda
+        price_change_1m
+        price_change_3m
+        price_change_1y
+        dividend_yield
+        dividends_per_share
+        dividend_payout_ratio
+        years_of_consecutive_dividend_growth
+        dividend_frequency
+        eps_actual
+        eps_estimate
+        beaten_quarterly_eps_estimation_count_ttm
+        eps_surprise
+        revenue_estimate_avg_0y
+        revenue_ttm
+        revenue_per_share_ttm
+        net_income
+        roi
+        asset_cash_and_equivalents
+        roa
+        total_assets
+        ebitda
+        net_debt
       }
       ticker_categories {
         __typename
@@ -484,6 +536,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("ticker_financials", type: .nonNull(.list(.nonNull(.object(TickerFinancial.selections))))),
+      GraphQLField("ticker_highlights", type: .nonNull(.list(.nonNull(.object(TickerHighlight.selections))))),
+      GraphQLField("ticker_metrics", type: .object(TickerMetric.selections)),
       GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
       GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
@@ -498,8 +552,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -545,6 +599,26 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, forKey: "ticker_financials")
+    }
+  }
+
+  /// An array relationship
+  public var tickerHighlights: [TickerHighlight] {
+    get {
+      return (resultMap["ticker_highlights"] as! [ResultMap]).map { (value: ResultMap) -> TickerHighlight in TickerHighlight(unsafeResultMap: value) }
+    }
+    set {
+      resultMap.updateValue(newValue.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, forKey: "ticker_highlights")
+    }
+  }
+
+  /// An object relationship
+  public var tickerMetrics: TickerMetric? {
+    get {
+      return (resultMap["ticker_metrics"] as? ResultMap).flatMap { TickerMetric(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "ticker_metrics")
     }
   }
 
@@ -604,16 +678,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("pe_ratio", type: .scalar(Double.self)),
-        GraphQLField("market_capitalization", type: .scalar(Double.self)),
-        GraphQLField("highlight", type: .scalar(String.self)),
-        GraphQLField("dividend_growth", type: .scalar(float8.self)),
         GraphQLField("symbol", type: .scalar(String.self)),
         GraphQLField("created_at", type: .scalar(timestamptz.self)),
-        GraphQLField("net_profit_margin", type: .scalar(Double.self)),
-        GraphQLField("quarterly_revenue_growth_yoy", type: .scalar(Double.self)),
-        GraphQLField("month_price_performance", type: .scalar(Double.self)),
-        GraphQLField("enterprise_value_to_sales", type: .scalar(Double.self)),
       ]
     }
 
@@ -623,8 +689,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(peRatio: Double? = nil, marketCapitalization: Double? = nil, highlight: String? = nil, dividendGrowth: float8? = nil, symbol: String? = nil, createdAt: timestamptz? = nil, netProfitMargin: Double? = nil, quarterlyRevenueGrowthYoy: Double? = nil, monthPricePerformance: Double? = nil, enterpriseValueToSales: Double? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_financials", "pe_ratio": peRatio, "market_capitalization": marketCapitalization, "highlight": highlight, "dividend_growth": dividendGrowth, "symbol": symbol, "created_at": createdAt, "net_profit_margin": netProfitMargin, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "month_price_performance": monthPricePerformance, "enterprise_value_to_sales": enterpriseValueToSales])
+    public init(symbol: String? = nil, createdAt: timestamptz? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_financials", "symbol": symbol, "created_at": createdAt])
     }
 
     public var __typename: String {
@@ -633,42 +699,6 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var peRatio: Double? {
-      get {
-        return resultMap["pe_ratio"] as? Double
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "pe_ratio")
-      }
-    }
-
-    public var marketCapitalization: Double? {
-      get {
-        return resultMap["market_capitalization"] as? Double
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "market_capitalization")
-      }
-    }
-
-    public var highlight: String? {
-      get {
-        return resultMap["highlight"] as? String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "highlight")
-      }
-    }
-
-    public var dividendGrowth: float8? {
-      get {
-        return resultMap["dividend_growth"] as? float8
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "dividend_growth")
       }
     }
 
@@ -689,40 +719,602 @@ public struct RemoteTickerDetails: GraphQLFragment {
         resultMap.updateValue(newValue, forKey: "created_at")
       }
     }
+  }
 
-    public var netProfitMargin: Double? {
+  public struct TickerHighlight: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ticker_highlights"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("highlight", type: .scalar(String.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(highlight: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_highlights", "highlight": highlight])
+    }
+
+    public var __typename: String {
       get {
-        return resultMap["net_profit_margin"] as? Double
+        return resultMap["__typename"]! as! String
       }
       set {
-        resultMap.updateValue(newValue, forKey: "net_profit_margin")
+        resultMap.updateValue(newValue, forKey: "__typename")
       }
     }
 
-    public var quarterlyRevenueGrowthYoy: Double? {
+    public var highlight: String? {
       get {
-        return resultMap["quarterly_revenue_growth_yoy"] as? Double
+        return resultMap["highlight"] as? String
       }
       set {
-        resultMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+        resultMap.updateValue(newValue, forKey: "highlight")
+      }
+    }
+  }
+
+  public struct TickerMetric: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ticker_metrics"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("profit_margin", type: .scalar(float8.self)),
+        GraphQLField("avg_volume_10d", type: .scalar(float8.self)),
+        GraphQLField("short_percent_outstanding", type: .scalar(float8.self)),
+        GraphQLField("shares_outstanding", type: .scalar(bigint.self)),
+        GraphQLField("avg_volume_90d", type: .scalar(float8.self)),
+        GraphQLField("shares_float", type: .scalar(bigint.self)),
+        GraphQLField("short_ratio", type: .scalar(float8.self)),
+        GraphQLField("beta", type: .scalar(float8.self)),
+        GraphQLField("absolute_historical_volatility_adjusted_current", type: .scalar(float8.self)),
+        GraphQLField("relative_historical_volatility_adjusted_current", type: .scalar(float8.self)),
+        GraphQLField("absolute_historical_volatility_adjusted_min_1y", type: .scalar(float8.self)),
+        GraphQLField("absolute_historical_volatility_adjusted_max_1y", type: .scalar(float8.self)),
+        GraphQLField("relative_historical_volatility_adjusted_min_1y", type: .scalar(float8.self)),
+        GraphQLField("relative_historical_volatility_adjusted_max_1y", type: .scalar(float8.self)),
+        GraphQLField("implied_volatility", type: .scalar(float8.self)),
+        GraphQLField("revenue_growth_yoy", type: .scalar(float8.self)),
+        GraphQLField("revenue_growth_fwd", type: .scalar(float8.self)),
+        GraphQLField("ebitda_growth_yoy", type: .scalar(float8.self)),
+        GraphQLField("eps_growth_yoy", type: .scalar(float8.self)),
+        GraphQLField("eps_growth_fwd", type: .scalar(float8.self)),
+        GraphQLField("address_city", type: .scalar(String.self)),
+        GraphQLField("address_state", type: .scalar(String.self)),
+        GraphQLField("address_county", type: .scalar(String.self)),
+        GraphQLField("address_full", type: .scalar(String.self)),
+        GraphQLField("exchange_name", type: .scalar(String.self)),
+        GraphQLField("market_capitalization", type: .scalar(bigint.self)),
+        GraphQLField("enterprise_value_to_sales", type: .scalar(float8.self)),
+        GraphQLField("price_to_earnings_ttm", type: .scalar(float8.self)),
+        GraphQLField("price_to_sales_ttm", type: .scalar(float8.self)),
+        GraphQLField("price_to_book_value", type: .scalar(float8.self)),
+        GraphQLField("enterprise_value_to_ebitda", type: .scalar(float8.self)),
+        GraphQLField("price_change_1m", type: .scalar(float8.self)),
+        GraphQLField("price_change_3m", type: .scalar(float8.self)),
+        GraphQLField("price_change_1y", type: .scalar(float8.self)),
+        GraphQLField("dividend_yield", type: .scalar(float8.self)),
+        GraphQLField("dividends_per_share", type: .scalar(float8.self)),
+        GraphQLField("dividend_payout_ratio", type: .scalar(float8.self)),
+        GraphQLField("years_of_consecutive_dividend_growth", type: .scalar(Int.self)),
+        GraphQLField("dividend_frequency", type: .scalar(String.self)),
+        GraphQLField("eps_actual", type: .scalar(float8.self)),
+        GraphQLField("eps_estimate", type: .scalar(float8.self)),
+        GraphQLField("beaten_quarterly_eps_estimation_count_ttm", type: .scalar(Int.self)),
+        GraphQLField("eps_surprise", type: .scalar(float8.self)),
+        GraphQLField("revenue_estimate_avg_0y", type: .scalar(float8.self)),
+        GraphQLField("revenue_ttm", type: .scalar(float8.self)),
+        GraphQLField("revenue_per_share_ttm", type: .scalar(float8.self)),
+        GraphQLField("net_income", type: .scalar(float8.self)),
+        GraphQLField("roi", type: .scalar(float8.self)),
+        GraphQLField("asset_cash_and_equivalents", type: .scalar(float8.self)),
+        GraphQLField("roa", type: .scalar(float8.self)),
+        GraphQLField("total_assets", type: .scalar(float8.self)),
+        GraphQLField("ebitda", type: .scalar(float8.self)),
+        GraphQLField("net_debt", type: .scalar(float8.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(profitMargin: float8? = nil, avgVolume_10d: float8? = nil, shortPercentOutstanding: float8? = nil, sharesOutstanding: bigint? = nil, avgVolume_90d: float8? = nil, sharesFloat: bigint? = nil, shortRatio: float8? = nil, beta: float8? = nil, absoluteHistoricalVolatilityAdjustedCurrent: float8? = nil, relativeHistoricalVolatilityAdjustedCurrent: float8? = nil, absoluteHistoricalVolatilityAdjustedMin_1y: float8? = nil, absoluteHistoricalVolatilityAdjustedMax_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMin_1y: float8? = nil, relativeHistoricalVolatilityAdjustedMax_1y: float8? = nil, impliedVolatility: float8? = nil, revenueGrowthYoy: float8? = nil, revenueGrowthFwd: float8? = nil, ebitdaGrowthYoy: float8? = nil, epsGrowthYoy: float8? = nil, epsGrowthFwd: float8? = nil, addressCity: String? = nil, addressState: String? = nil, addressCounty: String? = nil, addressFull: String? = nil, exchangeName: String? = nil, marketCapitalization: bigint? = nil, enterpriseValueToSales: float8? = nil, priceToEarningsTtm: float8? = nil, priceToSalesTtm: float8? = nil, priceToBookValue: float8? = nil, enterpriseValueToEbitda: float8? = nil, priceChange_1m: float8? = nil, priceChange_3m: float8? = nil, priceChange_1y: float8? = nil, dividendYield: float8? = nil, dividendsPerShare: float8? = nil, dividendPayoutRatio: float8? = nil, yearsOfConsecutiveDividendGrowth: Int? = nil, dividendFrequency: String? = nil, epsActual: float8? = nil, epsEstimate: float8? = nil, beatenQuarterlyEpsEstimationCountTtm: Int? = nil, epsSurprise: float8? = nil, revenueEstimateAvg_0y: float8? = nil, revenueTtm: float8? = nil, revenuePerShareTtm: float8? = nil, netIncome: float8? = nil, roi: float8? = nil, assetCashAndEquivalents: float8? = nil, roa: float8? = nil, totalAssets: float8? = nil, ebitda: float8? = nil, netDebt: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_metrics", "profit_margin": profitMargin, "avg_volume_10d": avgVolume_10d, "short_percent_outstanding": shortPercentOutstanding, "shares_outstanding": sharesOutstanding, "avg_volume_90d": avgVolume_90d, "shares_float": sharesFloat, "short_ratio": shortRatio, "beta": beta, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "implied_volatility": impliedVolatility, "revenue_growth_yoy": revenueGrowthYoy, "revenue_growth_fwd": revenueGrowthFwd, "ebitda_growth_yoy": ebitdaGrowthYoy, "eps_growth_yoy": epsGrowthYoy, "eps_growth_fwd": epsGrowthFwd, "address_city": addressCity, "address_state": addressState, "address_county": addressCounty, "address_full": addressFull, "exchange_name": exchangeName, "market_capitalization": marketCapitalization, "enterprise_value_to_sales": enterpriseValueToSales, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "price_to_book_value": priceToBookValue, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "price_change_1m": priceChange_1m, "price_change_3m": priceChange_3m, "price_change_1y": priceChange_1y, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "dividend_payout_ratio": dividendPayoutRatio, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth, "dividend_frequency": dividendFrequency, "eps_actual": epsActual, "eps_estimate": epsEstimate, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "eps_surprise": epsSurprise, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_ttm": revenueTtm, "revenue_per_share_ttm": revenuePerShareTtm, "net_income": netIncome, "roi": roi, "asset_cash_and_equivalents": assetCashAndEquivalents, "roa": roa, "total_assets": totalAssets, "ebitda": ebitda, "net_debt": netDebt])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
       }
     }
 
-    public var monthPricePerformance: Double? {
+    public var profitMargin: float8? {
       get {
-        return resultMap["month_price_performance"] as? Double
+        return resultMap["profit_margin"] as? float8
       }
       set {
-        resultMap.updateValue(newValue, forKey: "month_price_performance")
+        resultMap.updateValue(newValue, forKey: "profit_margin")
       }
     }
 
-    public var enterpriseValueToSales: Double? {
+    public var avgVolume_10d: float8? {
       get {
-        return resultMap["enterprise_value_to_sales"] as? Double
+        return resultMap["avg_volume_10d"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "avg_volume_10d")
+      }
+    }
+
+    public var shortPercentOutstanding: float8? {
+      get {
+        return resultMap["short_percent_outstanding"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "short_percent_outstanding")
+      }
+    }
+
+    public var sharesOutstanding: bigint? {
+      get {
+        return resultMap["shares_outstanding"] as? bigint
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "shares_outstanding")
+      }
+    }
+
+    public var avgVolume_90d: float8? {
+      get {
+        return resultMap["avg_volume_90d"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "avg_volume_90d")
+      }
+    }
+
+    public var sharesFloat: bigint? {
+      get {
+        return resultMap["shares_float"] as? bigint
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "shares_float")
+      }
+    }
+
+    public var shortRatio: float8? {
+      get {
+        return resultMap["short_ratio"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "short_ratio")
+      }
+    }
+
+    public var beta: float8? {
+      get {
+        return resultMap["beta"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "beta")
+      }
+    }
+
+    public var absoluteHistoricalVolatilityAdjustedCurrent: float8? {
+      get {
+        return resultMap["absolute_historical_volatility_adjusted_current"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_current")
+      }
+    }
+
+    public var relativeHistoricalVolatilityAdjustedCurrent: float8? {
+      get {
+        return resultMap["relative_historical_volatility_adjusted_current"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_current")
+      }
+    }
+
+    public var absoluteHistoricalVolatilityAdjustedMin_1y: float8? {
+      get {
+        return resultMap["absolute_historical_volatility_adjusted_min_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_min_1y")
+      }
+    }
+
+    public var absoluteHistoricalVolatilityAdjustedMax_1y: float8? {
+      get {
+        return resultMap["absolute_historical_volatility_adjusted_max_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_max_1y")
+      }
+    }
+
+    public var relativeHistoricalVolatilityAdjustedMin_1y: float8? {
+      get {
+        return resultMap["relative_historical_volatility_adjusted_min_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_min_1y")
+      }
+    }
+
+    public var relativeHistoricalVolatilityAdjustedMax_1y: float8? {
+      get {
+        return resultMap["relative_historical_volatility_adjusted_max_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_max_1y")
+      }
+    }
+
+    public var impliedVolatility: float8? {
+      get {
+        return resultMap["implied_volatility"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "implied_volatility")
+      }
+    }
+
+    public var revenueGrowthYoy: float8? {
+      get {
+        return resultMap["revenue_growth_yoy"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "revenue_growth_yoy")
+      }
+    }
+
+    public var revenueGrowthFwd: float8? {
+      get {
+        return resultMap["revenue_growth_fwd"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "revenue_growth_fwd")
+      }
+    }
+
+    public var ebitdaGrowthYoy: float8? {
+      get {
+        return resultMap["ebitda_growth_yoy"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "ebitda_growth_yoy")
+      }
+    }
+
+    public var epsGrowthYoy: float8? {
+      get {
+        return resultMap["eps_growth_yoy"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "eps_growth_yoy")
+      }
+    }
+
+    public var epsGrowthFwd: float8? {
+      get {
+        return resultMap["eps_growth_fwd"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "eps_growth_fwd")
+      }
+    }
+
+    public var addressCity: String? {
+      get {
+        return resultMap["address_city"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "address_city")
+      }
+    }
+
+    public var addressState: String? {
+      get {
+        return resultMap["address_state"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "address_state")
+      }
+    }
+
+    public var addressCounty: String? {
+      get {
+        return resultMap["address_county"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "address_county")
+      }
+    }
+
+    public var addressFull: String? {
+      get {
+        return resultMap["address_full"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "address_full")
+      }
+    }
+
+    public var exchangeName: String? {
+      get {
+        return resultMap["exchange_name"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "exchange_name")
+      }
+    }
+
+    public var marketCapitalization: bigint? {
+      get {
+        return resultMap["market_capitalization"] as? bigint
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "market_capitalization")
+      }
+    }
+
+    public var enterpriseValueToSales: float8? {
+      get {
+        return resultMap["enterprise_value_to_sales"] as? float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+      }
+    }
+
+    public var priceToEarningsTtm: float8? {
+      get {
+        return resultMap["price_to_earnings_ttm"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_to_earnings_ttm")
+      }
+    }
+
+    public var priceToSalesTtm: float8? {
+      get {
+        return resultMap["price_to_sales_ttm"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_to_sales_ttm")
+      }
+    }
+
+    public var priceToBookValue: float8? {
+      get {
+        return resultMap["price_to_book_value"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_to_book_value")
+      }
+    }
+
+    public var enterpriseValueToEbitda: float8? {
+      get {
+        return resultMap["enterprise_value_to_ebitda"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "enterprise_value_to_ebitda")
+      }
+    }
+
+    public var priceChange_1m: float8? {
+      get {
+        return resultMap["price_change_1m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_change_1m")
+      }
+    }
+
+    public var priceChange_3m: float8? {
+      get {
+        return resultMap["price_change_3m"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_change_3m")
+      }
+    }
+
+    public var priceChange_1y: float8? {
+      get {
+        return resultMap["price_change_1y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "price_change_1y")
+      }
+    }
+
+    public var dividendYield: float8? {
+      get {
+        return resultMap["dividend_yield"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "dividend_yield")
+      }
+    }
+
+    public var dividendsPerShare: float8? {
+      get {
+        return resultMap["dividends_per_share"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "dividends_per_share")
+      }
+    }
+
+    public var dividendPayoutRatio: float8? {
+      get {
+        return resultMap["dividend_payout_ratio"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "dividend_payout_ratio")
+      }
+    }
+
+    public var yearsOfConsecutiveDividendGrowth: Int? {
+      get {
+        return resultMap["years_of_consecutive_dividend_growth"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "years_of_consecutive_dividend_growth")
+      }
+    }
+
+    public var dividendFrequency: String? {
+      get {
+        return resultMap["dividend_frequency"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "dividend_frequency")
+      }
+    }
+
+    public var epsActual: float8? {
+      get {
+        return resultMap["eps_actual"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "eps_actual")
+      }
+    }
+
+    public var epsEstimate: float8? {
+      get {
+        return resultMap["eps_estimate"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "eps_estimate")
+      }
+    }
+
+    public var beatenQuarterlyEpsEstimationCountTtm: Int? {
+      get {
+        return resultMap["beaten_quarterly_eps_estimation_count_ttm"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "beaten_quarterly_eps_estimation_count_ttm")
+      }
+    }
+
+    public var epsSurprise: float8? {
+      get {
+        return resultMap["eps_surprise"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "eps_surprise")
+      }
+    }
+
+    public var revenueEstimateAvg_0y: float8? {
+      get {
+        return resultMap["revenue_estimate_avg_0y"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "revenue_estimate_avg_0y")
+      }
+    }
+
+    public var revenueTtm: float8? {
+      get {
+        return resultMap["revenue_ttm"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "revenue_ttm")
+      }
+    }
+
+    public var revenuePerShareTtm: float8? {
+      get {
+        return resultMap["revenue_per_share_ttm"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "revenue_per_share_ttm")
+      }
+    }
+
+    public var netIncome: float8? {
+      get {
+        return resultMap["net_income"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "net_income")
+      }
+    }
+
+    public var roi: float8? {
+      get {
+        return resultMap["roi"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "roi")
+      }
+    }
+
+    public var assetCashAndEquivalents: float8? {
+      get {
+        return resultMap["asset_cash_and_equivalents"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "asset_cash_and_equivalents")
+      }
+    }
+
+    public var roa: float8? {
+      get {
+        return resultMap["roa"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "roa")
+      }
+    }
+
+    public var totalAssets: float8? {
+      get {
+        return resultMap["total_assets"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "total_assets")
+      }
+    }
+
+    public var ebitda: float8? {
+      get {
+        return resultMap["ebitda"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "ebitda")
+      }
+    }
+
+    public var netDebt: float8? {
+      get {
+        return resultMap["net_debt"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "net_debt")
       }
     }
   }

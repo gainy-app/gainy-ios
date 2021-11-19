@@ -24,4 +24,10 @@
       created_at
     }
   }
+  app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
+    id
+    field_name
+    collection_id
+    order
+  }
 }

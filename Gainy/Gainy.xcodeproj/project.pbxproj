@@ -138,8 +138,6 @@
 		33BEB93627235ADE005237CB /* FetchStockMedianMonth.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93227235ADD005237CB /* FetchStockMedianMonth.graphql.swift */; };
 		33BEB93727235ADE005237CB /* FetchStockMedianDay.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93327235ADE005237CB /* FetchStockMedianDay.graphql.swift */; };
 		33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BEB93927235B02005237CB /* ScatterChartViewModel.swift */; };
-		33BF83762746330600643C97 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
-		33BF83772746330600643C97 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		33C4E9782726A782008D3006 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C4E9772726A782008D3006 /* Configuration.swift */; };
 		33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */; };
 		33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */; };
@@ -303,6 +301,22 @@
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
+		85695AE42745130200759569 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE32745130200759569 /* MetricsViewController.swift */; };
+		85695AE827455EF300759569 /* MetricsBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AE627455EF300759569 /* MetricsBottomView.xib */; };
+		85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE727455EF300759569 /* MetricsBottomView.swift */; };
+		85695AEB27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */; };
+		85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AEC274594BE00759569 /* MetricsHeaderView.swift */; };
+		85695AF1274594BF00759569 /* MetricsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AED274594BF00759569 /* MetricsFooterView.swift */; };
+		85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEE274594BF00759569 /* MetricsHeaderView.xib */; };
+		85695AF3274594BF00759569 /* MetricsFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEF274594BF00759569 /* MetricsFooterView.xib */; };
+		85695AF92746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85695AF52746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql */; };
+		85695AFA2746BAD400759569 /* InsertMetricsSessingsForCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85695AF62746BAD400759569 /* InsertMetricsSessingsForCollection.graphql */; };
+		85695AFB2746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85695AF72746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql */; };
+		85695AFC2746BAD400759569 /* InsertMetricsSessingsForTicker.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85695AF82746BAD400759569 /* InsertMetricsSessingsForTicker.graphql */; };
+		85695B012746C18200759569 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AFD2746C18100759569 /* DeleteMetricsSessingsForTicker.graphql.swift */; };
+		85695B022746C18200759569 /* InsertMetricsSessingsForTicker.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */; };
+		85695B032746C18200759569 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */; };
+		85695B042746C18200759569 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */; };
 		8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */; };
 		8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */; };
 		8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */; };
@@ -374,6 +388,8 @@
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
 		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
+		90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
+		90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,13 +410,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		33BF83782746330700643C97 /* Embed Frameworks */ = {
+		90491E32274645ED00B5E642 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				33BF83772746330600643C97 /* LinkKit.xcframework in Embed Frameworks */,
+				90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,6 +726,22 @@
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
+		85695AE32745130200759569 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
+		85695AE627455EF300759569 /* MetricsBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetricsBottomView.xib; sourceTree = "<group>"; };
+		85695AE727455EF300759569 /* MetricsBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsBottomView.swift; sourceTree = "<group>"; };
+		85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickerDetailsMarketInnerViewCell.xib; sourceTree = "<group>"; };
+		85695AEC274594BE00759569 /* MetricsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsHeaderView.swift; sourceTree = "<group>"; };
+		85695AED274594BF00759569 /* MetricsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsFooterView.swift; sourceTree = "<group>"; };
+		85695AEE274594BF00759569 /* MetricsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetricsHeaderView.xib; sourceTree = "<group>"; };
+		85695AEF274594BF00759569 /* MetricsFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetricsFooterView.xib; sourceTree = "<group>"; };
+		85695AF52746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteMetricsSessingsForCollection.graphql; sourceTree = "<group>"; };
+		85695AF62746BAD400759569 /* InsertMetricsSessingsForCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertMetricsSessingsForCollection.graphql; sourceTree = "<group>"; };
+		85695AF72746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteMetricsSessingsForTicker.graphql; sourceTree = "<group>"; };
+		85695AF82746BAD400759569 /* InsertMetricsSessingsForTicker.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertMetricsSessingsForTicker.graphql; sourceTree = "<group>"; };
+		85695AFD2746C18100759569 /* DeleteMetricsSessingsForTicker.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteMetricsSessingsForTicker.graphql.swift; sourceTree = "<group>"; };
+		85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertMetricsSessingsForTicker.graphql.swift; sourceTree = "<group>"; };
+		85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteMetricsSessingsForCollection.graphql.swift; sourceTree = "<group>"; };
+		85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertMetricsSessingsForCollection.graphql.swift; sourceTree = "<group>"; };
 		8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionCaptionCell.swift; sourceTree = "<group>"; };
 		8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroductionCaptionCell.xib; sourceTree = "<group>"; };
 		8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsHeaderView.swift; sourceTree = "<group>"; };
@@ -811,7 +843,7 @@
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
-				33BF83762746330600643C97 /* LinkKit.xcframework in Frameworks */,
+				90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
@@ -844,11 +876,15 @@
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */,
 				859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */,
+				85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */,
+				85695AFD2746C18100759569 /* DeleteMetricsSessingsForTicker.graphql.swift */,
 				85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */,
 				85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */,
 				85EDC1472728065A00866AD2 /* DeleteTickerFromWatchlist.graphql.swift */,
 				85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */,
+				85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */,
 				85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */,
 				85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */,
 				85EDC1462728065A00866AD2 /* InsertTickerToWatchlist.graphql.swift */,
@@ -1035,6 +1071,7 @@
 				33BDCF6E26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift */,
 				33BDCF7026CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift */,
 				33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */,
+				85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */,
 				33BDCF7226CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift */,
 				33BDCF7426CE8B66000DE770 /* TickerDetailsWSRViewCell.swift */,
 				33E1827926D3804600A1D2AC /* WSRView.swift */,
@@ -1588,6 +1625,7 @@
 				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
+				85695AF42746BAD400759569 /* Metrics */,
 				33019611273E824100BE4FDC /* Plaid */,
 				859B2EC6270605430084CCDC /* Profile */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
@@ -1793,6 +1831,7 @@
 			children = (
 				8505FCF6273965220061AB36 /* Brokers */,
 				3AFE0C402690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift */,
+				85695AE52745131200759569 /* Metrics */,
 				3AFE0C442690CEA100C25A8F /* TickerViewController.swift */,
 				33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */,
 				33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */,
@@ -1825,6 +1864,31 @@
 				8505FCF827399DF00061AB36 /* BrokerViewCell.xib */,
 			);
 			path = Brokers;
+			sourceTree = "<group>";
+		};
+		85695AE52745131200759569 /* Metrics */ = {
+			isa = PBXGroup;
+			children = (
+				85695AE32745130200759569 /* MetricsViewController.swift */,
+				85695AEF274594BF00759569 /* MetricsFooterView.xib */,
+				85695AED274594BF00759569 /* MetricsFooterView.swift */,
+				85695AEE274594BF00759569 /* MetricsHeaderView.xib */,
+				85695AEC274594BE00759569 /* MetricsHeaderView.swift */,
+				85695AE627455EF300759569 /* MetricsBottomView.xib */,
+				85695AE727455EF300759569 /* MetricsBottomView.swift */,
+			);
+			path = Metrics;
+			sourceTree = "<group>";
+		};
+		85695AF42746BAD400759569 /* Metrics */ = {
+			isa = PBXGroup;
+			children = (
+				85695AF62746BAD400759569 /* InsertMetricsSessingsForCollection.graphql */,
+				85695AF52746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql */,
+				85695AF82746BAD400759569 /* InsertMetricsSessingsForTicker.graphql */,
+				85695AF72746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql */,
+			);
+			path = Metrics;
 			sourceTree = "<group>";
 		};
 		8579516E26E22EFE003B751C /* IntroductionCaptionCell */ = {
@@ -1963,7 +2027,7 @@
 				3A930F2E265CC679000FD3EB /* SwiftLint */,
 				33467CF726C6714E00811F74 /* Firebase crashes */,
 				33B9887626CA995C008B8AC9 /* TODO Warnings */,
-				33BF83782746330700643C97 /* Embed Frameworks */,
+				90491E32274645ED00B5E642 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2098,12 +2162,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
+				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
 				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
 				85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */,
+				85695AF3274594BF00759569 /* MetricsFooterView.xib in Resources */,
 				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
+				85695AF92746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */,
 				3330BD0F26FA6B850079C899 /* FetchStockMedianDay.graphql in Resources */,
@@ -2119,6 +2186,8 @@
 				857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */,
 				3330BD1126FA6B850079C899 /* FetchStockMedianWeek.graphql in Resources */,
 				85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */,
+				85695AFC2746BAD400759569 /* InsertMetricsSessingsForTicker.graphql in Resources */,
+				85695AFB2746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql in Resources */,
 				85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */,
 				8579517626E26D8F003B751C /* PersonalizationPickInterestsHeaderView.xib in Resources */,
 				333CC16226DCB34700690245 /* StockViewCell.xib in Resources */,
@@ -2128,7 +2197,9 @@
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				85EDC14B27281EA700866AD2 /* FetchTickers.graphql in Resources */,
+				85695AFA2746BAD400759569 /* InsertMetricsSessingsForCollection.graphql in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
+				85695AEB27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib in Resources */,
 				85EDC145272801A000866AD2 /* DeleteTickerFromWatchlist.graphql in Resources */,
 				8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */,
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
@@ -2142,6 +2213,7 @@
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */,
 				85EDC144272801A000866AD2 /* InsertTickerToWatchlist.graphql in Resources */,
+				85695AE827455EF300759569 /* MetricsBottomView.xib in Resources */,
 				339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */,
@@ -2290,6 +2362,7 @@
 				3A5ADA6B268DA179008659E8 /* Swipeable.swift in Sources */,
 				3A930EDD265C1909000FD3EB /* DiscoverCollectionsViewController.swift in Sources */,
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
+				85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */,
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
@@ -2322,6 +2395,7 @@
 				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
+				85695B022746C18200759569 /* InsertMetricsSessingsForTicker.graphql.swift in Sources */,
 				85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */,
 				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
@@ -2378,6 +2452,7 @@
 				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
+				85695AF1274594BF00759569 /* MetricsFooterView.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
@@ -2395,6 +2470,7 @@
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
 				33FE9E4826D519A700FABC70 /* MultiLineChartView.swift in Sources */,
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
+				85695B042746C18200759569 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */,
 				33CD8DB92744E4150032C1F2 /* GetPlaidTransactions.graphql.swift in Sources */,
 				3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
@@ -2402,6 +2478,7 @@
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
+				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
@@ -2457,9 +2534,11 @@
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
+				85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
 				85EDC14D2728282400866AD2 /* FetchTickers.graphql.swift in Sources */,
+				85695B032746C18200759569 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */,
 				851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */,
 				3302E0B726DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift in Sources */,
 				33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */,
@@ -2513,6 +2592,7 @@
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
+				85695B012746C18200759569 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
 				85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */,
 				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,
 				33E1827C26D3967F00A1D2AC /* String+Sizes.swift in Sources */,
@@ -2669,7 +2749,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2792,7 +2872,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2974,9 +3054,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -2989,7 +3069,7 @@
 				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Dev 2";
 				SCHEME_CONFIGURATION = Prod;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3002,9 +3082,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3017,7 +3097,7 @@
 				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Prod Prov";
 				SCHEME_CONFIGURATION = Prod;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

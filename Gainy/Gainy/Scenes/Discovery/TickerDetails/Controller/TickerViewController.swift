@@ -150,6 +150,13 @@ final class TickerViewController: BaseViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func viewAllMetricsAction(_ sender: Any) {
+        
+        guard let ticker = viewModel?.ticker.ticker else {
+            return
+        }
+        self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: nil, delegate: self)
+    }
     //MARK: - Bottom action
     
     /// Model to cahnge bottom view
@@ -239,6 +246,15 @@ extension TickerViewController: BrokersViewControllerDelegate {
     
     func didDismissBrokersViewController() {
         
+        self.tableView.reloadData()
+    }
+}
+
+extension TickerViewController: MetricsViewControllerDelegate {
+    
+    func didDismissMetricsViewController() {
+        
+        viewModel?.dataSource.ticker.updateMarketData()
         self.tableView.reloadData()
     }
 }

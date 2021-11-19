@@ -3,6 +3,7 @@ struct TickerDetails {
     let companyName: String
     let description: String
     let financialMetrics: TickerFinancialMetrics
+    let tickerMetrics: TickerMetricsData
     let rawTicker: RemoteTickerDetails
 }
 

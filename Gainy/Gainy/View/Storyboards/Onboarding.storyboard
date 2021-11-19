@@ -181,7 +181,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-ck-xOZ">
-                                <rect key="frame" x="46.5" y="562.5" width="321" height="95.5"/>
+                                <rect key="frame" x="46.5" y="564.5" width="321" height="93.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="hDd-yX-cVg"/>
                                 </constraints>
@@ -722,7 +722,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with one of the following options" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZT-Ru-bqf">
-                                <rect key="frame" x="75.5" y="418" width="263" height="20"/>
+                                <rect key="frame" x="64" y="418" width="286" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="pby-Ha-Ftx"/>
                                 </constraints>
@@ -731,7 +731,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Almost done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-eV-wih">
-                                <rect key="frame" x="110" y="356" width="194" height="32"/>
+                                <rect key="frame" x="112.5" y="356" width="189.5" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="sLe-4U-UTP"/>
                                 </constraints>
@@ -847,16 +847,16 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="I1l-7F-EPp">
-                                <rect key="frame" x="61.5" y="773" width="291" height="14"/>
+                                <rect key="frame" x="54" y="773" width="306.5" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking “Register” you agree with " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-d1-YWT">
-                                        <rect key="frame" x="0.0" y="0.0" width="186" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yls-7v-6Io">
-                                        <rect key="frame" x="189" y="0.0" width="102" height="14"/>
+                                        <rect key="frame" x="204.5" y="0.0" width="102" height="14"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Client Agreement">
@@ -1260,28 +1260,28 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
         <designable name="Q4h-3q-Pkb">
-            <size key="intrinsicContentSize" width="130" height="20"/>
+            <size key="intrinsicContentSize" width="132" height="19"/>
         </designable>
         <designable name="UZm-4s-wQX">
-            <size key="intrinsicContentSize" width="81" height="32"/>
+            <size key="intrinsicContentSize" width="83" height="31"/>
         </designable>
         <designable name="Vqi-7P-fK5">
-            <size key="intrinsicContentSize" width="48" height="32"/>
+            <size key="intrinsicContentSize" width="50" height="31"/>
         </designable>
         <designable name="Xzu-k0-XRA">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
         <designable name="hlB-m7-gpl">
-            <size key="intrinsicContentSize" width="141" height="20"/>
+            <size key="intrinsicContentSize" width="144" height="19"/>
         </designable>
         <designable name="k8J-Tc-Hjf">
-            <size key="intrinsicContentSize" width="51" height="32"/>
+            <size key="intrinsicContentSize" width="51" height="31"/>
         </designable>
         <designable name="wXf-gr-Gu1">
-            <size key="intrinsicContentSize" width="59" height="32"/>
+            <size key="intrinsicContentSize" width="60" height="31"/>
         </designable>
     </designables>
     <resources>

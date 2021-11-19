@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
+        <array key="SFProDisplay-Semibold.ttf">
+            <string>SFProDisplay-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="PnD-hV-yxQ" customClass="MetricsBottomView" customModule="Gainy" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="101"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SM2-6B-RJx" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                    <rect key="frame" x="32" y="28" width="350" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="i0L-cb-y9Y"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                    <state key="normal" title="Save">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                            <integer key="value" value="0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="onSaveButtonTap:" destination="PnD-hV-yxQ" eventType="touchUpInside" id="ymK-rv-koJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select 6 metrics please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVS-81-J14">
+                    <rect key="frame" x="123.5" y="52" width="167" height="19"/>
+                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                    <color key="textColor" red="0.91161090140000001" green="0.3636762798" blue="0.44705456500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="SM2-6B-RJx" firstAttribute="leading" secondItem="PnD-hV-yxQ" secondAttribute="leading" constant="32" id="BPg-bX-Nbr"/>
+                <constraint firstItem="OVS-81-J14" firstAttribute="centerX" secondItem="PnD-hV-yxQ" secondAttribute="centerX" id="Lx8-nT-LDf"/>
+                <constraint firstAttribute="trailing" secondItem="SM2-6B-RJx" secondAttribute="trailing" constant="32" id="dIk-5Y-Bcl"/>
+                <constraint firstAttribute="bottom" secondItem="SM2-6B-RJx" secondAttribute="bottom" constant="9" id="e1g-Md-n9o"/>
+                <constraint firstAttribute="bottom" secondItem="OVS-81-J14" secondAttribute="bottom" constant="30" id="nTW-ne-c9H"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="saveButton" destination="SM2-6B-RJx" id="TBu-Ei-dum"/>
+                <outlet property="textLabel" destination="OVS-81-J14" id="4aN-JY-RmU"/>
+            </connections>
+            <point key="canvasLocation" x="73.188405797101453" y="-370.98214285714283"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="SM2-6B-RJx">
+            <size key="intrinsicContentSize" width="36" height="31"/>
+        </designable>
+    </designables>
+</document>
