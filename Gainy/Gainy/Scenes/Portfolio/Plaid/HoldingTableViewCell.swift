@@ -8,6 +8,10 @@
 import UIKit
 
 final class HoldingTableViewCell: UITableViewCell {
+    
+    static let heightWithoutEvents: CGFloat = 252.0
+    static let heightWithEvents: CGFloat = 252.0
+    
     var cellHeightChanged: ((CGFloat) -> Void)?
     
     //MARK: - Outlet
@@ -17,6 +21,7 @@ final class HoldingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lttView: CornerView!
     
+    @IBOutlet weak var expandBtn: UIButton!
     @IBOutlet weak var shadowView: CornerView! {
         didSet {
             shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
@@ -44,11 +49,25 @@ final class HoldingTableViewCell: UITableViewCell {
         }
     }
     
+    var isExpanded: Bool = false {
+        didSet {
+            expandBtn.isSelected = isExpanded
+            securitiesTableView.isHidden = !isExpanded
+            cellHeightChanged?(isExpanded ? 452.0 : HoldingTableViewCell.heightWithEvents)
+        }
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
     }
+    
+    //MARK: - Actions
+    
+    @IBAction func toggleExpandAction(_ sender: Any) {
+        isExpanded.toggle()
+    }
+    
 }
 
 extension HoldingTableViewCell: UITableViewDataSource {

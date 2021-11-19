@@ -66,7 +66,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="79" width="414" height="468"/>
+                                <rect key="frame" x="0.0" y="79" width="414" height="471"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -92,13 +92,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="655.5" width="350" height="57.5"/>
+                                <rect key="frame" x="32" y="657" width="350" height="56"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="563" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="566" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -357,7 +357,7 @@
                                                                 <constraint firstAttribute="height" constant="1" id="bir-AJ-Dk7"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxc-G1-O8w">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uxc-G1-O8w">
                                                             <rect key="frame" x="334" y="135" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="46L-12-hk6"/>
@@ -366,6 +366,9 @@
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="small_expand"/>
                                                             <state key="selected" image="small_dexpand"/>
+                                                            <connections>
+                                                                <action selector="toggleExpandAction:" destination="xqP-hr-YRU" eventType="touchUpInside" id="cuN-xB-GxB"/>
+                                                            </connections>
                                                         </button>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="268-IM-fw8" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="16" y="145" width="51" height="24"/>
@@ -464,9 +467,32 @@
                                                                         <subviews>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtC-Z6-wj0" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="350" height="80"/>
+                                                                                <subviews>
+                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJR-CL-6Du" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
+                                                                                        <rect key="frame" x="86.5" y="17.5" width="12" height="12"/>
+                                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="12" id="KiJ-wg-cGg"/>
+                                                                                            <constraint firstAttribute="height" constant="12" id="Ubv-gD-fgc"/>
+                                                                                        </constraints>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                                                                                <color key="value" red="0.42352941179999998" green="0.36470588240000001" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </view>
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORx-FV-DkZ">
+                                                                                        <rect key="frame" x="102.5" y="16" width="21" height="14.5"/>
+                                                                                        <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                        <color key="textColor" name="mainText"/>
+                                                                                        <nil key="highlightedColor"/>
+                                                                                    </label>
+                                                                                </subviews>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <constraints>
+                                                                                    <constraint firstItem="ORx-FV-DkZ" firstAttribute="leading" secondItem="kJR-CL-6Du" secondAttribute="trailing" constant="4" id="3iM-M1-Y3o"/>
                                                                                     <constraint firstAttribute="height" constant="80" id="5vq-40-bfF"/>
+                                                                                    <constraint firstItem="ORx-FV-DkZ" firstAttribute="centerY" secondItem="kJR-CL-6Du" secondAttribute="centerY" id="Ljx-en-LK4"/>
                                                                                 </constraints>
                                                                                 <userDefinedRuntimeAttributes>
                                                                                     <userDefinedRuntimeAttribute type="color" keyPath="dashColor">
@@ -474,12 +500,88 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,035.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxU-QX-iO9">
+                                                                                <rect key="frame" x="261.5" y="16" width="72.5" height="19.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
+                                                                                <color key="textColor" name="mainText"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avg Cost" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh5-ED-C8S">
+                                                                                <rect key="frame" x="16" y="57.5" width="47.5" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" name="mainLightGray"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufv-SD-vLw">
+                                                                                <rect key="frame" x="16" y="16" width="62.5" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" name="mainText"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$58.30" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIE-SB-6Pk">
+                                                                                <rect key="frame" x="67.5" y="57.5" width="38.5" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" name="mainText"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb7-QH-Qp7">
+                                                                                <rect key="frame" x="205" y="57.5" width="32" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7z-ed-rEj">
+                                                                                <rect key="frame" x="253" y="57.5" width="38" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" name="mainRed"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujg-I5-Bg6">
+                                                                                <rect key="frame" x="301" y="57.5" width="33" height="14.5"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" name="mainRed"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-T2-rk0">
+                                                                                <rect key="frame" x="295" y="64" width="2" height="2"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="2" id="9uV-Oz-BHV"/>
+                                                                                    <constraint firstAttribute="height" constant="2" id="ir0-b2-jIg"/>
+                                                                                </constraints>
+                                                                            </imageView>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="NJv-O2-oMT">
+                                                                                <rect key="frame" x="241" y="61" width="8" height="8"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="8" id="Dvy-xd-IpC"/>
+                                                                                    <constraint firstAttribute="height" constant="8" id="dmN-Cn-cwP"/>
+                                                                                </constraints>
+                                                                            </imageView>
                                                                         </subviews>
                                                                         <constraints>
+                                                                            <constraint firstItem="3AF-T2-rk0" firstAttribute="leading" secondItem="a7z-ed-rEj" secondAttribute="trailing" constant="4" id="0dB-bJ-Tck"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Sh5-ED-C8S" secondAttribute="bottom" constant="16" id="11X-fM-z4T"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="hxU-QX-iO9" secondAttribute="trailing" constant="16" id="1Qp-Qr-kyM"/>
+                                                                            <constraint firstItem="zIE-SB-6Pk" firstAttribute="centerY" secondItem="Sh5-ED-C8S" secondAttribute="centerY" id="5bD-ut-6ec"/>
+                                                                            <constraint firstItem="3AF-T2-rk0" firstAttribute="centerY" secondItem="a7z-ed-rEj" secondAttribute="centerY" id="71J-JV-oRY"/>
+                                                                            <constraint firstItem="kJR-CL-6Du" firstAttribute="leading" secondItem="Ufv-SD-vLw" secondAttribute="trailing" constant="8" id="7YI-li-gS9"/>
+                                                                            <constraint firstItem="Ufv-SD-vLw" firstAttribute="leading" secondItem="J4f-lQ-zE5" secondAttribute="leading" constant="16" id="B5L-0U-55w"/>
+                                                                            <constraint firstItem="ujg-I5-Bg6" firstAttribute="leading" secondItem="3AF-T2-rk0" secondAttribute="trailing" constant="4" id="O0F-fU-n6P"/>
+                                                                            <constraint firstItem="ujg-I5-Bg6" firstAttribute="centerY" secondItem="NJv-O2-oMT" secondAttribute="centerY" id="OCV-cg-eXK"/>
                                                                             <constraint firstAttribute="bottom" secondItem="YtC-Z6-wj0" secondAttribute="bottom" constant="8" id="P9U-49-pR4"/>
+                                                                            <constraint firstItem="hxU-QX-iO9" firstAttribute="top" secondItem="J4f-lQ-zE5" secondAttribute="top" constant="16" id="T08-Zf-CZn"/>
+                                                                            <constraint firstItem="Sh5-ED-C8S" firstAttribute="leading" secondItem="J4f-lQ-zE5" secondAttribute="leading" constant="16" id="Uf3-ex-tha"/>
                                                                             <constraint firstItem="YtC-Z6-wj0" firstAttribute="leading" secondItem="J4f-lQ-zE5" secondAttribute="leading" id="Wxv-be-zYi"/>
+                                                                            <constraint firstItem="kJR-CL-6Du" firstAttribute="centerY" secondItem="Ufv-SD-vLw" secondAttribute="centerY" id="bWn-2d-3OL"/>
                                                                             <constraint firstItem="YtC-Z6-wj0" firstAttribute="top" secondItem="J4f-lQ-zE5" secondAttribute="top" id="dLK-Kz-3uX"/>
                                                                             <constraint firstAttribute="trailing" secondItem="YtC-Z6-wj0" secondAttribute="trailing" id="eVp-fm-zVK"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="ujg-I5-Bg6" secondAttribute="bottom" constant="16" id="gzW-1n-ru7"/>
+                                                                            <constraint firstItem="a7z-ed-rEj" firstAttribute="leading" secondItem="NJv-O2-oMT" secondAttribute="trailing" constant="4" id="iUx-Ug-UO0"/>
+                                                                            <constraint firstItem="NJv-O2-oMT" firstAttribute="leading" secondItem="Sb7-QH-Qp7" secondAttribute="trailing" constant="4" id="jR1-kl-noK"/>
+                                                                            <constraint firstItem="NJv-O2-oMT" firstAttribute="centerY" secondItem="3AF-T2-rk0" secondAttribute="centerY" id="jSE-hb-dGn"/>
+                                                                            <constraint firstItem="Ufv-SD-vLw" firstAttribute="top" secondItem="J4f-lQ-zE5" secondAttribute="top" constant="16" id="kvD-SL-ZOL"/>
+                                                                            <constraint firstItem="Sb7-QH-Qp7" firstAttribute="centerY" secondItem="NJv-O2-oMT" secondAttribute="centerY" id="p4W-h3-y6I"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="ujg-I5-Bg6" secondAttribute="trailing" constant="16" id="zjs-Vh-sSN"/>
+                                                                            <constraint firstItem="zIE-SB-6Pk" firstAttribute="leading" secondItem="Sh5-ED-C8S" secondAttribute="trailing" constant="4" id="zw9-aI-A0k"/>
                                                                         </constraints>
                                                                     </tableViewCellContentView>
                                                                     <connections>
@@ -569,6 +671,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="amountLbl" destination="hFb-6t-eO0" id="54b-o1-kov"/>
+                                            <outlet property="expandBtn" destination="Uxc-G1-O8w" id="6Hh-AV-CpC"/>
                                             <outlet property="lttView" destination="BCn-ZB-Vte" id="Qhy-Zp-atS"/>
                                             <outlet property="nameLbl" destination="Slu-Ev-dUd" id="GsF-jV-ngl"/>
                                             <outlet property="securitiesTableView" destination="shb-Ar-GZt" id="RcK-gj-tbw"/>
@@ -1009,7 +1112,7 @@
     </scenes>
     <designables>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="149" height="33.5"/>
+            <size key="intrinsicContentSize" width="147" height="33"/>
         </designable>
     </designables>
     <resources>
