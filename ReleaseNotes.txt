@@ -3,12 +3,10 @@
 *General improvements* - MVP
 
 :new: *New:*
-• Metrics: List all metrics
-• Metrics: Change ticker metrics settings
-• Metrics: Change collection metrics settings
+• Metrics: Change "Compare Stocks" collection metrics settings
 
 :hammer_and_wrench: *Improvements*
-• 
+• Modals: Popups can be dismissed by tap on the screen now
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

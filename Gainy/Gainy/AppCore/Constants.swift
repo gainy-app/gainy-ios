@@ -25,6 +25,7 @@ func delay(_ delay: Double, closure:@escaping ()->()) {
 struct Constants {
     struct CollectionDetails {
         static let tickersPreloadCount = 20
+        static let watchlistCollectionID = -1
         static let compareCollectionID = -2
         static let top20ID = 231
         static let loadingCellIDs = [-10, -11, -12]

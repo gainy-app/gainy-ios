@@ -58,6 +58,13 @@ class FloatingPanelManager: NSObject {
         // Set a content view controller.
         fpc.set(contentViewController: viewController)
         fpc.isRemovalInteractionEnabled = true
+        fpc.backdropView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    
+    @objc
+    func handleTap(gesture _: UITapGestureRecognizer) {
+        fpc?.dismiss(animated: true, completion: nil)
     }
     
     public func showFloatingPanel() {
@@ -72,6 +79,11 @@ class FloatingPanelManager: NSObject {
             }
         }
     }
+    
+    lazy var tapGestureRecognizer: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(gesture:)))
+        return gesture
+    }()
     
     class DefaultFloatingPanelLayout: FloatingPanelLayout {
         

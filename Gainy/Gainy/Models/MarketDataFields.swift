@@ -502,7 +502,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .profitMargin:
             return "profit_margin"
         case .netDebt:
-            return "net_de"
+            return "net_debt"
         }
     }
     
