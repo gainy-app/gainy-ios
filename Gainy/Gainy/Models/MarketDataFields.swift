@@ -74,7 +74,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
     beatenQuarterlyEpsEstimationCountTtm, // beaten_quarterly_eps_estimation_count_ttm
     epsSurprise, // eps_surprise
     revenueEstimateAvg0y, // revenue_estimate_avg_0y
-    revenueTtmActual, // revenue_actual
+    revenueActual, // revenue_actual
     
     // FINANCICALS
     revenueTtm, // revenue_ttm
@@ -178,8 +178,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "Beats or Misses by", value: Float(ticker.tickerMetrics?.epsSurprise ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .revenueEstimateAvg0y:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "annual", value: Float(ticker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
-        case .revenueTtmActual:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "Beats or Misses by", value: Float(ticker.tickerMetrics?.revenueTtm ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
+        case .revenueActual:
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "Beats or Misses by", value: Float(ticker.tickerMetrics?.revenueActual ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
             
         case .revenueTtm:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenueTtm ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
@@ -283,7 +283,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "EPS Surprise"
         case .revenueEstimateAvg0y:
             return "Next Revenue Estimate"
-        case .revenueTtmActual:
+        case .revenueActual:
             return "Revenue Actual"
         case .revenueTtm:
             return "Revenues"
@@ -382,7 +382,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "EPS\nSurprise".uppercased()
         case .revenueEstimateAvg0y:
             return "Next Revenue\nEstimate".uppercased()
-        case .revenueTtmActual:
+        case .revenueActual:
             return "Revenue\nActual".uppercased()
         case .revenueTtm:
             return "Revenues".uppercased()
@@ -481,8 +481,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "eps_surprise"
         case .revenueEstimateAvg0y:
             return "revenue_estimate_avg_0y"
-        case .revenueTtmActual:
-            return "absolute_historical_volatility_adjusted_current"
+        case .revenueActual:
+            return "revenue_actual"
         case .revenueTtm:
             return "revenue_ttm"
         case .revenuePerShareTtm:
@@ -580,7 +580,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return false
         case .revenueEstimateAvg0y:
             return false
-        case .revenueTtmActual:
+        case .revenueActual:
             return false
         case .revenueTtm:
             return false
@@ -681,8 +681,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
                 return (lhs.rawTicker.tickerMetrics?.epsSurprise ?? 0.0) < (rhs.rawTicker.tickerMetrics?.epsSurprise ?? 0.0)
             case .revenueEstimateAvg0y:
                 return (lhs.rawTicker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0) < (rhs.rawTicker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0)
-            case .revenueTtmActual:
-                return (lhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0) < (rhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0)
+            case .revenueActual:
+                return (lhs.rawTicker.tickerMetrics?.revenueActual ?? 0.0) < (rhs.rawTicker.tickerMetrics?.revenueActual ?? 0.0)
             case .revenueTtm:
                 return (lhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0) < (rhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0)
             case .revenuePerShareTtm:
@@ -778,8 +778,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
                 return (lhs.rawTicker.tickerMetrics?.epsSurprise ?? 0.0) > (rhs.rawTicker.tickerMetrics?.epsSurprise ?? 0.0)
             case .revenueEstimateAvg0y:
                 return (lhs.rawTicker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0) > (rhs.rawTicker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0)
-            case .revenueTtmActual:
-                return (lhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0) > (rhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0)
+            case .revenueActual:
+                return (lhs.rawTicker.tickerMetrics?.revenueActual ?? 0.0) > (rhs.rawTicker.tickerMetrics?.revenueActual ?? 0.0)
             case .revenueTtm:
                 return (lhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0) > (rhs.rawTicker.tickerMetrics?.revenueTtm ?? 0.0)
             case .revenuePerShareTtm:

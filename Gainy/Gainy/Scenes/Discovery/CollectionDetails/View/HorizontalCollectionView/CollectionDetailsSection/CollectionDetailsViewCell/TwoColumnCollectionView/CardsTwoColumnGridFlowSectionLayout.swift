@@ -127,8 +127,8 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
                     vals.append(viewModel.epsSurprise)
                 case .revenueEstimateAvg0y:
                     vals.append(viewModel.revenueEstimateAvg0y)
-                case .revenueTtmActual:
-                    vals.append(viewModel.revenueTtmActual)
+                case .revenueActual:
+                    vals.append(viewModel.revenueActual)
                 case .revenueTtm:
                     vals.append(viewModel.revenueTtm)
                 case .revenuePerShareTtm:
