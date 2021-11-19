@@ -23,6 +23,7 @@ final class CollectionHorizontalView: UIView {
         addSubview(stocksLabel)
         addSubview(stocksAmountLabel)
         addSubview(settingsButton)
+        addSubview(extraActionButton)
         addSubview(sortByButton)
         addSubview(showListViewButton)
         addSubview(showGridViewButton)
@@ -114,7 +115,40 @@ final class CollectionHorizontalView: UIView {
         return label
     }()
 
+    
     private var settingsViews: [UIView] = []
+    
+    lazy var extraActionButton: ResponsiveButton = {
+        let button = ResponsiveButton()
+        button.layer.cornerRadius = 12
+        button.layer.cornerCurve = .continuous
+        button.backgroundColor = UIColor.Gainy.white
+
+        let slidersIconImageView = UIImageView(
+            frame: CGRect(x: 8, y: 4, width: 16, height: 16)
+        )
+        slidersIconImageView.image = UIImage(named: "sliders")
+
+        button.addSubview(slidersIconImageView)
+        let textLabel = UILabel(
+            frame: CGRect(x: 8 + 16 + 2, y: 4, width: 42, height: 16)
+        )
+
+        textLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.numberOfLines = 1
+        textLabel.textAlignment = .center
+        textLabel.text = "Settings"
+
+        button.addSubview(textLabel)
+        button.addTarget(self,
+                         action: #selector(extraActionButtonTapped(_:)),
+                         for: .touchUpInside)
+        button.isHidden = true
+
+        return button
+    }()
+    
     lazy var settingsButton: ResponsiveButton = {
         let button = ResponsiveButton()
         settingsViews.removeAll()
@@ -208,6 +242,7 @@ final class CollectionHorizontalView: UIView {
     
     var isCompare: Bool = false {
         didSet {
+            extraActionButton.isHidden = false
             setSettingsTitle("Add Stocks")
         }
     }
@@ -351,6 +386,13 @@ final class CollectionHorizontalView: UIView {
             height: 33
         )
 
+        extraActionButton.frame = CGRect(
+            x: hMargin,
+            y: bounds.height - (24 + bottomMargin) * 2,
+            width: 76,
+            height: 24
+        )
+        
         settingsButton.frame = CGRect(
             x: hMargin,
             y: bounds.height - (24 + bottomMargin),
@@ -433,6 +475,12 @@ final class CollectionHorizontalView: UIView {
 
     // MARK: Functions
 
+    @objc
+    private func extraActionButtonTapped(_: UIButton) {
+        GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : collectionId])
+        delegate?.settingsPressed(view: self)
+    }
+    
     @objc
     private func settingsButtonTapped(_: UIButton) {
         if isCompare {

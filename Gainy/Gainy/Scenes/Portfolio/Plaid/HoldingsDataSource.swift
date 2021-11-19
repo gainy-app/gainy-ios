@@ -14,7 +14,14 @@ final class HoldingsDataSource: NSObject {
     
     private var cellHeights: [Int: CGFloat] = [:]
     
-    var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = []
+    var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = [] {
+        didSet {
+            guard holdings.count > 0 else {return}
+            for ind in 0..<holdings.count {
+                cellHeights[ind] = HoldingTableViewCell.heightWithEvents
+            }
+        }
+    }
     var transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
 }
 
@@ -53,11 +60,22 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
             cell.holding = holdings[indexPath.row]
+            cell.cellHeightChanged = {[weak self] newHeight in
+                tableView.beginUpdates()
+                self?.cellHeights[indexPath.row] = newHeight
+                tableView.endUpdates()
+            }
             return cell
         }
     }
 }
 
 extension HoldingsDataSource: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return tableView.sk.isSkeletonActive ? 252.0 : 44.0
+        } else {
+            return cellHeights[indexPath.row] ?? 0.0
+        }
+    }
 }

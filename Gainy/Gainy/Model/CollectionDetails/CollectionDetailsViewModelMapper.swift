@@ -70,7 +70,7 @@ enum CollectionDetailsViewModelMapper {
             beatenQuarterlyEpsEstimationCountTtm: model.tickerMetrics.beatenQuarterlyEpsEstimationCountTtm.cleanOneDecimal,
             epsSurprise: model.tickerMetrics.epsSurprise.formatUsingAbbrevation(),
             revenueEstimateAvg0y: model.tickerMetrics.revenueEstimateAvg0y.formatUsingAbbrevation(),
-            revenueTtmActual: model.tickerMetrics.revenueTtmActual.formatUsingAbbrevation(),
+            revenueActual: model.tickerMetrics.revenueActual.formatUsingAbbrevation(),
             revenueTtm: model.tickerMetrics.revenueTtm.formatUsingAbbrevation(),
             revenuePerShareTtm: model.tickerMetrics.revenuePerShareTtm.cleanOneDecimal,
             roi: model.tickerMetrics.roi.percent,

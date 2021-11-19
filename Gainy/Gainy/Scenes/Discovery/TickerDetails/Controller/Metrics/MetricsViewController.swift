@@ -251,7 +251,7 @@ class MetricsViewController: BaseViewController {
                       metric.rawValue <= MarketDataField.dividendFrequency.rawValue {
                 self.dividendSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.epsActual.rawValue &&
-                      metric.rawValue <= MarketDataField.revenueTtmActual.rawValue {
+                      metric.rawValue <= MarketDataField.revenueActual.rawValue {
                 self.earningsSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.revenueTtm.rawValue &&
                       metric.rawValue <= MarketDataField.netDebt.rawValue {

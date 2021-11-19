@@ -67,7 +67,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
     }
 
     public struct GetRecommendedCollection: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["RecommendedCollection"]
+      public static let possibleTypes: [String] = ["Collection"]
 
       public static var selections: [GraphQLSelection] {
         return [
@@ -84,7 +84,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
       }
 
       public init(id: Int, collection: Collection) {
-        self.init(unsafeResultMap: ["__typename": "RecommendedCollection", "id": id, "collection": collection.resultMap])
+        self.init(unsafeResultMap: ["__typename": "Collection", "id": id, "collection": collection.resultMap])
       }
 
       public var __typename: String {

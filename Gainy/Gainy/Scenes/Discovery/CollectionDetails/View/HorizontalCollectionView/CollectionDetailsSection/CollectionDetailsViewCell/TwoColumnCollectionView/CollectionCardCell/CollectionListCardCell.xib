@@ -111,6 +111,9 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="puZ-ft-kkl"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,8 +139,14 @@
                     <constraint firstItem="7aa-0X-y0x" firstAttribute="leading" secondItem="gQ0-Ic-sny" secondAttribute="leading" id="wGr-A4-XCp"/>
                     <constraint firstItem="nlH-9O-fYK" firstAttribute="leading" secondItem="EM8-hZ-ndv" secondAttribute="trailing" constant="4" id="xc1-62-kd3"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <size key="customSize" width="373" height="110"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="growthLbl" destination="cTC-Ul-EKo" id="cLW-SP-cL4"/>
                 <outlet property="marketLbl" destination="n5y-Rg-QyM" id="1Sf-PX-0xM"/>

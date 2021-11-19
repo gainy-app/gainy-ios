@@ -47,7 +47,9 @@ final class TickerViewController: BaseViewController {
             return
         }
         delay(0.3) {
-            self.isLoadingInfo = true
+            if !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? true) {
+                self.isLoadingInfo = true
+            }
         }
         viewModel?.dataSource.chartLoader.startAnimating()
         dprint("SHOWING LOADER")

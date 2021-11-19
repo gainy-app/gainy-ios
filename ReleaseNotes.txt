@@ -1,21 +1,12 @@
-*iOS v0.3.1 #74* available
+*iOS v0.3.1 #75* available
 :globe_with_meridians: Server - PROD
 *General improvements* - MVP
 
 :new: *New:*
-<<<<<<< HEAD
-• CI
+• Metrics: Change "Compare Stocks" collection metrics settings
 
 :hammer_and_wrench: *Improvements*
-• -
-=======
-• Metrics: List all metrics
-• Metrics: Change ticker metrics settings
-• Metrics: Change collection metrics settings
-
-:hammer_and_wrench: *Improvements*
-• 
->>>>>>> develop
+• Modals: Popups can be dismissed by tap on the screen now
 
 :red_circle: *Important Notes:*
 If feature is not listed in New or in Improvements - *IT’S NOT DONE*

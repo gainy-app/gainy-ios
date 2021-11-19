@@ -84,6 +84,7 @@ fragment RemoteTickerDetails on tickers {
       beaten_quarterly_eps_estimation_count_ttm
       eps_surprise
       revenue_estimate_avg_0y
+      revenue_actual
       revenue_ttm
       #financials
       revenue_per_share_ttm

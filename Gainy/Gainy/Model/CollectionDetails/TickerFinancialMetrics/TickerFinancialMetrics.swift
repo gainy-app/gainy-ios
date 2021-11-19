@@ -36,7 +36,7 @@ struct TickerMetricsData {
     let beatenQuarterlyEpsEstimationCountTtm: Float
     let epsSurprise: Float
     let revenueEstimateAvg0y: Float
-    let revenueTtmActual: Float
+    let revenueActual: Float
     let revenueTtm: Float
     let revenuePerShareTtm: Float
     let roi: Float

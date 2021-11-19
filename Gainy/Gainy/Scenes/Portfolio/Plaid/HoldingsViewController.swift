@@ -10,6 +10,8 @@ import SkeletonView
 
 final class HoldingsViewController: BaseViewController {
     
+    
+    
     //MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView! {

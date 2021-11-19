@@ -37,7 +37,7 @@ struct CollectionCardViewCellModel {
     let beatenQuarterlyEpsEstimationCountTtm: String
     let epsSurprise: String
     let revenueEstimateAvg0y: String
-    let revenueTtmActual: String
+    let revenueActual: String
     let revenueTtm: String
     let revenuePerShareTtm: String
     let roi: String
