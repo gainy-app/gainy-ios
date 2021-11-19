@@ -59,5 +59,11 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 }
 
 extension HoldingsDataSource: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return tableView.sk.isSkeletonActive ? 252.0 : 44.0
+        } else {
+            return 442.0
+        }
+    }
 }

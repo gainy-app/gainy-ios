@@ -9,4 +9,5 @@ import UIKit
 
 final class HoldingSecurityTableViewCell: UITableViewCell {
     var cellHeightChanged: ((CGFloat) -> Void)?
+    @IBOutlet weak var cornerView: UIView!
 }

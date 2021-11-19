@@ -94,14 +94,35 @@ class TickerInfo {
         self.marketData = markers
     }
     
+    private(set) var isMainDataLoaded: Bool = false
+    private(set) var isChartDataLoaded: Bool = false
+    
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
         let chartsDS = DispatchGroup()
         
+        if isMainDataLoaded {
+            DispatchQueue.main.async {
+                mainDataLoaded()
+            }
+        }
+        
+        if isChartDataLoaded {
+            DispatchQueue.main.async {
+                chartsLoaded()
+            }
+        }
+        
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else {return}
             
+            if !self.isChartDataLoaded {
+                //Load Chart
+                self.loadAllCharts(dispatchGroup: chartsDS)
+            }
+            
+            if !self.isMainDataLoaded {
             //Load News data
             mainDS.enter()
             Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: self.symbol)){ result in
@@ -116,9 +137,6 @@ class TickerInfo {
                     break
                 }
             }
-            
-            //Load Chart
-            self.loadAllCharts(dispatchGroup: chartsDS)
             
             //Load Alt Stocks
             mainDS.enter()
@@ -166,15 +184,18 @@ class TickerInfo {
                     }
                 }
             }
+            }
             
             //Await for results
             mainDS.notify(queue: queue) {
+                self.isMainDataLoaded = true
                 DispatchQueue.main.async {
                     mainDataLoaded()
                 }
             }
             
             chartsDS.notify(queue: queue) {
+                self.isChartDataLoaded = true
                 DispatchQueue.main.async {
                     chartsLoaded()
                 }
