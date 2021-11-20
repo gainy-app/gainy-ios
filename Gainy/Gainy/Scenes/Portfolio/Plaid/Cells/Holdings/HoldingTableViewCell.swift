@@ -7,12 +7,10 @@
 
 import UIKit
 
-final class HoldingTableViewCell: UITableViewCell {
+final class HoldingTableViewCell: HoldingRangeableCell {
     
     static let heightWithoutEvents: CGFloat = 252.0
     static let heightWithEvents: CGFloat = 252.0
-    
-    var cellHeightChanged: ((CGFloat) -> Void)?
     
     //MARK: - Outlet
     @IBOutlet weak var nameLbl: UILabel!

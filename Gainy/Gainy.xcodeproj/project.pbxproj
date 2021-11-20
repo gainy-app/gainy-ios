@@ -389,6 +389,10 @@
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
 		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
+		900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */; };
+		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
+		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
+		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
 		90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
 		90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -814,6 +818,10 @@
 		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
 		85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppInterests.graphql; sourceTree = "<group>"; };
+		900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartViewModel.swift; sourceTree = "<group>"; };
+		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
+		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
+		900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRangeableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1194,12 +1202,8 @@
 			isa = PBXGroup;
 			children = (
 				33EEECD727424696004C41FE /* HoldingsViewController.swift */,
-				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
-				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
-				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
-				3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */,
-				33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */,
-				3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */,
+				900CEAEE274974ED00CF1597 /* Models */,
+				900CEAED274974DE00CF1597 /* Cells */,
 			);
 			path = Plaid;
 			sourceTree = "<group>";
@@ -2015,6 +2019,46 @@
 			path = Personalization;
 			sourceTree = "<group>";
 		};
+		900CEAED274974DE00CF1597 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */,
+				900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */,
+				900CEAF12749769B00CF1597 /* Chart */,
+				900CEAF2274976A400CF1597 /* Holdings */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		900CEAEE274974ED00CF1597 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
+				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		900CEAF12749769B00CF1597 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
+				900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		900CEAF2274976A400CF1597 /* Holdings */ = {
+			isa = PBXGroup;
+			children = (
+				3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */,
+				900CEAF3274976D600CF1597 /* HoldingViewModel.swift */,
+				3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */,
+				900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */,
+			);
+			path = Holdings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2418,6 +2462,7 @@
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */,
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
+				900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */,
 				85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */,
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
@@ -2465,6 +2510,7 @@
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
 				859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */,
+				900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */,
 				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
 				85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */,
@@ -2533,6 +2579,7 @@
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
 				3A498F63266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift in Sources */,
 				33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */,
+				900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
@@ -2626,6 +2673,7 @@
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
+				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */,
@@ -2751,8 +2799,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -2766,7 +2814,7 @@
 				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Dev Stage";
 				SCHEME_CONFIGURATION = Staging;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2874,8 +2922,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 75;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
@@ -2889,7 +2937,7 @@
 				MARKETING_VERSION = 0.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Prod Stage";
 				SCHEME_CONFIGURATION = Staging;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

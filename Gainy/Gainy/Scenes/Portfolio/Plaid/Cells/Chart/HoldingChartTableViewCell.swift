@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 
-final class HoldingChartTableViewCell: UITableViewCell {
-    var cellHeightChanged: ((CGFloat) -> Void)?
+final class HoldingChartTableViewCell: HoldingRangeableCell {
+    
 }

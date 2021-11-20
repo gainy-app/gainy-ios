@@ -585,7 +585,17 @@
                                                                         </constraints>
                                                                     </tableViewCellContentView>
                                                                     <connections>
+                                                                        <outlet property="balanceLbl" destination="hxU-QX-iO9" id="4gh-Mv-UF5"/>
+                                                                        <outlet property="bottomName" destination="Sh5-ED-C8S" id="7gQ-yc-G1o"/>
+                                                                        <outlet property="bottomPriceLbl" destination="zIE-SB-6Pk" id="k9l-f8-2cp"/>
                                                                         <outlet property="cornerView" destination="YtC-Z6-wj0" id="jAp-EW-oDa"/>
+                                                                        <outlet property="nameLbl" destination="Ufv-SD-vLw" id="f9z-SA-Vib"/>
+                                                                        <outlet property="progressLbl" destination="ORx-FV-DkZ" id="c2Q-3n-SfQ"/>
+                                                                        <outlet property="progressView" destination="kJR-CL-6Du" id="ZAZ-bB-K9X"/>
+                                                                        <outlet property="rangeArrowView" destination="NJv-O2-oMT" id="os8-Gd-18E"/>
+                                                                        <outlet property="rangeGrowLbl" destination="ujg-I5-Bg6" id="Sex-aH-Cay"/>
+                                                                        <outlet property="rangeNameLbl" destination="Sb7-QH-Qp7" id="onj-Gq-0lB"/>
+                                                                        <outlet property="rangePriceLbl" destination="a7z-ed-rEj" id="PQz-hH-xXN"/>
                                                                     </connections>
                                                                 </tableViewCell>
                                                             </prototypes>
