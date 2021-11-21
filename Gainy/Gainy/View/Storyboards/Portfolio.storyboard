@@ -230,13 +230,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qje-zu-p2a" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="5" width="382" height="411"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
                                                             <rect key="frame" x="48" y="18.5" width="226" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$15,427.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-6t-eO0">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15,427.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-6t-eO0">
                                                             <rect key="frame" x="290" y="18.5" width="76" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
@@ -600,10 +600,22 @@
                                                                 </tableViewCell>
                                                             </prototypes>
                                                         </tableView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4A-oi-DzJ">
+                                                            <rect key="frame" x="75" y="150" width="62.5" height="14.5"/>
+                                                            <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                            <color key="textColor" name="mainText"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-sa-hMd">
+                                                            <rect key="frame" x="64" y="59" width="165" height="19"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="Uxc-G1-O8w" secondAttribute="trailing" constant="4" id="0Vz-9v-1DD"/>
+                                                        <constraint firstItem="m4A-oi-DzJ" firstAttribute="centerY" secondItem="268-IM-fw8" secondAttribute="centerY" id="1PS-Zv-ylI"/>
                                                         <constraint firstItem="b4a-t9-ELz" firstAttribute="leading" secondItem="Qje-zu-p2a" secondAttribute="leading" constant="16" id="3Y9-va-Dav"/>
                                                         <constraint firstItem="hFb-6t-eO0" firstAttribute="leading" secondItem="Slu-Ev-dUd" secondAttribute="trailing" constant="16" id="3g7-Ik-Owa"/>
                                                         <constraint firstAttribute="trailing" secondItem="2oV-Sd-Koj" secondAttribute="trailing" constant="16" id="4Pv-FJ-DrN"/>
@@ -640,6 +652,7 @@
                                                         <constraint firstItem="534-CY-uIg" firstAttribute="centerY" secondItem="eeS-aM-2vr" secondAttribute="centerY" id="fxl-vo-78U"/>
                                                         <constraint firstItem="YwE-2H-Vvm" firstAttribute="centerY" secondItem="61p-Hf-Hz3" secondAttribute="centerY" id="gGe-hg-WiZ"/>
                                                         <constraint firstItem="b4a-t9-ELz" firstAttribute="centerX" secondItem="ZAz-Tx-QND" secondAttribute="centerX" id="hUN-bW-Zzq"/>
+                                                        <constraint firstItem="m4A-oi-DzJ" firstAttribute="leading" secondItem="268-IM-fw8" secondAttribute="trailing" constant="8" id="hUi-RU-b5H"/>
                                                         <constraint firstItem="61p-Hf-Hz3" firstAttribute="centerY" secondItem="534-CY-uIg" secondAttribute="centerY" id="if2-iY-SQJ"/>
                                                         <constraint firstItem="Uxc-G1-O8w" firstAttribute="top" secondItem="2oV-Sd-Koj" secondAttribute="bottom" constant="6" id="oh7-HI-NDA"/>
                                                         <constraint firstItem="61p-Hf-Hz3" firstAttribute="leading" secondItem="YwE-2H-Vvm" secondAttribute="trailing" constant="4" id="op3-N7-3nu"/>
@@ -681,12 +694,27 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="amountLbl" destination="hFb-6t-eO0" id="54b-o1-kov"/>
+                                            <outlet property="avgArrowView" destination="HXv-kg-op0" id="fmd-cs-5F5"/>
+                                            <outlet property="avgGrowLbl" destination="3wv-pn-nUE" id="mLv-Bd-GeD"/>
+                                            <outlet property="avgPriceLbl" destination="JHz-M2-JV2" id="o1g-9M-ika"/>
+                                            <outlet property="categoriesView" destination="EY7-sa-hMd" id="Cls-uD-voP"/>
+                                            <outlet property="eventLbl" destination="eBA-eW-eMO" id="qrf-af-CE1"/>
+                                            <outlet property="eventsView" destination="vvA-cr-A32" id="7Re-kH-GFQ"/>
                                             <outlet property="expandBtn" destination="Uxc-G1-O8w" id="6Hh-AV-CpC"/>
+                                            <outlet property="holdingProgressLbl" destination="hrg-8Z-KNL" id="OoP-YF-5Rf"/>
+                                            <outlet property="holdingProgressView" destination="hcv-nd-TA0" id="The-OS-NhL"/>
                                             <outlet property="lttView" destination="BCn-ZB-Vte" id="Qhy-Zp-atS"/>
+                                            <outlet property="matchCircleView" destination="ZAz-Tx-QND" id="WPo-ni-W1v"/>
+                                            <outlet property="matchScoreLbl" destination="b4a-t9-ELz" id="Qhd-Lv-wlN"/>
                                             <outlet property="nameLbl" destination="Slu-Ev-dUd" id="GsF-jV-ngl"/>
+                                            <outlet property="rangeArrowView" destination="61p-Hf-Hz3" id="1nF-Hb-ZTt"/>
+                                            <outlet property="rangeGrowLbl" destination="iNi-s4-NfB" id="4ed-Nv-ny9"/>
+                                            <outlet property="rangeNameLbl" destination="YwE-2H-Vvm" id="t8Z-Hf-I7r"/>
+                                            <outlet property="rangePriceLbl" destination="eeS-aM-2vr" id="7oa-Kv-mNg"/>
                                             <outlet property="securitiesTableView" destination="shb-Ar-GZt" id="RcK-gj-tbw"/>
                                             <outlet property="shadowView" destination="Qje-zu-p2a" id="lyW-aY-rYS"/>
                                             <outlet property="symbolLbl" destination="qZ8-aQ-X1h" id="bUJ-8U-cTd"/>
+                                            <outlet property="transactionsTotalLbl" destination="m4A-oi-DzJ" id="PPN-Vc-HYH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HoldingsSkeletonTableViewCell" rowHeight="252" id="gP1-qZ-sdq" customClass="HoldingsSkeletonTableViewCell" customModule="Gainy" customModuleProvider="target">
