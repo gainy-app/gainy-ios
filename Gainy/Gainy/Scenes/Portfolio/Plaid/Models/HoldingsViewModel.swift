@@ -11,6 +11,8 @@ final class HoldingsViewModel {
     
     let dataSource = HoldingsDataSource()
     
+    private var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = []
+    private var securities: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
     //MARK: - Network
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
@@ -27,7 +29,7 @@ final class HoldingsViewModel {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             return
                         }
-                        self?.dataSource.holdings = holdingsCount.compactMap({$0})
+                        self?.holdings = holdingsCount.compactMap({$0})
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -45,7 +47,7 @@ final class HoldingsViewModel {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             return
                         }
-                        self?.dataSource.transactions = holdingsCount.compactMap({$0})
+                        self?.securities = holdingsCount.compactMap({$0})
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -55,11 +57,22 @@ final class HoldingsViewModel {
                     loadGroup.leave()
                 }
                 
-                loadGroup.notify(queue: .main) {
+                loadGroup.notify(queue: .main) {[weak self] in
+                    guard let self = self else {
+                        completion?()
+                        return
+                    }
+                    self.dataSource.chartRange = .d1
+                    self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
+                                                                             securities: self.securities)
                     completion?()
                 }
                 
             }
         }
+    }
+    
+    init() {
+        //dataSource.delegate = self
     }
 }

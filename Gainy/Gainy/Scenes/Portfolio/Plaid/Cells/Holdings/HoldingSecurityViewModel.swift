@@ -24,3 +24,11 @@ struct HoldingSecurityViewModel {
 
     }
 }
+
+extension HoldingSecurityViewModel: Equatable {
+    
+}
+
+extension HoldingSecurityViewModel: Hashable {
+    
+}

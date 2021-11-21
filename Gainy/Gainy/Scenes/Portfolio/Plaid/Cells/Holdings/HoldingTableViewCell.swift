@@ -18,6 +18,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var symbolLbl: UILabel!
     
     @IBOutlet weak var lttView: CornerView!
+    @IBOutlet weak var categoriesView: UIView!
     
     @IBOutlet weak var expandBtn: UIButton!
     @IBOutlet weak var shadowView: CornerView! {
@@ -39,19 +40,23 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
     }
     
-    var holding: GetPlaidHoldingsQuery.Data.GetPortfolioHolding? {
-        didSet {
-            if let holding = holding {
-                print(holding)
-            }
-        }
+    func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod) {
+        holding = model
+        chartRange = range
+        
+        //Setting properties
     }
+    
+    var holding: HoldingViewModel?
+    var chartRange: ScatterChartView.ChartPeriod = .d1
     
     var isExpanded: Bool = false {
         didSet {
             expandBtn.isSelected = isExpanded
             securitiesTableView.isHidden = !isExpanded
-            cellHeightChanged?(isExpanded ? 452.0 : HoldingTableViewCell.heightWithEvents)
+            if let holding = holding {
+                cellHeightChanged?(holding)
+            }
         }
     }
     
@@ -70,11 +75,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
 
 extension HoldingTableViewCell: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        holding?.securities.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: HoldingSecurityTableViewCell = tableView.dequeueReusableCell(withIdentifier: HoldingSecurityTableViewCell.cellIdentifier, for: indexPath) as! HoldingSecurityTableViewCell
+        if let security = holding?.securities[indexPath.row] {
+            cell.setModel(security, chartRange)
+        }
         return cell
     }
 }

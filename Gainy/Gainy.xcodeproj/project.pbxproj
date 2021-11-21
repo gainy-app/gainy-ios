@@ -393,6 +393,7 @@
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
+		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
 		90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
 		90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -822,6 +823,7 @@
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
 		900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRangeableCell.swift; sourceTree = "<group>"; };
+		90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsModelMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2035,6 +2037,7 @@
 			children = (
 				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
 				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
+				90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2532,6 +2535,7 @@
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
+				90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */,
 				339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */,
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,

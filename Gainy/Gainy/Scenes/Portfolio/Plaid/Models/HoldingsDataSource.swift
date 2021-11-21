@@ -13,12 +13,15 @@ final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
     
     private var cellHeights: [Int: CGFloat] = [:]
+    private var expandedCells: Set<String> = Set<String>()
     
-    var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = [] {
+    var chartRange: ScatterChartView.ChartPeriod = .d1
+    var holdings: [HoldingViewModel] = [] {
         didSet {
             guard holdings.count > 0 else {return}
+            expandedCells.removeAll()
             for ind in 0..<holdings.count {
-                cellHeights[ind] = HoldingTableViewCell.heightWithEvents
+                cellHeights[ind] = holdings[ind].heightForState(range: chartRange, isExpaned: false)
             }
         }
     }
@@ -60,10 +63,24 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
             cell.holding = holdings[indexPath.row]
-            cell.cellHeightChanged = {[weak self] newHeight in
-                tableView.beginUpdates()
-                self?.cellHeights[indexPath.row] = newHeight
-                tableView.endUpdates()
+            cell.isExpanded = expandedCells.contains(holdings[indexPath.row].name)
+            cell.cellHeightChanged = {[weak self] model in
+                guard let self = self else {return}
+                if let index = self.holdings.first(where: {$0 == model}) {
+                    
+                    if self.expandedCells.contains(model.name) {
+                        self.expandedCells.remove(model.name)
+                    } else {
+                        self.expandedCells.insert(model.name)
+                    }
+                    
+                    tableView.beginUpdates()
+                    self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
+                                                                            isExpaned: self.expandedCells.contains(model.name))
+                    tableView.endUpdates()
+                    
+                    cell.isExpanded = self.expandedCells.contains(model.name)
+                }
             }
             return cell
         }
