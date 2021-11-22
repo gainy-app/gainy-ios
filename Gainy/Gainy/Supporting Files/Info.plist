@@ -75,19 +75,6 @@
 	<string>We will use Reminders to inform about upcoming financial events</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalized ads to you</string>
-	<key>PLKPlaidLinkConfiguration</key>
-	<dict>
-		<key>clientName</key>
-		<string>$(PRODUCT_NAME)</string>
-		<key>env</key>
-		<string>Sandbox</string>
-		<key>key</key>
-		<string></string>
-		<key>product</key>
-		<string>auth</string>
-		<key>selectAccount</key>
-		<false/>
-	</dict>
 	<key>SchemeName</key>
 	<string>$(SCHEME_CONFIGURATION)</string>
 	<key>UIAppFonts</key>

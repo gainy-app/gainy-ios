@@ -13,6 +13,7 @@ final class HoldingsViewModel {
     
     private var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = []
     private var securities: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
+    private var profileGains: GetProfileGainsQuery.Data.AppProfile?
     //MARK: - Network
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
@@ -48,6 +49,24 @@ final class HoldingsViewModel {
                             return
                         }
                         self?.securities = holdingsCount.compactMap({$0})
+                        break
+                    case .failure(let error):
+                        dprint("Failure when making GraphQL request. Error: \(error)")
+                        NotificationManager.shared.showError(error.localizedDescription)
+                        break
+                    }
+                    loadGroup.leave()
+                }
+                
+                loadGroup.enter()
+                Network.shared.apollo.fetch(query: GetProfileGainsQuery.init(profileID: profileID)) {[weak self] result in
+                    switch result {
+                    case .success(let graphQLResult):
+                        guard let profile = graphQLResult.data?.appProfiles.first else {
+                            NotificationManager.shared.showError("Sorry, you have no holdings")
+                            return
+                        }
+                        self?.profileGains = profile
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")

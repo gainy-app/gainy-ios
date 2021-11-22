@@ -1277,22 +1277,6 @@
             "deprecationReason": null
           },
           {
-            "name": "gains",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "portfolio_transaction_gains",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "id",
             "description": null,
             "args": [],
@@ -72589,6 +72573,180 @@
           },
           {
             "name": "public_portfolio_chart_profile_id__date__period_20211119_145212",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151249",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151328",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151404",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151504",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151604",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151704",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151804",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_151904",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152004",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152104",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152203",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152304",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152404",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152504",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152604",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152704",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152804",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_152904",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153004",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153104",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153203",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153304",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153404",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153504",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153604",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153704",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153804",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_153904",
+            "description": "unique or primary key constraint",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "public_portfolio_chart_profile_id__date__period_20211119_154004",
             "description": "unique or primary key constraint",
             "isDeprecated": false,
             "deprecationReason": null
