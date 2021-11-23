@@ -113,9 +113,10 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 tagView.backgroundColor = UIColor(hex: 0x3A4448)
             }
             tagView.tagName = tag
-            let width = 22.0 + tag.widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+            let width = 22.0 + tag.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
             if xPos + width + margin > totalWidth && categoriesView.subviews.count > 0 {
+                tagView.removeFromSuperview()
                 break
             }
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
@@ -127,21 +128,27 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Prices
         
+        if let curPrice = TickerLiveStorage.shared.getSymbolData(model.tickerSymbol) {
+            (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = (curPrice.currentPrice.price, UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!, curPrice.priceChangeToday.cleanTwoDecimalP)
+        } else {
+            (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = ("", nil, "")
+        }
+        (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text) = model.infoForRange(chartRange)
+        
         //Footer
-        holdingProgressView.progress = CGFloat(model.percentInProfile)
-        holdingProgressLbl.text = model.percentInProfile.cleanOneDecimalP
+        holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
+        holdingProgressLbl.text = (model.percentInProfile / 100.0).cleanOneDecimalP
         transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
     }
     
-    var holding: HoldingViewModel?
-    var chartRange: ScatterChartView.ChartPeriod = .d1
+    private var holding: HoldingViewModel?
+    private var chartRange: ScatterChartView.ChartPeriod = .d1
     
     var isExpanded: Bool = false {
         didSet {
             expandBtn.isSelected = isExpanded
             securitiesTableView.isHidden = !isExpanded
             if let holding = holding {
-                cellHeightChanged?(holding)
                 if isExpanded {
                     transactionsTotalLbl.text = "All positions"
                 } else {
@@ -160,6 +167,9 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     
     @IBAction func toggleExpandAction(_ sender: Any) {
         isExpanded.toggle()
+        if let holding = holding {
+            cellHeightChanged?(holding)
+        }
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {

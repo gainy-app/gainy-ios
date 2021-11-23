@@ -66,7 +66,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="79" width="414" height="471"/>
+                                <rect key="frame" x="0.0" y="79" width="414" height="468"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -92,13 +92,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="657" width="350" height="56"/>
+                                <rect key="frame" x="32" y="655.5" width="350" height="57.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="566" width="350" height="75"/>
+                                <rect key="frame" x="32" y="563" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -230,13 +230,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qje-zu-p2a" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="5" width="382" height="411"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
                                                             <rect key="frame" x="48" y="18.5" width="226" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15,427.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-6t-eO0">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$15,427.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hFb-6t-eO0">
                                                             <rect key="frame" x="290" y="18.5" width="76" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
@@ -606,9 +606,8 @@
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-sa-hMd">
-                                                            <rect key="frame" x="64" y="59" width="165" height="19"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EY7-sa-hMd">
+                                                            <rect key="frame" x="64" y="56" width="243" height="24"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         </view>
                                                     </subviews>
@@ -619,6 +618,7 @@
                                                         <constraint firstItem="b4a-t9-ELz" firstAttribute="leading" secondItem="Qje-zu-p2a" secondAttribute="leading" constant="16" id="3Y9-va-Dav"/>
                                                         <constraint firstItem="hFb-6t-eO0" firstAttribute="leading" secondItem="Slu-Ev-dUd" secondAttribute="trailing" constant="16" id="3g7-Ik-Owa"/>
                                                         <constraint firstAttribute="trailing" secondItem="2oV-Sd-Koj" secondAttribute="trailing" constant="16" id="4Pv-FJ-DrN"/>
+                                                        <constraint firstItem="EY7-sa-hMd" firstAttribute="centerY" secondItem="Z67-1Z-iHU" secondAttribute="centerY" id="5bY-8Q-axe"/>
                                                         <constraint firstItem="268-IM-fw8" firstAttribute="leading" secondItem="Z67-1Z-iHU" secondAttribute="leading" id="65G-8g-kMB"/>
                                                         <constraint firstItem="JHz-M2-JV2" firstAttribute="top" secondItem="Z67-1Z-iHU" secondAttribute="bottom" constant="13" id="6Gd-Cd-Fia"/>
                                                         <constraint firstItem="3wv-pn-nUE" firstAttribute="leading" secondItem="HXv-kg-op0" secondAttribute="trailing" constant="4" id="79u-m5-x5l"/>
@@ -644,6 +644,7 @@
                                                         <constraint firstItem="BCn-ZB-Vte" firstAttribute="top" secondItem="Qje-zu-p2a" secondAttribute="top" constant="56" id="TCa-js-7zP"/>
                                                         <constraint firstItem="X7Q-GI-RdZ" firstAttribute="centerY" secondItem="JHz-M2-JV2" secondAttribute="centerY" id="WOt-o1-fmg"/>
                                                         <constraint firstItem="2oV-Sd-Koj" firstAttribute="leading" secondItem="Qje-zu-p2a" secondAttribute="leading" constant="16" id="WWZ-Uj-JTw"/>
+                                                        <constraint firstAttribute="trailing" secondItem="EY7-sa-hMd" secondAttribute="trailing" constant="75" id="XJZ-nt-jdN"/>
                                                         <constraint firstItem="hFb-6t-eO0" firstAttribute="centerY" secondItem="Slu-Ev-dUd" secondAttribute="centerY" id="c6V-P0-lVl"/>
                                                         <constraint firstAttribute="trailing" secondItem="shb-Ar-GZt" secondAttribute="trailing" constant="16" id="cJR-Ml-38u"/>
                                                         <constraint firstItem="b4a-t9-ELz" firstAttribute="top" secondItem="Qje-zu-p2a" secondAttribute="top" constant="16" id="eBL-rW-NPl"/>
@@ -658,6 +659,7 @@
                                                         <constraint firstItem="61p-Hf-Hz3" firstAttribute="leading" secondItem="YwE-2H-Vvm" secondAttribute="trailing" constant="4" id="op3-N7-3nu"/>
                                                         <constraint firstAttribute="trailing" secondItem="vvA-cr-A32" secondAttribute="trailing" constant="16" id="ovL-gv-1Oo"/>
                                                         <constraint firstItem="X7Q-GI-RdZ" firstAttribute="leading" secondItem="JHz-M2-JV2" secondAttribute="trailing" constant="4" id="pZ2-Zu-JFU"/>
+                                                        <constraint firstItem="EY7-sa-hMd" firstAttribute="height" secondItem="Z67-1Z-iHU" secondAttribute="height" id="r18-yD-ixP"/>
                                                         <constraint firstItem="3wv-pn-nUE" firstAttribute="centerY" secondItem="HXv-kg-op0" secondAttribute="centerY" id="tRb-38-9Ys"/>
                                                         <constraint firstItem="ZAz-Tx-QND" firstAttribute="top" secondItem="Qje-zu-p2a" secondAttribute="top" constant="16" id="uSI-ye-d18"/>
                                                         <constraint firstAttribute="trailing" secondItem="hFb-6t-eO0" secondAttribute="trailing" constant="16" id="ukH-KF-BKD"/>
@@ -665,6 +667,7 @@
                                                         <constraint firstItem="534-CY-uIg" firstAttribute="leading" secondItem="eeS-aM-2vr" secondAttribute="trailing" constant="4" id="w0E-gh-UY1"/>
                                                         <constraint firstItem="2oV-Sd-Koj" firstAttribute="top" secondItem="Qje-zu-p2a" secondAttribute="top" constant="128" id="xU7-ld-Cn5"/>
                                                         <constraint firstItem="Slu-Ev-dUd" firstAttribute="centerY" secondItem="b4a-t9-ELz" secondAttribute="centerY" id="xtj-Lr-N29"/>
+                                                        <constraint firstItem="EY7-sa-hMd" firstAttribute="leading" secondItem="Z67-1Z-iHU" secondAttribute="trailing" constant="8" id="xu6-fm-FT0"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -1135,7 +1138,7 @@
     </scenes>
     <designables>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="147" height="33"/>
+            <size key="intrinsicContentSize" width="149" height="33.5"/>
         </designable>
     </designables>
     <resources>

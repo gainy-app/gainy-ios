@@ -28,6 +28,7 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
+                            completion?()
                             return
                         }
                         self?.holdings = holdingsCount.compactMap({$0})
@@ -46,6 +47,7 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.getPortfolioTransactions else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
+                            completion?()
                             return
                         }
                         self?.securities = holdingsCount.compactMap({$0})
@@ -64,6 +66,7 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let profile = graphQLResult.data?.appProfiles.first else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
+                            completion?()
                             return
                         }
                         self?.profileGains = profile
@@ -82,9 +85,26 @@ final class HoldingsViewModel {
                         return
                     }
                     self.dataSource.chartRange = .d1
-                    self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
-                                                                             securities: self.securities)
-                    completion?()
+                    
+                    let tickSymbols = self.holdings.compactMap({$0.security.first?.tickerSymbol})
+                    print(tickSymbols)
+                    
+                    //TO-DO: Serhii it's for you
+                    let securityType = self.holdings.compactMap({$0.security.first?.type}).uniqued()
+                    print(securityType)
+                    
+                    let industries = self.holdings.compactMap({$0.security.first?.tickers?.fragments.remoteTickerDetails.tickerIndustries}).flatMap({$0})
+                    print(industries)
+                    
+                    let interests = self.holdings.compactMap({$0.security.first?.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
+                    print(interests)
+                    
+                    TickersLiveFetcher.shared.getSymbolsData(tickSymbols) {
+                        self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
+                                                                                 securities: self.securities,
+                                                                                 profileHoldings: self.profileGains)
+                        completion?()
+                    }
                 }
                 
             }

@@ -73,8 +73,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             security_id
             profile_id
           }
-          account_id
           security_id
+          profile_id
         }
       }
     }
@@ -348,8 +348,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("portfolio_holding_gains", type: .object(PortfolioHoldingGain.selections)),
             GraphQLField("holding_transactions", type: .nonNull(.list(.nonNull(.object(HoldingTransaction.selections))))),
-            GraphQLField("account_id", type: .scalar(Int.self)),
             GraphQLField("security_id", type: .nonNull(.scalar(Int.self))),
+            GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
           ]
         }
 
@@ -359,8 +359,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(portfolioHoldingGains: PortfolioHoldingGain? = nil, holdingTransactions: [HoldingTransaction], accountId: Int? = nil, securityId: Int) {
-          self.init(unsafeResultMap: ["__typename": "app_profile_holdings", "portfolio_holding_gains": portfolioHoldingGains.flatMap { (value: PortfolioHoldingGain) -> ResultMap in value.resultMap }, "holding_transactions": holdingTransactions.map { (value: HoldingTransaction) -> ResultMap in value.resultMap }, "account_id": accountId, "security_id": securityId])
+        public init(portfolioHoldingGains: PortfolioHoldingGain? = nil, holdingTransactions: [HoldingTransaction], securityId: Int, profileId: Int) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_holdings", "portfolio_holding_gains": portfolioHoldingGains.flatMap { (value: PortfolioHoldingGain) -> ResultMap in value.resultMap }, "holding_transactions": holdingTransactions.map { (value: HoldingTransaction) -> ResultMap in value.resultMap }, "security_id": securityId, "profile_id": profileId])
         }
 
         public var __typename: String {
@@ -392,21 +392,21 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           }
         }
 
-        public var accountId: Int? {
-          get {
-            return resultMap["account_id"] as? Int
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "account_id")
-          }
-        }
-
         public var securityId: Int {
           get {
             return resultMap["security_id"]! as! Int
           }
           set {
             resultMap.updateValue(newValue, forKey: "security_id")
+          }
+        }
+
+        public var profileId: Int {
+          get {
+            return resultMap["profile_id"]! as! Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "profile_id")
           }
         }
 

@@ -43,7 +43,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                     tagView.backgroundColor = UIColor(hex: 0x3A4448)
                 }
                 tagView.tagName = tag
-                let width = 22.0 + tag.widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                let width = 22.0 + tag.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0

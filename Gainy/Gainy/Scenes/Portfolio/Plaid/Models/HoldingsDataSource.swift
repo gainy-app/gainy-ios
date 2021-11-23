@@ -62,7 +62,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
-            cell.holding = holdings[indexPath.row]
+            cell.setModel(holdings[indexPath.row], chartRange)
             cell.isExpanded = expandedCells.contains(holdings[indexPath.row].name)
             cell.cellHeightChanged = {[weak self] model in
                 guard let self = self else {return}
