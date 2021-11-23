@@ -137,8 +137,16 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Footer
         holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
-        holdingProgressLbl.text = (model.percentInProfile / 100.0).cleanOneDecimalP
+        holdingProgressLbl.text = (model.percentInProfile).cleanOneDecimalP
         transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
+        
+        if model.securities.isEmpty {
+            expandBtn.isHidden = true
+            transactionsTotalLbl.text = "No transactions"
+        } else {
+            expandBtn.isHidden = false
+            transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
+        }
     }
     
     private var holding: HoldingViewModel?
