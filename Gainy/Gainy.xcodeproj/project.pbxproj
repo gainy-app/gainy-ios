@@ -44,6 +44,7 @@
 		3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860A26E618BF00D448AA /* CompareScatterChartView.swift */; };
 		33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */; };
 		33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33376FAC26F8AED100618CD7 /* LineViewModel.swift */; };
+		33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33387FDD274E7DF30070A733 /* String+Attributed.swift */; };
 		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
 		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
@@ -481,6 +482,7 @@
 		33376FF226F916D800618CD7 /* LocalTickerInterest+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerInterest+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		33376FF326F916D800618CD7 /* LocalTickerFinancials+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTickerFinancials+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		33376FF426F916D800618CD7 /* LocalTicker+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTicker+CoreDataClass.swift"; sourceTree = "<group>"; };
+		33387FDD274E7DF30070A733 /* String+Attributed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Attributed.swift"; sourceTree = "<group>"; };
 		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
 		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1749,6 +1751,7 @@
 				331675072704623400CA92F6 /* Array-Reorder.swift */,
 				85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */,
 				33F1947C27143BE200C438AA /* String+Hash.swift */,
+				33387FDD274E7DF30070A733 /* String+Attributed.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2573,6 +2576,7 @@
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */,
+				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
 				8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */,
 				33EEECD427423E68004C41FE /* NoPlaidViewController.swift in Sources */,

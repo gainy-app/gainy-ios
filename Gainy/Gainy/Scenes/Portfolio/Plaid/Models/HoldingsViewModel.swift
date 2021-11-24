@@ -101,7 +101,7 @@ final class HoldingsViewModel {
                     
                     TickersLiveFetcher.shared.getSymbolsData(tickSymbols) {
                         self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
-                                                                                 securities: self.securities,
+                                                                                 transactions: self.securities,
                                                                                  profileHoldings: self.profileGains)
                         completion?()
                     }

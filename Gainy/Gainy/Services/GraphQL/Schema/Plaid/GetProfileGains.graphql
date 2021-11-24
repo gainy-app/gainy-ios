@@ -52,6 +52,7 @@
           relative_gain_3m
           relative_gain_5y
           relative_gain_total
+          transaction_id
         }
         security_id
         profile_id
