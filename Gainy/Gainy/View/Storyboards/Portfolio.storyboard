@@ -154,7 +154,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="add_account"/>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPM-pi-N58">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vPM-pi-N58" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="101" y="117" width="157" height="24"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reorder" translatesAutoresizingMaskIntoConstraints="NO" id="OL7-13-tuA">
@@ -193,6 +193,9 @@
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onSortButtonTapped:" destination="VI5-g6-Zl3" eventType="touchUpInside" id="g3s-aI-s5G"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="232" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Beq-YE-Scz">
                                 <rect key="frame" x="0.0" y="165" width="414" height="697"/>
@@ -1068,7 +1071,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aze-WP-iFm">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aze-WP-iFm" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="16" y="117" width="77" height="24"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliders" translatesAutoresizingMaskIntoConstraints="NO" id="V2D-PW-SHD">
@@ -1107,6 +1110,9 @@
                                         <real key="value" value="12"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onSettingsButtonTapped:" destination="VI5-g6-Zl3" eventType="touchUpInside" id="DYN-7S-xtA"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gea-qs-nwO"/>
@@ -1130,6 +1136,10 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="settingsButton" destination="aze-WP-iFm" id="ERH-fh-aGU"/>
+                        <outlet property="settingsLabel" destination="sRH-Zr-e5d" id="yCB-ou-axw"/>
+                        <outlet property="sortButton" destination="vPM-pi-N58" id="tnE-DS-5wp"/>
+                        <outlet property="sortLabel" destination="1Qr-JP-vpp" id="VVq-u1-0Rv"/>
                         <outlet property="tableView" destination="Beq-YE-Scz" id="Bld-J1-NGp"/>
                     </connections>
                 </viewController>

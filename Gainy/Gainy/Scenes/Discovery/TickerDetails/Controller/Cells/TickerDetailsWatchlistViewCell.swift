@@ -36,7 +36,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         
         if let selectedBroker = UserProfileManager.shared.selectedBrokerToTrade {
             changeCurrentBrokerBtn.isHidden = false
-            changeCurrentBrokerBtn.setTitle("Cange current broker — " + selectedBroker.brokerName, for: .normal)
+            changeCurrentBrokerBtn.setTitle("Change current broker — " + selectedBroker.brokerName, for: .normal)
         } else {
             changeCurrentBrokerBtn.isHidden = true
         }

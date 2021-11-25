@@ -302,6 +302,9 @@
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
 		8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9FA2722C5A8002234B2 /* LinkTextView.swift */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
+		854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */; };
+		854F1AC4274F8A38001900C7 /* PortfolioSortingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */; };
+		854F1AC6274F8CE6001900C7 /* PortfolioSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
 		85695AE42745130200759569 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE32745130200759569 /* MetricsViewController.swift */; };
@@ -740,6 +743,9 @@
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
 		8520F9FA2722C5A8002234B2 /* LinkTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkTextView.swift; sourceTree = "<group>"; };
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
+		854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPortfolioDetailsViewController.swift; sourceTree = "<group>"; };
+		854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSortingField.swift; sourceTree = "<group>"; };
+		854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSettingsManager.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		85695AE32745130200759569 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
@@ -1008,6 +1014,7 @@
 			isa = PBXGroup;
 			children = (
 				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
+				854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */,
 				8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */,
 				33F6DC3B2738FDF300CBE4DA /* SearchStocks */,
 			);
@@ -1122,6 +1129,7 @@
 				85CD154226F8A937001C060C /* Authorization */,
 				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
+				854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */,
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
 				33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */,
 				3316750927048A9800CA92F6 /* ImagePickerManager.swift */,
@@ -1193,6 +1201,7 @@
 			isa = PBXGroup;
 			children = (
 				33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */,
+				854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */,
 				33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */,
 				33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */,
 				33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */,
@@ -2509,6 +2518,7 @@
 				339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
 				336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */,
+				854F1AC6274F8CE6001900C7 /* PortfolioSettingsManager.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,
 				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
@@ -2614,6 +2624,7 @@
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
+				854F1AC4274F8A38001900C7 /* PortfolioSortingField.swift in Sources */,
 				1C3A2C3226AEB64700FAF107 /* DiscoverCollections.graphql.swift in Sources */,
 				85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
@@ -2645,6 +2656,7 @@
 				3AD40FC9266923C1005679DE /* DiscoverCollectionsViewControllerProtocol.swift in Sources */,
 				3AE7959F266385E1002B40D6 /* CoordinatorFinishOutput.swift in Sources */,
 				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
+				854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				9068DDEB274B7350007C588A /* GetPortfolioCharts.graphql.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
