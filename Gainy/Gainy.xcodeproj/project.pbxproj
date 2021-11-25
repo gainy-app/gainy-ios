@@ -178,6 +178,7 @@
 		33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC392738FB0200CBE4DA /* SearchStocksViewController.swift */; };
 		33F6DC3D2738FE2F00CBE4DA /* SearchStocksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC3C2738FE2F00CBE4DA /* SearchStocksViewModel.swift */; };
 		33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC3E2738FED500CBE4DA /* SearchStockTableViewCell.swift */; };
+		33F9B207274FADAE00C2F9B9 /* PortfolioScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F9B206274FADAE00C2F9B9 /* PortfolioScatterChartView.swift */; };
 		33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FBDE84270ADE55003B6DDB /* FirebaseTokenValidator.swift */; };
 		33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 33FBDE87270ADEEA003B6DDB /* JWTDecode */; };
 		33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */; };
@@ -607,6 +608,7 @@
 		33F6DC392738FB0200CBE4DA /* SearchStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStocksViewController.swift; sourceTree = "<group>"; };
 		33F6DC3C2738FE2F00CBE4DA /* SearchStocksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStocksViewModel.swift; sourceTree = "<group>"; };
 		33F6DC3E2738FED500CBE4DA /* SearchStockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStockTableViewCell.swift; sourceTree = "<group>"; };
+		33F9B206274FADAE00C2F9B9 /* PortfolioScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioScatterChartView.swift; sourceTree = "<group>"; };
 		33FBDE84270ADE55003B6DDB /* FirebaseTokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseTokenValidator.swift; sourceTree = "<group>"; };
 		33FE9E3726D5183A00FABC70 /* ScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartView.swift; sourceTree = "<group>"; };
 		33FE9E3926D518FD00FABC70 /* Legend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Legend.swift; sourceTree = "<group>"; };
@@ -2064,6 +2066,7 @@
 			isa = PBXGroup;
 			children = (
 				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
+				33F9B206274FADAE00C2F9B9 /* PortfolioScatterChartView.swift */,
 				900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */,
 			);
 			path = Chart;
@@ -2542,6 +2545,7 @@
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,
 				33FE9E4826D519A700FABC70 /* MultiLineChartView.swift in Sources */,
+				33F9B207274FADAE00C2F9B9 /* PortfolioScatterChartView.swift in Sources */,
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
 				85695B042746C18200759569 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */,
 				33CD8DB92744E4150032C1F2 /* GetPlaidTransactions.graphql.swift in Sources */,

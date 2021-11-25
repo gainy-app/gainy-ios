@@ -29,6 +29,7 @@ final class HoldingsViewController: BaseViewController {
             tableView.delegate = viewModel.dataSource
         }
     }
+    
     //MARK: - Inner
     private let viewModel = HoldingsViewModel()
     
