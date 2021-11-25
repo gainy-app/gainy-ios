@@ -29,6 +29,10 @@ class TickerDetailsViewCell: UITableViewCell {
     }
     
     
+    
+}
+
+extension UITableViewCell {
     func addSwiftUIIfPossible(_ view: UIView) -> Bool {
         guard !subviews.contains(where: {$0.tag == TickerDetailsDataSource.hostingTag}) else {
             return false

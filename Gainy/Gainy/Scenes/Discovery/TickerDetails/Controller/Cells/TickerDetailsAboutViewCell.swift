@@ -43,7 +43,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                     tagView.backgroundColor = UIColor(hex: 0x3A4448)
                 }
                 tagView.tagName = tag
-                let width = 22.0 + tag.widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                let width = 22.0 + tag.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0
@@ -67,48 +67,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         guard let name = tagView.tagName, name.count > 0 else {
             return
         }
-        
-        var title = NSLocalizedString("Title", comment: "title")
-        var description = NSLocalizedString("Description", comment: "description")
-        var height: CGFloat = CGFloat(135.0)
-        
-        // TODO: Move the logic outside of this class; don't attach to the name
-        let nameLowercased = name.lowercased()
-        if nameLowercased.contains("Defensive".lowercased()) {
-            title = NSLocalizedString("Defensive", comment: "Defensive")
-            description = NSLocalizedString("Defensive - a historically calculated metric of stocks that provide consistent dividends and stable earnings regardless of the state of the overall stock market.", comment: "Defensive desc")
-            height = 145.0
-            
-        } else if nameLowercased.contains("Speculation".lowercased()) || nameLowercased.contains("Speculative".lowercased()) {
-            title = NSLocalizedString("Speculation", comment: "Speculation")
-            description = NSLocalizedString("A speculative stock is a stock that a trader uses to speculate. The fundamentals of the stock do not show an apparent strength or sustainable business model, leading it to be viewed as very risky and trade at a comparatively low price, although the trader is hopeful that this will one day change.", comment: "Speculation desc")
-            height = 185.0
-        } else if nameLowercased.contains("Penny".lowercased()) {
-            title = NSLocalizedString("Penny", comment: "Penny")
-            description = NSLocalizedString("A penny stock typically refers to a small company's stock that trades for less than $5 per share.", comment: "Penny desc")
-            height = 135.0
-        } else if nameLowercased.contains("Dividend".lowercased()) {
-            title = NSLocalizedString("Dividend", comment: "Dividend")
-            description = NSLocalizedString("It is usually a more stable but with a slower growth company. Dividend stocks are companies that pay out regular dividends.", comment: "Dividend desc")
-            height = 145.0
-        } else if nameLowercased.contains("Momentum".lowercased()) {
-            title = NSLocalizedString("Momentum", comment: "Momentum")
-            description = NSLocalizedString("Momentum stocks is simply the stocks that are yielding higher returns over the past three, six, or 12 months than the S&P 500. They currently perform better than their peers but might have potential downside trend when the momentum is over. ", comment: "Momentum desc")
-            height = 175.0
-        } else if nameLowercased.contains("Value".lowercased()) {
-            title = NSLocalizedString("Value", comment: "Value")
-            description = NSLocalizedString("A value stock is one that is cheap in relation to such basic measures of corporate performance as earnings, sales, book value and cash flow.", comment: "Value desc")
-            height = 145.0
-        } else if nameLowercased.contains("Growth".lowercased()) {
-            title = NSLocalizedString("Growth", comment: "Growth")
-            description = NSLocalizedString("A growth stock is any share in a company that is anticipated to grow at a rate significantly above the average growth for the market.", comment: "Growth desc")
-            height = 145.0
-        } else {
-            // Not a category
-            return
+        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
+        if !panelInfo.title.isEmpty {
+            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
         }
-        
-        self.showExplanationWith(title: title, description: description, height: height)
     }
     
     //MARK: - Actions

@@ -138,7 +138,6 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int) {
         
         let vc = viewControllerFactory.instantiateTickersPages()
-        
         var controllers: [UIViewController] = []
         for tickerInfo in tickerInfos {
             let vcInner = self.viewControllerFactory.instantiateTickerDetails()

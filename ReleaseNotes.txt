@@ -1,15 +1,20 @@
-*iOS v0.3.1 #75* available
-:globe_with_meridians: Server - PROD
-*General improvements* - MVP
+iOS v0.3.1 #76 available
+:globe_with_meridians: Server - PROD
+General improvements - MVP
 
-:new: *New:*
-• Metrics: Change "Compare Stocks" collection metrics settings
+:new: New:
+• Portfolio: Chart with demo data Thx @Mikhail Astashkevich
+• Portfolio: Holdings
+• Portfolio: Transactions
+• Portfolio: Sorting and Filtering UI with partial logic Thx @Serhii Borysov
+• Lottie loader (pull-to-refresh on the way) Thx @Tim
 
-:hammer_and_wrench: *Improvements*
-• Modals: Popups can be dismissed by tap on the screen now
+:hammer_and_wrench: Improvements
+• Stock Card: Metrics layout
+• Stock Card: Bottom buttons
 
-:red_circle: *Important Notes:*
-If feature is not listed in New or in Improvements - *IT’S NOT DONE*
+:red_circle: Important Notes:
+If feature is not listed in New or in Improvements - IT’S NOT DONE
 
-:eyes: *What to check:*
+:eyes: What to check:
 General flow

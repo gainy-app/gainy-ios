@@ -10,6 +10,8 @@ import MBProgressHUD
 import Combine
 import Network
 import LinkKit
+import Lottie
+import PureLayout
 
 protocol LinkOAuthHandling {
     var linkHandler: Handler? { get }
@@ -77,6 +79,7 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         super.viewDidLoad()
         
         observeNetworkStatus()
+        setupAnimation()
     }
     
     // MARK: - Network Status Observation
@@ -87,6 +90,19 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
                 self?.networkStatus = status
             }
             .store(in: &cancellables)
+    }
+    private func setupAnimation() {
+        let path = Bundle.main.path(forResource: "loader3", ofType: "json")
+        let animation = Animation.named("loader3")
+        
+        animationView.animation = animation
+        animationView.contentMode = .scaleAspectFit
+        
+        animationView.alpha = 0.0
+        view.addSubview(animationView)
+        animationView.autoSetDimensions(to: .init(width: 64, height: 64))
+        animationView.autoCenterInSuperview()
+        
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -109,8 +125,7 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     
     //MARK: - Loaders
     
-    /// HUD to show
-    private var hudProgress: MBProgressHUD?
+    private let animationView = AnimationView()
     
     lazy var keyWindow: UIView =  {
         UIApplication.shared.keyWindow ?? UIView()
@@ -121,11 +136,9 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     
     /// Show Network HUD
     func showNetworkLoader() {
-        if hudProgress == nil {
-            hudProgress = MBProgressHUD.showAdded(to: keyWindow, animated: true)
-        }
-        hudProgress?.mode = .indeterminate;
-        hudProgress?.label.text = NSLocalizedString("Loading", comment: "");
+        self.animationView.alpha = 1.0
+        view.bringSubviewToFront(animationView)
+        animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.repeat(.infinity), completion: nil)
         isNetworkLoading = true
     }
     
@@ -133,13 +146,15 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     func hideLoader() {
         
         if Thread.isMainThread {
-            self.hudProgress?.hide(animated: true)
+            self.animationView.stop()
+            self.animationView.alpha = 0.0
             self.isNetworkLoading = false
             return
         }
         
         DispatchQueue.main.async { [weak self] in
-            self?.hudProgress?.hide(animated: true)
+            self?.animationView.stop()
+            self?.animationView.alpha = 0.0
             self?.isNetworkLoading = false
         }
     }

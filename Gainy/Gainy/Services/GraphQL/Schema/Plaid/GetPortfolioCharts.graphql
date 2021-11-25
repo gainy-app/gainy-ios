@@ -1,0 +1,7 @@
+  query GetPortfolioCharts($profileID: Int!, $period: String!) {
+    portfolio_chart(where: {profile_id: {_eq: $profileID}, period: {_eq: $period}}, order_by: {date: asc}) {
+        date
+        period
+        value
+    }
+}

@@ -48,6 +48,25 @@ struct ScatterChartView: View {
     
     enum ChartPeriod: String, CaseIterable {
         case d1 = "1D", w1 = "1W", m1 = "1M", m3 = "3M", y1 = "1Y", y5 = "5Y", all = "ALL"
+        
+        var longName: String {
+            switch self {
+            case .d1:
+                return "Today"
+            case .w1:
+                return "Week"
+            case .m1:
+                return "Month"
+            case .m3:
+                return "3 Months"
+            case .y1:
+                return "Year"
+            case .y5:
+                return "5 Years"
+            case .all:
+                return "All"
+            }
+        }
     }
     
     @State
