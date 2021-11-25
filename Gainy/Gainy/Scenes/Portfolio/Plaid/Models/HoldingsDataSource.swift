@@ -26,6 +26,56 @@ final class HoldingsDataSource: NSObject {
         }
     }
     var transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
+    
+    func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
+        
+        // TODO: Anton - Help with getting fields for sorting
+        switch sortingField {
+            // No purchase date yet
+//        case .purchasedDate:
+//
+//
+            // What fields to pick here?
+//        case .totalReturn:
+//
+//
+//        case .todayReturn:
+//
+//
+        case .percentOFPortfolio:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.percentInProfile < rhs.percentInProfile
+                } else {
+                    return lhs.percentInProfile > rhs.percentInProfile
+                }
+            })
+        
+        case .matchScore:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.matchScore < rhs.matchScore
+                } else {
+                    return lhs.matchScore > rhs.matchScore
+                }
+            })
+        
+        case .name:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.name < rhs.name
+                } else {
+                    return lhs.name > rhs.name
+                }
+            })
+        
+//        case .marketCap:
+        
+//        case .earningsDate:
+            
+        default: break
+        }
+    }
 }
 
 extension HoldingsDataSource: SkeletonTableViewDataSource {
