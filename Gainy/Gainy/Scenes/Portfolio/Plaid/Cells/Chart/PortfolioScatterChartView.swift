@@ -52,8 +52,11 @@ struct PortfolioScatterChartView: View {
                 chartView
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
+                sppView
+                    .offset(x: 0, y: -16)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
+                        .background(Rectangle().stroke())
                 }).frame(maxHeight: 40)
                 
             }
@@ -68,30 +71,42 @@ struct PortfolioScatterChartView: View {
     //MARK:- Body sections
     
     private var headerView: some View {
-        VStack {
-            HStack(spacing: 8) {
-                Button(action: {
-                    isSPPVisible.toggle()
-                    hapticTouch.impactOccurred()
-                }, label: {
-                    HStack {
-                            Image(isSPPVisible ? "toggle_on" : "toggle_off")
-                                .renderingMode(.original)
-                        Text("S&P500")
-                            .padding(.all, 0)
-                            .font(UIFont.proDisplayRegular(13).uiFont)
-                            .foregroundColor(isSPPVisible ? Color.white : UIColor(named: "mainText")!.uiColor)
-                    }
-                    .padding(.leading, 8)
-                    .padding(.trailing, 8)
-                    .padding(.top, 4)
-                    .padding(.bottom, 4)
-                    .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : Color.white).cornerRadius(20))
-                })
+        VStack(spacing: 8) {
+            HStack(spacing: 0) {
+                Text("Balance")
+                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)?.uiColor)
+                Spacer()
+                
+                HStack(spacing: 4) {
+                    Text(viewModel.rangeName)
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(14).uiFont)
+                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                    Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
+                        .resizable()
+                        .frame(width: 8.0, height: 8.0)
+                    Text("\(viewModel.rangeGrow.cleanTwoDecimalP)")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(14).uiFont)
+                        .foregroundColor(UIColor(named: viewModel.spGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                }
+            }
+            HStack(spacing: 4) {
+                Text(viewModel.balance.price)
+                    .font(UIFont.compactRoundedSemibold(24).uiFont)
+                    .foregroundColor(UIColor(hexString: "09141F", alpha: 1.0)?.uiColor)
+                Spacer()
+                
+                Text(viewModel.rangeGrowBalance.price)
+                    .padding(.all, 0)
+                    .font(UIFont.compactRoundedSemibold(24).uiFont)
+                    .foregroundColor(UIColor(hexString: "25C685", alpha: 1.0)!.uiColor)
             }
         }
-        .padding(.all, 0)
-        .frame(height: 74)
+        .padding(.leading, 16)
+        .padding(.trailing, 16)
+        .frame(height: 48)
         .animation(.easeIn)
     }
     
@@ -133,7 +148,7 @@ struct PortfolioScatterChartView: View {
         GeometryReader{ geometry in
         ZStack {
             if viewModel.chartData.points.count > 1 {
-                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
+                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel)
             }
         }
         .padding(.all, 0)
@@ -171,6 +186,38 @@ struct PortfolioScatterChartView: View {
         }
         return .zero
     }
+    var sppView: some View {
+        HStack {
+            Button(action: {
+                isSPPVisible.toggle()
+                hapticTouch.impactOccurred()
+            }, label: {
+                HStack(spacing: 4.0) {
+                        Image(isSPPVisible ? "toggle_on" : "toggle_off")
+                            .renderingMode(.original)
+                    Text("S&P500")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(12).uiFont)
+                        .foregroundColor(isSPPVisible ? Color.white : UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                    
+                    Image(viewModel.spGrow >= 0 ? "small_up" : "small_down")
+                        .resizable()
+                        .frame(width: 8.0, height: 8.0)
+                    Text("\(viewModel.spGrow.cleanTwoDecimalP)")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(13).uiFont)
+                        .foregroundColor(UIColor(named: viewModel.spGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                }
+                .padding(.leading, 16)
+                .padding(.trailing, 16)
+                .padding(.top, 6)
+                .padding(.bottom, 6)
+                .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+            })
+            Spacer()
+        }
+        .padding(.leading, 16)
+    }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
         HStack(alignment: .center, spacing: 0) {
@@ -191,12 +238,12 @@ struct PortfolioScatterChartView: View {
                     .animation(.easeIn)
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
-        }.padding(.leading, 20)
-        .padding(.trailing, 20)
-        .padding(.top, 8)
+        }.padding(.leading, 16)
+        .padding(.top, 0)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        48
+        geometry.size.width - 16.0 * 2.0 - 48.0 * 7.0 - 3.0 * 6
     }
 }
+
