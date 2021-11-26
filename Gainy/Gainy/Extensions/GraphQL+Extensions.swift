@@ -110,6 +110,38 @@ extension RemoteChartData: RemoteDateTimeConvertable {
     }
 }
 
+extension GetPortfolioChartsQuery.Data.PortfolioChart : RemoteDateTimeConvertable {
+    var datetime: String? {
+        get {
+            "2015-01-01T00:00:00.000Z"
+        }
+        set {
+            
+        }
+    }
+    
+        
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
+        let formatter = DateFormatter()
+        
+        switch period {
+        case .d1:
+            formatter.dateFormat = "HH:mm"
+            break
+        case .m1:
+            formatter.dateFormat = "MM-dd"
+            break
+        case .y5, .all:
+            formatter.dateFormat = "yyyy"
+            break
+        default:
+            formatter.dateFormat = "MM-dd"
+            break
+        }
+        return formatter.string(from: date)
+    }
+}
+
 protocol RemoteCreatedAtConvertable {
     var createdAt: String? {get set}
     var date: Date {get}

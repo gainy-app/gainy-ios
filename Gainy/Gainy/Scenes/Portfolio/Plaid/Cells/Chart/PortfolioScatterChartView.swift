@@ -49,11 +49,14 @@ struct PortfolioScatterChartView: View {
         GeometryReader(content: { rootGeo in
             VStack {
                 headerView
+                    .background(Rectangle().stroke())
                 chartView
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
+                    .background(Rectangle().stroke())
                 sppView
                     .offset(x: 0, y: -16)
+                    .background(Rectangle().stroke())
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                         .background(Rectangle().stroke())
@@ -79,7 +82,7 @@ struct PortfolioScatterChartView: View {
                 Spacer()
                 
                 HStack(spacing: 4) {
-                    Text(viewModel.rangeName)
+                    Text(statsDayName)
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                     .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)

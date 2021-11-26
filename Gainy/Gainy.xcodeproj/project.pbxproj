@@ -102,6 +102,9 @@
 		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
 		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
+		3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */; };
+		3394BA222750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */; };
+		3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */; };
 		339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */; };
 		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
 		339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */; };
@@ -540,6 +543,9 @@
 		338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHoldings.graphql.swift; sourceTree = "<group>"; };
 		338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersDetailsViewController.swift; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
+		3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetMatchScoreForTickers.graphql; sourceTree = "<group>"; };
+		3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMatchScoreForTickers.graphql.swift; sourceTree = "<group>"; };
+		3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioChartGainsViewModel.swift; sourceTree = "<group>"; };
 		339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventsManager.swift; sourceTree = "<group>"; };
 		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
 		339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersNoSpace.graphql; sourceTree = "<group>"; };
@@ -948,6 +954,7 @@
 				33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */,
 				9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */,
 				9068DDE8274B7350007C588A /* GetProfileGains.graphql.swift */,
+				3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1667,6 +1674,7 @@
 				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
+				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85695AF42746BAD400759569 /* Metrics */,
 				33019611273E824100BE4FDC /* Plaid */,
 				859B2EC6270605430084CCDC /* Profile */,
@@ -2080,8 +2088,9 @@
 			isa = PBXGroup;
 			children = (
 				3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */,
-				33F9B206274FADAE00C2F9B9 /* PortfolioScatterChartView.swift */,
+				3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */,
 				900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */,
+				33F9B206274FADAE00C2F9B9 /* PortfolioScatterChartView.swift */,
 			);
 			path = Chart;
 			sourceTree = "<group>";
@@ -2299,6 +2308,7 @@
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
+				3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */,
 				85EDC144272801A000866AD2 /* InsertTickerToWatchlist.graphql in Resources */,
@@ -2518,6 +2528,7 @@
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
+				3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */,
 				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
 				33F6DC382738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
@@ -2725,6 +2736,7 @@
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
+				3394BA222750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift in Sources */,
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,

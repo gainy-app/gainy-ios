@@ -221,6 +221,10 @@ public class ChartData: ObservableObject, Identifiable {
         }
     }
     
+    init(points: [GetPortfolioChartsQuery.Data.PortfolioChart], period: ScatterChartView.ChartPeriod) {
+        self.points = points.map{($0.labelForPeriod(period), Double($0.value ?? 0.0))}
+    }
+    
     public init<N: BinaryFloatingPoint>(points:[N]) {
         self.points = points.map{("", Double($0))}
     }
