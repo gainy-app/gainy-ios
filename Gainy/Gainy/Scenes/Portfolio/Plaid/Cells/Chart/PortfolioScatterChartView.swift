@@ -46,27 +46,24 @@ struct PortfolioScatterChartView: View {
     private var isLeftDurationVis: Bool = true
     
     var body: some View {
-        GeometryReader(content: { rootGeo in
             VStack {
                 headerView
-                    .background(Rectangle().stroke())
                 chartView
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
-                    .background(Rectangle().stroke())
+                    .frame(height: 220)
+                Spacer()
                 sppView
-                    .offset(x: 0, y: -16)
-                    .background(Rectangle().stroke())
+                    .offset(y: 0)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
-                        .background(Rectangle().stroke())
-                }).frame(maxHeight: 40)
+                })
                 
             }
             .background(Color.white)
-        }).onAppear(perform: {
-            hapticTouch.prepare()
-        })
+            .onAppear(perform: {
+                hapticTouch.prepare()
+            })
     }
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()
@@ -135,10 +132,6 @@ struct PortfolioScatterChartView: View {
     
     private var statsDayValue: String {
         return viewModel.chartData.startEndDiffString
-    }
-    
-    private var statsDayValueRaw: Float {
-        return 0.5
     }
     
     @ObservedObject
@@ -242,11 +235,13 @@ struct PortfolioScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }.padding(.leading, 16)
+        .padding(.trailing, 16)
         .padding(.top, 0)
+        .frame(width: UIScreen.main.bounds.width)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        geometry.size.width - 16.0 * 2.0 - 48.0 * 7.0 - 3.0 * 6
+        (UIScreen.main.bounds.width - 16.0 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 
