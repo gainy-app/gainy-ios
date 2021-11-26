@@ -54,7 +54,7 @@ struct PortfolioScatterChartView: View {
                     .frame(height: 220)
                 Spacer()
                 sppView
-                    .offset(y: 0)
+                    .offset(y: -16)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 })
