@@ -14,6 +14,7 @@ final class HoldingsDataSource: NSObject {
     
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
+    private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var holdings: [HoldingViewModel] = [] {
@@ -135,6 +136,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView = tableView
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
             if cell.addSwiftUIIfPossible(chartHosting.view) {
@@ -184,7 +186,8 @@ extension HoldingsDataSource: UITableViewDelegate {
 
 extension HoldingsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
-        
+        chartRange = period
+        tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
     }
 }
 
