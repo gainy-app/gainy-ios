@@ -14,6 +14,7 @@ final class HoldingsDataSource: NSObject {
     
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
+    private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var holdings: [HoldingViewModel] = [] {
@@ -25,7 +26,85 @@ final class HoldingsDataSource: NSObject {
             }
         }
     }
-    var transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
+    var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
+    
+    func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
+        
+        // TODO: Anton - Help with getting fields for sorting
+        switch sortingField {
+            // No purchase date yet
+//        case .purchasedDate:
+//
+//
+            // What fields to pick here?
+//        case .totalReturn:
+//
+//
+//        case .todayReturn:
+//
+//
+        case .percentOFPortfolio:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.percentInProfile < rhs.percentInProfile
+                } else {
+                    return lhs.percentInProfile > rhs.percentInProfile
+                }
+            })
+        
+        case .matchScore:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.matchScore < rhs.matchScore
+                } else {
+                    return lhs.matchScore > rhs.matchScore
+                }
+            })
+        
+        case .name:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                if ascending {
+                    return lhs.name < rhs.name
+                } else {
+                    return lhs.name > rhs.name
+                }
+            })
+        
+//        case .marketCap:
+        
+//        case .earningsDate:
+            
+        default: break
+        }
+    }
+    
+    //MARK: - Charts
+    private let chartHeight: CGFloat = 360.0
+    
+    var chartViewModel: HoldingChartViewModel!
+    private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
+        var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
+                                        delegate: chartDelegate)
+        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
+        chartHosting.view.tag = TickerDetailsDataSource.hostingTag
+        return chartHosting
+    }()
+    
+    
+    //MARK: - Updating UI
+    
+    func updateChart() {
+//        chartViewModel.ticker = ticker.ticker
+//        chartViewModel.localTicker = ticker
+//        chartViewModel.chartData = ticker.localChartData
+    }
+    
+    private lazy var chartDelegate: ScatterChartDelegate = {
+        let delegateObject =  ScatterChartDelegate()
+        delegateObject.delegate = self
+        return delegateObject
+    }()
+
 }
 
 extension HoldingsDataSource: SkeletonTableViewDataSource {
@@ -57,8 +136,16 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView = tableView
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
+            if cell.addSwiftUIIfPossible(chartHosting.view) {
+                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
+                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+            }
+
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
@@ -90,9 +177,17 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return tableView.sk.isSkeletonActive ? 252.0 : 44.0
+            return tableView.sk.isSkeletonActive ? 252.0 : chartHeight
         } else {
             return cellHeights[indexPath.row] ?? 0.0
         }
     }
 }
+
+extension HoldingsDataSource: ScatterChartViewDelegate {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
+        chartRange = period
+        tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
+    }
+}
+

@@ -58,6 +58,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             securitiesTableView.dataSource = self
         }
     }
+    @IBOutlet weak var secTableHeight: NSLayoutConstraint!
     
     func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod) {
         holding = model
@@ -137,8 +138,24 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Footer
         holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
-        holdingProgressLbl.text = (model.percentInProfile / 100.0).cleanOneDecimalP
+        holdingProgressLbl.text = (model.percentInProfile).cleanOneDecimalP
         transactionsTotalLbl.text = model.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
+        
+        if model.securities.isEmpty {
+            expandBtn.isHidden = true
+            transactionsTotalLbl.attributedText = "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
+            secTableHeight.constant = 0.0
+        } else {
+            expandBtn.isHidden = false
+            let attrArr = model.securities.map({$0.name.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
+            var totalList = NSMutableAttributedString.init(string: "")
+            for share in attrArr {
+                totalList.append(share)
+                totalList.append(" ".attr())
+            }
+            transactionsTotalLbl.attributedText = totalList
+            secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
+        }
     }
     
     private var holding: HoldingViewModel?
@@ -150,9 +167,15 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             securitiesTableView.isHidden = !isExpanded
             if let holding = holding {
                 if isExpanded {
-                    transactionsTotalLbl.text = "All positions"
+                    transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
-                    transactionsTotalLbl.text = holding.securities.map({"\($0.name)x\($0.quantity)"}).joined(separator: " ")
+                    let attrArr = holding.securities.map({$0.name.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
+                    var totalList = NSMutableAttributedString.init(string: "")
+                    for share in attrArr {
+                        totalList.append(share)
+                        totalList.append(" ".attr())
+                    }
+                    transactionsTotalLbl.attributedText = totalList
                 }
             }
         }
