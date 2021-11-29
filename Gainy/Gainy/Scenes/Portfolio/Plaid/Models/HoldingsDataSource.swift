@@ -14,6 +14,7 @@ final class HoldingsDataSource: NSObject {
     
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
+    private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var holdings: [HoldingViewModel] = [] {
@@ -25,6 +26,7 @@ final class HoldingsDataSource: NSObject {
             }
         }
     }
+    var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
     
     func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
         
@@ -79,10 +81,8 @@ final class HoldingsDataSource: NSObject {
     //MARK: - Charts
     private let chartHeight: CGFloat = 360.0
     
-    private(set) var chartViewModel: HoldingChartViewModel!
+    var chartViewModel: HoldingChartViewModel!
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
-        
-        chartViewModel = HoldingChartViewModel.init(balance: 156225, rangeName: "Today", rangeGrow: 12.05, rangeGrowBalance: 2228.50, spGrow: 1.13, chartData: ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40]))
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
@@ -136,6 +136,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView = tableView
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
             if cell.addSwiftUIIfPossible(chartHosting.view) {
@@ -185,7 +186,8 @@ extension HoldingsDataSource: UITableViewDelegate {
 
 extension HoldingsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
-        
+        chartRange = period
+        tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
     }
 }
 

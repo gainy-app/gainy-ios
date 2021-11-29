@@ -1147,6 +1147,47 @@
             </objects>
             <point key="canvasLocation" x="1553.6231884057972" y="122.54464285714285"/>
         </scene>
+        <!--Portfolio Filtering View Controller-->
+        <scene sceneID="VJO-dn-bW4">
+            <objects>
+                <viewController storyboardIdentifier="PortfolioFilteringViewController" id="Bbn-Go-ijC" customClass="PortfolioFilteringViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hGw-Pj-bab">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TA7-P7-6ca">
+                                <rect key="frame" x="190" y="70" width="34" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="C6D-J9-6o3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="14"/>
+                                <color key="textColor" name="mainText"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Tpc-xy-YZS">
+                                <rect key="frame" x="32" y="127" width="350" height="703"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="KWo-R6-AeV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KWo-R6-AeV" firstAttribute="trailing" secondItem="Tpc-xy-YZS" secondAttribute="trailing" constant="32" id="SMu-En-TG7"/>
+                            <constraint firstItem="Tpc-xy-YZS" firstAttribute="leading" secondItem="KWo-R6-AeV" secondAttribute="leading" constant="32" id="ZZn-rt-4u9"/>
+                            <constraint firstItem="TA7-P7-6ca" firstAttribute="top" secondItem="KWo-R6-AeV" secondAttribute="top" constant="26" id="a9y-k9-nos"/>
+                            <constraint firstItem="Tpc-xy-YZS" firstAttribute="top" secondItem="TA7-P7-6ca" secondAttribute="bottom" constant="32" id="dKL-Mu-c2e"/>
+                            <constraint firstItem="TA7-P7-6ca" firstAttribute="centerX" secondItem="KWo-R6-AeV" secondAttribute="centerX" id="fwt-PW-kVP"/>
+                            <constraint firstItem="KWo-R6-AeV" firstAttribute="bottom" secondItem="Tpc-xy-YZS" secondAttribute="bottom" constant="32" id="uwk-Bx-hmm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="Tpc-xy-YZS" id="Z1r-5r-n4Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1ej-Id-yTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2365" y="123"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="lut-SQ-IjF">

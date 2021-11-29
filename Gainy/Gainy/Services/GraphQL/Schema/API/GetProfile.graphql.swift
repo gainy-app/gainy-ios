@@ -47,6 +47,12 @@ public final class GetProfileQuery: GraphQLQuery {
         collection_id
         order
       }
+      app_profile_portfolio_accounts {
+        __typename
+        id
+        name
+        mask
+      }
     }
     """
 
@@ -69,6 +75,7 @@ public final class GetProfileQuery: GraphQLQuery {
       return [
         GraphQLField("app_profiles", arguments: ["where": ["id": ["_eq": GraphQLVariable("profileID")]]], type: .nonNull(.list(.nonNull(.object(AppProfile.selections))))),
         GraphQLField("app_profile_ticker_metrics_settings", arguments: ["where": ["profile": ["id": ["_eq": GraphQLVariable("profileID")]]]], type: .nonNull(.list(.nonNull(.object(AppProfileTickerMetricsSetting.selections))))),
+        GraphQLField("app_profile_portfolio_accounts", type: .nonNull(.list(.nonNull(.object(AppProfilePortfolioAccount.selections))))),
       ]
     }
 
@@ -78,8 +85,8 @@ public final class GetProfileQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(appProfiles: [AppProfile], appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }, "app_profile_ticker_metrics_settings": appProfileTickerMetricsSettings.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }])
+    public init(appProfiles: [AppProfile], appProfileTickerMetricsSettings: [AppProfileTickerMetricsSetting], appProfilePortfolioAccounts: [AppProfilePortfolioAccount]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "app_profiles": appProfiles.map { (value: AppProfile) -> ResultMap in value.resultMap }, "app_profile_ticker_metrics_settings": appProfileTickerMetricsSettings.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }, "app_profile_portfolio_accounts": appProfilePortfolioAccounts.map { (value: AppProfilePortfolioAccount) -> ResultMap in value.resultMap }])
     }
 
     /// fetch data from the table: "app.profiles"
@@ -99,6 +106,16 @@ public final class GetProfileQuery: GraphQLQuery {
       }
       set {
         resultMap.updateValue(newValue.map { (value: AppProfileTickerMetricsSetting) -> ResultMap in value.resultMap }, forKey: "app_profile_ticker_metrics_settings")
+      }
+    }
+
+    /// fetch data from the table: "app.profile_portfolio_accounts"
+    public var appProfilePortfolioAccounts: [AppProfilePortfolioAccount] {
+      get {
+        return (resultMap["app_profile_portfolio_accounts"] as! [ResultMap]).map { (value: ResultMap) -> AppProfilePortfolioAccount in AppProfilePortfolioAccount(unsafeResultMap: value) }
+      }
+      set {
+        resultMap.updateValue(newValue.map { (value: AppProfilePortfolioAccount) -> ResultMap in value.resultMap }, forKey: "app_profile_portfolio_accounts")
       }
     }
 
@@ -526,6 +543,65 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "order")
+        }
+      }
+    }
+
+    public struct AppProfilePortfolioAccount: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["app_profile_portfolio_accounts"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+          GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("mask", type: .nonNull(.scalar(String.self))),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(id: Int, name: String, mask: String) {
+        self.init(unsafeResultMap: ["__typename": "app_profile_portfolio_accounts", "id": id, "name": name, "mask": mask])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: Int {
+        get {
+          return resultMap["id"]! as! Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
+        }
+      }
+
+      public var name: String {
+        get {
+          return resultMap["name"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var mask: String {
+        get {
+          return resultMap["mask"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "mask")
         }
       }
     }
