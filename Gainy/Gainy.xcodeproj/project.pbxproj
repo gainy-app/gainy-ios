@@ -98,6 +98,7 @@
 		33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD626CD475700B11E58 /* CustomHostingController.swift */; };
 		337D612A26D514AE0048AE62 /* VHLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D612926D514AE0048AE62 /* VHLines.swift */; };
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
+		338142AD2754F1D3006867AE /* PortfolioSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */; };
 		3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381A56F271D48CA001A1EDA /* CollectionsManager.swift */; };
 		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
 		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
@@ -307,7 +308,6 @@
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */; };
 		854F1AC4274F8A38001900C7 /* PortfolioSortingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */; };
-		854F1AC6274F8CE6001900C7 /* PortfolioSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */; };
 		855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */; };
 		855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */; };
 		85695AE42745130200759569 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE32745130200759569 /* MetricsViewController.swift */; };
@@ -540,6 +540,7 @@
 		33787FD626CD475700B11E58 /* CustomHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHostingController.swift; sourceTree = "<group>"; };
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
+		338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSettingsManager.swift; sourceTree = "<group>"; };
 		3381A56F271D48CA001A1EDA /* CollectionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
 		338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHoldings.graphql.swift; sourceTree = "<group>"; };
 		338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersDetailsViewController.swift; sourceTree = "<group>"; };
@@ -754,7 +755,6 @@
 		8531030426F9ECA500AAAA91 /* GainyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyTextField.swift; sourceTree = "<group>"; };
 		854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortPortfolioDetailsViewController.swift; sourceTree = "<group>"; };
 		854F1AC3274F8A38001900C7 /* PortfolioSortingField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSortingField.swift; sourceTree = "<group>"; };
-		854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSettingsManager.swift; sourceTree = "<group>"; };
 		855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesB.xcassets; sourceTree = "<group>"; };
 		855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackgroundView.swift; sourceTree = "<group>"; };
 		85695AE32745130200759569 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
@@ -1143,8 +1143,8 @@
 				8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */,
 				85CD154226F8A937001C060C /* Authorization */,
 				3342C87B26DE2DC00049763E /* GainyAnalytics.swift */,
+				338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */,
 				3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */,
-				854F1AC5274F8CE5001900C7 /* PortfolioSettingsManager.swift */,
 				33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */,
 				33559B6326E8C08600E61D71 /* TickersLiveFetcher.swift */,
 				3316750927048A9800CA92F6 /* ImagePickerManager.swift */,
@@ -2543,7 +2543,6 @@
 				339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
 				336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */,
-				854F1AC6274F8CE6001900C7 /* PortfolioSettingsManager.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,
 				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
@@ -2576,6 +2575,7 @@
 				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
 				85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */,
+				338142AD2754F1D3006867AE /* PortfolioSettingsManager.swift in Sources */,
 				336D09FA26D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift in Sources */,
 				33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */,
 				33FE9E4126D5194400FABC70 /* Path+QuadCurve.swift in Sources */,

@@ -16,7 +16,9 @@ struct HoldingsModelMapper {
         
         
         for rawHolding in holdings {
-            let security: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.Security? = rawHolding.security.first
+            let security: GetPlaidTransactionsQuery.Data.GetPortfolioTransaction.Security? = transactions.first(where: {
+                $0.security.id == rawHolding.securityId
+            }).map({$0.security})
             print("Sec: \(security?.id ?? 0)")
             print("Sec Name: \(security?.name ?? "")")
             let ticker = security?.tickers?.fragments.remoteTickerDetails
@@ -102,6 +104,7 @@ struct HoldingsModelMapper {
                                                   relativeGains: relGains,
                                                   percentInProfile:portfolioHoldingsGains?.valueToPortfolioValue ?? 0.0,
                                                   securities: securities,
+                                                  holdingDetails: rawHolding.holdingDetails,
                                                   event: ticker?.tickerEvents.first?.description)
             
             holds.append(holdModel)

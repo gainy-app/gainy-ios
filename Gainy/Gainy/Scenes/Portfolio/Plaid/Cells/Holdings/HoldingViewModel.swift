@@ -28,6 +28,8 @@ struct HoldingViewModel {
     
     let securities: [HoldingSecurityViewModel]
     
+    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.HoldingDetail?
+    
     let event: String?
     
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String) {

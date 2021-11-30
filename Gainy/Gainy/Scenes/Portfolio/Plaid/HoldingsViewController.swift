@@ -142,9 +142,12 @@ final class HoldingsViewController: BaseViewController {
 extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
     
     func selectionChanged(vc: SortPortfolioDetailsViewController, sorting: PortfolioSortingField, ascending: Bool) {
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
         
         vc.dismiss(animated: true)
-        viewModel.dataSource.sortHoldingsBy(sorting, ascending: ascending)
+        viewModel.settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)
         tableView.reloadData()
         updateSortButton()
     }

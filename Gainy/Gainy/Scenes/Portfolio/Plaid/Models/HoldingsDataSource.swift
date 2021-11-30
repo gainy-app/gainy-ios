@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import Apollo
+import SwiftDate
 
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
@@ -28,21 +29,45 @@ final class HoldingsDataSource: NSObject {
     }
     var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
     
+    private let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
     func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
-        
-        // TODO: Anton - Help with getting fields for sorting
         switch sortingField {
-            // No purchase date yet
-//        case .purchasedDate:
-//
-//
-            // What fields to pick here?
-//        case .totalReturn:
-//
-//
-//        case .todayReturn:
-//
-//
+        case .purchasedDate:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
+            })
+
+        case .totalReturn:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
+                } else {
+                    return lhd.relativeGainTotal ?? 0 > rhd.relativeGainTotal ?? 0
+                }
+            })
+
+        case .todayReturn:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
+                } else {
+                    return lhd.relativeGain_1d ?? 0 > rhd.relativeGain_1d ?? 0
+                }
+            })
+
         case .percentOFPortfolio:
             self.holdings = self.holdings.sorted(by: { lhs, rhs in
                 if ascending {
@@ -70,11 +95,29 @@ final class HoldingsDataSource: NSObject {
                 }
             })
         
-//        case .marketCap:
+        case .marketCap:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
+                } else {
+                    return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
+                }
+            })
         
-//        case .earningsDate:
-            
-        default: break
+        case .earningsDate:
+            self.holdings = self.holdings.sorted(by: { lhs, rhs in
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
+            })
         }
     }
     

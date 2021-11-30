@@ -12,13 +12,23 @@ final class HoldingsViewModel {
     let dataSource = HoldingsDataSource()
     
     private var holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding] = []
-    private var securities: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
+    private var transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction] = []
     private var profileGains: GetProfileGainsQuery.Data.AppProfile?
+    
+    var settings: PortfolioSettings? {
+        didSet {
+            if let settings = settings {
+                dataSource.sortHoldingsBy(settings.sorting, ascending: settings.ascending)
+            }
+        }
+    }
     
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : [GetPortfolioChartsQuery.Data.PortfolioChart]] = [:]
     
     //MARK: - Network
+    
+    private var config = Configuration()
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
         DispatchQueue.global().async {
@@ -54,7 +64,7 @@ final class HoldingsViewModel {
                             completion?()
                             return
                         }
-                        self?.securities = holdingsCount.compactMap({$0})
+                        self?.transactions = holdingsCount.compactMap({$0})
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -105,17 +115,17 @@ final class HoldingsViewModel {
                     }
                     self.dataSource.chartRange = .d1
                     
-                    let tickSymbols = self.holdings.compactMap({$0.security.first?.tickerSymbol})
+                    let tickSymbols = self.transactions.compactMap({$0.security.tickerSymbol})
                     print(tickSymbols)
                     
                     //TO-DO: Serhii it's for you
-                    let securityType = self.holdings.compactMap({$0.security.first?.type}).uniqued()
+                    let securityType = self.transactions.compactMap({$0.security.type}).uniqued()
                     print(securityType)
                     
-                    let industries = self.holdings.compactMap({$0.security.first?.tickers?.fragments.remoteTickerDetails.tickerIndustries}).flatMap({$0})
+                    let industries = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerIndustries}).flatMap({$0})
                     print(industries)
                     
-                    let interests = self.holdings.compactMap({$0.security.first?.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
+                    let interests = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
                     print(interests)
                     
                     TickersLiveFetcher.shared.getSymbolsData(tickSymbols) {
@@ -124,14 +134,20 @@ final class HoldingsViewModel {
                             
                             //Loading Today
                             let today = topChartGains[.d1]
-                            
+                        
                             let demo = HoldingChartViewModel.init(balance: 156225, rangeGrow: 12.05, rangeGrowBalance: 2228.50, spGrow: 1.13, chartData: ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40]))
                             let live = HoldingChartViewModel.init(balance: self.profileGains?.portfolioGains?.actualValue ?? 0.0, rangeGrow: today?.rangeGrow ?? 0.0, rangeGrowBalance: today?.rangeGrowBalance ?? 0.0, spGrow: 0.0, chartData: today?.chartData ?? ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40]))
-                            self.dataSource.chartViewModel = live
+                            if self.config.environment == .production {
+                                self.dataSource.chartViewModel = live
+                            } else {
+                                self.dataSource.chartViewModel = demo
+                            }
                             self.dataSource.profileGains = topChartGains
+                            let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                             self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
-                                                                                     transactions: self.securities,
+                                                                                     transactions: self.transactions,
                                                                                      profileHoldings: self.profileGains)
+                            self.dataSource.sortHoldingsBy(settings.sorting, ascending: settings.ascending)
                             completion?()
                         }
                     }
