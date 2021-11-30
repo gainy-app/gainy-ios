@@ -129,7 +129,7 @@ final class HoldingsViewModel {
                                                                                                                             includeClosedPositions: true,
                                                                                                                             onlyLongCapitalGainTax: false,
                                                                                                                             interests: interests.compactMap(\.interestId),
-                                                                                                                            categories: categories.compactMap({$0.categories?}) ?? [],
+                                                                                                                            categories: categories.compactMap({$0.categories?.id}) ?? [],
                                                                                                                             securityTypes: securityTypes,
                                                                                                                             disabledAccounts: []))
                     

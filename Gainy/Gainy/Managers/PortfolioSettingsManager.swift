@@ -74,9 +74,9 @@ final class PortfolioSettingsManager {
     
     func setInitialSettingsForUserId(_ id: Int, settings: PortfolioSettings) {
         if settings == nil {
-            settings = [:]
+            self.settings = [:]
         }
-        settings?[id] = settings
+        self.settings?[id] = settings
     }
 
     func getSettingByUserID(_ id: Int) -> PortfolioSettings {
@@ -122,7 +122,7 @@ final class PortfolioSettingsManager {
         settings?[id] = PortfolioSettings(sorting: cur.sorting, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: categories, securityTypes: cur.securityTypes, disabledAccounts: cur.disabledAccounts)
     }
     
-    func changeSecurityTypesForUserId(_ id: Int, securityTypes: [Int]) {
+    func changeSecurityTypesForUserId(_ id: Int, securityTypes: [String]) {
         let cur = getSettingByUserID(id)
         settings?[id] = PortfolioSettings(sorting: cur.sorting, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, securityTypes: securityTypes, disabledAccounts: cur.disabledAccounts)
     }

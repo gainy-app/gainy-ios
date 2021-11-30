@@ -484,6 +484,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         __typename
         categories {
           __typename
+          id
           name
           icon_url
         }
@@ -1375,6 +1376,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
         ]
@@ -1386,8 +1388,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String? = nil, iconUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "categories", "name": name, "icon_url": iconUrl])
+      public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl])
       }
 
       public var __typename: String {
@@ -1396,6 +1398,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: Int? {
+        get {
+          return resultMap["id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
         }
       }
 
