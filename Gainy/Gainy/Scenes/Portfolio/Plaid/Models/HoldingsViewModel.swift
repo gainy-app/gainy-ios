@@ -18,7 +18,7 @@ final class HoldingsViewModel {
     var settings: PortfolioSettings? {
         didSet {
             if let settings = settings {
-                dataSource.sortHoldingsBy(settings.sorting, ascending: settings.ascending)
+                dataSource.sortAndFilterHoldingsBy(settings)
             }
         }
     }
@@ -117,16 +117,21 @@ final class HoldingsViewModel {
                     
                     let tickSymbols = self.transactions.compactMap({$0.security.tickerSymbol})
                     print(tickSymbols)
+                                        
+                    let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                     
-                    //TO-DO: Serhii it's for you
-                    let securityType = self.transactions.compactMap({$0.security.type}).uniqued()
-                    print(securityType)
+                    let securityTypes = self.transactions.compactMap({$0.security.type}).uniqued()
+                    let interests = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerInterests}).flatMap({$0})
+                    let categories = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
                     
-                    let industries = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerIndustries}).flatMap({$0})
-                    print(industries)
-                    
-                    let interests = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
-                    print(interests)
+                    PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: PortfolioSettings.init(sorting: .matchScore,
+                                                                                                                            ascending: false,
+                                                                                                                            includeClosedPositions: true,
+                                                                                                                            onlyLongCapitalGainTax: false,
+                                                                                                                            interests: interests.compactMap(\.interestId),
+                                                                                                                            categories: categories.compactMap({$0.categories?}) ?? [],
+                                                                                                                            securityTypes: securityTypes,
+                                                                                                                            disabledAccounts: []))
                     
                     TickersLiveFetcher.shared.getSymbolsData(tickSymbols) {
                         TickersLiveFetcher.shared.getMatchScores(symbols: tickSymbols) {
@@ -143,11 +148,10 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel = demo
                             }
                             self.dataSource.profileGains = topChartGains
-                            let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                             self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
                                                                                      transactions: self.transactions,
                                                                                      profileHoldings: self.profileGains)
-                            self.dataSource.sortHoldingsBy(settings.sorting, ascending: settings.ascending)
+                            self.dataSource.sortAndFilterHoldingsBy(settings)
                             completion?()
                         }
                     }

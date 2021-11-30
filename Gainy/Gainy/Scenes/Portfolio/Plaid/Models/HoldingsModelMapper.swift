@@ -97,7 +97,7 @@ struct HoldingsModelMapper {
                                                   tickerSymbol: symbol,
                                                   industries: ticker?.tickerIndustries ?? [],
                                                   categories: ticker?.tickerCategories ?? [],
-                                                  showLTT: false,
+                                                  showLTT: rawHolding.holdingDetails.lttQuantityTotal ?? 0.0 > 0.0,
                                                   todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                                   todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,
                                                   absoluteGains: absGains,
@@ -105,7 +105,10 @@ struct HoldingsModelMapper {
                                                   percentInProfile:portfolioHoldingsGains?.valueToPortfolioValue ?? 0.0,
                                                   securities: securities,
                                                   holdingDetails: rawHolding.holdingDetails,
-                                                  event: ticker?.tickerEvents.first?.description)
+                                                  event: ticker?.tickerEvents.first?.description,
+                                                  accountId: rawHolding.account.id,
+                                                  tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
+                                                  tickerCategories: ticker?.tickerIndustries.compactMap({$0.gainyIndustry?.id}) ?? [])
             
             holds.append(holdModel)
         }
