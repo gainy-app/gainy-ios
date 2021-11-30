@@ -362,6 +362,12 @@
 		85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift */; };
 		85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */; };
 		85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */; };
+		85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */; };
+		85E4A2802755184F00C0E5C5 /* InfoDataSouce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */; };
+		85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */; };
+		85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */; };
+		85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */; };
+		85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */; };
 		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
 		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
@@ -808,6 +814,12 @@
 		85D4F81126E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLeftAlignedVerticalLayout.swift; sourceTree = "<group>"; };
 		85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextCollectionViewCell.swift; sourceTree = "<group>"; };
+		85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioFilteringViewController.swift; sourceTree = "<group>"; };
+		85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDataSouce.swift; sourceTree = "<group>"; };
+		85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
+		85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
 		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
@@ -1029,7 +1041,7 @@
 			isa = PBXGroup;
 			children = (
 				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
-				854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */,
+				85E4A28127551CCB00C0E5C5 /* Portfolio */,
 				8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */,
 				33F6DC3B2738FDF300CBE4DA /* SearchStocks */,
 			);
@@ -1748,6 +1760,7 @@
 				85CD154E26F8FC4A001C060C /* ProfileInfo.swift */,
 				3A859452268B058900CB8DD6 /* Collection */,
 				3A859453268B059500CB8DD6 /* CollectionDetails */,
+				85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2042,6 +2055,27 @@
 			path = RoundedTextCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		85E4A28127551CCB00C0E5C5 /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */,
+				85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */,
+				85E4A28A27551D4100C0E5C5 /* Cells */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		85E4A28A27551D4100C0E5C5 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */,
+				85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */,
+				85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */,
+				85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		85ED4DD72701B77900FE6926 /* Keychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -2265,6 +2299,8 @@
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
+				85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */,
+				85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */,
 				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
 				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
@@ -2457,7 +2493,9 @@
 				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
+				85E4A2802755184F00C0E5C5 /* InfoDataSouce.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
+				85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */,
 				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
 				33A1F57927032721000DAF33 /* FetchRecommendedCollections.graphql.swift in Sources */,
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
@@ -2592,6 +2630,7 @@
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
+				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
@@ -2614,6 +2653,7 @@
 				3372ED352710490300D8D8E1 /* DDLog.swift in Sources */,
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
+				85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */,
 				33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */,
 				33387FDE274E7DF30070A733 /* String+Attributed.swift in Sources */,
 				33FE9E4226D5194400FABC70 /* Line.swift in Sources */,
