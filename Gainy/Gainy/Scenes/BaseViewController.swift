@@ -136,7 +136,10 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     
     /// Show Network HUD
     func showNetworkLoader() {
-        self.animationView.alpha = 1.0
+        animationView.backgroundColor = .white
+        animationView.alpha = 1.0
+        animationView.layer.cornerRadius = 8.0
+        animationView.clipsToBounds = true
         view.bringSubviewToFront(animationView)
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.repeat(.infinity), completion: nil)
         isNetworkLoading = true
