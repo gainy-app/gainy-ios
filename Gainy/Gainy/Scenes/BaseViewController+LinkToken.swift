@@ -14,26 +14,25 @@ extension BaseViewController {
         // With custom configuration using a link_token
         var linkConfiguration = LinkTokenConfiguration(token: linkToken) { success in
             dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
-            if let profileID = UserProfileManager.shared.profileID {
-                Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken)) {[weak self] result in
-                    switch result {
-                    case .success(let graphQLResult):
-                        guard let isAccountLinked = graphQLResult.data?.linkPlaidAccount?.result else {
-                            return
-                        }
-                        if isAccountLinked {
-                            self?.plaidLinked()
-                        } else {
-                            self?.plaidLinkFailed()
-                        }
-                        
-                        break
-                    case .failure(let error):
-                        dprint("Failure when making GraphQL request. Error: \(error)")
-                        
-                        self?.plaidLinkFailed()
-                        break
+            guard let profileID = UserProfileManager.shared.profileID else { return }
+            Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken)) {[weak self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let isAccountLinked = graphQLResult.data?.linkPlaidAccount?.result else {
+                        return
                     }
+                    if isAccountLinked {
+                        self?.plaidLinked()
+                    } else {
+                        self?.plaidLinkFailed()
+                    }
+                    
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    
+                    self?.plaidLinkFailed()
+                    break
                 }
             }
         }

@@ -1,5 +1,5 @@
 //
-//  InfoDataSouce.swift
+//  InfoDataSource.swift
 //  Gainy
 //
 //  Created by Serhii Borysov on 11/22/21.
@@ -7,18 +7,18 @@
 
 import Foundation
 
-enum InfoDataSouceType: Int {
+enum InfoDataSourceType: Int, Codable {
     
     case Interst
     case Category
     case SecurityType
 }
 
-struct InfoDataSouce {
+struct InfoDataSource: Codable {
     
-    let type: InfoDataSouceType
+    let type: InfoDataSourceType
     let id: Int
     let title: String
-    let iconURL: URL
+    let iconURL: String
     let selected: Bool
 }

@@ -35,6 +35,7 @@ final class PortfolioViewController: BaseViewController {
             case .linkedNoHoldings:
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
+                    holdingsVC.delegate = self
                     addViewController(holdingsVC, view: containerView)
                 }
                 holdingsVC.loadData()
@@ -80,5 +81,13 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
     func plaidLinked(controller: NoPlaidViewController) {
         UserProfileManager.shared.isPlaidLinked = true        
         state = .linkHasHoldings
+    }
+}
+
+extension PortfolioViewController: HoldingsViewControllerDelegate {
+    
+    func plaidUnlinked(controller: HoldingsViewController) {
+        
+        self.loadBasedOnState()
     }
 }

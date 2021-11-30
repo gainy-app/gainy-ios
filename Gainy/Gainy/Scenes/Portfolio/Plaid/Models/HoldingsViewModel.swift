@@ -118,20 +118,46 @@ final class HoldingsViewModel {
                     let tickSymbols = self.transactions.compactMap({$0.security.tickerSymbol})
                     print(tickSymbols)
                                         
-                    let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                     
-                    let securityTypes = self.transactions.compactMap({$0.security.type}).uniqued()
-                    let interests = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerInterests}).flatMap({$0})
-                    let categories = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
+                    let securityTypesRaw = self.transactions.compactMap({$0.security.type}).uniqued()
+                    let interestsRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerInterests}).flatMap({$0})
+                    let categoriesRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
                     
-                    PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: PortfolioSettings.init(sorting: .matchScore,
-                                                                                                                            ascending: false,
-                                                                                                                            includeClosedPositions: true,
-                                                                                                                            onlyLongCapitalGainTax: false,
-                                                                                                                            interests: interests.compactMap(\.interestId),
-                                                                                                                            categories: categories.compactMap({$0.categories?.id}) ?? [],
-                                                                                                                            securityTypes: securityTypes,
-                                                                                                                            disabledAccounts: []))
+                    
+                    var settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
+                    let securityTypes = securityTypesRaw.map { item -> InfoDataSource in
+                        let selected = settings?.securityTypes.contains(where: { item in
+                            item.selected
+                        }) ?? true
+                        return InfoDataSource.init(type: .SecurityType, id:item.hashValue, title: item, iconURL: "", selected: selected)
+                    }.uniqueUsingKey{$0.id}
+                    
+                    let interests = interestsRaw.map { item -> InfoDataSource in
+                        let selected = settings?.interests.contains(where: { item in
+                            item.selected
+                        }) ?? true
+                        return InfoDataSource.init(type: .Interst, id:item.interest?.id ?? 0, title: item.interest?.name ?? "", iconURL: item.interest?.iconUrl ?? "", selected: selected)
+                    }.uniqueUsingKey{$0.id}
+                    
+                    let categories = categoriesRaw.map { item -> InfoDataSource in
+                        let selected = settings?.categories.contains(where: { item in
+                            item.selected
+                        }) ?? true
+                        return InfoDataSource.init(type: .Category, id:item.categories?.id ?? 0, title: item.categories?.name ?? "", iconURL: item.categories?.iconUrl ?? "", selected: selected)
+                    }.uniqueUsingKey{$0.id}
+ 
+                    let defaultSettings = PortfolioSettings.init(sorting: .matchScore,
+                                                                 ascending: false,
+                                                                 includeClosedPositions: true,
+                                                                 onlyLongCapitalGainTax: false,
+                                                                 interests: interests,
+                                                                 categories: categories,
+                                                                 securityTypes: securityTypes,
+                                                                 disabledAccounts: [])
+                    if settings == nil {
+                        PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: defaultSettings)
+                        settings = defaultSettings
+                    }
                     
                     TickersLiveFetcher.shared.getSymbolsData(tickSymbols) {
                         TickersLiveFetcher.shared.getMatchScores(symbols: tickSymbols) {
@@ -151,10 +177,13 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel = demo
                             }
                             self.dataSource.profileGains = topChartGains
-                            self.dataSource.holdings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
-                                                                                     transactions: self.transactions,
-                                                                                     profileHoldings: self.profileGains)
-                            self.dataSource.sortAndFilterHoldingsBy(settings)
+                            self.dataSource.originalHoldings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
+                                                                                             transactions: self.transactions,
+                                                                                             profileHoldings: self.profileGains)
+                            self.dataSource.holdings = self.dataSource.originalHoldings
+                            if let settings = settings {
+                                self.dataSource.sortAndFilterHoldingsBy(settings)
+                            }
                             completion?()
                         }
                     }

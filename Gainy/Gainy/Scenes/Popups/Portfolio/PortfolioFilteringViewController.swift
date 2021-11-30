@@ -8,7 +8,8 @@
 import UIKit
 
 protocol PortfolioFilteringViewControllerDelegate: AnyObject {
-    // WIP Borysov - coming soon
+    
+    func didChangeFilterSettings(_ sender: PortfolioFilteringViewController)
 }
 
 class PortfolioFilteringViewController: BaseViewController {
@@ -17,17 +18,17 @@ class PortfolioFilteringViewController: BaseViewController {
     
     private var brokers: [PlaidAccountDataSource] = []
     
-    private var interests: [InfoDataSouce] = []
-    private var categories: [InfoDataSouce] = []
-    private var securityTypes: [InfoDataSouce] = []
+    private var interests: [InfoDataSource] = []
+    private var categories: [InfoDataSource] = []
+    private var securityTypes: [InfoDataSource] = []
     
     private var includeClosedPositions: Bool = false
     private var onlyLongCapitalGainTax: Bool = false
     
-    public func cofigure(_ brokers: [PlaidAccountDataSource],
-                         _ interests: [InfoDataSouce],
-                         _ categories: [InfoDataSouce],
-                         _ securityTypes: [InfoDataSouce],
+    public func configure(_ brokers: [PlaidAccountDataSource],
+                         _ interests: [InfoDataSource],
+                         _ categories: [InfoDataSource],
+                         _ securityTypes: [InfoDataSource],
                          _ includeClosedPositions: Bool,
                          _ onlyLongCapitalGainTax: Bool) {
         
@@ -123,23 +124,31 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
         if indexPath.section == 1 {
-            let type: InfoDataSouceType?
+            
+            let infoDataVC: PortfolioInfoDataViewController = PortfolioInfoDataViewController.instantiate(.portfolio)
             switch indexPath.row {
-            case 0: type = InfoDataSouceType.Interst
-            case 1: type = InfoDataSouceType.Category
-            case 2: type = InfoDataSouceType.SecurityType
+            case 0:
+                infoDataVC.configure(with: self.interests)
+            case 1:
+                infoDataVC.configure(with: self.categories)
+            case 2:
+                infoDataVC.configure(with: self.securityTypes)
             default: return nil
             }
-            if let type = type {
-                // WIP Borysov - coming soon : Show PickInfoDataViewController
+            
+            infoDataVC.delegate = self
+            infoDataVC.dismissHandler = {
+                self.tableView.reloadData()
             }
+            let navigationController = UINavigationController.init(rootViewController: infoDataVC)
+            self.present(navigationController, animated: true, completion: nil)
         }
         return nil
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         
-        return false
+        return true
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -151,6 +160,56 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
 extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
     
     func switchValueChanged(_ sender: SwitchTableViewCell) {
-        // WIP Borysov - coming soon : save changed value
+        
+        guard let indexPath = tableView.indexPath(for: sender) else {
+            return
+        }
+        
+        switch indexPath.section {
+        case 0:
+            guard let userID = UserProfileManager.shared.profileID else {return}
+            let accountData = self.brokers[indexPath.row].accountData
+            self.brokers[indexPath.row] = PlaidAccountDataSource.init(accountData: accountData, enabled: sender.valueSwitch.isOn)
+            let disabledBrokers = self.brokers.filter { item in
+                !item.enabled
+            }
+            let disabledAccounts = disabledBrokers.map { item in
+                item.accountData
+            }
+            PortfolioSettingsManager.shared.changedisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            self.delegate?.didChangeFilterSettings(self)
+        case 2:
+            guard let userID = UserProfileManager.shared.profileID else {return}
+            if indexPath.row == 0 {
+                PortfolioSettingsManager.shared.changeIncludeClosedPositionsForUserId(userID, includeClosedPositions: sender.valueSwitch.isOn)
+            } else if indexPath.row == 1 {
+                PortfolioSettingsManager.shared.changeOnlyLongCapitalGainTaxForUserId(userID, onlyLongCapitalGainTax: sender.valueSwitch.isOn)
+            }
+            self.delegate?.didChangeFilterSettings(self)
+        default: return
+        }
+    }
+}
+
+extension PortfolioFilteringViewController: PortfolioInfoDataViewControllerDelegate {
+    
+    func didChangeInfoData(_ sender: AnyObject?, _ updatedDataSource: [InfoDataSource]) {
+        
+        guard let userID = UserProfileManager.shared.profileID else {return}
+        guard let type = updatedDataSource.first?.type else {return}
+        
+        switch type {
+        case .Interst:
+            self.interests = updatedDataSource
+            PortfolioSettingsManager.shared.changeInterestsForUserId(userID, interests: updatedDataSource)
+        case .Category:
+            self.categories = updatedDataSource
+            PortfolioSettingsManager.shared.changeCategoriesForUserId(userID, categories: updatedDataSource)
+        case .SecurityType:
+            self.securityTypes = updatedDataSource
+            PortfolioSettingsManager.shared.changeSecurityTypesForUserId(userID, securityTypes: updatedDataSource)
+        }
+        
+        self.delegate?.didChangeFilterSettings(self)
     }
 }
