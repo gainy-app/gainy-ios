@@ -56,6 +56,7 @@ extension Array where Element == HoldingViewModel {
         let ascending: Bool = settings.ascending
         let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
         
+        
         //Filters
         return self.sorted { lhs, rhs in
             switch sortingField {
