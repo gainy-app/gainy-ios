@@ -1,17 +1,14 @@
-iOS v0.3.1 #76 available
-:globe_with_meridians: Server - PROD
+iOS v0.3.1 #77 available
+:globe_with_meridians: Server - STAGING
 General improvements - MVP
 
 :new: New:
-• Portfolio: Chart with demo data Thx @Mikhail Astashkevich
-• Portfolio: Holdings
-• Portfolio: Transactions
-• Portfolio: Sorting and Filtering UI with partial logic Thx @Serhii Borysov
-• Lottie loader (pull-to-refresh on the way) Thx @Tim
+• Portfolio: Sorting & Filtering
+• Portfolio: S&P Chart with demo data
+• Portfolio: Link/Unlink account (has as few known bugs - will be fixed asap)
 
 :hammer_and_wrench: Improvements
-• Stock Card: Metrics layout
-• Stock Card: Bottom buttons
+•
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

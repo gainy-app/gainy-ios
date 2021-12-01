@@ -46,24 +46,24 @@ struct PortfolioScatterChartView: View {
     private var isLeftDurationVis: Bool = true
     
     var body: some View {
-        GeometryReader(content: { rootGeo in
             VStack {
                 headerView
                 chartView
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
+                    .frame(height: 220)
+                Spacer()
                 sppView
-                    .offset(x: 0, y: -16)
+                    .offset(y: -16)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
-                        .background(Rectangle().stroke())
-                }).frame(maxHeight: 40)
+                })
                 
             }
             .background(Color.white)
-        }).onAppear(perform: {
-            hapticTouch.prepare()
-        })
+            .onAppear(perform: {
+                hapticTouch.prepare()
+            })
     }
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()
@@ -79,7 +79,7 @@ struct PortfolioScatterChartView: View {
                 Spacer()
                 
                 HStack(spacing: 4) {
-                    Text(viewModel.rangeName)
+                    Text(statsDayName)
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                     .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
@@ -134,10 +134,6 @@ struct PortfolioScatterChartView: View {
         return viewModel.chartData.startEndDiffString
     }
     
-    private var statsDayValueRaw: Float {
-        return 0.5
-    }
-    
     @ObservedObject
     var lineViewModel: LineViewModel = LineViewModel()
     
@@ -148,8 +144,17 @@ struct PortfolioScatterChartView: View {
         GeometryReader{ geometry in
         ZStack {
             if viewModel.chartData.points.count > 1 {
-                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel)
+                LineView(data: viewModel.chartData,
+                         title: "Full chart",
+                         style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                         viewModel: lineViewModel)
             }
+            LineView(data: viewModel.sypChartData,
+                     title: Constants.Chart.sypChartName,
+                     style: viewModel.sypChartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                     viewModel: lineViewModel)
+                .opacity(isSPPVisible ? 1.0 : 0.0)
+            
         }
         .padding(.all, 0)
         .animation(.linear)
@@ -239,11 +244,13 @@ struct PortfolioScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }.padding(.leading, 16)
+        .padding(.trailing, 16)
         .padding(.top, 0)
+        .frame(width: UIScreen.main.bounds.width)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        geometry.size.width - 16.0 * 2.0 - 48.0 * 7.0 - 3.0 * 6
+        (UIScreen.main.bounds.width - 16.0 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 

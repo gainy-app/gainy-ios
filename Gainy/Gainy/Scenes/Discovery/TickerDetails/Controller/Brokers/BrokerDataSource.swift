@@ -1,11 +1,23 @@
 //
-//  BrokerDataSource.swift
+//  PlaidAccountDataSource.swift
 //  Gainy
 //
 //  Created by Serhii Borysov on 11/8/21.
 //
 
 import Foundation
+
+struct PlaidAccountData: Codable {
+    
+    let id: Int
+    let name: String
+}
+
+struct PlaidAccountDataSource {
+    
+    let accountData: PlaidAccountData
+    let enabled: Bool
+}
 
 enum BrokerData: Int, Codable {
     

@@ -34,6 +34,20 @@ extension Int: Reorderable {
     var orderElement: OrderElement { self }
 }
 
+extension Array {
+    func uniqueUsingKey<T:Hashable>(map: ((Element) -> (T)))  -> [Element] {
+        var set = Set<T>()
+        var arrayOrdered = [Element]()
+        for value in self {
+            if !set.contains(map(value)) {
+                set.insert(map(value))
+                arrayOrdered.append(value)
+            }
+        }
+        return arrayOrdered
+    }
+}
+
 extension Array where Element: Hashable {
     func uniqued() -> Array {
         var buffer = Array()
@@ -45,5 +59,116 @@ extension Array where Element: Hashable {
             }
         }
         return buffer
+    }
+}
+
+extension Array where Element == HoldingViewModel {
+    func sortedAndFilter(by settings: PortfolioSettings) -> [Element] {
+        
+        //Sortings
+        let sortingField: PortfolioSortingField = settings.sorting
+        let ascending: Bool = settings.ascending
+        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
+        
+        //Filters
+        return self.sorted { lhs, rhs in
+            switch sortingField {
+            case .purchasedDate:
+                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                        return false
+                    }
+                    if ascending {
+                        return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                    } else {
+                        return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                    }
+            case .totalReturn:
+                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                        return false
+                    }
+                    if ascending {
+                        return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
+                    } else {
+                        return lhd.relativeGainTotal ?? 0 > rhd.relativeGainTotal ?? 0
+                    }
+
+            case .todayReturn:
+                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                        return false
+                    }
+                    if ascending {
+                        return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
+                    } else {
+                        return lhd.relativeGain_1d ?? 0 > rhd.relativeGain_1d ?? 0
+                    }
+            case .percentOFPortfolio:
+                    if ascending {
+                        return lhs.percentInProfile < rhs.percentInProfile
+                    } else {
+                        return lhs.percentInProfile > rhs.percentInProfile
+                    }
+            
+            case .matchScore:
+                    if ascending {
+                        return lhs.matchScore < rhs.matchScore
+                    } else {
+                        return lhs.matchScore > rhs.matchScore
+                    }
+            
+            case .name:
+                    if ascending {
+                        return lhs.name < rhs.name
+                    } else {
+                        return lhs.name > rhs.name
+                    }
+            
+            case .marketCap:
+                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                        return false
+                    }
+                    if ascending {
+                        return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
+                    } else {
+                        return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
+                    }
+            
+            case .earningsDate:
+                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                        return false
+                    }
+                    if ascending {
+                        return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                    } else {
+                        return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                    }
+            }
+        }.filter { model in
+            let holdingDetails = model.holdingDetails
+            
+            let notInAccount = settings.disabledAccounts.contains(where: {$0.id == model.accountId})
+            
+            let inInterests = model.tickerInterests.contains { item in
+                return settings.interests.contains { dataSource in
+                    dataSource.selected && item == dataSource.id
+                }
+            }
+            
+            let inCats = model.tickerCategories.contains { item in
+                return settings.categories.contains { dataSource in
+                    dataSource.selected && item == dataSource.id
+                }
+            }
+            
+            var inSec = false
+            if let securityType = holdingDetails?.securityType {
+                inSec = settings.securityTypes.contains { item in
+                    item.selected && item.title == securityType
+                }
+            }
+            
+            let isLTT = settings.onlyLongCapitalGainTax ? model.showLTT : true
+            
+            return !notInAccount && (inInterests || inCats || inSec) && isLTT
+        }
     }
 }

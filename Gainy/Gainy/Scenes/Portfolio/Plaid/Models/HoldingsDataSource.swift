@@ -8,14 +8,17 @@
 import UIKit
 import SkeletonView
 import Apollo
+import SwiftDate
 
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
     
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
+    private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
+    var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
         didSet {
             guard holdings.count > 0 else {return}
@@ -25,64 +28,18 @@ final class HoldingsDataSource: NSObject {
             }
         }
     }
+    var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
     
-    func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
-        
-        // TODO: Anton - Help with getting fields for sorting
-        switch sortingField {
-            // No purchase date yet
-//        case .purchasedDate:
-//
-//
-            // What fields to pick here?
-//        case .totalReturn:
-//
-//
-//        case .todayReturn:
-//
-//
-        case .percentOFPortfolio:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.percentInProfile < rhs.percentInProfile
-                } else {
-                    return lhs.percentInProfile > rhs.percentInProfile
-                }
-            })
-        
-        case .matchScore:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.matchScore < rhs.matchScore
-                } else {
-                    return lhs.matchScore > rhs.matchScore
-                }
-            })
-        
-        case .name:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.name < rhs.name
-                } else {
-                    return lhs.name > rhs.name
-                }
-            })
-        
-//        case .marketCap:
-        
-//        case .earningsDate:
-            
-        default: break
-        }
+    
+    func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
+        holdings = originalHoldings.sortedAndFilter(by: settings)
     }
     
     //MARK: - Charts
     private let chartHeight: CGFloat = 360.0
     
-    private(set) var chartViewModel: HoldingChartViewModel!
+    var chartViewModel: HoldingChartViewModel!
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
-        
-        chartViewModel = HoldingChartViewModel.init(balance: 156225, rangeName: "Today", rangeGrow: 12.05, rangeGrowBalance: 2228.50, spGrow: 1.13, chartData: ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40]))
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
@@ -136,6 +93,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView = tableView
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
             if cell.addSwiftUIIfPossible(chartHosting.view) {
@@ -185,7 +143,8 @@ extension HoldingsDataSource: UITableViewDelegate {
 
 extension HoldingsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
-        
+        chartRange = period
+        tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
     }
 }
 

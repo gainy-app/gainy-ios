@@ -53,7 +53,9 @@ final class UserProfileManager {
     var profileLoaded: Bool?
     
     var isPlaidLinked: Bool = false
+    var linkedPlaidAccessTokens: [Int] = Array()
     
+    var linkedPlaidAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
     var recommendedCollections: [Collection] = []
@@ -105,6 +107,13 @@ final class UserProfileManager {
                     return
                 }
                 
+                if let profilePortfolioAccounts = graphQLResult.data?.appProfilePortfolioAccounts {
+                    self.linkedPlaidAccounts = profilePortfolioAccounts.map({ item in
+                        let result = PlaidAccountData.init(id: item.id, name: item.name)
+                        return result
+                    })
+                }
+            
                 self.profileMetricsSettings = profileMetricsSettings.map({ item in
                     let result = AppProfileMetricsSetting.init(id: item.id, fieldName: item.fieldName, collectionId: item.collectionId, order: item.order)
                     return result
@@ -131,6 +140,10 @@ final class UserProfileManager {
                 self.userID = appProfile.userId
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
+                self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
+                    item.id
+                })
+                
                 completion(true)
                 
             case .failure(let error):

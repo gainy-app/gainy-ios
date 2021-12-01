@@ -140,6 +140,27 @@ final class TickersLiveFetcher {
         }
     }
     
+    func getMatchScores(symbols: [String], _ completion: @escaping (() -> Void)) {        
+        guard let profileID = UserProfileManager.shared.profileID else {
+            dprint("Missing profileID")
+            completion()
+            return
+        }
+        
+        Network.shared.apollo.fetch(query: GetMatchScoreForTickersQuery.init(profileId: profileID, symbols: symbols)) { result in
+            switch result {
+            case .success(let graphQLResult):
+                for data in (graphQLResult.data?.getMatchScoresByTickerList?.compactMap({$0?.fragments.liveMatch}) ?? []) {
+                    TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
+                }
+                completion()
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                completion()
+            }
+        }
+    }
+    
     /// Loading match score for collections
     /// - Parameters:
     ///   - collectionIds: collection IDs to load

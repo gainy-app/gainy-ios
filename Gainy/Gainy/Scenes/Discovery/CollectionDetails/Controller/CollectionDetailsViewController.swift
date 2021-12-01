@@ -666,7 +666,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         searchTextField?.isEnabled = false
         discoverCollectionsBtn?.isEnabled = false
-        centerInitialCollectionInTheCollectionView()
+        
+        delay(0.3) {
+            self.centerInitialCollectionInTheCollectionView()
+        }
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)

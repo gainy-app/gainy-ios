@@ -1,0 +1,5 @@
+query GetMatchScoreForTickers($profileId: Int!, $symbols: [String!]) {
+ get_match_scores_by_ticker_list(profile_id: $profileId, symbols: $symbols) {
+        ...LiveMatch
+ }
+}

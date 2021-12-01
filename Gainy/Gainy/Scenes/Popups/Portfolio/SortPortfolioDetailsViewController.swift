@@ -69,8 +69,10 @@ final class SortPortfolioDetailsViewController: BaseViewController {
         guard let userID = UserProfileManager.shared.profileID else {
             return
         }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
         
-        let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)
         view.removeConstraints(ascConstraints)
         ascConstraints.removeAll()
 

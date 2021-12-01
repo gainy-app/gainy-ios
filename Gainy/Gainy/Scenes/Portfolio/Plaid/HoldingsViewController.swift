@@ -9,10 +9,18 @@ import UIKit
 import SkeletonView
 import FloatingPanel
 
+protocol HoldingsViewControllerDelegate: AnyObject {
+    func plaidUnlinked(controller: HoldingsViewController)
+}
+
 final class HoldingsViewController: BaseViewController {
     
     //MARK: - Hosted VCs
-    private lazy var sortingVS = SortPortfolioDetailsViewController.instantiate(.popups)
+    private lazy var sortingVC = SortPortfolioDetailsViewController.instantiate(.popups)
+    private lazy var filterVC: PortfolioFilteringViewController = PortfolioFilteringViewController.instantiate(.portfolio)
+    private lazy var linkUnlinkVC: LinkUnlinkPlaidViewController = LinkUnlinkPlaidViewController.instantiate(.portfolio)
+    
+    public weak var delegate: HoldingsViewControllerDelegate?
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -23,6 +31,7 @@ final class HoldingsViewController: BaseViewController {
     @IBOutlet weak var sortLabel: UILabel!
     @IBOutlet weak var sortButton: ResponsiveButton!
     @IBOutlet weak var settingsButton: ResponsiveButton!
+    @IBOutlet weak var linkPlaidButton: UIButton!
     
     //MARK: - Outlets
     
@@ -60,12 +69,14 @@ final class HoldingsViewController: BaseViewController {
     func loadData(){
         settingsButton.isUserInteractionEnabled = false
         sortButton.isUserInteractionEnabled = false
+        linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         viewModel.loadHoldingsAndSecurities {[weak self] in
             self?.tableView.hideSkeleton()
             self?.settingsButton.isUserInteractionEnabled = true
             self?.sortButton.isUserInteractionEnabled = true
+            self?.linkPlaidButton.isUserInteractionEnabled = true
             self?.updateSortButton()
         }
     }
@@ -75,11 +86,23 @@ final class HoldingsViewController: BaseViewController {
         guard self.presentedViewController == nil else {return}
 
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
-        self.present(self.fpc, animated: true, completion: nil)
+        self.showSortingPanel()
+    }
+    
+    @IBAction func onLinkButtonTapped(_ sender: Any) {
+        
+        guard self.presentedViewController == nil else {return}
+
+        GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        self.showLinkUnlinkPlaid()
     }
     
     @IBAction func onSettingsButtonTapped(_ sender: Any) {
         
+        guard self.presentedViewController == nil else {return}
+
+        GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        self.showFilteringPanel()
     }
     
     private func updateSortButton() {
@@ -87,44 +110,89 @@ final class HoldingsViewController: BaseViewController {
         guard let userID = UserProfileManager.shared.profileID else {
             return
         }
-        
-        let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+
         let title = settings.sorting.title
         sortLabel.text = title
     }
     
     private func setupPanel() {
         fpc = FloatingPanelController()
-        fpc.layout = MyFloatingPanelLayout()
         let appearance = SurfaceAppearance()
-        
-        // Define corner radius and background color
         appearance.cornerRadius = 16.0
         appearance.backgroundColor = .clear
-        
-        // Set the new appearance
         fpc.surfaceView.appearance = appearance
-        
-        // Assign self as the delegate of the controller.
         fpc.delegate = self // Optional
+    }
+    
+    private func showSortingPanel() {
         
-        // Set a content view controller.
-        sortingVS.delegate = self
-        fpc.set(contentViewController: sortingVS)
+        let layout = MyFloatingPanelLayout()
+        layout.height = 420.0
+        fpc.layout = layout
+        sortingVC.delegate = self
+        fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    private func showFilteringPanel() {
         
-        // Add and show the views managed by the `FloatingPanelController` object to self.view.
-        //fpc.addPanel(toParent: self)
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+        
+        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+            let disabled = settings.disabledAccounts.contains { account in
+                item.id == account.id
+            }
+            return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
+        }
+        
+        let layout = MyFloatingPanelLayout()
+        layout.height = min(420.0 + 64.0 * CGFloat(brokers.count), self.view.bounds.height)
+        fpc.layout = layout
+        filterVC.delegate = self
+        filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
+        fpc.set(contentViewController: filterVC)
+        fpc.isRemovalInteractionEnabled = true
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    private func showLinkUnlinkPlaid() {
+        
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+        self.linkUnlinkVC.delegate = self
+        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+            let disabled = settings.disabledAccounts.contains { account in
+                item.id == account.id
+            }
+            return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
+        }
+        self.linkUnlinkVC.configure(brokers)
+        let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     class MyFloatingPanelLayout: FloatingPanelLayout {
+        public var height: CGFloat = 0.0
         let position: FloatingPanelPosition = .bottom
         let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 420.0, edge: .bottom, referenceGuide: .safeArea),
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 420.0, edge: .bottom, referenceGuide: .safeArea),
-                .tip: FloatingPanelLayoutAnchor(absoluteInset: 420.0, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
         
@@ -142,11 +210,40 @@ final class HoldingsViewController: BaseViewController {
 extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
     
     func selectionChanged(vc: SortPortfolioDetailsViewController, sorting: PortfolioSortingField, ascending: Bool) {
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
         
         vc.dismiss(animated: true)
-        viewModel.dataSource.sortHoldingsBy(sorting, ascending: ascending)
+        viewModel.settings = settings
         tableView.reloadData()
         updateSortButton()
+    }
+}
+
+extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
+    
+    func plaidLinked(controller: LinkUnlinkPlaidViewController) {
+        
+    }
+    
+    func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {
+        
+        self.delegate?.plaidUnlinked(controller: self)
+    }
+}
+
+extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
+    
+    func didChangeFilterSettings(_ sender: PortfolioFilteringViewController) {
+        
+        guard let userID = UserProfileManager.shared.profileID else {return}
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        viewModel.settings = settings
+        tableView.reloadData()
     }
 }
 
