@@ -38,7 +38,8 @@ final class HoldingsDataSource: NSObject {
     //MARK: - Charts
     private let chartHeight: CGFloat = 360.0
     
-    var chartViewModel: HoldingChartViewModel!
+    private static let emptyData: [Float] = []
+    var chartViewModel: HoldingChartViewModel = HoldingChartViewModel.init(balance: 0.0, rangeGrow: 0.0, rangeGrowBalance: 0.0, spGrow: 0.0, chartData: ChartData(points: HoldingsDataSource.emptyData), sypChartData: ChartData(points: HoldingsDataSource.emptyData))
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
