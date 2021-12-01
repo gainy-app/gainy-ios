@@ -134,7 +134,7 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: ButtonTableViewCell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.cellIdentifier, for: indexPath) as! ButtonTableViewCell
-        cell.customTitleLabel.text = "Account \(indexPath.row)"
+        cell.customTitleLabel.text = "Account \(indexPath.row + 1)"
         cell.dotsImageView.isHidden = false
         cell.delegate = self
         
