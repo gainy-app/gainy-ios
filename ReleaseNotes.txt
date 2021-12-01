@@ -4,11 +4,11 @@ General improvements - MVP
 
 :new: New:
 • Portfolio: Sorting & Filtering
-• Portfolio: S&P Chart with demo data
+• Portfolio: S&P Chart with live data
 • Portfolio: Link/Unlink account (has as few known bugs - will be fixed asap)
 
 :hammer_and_wrench: Improvements
-•
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

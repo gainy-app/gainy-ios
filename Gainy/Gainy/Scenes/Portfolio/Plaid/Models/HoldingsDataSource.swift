@@ -99,7 +99,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -20)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
 
@@ -144,6 +144,14 @@ extension HoldingsDataSource: UITableViewDelegate {
 extension HoldingsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         chartRange = period
+        if let rangeData = profileGains[period] {
+            chartViewModel.chartData = rangeData.chartData
+            chartViewModel.rangeGrow = rangeData.rangeGrow
+            chartViewModel.rangeGrowBalance = rangeData.rangeGrowBalance
+            chartViewModel.spGrow = rangeData.spGrow
+            chartViewModel.sypChartData = rangeData.sypChartData
+        }
+        
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
     }
 }

@@ -207,8 +207,15 @@ public class ChartData: ObservableObject, Identifiable {
     var valuesGiven: Bool = false
     var ID = UUID()
     
-    init(points:[RemoteChartData], period: ScatterChartView.ChartPeriod) {
-        self.points = points.map{($0.labelForPeriod(period), Double($0.volume ?? 0.0))}
+    
+    init(points:[DiscoverChartsQuery.Data.FetchChartDatum], period: ScatterChartView.ChartPeriod) {
+        self.points = points.compactMap{
+            if let close = $0.close  {
+                return ($0.labelForPeriod(period), Double(close))
+            } else {
+                return nil
+            }
+        }
     }
     
     func loadValues(_ vals: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
