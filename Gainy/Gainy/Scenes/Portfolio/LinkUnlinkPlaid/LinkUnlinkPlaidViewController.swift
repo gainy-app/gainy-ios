@@ -16,11 +16,11 @@ class LinkUnlinkPlaidViewController: BaseViewController {
 
     weak var delegate: LinkUnlinkPlaidViewControllerDelegate?
     
-    private var brokers: [PlaidAccountDataSource] = []
+    private var accountIDs: [Int] = []
     
-    public func configure(_ brokers: [PlaidAccountDataSource]) {
+    public func configure(_ accountIDs: [Int]) {
         
-        self.brokers = brokers
+        self.accountIDs = accountIDs
     }
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -123,7 +123,8 @@ class LinkUnlinkPlaidViewController: BaseViewController {
             item.accountData
         }
         PortfolioSettingsManager.shared.changedisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
-        self.brokers = brokers
+        
+        self.accountIDs = UserProfileManager.shared.linkedPlaidAccessTokens
         self.tableView.reloadData()
     }
 }
@@ -133,8 +134,7 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: ButtonTableViewCell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.cellIdentifier, for: indexPath) as! ButtonTableViewCell
-        let broker = brokers[indexPath.row]
-        cell.customTitleLabel.text = broker.accountData.name
+        cell.customTitleLabel.text = "Account \(indexPath.row)"
         cell.dotsImageView.isHidden = false
         cell.delegate = self
         
@@ -148,7 +148,7 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.brokers.count
+        return self.accountIDs.count
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -172,24 +172,20 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
     func disconnectButtonTouchUpInside(_ sender: ButtonTableViewCell) {
         
         guard let indexPath = tableView.indexPath(for: sender) else {return}
-        let broker = self.brokers[indexPath.row]
+        let accountID = self.accountIDs[indexPath.row]
         
         let yesAction = UIAlertAction.init(title: "Yes", style: .destructive) { action in
             GainyAnalytics.logEvent("plaid_account_unlinked", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LinkUnlinkPlaidViewController"])
-            self.unlinkAccount(broker, index: indexPath.row)
+            self.unlinkAccount(accountID)
         }
         NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to unlink this Account?", cancelTitle: "No", actions: [yesAction])
     }
     
-    private func unlinkAccount(_ account: PlaidAccountDataSource, index: Int) {
-        
-        guard index >= 0, index < UserProfileManager.shared.linkedPlaidAccessTokens.count else {return}
-        let token = UserProfileManager.shared.linkedPlaidAccessTokens[index]
+    private func unlinkAccount(_ accountID: Int) {
         
         self.showNetworkLoader()
         
-        // Remove account as well??
-        let query = UnlinkPlaidAccountMutation(publicTokenID: token)
+        let query = UnlinkPlaidAccountMutation(publicTokenID: accountID)
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
             self.hideLoader()
@@ -198,7 +194,6 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
                 return
             }
             
-           
             UserProfileManager.shared.fetchProfile { success in
                 
                 self.updateDataSource()
