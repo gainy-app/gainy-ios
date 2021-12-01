@@ -28,7 +28,7 @@ struct HoldingViewModel {
     
     let securities: [HoldingSecurityViewModel]
     
-    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.HoldingDetail?
+    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.Holding.HoldingDetail?
     
     let event: String?
     

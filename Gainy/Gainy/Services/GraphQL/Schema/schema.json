@@ -847,6 +847,22 @@
             "deprecationReason": null
           },
           {
+            "name": "holding",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "app_profile_holdings",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "holding_details",
             "description": "An object relationship",
             "args": [],
@@ -10526,6 +10542,18 @@
         "specifiedByUrl": null,
         "fields": [
           {
+            "name": "account",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "app_profile_portfolio_accounts",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "account_id",
             "description": null,
             "args": [],
@@ -10792,6 +10820,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_holding_gains",
             "description": "An object relationship",
             "args": [],
@@ -10831,18 +10871,6 @@
                 "name": "Int",
                 "ofType": null
               }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "profile_portfolio_account",
-            "description": "An object relationship",
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "app_profile_portfolio_accounts",
-              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -11385,6 +11413,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -11447,6 +11487,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -11558,6 +11610,18 @@
             "deprecationReason": null
           },
           {
+            "name": "account",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_profile_portfolio_accounts_bool_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "account_id",
             "description": null,
             "type": {
@@ -11630,6 +11694,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_holding_gains",
             "description": null,
             "type": {
@@ -11659,18 +11735,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Int_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "profile_portfolio_account",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "app_profile_portfolio_accounts_bool_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -11798,6 +11862,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -11845,6 +11921,18 @@
         "specifiedByUrl": null,
         "fields": null,
         "inputFields": [
+          {
+            "name": "account",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_profile_portfolio_accounts_obj_rel_insert_input",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "account_id",
             "description": null,
@@ -11918,6 +12006,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_holding_gains",
             "description": null,
             "type": {
@@ -11947,18 +12047,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "profile_portfolio_account",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "app_profile_portfolio_accounts_obj_rel_insert_input",
               "ofType": null
             },
             "defaultValue": null,
@@ -12085,6 +12173,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -12195,6 +12295,18 @@
           },
           {
             "name": "iso_currency_code",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -12325,6 +12437,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -12435,6 +12559,18 @@
           },
           {
             "name": "iso_currency_code",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -12674,6 +12810,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "account",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "app_profile_portfolio_accounts_order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "account_id",
             "description": null,
             "type": {
@@ -12746,6 +12894,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_holding_gains",
             "description": null,
             "type": {
@@ -12775,18 +12935,6 @@
             "type": {
               "kind": "ENUM",
               "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "profile_portfolio_account",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "app_profile_portfolio_accounts_order_by",
               "ofType": null
             },
             "defaultValue": null,
@@ -12920,6 +13068,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": "column name",
             "isDeprecated": false,
@@ -13001,6 +13155,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -13103,6 +13269,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -13176,6 +13354,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -13236,6 +13426,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -13320,6 +13522,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -13380,6 +13594,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -13464,6 +13690,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -13524,6 +13762,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -13597,6 +13847,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -13682,6 +13944,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": "column name",
             "isDeprecated": false,
@@ -13734,6 +14002,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -13818,6 +14098,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -13878,6 +14170,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -13962,6 +14266,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -14022,6 +14338,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -14095,6 +14423,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -18031,6 +18371,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile",
             "description": "An object relationship",
             "args": [],
@@ -18610,6 +18962,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -18795,6 +19159,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile",
             "description": null,
             "type": {
@@ -18963,6 +19339,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -19088,6 +19476,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -19298,6 +19698,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -19472,6 +19884,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "isDeprecated": false,
@@ -19815,6 +20239,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile",
             "description": null,
             "type": {
@@ -19995,6 +20431,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": "column name",
             "isDeprecated": false,
@@ -20143,6 +20585,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "type": {
@@ -20262,6 +20716,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -20323,6 +20789,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -20406,6 +20884,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -20467,6 +20957,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -20559,6 +21061,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": "column name",
             "isDeprecated": false,
@@ -20646,6 +21154,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -20718,6 +21238,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "profile_id",
             "description": null,
             "args": [],
@@ -20779,6 +21311,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -20953,6 +21497,18 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -21611,6 +22167,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "args": [],
@@ -21709,6 +22277,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -21940,6 +22520,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "Int_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_transaction_gains",
             "description": null,
             "type": {
@@ -22156,6 +22748,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -22317,6 +22921,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -22563,6 +23179,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "args": [],
@@ -22757,6 +23385,18 @@
           },
           {
             "name": "name",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -22971,6 +23611,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "args": [],
@@ -23165,6 +23817,18 @@
           },
           {
             "name": "name",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -23548,6 +24212,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "portfolio_transaction_gains",
             "description": null,
             "type": {
@@ -23770,6 +24446,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": "column name",
             "isDeprecated": false,
@@ -23917,6 +24599,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
               "ofType": null
             },
             "defaultValue": null,
@@ -24079,6 +24773,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "args": [],
@@ -24188,6 +24894,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -24284,6 +25002,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -24404,6 +25134,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -24500,6 +25242,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -24620,6 +25374,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -24716,6 +25482,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -24825,6 +25603,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -24946,6 +25736,12 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": "column name",
             "isDeprecated": false,
@@ -25040,6 +25836,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -25160,6 +25968,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -25256,6 +26076,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -25376,6 +26208,18 @@
             "deprecationReason": null
           },
           {
+            "name": "plaid_access_token_id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "price",
             "description": null,
             "type": {
@@ -25472,6 +26316,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "args": [],
             "type": {
@@ -25581,6 +26437,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "plaid_access_token_id",
             "description": null,
             "type": {
               "kind": "ENUM",

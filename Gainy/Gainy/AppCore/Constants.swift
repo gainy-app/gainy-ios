@@ -56,6 +56,6 @@ struct Constants {
     
     struct Chart {
         static let sypChartName = "SYPCHART"
-        static let sypSymbol = "SYP"
+        static let sypSymbol = "SPY"
     }
 }
