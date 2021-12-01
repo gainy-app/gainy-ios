@@ -144,8 +144,17 @@ struct PortfolioScatterChartView: View {
         GeometryReader{ geometry in
         ZStack {
             if viewModel.chartData.points.count > 1 {
-                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel)
+                LineView(data: viewModel.chartData,
+                         title: "Full chart",
+                         style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                         viewModel: lineViewModel)
             }
+            LineView(data: viewModel.sypChartData,
+                     title: Constants.Chart.sypChartName,
+                     style: viewModel.sypChartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                     viewModel: lineViewModel)
+                .opacity(isSPPVisible ? 1.0 : 0.0)
+            
         }
         .padding(.all, 0)
         .animation(.linear)

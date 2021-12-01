@@ -363,11 +363,19 @@
 		85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */; };
 		85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */; };
 		85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */; };
-		85E4A2802755184F00C0E5C5 /* InfoDataSouce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */; };
+		85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27F2755184F00C0E5C5 /* InfoDataSource.swift */; };
 		85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */; };
 		85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */; };
 		85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */; };
 		85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */; };
+		85E4A28C275687A100C0E5C5 /* PortfolioInfoDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28B275687A100C0E5C5 /* PortfolioInfoDataViewController.swift */; };
+		85E4A28F27568FEB00C0E5C5 /* InfoDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28D27568FEB00C0E5C5 /* InfoDataCell.swift */; };
+		85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A28E27568FEB00C0E5C5 /* InfoDataCell.xib */; };
+		85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */; };
+		85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */; };
+		85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */; };
+		85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2982756C80000C0E5C5 /* UnlinkPlaidAccount.graphql */; };
+		85E4A29B2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A29A2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift */; };
 		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
 		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
@@ -815,11 +823,19 @@
 		85D4F81926E6A00D004EC21D /* RoundedTextCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoundedTextCollectionViewCell.xib; sourceTree = "<group>"; };
 		85D4F81A26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTextCollectionViewCell.swift; sourceTree = "<group>"; };
 		85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioFilteringViewController.swift; sourceTree = "<group>"; };
-		85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDataSouce.swift; sourceTree = "<group>"; };
+		85E4A27F2755184F00C0E5C5 /* InfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDataSource.swift; sourceTree = "<group>"; };
 		85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableViewCell.xib; sourceTree = "<group>"; };
 		85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
+		85E4A28B275687A100C0E5C5 /* PortfolioInfoDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioInfoDataViewController.swift; sourceTree = "<group>"; };
+		85E4A28D27568FEB00C0E5C5 /* InfoDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoDataCell.swift; sourceTree = "<group>"; };
+		85E4A28E27568FEB00C0E5C5 /* InfoDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoDataCell.xib; sourceTree = "<group>"; };
+		85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkUnlinkPlaidViewController.swift; sourceTree = "<group>"; };
+		85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		85E4A2982756C80000C0E5C5 /* UnlinkPlaidAccount.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnlinkPlaidAccount.graphql; sourceTree = "<group>"; };
+		85E4A29A2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlinkPlaidAccount.graphql.swift; sourceTree = "<group>"; };
 		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
 		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
@@ -971,6 +987,7 @@
 				9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */,
 				9068DDE8274B7350007C588A /* GetProfileGains.graphql.swift */,
 				3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */,
+				85E4A29A2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -980,6 +997,7 @@
 			children = (
 				33019612273E825C00BE4FDC /* CreatePlaidLink.graphql */,
 				33019613273E82EC00BE4FDC /* LinkPlaidAccount.graphql */,
+				85E4A2982756C80000C0E5C5 /* UnlinkPlaidAccount.graphql */,
 				33019618273E9B7F00BE4FDC /* GetPlaidHoldings.graphql */,
 				33EEECD0274237A4004C41FE /* GetPlaidTransactions.graphql */,
 				9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */,
@@ -1206,6 +1224,7 @@
 				33571F22273BE463007B587F /* PortfolioViewModel.swift */,
 				33EEECD127423E49004C41FE /* NoPlaid */,
 				33EEECD227423E52004C41FE /* Plaid */,
+				85E4A2932756C01100C0E5C5 /* LinkUnlinkPlaid */,
 			);
 			path = Portfolio;
 			sourceTree = "<group>";
@@ -1760,7 +1779,7 @@
 				85CD154E26F8FC4A001C060C /* ProfileInfo.swift */,
 				3A859452268B058900CB8DD6 /* Collection */,
 				3A859453268B059500CB8DD6 /* CollectionDetails */,
-				85E4A27F2755184F00C0E5C5 /* InfoDataSouce.swift */,
+				85E4A27F2755184F00C0E5C5 /* InfoDataSource.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2060,6 +2079,7 @@
 			children = (
 				854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */,
 				85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */,
+				85E4A28B275687A100C0E5C5 /* PortfolioInfoDataViewController.swift */,
 				85E4A28A27551D4100C0E5C5 /* Cells */,
 			);
 			path = Portfolio;
@@ -2068,12 +2088,24 @@
 		85E4A28A27551D4100C0E5C5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */,
+				85E4A2942756C4C100C0E5C5 /* ButtonTableViewCell.swift */,
+				85E4A28E27568FEB00C0E5C5 /* InfoDataCell.xib */,
+				85E4A28D27568FEB00C0E5C5 /* InfoDataCell.swift */,
 				85E4A28327551D2300C0E5C5 /* SwitchTableViewCell.xib */,
 				85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */,
 				85E4A28727551D3600C0E5C5 /* ListTableViewCell.xib */,
 				85E4A28627551D3600C0E5C5 /* ListTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		85E4A2932756C01100C0E5C5 /* LinkUnlinkPlaid */ = {
+			isa = PBXGroup;
+			children = (
+				85E4A2912756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift */,
+			);
+			path = LinkUnlinkPlaid;
 			sourceTree = "<group>";
 		};
 		85ED4DD72701B77900FE6926 /* Keychain */ = {
@@ -2348,6 +2380,8 @@
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */,
+				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
+				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
@@ -2367,6 +2401,7 @@
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
 				3A8593F02689CC1A00CB8DD6 /* CollectionDetails.graphql in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
+				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
 				3330BD1026FA6B850079C899 /* FetchStockMedianMonth.graphql in Resources */,
 				85F2594A2703C58F009DEFFD /* DeleteProfileInterest.graphql in Resources */,
@@ -2493,7 +2528,7 @@
 				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
-				85E4A2802755184F00C0E5C5 /* InfoDataSouce.swift in Sources */,
+				85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
 				85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */,
 				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
@@ -2517,6 +2552,7 @@
 				33BEB93527235ADE005237CB /* FetchStockMedianWeek.graphql.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
+				85E4A28C275687A100C0E5C5 /* PortfolioInfoDataViewController.swift in Sources */,
 				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,
@@ -2553,6 +2589,7 @@
 				33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */,
 				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
+				85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */,
 				3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */,
 				33F1947D27143BE200C438AA /* String+Hash.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
@@ -2584,6 +2621,7 @@
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,
 				85D4F81C26E6A00D004EC21D /* RoundedTextCollectionViewCell.swift in Sources */,
+				85E4A29B2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift in Sources */,
 				3A859459268B0A3900CB8DD6 /* CollectionDetailsViewModelMapper.swift in Sources */,
 				33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */,
 				85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */,
@@ -2604,6 +2642,7 @@
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
+				85E4A28F27568FEB00C0E5C5 /* InfoDataCell.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
 				33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
@@ -2704,6 +2743,7 @@
 				33BEB93627235ADE005237CB /* FetchStockMedianMonth.graphql.swift in Sources */,
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
+				85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */,
@@ -2911,7 +2951,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3034,7 +3074,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3218,7 +3258,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3246,7 +3286,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 78;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

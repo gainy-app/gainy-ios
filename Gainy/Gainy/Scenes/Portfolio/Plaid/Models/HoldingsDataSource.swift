@@ -18,6 +18,7 @@ final class HoldingsDataSource: NSObject {
     private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
+    var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
         didSet {
             guard holdings.count > 0 else {return}
@@ -31,7 +32,7 @@ final class HoldingsDataSource: NSObject {
     
     
     func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
-        holdings = holdings.sortedAndFilter(by: settings)
+        holdings = originalHoldings.sortedAndFilter(by: settings)
     }
     
     //MARK: - Charts

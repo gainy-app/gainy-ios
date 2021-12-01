@@ -26,11 +26,15 @@ final class HoldingChartViewModel: ObservableObject {
     @Published
     var chartData: ChartData
     
-    init(balance: Float, rangeGrow: Float, rangeGrowBalance: Float, spGrow: Float, chartData: ChartData) {
+    @Published
+    var sypChartData: ChartData
+    
+    init(balance: Float, rangeGrow: Float, rangeGrowBalance: Float, spGrow: Float, chartData: ChartData, sypChartData: ChartData) {
         self.balance = balance
         self.rangeGrow = rangeGrow
         self.rangeGrowBalance = rangeGrowBalance
         self.spGrow = spGrow
         self.chartData = chartData
+        self.sypChartData = sypChartData
     }
 }
