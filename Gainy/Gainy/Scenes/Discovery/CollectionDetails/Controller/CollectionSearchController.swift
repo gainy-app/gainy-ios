@@ -282,11 +282,13 @@ final class CollectionSearchController: NSObject {
             networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
+                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    self?.stocks = mappedTickers
                     
-                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
-                        dispatchGroup.leave()
+                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                     }
+                    dispatchGroup.leave()
                     
                     break
                 case .failure(let error):
@@ -301,11 +303,13 @@ final class CollectionSearchController: NSObject {
                 switch result {
                 case .success(let graphQLResult):
                     
-                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
-                        dispatchGroup.leave()
-                    }
+                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    self?.stocks = mappedTickers
                     
+                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    dispatchGroup.leave()
                     break
                 case .failure(let error):
                     dprint("Failure when making GraphQL request. Error: \(error)")
@@ -319,11 +323,13 @@ final class CollectionSearchController: NSObject {
                 switch result {
                 case .success(let graphQLResult):
                     
-                    self?.stocks = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    TickersLiveFetcher.shared.getSymbolsData((graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails.symbol})) {
-                        dispatchGroup.leave()
-                    }
+                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
+                    self?.stocks = mappedTickers
                     
+                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    dispatchGroup.leave()
                     break
                 case .failure(let error):
                     dprint("Failure when making GraphQL request. Error: \(error)")
@@ -355,7 +361,13 @@ final class CollectionSearchController: NSObject {
             networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
-                    self?.collections = (graphQLResult.data?.collections ?? []).compactMap({$0.fragments.remoteCollectionDetails})
+                    let mappedCollections = (graphQLResult.data?.collections ?? []).compactMap({$0.fragments.remoteCollectionDetails})
+                    self?.collections = mappedCollections
+                    
+                    for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    
                     dispatchGroup.leave()
                     break
                 case .failure(let error):

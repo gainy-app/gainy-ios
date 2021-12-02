@@ -540,6 +540,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     completion()
                     return
                 }
+                
+                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                
                 CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
 
                 DispatchQueue.main.async {
@@ -573,6 +578,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.hideLoader()
                     completion()
                     return
+                }
+                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
                 CollectionsManager.shared.collections.append(contentsOf: collections)
                 CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)

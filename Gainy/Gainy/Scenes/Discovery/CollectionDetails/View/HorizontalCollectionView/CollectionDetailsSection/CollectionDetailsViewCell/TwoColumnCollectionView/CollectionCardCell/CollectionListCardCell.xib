@@ -140,7 +140,7 @@
                     <constraint firstItem="nlH-9O-fYK" firstAttribute="leading" secondItem="EM8-hZ-ndv" secondAttribute="trailing" constant="4" id="xc1-62-kd3"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
-                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                 </userDefinedRuntimeAttributes>
             </collectionViewCellContentView>
             <size key="customSize" width="373" height="110"/>
