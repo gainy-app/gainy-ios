@@ -166,20 +166,8 @@ final class HoldingsViewController: BaseViewController {
     
     private func showLinkUnlinkPlaid() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
-            return
-        }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
-            return
-        }
         self.linkUnlinkVC.delegate = self
-        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
-            let disabled = settings.disabledAccounts.contains { account in
-                item.id == account.id
-            }
-            return PlaidAccountDataSource.init(accountData: item, enabled: !disabled)
-        }
-        self.linkUnlinkVC.configure(brokers)
+        self.linkUnlinkVC.configure(UserProfileManager.shared.linkedPlaidAccessTokens)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
         self.present(navigationController, animated: true, completion: nil)
     }

@@ -96,6 +96,12 @@ fragment RemoteTickerDetails on tickers {
       ebitda
       net_debt
     }
+    realtime_metrics{
+            actual_price
+      relative_daily_change
+      time
+      symbol
+        }
     ticker_categories {
       categories {
         id

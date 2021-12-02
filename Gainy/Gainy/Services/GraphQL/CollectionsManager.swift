@@ -46,6 +46,10 @@ final class CollectionsManager {
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
                     return
                 }
+                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                
                 for newCol in collections {
                     if !self.collections.contains(where: {$0.id == newCol.id}) {
                     self.collections.append(newCol)

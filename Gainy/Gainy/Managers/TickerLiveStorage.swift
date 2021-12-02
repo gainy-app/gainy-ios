@@ -9,6 +9,7 @@ import UIKit
 import Cache
 import Combine
 
+typealias RealtimePrice = RemoteTickerDetails.RealtimeMetric
 typealias LivePrice = FetchLiveTickersDataQuery.Data.FetchLivePrice
 
 final class TickerLiveStorage {
@@ -133,6 +134,13 @@ final class TickerLiveStorage {
     }
     
     func setSymbolData(_ symbol: String, data: LivePrice) {
+        dataQueue.sync {
+            guard !symbol.isEmpty else {return}
+            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
+        }
+    }
+    
+    func setSymbolData(_ symbol: String, data: RealtimePrice) {
         dataQueue.sync {
             guard !symbol.isEmpty else {return}
             try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
