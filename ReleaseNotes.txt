@@ -1,9 +1,9 @@
-iOS v0.3.1 #78 available
+iOS v0.3.1 #79 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• -
+• Realtime prices migration
 
 :hammer_and_wrench: Improvements
 • Hotfixes
