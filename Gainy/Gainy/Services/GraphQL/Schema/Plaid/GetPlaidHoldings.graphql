@@ -1,34 +1,35 @@
 query GetPlaidHoldings($profileId: Int!) {
   get_portfolio_holdings(profile_id: $profileId) {
-    id
-    quantity
-    iso_currency_code
-    profile_id
-    security_id
-    security {
-        created_at
-  iso_currency_code
-  id
-  name
-  ticker_symbol
-  tickers {
-  ...RemoteTickerDetails
-}
-  type
-  updated_at
-    }
-    account {
+    holding {
+      id
+      quantity
+      profile_id
+      security_id
+      account {
         balance_available
-  balance_current
-  balance_iso_currency_code
-  balance_limit
-  created_at
-  id
-  mask
-  name
-  official_name
-  subtype
-  type
+        balance_current
+        balance_iso_currency_code
+        balance_limit
+        created_at
+        id
+        mask
+        name
+        official_name
+        subtype
+        type
+      }
+      holding_details {
+        purchase_date
+        relative_gain_total
+        relative_gain_1d
+        value_to_portfolio_value
+        ticker_name
+        market_capitalization
+        next_earnings_date
+        ltt_quantity_total
+        security_type
+        account_id
+      }
     }
   }
 }
