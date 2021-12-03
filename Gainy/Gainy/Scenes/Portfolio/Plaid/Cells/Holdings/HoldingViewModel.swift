@@ -14,8 +14,8 @@ struct HoldingViewModel {
     let tickerSymbol: String
     
 
-    let industries: [RemoteTicker.TickerIndustry]
-    let categories: [RemoteTicker.TickerCategory]
+    let industries: [RemoteTickerDetailsFull.TickerIndustry]
+    let categories: [RemoteTickerDetailsFull.TickerCategory]
     
     let showLTT: Bool
     

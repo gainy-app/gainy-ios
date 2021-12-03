@@ -127,8 +127,8 @@ final class CompareStocksViewController: BaseViewController {
         topStock = stocks.first!
         bottomStock = stocks.last!
         
-        let topGrowth = topStock?.tickerFinancials.last?.priceChangeToday ?? 0.0
-        let bottomGrowth = bottomStock?.tickerFinancials.last?.priceChangeToday ?? 0.0
+        let topGrowth = topStock?.realtimeMetrics?.relativeDailyChange ?? 0.0
+        let bottomGrowth = bottomStock?.realtimeMetrics?.actualPrice ?? 0.0
         chartViewModel.comparableStocks = [ChartCompareData.init(symbol: topStock?.symbol ?? "",
                                                                  growth: Double(topGrowth)),
                                             ChartCompareData.init(symbol: bottomStock?.symbol ?? "",

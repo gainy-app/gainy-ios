@@ -426,6 +426,7 @@
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
 		907B227A2750271100FB4B1E /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 907B22792750271100FB4B1E /* Lottie */; };
 		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
+		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -884,6 +885,8 @@
 		906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickerExtraDetails.graphql; sourceTree = "<group>"; };
 		906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		907B227B275029C900FB4B1E /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
+		90A8017A275AB7E9003D548D /* GetNextTickersForCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetNextTickersForCollection.graphql; sourceTree = "<group>"; };
+		90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNextTickersForCollection.graphql.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -948,6 +951,7 @@
 				33467CE426C6576800811F74 /* Charts.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */,
+				90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */,
 				85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */,
 				859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */,
 				85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */,
@@ -1709,6 +1713,7 @@
 				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
+				90A8017A275AB7E9003D548D /* GetNextTickersForCollection.graphql */,
 				906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */,
 				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85695AF42746BAD400759569 /* Metrics */,
@@ -2637,6 +2642,7 @@
 				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
+				90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */,
 				85695AF1274594BF00759569 /* MetricsFooterView.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
@@ -2951,7 +2957,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3074,7 +3080,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3258,7 +3264,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3286,7 +3292,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 78;
+				CURRENT_PROJECT_VERSION = 80;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

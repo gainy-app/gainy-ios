@@ -1,47 +1,6 @@
 query GetTickerExtraDetails($symbol: String!) {
   tickers(where: {symbol: {_eq: $symbol}}) {
-    description
-    ticker_financials {
-      symbol
-      created_at
-    }
-    ticker_categories {
-      categories {
-        name
-        icon_url
-      }
-    }
-    ticker_interests {
-      symbol
-      interest_id
-      interest {
-        icon_url
-        id
-        name
-      }
-    }
-    ticker_industries {
-      gainy_industry {
-        id
-        name
-      }
-    }
-    ticker_events {
-      created_at
-      description
-      symbol
-      type
-      timestamp
-    }
-    ticker_analyst_ratings{
-      target_price
-      strong_buy
-      buy
-      hold
-      sell
-      strong_sell
-      rating
-    }
+    ...RemoteTickerExtraDetails
   }
 }
 

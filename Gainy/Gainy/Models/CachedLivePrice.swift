@@ -25,5 +25,19 @@ struct CachedLivePrice: Codable {
         dateTime = remotePrice.time ?? ""
         currentPrice = Float(remotePrice.actualPrice ?? 0.0)
         priceChangeToday = Float(remotePrice.relativeDailyChange ?? 0.0)
-    } 
+    }
+    
+    init(remotePrice: RemoteTickerDetailsFull.RealtimeMetric) {
+        symbol = remotePrice.symbol ?? ""
+        dateTime = remotePrice.time ?? ""
+        currentPrice = Float(remotePrice.actualPrice ?? 0.0)
+        priceChangeToday = Float(remotePrice.relativeDailyChange ?? 0.0)
+    }
+    
+    init(remotePrice: RemoteTickerExtraDetails.RealtimeMetric) {
+        symbol = remotePrice.symbol ?? ""
+        dateTime = remotePrice.time ?? ""
+        currentPrice = Float(remotePrice.actualPrice ?? 0.0)
+        priceChangeToday = Float(remotePrice.relativeDailyChange ?? 0.0)
+    }
 }

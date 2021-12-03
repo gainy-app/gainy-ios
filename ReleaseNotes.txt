@@ -1,9 +1,10 @@
-iOS v0.3.1 #78 available
+iOS v0.3.1 #80 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• -
+• Ticker Financials removed totally - migration completed
+• Ticker Details splitted to lightweighted ones for initial display in Collections
 
 :hammer_and_wrench: Improvements
 • Hotfixes

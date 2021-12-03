@@ -148,9 +148,9 @@ final class HoldingsViewModel {
                     
                     
                     let securityTypesRaw = self.transactions.compactMap({$0.security.type}).uniqued()
-                    let interestsRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerInterests}).flatMap({$0})
-                    let categoriesRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.tickerCategories}).flatMap({$0})
-                    let realtimeMetrics = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetails.realtimeMetrics}).flatMap({$0})
+                    let interestsRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetailsFull.tickerInterests}).flatMap({$0})
+                    let categoriesRaw = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetailsFull.tickerCategories}).flatMap({$0})
+                    let realtimeMetrics = self.transactions.compactMap({$0.security.tickers?.fragments.remoteTickerDetailsFull.realtimeMetrics}).flatMap({$0})
                     
                     for tickLivePrice in realtimeMetrics {
                         TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)

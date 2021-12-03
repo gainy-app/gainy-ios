@@ -8,7 +8,7 @@
 import UIKit
 import UserNotifications
 
-extension RemoteTicker.TickerEvent {
+extension RemoteTickerExtraDetails.TickerEvent {
     var notifID: String {
         "\(self.symbol ?? "")\(self.type ?? "")\((self.description ?? "").djb2hash)"
     }
@@ -25,7 +25,7 @@ final class LocalNotificationsManager {
     
     private let threadID = "GainyThreadGroup"
     
-    func scheduleSymbolEvent(_ event: RemoteTicker.TickerEvent) {
+    func scheduleSymbolEvent(_ event: RemoteTickerExtraDetails.TickerEvent) {
         //Rescheduling
         if scheduledSymbolEvents.contains(event.notifID) {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.notifID])
@@ -39,14 +39,14 @@ final class LocalNotificationsManager {
     }
     
     
-    func removeSchedule(_ event: RemoteTicker.TickerEvent) {
+    func removeSchedule(_ event: RemoteTickerExtraDetails.TickerEvent) {
         if scheduledSymbolEvents.contains(event.notifID) {
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [event.notifID])
             scheduledSymbolEvents.removeAll(where: {$0 == event.notifID})
         }
     }
     
-    func isScheduled(_ event: RemoteTicker.TickerEvent) -> Bool {
+    func isScheduled(_ event: RemoteTickerExtraDetails.TickerEvent) -> Bool {
         scheduledSymbolEvents.contains(event.notifID)
     }
     

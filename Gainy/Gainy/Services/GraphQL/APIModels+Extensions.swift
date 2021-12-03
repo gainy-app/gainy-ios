@@ -49,28 +49,7 @@ extension RemoteTickerDetails: RemotePricable {
     }
 }
 
-extension RemoteTickerDetails.TickerFinancial: RemotePricable {
-    var currentPrice: Float {
-        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.currentPrice ?? 0.0
-    }
-    
-    var priceChangeToday: Float {
-        TickerLiveStorage.shared.getSymbolData(symbol ?? "")?.priceChangeToday ?? 0.0
-    }
-}
-
 extension RemoteTickerDetails: RemoteMatchable {
-    var matchScore: String {
-        "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
-    }
-    
-    var isMatch: Bool {
-        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
-    }
-    
-}
-
-extension RemoteTickerDetails.TickerFinancial: RemoteMatchable {
     var matchScore: String {
         "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
     }
@@ -118,7 +97,7 @@ extension RemoteCollectionDetails: Reorderable {
     var orderElement: OrderElement { id ?? 0 }
 }
 
-extension RemoteTicker.TickerEvent {
+extension RemoteTickerExtraDetails.TickerEvent {
     var date: Date {
         return ((timestamp ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date
     }

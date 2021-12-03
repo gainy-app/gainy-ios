@@ -47,7 +47,7 @@ final class TickerDetailsInnerUpcomingViewCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var enabledSwitch: UISwitch!
     
-    var upcomingEvent: RemoteTicker.TickerEvent? {
+    var upcomingEvent: RemoteTickerExtraDetails.TickerEvent? {
         didSet {
             guard let event = upcomingEvent else {return}
             nameLbl.text = event.description

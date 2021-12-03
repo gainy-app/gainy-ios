@@ -49,7 +49,7 @@ enum CollectionDetailsDTOMapper {
     static func mapTickerDetails(
         _ dto: RemoteTickerDetails
     ) -> TickerDetails {
-        let tickerFinancials = dto.tickerFinancials.first
+        let tickerFinancials = dto.realtimeMetrics
         let tickerMetrics = dto.tickerMetrics
         let highlight = dto.tickerHighlights.first
         return TickerDetails(
@@ -177,11 +177,11 @@ enum CollectionDetailsDTOMapper {
     }
     
     static func mapFinancialMetrics(
-        _ dto: RemoteTickerDetails.TickerFinancial
+        _ dto: RemoteTickerDetails.RealtimeMetric
     ) -> TickerFinancialMetrics {
         TickerFinancialMetrics(
-            todaysPriceChange: Float(dto.priceChangeToday),
-            currentPrice: dto.currentPrice
+            todaysPriceChange: Float(dto.relativeDailyChange ?? 0.0),
+            currentPrice: dto.actualPrice ?? 0.0
         )
     }
     
@@ -245,13 +245,7 @@ enum CollectionDetailsDTOMapper {
                         rawTicker: RemoteTickerDetails.init(symbol: randomString(4),
                                                             name: Constants.CollectionDetails.demoNamePrefix + randomString(10),
                                                             description: randomString(20),
-                                                            tickerFinancials: [],
-                                                            tickerHighlights: [],
-                                                            tickerCategories: [],
-                                                            tickerInterests: [],
-                                                            tickerIndustries: [],
-                                                            tickerEvents: [],
-                                                            tickerAnalystRatings: nil)))
+                                                            tickerHighlights: [])))
             }
             
             collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: "1", inYourCollectionList: false, cards: cards))
