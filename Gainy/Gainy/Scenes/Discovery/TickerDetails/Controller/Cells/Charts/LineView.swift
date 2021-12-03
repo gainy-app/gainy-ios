@@ -58,7 +58,7 @@ public struct LineView: View {
                 ZStack{
                     GeometryReader{ reader in
                         
-                        if viewModel.showCloseLine {
+                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
                         HLine()
                             .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                             .foregroundColor(Color(hex: "E0E6EA"))

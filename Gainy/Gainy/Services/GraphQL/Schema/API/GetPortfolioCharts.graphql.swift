@@ -14,7 +14,7 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
         order_by: {date: asc}
       ) {
         __typename
-        date
+        datetime
         period
         value
       }
@@ -70,7 +70,7 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("date", type: .scalar(timestamp.self)),
+          GraphQLField("datetime", type: .scalar(timestamp.self)),
           GraphQLField("period", type: .scalar(String.self)),
           GraphQLField("value", type: .scalar(float8.self)),
         ]
@@ -82,8 +82,8 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(date: timestamp? = nil, period: String? = nil, value: float8? = nil) {
-        self.init(unsafeResultMap: ["__typename": "portfolio_chart", "date": date, "period": period, "value": value])
+      public init(datetime: timestamp? = nil, period: String? = nil, value: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "portfolio_chart", "datetime": datetime, "period": period, "value": value])
       }
 
       public var __typename: String {
@@ -95,12 +95,12 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
         }
       }
 
-      public var date: timestamp? {
+      public var datetime: timestamp? {
         get {
-          return resultMap["date"] as? timestamp
+          return resultMap["datetime"] as? timestamp
         }
         set {
-          resultMap.updateValue(newValue, forKey: "date")
+          resultMap.updateValue(newValue, forKey: "datetime")
         }
       }
 

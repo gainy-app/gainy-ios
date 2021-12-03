@@ -480,10 +480,18 @@ public struct RemoteTickerDetails: GraphQLFragment {
         ebitda
         net_debt
       }
+      realtime_metrics {
+        __typename
+        actual_price
+        relative_daily_change
+        time
+        symbol
+      }
       ticker_categories {
         __typename
         categories {
           __typename
+          id
           name
           icon_url
         }
@@ -539,6 +547,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("ticker_financials", type: .nonNull(.list(.nonNull(.object(TickerFinancial.selections))))),
       GraphQLField("ticker_highlights", type: .nonNull(.list(.nonNull(.object(TickerHighlight.selections))))),
       GraphQLField("ticker_metrics", type: .object(TickerMetric.selections)),
+      GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
       GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
       GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
@@ -553,8 +562,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerFinancials: [TickerFinancial], tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_financials": tickerFinancials.map { (value: TickerFinancial) -> ResultMap in value.resultMap }, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -620,6 +629,16 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "ticker_metrics")
+    }
+  }
+
+  /// An object relationship
+  public var realtimeMetrics: RealtimeMetric? {
+    get {
+      return (resultMap["realtime_metrics"] as? ResultMap).flatMap { RealtimeMetric(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "realtime_metrics")
     }
   }
 
@@ -1330,6 +1349,75 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
   }
 
+  public struct RealtimeMetric: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ticker_realtime_metrics"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("actual_price", type: .scalar(float8.self)),
+        GraphQLField("relative_daily_change", type: .scalar(float8.self)),
+        GraphQLField("time", type: .scalar(timestamp.self)),
+        GraphQLField("symbol", type: .scalar(String.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "actual_price": actualPrice, "relative_daily_change": relativeDailyChange, "time": time, "symbol": symbol])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var actualPrice: float8? {
+      get {
+        return resultMap["actual_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "actual_price")
+      }
+    }
+
+    public var relativeDailyChange: float8? {
+      get {
+        return resultMap["relative_daily_change"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "relative_daily_change")
+      }
+    }
+
+    public var time: timestamp? {
+      get {
+        return resultMap["time"] as? timestamp
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "time")
+      }
+    }
+
+    public var symbol: String? {
+      get {
+        return resultMap["symbol"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "symbol")
+      }
+    }
+  }
+
   public struct TickerCategory: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["ticker_categories"]
 
@@ -1375,6 +1463,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
         ]
@@ -1386,8 +1475,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(name: String? = nil, iconUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "categories", "name": name, "icon_url": iconUrl])
+      public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl])
       }
 
       public var __typename: String {
@@ -1396,6 +1485,15 @@ public struct RemoteTickerDetails: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var id: Int? {
+        get {
+          return resultMap["id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "id")
         }
       }
 

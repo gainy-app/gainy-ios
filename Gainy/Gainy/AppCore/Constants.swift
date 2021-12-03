@@ -53,4 +53,9 @@ struct Constants {
     struct Plaid {
         static let redirectURI = "https://app.gainy.application.ios"
     }
+    
+    struct Chart {
+        static let sypChartName = "SYPCHART"
+        static let sypSymbol = "SPY"
+    }
 }

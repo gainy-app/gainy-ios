@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import Apollo
+import SwiftDate
 
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
@@ -17,6 +18,7 @@ final class HoldingsDataSource: NSObject {
     private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
+    var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
         didSet {
             guard holdings.count > 0 else {return}
@@ -28,60 +30,16 @@ final class HoldingsDataSource: NSObject {
     }
     var profileGains: [ScatterChartView.ChartPeriod: PortfolioChartGainsViewModel] = [:]
     
-    func sortHoldingsBy(_ sortingField: PortfolioSortingField, ascending: Bool) {
-        
-        // TODO: Anton - Help with getting fields for sorting
-        switch sortingField {
-            // No purchase date yet
-//        case .purchasedDate:
-//
-//
-            // What fields to pick here?
-//        case .totalReturn:
-//
-//
-//        case .todayReturn:
-//
-//
-        case .percentOFPortfolio:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.percentInProfile < rhs.percentInProfile
-                } else {
-                    return lhs.percentInProfile > rhs.percentInProfile
-                }
-            })
-        
-        case .matchScore:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.matchScore < rhs.matchScore
-                } else {
-                    return lhs.matchScore > rhs.matchScore
-                }
-            })
-        
-        case .name:
-            self.holdings = self.holdings.sorted(by: { lhs, rhs in
-                if ascending {
-                    return lhs.name < rhs.name
-                } else {
-                    return lhs.name > rhs.name
-                }
-            })
-        
-//        case .marketCap:
-        
-//        case .earningsDate:
-            
-        default: break
-        }
+    
+    func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
+        holdings = originalHoldings.sortedAndFilter(by: settings)
     }
     
     //MARK: - Charts
     private let chartHeight: CGFloat = 360.0
     
-    var chartViewModel: HoldingChartViewModel!
+    private static let emptyData: [Float] = []
+    var chartViewModel: HoldingChartViewModel = HoldingChartViewModel.init(balance: 0.0, rangeGrow: 0.0, rangeGrowBalance: 0.0, spGrow: 0.0, chartData: ChartData(points: HoldingsDataSource.emptyData), sypChartData: ChartData(points: HoldingsDataSource.emptyData))
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
@@ -142,7 +100,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -20)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
 
@@ -187,6 +145,14 @@ extension HoldingsDataSource: UITableViewDelegate {
 extension HoldingsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         chartRange = period
+        if let rangeData = profileGains[period] {
+            chartViewModel.chartData = rangeData.chartData
+            chartViewModel.rangeGrow = rangeData.rangeGrow
+            chartViewModel.rangeGrowBalance = rangeData.rangeGrowBalance
+            chartViewModel.spGrow = rangeData.spGrow
+            chartViewModel.sypChartData = rangeData.sypChartData
+        }
+        
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
     }
 }

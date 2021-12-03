@@ -34,23 +34,23 @@ final class NoPlaidViewController: BaseViewController {
     
     //MARK: - Action
     @IBAction func plaidLinkAction(_ sender: Any) {
-        if let profileID = UserProfileManager.shared.profileID {
+        
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        
         showNetworkLoader()
-            Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
-                self?.hideLoader()
-                switch result {
-                case .success(let graphQLResult):
-                    guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                        return
-                    }
-                    self?.presentPlaidLinkUsingLinkToken(linkToken)
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    break
+        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
+            self?.hideLoader()
+            switch result {
+            case .success(let graphQLResult):
+                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+                    return
                 }
+                self?.presentPlaidLinkUsingLinkToken(linkToken)
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                break
             }
         }
-        
     }
 }
