@@ -128,6 +128,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
             recurLock.unlock()
             
+            if indexPath.row == (self?.cards.count ?? 0) - 1 && self?.cards.count ?? 0 != (self?.stocksCount ?? 0) {
+                //isLoadingTickers = true
+                
+            }
+
             return cell
         }
         
@@ -201,6 +206,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
     
     private var collectionID: Int = 0
+    private var stocksCount: Int = 0
     func configureWith(
         name collectionName: String,
         image collectionImage: String,
@@ -211,6 +217,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionId: Int
     ) {
         self.collectionID = collectionId
+        self.stocksCount = Int(stocksAmount) ?? 0
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,
@@ -255,11 +262,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     private var cards: [CollectionCardViewCellModel] = []
     
-    func addRemoteStock(_ stock: RemoteTickerDetails) {
-        let cardDTO = CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(stock))
-        cards.append(cardDTO)
+    private func loadMoreTickers() {
+        
+    }
+    
+    func addRemoteStocks(_ stocks: [RemoteTickerDetails]) {
+        let cardsDTO = stocks.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
+        cards.append(contentsOf: cardsDTO)
         if var snap = dataSource?.snapshot() {
-            snap.appendItems([cardDTO], toSection: .cards)
+            snap.appendItems(cardsDTO, toSection: .cards)
             dataSource?.apply(snap, animatingDifferences: true)
         }
     }

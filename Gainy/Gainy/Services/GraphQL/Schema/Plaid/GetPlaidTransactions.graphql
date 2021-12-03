@@ -12,7 +12,7 @@ query GetPlaidTransactions($profileId: Int!) {
   name
   ticker_symbol
     tickers {
-  ...RemoteTickerDetails
+  ...RemoteTickerDetailsFull
 }
   type
   updated_at

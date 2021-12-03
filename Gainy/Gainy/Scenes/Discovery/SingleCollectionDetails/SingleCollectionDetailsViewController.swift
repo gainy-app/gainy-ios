@@ -273,7 +273,7 @@ extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate
 extension SingleCollectionDetailsViewController: SearchStocksViewControllerDelegate {
     func stockSelected(source: SearchStocksViewController, stock: RemoteTickerDetails) {
         if let cell = collectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell {
-            cell.addRemoteStock(stock)
+            cell.addRemoteStocks([stock])
         }
         self.fpc.dismiss(animated: true, completion: nil)
     }

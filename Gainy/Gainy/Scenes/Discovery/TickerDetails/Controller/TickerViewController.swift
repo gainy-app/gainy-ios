@@ -56,6 +56,7 @@ final class TickerViewController: BaseViewController {
         viewModel?.dataSource.ticker.loadDetails(mainDataLoaded: {[weak self] in
             dprint("DISMISS LOADIER")
             DispatchQueue.main.async {
+                
                 self?.isLoadingInfo = false
                 self?.viewModel?.dataSource.calculateHeights()
                 //self?.tableView.reloadData()
@@ -84,6 +85,7 @@ final class TickerViewController: BaseViewController {
                 for cell in tableView.visibleCells {
                     if let rightCell = cell as? TickerDetailsViewCell {
                         rightCell.hideSkeleton()
+                        rightCell.updateFromTickerData()
                     }
                 }
                 tableView.isScrollEnabled = true

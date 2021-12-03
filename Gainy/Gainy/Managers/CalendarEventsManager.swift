@@ -37,7 +37,7 @@ class CalendarEventsManager: NSObject {
         return EKEventStore.authorizationStatus(for: EKEntityType.event)
     }
     
-    func addEventToCalendar(event: RemoteTicker.TickerEvent) {
+    func addEventToCalendar(event: RemoteTickerExtraDetails.TickerEvent) {
         let authStatus = getAuthorizationStatus()
         switch authStatus {
         case .authorized:
@@ -60,7 +60,7 @@ class CalendarEventsManager: NSObject {
     }
     
     private var storableEventId: String = ""
-    private func addEvent(event: RemoteTicker.TickerEvent) {
+    private func addEvent(event: RemoteTickerExtraDetails.TickerEvent) {
         let storeEvent: EKEvent = EKEvent(eventStore: eventStore)
         dprint("Adding event")
         dprint("\(event.description ?? "") \(event.am9Time) \(event.pm11Time) \(event.timestamp ?? "")")
@@ -81,7 +81,7 @@ class CalendarEventsManager: NSObject {
         }        
     }
     
-    func deleteEvent(event: RemoteTicker.TickerEvent) {
+    func deleteEvent(event: RemoteTickerExtraDetails.TickerEvent) {
         
         if let eventStored = scheduledEvents.first(where: {$0.remoteEventID == event.notifID}) {
             if let eventLocal = eventStore.event(withIdentifier: eventStored.localEventID) {
@@ -95,7 +95,7 @@ class CalendarEventsManager: NSObject {
         }
     }
     
-    func isScheduled(event eventToAdd: RemoteTicker.TickerEvent) -> Bool {
+    func isScheduled(event eventToAdd: RemoteTickerExtraDetails.TickerEvent) -> Bool {
         if let event = scheduledEvents.first(where: {$0.remoteEventID == eventToAdd.notifID}) {
             return eventStore.event(withIdentifier: event.localEventID) != nil
         } else {

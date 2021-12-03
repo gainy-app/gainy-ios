@@ -147,6 +147,22 @@ final class TickerLiveStorage {
         }
     }
     
+    func setSymbolData(_ symbol: String, data: RemoteTickerDetailsFull.RealtimeMetric) {
+        dataQueue.sync {
+            guard !symbol.isEmpty else {return}
+            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
+        }
+    }
+    
+    func setSymbolData(_ symbol: String, data: RemoteTickerExtraDetails.RealtimeMetric) {
+        dataQueue.sync {
+            guard !symbol.isEmpty else {return}
+            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
+        }
+    }
+    
+    
+    
     //MARK: - Match Score Data
     
     func haveMatchScore(_ symbol: String) -> Bool {

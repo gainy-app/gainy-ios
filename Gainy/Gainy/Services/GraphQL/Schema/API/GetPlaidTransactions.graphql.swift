@@ -25,7 +25,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           ticker_symbol
           tickers {
             __typename
-            ...RemoteTickerDetails
+            ...RemoteTickerDetailsFull
           }
           type
           updated_at
@@ -57,7 +57,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
 
   public var queryDocument: String {
     var document: String = operationDefinition
-    document.append("\n" + RemoteTickerDetails.fragmentDefinition)
+    document.append("\n" + RemoteTickerDetailsFull.fragmentDefinition)
     return document
   }
 
@@ -364,7 +364,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLFragmentSpread(RemoteTickerDetails.self),
+              GraphQLFragmentSpread(RemoteTickerDetailsFull.self),
             ]
           }
 
@@ -399,9 +399,9 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public var remoteTickerDetails: RemoteTickerDetails {
+            public var remoteTickerDetailsFull: RemoteTickerDetailsFull {
               get {
-                return RemoteTickerDetails(unsafeResultMap: resultMap)
+                return RemoteTickerDetailsFull(unsafeResultMap: resultMap)
               }
               set {
                 resultMap += newValue.resultMap

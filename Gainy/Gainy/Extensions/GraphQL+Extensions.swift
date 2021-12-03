@@ -146,13 +146,9 @@ extension RemoteCreatedAtConvertable {
 }
 
 
-extension RemoteTickerDetails.TickerFinancial : RemoteCreatedAtConvertable {
-}
-
-
 extension RemoteTickerDetails {
     var isGrowing: Bool {
-        tickerFinancials.last?.priceChangeToday ?? 0.0 >= 0.0
+        realtimeMetrics?.relativeDailyChange ?? 0.0 >= 0.0
     }
     
     var priceColor: UIColor {

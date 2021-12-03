@@ -21,7 +21,7 @@ struct HoldingsModelMapper {
             }).map({$0.security})
             print("Sec: \(security?.id ?? 0)")
             print("Sec Name: \(security?.name ?? "")")
-            let ticker = security?.tickers?.fragments.remoteTickerDetails
+            let ticker = security?.tickers?.fragments.remoteTickerDetailsFull
             let symbol = security?.tickerSymbol ?? ""
             
             let portfolioHoldingsGains = profileHoldings?.profileHoldings.first(where: {
