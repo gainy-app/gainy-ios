@@ -18,9 +18,12 @@ final class HoldingsViewController: BaseViewController {
     //MARK: - Hosted VCs
     private lazy var sortingVC = SortPortfolioDetailsViewController.instantiate(.popups)
     private lazy var filterVC: PortfolioFilteringViewController = PortfolioFilteringViewController.instantiate(.portfolio)
+<<<<<<< HEAD
+=======
     private lazy var linkUnlinkVC: LinkUnlinkPlaidViewController = LinkUnlinkPlaidViewController.instantiate(.portfolio)
     
     public weak var delegate: HoldingsViewControllerDelegate?
+>>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -87,6 +90,8 @@ final class HoldingsViewController: BaseViewController {
 
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showSortingPanel()
+<<<<<<< HEAD
+=======
     }
     
     @IBAction func onLinkButtonTapped(_ sender: Any) {
@@ -95,6 +100,7 @@ final class HoldingsViewController: BaseViewController {
 
         GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showLinkUnlinkPlaid()
+>>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
     }
     
     @IBAction func onSettingsButtonTapped(_ sender: Any) {
@@ -143,11 +149,17 @@ final class HoldingsViewController: BaseViewController {
         guard let userID = UserProfileManager.shared.profileID else {
             return
         }
+<<<<<<< HEAD
+        
+        let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+            let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID)
+=======
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
         
         let brokers = UserProfileManager.shared.linkedPlaidAccounts.map { item -> PlaidAccountDataSource in
+>>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
             let disabled = settings.disabledAccounts.contains { account in
                 item.id == account.id
             }
@@ -158,6 +170,14 @@ final class HoldingsViewController: BaseViewController {
         layout.height = min(420.0 + 64.0 * CGFloat(brokers.count), self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
+<<<<<<< HEAD
+
+        // WIP Borysov - other settings coming soon
+        filterVC.cofigure(brokers, [], [], [], true, false)
+        fpc.set(contentViewController: filterVC)
+        fpc.isRemovalInteractionEnabled = true
+        self.present(self.fpc, animated: true, completion: nil)
+=======
         filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)
         fpc.set(contentViewController: filterVC)
         fpc.isRemovalInteractionEnabled = true
@@ -170,6 +190,7 @@ final class HoldingsViewController: BaseViewController {
         self.linkUnlinkVC.configure(UserProfileManager.shared.linkedPlaidAccessTokens)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
         self.present(navigationController, animated: true, completion: nil)
+>>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
     }
     
     class MyFloatingPanelLayout: FloatingPanelLayout {
@@ -212,6 +233,10 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
     }
 }
 
+<<<<<<< HEAD
+extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
+    
+=======
 extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
@@ -233,6 +258,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         viewModel.settings = settings
         tableView.reloadData()
     }
+>>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
 }
 
 extension HoldingsViewController: FloatingPanelControllerDelegate {

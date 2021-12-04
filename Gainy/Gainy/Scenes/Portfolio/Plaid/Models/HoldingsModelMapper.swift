@@ -17,7 +17,7 @@ struct HoldingsModelMapper {
         
         for rawHolding in holdings {
             let security: GetPlaidTransactionsQuery.Data.GetPortfolioTransaction.Security? = transactions.first(where: {
-                $0.security.id == rawHolding.securityId
+                $0.security.id == rawHolding.holding.securityId
             }).map({$0.security})
             print("Sec: \(security?.id ?? 0)")
             print("Sec Name: \(security?.name ?? "")")
@@ -62,7 +62,7 @@ struct HoldingsModelMapper {
                   ]
                 
                 let model = HoldingSecurityViewModel(name: transaction.name,
-                                                     precentInHolding: Float(transaction.quantity / rawHolding.quantity),
+                                                     precentInHolding: Float(transaction.quantity) / rawHolding.holding.quantity,
                                                      totalPrice: Float(transaction.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0),
                                                      quantity: Float(transaction.quantity),
                                                      singlePrice: Float(transaction.price),
@@ -72,7 +72,7 @@ struct HoldingsModelMapper {
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
-                .d1 : Float(rawHolding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
+                .d1 : Float(rawHolding.holding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
                 .w1 : portfolioHoldingsGains?.absoluteGain_1w ?? 0.0,
                 .m1 : portfolioHoldingsGains?.absoluteGain_1m ?? 0.0,
                 .m3 : portfolioHoldingsGains?.absoluteGain_3m ?? 0.0,
@@ -93,20 +93,20 @@ struct HoldingsModelMapper {
             
             let holdModel = HoldingViewModel.init(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                                   name: security?.name ?? "",
-                                                  balance: Float(rawHolding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0),
+                                                  balance: Float(rawHolding.holding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0),
                                                   tickerSymbol: symbol,
                                                   industries: ticker?.tickerIndustries ?? [],
                                                   categories: ticker?.tickerCategories ?? [],
-                                                  showLTT: rawHolding.holdingDetails.lttQuantityTotal ?? 0.0 > 0.0,
+                                                  showLTT: rawHolding.holding.holdingDetails?.lttQuantityTotal ?? 0.0 > 0.0,
                                                   todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                                   todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,
                                                   absoluteGains: absGains,
                                                   relativeGains: relGains,
                                                   percentInProfile:portfolioHoldingsGains?.valueToPortfolioValue ?? 0.0,
                                                   securities: securities,
-                                                  holdingDetails: rawHolding.holdingDetails,
+                                                  holdingDetails: rawHolding.holding.holdingDetails,
                                                   event: ticker?.tickerEvents.first?.description,
-                                                  accountId: rawHolding.account.id,
+                                                  accountId: rawHolding.holding.account?.id ?? 0,
                                                   tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
                                                   tickerCategories: ticker?.tickerIndustries.compactMap({$0.gainyIndustry?.id}) ?? [])
             
