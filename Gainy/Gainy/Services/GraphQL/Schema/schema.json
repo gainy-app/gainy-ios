@@ -1517,6 +1517,22 @@
             "deprecationReason": null
           },
           {
+            "name": "transaction",
+            "description": "An object relationship",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "app_profile_portfolio_transactions",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "type",
             "description": null,
             "args": [],
@@ -47549,6 +47565,18 @@
             "deprecationReason": null
           },
           {
+            "name": "datetime",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "high",
             "description": null,
             "args": [],
@@ -48047,6 +48075,18 @@
             "deprecationReason": null
           },
           {
+            "name": "datetime",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "timestamp_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "high",
             "description": null,
             "type": {
@@ -48287,6 +48327,18 @@
             "deprecationReason": null
           },
           {
+            "name": "datetime",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "high",
             "description": null,
             "type": {
@@ -48412,6 +48464,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "float8",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "datetime",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48544,6 +48608,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "float8",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "datetime",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -48799,6 +48875,18 @@
             "deprecationReason": null
           },
           {
+            "name": "datetime",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "high",
             "description": null,
             "type": {
@@ -48921,6 +49009,12 @@
             "deprecationReason": null
           },
           {
+            "name": "datetime",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "high",
             "description": "column name",
             "isDeprecated": false,
@@ -48996,6 +49090,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "float8",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "datetime",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -49456,6 +49562,12 @@
           },
           {
             "name": "close",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "datetime",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

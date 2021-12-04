@@ -38,10 +38,7 @@
                             <constraint firstAttribute="height" constant="32" id="CQf-lR-lq2"/>
                         </constraints>
                         <color key="tintColor" red="0.1070520952" green="0.2715020776" blue="0.96083885430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-<<<<<<< HEAD
-=======
                         <color key="onTintColor" red="0.1070520952" green="0.2715020776" blue="0.96083885430000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
->>>>>>> a7cd7a420585697ac1b1cb8bc77c38923fcc2b4a
                         <connections>
                             <action selector="switchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="yKv-vV-f5o"/>
                         </connections>
