@@ -1,8 +1,9 @@
 iOS v0.3.1 #80 available
-:globe_with_meridians: Server - PROD
+:globe_with_meridians: Server - STAGING
 General improvements - MVP
 
 :new: New:
+• New Charts endpoint
 • Ticker Financials removed totally - migration completed
 • Ticker Details splitted to lightweighted ones for initial display in Collections
 

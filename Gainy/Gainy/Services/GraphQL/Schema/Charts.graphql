@@ -1,9 +1,13 @@
-query DiscoverCharts($period: String!, $symbol: String!) {
-  fetchChartData(period: $period, symbol: $symbol) {
-    volume
-    open
-    low
-    datetime
-    close
-  }
+query DiscoverCharts($period: String!, $symbol: String!, $date: timestamp!) {
+    historical_prices_aggregated(where: {symbol: {_eq: $symbol}, period: {_eq: $period}, datetime: {_gte: $date}}, order_by: {datetime: asc}) {
+        symbol
+        datetime
+        period
+        open
+        high
+        low
+        close
+        adjusted_close
+        volume
+    }
 }

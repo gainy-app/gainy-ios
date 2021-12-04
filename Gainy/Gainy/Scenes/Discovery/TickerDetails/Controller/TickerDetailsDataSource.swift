@@ -270,6 +270,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
         ticker.loadNewChartData(period: period) {[weak self] in
             guard let self = self else {return}
             self.chartViewModel.localTicker = self.ticker
+            self.chartViewModel.chartData = self.ticker.localChartData
             self.delegate?.loadingState(started: false)
         }
     }

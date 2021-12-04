@@ -8,14 +8,21 @@ public final class DiscoverChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query DiscoverCharts($period: String!, $symbol: String!) {
-      fetchChartData(period: $period, symbol: $symbol) {
+    query DiscoverCharts($period: String!, $symbol: String!, $date: timestamp!) {
+      historical_prices_aggregated(
+        where: {symbol: {_eq: $symbol}, period: {_eq: $period}, datetime: {_gte: $date}}
+        order_by: {datetime: asc}
+      ) {
         __typename
-        volume
-        open
-        low
+        symbol
         datetime
+        period
+        open
+        high
+        low
         close
+        adjusted_close
+        volume
       }
     }
     """
@@ -24,14 +31,16 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
   public var period: String
   public var symbol: String
+  public var date: timestamp
 
-  public init(period: String, symbol: String) {
+  public init(period: String, symbol: String, date: timestamp) {
     self.period = period
     self.symbol = symbol
+    self.date = date
   }
 
   public var variables: GraphQLMap? {
-    return ["period": period, "symbol": symbol]
+    return ["period": period, "symbol": symbol, "date": date]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -39,7 +48,7 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("fetchChartData", arguments: ["period": GraphQLVariable("period"), "symbol": GraphQLVariable("symbol")], type: .list(.object(FetchChartDatum.selections))),
+        GraphQLField("historical_prices_aggregated", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")], "period": ["_eq": GraphQLVariable("period")], "datetime": ["_gte": GraphQLVariable("date")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(HistoricalPricesAggregated.selections))))),
       ]
     }
 
@@ -49,30 +58,35 @@ public final class DiscoverChartsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(fetchChartData: [FetchChartDatum?]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "fetchChartData": fetchChartData.flatMap { (value: [FetchChartDatum?]) -> [ResultMap?] in value.map { (value: FetchChartDatum?) -> ResultMap? in value.flatMap { (value: FetchChartDatum) -> ResultMap in value.resultMap } } }])
+    public init(historicalPricesAggregated: [HistoricalPricesAggregated]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "historical_prices_aggregated": historicalPricesAggregated.map { (value: HistoricalPricesAggregated) -> ResultMap in value.resultMap }])
     }
 
-    public var fetchChartData: [FetchChartDatum?]? {
+    /// fetch data from the table: "historical_prices_aggregated"
+    public var historicalPricesAggregated: [HistoricalPricesAggregated] {
       get {
-        return (resultMap["fetchChartData"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [FetchChartDatum?] in value.map { (value: ResultMap?) -> FetchChartDatum? in value.flatMap { (value: ResultMap) -> FetchChartDatum in FetchChartDatum(unsafeResultMap: value) } } }
+        return (resultMap["historical_prices_aggregated"] as! [ResultMap]).map { (value: ResultMap) -> HistoricalPricesAggregated in HistoricalPricesAggregated(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.flatMap { (value: [FetchChartDatum?]) -> [ResultMap?] in value.map { (value: FetchChartDatum?) -> ResultMap? in value.flatMap { (value: FetchChartDatum) -> ResultMap in value.resultMap } } }, forKey: "fetchChartData")
+        resultMap.updateValue(newValue.map { (value: HistoricalPricesAggregated) -> ResultMap in value.resultMap }, forKey: "historical_prices_aggregated")
       }
     }
 
-    public struct FetchChartDatum: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["ChartDataPoint"]
+    public struct HistoricalPricesAggregated: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["historical_prices_aggregated"]
 
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("volume", type: .scalar(Double.self)),
-          GraphQLField("open", type: .scalar(Double.self)),
-          GraphQLField("low", type: .scalar(Double.self)),
-          GraphQLField("datetime", type: .scalar(String.self)),
-          GraphQLField("close", type: .scalar(Double.self)),
+          GraphQLField("symbol", type: .scalar(String.self)),
+          GraphQLField("datetime", type: .scalar(timestamp.self)),
+          GraphQLField("period", type: .scalar(String.self)),
+          GraphQLField("open", type: .scalar(float8.self)),
+          GraphQLField("high", type: .scalar(float8.self)),
+          GraphQLField("low", type: .scalar(float8.self)),
+          GraphQLField("close", type: .scalar(float8.self)),
+          GraphQLField("adjusted_close", type: .scalar(float8.self)),
+          GraphQLField("volume", type: .scalar(float8.self)),
         ]
       }
 
@@ -82,8 +96,8 @@ public final class DiscoverChartsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(volume: Double? = nil, `open`: Double? = nil, low: Double? = nil, datetime: String? = nil, close: Double? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ChartDataPoint", "volume": volume, "open": `open`, "low": low, "datetime": datetime, "close": close])
+      public init(symbol: String? = nil, datetime: timestamp? = nil, period: String? = nil, `open`: float8? = nil, high: float8? = nil, low: float8? = nil, close: float8? = nil, adjustedClose: float8? = nil, volume: float8? = nil) {
+        self.init(unsafeResultMap: ["__typename": "historical_prices_aggregated", "symbol": symbol, "datetime": datetime, "period": period, "open": `open`, "high": high, "low": low, "close": close, "adjusted_close": adjustedClose, "volume": volume])
       }
 
       public var __typename: String {
@@ -95,48 +109,84 @@ public final class DiscoverChartsQuery: GraphQLQuery {
         }
       }
 
-      public var volume: Double? {
+      public var symbol: String? {
         get {
-          return resultMap["volume"] as? Double
+          return resultMap["symbol"] as? String
         }
         set {
-          resultMap.updateValue(newValue, forKey: "volume")
+          resultMap.updateValue(newValue, forKey: "symbol")
         }
       }
 
-      public var `open`: Double? {
+      public var datetime: timestamp? {
         get {
-          return resultMap["open"] as? Double
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "open")
-        }
-      }
-
-      public var low: Double? {
-        get {
-          return resultMap["low"] as? Double
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "low")
-        }
-      }
-
-      public var datetime: String? {
-        get {
-          return resultMap["datetime"] as? String
+          return resultMap["datetime"] as? timestamp
         }
         set {
           resultMap.updateValue(newValue, forKey: "datetime")
         }
       }
 
-      public var close: Double? {
+      public var period: String? {
         get {
-          return resultMap["close"] as? Double
+          return resultMap["period"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "period")
+        }
+      }
+
+      public var `open`: float8? {
+        get {
+          return resultMap["open"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "open")
+        }
+      }
+
+      public var high: float8? {
+        get {
+          return resultMap["high"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "high")
+        }
+      }
+
+      public var low: float8? {
+        get {
+          return resultMap["low"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "low")
+        }
+      }
+
+      public var close: float8? {
+        get {
+          return resultMap["close"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "close")
+        }
+      }
+
+      public var adjustedClose: float8? {
+        get {
+          return resultMap["adjusted_close"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "adjusted_close")
+        }
+      }
+
+      public var volume: float8? {
+        get {
+          return resultMap["volume"] as? float8
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "volume")
         }
       }
     }
