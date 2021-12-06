@@ -24,7 +24,7 @@ final class HistoricalChartsLoader {
         
         switch range {
         case .d1:
-            dateString = (Date().startOfDay - 1.days).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")
             periodString = "15min"
         case .w1:
             dateString = (Date().startOfDay - 1.weeks).toFormat("yyyy-MM-dd")

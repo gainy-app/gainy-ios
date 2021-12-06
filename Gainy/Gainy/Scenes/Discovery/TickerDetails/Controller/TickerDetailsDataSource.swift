@@ -19,7 +19,9 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
 final class TickerDetailsDataSource: NSObject {
     weak var delegate: TickerDetailsDataSourceDelegate?
     
-    let totalRows = 10
+    private let totalRows = 10
+    
+    
     
     init(ticker: TickerInfo) {
         self.ticker = ticker
@@ -65,7 +67,8 @@ final class TickerDetailsDataSource: NSObject {
     
     //MARK: - Hosting controllers
     
-    static let hostingTag: Int = 7
+    static var oldHostingTag: Int = -1
+    static var hostingTag: Int = Int((arc4random() % 50) + 1)
     
     private lazy var wsrHosting: CustomHostingController<WSRView> = {
         let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(totalScore: ticker.wsjData.rate, priceTarget: ticker.wsjData.targetPrice, progress: ticker.wsjData.detailedStats))
@@ -156,7 +159,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .chart:
             let cell: TickerDetailsChartViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
-            if cell.addSwiftUIIfPossible(chartHosting.view) {
+            if cell.addSwiftUIIfPossible(chartHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                 chartHosting.view.autoSetDimension(.height, toSize: chatHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
                 chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
@@ -204,7 +207,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
-            if cell.addSwiftUIIfPossible(wsrHosting.view) {
+            if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                 wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
                 wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
                 wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
