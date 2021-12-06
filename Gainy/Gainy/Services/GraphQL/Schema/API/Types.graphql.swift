@@ -1774,23 +1774,24 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
   ///   - _and
   ///   - _not
   ///   - _or
+  ///   - account
   ///   - accountId
   ///   - createdAt
   ///   - holdingDetails
   ///   - holdingTransactions
   ///   - id
   ///   - isoCurrencyCode
+  ///   - plaidAccessTokenId
   ///   - portfolioHoldingGains
   ///   - profile
   ///   - profileId
-  ///   - profilePortfolioAccount
   ///   - quantity
   ///   - refId
   ///   - security
   ///   - securityId
   ///   - updatedAt
-  public init(_and: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_holdings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_bool_exp?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_bool_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, profilePortfolioAccount: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "profile_portfolio_account": profilePortfolioAccount, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_holdings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_bool_exp?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_bool_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[app_profile_holdings_bool_exp]?> {
@@ -1817,6 +1818,15 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
+    get {
+      return graphQLMap["account"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account")
     }
   }
 
@@ -1874,6 +1884,15 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
   public var portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_bool_exp?> {
     get {
       return graphQLMap["portfolio_holding_gains"] as? Swift.Optional<portfolio_holding_gains_bool_exp?> ?? Swift.Optional<portfolio_holding_gains_bool_exp?>.none
@@ -1898,15 +1917,6 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-
-  public var profilePortfolioAccount: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
-    get {
-      return graphQLMap["profile_portfolio_account"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_portfolio_account")
     }
   }
 
@@ -1943,6 +1953,216 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// Boolean expression to filter rows from the table "app.profile_portfolio_accounts". All fields are combined with a logical 'AND'.
+public struct app_profile_portfolio_accounts_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - balanceAvailable
+  ///   - balanceCurrent
+  ///   - balanceIsoCurrencyCode
+  ///   - balanceLimit
+  ///   - createdAt
+  ///   - id
+  ///   - mask
+  ///   - name
+  ///   - officialName
+  ///   - plaidAccessTokenId
+  ///   - profile
+  ///   - profileHoldings
+  ///   - profileId
+  ///   - refId
+  ///   - subtype
+  ///   - type
+  ///   - updatedAt
+  public init(_and: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> = nil, _not: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, _or: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> = nil, balanceAvailable: Swift.Optional<float8_comparison_exp?> = nil, balanceCurrent: Swift.Optional<float8_comparison_exp?> = nil, balanceIsoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, balanceLimit: Swift.Optional<float8_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, mask: Swift.Optional<String_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, officialName: Swift.Optional<String_comparison_exp?> = nil, plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, subtype: Swift.Optional<String_comparison_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "balance_iso_currency_code": balanceIsoCurrencyCode, "balance_limit": balanceLimit, "created_at": createdAt, "id": id, "mask": mask, "name": name, "official_name": officialName, "plaid_access_token_id": plaidAccessTokenId, "profile": profile, "profile_holdings": profileHoldings, "profile_id": profileId, "ref_id": refId, "subtype": subtype, "type": type, "updated_at": updatedAt]
+  }
+
+  public var _and: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> ?? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> ?? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var balanceAvailable: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["balance_available"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_available")
+    }
+  }
+
+  public var balanceCurrent: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["balance_current"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_current")
+    }
+  }
+
+  public var balanceIsoCurrencyCode: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["balance_iso_currency_code"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_iso_currency_code")
+    }
+  }
+
+  public var balanceLimit: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["balance_limit"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_limit")
+    }
+  }
+
+  public var createdAt: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var mask: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["mask"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "mask")
+    }
+  }
+
+  public var name: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var officialName: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["official_name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "official_name")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_bool_exp?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> {
+    get {
+      return graphQLMap["profile_holdings"] as? Swift.Optional<app_profile_holdings_bool_exp?> ?? Swift.Optional<app_profile_holdings_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_holdings")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var refId: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
+    }
+  }
+
+  public var subtype: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["subtype"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subtype")
+    }
+  }
+
+  public var type: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
     }
   }
 
@@ -5313,6 +5533,7 @@ public struct app_profile_portfolio_transactions_bool_exp: GraphQLMapConvertible
   ///   - id
   ///   - isoCurrencyCode
   ///   - name
+  ///   - plaidAccessTokenId
   ///   - portfolioTransactionGains
   ///   - price
   ///   - profile
@@ -5324,8 +5545,8 @@ public struct app_profile_portfolio_transactions_bool_exp: GraphQLMapConvertible
   ///   - subtype
   ///   - type
   ///   - updatedAt
-  public init(_and: Swift.Optional<[app_profile_portfolio_transactions_bool_exp]?> = nil, _not: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, _or: Swift.Optional<[app_profile_portfolio_transactions_bool_exp]?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, amount: Swift.Optional<float8_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, fees: Swift.Optional<float8_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, portfolioTransactionGains: Swift.Optional<portfolio_transaction_gains_bool_exp?> = nil, price: Swift.Optional<float8_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, subtype: Swift.Optional<String_comparison_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "account": account, "account_id": accountId, "amount": amount, "created_at": createdAt, "date": date, "fees": fees, "id": id, "iso_currency_code": isoCurrencyCode, "name": name, "portfolio_transaction_gains": portfolioTransactionGains, "price": price, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "subtype": subtype, "type": type, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[app_profile_portfolio_transactions_bool_exp]?> = nil, _not: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, _or: Swift.Optional<[app_profile_portfolio_transactions_bool_exp]?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, amount: Swift.Optional<float8_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, date: Swift.Optional<date_comparison_exp?> = nil, fees: Swift.Optional<float8_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> = nil, portfolioTransactionGains: Swift.Optional<portfolio_transaction_gains_bool_exp?> = nil, price: Swift.Optional<float8_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, subtype: Swift.Optional<String_comparison_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "account": account, "account_id": accountId, "amount": amount, "created_at": createdAt, "date": date, "fees": fees, "id": id, "iso_currency_code": isoCurrencyCode, "name": name, "plaid_access_token_id": plaidAccessTokenId, "portfolio_transaction_gains": portfolioTransactionGains, "price": price, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "subtype": subtype, "type": type, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[app_profile_portfolio_transactions_bool_exp]?> {
@@ -5436,6 +5657,15 @@ public struct app_profile_portfolio_transactions_bool_exp: GraphQLMapConvertible
     }
   }
 
+  public var plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
   public var portfolioTransactionGains: Swift.Optional<portfolio_transaction_gains_bool_exp?> {
     get {
       return graphQLMap["portfolio_transaction_gains"] as? Swift.Optional<portfolio_transaction_gains_bool_exp?> ?? Swift.Optional<portfolio_transaction_gains_bool_exp?>.none
@@ -5505,206 +5735,6 @@ public struct app_profile_portfolio_transactions_bool_exp: GraphQLMapConvertible
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "security_id")
-    }
-  }
-
-  public var subtype: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["subtype"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "subtype")
-    }
-  }
-
-  public var type: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["type"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "type")
-    }
-  }
-
-  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
-    get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "updated_at")
-    }
-  }
-}
-
-/// Boolean expression to filter rows from the table "app.profile_portfolio_accounts". All fields are combined with a logical 'AND'.
-public struct app_profile_portfolio_accounts_bool_exp: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - _and
-  ///   - _not
-  ///   - _or
-  ///   - balanceAvailable
-  ///   - balanceCurrent
-  ///   - balanceIsoCurrencyCode
-  ///   - balanceLimit
-  ///   - createdAt
-  ///   - id
-  ///   - mask
-  ///   - name
-  ///   - officialName
-  ///   - profile
-  ///   - profileHoldings
-  ///   - profileId
-  ///   - refId
-  ///   - subtype
-  ///   - type
-  ///   - updatedAt
-  public init(_and: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> = nil, _not: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, _or: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> = nil, balanceAvailable: Swift.Optional<float8_comparison_exp?> = nil, balanceCurrent: Swift.Optional<float8_comparison_exp?> = nil, balanceIsoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, balanceLimit: Swift.Optional<float8_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, mask: Swift.Optional<String_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, officialName: Swift.Optional<String_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, subtype: Swift.Optional<String_comparison_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "balance_available": balanceAvailable, "balance_current": balanceCurrent, "balance_iso_currency_code": balanceIsoCurrencyCode, "balance_limit": balanceLimit, "created_at": createdAt, "id": id, "mask": mask, "name": name, "official_name": officialName, "profile": profile, "profile_holdings": profileHoldings, "profile_id": profileId, "ref_id": refId, "subtype": subtype, "type": type, "updated_at": updatedAt]
-  }
-
-  public var _and: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> {
-    get {
-      return graphQLMap["_and"] as? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> ?? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_and")
-    }
-  }
-
-  public var _not: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
-    get {
-      return graphQLMap["_not"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_not")
-    }
-  }
-
-  public var _or: Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> {
-    get {
-      return graphQLMap["_or"] as? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?> ?? Swift.Optional<[app_profile_portfolio_accounts_bool_exp]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_or")
-    }
-  }
-
-  public var balanceAvailable: Swift.Optional<float8_comparison_exp?> {
-    get {
-      return graphQLMap["balance_available"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_available")
-    }
-  }
-
-  public var balanceCurrent: Swift.Optional<float8_comparison_exp?> {
-    get {
-      return graphQLMap["balance_current"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_current")
-    }
-  }
-
-  public var balanceIsoCurrencyCode: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["balance_iso_currency_code"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_iso_currency_code")
-    }
-  }
-
-  public var balanceLimit: Swift.Optional<float8_comparison_exp?> {
-    get {
-      return graphQLMap["balance_limit"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_limit")
-    }
-  }
-
-  public var createdAt: Swift.Optional<timestamptz_comparison_exp?> {
-    get {
-      return graphQLMap["created_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "created_at")
-    }
-  }
-
-  public var id: Swift.Optional<Int_comparison_exp?> {
-    get {
-      return graphQLMap["id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "id")
-    }
-  }
-
-  public var mask: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["mask"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "mask")
-    }
-  }
-
-  public var name: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  public var officialName: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["official_name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "official_name")
-    }
-  }
-
-  public var profile: Swift.Optional<app_profiles_bool_exp?> {
-    get {
-      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile")
-    }
-  }
-
-  public var profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> {
-    get {
-      return graphQLMap["profile_holdings"] as? Swift.Optional<app_profile_holdings_bool_exp?> ?? Swift.Optional<app_profile_holdings_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_holdings")
-    }
-  }
-
-  public var profileId: Swift.Optional<Int_comparison_exp?> {
-    get {
-      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-
-  public var refId: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["ref_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ref_id")
     }
   }
 
@@ -7164,23 +7194,33 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
+  ///   - account
   ///   - accountId
   ///   - createdAt
   ///   - holdingDetails
   ///   - holdingTransactions
   ///   - id
   ///   - isoCurrencyCode
+  ///   - plaidAccessTokenId
   ///   - portfolioHoldingGains
   ///   - profile
   ///   - profileId
-  ///   - profilePortfolioAccount
   ///   - quantity
   ///   - refId
   ///   - security
   ///   - securityId
   ///   - updatedAt
-  public init(accountId: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_obj_rel_insert_input?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_arr_rel_insert_input?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, profilePortfolioAccount: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "profile_portfolio_account": profilePortfolioAccount, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  public init(account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, accountId: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_obj_rel_insert_input?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_arr_rel_insert_input?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, plaidAccessTokenId: Swift.Optional<Int?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  }
+
+  public var account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["account"] as? Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> ?? Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account")
+    }
   }
 
   public var accountId: Swift.Optional<Int?> {
@@ -7237,6 +7277,15 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var plaidAccessTokenId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
   public var portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> {
     get {
       return graphQLMap["portfolio_holding_gains"] as? Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> ?? Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?>.none
@@ -7261,15 +7310,6 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-
-  public var profilePortfolioAccount: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> {
-    get {
-      return graphQLMap["profile_portfolio_account"] as? Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> ?? Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_portfolio_account")
     }
   }
 
@@ -7316,6 +7356,421 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
     }
+  }
+}
+
+/// input type for inserting object relation for remote table "app.profile_portfolio_accounts"
+public struct app_profile_portfolio_accounts_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: app_profile_portfolio_accounts_insert_input, onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: app_profile_portfolio_accounts_insert_input {
+    get {
+      return graphQLMap["data"] as! app_profile_portfolio_accounts_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_portfolio_accounts_on_conflict?> ?? Swift.Optional<app_profile_portfolio_accounts_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "app.profile_portfolio_accounts"
+public struct app_profile_portfolio_accounts_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - balanceAvailable
+  ///   - balanceCurrent
+  ///   - balanceIsoCurrencyCode
+  ///   - balanceLimit
+  ///   - createdAt
+  ///   - id
+  ///   - mask
+  ///   - name
+  ///   - officialName
+  ///   - plaidAccessTokenId
+  ///   - profile
+  ///   - profileHoldings
+  ///   - profileId
+  ///   - refId
+  ///   - subtype
+  ///   - type
+  ///   - updatedAt
+  public init(balanceAvailable: Swift.Optional<float8?> = nil, balanceCurrent: Swift.Optional<float8?> = nil, balanceIsoCurrencyCode: Swift.Optional<String?> = nil, balanceLimit: Swift.Optional<float8?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, id: Swift.Optional<Int?> = nil, mask: Swift.Optional<String?> = nil, name: Swift.Optional<String?> = nil, officialName: Swift.Optional<String?> = nil, plaidAccessTokenId: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, refId: Swift.Optional<String?> = nil, subtype: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["balance_available": balanceAvailable, "balance_current": balanceCurrent, "balance_iso_currency_code": balanceIsoCurrencyCode, "balance_limit": balanceLimit, "created_at": createdAt, "id": id, "mask": mask, "name": name, "official_name": officialName, "plaid_access_token_id": plaidAccessTokenId, "profile": profile, "profile_holdings": profileHoldings, "profile_id": profileId, "ref_id": refId, "subtype": subtype, "type": type, "updated_at": updatedAt]
+  }
+
+  public var balanceAvailable: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["balance_available"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_available")
+    }
+  }
+
+  public var balanceCurrent: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["balance_current"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_current")
+    }
+  }
+
+  public var balanceIsoCurrencyCode: Swift.Optional<String?> {
+    get {
+      return graphQLMap["balance_iso_currency_code"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_iso_currency_code")
+    }
+  }
+
+  public var balanceLimit: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["balance_limit"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "balance_limit")
+    }
+  }
+
+  public var createdAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var mask: Swift.Optional<String?> {
+    get {
+      return graphQLMap["mask"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "mask")
+    }
+  }
+
+  public var name: Swift.Optional<String?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var officialName: Swift.Optional<String?> {
+    get {
+      return graphQLMap["official_name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "official_name")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> {
+    get {
+      return graphQLMap["profile_holdings"] as? Swift.Optional<app_profile_holdings_arr_rel_insert_input?> ?? Swift.Optional<app_profile_holdings_arr_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_holdings")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var refId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
+    }
+  }
+
+  public var subtype: Swift.Optional<String?> {
+    get {
+      return graphQLMap["subtype"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subtype")
+    }
+  }
+
+  public var type: Swift.Optional<String?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// on conflict condition type for table "app.profile_portfolio_accounts"
+public struct app_profile_portfolio_accounts_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: app_profile_portfolio_accounts_constraint, updateColumns: [app_profile_portfolio_accounts_update_column], `where`: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: app_profile_portfolio_accounts_constraint {
+    get {
+      return graphQLMap["constraint"] as! app_profile_portfolio_accounts_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [app_profile_portfolio_accounts_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [app_profile_portfolio_accounts_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "app.profile_portfolio_accounts"
+public enum app_profile_portfolio_accounts_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case profilePortfolioAccountsPkey
+  /// unique or primary key constraint
+  case profilePortfolioAccountsRefIdKey
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "profile_portfolio_accounts_pkey": self = .profilePortfolioAccountsPkey
+      case "profile_portfolio_accounts_ref_id_key": self = .profilePortfolioAccountsRefIdKey
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .profilePortfolioAccountsPkey: return "profile_portfolio_accounts_pkey"
+      case .profilePortfolioAccountsRefIdKey: return "profile_portfolio_accounts_ref_id_key"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_portfolio_accounts_constraint, rhs: app_profile_portfolio_accounts_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.profilePortfolioAccountsPkey, .profilePortfolioAccountsPkey): return true
+      case (.profilePortfolioAccountsRefIdKey, .profilePortfolioAccountsRefIdKey): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_portfolio_accounts_constraint] {
+    return [
+      .profilePortfolioAccountsPkey,
+      .profilePortfolioAccountsRefIdKey,
+    ]
+  }
+}
+
+/// update columns of table "app.profile_portfolio_accounts"
+public enum app_profile_portfolio_accounts_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case balanceAvailable
+  /// column name
+  case balanceCurrent
+  /// column name
+  case balanceIsoCurrencyCode
+  /// column name
+  case balanceLimit
+  /// column name
+  case createdAt
+  /// column name
+  case id
+  /// column name
+  case mask
+  /// column name
+  case name
+  /// column name
+  case officialName
+  /// column name
+  case plaidAccessTokenId
+  /// column name
+  case profileId
+  /// column name
+  case refId
+  /// column name
+  case subtype
+  /// column name
+  case type
+  /// column name
+  case updatedAt
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "balance_available": self = .balanceAvailable
+      case "balance_current": self = .balanceCurrent
+      case "balance_iso_currency_code": self = .balanceIsoCurrencyCode
+      case "balance_limit": self = .balanceLimit
+      case "created_at": self = .createdAt
+      case "id": self = .id
+      case "mask": self = .mask
+      case "name": self = .name
+      case "official_name": self = .officialName
+      case "plaid_access_token_id": self = .plaidAccessTokenId
+      case "profile_id": self = .profileId
+      case "ref_id": self = .refId
+      case "subtype": self = .subtype
+      case "type": self = .type
+      case "updated_at": self = .updatedAt
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .balanceAvailable: return "balance_available"
+      case .balanceCurrent: return "balance_current"
+      case .balanceIsoCurrencyCode: return "balance_iso_currency_code"
+      case .balanceLimit: return "balance_limit"
+      case .createdAt: return "created_at"
+      case .id: return "id"
+      case .mask: return "mask"
+      case .name: return "name"
+      case .officialName: return "official_name"
+      case .plaidAccessTokenId: return "plaid_access_token_id"
+      case .profileId: return "profile_id"
+      case .refId: return "ref_id"
+      case .subtype: return "subtype"
+      case .type: return "type"
+      case .updatedAt: return "updated_at"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_portfolio_accounts_update_column, rhs: app_profile_portfolio_accounts_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.balanceAvailable, .balanceAvailable): return true
+      case (.balanceCurrent, .balanceCurrent): return true
+      case (.balanceIsoCurrencyCode, .balanceIsoCurrencyCode): return true
+      case (.balanceLimit, .balanceLimit): return true
+      case (.createdAt, .createdAt): return true
+      case (.id, .id): return true
+      case (.mask, .mask): return true
+      case (.name, .name): return true
+      case (.officialName, .officialName): return true
+      case (.plaidAccessTokenId, .plaidAccessTokenId): return true
+      case (.profileId, .profileId): return true
+      case (.refId, .refId): return true
+      case (.subtype, .subtype): return true
+      case (.type, .type): return true
+      case (.updatedAt, .updatedAt): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_portfolio_accounts_update_column] {
+    return [
+      .balanceAvailable,
+      .balanceCurrent,
+      .balanceIsoCurrencyCode,
+      .balanceLimit,
+      .createdAt,
+      .id,
+      .mask,
+      .name,
+      .officialName,
+      .plaidAccessTokenId,
+      .profileId,
+      .refId,
+      .subtype,
+      .type,
+      .updatedAt,
+    ]
   }
 }
 
@@ -7626,6 +8081,8 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
   /// column name
   case isoCurrencyCode
   /// column name
+  case plaidAccessTokenId
+  /// column name
   case profileId
   /// column name
   case quantity
@@ -7644,6 +8101,7 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
       case "created_at": self = .createdAt
       case "id": self = .id
       case "iso_currency_code": self = .isoCurrencyCode
+      case "plaid_access_token_id": self = .plaidAccessTokenId
       case "profile_id": self = .profileId
       case "quantity": self = .quantity
       case "ref_id": self = .refId
@@ -7659,6 +8117,7 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
       case .createdAt: return "created_at"
       case .id: return "id"
       case .isoCurrencyCode: return "iso_currency_code"
+      case .plaidAccessTokenId: return "plaid_access_token_id"
       case .profileId: return "profile_id"
       case .quantity: return "quantity"
       case .refId: return "ref_id"
@@ -7674,6 +8133,7 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
       case (.createdAt, .createdAt): return true
       case (.id, .id): return true
       case (.isoCurrencyCode, .isoCurrencyCode): return true
+      case (.plaidAccessTokenId, .plaidAccessTokenId): return true
       case (.profileId, .profileId): return true
       case (.quantity, .quantity): return true
       case (.refId, .refId): return true
@@ -7690,6 +8150,7 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
       .createdAt,
       .id,
       .isoCurrencyCode,
+      .plaidAccessTokenId,
       .profileId,
       .quantity,
       .refId,
@@ -9188,8 +9649,9 @@ public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - data
-  public init(data: [ticker_events_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [ticker_events_insert_input], onConflict: Swift.Optional<ticker_events_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [ticker_events_insert_input] {
@@ -9198,6 +9660,16 @@ public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<ticker_events_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<ticker_events_on_conflict?> ?? Swift.Optional<ticker_events_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -9269,6 +9741,150 @@ public struct ticker_events_insert_input: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "type")
     }
+  }
+}
+
+/// on conflict condition type for table "ticker_events"
+public struct ticker_events_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: ticker_events_constraint, updateColumns: [ticker_events_update_column], `where`: Swift.Optional<ticker_events_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: ticker_events_constraint {
+    get {
+      return graphQLMap["constraint"] as! ticker_events_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [ticker_events_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [ticker_events_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<ticker_events_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<ticker_events_bool_exp?> ?? Swift.Optional<ticker_events_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "ticker_events"
+public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case publicTickerEventsSymbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "public_ticker_events_symbol": self = .publicTickerEventsSymbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .publicTickerEventsSymbol: return "public_ticker_events_symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_events_constraint, rhs: ticker_events_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.publicTickerEventsSymbol, .publicTickerEventsSymbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_events_constraint] {
+    return [
+      .publicTickerEventsSymbol,
+    ]
+  }
+}
+
+/// update columns of table "ticker_events"
+public enum ticker_events_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case createdAt
+  /// column name
+  case date
+  /// column name
+  case description
+  /// column name
+  case symbol
+  /// column name
+  case timestamp
+  /// column name
+  case type
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "created_at": self = .createdAt
+      case "date": self = .date
+      case "description": self = .description
+      case "symbol": self = .symbol
+      case "timestamp": self = .timestamp
+      case "type": self = .type
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .createdAt: return "created_at"
+      case .date: return "date"
+      case .description: return "description"
+      case .symbol: return "symbol"
+      case .timestamp: return "timestamp"
+      case .type: return "type"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_events_update_column, rhs: ticker_events_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.createdAt, .createdAt): return true
+      case (.date, .date): return true
+      case (.description, .description): return true
+      case (.symbol, .symbol): return true
+      case (.timestamp, .timestamp): return true
+      case (.type, .type): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_events_update_column] {
+    return [
+      .createdAt,
+      .date,
+      .description,
+      .symbol,
+      .timestamp,
+      .type,
+    ]
   }
 }
 
@@ -9825,8 +10441,9 @@ public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - data
-  public init(data: [ticker_industries_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [ticker_industries_insert_input], onConflict: Swift.Optional<ticker_industries_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [ticker_industries_insert_input] {
@@ -9835,6 +10452,16 @@ public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<ticker_industries_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<ticker_industries_on_conflict?> ?? Swift.Optional<ticker_industries_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -10625,6 +11252,126 @@ public enum gainy_industries_update_column: RawRepresentable, Equatable, Hashabl
     return [
       .id,
       .name,
+    ]
+  }
+}
+
+/// on conflict condition type for table "ticker_industries"
+public struct ticker_industries_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: ticker_industries_constraint, updateColumns: [ticker_industries_update_column], `where`: Swift.Optional<ticker_industries_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: ticker_industries_constraint {
+    get {
+      return graphQLMap["constraint"] as! ticker_industries_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [ticker_industries_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [ticker_industries_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<ticker_industries_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<ticker_industries_bool_exp?> ?? Swift.Optional<ticker_industries_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "ticker_industries"
+public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case publicTickerIndustriesIndustryIdSymbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "public_ticker_industries_industry_id__symbol": self = .publicTickerIndustriesIndustryIdSymbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .publicTickerIndustriesIndustryIdSymbol: return "public_ticker_industries_industry_id__symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_industries_constraint, rhs: ticker_industries_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.publicTickerIndustriesIndustryIdSymbol, .publicTickerIndustriesIndustryIdSymbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_industries_constraint] {
+    return [
+      .publicTickerIndustriesIndustryIdSymbol,
+    ]
+  }
+}
+
+/// update columns of table "ticker_industries"
+public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case industryId
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "industry_id": self = .industryId
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .industryId: return "industry_id"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_industries_update_column, rhs: ticker_industries_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.industryId, .industryId): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_industries_update_column] {
+    return [
+      .industryId,
+      .symbol,
     ]
   }
 }
@@ -12438,6 +13185,7 @@ public struct app_profile_portfolio_transactions_insert_input: GraphQLMapConvert
   ///   - id
   ///   - isoCurrencyCode
   ///   - name
+  ///   - plaidAccessTokenId
   ///   - portfolioTransactionGains
   ///   - price
   ///   - profile
@@ -12449,8 +13197,8 @@ public struct app_profile_portfolio_transactions_insert_input: GraphQLMapConvert
   ///   - subtype
   ///   - type
   ///   - updatedAt
-  public init(account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, accountId: Swift.Optional<Int?> = nil, amount: Swift.Optional<float8?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, date: Swift.Optional<date?> = nil, fees: Swift.Optional<float8?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, name: Swift.Optional<String?> = nil, portfolioTransactionGains: Swift.Optional<portfolio_transaction_gains_obj_rel_insert_input?> = nil, price: Swift.Optional<float8?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, subtype: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["account": account, "account_id": accountId, "amount": amount, "created_at": createdAt, "date": date, "fees": fees, "id": id, "iso_currency_code": isoCurrencyCode, "name": name, "portfolio_transaction_gains": portfolioTransactionGains, "price": price, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "subtype": subtype, "type": type, "updated_at": updatedAt]
+  public init(account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, accountId: Swift.Optional<Int?> = nil, amount: Swift.Optional<float8?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, date: Swift.Optional<date?> = nil, fees: Swift.Optional<float8?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, name: Swift.Optional<String?> = nil, plaidAccessTokenId: Swift.Optional<Int?> = nil, portfolioTransactionGains: Swift.Optional<portfolio_transaction_gains_obj_rel_insert_input?> = nil, price: Swift.Optional<float8?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, subtype: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["account": account, "account_id": accountId, "amount": amount, "created_at": createdAt, "date": date, "fees": fees, "id": id, "iso_currency_code": isoCurrencyCode, "name": name, "plaid_access_token_id": plaidAccessTokenId, "portfolio_transaction_gains": portfolioTransactionGains, "price": price, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "subtype": subtype, "type": type, "updated_at": updatedAt]
   }
 
   public var account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> {
@@ -12531,6 +13279,15 @@ public struct app_profile_portfolio_transactions_insert_input: GraphQLMapConvert
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
     }
   }
 
@@ -12631,405 +13388,6 @@ public struct app_profile_portfolio_transactions_insert_input: GraphQLMapConvert
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
     }
-  }
-}
-
-/// input type for inserting object relation for remote table "app.profile_portfolio_accounts"
-public struct app_profile_portfolio_accounts_obj_rel_insert_input: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - data
-  ///   - onConflict: on conflict condition
-  public init(data: app_profile_portfolio_accounts_insert_input, onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> = nil) {
-    graphQLMap = ["data": data, "on_conflict": onConflict]
-  }
-
-  public var data: app_profile_portfolio_accounts_insert_input {
-    get {
-      return graphQLMap["data"] as! app_profile_portfolio_accounts_insert_input
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "data")
-    }
-  }
-
-  /// on conflict condition
-  public var onConflict: Swift.Optional<app_profile_portfolio_accounts_on_conflict?> {
-    get {
-      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_portfolio_accounts_on_conflict?> ?? Swift.Optional<app_profile_portfolio_accounts_on_conflict?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "on_conflict")
-    }
-  }
-}
-
-/// input type for inserting data into table "app.profile_portfolio_accounts"
-public struct app_profile_portfolio_accounts_insert_input: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - balanceAvailable
-  ///   - balanceCurrent
-  ///   - balanceIsoCurrencyCode
-  ///   - balanceLimit
-  ///   - createdAt
-  ///   - id
-  ///   - mask
-  ///   - name
-  ///   - officialName
-  ///   - profile
-  ///   - profileHoldings
-  ///   - profileId
-  ///   - refId
-  ///   - subtype
-  ///   - type
-  ///   - updatedAt
-  public init(balanceAvailable: Swift.Optional<float8?> = nil, balanceCurrent: Swift.Optional<float8?> = nil, balanceIsoCurrencyCode: Swift.Optional<String?> = nil, balanceLimit: Swift.Optional<float8?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, id: Swift.Optional<Int?> = nil, mask: Swift.Optional<String?> = nil, name: Swift.Optional<String?> = nil, officialName: Swift.Optional<String?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, refId: Swift.Optional<String?> = nil, subtype: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["balance_available": balanceAvailable, "balance_current": balanceCurrent, "balance_iso_currency_code": balanceIsoCurrencyCode, "balance_limit": balanceLimit, "created_at": createdAt, "id": id, "mask": mask, "name": name, "official_name": officialName, "profile": profile, "profile_holdings": profileHoldings, "profile_id": profileId, "ref_id": refId, "subtype": subtype, "type": type, "updated_at": updatedAt]
-  }
-
-  public var balanceAvailable: Swift.Optional<float8?> {
-    get {
-      return graphQLMap["balance_available"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_available")
-    }
-  }
-
-  public var balanceCurrent: Swift.Optional<float8?> {
-    get {
-      return graphQLMap["balance_current"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_current")
-    }
-  }
-
-  public var balanceIsoCurrencyCode: Swift.Optional<String?> {
-    get {
-      return graphQLMap["balance_iso_currency_code"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_iso_currency_code")
-    }
-  }
-
-  public var balanceLimit: Swift.Optional<float8?> {
-    get {
-      return graphQLMap["balance_limit"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "balance_limit")
-    }
-  }
-
-  public var createdAt: Swift.Optional<timestamptz?> {
-    get {
-      return graphQLMap["created_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "created_at")
-    }
-  }
-
-  public var id: Swift.Optional<Int?> {
-    get {
-      return graphQLMap["id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "id")
-    }
-  }
-
-  public var mask: Swift.Optional<String?> {
-    get {
-      return graphQLMap["mask"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "mask")
-    }
-  }
-
-  public var name: Swift.Optional<String?> {
-    get {
-      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  public var officialName: Swift.Optional<String?> {
-    get {
-      return graphQLMap["official_name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "official_name")
-    }
-  }
-
-  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
-    get {
-      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile")
-    }
-  }
-
-  public var profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> {
-    get {
-      return graphQLMap["profile_holdings"] as? Swift.Optional<app_profile_holdings_arr_rel_insert_input?> ?? Swift.Optional<app_profile_holdings_arr_rel_insert_input?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_holdings")
-    }
-  }
-
-  public var profileId: Swift.Optional<Int?> {
-    get {
-      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-
-  public var refId: Swift.Optional<String?> {
-    get {
-      return graphQLMap["ref_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ref_id")
-    }
-  }
-
-  public var subtype: Swift.Optional<String?> {
-    get {
-      return graphQLMap["subtype"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "subtype")
-    }
-  }
-
-  public var type: Swift.Optional<String?> {
-    get {
-      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "type")
-    }
-  }
-
-  public var updatedAt: Swift.Optional<timestamptz?> {
-    get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "updated_at")
-    }
-  }
-}
-
-/// on conflict condition type for table "app.profile_portfolio_accounts"
-public struct app_profile_portfolio_accounts_on_conflict: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - constraint
-  ///   - updateColumns
-  ///   - where
-  public init(constraint: app_profile_portfolio_accounts_constraint, updateColumns: [app_profile_portfolio_accounts_update_column], `where`: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil) {
-    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
-  }
-
-  public var constraint: app_profile_portfolio_accounts_constraint {
-    get {
-      return graphQLMap["constraint"] as! app_profile_portfolio_accounts_constraint
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "constraint")
-    }
-  }
-
-  public var updateColumns: [app_profile_portfolio_accounts_update_column] {
-    get {
-      return graphQLMap["update_columns"] as! [app_profile_portfolio_accounts_update_column]
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "update_columns")
-    }
-  }
-
-  public var `where`: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> {
-    get {
-      return graphQLMap["where"] as? Swift.Optional<app_profile_portfolio_accounts_bool_exp?> ?? Swift.Optional<app_profile_portfolio_accounts_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "where")
-    }
-  }
-}
-
-/// unique or primary key constraints on table "app.profile_portfolio_accounts"
-public enum app_profile_portfolio_accounts_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  /// unique or primary key constraint
-  case profilePortfolioAccountsPkey
-  /// unique or primary key constraint
-  case profilePortfolioAccountsRefIdKey
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "profile_portfolio_accounts_pkey": self = .profilePortfolioAccountsPkey
-      case "profile_portfolio_accounts_ref_id_key": self = .profilePortfolioAccountsRefIdKey
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .profilePortfolioAccountsPkey: return "profile_portfolio_accounts_pkey"
-      case .profilePortfolioAccountsRefIdKey: return "profile_portfolio_accounts_ref_id_key"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: app_profile_portfolio_accounts_constraint, rhs: app_profile_portfolio_accounts_constraint) -> Bool {
-    switch (lhs, rhs) {
-      case (.profilePortfolioAccountsPkey, .profilePortfolioAccountsPkey): return true
-      case (.profilePortfolioAccountsRefIdKey, .profilePortfolioAccountsRefIdKey): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [app_profile_portfolio_accounts_constraint] {
-    return [
-      .profilePortfolioAccountsPkey,
-      .profilePortfolioAccountsRefIdKey,
-    ]
-  }
-}
-
-/// update columns of table "app.profile_portfolio_accounts"
-public enum app_profile_portfolio_accounts_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  /// column name
-  case balanceAvailable
-  /// column name
-  case balanceCurrent
-  /// column name
-  case balanceIsoCurrencyCode
-  /// column name
-  case balanceLimit
-  /// column name
-  case createdAt
-  /// column name
-  case id
-  /// column name
-  case mask
-  /// column name
-  case name
-  /// column name
-  case officialName
-  /// column name
-  case profileId
-  /// column name
-  case refId
-  /// column name
-  case subtype
-  /// column name
-  case type
-  /// column name
-  case updatedAt
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "balance_available": self = .balanceAvailable
-      case "balance_current": self = .balanceCurrent
-      case "balance_iso_currency_code": self = .balanceIsoCurrencyCode
-      case "balance_limit": self = .balanceLimit
-      case "created_at": self = .createdAt
-      case "id": self = .id
-      case "mask": self = .mask
-      case "name": self = .name
-      case "official_name": self = .officialName
-      case "profile_id": self = .profileId
-      case "ref_id": self = .refId
-      case "subtype": self = .subtype
-      case "type": self = .type
-      case "updated_at": self = .updatedAt
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .balanceAvailable: return "balance_available"
-      case .balanceCurrent: return "balance_current"
-      case .balanceIsoCurrencyCode: return "balance_iso_currency_code"
-      case .balanceLimit: return "balance_limit"
-      case .createdAt: return "created_at"
-      case .id: return "id"
-      case .mask: return "mask"
-      case .name: return "name"
-      case .officialName: return "official_name"
-      case .profileId: return "profile_id"
-      case .refId: return "ref_id"
-      case .subtype: return "subtype"
-      case .type: return "type"
-      case .updatedAt: return "updated_at"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: app_profile_portfolio_accounts_update_column, rhs: app_profile_portfolio_accounts_update_column) -> Bool {
-    switch (lhs, rhs) {
-      case (.balanceAvailable, .balanceAvailable): return true
-      case (.balanceCurrent, .balanceCurrent): return true
-      case (.balanceIsoCurrencyCode, .balanceIsoCurrencyCode): return true
-      case (.balanceLimit, .balanceLimit): return true
-      case (.createdAt, .createdAt): return true
-      case (.id, .id): return true
-      case (.mask, .mask): return true
-      case (.name, .name): return true
-      case (.officialName, .officialName): return true
-      case (.profileId, .profileId): return true
-      case (.refId, .refId): return true
-      case (.subtype, .subtype): return true
-      case (.type, .type): return true
-      case (.updatedAt, .updatedAt): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [app_profile_portfolio_accounts_update_column] {
-    return [
-      .balanceAvailable,
-      .balanceCurrent,
-      .balanceIsoCurrencyCode,
-      .balanceLimit,
-      .createdAt,
-      .id,
-      .mask,
-      .name,
-      .officialName,
-      .profileId,
-      .refId,
-      .subtype,
-      .type,
-      .updatedAt,
-    ]
   }
 }
 
@@ -13378,6 +13736,8 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
   /// column name
   case name
   /// column name
+  case plaidAccessTokenId
+  /// column name
   case price
   /// column name
   case profileId
@@ -13406,6 +13766,7 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
       case "id": self = .id
       case "iso_currency_code": self = .isoCurrencyCode
       case "name": self = .name
+      case "plaid_access_token_id": self = .plaidAccessTokenId
       case "price": self = .price
       case "profile_id": self = .profileId
       case "quantity": self = .quantity
@@ -13428,6 +13789,7 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
       case .id: return "id"
       case .isoCurrencyCode: return "iso_currency_code"
       case .name: return "name"
+      case .plaidAccessTokenId: return "plaid_access_token_id"
       case .price: return "price"
       case .profileId: return "profile_id"
       case .quantity: return "quantity"
@@ -13450,6 +13812,7 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
       case (.id, .id): return true
       case (.isoCurrencyCode, .isoCurrencyCode): return true
       case (.name, .name): return true
+      case (.plaidAccessTokenId, .plaidAccessTokenId): return true
       case (.price, .price): return true
       case (.profileId, .profileId): return true
       case (.quantity, .quantity): return true
@@ -13473,6 +13836,7 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
       .id,
       .isoCurrencyCode,
       .name,
+      .plaidAccessTokenId,
       .price,
       .profileId,
       .quantity,

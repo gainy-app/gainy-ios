@@ -24,8 +24,8 @@ final class HoldingsViewModel {
     }
     
     //MARK: - Caching
-    private var chartsCache: [ScatterChartView.ChartPeriod : [GetPortfolioChartsQuery.Data.PortfolioChart]] = [:]
-    private var sypChartsCache: [ScatterChartView.ChartPeriod : [DiscoverChartsQuery.Data.FetchChartDatum]] = [:]
+    private var chartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
+    private var sypChartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
     
     //MARK: - Network
     
@@ -96,42 +96,14 @@ final class HoldingsViewModel {
                 
                 for range in ScatterChartView.ChartPeriod.allCases {
                     loadGroup.enter()
-                    Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: range.rawValue)) {[weak self] result in
-                        switch result {
-                        case .success(let graphQLResult):
-                            self?.chartsCache[range] = graphQLResult.data?.portfolioChart ?? []
-                        case .failure(let error):
-                            dprint("Failure when making GraphQL request. Error: \(error)")
-                            NotificationManager.shared.showError(error.localizedDescription)
-                            break
-                        }
+                    HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
+                        self?.chartsCache[range] = chartData
                         loadGroup.leave()
                     }
                     
                     loadGroup.enter()
-                    Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: range.rawValue, symbol: Constants.Chart.sypSymbol)) {[weak self] result in
-                        switch result {
-                        case .success(let graphQLResult):
-                            var fetchedData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
-                            if range == .d1 {
-                                if let lastDay = fetchedData.last {
-                                    let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                                    if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                                        if index == 0 {
-                                            fetchedData = filtered
-                                        } else {
-                                            fetchedData = Array(fetchedData[(index-1)...])
-                                        }
-                                    }
-                                }
-                            }
-                            print("Got \(range) : \(fetchedData.count)")
-                            self?.sypChartsCache[range] = fetchedData
-                        case .failure(let error):
-                            dprint("Failure when making GraphQL request. Error: \(error)")
-                            NotificationManager.shared.showError(error.localizedDescription)
-                            break
-                        }
+                    HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, _ in
+                        self?.sypChartsCache[range] = chartData
                         loadGroup.leave()
                     }
                 }

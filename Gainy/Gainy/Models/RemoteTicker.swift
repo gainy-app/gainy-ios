@@ -49,10 +49,10 @@ class TickerInfo {
     class ChartDataCache {
         var medianGrow: Float = 0.0
         var haveMedian: Bool = false
-        var chartData: [DiscoverChartsQuery.Data.FetchChartDatum] = []
+        var chartData: ChartData = ChartData(points: [0.0])
         
         var description: String {
-            "Have M: \(haveMedian) M: \(medianGrow) CD: \(chartData.count)"
+            "Have M: \(haveMedian) M: \(medianGrow) CD: \(chartData.points.count)"
         }
     }
     
@@ -236,32 +236,12 @@ class TickerInfo {
         }
         
         dispatchGroup.enter()
-        Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: ScatterChartView.ChartPeriod.d1.rawValue, symbol: symbol)){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                
-                var fetchedData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
-                if let lastDay = fetchedData.last {
-                    let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                    
-                    if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                        if index == 0 {
-                            fetchedData = filtered
-                        } else {
-                            fetchedData = Array(fetchedData[(index-1)...])
-                        }
-                    }
-                }
-                self?.setChartsCache(.d1, chartData: fetchedData)
-                self?.updateChartData(fetchedData)
-                dispatchGroup.leave()
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                dispatchGroup.leave()
-                break
-            }
+        HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: ScatterChartView.ChartPeriod.d1) {[weak self] chartData, _ in
+            self?.setChartsCache(.d1, chartData: chartData)
+            self?.updateChartData(chartData)
+            dispatchGroup.leave()
         }
+
         
         //Load day median
         loadMedianForRange(.d1, dispatchGroup: dispatchGroup)
@@ -287,7 +267,7 @@ class TickerInfo {
     }
     
     
-    private func setChartsCache(_ period: ScatterChartView.ChartPeriod, chartData: [DiscoverChartsQuery.Data.FetchChartDatum]) {
+    private func setChartsCache(_ period: ScatterChartView.ChartPeriod, chartData: ChartData) {
         if let cache = chartsCache[period] {
             cache.chartData = chartData
         }
@@ -302,52 +282,32 @@ class TickerInfo {
     
     private func loadChartFromServer(period: ScatterChartView.ChartPeriod, dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)?) {
         dispatchGroup?.enter()
-        Network.shared.apollo.fetch(query: DiscoverChartsQuery.init(period: period.rawValue, symbol: symbol)){[weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                var chartRemData = (graphQLResult.data?.fetchChartData?.compactMap({$0}) ?? []).filter({$0.close != nil})
-                if period == .d1 {
-                    if let lastDay = chartRemData.last {
-                        let filtered = chartRemData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                        if let index = chartRemData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                            if index == 0 {
-                                chartRemData = filtered
-                            } else {
-                                chartRemData = Array(chartRemData[(index-1)...])
-                            }
-                        }
-                    }
-                }
-                self?.setChartsCache(period, chartData: chartRemData)
-                
-                if dispatchGroup == nil {
-                    self?.updateChartData(chartRemData)
-                }
-                if chartRemData.count > 0 {
-                    if let datetime = chartRemData.first?.datetime {
-                        self?.loadMedianForRange(period, explicitDate: String(datetime.prefix(while: { $0 != "T"}))) {
-                            dprint("Date for median: \(self?.haveMedian ?? false)")
-                            completion?()
-                        }
-                    } else {
-                        self?.loadMedianForRange(period) {
-                            completion?()
-                        }
+        
+        HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: period) {[weak self] chartData, chartRemData in
+            
+            self?.setChartsCache(period, chartData: chartData)
+            
+            if dispatchGroup == nil {
+                self?.updateChartData(chartData)
+            }
+            if chartRemData.count > 0 {
+                if let datetime = chartRemData.first?.datetime {
+                    self?.loadMedianForRange(period, explicitDate: String(datetime.prefix(while: { $0 != "T"}))) {
+                        dprint("Date for median: \(self?.haveMedian ?? false)")
+                        completion?()
                     }
                 } else {
-                    self?.medianGrow = 0.0
-                    self?.haveMedian = false
-                    self?.setMedianData(period, medianGrow: 0.0, haveMedian: false)
-                    completion?()
+                    self?.loadMedianForRange(period) {
+                        completion?()
+                    }
                 }
-                dispatchGroup?.leave()
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+            } else {
+                self?.medianGrow = 0.0
+                self?.haveMedian = false
+                self?.setMedianData(period, medianGrow: 0.0, haveMedian: false)
                 completion?()
-                dispatchGroup?.leave()
-                break
             }
+            dispatchGroup?.leave()
         }
     }
     
@@ -545,9 +505,8 @@ class TickerInfo {
         return Float(round(100 * (diff * 100)) / 100)
     }
     
-    private func updateChartData(_ data: [DiscoverChartsQuery.Data.FetchChartDatum]) {
-        self.chartData = data
-        self.localChartData.loadValues(data, period: chartRange)
+    private func updateChartData(_ data: ChartData) {
+        self.localChartData = data
     }
     
     private func updateNewsData(_ data: [DiscoverNewsQuery.Data.FetchNewsDatum]) {
@@ -559,7 +518,6 @@ class TickerInfo {
     let symbol: String
     
     //MARK: - Chart
-    var chartData: [DiscoverChartsQuery.Data.FetchChartDatum] = []
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var localChartData: ChartData =  ChartData.init(points: [0.0])
     

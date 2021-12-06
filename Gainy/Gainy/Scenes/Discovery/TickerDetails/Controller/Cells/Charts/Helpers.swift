@@ -208,7 +208,7 @@ public class ChartData: ObservableObject, Identifiable {
     var ID = UUID()
     
     
-    init(points:[DiscoverChartsQuery.Data.FetchChartDatum], period: ScatterChartView.ChartPeriod) {
+    init(points: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
         self.points = points.compactMap{
             if let close = $0.close  {
                 return ($0.labelForPeriod(period), Double(close))
