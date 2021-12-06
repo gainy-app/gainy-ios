@@ -108,7 +108,8 @@ struct HoldingsModelMapper {
                                                   event: ticker?.tickerEvents.first?.description,
                                                   accountId: rawHolding.holding.account?.id ?? 0,
                                                   tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
-                                                  tickerCategories: ticker?.tickerIndustries.compactMap({$0.gainyIndustry?.id}) ?? [])
+                                                  tickerCategories: ticker?.tickerIndustries.compactMap({$0.gainyIndustry?.id}) ?? [],
+                                                  rawTicker: ticker)
             
             holds.append(holdModel)
         }

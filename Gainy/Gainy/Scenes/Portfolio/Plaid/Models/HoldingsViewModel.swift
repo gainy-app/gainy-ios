@@ -172,18 +172,13 @@ final class HoldingsViewModel {
                         let today = topChartGains[.d1]
                         
                         let demoChartData = ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40].shuffled())
-                        
                         let demoSypChartData = ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40].shuffled())
                         
                         let sypChartReal = today?.sypChartData ?? demoSypChartData
-                        let demo = HoldingChartViewModel.init(balance: 156225, rangeGrow: 12.05, rangeGrowBalance: 2228.50, spGrow: Float(sypChartReal.startEndDiff), chartData: demoChartData, sypChartData: sypChartReal)
                         
                         let live = HoldingChartViewModel.init(balance: self.profileGains?.portfolioGains?.actualValue ?? 0.0, rangeGrow: today?.rangeGrow ?? 0.0, rangeGrowBalance: today?.rangeGrowBalance ?? 0.0, spGrow: 0.0, chartData: today?.chartData ?? demoChartData, sypChartData: demoSypChartData)
-                        if self.config.environment == .production {
-                            self.dataSource.chartViewModel = demo
-                        } else {
-                            self.dataSource.chartViewModel = demo
-                        }
+                      
+                        self.dataSource.chartViewModel = live
                         self.dataSource.profileGains = topChartGains
                         self.dataSource.originalHoldings = HoldingsModelMapper.modelsFor(holdings: self.holdings,
                                                                                          transactions: self.transactions,

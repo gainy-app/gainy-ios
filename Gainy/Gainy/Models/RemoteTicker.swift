@@ -37,6 +37,29 @@ class TickerInfo {
         
         self.updateMarketData()
     }
+        
+//    init(ticker: RemoteTickerDetailsFull) {
+//        self.ticker = RemoteTicker.init(symbol: ticker.symbol
+//                                        , name: ticker.name, description: ticker.description, tickerHighlights: ticker.tickerHighlights, tickerMetrics: ticker.realtimeMetrics, realtimeMetrics: ticker.realtimeMetrics)
+//        
+//        self.name = ticker.name ?? ""
+//        self.symbol = ticker.symbol ?? ""
+//        self.about = String((ticker.description ?? "").dropFirst().dropLast())
+//        self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
+//        
+//        self.tags = []
+//        self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
+//        self.wsjData = WSRData(rate: 0.0, targetPrice: 0.0, analystsCount: 0, detailedStats: [])
+//       
+//        self.wsrAnalystsCount = 0
+//        self.recommendedScore = 0.0
+//        
+//        self.news = []
+//        self.altStocks = []
+//        self.upcomingEvents = []
+//        
+//        self.updateMarketData()
+//    }
     
     let debugStr =
     """

@@ -10,6 +10,10 @@ import SkeletonView
 import Apollo
 import SwiftDate
 
+protocol HoldingsDataSourceDelegate: AnyObject {
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
+}
+
 final class HoldingsDataSource: NSObject {
     private let sectionsCount = 2
     
@@ -139,6 +143,10 @@ extension HoldingsDataSource: UITableViewDelegate {
         } else {
             return cellHeights[indexPath.row] ?? 0.0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //delegate?.stockSelected(source: self, stock: stocks[indexPath.row])
     }
 }
 
