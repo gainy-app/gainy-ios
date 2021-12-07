@@ -139,6 +139,7 @@ struct ScatterChartView: View {
                 
                 Button(action: {
                     hapticTouch.impactOccurred()
+                    delegate.comparePressed()
                 }, label: {
                     HStack {
                         Image("tiny plus")

@@ -49,7 +49,7 @@ struct Legend: View {
         ZStack(alignment: .topLeading){
             ForEach((0...1), id: \.self) { height in
                 HStack(alignment: .center){
-                        Text("$\(self.getYLegendSafe(height: height), specifier: (max - min) > 1.0 ? bigSpecifier : specifier)")
+                    Text("\(Float(self.getYLegendSafe(height: height)).price)")
                             .frame(maxHeight: 12)
                             .minimumScaleFactor(0.1)
                             .offset(x: getXposition(height: height), y: self.getYposition(height: height) + (height == 0 ? 7 : -3) )

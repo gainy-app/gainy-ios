@@ -14,6 +14,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func comparedStocksChanged(stock: AltStockTicker)
     func isStockCompared(stock: AltStockTicker) -> Bool
     func didRequestShowBrokersListForSymbol(symbol: String)
+    func openCompareWithSelf(ticker: TickerInfo)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -276,6 +277,9 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             self.chartViewModel.chartData = self.ticker.localChartData
             self.delegate?.loadingState(started: false)
         }
+    }
+    func comparePressed() {
+        delegate?.openCompareWithSelf(ticker: self.ticker)
     }
 }
 

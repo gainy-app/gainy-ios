@@ -155,5 +155,10 @@ final class CompareStocksViewController: BaseViewController {
 extension CompareStocksViewController: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         
-    } 
+    }
+    
+    func comparePressed() {
+        
+    }
+    
 }

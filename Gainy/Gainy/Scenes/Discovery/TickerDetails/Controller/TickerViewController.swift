@@ -248,6 +248,15 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             }
         }
     }
+    
+    func openCompareWithSelf(ticker: TickerInfo) {
+        if !(viewModel?.tickersToCompare.contains(ticker.ticker) ?? false) {
+            viewModel?.tickersToCompare.insert(ticker.ticker, at: 0)
+        }
+        if let model = viewModel?.compareCollectionDTO() {
+            coordinator?.showCompareDetails(model: model, delegate: nil)
+        }
+    }
 }
 
 extension TickerViewController: BrokersViewControllerDelegate {

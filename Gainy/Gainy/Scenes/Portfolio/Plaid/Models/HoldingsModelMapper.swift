@@ -42,7 +42,7 @@ struct HoldingsModelMapper {
                 let portfolioTransGains = portfolioTransactionsGains.first(where: {$0.portfolioTransactionGains?.transactionId == transaction.id})?.portfolioTransactionGains
                 
                 let absGains: [ScatterChartView.ChartPeriod : Float] = [
-                    .d1 : Float(transaction.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
+                    .d1 : portfolioTransGains?.absoluteGain_1d ?? 0.0,
                     .w1 : portfolioTransGains?.absoluteGain_1w ?? 0.0,
                     .m1 : portfolioTransGains?.absoluteGain_1m ?? 0.0,
                     .m3 : portfolioTransGains?.absoluteGain_3m ?? 0.0,
@@ -52,13 +52,13 @@ struct HoldingsModelMapper {
                   ]
                 
                 let relGains: [ScatterChartView.ChartPeriod : Float]  = [
-                    .d1 : (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
-                    .w1 : portfolioTransGains?.relativeGain_1w ?? 0.0,
-                    .m1 : portfolioTransGains?.relativeGain_1m ?? 0.0,
-                    .m3 : portfolioTransGains?.relativeGain_3m ?? 0.0,
-                    .y1 : portfolioTransGains?.relativeGain_1y ?? 0.0,
-                    .y5 : portfolioTransGains?.relativeGain_5y ?? 0.0,
-                    .all : portfolioTransGains?.relativeGainTotal ?? 0.0
+                    .d1 : (portfolioTransGains?.relativeGain_1d ?? 0.0) * 100.0,
+                    .w1 : (portfolioTransGains?.relativeGain_1w ?? 0.0) * 100.0,
+                    .m1 : (portfolioTransGains?.relativeGain_1m ?? 0.0) * 100.0,
+                    .m3 : (portfolioTransGains?.relativeGain_3m ?? 0.0) * 100.0,
+                    .y1 : (portfolioTransGains?.relativeGain_1y ?? 0.0) * 100.0,
+                    .y5 : (portfolioTransGains?.relativeGain_5y ?? 0.0) * 100.0,
+                    .all : (portfolioTransGains?.relativeGainTotal ?? 0.0) * 100.0
                   ]
                 
                 let model = HoldingSecurityViewModel(name: transaction.name,
@@ -72,7 +72,7 @@ struct HoldingsModelMapper {
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
-                .d1 : Float(rawHolding.holding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
+                .d1 : portfolioHoldingsGains?.absoluteGain_1d ?? 0.0,
                 .w1 : portfolioHoldingsGains?.absoluteGain_1w ?? 0.0,
                 .m1 : portfolioHoldingsGains?.absoluteGain_1m ?? 0.0,
                 .m3 : portfolioHoldingsGains?.absoluteGain_3m ?? 0.0,
@@ -82,13 +82,13 @@ struct HoldingsModelMapper {
               ]
             
             let relGains: [ScatterChartView.ChartPeriod : Float]  = [
-                .d1 : (TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0),
-                .w1 : portfolioHoldingsGains?.relativeGain_1w ?? 0.0,
-                .m1 : portfolioHoldingsGains?.relativeGain_1m ?? 0.0,
-                .m3 : portfolioHoldingsGains?.relativeGain_3m ?? 0.0,
-                .y1 : portfolioHoldingsGains?.relativeGain_1y ?? 0.0,
-                .y5 : portfolioHoldingsGains?.relativeGain_5y ?? 0.0,
-                .all : portfolioHoldingsGains?.relativeGainTotal ?? 0.0
+                .d1 : (portfolioHoldingsGains?.relativeGain_1d ?? 0.0) * 100.0,
+                .w1 : (portfolioHoldingsGains?.relativeGain_1w ?? 0.0) * 100.0,
+                .m1 : (portfolioHoldingsGains?.relativeGain_1m ?? 0.0) * 100.0,
+                .m3 : (portfolioHoldingsGains?.relativeGain_3m ?? 0.0) * 100.0,
+                .y1 : (portfolioHoldingsGains?.relativeGain_1y ?? 0.0) * 100.0,
+                .y5 : (portfolioHoldingsGains?.relativeGain_5y ?? 0.0) * 100.0,
+                .all : (portfolioHoldingsGains?.relativeGainTotal ?? 0.0) * 100.0
               ]
             
             let holdModel = HoldingViewModel.init(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
@@ -127,50 +127,50 @@ struct HoldingsModelMapper {
             
             switch range {
             case .d1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: 1.23,
-                                                                       rangeGrowBalance: 2233,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1d ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.relativeGain_1d ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
                 break
             case .w1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGain_1w ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1w ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1w ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .m1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGain_1m ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1m ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1m ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .m3:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGain_3m ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_3m ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_3m ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .y1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGain_1y ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1y ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1y ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .y5:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGain_5y ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_5y ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_5y ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .all:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: portfolioGains?.portfolioGains?.relativeGainTotal ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGainTotal ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGainTotal ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),

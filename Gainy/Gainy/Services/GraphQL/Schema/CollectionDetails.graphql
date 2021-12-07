@@ -93,90 +93,15 @@ fragment RemoteTickerDetails on tickers {
       net_debt
     }
     realtime_metrics{
-            actual_price
+    actual_price
       relative_daily_change
       time
       symbol
-        }
+    }
 }
 
 fragment RemoteTickerDetailsFull on tickers {
-    symbol
-    name
-    description
-    ticker_highlights {
-      highlight
-    }
-    ticker_metrics {
-      profit_margin
-      # trading
-      avg_volume_10d
-      short_percent_outstanding
-      shares_outstanding
-      avg_volume_90d
-      shares_float
-      short_ratio
-      beta
-      absolute_historical_volatility_adjusted_current
-      relative_historical_volatility_adjusted_current
-      absolute_historical_volatility_adjusted_min_1y
-      absolute_historical_volatility_adjusted_max_1y
-      relative_historical_volatility_adjusted_min_1y
-      relative_historical_volatility_adjusted_max_1y
-      implied_volatility
-      # growth
-      revenue_growth_yoy
-      revenue_growth_fwd
-      ebitda_growth_yoy
-      eps_growth_yoy
-      eps_growth_fwd
-      #general
-      address_city
-      address_state
-      address_county
-      address_full
-      exchange_name
-      #valuation
-      market_capitalization
-      enterprise_value_to_sales
-      price_to_earnings_ttm
-      price_to_sales_ttm
-      price_to_book_value
-      enterprise_value_to_ebitda
-      #momentum
-      price_change_1m
-      price_change_3m
-      price_change_1y
-      #dividend
-      dividend_yield
-      dividends_per_share
-      dividend_payout_ratio
-      years_of_consecutive_dividend_growth
-      dividend_frequency
-      #earnings
-      eps_actual
-      eps_estimate
-      beaten_quarterly_eps_estimation_count_ttm
-      eps_surprise
-      revenue_estimate_avg_0y
-      revenue_actual
-      revenue_ttm
-      #financials
-      revenue_per_share_ttm
-      net_income
-      roi
-      asset_cash_and_equivalents
-      roa
-      total_assets
-      ebitda
-      net_debt
-    }
-    realtime_metrics{
-            actual_price
-      relative_daily_change
-      time
-      symbol
-        }
+    ...RemoteTickerDetails
     ticker_categories {
       categories {
         id
@@ -219,12 +144,6 @@ fragment RemoteTickerDetailsFull on tickers {
 
 fragment RemoteTickerExtraDetails on tickers {
     symbol
-    realtime_metrics{
-            actual_price
-      relative_daily_change
-      time
-      symbol
-        }
     ticker_categories {
       categories {
         id

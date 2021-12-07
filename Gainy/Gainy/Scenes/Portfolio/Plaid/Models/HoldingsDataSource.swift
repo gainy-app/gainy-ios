@@ -15,6 +15,9 @@ protocol HoldingsDataSourceDelegate: AnyObject {
 }
 
 final class HoldingsDataSource: NSObject {
+    
+    weak var delegate: HoldingsDataSourceDelegate?
+    
     private let sectionsCount = 2
     
     private var cellHeights: [Int: CGFloat] = [:]
@@ -104,7 +107,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -20)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
 
@@ -146,7 +149,9 @@ extension HoldingsDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //delegate?.stockSelected(source: self, stock: stocks[indexPath.row])
+        if let stock = holdings[indexPath.row].rawTicker {
+            delegate?.stockSelected(source: self, stock: stock)
+        }
     }
 }
 
@@ -162,6 +167,10 @@ extension HoldingsDataSource: ScatterChartViewDelegate {
         }
         
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)
+    }
+    
+    func comparePressed() {
+        
     }
 }
 

@@ -58,6 +58,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + RemoteTickerDetailsFull.fragmentDefinition)
+    document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
   }
 

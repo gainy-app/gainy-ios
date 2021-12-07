@@ -50,6 +50,7 @@ final class HoldingsViewController: BaseViewController {
             tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
+            viewModel.dataSource.delegate = self
         }
     }
     
@@ -82,6 +83,8 @@ final class HoldingsViewController: BaseViewController {
             self?.updateSortButton()
         }
     }
+    
+    //MARK: - Actions
     
     @IBAction func onSortButtonTapped(_ sender: Any) {
         
@@ -261,7 +264,7 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
 
 extension HoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        //coordiantor?.showCardsDetailsViewController([TickerInfo.init(ticker: stock)], index: 0)
+        coordiantor?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
 }
 
