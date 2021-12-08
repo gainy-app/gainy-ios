@@ -62,14 +62,19 @@ final class HistoricalChartsLoader {
                             }
                         }
                     }
+                    print("CG \(range) : \(fetchedData.count)")
                     
+                    if range == .d1 {
+                        print("CG")
+                    }
                     completion(ChartData.init(points: fetchedData, period: range), fetchedData)
                 } else {
+                    print("CG \(range) : \(0)")
                     completion(ChartData.init(points: [0.0]), [])
                 }
                 break
             case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+                dprint("Failure when making GraphQL request. Error: \(range) \(error)")
                 completion(ChartData.init(points: [0.0]), [])
                 break
             }
@@ -126,7 +131,6 @@ final class HistoricalChartsLoader {
                             }
                         }
                     }
-                    
                     completion(ChartData.init(points: fetchedData, period: range))
                 } else {
                     completion(ChartData.init(points: [0.0]))

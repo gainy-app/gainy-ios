@@ -262,7 +262,10 @@ public class ChartData: ObservableObject, Identifiable {
     
     var startEndDiff: Double {
         func pctDiff(_ x1: Double, _ x2: Double) -> Double {
-            let diff = (x2 - x1) / x1
+            var diff = (x2 - x1) / x1
+            if x1 < 0 && x2 < 0 {
+                diff = -diff
+            }
             return Double(round(100 * (diff * 100)) / 100)
         }
         

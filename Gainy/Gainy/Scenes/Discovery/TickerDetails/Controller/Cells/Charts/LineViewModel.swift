@@ -31,7 +31,7 @@ class LineViewModel: ObservableObject {
     var hideHorizontalLines: Bool = false
     
     @Published
-    var isMedianVisible: Bool = false
+    var isSPYVisible: Bool = false
     
     @Published
     var chartPeriod: ScatterChartView.ChartPeriod = .d1

@@ -39,6 +39,7 @@ struct PortfolioScatterChartView: View {
             if isSPPVisible {
                 GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
             }
+            lineViewModel.isSPYVisible = isSPPVisible
         }
     }
     
@@ -151,7 +152,7 @@ struct PortfolioScatterChartView: View {
             }
             LineView(data: viewModel.sypChartData,
                      title: Constants.Chart.sypChartName,
-                     style: viewModel.sypChartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                     style: Styles.lineChartStyleMedian,
                      viewModel: lineViewModel)
                 .opacity(isSPPVisible ? 1.0 : 0.0)
             

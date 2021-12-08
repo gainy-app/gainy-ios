@@ -176,7 +176,12 @@ final class HoldingsViewModel {
                         
                         let sypChartReal = today?.sypChartData ?? demoSypChartData
                         
-                        let live = HoldingChartViewModel.init(balance: self.profileGains?.portfolioGains?.actualValue ?? 0.0, rangeGrow: today?.rangeGrow ?? 0.0, rangeGrowBalance: today?.rangeGrowBalance ?? 0.0, spGrow: 0.0, chartData: today?.chartData ?? demoChartData, sypChartData: demoSypChartData)
+                        let live = HoldingChartViewModel.init(balance: self.profileGains?.portfolioGains?.actualValue ?? 0.0,
+                                                              rangeGrow: today?.rangeGrow ?? 0.0,
+                                                              rangeGrowBalance: today?.rangeGrowBalance ?? 0.0,
+                                                              spGrow: Float(sypChartReal.startEndDiff),
+                                                              chartData: today?.chartData ?? demoChartData,
+                                                              sypChartData: sypChartReal)
                       
                         self.dataSource.chartViewModel = live
                         self.dataSource.profileGains = topChartGains

@@ -15,7 +15,7 @@ protocol HoldingsViewControllerDelegate: AnyObject {
 
 final class HoldingsViewController: BaseViewController {
     
-    var coordiantor: MainCoordinator?
+    var coordinator: MainCoordinator?
     
     //MARK: - Hosted VCs
     private lazy var sortingVC = SortPortfolioDetailsViewController.instantiate(.popups)
@@ -264,7 +264,7 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
 
 extension HoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
-        coordiantor?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
 }
 

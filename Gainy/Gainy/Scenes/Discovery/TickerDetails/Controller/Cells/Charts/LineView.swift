@@ -68,7 +68,7 @@ public struct LineView: View {
                             .opacity(viewModel.hideHorizontalLines ? 0.0 : 1.0)
                         }
                         
-                        if(self.showLegend && viewModel.isMedianVisible == false && viewModel.indicatorLocation == .zero){
+                        if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,
                                    frame: .constant(reader.frame(in: .local)), hideHorizontalLines: $viewModel.hideHorizontalLines, specifier: legendSpecifier)
                                 .animation(.none)
@@ -78,6 +78,7 @@ public struct LineView: View {
                              frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)),
                              touchLocation: $viewModel.indicatorLocation,
                              showIndicator: $viewModel.hideHorizontalLines,
+                             isSPYVisible:$viewModel.isSPYVisible,
                              minDataValue: .constant(nil),
                              maxDataValue: .constant(nil),
                              indicatorVal: $viewModel.currentDataNumber,

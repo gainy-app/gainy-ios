@@ -38,7 +38,7 @@ final class PortfolioViewController: BaseViewController {
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
-                    holdingsVC.coordiantor = mainCoordinator
+                    holdingsVC.coordinator = mainCoordinator
                     addViewController(holdingsVC, view: containerView)
                 }
                 holdingsVC.loadData()
@@ -67,9 +67,13 @@ final class PortfolioViewController: BaseViewController {
     
     private func loadBasedOnState() {
         if UserProfileManager.shared.isPlaidLinked {
-            state = .linkHasHoldings
+            if state != .linkHasHoldings {
+                state = .linkHasHoldings
+            }
         } else {
-            state = .noLink
+            if state != .noLink {
+                state = .noLink
+            }
         }
     }
     
