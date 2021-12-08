@@ -1,14 +1,12 @@
-iOS v0.3.1 #84 available
+iOS v0.3.1 #85 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• Charts: new grow formulas, new caching, placeholder for empty data
+• -
 
 :hammer_and_wrench: Improvements
 • Hotfixes
-• Added icons for security types;
-• Fixed 83's build regression related to portfolio screen loading (thanks Anton)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
