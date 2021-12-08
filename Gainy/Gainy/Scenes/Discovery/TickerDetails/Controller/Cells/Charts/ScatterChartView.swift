@@ -14,11 +14,11 @@ extension Color {
         scanner.scanLocation = 0
         var rgbValue: UInt64 = 0
         scanner.scanHexInt64(&rgbValue)
-
+        
         let r = (rgbValue & 0xff0000) >> 16
         let g = (rgbValue & 0xff00) >> 8
         let b = rgbValue & 0xff
-
+        
         self.init(
             red: Double(r) / 0xff,
             green: Double(g) / 0xff,
@@ -122,8 +122,8 @@ struct ScatterChartView: View {
                     hapticTouch.impactOccurred()
                 }, label: {
                     HStack {
-                            Image(isMedianVisible ? "toggle_on" : "toggle_off")
-                                .renderingMode(.original)
+                        Image(isMedianVisible ? "toggle_on" : "toggle_off")
+                            .renderingMode(.original)
                         Text("Industry median")
                             .padding(.all, 0)
                             .font(UIFont.proDisplayRegular(13).uiFont)
@@ -135,10 +135,11 @@ struct ScatterChartView: View {
                     .padding(.bottom, 4)
                     .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : Color.white).cornerRadius(20))
                 })
-                .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
+                    .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
                 
                 Button(action: {
                     hapticTouch.impactOccurred()
+                    delegate.comparePressed()
                 }, label: {
                     HStack {
                         Image("tiny plus")
@@ -156,8 +157,8 @@ struct ScatterChartView: View {
                 })
                 Spacer()
             }.padding(.leading, 20)
-            .padding(.top, 8)
-            .frame(height: 24)
+                .padding(.top, 8)
+                .frame(height: 24)
             HStack {
                 //Left median
                 VStack(spacing: 2) {
@@ -183,7 +184,7 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(named: (statsDayValueRaw -  viewModel.localTicker.medianGrow) >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                             .font(UIFont.proDisplaySemibold(11).uiFont)
                             .frame(width: 45)
-                            
+                        
                     }.frame(height: 12)
                         .frame(width: 95)
                 }.padding(.leading, 20)
@@ -266,42 +267,59 @@ struct ScatterChartView: View {
     
     private var chartView: some View {
         GeometryReader{ geometry in
-        ZStack {
-            if viewModel.chartData.points.count > 1 {
-                LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
-            }            
-//            VStack(alignment: .leading) {
-//                Spacer()
-//                HStack {
-//                    Text("Market closes in 15 MIN".uppercased())
-//                        .padding(.leading, 20)
-//                        .foregroundColor(Color(hex: "879095"s))
-//                        .font(UIFont.proDisplayRegular(9).uiFont)
-//                    Spacer()
-//                }
-//            }
-//            .opacity(isLeftDurationVis ? 1.0 : 0.0)
-//            .opacity(isMedianVisible ? 0.0 : 1.0)
-//            .padding(.bottom, -5)
-        }
-        .padding(.all, 0)
-        .animation(.linear)
-        .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
-        .gesture(DragGesture(minimumDistance: 0)
-        .onChanged({ value in
-            lineViewModel.dragLocation = value.location
-            lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
-            lineViewModel.opacity = 1
-            lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
-            lineViewModel.hideHorizontalLines = true
-        })
-            .onEnded({ value in
+            ZStack {
+                if viewModel.chartData.onlyPoints().uniqued().count > 1 {
+                    LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -40)
+                } else {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            VStack {
+                                Text("Not enough data")
+                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                    .font(UIFont.proDisplaySemibold(12).uiFont)
+                                Rectangle()
+                                        .fill(UIColor(named: "mainGreen")!.uiColor)
+                                        .frame(height: 2)
+                            }
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+                //            VStack(alignment: .leading) {
+                //                Spacer()
+                //                HStack {
+                //                    Text("Market closes in 15 MIN".uppercased())
+                //                        .padding(.leading, 20)
+                //                        .foregroundColor(Color(hex: "879095"s))
+                //                        .font(UIFont.proDisplayRegular(9).uiFont)
+                //                    Spacer()
+                //                }
+                //            }
+                //            .opacity(isLeftDurationVis ? 1.0 : 0.0)
+                //            .opacity(isMedianVisible ? 0.0 : 1.0)
+                //            .padding(.bottom, -5)
+            }
+            .padding(.all, 0)
+            .animation(.linear)
+            .background(Rectangle().fill().foregroundColor(UIColor(hexString: "F8FBFD")!.uiColor))
+            .gesture(DragGesture(minimumDistance: 0)
+                        .onChanged({ value in
+                lineViewModel.dragLocation = value.location
+                lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+                lineViewModel.opacity = 1
+                lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+                lineViewModel.hideHorizontalLines = true
+            })
+                        .onEnded({ value in
                 lineViewModel.opacity = 0
                 lineViewModel.hideHorizontalLines = false
                 lineViewModel.indicatorLocation = .zero
             }
+                                )
             )
-        )
         }
     }
     
@@ -341,8 +359,8 @@ struct ScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }.padding(.leading, 20)
-        .padding(.trailing, 20)
-        .padding(.top, 8)
+            .padding(.trailing, 20)
+            .padding(.top, 8)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {

@@ -28,13 +28,14 @@ struct HoldingViewModel {
     
     let securities: [HoldingSecurityViewModel]
     
-    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.HoldingDetail?
+    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.Holding.HoldingDetail?
     
     let event: String?
     
     let accountId: Int
     let tickerInterests: [Int]
     let tickerCategories: [Int]
+    let rawTicker: RemoteTickerDetailsFull?
     
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String) {
         return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "", relativeGains[range]?.cleanTwoDecimalP ?? "" )

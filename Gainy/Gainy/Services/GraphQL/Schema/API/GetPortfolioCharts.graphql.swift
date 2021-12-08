@@ -8,10 +8,10 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetPortfolioCharts($profileID: Int!, $period: String!) {
+    query GetPortfolioCharts($profileID: Int!, $period: String!, $date: timestamp!) {
       portfolio_chart(
-        where: {profile_id: {_eq: $profileID}, period: {_eq: $period}}
-        order_by: {date: asc}
+        where: {profile_id: {_eq: $profileID}, period: {_eq: $period}, datetime: {_gte: $date}}
+        order_by: {datetime: asc}
       ) {
         __typename
         datetime
@@ -25,14 +25,16 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
 
   public var profileID: Int
   public var period: String
+  public var date: timestamp
 
-  public init(profileID: Int, period: String) {
+  public init(profileID: Int, period: String, date: timestamp) {
     self.profileID = profileID
     self.period = period
+    self.date = date
   }
 
   public var variables: GraphQLMap? {
-    return ["profileID": profileID, "period": period]
+    return ["profileID": profileID, "period": period, "date": date]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -40,7 +42,7 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("portfolio_chart", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileID")], "period": ["_eq": GraphQLVariable("period")]], "order_by": ["date": "asc"]], type: .nonNull(.list(.nonNull(.object(PortfolioChart.selections))))),
+        GraphQLField("portfolio_chart", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileID")], "period": ["_eq": GraphQLVariable("period")], "datetime": ["_gte": GraphQLVariable("date")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(PortfolioChart.selections))))),
       ]
     }
 

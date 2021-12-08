@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol ScatterChartViewDelegate: AnyObject {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod)
+    func comparePressed()
 }
 
 class ScatterChartDelegate: ObservableObject {
@@ -20,5 +21,9 @@ class ScatterChartDelegate: ObservableObject {
         didSet {
             delegate?.chartPeriodChanged(period: range)
         }
+    }
+    
+    func comparePressed() {
+        delegate?.comparePressed()
     }
 }

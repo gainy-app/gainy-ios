@@ -16,7 +16,7 @@ extension Double {
 
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!
-        return "\(formattedValue)"
+        return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
     var percent: String {
@@ -92,7 +92,7 @@ extension Float {
 
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!
-        return "$\(formattedValue)"
+        return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
     var percent: String {

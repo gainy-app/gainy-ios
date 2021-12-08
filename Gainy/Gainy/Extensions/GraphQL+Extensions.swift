@@ -16,7 +16,11 @@ protocol RemoteDateTimeConvertable {
 
 extension RemoteDateTimeConvertable {
     var date: Date {
-        return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()
+        if let zDate = (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return zDate
+        } else {
+            return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+        }
     }
 }
 
@@ -85,7 +89,7 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
 }
 
 
-typealias RemoteChartData = DiscoverChartsQuery.Data.FetchChartDatum
+typealias RemoteChartData = DiscoverChartsQuery.Data.HistoricalPricesAggregated
 
 extension RemoteChartData: RemoteDateTimeConvertable {
         

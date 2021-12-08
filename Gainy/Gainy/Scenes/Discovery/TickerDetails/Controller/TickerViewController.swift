@@ -206,11 +206,15 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         let yesAction = UIAlertAction.init(title: "Yes", style: .default) { _ in
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else {return}
+                self.tableView.setContentOffset(.zero, animated: false)
                 let viewModel = TickerDetailsViewModel(ticker: TickerInfo(ticker: stock))
                 self.viewModel = viewModel
                 self.tableView.dataSource = viewModel.dataSource
                 self.tableView.delegate = viewModel.dataSource
                 viewModel.dataSource.delegate = self
+                
+                TickerDetailsDataSource.oldHostingTag = TickerDetailsDataSource.hostingTag
+                TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)                
                 self.loadTicketInfo()
             }
             
@@ -242,6 +246,15 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             if done {
                 self.bottomViewModel?.actionTitle = "Compare \(stocksCount) stocks"
             }
+        }
+    }
+    
+    func openCompareWithSelf(ticker: TickerInfo) {
+        if !(viewModel?.tickersToCompare.contains(ticker.ticker) ?? false) {
+            viewModel?.tickersToCompare.insert(ticker.ticker, at: 0)
+        }
+        if let model = viewModel?.compareCollectionDTO() {
+            coordinator?.showCompareDetails(model: model, delegate: nil)
         }
     }
 }

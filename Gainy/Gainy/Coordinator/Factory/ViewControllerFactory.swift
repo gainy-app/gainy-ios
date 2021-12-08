@@ -175,8 +175,9 @@ final class ViewControllerFactory {
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
     }
     
-    func instantiatePortfolioVC() -> PortfolioViewController {
+    func instantiatePortfolioVC(coordinator: MainCoordinator) -> PortfolioViewController {
         let vc = PortfolioViewController.instantiate(.portfolio)
+        vc.mainCoordinator = coordinator
         setupTabWithIndex(vc: vc, tab: .portfolio)
         return vc
     }

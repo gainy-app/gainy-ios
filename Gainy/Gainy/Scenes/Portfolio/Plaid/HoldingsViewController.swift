@@ -15,6 +15,8 @@ protocol HoldingsViewControllerDelegate: AnyObject {
 
 final class HoldingsViewController: BaseViewController {
     
+    var coordinator: MainCoordinator?
+    
     //MARK: - Hosted VCs
     private lazy var sortingVC = SortPortfolioDetailsViewController.instantiate(.popups)
     private lazy var filterVC: PortfolioFilteringViewController = PortfolioFilteringViewController.instantiate(.portfolio)
@@ -48,6 +50,7 @@ final class HoldingsViewController: BaseViewController {
             tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
+            viewModel.dataSource.delegate = self
         }
     }
     
@@ -80,6 +83,8 @@ final class HoldingsViewController: BaseViewController {
             self?.updateSortButton()
         }
     }
+    
+    //MARK: - Actions
     
     @IBAction func onSortButtonTapped(_ sender: Any) {
         
@@ -254,6 +259,12 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
         if shouldDismissFloatingPanel {
             self.fpc.dismiss(animated: true, completion: nil)
         }
+    }
+}
+
+extension HoldingsViewController: HoldingsDataSourceDelegate {
+    func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
+        coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
 }
 

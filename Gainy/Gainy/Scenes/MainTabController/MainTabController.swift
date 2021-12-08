@@ -25,7 +25,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         if let coordinator = coordinator {
             collectionDetailsViewController = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
             setViewControllers([collectionDetailsViewController as! UIViewController,
-                                coordinator.viewControllerFactory.instantiatePortfolioVC(),
+                                coordinator.viewControllerFactory.instantiatePortfolioVC(coordinator: coordinator),
                                 coordinator.viewControllerFactory.instantiateProfileVC(coordinator: coordinator)], animated: false)
         }
     }

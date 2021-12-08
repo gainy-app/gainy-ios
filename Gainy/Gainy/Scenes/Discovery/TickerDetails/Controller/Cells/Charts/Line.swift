@@ -13,6 +13,7 @@ public struct Line: View {
     @Binding var frame: CGRect
     @Binding var touchLocation: CGPoint
     @Binding var showIndicator: Bool
+    @Binding var isSPYVisible: Bool
     @Binding var minDataValue: Double?
     @Binding var maxDataValue: Double?
     @Binding var indicatorVal: String
@@ -82,7 +83,7 @@ public struct Line: View {
             .onDisappear {
                 self.showFull = false
             }
-            if(self.showIndicator) {
+            if(self.showIndicator && !isSPYVisible) {
                 MagnifierRect(currentNumber: $indicatorVal)
                     .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80))
                 IndicatorPoint()
@@ -103,7 +104,7 @@ public struct Line: View {
 struct Line_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader{ geometry in
-            Line(data: ChartData(points: [12,-230,10,54]), frame: .constant(geometry.frame(in: .local)), touchLocation: .constant(CGPoint(x: 100, y: 12)), showIndicator: .constant(true), minDataValue: .constant(nil), maxDataValue: .constant(nil), indicatorVal: .constant(""))
+            Line(data: ChartData(points: [12,-230,10,54]), frame: .constant(geometry.frame(in: .local)), touchLocation: .constant(CGPoint(x: 100, y: 12)), showIndicator: .constant(true), isSPYVisible: .constant(false), minDataValue: .constant(nil), maxDataValue: .constant(nil), indicatorVal: .constant(""))
         }.frame(width: 320, height: 160)
     }
 }

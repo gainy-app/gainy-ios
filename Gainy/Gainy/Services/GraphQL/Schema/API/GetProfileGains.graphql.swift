@@ -13,6 +13,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
         __typename
         portfolio_gains {
           __typename
+          absolute_gain_1d
           absolute_gain_1m
           absolute_gain_1w
           absolute_gain_1y
@@ -20,6 +21,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           absolute_gain_5y
           absolute_gain_total
           actual_value
+          relative_gain_1d
           relative_gain_1m
           relative_gain_1w
           relative_gain_1y
@@ -32,6 +34,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           __typename
           portfolio_holding_gains {
             __typename
+            absolute_gain_1d
             absolute_gain_1m
             absolute_gain_1w
             absolute_gain_1y
@@ -39,6 +42,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             absolute_gain_5y
             absolute_gain_total
             actual_value
+            relative_gain_1d
             relative_gain_1m
             relative_gain_1w
             relative_gain_1y
@@ -57,12 +61,14 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             __typename
             portfolio_transaction_gains {
               __typename
+              absolute_gain_1d
               absolute_gain_1m
               absolute_gain_1w
               absolute_gain_1y
               absolute_gain_3m
               absolute_gain_5y
               absolute_gain_total
+              relative_gain_1d
               relative_gain_1m
               relative_gain_1w
               relative_gain_1y
@@ -178,6 +184,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
             GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
             GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
             GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
@@ -185,6 +192,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
             GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
             GraphQLField("actual_value", type: .scalar(float8.self)),
+            GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
             GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
             GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
             GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
@@ -201,8 +209,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, profileId: Int? = nil) {
-          self.init(unsafeResultMap: ["__typename": "portfolio_gains", "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "profile_id": profileId])
+        public init(absoluteGain_1d: float8? = nil, absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1d: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, profileId: Int? = nil) {
+          self.init(unsafeResultMap: ["__typename": "portfolio_gains", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "profile_id": profileId])
         }
 
         public var __typename: String {
@@ -211,6 +219,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var absoluteGain_1d: float8? {
+          get {
+            return resultMap["absolute_gain_1d"] as? float8
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
           }
         }
 
@@ -274,6 +291,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "actual_value")
+          }
+        }
+
+        public var relativeGain_1d: float8? {
+          get {
+            return resultMap["relative_gain_1d"] as? float8
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "relative_gain_1d")
           }
         }
 
@@ -417,6 +443,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
               GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
               GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
               GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
@@ -424,6 +451,7 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
               GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
               GraphQLField("actual_value", type: .scalar(float8.self)),
+              GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
               GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
               GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
               GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
@@ -442,8 +470,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, valueToPortfolioValue: float8? = nil, holdingId: Int? = nil, holding: Holding? = nil) {
-            self.init(unsafeResultMap: ["__typename": "portfolio_holding_gains", "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "value_to_portfolio_value": valueToPortfolioValue, "holding_id": holdingId, "holding": holding.flatMap { (value: Holding) -> ResultMap in value.resultMap }])
+          public init(absoluteGain_1d: float8? = nil, absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, actualValue: float8? = nil, relativeGain_1d: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, valueToPortfolioValue: float8? = nil, holdingId: Int? = nil, holding: Holding? = nil) {
+            self.init(unsafeResultMap: ["__typename": "portfolio_holding_gains", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "value_to_portfolio_value": valueToPortfolioValue, "holding_id": holdingId, "holding": holding.flatMap { (value: Holding) -> ResultMap in value.resultMap }])
           }
 
           public var __typename: String {
@@ -452,6 +480,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var absoluteGain_1d: float8? {
+            get {
+              return resultMap["absolute_gain_1d"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
             }
           }
 
@@ -515,6 +552,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "actual_value")
+            }
+          }
+
+          public var relativeGain_1d: float8? {
+            get {
+              return resultMap["relative_gain_1d"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "relative_gain_1d")
             }
           }
 
@@ -715,12 +761,14 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_3m", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
                 GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
+                GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
                 GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
                 GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
                 GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
@@ -737,8 +785,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, transactionId: Int? = nil) {
-              self.init(unsafeResultMap: ["__typename": "portfolio_transaction_gains", "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "transaction_id": transactionId])
+            public init(absoluteGain_1d: float8? = nil, absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, relativeGain_1d: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, transactionId: Int? = nil) {
+              self.init(unsafeResultMap: ["__typename": "portfolio_transaction_gains", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "transaction_id": transactionId])
             }
 
             public var __typename: String {
@@ -747,6 +795,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            public var absoluteGain_1d: float8? {
+              get {
+                return resultMap["absolute_gain_1d"] as? float8
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
               }
             }
 
@@ -801,6 +858,15 @@ public final class GetProfileGainsQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "absolute_gain_total")
+              }
+            }
+
+            public var relativeGain_1d: float8? {
+              get {
+                return resultMap["relative_gain_1d"] as? float8
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "relative_gain_1d")
               }
             }
 

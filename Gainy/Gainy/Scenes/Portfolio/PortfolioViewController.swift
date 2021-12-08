@@ -10,6 +10,8 @@ import SwiftUI
 
 final class PortfolioViewController: BaseViewController {
     
+    var mainCoordinator: MainCoordinator?
+    
     //MARK: - Child VCs
     lazy var noPlaidVC = NoPlaidViewController.instantiate(.portfolio)
     lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
@@ -36,6 +38,7 @@ final class PortfolioViewController: BaseViewController {
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
+                    holdingsVC.coordinator = mainCoordinator
                     addViewController(holdingsVC, view: containerView)
                 }
                 holdingsVC.loadData()
