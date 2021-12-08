@@ -134,7 +134,7 @@ final class HoldingsViewModel {
                         let selected = settings?.securityTypes.contains(where: { item in
                             item.selected
                         }) ?? true
-                        return InfoDataSource.init(type: .SecurityType, id:item.hashValue, title: item, iconURL: "", selected: selected)
+                        return InfoDataSource.init(type: .SecurityType, id:item.hashValue, title: item, iconURL: InfoDataSourceType.securityTypeToIconURL[item] ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
                     
                     let interests = interestsRaw.map { item -> InfoDataSource in
