@@ -1,11 +1,9 @@
-iOS v0.3.1 #82 available
+iOS v0.3.1 #83 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• Portfolio: cool correct relative and actual prices
-• Portfolio: can tap on Holding to view details
-• Stock Detail: can comapre with only 1 initial card by pressing Compare on Chart
+• Charts: new grow formulas, new caching, placeholder for empty data
 
 :hammer_and_wrench: Improvements
 • Hotfixes

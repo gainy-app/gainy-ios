@@ -47,24 +47,24 @@ struct PortfolioScatterChartView: View {
     private var isLeftDurationVis: Bool = true
     
     var body: some View {
-            VStack {
-                headerView
-                chartView
-                    .padding(.leading, 8)
-                    .padding(.trailing, 8)
-                    .frame(height: 220)
-                Spacer()
-                sppView
-                    .offset(y: -16)
-                GeometryReader(content: { geometry in
-                    bottomMenu(geometry)
-                })
-                
-            }
-            .background(Color.white)
-            .onAppear(perform: {
-                hapticTouch.prepare()
+        VStack {
+            headerView
+            chartView
+                .padding(.leading, 8)
+                .padding(.trailing, 8)
+                .frame(height: 220)
+            Spacer()
+            sppView
+                .offset(y: -16)
+            GeometryReader(content: { geometry in
+                bottomMenu(geometry)
             })
+            
+        }
+        .background(Color.white)
+        .onAppear(perform: {
+            hapticTouch.prepare()
+        })
     }
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()
@@ -83,7 +83,7 @@ struct PortfolioScatterChartView: View {
                     Text(statsDayName)
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
-                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                        .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
                     Image(viewModel.rangeGrow >= 0 ? "small_up" : "small_down")
                         .resizable()
                         .frame(width: 8.0, height: 8.0)
@@ -143,38 +143,52 @@ struct PortfolioScatterChartView: View {
     
     private var chartView: some View {
         GeometryReader{ geometry in
-        ZStack {
-            if viewModel.chartData.points.count > 1 {
-                LineView(data: viewModel.chartData,
-                         title: "Full chart",
-                         style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                         viewModel: lineViewModel)
+            ZStack {
+                if viewModel.chartData.onlyPoints().uniqued().count > 2 {
+                    LineView(data: viewModel.chartData,
+                             title: "Full chart",
+                             style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                             viewModel: lineViewModel)
+                }  else {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("Not enought data")
+                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                .font(UIFont.proDisplaySemibold(12).uiFont)
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+                if viewModel.sypChartData.points.count > 2 {
+                    LineView(data: viewModel.sypChartData,
+                             title: Constants.Chart.sypChartName,
+                             style: Styles.lineChartStyleMedian,
+                             viewModel: lineViewModel)
+                        .opacity(isSPPVisible ? 1.0 : 0.0)
+                }
+                
             }
-            LineView(data: viewModel.sypChartData,
-                     title: Constants.Chart.sypChartName,
-                     style: Styles.lineChartStyleMedian,
-                     viewModel: lineViewModel)
-                .opacity(isSPPVisible ? 1.0 : 0.0)
-            
-        }
-        .padding(.all, 0)
-        .animation(.linear)
-        .background(Rectangle().fill().foregroundColor(.white))
-        .gesture(DragGesture(minimumDistance: 0)
-        .onChanged({ value in
-            lineViewModel.dragLocation = value.location
-            lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
-            lineViewModel.opacity = 1
-            lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
-            lineViewModel.hideHorizontalLines = true
-        })
-            .onEnded({ value in
+            .padding(.all, 0)
+            .animation(.linear)
+            .background(Rectangle().fill().foregroundColor(.white))
+            .gesture(DragGesture(minimumDistance: 0)
+                        .onChanged({ value in
+                lineViewModel.dragLocation = value.location
+                lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+                lineViewModel.opacity = 1
+                lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+                lineViewModel.hideHorizontalLines = true
+            })
+                        .onEnded({ value in
                 lineViewModel.opacity = 0
                 lineViewModel.hideHorizontalLines = false
                 lineViewModel.indicatorLocation = .zero
             }
+                                )
             )
-        )
         }
     }
     
@@ -199,8 +213,8 @@ struct PortfolioScatterChartView: View {
                 hapticTouch.impactOccurred()
             }, label: {
                 HStack(spacing: 4.0) {
-                        Image(isSPPVisible ? "toggle_on" : "toggle_off")
-                            .renderingMode(.original)
+                    Image(isSPPVisible ? "toggle_on" : "toggle_off")
+                        .renderingMode(.original)
                     Text("S&P500")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(12).uiFont)
@@ -227,7 +241,7 @@ struct PortfolioScatterChartView: View {
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
         HStack(alignment: .center, spacing: 0) {
-            ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in                
+            ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
                     selectedTag = tag
                 }, label: {
@@ -245,9 +259,9 @@ struct PortfolioScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }.padding(.leading, 16)
-        .padding(.trailing, 16)
-        .padding(.top, 0)
-        .frame(width: UIScreen.main.bounds.width)
+            .padding(.trailing, 16)
+            .padding(.top, 0)
+            .frame(width: UIScreen.main.bounds.width)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {

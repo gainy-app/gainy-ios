@@ -11,6 +11,8 @@ private enum CollectionDetailsSection: Int, CaseIterable {
 
 final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {    
     // MARK: Internal
+    private let barrierQueue = DispatchQueue(label: "CollectionsFetcherQueue", attributes: .concurrent)
+
     
     // MARK: Properties
     
@@ -279,13 +281,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             .sink {[unowned self] result in
             switch result {
             case .fetched(let model):
-                self.addNewCollections([model])
+                barrierQueue.async(flags: .barrier) {
+                    self.addNewCollections([model])
+                }
                 break
             case .deleted(let model):
-                self.deleteCollections([model])
+                barrierQueue.async(flags: .barrier) {
+                    self.deleteCollections([model])
+                }
                 break
             case .updated(model: let model):
-                self.updateCollections([model])
+                barrierQueue.async(flags: .barrier) {
+                    self.updateCollections([model])
+                }
                 break
             case .fetchedFailed:
                 break
