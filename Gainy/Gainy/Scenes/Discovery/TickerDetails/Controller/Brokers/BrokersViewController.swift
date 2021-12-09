@@ -82,10 +82,7 @@ extension BrokersViewController: UICollectionViewDelegate {
         let broker = self.brokers[indexPath.row]
         UserProfileManager.shared.selectedBrokerToTrade = broker
         if let url = broker.brokerURLWithSymbol(symbol: symbol) {
-            if UIApplication.shared.canOpenURL(url) {
-                UIApplication.shared.open(url, completionHandler: { (success) in
-                })
-            }
+            WebPresenter.openLink(vc: self, url: url)
         }
         self.dismiss(animated: true)
         self.delegate?.didDismissBrokersViewController()
@@ -110,7 +107,7 @@ extension BrokersViewController: BrokerFooterViewDelegate {
             present(mailComposer, animated: true)
             
         } else if let emailUrl = URL.init(string: "support@gainy.app") {
-            UIApplication.shared.open(emailUrl)
+            WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
 }

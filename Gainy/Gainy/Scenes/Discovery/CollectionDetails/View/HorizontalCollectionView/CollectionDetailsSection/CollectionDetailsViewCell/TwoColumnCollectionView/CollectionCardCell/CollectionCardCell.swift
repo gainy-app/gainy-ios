@@ -10,6 +10,12 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         
         self.isSkeletonable = true
         contentView.addSubview(companyNameLabel)
+        
+        companyNameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 18)
+        companyNameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
+        companyNameLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0 * 2 - 30)
+        companyNameLabel.autoSetDimension(.height, toSize: 40, relation: NSLayoutConstraint.Relation.lessThanOrEqual)
+        
         contentView.addSubview(tickerSymbolLabel)
         contentView.addSubview(todayLabel)
         contentView.addSubview(tickerPercentChangeLabel)
@@ -358,30 +364,30 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         let hMargin: CGFloat = 16
         let topMargin: CGFloat = 18
         
-        companyNameLabel.frame = CGRect(
-            x: hMargin,
-            y: topMargin,
-            width: bounds.width - hMargin * 2.0 - 30.0,
-            height: 20 * 2.0
-        )
+//        companyNameLabel.frame = CGRect(
+//            x: hMargin,
+//            y: topMargin,
+//            width: bounds.width - hMargin * 2.0 - 30.0,
+//            height: 20
+//        )
         
         tickerSymbolLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + companyNameLabel.bounds.height,
+            y: topMargin + 40.0,
             width: 60,
             height: 20
         )
         
         todayLabel.frame = CGRect(
             x: hMargin,
-            y: topMargin + companyNameLabel.bounds.height + tickerSymbolLabel.bounds.height + 4,
+            y: topMargin + 40 + tickerSymbolLabel.bounds.height + 4,
             width: 26,
             height: 12
         )
         
         tickerPercentChangeLabel.frame = CGRect(
             x: hMargin + todayLabel.bounds.width,
-            y: topMargin + companyNameLabel.bounds.height + tickerSymbolLabel.bounds.height + 4,
+            y: topMargin + 40.0 + tickerSymbolLabel.bounds.height + 4,
             width: 55,
             height: 12
         )

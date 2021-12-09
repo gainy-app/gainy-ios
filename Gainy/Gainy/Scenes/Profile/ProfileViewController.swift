@@ -186,7 +186,7 @@ final class ProfileViewController: BaseViewController {
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
         } else if let url = URL(string: "https://www.gainy.app/privacy-policy") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -204,7 +204,7 @@ final class ProfileViewController: BaseViewController {
         
         GainyAnalytics.logEvent("profile_request_feature_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         if let url = URL.init(string: "https://gainy.canny.io") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -219,7 +219,7 @@ final class ProfileViewController: BaseViewController {
             present(mailComposer, animated: true)
             
         } else if let emailUrl = URL.init(string: "support@gainy.app") {
-            UIApplication.shared.open(emailUrl)
+            WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
     

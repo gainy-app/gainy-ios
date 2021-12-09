@@ -3,8 +3,8 @@ import SkeletonView
 
 // TODO: move into a separate file
 protocol CardDetailsViewModelProtocol {
-//    var initialCollectionIndex: Int { get set }
-//    var collectionDetails: [CollectionDetailViewCellModel] { get set }
+    //    var initialCollectionIndex: Int { get set }
+    //    var collectionDetails: [CollectionDetailViewCellModel] { get set }
 }
 
 
@@ -103,11 +103,8 @@ final class TickerViewController: BaseViewController {
         }
         if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
             if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, completionHandler: { (success) in
-                        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
-                    })
-                }
+                WebPresenter.openLink(vc: self, url: url)
+                GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
             }
             return
         }
@@ -214,7 +211,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
                 viewModel.dataSource.delegate = self
                 
                 TickerDetailsDataSource.oldHostingTag = TickerDetailsDataSource.hostingTag
-                TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)                
+                TickerDetailsDataSource.hostingTag = Int((arc4random() % 50) + 1)
                 self.loadTicketInfo()
             }
             

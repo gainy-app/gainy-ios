@@ -520,6 +520,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         viewModel?.yourCollections = UserProfileManager.shared
             .yourCollections
             .map { CollectionViewModelMapper.map($0) }
+        if let watchlist = CollectionsManager.shared.watchlistCollection {
+            let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
+            viewModel?.yourCollections.insert(watchDTO, at: 0)
+        }
         viewModel?.recommendedCollections = UserProfileManager.shared
             .recommendedCollections
             .map { CollectionViewModelMapper.map($0) }
@@ -552,10 +556,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
             GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            var index = indexPath.row
-            if CollectionsManager.shared.watchlistCollection != nil {
-                index = index + 1
-            }
+            let index = indexPath.row
             self.goToCollectionDetails(at: index)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {

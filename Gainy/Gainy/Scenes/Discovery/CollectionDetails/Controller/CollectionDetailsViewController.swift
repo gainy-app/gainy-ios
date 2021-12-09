@@ -271,6 +271,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController?.onCollectionDelete = {[weak self] collectionId in
             self?.deleteItem(collectionId)
         }
+        searchController?.onNewsClicked = {[weak self] newsUrl in
+            if let self = self {
+                WebPresenter.openLink(vc: self, url: newsUrl)
+            }
+        }
         
         searchController?.coordinator = coordinator
         handleLoginEvent()

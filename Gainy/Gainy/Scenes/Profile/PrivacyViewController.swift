@@ -40,14 +40,14 @@ final class PrivacyViewController: BaseViewController {
     @IBAction func onPrivacyPolicyTap(_ sender: Any) {
         
         if let url = URL(string: Constants.Links.privacy) {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
     @IBAction func onTermsOfServiceTap(_ sender: Any) {
         
         if let url = URL(string: Constants.Links.tos) {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
 }

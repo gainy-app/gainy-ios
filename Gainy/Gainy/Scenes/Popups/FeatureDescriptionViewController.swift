@@ -43,10 +43,9 @@ final class FeatureDescriptionViewController: BaseViewController {
             self.descriptionTextView.addLinks([
                 linkString: link
             ])
-            self.descriptionTextView.onLinkTap = { url in
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, completionHandler: { (success) in
-                    })
+            self.descriptionTextView.onLinkTap = {[weak self] url in
+                if let self = self {
+                    WebPresenter.openLink(vc: self, url: url)
                 }
                 return true
             }

@@ -71,11 +71,12 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         }
         if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
             if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, completionHandler: { (success) in
-                        GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
-                    })
+                
+                if let vc = self.window?.rootViewController {
+                    WebPresenter.openLink(vc: vc, url: url)
                 }
+                GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
+                
             }
             return
         }
