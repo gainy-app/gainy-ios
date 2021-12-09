@@ -17,6 +17,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initializeAppsFlyer()
         initFirebase()
         initDataDog()
+        initBugfender()
         TickerLiveStorage.shared.clearAllLiveData()
         return true
     }
@@ -74,11 +75,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var config = Configuration()
     private func initBugfender() {
-        if config.environment == .staging {
+        //if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
-        }
+        //}
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

@@ -41,6 +41,7 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        dprint("\(graphQLResult)")
                         guard let holdingsCount = graphQLResult.data?.getPortfolioHoldings else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             completion?()
@@ -60,8 +61,9 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetPlaidTransactionsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        dprint("\(graphQLResult)")
                         guard let holdingsCount = graphQLResult.data?.getPortfolioTransactions else {
-                            NotificationManager.shared.showError("Sorry, you have no holdings")
+                            NotificationManager.shared.showError("Sorry, you have no transactions")
                             completion?()
                             return
                         }
@@ -79,8 +81,9 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetProfileGainsQuery.init(profileID: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
+                        dprint("\(graphQLResult)")
                         guard let profile = graphQLResult.data?.appProfiles.first else {
-                            NotificationManager.shared.showError("Sorry, you have no holdings")
+                            NotificationManager.shared.showError("Sorry, you have no Profile Gains")
                             completion?()
                             return
                         }
