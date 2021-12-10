@@ -216,7 +216,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             }
             
         }
-        NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to load \(stock.name ?? "") stock?", cancelTitle: "No", actions: [yesAction])
+        NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to load \(stock.name ?? "") stock?", cancelTitle: "No", actions: [yesAction])
     }
     
     func loadingState(started: Bool) {

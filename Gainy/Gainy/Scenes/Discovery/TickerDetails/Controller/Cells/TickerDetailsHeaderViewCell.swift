@@ -15,6 +15,11 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     @IBOutlet private weak var symbolLbl: UILabel!
     @IBOutlet private weak var addToWatchlistToggle: UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isSkeletonable = false
+    }
+    
     override func updateFromTickerData() {
         tickerNameLbl.text = tickerInfo?.name
         symbolLbl.text = tickerInfo?.symbol

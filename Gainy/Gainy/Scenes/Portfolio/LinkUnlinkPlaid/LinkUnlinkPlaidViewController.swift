@@ -178,7 +178,7 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
             GainyAnalytics.logEvent("plaid_account_unlinked", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LinkUnlinkPlaidViewController"])
             self.unlinkAccount(accountID)
         }
-        NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to unlink this Account?", cancelTitle: "No", actions: [yesAction])
+        NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to unlink this Account?", cancelTitle: "No", actions: [yesAction])
     }
     
     private func unlinkAccount(_ accountID: Int) {

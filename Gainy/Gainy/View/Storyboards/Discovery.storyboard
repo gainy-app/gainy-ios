@@ -66,7 +66,7 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbE-jA-16s">
@@ -75,7 +75,7 @@
                                                     <color key="textColor" red="0.22745098039215686" green="0.26666666666666666" blue="0.28235294117647058" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-Yr-eF3">
@@ -87,7 +87,7 @@
                                                     <state key="normal" image="ticket_plus"/>
                                                     <state key="selected" image="collection_added"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="addToWatchlistToggleAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="UT1-Db-aeY"/>
@@ -101,7 +101,7 @@
                                                     </constraints>
                                                     <state key="normal" image="ticket_share"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="shareAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="yo6-oH-FBc"/>
@@ -115,7 +115,7 @@
                                                     </constraints>
                                                     <state key="normal" image="close_modal"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="closeViewAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="BXL-y3-05v"/>
@@ -136,7 +136,13 @@
                                                 <constraint firstAttribute="bottom" secondItem="fVb-yA-YhU" secondAttribute="bottom" constant="32" id="rrN-Cx-hD8"/>
                                                 <constraint firstItem="qKu-Yr-eF3" firstAttribute="top" secondItem="xdc-yJ-fA4" secondAttribute="top" constant="16" id="vKI-FX-1CT"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="addToWatchlistToggle" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
                                             <outlet property="symbolLbl" destination="IbE-jA-16s" id="As9-ts-Iz3"/>
@@ -182,7 +188,7 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym5-lw-anw">
@@ -192,7 +198,7 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCS-y1-hIY">
@@ -254,7 +260,7 @@
                                                     <color key="textColor" name="mainText"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7h4-Fy-ASY">

@@ -76,7 +76,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
     revenueEstimateAvg0y, // revenue_estimate_avg_0y
     revenueActual, // revenue_actual
     
-    // FINANCICALS
+    // FINANCIALS
     revenueTtm, // revenue_ttm
     revenuePerShareTtm, // revenue_per_share_ttm
     roi, // roi

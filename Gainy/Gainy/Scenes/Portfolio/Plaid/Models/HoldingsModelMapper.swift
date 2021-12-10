@@ -90,7 +90,7 @@ struct HoldingsModelMapper {
                 .y5 : (portfolioHoldingsGains?.relativeGain_5y ?? 0.0) * 100.0,
                 .all : (portfolioHoldingsGains?.relativeGainTotal ?? 0.0) * 100.0
               ]
-            
+            print("BACK: \(portfolioHoldingsGains?.valueToPortfolioValue ?? 0.0)")
             let holdModel = HoldingViewModel.init(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                                   name: security?.name ?? "",
                                                   balance: Float(rawHolding.holding.quantity) * (TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0),

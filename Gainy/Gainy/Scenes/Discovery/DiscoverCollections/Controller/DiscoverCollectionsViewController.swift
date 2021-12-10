@@ -73,7 +73,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                         self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
                     }
-                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
+                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
                 }
                 
                 cell.onCellLifted = { [weak self] in
