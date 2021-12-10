@@ -376,6 +376,10 @@
 		85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */; };
 		85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2982756C80000C0E5C5 /* UnlinkPlaidAccount.graphql */; };
 		85E4A29B2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A29A2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift */; };
+		85E4A2C92762101A00C0E5C5 /* SearchTickersAlgolia.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2C72762101900C0E5C5 /* SearchTickersAlgolia.graphql */; };
+		85E4A2CA2762101A00C0E5C5 /* SearchCollectionDetailsAlgolia.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85E4A2C82762101900C0E5C5 /* SearchCollectionDetailsAlgolia.graphql */; };
+		85E4A2CD2762115400C0E5C5 /* SearchTickersAlgolia.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2CB2762115300C0E5C5 /* SearchTickersAlgolia.graphql.swift */; };
+		85E4A2CE2762115400C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A2CC2762115300C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift */; };
 		85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD52701B77100FE6926 /* GainyKeychain.swift */; };
 		85ED4DD92701B82B00FE6926 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DD82701B82B00FE6926 /* Keychain.swift */; };
 		85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */; };
@@ -839,6 +843,10 @@
 		85E4A2952756C4C100C0E5C5 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		85E4A2982756C80000C0E5C5 /* UnlinkPlaidAccount.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnlinkPlaidAccount.graphql; sourceTree = "<group>"; };
 		85E4A29A2756C92600C0E5C5 /* UnlinkPlaidAccount.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlinkPlaidAccount.graphql.swift; sourceTree = "<group>"; };
+		85E4A2C72762101900C0E5C5 /* SearchTickersAlgolia.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SearchTickersAlgolia.graphql; sourceTree = "<group>"; };
+		85E4A2C82762101900C0E5C5 /* SearchCollectionDetailsAlgolia.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SearchCollectionDetailsAlgolia.graphql; sourceTree = "<group>"; };
+		85E4A2CB2762115300C0E5C5 /* SearchTickersAlgolia.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTickersAlgolia.graphql.swift; sourceTree = "<group>"; };
+		85E4A2CC2762115300C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionDetailsAlgolia.graphql.swift; sourceTree = "<group>"; };
 		85ED4DD52701B77100FE6926 /* GainyKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyKeychain.swift; sourceTree = "<group>"; };
 		85ED4DD82701B82B00FE6926 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		85ED4DDA2701B95F00FE6926 /* Notification+Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Name.swift"; sourceTree = "<group>"; };
@@ -974,7 +982,9 @@
 				33467CE126C6575A00811F74 /* News.graphql.swift */,
 				33467CE026C6575A00811F74 /* Types.graphql.swift */,
 				3302E0B526DCBF20008DBC76 /* SearchCollectionDetails.graphql.swift */,
+				85E4A2CC2762115300C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift */,
 				3302E0B426DCBF20008DBC76 /* SearchTickers.graphql.swift */,
+				85E4A2CB2762115300C0E5C5 /* SearchTickersAlgolia.graphql.swift */,
 				339A2EB426FE08390076BF52 /* SearchTickersNoSpace.graphql.swift */,
 				339A2EB326FE08390076BF52 /* SearchTickersWithSpace.graphql.swift */,
 				33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */,
@@ -1727,7 +1737,9 @@
 				859B2EC6270605430084CCDC /* Profile */,
 				33B9886C26CA6E79008B8AC9 /* News.graphql */,
 				3302E0B026DCBE90008DBC76 /* SearchCollectionDetails.graphql */,
+				85E4A2C82762101900C0E5C5 /* SearchCollectionDetailsAlgolia.graphql */,
 				3302E0B226DCBEC0008DBC76 /* SearchTickers.graphql */,
+				85E4A2C72762101900C0E5C5 /* SearchTickersAlgolia.graphql */,
 				339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */,
 				339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */,
 				33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */,
@@ -2340,6 +2352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
+				85E4A2C92762101A00C0E5C5 /* SearchTickersAlgolia.graphql in Resources */,
 				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */,
@@ -2374,6 +2387,7 @@
 				333CC16226DCB34700690245 /* StockViewCell.xib in Resources */,
 				33D3D4F126CBA2B6005A859B /* Discovery.storyboard in Resources */,
 				3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */,
+				85E4A2CA2762101A00C0E5C5 /* SearchCollectionDetailsAlgolia.graphql in Resources */,
 				859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
@@ -2638,6 +2652,7 @@
 				33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */,
 				85ED4DD62701B77200FE6926 /* GainyKeychain.swift in Sources */,
 				9068DDEA274B7350007C588A /* GetProfileGains.graphql.swift in Sources */,
+				85E4A2CE2762115400C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
@@ -2714,6 +2729,7 @@
 				3AFE1A71266E4A7A0091E799 /* UIDevice+HasTopNotch.swift in Sources */,
 				3A4A98FB2688D495008C1968 /* CollectionDetails.swift in Sources */,
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
+				85E4A2CD2762115400C0E5C5 /* SearchTickersAlgolia.graphql.swift in Sources */,
 				3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */,
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,
 				85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */,

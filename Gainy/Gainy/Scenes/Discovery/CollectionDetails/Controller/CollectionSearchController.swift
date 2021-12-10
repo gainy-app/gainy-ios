@@ -278,71 +278,32 @@ final class CollectionSearchController: NSObject {
         }
         let dispatchGroup = DispatchGroup()
         
-        if text.count <= 3 {
-            dispatchGroup.enter()
-            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersQuery.init(text: "%\(text)%") ){[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    self?.stocks = mappedTickers
-                    
-                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                    }
-                    dispatchGroup.leave()
-                    
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
-                    break
-                }
-            })
-        } else if text.contains(" ") {
-            dispatchGroup.enter()
-            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersWithSpaceQuery.init(text: "%\(text)%") ){[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    
-                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    self?.stocks = mappedTickers
-                    
-                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                    }
-                    dispatchGroup.leave()
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
-                    break
-                }
-            })
-        } else {
-            dispatchGroup.enter()
-            networkCalls.append(Network.shared.apollo.fetch(query: SearchTickersNoSpaceQuery.init(text: "%\(text)%") ){[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    
-                    let mappedTickers = (graphQLResult.data?.tickers ?? []).compactMap({$0.fragments.remoteTickerDetails})
-                    self?.stocks = mappedTickers
-                    
-                    for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                    }
-                    dispatchGroup.leave()
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
-                    break
-                }
-            })
-        }
-        
-        //Searching for news and collection only in this case
+        //Searching for tickers
         dispatchGroup.enter()
-        networkCalls.append(Network.shared.apollo.fetch(query: DiscoverNewsQuery.init(symbol: text)){[weak self] result in
+        let tickersQuery = SearchTickersAlgoliaQuery.init(text: text)
+        networkCalls.append(Network.shared.apollo.fetch(query: tickersQuery){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                let mappedTickers = (graphQLResult.data?.searchTickers ?? []).compactMap({$0?.ticker.fragments.remoteTickerDetails})
+                self?.stocks = mappedTickers
+                
+                for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                dispatchGroup.leave()
+                
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                dispatchGroup.leave()
+                break
+            }
+        })
+        
+        //Searching for news
+        dispatchGroup.enter()
+        let newsQuery = DiscoverNewsQuery.init(symbol: text)
+        networkCalls.append(Network.shared.apollo.fetch(query: newsQuery){[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 self?.news = (graphQLResult.data?.fetchNewsData ?? []).uniqued()
@@ -355,29 +316,27 @@ final class CollectionSearchController: NSObject {
             }
         })
         
-        
-        
-        if text.count >= 3 {
-            dispatchGroup.enter()
-            networkCalls.append(Network.shared.apollo.fetch(query: SearchCollectionDetailsQuery.init(text: "%\(text)%") ){[weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    let mappedCollections = (graphQLResult.data?.collections ?? []).compactMap({$0.fragments.remoteCollectionDetails})
-                    self?.collections = mappedCollections
-                    
-                    for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                    }
-                    
-                    dispatchGroup.leave()
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    dispatchGroup.leave()
-                    break
+        // Searching for collections
+        dispatchGroup.enter()
+        let collectionsQuery = SearchCollectionDetailsAlgoliaQuery.init(text: text)
+        networkCalls.append(Network.shared.apollo.fetch(query: collectionsQuery){[weak self] result in
+            switch result {
+            case .success(let graphQLResult):
+                let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection.fragments.remoteCollectionDetails})
+                self?.collections = mappedCollections
+                
+                for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
-            })
-        }
+                
+                dispatchGroup.leave()
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                dispatchGroup.leave()
+                break
+            }
+        })
         
         dispatchGroup.notify(queue: searchQueue) {
             dprint("SEARCH ENDED")
