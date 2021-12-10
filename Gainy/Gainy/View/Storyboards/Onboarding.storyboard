@@ -37,7 +37,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tgg-bz-WAB">
                                 <rect key="frame" x="36" y="120" width="342" height="647"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="e27-O5-jCU">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaR-Sy-EuZ">
                                         <rect key="frame" x="0.0" y="0.0" width="342" height="553"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="beta disclaimer" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7G-cN-LFS" userLabel="beta disclaimer">
@@ -69,16 +69,24 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                    </stackView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="rfM-Gi-b6D" firstAttribute="top" secondItem="j7G-cN-LFS" secondAttribute="bottom" constant="40" id="Lif-xS-e1p"/>
+                                            <constraint firstAttribute="trailing" secondItem="rfM-Gi-b6D" secondAttribute="trailing" id="MVa-Ro-3FQ"/>
+                                            <constraint firstItem="rfM-Gi-b6D" firstAttribute="leading" secondItem="FaR-Sy-EuZ" secondAttribute="leading" id="MWB-xn-kWC"/>
+                                            <constraint firstItem="j7G-cN-LFS" firstAttribute="top" secondItem="FaR-Sy-EuZ" secondAttribute="top" id="cEy-3D-B40"/>
+                                            <constraint firstAttribute="trailing" secondItem="j7G-cN-LFS" secondAttribute="trailing" id="dE2-ZD-lLd"/>
+                                            <constraint firstAttribute="bottom" secondItem="rfM-Gi-b6D" secondAttribute="bottom" id="gg4-Af-eqN"/>
+                                            <constraint firstItem="j7G-cN-LFS" firstAttribute="leading" secondItem="FaR-Sy-EuZ" secondAttribute="leading" id="oCO-Jh-s9b"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="A0b-nw-cPA" firstAttribute="leading" secondItem="e27-O5-jCU" secondAttribute="leading" id="CVy-a2-E1L"/>
-                                    <constraint firstItem="A0b-nw-cPA" firstAttribute="top" secondItem="e27-O5-jCU" secondAttribute="top" id="Rk3-Kk-32V"/>
-                                    <constraint firstItem="e27-O5-jCU" firstAttribute="trailing" secondItem="A0b-nw-cPA" secondAttribute="trailing" id="Tjz-sA-n2z"/>
-                                    <constraint firstItem="e27-O5-jCU" firstAttribute="top" secondItem="ItO-8u-Ojo" secondAttribute="top" id="WCd-EY-ovR"/>
-                                    <constraint firstItem="e27-O5-jCU" firstAttribute="bottom" secondItem="A0b-nw-cPA" secondAttribute="bottom" id="Zrq-sl-wl1"/>
-                                    <constraint firstItem="e27-O5-jCU" firstAttribute="width" secondItem="ItO-8u-Ojo" secondAttribute="width" id="cbz-CU-pUx"/>
-                                    <constraint firstItem="e27-O5-jCU" firstAttribute="bottom" secondItem="A0b-nw-cPA" secondAttribute="bottom" id="sDQ-vO-dfJ"/>
+                                    <constraint firstItem="FaR-Sy-EuZ" firstAttribute="trailing" secondItem="A0b-nw-cPA" secondAttribute="trailing" id="0CE-R8-Gtf"/>
+                                    <constraint firstItem="FaR-Sy-EuZ" firstAttribute="top" secondItem="A0b-nw-cPA" secondAttribute="top" id="4oE-gt-gEd"/>
+                                    <constraint firstItem="FaR-Sy-EuZ" firstAttribute="bottom" secondItem="A0b-nw-cPA" secondAttribute="bottom" id="6Nh-xK-7ps"/>
+                                    <constraint firstItem="FaR-Sy-EuZ" firstAttribute="width" secondItem="ItO-8u-Ojo" secondAttribute="width" id="Aew-D4-kwf"/>
+                                    <constraint firstItem="FaR-Sy-EuZ" firstAttribute="leading" secondItem="A0b-nw-cPA" secondAttribute="leading" id="mga-f6-yY1"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="A0b-nw-cPA"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="ItO-8u-Ojo"/>
@@ -198,7 +206,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4P-ck-xOZ">
-                                <rect key="frame" x="46.5" y="562.5" width="321" height="95.5"/>
+                                <rect key="frame" x="46.5" y="564.5" width="321" height="93.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="321" id="hDd-yX-cVg"/>
                                 </constraints>
@@ -739,7 +747,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with one of the following options" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZT-Ru-bqf">
-                                <rect key="frame" x="75.5" y="418" width="263" height="20"/>
+                                <rect key="frame" x="64" y="418" width="286" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="pby-Ha-Ftx"/>
                                 </constraints>
@@ -748,7 +756,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Almost done!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLy-eV-wih">
-                                <rect key="frame" x="110" y="356" width="194" height="32"/>
+                                <rect key="frame" x="112.5" y="356" width="189.5" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="sLe-4U-UTP"/>
                                 </constraints>
@@ -1277,25 +1285,25 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
     </scenes>
     <designables>
         <designable name="4Pz-No-tf3">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
         <designable name="Q4h-3q-Pkb">
-            <size key="intrinsicContentSize" width="130" height="20"/>
+            <size key="intrinsicContentSize" width="132" height="19"/>
         </designable>
         <designable name="UZm-4s-wQX">
-            <size key="intrinsicContentSize" width="81" height="32"/>
+            <size key="intrinsicContentSize" width="83" height="31"/>
         </designable>
         <designable name="Vqi-7P-fK5">
-            <size key="intrinsicContentSize" width="48" height="32"/>
+            <size key="intrinsicContentSize" width="50" height="31"/>
         </designable>
         <designable name="Xzu-k0-XRA">
             <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
         <designable name="hlB-m7-gpl">
-            <size key="intrinsicContentSize" width="141" height="20"/>
+            <size key="intrinsicContentSize" width="144" height="19"/>
         </designable>
         <designable name="k8J-Tc-Hjf">
-            <size key="intrinsicContentSize" width="51" height="32"/>
+            <size key="intrinsicContentSize" width="51" height="31"/>
         </designable>
         <designable name="wXf-gr-Gu1">
             <size key="intrinsicContentSize" width="59" height="32"/>

@@ -16,9 +16,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     var minHeightUpdated: ((CGFloat) -> Void)?
     private var lines: Int = 1
+    
     override func updateFromTickerData() {
-        aboutLbl.text = tickerInfo?.aboutShort
-        
+        aboutLbl.text = tickerInfo?.about
+        aboutLbl.numberOfLines = 3
         
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 12.0
@@ -78,21 +79,20 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         sender.isSelected.toggle()
         
         if sender.isSelected {
-            aboutLbl.text = tickerInfo?.about
+            aboutLbl.numberOfLines = 0
             sender.setTitle("show less", for: .normal)
         } else {
-            aboutLbl.text = tickerInfo?.aboutShort
+            aboutLbl.numberOfLines = 3
             sender.setTitle("show more", for: .normal)
         }
-        cellHeightChanged?(heightBasedOnString(aboutLbl.text ?? ""))
+        cellHeightChanged?(heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")))
         GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
     
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
-        if let height = aboutLbl.text?.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12)) {
-            return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
-        }
+        let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
+        return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
         return 0.0
     }
     

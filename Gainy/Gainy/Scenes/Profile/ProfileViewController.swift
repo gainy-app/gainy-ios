@@ -225,7 +225,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBAction func onLogOutTap(_ sender: Any) {
         
-        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to log out?", comment: ""), preferredStyle: .alert)
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure you want to log out?", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action) in
             
         }

@@ -100,7 +100,7 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         
         animationView.alpha = 0.0
         view.addSubview(animationView)
-        animationView.autoSetDimensions(to: .init(width: 64, height: 64))
+        animationView.autoSetDimensions(to: .init(width: 32, height: 32))
         animationView.autoCenterInSuperview()
         
     }

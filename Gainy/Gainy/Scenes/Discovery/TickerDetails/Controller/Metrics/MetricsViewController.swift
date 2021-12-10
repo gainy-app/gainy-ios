@@ -9,7 +9,7 @@ import UIKit
 import Apollo
 
 enum MetricsViewControllerSection: Int, CaseIterable, Hashable {
-    case selected = 0, trading, growth, general, valuation, momentum, dividend, earnings, financicals
+    case selected = 0, trading, growth, general, valuation, momentum, dividend, earnings, financials
 }
 
 protocol MetricsViewControllerDelegate: AnyObject {
@@ -38,13 +38,15 @@ class MetricsViewController: BaseViewController {
     private var momentumSection: [TickerInfo.MarketData] = []
     private var dividendSection: [TickerInfo.MarketData] = []
     private var earningsSection: [TickerInfo.MarketData] = []
-    private var financicalsSection: [TickerInfo.MarketData] = []
+    private var financialsSection: [TickerInfo.MarketData] = []
     
     private var allMetrics: [TickerInfo.MarketData] = []
     private var searchDataSourceMetrics: [TickerInfo.MarketData] = []
     
     private var bottomView: MetricsBottomView? = nil
     private var isSearching: Bool = false
+    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 10.0 * 2.0 - 32.0) / 3.0
+    private let itemHeight: CGFloat = 96.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -255,7 +257,7 @@ class MetricsViewController: BaseViewController {
                 self.earningsSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.revenueTtm.rawValue &&
                       metric.rawValue <= MarketDataField.netDebt.rawValue {
-                self.financicalsSection.append(marketData)
+                self.financialsSection.append(marketData)
             }
             
             var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
@@ -379,8 +381,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     marketData = self.dividendSection[indexPath.row]
                 case .earnings:
                     marketData = self.earningsSection[indexPath.row]
-                case .financicals:
-                    marketData = self.financicalsSection[indexPath.row]
+                case .financials:
+                    marketData = self.financialsSection[indexPath.row]
                 }
                 
                 let selected = self.selectedSection.contains { item in
@@ -429,8 +431,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return self.dividendSection.count
             case .earnings:
                 return self.earningsSection.count
-            case .financicals:
-                return self.financicalsSection.count
+            case .financials:
+                return self.financialsSection.count
             }
         }
         return 0
@@ -438,7 +440,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize.init(width: (UIScreen.main.bounds.width - 8.0 * 2.0 - 32.0) / 3.0, height: 96.0)
+        return CGSize.init(width: itemWidth, height: itemHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -459,7 +461,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         if let metricSection = MetricsViewControllerSection.init(rawValue: section) {
-            if metricSection != .selected && metricSection != .financicals {
+            if metricSection != .selected && metricSection != .financials {
                 return UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 32.0, right: 16.0)
             }
         }
@@ -490,7 +492,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return CGSize.init(width: collectionView.frame.size.width, height: 80.0)
             case .earnings:
                 return CGSize.init(width: collectionView.frame.size.width, height: 80.0)
-            case .financicals:
+            case .financials:
                 return CGSize.init(width: collectionView.frame.size.width, height: 32.0)
             }
         }
@@ -561,8 +563,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     headerView.titleLabel.text = "Earnings" // 80
                     headerView.descriptionLabel.text = "Metrics that show how successfully a company\nmade last earnings results. "
                     headerView.descriptionLabel.isHidden = false
-                case .financicals:
-                    headerView.titleLabel.text = "Financicals" // 32
+                case .financials:
+                    headerView.titleLabel.text = "Financials" // 32
                     headerView.descriptionLabel.text = ""
                     headerView.descriptionLabel.isHidden = true
                 }
@@ -646,8 +648,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 marketData = self.dividendSection[indexPath.row]
             case .earnings:
                 marketData = self.earningsSection[indexPath.row]
-            case .financicals:
-                marketData = self.financicalsSection[indexPath.row]
+            case .financials:
+                marketData = self.financialsSection[indexPath.row]
             default: break
             }
         }
@@ -695,8 +697,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                 marketData = self.dividendSection[indexPath.row]
             case .earnings:
                 marketData = self.earningsSection[indexPath.row]
-            case .financicals:
-                marketData = self.financicalsSection[indexPath.row]
+            case .financials:
+                marketData = self.financialsSection[indexPath.row]
             default: break
             }
         }
@@ -754,8 +756,8 @@ extension MetricsViewController: UICollectionViewDragDelegate {
             roundedRect: CGRect(
                 x: 0,
                 y: 0,
-                width: (UIScreen.main.bounds.width - 8.0 * 2.0 - 32.0) / 3.0,
-                height: 96
+                width: itemWidth,
+                height: itemHeight
             ),
             cornerRadius: 8
         )
@@ -835,8 +837,8 @@ extension MetricsViewController: UICollectionViewDropDelegate {
             roundedRect: CGRect(
                 x: 0,
                 y: 0,
-                width: (UIScreen.main.bounds.width - 8.0 * 2.0 - 32.0) / 3.0,
-                height: 96
+                width: itemWidth,
+                height: itemHeight
             ),
             cornerRadius: 8
         )
