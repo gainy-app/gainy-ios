@@ -28,7 +28,8 @@ struct HoldingViewModel {
     
     let securities: [HoldingSecurityViewModel]
     
-    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.Holding.HoldingDetail?
+    let holdingDetails: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Detail
+    let securityTypes: [String]
     
     let event: String?
     

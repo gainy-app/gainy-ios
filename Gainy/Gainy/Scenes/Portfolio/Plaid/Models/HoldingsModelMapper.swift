@@ -8,7 +8,7 @@
 import UIKit
 
 struct HoldingsModelMapper {
-    static func modelsFor(holdings: [GetPlaidHoldingsQuery.Data.GetPortfolioHolding], transactions: [GetPlaidTransactionsQuery.Data.GetPortfolioTransaction], profileHoldings: GetProfileGainsQuery.Data.AppProfile?) -> [HoldingViewModel] {
+    static func modelsFor(holdingGroups: [GetPlaidHoldingsQuery.Data.ProfileHoldingGroup], profileHoldings: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> [HoldingViewModel] {
         
         let profileID = UserProfileManager.shared.profileID ?? 0
         
@@ -118,7 +118,7 @@ struct HoldingsModelMapper {
         return holds
     }
     
-    static func topChartGains(chartsCache: [ScatterChartView.ChartPeriod : ChartData], sypChartsCache: [ScatterChartView.ChartPeriod : ChartData], portfolioGains: GetProfileGainsQuery.Data.AppProfile?) -> [ScatterChartView.ChartPeriod : PortfolioChartGainsViewModel] {
+    static func topChartGains(chartsCache: [ScatterChartView.ChartPeriod : ChartData], sypChartsCache: [ScatterChartView.ChartPeriod : ChartData], portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> [ScatterChartView.ChartPeriod : PortfolioChartGainsViewModel] {
         var models: [ScatterChartView.ChartPeriod : PortfolioChartGainsViewModel] = [:]
         
         for range in ScatterChartView.ChartPeriod.allCases {
@@ -127,51 +127,51 @@ struct HoldingsModelMapper {
             
             switch range {
             case .d1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1d ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.relativeGain_1d ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1d ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.relativeGain_1d ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
                 break
             case .w1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1w ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1w ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1w ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_1w ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .m1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1m ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1m ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1m ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_1m ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .m3:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_3m ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_3m ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_3m ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_3m ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .y1:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_1y ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_1y ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1y ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_1y ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .y5:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGain_5y ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGain_5y ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_5y ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_5y ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 models[range] = chartGainModel
             case .all:
-                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.portfolioGains?.relativeGainTotal ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.portfolioGains?.absoluteGainTotal ?? 0.0,
+                let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGainTotal ?? 0.0) * 100.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGainTotal ?? 0.0,
                                                                        chartData: chartsCache[range] ?? ChartData.init(points: [0.0]),
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
