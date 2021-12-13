@@ -74,16 +74,20 @@ extension Array where Element == HoldingViewModel {
         return self.sorted { lhs, rhs in
             switch sortingField {
             case .purchasedDate:
-                let lhd = lhs.holdingDetails
-                let rhd = rhs.holdingDetails
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
                 if ascending {
                     return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
                 } else {
                     return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
             case .totalReturn:
-                let lhd = lhs.holdingDetails
-                let rhd = rhs.holdingDetails
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
                 if ascending {
                     return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
                 } else {
@@ -91,8 +95,9 @@ extension Array where Element == HoldingViewModel {
                 }
                 
             case .todayReturn:
-                let lhd = lhs.holdingDetails
-                let rhd = rhs.holdingDetails
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
                 if ascending {
                     return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
                 } else {
@@ -120,8 +125,10 @@ extension Array where Element == HoldingViewModel {
                 }
                 
             case .marketCap:
-                let lhd = lhs.holdingDetails
-                let rhd = rhs.holdingDetails
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
                 if ascending {
                     return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
                 } else {
@@ -129,8 +136,10 @@ extension Array where Element == HoldingViewModel {
                 }
                 
             case .earningsDate:
-                let lhd = lhs.holdingDetails
-                let rhd = rhs.holdingDetails
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
                 if ascending {
                     return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
                 } else {
@@ -139,7 +148,8 @@ extension Array where Element == HoldingViewModel {
             }
         }.filter { model in
             
-            let notInAccount = settings.disabledAccounts.contains(where: {$0.id == model.accountId})
+            //TO-DO: Serhii plz check this
+            let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
             
             let inInterests = model.tickerInterests.contains { item in
                 return settings.interests.contains { dataSource in
