@@ -28,6 +28,10 @@ final class HoldingsViewModel {
         }
     }
     
+    var haveHoldings: Bool {
+        self.dataSource.originalHoldings.count > 0
+    }
+    
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
