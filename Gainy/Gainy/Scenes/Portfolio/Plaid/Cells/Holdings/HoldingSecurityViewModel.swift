@@ -25,7 +25,14 @@ struct HoldingSecurityViewModel {
     }
     
     init(transaction: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding.Transaction, holding: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding) {
-        self.name = transaction.name
+        var type = holding.holdingDetails?.securityType ?? ""
+        if type == "derivative" {
+            type = "Options"
+        }
+        if type == "equity" {
+            type = "Shares"
+        }
+        self.name = type
         self.percentInHolding = Float(transaction.quantity) / (holding.quantity ?? 0.0)
         self.totalPrice = Float(transaction.quantity) * (transaction.portfolioTransactionGains?.absoluteGain_1d ?? 0.0)
         self.quantity = Float(transaction.quantity)
