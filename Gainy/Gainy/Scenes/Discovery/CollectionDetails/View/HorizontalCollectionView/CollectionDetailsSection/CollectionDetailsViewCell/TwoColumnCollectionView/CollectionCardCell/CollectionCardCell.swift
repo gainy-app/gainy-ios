@@ -386,7 +386,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         )
         
         tickerPercentChangeLabel.frame = CGRect(
-            x: hMargin + todayLabel.bounds.width,
+            x: hMargin + todayLabel.bounds.width + 4,
             y: topMargin + 40.0 + tickerSymbolLabel.bounds.height + 4,
             width: 55,
             height: 12

@@ -60,7 +60,7 @@ enum CollectionDetailsDTOMapper {
                 tickerFinancials!
             ) : TickerFinancialMetrics.init(todaysPriceChange: 0.0, currentPrice: 0.0),
             tickerMetrics: tickerMetrics != nil ? CollectionDetailsDTOMapper.mapTickerMetrics(
-                tickerMetrics!, highlight?.highlight ?? "ERROR"
+                tickerMetrics!, highlight?.highlight ?? ""
             ) : TickerMetricsData(
                 matchScore: 0.0,
                 sharesOutstanding: 0.0,
@@ -71,14 +71,14 @@ enum CollectionDetailsDTOMapper {
                 shortRatio: 0.0,
                 beta: 0.0,
                 impliedVolatility: 0.0,
-                volatility52Weeks: "ERROR",
+                volatility52Weeks: "",
                 revenueGrowthYoy: 0.0,
                 revenueGrowthFwd: 0.0,
                 ebitdaGrowthYoy: 0.0,
                 epsGrowthYoy: 0.0,
                 epsGrowthFwd: 0.0,
-                address: "ERROR",
-                exchangeName: "ERROR",
+                address: "",
+                exchangeName: "",
                 marketCapitalization: 0.0,
                 enterpriseValueToSales: 0.0,
                 priceToEarningsTtm: 0.0,
@@ -92,7 +92,7 @@ enum CollectionDetailsDTOMapper {
                 dividendsPerShare: 0.0,
                 dividendPayoutRatio: 0.0,
                 yearsOfConsecutiveDividendGrowth: 0.0,
-                dividendFrequency: "ERROR",
+                dividendFrequency: "",
                 epsActual: 0.0,
                 epsEstimate: 0.0,
                 beatenQuarterlyEpsEstimationCountTtm: 0.0,
@@ -109,7 +109,7 @@ enum CollectionDetailsDTOMapper {
                 ebitda: 0.0,
                 profitMargin: 0.0,
                 netDebt: 0.0,
-                highlight: "ERROR"),
+                highlight: ""),
             rawTicker: dto
         )
     }

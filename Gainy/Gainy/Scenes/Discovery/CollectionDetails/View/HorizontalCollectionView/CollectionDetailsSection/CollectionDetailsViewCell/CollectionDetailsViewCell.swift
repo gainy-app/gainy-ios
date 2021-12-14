@@ -267,12 +267,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     
     func addRemoteStocks(_ stocks: [RemoteTickerDetails]) {
+        
         let cardsDTO = stocks.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
         cards.append(contentsOf: cardsDTO)
         if var snap = dataSource?.snapshot() {
             snap.appendItems(cardsDTO, toSection: .cards)
             dataSource?.apply(snap, animatingDifferences: true)
         }
+        collectionHorizontalView.stocksAmountLabel.text = "\(cards.count)"
     }
     
     func sortSections() {

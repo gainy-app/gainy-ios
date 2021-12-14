@@ -1,12 +1,12 @@
-iOS v0.3.1 #88 available
+iOS v0.3.1 #89 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• Metrics changed
+• -
 
 :hammer_and_wrench: Improvements
-• Portfolio
+• Small improvements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
