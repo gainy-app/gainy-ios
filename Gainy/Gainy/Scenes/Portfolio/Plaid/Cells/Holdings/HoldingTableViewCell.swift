@@ -56,6 +56,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var securitiesTableView: UITableView! {
         didSet {
             securitiesTableView.dataSource = self
+            securitiesTableView.isScrollEnabled = false
         }
     }
     @IBOutlet weak var secTableHeight: NSLayoutConstraint!
@@ -67,7 +68,16 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Setting properties
         nameLbl.text = model.name
         eventsView.isHidden = model.event == nil
-        eventLbl.text = model.event ?? ""
+        if let event = model.event {
+            var eventDate = Date()
+            if let zDate = event.toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+                eventDate = zDate
+            } else {
+                eventDate = event.toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+            }
+            eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
+        }
+        
         
         matchCircleView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
@@ -159,6 +169,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             transactionsTotalLbl.attributedText = totalList
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
+        securitiesTableView.reloadData()
     }
     
     private var holding: HoldingViewModel?

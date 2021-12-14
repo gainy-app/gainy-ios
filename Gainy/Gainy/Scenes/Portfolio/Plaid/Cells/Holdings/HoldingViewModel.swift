@@ -27,12 +27,13 @@ struct HoldingViewModel {
     let percentInProfile: Float
     
     let securities: [HoldingSecurityViewModel]
+    let securityTypes: [String]
     
-    let holdingDetails: GetPlaidHoldingsQuery.Data.GetPortfolioHolding.Holding.HoldingDetail?
+    let holdingDetails: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Detail?
     
     let event: String?
     
-    let accountId: Int
+    let accountIds: [Int]
     let tickerInterests: [Int]
     let tickerCategories: [Int]
     let rawTicker: RemoteTickerDetailsFull?

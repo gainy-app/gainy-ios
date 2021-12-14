@@ -55,7 +55,7 @@ final class HoldingsViewController: BaseViewController {
     }
     
     //MARK: - Inner
-    private let viewModel = HoldingsViewModel()
+    private(set) var viewModel = HoldingsViewModel()
     
     //MARK: - Life Cycle
     
