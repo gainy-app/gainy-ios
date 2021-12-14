@@ -1,12 +1,12 @@
-iOS v0.3.1 #87 available
-:globe_with_meridians: Server - TEST
+iOS v0.3.1 #88 available
+:globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• Search improved
+• Metrics changed
 
 :hammer_and_wrench: Improvements
-• Hotfixes
+• Portfolio
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
