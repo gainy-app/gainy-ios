@@ -117,7 +117,7 @@ extension Float {
         return "\(formattedValue)%"
     }
     
-    func formatUsingAbbrevation () -> String {
+    func formatUsingAbbrevation (_ usePrefix: Bool) -> String {
             let numFormatter = NumberFormatter()
 
             typealias Abbrevation = (threshold:Float, divisor:Float, suffix:String)
@@ -143,12 +143,18 @@ extension Float {
             numFormatter.negativeSuffix = abbreviation.suffix
             numFormatter.allowsFloats = true
             numFormatter.minimumIntegerDigits = 1
-            numFormatter.minimumFractionDigits = 0
-            numFormatter.maximumFractionDigits = 0
+            numFormatter.minimumFractionDigits = 1
+            numFormatter.maximumFractionDigits = 2
 
+        let prefix = usePrefix ? "$" : ""
         if self < 0 {
-            return "-$" + numFormatter.string(from: NSNumber(value:(value * -1.0)))!
+            return "-" + prefix + numFormatter.string(from: NSNumber(value:(value * -1.0)))!
         }
-        return "$" + numFormatter.string(from: NSNumber(value:value))!
+        return prefix + numFormatter.string(from: NSNumber(value:value))!
+    }
+    
+    func formatUsingAbbrevation () -> String {
+        
+        return formatUsingAbbrevation(true)
     }
 }

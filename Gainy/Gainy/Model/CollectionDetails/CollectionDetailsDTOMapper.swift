@@ -119,10 +119,12 @@ enum CollectionDetailsDTOMapper {
     ) -> TickerMetricsData {
         let marketCapitalization = dto.marketCapitalization != nil ? Float(dto.marketCapitalization!) : 0.0
         
-        var volatility52Weeks = "ERROR"
-        if let min = dto.relativeHistoricalVolatilityAdjustedMin_1y?.cleanOneDecimal,
-           let max = dto.relativeHistoricalVolatilityAdjustedMax_1y?.cleanOneDecimal {
-            volatility52Weeks = min + "-" + max + "%"
+        var volatility52Weeks = "null"
+        let min = dto.relativeHistoricalVolatilityAdjustedMin_1y ?? float8(0.0)
+        let max = dto.relativeHistoricalVolatilityAdjustedMin_1y ?? float8(0.0)
+        if dto.relativeHistoricalVolatilityAdjustedMin_1y != nil,
+           dto.relativeHistoricalVolatilityAdjustedMin_1y != nil {
+            volatility52Weeks = (min * 100.0).cleanOneDecimal + "-" + (max * 100.0).cleanOneDecimal + "%"
         }
         
         return TickerMetricsData(
@@ -141,8 +143,8 @@ enum CollectionDetailsDTOMapper {
             ebitdaGrowthYoy: dto.ebitdaGrowthYoy ?? 0.0,
             epsGrowthYoy: dto.epsGrowthYoy ?? 0.0,
             epsGrowthFwd: dto.epsGrowthFwd ?? 0.0,
-            address: dto.addressCity ?? "ERROR",
-            exchangeName: dto.exchangeName ?? "ERROR",
+            address: dto.addressCity ?? "null",
+            exchangeName: dto.exchangeName ?? "null",
             marketCapitalization: marketCapitalization,
             enterpriseValueToSales: dto.enterpriseValueToSales ?? 0.0,
             priceToEarningsTtm: dto.priceToEarningsTtm ?? 0.0,
@@ -156,7 +158,7 @@ enum CollectionDetailsDTOMapper {
             dividendsPerShare: dto.dividendsPerShare ?? 0.0,
             dividendPayoutRatio: dto.dividendPayoutRatio ?? 0.0,
             yearsOfConsecutiveDividendGrowth: Float(dto.yearsOfConsecutiveDividendGrowth ?? 0),
-            dividendFrequency: dto.dividendFrequency ?? "ERROR",
+            dividendFrequency: dto.dividendFrequency ?? "null",
             epsActual: dto.epsActual ?? 0.0,
             epsEstimate: dto.epsEstimate ?? 0.0,
             beatenQuarterlyEpsEstimationCountTtm: Float(dto.beatenQuarterlyEpsEstimationCountTtm ?? 0),
