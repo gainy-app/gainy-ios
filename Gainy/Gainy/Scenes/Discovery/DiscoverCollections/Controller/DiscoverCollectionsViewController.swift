@@ -228,7 +228,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             button.autoSetDimension(ALDimension.height, toSize: 60.0)
             button.autoPinEdge(toSuperviewEdge: ALEdge.leading, withInset: 32.0)
             button.autoPinEdge(toSuperviewEdge: ALEdge.trailing, withInset: 32.0)
-            button.autoPinEdge(toSuperviewSafeArea: ALEdge.bottom, withInset: 0.0)
+            button.autoPinEdge(toSuperviewSafeArea: ALEdge.bottom, withInset: 32.0)
             button.borderColor = UIColor.clear
             button.setTitle("Next", for: .normal)
             button.backgroundColor = UIColor(hexString: "#0062FF", alpha: 1.0)
@@ -555,7 +555,8 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            //TO-Do: - Serhii plz check this
+            //GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             let index = indexPath.row
             self.goToCollectionDetails(at: index)
         } else {

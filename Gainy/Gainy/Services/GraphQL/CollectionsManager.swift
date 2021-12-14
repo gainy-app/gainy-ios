@@ -21,6 +21,9 @@ final class CollectionsManager {
         case fetchedFailed
     }
     
+    @UserDefault("lastLoadDate")
+    var lastLoadDate: Date?
+    
     var collections: [RemoteCollectionDetails] = []
     var watchlistCollection: RemoteCollectionDetails?
     
