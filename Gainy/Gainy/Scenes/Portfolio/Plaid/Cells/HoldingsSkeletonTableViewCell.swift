@@ -12,10 +12,13 @@ final class HoldingsSkeletonTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.isSkeletonable = true
         
-        contentView.subviews.forEach({
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 6
-        })
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
     }
 }

@@ -85,6 +85,13 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
         let cell = skeletonView.dequeueReusableCell(withIdentifier: HoldingsSkeletonTableViewCell.cellIdentifier, for: indexPath) as? HoldingsSkeletonTableViewCell
         cell?.isSkeletonable = true
+        cell?.contentView.subviews[0].subviews.forEach({
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 6
+            if let lbl =  $0 as? UILabel {
+                lbl.linesCornerRadius = 6
+            }
+        })
         return cell
     }
     

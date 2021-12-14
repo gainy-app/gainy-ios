@@ -1,4 +1,4 @@
-iOS v0.3.1 #89 available
+iOS v0.3.1 #90 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
@@ -6,7 +6,7 @@ General improvements - MVP
 • -
 
 :hammer_and_wrench: Improvements
-• Small improvements
+• Small improvements: loaders
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
