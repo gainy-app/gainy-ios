@@ -45,8 +45,14 @@ struct Constants {
     }
     
     struct Links {
-        static let privacy = "https://www.gainy.app/privacy-policy"
-        static let tos = "https://www.gainy.app/terms-of-service"
+        static let privacy = "https://www.gainy.app/legal/privacy-policy"
+        static let tos = "https://www.gainy.app/legal/terms-of-service"
+        static let privacyNotice = "https://www.gainy.app/legal/privacy-notice"
+        static let advPart3 = "https://www.gainy.app/legal/form-adv"
+        static let formCRS = "https://www.gainy.app/legal/form-crs"
+        static let clientAgreement = "https://www.gainy.app/legal/client-agreement"
+        static let contentTOEDelivery = "https://www.gainy.app/legal/consent-to-e-delivery"
+        
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }
     

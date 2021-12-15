@@ -49,52 +49,12 @@ final class PersonalInfoViewController: BaseViewController {
         self.didTapDone(sender: nil)
     }
     
-    @IBAction private func formCRSTap(_ sender: Any) {
+    @IBAction private func privacyPolicyTapped(_ sender: Any) {
         
-        GainyAnalytics.logEvent("form_CRS_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://www.gainy.app/form-adv") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
-    }
-    
-    @IBAction private func contentToEDelivatyTap(_ sender: Any) {
-        
-        GainyAnalytics.logEvent("content_to_EDelivaty_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://drive.google.com/file/d/1y6Llkc8wNiUetPvqd9XH9zQATR7LMAek/view?usp=sharing") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
-    }
-    
-    @IBAction private func privacyNoticeTap(_ sender: Any) {
-        
-        GainyAnalytics.logEvent("content_privacy_notice_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://www.gainy.app/privacy-notice") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
-    }
-    
-    @IBAction private func clientAgreementTap(_ sender: Any) {
-        
-        GainyAnalytics.logEvent("content_client_agreement_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://drive.google.com/file/d/1faoz7rAh6dw7wa0BQYRhokLPGou9CW-L/view?usp=sharing") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
-    }
-    
-    @IBAction private func privacyPolicyTap(_ sender: Any) {
-        
-        GainyAnalytics.logEvent("content_privacy_policy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://www.gainy.app/privacy-policy") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
-    }
-    
-    @IBAction private func termsOfServiceTap(_ sender: Any) {
-        
-        GainyAnalytics.logEvent("content_terms_of_service_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        if let url = URL(string: "https://www.gainy.app/terms-of-service") {
-            WebPresenter.openLink(vc: self, url: url)
-        }
+        GainyAnalytics.logEvent("profile_privacy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
+        let vc = PrivacyViewController.instantiate(.profile)
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     @IBAction private func registerButtonTap(_ sender: Any) {
@@ -187,6 +147,10 @@ final class PersonalInfoViewController: BaseViewController {
         self.firstNameTextField.text = self.authorizationManager?.firstName
         self.lastNameTextField.text = self.authorizationManager?.lastName
         self.emailTextField.text = self.authorizationManager?.email
+        
+        self.updatePlaceholderStates(self.firstNameTextField, self.firstNameTextField.text ?? "")
+        self.updatePlaceholderStates(self.lastNameTextField, self.lastNameTextField.text ?? "")
+        self.updatePlaceholderStates(self.emailTextField, self.emailTextField.text ?? "")
     }
 }
 

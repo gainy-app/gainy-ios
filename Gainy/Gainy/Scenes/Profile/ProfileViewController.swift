@@ -185,7 +185,7 @@ final class ProfileViewController: BaseViewController {
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiatePrivacy() {
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
-        } else if let url = URL(string: "https://www.gainy.app/privacy-policy") {
+        } else if let url = URL(string: Constants.Links.privacy) {
             WebPresenter.openLink(vc: self, url: url)
         }
     }
