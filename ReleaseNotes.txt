@@ -1,12 +1,17 @@
-iOS v1.0 #93 available
+iOS v0.3.1 #93 available
 :globe_with_meridians: Server - PROD
-Release Candidate
+General improvements - MVP
 
 :new: New:
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio: hotfixes
+• Portfolio: Privacy Policy updates
+• Metrics: Updated GrapchQL schema + use short_percent
+• Everything from the build #92
+• Portfolio: Avg removed
+• Stock Card: Diff removed
+• Charts: 1D improved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

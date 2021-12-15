@@ -16,7 +16,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
     // TRADING
     avgVolume10d, // avg_volume_10d
     sharesOutstanding, // shares_outstanding
-    shortPercentOutstanding, // short_percent_outstanding
+    shortPercentOutstanding, // short_percent
     avgVolume90d, // avg_volume_90d
     sharesFloat, // shares_float
     shortRatio, // short_ratio
@@ -431,7 +431,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .sharesOutstanding:
             return "shares_outstanding"
         case .shortPercentOutstanding:
-            return "short_percent_outstanding"
+            return "short_percent"
         case .avgVolume90d:
             return "avg_volume_90d"
         case .sharesFloat:
