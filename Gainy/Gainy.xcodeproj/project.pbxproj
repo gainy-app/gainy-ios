@@ -420,6 +420,7 @@
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
+		900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */; };
 		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
@@ -888,6 +889,7 @@
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
 		900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRangeableCell.swift; sourceTree = "<group>"; };
+		900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHoldingsViewController.swift; sourceTree = "<group>"; };
 		90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsModelMapper.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
@@ -1244,6 +1246,7 @@
 			children = (
 				33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */,
 				33571F22273BE463007B587F /* PortfolioViewModel.swift */,
+				900DF276276A95E300047E2B /* NoHoldings */,
 				33EEECD127423E49004C41FE /* NoPlaid */,
 				33EEECD227423E52004C41FE /* Plaid */,
 				85E4A2932756C01100C0E5C5 /* LinkUnlinkPlaid */,
@@ -2203,6 +2206,14 @@
 			path = Holdings;
 			sourceTree = "<group>";
 		};
+		900DF276276A95E300047E2B /* NoHoldings */ = {
+			isa = PBXGroup;
+			children = (
+				900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */,
+			);
+			path = NoHoldings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2799,6 +2810,7 @@
 				9068DDEB274B7350007C588A /* GetPortfolioCharts.graphql.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,
 				33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */,
+				900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */,
 				85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */,
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
 				33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */,
@@ -2985,7 +2997,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3108,7 +3120,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3292,7 +3304,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3320,7 +3332,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 93;
+				CURRENT_PROJECT_VERSION = 94;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

@@ -11,6 +11,7 @@ import FloatingPanel
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)
+    func noHoldings(controller: HoldingsViewController)
 }
 
 final class HoldingsViewController: BaseViewController {
@@ -76,6 +77,11 @@ final class HoldingsViewController: BaseViewController {
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         viewModel.loadHoldingsAndSecurities {[weak self] in
+            if !(self?.viewModel.haveHoldings ?? false) {
+                if let self = self {
+                    self.delegate?.noHoldings(controller: self)
+                }
+            }
             self?.tableView.hideSkeleton()
             self?.settingsButton.isUserInteractionEnabled = true
             self?.sortButton.isUserInteractionEnabled = true

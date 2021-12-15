@@ -219,7 +219,7 @@ final class ProfileViewController: BaseViewController {
             present(mailComposer, animated: true)
             
         } else if let emailUrl = URL.init(string: "support@gainy.app") {
-            WebPresenter.openLink(vc: self, url: emailUrl)
+            //WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
     
