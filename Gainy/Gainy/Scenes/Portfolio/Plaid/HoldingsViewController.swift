@@ -180,6 +180,7 @@ final class HoldingsViewController: BaseViewController {
             return
         }
         
+        
         let selectedInterests = settings.interests.filter { item in
             item.selected
         }
@@ -189,12 +190,8 @@ final class HoldingsViewController: BaseViewController {
         let selectedSecurityTypes = settings.securityTypes.filter { item in
             item.selected
         }
-        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count
-        let allSum = settings.interests.count + settings.categories.count + settings.securityTypes.count
-        let allSelected = (selectedSum == allSum ? true : false)
-        let filterApplied = (settings.disabledAccounts.count > 0 ? true : false) || settings.onlyLongCapitalGainTax || !allSelected
-       
-        self.settingsLabel.text = filterApplied ? "Filter applied" : "All"
+        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count + settings.disabledAccounts.count
+        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All"
     }
     
     private func showLinkUnlinkPlaid() {

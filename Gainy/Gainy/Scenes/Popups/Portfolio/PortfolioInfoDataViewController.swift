@@ -77,11 +77,11 @@ class PortfolioInfoDataViewController: BaseViewController {
         self.navigationItem.leftBarButtonItems = [backItem]
         if let infoData = self.infoDataSource.first {
             if infoData.type == InfoDataSourceType.Interst {
-                self.title = NSLocalizedString("Interests", comment: "Interests").uppercased()
+                self.title = NSLocalizedString("Filter by Interests", comment: "Filter by  Interests").uppercased()
             } else if infoData.type == InfoDataSourceType.Category {
-                self.title = NSLocalizedString("Investment categories", comment: "Investment categories").uppercased()
+                self.title = NSLocalizedString("Filter by Investment categories", comment: "Filter by  Investment categories").uppercased()
             } else if infoData.type == InfoDataSourceType.SecurityType {
-                self.title = NSLocalizedString("Security types", comment: "Security types").uppercased()
+                self.title = NSLocalizedString("Filter by Security types", comment: "Filter by  Security types").uppercased()
             }
         }
     }

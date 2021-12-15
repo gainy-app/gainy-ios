@@ -150,6 +150,16 @@ extension Array where Element == HoldingViewModel {
             
             let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
             
+            let selectedInterestsFilter = settings.interests.filter { item in
+                item.selected
+            }
+            let selectedCategoriesFilter = settings.categories.filter { item in
+                item.selected
+            }
+            let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
+                item.selected
+            }
+            
             let inInterests = model.tickerInterests.contains { item in
                 return settings.interests.contains { dataSource in
                     dataSource.selected && item == dataSource.id
@@ -168,7 +178,47 @@ extension Array where Element == HoldingViewModel {
             
             let isLTT = settings.onlyLongCapitalGainTax ? model.showLTT : true
             
-            return !notInAccount && (inInterests || inCats || inSec) && isLTT
+            let inAccount = !notInAccount
+            let canBeShown = inAccount && isLTT
+            
+            let showFilteredByAll = (inInterests && inCats && inSec)
+            
+            let showFilteredByInterests = inInterests
+            let showFilteredByInterestsAndCategories = inInterests && inCats
+            let showFilteredByInterestsAndSec = inInterests && inSec
+            let showFilteredByCategories = inCats
+            let showFilteredByCategoriesAndSec = inCats && inSec
+            let showFilteredBySec = inSec
+            
+            var show = true
+            if selectedInterestsFilter.count > 0
+                && selectedCategoriesFilter.count > 0
+                && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByAll
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedCategoriesFilter.count > 0 {
+                show = showFilteredByInterestsAndCategories
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByInterestsAndSec
+                
+            } else if      selectedCategoriesFilter.count > 0
+                            && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByCategoriesAndSec
+                
+            } else if selectedInterestsFilter.count > 0 {
+                show = showFilteredByInterests
+                
+            } else if selectedCategoriesFilter.count > 0 {
+                show = showFilteredByCategories
+                
+            } else if selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredBySec
+            }
+            
+            return canBeShown && show
         }
     }
 }

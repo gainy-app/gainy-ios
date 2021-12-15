@@ -46,6 +46,11 @@ struct HoldingsModelMapper {
                 .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
             ]
             
+            let categories: [Int] = ticker?.tickerCategories.flatMap({ item in
+                item.categories.flatMap { catItem in
+                    catItem.id
+                }
+            }) ?? []
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: ticker?.fragments.remoteTickerDetails.name ?? "",
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
@@ -64,7 +69,7 @@ struct HoldingsModelMapper {
                                              event: holdingGroup.details?.nextEarningsDate,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
-                                             tickerCategories: ticker?.tickerIndustries.compactMap({$0.gainyIndustry?.id}) ?? [],
+                                             tickerCategories:categories,
                                              rawTicker: ticker)
             
             holds.append(holdModel)
