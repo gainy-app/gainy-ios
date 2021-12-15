@@ -144,9 +144,6 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchBackground" translatesAutoresizingMaskIntoConstraints="NO" id="Sh7-m8-17Z">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GTH-4t-9aY">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -309,15 +306,12 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <constraints>
                             <constraint firstItem="Vqi-7P-fK5" firstAttribute="top" secondItem="UZm-4s-wQX" secondAttribute="bottom" constant="34" id="217-Ch-bvk"/>
                             <constraint firstItem="OGq-oP-UmZ" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="2Xm-PI-cHU"/>
-                            <constraint firstItem="Sh7-m8-17Z" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="A4V-cC-zU9"/>
                             <constraint firstItem="g4P-ck-xOZ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Ccg-rq-0jU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="OGq-oP-UmZ" secondAttribute="trailing" constant="25" id="EDn-zZ-rQ7"/>
-                            <constraint firstAttribute="bottom" secondItem="Sh7-m8-17Z" secondAttribute="bottom" id="HXN-tR-W0l"/>
                             <constraint firstItem="xdX-l7-2wa" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.576" id="Hc6-ut-eYc"/>
                             <constraint firstAttribute="trailing" secondItem="xdX-l7-2wa" secondAttribute="trailing" id="JgC-yn-qWM"/>
                             <constraint firstItem="UZm-4s-wQX" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="Khs-Ux-SaL"/>
                             <constraint firstAttribute="trailing" secondItem="GTH-4t-9aY" secondAttribute="trailing" id="KlE-KE-f1x"/>
-                            <constraint firstItem="Sh7-m8-17Z" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="Ky0-Rj-f6h"/>
                             <constraint firstItem="UZm-4s-wQX" firstAttribute="top" secondItem="g4P-ck-xOZ" secondAttribute="bottom" constant="40" id="MvF-Dm-dTb"/>
                             <constraint firstItem="EbN-vG-6qi" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.288" id="O2g-0u-z1v"/>
                             <constraint firstAttribute="bottom" secondItem="GTH-4t-9aY" secondAttribute="bottom" id="YWF-Vp-BQY"/>
@@ -331,7 +325,6 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <constraint firstItem="GTH-4t-9aY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="pXN-h7-09W"/>
                             <constraint firstItem="OGq-oP-UmZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="ppt-p5-hkj"/>
                             <constraint firstItem="xdX-l7-2wa" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="ue9-Tg-RCS"/>
-                            <constraint firstAttribute="trailing" secondItem="Sh7-m8-17Z" secondAttribute="trailing" id="uum-ko-qXC"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UZm-4s-wQX" secondAttribute="trailing" constant="40" id="wx4-hq-AOG"/>
                             <constraint firstItem="OGq-oP-UmZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="25" id="x6K-b1-kCS"/>
                             <constraint firstItem="UZm-4s-wQX" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="zm2-o5-Mfy"/>
@@ -872,16 +865,16 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="I1l-7F-EPp">
-                                <rect key="frame" x="61.5" y="773" width="291" height="14"/>
+                                <rect key="frame" x="54" y="773" width="306.5" height="14"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By clicking “Register” you agree with " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wup-d1-YWT">
-                                        <rect key="frame" x="0.0" y="0.0" width="186" height="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="201.5" height="14"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yls-7v-6Io">
-                                        <rect key="frame" x="189" y="0.0" width="102" height="14"/>
+                                        <rect key="frame" x="204.5" y="0.0" width="102" height="14"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Client Agreement">
@@ -1297,7 +1290,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
             <size key="intrinsicContentSize" width="50" height="31"/>
         </designable>
         <designable name="Xzu-k0-XRA">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
         <designable name="hlB-m7-gpl">
             <size key="intrinsicContentSize" width="144" height="19"/>
@@ -1306,13 +1299,12 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
             <size key="intrinsicContentSize" width="51" height="31"/>
         </designable>
         <designable name="wXf-gr-Gu1">
-            <size key="intrinsicContentSize" width="59" height="32"/>
+            <size key="intrinsicContentSize" width="60" height="31"/>
         </designable>
     </designables>
     <resources>
         <image name="iconApple" width="14" height="16"/>
         <image name="iconGoogle" width="16" height="16"/>
-        <image name="launchBackground" width="375" height="812"/>
         <image name="launchGainy" width="151" height="53"/>
         <image name="onboardingGradient" width="375" height="812"/>
     </resources>
