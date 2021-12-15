@@ -51,7 +51,9 @@ extension TickerDetailsNewsViewCell: UICollectionViewDelegate {
         if let news = tickerInfo?.news[indexPath.row] {
             if let url = URL(string: GainyAnalytics.shared.addInfoToURLString(news.url ?? "")) {
                 GainyAnalytics.logEvent("ticker_news_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "newsID" : news.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                if let vc = self.window?.rootViewController {
+                    WebPresenter.openLink(vc: vc, url: url)
+                }
             }
         }
     }

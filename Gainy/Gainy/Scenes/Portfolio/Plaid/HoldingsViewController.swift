@@ -55,7 +55,7 @@ final class HoldingsViewController: BaseViewController {
     }
     
     //MARK: - Inner
-    private let viewModel = HoldingsViewModel()
+    private(set) var viewModel = HoldingsViewModel()
     
     //MARK: - Life Cycle
     
@@ -81,6 +81,8 @@ final class HoldingsViewController: BaseViewController {
             self?.sortButton.isUserInteractionEnabled = true
             self?.linkPlaidButton.isUserInteractionEnabled = true
             self?.updateSortButton()
+            self?.updateFilterButtonTitle()
+            self?.tableView.reloadData()
         }
     }
     
@@ -169,6 +171,29 @@ final class HoldingsViewController: BaseViewController {
         self.present(self.fpc, animated: true, completion: nil)
     }
     
+    private func updateFilterButtonTitle() {
+        
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+        
+        
+        let selectedInterests = settings.interests.filter { item in
+            item.selected
+        }
+        let selectedCategories = settings.categories.filter { item in
+            item.selected
+        }
+        let selectedSecurityTypes = settings.securityTypes.filter { item in
+            item.selected
+        }
+        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count + settings.disabledAccounts.count
+        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All"
+    }
+    
     private func showLinkUnlinkPlaid() {
         
         self.linkUnlinkVC.delegate = self
@@ -237,6 +262,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         viewModel.settings = settings
         tableView.reloadData()
+        self.updateFilterButtonTitle()
     }
 }
 

@@ -11,30 +11,37 @@ import PureLayout
 
 final class IntroductionCaptionCell: UICollectionViewCell {
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var captionLabel: UILabel!
-    @IBOutlet weak var captionLabelHeightConstraint: NSLayoutConstraint!
     
     var captionText: String = "" {
         didSet {
-            self.updateUI()
+            self.updateLabel()
         }
     }
     
-    var captionHeight: Float = Float(20) {
-        willSet {
-            self.captionLabelHeightConstraint.constant = CGFloat(newValue)
+    var imageName: String = "" {
+        didSet {
+            self.updateImage()
         }
     }
     
-    private func updateUI() {
+    private func updateImage() {
+        guard let imageView = imageView else {return}
+        guard imageName.count > 0 else {return}
+        guard let image = UIImage(named: imageName) else {return}
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = image
+    }
+    
+    private func updateLabel() {
     
         guard let textLabel = captionLabel else {return}
-        
         textLabel.layer.masksToBounds = false
         textLabel.clipsToBounds = false
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont.proDisplaySemibold(56)
-        textLabel.setLineHeight(lineHeight: 48, textAlignment: NSTextAlignment.left)
+        textLabel.font = UIFont.proDisplaySemibold(32)
+        textLabel.setLineHeight(lineHeight: 32, textAlignment: NSTextAlignment.left)
         textLabel.text = captionText
     }
 }

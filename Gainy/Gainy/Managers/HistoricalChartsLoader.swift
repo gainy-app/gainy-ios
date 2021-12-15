@@ -12,6 +12,10 @@ final class HistoricalChartsLoader {
     
     static let shared = HistoricalChartsLoader()
     
+    //9.30 un-US -5:00
+    
+    let backTimeFormat = "yyyy-MM-dd'T'HH:mm:ss"
+    
     /// Load charts data using new endpoint
     /// - Parameters:
     ///   - symbol: Stock symbol
@@ -24,28 +28,34 @@ final class HistoricalChartsLoader {
         
         switch range {
         case .d1:
-            dateString = (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")
+            let weekDay = Date().toFormat("ccc", locale: Locale.init(identifier: "en_US"))
+            var daysToTake = 2
+            if weekDay == "Mon" {
+                daysToTake = 4
+            }
+            
+            dateString = (Date().startOfTradingDay - daysToTake.days).toFormat(backTimeFormat)
             periodString = "15min"
         case .w1:
-            dateString = (Date().startOfDay - 1.weeks).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.weeks).toFormat(backTimeFormat)
             periodString = "1d"
         case .m1:
-            dateString = (Date().startOfDay - 1.months).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.months).toFormat(backTimeFormat)
             periodString = "1d"
         case .m3:
-            dateString = (Date().startOfDay - 3.months).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 3.months).toFormat(backTimeFormat)
             periodString = "1w"
         case .y1:
-            dateString = (Date().startOfDay - 1.years).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.years).toFormat(backTimeFormat)
             periodString = "1w"
         case .y5:
-            dateString = (Date().startOfDay - 5.years).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 5.years).toFormat(backTimeFormat)
             periodString = "1m"
         case .all:
             dateString = "1900-01-01"
             periodString = "1m"
         }
-        Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol, date: dateString) ){result in
+        Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.historicalPricesAggregated.filter({$0.close != nil}) {
@@ -93,28 +103,34 @@ final class HistoricalChartsLoader {
         
         switch range {
         case .d1:
-            dateString = (Date().startOfDay - 7.days).toFormat("yyyy-MM-dd")
+            let weekDay = Date().toFormat("ccc", locale: Locale.init(identifier: "en_US"))
+            var daysToTake = 2
+            if weekDay == "Mon" {
+                daysToTake = 4
+            }
+            
+            dateString = (Date().startOfTradingDay - daysToTake.days).toFormat(backTimeFormat)
             periodString = "15min"
         case .w1:
-            dateString = (Date().startOfDay - 1.weeks).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.weeks).toFormat(backTimeFormat)
             periodString = "1d"
         case .m1:
-            dateString = (Date().startOfDay - 1.months).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.months).toFormat(backTimeFormat)
             periodString = "1d"
         case .m3:
-            dateString = (Date().startOfDay - 3.months).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 3.months).toFormat(backTimeFormat)
             periodString = "1w"
         case .y1:
-            dateString = (Date().startOfDay - 1.years).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 1.years).toFormat(backTimeFormat)
             periodString = "1w"
         case .y5:
-            dateString = (Date().startOfDay - 5.years).toFormat("yyyy-MM-dd")
+            dateString = (Date().startOfTradingDay - 5.years).toFormat(backTimeFormat)
             periodString = "1m"
         case .all:
             dateString = "1900-01-01"
             periodString = "1m"
         }
-        Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, date: dateString) ){result in
+        Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {

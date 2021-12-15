@@ -200,7 +200,7 @@ final class UserProfileManager {
             case .success(let graphQLResult):
                 
                 guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    NotificationManager.shared.showError("Error fetching Recommended Collections")
                     completion(false)
                     return
                 }

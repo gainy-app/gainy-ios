@@ -15,6 +15,11 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     @IBOutlet private weak var symbolLbl: UILabel!
     @IBOutlet private weak var addToWatchlistToggle: UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        isSkeletonable = false
+    }
+    
     override func updateFromTickerData() {
         tickerNameLbl.text = tickerInfo?.name
         symbolLbl.text = tickerInfo?.symbol
@@ -29,7 +34,9 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     @IBAction func shareAction() {
         if let url = URL(string: Constants.Links.rhLink + (tickerInfo?.symbol ?? "")) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            if let vc = self.window?.rootViewController {
+                WebPresenter.openLink(vc: vc, url: url)
+            }
         }
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }

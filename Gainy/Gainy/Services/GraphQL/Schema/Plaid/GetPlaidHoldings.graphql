@@ -1,37 +1,101 @@
 query GetPlaidHoldings($profileId: Int!) {
-  get_portfolio_holdings(profile_id: $profileId) {
-    holding {
-      id
-      quantity
-      profile_id
-      security_id
-      account {
-        balance_available
-        balance_current
-        balance_iso_currency_code
-        balance_limit
-        created_at
-        id
-        mask
-        name
-        official_name
-        subtype
-        type
-      }
-      holding_details {
-        purchase_date
-        relative_gain_total
+
+portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
+        absolute_gain_1d
+        absolute_gain_1m
+        absolute_gain_1w
+        absolute_gain_1y
+        absolute_gain_3m
+        absolute_gain_5y
+        absolute_gain_total
+        actual_value
         relative_gain_1d
-        value_to_portfolio_value
-        ticker_name
-        market_capitalization
-        next_earnings_date
-        ltt_quantity_total
-        security_type
-        account_id
-      }
+        relative_gain_1m
+        relative_gain_1w
+        relative_gain_1y
+        relative_gain_3m
+        relative_gain_5y
+        relative_gain_total
     }
-  }
+    profile_holding_groups(where:{profile_id: {_eq: $profileId}}) {
+        details {
+            ltt_quantity_total
+            market_capitalization
+            next_earnings_date
+            purchase_date
+            relative_gain_1d
+            relative_gain_total
+            ticker_name
+            ticker_symbol
+            value_to_portfolio_value
+        }
+        gains{
+            absolute_gain_1d
+            absolute_gain_1m
+            absolute_gain_1w
+            absolute_gain_1y
+            absolute_gain_3m
+            absolute_gain_5y
+            absolute_gain_total
+            actual_value
+            ltt_quantity_total
+            relative_gain_1m
+            relative_gain_1d
+            relative_gain_1w
+            relative_gain_1y
+            relative_gain_3m
+            relative_gain_5y
+            relative_gain_total
+            value_to_portfolio_value
+        }
+        holdings {
+            account_id
+            holding_id
+            name
+            quantity
+            ticker_symbol
+            type
+            holding_details {
+                purchase_date
+                relative_gain_total
+                relative_gain_1d
+                value_to_portfolio_value
+                ticker_name
+                market_capitalization
+                next_earnings_date
+                ltt_quantity_total
+                security_type
+                account_id
+            }
+            gains {
+                absolute_gain_1d
+                absolute_gain_1m
+                absolute_gain_1w
+                absolute_gain_1y
+                absolute_gain_3m
+                absolute_gain_5y
+                absolute_gain_total
+                actual_value
+                ltt_quantity_total
+                relative_gain_1m
+                relative_gain_1d
+                relative_gain_1w
+                relative_gain_1y
+                relative_gain_3m
+                relative_gain_5y
+                relative_gain_total
+                value_to_portfolio_value
+            }
+        }
+        quantity
+        symbol
+                        
+                    ticker {
+                        ...RemoteTickerDetailsFull
+                    }
+    }
 }
+
+
 
 

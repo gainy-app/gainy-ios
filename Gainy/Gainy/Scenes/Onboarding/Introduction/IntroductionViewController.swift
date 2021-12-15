@@ -10,7 +10,7 @@ import PureLayout
 
 class IntroductionViewController: UIViewController, Storyboarded {
     
-    @IBOutlet weak var captionsTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var captionsCollectionView: UICollectionView!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -27,13 +27,17 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     private var currentCaptionIndex = 0
     private let captions = [
-        NSLocalizedString("Collections\ntailored to\nyou", comment: "Collections tailored to you"),
-        NSLocalizedString("Highlights\nand\nindustry\nbenchmarks", comment: "Highlights and industry benchmarks"),
-        NSLocalizedString("Search,\nfilters,\nand stock\ncomparison", comment: "Search, filters, and stock comparison"),
-        NSLocalizedString("Yes, it's\npersonalized", comment: "Yes, it's personalized")
+        NSLocalizedString("Discover collections\nof stocks that match\nyour goals", comment: "Discover collections\nof stocks that match\nyour goals"),
+        NSLocalizedString("See highlights\nand benchmarks\nto support yourn\ndecisions", comment: "See highlights\nand benchmarks\nto support yourn\ndecisions"),
+        NSLocalizedString("Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them", comment: "Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them"),
+        NSLocalizedString("Compare and sell\nunderperforming\nstocks and improve\nyour gains", comment: "Compare and sell\nunderperforming\nstocks and improve\nyour gains")
     ]
-    private let captionSizes: [Float] = [176, 224, 224, 128]
-    
+    private let imageNames = [
+        "Screen 1",
+        "Screen 2",
+        "Screen 3",
+        "Screen 4",
+    ]
     
     override func viewDidLoad() {
         
@@ -122,7 +126,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         default: fatalError("Unhandled behaviour")
         }
     }
-    
+        
     private func setUpCollectionView() {
         
         self.captionsCollectionView.delegate = self
@@ -130,7 +134,6 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.captionsCollectionView.register(UINib.init(nibName: "IntroductionCaptionCell", bundle: Bundle.main), forCellWithReuseIdentifier: IntroductionCaptionCell.reuseIdentifier)
         self.captionsCollectionView.contentInset = UIEdgeInsets.init(top: CGFloat(0.0), left: CGFloat(0.0), bottom: CGFloat(0.0), right: CGFloat(0.0))
         self.captionsCollectionView.contentInsetAdjustmentBehavior = .never
-        self.captionsTopConstraint.constant = UIScreen.main.bounds.height * 0.5 - 72
         self.captionsCollectionView.isScrollEnabled = true
         self.captionsCollectionView.isPagingEnabled = true
         let layout = UICollectionViewFlowLayout.init()
@@ -182,7 +185,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     private func setProgressIndicatorHidden(hidden: Bool) {
         
         let nextTitle = NSLocalizedString("Next", comment: "Next")
-        let personaliseTitle = NSLocalizedString("Let's personalize it!", comment: "Let's personalize it!")
+        let personaliseTitle = NSLocalizedString("Start to gain more!", comment: "Start to gain more!")
         let nextButtonTitle = hidden ? personaliseTitle : nextTitle
         
         UIView.animate(withDuration: 0.175) {
@@ -216,9 +219,10 @@ extension IntroductionViewController: UICollectionViewDelegate, UICollectionView
         
         let cell: IntroductionCaptionCell = collectionView.dequeueReusableCell(withReuseIdentifier: IntroductionCaptionCell.reuseIdentifier, for: indexPath) as! IntroductionCaptionCell
         let caption = captions[indexPath.row]
-        let captionHeight = captionSizes[indexPath.row]
-        cell.captionHeight = captionHeight
+        let imageName = imageNames[indexPath.row]
+        
         cell.captionText = caption
+        cell.imageName = imageName
         
         return cell
     }
@@ -230,9 +234,8 @@ extension IntroductionViewController: UICollectionViewDelegate, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let caption = self.captions[indexPath.row]
         let width = UIScreen.main.bounds.size.width
-        var size = CGSize.init(width: width, height: 260)
+        let size = CGSize.init(width: width, height: collectionView.frame.height)
 
         return size
     }

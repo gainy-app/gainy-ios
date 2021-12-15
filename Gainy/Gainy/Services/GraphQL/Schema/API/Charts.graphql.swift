@@ -8,9 +8,9 @@ public final class DiscoverChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query DiscoverCharts($period: String!, $symbol: String!, $date: timestamp!) {
+    query DiscoverCharts($period: String!, $symbol: String!, $dateG: timestamp!, $dateL: timestamp!) {
       historical_prices_aggregated(
-        where: {symbol: {_eq: $symbol}, period: {_eq: $period}, datetime: {_gte: $date}}
+        where: {symbol: {_eq: $symbol}, period: {_eq: $period}, datetime: {_gte: $dateG, _lte: $dateL}}
         order_by: {datetime: asc}
       ) {
         __typename
@@ -31,16 +31,18 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
   public var period: String
   public var symbol: String
-  public var date: timestamp
+  public var dateG: timestamp
+  public var dateL: timestamp
 
-  public init(period: String, symbol: String, date: timestamp) {
+  public init(period: String, symbol: String, dateG: timestamp, dateL: timestamp) {
     self.period = period
     self.symbol = symbol
-    self.date = date
+    self.dateG = dateG
+    self.dateL = dateL
   }
 
   public var variables: GraphQLMap? {
-    return ["period": period, "symbol": symbol, "date": date]
+    return ["period": period, "symbol": symbol, "dateG": dateG, "dateL": dateL]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -48,7 +50,7 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("historical_prices_aggregated", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")], "period": ["_eq": GraphQLVariable("period")], "datetime": ["_gte": GraphQLVariable("date")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(HistoricalPricesAggregated.selections))))),
+        GraphQLField("historical_prices_aggregated", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")], "period": ["_eq": GraphQLVariable("period")], "datetime": ["_gte": GraphQLVariable("dateG"), "_lte": GraphQLVariable("dateL")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(HistoricalPricesAggregated.selections))))),
       ]
     }
 

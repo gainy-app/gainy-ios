@@ -13,17 +13,17 @@ protocol Reorderable {
 }
 
 extension Array where Element: Reorderable {
-
+    
     func reorder(by preferredOrder: [Element.OrderElement]) -> [Element] {
         sorted {
             guard let first = preferredOrder.firstIndex(of: $0.orderElement) else {
                 return false
             }
-
+            
             guard let second = preferredOrder.firstIndex(of: $1.orderElement) else {
                 return true
             }
-
+            
             return first < second
         }
     }
@@ -74,78 +74,91 @@ extension Array where Element == HoldingViewModel {
         return self.sorted { lhs, rhs in
             switch sortingField {
             case .purchasedDate:
-                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
-                        return false
-                    }
-                    if ascending {
-                        return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                    } else {
-                        return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
-                    }
-            case .totalReturn:
-                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
-                        return false
-                    }
-                    if ascending {
-                        return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
-                    } else {
-                        return lhd.relativeGainTotal ?? 0 > rhd.relativeGainTotal ?? 0
-                    }
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
 
+                if ascending {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
+            case .totalReturn:
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
+                if ascending {
+                    return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
+                } else {
+                    return lhd.relativeGainTotal ?? 0 > rhd.relativeGainTotal ?? 0
+                }
+                
             case .todayReturn:
-                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
-                        return false
-                    }
-                    if ascending {
-                        return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
-                    } else {
-                        return lhd.relativeGain_1d ?? 0 > rhd.relativeGain_1d ?? 0
-                    }
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+                if ascending {
+                    return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
+                } else {
+                    return lhd.relativeGain_1d ?? 0 > rhd.relativeGain_1d ?? 0
+                }
             case .percentOFPortfolio:
-                    if ascending {
-                        return lhs.percentInProfile < rhs.percentInProfile
-                    } else {
-                        return lhs.percentInProfile > rhs.percentInProfile
-                    }
-            
+                if ascending {
+                    return lhs.percentInProfile < rhs.percentInProfile
+                } else {
+                    return lhs.percentInProfile > rhs.percentInProfile
+                }
+                
             case .matchScore:
-                    if ascending {
-                        return lhs.matchScore < rhs.matchScore
-                    } else {
-                        return lhs.matchScore > rhs.matchScore
-                    }
-            
+                if ascending {
+                    return lhs.matchScore < rhs.matchScore
+                } else {
+                    return lhs.matchScore > rhs.matchScore
+                }
+                
             case .name:
-                    if ascending {
-                        return lhs.name < rhs.name
-                    } else {
-                        return lhs.name > rhs.name
-                    }
-            
+                if ascending {
+                    return lhs.name < rhs.name
+                } else {
+                    return lhs.name > rhs.name
+                }
+                
             case .marketCap:
-                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
-                        return false
-                    }
-                    if ascending {
-                        return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
-                    } else {
-                        return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
-                    }
-            
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
+                if ascending {
+                    return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
+                } else {
+                    return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
+                }
+                
             case .earningsDate:
-                    guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
-                        return false
-                    }
-                    if ascending {
-                        return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
-                    } else {
-                        return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
-                    }
+                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+                    return false
+                }
+
+                if ascending {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
             }
         }.filter { model in
-            let holdingDetails = model.holdingDetails
             
-            let notInAccount = settings.disabledAccounts.contains(where: {$0.id == model.accountId})
+            let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
+            
+            let selectedInterestsFilter = settings.interests.filter { item in
+                item.selected
+            }
+            let selectedCategoriesFilter = settings.categories.filter { item in
+                item.selected
+            }
+            let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
+                item.selected
+            }
             
             let inInterests = model.tickerInterests.contains { item in
                 return settings.interests.contains { dataSource in
@@ -160,15 +173,52 @@ extension Array where Element == HoldingViewModel {
             }
             
             var inSec = false
-            if let securityType = holdingDetails?.securityType {
-                inSec = settings.securityTypes.contains { item in
-                    item.selected && item.title == securityType
-                }
-            }
+            let modelSecs = model.securityTypes
+            inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
             
             let isLTT = settings.onlyLongCapitalGainTax ? model.showLTT : true
             
-            return !notInAccount && (inInterests || inCats || inSec) && isLTT
+            let inAccount = !notInAccount
+            let canBeShown = inAccount && isLTT
+            
+            let showFilteredByAll = (inInterests && inCats && inSec)
+            
+            let showFilteredByInterests = inInterests
+            let showFilteredByInterestsAndCategories = inInterests && inCats
+            let showFilteredByInterestsAndSec = inInterests && inSec
+            let showFilteredByCategories = inCats
+            let showFilteredByCategoriesAndSec = inCats && inSec
+            let showFilteredBySec = inSec
+            
+            var show = true
+            if selectedInterestsFilter.count > 0
+                && selectedCategoriesFilter.count > 0
+                && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByAll
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedCategoriesFilter.count > 0 {
+                show = showFilteredByInterestsAndCategories
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByInterestsAndSec
+                
+            } else if      selectedCategoriesFilter.count > 0
+                            && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByCategoriesAndSec
+                
+            } else if selectedInterestsFilter.count > 0 {
+                show = showFilteredByInterests
+                
+            } else if selectedCategoriesFilter.count > 0 {
+                show = showFilteredByCategories
+                
+            } else if selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredBySec
+            }
+            
+            return canBeShown && show
         }
     }
 }

@@ -19,6 +19,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         
         dataSource = self
         delegate = self
+        presentationController?.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,5 +76,10 @@ extension TickersDetailsViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
         let pageContentViewController = pageViewController.viewControllers![0] as! TickerViewController
         pageContentViewController.loadTicketInfo()
+    }
+}
+extension TickersDetailsViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+        return true
     }
 }

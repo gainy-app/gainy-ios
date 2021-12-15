@@ -38,16 +38,22 @@ final class PortfolioViewController: BaseViewController {
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
-                    holdingsVC.coordinator = mainCoordinator
                     addViewController(holdingsVC, view: containerView)
                 }
-                holdingsVC.loadData()
+                holdingsVC.coordinator = mainCoordinator
+                if !holdingsVC.viewModel.haveHoldings {
+                    holdingsVC.loadData()
+                }
             case .linkHasHoldings:
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
                     addViewController(holdingsVC, view: containerView)
+                    holdingsVC.loadData()
                 }
-                holdingsVC.loadData()
+                holdingsVC.coordinator = mainCoordinator
+                if !holdingsVC.viewModel.haveHoldings {
+                    holdingsVC.loadData()
+                }                
             }
         }
     }

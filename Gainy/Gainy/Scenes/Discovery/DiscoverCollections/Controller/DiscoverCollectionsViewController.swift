@@ -73,7 +73,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                         self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
                     }
-                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
+                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this Collection?", cancelTitle: "No", actions: [yesAction])
                 }
                 
                 cell.onCellLifted = { [weak self] in
@@ -228,7 +228,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             button.autoSetDimension(ALDimension.height, toSize: 60.0)
             button.autoPinEdge(toSuperviewEdge: ALEdge.leading, withInset: 32.0)
             button.autoPinEdge(toSuperviewEdge: ALEdge.trailing, withInset: 32.0)
-            button.autoPinEdge(toSuperviewSafeArea: ALEdge.bottom, withInset: 0.0)
+            button.autoPinEdge(toSuperviewSafeArea: ALEdge.bottom, withInset: 32.0)
             button.borderColor = UIColor.clear
             button.setTitle("Next", for: .normal)
             button.backgroundColor = UIColor(hexString: "#0062FF", alpha: 1.0)
@@ -520,6 +520,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         viewModel?.yourCollections = UserProfileManager.shared
             .yourCollections
             .map { CollectionViewModelMapper.map($0) }
+        if let watchlist = CollectionsManager.shared.watchlistCollection {
+            let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
+            viewModel?.yourCollections.insert(watchDTO, at: 0)
+        }
         viewModel?.recommendedCollections = UserProfileManager.shared
             .recommendedCollections
             .map { CollectionViewModelMapper.map($0) }
@@ -551,11 +555,9 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-            var index = indexPath.row
-            if CollectionsManager.shared.watchlistCollection != nil {
-                index = index + 1
-            }
+            //TO-Do: - Serhii plz check this
+            //GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            let index = indexPath.row
             self.goToCollectionDetails(at: index)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {

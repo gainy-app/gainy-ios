@@ -56,6 +56,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var securitiesTableView: UITableView! {
         didSet {
             securitiesTableView.dataSource = self
+            securitiesTableView.isScrollEnabled = false
         }
     }
     @IBOutlet weak var secTableHeight: NSLayoutConstraint!
@@ -67,7 +68,16 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Setting properties
         nameLbl.text = model.name
         eventsView.isHidden = model.event == nil
-        eventLbl.text = model.event ?? ""
+        if let event = model.event {
+            var eventDate = Date()
+            if let zDate = event.toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+                eventDate = zDate
+            } else {
+                eventDate = event.toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+            }
+            eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
+        }
+        
         
         matchCircleView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
@@ -130,11 +140,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Prices
         
         if let curPrice = TickerLiveStorage.shared.getSymbolData(model.tickerSymbol) {
-            (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = (curPrice.currentPrice.price, UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!, curPrice.priceChangeToday.cleanTwoDecimalP)
+            (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text, avgGrowLbl.textColor) = (curPrice.currentPrice.price,
+                                                                                             UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!,
+                                                                                             curPrice.priceChangeToday.cleanTwoDecimalP,
+                                                                                             curPrice.priceChangeToday >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         } else {
             (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = ("", nil, "")
         }
-        (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text) = model.infoForRange(chartRange)
+        (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text, rangePriceLbl.textColor, rangeGrowLbl.textColor) = model.infoForRange(chartRange)
         
         //Footer
         holdingProgressView.progress = CGFloat(model.percentInProfile / 100.0)
@@ -147,7 +160,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             secTableHeight.constant = 0.0
         } else {
             expandBtn.isHidden = false
-            let attrArr = model.securities.map({$0.name.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
+            let attrArr = model.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
             var totalList = NSMutableAttributedString.init(string: "")
             for share in attrArr {
                 totalList.append(share)
@@ -156,6 +169,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             transactionsTotalLbl.attributedText = totalList
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
+        securitiesTableView.reloadData()
     }
     
     private var holding: HoldingViewModel?
@@ -169,7 +183,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 if isExpanded {
                     transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
-                    let attrArr = holding.securities.map({$0.name.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
+                    let attrArr = holding.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
                     var totalList = NSMutableAttributedString.init(string: "")
                     for share in attrArr {
                         totalList.append(share)

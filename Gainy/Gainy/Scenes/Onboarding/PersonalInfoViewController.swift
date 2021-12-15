@@ -53,7 +53,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("form_CRS_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://www.gainy.app/form-adv") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -61,7 +61,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("content_to_EDelivaty_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://drive.google.com/file/d/1y6Llkc8wNiUetPvqd9XH9zQATR7LMAek/view?usp=sharing") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -69,7 +69,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("content_privacy_notice_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://www.gainy.app/privacy-notice") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -77,7 +77,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("content_client_agreement_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://drive.google.com/file/d/1faoz7rAh6dw7wa0BQYRhokLPGou9CW-L/view?usp=sharing") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -85,7 +85,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("content_privacy_policy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://www.gainy.app/privacy-policy") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     
@@ -93,7 +93,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         GainyAnalytics.logEvent("content_terms_of_service_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
         if let url = URL(string: "https://www.gainy.app/terms-of-service") {
-            UIApplication.shared.open(url)
+            WebPresenter.openLink(vc: self, url: url)
         }
     }
     

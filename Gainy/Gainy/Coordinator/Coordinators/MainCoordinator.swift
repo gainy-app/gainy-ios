@@ -186,3 +186,5 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         GainyAnalytics.logEvent("show_compare_collection")
     }
 }
+
+

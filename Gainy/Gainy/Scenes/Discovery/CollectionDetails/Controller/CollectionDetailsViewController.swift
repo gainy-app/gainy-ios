@@ -4,6 +4,7 @@ import PureLayout
 import FloatingPanel
 import Firebase
 import SkeletonView
+import SwiftDate
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case collectionWithCards
@@ -271,6 +272,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchController?.onCollectionDelete = {[weak self] collectionId in
             self?.deleteItem(collectionId)
         }
+        searchController?.onNewsClicked = {[weak self] newsUrl in
+            if let self = self {
+                WebPresenter.openLink(vc: self, url: newsUrl)
+            }
+        }
         
         searchController?.coordinator = coordinator
         handleLoginEvent()
@@ -533,10 +539,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         
-        guard CollectionsManager.shared.collections.isEmpty else {
-            self.hideLoader()
-            completion()
-            return
+        if !CollectionsManager.shared.collections.isEmpty {
+            if let lastLoadDate = CollectionsManager.shared.lastLoadDate {
+                if Date() < lastLoadDate + 15.minutes {
+                    self.hideLoader()
+                    completion()
+                    return
+                }
+            } else {
+                self.hideLoader()
+                completion()
+                return
+            }
         }
         
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
@@ -554,7 +568,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 
                 CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-
+                CollectionsManager.shared.lastLoadDate = Date()
+                
                 DispatchQueue.main.async {
                     self?.initViewModelsFromData()
                     self?.hideLoader()
@@ -592,7 +607,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 CollectionsManager.shared.collections.append(contentsOf: collections)
                 CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                
+                CollectionsManager.shared.lastLoadDate = Date()
                 DispatchQueue.main.async {
                     
                     let newModels = CollectionsManager.shared.convertToModel(collections)

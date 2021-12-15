@@ -41,7 +41,7 @@ extension TickerDetailsMarketDataViewCell: UICollectionViewDataSource {
 
 extension TickerDetailsMarketDataViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize.init(width: (UIScreen.main.bounds.width - 16.0 * 2.0 - 8.0 * 2.0) / 3.0, height: 96.0)
+        CGSize.init(width: (UIScreen.main.bounds.width - 16.0 * 2.0 - 10.0 * 2.0) / 3.0, height: 96.0)
     }
 }
 

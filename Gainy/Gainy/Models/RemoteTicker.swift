@@ -269,6 +269,7 @@ class TickerInfo {
     
     
     private func setChartsCache(_ period: ScatterChartView.ChartPeriod, chartData: ChartData) {
+        print("CHART \(period) \(chartData.points.count)")
         if let cache = chartsCache[period] {
             cache.chartData = chartData
         }
