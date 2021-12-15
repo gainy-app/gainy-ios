@@ -1,12 +1,12 @@
-iOS v0.3.1 #90 available
+iOS v0.3.1 #91 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• -
+• Portfolio migration
 
 :hammer_and_wrench: Improvements
-• Small improvements: loaders
+• Portfolio: sorting/filtering restored
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

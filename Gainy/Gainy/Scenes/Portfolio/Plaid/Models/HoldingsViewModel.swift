@@ -50,7 +50,6 @@ final class HoldingsViewModel {
                 Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
-                        dprint("\(graphQLResult)")
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             completion?()
@@ -114,7 +113,6 @@ final class HoldingsViewModel {
                         }
                     }
                     securityTypesRaw = securityTypesRaw.uniqued()
-                    print(tickSymbols)
                     
                     var settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                     let securityTypes = securityTypesRaw.map { item -> InfoDataSource in
