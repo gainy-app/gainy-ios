@@ -32,17 +32,23 @@ enum CollectionDetailsViewModelMapper {
             ? " +\(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
             : " \(model.financialMetrics.todaysPriceChange.cleanTwoDecimal)%"
         
+        let sharesOutstanding = Float(model.tickerMetrics.sharesOutstanding).formatUsingAbbrevation(false)
+        let shortPercentOutstanding = (Float(model.tickerMetrics.shortPercentOutstanding) * 100.0).cleanOneDecimalP
+    
+        let value = model.tickerMetrics.beatenQuarterlyEpsEstimationCountTtm
+        let beatenQuarterlyEpsEstimationCountTtm = "{" + Float(value).cleanOneDecimal + "} / 4"
+        
         return CollectionCardViewCellModel.init(
             tickerCompanyName: model.companyName,
             tickerSymbol: model.tickerSymbol,
-            sharesOutstanding: Float(model.tickerMetrics.sharesOutstanding).formatUsingAbbrevation(),
-            shortPercentOutstanding: (model.tickerMetrics.shortPercentOutstanding * 100.0).cleanOneDecimalP,
+            sharesOutstanding: sharesOutstanding,
+            shortPercentOutstanding: shortPercentOutstanding,
             avgVolume10d: model.tickerMetrics.avgVolume10d.formatUsingAbbrevation(),
             avgVolume90d: model.tickerMetrics.avgVolume90d.formatUsingAbbrevation(),
             sharesFloat: model.tickerMetrics.sharesFloat.formatUsingAbbrevation(),
-            shortRatio: model.tickerMetrics.shortRatio.formatUsingAbbrevation(),
+            shortRatio: model.tickerMetrics.shortRatio.formatUsingAbbrevation(false),
             beta: model.tickerMetrics.beta.formatUsingAbbrevation(false),
-            impliedVolatility: model.tickerMetrics.impliedVolatility.cleanOneDecimalP,
+            impliedVolatility: model.tickerMetrics.impliedVolatility.zeroDecimalP,
             volatility52Weeks: model.tickerMetrics.volatility52Weeks,
             revenueGrowthYoy: (model.tickerMetrics.revenueGrowthYoy * 100.0).cleanOneDecimalP,
             revenueGrowthFwd: (model.tickerMetrics.revenueGrowthFwd * 100.0).cleanOneDecimalP,
@@ -67,7 +73,7 @@ enum CollectionDetailsViewModelMapper {
             dividendFrequency: model.tickerMetrics.dividendFrequency,
             epsActual: model.tickerMetrics.epsActual.formatUsingAbbrevation(),
             epsEstimate: model.tickerMetrics.epsEstimate.formatUsingAbbrevation(),
-            beatenQuarterlyEpsEstimationCountTtm: model.tickerMetrics.beatenQuarterlyEpsEstimationCountTtm.cleanOneDecimal,
+            beatenQuarterlyEpsEstimationCountTtm: beatenQuarterlyEpsEstimationCountTtm,
             epsSurprise: model.tickerMetrics.epsSurprise.formatUsingAbbrevation(),
             revenueEstimateAvg0y: model.tickerMetrics.revenueEstimateAvg0y.formatUsingAbbrevation(),
             revenueActual: model.tickerMetrics.revenueActual.formatUsingAbbrevation(),
