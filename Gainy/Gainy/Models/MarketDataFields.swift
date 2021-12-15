@@ -96,7 +96,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         let max = ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMax_1y ?? float8(0.0)
         if ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMin_1y != nil,
            ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMax_1y != nil {
-            volatility52Weeks = (min * 100.0).cleanOneDecimal + "-" + (max * 100.0).cleanOneDecimal + "%"
+            volatility52Weeks = (min * 100.0).zeroDecimal + "-" + (max * 100.0).zeroDecimal + "%"
         }
             
         switch self {
