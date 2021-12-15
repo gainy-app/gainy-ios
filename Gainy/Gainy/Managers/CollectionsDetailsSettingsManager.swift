@@ -78,7 +78,7 @@ final class CollectionsDetailsSettingsManager {
     
     static let shared = CollectionsDetailsSettingsManager()
     
-    @UserDefault("CollectionsDetailsSettingsManager.settings_v2_test")
+    @UserDefault("CollectionsDetailsSettingsManager.settings_v1_prod")
     private var settings: [CollectionId : CollectionSettings]?
     
     //MARK: - Functions

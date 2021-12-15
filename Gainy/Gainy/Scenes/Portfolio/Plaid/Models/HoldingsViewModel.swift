@@ -149,6 +149,10 @@ final class HoldingsViewModel {
                     if settings == nil {
                         PortfolioSettingsManager.shared.setInitialSettingsForUserId(profileID, settings: defaultSettings)
                         settings = defaultSettings
+                    } else {
+                        PortfolioSettingsManager.shared.changeInterestsForUserId(profileID, interests: interests)
+                        PortfolioSettingsManager.shared.changeCategoriesForUserId(profileID, categories: categories)
+                        PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
                     
@@ -185,7 +189,7 @@ final class HoldingsViewModel {
                         self.dataSource.originalHoldings = originalHoldings
                         self.dataSource.holdings = originalHoldings
                         if let settings = settings {
-                            //self.dataSource.sortAndFilterHoldingsBy(settings)
+                            self.dataSource.sortAndFilterHoldingsBy(settings)
                         }
                         completion?()
                     }

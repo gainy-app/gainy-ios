@@ -81,6 +81,7 @@ final class HoldingsViewController: BaseViewController {
             self?.sortButton.isUserInteractionEnabled = true
             self?.linkPlaidButton.isUserInteractionEnabled = true
             self?.updateSortButton()
+            self?.updateFilterButtonTitle()
             self?.tableView.reloadData()
         }
     }
@@ -170,6 +171,32 @@ final class HoldingsViewController: BaseViewController {
         self.present(self.fpc, animated: true, completion: nil)
     }
     
+    private func updateFilterButtonTitle() {
+        
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+        
+        let selectedInterests = settings.interests.filter { item in
+            item.selected
+        }
+        let selectedCategories = settings.categories.filter { item in
+            item.selected
+        }
+        let selectedSecurityTypes = settings.securityTypes.filter { item in
+            item.selected
+        }
+        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count
+        let allSum = settings.interests.count + settings.categories.count + settings.securityTypes.count
+        let allSelected = (selectedSum == allSum ? true : false)
+        let filterApplied = (settings.disabledAccounts.count > 0 ? true : false) || settings.onlyLongCapitalGainTax || !allSelected
+       
+        self.settingsLabel.text = filterApplied ? "Filter applied" : "All"
+    }
+    
     private func showLinkUnlinkPlaid() {
         
         self.linkUnlinkVC.delegate = self
@@ -238,6 +265,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         viewModel.settings = settings
         tableView.reloadData()
+        self.updateFilterButtonTitle()
     }
 }
 

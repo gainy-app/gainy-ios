@@ -62,7 +62,7 @@ final class PortfolioSettingsManager {
     
     static let shared = PortfolioSettingsManager()
     
-    @UserDefault("PortfolioSettingsManager.settings_v3_test")
+    @UserDefault("PortfolioSettingsManager.settings_v1_prod")
     private var settings: [UserId : PortfolioSettings]?
     
     //All Sortings

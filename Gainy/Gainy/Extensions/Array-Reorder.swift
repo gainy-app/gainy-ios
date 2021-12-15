@@ -148,7 +148,6 @@ extension Array where Element == HoldingViewModel {
             }
         }.filter { model in
             
-            //TO-DO: Serhii plz check this
             let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
             
             let inInterests = model.tickerInterests.contains { item in
@@ -163,7 +162,6 @@ extension Array where Element == HoldingViewModel {
                 }
             }
             
-            //TO-DO: Serhii plz check this
             var inSec = false
             let modelSecs = model.securityTypes
             inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
