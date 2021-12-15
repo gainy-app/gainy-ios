@@ -1,13 +1,14 @@
-iOS v0.3.1 #92 available
+iOS v0.3.1 #93 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
 :new: New:
-• Portfolio migration
+• -
 
 :hammer_and_wrench: Improvements
-• Portfolio: sorting/filtering logic improved
-• Added onboarding intro video + images + fonts/texts updates
+• Portfolio: Privacy Policy updates
+• Metrics: Updated GrapchQL schema + use short_percent
+• Everything from the build #92
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
