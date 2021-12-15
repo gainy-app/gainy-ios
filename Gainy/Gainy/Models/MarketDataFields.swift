@@ -120,11 +120,11 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .sharesFloat:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.sharesFloat ?? 0).formatUsingAbbrevation(), marketDataField: self)
         case .shortRatio:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.shortRatio ?? 0).formatUsingAbbrevation(), marketDataField: self)
+            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.shortRatio ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .beta:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.beta ?? 0).formatUsingAbbrevation(), marketDataField: self)
+            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.beta ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .impliedVolatility:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.impliedVolatility ?? 0).cleanOneDecimalP, marketDataField: self)
+            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.impliedVolatility ?? 0).zeroDecimalP, marketDataField: self)
         case .volatility52Weeks:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: volatility52Weeks, marketDataField: self)
                                        
@@ -154,11 +154,11 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .priceToEarningsTtm:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.priceToEarningsTtm ?? 0.0).cleanOneDecimal, marketDataField: self)
         case .priceToSalesTtm:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.priceToSalesTtm ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.priceToSalesTtm ?? 0.0).formatUsingAbbrevation(false), marketDataField: self)
         case .priceToBookValue:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.priceToBookValue ?? 0.0).cleanOneDecimal, marketDataField: self)
         case .enterpriseValueToEbitda:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.enterpriseValueToEbitda ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "TTM", value: Float(ticker.tickerMetrics?.enterpriseValueToEbitda ?? 0.0).formatUsingAbbrevation(false), marketDataField: self)
             
         case .priceChange1m:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: (Float(ticker.tickerMetrics?.priceChange_1m ?? 0.0) * 100.0).cleanOneDecimalP, marketDataField: self)

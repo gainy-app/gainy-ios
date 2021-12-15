@@ -1,4 +1,8 @@
 extension Float {
+    var zeroDecimal: String {
+        String(format: "%.0f", self)
+    }
+    
     var cleanOneDecimal: String {
         self.truncatingRemainder(dividingBy: 1) == 0
             ? String(format: "%.0f", self)
@@ -9,6 +13,10 @@ extension Float {
         self.truncatingRemainder(dividingBy: 1) == 0
             ? String(format: "%.0f", self)
             : String(format: "%.2f", self)
+    }
+    
+    var zeroDecimalP: String {
+        String(format: "%.0f", self) + "%"
     }
     
     var cleanOneDecimalP: String {
