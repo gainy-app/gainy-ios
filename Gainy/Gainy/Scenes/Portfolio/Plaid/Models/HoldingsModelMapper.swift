@@ -22,10 +22,8 @@ struct HoldingsModelMapper {
             
             var securities: [HoldingSecurityViewModel] = []
             for holding in holdingGroup.holdings {
-                for transaction in holding.transactions {
-                    let model = HoldingSecurityViewModel(transaction: transaction, holding: holding)
-                    securities.append(model)
-                }
+                let model = HoldingSecurityViewModel(holding: holding)
+                securities.append(model)
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
@@ -49,7 +47,7 @@ struct HoldingsModelMapper {
             ]
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: holdingGroup.holdings.compactMap(\.name).joined(separator: " / "),
+                                             name: ticker?.fragments.remoteTickerDetails.name ?? "",
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              industries: ticker?.tickerIndustries ?? [],

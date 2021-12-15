@@ -101,8 +101,7 @@ final class HoldingsViewModel {
                             tickSymbols.append(symbol)
                         }
                         for holding in holdingGroup.holdings {
-                            let secTypes = holding.transactions.compactMap({$0.type}).uniqued()
-                            securityTypesRaw.append(contentsOf: secTypes)
+                            securityTypesRaw.append(holding.type ?? "")
                         }
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
@@ -184,13 +183,10 @@ final class HoldingsViewModel {
                         self.dataSource.chartViewModel = live
                         self.dataSource.profileGains = topChartGains
                         self.dataSource.originalHoldings = originalHoldings
-                        self.dataSource.holdings = self.dataSource.originalHoldings
+                        self.dataSource.holdings = originalHoldings
                         if let settings = settings {
-                            self.dataSource.sortAndFilterHoldingsBy(settings)
+                            //self.dataSource.sortAndFilterHoldingsBy(settings)
                         }
-                        
-                        
-                        
                         completion?()
                     }
                 }

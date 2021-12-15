@@ -225,7 +225,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qje-zu-p2a" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="5" width="382" height="411"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" ambiguous="YES" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Slu-Ev-dUd">
                                                             <rect key="frame" x="48" y="18.5" width="226" height="19"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
@@ -510,7 +510,7 @@
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufv-SD-vLw">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ufv-SD-vLw">
                                                                                 <rect key="frame" x="16" y="16" width="62.5" height="14.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" name="mainText"/>
@@ -566,6 +566,7 @@
                                                                             <constraint firstItem="ujg-I5-Bg6" firstAttribute="leading" secondItem="3AF-T2-rk0" secondAttribute="trailing" constant="4" id="O0F-fU-n6P"/>
                                                                             <constraint firstItem="ujg-I5-Bg6" firstAttribute="centerY" secondItem="NJv-O2-oMT" secondAttribute="centerY" id="OCV-cg-eXK"/>
                                                                             <constraint firstAttribute="bottom" secondItem="YtC-Z6-wj0" secondAttribute="bottom" constant="8" id="P9U-49-pR4"/>
+                                                                            <constraint firstItem="hxU-QX-iO9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ufv-SD-vLw" secondAttribute="trailing" constant="48" id="QET-I3-gZ7"/>
                                                                             <constraint firstItem="hxU-QX-iO9" firstAttribute="top" secondItem="J4f-lQ-zE5" secondAttribute="top" constant="16" id="T08-Zf-CZn"/>
                                                                             <constraint firstItem="Sh5-ED-C8S" firstAttribute="leading" secondItem="J4f-lQ-zE5" secondAttribute="leading" constant="16" id="Uf3-ex-tha"/>
                                                                             <constraint firstItem="YtC-Z6-wj0" firstAttribute="leading" secondItem="J4f-lQ-zE5" secondAttribute="leading" id="Wxv-be-zYi"/>
@@ -598,8 +599,8 @@
                                                                 </tableViewCell>
                                                             </prototypes>
                                                         </tableView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4A-oi-DzJ">
-                                                            <rect key="frame" x="75" y="150" width="62.5" height="14.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4A-oi-DzJ">
+                                                            <rect key="frame" x="75" y="150" width="259" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
@@ -634,6 +635,7 @@
                                                         <constraint firstItem="iNi-s4-NfB" firstAttribute="centerY" secondItem="61p-Hf-Hz3" secondAttribute="centerY" id="J6M-Cj-nnq"/>
                                                         <constraint firstItem="iNi-s4-NfB" firstAttribute="top" secondItem="BCn-ZB-Vte" secondAttribute="bottom" constant="13" id="JU4-Sw-zYT"/>
                                                         <constraint firstItem="Slu-Ev-dUd" firstAttribute="leading" secondItem="Qje-zu-p2a" secondAttribute="leading" constant="48" id="Jok-qM-Xlg"/>
+                                                        <constraint firstAttribute="trailing" secondItem="m4A-oi-DzJ" secondAttribute="trailing" constant="48" id="Kfy-GU-fmO"/>
                                                         <constraint firstAttribute="trailing" secondItem="iNi-s4-NfB" secondAttribute="trailing" constant="16" id="Ls3-XU-bnh"/>
                                                         <constraint firstItem="b4a-t9-ELz" firstAttribute="width" secondItem="ZAz-Tx-QND" secondAttribute="width" id="NaP-EI-B2w"/>
                                                         <constraint firstItem="JHz-M2-JV2" firstAttribute="leading" secondItem="Z67-1Z-iHU" secondAttribute="leading" id="ORV-ko-fyi"/>

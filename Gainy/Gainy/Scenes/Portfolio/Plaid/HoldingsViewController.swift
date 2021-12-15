@@ -81,6 +81,7 @@ final class HoldingsViewController: BaseViewController {
             self?.sortButton.isUserInteractionEnabled = true
             self?.linkPlaidButton.isUserInteractionEnabled = true
             self?.updateSortButton()
+            self?.tableView.reloadData()
         }
     }
     

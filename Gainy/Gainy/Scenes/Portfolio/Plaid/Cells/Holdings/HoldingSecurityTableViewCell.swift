@@ -23,7 +23,7 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var rangeArrowView: UIImageView!
     
     func setModel(_ model: HoldingSecurityViewModel, _ range: ScatterChartView.ChartPeriod) {
-        nameLbl.text = "\(model.name) x \(model.quantity)"
+        nameLbl.text = model.name
         progressView.progress = CGFloat(model.percentInHolding)
         balanceLbl.text = model.totalPrice.price
         progressLbl.text = (model.percentInHolding * 100).cleanOneDecimalP

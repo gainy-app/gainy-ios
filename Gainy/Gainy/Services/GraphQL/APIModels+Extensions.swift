@@ -115,4 +115,9 @@ extension Date {
     var startOfDay: Date {
         return Calendar.current.startOfDay(for: self)
     }
+    
+    var startOfTradingDay: Date {
+        let NY = Region(calendar: SwiftDate.defaultRegion.calendar, zone: Zones.americaNewYork, locale: Locales.current)
+        return DateInRegion(year: self.year, month: self.month, day: self.day, hour: 9, minute: 30, second: 0, region: NY).date
+    }
 }
