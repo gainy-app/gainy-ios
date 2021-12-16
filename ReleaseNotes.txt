@@ -1,4 +1,4 @@
-iOS v1.0 #94 available
+iOS v1.0 #95 available
 :globe_with_meridians: Server - PROD
 General improvements - MVP
 
@@ -6,7 +6,8 @@ General improvements - MVP
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio: No data placeholder
+• Hotfixes
+• Graphics for Top 20 and Watchlist collections update
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

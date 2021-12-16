@@ -32,8 +32,18 @@ final class HoldingsViewController: BaseViewController {
     
     @IBOutlet weak var settingsLabel: UILabel!
     @IBOutlet weak var sortLabel: UILabel!
-    @IBOutlet weak var sortButton: ResponsiveButton!
-    @IBOutlet weak var settingsButton: ResponsiveButton!
+    @IBOutlet weak var sortButton: ResponsiveButton! {
+        didSet {
+            sortButton.layer.cornerRadius = 8.0
+            sortButton.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var settingsButton: ResponsiveButton! {
+       didSet {
+           settingsButton.layer.cornerRadius = 8.0
+           settingsButton.clipsToBounds = true
+       }
+   }
     @IBOutlet weak var linkPlaidButton: UIButton!
     
     //MARK: - Outlets
