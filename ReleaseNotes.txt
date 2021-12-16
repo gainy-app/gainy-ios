@@ -1,6 +1,6 @@
-iOS v1.0 #96 available
+iOS v1.0 #97 available
 :globe_with_meridians: Server - PROD
-General improvements - MVP
+Release Candidate
 
 :new: New:
 • -
