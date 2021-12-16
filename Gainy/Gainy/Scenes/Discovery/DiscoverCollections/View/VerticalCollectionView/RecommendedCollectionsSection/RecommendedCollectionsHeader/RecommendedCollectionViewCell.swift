@@ -113,9 +113,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
             return
         }
-        if Constants.CollectionDetails.top20ID == self.tag {
-            backImageView.image = UIImage(named: "top20CollectionBgSmall")
-            self.imageLoaded = true
+        if self.updateImageBasedOnTag() {
             return
         }
         
@@ -131,6 +129,22 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 //            print("-----\(result)")
         }
         self.imageLoaded = true
+    }
+    
+    func updateImageBasedOnTag() -> Bool {
+        
+        if Constants.CollectionDetails.top20ID == self.tag {
+            backImageView.image = UIImage(named: "top20CollectionBg")
+            self.imageLoaded = true
+            return true
+        }
+        if Constants.CollectionDetails.watchlistCollectionID == self.tag {
+            backImageView.image = UIImage(named: "watchlistCollectionBackgroundImage")
+            self.imageLoaded = true
+            return true
+        }
+        
+        return false
     }
     
     override func didMoveToWindow() {
@@ -181,6 +195,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         self.layer.borderWidth = isTop20 ? 2.0 : 0.0
         self.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
         self.layer.cornerRadius = isTop20 ? 8.0 : 0.0
+        _ = self.updateImageBasedOnTag()
     }
 
 
