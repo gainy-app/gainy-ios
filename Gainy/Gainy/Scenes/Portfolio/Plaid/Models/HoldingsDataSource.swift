@@ -64,8 +64,8 @@ final class HoldingsDataSource: NSObject {
 //        chartViewModel.chartData = ticker.localChartData
     }
     
-    private lazy var chartDelegate: ScatterChartDelegate = {
-        let delegateObject =  ScatterChartDelegate()
+    private lazy var chartDelegate: HoldingScatterChartDelegate = {
+        let delegateObject =  HoldingScatterChartDelegate()
         delegateObject.delegate = self
         return delegateObject
     }()
@@ -162,15 +162,15 @@ extension HoldingsDataSource: UITableViewDelegate {
     }
 }
 
-extension HoldingsDataSource: ScatterChartViewDelegate {
-    func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
+extension HoldingsDataSource: HoldingScatterChartViewDelegate {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         chartRange = period
         if let rangeData = profileGains[period] {
-            chartViewModel.chartData = rangeData.chartData
-            chartViewModel.rangeGrow = rangeData.rangeGrow
-            chartViewModel.rangeGrowBalance = rangeData.rangeGrowBalance
-            chartViewModel.spGrow = rangeData.spGrow
-            chartViewModel.sypChartData = rangeData.sypChartData
+            viewModel.chartData = rangeData.chartData
+            viewModel.rangeGrow = rangeData.rangeGrow
+            viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
+            viewModel.spGrow = rangeData.spGrow
+            viewModel.sypChartData = rangeData.sypChartData
         }
         
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)

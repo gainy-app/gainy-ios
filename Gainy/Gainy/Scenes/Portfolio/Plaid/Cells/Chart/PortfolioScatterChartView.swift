@@ -10,7 +10,7 @@ import SwiftDate
 
 struct PortfolioScatterChartView: View {
     
-    init(viewModel: HoldingChartViewModel, delegate: ScatterChartDelegate) {
+    init(viewModel: HoldingChartViewModel, delegate: HoldingScatterChartDelegate) {
         self.viewModel = viewModel
         self.delegate = delegate
     }
@@ -19,7 +19,7 @@ struct PortfolioScatterChartView: View {
     var viewModel: HoldingChartViewModel
     
     @ObservedObject
-    var delegate: ScatterChartDelegate
+    var delegate: HoldingScatterChartDelegate
     
     
     @State
@@ -27,7 +27,7 @@ struct PortfolioScatterChartView: View {
         didSet {
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
-            delegate.range = selectedTag
+            delegate.changeRange(range: selectedTag, viewModel: viewModel)
             hapticTouch.impactOccurred()
             GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         }

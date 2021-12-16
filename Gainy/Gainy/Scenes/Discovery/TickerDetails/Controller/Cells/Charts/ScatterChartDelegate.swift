@@ -27,3 +27,22 @@ class ScatterChartDelegate: ObservableObject {
         delegate?.comparePressed()
     }
 }
+
+
+protocol HoldingScatterChartViewDelegate: AnyObject {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
+    func comparePressed()
+}
+
+class HoldingScatterChartDelegate: ObservableObject {
+    
+    weak var delegate: HoldingScatterChartViewDelegate?
+    
+    func changeRange(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+        delegate?.chartPeriodChanged(period: range, viewModel: viewModel)
+    }
+    
+    func comparePressed() {
+        delegate?.comparePressed()
+    }
+}
