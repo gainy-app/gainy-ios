@@ -160,13 +160,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             secTableHeight.constant = 0.0
         } else {
             expandBtn.isHidden = false
-            let attrArr = model.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
-            var totalList = NSMutableAttributedString.init(string: "")
-            for share in attrArr {
-                totalList.append(share)
-                totalList.append(" ".attr())
-            }
-            transactionsTotalLbl.attributedText = totalList
+            transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
@@ -180,16 +174,10 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             expandBtn.isSelected = isExpanded
             securitiesTableView.isHidden = !isExpanded
             if let holding = holding {
-                if isExpanded {
+                if !isExpanded {
                     transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
-                    let attrArr = holding.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
-                    var totalList = NSMutableAttributedString.init(string: "")
-                    for share in attrArr {
-                        totalList.append(share)
-                        totalList.append(" ".attr())
-                    }
-                    transactionsTotalLbl.attributedText = totalList
+                    transactionsTotalLbl.attributedText = holding.holdingsCount
                 }
             }
         }

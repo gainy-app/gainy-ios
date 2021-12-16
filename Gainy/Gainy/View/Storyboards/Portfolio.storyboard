@@ -67,7 +67,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="79" width="414" height="468"/>
+                                <rect key="frame" x="0.0" y="79" width="414" height="471"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -93,13 +93,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="655.5" width="350" height="57.5"/>
+                                <rect key="frame" x="32" y="657" width="350" height="56"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="563" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="566" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1309,13 +1309,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="627.5" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="629" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="76" width="350" height="519.5"/>
+                                <rect key="frame" x="32" y="76" width="350" height="521"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -1353,8 +1353,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="HHy-Lw-Y76">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="no_holdings_back" translatesAutoresizingMaskIntoConstraints="NO" id="G8Y-tg-Sgt">
-                                <rect key="frame" x="0.0" y="159" width="414" height="367.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="no_holdings_back" translatesAutoresizingMaskIntoConstraints="NO" id="G8Y-tg-Sgt">
+                                <rect key="frame" x="22" y="134" width="370" height="393.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-w8-DmJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -1388,7 +1388,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-2w-RgT">
-                                <rect key="frame" x="32" y="542.5" width="350" height="38.5"/>
+                                <rect key="frame" x="32" y="543.5" width="350" height="37.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1398,17 +1398,17 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="HHy-Lw-Y76" secondAttribute="trailing" id="3Gd-IZ-MH9"/>
-                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" id="5QJ-aV-cNU"/>
+                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" constant="22" id="5QJ-aV-cNU"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="leading" secondItem="q12-ty-27c" secondAttribute="leading" id="751-sM-aTk"/>
                             <constraint firstItem="HHy-Lw-Y76" firstAttribute="top" secondItem="9sm-hl-fhu" secondAttribute="top" id="Eg2-Zv-IcN"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="top" secondItem="G8Y-tg-Sgt" secondAttribute="bottom" constant="16" id="J3B-WG-saD"/>
                             <constraint firstItem="HHy-Lw-Y76" firstAttribute="leading" secondItem="9sm-hl-fhu" secondAttribute="leading" id="MoO-rj-pDR"/>
                             <constraint firstItem="q12-ty-27c" firstAttribute="trailing" secondItem="wZc-w8-DmJ" secondAttribute="trailing" id="Pbv-1t-QzG"/>
                             <constraint firstItem="Rup-Ob-90A" firstAttribute="bottom" secondItem="wZc-w8-DmJ" secondAttribute="bottom" constant="32" id="UGs-Yk-Nil"/>
-                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="top" secondItem="Rup-Ob-90A" secondAttribute="top" constant="115" id="ZA5-fD-94E"/>
+                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="top" secondItem="Rup-Ob-90A" secondAttribute="top" constant="90" id="ZA5-fD-94E"/>
                             <constraint firstItem="q12-ty-27c" firstAttribute="leading" secondItem="wZc-w8-DmJ" secondAttribute="leading" id="akq-8U-hy2"/>
                             <constraint firstItem="wZc-w8-DmJ" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" constant="32" id="bdV-sz-LJn"/>
-                            <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="G8Y-tg-Sgt" secondAttribute="trailing" id="bz5-YD-wqB"/>
+                            <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="G8Y-tg-Sgt" secondAttribute="trailing" constant="22" id="bz5-YD-wqB"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="trailing" secondItem="q12-ty-27c" secondAttribute="trailing" id="cSU-ly-Ysq"/>
                             <constraint firstItem="wZc-w8-DmJ" firstAttribute="top" secondItem="q12-ty-27c" secondAttribute="bottom" constant="52" id="fx4-cO-557"/>
                             <constraint firstAttribute="bottom" secondItem="HHy-Lw-Y76" secondAttribute="bottom" id="h9a-Lw-6KS"/>
@@ -1424,23 +1424,107 @@
             </objects>
             <point key="canvasLocation" x="837.68115942028987" y="794.86607142857144"/>
         </scene>
+        <!--Holdings In Progress View Controller-->
+        <scene sceneID="h5S-pT-eCH">
+            <objects>
+                <viewController storyboardIdentifier="HoldingsInProgressViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BLS-qm-XBM" customClass="HoldingsInProgressViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sxy-B6-fLM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="onboardingGradient" translatesAutoresizingMaskIntoConstraints="NO" id="4Zf-Wo-LpF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="holdings_in_progress" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-gv-H6K">
+                                <rect key="frame" x="0.0" y="74" width="414" height="549.5"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-cx-pen" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="766" width="350" height="64"/>
+                                <color key="backgroundColor" name="mainText"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="5OQ-7X-MI0"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Go to Discovery">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="moveAction:" destination="BLS-qm-XBM" eventType="touchUpInside" id="qQl-5Z-HKU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To connect your portfolio it might take a few minutes to a couple hours. Please get back shortly." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
+                                <rect key="frame" x="32" y="657" width="350" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sAJ-U9-vw5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work in progress" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh3-qn-c7V">
+                                <rect key="frame" x="32" y="603.5" width="350" height="37.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Z8i-BG-c4t"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Zf-Wo-LpF" firstAttribute="top" secondItem="sxy-B6-fLM" secondAttribute="top" id="1k9-Hs-9Ci"/>
+                            <constraint firstItem="4Zf-Wo-LpF" firstAttribute="leading" secondItem="sxy-B6-fLM" secondAttribute="leading" id="47x-l1-PzX"/>
+                            <constraint firstItem="Z8i-BG-c4t" firstAttribute="bottom" secondItem="X8f-cx-pen" secondAttribute="bottom" constant="32" id="CXb-HZ-ULj"/>
+                            <constraint firstItem="Z8i-BG-c4t" firstAttribute="trailing" secondItem="X8f-cx-pen" secondAttribute="trailing" constant="32" id="Ev6-92-p7Q"/>
+                            <constraint firstItem="zyM-gv-H6K" firstAttribute="top" secondItem="Z8i-BG-c4t" secondAttribute="top" constant="30" id="FuJ-go-Jyo"/>
+                            <constraint firstItem="Z8i-BG-c4t" firstAttribute="trailing" secondItem="zyM-gv-H6K" secondAttribute="trailing" id="GQy-G4-ev0"/>
+                            <constraint firstItem="X8f-cx-pen" firstAttribute="leading" secondItem="Z8i-BG-c4t" secondAttribute="leading" constant="32" id="HQR-JZ-sfy"/>
+                            <constraint firstItem="X8f-cx-pen" firstAttribute="top" secondItem="Ziq-NV-Kiz" secondAttribute="bottom" constant="53" id="Hfi-5y-2aM"/>
+                            <constraint firstItem="Zh3-qn-c7V" firstAttribute="top" secondItem="zyM-gv-H6K" secondAttribute="bottom" constant="-20" id="Q5E-8o-4o5"/>
+                            <constraint firstAttribute="bottom" secondItem="4Zf-Wo-LpF" secondAttribute="bottom" id="SDJ-FZ-Wru"/>
+                            <constraint firstItem="Ziq-NV-Kiz" firstAttribute="top" secondItem="Zh3-qn-c7V" secondAttribute="bottom" constant="16" id="dF6-Ja-Xkw"/>
+                            <constraint firstItem="Z8i-BG-c4t" firstAttribute="trailing" secondItem="4Zf-Wo-LpF" secondAttribute="trailing" id="dSX-ez-PMt"/>
+                            <constraint firstItem="Zh3-qn-c7V" firstAttribute="leading" secondItem="Ziq-NV-Kiz" secondAttribute="leading" id="fj8-qL-rl2"/>
+                            <constraint firstItem="Ziq-NV-Kiz" firstAttribute="leading" secondItem="Z8i-BG-c4t" secondAttribute="leading" constant="32" id="h6S-GS-joD"/>
+                            <constraint firstAttribute="trailing" secondItem="Ziq-NV-Kiz" secondAttribute="trailing" constant="32" id="i3J-LX-oBc"/>
+                            <constraint firstItem="zyM-gv-H6K" firstAttribute="leading" secondItem="Z8i-BG-c4t" secondAttribute="leading" id="lVj-SM-KDt"/>
+                            <constraint firstItem="Zh3-qn-c7V" firstAttribute="trailing" secondItem="Ziq-NV-Kiz" secondAttribute="trailing" id="yVK-u7-b2m"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SCs-sz-bSQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="795"/>
+        </scene>
     </scenes>
     <designables>
+        <designable name="X8f-cx-pen">
+            <size key="intrinsicContentSize" width="139" height="33"/>
+        </designable>
         <designable name="arh-iU-hih">
-            <size key="intrinsicContentSize" width="187" height="33.5"/>
+            <size key="intrinsicContentSize" width="185.5" height="33"/>
         </designable>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="149" height="33.5"/>
+            <size key="intrinsicContentSize" width="147" height="33"/>
         </designable>
         <designable name="wZc-w8-DmJ">
-            <size key="intrinsicContentSize" width="74.5" height="33.5"/>
+            <size key="intrinsicContentSize" width="74.5" height="33"/>
         </designable>
     </designables>
     <resources>
         <image name="DotsBig" width="303" height="2"/>
         <image name="add_account" width="28" height="28"/>
+        <image name="holdings_in_progress" width="542" height="438"/>
         <image name="match_circle" width="25" height="25"/>
-        <image name="no_holdings_back" width="375" height="438"/>
+        <image name="no_holdings_back" width="542" height="438"/>
         <image name="onboardingGradient" width="375" height="812"/>
         <image name="portf_plaid_intro" width="375" height="331"/>
         <image name="reorder" width="16" height="16"/>

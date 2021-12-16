@@ -16,6 +16,8 @@ final class PortfolioViewController: BaseViewController {
     lazy var noPlaidVC = NoPlaidViewController.instantiate(.portfolio)
     lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
     lazy var noHoldingsVC = NoHoldingsViewController.instantiate(.portfolio)
+    lazy var inProgressHoldingsVC = HoldingsInProgressViewController.instantiate(.portfolio)
+    
     
     //MARK: - Outlets
     
@@ -23,7 +25,7 @@ final class PortfolioViewController: BaseViewController {
     
     //MARK: - State
     enum LinkState {
-        case noLink, linkedNoHoldings, linkHasHoldings
+        case noLink, linkedNoHoldings, linkHasHoldings, inProgress
     }
     
     private var state: LinkState = .noLink {
@@ -51,7 +53,13 @@ final class PortfolioViewController: BaseViewController {
                 holdingsVC.coordinator = mainCoordinator
                 if !holdingsVC.viewModel.haveHoldings {
                     holdingsVC.loadData()
-                }                
+                }
+            case .inProgress:
+                if !children.contains(inProgressHoldingsVC) {
+                    removeAllChildVCs()
+                    inProgressHoldingsVC.delegate = self
+                    addViewController(inProgressHoldingsVC, view: containerView)
+                }
             }
         }
     }
@@ -93,7 +101,7 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {
-        state = .linkedNoHoldings
+        state = .inProgress
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {
@@ -105,5 +113,11 @@ extension PortfolioViewController: HoldingsViewControllerDelegate {
 extension PortfolioViewController: NoHoldingsViewControllerDelegate {
     func reconnectPressed(vc: NoHoldingsViewController) {
         state = .linkHasHoldings
+    }
+}
+
+extension PortfolioViewController: HoldingsInProgressViewControllerDelegate {
+    func discoveryPressed(vc: HoldingsInProgressViewController) {
+        tabBarController?.selectedIndex = 0
     }
 }

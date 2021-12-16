@@ -221,6 +221,11 @@ class TickerInfo {
             
             chartsDS.notify(queue: queue) {
                 self.isChartDataLoaded = true
+                if let chartCache = self.chartsCache[.d1] {
+                    self.updateChartData(chartCache.chartData)
+                    self.medianGrow = chartCache.medianGrow
+                    self.haveMedian = chartCache.haveMedian
+                }
                 DispatchQueue.main.async {
                     chartsLoaded()
                 }

@@ -91,6 +91,7 @@
 		33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */; };
 		33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */; };
 		3372ED352710490300D8D8E1 /* DDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372ED342710490300D8D8E1 /* DDLog.swift */; };
+		3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -556,6 +557,7 @@
 		33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewModel.swift; sourceTree = "<group>"; };
 		3372ED342710490300D8D8E1 /* DDLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLog.swift; sourceTree = "<group>"; };
+		3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsInProgressViewController.swift; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -2210,6 +2212,7 @@
 			isa = PBXGroup;
 			children = (
 				900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */,
+				3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */,
 			);
 			path = NoHoldings;
 			sourceTree = "<group>";
@@ -2815,6 +2818,7 @@
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
 				33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
+				3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
 				3A5ADA7C268DA179008659E8 /* SwipeController.swift in Sources */,
 				85CD155126F95022001C060C /* PersonalInfoViewController.swift in Sources */,
@@ -3007,7 +3011,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Dev Stage";
@@ -3130,7 +3134,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Prod Stage";
@@ -3314,7 +3318,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3342,7 +3346,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
