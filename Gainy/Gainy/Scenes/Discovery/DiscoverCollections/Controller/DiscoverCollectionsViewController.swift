@@ -480,8 +480,26 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
-        UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        UserProfileManager.shared.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        let items = snapshot.itemIdentifiers(inSection: .yourCollections)
+        let watchlistItems = items.filter { item in
+            if let itemModel = item as? YourCollectionViewCellModel {
+                return itemModel.id == Constants.CollectionDetails.watchlistCollectionID
+            }
+            return false
+        }
+        var watchlistIndex = -1
+        if let watchlistModel = watchlistItems.first {
+            watchlistIndex = items.firstIndex(of: watchlistModel) ?? -1
+        }
+        
+        var fromIndex = sourceIndexPath.row
+        var toIndex = destinationIndexPath.row
+        fromIndex = fromIndex + (fromIndex > watchlistIndex ? -1 : 0)
+        toIndex = toIndex + (fromIndex < watchlistIndex && toIndex < watchlistIndex ? 0 : -1)
+        if fromIndex != watchlistIndex {
+            UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+            UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
+        }
         
         if dragDirectionIsTopBottom {
             snapshot.moveItem(sourceItem, afterItem: destItem)
