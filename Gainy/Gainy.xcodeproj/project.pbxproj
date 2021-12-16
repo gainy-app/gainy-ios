@@ -92,6 +92,7 @@
 		33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */; };
 		3372ED352710490300D8D8E1 /* DDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372ED342710490300D8D8E1 /* DDLog.swift */; };
 		3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */; };
+		3376FE16276B44060098CDF7 /* SFCompactRounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -558,6 +559,7 @@
 		33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewModel.swift; sourceTree = "<group>"; };
 		3372ED342710490300D8D8E1 /* DDLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLog.swift; sourceTree = "<group>"; };
 		3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsInProgressViewController.swift; sourceTree = "<group>"; };
+		3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.ttf"; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -1965,6 +1967,7 @@
 				3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */,
 				3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */,
 				3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */,
+				3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */,
 				3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */,
 				3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */,
 				3AFE1A86266E540C0091E799 /* SFProDisplay-Bold.ttf */,
@@ -2368,6 +2371,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3376FE16276B44060098CDF7 /* SFCompactRounded-Bold.ttf in Resources */,
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				85E4A2C92762101A00C0E5C5 /* SearchTickersAlgolia.graphql in Resources */,
 				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
