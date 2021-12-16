@@ -42,11 +42,13 @@ final class CollectionsManager {
     
     //MARK: - Fetching
 
-    func loadNewCollectionDetails(_ colID: Int) {
+    func loadNewCollectionDetails(_ colID: Int, completion: @escaping () -> Void) {
+        Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery.init(ids: [colID])) {[unowned self] result in
             switch result {
             case .success(let graphQLResult):
                 guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                    completion()
                     return
                 }
                 for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
@@ -79,12 +81,18 @@ final class CollectionsManager {
                 newCollectionFetched.send(.fetchedFailed)
                 break
             }
+            completion()
         }
     }
     
-    func reloadTop20() {
-        guard collections.contains(where: {$0.id == Constants.CollectionDetails.top20ID}) else {return}
-        loadNewCollectionDetails(Constants.CollectionDetails.top20ID)
+    func reloadTop20(completion: @escaping () -> Void) {
+        guard collections.contains(where: {$0.id == Constants.CollectionDetails.top20ID}) else {
+            completion()
+            return
+        }
+        loadNewCollectionDetails(Constants.CollectionDetails.top20ID) {
+            completion()
+        }
     }
     
     func loadWatchlistCollection(completion: @escaping () -> Void) {
@@ -143,7 +151,9 @@ final class CollectionsManager {
     
     func reloadUnfetched() {
         failedToLoad.forEach({
-            loadNewCollectionDetails($0)
+            loadNewCollectionDetails($0) {
+                
+            }
         })
     }
 }

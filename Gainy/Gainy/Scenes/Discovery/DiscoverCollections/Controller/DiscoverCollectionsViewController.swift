@@ -298,7 +298,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         )
         
         //Prefetching
-        CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id)
+        CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
+            
+        }
         
         showNetworkLoader()
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in

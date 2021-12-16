@@ -29,6 +29,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var currentCollectionToChange: Int = 0
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
+    private var needTop20Reload = false
     
     //Analytics
     var collectionID: Int {
@@ -42,7 +43,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
-    fileprivate func handleLoginEvent() {
+    fileprivate func handleNotificationsEvents() {
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
@@ -70,6 +71,20 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     }
                 }
             }
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileInterests)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.needTop20Reload = true
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileCategories)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.needTop20Reload = true
         }.store(in: &cancellables)
     }
     
@@ -279,7 +294,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         searchController?.coordinator = coordinator
-        handleLoginEvent()
+        handleNotificationsEvents()
         setupPanel()
         
         CollectionsManager.shared.newCollectionsPublisher
@@ -754,32 +769,43 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadCollectionIfNeeded()
+        if self.needTop20Reload {
+            self.showNetworkLoader()
+            TickerLiveStorage.shared.clearMatchData()
+            CollectionsManager.shared.reloadTop20 {
+                self.hideLoader()
+                self.collectionView.reloadData()
+            }
+        } else {
+            reloadCollectionIfNeeded()
+        }
     }
     
     private func reloadCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
-            
-            if let profileID = UserProfileManager.shared.profileID {
+            self.reloadCollection()
+        }
+    }
+    
+    private func reloadCollection() {
+        guard let profileID = UserProfileManager.shared.profileID else { return }
+        guard !UserProfileManager.shared.favoriteCollections.isEmpty else {
+            self.onDiscoverCollections?(false)
+            return
+        }
+        
+        getRemoteData(loadProfile: true) {
+            DispatchQueue.main.async { [weak self] in
+                self?.initViewModels()
+                self?.centerInitialCollectionInTheCollectionView()
+                self?.hideLoader()
                 
                 let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
                 let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-                                
-                if UserProfileManager.shared.favoriteCollections.isEmpty {
-                    self.onDiscoverCollections?(false)
-                } else {
-                    getRemoteData(loadProfile: true) {
-                        DispatchQueue.main.async { [weak self] in
-                            self?.initViewModels()
-                            self?.centerInitialCollectionInTheCollectionView()
-                            
-                            if !shown {
-                                UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
-                                self?.onDiscoverCollections?(true)
-                                return
-                            }
-                        }
-                    }
+                if !shown {
+                    UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                    self?.onDiscoverCollections?(true)
+                    return
                 }
             }
         }

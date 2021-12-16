@@ -582,7 +582,9 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID)
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                    
+                }
             }
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
