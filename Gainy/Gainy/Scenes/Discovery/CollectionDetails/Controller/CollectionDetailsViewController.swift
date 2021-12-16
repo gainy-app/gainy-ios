@@ -309,15 +309,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         TickerLiveStorage.shared.matchScoreClearedPublisher
             .receive(on: RunLoop.main)
             .sink {[unowned self] _ in
-            dprint("Reloading visible cells after MS clear")
-            if var snapshot = self.dataSource?.snapshot() {
-                if snapshot.itemIdentifiers.count > 0 {
-                    let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                    snapshot.reloadItems(ids)
+                dprint("Reloading visible cells after MS clear")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    if var snapshot = self.dataSource?.snapshot() {
+                        if snapshot.itemIdentifiers.count > 0 {
+                            let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                            snapshot.reloadItems(ids)
+                        }
+                        self.dataSource?.apply(snapshot, animatingDifferences: false)
+                    }
                 }
-                self.dataSource?.apply(snapshot, animatingDifferences: false)
-            }
-        }.store(in: &self.cancellables)
+            }.store(in: &self.cancellables)
         
         addLoaders()
     }
