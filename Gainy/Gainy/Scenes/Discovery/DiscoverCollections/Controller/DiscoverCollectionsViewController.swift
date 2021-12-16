@@ -90,6 +90,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 cell.delegate = cell
                 
             case let (cell as RecommendedCollectionViewCell, modelItem as RecommendedCollectionViewCellModel):
+                cell.tag = modelItem.id
                 cell.onPlusButtonPressed = { [weak self] in
                     cell.isUserInteractionEnabled = false
                     

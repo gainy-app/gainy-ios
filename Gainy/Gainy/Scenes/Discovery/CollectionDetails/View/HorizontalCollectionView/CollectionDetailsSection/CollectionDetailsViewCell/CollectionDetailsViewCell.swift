@@ -218,6 +218,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     ) {
         self.collectionID = collectionId
         self.stocksCount = Int(stocksAmount) ?? 0
+        collectionHorizontalView.tag = collectionId
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,

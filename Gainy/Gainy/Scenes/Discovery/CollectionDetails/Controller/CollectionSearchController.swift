@@ -75,6 +75,7 @@ final class CollectionSearchController: NSObject {
                         let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0)
                             ? .checked
                             : .unchecked
+                        cell.tag = collection.id ?? 0
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
@@ -108,6 +109,7 @@ final class CollectionSearchController: NSObject {
                         let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(collection.id)
                             ? .checked
                             : .unchecked
+                        cell.tag = collection.id ?? 0
                         cell.configureWith(name: collection.name,
                                            imageUrl: collection.imageUrl,
                                            description: collection.description,
