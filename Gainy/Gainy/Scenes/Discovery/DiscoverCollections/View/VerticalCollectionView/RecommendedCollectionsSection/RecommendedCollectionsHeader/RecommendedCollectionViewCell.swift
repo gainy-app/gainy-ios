@@ -134,7 +134,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     func updateImageBasedOnTag() -> Bool {
         
         if Constants.CollectionDetails.top20ID == self.tag {
-            backImageView.image = UIImage(named: "top20CollectionBg")
+            backImageView.image = UIImage(named: "top20CollectionBgSmall")
             self.imageLoaded = true
             return true
         }
