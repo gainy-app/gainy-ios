@@ -1,4 +1,6 @@
 import UIKit
+import AppTrackingTransparency
+import AdSupport
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Internal
@@ -62,10 +64,30 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 navController.setStatusBar(backgroundColor: .black)
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            self?.requestTrackingAuthorization()
+        }
     }
 
     // MARK: Private
-
+    
+    private func requestTrackingAuthorization() {
+        guard #available(iOS 14, *) else { return }
+        ATTrackingManager.requestTrackingAuthorization { status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized:
+                    dprint("Got IDFA")
+                case .denied, .restricted:
+                    dprint("Denied IDFA")
+                case .notDetermined:
+                    dprint("Not Determined IDFA")
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
     // MARK: Properties
 
     private lazy var appCoordinator: Coordinator = AppCoordinator(

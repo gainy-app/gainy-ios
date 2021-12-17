@@ -7,6 +7,7 @@ import GoogleSignIn
 @_exported import BugfenderSDK
 import LinkKit
 
+
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal
