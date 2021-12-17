@@ -156,11 +156,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         if model.securities.isEmpty {
             expandBtn.isHidden = true
-            transactionsTotalLbl.attributedText = "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
+            transactionsTotalLbl.attributedText =  "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
             secTableHeight.constant = 0.0
         } else {
             expandBtn.isHidden = false
-            transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
+            transactionsTotalLbl.attributedText = model.holdingsCount
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
@@ -174,7 +174,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             expandBtn.isSelected = isExpanded
             securitiesTableView.isHidden = !isExpanded
             if let holding = holding {
-                if !isExpanded {
+                if isExpanded {
                     transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
                     transactionsTotalLbl.attributedText = holding.holdingsCount

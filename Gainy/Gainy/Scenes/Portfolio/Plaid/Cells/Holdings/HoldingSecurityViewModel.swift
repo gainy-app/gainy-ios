@@ -33,7 +33,7 @@ struct HoldingSecurityViewModel {
         if type == "equity" {
             type = "Shares"
         }
-        self.name = holding.name ?? ""
+        self.name = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "")  : (holding.name ?? "")) + " x\(holding.quantity ?? 0.0)"
         self.type = type
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
