@@ -18,7 +18,7 @@ final class ViewControllerFactory {
     }
     
     func instantiateMainTab(coordinator: MainCoordinator) -> MainTabBarViewController {
-        let vc = MainTabBarViewController.instantiate(.discovery)        
+        let vc = MainTabBarViewController.instantiate(.discovery)
         return vc
     }
     
@@ -26,11 +26,8 @@ final class ViewControllerFactory {
         let vc = LaunchScreenViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
         vc.authorizationManager = authorizationManager
-        if let betaDisclaimerWasShown = BetaDisclaimerViewController.betaDisclaimerWasShown {
-            if !betaDisclaimerWasShown {
-                vc.betaDisclaimerViewController = self.initializeBetaDisclaimer(coordinator: coordinator)
-            }
-        } else {
+        
+        if !BetaDisclaimerViewController.betaDisclaimerWasShown {
             vc.betaDisclaimerViewController = self.initializeBetaDisclaimer(coordinator: coordinator)
         }
         return vc

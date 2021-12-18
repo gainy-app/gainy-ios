@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -117,7 +117,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="view all">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -176,7 +176,7 @@
                                             <attributedString key="attributedTitle">
                                                 <fragment content="view all">
                                                     <attributes>
-                                                        <font key="NSFont" size="14" name="SFProDisplay-Medium"/>
+                                                        <font key="NSFont" metaFont="system" size="14"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                     </attributes>
                                                 </fragment>
@@ -589,7 +589,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legal address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZK-sD-BwV">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legal address (optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZK-sD-BwV">
                                         <rect key="frame" x="48" y="240" width="334" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="MAy-SJ-wwV"/>
@@ -907,7 +907,7 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="8AG-GZ-RBx">
-            <size key="intrinsicContentSize" width="70" height="30.5"/>
+            <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="BIg-BP-mtL">
             <size key="intrinsicContentSize" width="116" height="32"/>
@@ -931,7 +931,7 @@
             <size key="intrinsicContentSize" width="53" height="32"/>
         </designable>
         <designable name="l1e-sc-Ubw">
-            <size key="intrinsicContentSize" width="70" height="30.5"/>
+            <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="yj6-GW-26L">
             <size key="intrinsicContentSize" width="16" height="22"/>

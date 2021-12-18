@@ -23,18 +23,19 @@ final class NoPlaidViewController: BaseViewController {
     override func plaidLinked() {
         super.plaidLinked()
         
+        GainyAnalytics.logEvent("portfolio_plaid_link_success")
         delegate?.plaidLinked(controller: self)
     }
     
     override func plaidLinkFailed() {
         super.plaidLinkFailed()
-        
+        GainyAnalytics.logEvent("portfolio_plaid_link_failed")
     }
     
     
     //MARK: - Action
     @IBAction func plaidLinkAction(_ sender: Any) {
-        
+        GainyAnalytics.logEvent("portfolio_plaid_link_pressed")
         guard let profileID = UserProfileManager.shared.profileID else {return}
         
         showNetworkLoader()

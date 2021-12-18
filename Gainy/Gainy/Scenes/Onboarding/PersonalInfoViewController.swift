@@ -247,7 +247,6 @@ extension PersonalInfoViewController: UITextFieldDelegate {
         let filled = firstName?.count ?? 0 > 0
         && lastName?.count ?? 0 > 0
         && email?.count ?? 0 > 0
-        && self.legalAddressTextView.text?.count ?? 0 > 0
      
    
         let canRegister = filled && self.isValidEmailString(emailString: self.emailTextField.text ?? "")

@@ -191,7 +191,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     //MARK: - Actions
     
     @IBAction func toggleExpandAction(_ sender: Any) {
+        
         isExpanded.toggle()
+        
+        if isExpanded {
+            GainyAnalytics.logEvent("portfolio_plaid_holding_details_expanded")
+        } else {
+            GainyAnalytics.logEvent("portfolio_plaid_holding_details_collapsed")
+        }
         if let holding = holding {
             cellHeightChanged?(holding)
         }
