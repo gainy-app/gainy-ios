@@ -20,8 +20,11 @@ struct HoldingSecurityViewModel {
     let absoluteGains: [ScatterChartView.ChartPeriod : Float]
     let relativeGains: [ScatterChartView.ChartPeriod : Float]
     
-    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String) {
-        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "", relativeGains[range]?.cleanOneDecimalP ?? "" )
+    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
+        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "",
+                relativeGains[range]?.cleanOneDecimalP ?? "",
+                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         
     }
     

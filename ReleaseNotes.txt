@@ -1,4 +1,4 @@
-iOS v1.0 #100 available
+iOS v1.0 #101 available
 :globe_with_meridians: Server - PROD
 Release Candidate
 
@@ -6,7 +6,7 @@ Release Candidate
 • -
 
 :hammer_and_wrench: Improvements
-• Hotfixes
+• Colors of holdings stats corrected
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
