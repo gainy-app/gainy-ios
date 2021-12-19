@@ -73,27 +73,35 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 return cell
             }
             //Loading tickers data!
-            recurLock.lock()
+            
             if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
                 
+                
+                
                 let dispatchGroup = DispatchGroup()
-                var loadingItems: Int  = 0
+                
+                
+                //Realtime prices
+                Task(priority: .utility) {
+                    
+                
+                
                 if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
-                    loadingItems += 1
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
                         self?.isLoadingTickers = true
                     }
                     dprint("Fetching dt started \(model.tickerSymbol)")
-                    dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                    let symbols = self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []
+                    TickersLiveFetcher.shared.getSymbolsData(symbols,  {
                         dispatchGroup.leave()
                         dprint("Fetching dt ended \(model.tickerSymbol)")
                     }
                 }
+                
+                //Match Scores
                 if let collectionID = self?.collectionID, !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol), collectionID >= 0 {
-                    loadingItems += 1
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
@@ -107,8 +115,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         self?.sortSections()
                     }
                 }
-                if loadingItems > 0 {
-                dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                                                             
                     dprint("Fetching ended \(model.tickerSymbol)")
                     guard let self = self else {return}
                     self.isLoadingTickers = false
@@ -119,14 +126,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         }
                         self.dataSource?.apply(snapshot, animatingDifferences: true)
                     }
-                })
+               
                 } else {
                     cell?.hideSkeleton()
                 }
             } else {
                 cell?.showAnimatedGradientSkeleton()
             }
-            recurLock.unlock()
             
             if indexPath.row == (self?.cards.count ?? 0) - 1 && self?.cards.count ?? 0 != (self?.stocksCount ?? 0) {
                 //isLoadingTickers = true
@@ -152,10 +158,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     // MARK: Internal
     
-    private var isLoadingTickers: Bool = false {
+    @MainActor private var isLoadingTickers: Bool = false {
         didSet {
             if isLoadingTickers {
-                
                 for cell in internalCollectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.showAnimatedGradientSkeleton()

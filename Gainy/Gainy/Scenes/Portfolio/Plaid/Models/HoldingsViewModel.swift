@@ -40,8 +40,11 @@ final class HoldingsViewModel {
     
     private var config = Configuration()
     
-    func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
-        DispatchQueue.global().async {
+    enum HoldingsLoadError: Error {
+        case noHoldings
+    }
+    
+    func loadHoldingsAndSecurities() async throws {
             if let profileID = UserProfileManager.shared.profileID {
                 
                 let loadGroup = DispatchGroup()
@@ -52,8 +55,7 @@ final class HoldingsViewModel {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
                             NotificationManager.shared.showError("Sorry, you have no holdings")
-                            completion?()
-                            return
+                            throw HoldingsLoadError.noHOldings
                         }
                         self?.holdingGroups = holdingsCount.compactMap({$0})
                         self?.portfolioGains = portfolioGains.first
@@ -154,9 +156,8 @@ final class HoldingsViewModel {
                     }
                     
                     
-                    TickersLiveFetcher.shared.getMatchScores(symbols: tickSymbols) {
-                        
-                        
+                    
+                        let matchesLoaded = await TickersLiveFetcher.shared.getAsyncMatchScores(symbols: tickSymbols)
                         
                         let topChartGains = HoldingsModelMapper.topChartGains(chartsCache: self.chartsCache,
                                                                               sypChartsCache: self.sypChartsCache,
@@ -191,9 +192,8 @@ final class HoldingsViewModel {
                         }
                         completion?()
                     }
-                }
+              
             }
-        }
     }
     
     init() {

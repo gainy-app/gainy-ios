@@ -16,13 +16,13 @@ extension Array {
     }
 }
 
-final class TickersLiveFetcher {
+
+actor TickersLiveFetcher {
     
     static let shared = TickersLiveFetcher()
     
     //MARK: - Inner
     
-    @Atomic
     private var currentlyFetching: Set<String> = []
     
     //MARK: - Public
@@ -106,9 +106,9 @@ final class TickersLiveFetcher {
                     }
                 }
             } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
-                completion()
-            })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    completion()
+                })
             }
         }
     }
@@ -130,7 +130,7 @@ final class TickersLiveFetcher {
             switch result {
             case .success(let graphQLResult):
                 for data in (graphQLResult.data?.getMatchScoresByCollection?.compactMap({$0?.fragments.liveMatch}) ?? []) {
-                    TickerLiveStorage.shared.setMatchData(data.symbol, data: data)                    
+                    TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
                 }
                 completion()
             case .failure(let error):
@@ -140,7 +140,7 @@ final class TickersLiveFetcher {
         }
     }
     
-    func getMatchScores(symbols: [String], _ completion: @escaping (() -> Void)) {        
+    func getMatchScores(symbols: [String], _ completion: @escaping (() -> Void)) {
         guard let profileID = UserProfileManager.shared.profileID else {
             dprint("Missing profileID")
             completion()
@@ -165,7 +165,7 @@ final class TickersLiveFetcher {
     /// - Parameters:
     ///   - collectionIds: collection IDs to load
     ///   - completion: when loading completed/failed
-    func getMatchScores(collectionIds: [Int], _ completion: @escaping (() -> Void)) {        
+    func getMatchScores(collectionIds: [Int], _ completion: @escaping (() -> Void)) {
         guard let profileID = UserProfileManager.shared.profileID else {
             dprint("Missing profileID")
             completion()
@@ -198,5 +198,91 @@ final class TickersLiveFetcher {
             completion()
         }
         
+    }
+    
+    
+    
+    //MARK: - Async/Await
+    
+    private func getAsyncMatchScore(profileId: Int, collectionId: Int) async -> [LiveMatch] {
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileId, collectionId: collectionId)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    let matches = (graphQLResult.data?.getMatchScoresByCollection?.compactMap({$0?.fragments.liveMatch}) ?? [])
+                    for data in matches {
+                        TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
+                    }
+                    continuation.resume(returning: matches)
+                    dprint("Fetching match ended \(collectionId)")
+                case .failure(_):
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+    }
+    
+    func getAsyncMatchScores(symbols: [String]) async throws -> [LiveMatch] {
+        guard let profileID = UserProfileManager.shared.profileID else {
+            dprint("Missing profileID")
+            throw MatchScoreLoadError.noProfile
+        }
+        
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.apollo.fetch(query: GetMatchScoreForTickersQuery.init(profileId: profileID, symbols: symbols)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    let matches = (graphQLResult.data?.getMatchScoresByTickerList?.compactMap({$0?.fragments.liveMatch}) ?? [])
+                    for data in matches {
+                        TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
+                    }
+                    continuation.resume(returning: matches)
+                case .failure(_):
+                    continuation.resume(returning: [])
+                }
+            }
+        }
+        
+    }
+    
+    enum MatchScoreLoadError: Error {
+        case noProfile
+    }
+    
+    func getAsyncMatchScores(collectionId: Int) async throws -> Bool {
+        guard let profileId = UserProfileManager.shared.profileID else {
+            dprint("Missing profileID")
+            throw MatchScoreLoadError.noProfile
+        }
+        async let matches = await getAsyncMatchScore(profileId: profileId, collectionId: collectionId)
+        
+        return await matches.count > 0
+    }
+    
+    func getAsyncMatchScores(collectionIds: [Int]) async throws -> Bool {
+        guard let profileId = UserProfileManager.shared.profileID else {
+            dprint("Missing profileID")
+            throw MatchScoreLoadError.noProfile
+        }
+        
+        let liveMatches =  await withTaskGroup(of: [LiveMatch].self) { group -> [LiveMatch] in
+            
+            for collectionId in collectionIds {
+                group.addTask {
+                    return await self.getAsyncMatchScore(profileId: profileId, collectionId: collectionId)
+                }
+            }
+            
+            var collected = [LiveMatch]()
+            
+            for await value in group {
+                collected.append(contentsOf: value)
+            }
+            
+            return collected
+        }
+        return liveMatches.count > 0
     }
 }
