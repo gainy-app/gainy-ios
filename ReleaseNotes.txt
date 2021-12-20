@@ -1,4 +1,4 @@
-iOS v1.0 #101 available
+iOS v1.01 #102 available
 :globe_with_meridians: Server - TEST
 Release Candidate
 
@@ -6,7 +6,10 @@ Release Candidate
 • -
 
 :hammer_and_wrench: Improvements
-• Colors of holdings stats corrected
+• Stock Card: Median moved to the right
+• Stock Card: Alt Stocks metrics loading
+• Stock Card: WSR reload updated
+• Discovery: Compared Stocks are centered
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

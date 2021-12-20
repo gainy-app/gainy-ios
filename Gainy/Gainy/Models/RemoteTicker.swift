@@ -179,10 +179,19 @@ class TickerInfo {
                         //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
                         self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued()
                         
-                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
-                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        let tickerSymbols = (self?.altStocks ?? []).compactMap(\.symbol)
+                        
+                        TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
+                            TickersLiveFetcher.shared.getMatchScores(symbols: tickerSymbols) {
+                                mainDS.leave()
+                            }
                         }
-                        mainDS.leave()
+                        
+                        //Not working
+//                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
+//                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+//                        }
+                        
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")

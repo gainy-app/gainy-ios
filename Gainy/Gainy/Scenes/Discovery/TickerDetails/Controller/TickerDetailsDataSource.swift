@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
@@ -71,8 +72,9 @@ final class TickerDetailsDataSource: NSObject {
     static var oldHostingTag: Int = -1
     static var hostingTag: Int = Int((arc4random() % 50) + 1)
     
+    private let wsrModel: WSRViewModel = WSRViewModel.init(totalScore: 0, priceTarget: 0, progress: [])
     private lazy var wsrHosting: CustomHostingController<WSRView> = {
-        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(totalScore: ticker.wsjData.rate, priceTarget: ticker.wsjData.targetPrice, progress: ticker.wsjData.detailedStats))
+        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(viewModel: wsrModel))
         wsrHosting.view.tag = TickerDetailsDataSource.hostingTag
         return wsrHosting
     }()
@@ -107,6 +109,9 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
+        wsrModel.totalScore = ticker.wsjData.rate
+        wsrModel.priceTarget = ticker.wsjData.targetPrice
+        wsrModel.progress = ticker.wsjData.detailedStats
     }
     
     func calculateHeights() {

@@ -95,9 +95,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         
         
         viewModel?.loadCollectionDetails({
-            DispatchQueue.main.async { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: { [weak self] in
                 self?.centerInitialCollectionInTheCollectionView()
-            }
+            })
         })
     }
     

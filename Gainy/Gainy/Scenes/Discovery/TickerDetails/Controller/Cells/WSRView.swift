@@ -6,14 +6,35 @@
 //
 
 import SwiftUI
+import Combine
 
-
-struct WSRView: View {
-    init(totalScore: Float, priceTarget: Float, progress: [TickerInfo.WSRData.WSRDataDetails], lastAngle: Angle = .degrees(0)) {
+class WSRViewModel: ObservableObject {
+    
+    @Published
+    var totalScore: Float
+    
+    @Published
+    var priceTarget: Float
+    
+    @Published
+    var progress: [TickerInfo.WSRData.WSRDataDetails] {
+        didSet {
+            progressUpdate.send()
+        }
+    }
+    
+    var progressUpdate: PassthroughSubject<Void, Never> = PassthroughSubject<Void, Never>()
+    
+    init(totalScore: Float, priceTarget: Float, progress: [TickerInfo.WSRData.WSRDataDetails]) {
         self.totalScore = totalScore
         self.priceTarget = priceTarget
         self.progress = progress
-        self.lastAngle = .degrees(0)
+    }
+}
+
+struct WSRView: View {
+    init(viewModel: WSRViewModel) {
+        self.viewModel = viewModel
     }
     
     let cirlceRadius: CGFloat = 119.0 / 2.0
@@ -21,9 +42,8 @@ struct WSRView: View {
     @State
     var pieData: [PieData] = []
     
-    let totalScore: Float
-    let priceTarget: Float
-    let progress: [TickerInfo.WSRData.WSRDataDetails]
+    @ObservedObject
+    var viewModel: WSRViewModel
     
     struct PieData: Hashable {
         let startAngle: Angle
@@ -48,73 +68,79 @@ struct WSRView: View {
         formatter.minimumFractionDigits = 2
         formatter.maximumFractionDigits = 2
         formatter.roundingMode = .halfUp
-        return formatter.string(from: NSNumber(value: totalScore)) ?? ""
+        return formatter.string(from: NSNumber(value: viewModel.totalScore)) ?? ""
     }
     var body: some View {
         ZStack {
-        HStack {
-            ZStack {
-                ForEach(pieData, id: \.self) { pie in
-                    ArcShape(startAngle: pie.startAngle,
-                             partialProgress: pie.progress
-                    ).fill(pie.color).frame(width: 119, height: 119)
-                }.scaleEffect(CGSize(width: 1.0, height: -1.0))
-                
-                VStack {
-                    Text("\(totalPriceString)")
-                        .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
-                        .font(UIFont.compactRoundedSemibold(28).uiFont)
-                    Text(totalText)
-                        .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
-                        .font(UIFont.compactRoundedRegular(11).uiFont)
-                }
-            }
-            .frame(width: 119, height: 119)
-            
-            Spacer().frame(width: 62)
-            VStack(alignment: .center, spacing: 10) {
-                ForEach(pieData, id: \.self) { curProgress in
-                    HStack {
-                        Text(curProgress.name)
-                            .foregroundColor(UIColor(hexString: "687379")!.uiColor)
+            HStack {
+                ZStack {
+                    ForEach(pieData, id: \.self) { pie in
+                        ArcShape(startAngle: pie.startAngle,
+                                 partialProgress: pie.progress
+                        ).fill(pie.color).frame(width: 119, height: 119)
+                    }.scaleEffect(CGSize(width: 1.0, height: -1.0))
+                    
+                    VStack {
+                        Text("\(totalPriceString)")
+                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(28).uiFont)
+                        Text(totalText)
+                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
                             .font(UIFont.compactRoundedRegular(11).uiFont)
-                            .frame(height: 16)
-                        Spacer()
-                        Text("\(curProgress.count)")
-                            .foregroundColor(curProgress.color)
-                            .font(UIFont.compactRoundedSemibold(15).uiFont)
-                            .frame(height: 16)
                     }
                 }
+                .frame(width: 119, height: 119)
+                
+                Spacer().frame(width: 62)
+                VStack(alignment: .center, spacing: 10) {
+                    ForEach(pieData, id: \.self) { curProgress in
+                        HStack {
+                            Text(curProgress.name)
+                                .foregroundColor(UIColor(hexString: "687379")!.uiColor)
+                                .font(UIFont.compactRoundedRegular(11).uiFont)
+                                .frame(height: 16)
+                            Spacer()
+                            Text("\(curProgress.count)")
+                                .foregroundColor(curProgress.color)
+                                .font(UIFont.compactRoundedSemibold(15).uiFont)
+                                .frame(height: 16)
+                        }
+                    }
+                }
+                
             }
-            
-        }.fixedSize(horizontal: false, vertical: false)
+            .fixedSize(horizontal: false, vertical: false)
             .onAppear(perform: {
-                
-                var lastAngle: Angle = .degrees(0.0)
-                var colors = Array([UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "F3BD00")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor].reversed())
-                
-                let totalCount = Double(progress.map(\.count).reduce(0, +))
-                
-                progress.forEach({
-                    let progress = Double($0.count) / totalCount
-                    pieData.append(PieData.init(startAngle: lastAngle,
-                                                progress: progress,
-                                                color: colors.popLast()!,
-                                                name: $0.name,
-                                                count: $0.count))
-                    lastAngle = .degrees(lastAngle.degrees + (360 * progress))
-                })
+                loadStats()
             })
-            
             targetView
                 .offset(x:8, y: 30)
+        }.onReceive(viewModel.progressUpdate) { _ in
+            loadStats()
         }
+    }
+    
+    func loadStats() {
+        var lastAngle: Angle = .degrees(0.0)
+        var colors = Array([UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "F3BD00")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor].reversed())
+        
+        let totalCount = Double(viewModel.progress.map(\.count).reduce(0, +))
+        
+        pieData.removeAll()
+        viewModel.progress.forEach({
+            let progress = Double($0.count) / totalCount
+            pieData.append(PieData.init(startAngle: lastAngle,
+                                        progress: progress,
+                                        color: colors.popLast()!,
+                                        name: $0.name,
+                                        count: $0.count))
+            lastAngle = .degrees(lastAngle.degrees + (360 * progress))
+        })
     }
     
     var totalText: String {
         let list = Array(["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"].reversed())
-        let index = Int(round(totalScore)) - 1
+        let index = Int(round(viewModel.totalScore)) - 1
         return index >= 0 && index <= 4 ? list[index] : ""
     }
     
@@ -125,19 +151,19 @@ struct WSRView: View {
                 Spacer()
                 ZStack {
                     HStack(spacing: 0.0)  {
-                    Text("PRICE TARGET")
-                        .foregroundColor(UIColor(hexString: "687379")!.uiColor)
-                        .font(UIFont.compactRoundedRegular(11).uiFont)
-                        .padding(.leading, 10)
-                    Spacer()
+                        Text("PRICE TARGET")
+                            .foregroundColor(UIColor(hexString: "687379")!.uiColor)
+                            .font(UIFont.compactRoundedRegular(11).uiFont)
+                            .padding(.leading, 10)
+                        Spacer()
                     }
                     
                     HStack(spacing: 0.0)  {
                         Spacer()
-                    Text("\(priceTarget.cleanTwoDecimal)$")
-                        .foregroundColor(UIColor(hexString: "09141F")!.uiColor)
-                        .font(UIFont.compactRoundedSemibold(15).uiFont)
-                        .padding(.trailing, 8)
+                        Text("\(viewModel.priceTarget.cleanTwoDecimal)$")
+                            .foregroundColor(UIColor(hexString: "09141F")!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(15).uiFont)
+                            .padding(.trailing, 8)
                     }
                 }.background(Rectangle().cornerRadius(8.0).foregroundColor(UIColor(hexString: "F7F8F9")!.uiColor).frame(height: 32.0))
                     .frame(width: 156)
@@ -161,6 +187,6 @@ struct ArcShape : Shape {
 
 struct WSRView_Previews: PreviewProvider {
     static var previews: some View {
-        WSRView(totalScore: 4.23, priceTarget: 113.86, progress: [])
+        WSRView(viewModel: WSRViewModel.init(totalScore: 4.45, priceTarget: 85.56, progress: []))
     }
 }
