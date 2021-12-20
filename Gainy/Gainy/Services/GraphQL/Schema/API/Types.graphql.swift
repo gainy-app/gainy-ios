@@ -4198,7 +4198,7 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   ///   - industryId
   ///   - symbol
   ///   - ticker
-  public init(_and: Swift.Optional<[ticker_industries_bool_exp]?> = nil, _not: Swift.Optional<ticker_industries_bool_exp?> = nil, _or: Swift.Optional<[ticker_industries_bool_exp]?> = nil, gainyIndustry: Swift.Optional<gainy_industries_bool_exp?> = nil, industryId: Swift.Optional<Int_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil) {
+  public init(_and: Swift.Optional<[ticker_industries_bool_exp]?> = nil, _not: Swift.Optional<ticker_industries_bool_exp?> = nil, _or: Swift.Optional<[ticker_industries_bool_exp]?> = nil, gainyIndustry: Swift.Optional<gainy_industries_bool_exp?> = nil, industryId: Swift.Optional<bigint_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil) {
     graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "gainy_industry": gainyIndustry, "industry_id": industryId, "symbol": symbol, "ticker": ticker]
   }
 
@@ -4238,9 +4238,9 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var industryId: Swift.Optional<Int_comparison_exp?> {
+  public var industryId: Swift.Optional<bigint_comparison_exp?> {
     get {
-      return graphQLMap["industry_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+      return graphQLMap["industry_id"] as? Swift.Optional<bigint_comparison_exp?> ?? Swift.Optional<bigint_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_id")
@@ -4518,7 +4518,7 @@ public struct industry_stats_quarterly_bool_exp: GraphQLMapConvertible {
   ///   - industryId
   ///   - medianNetIncome
   ///   - medianRevenue
-  public init(_and: Swift.Optional<[industry_stats_quarterly_bool_exp]?> = nil, _not: Swift.Optional<industry_stats_quarterly_bool_exp?> = nil, _or: Swift.Optional<[industry_stats_quarterly_bool_exp]?> = nil, date: Swift.Optional<timestamp_comparison_exp?> = nil, industryId: Swift.Optional<Int_comparison_exp?> = nil, medianNetIncome: Swift.Optional<float8_comparison_exp?> = nil, medianRevenue: Swift.Optional<float8_comparison_exp?> = nil) {
+  public init(_and: Swift.Optional<[industry_stats_quarterly_bool_exp]?> = nil, _not: Swift.Optional<industry_stats_quarterly_bool_exp?> = nil, _or: Swift.Optional<[industry_stats_quarterly_bool_exp]?> = nil, date: Swift.Optional<timestamp_comparison_exp?> = nil, industryId: Swift.Optional<bigint_comparison_exp?> = nil, medianNetIncome: Swift.Optional<float8_comparison_exp?> = nil, medianRevenue: Swift.Optional<float8_comparison_exp?> = nil) {
     graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "date": date, "industry_id": industryId, "median_net_income": medianNetIncome, "median_revenue": medianRevenue]
   }
 
@@ -4558,9 +4558,9 @@ public struct industry_stats_quarterly_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var industryId: Swift.Optional<Int_comparison_exp?> {
+  public var industryId: Swift.Optional<bigint_comparison_exp?> {
     get {
-      return graphQLMap["industry_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+      return graphQLMap["industry_id"] as? Swift.Optional<bigint_comparison_exp?> ?? Swift.Optional<bigint_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_id")
@@ -10565,7 +10565,7 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
   ///   - industryId
   ///   - symbol
   ///   - ticker
-  public init(gainyIndustry: Swift.Optional<gainy_industries_obj_rel_insert_input?> = nil, industryId: Swift.Optional<Int?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil) {
+  public init(gainyIndustry: Swift.Optional<gainy_industries_obj_rel_insert_input?> = nil, industryId: Swift.Optional<bigint?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil) {
     graphQLMap = ["gainy_industry": gainyIndustry, "industry_id": industryId, "symbol": symbol, "ticker": ticker]
   }
 
@@ -10578,9 +10578,9 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var industryId: Swift.Optional<Int?> {
+  public var industryId: Swift.Optional<bigint?> {
     get {
-      return graphQLMap["industry_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+      return graphQLMap["industry_id"] as? Swift.Optional<bigint?> ?? Swift.Optional<bigint?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_id")
@@ -11039,7 +11039,7 @@ public struct industry_stats_quarterly_insert_input: GraphQLMapConvertible {
   ///   - industryId
   ///   - medianNetIncome
   ///   - medianRevenue
-  public init(date: Swift.Optional<timestamp?> = nil, industryId: Swift.Optional<Int?> = nil, medianNetIncome: Swift.Optional<float8?> = nil, medianRevenue: Swift.Optional<float8?> = nil) {
+  public init(date: Swift.Optional<timestamp?> = nil, industryId: Swift.Optional<bigint?> = nil, medianNetIncome: Swift.Optional<float8?> = nil, medianRevenue: Swift.Optional<float8?> = nil) {
     graphQLMap = ["date": date, "industry_id": industryId, "median_net_income": medianNetIncome, "median_revenue": medianRevenue]
   }
 
@@ -11052,9 +11052,9 @@ public struct industry_stats_quarterly_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var industryId: Swift.Optional<Int?> {
+  public var industryId: Swift.Optional<bigint?> {
     get {
-      return graphQLMap["industry_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+      return graphQLMap["industry_id"] as? Swift.Optional<bigint?> ?? Swift.Optional<bigint?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_id")
