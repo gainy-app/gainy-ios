@@ -39,7 +39,8 @@ enum CollectionDetailsDTOMapper {
                         remoteTickerDetails
                     )
                 } else {
-                    dprint("Missing ticker: \(dto.name ?? "")")
+                    dprint("Missing tickers: \(dto.name ?? "")")
+                    GainyAnalytics.logEvent("Missing tickers", params: ["collection": dto.name ?? "", "id" : dto.id ?? -1])
                     return nil
                 }
             }
@@ -52,6 +53,9 @@ enum CollectionDetailsDTOMapper {
         let tickerFinancials = dto.realtimeMetrics
         let tickerMetrics = dto.tickerMetrics
         let highlight = dto.tickerHighlights.first
+        if tickerMetrics == nil {
+            GainyAnalytics.logEvent("Missing TickerMetricsData", params: ["symbol": dto.symbol ?? "", "name" : dto.name ?? ""])
+        }
         return TickerDetails(
             tickerSymbol: dto.symbol ?? "",
             companyName: dto.name ?? "",
@@ -60,7 +64,7 @@ enum CollectionDetailsDTOMapper {
                 tickerFinancials!
             ) : TickerFinancialMetrics.init(todaysPriceChange: 0.0, currentPrice: 0.0),
             tickerMetrics: tickerMetrics != nil ? CollectionDetailsDTOMapper.mapTickerMetrics(
-                tickerMetrics!, highlight?.highlight ?? "null"
+                tickerMetrics!, highlight?.highlight ?? ""
             ) : TickerMetricsData(
                 matchScore: 0.0,
                 sharesOutstanding: 0.0,
@@ -77,7 +81,7 @@ enum CollectionDetailsDTOMapper {
                 ebitdaGrowthYoy: 0.0,
                 epsGrowthYoy: 0.0,
                 epsGrowthFwd: 0.0,
-                address: "null",
+                address: "None",
                 exchangeName: "null",
                 marketCapitalization: 0.0,
                 enterpriseValueToSales: 0.0,
@@ -92,7 +96,7 @@ enum CollectionDetailsDTOMapper {
                 dividendsPerShare: 0.0,
                 dividendPayoutRatio: 0.0,
                 yearsOfConsecutiveDividendGrowth: 0.0,
-                dividendFrequency: "null",
+                dividendFrequency: "None",
                 epsActual: 0.0,
                 epsEstimate: 0.0,
                 beatenQuarterlyEpsEstimationCountTtm: 0.0,
@@ -109,7 +113,7 @@ enum CollectionDetailsDTOMapper {
                 ebitda: 0.0,
                 profitMargin: 0.0,
                 netDebt: 0.0,
-                highlight: "null"),
+                highlight: ""),
             rawTicker: dto
         )
     }
@@ -143,7 +147,7 @@ enum CollectionDetailsDTOMapper {
             ebitdaGrowthYoy: dto.ebitdaGrowthYoy ?? 0.0,
             epsGrowthYoy: dto.epsGrowthYoy ?? 0.0,
             epsGrowthFwd: dto.epsGrowthFwd ?? 0.0,
-            address: dto.addressCity ?? "null",
+            address: dto.addressCity ?? "None",
             exchangeName: dto.exchangeName ?? "null",
             marketCapitalization: marketCapitalization,
             enterpriseValueToSales: dto.enterpriseValueToSales ?? 0.0,
@@ -158,7 +162,7 @@ enum CollectionDetailsDTOMapper {
             dividendsPerShare: dto.dividendsPerShare ?? 0.0,
             dividendPayoutRatio: dto.dividendPayoutRatio ?? 0.0,
             yearsOfConsecutiveDividendGrowth: Float(dto.yearsOfConsecutiveDividendGrowth ?? 0),
-            dividendFrequency: dto.dividendFrequency ?? "null",
+            dividendFrequency: dto.dividendFrequency ?? "None",
             epsActual: dto.epsActual ?? 0.0,
             epsEstimate: dto.epsEstimate ?? 0.0,
             beatenQuarterlyEpsEstimationCountTtm: Float(dto.beatenQuarterlyEpsEstimationCountTtm ?? 0),

@@ -549,7 +549,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     headerView.descriptionLabel.isHidden = false
                 case .valuation:
                     headerView.titleLabel.text = "Valuation" // 80
-                    headerView.descriptionLabel.text = "Metrics that help to see how pricey the stock is based\non a multiplicateur. Usully, lower is better."
+                    headerView.descriptionLabel.text = "Metrics that help to see how pricey the stock is based\non a multiplier. Usually, lower is better."
                     headerView.descriptionLabel.isHidden = false
                 case .momentum:
                     headerView.titleLabel.text = "Momentum" // 32
@@ -557,7 +557,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     headerView.descriptionLabel.isHidden = true
                 case .dividend:
                     headerView.titleLabel.text = "Dividends" // 80
-                    headerView.descriptionLabel.text = "Dividen metrics are very important metrics for large\norganizations and stable organizations."
+                    headerView.descriptionLabel.text = "Dividend metrics are very important metrics for large\norganizations and stable organizations."
                     headerView.descriptionLabel.isHidden = false
                 case .earnings:
                     headerView.titleLabel.text = "Earnings" // 80
@@ -578,7 +578,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
                 if metricSection == .selected {
                     let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MetricsFooterView.reuseIdentifier, for: indexPath) as! MetricsFooterView
-                    footerView.textLabel.text = "To pin another Market Data matrics — select items\nbelow. You can pin only \(self.maxSelectedElements) items."
+                    footerView.textLabel.text = "To pin another Market Data metrics — select items\nbelow. You can pin only \(self.maxSelectedElements) items."
                     result = footerView
                 }
             }

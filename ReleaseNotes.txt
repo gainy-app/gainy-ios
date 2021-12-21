@@ -1,4 +1,4 @@
-iOS v1.01 #102 available
+iOS v1.0.1 #103 available
 :globe_with_meridians: Server - TEST
 Release Candidate
 
@@ -6,10 +6,11 @@ Release Candidate
 • -
 
 :hammer_and_wrench: Improvements
-• Stock Card: Median moved to the right
-• Stock Card: Alt Stocks metrics loading
-• Stock Card: WSR reload updated
-• Discovery: Compared Stocks are centered
+• Discovery: Null value for Company HQ location
+• Discovery: Null value for Dividend Frequency
+• Collections: 4-digit number looks good
+•
+•
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

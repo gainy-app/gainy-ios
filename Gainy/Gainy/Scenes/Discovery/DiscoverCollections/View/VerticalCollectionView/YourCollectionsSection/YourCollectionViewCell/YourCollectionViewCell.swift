@@ -28,7 +28,6 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
         stocksAmountLabel.autoAlignAxis(.vertical, toSameAxisOf: stocksLabel)
-        
     }
     
     @available(*, unavailable)
@@ -117,6 +116,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         label.numberOfLines = 1
         label.textAlignment = .right
+        label.minimumScaleFactor = 0.1
         
         return label
     }()
@@ -262,7 +262,9 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         descriptionLabel.sizeToFit()
         
         stocksAmountLabel.text = stocksAmount
-        stocksAmountLabel.sizeToFit()
+        if stocksAmount.count > 3 {
+            stocksAmountLabel.font = UIFont(name: "SFCompactRounded-Semibold", size: 24)
+        }
         
         layoutIfNeeded()
     }

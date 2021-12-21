@@ -20,6 +20,10 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
         nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 8)
         
+        stocksAmountLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
+        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -44)
+        stocksAmountLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
+        
         
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
@@ -172,13 +176,6 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             y: 0,
             width: bounds.width,
             height: bounds.height
-        )
-
-        stocksAmountLabel.frame = CGRect(
-            x: hMargin,
-            y: bounds.height - (28 + bMargin),
-            width: 55,
-            height: 28
         )
 
         plusButton.frame = CGRect(

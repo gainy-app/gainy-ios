@@ -184,7 +184,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .epsEstimate:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.epsEstimate ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .beatenQuarterlyEpsEstimationCountTtm:
-            var valueString = "null"
+            var valueString = "None"
             if let value = ticker.tickerMetrics?.beatenQuarterlyEpsEstimationCountTtm {
                 valueString = "{" + Float(value).cleanOneDecimal + "} / 4"
             }

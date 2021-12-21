@@ -3005,7 +3005,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3015,7 +3015,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Dev Stage";
@@ -3128,7 +3128,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3138,7 +3138,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Prod Stage";
@@ -3312,7 +3312,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3322,7 +3322,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3340,7 +3340,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 103;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3350,7 +3350,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.01;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -716,7 +716,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextField?.isEnabled = false
         discoverCollectionsBtn?.isEnabled = false
         
-        delay(0.3) {
+        delay(0.5) {
             self.centerInitialCollectionInTheCollectionView()
         }
     }
