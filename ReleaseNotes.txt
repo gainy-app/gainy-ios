@@ -1,16 +1,12 @@
-iOS v1.0.1 #103 available
-:globe_with_meridians: Server - TEST
-Release Candidate
+iOS v1.0.1 #104 available
+:globe_with_meridians: Server - PROD
+Bugfixes
 
 :new: New:
 • -
 
 :hammer_and_wrench: Improvements
-• Discovery: Null value for Company HQ location
-• Discovery: Null value for Dividend Frequency
-• Collections: 4-digit number looks good
-•
-•
+• Network requests improvements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
