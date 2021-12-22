@@ -217,9 +217,9 @@ final class CollectionSearchController: NSObject {
         self.stocks.removeAll()
         self.collections.removeAll()
         self.news.removeAll()
-        runOnMain(
+        runOnMain{
             self.performClearAll()
-        )
+        }
     }
     
     func performClearAll() {

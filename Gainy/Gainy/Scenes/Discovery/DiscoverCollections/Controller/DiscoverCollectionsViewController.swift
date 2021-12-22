@@ -298,18 +298,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         )
         
         //Prefetching
-        CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
-            
+        showNetworkLoader()
+        
+        DispatchQueue.global(qos:.utility).async {
+            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
+                runOnMain {
+                    self.hideLoader()
+                }
+            }
         }
         
-        showNetworkLoader()
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
             self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
             UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
             
-            self.hideLoader()
             UserProfileManager.shared.yourCollections.append(
                 Collection(id: yourCollectionItem.id,
                            image: yourCollectionItem.image,

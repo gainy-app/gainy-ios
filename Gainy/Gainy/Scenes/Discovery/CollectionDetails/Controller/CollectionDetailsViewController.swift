@@ -341,7 +341,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         let collections = models.filter { item in
             item.id >= 0
         }
@@ -359,10 +359,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }
         }
+        }
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         let watchlistCollections = models.filter { item in
             item.id < 0
         }
@@ -381,15 +382,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }
         }
+        }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         self.appendNewCollectionsFromModels(models)
         self.appendWatchlistCollectionsFromModels(models)
+        }
     }
     
     private func deleteCollections(_ models: [CollectionDetailViewCellModel]) {
+        runOnMain {
         self.viewModel?.collectionDetails.removeAll(where: { item in
             models.contains(item)
         })
@@ -399,9 +403,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }
+        }
     }
     
     private func updateCollections(_ models: [CollectionDetailViewCellModel]) {
+        runOnMain {
         for model in models {
             if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
                 self.viewModel?.collectionDetails[modelIndex] = model
@@ -414,6 +420,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
+        }
         }
     }
     

@@ -236,17 +236,24 @@ final class UserProfileManager {
         }
         
         let query = InsertProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
-        Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
-            guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
-                completion(false)
-                return
+        DispatchQueue.global(qos: .background).async {
+            Network.shared.apollo.perform(mutation: query) { result in
+                dprint("\(result)")
+                guard (try? result.get().data) != nil else {
+                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
+                    runOnMain {
+                        completion(false)
+                    }
+                    return
+                }
+                
+                self.favoriteCollections.append(collectionID)
+                runOnMain {
+                    completion(true)
+                }
             }
-            
-            self.favoriteCollections.append(collectionID)
-            completion(true)
         }
+        
     }
     
     public func removeFavouriteCollection(_ collectionID: Int, completion: @escaping (_ success: Bool) -> Void) {

@@ -41,47 +41,59 @@ final class CollectionsManager {
     }
     
     //MARK: - Fetching
-
+    
     func loadNewCollectionDetails(_ colID: Int, completion: @escaping () -> Void) {
-        Network.shared.apollo.clearCache()
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery.init(ids: [colID])) {[unowned self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    completion()
-                    return
-                }
-                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
-                
-                for newCol in collections {
-                    if !self.collections.contains(where: {$0.id == newCol.id}) {
-                    self.collections.append(newCol)
-                    
-                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
-                    newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                    
-                    
-                    } else {
-                        if let index = self.collections.firstIndex(where: {$0.id == newCol.id}) {
-                            self.collections[index] = newCol
-                            let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
-                            newCollectionFetched.send(.updated(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+        DispatchQueue.global(qos: .background).async {
+            Network.shared.apollo.clearCache()
+            
+            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery.init(ids: [colID])) {[unowned self] result in
+                switch result {
+                case .success(let graphQLResult):
+                    DispatchQueue.global(qos: .background).async {
+                        guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                            DispatchQueue.main.async {
+                                completion()
+                            }
+                            return
+                        }
+                        for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        }
+                        for newCol in collections {
+                            if !self.collections.contains(where: {$0.id == newCol.id}) {
+                                self.collections.append(newCol)
+                                
+                                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                                
+                                
+                            } else {
+                                if let index = self.collections.firstIndex(where: {$0.id == newCol.id}) {
+                                    self.collections[index] = newCol
+                                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                                    newCollectionFetched.send(.updated(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                                }
+                            }
+                            
+                            if self.failedToLoad.contains(colID) {
+                                self.failedToLoad.remove(colID)
+                            }
+                        }
+                        DispatchQueue.main.async {
+                            completion()
                         }
                     }
-                    
-                    if self.failedToLoad.contains(colID) {
-                        self.failedToLoad.remove(colID)
+                    break                    
+                case .failure(_):
+                    self.failedToLoad.insert(colID)
+                    newCollectionFetched.send(.fetchedFailed)
+                    DispatchQueue.main.async {
+                        completion()
                     }
+                    break
                 }
                 
-            case .failure(_):
-                self.failedToLoad.insert(colID)
-                newCollectionFetched.send(.fetchedFailed)
-                break
             }
-            completion()
         }
     }
     
@@ -107,7 +119,7 @@ final class CollectionsManager {
             completion()
             return
         }
-            
+        
         Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { [weak self] result in
             switch result {
             case .success(let graphQLResult):

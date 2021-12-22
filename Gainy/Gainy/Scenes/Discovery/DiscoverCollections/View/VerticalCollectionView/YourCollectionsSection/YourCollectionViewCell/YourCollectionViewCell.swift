@@ -221,9 +221,9 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
         self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
         self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow
-        self.layer.borderWidth = isTop20 ? 1.0 : 0.0
-        self.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
-        self.layer.cornerRadius = isTop20 ? 8.0 : 0.0
+        self.contentView.layer.borderWidth = isTop20 ? 1.0 : 0.0
+        self.contentView.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
+        self.contentView.layer.cornerRadius = isTop20 ? 8.0 : 0.0
         _ = self.updateImageBasedOnTag()
     }
     

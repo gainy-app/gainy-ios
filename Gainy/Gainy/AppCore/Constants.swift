@@ -7,12 +7,12 @@
 
 import Foundation
 
-func runOnMain(_ closure: @autoclosure @escaping () -> Void) {
+func runOnMain(_ closure: () -> Void) {
     if Thread.current.isMainThread {
         closure()
         return
     }
-    DispatchQueue.main.async {
+    DispatchQueue.main.sync {
         closure()
     }
 }
