@@ -33,9 +33,9 @@ protocol RemoteMatchable {
         get
     }
     
-    var isMatch: Bool {
-        get
-    }
+//    var isMatch: Bool {
+//        get
+//    }
 }
 
 // Adding missing fields from old Model
@@ -54,9 +54,9 @@ extension RemoteTickerDetails: RemoteMatchable {
         "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
     }
     
-    var isMatch: Bool {
-        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
-    }
+//    var isMatch: Bool {
+//        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
+//    }
     
 }
 

@@ -9,18 +9,32 @@ import UIKit
 
 struct CachedMatchScore: Codable {
     let symbol: String
-    let isMatch: Bool
     let matchScore: Int
     let fitsRisk: Int
     let fitsCategories: Int
     let fitsInterests: Int
     
+    let riskSimilarity: Double
+    let interestMatches: String
+    let categoryMatches: String
+    
     init(remoteMatch: LiveMatch) {
         symbol = remoteMatch.symbol
-        isMatch = remoteMatch.isMatch
         matchScore = remoteMatch.matchScore
         fitsRisk = remoteMatch.fitsRisk
         fitsCategories = remoteMatch.fitsCategories
         fitsInterests = remoteMatch.fitsInterests
+        
+        riskSimilarity = remoteMatch.riskSimilarity
+        interestMatches = remoteMatch.interestMatches ?? ""
+        categoryMatches = remoteMatch.categoryMatches ?? ""
+    }
+    
+    var interests: [RemoteTickerDetailsFull.TickerInterest] {
+        []
+    }
+    
+    var categories: [RemoteTickerDetailsFull.TickerCategory] {
+        []
     }
 }

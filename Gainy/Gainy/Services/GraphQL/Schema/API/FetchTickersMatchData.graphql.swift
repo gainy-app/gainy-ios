@@ -83,8 +83,8 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
-        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
+      public init(matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "MatchScore", "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
       }
 
       public var __typename: String {
@@ -131,12 +131,14 @@ public struct LiveMatch: GraphQLFragment {
     """
     fragment LiveMatch on MatchScore {
       __typename
-      is_match
       match_score
       symbol
       fits_risk
       fits_categories
       fits_interests
+      risk_similarity
+      interest_matches
+      category_matches
     }
     """
 
@@ -145,12 +147,14 @@ public struct LiveMatch: GraphQLFragment {
   public static var selections: [GraphQLSelection] {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("is_match", type: .nonNull(.scalar(Bool.self))),
       GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
       GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
       GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
       GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
       GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("risk_similarity", type: .nonNull(.scalar(Double.self))),
+      GraphQLField("interest_matches", type: .scalar(String.self)),
+      GraphQLField("category_matches", type: .scalar(String.self)),
     ]
   }
 
@@ -160,8 +164,8 @@ public struct LiveMatch: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
-    self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
+  public init(matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
+    self.init(unsafeResultMap: ["__typename": "MatchScore", "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
   }
 
   public var __typename: String {
@@ -170,15 +174,6 @@ public struct LiveMatch: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "__typename")
-    }
-  }
-
-  public var isMatch: Bool {
-    get {
-      return resultMap["is_match"]! as! Bool
-    }
-    set {
-      resultMap.updateValue(newValue, forKey: "is_match")
     }
   }
 
@@ -224,6 +219,33 @@ public struct LiveMatch: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "fits_interests")
+    }
+  }
+
+  public var riskSimilarity: Double {
+    get {
+      return resultMap["risk_similarity"]! as! Double
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "risk_similarity")
+    }
+  }
+
+  public var interestMatches: String? {
+    get {
+      return resultMap["interest_matches"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "interest_matches")
+    }
+  }
+
+  public var categoryMatches: String? {
+    get {
+      return resultMap["category_matches"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "category_matches")
     }
   }
 }

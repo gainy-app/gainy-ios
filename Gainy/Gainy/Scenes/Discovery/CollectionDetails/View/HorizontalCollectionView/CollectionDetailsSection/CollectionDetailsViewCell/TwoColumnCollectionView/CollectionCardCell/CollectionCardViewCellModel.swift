@@ -79,7 +79,7 @@ extension CollectionCardViewCellModel: RemoteMatchable {
         "\(TickerLiveStorage.shared.getMatchData(tickerSymbol)?.matchScore ?? 0)"
     }
     
-    var isMatch: Bool {
-        TickerLiveStorage.shared.getMatchData(tickerSymbol)?.isMatch ?? false
-    } 
+//    var isMatch: Bool {
+//        TickerLiveStorage.shared.getMatchData(tickerSymbol)?.isMatch ?? false
+//    }
 }

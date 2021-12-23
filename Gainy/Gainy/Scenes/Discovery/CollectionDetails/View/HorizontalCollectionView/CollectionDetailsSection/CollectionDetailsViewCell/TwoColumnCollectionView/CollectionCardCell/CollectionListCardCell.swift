@@ -29,8 +29,7 @@ final class CollectionListCardCell: UICollectionViewCell {
         tickerPrice: String,
         markerHeaders: [String],
         markerMetrics: [String],
-        matchScore: String,
-        isMatch: Bool
+        matchScore: String
     ) {
         nameLbl.text = companyName
 

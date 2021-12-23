@@ -5,11 +5,13 @@ query FetchTickersMatchData($profileId: Int!, $collectionId: Int!) {
 }
 
 fragment LiveMatch on MatchScore {
-  is_match
         match_score
         symbol
         fits_risk
         fits_categories
         fits_interests
+        risk_similarity
+        interest_matches
+        category_matches
 }
 
