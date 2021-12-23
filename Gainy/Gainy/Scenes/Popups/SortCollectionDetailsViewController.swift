@@ -74,8 +74,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
             sortingList = defaultSortingList
         } else {
             sortingList.append(.matchScore)
-            for metric in MarketDataField.allCases {
-                for item in tickerMetrics {
+            for item in tickerMetrics {
+                for metric in MarketDataField.allCases {
                     if metric.fieldName == item.fieldName {
                         sortingList.append(metric)
                     }

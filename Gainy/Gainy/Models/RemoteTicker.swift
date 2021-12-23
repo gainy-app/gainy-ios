@@ -59,33 +59,42 @@ class TickerInfo {
     
     func updateMarketData() {
         var markers: [MarketData] = []
+        var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+            item.collectionId == nil
+        }
+        tickerMetrics = tickerMetrics.sorted { left, right in
+            left.order < right.order
+        }
+        
         for metric in MarketDataField.allCases {
-            
             let marketData = metric.mapToMarketData(ticker: ticker)
             guard let marketData = marketData else {
                 continue
             }
             
-            var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
-                item.collectionId == nil
-            }
-            tickerMetrics = tickerMetrics.sorted { left, right in
-                left.order < right.order
-            }
             if tickerMetrics.count == 0 {
                 if MarketDataField.metricsOrder.contains(where: { item in
                     item == metric
                 }) {
                     markers.append(marketData)
                 }
-            } else {
-                if tickerMetrics.contains(where: { item in
-                    item.fieldName == metric.fieldName
-                }) {
-                    markers.append(marketData)
+            }
+        }
+        
+        if tickerMetrics.count > 0 {
+            for tickerMetric in tickerMetrics {
+                for metric in MarketDataField.allCases {
+                    let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
+                    guard let marketData = marketData else {
+                        continue
+                    }
+                    if tickerMetric.fieldName == metric.fieldName {
+                        markers.append(marketData)
+                    }
                 }
             }
         }
+        
         self.marketData = markers
     }
     

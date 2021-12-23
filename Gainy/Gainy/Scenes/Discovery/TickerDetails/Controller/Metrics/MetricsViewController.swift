@@ -227,6 +227,14 @@ class MetricsViewController: BaseViewController {
             return
         }
         
+        var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+            item.collectionId == self.collectionID
+        }
+        
+        tickerMetrics = tickerMetrics.sorted { left, right in
+            left.order < right.order
+        }
+        
         for metric in MarketDataField.allCases {
             
             let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
@@ -260,28 +268,28 @@ class MetricsViewController: BaseViewController {
                 self.financialsSection.append(marketData)
             }
             
-            var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
-                item.collectionId == self.collectionID
-            }
-            
-            tickerMetrics = tickerMetrics.sorted { left, right in
-                left.order < right.order
-            }
-            
             if tickerMetrics.count == 0 {
                 if MarketDataField.metricsOrder.contains(where: { item in
                     item == metric
                 }) {
                     self.selectedSection.append(marketData)
                 }
-            } else {
-                if tickerMetrics.contains(where: { item in
-                    item.fieldName == metric.fieldName
-                }) {
-                    self.selectedSection.append(marketData)
-                }
             }
             self.allMetrics.append(marketData)
+        }
+        
+        if tickerMetrics.count > 0 {
+            for tickerMetric in tickerMetrics {
+                for metric in MarketDataField.allCases {
+                    let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
+                    guard let marketData = marketData else {
+                        continue
+                    }
+                    if tickerMetric.fieldName == metric.fieldName {
+                        self.selectedSection.append(marketData)
+                    }
+                }
+            }
         }
         
         self.collectionView.reloadData()
