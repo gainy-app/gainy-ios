@@ -80,8 +80,8 @@ public final class GetMatchScoreForTickersQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "MatchScore", "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
+      public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
       }
 
       public var __typename: String {

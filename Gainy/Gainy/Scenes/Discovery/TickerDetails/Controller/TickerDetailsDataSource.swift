@@ -64,7 +64,7 @@ final class TickerDetailsDataSource: NSObject {
     let ticker: TickerInfo
     
     enum Row: Int {
-        case header = 0, chart, about, highlights, marketData, wsr, recommended, news, alternativeStocks, upcomingEvents, watchlist
+        case header = 0, chart, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
     }
     
     //MARK: - Hosting controllers
@@ -230,6 +230,14 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                     cell.setTransform(transform)
                 }
             }.store(in: &cancellable)
+            
+//            cell.cellHeightChanged = { [weak self] newHeight in
+//                DispatchQueue.main.async {
+//                    tableView.beginUpdates()
+//                    self?.cellHeights[.recommended] = max((self?.aboutMinHeight ?? 168.0), newHeight)
+//                    tableView.endUpdates()
+//                }
+//            }
             
             return cell
         case .news:

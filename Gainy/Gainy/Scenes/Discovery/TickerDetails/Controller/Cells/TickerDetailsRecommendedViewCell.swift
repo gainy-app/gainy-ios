@@ -8,7 +8,7 @@
 import UIKit
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 156.0
+    static let cellHeight: CGFloat = 168.0
     
     @IBOutlet private weak var rotatableImageView: UIImageView!
     
@@ -23,7 +23,23 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[0].image = UIImage(named: "fits_risk\(matchData.fitsRisk)")
             recImgs[1].image = UIImage(named: "fits_risk\(matchData.fitsInterests)")
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
+            
+            recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
+            switch matchData.matchScore {
+            case 0..<55:
+                contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
+                break
+            case 55..<75:
+                contentView.backgroundColor = UIColor.Gainy.mainYellow
+                break
+            case 75...:
+                contentView.backgroundColor = UIColor.Gainy.mainGreen
+                break
+            default:
+                break
+            }
         }
+        cellHeightChanged?(168.0)
     }
     
     func setTransform(_ transform: CGAffineTransform) {

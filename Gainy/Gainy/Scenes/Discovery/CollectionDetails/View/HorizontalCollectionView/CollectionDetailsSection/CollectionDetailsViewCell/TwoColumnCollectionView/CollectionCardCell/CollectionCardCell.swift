@@ -597,7 +597,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             matchLabel.backgroundColor = UIColor.Gainy.mainYellow
             break
         case 75...:
-            matchLabel.textColor = UIColor.Gainy.mainGreen
+            matchLabel.backgroundColor = UIColor.Gainy.mainGreen
             break
         default:
             break
