@@ -30,7 +30,7 @@ struct CachedMatchScore: Codable {
         categoryMatches = remoteMatch.categoryMatches ?? ""
     }
     
-    var interests: [RemoteTickerDetailsFull.TickerInterest] {
+    private func interests() async -> [TickerTag] {
         let matches = interestMatches.dropFirst().dropLast()
         if matches.isEmpty {
             return []
@@ -39,14 +39,29 @@ struct CachedMatchScore: Codable {
             if ids.count == 0 {
                 return []
             } else {
-                //async
-                return []
+                return await
+                withCheckedContinuation { continuation in
+                    Network.shared.apollo.fetch(query: GetSelectedInterestsQuery(ids: ids)){ result in
+                        switch result {
+                        case .success(let graphQLResult):
+                            guard let appInterests = graphQLResult.data?.interests else {
+                                continuation.resume(returning: [])
+                                return
+                            }
+                            continuation.resume(returning: appInterests.compactMap({TickerTag(name: $0.name ?? "", url: $0.iconUrl ?? "")}))
+                            break
+                        case .failure(_):
+                            continuation.resume(returning: [])
+                            break
+                        }
+                    }
+                }
             }
         }
     }
     
-    var categories: [RemoteTickerDetailsFull.TickerCategory] {
-        let matches = interestMatches.dropFirst().dropLast()
+    private func categories() async -> [TickerTag] {
+        let matches = categoryMatches.dropFirst().dropLast()
         if matches.isEmpty {
             return []
         } else {
@@ -54,13 +69,32 @@ struct CachedMatchScore: Codable {
             if ids.count == 0 {
                 return []
             } else {
-                //async
-                return []
+                return await
+                withCheckedContinuation { continuation in
+                    Network.shared.apollo.fetch(query: GetSelectedCategoriesQuery(ids: ids)){ result in
+                        switch result {
+                        case .success(let graphQLResult):
+                            guard let categories = graphQLResult.data?.categories else {
+                                continuation.resume(returning: [])
+                                return
+                            }
+                            continuation.resume(returning: categories.compactMap({TickerTag(name: $0.name ?? "", url: "")}))
+                            break
+                        case .failure(_):
+                            continuation.resume(returning: [])
+                            break
+                        }
+                    }
+                }
+                
             }
         }
     }
-    
-    var combinedTags: [TickerTag] {
-        []
+    func combinedTags() async -> [TickerTag] {
+        async let interests = interests()
+        async let categories = categories()
+        var (interestsList, categoriesList) = await (interests, categories)
+        interestsList.append(contentsOf: categoriesList)
+        return interestsList
     }
 }

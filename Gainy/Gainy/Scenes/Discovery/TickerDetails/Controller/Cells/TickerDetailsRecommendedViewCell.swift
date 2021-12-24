@@ -53,11 +53,10 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 let totalWidth: CGFloat = UIScreen.main.bounds.width - 26.0 * 2.0
                 var xPos: CGFloat = 0.0
                 var yPos: CGFloat = 0.0
-                for tag in tickerInfo?.tags ?? [] {
+                for tag in tickerInfo?.matchTags ?? [] {
                     let tagView = TagView()
-                    tagView.backgroundColor = UIColor(named: "mainText")
-                    tagView.tagLabel.textColor = .white
-                    tagView.loadImage(url: "")
+                    tagView.changeLayoutForRec()
+                    tagView.loadImage(url: tag.url)
                     
                     tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                                      for: .touchUpInside)

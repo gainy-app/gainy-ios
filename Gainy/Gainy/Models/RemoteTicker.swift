@@ -162,9 +162,7 @@ class TickerInfo {
                             let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "")  })
                             
                             
-                            if let matchData  = TickerLiveStorage.shared.getMatchData(self?.symbol ?? "") {
-                                self?.matchTags = matchData.combinedTags
-                            }
+                            
                             self?.tags = categories + industries
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                                        WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
@@ -181,6 +179,17 @@ class TickerInfo {
                         dprint("Failure when making GraphQL request. Error: \(error)")
                         mainDS.leave()
                         break
+                    }
+                }
+                
+                //Load Match Tags
+                
+                mainDS.enter()
+                if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol ?? "") {
+                    let tagsTask = Task {
+                        let loadedTags = await matchData.combinedTags()
+                        self.matchTags = loadedTags
+                        mainDS.leave()
                     }
                 }
                 

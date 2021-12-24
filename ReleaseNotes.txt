@@ -4,6 +4,7 @@ Bugfixes
 
 :new: New:
 • Collection Details: New Cards layout
+• Stock Card: New UI, Match Score updated
 
 :hammer_and_wrench: Improvements
 • Typos fixed

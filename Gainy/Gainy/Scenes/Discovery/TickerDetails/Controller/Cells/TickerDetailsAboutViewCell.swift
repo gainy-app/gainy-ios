@@ -120,19 +120,24 @@ class TagView: UIButton {
         }
     }
     
-    private(set) lazy var tagImageView: UIImageView = {
+    private lazy var tagImageView: UIImageView = {
         let tagImageView = UIImageView()
         tagImageView.contentMode = .scaleAspectFill
         tagImageView.image = UIImage(named: "demoRocket")
         return tagImageView
     }()
     
-    private(set)  lazy var tagLabel: UILabel = {
+    private lazy var tagLabel: UILabel = {
         let tagLabel = UILabel()
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)
         return tagLabel
     }()
+    
+    func changeLayoutForRec() {
+        tagLabel.textColor = UIColor(named: "mainText")
+        backgroundColor = .white
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
