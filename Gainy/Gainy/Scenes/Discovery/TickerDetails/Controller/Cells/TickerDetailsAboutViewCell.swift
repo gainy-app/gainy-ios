@@ -37,14 +37,15 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
                 if !categories.contains(where: { element in
-                    element.isEqual(tag.lowercased())
+                    element.isEqual(tag.name.lowercased())
                 }) {
                     tagView.backgroundColor = UIColor.lightGray
                 } else {
                     tagView.backgroundColor = UIColor(hex: 0x3A4448)
                 }
-                tagView.tagName = tag
-                let width = 22.0 + tag.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                tagView.tagName = tag.name
+                tagView.loadImage(url: tag.url)
+                let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0
@@ -109,7 +110,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
 
 
 import UIKit
-
+import Kingfisher
 
 class TagView: UIButton {
     
@@ -119,14 +120,14 @@ class TagView: UIButton {
         }
     }
     
-    private lazy var tagImageView: UIImageView = {
+    private(set) lazy var tagImageView: UIImageView = {
         let tagImageView = UIImageView()
         tagImageView.contentMode = .scaleAspectFill
         tagImageView.image = UIImage(named: "demoRocket")
         return tagImageView
     }()
     
-    private lazy var tagLabel: UILabel = {
+    private(set)  lazy var tagLabel: UILabel = {
         let tagLabel = UILabel()
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)
@@ -158,5 +159,19 @@ class TagView: UIButton {
         tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 8)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
+    }
+    
+    func loadImage(url: String) {
+        guard !url.isEmpty else {
+            tagImageView.image = UIImage(named: "demoRocket")
+            return
+        }
+        let processor = DownsamplingImageProcessor(size: tagImageView.bounds.size)
+        tagImageView.kf.setImage(with: URL(string: url), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ], progressBlock: nil, completionHandler: nil)
     }
 }

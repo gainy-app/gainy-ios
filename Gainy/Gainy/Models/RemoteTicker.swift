@@ -9,6 +9,11 @@ import UIKit
 import SwiftDate
 import Apollo
 
+struct TickerTag {
+    let name: String
+    let url: String
+}
+
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
 typealias AltStockTicker = RemoteTickerDetails
@@ -25,6 +30,7 @@ class TickerInfo {
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         self.tags = []
+        self.matchTags = []
         self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
         self.wsjData = WSRData(rate: 0.0, targetPrice: 0.0, analystsCount: 0, detailedStats: [])
        
@@ -142,8 +148,14 @@ class TickerInfo {
                         
                         if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
                             self?.upcomingEvents = tickerDetails.tickerEvents
-                            let industries = tickerDetails.tickerIndustries.compactMap({$0.gainyIndustry?.name})
-                            let categories = tickerDetails.tickerCategories.compactMap({$0.categories?.name})
+                            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                                                                                                       url: "")  })
+                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "")  })
+                            
+                            
+                            if let matchData  = TickerLiveStorage.shared.getMatchData(symbol) {
+                                self?.matchTags = matchData.combinedTags
+                            }
                             self?.tags = categories + industries
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                                        WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
@@ -540,7 +552,10 @@ class TickerInfo {
     //MARK: - About
     let about: String
     let aboutShort: String
-    var tags: [String]
+    var tags: [TickerTag]
+    var matchTags: [TickerTag]
+    
+    
     
     //MARK: - Highlights
     let highlights: [String]

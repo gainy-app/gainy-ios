@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     static let cellHeight: CGFloat = 168.0
@@ -15,6 +17,10 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     @IBOutlet private var recLbls: [UILabel]!
     @IBOutlet private weak var scoreLbl: UILabel!
     @IBOutlet private var recImgs: [UIImageView]!
+    @IBOutlet private weak var tagsStack: UIView!
+    @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    
+    private var lines: Int = 1
     
     override func updateFromTickerData() {
         let symbol = tickerInfo?.symbol ?? ""
@@ -38,8 +44,55 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             default:
                 break
             }
+            
+            //Tags
+            let tagHeight: CGFloat = 24.0
+            let margin: CGFloat = 12.0
+            
+            if tagsStack.subviews.count == 0 {
+                let totalWidth: CGFloat = UIScreen.main.bounds.width - 26.0 * 2.0
+                var xPos: CGFloat = 0.0
+                var yPos: CGFloat = 0.0
+                for tag in tickerInfo?.tags ?? [] {
+                    let tagView = TagView()
+                    tagView.backgroundColor = UIColor(named: "mainText")
+                    tagView.tagLabel.textColor = .white
+                    tagView.loadImage(url: "")
+                    
+                    tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
+                                     for: .touchUpInside)
+                    tagsStack.addSubview(tagView)
+                    tagView.tagName = tag.name
+                    tagView.loadImage(url: tag.url)
+                    let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                    tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
+                    if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
+                        xPos = 0.0
+                        yPos = yPos + tagHeight + margin
+                        lines += 1
+                    }
+                    tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
+                    tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
+                    xPos += width + margin
+                }
+            }
+                
+            self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+            self.tagsStack.layoutIfNeeded()
+            
+            let calculatedHeight: CGFloat = 192.0 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
+            cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
         }
-        cellHeightChanged?(168.0)
+    }
+    
+    @objc func tagViewTouchUpInside(_ tagView: TagView) {
+//        guard let name = tagView.tagName, name.count > 0 else {
+//            return
+//        }
+//        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
+//        if !panelInfo.title.isEmpty {
+//            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
+//        }
     }
     
     func setTransform(_ transform: CGAffineTransform) {

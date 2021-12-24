@@ -15,4 +15,3 @@ fragment LiveMatch on MatchScore {
         interest_matches
         category_matches
 }
-

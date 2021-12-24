@@ -551,6 +551,8 @@
 		336970AC2716B96D0001625C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		336970AE2716B97A0001625C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		336970B02716B9920001625C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		336C9A2A2775D03900106332 /* GetSelectedCategories.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetSelectedCategories.graphql; sourceTree = "<group>"; };
+		336C9A2B2775D07A00106332 /* GetSelectedInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetSelectedInterests.graphql; sourceTree = "<group>"; };
 		336D09F926D7B86B0036EB54 /* CardsOneColumnListFlowSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsOneColumnListFlowSectionLayout.swift; sourceTree = "<group>"; };
 		336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionListCardCell.xib; sourceTree = "<group>"; };
 		336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListCardCell.swift; sourceTree = "<group>"; };
@@ -1737,6 +1739,8 @@
 				85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */,
 				85CD154A26F8CED6001C060C /* AppProfilesUserIDs.graphql */,
 				85ED4DEC2703481B00FE6926 /* Categories.graphql */,
+				336C9A2A2775D03900106332 /* GetSelectedCategories.graphql */,
+				336C9A2B2775D07A00106332 /* GetSelectedInterests.graphql */,
 				33467CDC26C6565600811F74 /* Charts.graphql */,
 				3A8593EF2689CC1A00CB8DD6 /* CollectionDetails.graphql */,
 				90A8017A275AB7E9003D548D /* GetNextTickersForCollection.graphql */,

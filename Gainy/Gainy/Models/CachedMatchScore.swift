@@ -31,10 +31,36 @@ struct CachedMatchScore: Codable {
     }
     
     var interests: [RemoteTickerDetailsFull.TickerInterest] {
-        []
+        let matches = interestMatches.dropFirst().dropLast()
+        if matches.isEmpty {
+            return []
+        } else {
+            let ids = matches.components(separatedBy: ",").compactMap({Int($0)})
+            if ids.count == 0 {
+                return []
+            } else {
+                //async
+                return []
+            }
+        }
     }
     
     var categories: [RemoteTickerDetailsFull.TickerCategory] {
+        let matches = interestMatches.dropFirst().dropLast()
+        if matches.isEmpty {
+            return []
+        } else {
+            let ids = matches.components(separatedBy: ",").compactMap({Int($0)})
+            if ids.count == 0 {
+                return []
+            } else {
+                //async
+                return []
+            }
+        }
+    }
+    
+    var combinedTags: [TickerTag] {
         []
     }
 }
