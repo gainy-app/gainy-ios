@@ -326,99 +326,99 @@ enum MarketDataField: Int, Codable, CaseIterable {
     var shortTitle: String {
         switch self {
         case .matchScore:
-            return "Match\nScore"
+            return Constants.CollectionDetails.matchScore
         case .avgVolume10d:
-            return "Avg Vol\n10 days".uppercased()
+            return "Avg Vol\n10 days"
         case .sharesOutstanding:
-            return "Shares\nOutstanding".uppercased()
+            return "Shares\nOutstanding"
         case .shortPercentOutstanding:
-            return "Short of\nOutstanding Stocks".uppercased()
+            return "Short of\nOutstanding Stocks"
         case .avgVolume90d:
-            return "Avg Vol,\n90 days".uppercased()
+            return "Avg Vol,\n90 days"
         case .sharesFloat:
-            return "Shares\nFloat".uppercased()
+            return "Shares\nFloat"
         case .shortRatio:
-            return "Short\nRatio".uppercased()
+            return "Short\nRatio"
         case .beta:
-            return "beta".uppercased()
+            return "beta"
         case .impliedVolatility:
-            return "Implied Volatility\nCurrent".uppercased()
+            return "Implied Volatility\nCurrent"
         case .volatility52Weeks:
-            return "Volatility range\n52 weeks".uppercased()
+            return "Volatility range\n52 weeks"
         case .revenueGrowthYoy:
-            return "Revenue\nGrowth, TTM".uppercased()
+            return "Revenue\nGrowth, TTM"
         case .revenueGrowthFwd:
-            return "Revenue\nGrowth, FWD".uppercased()
+            return "Revenue\nGrowth, FWD"
         case .ebitdaGrowthYoy:
-            return "EBITDA\nGrowth, TTM".uppercased()
+            return "EBITDA\nGrowth, TTM"
         case .epsGrowthYoy:
-            return "EPS\nGrowth, TTM".uppercased()
+            return "EPS\nGrowth, TTM"
         case .epsGrowthFwd:
-            return "EPS\nGrowth, FWD".uppercased()
+            return "EPS\nGrowth, FWD"
         case .address:
-            return "Company HQ\nlocation".uppercased()
+            return "Company HQ\nlocation"
         case .exchangeName:
-            return "Exchange\nname".uppercased()
+            return "Exchange\nname"
         case .marketCapitalization:
-            return "Market\nCap".uppercased()
+            return "Market\nCap"
         case .enterpriseValueToSales:
             return "EV/S,\nTTM"
         case .priceToEarningsTtm:
             return "PE,\nTTM"
         case .priceToSalesTtm:
-            return "Price/Sales,\nTTM".uppercased()
+            return "Price/Sales,\nTTM"
         case .priceToBookValue:
-            return "Price/Book,\nTTM".uppercased()
+            return "Price/Book,\nTTM"
         case .enterpriseValueToEbitda:
-            return "EV / EBITDA,\nTTM".uppercased()
+            return "EV / EBITDA,\nTTM"
         case .priceChange1m:
-            return "30d price\nchange".uppercased()
+            return "30d price\nchange"
         case .priceChange3m:
-            return "90d price\nchange".uppercased()
+            return "90d price\nchange"
         case .priceChange1y:
-            return "1y price\nchange".uppercased()
+            return "1y price\nchange"
         case .dividendYield:
-            return "Dividend\nyield".uppercased()
+            return "Dividend\nyield"
         case .dividendsPerShare:
-            return "Dividends / \nShare".uppercased()
+            return "Dividends / \nShare"
         case .dividendPayoutRatio:
-            return "Dividend Payout\nRatio".uppercased()
+            return "Dividend Payout\nRatio"
         case .yearsOfConsecutiveDividendGrowth:
-            return "Years of\ndividend growth".uppercased()
+            return "Years of\ndividend growth"
         case .dividendFrequency:
-            return "Dividend\nFrequency".uppercased()
+            return "Dividend\nFrequency"
         case .epsActual:
-            return "EPS\nActual".uppercased()
+            return "EPS\nActual"
         case .epsEstimate:
-            return "EPS\nEstimate".uppercased()
+            return "EPS\nEstimate"
         case .beatenQuarterlyEpsEstimationCountTtm:
-            return "Beaten\nexpectations".uppercased()
+            return "Beaten\nexpectations"
         case .epsSurprise:
-            return "EPS\nSurprise".uppercased()
+            return "EPS\nSurprise"
         case .revenueEstimateAvg0y:
-            return "Next Revenue\nEstimate".uppercased()
+            return "Next Revenue\nEstimate"
         case .revenueActual:
-            return "Revenue\nActual".uppercased()
+            return "Revenue\nActual"
         case .revenueTtm:
-            return "Revenues".uppercased()
+            return "Revenues"
         case .revenuePerShareTtm:
-            return "Revenue / \nShare".uppercased()
+            return "Revenue / \nShare"
         case .roi:
             return "ROI"
         case .netIncome:
-            return "Net\nincome".uppercased()
+            return "Net\nincome"
         case .assetCashAndEquivalents:
-            return "Cash and\nEquivalents".uppercased()
+            return "Cash and\nEquivalents"
         case .roa:
             return "ROA"
         case .totalAssets:
-            return "Total\nAssets".uppercased()
+            return "Total\nAssets"
         case .ebitda:
             return "EBITDA"
         case .profitMargin:
-            return "Net\nProfit".uppercased()
+            return "Net\nProfit"
         case .netDebt:
-            return "Total\nDebt".uppercased()
+            return "Total\nDebt"
         }
     }
     

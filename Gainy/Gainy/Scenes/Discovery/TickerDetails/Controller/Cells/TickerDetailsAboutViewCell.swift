@@ -61,8 +61,8 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsStack.layoutIfNeeded()
         
-        let calculatedHeight: CGFloat = (164.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-        minHeightUpdated?(max( (164.0 + 44.0), calculatedHeight))
+        let calculatedHeight: CGFloat = (152.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -166,7 +166,7 @@ class TagView: UIButton {
             tagImageView.image = UIImage(named: "demoRocket")
             return
         }
-        let processor = DownsamplingImageProcessor(size: tagImageView.bounds.size)
+        let processor = DownsamplingImageProcessor(size: CGSize(width: 19, height: 14))
         tagImageView.kf.setImage(with: URL(string: url), options: [
             .processor(processor),
             .scaleFactor(UIScreen.main.scale),

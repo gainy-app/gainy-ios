@@ -432,80 +432,80 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         )
         
         let markerMarkerWidth = (bounds.width - (12 + 2 + 1 + 2 + 2 + 1 + 2 + 12)) / 3
-        let markerTextWidth: CGFloat = 44
+        let markerTextWidth: CGFloat = 50
         
         marketMarkerOneButton.frame = CGRect(
-            x: hMargin - 4,
+            x: 0,
             y: 110 + 24,
-            width: markerMarkerWidth,
+            width: 50,
             height: 40
         )
         
         marketMarkerOneTextLabel.frame = CGRect(
-            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
+            x: 0,
             y: 110 + 24,
-            width: markerTextWidth, // markerMarkerWidth,
+            width: 50, // markerMarkerWidth,
             height: 24
         )
         
         marketMarkerOneValueLabel.frame = CGRect(
-            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth, // markerMarkerWidth,
+            x: 0,
+            y: 134 + 26,
+            width: 50, // markerMarkerWidth,
             height: 16
         )
         
         marketMarkerSecondButton.frame = CGRect(
-            x: (hMargin - 4) + markerMarkerWidth + 2 + 1 + 2,
+            x: 51,
             y: 110 + 24,
-            width: markerMarkerWidth,
+            width: bounds.width - 100,
             height: 40
         )
         
         marketMarkerSecondTextLabel.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
+            x: 51,
             y: 110 + 24,
-            width: markerTextWidth,
+            width: bounds.width - 100,
             height: 24
         )
         
         marketMarkerSecondValueLabel.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth,
+            x: 51,
+            y: 134 + 26,
+            width: bounds.width - 100,
             height: 16
         )
         
         marketMarkerThirdButton.frame = CGRect(
-            x: bounds.width - (markerMarkerWidth + (hMargin - 4)),
+            x: bounds.width - 50,
             y: 110 + 24,
-            width: markerMarkerWidth,
+            width: 50,
             height: 40
         )
         
         marketMarkerThirdTextLabel.frame = CGRect(
-            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
+            x: bounds.width - 50,
             y: 110 + 24,
-            width: markerTextWidth,
+            width: 50,
             height: 24
         )
         
         marketMarkerThirdValueLabel.frame = CGRect(
-            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth,
+            x: bounds.width - 50,
+            y: 134 + 26,
+            width: 50,
             height: 16
         )
         
         leftVerticalSeparator.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerOneButton.bounds.width + 2,
+            x: 50,
             y: 112 + 24,
             width: 1,
             height: 38
         )
         
         rightVerticalSeparator.frame = CGRect(
-            x: bounds.width - (2 + 1 + markerMarkerWidth + (hMargin - 4)),
+            x: bounds.width - 50,
             y: 112 + 24,
             width: 1,
             height: 38
@@ -576,11 +576,21 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
         let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
         
-        for (ind ,val) in markerMetricHeaders.enumerated() {
-            headers[ind].text = val
-            values[ind].text = markerMetric[ind]
-            headers[ind].sizeToFit()
-            values[ind].sizeToFit()
+        
+        if markerMetricHeaders.first == Constants.CollectionDetails.matchScore {
+            for (ind ,val) in markerMetricHeaders.enumerated() {
+                headers.reversed()[ind].text = val
+                values.reversed()[ind].text = markerMetric[ind]
+                headers.reversed()[ind].sizeToFit()
+                values.reversed()[ind].sizeToFit()
+            }
+        } else {
+            for (ind ,val) in markerMetricHeaders.enumerated() {
+                headers[ind].text = val
+                values[ind].text = markerMetric[ind]
+                headers[ind].sizeToFit()
+                values[ind].sizeToFit()
+            }
         }
         
         highlightLabel.text = highlight
@@ -590,13 +600,13 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         matchLabel.text = matchScore
         let matchVal = Int(matchScore) ?? 0
         switch matchVal {
-        case 0..<55:
+        case 0..<35:
             matchLabel.backgroundColor = UIColor.Gainy.mainRed
             break
-        case 55..<75:
+        case 35..<65:
             matchLabel.backgroundColor = UIColor.Gainy.mainYellow
             break
-        case 75...:
+        case 65...:
             matchLabel.backgroundColor = UIColor.Gainy.mainGreen
             break
         default:

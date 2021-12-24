@@ -28,6 +28,7 @@ final class CollectionListCardCell: UICollectionViewCell {
             matchCircleImgView.tintColor = .white
         }
     }
+    @IBOutlet weak var separatorTrailing: NSLayoutConstraint!
     
     @IBOutlet private weak var growthLbl: UILabel!
     @IBOutlet private weak var yieldLbl: UILabel!
@@ -59,29 +60,35 @@ final class CollectionListCardCell: UICollectionViewCell {
 
         let lbls = [growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl]
         
-        for (ind, val) in markerMetrics.enumerated() {
-            lbls[ind]?.text = val
-        }
-        if markerHeaders.first == "Match\nScore" {
+        
+        if markerHeaders.first == Constants.CollectionDetails.matchScore {
             let matchVal = Int(markerMetrics.first ?? "0") ?? 0
             switch matchVal {
-            case 0..<55:
+            case 0..<35:
                 matchView.backgroundColor = UIColor.Gainy.mainRed
                 break
-            case 55..<75:
+            case 35..<65:
                 matchView.backgroundColor = UIColor.Gainy.mainYellow
                 break
-            case 75...:
+            case 65...:
                 matchView.backgroundColor = UIColor.Gainy.mainGreen
                 break
             default:
                 break
             }
+            for (ind, val) in markerMetrics.enumerated() {
+                lbls.reversed()[ind]?.text = val
+            }
             matchView.isHidden = false
-            growthLbl.textColor = .white
+            mlpLbl.textColor = .white
+            separatorTrailing.constant = 56
         } else {
+            for (ind, val) in markerMetrics.enumerated() {
+                lbls[ind]?.text = val
+            }
             matchView.isHidden = true
-            growthLbl.textColor = UIColor(named: "mainText")
+            mlpLbl.textColor = UIColor(named: "mainText")
+            separatorTrailing.constant = 0
         }
         
         layoutIfNeeded()

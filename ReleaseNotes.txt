@@ -1,12 +1,14 @@
-iOS v1.0.1 #104 available
-:globe_with_meridians: Server - TEST
+iOS v1.0.1 #103 available
+:globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• -
+• Collection Details: New Cards layout
 
 :hammer_and_wrench: Improvements
-• Network requests improvements
+• Typos fixed
+• Privacy links updated
+• Metrics order update
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

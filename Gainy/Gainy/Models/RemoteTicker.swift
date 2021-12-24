@@ -162,7 +162,7 @@ class TickerInfo {
                             let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "")  })
                             
                             
-                            if let matchData  = TickerLiveStorage.shared.getMatchData(symbol) {
+                            if let matchData  = TickerLiveStorage.shared.getMatchData(self?.symbol ?? "") {
                                 self?.matchTags = matchData.combinedTags
                             }
                             self?.tags = categories + industries

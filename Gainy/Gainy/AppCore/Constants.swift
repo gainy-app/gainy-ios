@@ -30,6 +30,7 @@ struct Constants {
         static let top20ID = 231
         static let loadingCellIDs = [-10, -11, -12]
         static let demoNamePrefix = "GDEMO:"
+        static let matchScore = "Match\nScore"
     }
     
     struct Auth {

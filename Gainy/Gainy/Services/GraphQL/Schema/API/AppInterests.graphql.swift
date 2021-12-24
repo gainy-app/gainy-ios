@@ -9,7 +9,7 @@ public final class AppInterestsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query AppInterests {
-      interests(where: {enabled: {_eq: "1"}}) {
+      interests(where: {enabled: {_eq: "1"}, id: {_in: 10}}) {
         __typename
         icon_url
         id
@@ -28,7 +28,7 @@ public final class AppInterestsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("interests", arguments: ["where": ["enabled": ["_eq": "1"]]], type: .nonNull(.list(.nonNull(.object(Interest.selections))))),
+        GraphQLField("interests", arguments: ["where": ["enabled": ["_eq": "1"], "id": ["_in": 10]]], type: .nonNull(.list(.nonNull(.object(Interest.selections))))),
       ]
     }
 

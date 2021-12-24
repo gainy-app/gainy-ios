@@ -141,10 +141,16 @@ extension Float {
             let value = self / abbreviation.divisor
             numFormatter.positiveSuffix = abbreviation.suffix
             numFormatter.negativeSuffix = abbreviation.suffix
-            numFormatter.allowsFloats = true
             numFormatter.minimumIntegerDigits = 1
+        if self > 1000 {
+            numFormatter.minimumFractionDigits = 0
+            numFormatter.maximumFractionDigits = 0
+            numFormatter.allowsFloats = false
+        } else {
             numFormatter.minimumFractionDigits = 1
             numFormatter.maximumFractionDigits = 2
+            numFormatter.allowsFloats = true
+        }
 
         let prefix = usePrefix ? "$" : ""
         if self < 0 {

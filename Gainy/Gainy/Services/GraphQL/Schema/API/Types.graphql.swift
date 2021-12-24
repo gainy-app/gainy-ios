@@ -9386,8 +9386,9 @@ public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - data
-  public init(data: [ticker_categories_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [ticker_categories_insert_input], onConflict: Swift.Optional<ticker_categories_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [ticker_categories_insert_input] {
@@ -9396,6 +9397,16 @@ public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<ticker_categories_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<ticker_categories_on_conflict?> ?? Swift.Optional<ticker_categories_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -9649,6 +9660,126 @@ public enum categories_update_column: RawRepresentable, Equatable, Hashable, Cas
       .id,
       .name,
       .riskScore,
+    ]
+  }
+}
+
+/// on conflict condition type for table "ticker_categories"
+public struct ticker_categories_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: ticker_categories_constraint, updateColumns: [ticker_categories_update_column], `where`: Swift.Optional<ticker_categories_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: ticker_categories_constraint {
+    get {
+      return graphQLMap["constraint"] as! ticker_categories_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [ticker_categories_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [ticker_categories_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<ticker_categories_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<ticker_categories_bool_exp?> ?? Swift.Optional<ticker_categories_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "ticker_categories"
+public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case publicTickerCategoriesSymbolCategoryId
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "public_ticker_categories_symbol__category_id": self = .publicTickerCategoriesSymbolCategoryId
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .publicTickerCategoriesSymbolCategoryId: return "public_ticker_categories_symbol__category_id"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_categories_constraint, rhs: ticker_categories_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.publicTickerCategoriesSymbolCategoryId, .publicTickerCategoriesSymbolCategoryId): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_categories_constraint] {
+    return [
+      .publicTickerCategoriesSymbolCategoryId,
+    ]
+  }
+}
+
+/// update columns of table "ticker_categories"
+public enum ticker_categories_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case categoryId
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "category_id": self = .categoryId
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .categoryId: return "category_id"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_categories_update_column, rhs: ticker_categories_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.categoryId, .categoryId): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_categories_update_column] {
+    return [
+      .categoryId,
+      .symbol,
     ]
   }
 }
@@ -11472,8 +11603,9 @@ public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
 
   /// - Parameters:
   ///   - data
-  public init(data: [ticker_interests_insert_input]) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: [ticker_interests_insert_input], onConflict: Swift.Optional<ticker_interests_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: [ticker_interests_insert_input] {
@@ -11482,6 +11614,16 @@ public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<ticker_interests_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<ticker_interests_on_conflict?> ?? Swift.Optional<ticker_interests_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -11755,6 +11897,126 @@ public enum interests_update_column: RawRepresentable, Equatable, Hashable, Case
       .iconUrl,
       .id,
       .name,
+    ]
+  }
+}
+
+/// on conflict condition type for table "ticker_interests"
+public struct ticker_interests_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: ticker_interests_constraint, updateColumns: [ticker_interests_update_column], `where`: Swift.Optional<ticker_interests_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: ticker_interests_constraint {
+    get {
+      return graphQLMap["constraint"] as! ticker_interests_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [ticker_interests_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [ticker_interests_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<ticker_interests_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<ticker_interests_bool_exp?> ?? Swift.Optional<ticker_interests_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "ticker_interests"
+public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case publicTickerInterestsSymbolInterestId
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "public_ticker_interests_symbol__interest_id": self = .publicTickerInterestsSymbolInterestId
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .publicTickerInterestsSymbolInterestId: return "public_ticker_interests_symbol__interest_id"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_interests_constraint, rhs: ticker_interests_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.publicTickerInterestsSymbolInterestId, .publicTickerInterestsSymbolInterestId): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_interests_constraint] {
+    return [
+      .publicTickerInterestsSymbolInterestId,
+    ]
+  }
+}
+
+/// update columns of table "ticker_interests"
+public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case interestId
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "interest_id": self = .interestId
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .interestId: return "interest_id"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: ticker_interests_update_column, rhs: ticker_interests_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.interestId, .interestId): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [ticker_interests_update_column] {
+    return [
+      .interestId,
+      .symbol,
     ]
   }
 }

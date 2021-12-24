@@ -32,13 +32,13 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             
             recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
             switch matchData.matchScore {
-            case 0..<55:
+            case 0..<35:
                 contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
                 break
-            case 55..<75:
+            case 35..<65:
                 contentView.backgroundColor = UIColor.Gainy.mainYellow
                 break
-            case 75...:
+            case 65...:
                 contentView.backgroundColor = UIColor.Gainy.mainGreen
                 break
             default:
