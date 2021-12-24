@@ -9,18 +9,58 @@ import UIKit
 
 struct CachedMatchScore: Codable {
     let symbol: String
-    let isMatch: Bool
     let matchScore: Int
     let fitsRisk: Int
     let fitsCategories: Int
     let fitsInterests: Int
     
+    let riskSimilarity: Double
+    let interestMatches: String
+    let categoryMatches: String
+    
     init(remoteMatch: LiveMatch) {
         symbol = remoteMatch.symbol
-        isMatch = remoteMatch.isMatch
         matchScore = remoteMatch.matchScore
         fitsRisk = remoteMatch.fitsRisk
         fitsCategories = remoteMatch.fitsCategories
         fitsInterests = remoteMatch.fitsInterests
+        
+        riskSimilarity = remoteMatch.riskSimilarity
+        interestMatches = remoteMatch.interestMatches ?? ""
+        categoryMatches = remoteMatch.categoryMatches ?? ""
+    }
+    
+    var interests: [RemoteTickerDetailsFull.TickerInterest] {
+        let matches = interestMatches.dropFirst().dropLast()
+        if matches.isEmpty {
+            return []
+        } else {
+            let ids = matches.components(separatedBy: ",").compactMap({Int($0)})
+            if ids.count == 0 {
+                return []
+            } else {
+                //async
+                return []
+            }
+        }
+    }
+    
+    var categories: [RemoteTickerDetailsFull.TickerCategory] {
+        let matches = interestMatches.dropFirst().dropLast()
+        if matches.isEmpty {
+            return []
+        } else {
+            let ids = matches.components(separatedBy: ",").compactMap({Int($0)})
+            if ids.count == 0 {
+                return []
+            } else {
+                //async
+                return []
+            }
+        }
+    }
+    
+    var combinedTags: [TickerTag] {
+        []
     }
 }

@@ -18,6 +18,8 @@ struct AppProfileMetricsSetting {
 final class UserProfileManager {
         
     static let shared = UserProfileManager()
+    
+    
     weak var authorizationManager: AuthorizationManager?
     @UserDefaultArray(key: "favoriteCollections")
     var favoriteCollections: [Int]
@@ -123,12 +125,14 @@ final class UserProfileManager {
                 self.favoriteCollections = appProfile.profileFavoriteCollections.map({ item in
                     item.collectionId
                 }).reorder(by: oldFavs)
+                
                 self.interests = appProfile.profileInterests.map({ item in
                     item.interestId
                 })
                 self.categories = appProfile.profileCategories.map({ item in
                     item.categoryId
                 })
+                
                 self.watchlist = appProfile.profileWatchlistTickers.map({ item in
                     item.symbol
                 })

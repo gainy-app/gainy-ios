@@ -78,6 +78,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 switch status {
                 case .authorized:
                     dprint("Got IDFA")
+                    print(self.identifierForAdvertising())
                 case .denied, .restricted:
                     dprint("Denied IDFA")
                 case .notDetermined:
@@ -86,6 +87,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     break
                 }
             }
+        }
+    }
+    
+    private func identifierForAdvertising() -> String? {
+        // check if advertising tracking is enabled in user’s setting
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        } else {
+            return nil
         }
     }
     // MARK: Properties
