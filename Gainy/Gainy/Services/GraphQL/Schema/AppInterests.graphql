@@ -1,5 +1,5 @@
 query AppInterests {
-  interests(where: {enabled: {_eq: "1"}, id: {_in: 10}}) {
+  interests(where: {enabled: {_eq: "1"}}) {
     icon_url
     id
     name
