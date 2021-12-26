@@ -26,7 +26,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         
         if tagsStack.subviews.count == 0 {
             
-            let totalWidth: CGFloat = UIScreen.main.bounds.width - 28.0 * 2.0
+            let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
             let categories = ["defensive", "speculation", "penny", "dividend", "momentum", "value", "growth"]

@@ -116,11 +116,11 @@ struct ScatterChartView: View {
     //MARK:- Body sections
     
     private var headerView: some View {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
-                HStack {
+                HStack(spacing: 0) {
                     //Right Stock price
-                    VStack(alignment: .trailing) {
+                    VStack(alignment: .trailing, spacing: 0) {
                         HStack(alignment: .lastTextBaseline, spacing: 4) {
                             Text(statsDayName)
                                 .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -145,8 +145,9 @@ struct ScatterChartView: View {
                 }
                 .padding(.leading, 24)
                 .padding(.top, 0)
+                .offset(y: -20)
+                
                 HStack(spacing: 0) {
-                    
                     //Right median
                     VStack(spacing: 2) {
                         HStack(alignment: .firstTextBaseline, spacing: 2) {
@@ -160,10 +161,10 @@ struct ScatterChartView: View {
                         }.frame(height: 12)
                         Spacer()
                     }.padding(.leading, 24)
-                        .padding(.top, 10)
                         .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
                     
-                }
+                    Spacer()
+                }.offset(y: 37)
             }
         }
         .padding(.all, 0)

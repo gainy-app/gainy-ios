@@ -1,15 +1,12 @@
-iOS v1.0.1 #105 available
+iOS v1.0.1 #106 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Collection Details: New Cards layout
-• Stock Card: New UI, Match Score updated
+• Stock Card: Share removed, details updated
 
 :hammer_and_wrench: Improvements
-• Typos fixed
-• Privacy links updated
-• Metrics order update
+• Hotfixes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
