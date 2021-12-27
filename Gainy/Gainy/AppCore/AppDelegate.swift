@@ -6,6 +6,7 @@ import GoogleSignIn
 //import Datadog
 @_exported import BugfenderSDK
 import LinkKit
+import FirebaseAnalytics
 
 
 @main
@@ -178,7 +179,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         handler.continue(from: webpageURL)
         return true
     }
-    // <!-- SMARTDOWN_OAUTH_SUPPORT -->
+    // <!-- SMARTDOWN_OAUTH_SUPPORT -->    
+    
 }
 
 extension AppDelegate: AppsFlyerLibDelegate {
@@ -198,4 +200,21 @@ extension AppDelegate {
     -> Bool {
         return GIDSignIn.sharedInstance.handle(url)
     }
+    
+//    private func handleGAILink(_ url: URL) {
+//        let tracker1 = GAI.sharedInstance().tracker(withTrackingId: "...")
+//                    let hitParams = GAIDictionaryBuilder()
+//                    hitParams.setCampaignParametersFromUrl(path)
+//                    let medium = self.getQueryStringParameter(url: path, param: "utm_medium")
+//
+//                    hitParams.set(medium, forKey: kGAICampaignMedium)
+//                    hitParams.set(path, forKey: kGAICampaignSource)
+//
+//                    let hitParamsDict = hitParams.build()
+//
+//                    tracker1?.allowIDFACollection = true
+//
+//                    tracker1?.set(kGAIScreenName, value: "...")
+//                    tracker1?.send(GAIDictionaryBuilder.createScreenView().setAll(hitParamsDict as? [AnyHashable : Any]).build() as? [AnyHashable : Any])
+//    }
 }

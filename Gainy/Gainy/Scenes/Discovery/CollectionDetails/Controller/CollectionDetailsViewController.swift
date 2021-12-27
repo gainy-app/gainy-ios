@@ -724,7 +724,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         discoverCollectionsBtn?.isEnabled = false
         
         delay(0.5) {
-            self.centerInitialCollectionInTheCollectionView()
+            runOnMain {
+                self.centerInitialCollectionInTheCollectionView()
+            }
         }
     }
     

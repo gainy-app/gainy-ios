@@ -34,12 +34,15 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             switch matchData.matchScore {
             case 0..<35:
                 contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
+                scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 35..<65:
                 contentView.backgroundColor = UIColor.Gainy.mainYellow
+                scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 65...:
                 contentView.backgroundColor = UIColor.Gainy.mainGreen
+                scoreLbl.textColor = UIColor.Gainy.mainYellow
                 break
             default:
                 break
@@ -80,7 +83,11 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             self.tagsStack.layoutIfNeeded()
             
             let calculatedHeight: CGFloat = 192.0 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
-            cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
+            if (tickerInfo?.matchTags ?? []).count > 0 {
+                cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
+            } else {
+                cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
+            }
         }
     }
     
