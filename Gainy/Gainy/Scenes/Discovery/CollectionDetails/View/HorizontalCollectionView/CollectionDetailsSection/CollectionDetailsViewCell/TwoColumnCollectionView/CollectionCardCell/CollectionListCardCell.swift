@@ -7,6 +7,7 @@
 
 import UIKit
 import SkeletonView
+import PureLayout
 
 final class CollectionListCardCell: UICollectionViewCell {
     
@@ -60,8 +61,8 @@ final class CollectionListCardCell: UICollectionViewCell {
 
         let lbls = [growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl]
         
-        
-        if markerHeaders.first == Constants.CollectionDetails.matchScore {
+        mlpLbl.textColor = UIColor(named: "mainText")
+        if markerHeaders.first == Constants.CollectionDetails.matchScore || markerHeaders.contains(where: {$0 == Constants.CollectionDetails.matchScore}) {
             let matchVal = Int(markerMetrics.first ?? "0") ?? 0
             switch matchVal {
             case 0..<35:
@@ -76,11 +77,25 @@ final class CollectionListCardCell: UICollectionViewCell {
             default:
                 break
             }
-            for (ind, val) in markerMetrics.enumerated() {
-                lbls.reversed()[ind]?.text = val
+            if markerHeaders.first == Constants.CollectionDetails.matchScore {
+                for (ind, val) in markerMetrics.enumerated() {
+                    lbls.reversed()[ind]?.text = val
+                }
+                matchView.autoAlignAxis(.horizontal, toSameAxisOf: mlpLbl)
+                matchView.autoAlignAxis(.vertical, toSameAxisOf: mlpLbl)
+                mlpLbl.textColor = .white
+            } else {
+                for (ind, val) in markerMetrics.enumerated() {
+                    lbls[ind]?.text = val
+                    
+                    if (markerHeaders[ind] == Constants.CollectionDetails.matchScore) {
+                        matchView.autoAlignAxis(.horizontal, toSameAxisOf: lbls[ind]!)
+                        matchView.autoAlignAxis(.vertical, toSameAxisOf: lbls[ind]!)
+                        lbls[ind]?.textColor = .white
+                    }
+                }
             }
             matchView.isHidden = false
-            mlpLbl.textColor = .white
             separatorTrailing.constant = 56
         } else {
             for (ind, val) in markerMetrics.enumerated() {

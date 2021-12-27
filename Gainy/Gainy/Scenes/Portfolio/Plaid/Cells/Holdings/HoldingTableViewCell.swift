@@ -18,7 +18,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var amountLbl: UILabel!
     @IBOutlet weak var symbolLbl: UILabel!
     
-    @IBOutlet weak var matchCircleView: UIImageView!
+    @IBOutlet weak var matchCircleView: UIView!
     @IBOutlet weak var matchScoreLbl: UILabel!
     @IBOutlet weak var lttView: CornerView!
     @IBOutlet weak var categoriesView: UIView!
@@ -78,16 +78,21 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
         }
         
-        
-        matchCircleView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+        matchScoreLbl.textColor = .white
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
-            matchScoreLbl.text = "\(matchScore)"
-            if matchScore > 50 {
-                matchScoreLbl.textColor = UIColor(named: "mainGreen")
-                matchCircleView.tintColor = UIColor(named: "mainGreen")
-            } else {
-                matchScoreLbl.textColor = UIColor(named: "mainRed")
-                matchCircleView.tintColor = UIColor(named: "mainRed")
+            let matchVal = Int(matchScore) ?? 0
+            switch matchVal {
+            case 0..<35:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainRed
+                break
+            case 35..<65:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainYellow
+                break
+            case 65...:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainGreen
+                break
+            default:
+                break
             }
         } else {
             matchScoreLbl.text = "-"

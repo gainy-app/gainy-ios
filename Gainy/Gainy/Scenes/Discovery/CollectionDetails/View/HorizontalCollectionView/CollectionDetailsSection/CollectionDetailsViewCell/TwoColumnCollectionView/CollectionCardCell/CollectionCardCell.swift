@@ -104,6 +104,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         view.clipsToBounds = true
         view.isSkeletonable = true
         view.skeletonCornerRadius = 6
+        
         return view
     }()
     
@@ -432,80 +433,80 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         )
         
         let markerMarkerWidth = (bounds.width - (12 + 2 + 1 + 2 + 2 + 1 + 2 + 12)) / 3
-        let markerTextWidth: CGFloat = 50
+        let markerTextWidth: CGFloat = 44
         
         marketMarkerOneButton.frame = CGRect(
-            x: 0,
+            x: hMargin - 4,
             y: 110 + 24,
-            width: 50,
+            width: markerMarkerWidth,
             height: 40
         )
         
         marketMarkerOneTextLabel.frame = CGRect(
-            x: 0,
+            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
             y: 110 + 24,
-            width: 50, // markerMarkerWidth,
+            width: markerTextWidth, // markerMarkerWidth,
             height: 24
         )
         
         marketMarkerOneValueLabel.frame = CGRect(
-            x: 0,
-            y: 134 + 26,
-            width: 50, // markerMarkerWidth,
+            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
+            y: 134 + 24,
+            width: markerTextWidth, // markerMarkerWidth,
             height: 16
         )
         
         marketMarkerSecondButton.frame = CGRect(
-            x: 51,
+            x: (hMargin - 4) + markerMarkerWidth + 2 + 1 + 2,
             y: 110 + 24,
-            width: bounds.width - 100,
+            width: markerMarkerWidth,
             height: 40
         )
         
         marketMarkerSecondTextLabel.frame = CGRect(
-            x: 51,
+            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
             y: 110 + 24,
-            width: bounds.width - 100,
+            width: markerTextWidth,
             height: 24
         )
         
         marketMarkerSecondValueLabel.frame = CGRect(
-            x: 51,
-            y: 134 + 26,
-            width: bounds.width - 100,
+            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
+            y: 134 + 24,
+            width: markerTextWidth,
             height: 16
         )
         
         marketMarkerThirdButton.frame = CGRect(
-            x: bounds.width - 50,
+            x: bounds.width - (markerMarkerWidth + (hMargin - 4)),
             y: 110 + 24,
-            width: 50,
+            width: markerMarkerWidth,
             height: 40
         )
         
         marketMarkerThirdTextLabel.frame = CGRect(
-            x: bounds.width - 50,
+            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
             y: 110 + 24,
-            width: 50,
+            width: markerTextWidth,
             height: 24
         )
         
         marketMarkerThirdValueLabel.frame = CGRect(
-            x: bounds.width - 50,
-            y: 134 + 26,
-            width: 50,
+            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
+            y: 134 + 24,
+            width: markerTextWidth,
             height: 16
         )
         
         leftVerticalSeparator.frame = CGRect(
-            x: 50,
+            x: (hMargin - 4) + marketMarkerOneButton.bounds.width + 2,
             y: 112 + 24,
             width: 1,
             height: 38
         )
         
         rightVerticalSeparator.frame = CGRect(
-            x: bounds.width - 50,
+            x: bounds.width - (2 + 1 + markerMarkerWidth + (hMargin - 4)),
             y: 112 + 24,
             width: 1,
             height: 38

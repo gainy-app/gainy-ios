@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="373" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M86-jW-kQf">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M86-jW-kQf">
                         <rect key="frame" x="339" y="73" width="24" height="24"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match_circle" translatesAutoresizingMaskIntoConstraints="NO" id="cLI-iy-lSL">
@@ -175,7 +175,6 @@
                     <constraint firstItem="Dno-8R-k9b" firstAttribute="centerY" secondItem="6Vp-DW-djR" secondAttribute="centerY" id="fH2-dY-UQG"/>
                     <constraint firstItem="M86-jW-kQf" firstAttribute="centerY" secondItem="Dno-8R-k9b" secondAttribute="centerY" id="gXr-0H-WmT"/>
                     <constraint firstItem="cTC-Ul-EKo" firstAttribute="centerY" secondItem="EM8-hZ-ndv" secondAttribute="centerY" id="hOo-oP-2G4"/>
-                    <constraint firstItem="M86-jW-kQf" firstAttribute="centerX" secondItem="Dno-8R-k9b" secondAttribute="centerX" id="i6X-Un-XjD"/>
                     <constraint firstItem="n5y-Rg-QyM" firstAttribute="centerY" secondItem="Dno-8R-k9b" secondAttribute="centerY" id="lMi-MH-w4z"/>
                     <constraint firstAttribute="bottom" secondItem="d1a-Av-lea" secondAttribute="bottom" id="rBI-ji-WJW"/>
                     <constraint firstItem="gQ0-Ic-sny" firstAttribute="top" secondItem="pN9-Iu-rYY" secondAttribute="top" constant="12" id="sN7-p3-hme"/>
