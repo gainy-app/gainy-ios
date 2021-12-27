@@ -56,6 +56,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         tickersLoadIndicator.center = internalCollectionView.center
         
         
+        let recurLock = NSRecursiveLock()
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
             collectionView: internalCollectionView
@@ -66,77 +67,51 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 viewModel: modelItem,
                 position: indexPath.row
             )
-            
             TickerLiveStorage.shared.clearAllExpiredLiveData()
             
             if let model = modelItem as? CollectionCardViewCellModel, model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
                 cell?.showAnimatedGradientSkeleton()
                 return cell
             }
-            
-            DispatchQueue.global(qos: .background).async { [weak self] in
-                self?.fetchTickersDataIfNeeded(modelItem: modelItem,
-                                               collectionView: collectionView,
-                                               cell: cell,
-                                               indexPath: indexPath)
-            }
-            
-            return cell
-        }
-        
-        initViewModels()
-    }
-    
-    private let recurLock = NSRecursiveLock()
-    private func fetchTickersDataIfNeeded(modelItem: AnyHashable,
-                                          collectionView: UICollectionView,
-                                          cell: UICollectionViewCell?,
-                                          indexPath: IndexPath) {
-        //Loading tickers data!
-        recurLock.lock()
-        if let model = modelItem as? CollectionCardViewCellModel,
-           !isLoadingTickers {
-            let dispatchGroup = DispatchGroup()
-            var loadingItems: Int  = 0
-            if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
-                loadingItems += 1
-                runOnMain {
+            //Loading tickers data!
+            recurLock.lock()
+            if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
+                
+                let dispatchGroup = DispatchGroup()
+                var loadingItems: Int  = 0
+                if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
+                    loadingItems += 1
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
-                        isLoadingTickers = true
+                        self?.isLoadingTickers = true
+                    }
+                    dprint("Fetching dt started \(model.tickerSymbol)")
+                    dispatchGroup.enter()
+                    TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                        dispatchGroup.leave()
+                        dprint("Fetching dt ended \(model.tickerSymbol)")
                     }
                 }
-                dprint("Fetching dt started \(model.tickerSymbol)")
-                dispatchGroup.enter()
-                TickersLiveFetcher.shared.getSymbolsData(cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol})) {
-                    dispatchGroup.leave()
-                    dprint("Fetching dt ended \(model.tickerSymbol)")
-                }
-            }
-            if !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol),
-               collectionID >= 0 {
-                loadingItems += 1
-                runOnMain {
+                if let collectionID = self?.collectionID, !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol), collectionID >= 0 {
+                    loadingItems += 1
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
-                        isLoadingTickers = true
+                        self?.isLoadingTickers = true
                     }
                     dprint("Fetching match started \(collectionID)")
-                }
-                dispatchGroup.enter()
-                TickersLiveFetcher.shared.getMatchScores(collectionId: collectionID) { [weak self] in
-                    dispatchGroup.leave()
-                    dprint("Fetching match ended \(self?.collectionID ?? -1)")
-                    runOnMain {
+                    dispatchGroup.enter()
+                    TickersLiveFetcher.shared.getMatchScores(collectionId: collectionID) {
+                        dispatchGroup.leave()
+                        dprint("Fetching match ended \(collectionID)")
                         self?.sortSections()
                     }
                 }
-            }
-            if loadingItems > 0 {
+                if loadingItems > 0 {
                 dispatchGroup.notify(queue: DispatchQueue.main, execute: {
                     dprint("Fetching ended \(model.tickerSymbol)")
+                    guard let self = self else {return}
                     self.isLoadingTickers = false
                     if var snapshot = self.dataSource?.snapshot() {
                         if snapshot.itemIdentifiers.count > 0 {
@@ -146,17 +121,23 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         self.dataSource?.apply(snapshot, animatingDifferences: true)
                     }
                 })
-            } else {
-                runOnMain {
+                } else {
                     cell?.hideSkeleton()
                 }
+            } else {
+                cell?.showAnimatedGradientSkeleton()
             }
-        } else {
-            runOnMain {
-                cell?.hideSkeleton()
+            recurLock.unlock()
+            
+            if indexPath.row == (self?.cards.count ?? 0) - 1 && self?.cards.count ?? 0 != (self?.stocksCount ?? 0) {
+                //isLoadingTickers = true
+                
             }
+
+            return cell
         }
-        recurLock.unlock()
+        
+        initViewModels()
     }
     
     @available(*, unavailable)

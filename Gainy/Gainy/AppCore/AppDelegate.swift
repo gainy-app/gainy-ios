@@ -37,13 +37,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc
     private func sendLaunch() {
-        AppsFlyerLib.shared().start()
+        AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
+                    if (error != nil){
+                        print(error ?? "")
+                        return
+                    } else {
+                        dprint("AppsFlyerLib started")
+                        print(dictionary ?? "")
+                        return
+                    }
+                })
     }
     
     private func initializeAppsFlyer() {
         AppsFlyerLib.shared().appsFlyerDevKey = "z6SeiLgYCSRpeqK27zouo5"
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
+        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         
 #if DEBUG
         AppsFlyerLib.shared().isDebug = true
