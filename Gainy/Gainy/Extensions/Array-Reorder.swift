@@ -83,25 +83,25 @@ extension Array where Element == HoldingViewModel {
                 } else {
                     return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
-            case .totalReturn:
-                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+            case .oneYearPriceChange:
+                guard let lhd = lhs.relativeGains[.y1], let rhd = rhs.relativeGains[.y1] else {
                     return false
                 }
-
+              
                 if ascending {
-                    return lhd.relativeGainTotal ?? 0 < rhd.relativeGainTotal ?? 0
+                    return lhd < rhd
                 } else {
-                    return lhd.relativeGainTotal ?? 0 > rhd.relativeGainTotal ?? 0
+                    return lhd > rhd
                 }
-                
-            case .todayReturn:
-                guard let lhd = lhs.holdingDetails, let rhd = rhs.holdingDetails else {
+            case .todayPriceChange:
+                guard let lhd = lhs.relativeGains[.d1], let rhd = rhs.relativeGains[.d1] else {
                     return false
                 }
+              
                 if ascending {
-                    return lhd.relativeGain_1d ?? 0 < rhd.relativeGain_1d ?? 0
+                    return lhd < rhd
                 } else {
-                    return lhd.relativeGain_1d ?? 0 > rhd.relativeGain_1d ?? 0
+                    return lhd > rhd
                 }
             case .percentOFPortfolio:
                 if ascending {
