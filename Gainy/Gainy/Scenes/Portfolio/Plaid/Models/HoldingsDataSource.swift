@@ -12,6 +12,7 @@ import SwiftDate
 
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod)
 }
 
 final class HoldingsDataSource: NSObject {
@@ -171,6 +172,9 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
             viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
             viewModel.spGrow = rangeData.spGrow
             viewModel.sypChartData = rangeData.sypChartData
+        } else {
+            //Load for this range
+            delegate?.chartsForRangeRequested(range: period)
         }
         
         tableView?.reloadSections(IndexSet.init(integer: 1), with: .automatic)

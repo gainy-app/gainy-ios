@@ -234,7 +234,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.cellHeightChanged = { [weak self] newHeight in
                 DispatchQueue.main.async {
                     tableView.beginUpdates()
-                    self?.cellHeights[.recommended] = max((self?.aboutMinHeight ?? 168.0), newHeight)
+                    self?.cellHeights[.recommended] = max(168.0, newHeight)
                     tableView.endUpdates()
                 }
             }

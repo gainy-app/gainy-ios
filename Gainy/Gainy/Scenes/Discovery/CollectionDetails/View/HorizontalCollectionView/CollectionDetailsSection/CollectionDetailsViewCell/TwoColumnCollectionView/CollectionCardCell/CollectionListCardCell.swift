@@ -62,6 +62,7 @@ final class CollectionListCardCell: UICollectionViewCell {
         let lbls = [growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl]
         
         mlpLbl.textColor = UIColor(named: "mainText")
+        contentView.removeConstraints(matchView.constraints)
         if markerHeaders.first == Constants.CollectionDetails.matchScore || markerHeaders.contains(where: {$0 == Constants.CollectionDetails.matchScore}) {
             let matchVal = Int(markerMetrics.first ?? "0") ?? 0
             switch matchVal {
@@ -81,6 +82,8 @@ final class CollectionListCardCell: UICollectionViewCell {
                 for (ind, val) in markerMetrics.enumerated() {
                     lbls.reversed()[ind]?.text = val
                 }
+                contentView.removeConstraints(matchView.constraints)
+                matchView.autoSetDimensions(to: .init(width: 24, height: 24))
                 matchView.autoAlignAxis(.horizontal, toSameAxisOf: mlpLbl)
                 matchView.autoAlignAxis(.vertical, toSameAxisOf: mlpLbl)
                 mlpLbl.textColor = .white
@@ -89,8 +92,10 @@ final class CollectionListCardCell: UICollectionViewCell {
                     lbls[ind]?.text = val
                     
                     if (markerHeaders[ind] == Constants.CollectionDetails.matchScore) {
+                        contentView.removeConstraints(matchView.constraints)
                         matchView.autoAlignAxis(.horizontal, toSameAxisOf: lbls[ind]!)
                         matchView.autoAlignAxis(.vertical, toSameAxisOf: lbls[ind]!)
+                        matchView.autoSetDimensions(to: .init(width: 24, height: 24))
                         lbls[ind]?.textColor = .white
                     }
                 }
@@ -117,6 +122,7 @@ final class CollectionListCardCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        contentView.removeConstraints(matchView.constraints)
         [nameLbl, symbolLbl, priceLbl, growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl].forEach({
             $0?.isSkeletonable = true
             $0?.linesCornerRadius = 6

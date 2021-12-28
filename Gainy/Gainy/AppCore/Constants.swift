@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+//MARK: - First Order functions
 func runOnMain(_ closure: () -> Void) {
     if Thread.current.isMainThread {
         closure()
@@ -15,6 +17,15 @@ func runOnMain(_ closure: () -> Void) {
     DispatchQueue.main.sync {
         closure()
     }
+}
+
+@discardableResult
+func measure<A>(name: String = "", _ block: () -> A) -> A {
+    let startTime = CACurrentMediaTime()
+    let result = block()
+    let timeElapsed = CACurrentMediaTime() - startTime
+    print("Time: \(name) - \(timeElapsed)")
+    return result
 }
 
 func delay(_ delay: Double, closure:@escaping ()->()) {

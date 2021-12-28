@@ -104,8 +104,8 @@ struct PortfolioScatterChartView: View {
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
             }
+            .opacity(0.0)
         }
-        .opacity(0.0)
         .padding(.leading, 16)
         .padding(.trailing, 16)
         .frame(height: 48)

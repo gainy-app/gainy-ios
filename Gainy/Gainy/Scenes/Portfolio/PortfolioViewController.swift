@@ -48,11 +48,15 @@ final class PortfolioViewController: BaseViewController {
                     removeAllChildVCs()
                     holdingsVC.delegate = self
                     addViewController(holdingsVC, view: containerView)
-                    holdingsVC.loadData()
+                    measure(name: "Holding total load") {
+                        holdingsVC.loadData()
+                    }
                 }
                 holdingsVC.coordinator = mainCoordinator
                 if !holdingsVC.viewModel.haveHoldings {
-                    holdingsVC.loadData()
+                    measure(name: "Holding total load") {
+                        holdingsVC.loadData()
+                    }
                 }
             case .inProgress:
                 if !children.contains(inProgressHoldingsVC) {

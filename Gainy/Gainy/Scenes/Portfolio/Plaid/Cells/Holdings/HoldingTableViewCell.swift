@@ -19,6 +19,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var symbolLbl: UILabel!
     
     @IBOutlet weak var matchCircleView: UIView!
+    @IBOutlet weak var matchCircleImgView: UIImageView! {
+        didSet {
+            matchCircleImgView.backgroundColor = .clear
+            matchCircleImgView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+            matchCircleImgView.tintColor = .white
+        }
+    }
     @IBOutlet weak var matchScoreLbl: UILabel!
     @IBOutlet weak var lttView: CornerView!
     @IBOutlet weak var categoriesView: UIView!

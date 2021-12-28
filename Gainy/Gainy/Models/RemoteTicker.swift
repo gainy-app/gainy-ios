@@ -185,7 +185,7 @@ class TickerInfo {
                 //Load Match Tags
                 
                 mainDS.enter()
-                if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol ?? "") {
+                if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol) {
                     let tagsTask = Task {
                         let loadedTags = await matchData.combinedTags()
                         self.matchTags = loadedTags
@@ -276,10 +276,10 @@ class TickerInfo {
     /// - Parameter dispatchGroup: Group to sync work
     private func loadAllCharts(dispatchGroup: DispatchGroup) {
         
-        for period in ScatterChartView.ChartPeriod.allCases {
-            chartsCache[period] = ChartDataCache()
-        }
-        
+//        for period in ScatterChartView.ChartPeriod.allCases {
+//            chartsCache[period] = ChartDataCache()
+//        }
+//        
         dispatchGroup.enter()
         HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: ScatterChartView.ChartPeriod.d1) {[weak self] chartData, _ in
             self?.setChartsCache(.d1, chartData: chartData)
@@ -291,12 +291,12 @@ class TickerInfo {
         //Load day median
         loadMedianForRange(.d1, dispatchGroup: dispatchGroup)
         
-        loadChartFromServer(period: .w1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .m1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .m3, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .y1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .y5, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .all, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .w1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .m1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .m3, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .y1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .y5, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .all, dispatchGroup: dispatchGroup, nil)
     }
     
     /// Update direct Chart only

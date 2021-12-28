@@ -30,6 +30,7 @@ fragment RemoteTickerDetails on tickers {
     }
     ticker_metrics {
       profit_margin
+      
       # trading
       avg_volume_10d
       short_percent_outstanding

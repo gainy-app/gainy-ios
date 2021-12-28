@@ -308,5 +308,11 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
+    
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod) {
+        showNetworkLoader()
+        
+        hideLoader()
+    }
 }
 

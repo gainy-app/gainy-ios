@@ -19,6 +19,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     @IBOutlet private var recImgs: [UIImageView]!
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    @IBOutlet private weak var tagsHeaderLbl: UILabel!
     
     private var lines: Int = 1
     
@@ -85,8 +86,10 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             let calculatedHeight: CGFloat = 192.0 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
             if (tickerInfo?.matchTags ?? []).count > 0 {
                 cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
+                tagsHeaderLbl.isHidden = false
             } else {
                 cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
+                tagsHeaderLbl.isHidden = true
             }
         }
     }
