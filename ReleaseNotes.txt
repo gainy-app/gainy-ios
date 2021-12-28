@@ -6,6 +6,7 @@ Bugfixes
 • Stock Card: Share removed, details updated
 
 :hammer_and_wrench: Improvements
+• Total/Today Return logic changed to Today/1Year Price Change
 • Hotfixes
 
 :red_circle: Important Notes:
