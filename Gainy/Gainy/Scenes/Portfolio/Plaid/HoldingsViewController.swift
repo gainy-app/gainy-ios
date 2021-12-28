@@ -39,11 +39,11 @@ final class HoldingsViewController: BaseViewController {
         }
     }
     @IBOutlet weak var settingsButton: ResponsiveButton! {
-       didSet {
-           settingsButton.layer.cornerRadius = 8.0
-           settingsButton.clipsToBounds = true
-       }
-   }
+        didSet {
+            settingsButton.layer.cornerRadius = 8.0
+            settingsButton.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var linkPlaidButton: UIButton!
     
     //MARK: - Outlets
@@ -107,7 +107,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onSortButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showSortingPanel()
     }
@@ -115,7 +115,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onLinkButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showLinkUnlinkPlaid()
     }
@@ -123,7 +123,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onSettingsButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showFilteringPanel()
     }
@@ -136,7 +136,7 @@ final class HoldingsViewController: BaseViewController {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
-
+        
         let title = settings.sorting.title
         sortLabel.text = title
     }
@@ -309,10 +309,23 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }
     
-    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod) {
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         showNetworkLoader()
-        
-        hideLoader()
+        self.viewModel.loadChartsForRange(range: range) {[weak self] model in
+            runOnMain {
+                if let model = model {
+                    self?.viewModel.dataSource.profileGains[range] = model
+                    
+                    viewModel.chartData = model.chartData
+                    viewModel.rangeGrow = model.rangeGrow
+                    viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    viewModel.spGrow = model.spGrow
+                    viewModel.sypChartData = model.sypChartData
+                }
+                self?.hideLoader()
+            }
+            
+        }
     }
 }
 

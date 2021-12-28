@@ -197,6 +197,39 @@ final class HoldingsViewModel {
         }
     }
     
+    func loadChartsForRange(range: ScatterChartView.ChartPeriod, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
+        if let profileID = UserProfileManager.shared.profileID {
+        let loadGroup = DispatchGroup()
+            loadGroup.enter()
+            HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
+                self?.chartsCache[range] = chartData
+                loadGroup.leave()
+            }
+            
+            loadGroup.enter()
+            HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, _ in
+                self?.sypChartsCache[range] = chartData
+                loadGroup.leave()
+            }
+        
+        loadGroup.notify(queue: .main) {[weak self] in
+            guard let self = self else {
+                completion?(nil)
+                return
+            }
+            
+            let chartModel = HoldingsModelMapper.topChartGains(range: range,
+                                                                  chartsCache: self.chartsCache,
+                                                                  sypChartsCache: self.sypChartsCache,
+                                                                  portfolioGains: self.portfolioGains)
+            completion?(chartModel)
+            
+        }
+        } else {
+            completion?(nil)
+        }
+    }
+    
     init() {
         //dataSource.delegate = self
     }

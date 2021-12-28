@@ -58,7 +58,7 @@ enum CollectionDetailsDTOMapper {
         }
         return TickerDetails(
             tickerSymbol: dto.symbol ?? "",
-            companyName: dto.name ?? "",
+            companyName: (dto.name ?? "").companyMarkRemoved,
             description: dto.description ?? "",
             financialMetrics: tickerFinancials != nil ? CollectionDetailsDTOMapper.mapFinancialMetrics(
                 tickerFinancials!

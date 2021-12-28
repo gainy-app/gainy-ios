@@ -21,7 +21,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     }
     
     override func updateFromTickerData() {
-        tickerNameLbl.text = tickerInfo?.name
+        tickerNameLbl.text = tickerInfo?.name.companyMarkRemoved
         symbolLbl.text = tickerInfo?.symbol
     }
     

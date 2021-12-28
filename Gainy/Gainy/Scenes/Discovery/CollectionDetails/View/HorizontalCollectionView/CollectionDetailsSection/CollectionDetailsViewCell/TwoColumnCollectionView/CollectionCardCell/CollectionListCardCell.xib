@@ -27,8 +27,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="373" height="110"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M86-jW-kQf">
-                        <rect key="frame" x="339" y="73" width="24" height="24"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M86-jW-kQf">
+                        <rect key="frame" x="349" y="73" width="24" height="24"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match_circle" translatesAutoresizingMaskIntoConstraints="NO" id="cLI-iy-lSL">
                                 <rect key="frame" x="1" y="1" width="22" height="22"/>
@@ -178,6 +178,7 @@
                     <constraint firstItem="n5y-Rg-QyM" firstAttribute="centerY" secondItem="Dno-8R-k9b" secondAttribute="centerY" id="lMi-MH-w4z"/>
                     <constraint firstAttribute="bottom" secondItem="d1a-Av-lea" secondAttribute="bottom" id="rBI-ji-WJW"/>
                     <constraint firstItem="gQ0-Ic-sny" firstAttribute="top" secondItem="pN9-Iu-rYY" secondAttribute="top" constant="12" id="sN7-p3-hme"/>
+                    <constraint firstAttribute="trailing" secondItem="M86-jW-kQf" secondAttribute="leading" constant="24" id="tc3-qW-tXz"/>
                     <constraint firstItem="nlH-9O-fYK" firstAttribute="leading" secondItem="EM8-hZ-ndv" secondAttribute="trailing" constant="4" id="xc1-62-kd3"/>
                 </constraints>
                 <userDefinedRuntimeAttributes>
@@ -192,6 +193,7 @@
                 <outlet property="growthLbl" destination="cTC-Ul-EKo" id="cLW-SP-cL4"/>
                 <outlet property="marketLbl" destination="n5y-Rg-QyM" id="1Sf-PX-0xM"/>
                 <outlet property="matchCircleImgView" destination="cLI-iy-lSL" id="3Pn-Oe-Ccr"/>
+                <outlet property="matchTrailing" destination="tc3-qW-tXz" id="e8H-VR-Ir8"/>
                 <outlet property="matchView" destination="M86-jW-kQf" id="0US-AH-jCF"/>
                 <outlet property="mlpLbl" destination="Dno-8R-k9b" id="93i-Ip-Hja"/>
                 <outlet property="nameLbl" destination="gQ0-Ic-sny" id="3XF-Tx-INw"/>

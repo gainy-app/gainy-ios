@@ -36,7 +36,8 @@ struct HoldingSecurityViewModel {
         if type == "equity" {
             type = "Shares"
         }
-        self.name = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "")  : (holding.name ?? "")) + " x\(holding.quantity ?? 0.0)"
+        let correctName = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "")  : (holding.name ?? ""))
+        self.name = correctName.companyMarkRemoved + " x\(holding.quantity ?? 0.0)"
         self.type = type
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
@@ -63,6 +64,21 @@ struct HoldingSecurityViewModel {
         ]
         self.absoluteGains = absGains
         self.relativeGains = relGains
+    }
+}
+
+extension String {
+    var companyMarkRemoved: String {
+        let list = ["Inc", "Ltd", "Plc", "Holdings", "Corporation", "Incorporated", "Limited", "International S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", "Company", "Class A...", "Class B...", "Warrants", "International", "Co", "Global Inc"]
+        for ltd in list {
+            if let dotRange = self.lowercased().range(of: ltd.lowercased()) {
+                var old = self
+                old.removeSubrange(dotRange.lowerBound..<self.endIndex)
+                //let clearName = String(old.dropLast(ltd.count))
+                return old
+            }
+        }
+        return self
     }
 }
 

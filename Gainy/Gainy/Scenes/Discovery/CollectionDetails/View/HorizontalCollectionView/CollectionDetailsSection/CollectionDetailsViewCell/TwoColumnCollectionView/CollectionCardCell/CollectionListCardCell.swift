@@ -29,6 +29,7 @@ final class CollectionListCardCell: UICollectionViewCell {
             matchCircleImgView.tintColor = .white
         }
     }
+    @IBOutlet weak var matchTrailing: NSLayoutConstraint!
     @IBOutlet weak var separatorTrailing: NSLayoutConstraint!
     
     @IBOutlet private weak var growthLbl: UILabel!
@@ -60,9 +61,9 @@ final class CollectionListCardCell: UICollectionViewCell {
             : UIColor.Gainy.red
 
         let lbls = [growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl]
+        lbls.forEach({$0?.textColor = UIColor(named: "mainText")})
         
         mlpLbl.textColor = UIColor(named: "mainText")
-        contentView.removeConstraints(matchView.constraints)
         if markerHeaders.first == Constants.CollectionDetails.matchScore || markerHeaders.contains(where: {$0 == Constants.CollectionDetails.matchScore}) {
             let matchVal = Int(markerMetrics.first ?? "0") ?? 0
             switch matchVal {
@@ -82,20 +83,15 @@ final class CollectionListCardCell: UICollectionViewCell {
                 for (ind, val) in markerMetrics.enumerated() {
                     lbls.reversed()[ind]?.text = val
                 }
-                contentView.removeConstraints(matchView.constraints)
-                matchView.autoSetDimensions(to: .init(width: 24, height: 24))
-                matchView.autoAlignAxis(.horizontal, toSameAxisOf: mlpLbl)
-                matchView.autoAlignAxis(.vertical, toSameAxisOf: mlpLbl)
+                matchTrailing.constant = 34.0
+                
                 mlpLbl.textColor = .white
             } else {
                 for (ind, val) in markerMetrics.enumerated() {
                     lbls[ind]?.text = val
                     
                     if (markerHeaders[ind] == Constants.CollectionDetails.matchScore) {
-                        contentView.removeConstraints(matchView.constraints)
-                        matchView.autoAlignAxis(.horizontal, toSameAxisOf: lbls[ind]!)
-                        matchView.autoAlignAxis(.vertical, toSameAxisOf: lbls[ind]!)
-                        matchView.autoSetDimensions(to: .init(width: 24, height: 24))
+                        matchTrailing.constant = CGFloat(5 - ind) * 48.0 - 4.0 - 22.0 + 12.0
                         lbls[ind]?.textColor = .white
                     }
                 }
