@@ -583,6 +583,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             self.profileInterests?.removeAll(where: { element in
                 element.id == profileInterest.id
             })
+            self.profileInterestsSelected?.removeAll(where: { element in
+                element.id == profileInterest.id
+            })
             collectionView.reloadData()
             self.updateProfileInterestsUI()
         } else {
@@ -590,6 +593,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return
             }
             self.didDeselectCategory(nil, profileCategory)
+            self.profileCategoriesSelected?.removeAll(where: { element in
+                element.id == profileCategory.id
+            })
             self.profileCategories?.removeAll(where: { element in
                 element.id == profileCategory.id
             })
@@ -692,8 +698,12 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 }
                 
                 GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-                self.profileInterestsSelected?.remove(at: index!)
-                
+                self.profileInterestsSelected?.removeAll(where: { element in
+                    element.id == interestID
+                })
+                self.profileInterests?.removeAll(where: { element in
+                    element.id == interestID
+                })
                 NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
             }
         }
@@ -751,8 +761,12 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 }
                 
                 GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-                self.profileCategoriesSelected?.remove(at: index!)
-                
+                self.profileCategoriesSelected?.removeAll(where: { element in
+                    element.id == categoryID
+                })
+                self.profileCategories?.removeAll(where: { element in
+                    element.id == categoryID
+                })
                 NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
             }
         }
