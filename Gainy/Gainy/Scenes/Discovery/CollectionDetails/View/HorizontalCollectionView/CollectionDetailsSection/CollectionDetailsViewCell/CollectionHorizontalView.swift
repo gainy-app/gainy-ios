@@ -62,6 +62,17 @@ final class CollectionHorizontalView: UIView {
         return imageView
     }()
 
+    lazy var blackAlphaView: UIView = {
+        let view = UIView()
+        view.contentMode = .scaleAspectFill
+        view.isOpaque = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        backImageView.addSubview(view)
+        view.autoPinEdgesToSuperviewEdges()
+        return view
+    }()
+    
     lazy var nameLabel: UILabel = {
         let label = UILabel()
 
@@ -291,6 +302,18 @@ final class CollectionHorizontalView: UIView {
         guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
             return
         }
+        self.blackAlphaView.isHidden = true
+        if Constants.CollectionDetails.top20ID == self.tag {
+            backImageView.image = UIImage(named: "top20CollectionBgBig")
+            self.imageLoaded = true
+            return
+        }
+        if Constants.CollectionDetails.watchlistCollectionID == self.tag {
+            backImageView.image = UIImage(named: "watchlistCollectionBackgroundImage")
+            self.imageLoaded = true
+            self.blackAlphaView.isHidden = false
+            return
+        }
         
         var image = UIImage(named: imageName)
         if image == nil {
@@ -420,6 +443,12 @@ final class CollectionHorizontalView: UIView {
             width: 24,
             height: 24
         )
+        
+        let isTop20 = (Constants.CollectionDetails.top20ID == self.tag) ? true : false
+        self.stocksLabel.textColor = isTop20 ? UIColor(hexString: "#09141F", alpha: 1.0) : UIColor.Gainy.white
+        self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow
     }
     
     fileprivate func resize(textView: UITextView) {

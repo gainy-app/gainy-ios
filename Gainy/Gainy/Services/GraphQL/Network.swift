@@ -117,9 +117,18 @@ final class CustomInterceptor: ApolloInterceptor {
         completion: @escaping (Swift.Result<GraphQLResult<Operation.Data>, Error>) -> Void
     ) {
         func makeRequest() {
-            chain.proceedAsync(request: request,
-                               response: response,
-                               completion: completion)
+            if Thread.isMainThread {
+                print("Why main")
+                DispatchQueue.global(qos: .background).async {
+                    chain.proceedAsync(request: request,
+                                       response: response,
+                                       completion: completion)
+                }
+            } else {
+                chain.proceedAsync(request: request,
+                                   response: response,
+                                   completion: completion)
+            }            
         }
         
         if let token = self.firebaseAuthToken {

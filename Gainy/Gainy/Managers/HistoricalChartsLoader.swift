@@ -60,18 +60,18 @@ final class HistoricalChartsLoader {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.historicalPricesAggregated.filter({$0.close != nil}) {
                     
-                    if range == .d1 {
-                        if let lastDay = fetchedData.last {
-                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                                if index == 0 {
-                                    fetchedData = filtered
-                                } else {
-                                    fetchedData = Array(fetchedData[(index-1)...])
-                                }
-                            }
-                        }
-                    }
+//                    if range == .d1 {
+//                        if let lastDay = fetchedData.last {
+//                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+//                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+//                                if index == 0 {
+//                                    fetchedData = filtered
+//                                } else {
+//                                    fetchedData = Array(fetchedData[(index-1)...])
+//                                }
+//                            }
+//                        }
+//                    }
                     print("CG \(range) : \(fetchedData.count)")
                     
                     if range == .d1 {
@@ -135,18 +135,18 @@ final class HistoricalChartsLoader {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
                     
-                    if range == .d1 {
-                        if let lastDay = fetchedData.last {
-                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                                if index == 0 {
-                                    fetchedData = filtered
-                                } else {
-                                    fetchedData = Array(fetchedData[(index-1)...])
-                                }
-                            }
-                        }
-                    }
+//                    if range == .d1 {
+//                        if let lastDay = fetchedData.last {
+//                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+//                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+//                                if index == 0 {
+//                                    fetchedData = filtered
+//                                } else {
+//                                    fetchedData = Array(fetchedData[(index-1)...])
+//                                }
+//                            }
+//                        }
+//                    }
                     completion(ChartData.init(points: fetchedData, period: range))
                 } else {
                     completion(ChartData.init(points: [0.0]))

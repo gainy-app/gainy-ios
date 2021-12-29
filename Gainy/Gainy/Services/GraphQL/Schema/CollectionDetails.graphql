@@ -30,6 +30,7 @@ fragment RemoteTickerDetails on tickers {
     }
     ticker_metrics {
       profit_margin
+      
       # trading
       avg_volume_10d
       short_percent_outstanding
@@ -106,6 +107,7 @@ fragment RemoteTickerDetailsFull on tickers {
       categories {
         id
         name
+        collection_id
         icon_url
       }
     }
@@ -122,6 +124,7 @@ fragment RemoteTickerDetailsFull on tickers {
       gainy_industry {
         id
         name
+        collection_id
       }
     }
     ticker_events {
@@ -148,6 +151,7 @@ fragment RemoteTickerExtraDetails on tickers {
       categories {
         id
         name
+        collection_id
         icon_url
       }
     }
@@ -164,6 +168,7 @@ fragment RemoteTickerExtraDetails on tickers {
       gainy_industry {
         id
         name
+        collection_id
       }
     }
     ticker_events {

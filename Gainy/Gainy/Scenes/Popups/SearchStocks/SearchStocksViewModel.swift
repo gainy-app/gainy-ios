@@ -85,9 +85,9 @@ final class SearchStocksViewModel: NSObject {
     
     func clearAll() {
         self.stocks.removeAll()
-        runOnMain(
+        runOnMain{
             self.performClearAll()
-        )
+        }
     }
     
     func performClearAll() {

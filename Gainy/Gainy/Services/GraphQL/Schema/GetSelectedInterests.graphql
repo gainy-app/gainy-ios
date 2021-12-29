@@ -1,0 +1,7 @@
+query GetSelectedInterests($ids: [Int!]) {
+  interests(where: {enabled: {_eq: "1"}, id: {_in: $ids}}) {
+    icon_url
+    id
+    name
+  }
+}

@@ -28,7 +28,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     private var currentCaptionIndex = 0
     private let captions = [
         NSLocalizedString("Discover collections\nof stocks that match\nyour goals", comment: "Discover collections\nof stocks that match\nyour goals"),
-        NSLocalizedString("See highlights\nand benchmarks\nto support yourn\ndecisions", comment: "See highlights\nand benchmarks\nto support yourn\ndecisions"),
+        NSLocalizedString("See highlights\nand benchmarks\nto support your\ndecisions", comment: "See highlights\nand benchmarks\nto support your\ndecisions"),
         NSLocalizedString("Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them", comment: "Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them"),
         NSLocalizedString("Compare and sell\nunderperforming\nstocks and improve\nyour gains", comment: "Compare and sell\nunderperforming\nstocks and improve\nyour gains")
     ]

@@ -29,6 +29,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var currentCollectionToChange: Int = 0
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
+    private var needTop20Reload = false
     
     //Analytics
     var collectionID: Int {
@@ -42,7 +43,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
-    fileprivate func handleLoginEvent() {
+    fileprivate func handleNotificationsEvents() {
         NotificationCenter.default.publisher(for: Notification.Name.didReceiveFirebaseAuthToken).sink { _ in
         } receiveValue: {[weak self] notification in
             if let token = notification.object as? String {
@@ -70,6 +71,20 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     }
                 }
             }
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileInterests)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.needTop20Reload = true
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileCategories)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.needTop20Reload = true
         }.store(in: &cancellables)
     }
     
@@ -279,7 +294,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         searchController?.coordinator = coordinator
-        handleLoginEvent()
+        handleNotificationsEvents()
         setupPanel()
         
         CollectionsManager.shared.newCollectionsPublisher
@@ -309,21 +324,24 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         TickerLiveStorage.shared.matchScoreClearedPublisher
             .receive(on: RunLoop.main)
             .sink {[unowned self] _ in
-            dprint("Reloading visible cells after MS clear")
-            if var snapshot = self.dataSource?.snapshot() {
-                if snapshot.itemIdentifiers.count > 0 {
-                    let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                    snapshot.reloadItems(ids)
+                dprint("Reloading visible cells after MS clear")
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    if var snapshot = self.dataSource?.snapshot() {
+                        if snapshot.itemIdentifiers.count > 0 {
+                            let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
+                            snapshot.reloadItems(ids)
+                        }
+                        self.dataSource?.apply(snapshot, animatingDifferences: false)
+                    }
                 }
-                self.dataSource?.apply(snapshot, animatingDifferences: false)
-            }
-        }.store(in: &self.cancellables)
+            }.store(in: &self.cancellables)
         
         addLoaders()
     }
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         let collections = models.filter { item in
             item.id >= 0
         }
@@ -341,10 +359,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }
         }
+        }
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         let watchlistCollections = models.filter { item in
             item.id < 0
         }
@@ -363,15 +382,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }
         }
+        }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
-        
+        runOnMain {
         self.appendNewCollectionsFromModels(models)
         self.appendWatchlistCollectionsFromModels(models)
+        }
     }
     
     private func deleteCollections(_ models: [CollectionDetailViewCellModel]) {
+        runOnMain {
         self.viewModel?.collectionDetails.removeAll(where: { item in
             models.contains(item)
         })
@@ -381,9 +403,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
         }
+        }
     }
     
     private func updateCollections(_ models: [CollectionDetailViewCellModel]) {
+        runOnMain {
         for model in models {
             if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
                 self.viewModel?.collectionDetails[modelIndex] = model
@@ -396,6 +420,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 self.dataSource?.apply(snapshot, animatingDifferences: false)
             }
+        }
         }
     }
     
@@ -698,8 +723,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextField?.isEnabled = false
         discoverCollectionsBtn?.isEnabled = false
         
-        delay(0.3) {
-            self.centerInitialCollectionInTheCollectionView()
+        delay(0.5) {
+            runOnMain {
+                self.centerInitialCollectionInTheCollectionView()
+            }
         }
     }
     
@@ -751,32 +778,43 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        reloadCollectionIfNeeded()
+        if self.needTop20Reload {
+            self.showNetworkLoader()
+            TickerLiveStorage.shared.clearMatchData()
+            CollectionsManager.shared.reloadTop20 {
+                self.hideLoader()
+                self.collectionView.reloadData()
+            }
+        } else {
+            reloadCollectionIfNeeded()
+        }
     }
     
     private func reloadCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
-            
-            if let profileID = UserProfileManager.shared.profileID {
+            self.reloadCollection()
+        }
+    }
+    
+    private func reloadCollection() {
+        guard let profileID = UserProfileManager.shared.profileID else { return }
+        guard !UserProfileManager.shared.favoriteCollections.isEmpty else {
+            self.onDiscoverCollections?(false)
+            return
+        }
+        
+        getRemoteData(loadProfile: true) {
+            DispatchQueue.main.async { [weak self] in
+                self?.initViewModels()
+                self?.centerInitialCollectionInTheCollectionView()
+                self?.hideLoader()
                 
                 let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
                 let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-                                
-                if UserProfileManager.shared.favoriteCollections.isEmpty {
-                    self.onDiscoverCollections?(false)
-                } else {
-                    getRemoteData(loadProfile: true) {
-                        DispatchQueue.main.async { [weak self] in
-                            self?.initViewModels()
-                            self?.centerInitialCollectionInTheCollectionView()
-                            
-                            if !shown {
-                                UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
-                                self?.onDiscoverCollections?(true)
-                                return
-                            }
-                        }
-                    }
+                if !shown {
+                    UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                    self?.onDiscoverCollections?(true)
+                    return
                 }
             }
         }

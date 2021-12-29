@@ -75,6 +75,7 @@ final class CollectionSearchController: NSObject {
                         let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(collection.id ?? 0)
                             ? .checked
                             : .unchecked
+                        cell.tag = collection.id ?? 0
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
@@ -108,6 +109,7 @@ final class CollectionSearchController: NSObject {
                         let buttonState: RecommendedCellButtonState = UserProfileManager.shared.favoriteCollections.contains(collection.id)
                             ? .checked
                             : .unchecked
+                        cell.tag = collection.id ?? 0
                         cell.configureWith(name: collection.name,
                                            imageUrl: collection.imageUrl,
                                            description: collection.description,
@@ -215,9 +217,9 @@ final class CollectionSearchController: NSObject {
         self.stocks.removeAll()
         self.collections.removeAll()
         self.news.removeAll()
-        runOnMain(
+        runOnMain{
             self.performClearAll()
-        )
+        }
     }
     
     func performClearAll() {
@@ -580,7 +582,9 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID)
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                    
+                }
             }
         } else {
             if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {

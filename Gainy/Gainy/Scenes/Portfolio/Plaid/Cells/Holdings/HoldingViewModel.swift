@@ -66,6 +66,30 @@ struct HoldingViewModel {
             
         }
     }
+    
+    var holdingsCount: NSMutableAttributedString {        
+        var secCount: [String : Float] = [:]
+        for sec in securities {
+            if let haveCount = secCount[sec.type] {
+                secCount[sec.type] = haveCount + sec.quantity
+            } else {
+                secCount[sec.type] = sec.quantity
+            }
+        }
+        
+        var attrArr: [NSMutableAttributedString] = []
+        for key in secCount.keys {
+            attrArr.append(key.attr(font: .compactRoundedSemibold(14.0),
+                                    color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\(secCount[key]!)".attr(font: .compactRoundedSemibold(14.0),
+                                                                                                               color: .init(hexString: "09141F", alpha: 1.0)!))
+        }
+        var totalList = NSMutableAttributedString.init(string: "")
+        for share in attrArr {
+            totalList.append(share)
+            totalList.append(" ".attr())
+        }
+        return totalList
+    }
 }
 
 extension HoldingViewModel: Equatable {

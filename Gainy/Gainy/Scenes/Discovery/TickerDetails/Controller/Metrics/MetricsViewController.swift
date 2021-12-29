@@ -227,6 +227,14 @@ class MetricsViewController: BaseViewController {
             return
         }
         
+        var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+            item.collectionId == self.collectionID
+        }
+        
+        tickerMetrics = tickerMetrics.sorted { left, right in
+            left.order < right.order
+        }
+        
         for metric in MarketDataField.allCases {
             
             let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
@@ -260,28 +268,28 @@ class MetricsViewController: BaseViewController {
                 self.financialsSection.append(marketData)
             }
             
-            var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
-                item.collectionId == self.collectionID
-            }
-            
-            tickerMetrics = tickerMetrics.sorted { left, right in
-                left.order < right.order
-            }
-            
             if tickerMetrics.count == 0 {
                 if MarketDataField.metricsOrder.contains(where: { item in
                     item == metric
                 }) {
                     self.selectedSection.append(marketData)
                 }
-            } else {
-                if tickerMetrics.contains(where: { item in
-                    item.fieldName == metric.fieldName
-                }) {
-                    self.selectedSection.append(marketData)
-                }
             }
             self.allMetrics.append(marketData)
+        }
+        
+        if tickerMetrics.count > 0 {
+            for tickerMetric in tickerMetrics {
+                for metric in MarketDataField.allCases {
+                    let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
+                    guard let marketData = marketData else {
+                        continue
+                    }
+                    if tickerMetric.fieldName == metric.fieldName {
+                        self.selectedSection.append(marketData)
+                    }
+                }
+            }
         }
         
         self.collectionView.reloadData()
@@ -549,7 +557,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     headerView.descriptionLabel.isHidden = false
                 case .valuation:
                     headerView.titleLabel.text = "Valuation" // 80
-                    headerView.descriptionLabel.text = "Metrics that help to see how pricey the stock is based\non a multiplicateur. Usully, lower is better."
+                    headerView.descriptionLabel.text = "Metrics that help to see how pricey the stock is based\non a multiplier. Usually, lower is better."
                     headerView.descriptionLabel.isHidden = false
                 case .momentum:
                     headerView.titleLabel.text = "Momentum" // 32
@@ -557,7 +565,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
                     headerView.descriptionLabel.isHidden = true
                 case .dividend:
                     headerView.titleLabel.text = "Dividends" // 80
-                    headerView.descriptionLabel.text = "Dividen metrics are very important metrics for large\norganizations and stable organizations."
+                    headerView.descriptionLabel.text = "Dividend metrics are very important metrics for large\norganizations and stable organizations."
                     headerView.descriptionLabel.isHidden = false
                 case .earnings:
                     headerView.titleLabel.text = "Earnings" // 80
@@ -578,7 +586,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
                 if metricSection == .selected {
                     let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MetricsFooterView.reuseIdentifier, for: indexPath) as! MetricsFooterView
-                    footerView.textLabel.text = "To pin another Market Data matrics — select items\nbelow. You can pin only \(self.maxSelectedElements) items."
+                    footerView.textLabel.text = "To pin another Market Data metrics — select items\nbelow. You can pin only \(self.maxSelectedElements) items."
                     result = footerView
                 }
             }

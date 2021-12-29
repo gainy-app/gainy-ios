@@ -90,6 +90,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 cell.delegate = cell
                 
             case let (cell as RecommendedCollectionViewCell, modelItem as RecommendedCollectionViewCellModel):
+                cell.tag = modelItem.id
                 cell.onPlusButtonPressed = { [weak self] in
                     cell.isUserInteractionEnabled = false
                     
@@ -297,16 +298,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         )
         
         //Prefetching
-        CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id)
-        
         showNetworkLoader()
+        
+        DispatchQueue.global(qos:.utility).async {
+            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
+                runOnMain {
+                    self.hideLoader()
+                }
+            }
+        }
+        
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
             self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
             UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
             
-            self.hideLoader()
             UserProfileManager.shared.yourCollections.append(
                 Collection(id: yourCollectionItem.id,
                            image: yourCollectionItem.image,
@@ -479,8 +486,26 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
-        UserProfileManager.shared.favoriteCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        UserProfileManager.shared.yourCollections.move(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        let items = snapshot.itemIdentifiers(inSection: .yourCollections)
+        let watchlistItems = items.filter { item in
+            if let itemModel = item as? YourCollectionViewCellModel {
+                return itemModel.id == Constants.CollectionDetails.watchlistCollectionID
+            }
+            return false
+        }
+        var watchlistIndex = -1
+        if let watchlistModel = watchlistItems.first {
+            watchlistIndex = items.firstIndex(of: watchlistModel) ?? -1
+        }
+        
+        var fromIndex = sourceIndexPath.row
+        var toIndex = destinationIndexPath.row
+        fromIndex = fromIndex + (fromIndex > watchlistIndex ? -1 : 0)
+        toIndex = toIndex + (fromIndex < watchlistIndex && toIndex < watchlistIndex ? 0 : -1)
+        if fromIndex != watchlistIndex {
+            UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+            UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
+        }
         
         if dragDirectionIsTopBottom {
             snapshot.moveItem(sourceItem, afterItem: destItem)

@@ -15,6 +15,9 @@ final class PortfolioViewController: BaseViewController {
     //MARK: - Child VCs
     lazy var noPlaidVC = NoPlaidViewController.instantiate(.portfolio)
     lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
+    lazy var noHoldingsVC = NoHoldingsViewController.instantiate(.portfolio)
+    lazy var inProgressHoldingsVC = HoldingsInProgressViewController.instantiate(.portfolio)
+    
     
     //MARK: - Outlets
     
@@ -22,7 +25,7 @@ final class PortfolioViewController: BaseViewController {
     
     //MARK: - State
     enum LinkState {
-        case noLink, linkedNoHoldings, linkHasHoldings
+        case noLink, linkedNoHoldings, linkHasHoldings, inProgress
     }
     
     private var state: LinkState = .noLink {
@@ -35,25 +38,32 @@ final class PortfolioViewController: BaseViewController {
                     addViewController(noPlaidVC, view: containerView)
                 }
             case .linkedNoHoldings:
-                if !children.contains(holdingsVC) {
+                if !children.contains(noHoldingsVC) {
                     removeAllChildVCs()
-                    holdingsVC.delegate = self
-                    addViewController(holdingsVC, view: containerView)
-                }
-                holdingsVC.coordinator = mainCoordinator
-                if !holdingsVC.viewModel.haveHoldings {
-                    holdingsVC.loadData()
+                    noHoldingsVC.delegate = self
+                    addViewController(noHoldingsVC, view: containerView)
                 }
             case .linkHasHoldings:
                 if !children.contains(holdingsVC) {
                     removeAllChildVCs()
+                    holdingsVC.delegate = self
                     addViewController(holdingsVC, view: containerView)
-                    holdingsVC.loadData()
+                    measure(name: "Holding total load") {
+                        holdingsVC.loadData()
+                    }
                 }
                 holdingsVC.coordinator = mainCoordinator
                 if !holdingsVC.viewModel.haveHoldings {
-                    holdingsVC.loadData()
-                }                
+                    measure(name: "Holding total load") {
+                        holdingsVC.loadData()
+                    }
+                }
+            case .inProgress:
+                if !children.contains(inProgressHoldingsVC) {
+                    removeAllChildVCs()
+                    inProgressHoldingsVC.delegate = self
+                    addViewController(inProgressHoldingsVC, view: containerView)
+                }
             }
         }
     }
@@ -94,9 +104,24 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 }
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
+    func noHoldings(controller: HoldingsViewController) {
+        state = .inProgress
+    }
     
     func plaidUnlinked(controller: HoldingsViewController) {
         
         self.loadBasedOnState()
+    }
+}
+
+extension PortfolioViewController: NoHoldingsViewControllerDelegate {
+    func reconnectPressed(vc: NoHoldingsViewController) {
+        state = .linkHasHoldings
+    }
+}
+
+extension PortfolioViewController: HoldingsInProgressViewControllerDelegate {
+    func discoveryPressed(vc: HoldingsInProgressViewController) {
+        tabBarController?.selectedIndex = 0
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
@@ -15,6 +16,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func isStockCompared(stock: AltStockTicker) -> Bool
     func didRequestShowBrokersListForSymbol(symbol: String)
     func openCompareWithSelf(ticker: TickerInfo)
+    func requestOpenCollection(withID id: Int)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -63,7 +65,7 @@ final class TickerDetailsDataSource: NSObject {
     let ticker: TickerInfo
     
     enum Row: Int {
-        case header = 0, chart, about, highlights, marketData, wsr, recommended, news, alternativeStocks, upcomingEvents, watchlist
+        case header = 0, chart, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
     }
     
     //MARK: - Hosting controllers
@@ -71,8 +73,9 @@ final class TickerDetailsDataSource: NSObject {
     static var oldHostingTag: Int = -1
     static var hostingTag: Int = Int((arc4random() % 50) + 1)
     
+    private let wsrModel: WSRViewModel = WSRViewModel.init(totalScore: 0, priceTarget: 0, progress: [])
     private lazy var wsrHosting: CustomHostingController<WSRView> = {
-        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(totalScore: ticker.wsjData.rate, priceTarget: ticker.wsjData.targetPrice, progress: ticker.wsjData.detailedStats))
+        let wsrHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: WSRView(viewModel: wsrModel))
         wsrHosting.view.tag = TickerDetailsDataSource.hostingTag
         return wsrHosting
     }()
@@ -107,6 +110,9 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
+        wsrModel.totalScore = ticker.wsjData.rate
+        wsrModel.priceTarget = ticker.wsjData.targetPrice
+        wsrModel.progress = ticker.wsjData.detailedStats
     }
     
     func calculateHeights() {
@@ -177,6 +183,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .about:
             let cell: TickerDetailsAboutViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
             
             cell.cellHeightChanged = { [weak self] newHeight in
                 DispatchQueue.main.async {
@@ -225,6 +232,14 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                     cell.setTransform(transform)
                 }
             }.store(in: &cancellable)
+            
+            cell.cellHeightChanged = { [weak self] newHeight in
+                DispatchQueue.main.async {
+                    tableView.beginUpdates()
+                    self?.cellHeights[.recommended] = max(168.0, newHeight)
+                    tableView.endUpdates()
+                }
+            }
             
             return cell
         case .news:
@@ -316,5 +331,13 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
             let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
             NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
         }
+    }
+}
+
+extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
+    
+    func requestOpenCollection(withID id: Int) {
+        
+        self.delegate?.requestOpenCollection(withID: id)
     }
 }

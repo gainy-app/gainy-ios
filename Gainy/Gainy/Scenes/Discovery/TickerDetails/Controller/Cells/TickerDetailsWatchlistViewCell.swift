@@ -112,5 +112,6 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
             title = NSLocalizedString("Remove from Watchlist", comment: "Remove from Watchlist")
         }
         watchBtn.setTitle(title, for: UIControl.State.normal)
+        watchBtn.titleLabel?.minimumScaleFactor = 0.1
     }
 }

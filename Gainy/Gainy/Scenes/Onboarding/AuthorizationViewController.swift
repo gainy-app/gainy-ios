@@ -47,9 +47,9 @@ final class AuthorizationViewController: BaseViewController {
         showNetworkLoader()
         GainyAnalytics.logEvent("enter_with_apple_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
         self.authorizationManager?.authorizeWithApple(completion: { authorizationStatus in
-            runOnMain(
+            runOnMain{
                 self.handleAuthorizationStatus(authorizationStatus: authorizationStatus)
-            )
+            }
         })
     }
     

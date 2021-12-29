@@ -20,6 +20,10 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
         nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 8)
         
+        stocksAmountLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
+        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -44)
+        stocksAmountLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
+        
         
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
@@ -113,6 +117,9 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
             return
         }
+        if self.updateImageBasedOnTag() {
+            return
+        }
         
         let processor = DownsamplingImageProcessor(size: backImageView.bounds.size)
         backImageView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
@@ -126,6 +133,22 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 //            print("-----\(result)")
         }
         self.imageLoaded = true
+    }
+    
+    func updateImageBasedOnTag() -> Bool {
+        
+        if Constants.CollectionDetails.top20ID == self.tag {
+            backImageView.image = UIImage(named: "top20CollectionBgSmall")
+            self.imageLoaded = true
+            return true
+        }
+        if Constants.CollectionDetails.watchlistCollectionID == self.tag {
+            backImageView.image = UIImage(named: "watchlistCollectionBackgroundImage")
+            self.imageLoaded = true
+            return true
+        }
+        
+        return false
     }
     
     override func didMoveToWindow() {
@@ -155,19 +178,21 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             height: bounds.height
         )
 
-        stocksAmountLabel.frame = CGRect(
-            x: hMargin,
-            y: bounds.height - (28 + bMargin),
-            width: 55,
-            height: 28
-        )
-
         plusButton.frame = CGRect(
             x: bounds.width - (28 + hMargin),
             y: bounds.height - (28 + bMargin),
             width: 28,
             height: 28
         )
+        
+        let isTop20 = (Constants.CollectionDetails.top20ID == self.tag) ? true : false
+        self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow
+        self.layer.borderWidth = isTop20 ? 1.0 : 0.0
+        self.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
+        self.layer.cornerRadius = isTop20 ? 8.0 : 0.0
+        _ = self.updateImageBasedOnTag()
     }
 
 

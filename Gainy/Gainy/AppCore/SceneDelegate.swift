@@ -1,4 +1,7 @@
 import UIKit
+import AppTrackingTransparency
+import AdSupport
+import FacebookCore
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Internal
@@ -29,6 +32,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         appCoordinator.start(with: nil)
         
+        Settings.setAdvertiserTrackingEnabled(true)
+        
         var isFromPush = connectionOptions.notificationResponse != nil
         var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
         // Determine who sent the URL.
@@ -55,6 +60,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         GainyAnalytics.logEvent("first_launch", params: fbParams)
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else {
+            return
+        }
+
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            open: url,
+            sourceApplication: nil,
+            annotation: [UIApplication.OpenURLOptionsKey.annotation]
+        )
+    }
 
     func sceneWillEnterForeground(_: UIScene) {
         if !UIDevice.current.hasTopNotch {
@@ -62,10 +80,40 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 navController.setStatusBar(backgroundColor: .black)
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            self?.requestTrackingAuthorization()
+        }
     }
 
     // MARK: Private
-
+    
+    private func requestTrackingAuthorization() {
+        guard #available(iOS 14, *) else { return }
+        ATTrackingManager.requestTrackingAuthorization { status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized:
+                    dprint("Got IDFA")
+                    print(self.identifierForAdvertising())
+                case .denied, .restricted:
+                    dprint("Denied IDFA")
+                case .notDetermined:
+                    dprint("Not Determined IDFA")
+                @unknown default:
+                    break
+                }
+            }
+        }
+    }
+    
+    private func identifierForAdvertising() -> String? {
+        // check if advertising tracking is enabled in user’s setting
+        if ASIdentifierManager.shared().isAdvertisingTrackingEnabled {
+            return ASIdentifierManager.shared().advertisingIdentifier.uuidString
+        } else {
+            return nil
+        }
+    }
     // MARK: Properties
 
     private lazy var appCoordinator: Coordinator = AppCoordinator(

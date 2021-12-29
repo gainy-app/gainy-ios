@@ -22,7 +22,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
         let horizontalTwoItemsGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(232 + 16)
+                heightDimension: .absolute(248 + 16)
             ),
             subitem: gridItem,
             count: 2
@@ -166,8 +166,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
                 markerMetricHeaders: markers.map(\.shortTitle),
                 markerMetric: vals,
                 highlight: viewModel.highlight,
-                matchScore: viewModel.matchScore,
-                isMatch: viewModel.isMatch
+                matchScore: viewModel.matchScore
             )
         }
 

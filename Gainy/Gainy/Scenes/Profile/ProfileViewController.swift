@@ -185,7 +185,7 @@ final class ProfileViewController: BaseViewController {
         if let vc = self.mainCoordinator?.viewControllerFactory.instantiatePrivacy() {
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
-        } else if let url = URL(string: "https://www.gainy.app/privacy-policy") {
+        } else if let url = URL(string: Constants.Links.privacy) {
             WebPresenter.openLink(vc: self, url: url)
         }
     }
@@ -219,7 +219,7 @@ final class ProfileViewController: BaseViewController {
             present(mailComposer, animated: true)
             
         } else if let emailUrl = URL.init(string: "support@gainy.app") {
-            WebPresenter.openLink(vc: self, url: emailUrl)
+            //WebPresenter.openLink(vc: self, url: emailUrl)
         }
     }
     
@@ -583,6 +583,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
             self.profileInterests?.removeAll(where: { element in
                 element.id == profileInterest.id
             })
+            self.profileInterestsSelected?.removeAll(where: { element in
+                element.id == profileInterest.id
+            })
             collectionView.reloadData()
             self.updateProfileInterestsUI()
         } else {
@@ -590,6 +593,9 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
                 return
             }
             self.didDeselectCategory(nil, profileCategory)
+            self.profileCategoriesSelected?.removeAll(where: { element in
+                element.id == profileCategory.id
+            })
             self.profileCategories?.removeAll(where: { element in
                 element.id == profileCategory.id
             })
@@ -650,15 +656,6 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
-        TickerLiveStorage.shared.clearMatchData()
-        GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-        self.profileInterestsSelected?.append(interest)
-        let index = self.profileInterests?.lastIndex(where: { element in
-            element.id == interest.id
-        })
-        if index == nil {
-            self.profileInterests?.append(interest)
-        }
         let query = InsertProfileInterestMutation.init(profileID: profileID, interestID: interestID)
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
@@ -667,6 +664,14 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 return
             }
             
+            GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.profileInterestsSelected?.append(interest)
+            let index = self.profileInterests?.lastIndex(where: { element in
+                element.id == interest.id
+            })
+            if index == nil {
+                self.profileInterests?.append(interest)
+            }
             NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
         }
     }
@@ -680,13 +685,10 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
-        TickerLiveStorage.shared.clearMatchData()
-        GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         let index = self.profileInterestsSelected?.lastIndex(where: { element in
             element.id == interest.id
         })
         if index != nil {
-            self.profileInterestsSelected?.remove(at: index!)
             let query = DeleteProfileInterestMutation.init(profileID: profileID, interestID: interestID)
             Network.shared.apollo.perform(mutation: query) { result in
                 dprint("\(result)")
@@ -694,6 +696,14 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
                 }
+                
+                GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                self.profileInterestsSelected?.removeAll(where: { element in
+                    element.id == interestID
+                })
+                self.profileInterests?.removeAll(where: { element in
+                    element.id == interestID
+                })
                 NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
             }
         }
@@ -708,16 +718,6 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
-        TickerLiveStorage.shared.clearMatchData()
-        CollectionsManager.shared.reloadTop20()
-        GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-        self.profileCategoriesSelected?.append(category)
-        let index = self.profileCategories?.lastIndex(where: { element in
-            element.id == category.id
-        })
-        if index == nil {
-            self.profileCategories?.append(category)
-        }
         let query = InsertProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
@@ -725,6 +725,16 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
             }
+            
+            GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.profileCategoriesSelected?.append(category)
+            let index = self.profileCategories?.lastIndex(where: { element in
+                element.id == category.id
+            })
+            if index == nil {
+                self.profileCategories?.append(category)
+            }
+            
             NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
         }
     }
@@ -738,14 +748,10 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
-        TickerLiveStorage.shared.clearMatchData()
-        CollectionsManager.shared.reloadTop20()
-        GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
         let index = self.profileCategoriesSelected?.lastIndex(where: { element in
             element.id == category.id
         })
         if index != nil {
-            self.profileCategoriesSelected?.remove(at: index!)
             let query = DeleteProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
             Network.shared.apollo.perform(mutation: query) { result in
                 dprint("\(result)")
@@ -753,6 +759,14 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
                 }
+                
+                GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                self.profileCategoriesSelected?.removeAll(where: { element in
+                    element.id == categoryID
+                })
+                self.profileCategories?.removeAll(where: { element in
+                    element.id == categoryID
+                })
                 NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
             }
         }

@@ -31,6 +31,6 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
         bottomNameLbl.text = "Avg cost"
         bottomPriceLbl.text = model.singlePrice.price
         
-        (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text) = model.infoForRange(range)
+        (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text, rangePriceLbl.textColor, rangeGrowLbl.textColor) = model.infoForRange(range)
     }
 }

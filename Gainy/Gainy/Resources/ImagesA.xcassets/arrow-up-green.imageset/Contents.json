@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "arrow-up-green.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "arrow-up-green@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "arrow-up-green@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Vector.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

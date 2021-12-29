@@ -50,6 +50,15 @@ class NotificationManager: NSObject {
         }
     }
     
+    class func trackingRequest() {
+        //ATT Tracking
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in
+            })
+        } else {
+        }
+    }
+    
     class func registerOrEnableNotifications() {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {

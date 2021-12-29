@@ -7,14 +7,25 @@
 
 import Foundation
 
-func runOnMain(_ closure: @autoclosure @escaping () -> Void) {
+
+//MARK: - First Order functions
+func runOnMain(_ closure: () -> Void) {
     if Thread.current.isMainThread {
         closure()
         return
     }
-    DispatchQueue.main.async {
+    DispatchQueue.main.sync {
         closure()
     }
+}
+
+@discardableResult
+func measure<A>(name: String = "", _ block: () -> A) -> A {
+    let startTime = CACurrentMediaTime()
+    let result = block()
+    let timeElapsed = CACurrentMediaTime() - startTime
+    print("Time: \(name) - \(timeElapsed)")
+    return result
 }
 
 func delay(_ delay: Double, closure:@escaping ()->()) {
@@ -30,6 +41,7 @@ struct Constants {
         static let top20ID = 231
         static let loadingCellIDs = [-10, -11, -12]
         static let demoNamePrefix = "GDEMO:"
+        static let matchScore = "Match\nScore"
     }
     
     struct Auth {
@@ -47,6 +59,12 @@ struct Constants {
     struct Links {
         static let privacy = "https://www.gainy.app/privacy-policy"
         static let tos = "https://www.gainy.app/terms-of-service"
+        static let privacyNotice = "https://www.gainy.app/privacy-notice"
+        static let advPart3 = "https://www.gainy.app/form-adv"
+        static let formCRS = "https://www.gainy.app/form-crs"
+        static let clientAgreement = "https://www.gainy.app/client-agreement"
+        static let contentTOEDelivery = "https://www.gainy.app/consent-to-e-delivery"
+        
         static let rhLink = "https://robinhood.com/applink/instrument/?symbol="
     }
     

@@ -117,8 +117,9 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
             nameLbl.text = stock.name
             symbolLbl.text = stock.symbol
             
-            let priceChange = stock.realtimeMetrics?.relativeDailyChange ?? 0.0
-            priceLbl.text = stock.realtimeMetrics?.actualPrice?.price ?? ""
+            let storedData = TickerLiveStorage.shared.getSymbolData(stock.symbol ?? "")
+            let priceChange = storedData?.priceChangeToday ?? 0.0
+            priceLbl.text = storedData?.currentPrice.price ?? ""
             priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
             
             highlightLbl.text = stock.tickerHighlights.compactMap(\.highlight).first(where: {!$0.isEmpty}) ?? ""

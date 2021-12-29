@@ -6,15 +6,22 @@
 //
 
 import UIKit
+import Kingfisher
+
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 156.0
+    static let cellHeight: CGFloat = 168.0
     
     @IBOutlet private weak var rotatableImageView: UIImageView!
     
     @IBOutlet private var recLbls: [UILabel]!
     @IBOutlet private weak var scoreLbl: UILabel!
     @IBOutlet private var recImgs: [UIImageView]!
+    @IBOutlet private weak var tagsStack: UIView!
+    @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    @IBOutlet private weak var tagsHeaderLbl: UILabel!
+    
+    private var lines: Int = 1
     
     override func updateFromTickerData() {
         let symbol = tickerInfo?.symbol ?? ""
@@ -23,7 +30,78 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[0].image = UIImage(named: "fits_risk\(matchData.fitsRisk)")
             recImgs[1].image = UIImage(named: "fits_risk\(matchData.fitsInterests)")
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
+            
+            recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
+            switch matchData.matchScore {
+            case 0..<35:
+                contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
+                scoreLbl.textColor = UIColor(named: "mainText")
+                break
+            case 35..<65:
+                contentView.backgroundColor = UIColor.Gainy.mainYellow
+                scoreLbl.textColor = UIColor(named: "mainText")
+                break
+            case 65...:
+                contentView.backgroundColor = UIColor.Gainy.mainGreen
+                scoreLbl.textColor = UIColor(named: "mainText")
+                break
+            default:
+                break
+            }
+            
+            //Tags
+            let tagHeight: CGFloat = 24.0
+            let margin: CGFloat = 12.0
+            
+            if tagsStack.subviews.count == 0 {
+                let totalWidth: CGFloat = UIScreen.main.bounds.width - 24 * 2.0
+                var xPos: CGFloat = 0.0
+                var yPos: CGFloat = 0.0
+                for tag in tickerInfo?.matchTags ?? [] {
+                    let tagView = TagView()
+                    tagView.changeLayoutForRec()
+                    tagView.loadImage(url: tag.url)
+                    
+                    tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
+                                     for: .touchUpInside)
+                    tagsStack.addSubview(tagView)
+                    tagView.tagName = tag.name
+                    tagView.loadImage(url: tag.url)
+                    let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                    tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
+                    if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
+                        xPos = 0.0
+                        yPos = yPos + tagHeight + margin
+                        lines += 1
+                    }
+                    tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
+                    tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
+                    xPos += width + margin
+                }
+            }
+                
+            self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+            self.tagsStack.layoutIfNeeded()
+            
+            let calculatedHeight: CGFloat = 192.0 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
+            if (tickerInfo?.matchTags ?? []).count > 0 {
+                cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
+                tagsHeaderLbl.isHidden = false
+            } else {
+                cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
+                tagsHeaderLbl.isHidden = true
+            }
         }
+    }
+    
+    @objc func tagViewTouchUpInside(_ tagView: TagView) {
+//        guard let name = tagView.tagName, name.count > 0 else {
+//            return
+//        }
+//        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
+//        if !panelInfo.title.isEmpty {
+//            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
+//        }
     }
     
     func setTransform(_ transform: CGAffineTransform) {

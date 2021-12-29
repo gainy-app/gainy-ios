@@ -55,6 +55,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         contentView.addSubview(tickersLoadIndicator)
         tickersLoadIndicator.center = internalCollectionView.center
         
+        
         let recurLock = NSRecursiveLock()
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
@@ -152,10 +153,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     // MARK: Internal
     
+    @MainActor
     private var isLoadingTickers: Bool = false {
         didSet {
             if isLoadingTickers {
-                
                 for cell in internalCollectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.showAnimatedGradientSkeleton()
@@ -218,6 +219,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     ) {
         self.collectionID = collectionId
         self.stocksCount = Int(stocksAmount) ?? 0
+        collectionHorizontalView.tag = collectionId
         // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
         collectionHorizontalView.configureWith(
             name: collectionName,

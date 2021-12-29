@@ -6,6 +6,8 @@ import GoogleSignIn
 //import Datadog
 @_exported import BugfenderSDK
 import LinkKit
+import FirebaseAnalytics
+
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initDataDog()
         initBugfender()
         TickerLiveStorage.shared.clearAllLiveData()
+        NotificationManager.trackingRequest()
         return true
     }
     
@@ -35,16 +38,26 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc
     private func sendLaunch() {
-        AppsFlyerLib.shared().start()
+        AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
+                    if (error != nil){
+                        print(error ?? "")
+                        return
+                    } else {
+                        dprint("AppsFlyerLib started")
+                        print(dictionary ?? "")
+                        return
+                    }
+                })
     }
     
     private func initializeAppsFlyer() {
         AppsFlyerLib.shared().appsFlyerDevKey = "z6SeiLgYCSRpeqK27zouo5"
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
+        AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         
 #if DEBUG
-        AppsFlyerLib.shared().isDebug = true
+        //AppsFlyerLib.shared().isDebug = true
 #endif
         
         NotificationCenter
@@ -75,11 +88,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var config = Configuration()
     private func initBugfender() {
-        //if config.environment == .staging {
+        if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
-        //}
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -166,7 +179,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         handler.continue(from: webpageURL)
         return true
     }
-    // <!-- SMARTDOWN_OAUTH_SUPPORT -->
+    // <!-- SMARTDOWN_OAUTH_SUPPORT -->    
+    
 }
 
 extension AppDelegate: AppsFlyerLibDelegate {
@@ -186,4 +200,21 @@ extension AppDelegate {
     -> Bool {
         return GIDSignIn.sharedInstance.handle(url)
     }
+    
+//    private func handleGAILink(_ url: URL) {
+//        let tracker1 = GAI.sharedInstance().tracker(withTrackingId: "...")
+//                    let hitParams = GAIDictionaryBuilder()
+//                    hitParams.setCampaignParametersFromUrl(path)
+//                    let medium = self.getQueryStringParameter(url: path, param: "utm_medium")
+//
+//                    hitParams.set(medium, forKey: kGAICampaignMedium)
+//                    hitParams.set(path, forKey: kGAICampaignSource)
+//
+//                    let hitParamsDict = hitParams.build()
+//
+//                    tracker1?.allowIDFACollection = true
+//
+//                    tracker1?.set(kGAIScreenName, value: "...")
+//                    tracker1?.send(GAIDictionaryBuilder.createScreenView().setAll(hitParamsDict as? [AnyHashable : Any]).build() as? [AnyHashable : Any])
+//    }
 }

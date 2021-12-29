@@ -18,6 +18,8 @@ struct AppProfileMetricsSetting {
 final class UserProfileManager {
         
     static let shared = UserProfileManager()
+    
+    
     weak var authorizationManager: AuthorizationManager?
     @UserDefaultArray(key: "favoriteCollections")
     var favoriteCollections: [Int]
@@ -93,7 +95,6 @@ final class UserProfileManager {
             switch result {
             case .success(let graphQLResult):
                 
-                dprint("Success \(graphQLResult)")
                 guard let appProfile = graphQLResult.data?.appProfiles.first else {
                     NotificationManager.shared.showError("Sorry... Failed to load profile info.")
                     completion(false)
@@ -123,12 +124,14 @@ final class UserProfileManager {
                 self.favoriteCollections = appProfile.profileFavoriteCollections.map({ item in
                     item.collectionId
                 }).reorder(by: oldFavs)
+                
                 self.interests = appProfile.profileInterests.map({ item in
                     item.interestId
                 })
                 self.categories = appProfile.profileCategories.map({ item in
                     item.categoryId
                 })
+                
                 self.watchlist = appProfile.profileWatchlistTickers.map({ item in
                     item.symbol
                 })
@@ -236,17 +239,23 @@ final class UserProfileManager {
         }
         
         let query = InsertProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
-        Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
-            guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
-                completion(false)
-                return
+        DispatchQueue.global(qos: .background).async {
+            Network.shared.apollo.perform(mutation: query) { result in
+                guard (try? result.get().data) != nil else {
+                    NotificationManager.shared.showError("Sorry... Failed to sync inserted favourite collection.")
+                    runOnMain {
+                        completion(false)
+                    }
+                    return
+                }
+                
+                self.favoriteCollections.append(collectionID)
+                runOnMain {
+                    completion(true)
+                }
             }
-            
-            self.favoriteCollections.append(collectionID)
-            completion(true)
         }
+        
     }
     
     public func removeFavouriteCollection(_ collectionID: Int, completion: @escaping (_ success: Bool) -> Void) {
@@ -258,7 +267,6 @@ final class UserProfileManager {
         
         let query = DeleteProfileFavoriteCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... Failed to sync deleted favourite collection.")
                 completion(false)
@@ -305,7 +313,6 @@ final class UserProfileManager {
         
         let query = DeleteTickerFromWatchlistMutation(profileID: profileID, symbol: symbol)
         Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... Failed to sync watchlist data")
                 completion(false)
@@ -336,7 +343,6 @@ final class UserProfileManager {
         
         let query = DeleteMetricsSessingsForTickerMutation.init(profileID: profileID)
         Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
             guard (try? result.get().data) != nil else {
 //                NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
                 completion(false)
@@ -345,7 +351,6 @@ final class UserProfileManager {
             
             let updateQuery = InsertMetricsSessingsForTickerMutation.init(profileID: profileID, f1: f1, f2: f2, f3: f3, f4: f4, f5: f5, f6: f6)
             Network.shared.apollo.perform(mutation: updateQuery) { updateResult in
-                dprint("\(updateResult)")
                 guard (try? updateResult.get().data) != nil else {
 //                    NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
                     completion(false)
@@ -372,7 +377,6 @@ final class UserProfileManager {
         
         let query = DeleteMetricsSessingsForCollectionMutation.init(profileID: profileID, collectionID: collectionID)
         Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
             guard (try? result.get().data) != nil else {
 //                NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
                 completion(false)
@@ -381,7 +385,6 @@ final class UserProfileManager {
             
             let updateQuery = InsertMetricsSessingsForCollectionMutation.init(profileID: profileID, collectionID: collectionID,  f1: f1, f2: f2, f3: f3, f4: f4, f5: f5)
             Network.shared.apollo.perform(mutation: updateQuery) { updateResult in
-                dprint("\(updateResult)")
                 guard (try? updateResult.get().data) != nil else {
 //                    NotificationManager.shared.showError("Sorry... Failed to sync metrics data")
                     completion(false)

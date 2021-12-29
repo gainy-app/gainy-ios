@@ -29,7 +29,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
         let horizontalTwoItemsGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .absolute(64)
+                heightDimension: .absolute(73)
             ),
             subitem: gridItem,
             count: 1
@@ -170,8 +170,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                 tickerPrice: viewModel.currentPrice.cleanTwoDecimal,
                 markerHeaders: markers.map(\.shortTitle),
                 markerMetrics: vals,
-                matchScore: viewModel.matchScore,
-                isMatch: viewModel.isMatch
+                matchScore: viewModel.matchScore
             )
         }
 

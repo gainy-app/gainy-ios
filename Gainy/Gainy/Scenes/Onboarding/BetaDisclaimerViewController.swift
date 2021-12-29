@@ -9,8 +9,8 @@ import UIKit
 
 final class BetaDisclaimerViewController: BaseViewController {
     
-    @UserDefault<Bool>("betaDisclaimerWasShownKey")
-    static private(set) var betaDisclaimerWasShown: Bool?
+    
+    static var betaDisclaimerWasShown: Bool = true
     
     //Coordinators
     weak var coordinator: OnboardingCoordinator?

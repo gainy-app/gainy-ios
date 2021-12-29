@@ -11,6 +11,7 @@ import FloatingPanel
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)
+    func noHoldings(controller: HoldingsViewController)
 }
 
 final class HoldingsViewController: BaseViewController {
@@ -31,8 +32,18 @@ final class HoldingsViewController: BaseViewController {
     
     @IBOutlet weak var settingsLabel: UILabel!
     @IBOutlet weak var sortLabel: UILabel!
-    @IBOutlet weak var sortButton: ResponsiveButton!
-    @IBOutlet weak var settingsButton: ResponsiveButton!
+    @IBOutlet weak var sortButton: ResponsiveButton! {
+        didSet {
+            sortButton.layer.cornerRadius = 8.0
+            sortButton.clipsToBounds = true
+        }
+    }
+    @IBOutlet weak var settingsButton: ResponsiveButton! {
+        didSet {
+            settingsButton.layer.cornerRadius = 8.0
+            settingsButton.clipsToBounds = true
+        }
+    }
     @IBOutlet weak var linkPlaidButton: UIButton!
     
     //MARK: - Outlets
@@ -76,6 +87,11 @@ final class HoldingsViewController: BaseViewController {
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         viewModel.loadHoldingsAndSecurities {[weak self] in
+            if !(self?.viewModel.haveHoldings ?? false) {
+                if let self = self {
+                    self.delegate?.noHoldings(controller: self)
+                }
+            }
             self?.tableView.hideSkeleton()
             self?.settingsButton.isUserInteractionEnabled = true
             self?.sortButton.isUserInteractionEnabled = true
@@ -91,7 +107,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onSortButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showSortingPanel()
     }
@@ -99,7 +115,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onLinkButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showLinkUnlinkPlaid()
     }
@@ -107,7 +123,7 @@ final class HoldingsViewController: BaseViewController {
     @IBAction func onSettingsButtonTapped(_ sender: Any) {
         
         guard self.presentedViewController == nil else {return}
-
+        
         GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showFilteringPanel()
     }
@@ -120,7 +136,7 @@ final class HoldingsViewController: BaseViewController {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
-
+        
         let title = settings.sorting.title
         sortLabel.text = title
     }
@@ -291,6 +307,64 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
 extension HoldingsViewController: HoldingsDataSourceDelegate {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
+    }
+    
+    func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+        showNetworkLoader()
+        self.viewModel.loadChartsForRange(range: range) {[weak self] model in
+            runOnMain {
+                if let model = model {
+                    self?.viewModel.dataSource.profileGains[range] = model
+                    
+                    viewModel.chartData = model.chartData
+                    viewModel.rangeGrow = model.rangeGrow
+                    viewModel.rangeGrowBalance = model.rangeGrowBalance
+                    viewModel.spGrow = model.spGrow
+                    viewModel.sypChartData = model.sypChartData
+                }
+                self?.hideLoader()
+            }
+            
+        }
+    }
+    
+    func requestOpenCollection(withID id: Int) {
+        coordinator?.showCollectionDetails(collectionID: id, delegate: self)
+    }
+}
+
+extension HoldingsViewController: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.mutateFavouriteCollections(senderCell: nil, isAdded: isAdded, collectionID: collectionID)
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+    }
+    
+    private func mutateFavouriteCollections(senderCell: RecommendedCollectionViewCell? = nil, isAdded: Bool, collectionID: Int) {
+        
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
+                    if let cell = senderCell {
+                        cell.setButtonChecked(isChecked: success)
+                    }
+                }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                    
+                }
+            }
+        } else {
+            if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+                    if let cell = senderCell {
+                        cell.setButtonChecked(isChecked: !success)
+                    }
+                }
+            }
+        }
     }
 }
 

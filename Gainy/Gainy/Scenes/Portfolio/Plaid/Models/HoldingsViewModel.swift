@@ -36,6 +36,14 @@ final class HoldingsViewModel {
     private var chartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
     
+    func loadNewChartData(period: ScatterChartView.ChartPeriod, _ completion: ( () -> Void)? = nil) {
+        if let chartCache = chartsCache[period] {
+
+            completion?()
+        } else {
+        }
+    }
+    
     //MARK: - Network
     
     private var config = Configuration()
@@ -45,8 +53,8 @@ final class HoldingsViewModel {
             if let profileID = UserProfileManager.shared.profileID {
                 
                 let loadGroup = DispatchGroup()
-                
                 loadGroup.enter()
+                print("\(Date()) Holdings load start")
                 Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
@@ -63,11 +71,12 @@ final class HoldingsViewModel {
                         NotificationManager.shared.showError(error.localizedDescription)
                         break
                     }
+                    print("\(Date()) Holdings load end")
                     loadGroup.leave()
                 }
                 
-                
-                for range in ScatterChartView.ChartPeriod.allCases {
+                print("\(Date()) Holdings charts start")
+                for range in [ScatterChartView.ChartPeriod.d1]{
                     loadGroup.enter()
                     HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
                         self?.chartsCache[range] = chartData
@@ -86,6 +95,7 @@ final class HoldingsViewModel {
                         completion?()
                         return
                     }
+                    print("\(Date()) Holdings charts enede")
                     self.dataSource.chartRange = .d1
                     
                     var tickSymbols: [String] = []
@@ -153,46 +163,70 @@ final class HoldingsViewModel {
                         PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
-                    
+                    print("\(Date()) Holdings match score start")
                     TickersLiveFetcher.shared.getMatchScores(symbols: tickSymbols) {
                         
-                        
-                        
-                        let topChartGains = HoldingsModelMapper.topChartGains(chartsCache: self.chartsCache,
+                        let today = HoldingsModelMapper.topChartGains(range: .d1,
+                                                                              chartsCache: self.chartsCache,
                                                                               sypChartsCache: self.sypChartsCache,
                                                                               portfolioGains: self.portfolioGains)
-                        
-                        //Loading Today
-                        let today = topChartGains[.d1]
-                        
-                        let demoChartData = ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40].shuffled())
-                        let demoSypChartData = ChartData.init(points: [32, 45, 56, 32, 20, 15, 25, 35, 45, 60, 50, 40].shuffled())
-                        
-                        let sypChartReal = today?.sypChartData ?? demoSypChartData
+                        let sypChartReal = today.sypChartData
                         
                         let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
-                                                              rangeGrow: today?.rangeGrow ?? 0.0,
-                                                              rangeGrowBalance: today?.rangeGrowBalance ?? 0.0,
+                                                              rangeGrow: today.rangeGrow,
+                                                              rangeGrowBalance: today.rangeGrowBalance,
                                                               spGrow: Float(sypChartReal.startEndDiff),
-                                                              chartData: today?.chartData ?? demoChartData,
+                                                              chartData: today.chartData,
                                                               sypChartData: sypChartReal)
                         
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
                                                                              profileHoldings: self.portfolioGains)
-                        
-                        
-                        
+                        print("\(Date()) Holdings match score end")
                         self.dataSource.chartViewModel = live
-                        self.dataSource.profileGains = topChartGains
+                        self.dataSource.profileGains = [.d1 : today]
                         self.dataSource.originalHoldings = originalHoldings
                         self.dataSource.holdings = originalHoldings
                         if let settings = settings {
                             self.dataSource.sortAndFilterHoldingsBy(settings)
                         }
+                        print("\(Date()) Holdings fianl end")
                         completion?()
                     }
                 }
             }
+        }
+    }
+    
+    func loadChartsForRange(range: ScatterChartView.ChartPeriod, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
+        if let profileID = UserProfileManager.shared.profileID {
+        let loadGroup = DispatchGroup()
+            loadGroup.enter()
+            HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
+                self?.chartsCache[range] = chartData
+                loadGroup.leave()
+            }
+            
+            loadGroup.enter()
+            HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, _ in
+                self?.sypChartsCache[range] = chartData
+                loadGroup.leave()
+            }
+        
+        loadGroup.notify(queue: .main) {[weak self] in
+            guard let self = self else {
+                completion?(nil)
+                return
+            }
+            
+            let chartModel = HoldingsModelMapper.topChartGains(range: range,
+                                                                  chartsCache: self.chartsCache,
+                                                                  sypChartsCache: self.sypChartsCache,
+                                                                  portfolioGains: self.portfolioGains)
+            completion?(chartModel)
+            
+        }
+        } else {
+            completion?(nil)
         }
     }
     

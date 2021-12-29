@@ -20,8 +20,11 @@ struct HoldingSecurityViewModel {
     let absoluteGains: [ScatterChartView.ChartPeriod : Float]
     let relativeGains: [ScatterChartView.ChartPeriod : Float]
     
-    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String) {
-        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "", relativeGains[range]?.cleanOneDecimalP ?? "" )
+    func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
+        return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "",
+                relativeGains[range]?.cleanOneDecimalP ?? "",
+                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         
     }
     
@@ -33,7 +36,8 @@ struct HoldingSecurityViewModel {
         if type == "equity" {
             type = "Shares"
         }
-        self.name = holding.name ?? ""
+        let correctName = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "")  : (holding.name ?? ""))
+        self.name = correctName.companyMarkRemoved + " x\(holding.quantity ?? 0.0)"
         self.type = type
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
@@ -60,6 +64,21 @@ struct HoldingSecurityViewModel {
         ]
         self.absoluteGains = absGains
         self.relativeGains = relGains
+    }
+}
+
+extension String {
+    var companyMarkRemoved: String {
+        let list = ["Inc", "Ltd", "Plc", "Holdings", "Corporation", "Incorporated", "Limited", "International S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", "Company", "Class A...", "Class B...", "Warrants", "International", "Co", "Global Inc"]
+        for ltd in list {
+            if let dotRange = self.lowercased().range(of: ltd.lowercased()) {
+                var old = self
+                old.removeSubrange(dotRange.lowerBound..<self.endIndex)
+                //let clearName = String(old.dropLast(ltd.count))
+                return old
+            }
+        }
+        return self
     }
 }
 

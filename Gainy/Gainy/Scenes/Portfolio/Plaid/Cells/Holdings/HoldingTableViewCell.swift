@@ -8,7 +8,13 @@
 import UIKit
 import PureLayout
 
+protocol HoldingTableViewCellDelegate: AnyObject {
+    func requestOpenCollection(withID id: Int)
+}
+
 final class HoldingTableViewCell: HoldingRangeableCell {
+    
+    public weak var delegate: HoldingTableViewCellDelegate?
     
     static let heightWithoutEvents: CGFloat = 252.0
     static let heightWithEvents: CGFloat = 252.0
@@ -18,7 +24,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var amountLbl: UILabel!
     @IBOutlet weak var symbolLbl: UILabel!
     
-    @IBOutlet weak var matchCircleView: UIImageView!
+    @IBOutlet weak var matchCircleView: UIView!
+    @IBOutlet weak var matchCircleImgView: UIImageView! {
+        didSet {
+            matchCircleImgView.backgroundColor = .clear
+            matchCircleImgView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+            matchCircleImgView.tintColor = .white
+        }
+    }
     @IBOutlet weak var matchScoreLbl: UILabel!
     @IBOutlet weak var lttView: CornerView!
     @IBOutlet weak var categoriesView: UIView!
@@ -78,17 +91,23 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
         }
         
-        
-        matchCircleView.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+        matchScoreLbl.textColor = .white
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
-            matchScoreLbl.text = "\(matchScore)"
-            if matchScore > 50 {
-                matchScoreLbl.textColor = UIColor(named: "mainGreen")
-                matchCircleView.tintColor = UIColor(named: "mainGreen")
-            } else {
-                matchScoreLbl.textColor = UIColor(named: "mainRed")
-                matchCircleView.tintColor = UIColor(named: "mainRed")
+            let matchVal = Int(matchScore) ?? 0
+            switch matchVal {
+            case 0..<35:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainRed
+                break
+            case 35..<65:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainYellow
+                break
+            case 65...:
+                matchCircleView.backgroundColor = UIColor.Gainy.mainGreen
+                break
+            default:
+                break
             }
+            matchScoreLbl.text = "\(matchScore)"
         } else {
             matchScoreLbl.text = "-"
         }
@@ -99,8 +118,9 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Tags
         
-        let industries = model.industries.compactMap({$0.gainyIndustry?.name})
-        let categories = model.categories.compactMap({$0.categories?.name})
+        let industries = model.industries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                                                                     url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404)  })
+        let categories = model.categories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404)})
         let tags = categories + industries
         
         
@@ -109,22 +129,21 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         let totalWidth: CGFloat = UIScreen.main.bounds.width - 81.0 - 32.0
         var xPos: CGFloat = 0.0
-        let categoriesToShowInfo = ["defensive", "speculation", "penny", "dividend", "momentum", "value", "growth"]
         
         for tag in tags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                               for: .touchUpInside)
             categoriesView.addSubview(tagView)
-            if !categoriesToShowInfo.contains(where: { element in
-                element.isEqual(tag.lowercased())
-            }) {
+            if tag.collectionID < 0 {
                 tagView.backgroundColor = UIColor.lightGray
             } else {
                 tagView.backgroundColor = UIColor(hex: 0x3A4448)
             }
-            tagView.tagName = tag
-            let width = 22.0 + tag.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+            tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
+            tagView.tagName = tag.name
+            tagView.loadImage(url: tag.url)
+            let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
             if xPos + width + margin > totalWidth && categoriesView.subviews.count > 0 {
                 tagView.removeFromSuperview()
@@ -156,17 +175,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         if model.securities.isEmpty {
             expandBtn.isHidden = true
-            transactionsTotalLbl.attributedText = "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
+            transactionsTotalLbl.attributedText =  "No transactions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
             secTableHeight.constant = 0.0
         } else {
             expandBtn.isHidden = false
-            let attrArr = model.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
-            var totalList = NSMutableAttributedString.init(string: "")
-            for share in attrArr {
-                totalList.append(share)
-                totalList.append(" ".attr())
-            }
-            transactionsTotalLbl.attributedText = totalList
+            transactionsTotalLbl.attributedText = model.holdingsCount
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
@@ -183,13 +196,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 if isExpanded {
                     transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
-                    let attrArr = holding.securities.map({$0.type.attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\($0.quantity)".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "09141F", alpha: 1.0)!)})
-                    var totalList = NSMutableAttributedString.init(string: "")
-                    for share in attrArr {
-                        totalList.append(share)
-                        totalList.append(" ".attr())
-                    }
-                    transactionsTotalLbl.attributedText = totalList
+                    transactionsTotalLbl.attributedText = holding.holdingsCount
                 }
             }
         }
@@ -203,20 +210,25 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     //MARK: - Actions
     
     @IBAction func toggleExpandAction(_ sender: Any) {
+        
         isExpanded.toggle()
+        
+        if isExpanded {
+            GainyAnalytics.logEvent("portfolio_plaid_holding_details_expanded")
+        } else {
+            GainyAnalytics.logEvent("portfolio_plaid_holding_details_collapsed")
+        }
         if let holding = holding {
             cellHeightChanged?(holding)
         }
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
-        guard let name = tagView.tagName, name.count > 0 else {
+        guard let collectionID = tagView.collectionID, collectionID > 0 else {
             return
         }
-        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
-        if !panelInfo.title.isEmpty {
-            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
-        }
+        
+        self.delegate?.requestOpenCollection(withID: collectionID);
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {

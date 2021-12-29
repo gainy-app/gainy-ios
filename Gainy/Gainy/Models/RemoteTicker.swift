@@ -9,6 +9,12 @@ import UIKit
 import SwiftDate
 import Apollo
 
+struct TickerTag {
+    let name: String
+    let url: String
+    let collectionID: Int
+}
+
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
 typealias AltStockTicker = RemoteTickerDetails
@@ -25,6 +31,7 @@ class TickerInfo {
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         self.tags = []
+        self.matchTags = []
         self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
         self.wsjData = WSRData(rate: 0.0, targetPrice: 0.0, analystsCount: 0, detailedStats: [])
        
@@ -59,33 +66,42 @@ class TickerInfo {
     
     func updateMarketData() {
         var markers: [MarketData] = []
+        var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
+            item.collectionId == nil
+        }
+        tickerMetrics = tickerMetrics.sorted { left, right in
+            left.order < right.order
+        }
+        
         for metric in MarketDataField.allCases {
-            
             let marketData = metric.mapToMarketData(ticker: ticker)
             guard let marketData = marketData else {
                 continue
             }
             
-            var tickerMetrics = UserProfileManager.shared.profileMetricsSettings.filter { item in
-                item.collectionId == nil
-            }
-            tickerMetrics = tickerMetrics.sorted { left, right in
-                left.order < right.order
-            }
             if tickerMetrics.count == 0 {
                 if MarketDataField.metricsOrder.contains(where: { item in
                     item == metric
                 }) {
                     markers.append(marketData)
                 }
-            } else {
-                if tickerMetrics.contains(where: { item in
-                    item.fieldName == metric.fieldName
-                }) {
-                    markers.append(marketData)
+            }
+        }
+        
+        if tickerMetrics.count > 0 {
+            for tickerMetric in tickerMetrics {
+                for metric in MarketDataField.allCases {
+                    let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
+                    guard let marketData = marketData else {
+                        continue
+                    }
+                    if tickerMetric.fieldName == metric.fieldName {
+                        markers.append(marketData)
+                    }
                 }
             }
         }
+        
         self.marketData = markers
     }
     
@@ -142,8 +158,10 @@ class TickerInfo {
                         
                         if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
                             self?.upcomingEvents = tickerDetails.tickerEvents
-                            let industries = tickerDetails.tickerIndustries.compactMap({$0.gainyIndustry?.name})
-                            let categories = tickerDetails.tickerCategories.compactMap({$0.categories?.name})
+                            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                                                                                                       url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404)  })
+                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404)})
+                            
                             self?.tags = categories + industries
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                                        WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
@@ -163,6 +181,17 @@ class TickerInfo {
                     }
                 }
                 
+                //Load Match Tags
+                
+                mainDS.enter()
+                if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol) {
+                    let tagsTask = Task {
+                        let loadedTags = await matchData.combinedTags()
+                        self.matchTags = loadedTags
+                        mainDS.leave()
+                    }
+                }
+                
                 //Load Alt Stocks
                 mainDS.enter()
                 Network.shared.apollo.fetch(query: FetchAltStocksQuery.init(symbol: self.symbol)){[weak self] result in
@@ -179,10 +208,19 @@ class TickerInfo {
                         //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
                         self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued()
                         
-                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
-                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        let tickerSymbols = (self?.altStocks ?? []).compactMap(\.symbol)
+                        
+                        TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
+                            TickersLiveFetcher.shared.getMatchScores(symbols: tickerSymbols) {
+                                mainDS.leave()
+                            }
                         }
-                        mainDS.leave()
+                        
+                        //Not working
+//                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
+//                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+//                        }
+                        
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")
@@ -221,6 +259,11 @@ class TickerInfo {
             
             chartsDS.notify(queue: queue) {
                 self.isChartDataLoaded = true
+                if let chartCache = self.chartsCache[.d1] {
+                    self.updateChartData(chartCache.chartData)
+                    self.medianGrow = chartCache.medianGrow
+                    self.haveMedian = chartCache.haveMedian
+                }
                 DispatchQueue.main.async {
                     chartsLoaded()
                 }
@@ -232,10 +275,10 @@ class TickerInfo {
     /// - Parameter dispatchGroup: Group to sync work
     private func loadAllCharts(dispatchGroup: DispatchGroup) {
         
-        for period in ScatterChartView.ChartPeriod.allCases {
-            chartsCache[period] = ChartDataCache()
-        }
-        
+//        for period in ScatterChartView.ChartPeriod.allCases {
+//            chartsCache[period] = ChartDataCache()
+//        }
+//        
         dispatchGroup.enter()
         HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: ScatterChartView.ChartPeriod.d1) {[weak self] chartData, _ in
             self?.setChartsCache(.d1, chartData: chartData)
@@ -247,12 +290,12 @@ class TickerInfo {
         //Load day median
         loadMedianForRange(.d1, dispatchGroup: dispatchGroup)
         
-        loadChartFromServer(period: .w1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .m1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .m3, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .y1, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .y5, dispatchGroup: dispatchGroup, nil)
-        loadChartFromServer(period: .all, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .w1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .m1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .m3, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .y1, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .y5, dispatchGroup: dispatchGroup, nil)
+//        loadChartFromServer(period: .all, dispatchGroup: dispatchGroup, nil)
     }
     
     /// Update direct Chart only
@@ -526,7 +569,10 @@ class TickerInfo {
     //MARK: - About
     let about: String
     let aboutShort: String
-    var tags: [String]
+    var tags: [TickerTag]
+    var matchTags: [TickerTag]
+    
+    
     
     //MARK: - Highlights
     let highlights: [String]

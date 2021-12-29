@@ -83,8 +83,8 @@ public final class FetchTickersMatchDataQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
-        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
+      public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
       }
 
       public var __typename: String {
@@ -137,6 +137,9 @@ public struct LiveMatch: GraphQLFragment {
       fits_risk
       fits_categories
       fits_interests
+      risk_similarity
+      interest_matches
+      category_matches
     }
     """
 
@@ -151,6 +154,9 @@ public struct LiveMatch: GraphQLFragment {
       GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
       GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
       GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+      GraphQLField("risk_similarity", type: .nonNull(.scalar(Double.self))),
+      GraphQLField("interest_matches", type: .scalar(String.self)),
+      GraphQLField("category_matches", type: .scalar(String.self)),
     ]
   }
 
@@ -160,8 +166,8 @@ public struct LiveMatch: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int) {
-    self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests])
+  public init(isMatch: Bool, matchScore: Int, symbol: String, fitsRisk: Int, fitsCategories: Int, fitsInterests: Int, riskSimilarity: Double, interestMatches: String? = nil, categoryMatches: String? = nil) {
+    self.init(unsafeResultMap: ["__typename": "MatchScore", "is_match": isMatch, "match_score": matchScore, "symbol": symbol, "fits_risk": fitsRisk, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "risk_similarity": riskSimilarity, "interest_matches": interestMatches, "category_matches": categoryMatches])
   }
 
   public var __typename: String {
@@ -224,6 +230,33 @@ public struct LiveMatch: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "fits_interests")
+    }
+  }
+
+  public var riskSimilarity: Double {
+    get {
+      return resultMap["risk_similarity"]! as! Double
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "risk_similarity")
+    }
+  }
+
+  public var interestMatches: String? {
+    get {
+      return resultMap["interest_matches"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "interest_matches")
+    }
+  }
+
+  public var categoryMatches: String? {
+    get {
+      return resultMap["category_matches"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "category_matches")
     }
   }
 }

@@ -13,7 +13,7 @@ class CollictionsListHeaderView: UIView {
     lazy var tickerLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .left
         label.text = "STOCK\nTICKER"
@@ -23,7 +23,7 @@ class CollictionsListHeaderView: UIView {
     lazy var netLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "Net Profit".uppercased()
@@ -33,7 +33,7 @@ class CollictionsListHeaderView: UIView {
     lazy var monthPriceLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "Month to day".uppercased()
@@ -43,7 +43,7 @@ class CollictionsListHeaderView: UIView {
     lazy var capLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "Market\ncap".uppercased()
@@ -53,7 +53,7 @@ class CollictionsListHeaderView: UIView {
     lazy var peLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "EV/S\n".uppercased()
@@ -63,7 +63,7 @@ class CollictionsListHeaderView: UIView {
     lazy var growLbl: UILabel = {
         let label = UILabel()
         label.font = UIFont.compactRoundedMedium(9)
-        label.textColor = UIColor(hexString: "687379")!
+        label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "Growth rate CAGR".uppercased()
@@ -202,8 +202,15 @@ class CollictionsListHeaderView: UIView {
         self.marketDataToShow = metrics
         let titles = metrics.prefix(5).map(\.shortTitle)
         let lbls = [growLbl, peLbl, capLbl, monthPriceLbl, netLbl]
-        for (ind, val) in titles.enumerated() {
-            lbls[ind].text = val
+        
+        if titles.first == Constants.CollectionDetails.matchScore {
+            for (ind, val) in titles.reversed().enumerated() {
+                lbls[ind].text = val
+            }
+        } else {
+            for (ind, val) in titles.enumerated() {
+                lbls[ind].text = val
+            }
         }
     }
     

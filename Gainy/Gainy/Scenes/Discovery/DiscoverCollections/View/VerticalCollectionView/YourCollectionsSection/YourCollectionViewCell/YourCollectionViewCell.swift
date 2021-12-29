@@ -28,7 +28,6 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
         stocksAmountLabel.autoAlignAxis(.vertical, toSameAxisOf: stocksLabel)
-        
     }
     
     @available(*, unavailable)
@@ -55,6 +54,17 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         imageView.isOpaque = true
         imageView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
         return imageView
+    }()
+    
+    lazy var blackAlphaView: UIView = {
+        let view = UIView()
+        view.contentMode = .scaleAspectFill
+        view.isOpaque = true
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        backImageView.addSubview(view)
+        view.autoPinEdgesToSuperviewEdges()
+        return view
     }()
     
     lazy var nameLabel: UILabel = {
@@ -106,6 +116,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         label.numberOfLines = 1
         label.textAlignment = .right
+        label.minimumScaleFactor = 0.1
         
         return label
     }()
@@ -113,6 +124,9 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     private func loadImage() {
         
         guard self.imageLoaded == false, backImageView.bounds.size.width > 0, backImageView.bounds.size.height > 0 else {
+            return
+        }
+        if self.updateImageBasedOnTag() {
             return
         }
         
@@ -128,6 +142,24 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
 //            print("-----\(result)")
         }
         self.imageLoaded = true
+    }
+    
+    func updateImageBasedOnTag() -> Bool {
+        
+        self.blackAlphaView.isHidden = true
+        if Constants.CollectionDetails.top20ID == self.tag {
+            backImageView.image = UIImage(named: "top20CollectionBg")
+            self.imageLoaded = true
+            return true
+        }
+        if Constants.CollectionDetails.watchlistCollectionID == self.tag {
+            backImageView.image = UIImage(named: "watchlistCollectionBackgroundImage")
+            self.blackAlphaView.isHidden = false
+            self.imageLoaded = true
+            return true
+        }
+        
+        return false
     }
     
     override func didMoveToWindow() {
@@ -183,6 +215,16 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             width: bounds.width - (hMargin + 71),
             height: minDescHeight
         )
+        
+        let isTop20 = (Constants.CollectionDetails.top20ID == self.tag) ? true : false
+        self.stocksLabel.textColor = isTop20 ? UIColor(hexString: "#09141F", alpha: 1.0) : UIColor.Gainy.white
+        self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
+        self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow
+        self.contentView.layer.borderWidth = isTop20 ? 1.0 : 0.0
+        self.contentView.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
+        self.contentView.layer.cornerRadius = isTop20 ? 8.0 : 0.0
+        _ = self.updateImageBasedOnTag()
     }
     
     // MARK: Functions
@@ -220,7 +262,9 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         descriptionLabel.sizeToFit()
         
         stocksAmountLabel.text = stocksAmount
-        stocksAmountLabel.sizeToFit()
+        if stocksAmount.count > 3 {
+            stocksAmountLabel.font = UIFont(name: "SFCompactRounded-Semibold", size: 24)
+        }
         
         layoutIfNeeded()
     }
