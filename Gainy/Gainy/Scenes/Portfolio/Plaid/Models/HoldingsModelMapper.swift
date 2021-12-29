@@ -79,9 +79,7 @@ struct HoldingsModelMapper {
         return holds
     }
     
-    static func topChartGains(range: ScatterChartView.ChartPeriod, chartsCache: [ScatterChartView.ChartPeriod : ChartData], sypChartsCache: [ScatterChartView.ChartPeriod : ChartData], portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> PortfolioChartGainsViewModel {
-        var models: [ScatterChartView.ChartPeriod : PortfolioChartGainsViewModel] = [:]
-        
+    static func topChartGains(range: ScatterChartView.ChartPeriod, chartsCache: [ScatterChartView.ChartPeriod : ChartData], sypChartsCache: [ScatterChartView.ChartPeriod : ChartData], portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> PortfolioChartGainsViewModel {        
             
             let spChart = sypChartsCache[range] ?? ChartData.init(points: [0.0])
             
@@ -93,7 +91,6 @@ struct HoldingsModelMapper {
                                                                        spGrow: Float(spChart.startEndDiff),
                                                                        sypChartData: spChart)
                 return chartGainModel
-                break
             case .w1:
                 let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1w ?? 0.0) * 100.0,
                                                                        rangeGrowBalance: portfolioGains?.absoluteGain_1w ?? 0.0,

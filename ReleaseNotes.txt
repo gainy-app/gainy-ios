@@ -1,14 +1,11 @@
-iOS v1.0.1 #107 available
+iOS v1.0.1 #108 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Stock Card: Charts loading changed
-• Portfolio: Charts loading changed
-• Portfolio: loading speedup
+-
 
 :hammer_and_wrench: Improvements
-• Total/Today Return logic changed to Today/1Year Price Change
 • Hotfixes
 
 :red_circle: Important Notes:
