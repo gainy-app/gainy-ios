@@ -67,7 +67,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
             for marker in markers {
                 switch marker {
                 case .matchScore:
-                    vals.append(viewModel.matchScore)
+                    vals.append("\(viewModel.matchScore)")
                 case .sharesOutstanding:
                     vals.append(viewModel.sharesOutstanding)
                 case .shortPercentOutstanding:
@@ -170,7 +170,7 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                 tickerPrice: viewModel.currentPrice.cleanTwoDecimal,
                 markerHeaders: markers.map(\.shortTitle),
                 markerMetrics: vals,
-                matchScore: viewModel.matchScore
+                matchScore: "\(viewModel.matchScore)"
             )
         }
 

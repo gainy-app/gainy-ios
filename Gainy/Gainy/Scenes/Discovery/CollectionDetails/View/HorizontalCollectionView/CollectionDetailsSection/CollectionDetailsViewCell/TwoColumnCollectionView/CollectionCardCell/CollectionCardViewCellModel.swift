@@ -75,8 +75,8 @@ extension CollectionCardViewCellModel: RemotePricable {
 }
 
 extension CollectionCardViewCellModel: RemoteMatchable {
-    var matchScore: String {
-        "\(TickerLiveStorage.shared.getMatchData(tickerSymbol)?.matchScore ?? 0)"
+    var matchScore: Int {
+        TickerLiveStorage.shared.getMatchData(tickerSymbol)?.matchScore ?? 0
     }
     
 //    var isMatch: Bool {

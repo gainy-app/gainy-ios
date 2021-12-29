@@ -52,7 +52,7 @@ struct HoldingsModelMapper {
                 }
             }) ?? []
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: ticker?.fragments.remoteTickerDetails.name ?? "",
+                                             name: (ticker?.fragments.remoteTickerDetails.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              industries: ticker?.tickerIndustries ?? [],

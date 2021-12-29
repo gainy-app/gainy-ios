@@ -679,7 +679,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
             case .dividendYield:
                 return (lhs.rawTicker.tickerMetrics?.dividendYield ?? 0.0) < (rhs.rawTicker.tickerMetrics?.dividendYield ?? 0.0)
             case .dividendsPerShare:
-                return (lhs.rawTicker.tickerMetrics?.dividendYield ?? 0.0) < (rhs.rawTicker.tickerMetrics?.dividendYield ?? 0.0)
+                return (lhs.rawTicker.tickerMetrics?.dividendsPerShare ?? 0.0) < (rhs.rawTicker.tickerMetrics?.dividendsPerShare ?? 0.0)
             case .dividendPayoutRatio:
                 return (lhs.rawTicker.tickerMetrics?.dividendPayoutRatio ?? 0.0) < (rhs.rawTicker.tickerMetrics?.dividendPayoutRatio ?? 0.0)
             case .yearsOfConsecutiveDividendGrowth:
