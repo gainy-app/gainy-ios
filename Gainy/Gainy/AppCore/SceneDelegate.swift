@@ -1,6 +1,7 @@
 import UIKit
 import AppTrackingTransparency
 import AdSupport
+import FacebookCore
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Internal
@@ -31,6 +32,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         appCoordinator.start(with: nil)
         
+        Settings.setAdvertiserTrackingEnabled(true)
+        
         var isFromPush = connectionOptions.notificationResponse != nil
         var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
         // Determine who sent the URL.
@@ -56,6 +59,19 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         }
         GainyAnalytics.logEvent("first_launch", params: fbParams)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url else {
+            return
+        }
+
+        ApplicationDelegate.shared.application(
+            UIApplication.shared,
+            open: url,
+            sourceApplication: nil,
+            annotation: [UIApplication.OpenURLOptionsKey.annotation]
+        )
     }
 
     func sceneWillEnterForeground(_: UIScene) {

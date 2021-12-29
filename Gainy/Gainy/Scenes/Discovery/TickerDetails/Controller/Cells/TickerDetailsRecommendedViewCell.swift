@@ -43,7 +43,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 break
             case 65...:
                 contentView.backgroundColor = UIColor.Gainy.mainGreen
-                scoreLbl.textColor = UIColor.Gainy.mainYellow
+                scoreLbl.textColor = UIColor(named: "mainText")
                 break
             default:
                 break

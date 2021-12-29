@@ -101,6 +101,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             default:
                 break
             }
+            matchScoreLbl.text = "\(matchScore)"
         } else {
             matchScoreLbl.text = "-"
         }
