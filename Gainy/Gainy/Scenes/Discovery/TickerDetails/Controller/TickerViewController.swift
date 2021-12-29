@@ -254,6 +254,45 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
             coordinator?.showCompareDetails(model: model, delegate: nil)
         }
     }
+    
+    func requestOpenCollection(withID id: Int) {
+        coordinator?.showCollectionDetails(collectionID: id, delegate: self)
+    }
+}
+
+extension TickerViewController: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.mutateFavouriteCollections(senderCell: nil, isAdded: isAdded, collectionID: collectionID)
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+    }
+    
+    private func mutateFavouriteCollections(senderCell: RecommendedCollectionViewCell? = nil, isAdded: Bool, collectionID: Int) {
+        
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
+                    if let cell = senderCell {
+                        cell.setButtonChecked(isChecked: success)
+                    }
+                }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                    
+                }
+            }
+        } else {
+            if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+                    if let cell = senderCell {
+                        cell.setButtonChecked(isChecked: !success)
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension TickerViewController: BrokersViewControllerDelegate {

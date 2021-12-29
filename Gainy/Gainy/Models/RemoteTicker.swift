@@ -12,6 +12,7 @@ import Apollo
 struct TickerTag {
     let name: String
     let url: String
+    let collectionID: Int
 }
 
 /// Ticker model to pupulate cells
@@ -158,10 +159,8 @@ class TickerInfo {
                         if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
                             self?.upcomingEvents = tickerDetails.tickerEvents
                             let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
-                                                                                                       url: "")  })
-                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "")  })
-                            
-                            
+                                                                                                       url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404)  })
+                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404)})
                             
                             self?.tags = categories + industries
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),

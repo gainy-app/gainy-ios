@@ -16,6 +16,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func isStockCompared(stock: AltStockTicker) -> Bool
     func didRequestShowBrokersListForSymbol(symbol: String)
     func openCompareWithSelf(ticker: TickerInfo)
+    func requestOpenCollection(withID id: Int)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -182,6 +183,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .about:
             let cell: TickerDetailsAboutViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.delegate = self
             
             cell.cellHeightChanged = { [weak self] newHeight in
                 DispatchQueue.main.async {
@@ -329,5 +331,13 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
             let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
             NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
         }
+    }
+}
+
+extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
+    
+    func requestOpenCollection(withID id: Int) {
+        
+        self.delegate?.requestOpenCollection(withID: id)
     }
 }

@@ -48,7 +48,7 @@ struct CachedMatchScore: Codable {
                                 continuation.resume(returning: [])
                                 return
                             }
-                            continuation.resume(returning: appInterests.compactMap({TickerTag(name: $0.name ?? "", url: $0.iconUrl ?? "")}))
+                            continuation.resume(returning: appInterests.compactMap({TickerTag(name: $0.name ?? "", url: $0.iconUrl ?? "", collectionID: -404)}))
                             break
                         case .failure(_):
                             continuation.resume(returning: [])
@@ -78,7 +78,7 @@ struct CachedMatchScore: Codable {
                                 continuation.resume(returning: [])
                                 return
                             }
-                            continuation.resume(returning: categories.compactMap({TickerTag(name: $0.name ?? "", url: "")}))
+                            continuation.resume(returning: categories.compactMap({TickerTag(name: $0.name ?? "", url: "", collectionID: -404)}))
                             break
                         case .failure(_):
                             continuation.resume(returning: [])

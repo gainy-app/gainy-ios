@@ -8,7 +8,13 @@
 import UIKit
 import PureLayout
 
+protocol TickerDetailsAboutViewCellDelegate: AnyObject {
+    func requestOpenCollection(withID id: Int)
+}
+
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
+    
+    public weak var delegate: TickerDetailsAboutViewCellDelegate?
     
     @IBOutlet private weak var aboutLbl: UILabel!
     @IBOutlet private weak var tagsStack: UIView!
@@ -29,20 +35,19 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
-            let categories = ["defensive", "speculation", "penny", "dividend", "momentum", "value", "growth"]
             
             for tag in tickerInfo?.tags ?? [] {
                 let tagView = TagView()
                 tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
-                if !categories.contains(where: { element in
-                    element.isEqual(tag.name.lowercased())
-                }) {
+                if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.lightGray
                 } else {
                     tagView.backgroundColor = UIColor(hex: 0x3A4448)
                 }
+                
+                tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name
                 tagView.loadImage(url: tag.url)
                 let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
@@ -66,13 +71,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
-        guard let name = tagView.tagName, name.count > 0 else {
+        guard let collectionID = tagView.collectionID, collectionID > 0 else {
             return
         }
-        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
-        if !panelInfo.title.isEmpty {
-            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
-        }
+        
+        self.delegate?.requestOpenCollection(withID: collectionID)
     }
     
     //MARK: - Actions
@@ -113,6 +116,8 @@ import UIKit
 import Kingfisher
 
 class TagView: UIButton {
+    
+    var collectionID: Int?
     
     var tagName: String? {
         didSet {

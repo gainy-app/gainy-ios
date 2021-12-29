@@ -3,7 +3,7 @@ iOS v1.0.1 #108 available
 Bugfixes
 
 :new: New:
--
+• Open collection by tap on tags (category/industry)
 
 :hammer_and_wrench: Improvements
 • Hotfixes

@@ -13,6 +13,7 @@ import SwiftDate
 protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
+    func requestOpenCollection(withID id: Int)
 }
 
 final class HoldingsDataSource: NSObject {
@@ -122,6 +123,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
+            cell.delegate = self
             cell.setModel(holdings[indexPath.row], chartRange)
             cell.isExpanded = expandedCells.contains(holdings[indexPath.row].name)
             cell.cellHeightChanged = {[weak self] model in
@@ -186,3 +188,10 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     }
 }
 
+extension HoldingsDataSource: HoldingTableViewCellDelegate {
+    
+    func requestOpenCollection(withID id: Int) {
+        
+        self.delegate?.requestOpenCollection(withID: id)
+    }
+}

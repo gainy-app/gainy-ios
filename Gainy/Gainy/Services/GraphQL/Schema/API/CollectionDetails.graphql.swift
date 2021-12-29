@@ -1266,6 +1266,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
           __typename
           id
           name
+          collection_id
           icon_url
         }
       }
@@ -1286,6 +1287,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
           __typename
           id
           name
+          collection_id
         }
       }
       ticker_events {
@@ -1461,6 +1463,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
         ]
       }
@@ -1471,8 +1474,8 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl])
+      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "collection_id": collectionId, "icon_url": iconUrl])
       }
 
       public var __typename: String {
@@ -1499,6 +1502,15 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
         }
       }
 
@@ -1679,6 +1691,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
         ]
       }
 
@@ -1688,8 +1701,8 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name])
+      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name, "collection_id": collectionId])
       }
 
       public var __typename: String {
@@ -1716,6 +1729,15 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
         }
       }
     }
@@ -1913,6 +1935,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
           __typename
           id
           name
+          collection_id
           icon_url
         }
       }
@@ -1933,6 +1956,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
           __typename
           id
           name
+          collection_id
         }
       }
       ticker_events {
@@ -2095,6 +2119,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
         ]
       }
@@ -2105,8 +2130,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl])
+      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "collection_id": collectionId, "icon_url": iconUrl])
       }
 
       public var __typename: String {
@@ -2133,6 +2158,15 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
         }
       }
 
@@ -2313,6 +2347,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("collection_id", type: .scalar(Int.self)),
         ]
       }
 
@@ -2322,8 +2357,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name])
+      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name, "collection_id": collectionId])
       }
 
       public var __typename: String {
@@ -2350,6 +2385,15 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var collectionId: Int? {
+        get {
+          return resultMap["collection_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "collection_id")
         }
       }
     }
