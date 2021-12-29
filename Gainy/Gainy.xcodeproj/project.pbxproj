@@ -436,6 +436,7 @@
 		9068DDEB274B7350007C588A /* GetPortfolioCharts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */; };
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
+		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
 		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
@@ -920,6 +921,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9072F56F277C4FA70057596B /* FacebookCore in Frameworks */,
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
@@ -2275,6 +2277,7 @@
 				336970B22716BA2F0001625C /* BugfenderLibrary */,
 				3332BCD2273CFCC3001222A7 /* SkeletonView */,
 				906B28E92768C0FF0058528B /* Lottie */,
+				9072F56E277C4FA70057596B /* FacebookCore */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2364,6 +2367,7 @@
 				336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */,
 				3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3630,6 +3634,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3742,6 +3754,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		9072F56E277C4FA70057596B /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 

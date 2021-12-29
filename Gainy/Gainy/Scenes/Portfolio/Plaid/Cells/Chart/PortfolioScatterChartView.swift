@@ -91,7 +91,7 @@ struct PortfolioScatterChartView: View {
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                }
+                } .opacity(0.0)
             }
             HStack(spacing: 4) {
                 Text(viewModel.balance.price)
@@ -103,8 +103,9 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                
+                .opacity(0.0)
             }
-            .opacity(0.0)
         }
         .padding(.leading, 16)
         .padding(.trailing, 16)
