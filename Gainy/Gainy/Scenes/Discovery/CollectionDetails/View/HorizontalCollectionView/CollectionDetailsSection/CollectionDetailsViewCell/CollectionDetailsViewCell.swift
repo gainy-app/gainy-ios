@@ -79,8 +79,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 
                 let dispatchGroup = DispatchGroup()
                 var loadingItems: Int  = 0
-                if !TickerLiveStorage.shared.haveSymbol(model.tickerSymbol) {
+                let hasSymbol = TickerLiveStorage.shared.haveSymbol(model.tickerSymbol)
+                let isLoadingSymbol = self?.loadingSymbolArray.contains(where: { item in
+                    item == model.tickerSymbol
+                }) ?? false
+                let needLoadSymbol = !hasSymbol && !isLoadingSymbol
+                if needLoadSymbol {
                     loadingItems += 1
+                    self?.loadingSymbolArray.append(model.tickerSymbol)
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
@@ -89,22 +95,36 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     dprint("Fetching dt started \(model.tickerSymbol)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                        self?.loadingSymbolArray.removeAll(where: { item in
+                            item == model.tickerSymbol
+                        })
                         dispatchGroup.leave()
                         dprint("Fetching dt ended \(model.tickerSymbol)")
                     }
                 }
-                if let collectionID = self?.collectionID, !TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol), collectionID >= 0 {
+                
+                let hasMatchScore = TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol)
+                let isLoadingMatchScore = self?.loadingMatchScoreArray.contains(where: { item in
+                    item == model.tickerSymbol
+                }) ?? false
+                let needLoadMatchScore = !hasMatchScore && !isLoadingMatchScore
+                
+                if  needLoadMatchScore{
                     loadingItems += 1
+                    self?.loadingMatchScoreArray.append(model.tickerSymbol)
                     if collectionView.visibleCells.count == 0 {
                         cell?.showAnimatedGradientSkeleton()
                     } else {
                         self?.isLoadingTickers = true
                     }
-                    dprint("Fetching match started \(collectionID)")
+                    dprint("Fetching match started")
                     dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getMatchScores(collectionId: collectionID) {
+                    TickersLiveFetcher.shared.getMatchScores(symbols: self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
+                        self?.loadingMatchScoreArray.removeAll(where: { item in
+                            item == model.tickerSymbol
+                        })
                         dispatchGroup.leave()
-                        dprint("Fetching match ended \(collectionID)")
+                        dprint("Fetching match ended")
                         self?.sortSections()
                     }
                 }
@@ -208,6 +228,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private var collectionID: Int = 0
     private var stocksCount: Int = 0
+    
+    private var loadingSymbolArray: Array<String> = Array()
+    private var loadingMatchScoreArray: Array<String> = Array()
+    
     func configureWith(
         name collectionName: String,
         image collectionImage: String,

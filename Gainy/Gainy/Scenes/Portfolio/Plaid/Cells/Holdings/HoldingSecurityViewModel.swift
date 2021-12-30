@@ -36,8 +36,9 @@ struct HoldingSecurityViewModel {
         if type == "equity" {
             type = "Shares"
         }
-        let correctName = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "")  : (holding.name ?? ""))
-        self.name = correctName.companyMarkRemoved + " x\(holding.quantity ?? 0.0)"
+        let correctName = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "").companyMarkRemoved  : (holding.name ?? "").companyMarkRemoved)
+        
+        self.name = correctName + " x\(holding.quantity ?? 0.0)"
         self.type = type
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
@@ -69,16 +70,14 @@ struct HoldingSecurityViewModel {
 
 extension String {
     var companyMarkRemoved: String {
-        let list = ["Inc", "Ltd", "Plc", "Holdings", "Corporation", "Incorporated", "Limited", "International S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", "Company", "Class A...", "Class B...", "Warrants", "International", "Co", "Global Inc"]
+        let list = ["Inc", "Ltd", "Plc", "Holdings", "Corporation", "Incorporated", "Limited", "International S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", "Company", "Co. Class A", "Co. Class B", "Class A", "Class B", "Warrants", "International", "Co", "Co.", "Global Inc"]
+        var old = self
         for ltd in list {
-            if let dotRange = self.lowercased().range(of: ltd.lowercased()) {
-                var old = self
-                old.removeSubrange(dotRange.lowerBound..<self.endIndex)
-                //let clearName = String(old.dropLast(ltd.count))
-                return old
+            if let dotRange = old.lowercased().range(of: ltd.lowercased()), !old.lowercased().hasPrefix(ltd.lowercased()){
+                old.removeSubrange(dotRange.lowerBound..<old.endIndex)
             }
         }
-        return self
+        return old
     }
 }
 

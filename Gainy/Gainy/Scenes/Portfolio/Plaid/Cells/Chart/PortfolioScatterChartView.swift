@@ -156,7 +156,7 @@ struct PortfolioScatterChartView: View {
                         Spacer()
                         HStack {
                             Spacer()
-                            Text("Not enought data")
+                            Text("Not enough data")
                                 .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                 .font(UIFont.proDisplaySemibold(12).uiFont)
                             Spacer()

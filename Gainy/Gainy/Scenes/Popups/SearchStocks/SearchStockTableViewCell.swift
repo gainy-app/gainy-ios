@@ -17,7 +17,7 @@ final class SearchStockTableViewCell: UITableViewCell {
     var stock: RemoteTickerDetails? {
         didSet {
             if let stock = stock {
-                stockNameLbl.text = stock.name
+                stockNameLbl.text = stock.name?.companyMarkRemoved
                 stockSymLbl.text = stock.symbol
                 
                 let priceChange = stock.realtimeMetrics?.relativeDailyChange ?? 0.0

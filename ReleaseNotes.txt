@@ -1,12 +1,12 @@
-iOS v1.0.1 #109 available
+iOS v1.0.2 #113 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Open collection by tap on tags (category/industry)
+-
 
 :hammer_and_wrench: Improvements
-• Hotfixes
+• Reload discovery and top 20 once profile settings changed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

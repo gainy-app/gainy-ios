@@ -62,7 +62,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
             for marker in markers {
                 switch marker {
                 case .matchScore:
-                    vals.append(viewModel.matchScore)
+                    vals.append("\(viewModel.matchScore)")
                 case .sharesOutstanding:
                     vals.append(viewModel.sharesOutstanding)
                 case .shortPercentOutstanding:
@@ -166,7 +166,7 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
                 markerMetricHeaders: markers.map(\.shortTitle),
                 markerMetric: vals,
                 highlight: viewModel.highlight,
-                matchScore: viewModel.matchScore
+                matchScore: "\(viewModel.matchScore)"
             )
         }
 

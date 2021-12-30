@@ -29,7 +29,7 @@ protocol RemotePricable {
 }
 
 protocol RemoteMatchable {
-    var matchScore: String {
+    var matchScore: Int {
         get
     }
     
@@ -50,8 +50,8 @@ extension RemoteTickerDetails: RemotePricable {
 }
 
 extension RemoteTickerDetails: RemoteMatchable {
-    var matchScore: String {
-        "\(TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0)"
+    var matchScore: Int {
+        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0
     }
     
 //    var isMatch: Bool {

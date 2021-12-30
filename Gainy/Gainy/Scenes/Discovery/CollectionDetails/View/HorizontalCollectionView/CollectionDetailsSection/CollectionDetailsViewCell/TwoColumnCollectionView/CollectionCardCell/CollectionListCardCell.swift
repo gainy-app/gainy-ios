@@ -64,27 +64,28 @@ final class CollectionListCardCell: UICollectionViewCell {
         lbls.forEach({$0?.textColor = UIColor(named: "mainText")})
         
         mlpLbl.textColor = UIColor(named: "mainText")
+        let matchVal = Int(matchScore) ?? 0
+        switch matchVal {
+        case 0..<35:
+            matchView.backgroundColor = UIColor.Gainy.mainRed
+            break
+        case 35..<65:
+            matchView.backgroundColor = UIColor.Gainy.mainYellow
+            break
+        case 65...:
+            matchView.backgroundColor = UIColor.Gainy.mainGreen
+            break
+        default:
+            break
+        }
+        
         if markerHeaders.first == Constants.CollectionDetails.matchScore || markerHeaders.contains(where: {$0 == Constants.CollectionDetails.matchScore}) {
-            let matchVal = Int(markerMetrics.first ?? "0") ?? 0
-            switch matchVal {
-            case 0..<35:
-                matchView.backgroundColor = UIColor.Gainy.mainRed
-                break
-            case 35..<65:
-                matchView.backgroundColor = UIColor.Gainy.mainYellow
-                break
-            case 65...:
-                matchView.backgroundColor = UIColor.Gainy.mainGreen
-                break
-            default:
-                break
-            }
+            
             if markerHeaders.first == Constants.CollectionDetails.matchScore {
                 for (ind, val) in markerMetrics.enumerated() {
                     lbls.reversed()[ind]?.text = val
                 }
                 matchTrailing.constant = 34.0
-                
                 mlpLbl.textColor = .white
             } else {
                 for (ind, val) in markerMetrics.enumerated() {
