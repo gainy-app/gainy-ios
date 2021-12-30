@@ -1,4 +1,4 @@
-iOS v1.0.1 #111 available
+iOS v1.0.1 #112 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 -
 
 :hammer_and_wrench: Improvements
-• Names shortening improved
+• Portfolio: percent changed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
