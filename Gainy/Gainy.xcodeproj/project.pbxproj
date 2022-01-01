@@ -424,6 +424,7 @@
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
 		900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */; };
 		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
+		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
@@ -945,6 +946,7 @@
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
+				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
 				90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */,
@@ -2278,6 +2280,7 @@
 				3332BCD2273CFCC3001222A7 /* SkeletonView */,
 				906B28E92768C0FF0058528B /* Lottie */,
 				9072F56E277C4FA70057596B /* FacebookCore */,
+				9017BF5E2780D88600F3910A /* Deviice */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2368,6 +2371,7 @@
 				3332BCD1273CFCC3001222A7 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3021,7 +3025,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3145,7 +3149,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3330,7 +3334,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3359,7 +3363,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 113;
+				CURRENT_PROJECT_VERSION = 114;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3630,6 +3634,14 @@
 				minimumVersion = 6.0.2;
 			};
 		};
+		9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/andrealufino/Deviice.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -3753,6 +3765,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		9017BF5E2780D88600F3910A /* Deviice */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */;
+			productName = Deviice;
 		};
 		906B28E92768C0FF0058528B /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
