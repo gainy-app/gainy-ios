@@ -179,30 +179,36 @@ final class AuthorizationManager {
             
             guard (try? result.get().data) != nil else {
                 self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let resultData = (try? result.get().data) else {
                 self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let insert_app_profiles = resultData.resultMap["insert_app_profiles"] as? [String : Any] else  {
                 self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let returning = (insert_app_profiles["returning"] as? [Any])?.first else {
                 self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 completion(self.authorizationStatus)
                 return
             }
             guard let profileID = ((returning as? [String : Any?])?["id"]) as? Int else {
                 self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 completion(self.authorizationStatus)
                 return
             }
             
+            GainyAnalytics.logEvent("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID
             UserProfileManager.shared.fetchProfile { success in
                 guard success == true else {
