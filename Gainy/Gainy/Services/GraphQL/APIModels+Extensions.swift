@@ -121,3 +121,39 @@ extension Date {
         return DateInRegion(year: self.year, month: self.month, day: self.day, hour: 9, minute: 30, second: 0, region: NY).date
     }
 }
+
+protocol ChartMergable {
+    var date: Date {
+        get
+    }
+    
+    var val: Float {
+        get
+    }
+}
+
+extension DiscoverChartsQuery.Data.HistoricalPricesAggregated: ChartMergable {
+    var val: Float {
+        close ?? 0.0
+    }
+}
+
+extension GetPortfolioChartsQuery.Data.PortfolioChart: ChartMergable {
+    var val: Float {
+        value ?? 0.0
+    }
+}
+
+func normalizeCharts(_ chart1: [ChartMergable], _ chart2: [ChartMergable]) -> ([ChartMergable], [ChartMergable]) {
+    
+    guard chart1.count > 3, chart2.count > 3 else {return (chart1, chart2)}
+    
+    let first1 = chart1.first!.date
+    let first2 = chart2.first!.date
+    
+    let small = first1 < first2 ? chart2 : chart1
+    let large =  first1 < first2 ? chart1 : chart2
+    var reconstructed: [ChartMergable] = []
+    
+    return first1 < first2 ? (large, reconstructed) : (reconstructed, large)
+}

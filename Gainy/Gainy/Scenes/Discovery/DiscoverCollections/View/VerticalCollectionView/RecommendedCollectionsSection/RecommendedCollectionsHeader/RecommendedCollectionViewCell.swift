@@ -1,6 +1,7 @@
 import UIKit
 import Kingfisher
 import PureLayout
+import Deviice
 
 final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     // MARK: Lifecycle
@@ -90,7 +91,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
 
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 28)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: Deviice.current.size == .screen4Dot7Inches ? 20 : 26)
         label.textColor = UIColor.Gainy.yellow
 
         label.numberOfLines = 1
@@ -217,7 +218,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = stocksAmount
+        stocksAmountLabel.text = "9999"
 
         buttonState = plusButtonState
         buttonState == .checked
