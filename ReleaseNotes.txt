@@ -3,7 +3,7 @@ iOS v1.0.2 #115 available
 Bugfixes
 
 :new: New:
--
+• Re-launch onboarding flow + disclaimer
 
 :hammer_and_wrench: Improvements
 • Sorting if Dividends improved
