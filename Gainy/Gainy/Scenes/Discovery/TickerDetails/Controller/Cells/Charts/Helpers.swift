@@ -210,7 +210,7 @@ public class ChartData: ObservableObject, Identifiable {
     
     init(points: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
         self.points = points.compactMap{
-            if let close = $0.close  {
+            if let close = $0.adjustedClose  {
                 return ($0.labelForPeriod(period), Double(close))
             } else {
                 return nil
@@ -220,7 +220,7 @@ public class ChartData: ObservableObject, Identifiable {
     
     func loadValues(_ vals: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
         self.points = vals.compactMap{
-            if let close = $0.close  {
+            if let close = $0.adjustedClose  {
                 return ($0.labelForPeriod(period), Double(close))
             } else {
                 return nil

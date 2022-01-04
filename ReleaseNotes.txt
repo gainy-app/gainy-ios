@@ -1,4 +1,4 @@
-iOS v1.0.2 #115 available
+iOS v1.0.2 #116 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,8 +6,8 @@ Bugfixes
 -
 
 :hammer_and_wrench: Improvements
-• Sorting if Dividends improved
-• Small screen support
+• Charts: Adjusted clsoe for calculations
+• Analytics: extra logging for QA
 • Plaid SDK monthly update
 
 :red_circle: Important Notes:
