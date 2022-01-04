@@ -7,22 +7,23 @@
 
 import UIKit
 import PureLayout
+import Deviice
 
 class CollictionsListHeaderView: UIView {
     
     lazy var tickerLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .left
-        label.text = "STOCK\nTICKER"
+        label.text = "Stock Ticker\n"
         return label
     }()
     
     lazy var netLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -32,7 +33,7 @@ class CollictionsListHeaderView: UIView {
     
     lazy var monthPriceLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -42,7 +43,7 @@ class CollictionsListHeaderView: UIView {
     
     lazy var capLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -52,7 +53,7 @@ class CollictionsListHeaderView: UIView {
     
     lazy var peLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center
@@ -62,7 +63,7 @@ class CollictionsListHeaderView: UIView {
     
     lazy var growLbl: UILabel = {
         let label = UILabel()
-        label.font = UIFont.compactRoundedMedium(9)
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
         label.textColor = UIColor(hexString: "B1BDC8")!
         label.numberOfLines = 2
         label.textAlignment = .center

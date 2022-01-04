@@ -148,7 +148,7 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
                 profileInterestIDs.append(id)
             }
         }
-        self.coordinator?.profileInfoBuilder.profileInterestIDs = profileInterestIDs
+        self.coordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
         self.coordinator?.pushPersonalizationIndicatorsViewController()
     }
 }

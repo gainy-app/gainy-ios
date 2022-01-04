@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Deviice
 
 protocol TickerDetailsWatchlistViewCellDelegate: AnyObject {
     
@@ -112,6 +113,6 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
             title = NSLocalizedString("Remove from Watchlist", comment: "Remove from Watchlist")
         }
         watchBtn.setTitle(title, for: UIControl.State.normal)
-        watchBtn.titleLabel?.minimumScaleFactor = 0.1
+        watchBtn.titleLabel?.font = .proDisplayRegular(Deviice.current.size == .screen4Dot7Inches ? 13 : 16)
     }
 }

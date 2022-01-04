@@ -1,12 +1,14 @@
-iOS v1.0.2 #113 available
+iOS v1.0.2 #115 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
--
+• Re-launch onboarding flow + disclaimer
 
 :hammer_and_wrench: Improvements
-• Reload discovery and top 20 once profile settings changed
+• Sorting if Dividends improved
+• Small screen support
+• Plaid SDK monthly update
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
