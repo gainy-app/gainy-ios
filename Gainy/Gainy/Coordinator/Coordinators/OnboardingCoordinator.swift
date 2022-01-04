@@ -13,6 +13,7 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
         self.profileInfoBuilder = ProfileInfoBuilder.init()
+        self.onboardingInfoBuilder = OnboardingInfoBuilder.init()
         self.profileInfoBuilder.avatarURLString = ""
         self.profileInfoBuilder.gender = 0
     }
@@ -132,7 +133,9 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
     private var authenticationNavigationController: UINavigationController?
+    
     private(set) var profileInfoBuilder: ProfileInfoBuilder
+    private(set) var onboardingInfoBuilder: OnboardingInfoBuilder
     
     // MARK: Functions
     

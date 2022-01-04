@@ -3,7 +3,7 @@ iOS v1.0.2 #116 available
 Bugfixes
 
 :new: New:
--
+• Re-launch onboarding flow + disclaimer
 
 :hammer_and_wrench: Improvements
 • Charts: Adjusted clsoe for calculations

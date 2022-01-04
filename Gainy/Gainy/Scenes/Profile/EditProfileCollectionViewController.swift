@@ -14,10 +14,14 @@ enum ProfileCollectionType {
 
 protocol EditProfileCollectionViewControllerDelegate: AnyObject {
     
-    func didSelectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest)
-    func didDeselectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest)
-    func didSelectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category)
-    func didDeselectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category)
+    func didSelectInterest(_ sender: EditProfileCollectionViewController?, _ interest: AppInterestsQuery.Data.Interest)
+    func didDeselectInterest(_ sender: EditProfileCollectionViewController?, _ interest: AppInterestsQuery.Data.Interest)
+    func didSelectCategory(_ sender: EditProfileCollectionViewController?, _ category: CategoriesQuery.Data.Category)
+    func didDeselectCategory(_ sender: EditProfileCollectionViewController?, _ category: CategoriesQuery.Data.Category)
+    
+    func showDisclaimer(_ sender: EditProfileCollectionViewController?)
+    func didChangeSettings(_ sender: EditProfileCollectionViewController?)
+    func shouldShowDisclaimer(_ sender: EditProfileCollectionViewController?) -> Bool
 }
 
 final class EditProfileCollectionViewController: BaseViewController {
@@ -32,6 +36,9 @@ final class EditProfileCollectionViewController: BaseViewController {
     private var interests: [AppInterestsQuery.Data.Interest]?
     private var categoriesSelected: [CategoriesQuery.Data.Category]?
     private var categories: [CategoriesQuery.Data.Category]?
+    
+    private var currentIndexPath: IndexPath?
+    private var select: Bool = false
     
     override func viewDidLoad() {
         
@@ -63,6 +70,21 @@ final class EditProfileCollectionViewController: BaseViewController {
         self.categories = categories
         self.categoriesSelected = selected
         self.collectionView?.reloadData()
+    }
+    
+    public func proceedEditing() {
+        
+        guard let indexPath = self.currentIndexPath else { return }
+        
+        self.delegate?.didChangeSettings(self)
+        
+        if self.select {
+            self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+            self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+        } else {
+            self.collectionView.deselectItem(at: indexPath, animated: false)
+            self.collectionView(self.collectionView, didDeselectItemAt: indexPath)
+        }
     }
     
     private func setUpNavigationBar() {
@@ -261,16 +283,45 @@ extension EditProfileCollectionViewController: UICollectionViewDelegate, UIColle
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        
         guard let collectionType = self.collectionType else {
             return false
         }
-        if collectionType == .AppInterests {
-            return (self.interestsSelected?.count ?? 0) > 1
-        } else if collectionType == .AppCategories {
-            return (self.categoriesSelected?.count ?? 0) > 1
+        
+        if delegate?.shouldShowDisclaimer(self) ?? false {
+            
+            self.currentIndexPath = indexPath
+            self.select = true
+            delegate?.showDisclaimer(self)
+            return false
         }
         
-        return false
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        
+        guard let collectionType = self.collectionType else {
+            return false
+        }
+        var result = false
+        if collectionType == .AppInterests {
+            result = (self.interestsSelected?.count ?? 0) > 1
+        } else if collectionType == .AppCategories {
+            result = (self.categoriesSelected?.count ?? 0) > 1
+        }
+        
+        if result {
+            if delegate?.shouldShowDisclaimer(self) ?? false {
+                
+                self.currentIndexPath = indexPath
+                self.select = false
+                delegate?.showDisclaimer(self)
+                return false
+            }
+        }
+        
+        return result
     }
 }

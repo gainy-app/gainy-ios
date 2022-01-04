@@ -13,6 +13,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         self.router = router
         self.coordinatorFactory = coordinatorFactory
         self.viewControllerFactory = viewControllerFactory
+        self.onboardingInfoBuilder = OnboardingInfoBuilder.init()
     }
 
     // MARK: Internal
@@ -56,6 +57,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
+    private(set) var onboardingInfoBuilder: OnboardingInfoBuilder
 
     // MARK: Functions
     
@@ -73,27 +75,10 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.onItemDelete = onItemDelete
         vc.showNextButton = showNextButton
         lastDiscoverCollectionsVC = vc
-        // TODO: Borysov - custom transition
         router.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 
     func showCollectionDetailsViewController(with initialCollectionIndex: Int, for vc: CollectionDetailsViewController) {
-//        let vc = self.viewControllerFactory.instantiateCollectionDetails(coordinator: self)
-//        vc.onDiscoverCollections = { [weak self] in
-//            self?.showDiscoverCollectionsViewController(onGoToCollectionDetails: { [weak self]  initialPosition in
-//                self?.router.popModule(transition: FadeTransitionAnimator(), animated: true)
-//
-//                //Animating to selected position
-//                vc.viewModel?.initialCollectionIndex = initialCollectionIndex
-//                vc.centerInitialCollectionInTheCollectionView()
-//            })
-//        }
-//        vc.onShowCardDetails = { [weak self] in
-//            self?.showCardDetailsViewController(TickerInfo())
-//        }
-//        vc.viewModel?.initialCollectionIndex = initialCollectionIndex
-
-        // TODO: Borysov - custom transition make it better and move out of here
         vc.viewModel?.initialCollectionIndex = initialCollectionIndex
         vc.centerInitialCollectionInTheCollectionView()
         let frame = vc.currentBackgroundImageFrame()
