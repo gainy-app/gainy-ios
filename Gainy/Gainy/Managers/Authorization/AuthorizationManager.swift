@@ -139,21 +139,22 @@ final class AuthorizationManager {
         }
     }
     
-    public func finalizeSignUp(_ profileInfoBuilder: ProfileInfoBuilder, completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
+    public func finalizeSignUp(profileInfoBuilder: ProfileInfoBuilder, onboardingInfoBuilder: OnboardingInfoBuilder, completion: @escaping (_ authorizationStatus: AuthorizationStatus) -> Void) {
         
-        guard let profileInfo = profileInfoBuilder.buildProfileInfo() else {
+        guard let profileInfo = profileInfoBuilder.buildProfileInfo(),
+              let onboardingInfo = onboardingInfoBuilder.buildOnboardingInfo() else {
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
         }
         
-        if profileInfo.profileInterestIDs.count < 1 {
+        if onboardingInfo.profileInterestIDs.count < 1 {
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
         }
         
-        let appInterests: [app_profile_interests_insert_input]! = profileInfo.profileInterestIDs.map { interestID in
+        let appInterests: [app_profile_interests_insert_input]! = onboardingInfo.profileInterestIDs.map { interestID in
             return app_profile_interests_insert_input.init(interestId: interestID, profile: nil, profileId: nil)
         }
         self.authorizationStatus = .authorizedNeedCreateProfile
@@ -165,15 +166,15 @@ final class AuthorizationManager {
                                              userID: profileInfo.userID,
                                              legalAddress: profileInfo.legalAddress,
                                              interests: appInterests,
-                                             averageMarketReturn: profileInfo.averageMarketReturn,
-                                             damageOfFailure: Double(profileInfo.damageOfFailure),
-                                             marketLoss20: Double(profileInfo.ifMarketDrops20IWillBuy),
-                                             marketLoss40: Double(profileInfo.ifMarketDrops40IWillBuy),
-                                             investemtHorizon: Double(profileInfo.investmentHorizon),
-                                             riskLevel: Double(profileInfo.riskLevel),
-                                             stockMarketRiskLevel: profileInfo.stockMarketRiskLevel,
-                                             tradingExperience: profileInfo.tradingExperience,
-                                             unexpectedPurchaseSource: profileInfo.unexpectedPurchasesSource)
+                                             averageMarketReturn: onboardingInfo.averageMarketReturn,
+                                             damageOfFailure: Double(onboardingInfo.damageOfFailure),
+                                             marketLoss20: Double(onboardingInfo.ifMarketDrops20IWillBuy),
+                                             marketLoss40: Double(onboardingInfo.ifMarketDrops40IWillBuy),
+                                             investemtHorizon: Double(onboardingInfo.investmentHorizon),
+                                             riskLevel: Double(onboardingInfo.riskLevel),
+                                             stockMarketRiskLevel: onboardingInfo.stockMarketRiskLevel,
+                                             tradingExperience: onboardingInfo.tradingExperience,
+                                             unexpectedPurchaseSource: onboardingInfo.unexpectedPurchasesSource)
         Network.shared.apollo.clearCache()
         Network.shared.apollo.perform(mutation: query) { result in
             

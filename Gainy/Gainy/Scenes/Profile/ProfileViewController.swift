@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import MessageUI
 import PureLayout
+import Combine
 
 final class ProfileViewController: BaseViewController {
     
@@ -30,21 +31,36 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var requestFeatureButton: BorderButton!
     @IBOutlet private weak var sendFeedbackButton: BorderButton!
     @IBOutlet private weak var privacyButton: UIButton!
+    @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
     @IBOutlet private weak var profilePictureImageView: UIImageView!
     @IBOutlet private weak var fullNameTitle: UILabel!
     
+    private var currentCollectionView: UICollectionView?
+    private var currentIndexPath: IndexPath?
+    
+    private var disclaimerShownKey: String? {
+        get {
+            guard let profileID = UserProfileManager.shared.profileID else {
+                return nil
+            }
+            
+            let key = "disclaimerShownForProfileWithID" + "\(profileID)" + ".prod.v1.0"
+            return key
+        }
+    }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         configureProfilePictureSection()
-        configurePersonalInfoAndPrivacyButtons()
+        configureButtons()
         setUpCollectionView(interestsCollectionView)
         setUpCollectionView(categoriesCollectionView)
+        subscribeOnUpdates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -177,6 +193,21 @@ final class ProfileViewController: BaseViewController {
         pickerController.allowsEditing = true
         pickerController.mediaTypes = ["public.image"]
         present(pickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
+        
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure want to re-launch onboarding questionnaire? It might significantly affect your overall recommendations.", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+            
+        }
+        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .default) { (action) in
+            GainyAnalytics.logEvent("profile_re_launch_onboarding_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.reLaunchOnboarding()
+        }
+        alertController.addAction(proceedAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func privacyInfoButtonTap(_ sender: Any) {
@@ -410,7 +441,7 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
-    private func configurePersonalInfoAndPrivacyButtons() {
+    private func configureButtons() {
         
         let privacyTitle = NSLocalizedString("Privacy", comment: "Privacy")
         privacyButton.setTitle("", for: UIControl.State.normal)
@@ -447,6 +478,25 @@ final class ProfileViewController: BaseViewController {
         personalInfoImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         personalInfoImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         personalInfoImageView.isUserInteractionEnabled = false
+        
+        let onboadring = NSLocalizedString("Re-launch onboarding", comment: "Re-launch onboarding")
+        relLaunchOnboardingQuestionnaireButton.setTitle("", for: UIControl.State.normal)
+        relLaunchOnboardingQuestionnaireButton.titleLabel?.alpha = 0.0
+        let onboardingLabelLabel = UILabel.newAutoLayout()
+        onboardingLabelLabel.font = UIFont.proDisplaySemibold(20.0)
+        onboardingLabelLabel.textAlignment = NSTextAlignment.left
+        onboardingLabelLabel.text = onboadring
+        relLaunchOnboardingQuestionnaireButton.addSubview(onboardingLabelLabel)
+        onboardingLabelLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        onboardingLabelLabel.sizeToFit()
+        onboardingLabelLabel.isUserInteractionEnabled = false
+        let onboardingImageView = UIImageView.newAutoLayout()
+        onboardingImageView.image = UIImage.init(named: "iconChevronRight")
+        relLaunchOnboardingQuestionnaireButton.addSubview(onboardingImageView)
+        onboardingImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        onboardingImageView.isUserInteractionEnabled = false
+        
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {
@@ -468,6 +518,40 @@ final class ProfileViewController: BaseViewController {
         collectionView?.allowsSelection = true
         collectionView?.allowsMultipleSelection = true
         collectionView.scrollIndicatorInsets = UIEdgeInsets.init(top: -20.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+    
+    private func subscribeOnUpdates() {
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateScoringSettings).sink { _ in
+        } receiveValue: { notification in
+            self.reloadData()
+            self.didChangeSettings(nil)
+        }.store(in: &cancellables)
+    }
+    
+    private func reLaunchOnboarding(_ sender: EditProfileCollectionViewController? = nil) {
+        
+        let vc = PersonalizationIndicatorsViewController.instantiate(.onboarding)
+        vc.mainCoordinator = self.mainCoordinator
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        if let sender = sender {
+            sender.dismiss(animated: true) {
+                self.present(navigationController, animated: true, completion: nil)
+            }
+        } else {
+            self.present(navigationController, animated: true, completion: nil)
+        }
+    }
+    
+    private func proceedEditing() {
+        
+        guard let indexPath = self.currentIndexPath else { return }
+        guard let collectionView = self.currentCollectionView else { return }
+        
+        self.didChangeSettings(nil)
+        
+        self.categoriesCollectionView.deselectItem(at: indexPath, animated: false)
+        self.collectionView(collectionView, didDeselectItemAt: indexPath)
     }
 }
 
@@ -606,11 +690,23 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         
+        var result = false
         if collectionView == self.interestsCollectionView {
-            return (self.profileInterestsSelected?.count ?? 0) > 1
+            result = (self.profileInterestsSelected?.count ?? 0) > 1
         } else {
-            return (self.profileCategoriesSelected?.count ?? 0) > 1
+            result = (self.profileCategoriesSelected?.count ?? 0) > 1
         }
+        
+        if result {
+            if self.shouldShowDisclaimer(nil) {
+                self.currentIndexPath = indexPath
+                self.currentCollectionView = collectionView
+                self.showDisclaimer(nil)
+                return false
+            }
+        }
+        
+        return result
     }
 }
 
@@ -647,7 +743,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
     
-    func didSelectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest) {
+    func didSelectInterest(_ sender: EditProfileCollectionViewController?, _ interest: AppInterestsQuery.Data.Interest) {
         
         guard let profileID = UserProfileManager.shared.profileID else {
             return
@@ -676,7 +772,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
     }
     
-    func didDeselectInterest(_ sender: AnyObject?, _ interest: AppInterestsQuery.Data.Interest) {
+    func didDeselectInterest(_ sender: EditProfileCollectionViewController?, _ interest: AppInterestsQuery.Data.Interest) {
         
         guard let profileID = UserProfileManager.shared.profileID else {
             return
@@ -709,7 +805,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
     }
     
-    func didSelectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category) {
+    func didSelectCategory(_ sender: EditProfileCollectionViewController?, _ category: CategoriesQuery.Data.Category) {
         
         guard let profileID = UserProfileManager.shared.profileID else {
             return
@@ -739,7 +835,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
     }
     
-    func didDeselectCategory(_ sender: AnyObject?, _ category: CategoriesQuery.Data.Category) {
+    func didDeselectCategory(_ sender: EditProfileCollectionViewController?, _ category: CategoriesQuery.Data.Category) {
         
         guard let profileID = UserProfileManager.shared.profileID else {
             return
@@ -769,6 +865,48 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
                 })
                 NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
             }
+        }
+    }
+    
+    func didChangeSettings(_ sender: EditProfileCollectionViewController?) {
+        
+        guard let disclaimerShownKey = self.disclaimerShownKey else { return }
+        
+        UserDefaults.standard.set(true, forKey: disclaimerShownKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    func shouldShowDisclaimer(_ sender: EditProfileCollectionViewController?) -> Bool {
+        
+        guard let disclaimerShownKey = self.disclaimerShownKey else { return false }
+        
+        let value = UserDefaults.standard.bool(forKey: disclaimerShownKey)
+        return !value
+    }
+    
+    func showDisclaimer(_ sender: EditProfileCollectionViewController?) {
+        
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Changing Interests and Categories might significantly affect your overall recommendations. If you are not sure, it’s better to re-launch onboarding questionnaire instead.", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel) { (action) in
+            
+        }
+        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .destructive) { (action) in
+            if let sender = sender {
+                sender.proceedEditing()
+            } else {
+                self.proceedEditing()
+            }
+        }
+        let reLaunchOnboardingAction = UIAlertAction(title: NSLocalizedString("Re-launch onboarding", comment: ""), style: .default) { (action) in
+            self.reLaunchOnboarding(sender)
+        }
+        alertController.addAction(proceedAction)
+        alertController.addAction(reLaunchOnboardingAction)
+        alertController.addAction(cancelAction)
+        if let sender = sender {
+            sender.present(alertController, animated: true, completion: nil)
+        } else {
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

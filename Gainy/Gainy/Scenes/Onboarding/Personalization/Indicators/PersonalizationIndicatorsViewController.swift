@@ -20,6 +20,7 @@ enum PersonalizationTab: Int {
 class PersonalizationIndicatorsViewController: BaseViewController {
  
     public weak var coordinator: OnboardingCoordinator?
+    public weak var mainCoordinator: MainCoordinator?
     
     @IBOutlet weak var firstSectionStackView: UIStackView!
     @IBOutlet weak var secondSectionStackView: UIStackView!
@@ -85,7 +86,11 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         GainyAnalytics.logEvent("indicators_back_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         if self.currentTab == .investmentsGoals {
             
-            self.coordinator?.popModule()
+            if self.mainCoordinator != nil {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.coordinator?.popModule()
+            }
             return
         }
         
@@ -97,7 +102,11 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("indicators_close_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
-        self.coordinator?.popToRootModule()
+        if self.mainCoordinator != nil {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.coordinator?.popToRootModule()
+        }
     }
     
     @IBAction func nextButtonTap(_ sender: Any) {
@@ -105,6 +114,12 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         GainyAnalytics.logEvent("indicators_next_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         if self.currentTab == .investingApproach {
             
+            if let mainCoordinator = self.mainCoordinator {
+                let vc = OnboardingFinalizingViewController.instantiate(.onboarding)
+                vc.mainCoordinator = mainCoordinator
+                self.navigationController?.pushViewController(vc, animated: true)
+                return
+            }
             if let email = self.coordinator?.profileInfoBuilder.email {
                 if email.count > 0 {
                     self.coordinator?.pushOnboardingFinalizingViewController()
@@ -195,8 +210,13 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         let closeImage = UIImage(named: "iconClose")
         let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
         closeItem.tintColor = UIColor.black
-        self.navigationItem.leftBarButtonItems = [backItem]
-        self.navigationItem.rightBarButtonItems = [closeItem]
+        if self.mainCoordinator != nil {
+            self.navigationItem.leftBarButtonItems = [closeItem]
+            self.mainCoordinator?.onboardingInfoBuilder.profileInterestIDs = []
+        } else {
+            self.navigationItem.leftBarButtonItems = [backItem]
+            self.navigationItem.rightBarButtonItems = [closeItem]
+        }
     }
     
     public func addIndicatorView() {
@@ -360,20 +380,23 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
             if let selectedMarketReturns = self.selectedMarketReturns {
                 self.setNextButtonHidden(isHidden: selectedMarketReturns.count == 0)
                 if (selectedMarketReturns.count == 0) {
-                    self.coordinator?.profileInfoBuilder.averageMarketReturn = nil
+                    self.coordinator?.onboardingInfoBuilder.averageMarketReturn = nil
+                    self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = nil
                 } else {
                     if let source = sources?.first {
                         var averageMarketReturn = source.description()
                         averageMarketReturn.removeLast()
                         if let averageMarketReturnValue = Int(averageMarketReturn) {
-                            self.coordinator?.profileInfoBuilder.averageMarketReturn = averageMarketReturnValue
+                            self.coordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
+                            self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
                             GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
                         }
                     }
                 }
             } else {
                 self.setNextButtonHidden(isHidden: true)
-                self.coordinator?.profileInfoBuilder.averageMarketReturn = nil
+                self.coordinator?.onboardingInfoBuilder.averageMarketReturn = nil
+                self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = nil
             }
         }
         else if self.urgentMoneySourceView == sender {
@@ -381,38 +404,46 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
             if let selectedSources = self.selectedSources {
                 self.setNextButtonHidden(isHidden: selectedSources.count == 0)
                 if (selectedSources.count == 0) {
-                    self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = nil
+                    self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
+                    self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
                 } else {
                     if let source = sources?.first {
                         let unexpectedPurchasesSource = "\(source)"
-                        self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
+                        self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
+                        self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = unexpectedPurchasesSource
                         GainyAnalytics.logEvent("unexpected_purchases_source_picked", params: ["source" : unexpectedPurchasesSource, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
                     }
                 }
             } else {
                 self.setNextButtonHidden(isHidden: true)
-                self.coordinator?.profileInfoBuilder.unexpectedPurchasesSource = nil
+                self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
+                self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
             }
         } else if self.investingApproachSourceView == sender {
             self.selectedApproaches = sources
             if let selectedApproaches = self.selectedApproaches {
                 self.setNextButtonHidden(isHidden: selectedApproaches.count == 0)
                 if (selectedApproaches.count == 0) {
-                    self.coordinator?.profileInfoBuilder.tradingExperience = nil
+                    self.coordinator?.onboardingInfoBuilder.tradingExperience = nil
+                    self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = nil
                 } else {
                     if let selectedApproach = sources?.first {
                         let tradingExperience = "\(selectedApproach)"
-                        self.coordinator?.profileInfoBuilder.tradingExperience = tradingExperience
+                        self.coordinator?.onboardingInfoBuilder.tradingExperience = tradingExperience
+                        self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = tradingExperience
                         GainyAnalytics.logEvent("trading_experience_picked", params: ["experience" : tradingExperience, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
                     }
                 }
             } else {
                 self.setNextButtonHidden(isHidden: true)
-                self.coordinator?.profileInfoBuilder.tradingExperience = nil
+                self.coordinator?.onboardingInfoBuilder.tradingExperience = nil
+                self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = nil
             }
             // TODO: Borysov - Add UI with next 2 sliders in the collection view, if the first (never tried) value is selected
-            self.coordinator?.profileInfoBuilder.ifMarketDrops20IWillBuy = 0.5
-            self.coordinator?.profileInfoBuilder.ifMarketDrops40IWillBuy = 0.5
+            self.coordinator?.onboardingInfoBuilder.ifMarketDrops20IWillBuy = 0.5
+            self.coordinator?.onboardingInfoBuilder.ifMarketDrops40IWillBuy = 0.5
+            self.mainCoordinator?.onboardingInfoBuilder.ifMarketDrops20IWillBuy = 0.5
+            self.mainCoordinator?.onboardingInfoBuilder.ifMarketDrops40IWillBuy = 0.5
         }
     }
 }
@@ -490,15 +521,18 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
         
         if sender == self.sliderViewInvestmentGoals {
             self.setCurrentTab(newTab: .marketReturns)
-            self.coordinator?.profileInfoBuilder.riskLevel = currentValue
+            self.coordinator?.onboardingInfoBuilder.riskLevel = currentValue
+            self.mainCoordinator?.onboardingInfoBuilder.riskLevel = currentValue
             GainyAnalytics.logEvent("risk_level_picked", params: ["risk_level" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else if sender == self.sliderViewInvestmentHorizon {
             self.setCurrentTab(newTab: .moneySourceView)
-            self.coordinator?.profileInfoBuilder.investmentHorizon = currentValue
+            self.coordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
+            self.mainCoordinator?.onboardingInfoBuilder.investmentHorizon = currentValue
             GainyAnalytics.logEvent("investment_horizon_picked", params: ["investment_horizon" : "\(currentValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else if sender == self.sliderViewDamageOfFailure {
             self.setCurrentTab(newTab: .stockMarketRisks)
-            self.coordinator?.profileInfoBuilder.damageOfFailure = (1.0 - currentValue)
+            self.coordinator?.onboardingInfoBuilder.damageOfFailure = (1.0 - currentValue)
+            self.mainCoordinator?.onboardingInfoBuilder.damageOfFailure = (1.0 - currentValue)
             GainyAnalytics.logEvent("damage_of_failure_picked", params: ["damage_of_failure" : "\((1.0 - currentValue))", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else {
             self.setNextButtonHidden(isHidden: false)
@@ -516,7 +550,8 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                 } else if value > 85 && value <= 100 {
                     stockMarketRisks = "very_risky"
                 }
-                self.coordinator?.profileInfoBuilder.stockMarketRiskLevel = stockMarketRisks
+                self.coordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
+                self.mainCoordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
                 GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             }
         }
