@@ -12,6 +12,7 @@ protocol RemoteDateTimeConvertable {
     var datetime: String? {get set}
     var date: Date {get}
     
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String
 }
 
 extension RemoteDateTimeConvertable {
@@ -85,6 +86,9 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
         }
         
         return "Now"
+    }
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String  {
+        ""
     }
 }
 

@@ -662,7 +662,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     func centerInitialCollectionInTheCollectionView() {
         guard let snap = dataSource?.snapshot() else {return}
-        guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {return}
+        guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {
+            if !(discoverCollectionsBtn?.isEnabled ?? false){
+                if snap.sectionIdentifiers.count > 0 {
+                    collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                                                 at: .centeredHorizontally,
+                                                                 animated: false)
+                }
+            }
+            return
+        }
         let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
         
         if snap.sectionIdentifiers.count > 0 {

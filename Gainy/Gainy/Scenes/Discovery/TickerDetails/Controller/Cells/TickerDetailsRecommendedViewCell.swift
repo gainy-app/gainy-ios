@@ -19,6 +19,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     @IBOutlet private var recImgs: [UIImageView]!
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    @IBOutlet var colorView: UIView!
     @IBOutlet private weak var tagsHeaderLbl: UILabel!
     
     private var lines: Int = 1
@@ -34,15 +35,15 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
             switch matchData.matchScore {
             case 0..<35:
-                contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
+                colorView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 35..<65:
-                contentView.backgroundColor = UIColor.Gainy.mainYellow
+                colorView.backgroundColor = UIColor.Gainy.mainYellow
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 65...:
-                contentView.backgroundColor = UIColor.Gainy.mainGreen
+                colorView.backgroundColor = UIColor.Gainy.mainGreen
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             default:

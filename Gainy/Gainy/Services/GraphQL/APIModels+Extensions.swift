@@ -134,7 +134,7 @@ protocol ChartMergable {
 
 extension DiscoverChartsQuery.Data.HistoricalPricesAggregated: ChartMergable {
     var val: Float {
-        close ?? 0.0
+        adjustedClose ?? 0.0
     }
 }
 
@@ -144,7 +144,9 @@ extension GetPortfolioChartsQuery.Data.PortfolioChart: ChartMergable {
     }
 }
 
-func normalizeCharts(_ chart1: [ChartMergable], _ chart2: [ChartMergable]) -> ([ChartMergable], [ChartMergable]) {
+typealias ChartNormalized = RemoteDateTimeConvertable & ChartMergable
+
+func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -> ([ChartNormalized], [ChartNormalized]) {
     
     guard chart1.count > 3, chart2.count > 3 else {return (chart1, chart2)}
     
@@ -153,7 +155,19 @@ func normalizeCharts(_ chart1: [ChartMergable], _ chart2: [ChartMergable]) -> ([
     
     let small = first1 < first2 ? chart2 : chart1
     let large =  first1 < first2 ? chart1 : chart2
-    var reconstructed: [ChartMergable] = []
+    var reconstructed: [ChartNormalized] = []
+    
+    let firstSmallDate = small.first!.date
+    var largeIndex: Int = 0
+    
+    while largeIndex < large.count && large[largeIndex].date < firstSmallDate {
+        reconstructed.append(small.first!)
+        largeIndex += 1
+    }
+    if !reconstructed.isEmpty {
+        reconstructed = reconstructed.dropLast()
+        reconstructed.append(contentsOf: small)
+    }
     
     return first1 < first2 ? (large, reconstructed) : (reconstructed, large)
 }

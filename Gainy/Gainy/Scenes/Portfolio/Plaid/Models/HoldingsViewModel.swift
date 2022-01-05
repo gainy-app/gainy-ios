@@ -33,8 +33,8 @@ final class HoldingsViewModel {
     }
     
     //MARK: - Caching
-    private var chartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
-    private var sypChartsCache: [ScatterChartView.ChartPeriod : ChartData] = [:]
+    private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
+    private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     
     func loadNewChartData(period: ScatterChartView.ChartPeriod, _ completion: ( () -> Void)? = nil) {
         if let chartCache = chartsCache[period] {
@@ -84,8 +84,8 @@ final class HoldingsViewModel {
                     }
                     
                     loadGroup.enter()
-                    HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, _ in
-                        self?.sypChartsCache[range] = chartData
+                    HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
+                        self?.sypChartsCache[range] = rawData
                         loadGroup.leave()
                     }
                 }
@@ -207,8 +207,8 @@ final class HoldingsViewModel {
             }
             
             loadGroup.enter()
-            HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, _ in
-                self?.sypChartsCache[range] = chartData
+            HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
+                self?.sypChartsCache[range] = rawData
                 loadGroup.leave()
             }
         

@@ -1,14 +1,13 @@
-iOS v1.0.2 #116 available
+iOS v1.0.2 #117 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Re-launch onboarding flow + disclaimer
+• -
 
 :hammer_and_wrench: Improvements
-• Charts: Adjusted clsoe for calculations
-• Analytics: extra logging for QA
-• Plaid SDK monthly update
+• Charts: Normalization 1.0 (Now Chart with S&P have dates matching)
+• Loaders centering
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
