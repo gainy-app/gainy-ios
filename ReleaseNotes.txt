@@ -1,4 +1,4 @@
-iOS v1.0.2 #117 available
+iOS v1.0.2 #118 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,8 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Charts: Normalization 1.0 (Now Chart with S&P have dates matching)
-• Loaders centering
+• Charts: Normalization 1.1 (Needed improvements)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

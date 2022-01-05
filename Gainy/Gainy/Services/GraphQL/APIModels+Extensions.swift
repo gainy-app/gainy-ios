@@ -153,6 +153,8 @@ func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -
     let first1 = chart1.first!.date
     let first2 = chart2.first!.date
     
+    guard first1 != first2 else {return (chart1, chart2)}
+    
     let small = first1 < first2 ? chart2 : chart1
     let large =  first1 < first2 ? chart1 : chart2
     var reconstructed: [ChartNormalized] = []
