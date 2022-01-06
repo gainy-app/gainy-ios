@@ -1,4 +1,4 @@
-iOS v1.0.2 #118 available
+iOS v1.0.2 #119 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,9 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Charts: Normalization 1.1 (Needed improvements)
+• Stocks: daily change percent works
+• Stock Card: loading improved
+• Portfolio: detail names changed, expiry added
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

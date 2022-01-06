@@ -195,7 +195,7 @@ struct ScatterChartView: View {
     private var statsDayValue: String {
         switch selectedTag {
         case .d1:
-            return viewModel.ticker.priceChangeToday.percentRaw
+            return (viewModel.ticker.priceChangeToday * 100.0).percentRaw
         default:
             return viewModel.chartData.startEndDiffString
         }

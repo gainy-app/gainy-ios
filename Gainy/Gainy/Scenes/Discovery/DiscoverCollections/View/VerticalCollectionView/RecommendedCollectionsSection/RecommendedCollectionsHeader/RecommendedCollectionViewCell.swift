@@ -218,7 +218,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = "9999"
+        stocksAmountLabel.text = stocksAmount
 
         buttonState = plusButtonState
         buttonState == .checked

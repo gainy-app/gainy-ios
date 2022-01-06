@@ -28,8 +28,14 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
         balanceLbl.text = model.totalPrice.price
         progressLbl.text = (model.percentInHolding * 100).cleanOneDecimalP
         
-        bottomNameLbl.text = "Avg cost"
-        bottomPriceLbl.text = model.singlePrice.price
+        if model.type == .option {
+            bottomNameLbl.text = "Exp"
+            bottomPriceLbl.text = model.singlePrice
+        } else {
+            bottomNameLbl.text = ""
+            bottomPriceLbl.text = ""
+        }
+        
         
         (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text, rangePriceLbl.textColor, rangeGrowLbl.textColor) = model.infoForRange(range)
     }
