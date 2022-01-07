@@ -1,14 +1,12 @@
-iOS v1.0.2 #119 available
+iOS v1.0.2 #120 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• -
+• Merry Christmas!
 
 :hammer_and_wrench: Improvements
-• Stocks: daily change percent works
-• Stock Card: loading improved
-• Portfolio: detail names changed, expiry added
+• Portfolio: detail names changed, expiry changes, sorting
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -177,7 +177,7 @@ func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -
 extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
     var lovelyTitle: String {
         if let nameData = holdingDetails?.tickerName?.components(separatedBy: " "), nameData.count > 3 {
-            return "Call $\(nameData[2])"
+            return "\(nameData[3]) $\(nameData[2])"
         } else {
             return name ?? ""
         }
@@ -185,7 +185,7 @@ extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
     
     var expiryDateString: String {
         if let nameData = holdingDetails?.tickerName?.components(separatedBy: " "), nameData.count > 3 {
-            var eventDate = nameData[1].toDate("dd/MM/yyyy")?.date ?? Date()
+            let eventDate = nameData[1].toDate()?.date ?? Date()
             return eventDate.toFormat("MMM dd, yy")
         } else {
             return ""

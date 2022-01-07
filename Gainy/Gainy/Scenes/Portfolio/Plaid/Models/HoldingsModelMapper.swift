@@ -23,7 +23,11 @@ struct HoldingsModelMapper {
             var securities: [HoldingSecurityViewModel] = []
             for holding in holdingGroup.holdings {
                 let model = HoldingSecurityViewModel(holding: holding)
-                securities.append(model)
+                if model.type == .share {
+                    securities.insert(model, at: 0)
+                } else {
+                    securities.append(model)
+                }
             }
             
             let absGains: [ScatterChartView.ChartPeriod : Float] = [
