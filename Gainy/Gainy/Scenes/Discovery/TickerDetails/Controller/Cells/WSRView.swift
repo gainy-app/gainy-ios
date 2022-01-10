@@ -116,7 +116,9 @@ struct WSRView: View {
             targetView
                 .offset(x:8, y: 30)
         }.onReceive(viewModel.progressUpdate) { _ in
-            loadStats()
+            DispatchQueue.main.async {
+                self.loadStats()
+            }
         }
     }
     

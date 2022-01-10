@@ -90,6 +90,7 @@ struct CachedMatchScore: Codable {
             }
         }
     }
+    
     func combinedTags() async -> [TickerTag] {
         async let interests = interests()
         async let categories = categories()

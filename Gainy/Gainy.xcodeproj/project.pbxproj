@@ -40,6 +40,7 @@
 		3330BD1126FA6B850079C899 /* FetchStockMedianWeek.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0E26FA6B850079C899 /* FetchStockMedianWeek.graphql */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
 		3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 3332BCD2273CFCC3001222A7 /* SkeletonView */; };
+		3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */; };
 		3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */; };
 		3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336860A26E618BF00D448AA /* CompareScatterChartView.swift */; };
 		33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33376F9526F8A75300618CD7 /* GainyModel.xcdatamodeld */; };
@@ -510,6 +511,7 @@
 		3330BD0D26FA6B850079C899 /* FetchStockMedianMonth.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianMonth.graphql; sourceTree = "<group>"; };
 		3330BD0E26FA6B850079C899 /* FetchStockMedianWeek.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianWeek.graphql; sourceTree = "<group>"; };
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
+		3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Async.swift"; sourceTree = "<group>"; };
 		3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStockFieldsView.swift; sourceTree = "<group>"; };
 		3336860A26E618BF00D448AA /* CompareScatterChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareScatterChartView.swift; path = Gainy/Scenes/Discovery/TickerDetails/Controller/Cells/Charts/CompareScatterChartView.swift; sourceTree = SOURCE_ROOT; };
 		33376F9626F8A75300618CD7 /* GainyModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GainyModel.xcdatamodel; sourceTree = "<group>"; };
@@ -1743,6 +1745,7 @@
 				3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */,
 				33626A97271826190013EE6C /* APIModels+Caching.swift */,
 				3381A56F271D48CA001A1EDA /* CollectionsManager.swift */,
+				3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
 			path = GraphQL;
@@ -2652,6 +2655,7 @@
 				85695B022746C18200759569 /* InsertMetricsSessingsForTicker.graphql.swift in Sources */,
 				85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */,
 				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
+				3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */,
