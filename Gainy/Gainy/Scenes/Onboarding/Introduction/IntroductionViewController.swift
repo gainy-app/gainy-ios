@@ -10,7 +10,6 @@ import PureLayout
 
 class IntroductionViewController: UIViewController, Storyboarded {
     
-    @IBOutlet weak var imagesCollectionView: UICollectionView!
     @IBOutlet weak var captionsCollectionView: UICollectionView!
     @IBOutlet weak var nextButton: UIButton!
     
@@ -24,6 +23,8 @@ class IntroductionViewController: UIViewController, Storyboarded {
 
     private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewProgress?
     private var indicatorView: UIView?
+    
+    private var nextButtonImage: UIImageView = UIImageView.newAutoLayout()
     
     private var currentCaptionIndex = 0
     private let captions = [
@@ -64,7 +65,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     @objc func backButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("introduction_back_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-        let rect = CGRect(x: self.view.bounds.width * CGFloat(self.currentCaptionIndex - 1), y: 0.0, width: self.view.bounds.width, height: self.view.bounds.height)
+        let rect = CGRect(x: 0.0, y: self.captionsCollectionView.bounds.height * CGFloat(self.currentCaptionIndex - 1), width: self.view.bounds.width, height: self.captionsCollectionView.bounds.height)
         self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
         switch self.currentCaptionIndex {
         case 0:
@@ -101,7 +102,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     @IBAction func nextButtonTap(_ sender: Any) {
         
         GainyAnalytics.logEvent("introduction_next_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
-        let rect = CGRect(x: self.view.bounds.width * CGFloat(self.currentCaptionIndex + 1), y: 0.0, width: self.view.bounds.width, height: self.view.bounds.height)
+        let rect = CGRect(x: 0.0, y: self.captionsCollectionView.bounds.height * CGFloat(self.currentCaptionIndex + 1), width: self.view.bounds.width, height: self.captionsCollectionView.bounds.height)
         switch self.currentCaptionIndex {
         case 0:
             GainyAnalytics.logEvent("next_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
@@ -142,7 +143,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         layout.sectionInset = UIEdgeInsets.init(top: 0, left:0, bottom:0, right:0)
         layout.minimumInteritemSpacing = 0.0
         layout.minimumLineSpacing = 0.0
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .vertical
         self.captionsCollectionView.collectionViewLayout = layout;
         self.captionsCollectionView.contentInset = UIEdgeInsets.zero
     }
@@ -165,6 +166,13 @@ class IntroductionViewController: UIViewController, Storyboarded {
         closeItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]
         self.navigationItem.rightBarButtonItems = [closeItem]
+        
+        let image = UIImage.init(named: "arrow-down-white")
+        self.nextButtonImage.image = image
+        self.nextButton.addSubview(self.nextButtonImage)
+        self.nextButtonImage.translatesAutoresizingMaskIntoConstraints = false
+        self.nextButtonImage.autoSetDimensions(to: CGSize.init(width: 14, height: 8))
+        self.nextButtonImage.autoCenterInSuperview()
     }
     
     public func addIndicatorView() {
@@ -184,12 +192,14 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     private func setProgressIndicatorHidden(hidden: Bool) {
         
-        let nextTitle = NSLocalizedString("Next", comment: "Next")
+        let nextTitle = ""
         let personaliseTitle = NSLocalizedString("Start to gain more!", comment: "Start to gain more!")
         let nextButtonTitle = hidden ? personaliseTitle : nextTitle
         
+        self.nextButtonImage.isHidden = hidden
         UIView.animate(withDuration: 0.175) {
             
+            self.nextButtonImage.alpha = 0.0
             self.nextButton.titleLabel?.alpha = 0.0
             
         } completion: { success in
@@ -197,6 +207,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
             self.nextButton.setTitle(nextButtonTitle, for: UIControl.State.normal)
             UIView.animate(withDuration: 0.175) {
                 
+                self.nextButtonImage.alpha = 1.0
                 self.nextButton.titleLabel?.alpha = 1.0
             }
         }
@@ -204,7 +215,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.view.setNeedsLayout()
         self.nextButtonRightConstraint.constant = hidden ? 40.0 : 24.0
         self.nextButtonHeightConstraint.constant = hidden ? 64.0 : 48.0
-        self.nextButtonWidthConstraint.constant = hidden ? UIScreen.main.bounds.width - 80 : 104.0
+        self.nextButtonWidthConstraint.constant = hidden ? UIScreen.main.bounds.width - 80 : 48.0
         
         UIView.animate(withDuration: 0.35) {
             
@@ -245,9 +256,9 @@ extension IntroductionViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         
-        let middle = scrollView.contentOffset.x + (self.view.bounds.width / 2.0)
-        let width = self.view.bounds.width
-        let currentIndex = Int(middle) / Int(width)
+        let middle = scrollView.contentOffset.y + (self.captionsCollectionView.bounds.height / 2.0)
+        let height = self.captionsCollectionView.bounds.height
+        let currentIndex = Int(middle) / Int(height)
         switch currentIndex {
         case 0:
             self.setProgressIndicatorHidden(hidden: false)
