@@ -15,6 +15,8 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     
     private var appInterests: [AppInterestsQuery.Data.Interest]?
     private weak var footerView: PersonalizationPickInterestsFooterView?
+    private var footerViewHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var collectionViewBottomConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         
@@ -93,12 +95,11 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         footerView.autoPinEdge(toSuperviewEdge: .leading)
         footerView.autoPinEdge(toSuperviewEdge: .trailing)
         footerView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        footerView.autoSetDimension(.height, toSize: 101)
+      
         self.footerView = footerView
         self.footerView?.delegate = self
         footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
-        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
+        self.updateFooterPosition()
     }
     
     private func getRemoteData(completion: @escaping () -> Void) {
@@ -223,16 +224,31 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let interest = self.appInterests?[indexPath.row] else {return}
-        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
+        
+        self.updateFooterPosition()
         GainyAnalytics.logEvent("personalization_select_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         
         guard let interest = self.appInterests?[indexPath.row] else {return}
+        
+        self.updateFooterPosition()
+        GainyAnalytics.logEvent("personalization_deselect_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
+    }
+    
+    func updateFooterPosition() {
+        
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
         self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
-        GainyAnalytics.logEvent("personalization_deselect_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
+        let height = indexPaths.count == 0 ? 30 : 101
+        if self.footerViewHeightConstraint != nil {
+            self.footerViewHeightConstraint?.constant = CGFloat(height)
+        } else {
+            self.footerViewHeightConstraint = self.footerView?.autoSetDimension(.height, toSize: CGFloat(height))
+        }
+        self.collectionViewBottomConstraint?.constant = indexPaths.count == 0 ? -45 : 0
+        let bottomInset = indexPaths.count == 0 ? 0 : 101
+        self.collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: CGFloat(bottomInset), right: 0.0)
     }
 }
