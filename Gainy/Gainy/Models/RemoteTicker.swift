@@ -107,7 +107,8 @@ class TickerInfo {
     
     private(set) var isMainDataLoaded: Bool = false
     private(set) var isChartDataLoaded: Bool = false
-    
+    private var matchLoadTask: Task<Void, Never>?
+
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
@@ -185,7 +186,10 @@ class TickerInfo {
                 
                 mainDS.enter()
                 if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol) {
-                    let _ = Task {
+                    if let matchLoadTask = self.matchLoadTask {
+                        matchLoadTask.cancel()
+                    }
+                    self.matchLoadTask = Task {
                         let loadedTags = await matchData.combinedTags()
                         self.matchTags = loadedTags
                         mainDS.leave()
