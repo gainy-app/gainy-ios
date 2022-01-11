@@ -69,7 +69,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                     tagsStack.addSubview(tagView)
                     tagView.tagName = tag.name
                     tagView.loadImage(url: tag.url)
-                    let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                    let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                     tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                     if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                         xPos = 0.0

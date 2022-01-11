@@ -57,7 +57,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}
-                    self.delegate?.tickerPressed(source: self, tickers: modelItem.cards.map(\.rawTicker), ticker: ticker)
+                    self.delegate?.tickerPressed(source: self, tickers: cell.cards.map(\.rawTicker), ticker: ticker)
                 }
                 cell.onSortingPressed = { [weak self] in
                     guard let self = self else {return}

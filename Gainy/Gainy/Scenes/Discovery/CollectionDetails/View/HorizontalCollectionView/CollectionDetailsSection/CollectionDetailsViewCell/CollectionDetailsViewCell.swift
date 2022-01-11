@@ -290,7 +290,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.cards = cards
         sortSections()
     }
-    private var cards: [CollectionCardViewCellModel] = []
+    private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
         

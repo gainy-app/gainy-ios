@@ -19,6 +19,11 @@ protocol MetricsViewControllerDelegate: AnyObject {
 
 class MetricsViewController: BaseViewController {
 
+    @IBOutlet private weak var titleLbl: UILabel! {
+       didSet {
+           titleLbl.setKern()
+       }
+   }
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var searchCollectionView: UICollectionView!

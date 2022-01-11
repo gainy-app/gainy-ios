@@ -131,15 +131,19 @@ struct WSRView: View {
         let totalCount = Double(viewModel.progress.map(\.count).reduce(0, +))
         
         pieData.removeAll()
-        viewModel.progress.forEach({
-            let progress = Double($0.count) / totalCount
-            pieData.append(PieData.init(startAngle: lastAngle,
+        
+        var pieDataList: [PieData] = []
+        for val in viewModel.progress {
+            let progress = Double(val.count) / totalCount
+            
+            pieDataList.append(PieData.init(startAngle: lastAngle,
                                         progress: progress,
                                         color: colors.popLast()!,
-                                        name: $0.name,
-                                        count: $0.count))
+                                        name: val.name,
+                                        count: val.count))
             lastAngle = .degrees(lastAngle.degrees + (360 * progress))
-        })
+        }
+        pieData.append(contentsOf: pieDataList)
     }
     
     var totalText: String {

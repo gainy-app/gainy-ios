@@ -41,18 +41,18 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
-                if tag.collectionID < 0 {
+                //if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white
                     tagView.tagLabel.textColor = UIColor(named: "mainText")
-                } else {
-                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                    tagView.tagLabel.textColor = .white
-                }
+//                } else {
+//                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+//                    tagView.tagLabel.textColor = .white
+//                }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name
                 tagView.loadImage(url: tag.url)
-                let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0
@@ -155,6 +155,8 @@ class TagView: UIButton {
         setupView()
     }
     
+    private var textLeadingConst: NSLayoutConstraint?
+    
     private func setupView() {
         layer.cornerRadius = 4.0
         clipsToBounds = true
@@ -169,7 +171,7 @@ class TagView: UIButton {
         tagImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
         
         addSubview(tagLabel)
-        tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
+        textLeadingConst = tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
         tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 8)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
@@ -178,6 +180,8 @@ class TagView: UIButton {
     func loadImage(url: String) {
         guard !url.isEmpty else {
             tagImageView.image = nil
+            textLeadingConst?.constant = 8.0
+            layoutIfNeeded()
             return
         }
         let processor = DownsamplingImageProcessor(size: CGSize(width: 19, height: 14))

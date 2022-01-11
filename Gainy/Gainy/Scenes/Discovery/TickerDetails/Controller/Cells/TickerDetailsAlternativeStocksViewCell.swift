@@ -50,7 +50,7 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
 
 extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: 144.0, height: 192.0)
+        .init(width: 144.0, height: 192.0 + 32.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

@@ -142,6 +142,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         let view = UIImageView()
         view.image = UIImage(named: "arrow-up-green")
         view.isSkeletonable = true
+        view.isHiddenWhenSkeletonIsActive = true
         return view
     }()
     
