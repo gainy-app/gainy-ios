@@ -104,7 +104,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         view.clipsToBounds = true
         view.isSkeletonable = true
         view.skeletonCornerRadius = 6
-        
+        view.isHiddenWhenSkeletonIsActive = true
         return view
     }()
     

@@ -117,6 +117,9 @@ class MetricsViewController: BaseViewController {
         searchTextField.layer.cornerRadius = 16
         searchTextField.isUserInteractionEnabled = true
         searchTextField.placeholder = "Search metrics"
+        searchTextField.backgroundColor = UIColor(hexString: "F7F8F9", alpha: 1.0)
+        searchTextField.layer.cornerRadius = 16.0
+        searchTextField.clipsToBounds = true
         let searchIconContainerView = UIView(
             frame: CGRect(
                 x: 0,

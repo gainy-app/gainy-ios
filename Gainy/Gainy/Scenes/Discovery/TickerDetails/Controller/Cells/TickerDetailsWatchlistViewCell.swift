@@ -21,7 +21,11 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
     
     @IBOutlet weak var watchBtn: BorderButton!
-    @IBOutlet weak var tradeBtn: BorderButton!
+    @IBOutlet weak var tradeBtn: BorderButton! {
+        didSet {
+            tradeBtn.layer.borderWidth = 2.0
+        }
+    }
     @IBOutlet weak var changeCurrentBrokerBtn: BorderButton!
     
     override func updateFromTickerData() {

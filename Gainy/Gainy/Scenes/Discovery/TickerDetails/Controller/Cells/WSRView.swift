@@ -111,7 +111,9 @@ struct WSRView: View {
             }
             .fixedSize(horizontal: false, vertical: false)
             .onAppear(perform: {
-                loadStats()
+                DispatchQueue.main.async {
+                    self.loadStats()
+                }
             })
             targetView
                 .offset(x:8, y: 30)
@@ -168,7 +170,7 @@ struct WSRView: View {
                             .padding(.trailing, 8)
                     }
                 }.background(Rectangle().cornerRadius(8.0).foregroundColor(UIColor(hexString: "F7F8F9")!.uiColor).frame(height: 32.0))
-                    .frame(width: 156)
+                    .frame(width: 168)
                     .frame(height: 32.0)
             }
         }

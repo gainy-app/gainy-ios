@@ -17,6 +17,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var toggleBtn: UIButton!
+    @IBOutlet weak var shareBtn: UIButton!
     
     // MARK: Properties
     private var viewModel: SingleCollectionDetailsViewModel?
@@ -52,6 +53,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         if collectionId == Constants.CollectionDetails.compareCollectionID {
             viewModel = SingleCollectionDetailsViewModel.init(model: model)
             toggleBtn.isHidden = true
+            shareBtn.isHidden = true
         } else {
             viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
         }

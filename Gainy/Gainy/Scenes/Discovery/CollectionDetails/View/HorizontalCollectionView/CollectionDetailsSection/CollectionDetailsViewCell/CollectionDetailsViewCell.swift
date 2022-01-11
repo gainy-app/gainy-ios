@@ -45,7 +45,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.delegate = self
         internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
         internalCollectionView.contentInsetAdjustmentBehavior = .never
-        internalCollectionView.clipsToBounds = true
+        internalCollectionView.clipsToBounds = false
         
         contentView.addSubview(internalCollectionView)
         contentView.bringSubviewToFront(collectionHorizontalView)
@@ -392,6 +392,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         }
         
         sections.swapAt(0, 1)
+        internalCollectionView.clipsToBounds = false
         internalCollectionView.reloadData()
     }
     

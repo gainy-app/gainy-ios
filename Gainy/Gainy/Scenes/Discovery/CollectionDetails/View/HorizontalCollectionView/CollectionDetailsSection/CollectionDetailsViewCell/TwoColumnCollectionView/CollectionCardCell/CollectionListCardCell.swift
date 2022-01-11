@@ -87,6 +87,7 @@ final class CollectionListCardCell: UICollectionViewCell {
                 }
                 matchTrailing.constant = 34.0
                 mlpLbl.textColor = .white
+                mlpLbl.font = .compactRoundedSemibold(14.0)
             } else {
                 for (ind, val) in markerMetrics.enumerated() {
                     lbls[ind]?.text = val
@@ -94,6 +95,7 @@ final class CollectionListCardCell: UICollectionViewCell {
                     if (markerHeaders[ind] == Constants.CollectionDetails.matchScore) {
                         matchTrailing.constant = CGFloat(5 - ind) * 48.0 - 4.0 - 22.0 + 12.0
                         lbls[ind]?.textColor = .white
+                        lbls[ind]?.font = .compactRoundedSemibold(12.0)
                     }
                 }
             }

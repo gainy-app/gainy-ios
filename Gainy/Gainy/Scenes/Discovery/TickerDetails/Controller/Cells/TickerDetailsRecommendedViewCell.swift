@@ -60,7 +60,6 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 var yPos: CGFloat = 0.0
                 for tag in tickerInfo?.matchTags ?? [] {
                     let tagView = TagView()
-                    tagView.changeLayoutForRec()
                     tagView.loadImage(url: tag.url)
                     
                     tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),

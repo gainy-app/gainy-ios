@@ -42,9 +42,9 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
                 if tag.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.lightGray
+                    tagView.backgroundColor = UIColor.white
                 } else {
-                    tagView.backgroundColor = UIColor(hex: 0x3A4448)
+                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                 }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
@@ -157,7 +157,10 @@ class TagView: UIButton {
     private func setupView() {
         layer.cornerRadius = 4.0
         clipsToBounds = true
-        backgroundColor = UIColor(hexString: "3A4448")!
+        backgroundColor = .white
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor(hexString: "#E7EAEE", alpha: 1.0)?.cgColor
+        layer.cornerRadius = 12.0
         
         addSubview(tagImageView)
         tagImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 12))
@@ -173,7 +176,7 @@ class TagView: UIButton {
     
     func loadImage(url: String) {
         guard !url.isEmpty else {
-            tagImageView.image = UIImage(named: "demoRocket")
+            tagImageView.image = nil
             return
         }
         let processor = DownsamplingImageProcessor(size: CGSize(width: 19, height: 14))
