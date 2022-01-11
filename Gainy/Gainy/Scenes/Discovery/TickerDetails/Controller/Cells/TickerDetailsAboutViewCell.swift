@@ -43,8 +43,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagsStack.addSubview(tagView)
                 if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white
+                    tagView.tagLabel.textColor = UIColor(named: "mainText")
                 } else {
                     tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                    tagView.tagLabel.textColor = .white
                 }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
@@ -97,7 +99,6 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
         return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
-        return 0.0
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
@@ -132,7 +133,7 @@ class TagView: UIButton {
         return tagImageView
     }()
     
-    private lazy var tagLabel: UILabel = {
+    private(set) lazy var tagLabel: UILabel = {
         let tagLabel = UILabel()
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)

@@ -134,7 +134,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         label.isSkeletonable = true
-        
+        label.linesCornerRadius = 6
         return label
     }()
     
