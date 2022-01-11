@@ -689,19 +689,13 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JWx-Jk-Rpy">
-                                <rect key="frame" x="107" y="108" width="200" height="200"/>
-                                <color key="backgroundColor" red="0.90605252979999995" green="0.91741710899999995" blue="0.92941474909999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="JWx-Jk-Rpy" customClass="UIImageView">
+                                <rect key="frame" x="87" y="124" width="240" height="184"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="pGc-Hh-Cx4"/>
-                                    <constraint firstAttribute="height" constant="200" id="wFy-Da-1Ex"/>
+                                    <constraint firstAttribute="width" constant="240" id="pGc-Hh-Cx4"/>
+                                    <constraint firstAttribute="height" constant="184" id="wFy-Da-1Ex"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="100"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in with one of the following options" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZT-Ru-bqf">
                                 <rect key="frame" x="64" y="418" width="286" height="20"/>
@@ -776,9 +770,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <constraint firstItem="hlB-m7-gpl" firstAttribute="top" secondItem="Q4h-3q-Pkb" secondAttribute="bottom" constant="10" id="8SU-Kn-hBn"/>
                             <constraint firstItem="Q4h-3q-Pkb" firstAttribute="top" secondItem="qZT-Ru-bqf" secondAttribute="bottom" constant="40" id="BLd-bz-drJ"/>
                             <constraint firstItem="qZT-Ru-bqf" firstAttribute="top" secondItem="eLy-eV-wih" secondAttribute="bottom" constant="30" id="DtC-NG-shi"/>
-                            <constraint firstItem="JWx-Jk-Rpy" firstAttribute="top" relation="lessThanOrEqual" secondItem="Zlb-gr-7m8" secondAttribute="top" constant="64" id="Id0-TN-Y5V"/>
+                            <constraint firstItem="JWx-Jk-Rpy" firstAttribute="top" relation="lessThanOrEqual" secondItem="Zlb-gr-7m8" secondAttribute="top" constant="80" id="Id0-TN-Y5V"/>
                             <constraint firstItem="Zlb-gr-7m8" firstAttribute="trailing" secondItem="hlB-m7-gpl" secondAttribute="trailing" constant="32" id="MW6-bV-vss"/>
-                            <constraint firstItem="JWx-Jk-Rpy" firstAttribute="top" secondItem="Zlb-gr-7m8" secondAttribute="top" priority="999" constant="64" id="W6L-IH-TNw"/>
+                            <constraint firstItem="JWx-Jk-Rpy" firstAttribute="top" secondItem="Zlb-gr-7m8" secondAttribute="top" priority="999" constant="80" id="W6L-IH-TNw"/>
                             <constraint firstItem="JWx-Jk-Rpy" firstAttribute="centerX" secondItem="Zlb-gr-7m8" secondAttribute="centerX" id="heG-Zm-Did"/>
                             <constraint firstItem="hlB-m7-gpl" firstAttribute="leading" secondItem="Zlb-gr-7m8" secondAttribute="leading" constant="32" id="i9U-Z4-Fd3"/>
                             <constraint firstItem="Zlb-gr-7m8" firstAttribute="trailing" secondItem="Q4h-3q-Pkb" secondAttribute="trailing" constant="32" id="jXh-Om-2aC"/>
@@ -790,6 +784,8 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                     <connections>
                         <outlet property="enterWithAppleButton" destination="Q4h-3q-Pkb" id="RVA-V4-j1O"/>
                         <outlet property="enterWithGoogleButton" destination="hlB-m7-gpl" id="P6G-le-SZ5"/>
+                        <outlet property="imageView" destination="JWx-Jk-Rpy" id="lKF-kr-3fg"/>
+                        <outlet property="imageViewHeightConstraint" destination="wFy-Da-1Ex" id="QGX-Zb-Gmc"/>
                         <outlet property="titleLabel" destination="eLy-eV-wih" id="1gs-1d-CcZ"/>
                     </connections>
                 </viewController>
