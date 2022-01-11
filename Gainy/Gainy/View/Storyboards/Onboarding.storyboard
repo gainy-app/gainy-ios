@@ -414,7 +414,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TKP-Cc-QvB">
-                                <rect key="frame" x="4" y="44" width="406" height="717"/>
+                                <rect key="frame" x="4" y="44" width="406" height="778"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jzi-rU-084">
                                     <size key="itemSize" width="128" height="128"/>
@@ -434,12 +434,13 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <constraint firstAttribute="trailing" secondItem="TKP-Cc-QvB" secondAttribute="trailing" constant="4" id="dRU-AX-rgQ"/>
                             <constraint firstItem="tlc-YS-tf5" firstAttribute="top" secondItem="TKP-Cc-QvB" secondAttribute="top" id="dgu-CY-Tnn"/>
                             <constraint firstAttribute="bottom" secondItem="h3x-Y7-YV2" secondAttribute="bottom" id="fQn-Kp-b1a"/>
-                            <constraint firstItem="TKP-Cc-QvB" firstAttribute="bottom" secondItem="tlc-YS-tf5" secondAttribute="bottom" constant="-101" id="jxZ-g7-tJX"/>
+                            <constraint firstItem="TKP-Cc-QvB" firstAttribute="bottom" secondItem="tlc-YS-tf5" secondAttribute="bottom" constant="-40" id="jxZ-g7-tJX"/>
                             <constraint firstItem="h3x-Y7-YV2" firstAttribute="leading" secondItem="khA-J7-gRR" secondAttribute="leading" id="mEt-J5-rnR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="TKP-Cc-QvB" id="5wn-rz-L9t"/>
+                        <outlet property="collectionViewBottomConstraint" destination="jxZ-g7-tJX" id="ctg-rD-u8P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2o-La-Dig" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

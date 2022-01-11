@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -45,7 +45,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select at least 1 option please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVS-81-J14">
-                    <rect key="frame" x="109" y="51.5" width="196.5" height="19.5"/>
+                    <rect key="frame" x="99.5" y="82" width="215.5" height="19"/>
                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                     <color key="textColor" red="0.91161090140000001" green="0.3636762798" blue="0.44705456500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                 <constraint firstItem="OVS-81-J14" firstAttribute="centerX" secondItem="PnD-hV-yxQ" secondAttribute="centerX" id="Lx8-nT-LDf"/>
                 <constraint firstAttribute="trailing" secondItem="SM2-6B-RJx" secondAttribute="trailing" constant="32" id="dIk-5Y-Bcl"/>
                 <constraint firstAttribute="bottom" secondItem="SM2-6B-RJx" secondAttribute="bottom" constant="9" id="e1g-Md-n9o"/>
-                <constraint firstAttribute="bottom" secondItem="OVS-81-J14" secondAttribute="bottom" constant="30" id="nTW-ne-c9H"/>
+                <constraint firstAttribute="bottom" secondItem="OVS-81-J14" secondAttribute="bottom" id="nTW-ne-c9H"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -71,7 +71,7 @@
     </objects>
     <designables>
         <designable name="SM2-6B-RJx">
-            <size key="intrinsicContentSize" width="34" height="32"/>
+            <size key="intrinsicContentSize" width="34" height="31"/>
         </designable>
     </designables>
 </document>
