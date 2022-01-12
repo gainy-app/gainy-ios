@@ -86,7 +86,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
     
     
     //MARK: - Models
-    private var collectionDetailsModels: [CollectionDetailViewCellModel] = []
+    private(set) var collectionDetailsModels: [CollectionDetailViewCellModel] = []
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>?
     
     var haveCollection: Bool {
