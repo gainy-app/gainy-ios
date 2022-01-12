@@ -59,7 +59,8 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14)]
+            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
+                NSAttributedString.Key.kern: 1.25]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()

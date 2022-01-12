@@ -21,7 +21,9 @@ final class PrivacyViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedSemibold(14)]
+            NSAttributedString.Key.font: UIFont.compactRoundedSemibold(14),
+            NSAttributedString.Key.kern: 1.25]
+        
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
@@ -30,6 +32,7 @@ final class PrivacyViewController: BaseViewController {
         backItem.tintColor = UIColor.black
         self.navigationItem.leftBarButtonItems = [backItem]
         self.title = NSLocalizedString("Privacy", comment: "Privacy").uppercased()
+        
     }
     
     @objc private func backButtonTap(sender: UIBarButtonItem) {
