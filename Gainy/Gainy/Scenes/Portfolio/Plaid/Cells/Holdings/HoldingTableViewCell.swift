@@ -130,20 +130,22 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         let totalWidth: CGFloat = UIScreen.main.bounds.width - 81.0 - 32.0
         var xPos: CGFloat = 0.0
         
+        
+        
+        
         for tag in tags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                               for: .touchUpInside)
             categoriesView.addSubview(tagView)
-            if tag.collectionID < 0 {
-                tagView.backgroundColor = UIColor.lightGray
-            } else {
-                tagView.backgroundColor = UIColor(hex: 0x3A4448)
-            }
+            
+            tagView.backgroundColor = UIColor.white
+            tagView.tagLabel.textColor = UIColor(named: "mainText")
+            
             tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
             tagView.tagName = tag.name
             tagView.loadImage(url: tag.url)
-            let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+            let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
             if xPos + width + margin > totalWidth && categoriesView.subviews.count > 0 {
                 tagView.removeFromSuperview()

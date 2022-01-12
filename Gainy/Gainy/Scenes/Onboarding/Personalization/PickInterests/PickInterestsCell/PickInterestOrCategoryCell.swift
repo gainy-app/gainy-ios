@@ -41,7 +41,7 @@ final class PickInterestOrCategoryCell: UICollectionViewCell {
     
     override var isHighlighted: Bool {
         didSet {
-            cornerView.backgroundColor = UIColor.init(hexString: self.isSelected ? selectedColorHexString : "#FFFFFF", alpha: isHighlighted ? 0.7 : 1.0)
+            cornerView.backgroundColor = UIColor.init(hexString: self.isSelected ? selectedColorHexString : "#FFFFFF", alpha: isHighlighted ? 1.0 : 1.0)
             textLabel.textColor = UIColor.init(hexString: self.isSelected ? "#FFFFFF" : "#09141F", alpha: isHighlighted ? 0.7 : 1.0)
         }
     }
