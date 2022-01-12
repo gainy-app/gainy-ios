@@ -52,7 +52,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             
             //Tags
             let tagHeight: CGFloat = 24.0
-            let margin: CGFloat = 12.0
+            let margin: CGFloat = 8.0
             
             if tagsStack.subviews.count == 0 {
                 let totalWidth: CGFloat = UIScreen.main.bounds.width - 24 * 2.0

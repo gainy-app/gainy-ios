@@ -28,7 +28,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.numberOfLines = 3
         
         let tagHeight: CGFloat = 24.0
-        let margin: CGFloat = 12.0
+        let margin: CGFloat = 8.0
         
         if tagsStack.subviews.count == 0 {
             
