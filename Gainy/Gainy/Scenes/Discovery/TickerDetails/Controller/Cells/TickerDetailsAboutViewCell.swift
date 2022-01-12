@@ -44,9 +44,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white
                     tagView.tagLabel.textColor = UIColor(named: "mainText")
+                    tagView.layer.borderWidth = 1.0
                 } else {
                     tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                     tagView.tagLabel.textColor = .white
+                    tagView.layer.borderWidth = 0.0
                 }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
