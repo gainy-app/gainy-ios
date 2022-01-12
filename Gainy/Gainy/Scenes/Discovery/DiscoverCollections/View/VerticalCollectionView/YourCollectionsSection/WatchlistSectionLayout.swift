@@ -1,6 +1,6 @@
 import UIKit
 
-struct YourCollectionsSectionLayout: SectionLayout {
+struct WatchlistSectionLayout: SectionLayout {
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let yourCollectionItem = NSCollectionLayoutItem(
@@ -21,11 +21,20 @@ struct YourCollectionsSectionLayout: SectionLayout {
 
         // Section
         let yourCollectionsSection = NSCollectionLayoutSection(group: yourCollectionGroup)
+        let yourCollectionsHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(74)
+            ),
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        yourCollectionsSection.boundarySupplementaryItems = [yourCollectionsHeader]
         yourCollectionsSection.interGroupSpacing = 8
         yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
             top: 16.0,
             leading: 16.0,
-            bottom: 32.0,
+            bottom: 16.0,
             trailing: 16.0
         )
 
@@ -46,7 +55,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
                 description: viewModel.description
             )
         }
-
+        
         return headerView
     }
 

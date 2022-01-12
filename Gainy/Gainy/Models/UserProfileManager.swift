@@ -125,6 +125,10 @@ final class UserProfileManager {
                     item.collectionId
                 }).reorder(by: oldFavs)
                 
+                if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
+                    self.favoriteCollections.swapAt(index, 0)
+                }
+                
                 self.interests = appProfile.profileInterests.map({ item in
                     item.interestId
                 })
@@ -216,6 +220,10 @@ final class UserProfileManager {
                 
                 self.recommendedCollections = firstCollections.map {
                     CollectionDTOMapper.map($0)
+                }
+                
+                if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
+                    self.favoriteCollections.swapAt(index, 0)
                 }
                 
                 self.yourCollections = collections.filter({self.favoriteCollections.contains($0.id ?? 0)}).map {

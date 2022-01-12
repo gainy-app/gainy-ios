@@ -1,11 +1,12 @@
-iOS v1.0.2 #123 available
+iOS v1.0.2 #124 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Serach integrated into the discovery screen
+• Watchlist collection new UI
 
 :hammer_and_wrench: Improvements
+• Make top 20 collection always on top
 • UI Bugs
 
 :red_circle: Important Notes:

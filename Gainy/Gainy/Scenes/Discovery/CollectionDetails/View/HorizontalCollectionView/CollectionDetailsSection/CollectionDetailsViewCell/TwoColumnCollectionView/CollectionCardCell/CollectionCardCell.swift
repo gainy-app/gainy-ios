@@ -48,10 +48,10 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         symbolBackView.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         symbolBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
         
-        tickerSymbolLabel.autoPinEdge(.top, to: .top, of: symbolBackView, withOffset: 2)
-        tickerSymbolLabel.autoPinEdge(.left, to: .left, of: symbolBackView, withOffset: 4)
-        tickerSymbolLabel.autoPinEdge(.right, to: .right, of: symbolBackView, withOffset: -4)
-        tickerSymbolLabel.autoPinEdge(.bottom, to: .bottom, of: symbolBackView, withOffset: -2)
+        tickerSymbolLabel.autoPinEdge(.top, to: .top, of: symbolBackView, withOffset: 4)
+        tickerSymbolLabel.autoPinEdge(.left, to: .left, of: symbolBackView, withOffset: 8)
+        tickerSymbolLabel.autoPinEdge(.right, to: .right, of: symbolBackView, withOffset: -8)
+        tickerSymbolLabel.autoPinEdge(.bottom, to: .bottom, of: symbolBackView, withOffset: -4)
         
         matchCircle.autoSetDimensions(to: CGSize.init(width: 22, height: 22))
         matchLabel.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
@@ -111,7 +111,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     lazy var tickerSymbolLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFProDisplay-Semibold", size: 14)
+        label.font = .compactRoundedSemibold(12.0)
         label.textColor = UIColor.Gainy.tickerSymbol
         label.numberOfLines = 1
         label.layer.cornerRadius = 4.0
@@ -556,7 +556,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerSymbolLabel.text = tickerSymbol
         tickerSymbolLabel.sizeToFit()
         
-        tickerPercentChangeLabel.text = tickerPercentChange.replacingOccurrences(of: " +", with: "").replacingOccurrences(of: " - ", with: "")
+        tickerPercentChangeLabel.text = tickerPercentChange.replacingOccurrences(of: " +", with: "").replacingOccurrences(of: " -", with: "").replacingOccurrences(of: "-", with: "")
         tickerPercentChangeLabel.textColor = tickerPercentChange.hasPrefix(" +")
         ? UIColor.Gainy.green
         : UIColor.Gainy.red

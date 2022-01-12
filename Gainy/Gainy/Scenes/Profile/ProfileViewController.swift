@@ -29,7 +29,11 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var addProfilePictureButton: UIButton!
     @IBOutlet private weak var logoutButton: BorderButton!
     @IBOutlet private weak var requestFeatureButton: BorderButton!
-    @IBOutlet private weak var sendFeedbackButton: BorderButton!
+    @IBOutlet private weak var sendFeedbackButton: BorderButton! {
+        didSet {
+            sendFeedbackButton.layer.borderWidth = 2.0
+        }
+    }
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!

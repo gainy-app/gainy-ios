@@ -304,6 +304,7 @@
 		8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCF827399DF00061AB36 /* BrokerViewCell.xib */; };
 		8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */; };
 		8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */; };
+		851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
@@ -786,6 +787,7 @@
 		8505FCF827399DF00061AB36 /* BrokerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerViewCell.xib; sourceTree = "<group>"; };
 		8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerFooterView.swift; sourceTree = "<group>"; };
 		8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerFooterView.xib; sourceTree = "<group>"; };
+		851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistSectionLayout.swift; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
@@ -1472,6 +1474,7 @@
 			children = (
 				335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */,
 				3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */,
+				851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */,
 				3A859426268A50D500CB8DD6 /* YourCollectionsHeader */,
 				3A85942D268A515400CB8DD6 /* YourCollectionViewCell */,
 			);
@@ -2793,6 +2796,7 @@
 				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
 				338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
+				851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */,
 				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
@@ -3038,7 +3042,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 124;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3162,7 +3166,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 124;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3347,7 +3351,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 124;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3376,7 +3380,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 123;
+				CURRENT_PROJECT_VERSION = 124;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
