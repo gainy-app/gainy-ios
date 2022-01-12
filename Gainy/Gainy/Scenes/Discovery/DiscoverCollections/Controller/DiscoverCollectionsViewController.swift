@@ -824,9 +824,13 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
     ) -> [UIDragItem] {
         switch indexPath.section {
         case DiscoverCollectionsSection.yourCollections.rawValue:
-            if indexPath.row == 0 {
+            
+            if CollectionsManager.shared.collections.contains(where: { item in
+                (item.id ?? 0) == Constants.CollectionDetails.top20ID
+            }), indexPath.row == 0 {
                 return []
             }
+            
             let item = viewModel!.yourCollections[indexPath.row]
             // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
@@ -900,8 +904,16 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
             )
         }
         
-        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue,
-              destination.row > 0 else {
+        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+        
+        if CollectionsManager.shared.collections.contains(where: { item in
+            (item.id ?? 0) == Constants.CollectionDetails.top20ID
+        }), destination.row == 0 {
             return UICollectionViewDropProposal(
                 operation: .cancel,
                 intent: .unspecified

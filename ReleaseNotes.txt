@@ -3,9 +3,10 @@ iOS v1.0.2 #124 available
 Bugfixes
 
 :new: New:
-• Serach integrated into the discovery screen
+• Watchlist collection new UI
 
 :hammer_and_wrench: Improvements
+• Make top 20 collection always on top
 • UI Bugs
 
 :red_circle: Important Notes:

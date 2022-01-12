@@ -140,7 +140,7 @@ final class CollectionsManager {
                     CollectionsManager.shared.watchlistCollection = nil
                 }
                 
-                let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID, name: "Watchlist", imageUrl: "watchlistCollectionBackgroundImage", description: "The companies you choose", tickerCollectionsAggregate: RemoteCollectionDetails.TickerCollectionsAggregate.init(aggregate: RemoteCollectionDetails.TickerCollectionsAggregate.Aggregate.init(count: UserProfileManager.shared.watchlist.count)), tickerCollections: tickerCollection)
+                let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID, name: "Watchlist", imageUrl: "watchlistCollectionBackgroundImage", description: "", tickerCollectionsAggregate: RemoteCollectionDetails.TickerCollectionsAggregate.init(aggregate: RemoteCollectionDetails.TickerCollectionsAggregate.Aggregate.init(count: UserProfileManager.shared.watchlist.count)), tickerCollections: tickerCollection)
                 CollectionsManager.shared.watchlistCollection = collectionRemoteDetails
                 
                 let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
