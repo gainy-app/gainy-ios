@@ -772,10 +772,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsAlternativeStocksViewCell" id="VEf-P1-4m6" customClass="TickerDetailsAlternativeStocksViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1502.5" width="414" height="286"/>
+                                        <rect key="frame" x="0.0" y="1502.5" width="414" height="288"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEf-P1-4m6" id="OjT-VH-nQx">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="286"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="288"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alternative stocks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhJ-IH-SQx">
@@ -788,10 +788,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8sA-mC-Reu">
-                                                    <rect key="frame" x="0.0" y="60" width="414" height="226"/>
+                                                    <rect key="frame" x="0.0" y="60" width="414" height="228"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="226" id="J1h-ql-LMc"/>
+                                                        <constraint firstAttribute="height" constant="228" id="J1h-ql-LMc"/>
                                                     </constraints>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="CpY-Yz-jaQ">
                                                         <size key="itemSize" width="144" height="144"/>
@@ -801,7 +801,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TickerDetailsAlternativeInnerStocksViewCell" id="5V3-r0-x5Y" customClass="TickerDetailsAlternativeInnerStocksViewCell" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="49" width="144" height="128"/>
+                                                            <rect key="frame" x="0.0" y="50" width="144" height="128"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cPF-PC-CGZ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="144" height="128"/>
@@ -850,7 +850,7 @@
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Highlights" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="57v-Sz-Se4">
                                                                                 <rect key="frame" x="16" y="85" width="71.5" height="19"/>
-                                                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
                                                                                 <color key="textColor" name="mainGreen"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
@@ -861,8 +861,12 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G6P-aq-wGH">
-                                                                                <rect key="frame" x="114" y="8" width="22" height="22"/>
+                                                                                <rect key="frame" x="105" y="15" width="24" height="24"/>
                                                                                 <color key="backgroundColor" name="mainYellow"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="24" id="ASQ-ev-vgO"/>
+                                                                                    <constraint firstAttribute="height" constant="24" id="u0C-Pi-yrI"/>
+                                                                                </constraints>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -874,7 +878,7 @@
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match_circle" translatesAutoresizingMaskIntoConstraints="NO" id="HZw-tP-8Pp">
-                                                                                <rect key="frame" x="114" y="8" width="22" height="22"/>
+                                                                                <rect key="frame" x="106" y="16" width="22" height="22"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="22" id="TER-xE-GJ9"/>
                                                                                     <constraint firstAttribute="width" constant="22" id="Z8c-iN-MgC"/>
@@ -906,9 +910,8 @@
                                                                         <constraints>
                                                                             <constraint firstItem="s1A-LY-BZt" firstAttribute="leading" secondItem="UFr-gR-2dm" secondAttribute="leading" constant="16" id="0TI-9D-vHC"/>
                                                                             <constraint firstItem="tJk-PH-87L" firstAttribute="top" secondItem="UFr-gR-2dm" secondAttribute="top" constant="111" id="3mQ-eI-atJ"/>
-                                                                            <constraint firstItem="G6P-aq-wGH" firstAttribute="width" secondItem="HZw-tP-8Pp" secondAttribute="width" id="5iE-8M-aJS"/>
                                                                             <constraint firstAttribute="trailing" secondItem="3a9-PT-1yA" secondAttribute="trailing" constant="16" id="A9K-nr-WGI"/>
-                                                                            <constraint firstItem="HZw-tP-8Pp" firstAttribute="top" secondItem="UFr-gR-2dm" secondAttribute="top" constant="8" id="BPW-f0-VsS"/>
+                                                                            <constraint firstItem="HZw-tP-8Pp" firstAttribute="top" secondItem="UFr-gR-2dm" secondAttribute="top" constant="16" id="BPW-f0-VsS"/>
                                                                             <constraint firstItem="57v-Sz-Se4" firstAttribute="leading" secondItem="UFr-gR-2dm" secondAttribute="leading" constant="16" id="CxT-OE-Mb6"/>
                                                                             <constraint firstItem="57v-Sz-Se4" firstAttribute="top" secondItem="UFr-gR-2dm" secondAttribute="top" constant="85" id="EDb-LB-WOL"/>
                                                                             <constraint firstAttribute="trailing" secondItem="tJk-PH-87L" secondAttribute="trailing" constant="16" id="GK7-Ty-48q"/>
@@ -919,12 +922,11 @@
                                                                             <constraint firstItem="G6P-aq-wGH" firstAttribute="centerY" secondItem="HZw-tP-8Pp" secondAttribute="centerY" id="Oo7-vy-4iu"/>
                                                                             <constraint firstItem="G6P-aq-wGH" firstAttribute="centerX" secondItem="HZw-tP-8Pp" secondAttribute="centerX" id="Z6o-5V-wgE"/>
                                                                             <constraint firstAttribute="trailing" secondItem="CpB-tV-fw3" secondAttribute="trailing" id="arR-aR-HC6"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="HZw-tP-8Pp" secondAttribute="trailing" constant="8" id="bts-9Q-HfU"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="HZw-tP-8Pp" secondAttribute="trailing" constant="16" id="bts-9Q-HfU"/>
                                                                             <constraint firstItem="sOl-XY-yv3" firstAttribute="top" secondItem="UFr-gR-2dm" secondAttribute="top" constant="48" id="fs0-j0-44P"/>
                                                                             <constraint firstAttribute="trailing" secondItem="sOl-XY-yv3" secondAttribute="trailing" constant="16" id="kCs-KJ-hgd"/>
                                                                             <constraint firstItem="3a9-PT-1yA" firstAttribute="leading" secondItem="UFr-gR-2dm" secondAttribute="leading" constant="16" id="o06-7u-jJ0"/>
                                                                             <constraint firstItem="sOl-XY-yv3" firstAttribute="leading" secondItem="UFr-gR-2dm" secondAttribute="leading" constant="16" id="o6b-8X-pmO"/>
-                                                                            <constraint firstItem="G6P-aq-wGH" firstAttribute="height" secondItem="HZw-tP-8Pp" secondAttribute="height" id="oxb-AM-Bpo"/>
                                                                             <constraint firstAttribute="bottom" secondItem="CpB-tV-fw3" secondAttribute="bottom" id="qKs-8n-Y3R"/>
                                                                         </constraints>
                                                                         <userDefinedRuntimeAttributes>
@@ -976,7 +978,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsUpcomingViewCell" rowHeight="300" id="R5J-Kv-TkC" customClass="TickerDetailsUpcomingViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1788.5" width="414" height="300"/>
+                                        <rect key="frame" x="0.0" y="1790.5" width="414" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R5J-Kv-TkC" id="FO8-SI-ijb">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
@@ -1079,7 +1081,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWatchlistViewCell" id="Aqi-Q5-n3g" customClass="TickerDetailsWatchlistViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="2088.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="2090.5" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aqi-Q5-n3g" id="oYl-nw-A2V">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>

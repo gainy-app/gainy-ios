@@ -60,6 +60,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 var yPos: CGFloat = 0.0
                 for tag in tickerInfo?.matchTags ?? [] {
                     let tagView = TagView()
+                    
                     tagView.backgroundColor = UIColor.white
                     tagView.tagLabel.textColor = UIColor(named: "mainText")
                     tagView.loadImage(url: tag.url)
@@ -97,16 +98,26 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
-//        guard let name = tagView.tagName, name.count > 0 else {
-//            return
-//        }
-//        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
-//        if !panelInfo.title.isEmpty {
-//            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
-//        }
+        guard let name = tagView.tagName, name.count > 0 else {
+            return
+        }
+        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
+        if !panelInfo.title.isEmpty {
+            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
+        }
     }
     
     func setTransform(_ transform: CGAffineTransform) {
         rotatableImageView.transform = transform
+    }
+    
+    private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: title)
+        explanationVc.configureWith(description: description, linkString: linkText, link: link)
+        FloatingPanelManager.shared.configureWithHeight(height: height)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
     }
 }

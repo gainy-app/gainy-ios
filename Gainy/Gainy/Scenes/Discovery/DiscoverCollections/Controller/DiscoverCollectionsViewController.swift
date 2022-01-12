@@ -311,7 +311,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
-            self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
             UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
             
             UserProfileManager.shared.yourCollections.append(
@@ -326,15 +325,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             if var snapshot = self.dataSource?.snapshot() {
                 snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-                
-                if var itemToReload = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
-                    if let item = $0 as? RecommendedCollectionViewCellModel {
-                        return item.id == collectionItemToAdd.id
-                    }
-                    return false
-                }) as? RecommendedCollectionViewCellModel {
-                    snapshot.reloadItems([itemToReload])
-                }
+                snapshot.deleteItems([collectionItemToAdd])
+                self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
                 
                 self.dataSource?.apply(snapshot, animatingDifferences: true)
             }
@@ -439,15 +431,18 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     isInYourCollections: false
                 )
                 
-                if let indexOfRecommendedItemToDelete = viewModel?
-                    .recommendedCollections
+                if let indexOfRecommendedItemToDelete = UserProfileManager.shared.recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
-                    viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
                     UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
                     snapshot.reloadItems([reloadItem])
                 }
                 
                 snapshot.deleteItems([deleteItems])
+                
+                if let recColl = viewModel?.addedRecs[yourCollectionItemToRemove.id] {
+                    snapshot.appendItems([recColl], toSection: .recommendedCollections)
+                    viewModel?.addedRecs.removeValue(forKey: yourCollectionItemToRemove.id)
+                }
                 dataSource?.apply(snapshot, animatingDifferences: true)
                 onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
             }
@@ -549,9 +544,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
             viewModel?.yourCollections.insert(watchDTO, at: 0)
         }
-        viewModel?.recommendedCollections = UserProfileManager.shared
-            .recommendedCollections
-            .map { CollectionViewModelMapper.map($0) }
+        
+        var recColls: [RecommendedCollectionViewCellModel] = []
+        
+        for (_, val) in UserProfileManager.shared.recommendedCollections.enumerated() {
+            if val.isInYourCollections {
+                viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
+            } else {
+                recColls.append(CollectionViewModelMapper.map(val))
+            }
+        }
+        
+        for (_, val) in UserProfileManager.shared.yourCollections.enumerated() {
+            viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
+        }
+    
+        viewModel?.recommendedCollections = recColls
     }
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {

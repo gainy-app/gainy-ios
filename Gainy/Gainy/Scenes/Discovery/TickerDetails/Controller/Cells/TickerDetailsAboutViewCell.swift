@@ -41,13 +41,13 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
-                //if tag.collectionID < 0 {
+                if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white
                     tagView.tagLabel.textColor = UIColor(named: "mainText")
-//                } else {
-//                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-//                    tagView.tagLabel.textColor = .white
-//                }
+                } else {
+                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                    tagView.tagLabel.textColor = .white
+                }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name

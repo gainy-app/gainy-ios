@@ -90,6 +90,7 @@ struct WSRView: View {
                     }
                 }
                 .frame(width: 119, height: 119)
+                .offset(y: 32)
                 
                 Spacer().frame(width: 62)
                 VStack(alignment: .center, spacing: 10) {
