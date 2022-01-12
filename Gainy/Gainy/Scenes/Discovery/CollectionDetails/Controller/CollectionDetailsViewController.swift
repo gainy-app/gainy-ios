@@ -592,15 +592,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
                 
+                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+                }
+                
                 CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
                 CollectionsManager.shared.lastLoadDate = Date()
                 
                 DispatchQueue.main.async {
-                    self?.initViewModelsFromData()
-                    self?.hideLoader()
                     CollectionsManager.shared.loadWatchlistCollection {
+                        self?.initViewModelsFromData()
+                        self?.hideLoader()
+                        completion()
                     }
-                    completion()
                 }
                 
                 //Paging
@@ -631,7 +635,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
                 CollectionsManager.shared.collections.append(contentsOf: collections)
+                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+                }
                 CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+                
                 CollectionsManager.shared.lastLoadDate = Date()
                 DispatchQueue.main.async {
                     

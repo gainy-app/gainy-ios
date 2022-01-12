@@ -7,6 +7,7 @@ import SwiftUI
 import Firebase
 
 enum DiscoverCollectionsSection: Int, CaseIterable {
+    case watchlist
     case yourCollections
     case recommendedCollections
 }
@@ -225,7 +226,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                let headerViewModel = indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue
+                let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
                     title: "Your collections",
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
@@ -385,7 +386,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         let yourCollectionsCount = discoverCollectionsCollectionView.numberOfItems(inSection: DiscoverCollectionsSection.yourCollections.rawValue)
         if yourCollectionsCount > 0 {
-            self.goToCollectionDetails(at: 0)
+            self.goToCollectionDetails(at: 1)
         } else {
             NotificationManager.shared.showMessage(title: "", text: "Please, in order to proceed, add at least one recommended collection to your collections.", cancelTitle: "Ok", actions: [])
         }
@@ -457,6 +458,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [
+        WatchlistSectionLayout(),
         YourCollectionsSectionLayout(),
         RecommendedCollectionsSectionLayout(),
     ]
@@ -637,7 +639,15 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 if let indexOfRecommendedItemToDelete = UserProfileManager.shared.recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
                     UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
-                    snapshot.reloadItems([reloadItem])
+                    
+                    if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
+                        if let item = $0 as? RecommendedCollectionViewCellModel {
+                            return item.id == itemId
+                        }
+                        return false
+                    }) as? RecommendedCollectionViewCellModel {
+                        snapshot.reloadItems([itemToReload])
+                    }
                 }
                 
                 snapshot.deleteItems([deleteItems])
@@ -672,26 +682,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
-        let items = snapshot.itemIdentifiers(inSection: .yourCollections)
-        let watchlistItems = items.filter { item in
-            if let itemModel = item as? YourCollectionViewCellModel {
-                return itemModel.id == Constants.CollectionDetails.watchlistCollectionID
-            }
-            return false
-        }
-        var watchlistIndex = -1
-        if let watchlistModel = watchlistItems.first {
-            watchlistIndex = items.firstIndex(of: watchlistModel) ?? -1
-        }
-        
-        var fromIndex = sourceIndexPath.row
-        var toIndex = destinationIndexPath.row
-        fromIndex = fromIndex + (fromIndex > watchlistIndex ? -1 : 0)
-        toIndex = toIndex + (fromIndex < watchlistIndex && toIndex < watchlistIndex ? 0 : -1)
-        if fromIndex != watchlistIndex {
-            UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
-            UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
-        }
+        let fromIndex = sourceIndexPath.row
+        let toIndex = destinationIndexPath.row
+        UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+        UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
         
         if dragDirectionIsTopBottom {
             snapshot.moveItem(sourceItem, afterItem: destItem)
@@ -709,9 +703,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         var snap = dataSource.snapshot()
         if snap.sectionIdentifiers.count > 0 {
-            snap.deleteSections([.yourCollections, .recommendedCollections])
+            snap.deleteSections([.watchlist, .yourCollections, .recommendedCollections])
         }
-        snap.appendSections([.yourCollections, .recommendedCollections])
+        snap.appendSections([.watchlist, .yourCollections, .recommendedCollections])
+        snap.appendItems(viewModel?.watchlistCollections ?? [], toSection: .watchlist)
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snap, animatingDifferences: true)
@@ -731,9 +726,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         viewModel?.yourCollections = UserProfileManager.shared
             .yourCollections
             .map { CollectionViewModelMapper.map($0) }
-        if let watchlist = CollectionsManager.shared.watchlistCollection {
+        
+        
+        if let watchlist = CollectionsManager.shared.watchlistCollection,  viewModel?.watchlistCollections.count == 0 {
             let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
-            viewModel?.yourCollections.insert(watchDTO, at: 0)
+            viewModel?.watchlistCollections.insert(watchDTO, at: 0)
         }
         
         var recColls: [RecommendedCollectionViewCellModel] = []
@@ -801,11 +798,15 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegateFlowLayout 
 extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
+        if indexPath.section == DiscoverCollectionsSection.watchlist.rawValue {
+            self.goToCollectionDetails(at: 0)
+        }
+        else if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
             //TO-Do: - Serhii plz check this
             //GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
             let index = indexPath.row
-            self.goToCollectionDetails(at: index)
+            let increment = (viewModel?.watchlistCollections.count ?? 0) > 0 ? 1 : 0
+            self.goToCollectionDetails(at: index + increment)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
@@ -823,6 +824,9 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
     ) -> [UIDragItem] {
         switch indexPath.section {
         case DiscoverCollectionsSection.yourCollections.rawValue:
+            if indexPath.row == 0 {
+                return []
+            }
             let item = viewModel!.yourCollections[indexPath.row]
             // swiftlint:disable legacy_objc_type
             let itemProvider = NSItemProvider(object: item.name as NSString)
@@ -896,7 +900,8 @@ extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
             )
         }
         
-        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
+        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue,
+              destination.row > 0 else {
             return UICollectionViewDropProposal(
                 operation: .cancel,
                 intent: .unspecified
