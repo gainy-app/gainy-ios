@@ -20,8 +20,17 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     
     public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
     
-    @IBOutlet weak var watchBtn: BorderButton!
-    @IBOutlet weak var tradeBtn: BorderButton!
+    @IBOutlet weak var watchBtn: BorderButton! {
+        didSet {
+            watchBtn.titleLabel?.lineBreakMode = .byWordWrapping
+            watchBtn.titleLabel?.textAlignment = .center
+        }
+    }
+    @IBOutlet weak var tradeBtn: BorderButton! {
+        didSet {
+            tradeBtn.layer.borderWidth = 2.0
+        }
+    }
     @IBOutlet weak var changeCurrentBrokerBtn: BorderButton!
     
     override func updateFromTickerData() {
@@ -110,7 +119,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         }
         var title = NSLocalizedString("Add to Watchlist", comment: "Add to Watchlist")
         if addedToWatchlist {
-            title = NSLocalizedString("Remove from Watchlist", comment: "Remove from Watchlist")
+            title = NSLocalizedString("Remove from\nWatchlist", comment: "Remove from Watchlist")
         }
         watchBtn.setTitle(title, for: UIControl.State.normal)
         watchBtn.titleLabel?.font = .proDisplayRegular(Deviice.current.size == .screen4Dot7Inches ? 13 : 16)

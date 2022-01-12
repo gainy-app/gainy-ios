@@ -186,7 +186,7 @@ enum CollectionDetailsDTOMapper {
         _ dto: RemoteTickerDetails.RealtimeMetric
     ) -> TickerFinancialMetrics {
         TickerFinancialMetrics(
-            todaysPriceChange: Float(dto.relativeDailyChange ?? 0.0),
+            todaysPriceChange: Float(dto.relativeDailyChange ?? 0.0) * 100.0,
             currentPrice: dto.actualPrice ?? 0.0
         )
     }

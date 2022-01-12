@@ -208,28 +208,18 @@ public class ChartData: ObservableObject, Identifiable {
     var ID = UUID()
     
     
-    init(points: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
+    init(points: [ChartNormalized], period: ScatterChartView.ChartPeriod) {
         self.points = points.compactMap{
-            if let close = $0.close  {
-                return ($0.labelForPeriod(period), Double(close))
-            } else {
-                return nil
-            }
+                return ($0.labelForPeriod(period), Double($0.val))
+
         }
     }
     
-    func loadValues(_ vals: [RemoteChartData], period: ScatterChartView.ChartPeriod) {
+    func loadValues(_ vals: [ChartNormalized], period: ScatterChartView.ChartPeriod) {
         self.points = vals.compactMap{
-            if let close = $0.close  {
-                return ($0.labelForPeriod(period), Double(close))
-            } else {
-                return nil
-            }
+            return ($0.labelForPeriod(period), Double($0.val))
+           
         }
-    }
-    
-    init(points: [GetPortfolioChartsQuery.Data.PortfolioChart], period: ScatterChartView.ChartPeriod) {
-        self.points = points.map{($0.labelForPeriod(period), Double($0.value ?? 0.0))}
     }
     
     public init<N: BinaryFloatingPoint>(points:[N]) {

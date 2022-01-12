@@ -12,6 +12,7 @@ protocol RemoteDateTimeConvertable {
     var datetime: String? {get set}
     var date: Date {get}
     
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String
 }
 
 extension RemoteDateTimeConvertable {
@@ -86,6 +87,9 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
         
         return "Now"
     }
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String  {
+        ""
+    }
 }
 
 typealias RemoteChartData = DiscoverChartsQuery.Data.HistoricalPricesAggregated
@@ -103,7 +107,7 @@ extension RemoteChartData: RemoteDateTimeConvertable {
             formatter.dateFormat = "MM-dd"
             break
         case .y5, .all:
-            formatter.dateFormat = "yyyy"
+            formatter.dateFormat = "MM-yy"
             break
         default:
             formatter.dateFormat = "MM-dd"
@@ -126,7 +130,7 @@ extension GetPortfolioChartsQuery.Data.PortfolioChart : RemoteDateTimeConvertabl
             formatter.dateFormat = "MM-dd"
             break
         case .y5, .all:
-            formatter.dateFormat = "yyyy"
+            formatter.dateFormat = "MM-yy"
             break
         default:
             formatter.dateFormat = "MM-dd"

@@ -221,6 +221,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
                 wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
             }
+            wsrModel.totalScore = ticker.wsjData.rate
+            wsrModel.priceTarget = ticker.wsjData.targetPrice
+            wsrModel.progress = ticker.wsjData.detailedStats
             return cell
         case .recommended:
             let cell: TickerDetailsRecommendedViewCell = tableView.dequeueReusableCell(for: indexPath)

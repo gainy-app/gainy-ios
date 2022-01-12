@@ -20,7 +20,7 @@ final class SearchStockTableViewCell: UITableViewCell {
                 stockNameLbl.text = stock.name?.companyMarkRemoved
                 stockSymLbl.text = stock.symbol
                 
-                let priceChange = stock.realtimeMetrics?.relativeDailyChange ?? 0.0
+                let priceChange = (stock.realtimeMetrics?.relativeDailyChange ?? 0.0) * 100.0
                 stockPriceLbl.text = stock.realtimeMetrics?.actualPrice?.price ?? ""
                 stockPriceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
                 stockDiffLbl.text = priceChange.cleanOneDecimalP

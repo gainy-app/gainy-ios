@@ -27,7 +27,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         stocksLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
         
         stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
-        stocksAmountLabel.autoAlignAxis(.vertical, toSameAxisOf: stocksLabel)
+        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
     }
     
     @available(*, unavailable)

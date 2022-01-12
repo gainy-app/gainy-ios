@@ -31,6 +31,15 @@ final class GainyAnalytics {
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         var newParams = params ?? [:]
         
+        #if DEBUG
+        print("\n###ANALYTICS###")
+        print(name)
+        if let params = params {
+            print(params)
+        }
+        print("\n")
+        #endif
+        
         newParams["v"] = 1
         newParams["tid"] = UUID().uuidString
         if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {

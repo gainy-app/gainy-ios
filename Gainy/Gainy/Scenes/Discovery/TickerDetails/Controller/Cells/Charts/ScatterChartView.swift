@@ -195,7 +195,7 @@ struct ScatterChartView: View {
     private var statsDayValue: String {
         switch selectedTag {
         case .d1:
-            return viewModel.ticker.priceChangeToday.percentRaw
+            return (viewModel.ticker.priceChangeToday * 100.0).percentRaw
         default:
             return viewModel.chartData.startEndDiffString
         }
@@ -292,6 +292,25 @@ struct ScatterChartView: View {
     var bottomMedian: some View {
         HStack(spacing: 8) {
             Button(action: {
+                hapticTouch.impactOccurred()
+                delegate.comparePressed()
+            }, label: {
+                HStack {
+                    Image("tiny plus")
+                        .renderingMode(.original)
+                    Text("Compare stocks")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(12).uiFont)
+                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                }
+                .padding(.leading, 8)
+                .padding(.trailing, 8)
+                .padding(.top, 4)
+                .padding(.bottom, 4)
+                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+            })
+            
+            Button(action: {
                 isMedianVisible.toggle()
                 hapticTouch.impactOccurred()
             }, label: {
@@ -300,7 +319,7 @@ struct ScatterChartView: View {
                         .renderingMode(.original)
                     Text("Industry median")
                         .padding(.all, 0)
-                        .font(UIFont.proDisplayRegular(13).uiFont)
+                        .font(UIFont.compactRoundedSemibold(12).uiFont)
                         .foregroundColor(isMedianVisible ? Color.white : UIColor(named: "mainText")!.uiColor)
                 }
                 .padding(.leading, 8)
@@ -311,24 +330,7 @@ struct ScatterChartView: View {
             })
                 .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             
-            Button(action: {
-                hapticTouch.impactOccurred()
-                delegate.comparePressed()
-            }, label: {
-                HStack {
-                    Image("tiny plus")
-                        .renderingMode(.original)
-                    Text("Compare")
-                        .padding(.all, 0)
-                        .font(UIFont.proDisplayRegular(13).uiFont)
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                }
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
-                .padding(.top, 4)
-                .padding(.bottom, 4)
-                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
-            })
+            
             Spacer()
         }.padding(.leading, 20)
             .padding(.top, 8)

@@ -21,7 +21,7 @@ final class HistoricalChartsLoader {
     ///   - symbol: Stock symbol
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadChart(symbol: String, range: ScatterChartView.ChartPeriod, completion: @escaping (ChartData, [RemoteChartData]) -> Void) {
+    func loadChart(symbol: String, range: ScatterChartView.ChartPeriod, completion: @escaping (ChartData, [ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -59,19 +59,6 @@ final class HistoricalChartsLoader {
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.historicalPricesAggregated.filter({$0.close != nil}) {
-                    
-//                    if range == .d1 {
-//                        if let lastDay = fetchedData.last {
-//                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-//                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-//                                if index == 0 {
-//                                    fetchedData = filtered
-//                                } else {
-//                                    fetchedData = Array(fetchedData[(index-1)...])
-//                                }
-//                            }
-//                        }
-//                    }
                     print("CG \(range) : \(fetchedData.count)")
                     
                     if range == .d1 {
@@ -96,7 +83,7 @@ final class HistoricalChartsLoader {
     ///   - profileID: User Profile ID
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, completion: @escaping (ChartData) -> Void) {
+    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, completion: @escaping ([ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -133,28 +120,15 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
             switch result {
             case .success(let graphQLResult):
-                if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
-                    
-//                    if range == .d1 {
-//                        if let lastDay = fetchedData.last {
-//                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-//                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-//                                if index == 0 {
-//                                    fetchedData = filtered
-//                                } else {
-//                                    fetchedData = Array(fetchedData[(index-1)...])
-//                                }
-//                            }
-//                        }
-//                    }
-                    completion(ChartData.init(points: fetchedData, period: range))
+                if let fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                    completion(fetchedData)
                 } else {
-                    completion(ChartData.init(points: [0.0]))
+                    completion([])
                 }
                 break
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                completion(ChartData.init(points: [0.0]))
+                completion([])
                 break
             }
         }

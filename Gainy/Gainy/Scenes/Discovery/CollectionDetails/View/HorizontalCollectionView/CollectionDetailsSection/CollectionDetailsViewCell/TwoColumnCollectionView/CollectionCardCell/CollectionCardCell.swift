@@ -104,7 +104,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         view.clipsToBounds = true
         view.isSkeletonable = true
         view.skeletonCornerRadius = 6
-        
+        view.isHiddenWhenSkeletonIsActive = true
         return view
     }()
     
@@ -134,7 +134,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         label.isSkeletonable = true
-        
+        label.linesCornerRadius = 6
         return label
     }()
     
@@ -142,6 +142,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         let view = UIImageView()
         view.image = UIImage(named: "arrow-up-green")
         view.isSkeletonable = true
+        view.isHiddenWhenSkeletonIsActive = true
         return view
     }()
     
@@ -555,7 +556,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerSymbolLabel.text = tickerSymbol
         tickerSymbolLabel.sizeToFit()
         
-        tickerPercentChangeLabel.text = tickerPercentChange
+        tickerPercentChangeLabel.text = tickerPercentChange.replacingOccurrences(of: " +", with: "").replacingOccurrences(of: " - ", with: "")
         tickerPercentChangeLabel.textColor = tickerPercentChange.hasPrefix(" +")
         ? UIColor.Gainy.green
         : UIColor.Gainy.red

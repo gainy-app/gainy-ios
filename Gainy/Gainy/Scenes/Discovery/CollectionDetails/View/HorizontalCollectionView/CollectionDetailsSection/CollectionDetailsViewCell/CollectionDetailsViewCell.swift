@@ -45,7 +45,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.delegate = self
         internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
         internalCollectionView.contentInsetAdjustmentBehavior = .never
-        internalCollectionView.clipsToBounds = true
+        internalCollectionView.clipsToBounds = false
         
         contentView.addSubview(internalCollectionView)
         contentView.bringSubviewToFront(collectionHorizontalView)
@@ -123,16 +123,20 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         self?.loadingMatchScoreArray.removeAll(where: { item in
                             item == model.tickerSymbol
                         })
-                        dispatchGroup.leave()
-                        dprint("Fetching match ended")
-                        self?.sortSections()
+                        
+                        self?.sortSections({
+                            dispatchGroup.leave()
+                            dprint("Fetching match ended")
+                        })
                     }
                 }
                 if loadingItems > 0 {
                 dispatchGroup.notify(queue: DispatchQueue.main, execute: {
                     dprint("Fetching ended \(model.tickerSymbol)")
                     guard let self = self else {return}
+                    
                     self.isLoadingTickers = false
+                    
                     if var snapshot = self.dataSource?.snapshot() {
                         if snapshot.itemIdentifiers.count > 0 {
                             let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
@@ -286,7 +290,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.cards = cards
         sortSections()
     }
-    private var cards: [CollectionCardViewCellModel] = []
+    private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
         
@@ -303,7 +307,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionHorizontalView.stocksAmountLabel.text = "\(cards.count)"
     }
     
-    func sortSections() {
+    func sortSections(_ completion: (() -> Void)? = nil) {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
         collectionHorizontalView.updateChargeLbl(settings.sortingText())
         
@@ -319,6 +323,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             snapshot.appendSections([.cards])
             snapshot.appendItems(self?.cards ?? [], toSection: .cards)
             self?.dataSource?.apply(snapshot, animatingDifferences: true)
+            completion?()
         }
     }
     
@@ -387,6 +392,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         }
         
         sections.swapAt(0, 1)
+        internalCollectionView.clipsToBounds = false
         internalCollectionView.reloadData()
     }
     

@@ -78,6 +78,7 @@ final class HoldingsViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.setContentOffset(.zero, animated: true)
     }
     
     func loadData(){

@@ -15,7 +15,7 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 258.0
+    static let cellHeight: CGFloat = 226.0 + 60.0
     
     weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
     
@@ -50,11 +50,11 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
 
 extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: 130.0, height: 164.0 + 28.0)
+        .init(width: 144.0, height: 192.0 + 32.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 0, left: 28, bottom: 0, right: 0)
+        .init(top: 0, left: 16, bottom: 0, right: 0)
     }
 }
 
@@ -93,10 +93,15 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
     @IBOutlet private weak var matchCircle: UIImageView! {
         didSet {
             matchCircle.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
-            matchCircle.tintColor = UIColor(named: "mainGreen")
+            matchCircle.tintColor = .white
         }
     }
-    @IBOutlet private weak var matchLabel: UILabel!
+    @IBOutlet private weak var matchLabel: UILabel! {
+        didSet {
+            matchLabel.layer.cornerRadius = 12.0
+            matchLabel.clipsToBounds = true
+        }
+    }
     
     //MARK: - Properties
     var isInCompare: Bool = false {
@@ -126,13 +131,20 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
             
             if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
                 matchLabel.text = "\(matchScore)"
-                if matchScore > 50 {
-                    matchLabel.textColor = UIColor(named: "mainGreen")
-                    matchCircle.tintColor = UIColor(named: "mainGreen")
-                } else {
-                    matchLabel.textColor = UIColor(named: "mainRed")
-                    matchCircle.tintColor = UIColor(named: "mainRed")
+                switch matchScore {
+                case 0..<35:
+                    matchLabel.backgroundColor = UIColor.Gainy.mainRed
+                    break
+                case 35..<65:
+                    matchLabel.backgroundColor = UIColor.Gainy.mainYellow
+                    break
+                case 65...:
+                    matchLabel.backgroundColor = UIColor.Gainy.mainGreen
+                    break
+                default:
+                    break
                 }
+                
             } else {
                 matchLabel.text = "-"
             }

@@ -32,6 +32,7 @@
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
+		331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331D4522278EC14200F990DF /* UserDefaults+Ext.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
 		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
@@ -504,6 +505,7 @@
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
+		331D4522278EC14200F990DF /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianDay.graphql; sourceTree = "<group>"; };
@@ -1866,6 +1868,7 @@
 				85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */,
 				33F1947C27143BE200C438AA /* String+Hash.swift */,
 				33387FDD274E7DF30070A733 /* String+Attributed.swift */,
+				331D4522278EC14200F990DF /* UserDefaults+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2643,6 +2646,7 @@
 				859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */,
+				331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
 				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
@@ -3034,7 +3038,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3158,7 +3162,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3343,7 +3347,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3372,7 +3376,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 115;
+				CURRENT_PROJECT_VERSION = 123;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

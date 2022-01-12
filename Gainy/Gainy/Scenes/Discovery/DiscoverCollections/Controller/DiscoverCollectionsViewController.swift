@@ -29,15 +29,111 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.Gainy.white
+        let navigationBarContainer = UIView(
+            frame: CGRect(
+                x: 0,
+                y: view.safeAreaInsets.top + 36,
+                width: view.bounds.width,
+                height: 80
+            )
+        )
+        navigationBarContainer.backgroundColor = UIColor.Gainy.white
+        
+        let discoverCollectionsButton = UIButton(
+            frame: CGRect(
+                x: navigationBarContainer.bounds.width - (32 + 20),
+                y: 28,
+                width: 32,
+                height: 32
+            )
+        )
+        
+        discoverCollectionsButton.setImage(UIImage(named: "collection-details"), for: .normal)
+        discoverCollectionsButton.addTarget(self,
+                                            action: #selector(discoverCollectionsButtonTapped),
+                                            for: .touchUpInside)
+        
+        navigationBarContainer.addSubview(discoverCollectionsButton)
+        showCollectionDetailsBtn = discoverCollectionsButton
+        let searchTextField = UITextField(
+            frame: CGRect(
+                x: 16,
+                y: 24,
+                width: navigationBarContainer.bounds.width - (16 + 16 + 32 + 20),
+                height: 40
+            )
+        )
+        
+        searchTextField.font = UIFont(name: "SFProDisplay-Regular", size: 16)
+        searchTextField.textColor = UIColor(named: "mainText")
+        searchTextField.layer.cornerRadius = 16
+        searchTextField.isUserInteractionEnabled = true
+        searchTextField.placeholder = "Search anything"
+        let searchIconContainerView = UIView(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 14 + 24 + 6,
+                height: 24
+            )
+        )
+        
+        let searchIconImageView = UIImageView(
+            frame: CGRect(
+                x: 14,
+                y: 0,
+                width: 24,
+                height: 24
+            )
+        )
+        
+        searchIconContainerView.addSubview(searchIconImageView)
+        searchIconImageView.contentMode = .center
+        searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
+        searchIconImageView.image = UIImage(named: "search")
+        
+        searchTextField.leftView = searchIconContainerView
+        searchTextField.leftViewMode = .always
+        searchTextField.rightViewMode = .whileEditing
+        searchTextField.backgroundColor = UIColor.Gainy.lightBack
+        searchTextField.returnKeyType = .done
+        
+        let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
+        let clearBtn = UIButton(
+            frame: CGRect(
+                x: 0,
+                y: 0,
+                width: 24,
+                height: 24
+            )
+        )
+        clearBtn.setImage(UIImage(named: "search_clear"), for: .normal)
+        clearBtn.addTarget(self, action: #selector(textFieldClear), for: .touchUpInside)
+        btnFrame.addSubview(clearBtn)
+        searchTextField.rightView = btnFrame
+        
+        searchTextField.addTarget(self, action: #selector(textFieldEditingDidBegin(_:)), for: .editingDidBegin)
+        searchTextField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        searchTextField.delegate = self
+        navigationBarContainer.addSubview(searchTextField)
+        self.searchTextField = searchTextField
+        
+        view.addSubview(navigationBarContainer)
+        
+        let navigationBarTopOffset =
+        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
         discoverCollectionsCollectionView = UICollectionView(
             frame: view.frame,
             collectionViewLayout: customLayout
         )
         view.addSubview(discoverCollectionsCollectionView)
-        discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view)
+        discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
+        discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -48,8 +144,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
-        
-        
+
         discoverCollectionsCollectionView.delegate = self
         
         discoverCollectionsCollectionView.dragDelegate = self
@@ -67,6 +162,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             switch (cell, modelItem) {
             case let (cell as YourCollectionViewCell, modelItem as YourCollectionViewCellModel):
+                
                 cell.tag = modelItem.id
                 cell.onDeleteButtonPressed = { [weak self] in
                     let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
@@ -105,7 +201,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     cell.isUserInteractionEnabled = false
                     
                     cell.setButtonUnchecked()
-                    // TODO: create a func removeFromYourCollection(collectionToRemove: recommendedCollectionItem)
                     let yourCollectionItem = YourCollectionViewCellModel(
                         id: modelItem.id,
                         image: modelItem.image,
@@ -152,6 +247,51 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.dataSource = dataSource
         
         
+        searchCollectionView = UICollectionView(
+            frame: CGRect(
+                x: 0,
+                y: navigationBarTopOffset,
+                width: view.bounds.width,
+                height: view.bounds.height - navigationBarTopOffset
+            ),
+            collectionViewLayout: CollectionSearchController.createLayout([.loader])
+        )
+        view.addSubview(searchCollectionView)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
+        searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
+        searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        
+        searchCollectionView.backgroundColor = .clear
+        searchCollectionView.showsVerticalScrollIndicator = false
+        searchCollectionView.dragInteractionEnabled = true
+        searchCollectionView.bounces = false
+        searchCollectionView.alpha = 0.0
+        searchController = CollectionSearchController.init(collectionView: searchCollectionView, callback: {[weak self] tickers, ticker in
+            if let index = tickers.firstIndex(where: {$0.symbol == ticker.symbol}) {
+                self?.coordinator?.showCardsDetailsViewController(tickers.compactMap({TickerInfo(ticker: $0)}), index: index)
+            }
+        })
+        searchController?.collectionsUpdated = { [weak self] in
+            self?.getRemoteData(loadProfile: true ) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.initViewModels()
+                    self?.hideLoader()
+                }
+            }
+        }
+        searchController?.onCollectionDelete = {[weak self] collectionId in
+            
+            // TODO: Double check if this needed or not - looks like colletion is already removed here
+            // self?.removeFromYourCollection(itemId: collectionId, yourCollectionItemToRemove: )
+        }
+        searchController?.onNewsClicked = {[weak self] newsUrl in
+            if let self = self {
+                WebPresenter.openLink(vc: self, url: newsUrl)
+            }
+        }
+        
+        searchController?.coordinator = coordinator
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,7 +319,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     public func frameForYourCollectionCell(at index: Int) -> CGRect {
         
         if let cell = discoverCollectionsCollectionView.cellForItem(at: IndexPath(item: index, section: 0)) {
-            let frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y - discoverCollectionsCollectionView.contentOffset.y, width: cell.frame.width, height: cell.frame.height)
+            let frame = CGRect(x: cell.frame.origin.x, y: cell.frame.origin.y - discoverCollectionsCollectionView.contentOffset.y + discoverCollectionsCollectionView.frame.origin.y, width: cell.frame.width, height: cell.frame.height)
             return frame
         }
         
@@ -251,6 +391,67 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
     }
     
+    public func cancelSearchAsNeeded() {
+        if searchCollectionView.alpha > 0.0 {
+            textFieldClear()
+        }
+    }
+    
+    @objc func textFieldClear() {
+        searchTextField?.text = ""
+        searchController?.searchText = searchTextField?.text ?? ""
+        searchController?.clearAll()
+        
+        searchTextField?.resignFirstResponder()
+        
+        let oldFrame = CGRect(
+            x: 16,
+            y: 24,
+            width: self.view.bounds.width - (16 + 16 + 32 + 20),
+            height: 40
+        )
+        UIView.animate(withDuration: 0.3) {
+            self.discoverCollectionsCollectionView.alpha = 1.0
+            self.searchCollectionView.alpha = 0.0
+            self.showCollectionDetailsBtn?.alpha = 1.0
+            self.searchTextField?.frame = oldFrame
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        
+        let text = textField.text ?? ""
+        searchController?.searchText = text
+        
+        if text.count > 0 {
+            searchTextField?.clearButtonMode = .always
+            searchTextField?.clearButtonMode = .whileEditing
+        } else {
+            searchTextField?.clearButtonMode = .never
+        }
+    }
+    
+    @objc func textFieldEditingDidBegin(_ textField: UITextField) {
+        GainyAnalytics.logEvent("collections_search_started", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        searchController?.searchText =  ""
+        UIView.animate(withDuration: 0.3) {
+            self.discoverCollectionsCollectionView.alpha = 0.0
+            self.searchCollectionView.alpha = 1.0
+            self.showCollectionDetailsBtn?.alpha = 0.0
+            self.searchTextField?.frame = CGRect(
+                x: 16,
+                y: 24,
+                width: self.view.bounds.width - (16 + 16),
+                height: 40
+            )
+        }
+    }
+    
+    @objc func textFieldEditingDidEnd(_ textField: UITextField) {
+        GainyAnalytics.logEvent("collections_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+    }
+    
+    
     // MARK: Private
     
     // MARK: Properties
@@ -274,7 +475,21 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     private var indexOfCellBeingDragged: Int?
     
+    
+    private var searchCollectionView: UICollectionView!
+    private var searchController: CollectionSearchController?
+    private var showCollectionDetailsBtn: UIButton?
+    private var searchTextField: UITextField?
+    
     // MARK: Functions
+    
+    @objc
+    private func discoverCollectionsButtonTapped() {
+        GainyAnalytics.logEvent("discover_collection_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+        
+        // TODO: Go back to source collection
+        self.goToCollectionDetails(at: 0)
+    }
     
     private func addToYourCollection(collectionItemToAdd: RecommendedCollectionViewCellModel, indexRow: Int) {
         let updatedRecommendedItem = RecommendedCollectionViewCellModel(
@@ -311,7 +526,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
-            self.viewModel?.recommendedCollections[indexRow] = updatedRecommendedItem
             UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
             
             UserProfileManager.shared.yourCollections.append(
@@ -326,30 +540,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             if var snapshot = self.dataSource?.snapshot() {
                 snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
-                
-                if var itemToReload = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
-                    if let item = $0 as? RecommendedCollectionViewCellModel {
-                        return item.id == collectionItemToAdd.id
-                    }
-                    return false
-                }) as? RecommendedCollectionViewCellModel {
-                    snapshot.reloadItems([itemToReload])
-                }
+                snapshot.deleteItems([collectionItemToAdd])
+                self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
                 
                 self.dataSource?.apply(snapshot, animatingDifferences: true)
             }
-            
-            AppsFlyerLib.shared().logEvent(
-                AFEvent.addToYourCollections,
-                withValues: [
-                    AFParameter.collectionName:
-                        collectionItemToAdd.name,
-                    AFParameter.itemsInYourCollectionsAfterAdding:
-                        "\(self.viewModel?.yourCollections.count ?? 0)",
-                    AFParameter.itemsInRecommendedAfterAdding:
-                        "\(self.viewModel?.recommendedCollections.count ?? 0)",
-                ]
-            )
         }
     }
     
@@ -439,32 +634,23 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     isInYourCollections: false
                 )
                 
-                if let indexOfRecommendedItemToDelete = viewModel?
-                    .recommendedCollections
+                if let indexOfRecommendedItemToDelete = UserProfileManager.shared.recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
-                    viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
                     UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
                     snapshot.reloadItems([reloadItem])
                 }
                 
                 snapshot.deleteItems([deleteItems])
+                
+                if let recColl = viewModel?.addedRecs[yourCollectionItemToRemove.id] {
+                    snapshot.appendItems([recColl], toSection: .recommendedCollections)
+                    viewModel?.addedRecs.removeValue(forKey: yourCollectionItemToRemove.id)
+                }
                 dataSource?.apply(snapshot, animatingDifferences: true)
                 onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
             }
             
         }
-        
-        AppsFlyerLib.shared().logEvent(
-            AFEvent.removeFromYourCollections,
-            withValues: [
-                AFParameter.collectionName:
-                    yourCollectionItemToRemove.name,
-                AFParameter.itemsInYourCollectionsAfterRemoval:
-                    "\(self.viewModel?.yourCollections.count ?? 0)",
-                AFParameter.itemsInRecommendedAfterRemoval:
-                    "\(self.viewModel?.recommendedCollections.count ?? 0)",
-            ]
-        )
     }
     
     private func reorderItems(
@@ -549,9 +735,22 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
             viewModel?.yourCollections.insert(watchDTO, at: 0)
         }
-        viewModel?.recommendedCollections = UserProfileManager.shared
-            .recommendedCollections
-            .map { CollectionViewModelMapper.map($0) }
+        
+        var recColls: [RecommendedCollectionViewCellModel] = []
+        
+        for (_, val) in UserProfileManager.shared.recommendedCollections.enumerated() {
+            if val.isInYourCollections {
+                viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
+            } else {
+                recColls.append(CollectionViewModelMapper.map(val))
+            }
+        }
+        
+        for (_, val) in UserProfileManager.shared.yourCollections.enumerated() {
+            viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
+        }
+    
+        viewModel?.recommendedCollections = recColls
     }
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
@@ -575,6 +774,29 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
     }
 }
+
+extension DiscoverCollectionsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension DiscoverCollectionsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        .init(width: 240, height: 136)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 0, left: 16, bottom: 0, right: 0)
+    }
+}
+
 
 extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,

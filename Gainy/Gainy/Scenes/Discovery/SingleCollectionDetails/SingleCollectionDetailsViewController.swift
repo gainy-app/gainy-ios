@@ -17,6 +17,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var toggleBtn: UIButton!
+    @IBOutlet weak var shareBtn: UIButton!
     
     // MARK: Properties
     private var viewModel: SingleCollectionDetailsViewModel?
@@ -52,6 +53,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         if collectionId == Constants.CollectionDetails.compareCollectionID {
             viewModel = SingleCollectionDetailsViewModel.init(model: model)
             toggleBtn.isHidden = true
+            shareBtn.isHidden = true
         } else {
             viewModel = SingleCollectionDetailsViewModel.init(collectionId: collectionId)
         }
@@ -272,10 +274,29 @@ extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate
 
 extension SingleCollectionDetailsViewController: SearchStocksViewControllerDelegate {
     func stockSelected(source: SearchStocksViewController, stock: RemoteTickerDetails) {
-        if let cell = collectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell {
-            cell.addRemoteStocks([stock])
-        }
         self.fpc.dismiss(animated: true, completion: nil)
+        if collectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell != nil {
+            if let first = viewModel?.collectionDetailsModels.first {
+                let cardsDTO = [stock].compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
+                var cards = first.cards
+                cards.append(contentsOf: cardsDTO)
+                let model = CollectionDetailViewCellModel(
+                    id: Constants.CollectionDetails.compareCollectionID,
+                    image: "compare_stocks",
+                    imageUrl: "",
+                    name: "Compared Stocks",
+                    description: "",
+                    stocksAmount: "\(first.cards.count + 1)",
+                    inYourCollectionList: false,
+                    cards: cards
+                )
+                self.model = model
+                self.setupViewModel()
+                self.collectionView.removeFromSuperview()
+                self.initCollectionView()
+                self.setupPanel()
+            }
+        }
     }
 }
 

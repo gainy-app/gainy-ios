@@ -70,7 +70,7 @@ extension CollectionCardViewCellModel: RemotePricable {
     }
     
     var priceChangeToday: Float {
-        TickerLiveStorage.shared.getSymbolData(tickerSymbol)?.priceChangeToday ?? 0.0
+        (TickerLiveStorage.shared.getSymbolData(tickerSymbol)?.priceChangeToday ?? 0.0) * 100.0
     }
 }
 

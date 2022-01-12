@@ -44,7 +44,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
                     let params = components.queryItems else {
-                        GainyAnalytics.logEvent("first_launch", params: fbParams)
+                        if UserDefaults.isFirstLaunch() {
+                            GainyAnalytics.logEvent("first_launch", params: fbParams)
+                        }
                         return
                 }
 
@@ -58,7 +60,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 fbParams["cs"] = csVal
             }
         }
-        GainyAnalytics.logEvent("first_launch", params: fbParams)
+        if UserDefaults.isFirstLaunch() {
+            GainyAnalytics.logEvent("first_launch", params: fbParams)
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

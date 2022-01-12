@@ -19,6 +19,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     @IBOutlet private var recImgs: [UIImageView]!
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    @IBOutlet var colorView: UIView!
     @IBOutlet private weak var tagsHeaderLbl: UILabel!
     
     private var lines: Int = 1
@@ -34,15 +35,15 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
             switch matchData.matchScore {
             case 0..<35:
-                contentView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
+                colorView.backgroundColor = UIColor(hexString: "FFCCCC", alpha: 1.0)
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 35..<65:
-                contentView.backgroundColor = UIColor.Gainy.mainYellow
+                colorView.backgroundColor = UIColor.Gainy.mainYellow
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 65...:
-                contentView.backgroundColor = UIColor.Gainy.mainGreen
+                colorView.backgroundColor = UIColor.Gainy.mainGreen
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             default:
@@ -59,7 +60,9 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 var yPos: CGFloat = 0.0
                 for tag in tickerInfo?.matchTags ?? [] {
                     let tagView = TagView()
-                    tagView.changeLayoutForRec()
+                    
+                    tagView.backgroundColor = UIColor.white
+                    tagView.tagLabel.textColor = UIColor(named: "mainText")
                     tagView.loadImage(url: tag.url)
                     
                     tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
@@ -67,7 +70,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                     tagsStack.addSubview(tagView)
                     tagView.tagName = tag.name
                     tagView.loadImage(url: tag.url)
-                    let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                    let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                     tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                     if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                         xPos = 0.0
@@ -95,16 +98,26 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
-//        guard let name = tagView.tagName, name.count > 0 else {
-//            return
-//        }
-//        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
-//        if !panelInfo.title.isEmpty {
-//            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
-//        }
+        guard let name = tagView.tagName, name.count > 0 else {
+            return
+        }
+        let panelInfo = CategoriesTipsGenerator.getInfoForPanel(name)
+        if !panelInfo.title.isEmpty {
+            self.showExplanationWith(title: panelInfo.title, description: panelInfo.description, height: panelInfo.height)
+        }
     }
     
     func setTransform(_ transform: CGAffineTransform) {
         rotatableImageView.transform = transform
+    }
+    
+    private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: title)
+        explanationVc.configureWith(description: description, linkString: linkText, link: link)
+        FloatingPanelManager.shared.configureWithHeight(height: height)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
     }
 }

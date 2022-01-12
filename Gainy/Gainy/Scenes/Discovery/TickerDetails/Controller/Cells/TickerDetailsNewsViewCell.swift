@@ -42,7 +42,7 @@ extension TickerDetailsNewsViewCell: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        .init(top: 0, left: 28, bottom: 0, right: 0)
+        .init(top: 0, left: 16, bottom: 0, right: 0)
     }
 }
 

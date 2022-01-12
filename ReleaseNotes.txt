@@ -1,14 +1,12 @@
-iOS v1.0.2 #115 available
+iOS v1.0.2 #123 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Re-launch onboarding flow + disclaimer
+• Serach integrated into the discovery screen
 
 :hammer_and_wrench: Improvements
-• Sorting if Dividends improved
-• Small screen support
-• Plaid SDK monthly update
+• UI Bugs
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -9,41 +9,48 @@ import Foundation
 import UIKit
 
 struct HoldingSecurityViewModel {
+    
+    enum SecType: String {
+        case option = "Option", share = "Share"
+    }
+    
     let name: String
-    let type: String
+    let type: SecType
     let percentInHolding: Float
     let totalPrice: Float
     let quantity: Float
     
-    let singlePrice: Float
+    let singlePrice: String
     
     let absoluteGains: [ScatterChartView.ChartPeriod : Float]
     let relativeGains: [ScatterChartView.ChartPeriod : Float]
     
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
         return (range.longName, UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!, absoluteGains[range]?.price ?? "",
-                relativeGains[range]?.cleanOneDecimalP ?? "",
+                relativeGains[range]?.cleanTwoDecimalP ?? "",
                 relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
                 relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
         
     }
     
     init(holding: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding) {
-        var type = holding.holdingDetails?.securityType ?? ""
-        if type == "derivative" {
-            type = "Options"
+        let rawType = holding.holdingDetails?.securityType ?? ""
+        if rawType == "derivative" {
+            type = .option
+        } else {
+            if rawType == "equity" {
+                type = .share
+            } else {
+                type = .share
+            }
         }
-        if type == "equity" {
-            type = "Shares"
-        }
-        let correctName = (type == "Options" ? (holding.holdingDetails?.tickerName ?? "").companyMarkRemoved  : (holding.name ?? "").companyMarkRemoved)
+        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : "Shares")
         
         self.name = correctName + " x\(holding.quantity ?? 0.0)"
-        self.type = type
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
         self.quantity = Float(holding.quantity ?? 0.0)
-        self.singlePrice = Float(55.0)
+        self.singlePrice = holding.expiryDateString
         let absGains: [ScatterChartView.ChartPeriod : Float] = [
             .d1 : holding.gains?.absoluteGain_1d ?? 0.0,
             .w1 : holding.gains?.absoluteGain_1w ?? 0.0,
@@ -88,3 +95,5 @@ extension HoldingSecurityViewModel: Equatable {
 extension HoldingSecurityViewModel: Hashable {
     
 }
+
+

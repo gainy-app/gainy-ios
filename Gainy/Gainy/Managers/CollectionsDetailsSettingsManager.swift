@@ -43,6 +43,8 @@ struct CollectionSettings: Codable {
         return marketDataToShow.first?.title ?? "Match Score"
     }
     
+    
+    //Used for prefetching
     var marketDataToShow: [MarketDataField] {
         
         let defaultSortingList = MarketDataField.rawOrder

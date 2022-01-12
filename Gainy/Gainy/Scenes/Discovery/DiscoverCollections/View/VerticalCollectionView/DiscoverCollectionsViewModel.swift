@@ -4,4 +4,7 @@ final class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModel
     var noCollections: [NoCollectionViewModel] = [NoCollectionViewModel()]
     var yourCollections: [YourCollectionViewCellModel] = []
     var recommendedCollections: [RecommendedCollectionViewCellModel] = []
+    
+    //Temp cache of removed items
+    var addedRecs: [Int : RecommendedCollectionViewCellModel] = [:]
 }

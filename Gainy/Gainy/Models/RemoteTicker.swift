@@ -107,7 +107,8 @@ class TickerInfo {
     
     private(set) var isMainDataLoaded: Bool = false
     private(set) var isChartDataLoaded: Bool = false
-    
+    private var matchLoadTask: Task<Void, Never>?
+
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
@@ -185,7 +186,10 @@ class TickerInfo {
                 
                 mainDS.enter()
                 if let matchData  = TickerLiveStorage.shared.getMatchData(self.symbol) {
-                    let tagsTask = Task {
+                    if let matchLoadTask = self.matchLoadTask {
+                        matchLoadTask.cancel()
+                    }
+                    self.matchLoadTask = Task {
                         let loadedTags = await matchData.combinedTags()
                         self.matchTags = loadedTags
                         mainDS.leave()
@@ -210,16 +214,14 @@ class TickerInfo {
                         
                         let tickerSymbols = (self?.altStocks ?? []).compactMap(\.symbol)
                         
-                        TickersLiveFetcher.shared.getSymbolsData(tickerSymbols) {
-                            TickersLiveFetcher.shared.getMatchScores(symbols: tickerSymbols) {
-                                mainDS.leave()
-                            }
+
+                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
+                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                         }
                         
-                        //Not working
-//                        for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
-//                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-//                        }
+                        TickersLiveFetcher.shared.getMatchScores(symbols: tickerSymbols) {
+                            mainDS.leave()
+                        }
                         
                         break
                     case .failure(let error):
@@ -251,8 +253,8 @@ class TickerInfo {
             
             //Await for results
             mainDS.notify(queue: queue) {
-                self.isMainDataLoaded = true
                 DispatchQueue.main.async {
+                    self.isMainDataLoaded = true
                     mainDataLoaded()
                 }
             }
