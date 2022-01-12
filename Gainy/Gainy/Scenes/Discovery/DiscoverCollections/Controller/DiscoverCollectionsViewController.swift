@@ -330,18 +330,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 
                 self.dataSource?.apply(snapshot, animatingDifferences: true)
             }
-            
-            AppsFlyerLib.shared().logEvent(
-                AFEvent.addToYourCollections,
-                withValues: [
-                    AFParameter.collectionName:
-                        collectionItemToAdd.name,
-                    AFParameter.itemsInYourCollectionsAfterAdding:
-                        "\(self.viewModel?.yourCollections.count ?? 0)",
-                    AFParameter.itemsInRecommendedAfterAdding:
-                        "\(self.viewModel?.recommendedCollections.count ?? 0)",
-                ]
-            )
         }
     }
     
@@ -448,18 +436,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
             
         }
-        
-        AppsFlyerLib.shared().logEvent(
-            AFEvent.removeFromYourCollections,
-            withValues: [
-                AFParameter.collectionName:
-                    yourCollectionItemToRemove.name,
-                AFParameter.itemsInYourCollectionsAfterRemoval:
-                    "\(self.viewModel?.yourCollections.count ?? 0)",
-                AFParameter.itemsInRecommendedAfterRemoval:
-                    "\(self.viewModel?.recommendedCollections.count ?? 0)",
-            ]
-        )
     }
     
     private func reorderItems(
