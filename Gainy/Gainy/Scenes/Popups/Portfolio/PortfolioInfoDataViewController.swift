@@ -141,7 +141,7 @@ extension PortfolioInfoDataViewController: UICollectionViewDelegate, UICollectio
         let infoData = self.infoDataSource[indexPath.row]
         let name: String = infoData.title
         let width = name.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width
-        var size = CGSize.init(width: (ceil(width) + CGFloat(64.0)), height: CGFloat(40))
+        var size = CGSize.init(width: (ceil(width) + CGFloat(56.0)), height: CGFloat(40))
         let maxWidth = UIScreen.main.bounds.size.width - 32.0
         if size.width > maxWidth {
             size.width = maxWidth

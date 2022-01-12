@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publishing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJ0-xV-W5d">
-                                <rect key="frame" x="46" y="8" width="191" height="24"/>
+                                <rect key="frame" x="40" y="8" width="197" height="24"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                             <constraint firstItem="k9b-ap-ojQ" firstAttribute="leading" secondItem="gYh-cg-cv0" secondAttribute="leading" constant="8" id="DxL-qF-Llr"/>
                             <constraint firstItem="k9b-ap-ojQ" firstAttribute="top" secondItem="gYh-cg-cv0" secondAttribute="top" constant="8" id="OwC-Me-RpO"/>
                             <constraint firstAttribute="trailing" secondItem="bJ0-xV-W5d" secondAttribute="trailing" constant="16" id="W39-GK-5tN"/>
-                            <constraint firstItem="bJ0-xV-W5d" firstAttribute="leading" secondItem="k9b-ap-ojQ" secondAttribute="trailing" constant="14" id="YxC-aN-2zy"/>
+                            <constraint firstItem="bJ0-xV-W5d" firstAttribute="leading" secondItem="k9b-ap-ojQ" secondAttribute="trailing" constant="8" id="YxC-aN-2zy"/>
                             <constraint firstAttribute="bottom" secondItem="bJ0-xV-W5d" secondAttribute="bottom" constant="8" id="vtd-Kz-9Qc"/>
                             <constraint firstItem="bJ0-xV-W5d" firstAttribute="top" secondItem="gYh-cg-cv0" secondAttribute="top" constant="8" id="zYf-VM-vIH"/>
                         </constraints>

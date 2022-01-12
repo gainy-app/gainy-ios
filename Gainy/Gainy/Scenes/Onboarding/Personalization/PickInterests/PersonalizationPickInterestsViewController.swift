@@ -123,7 +123,17 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                     return
                 }
                 
-                self.appInterests = appInterests
+                var health: [AppInterestsQuery.Data.Interest] = []
+                self.appInterests = appInterests.compactMap({ item in
+                    if item.id == 50 || item.id == 55 {
+                        health.append(item)
+                        return nil
+                    }
+                    return item
+                })
+                if let interests = self.appInterests {
+                    self.appInterests?.insert(contentsOf: health, at: interests.count / 2)
+                }
                 self.collectionView.reloadData()
                 completion()
 
@@ -179,7 +189,7 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
         
         let name = appInterest.name
         let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
-        var size = CGSize.init(width: (ceil(width) + CGFloat(64.0)), height: CGFloat(40))
+        var size = CGSize.init(width: (ceil(width) + CGFloat(56.0)), height: CGFloat(40))
         let maxWidth = UIScreen.main.bounds.size.width - 32.0
         if size.width > maxWidth {
             size.width = maxWidth
