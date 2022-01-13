@@ -111,7 +111,6 @@ extension PortfolioInfoDataViewController: UICollectionViewDelegate, UICollectio
     
         let infoData = self.infoDataSource[indexPath.row]
         let cell: InfoDataCell = collectionView.dequeueReusableCell(withReuseIdentifier: InfoDataCell.reuseIdentifier, for: indexPath) as! InfoDataCell
-        cell.selectedColorHexString = "#5999FF"
         cell.infoData = infoData
         let isSelected = infoData.selected
         var canSelect = false

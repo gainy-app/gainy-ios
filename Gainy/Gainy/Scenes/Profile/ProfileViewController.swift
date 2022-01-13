@@ -51,7 +51,7 @@ final class ProfileViewController: BaseViewController {
                 return nil
             }
             
-            let key = "disclaimerShownForProfileWithID" + "\(profileID)" + ".prod.v1.0"
+            let key = "disclaimerShownForProfileWithID" + "\(profileID)" + ".prod.v1.0.1"
             return key
         }
     }
@@ -576,7 +576,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         
         let cell: PickInterestOrCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: PickInterestOrCategoryCell.reuseIdentifier, for: indexPath) as! PickInterestOrCategoryCell
-        cell.selectedColorHexString = "#5999FF"
         var isSelected: Bool = false
         if collectionView == self.interestsCollectionView {
             let profileInterest: AppInterestsQuery.Data.Interest? = self.profileInterests?[indexPath.row]
