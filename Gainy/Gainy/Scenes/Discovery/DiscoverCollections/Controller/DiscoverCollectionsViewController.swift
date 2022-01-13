@@ -603,7 +603,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 return false
             }) as? RecommendedCollectionViewCellModel {
-                snapshot.reloadItems([itemToReload])
+                snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
             }
             dataSource?.apply(snapshot, animatingDifferences: true)
             
