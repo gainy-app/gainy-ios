@@ -597,14 +597,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
             
             snapshot.deleteItems([yourCollectionItemToRemove])
-            if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
-                if let item = $0 as? RecommendedCollectionViewCellModel {
-                    return item.id == itemId
-                }
-                return false
-            }) as? RecommendedCollectionViewCellModel {
-                snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-            }
+            snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
+            
             dataSource?.apply(snapshot, animatingDifferences: true)
             
             onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
