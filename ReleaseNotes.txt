@@ -3,10 +3,9 @@ iOS v1.0.2 #124 available
 Bugfixes
 
 :new: New:
-• Watchlist collection new UI
+• Onboarding videos integrated
 
 :hammer_and_wrench: Improvements
-• Make top 20 collection always on top
 • UI Bugs
 
 :red_circle: Important Notes:

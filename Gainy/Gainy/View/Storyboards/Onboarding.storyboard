@@ -455,6 +455,37 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMq-cc-6og">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9hf-lg-nO0" customClass="GradientBackgroundView" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="336" width="414" height="560"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="560" id="Fyd-LC-9gF"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.78076940770000003" green="0.76743400100000003" blue="0.83530277009999998" alpha="0.0" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="middleColor">
+                                        <color key="value" red="0.96478408579999997" green="0.97247809169999999" blue="0.97647136450000005" alpha="0.62637086577762835" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.96478408579999997" green="0.97247809169999999" blue="0.97647136450000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                        <point key="value" x="0.0" y="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                        <point key="value" x="0.0" y="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="middleLocation">
+                                        <real key="value" value="0.53000000000000003"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYU-Es-rcX">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
@@ -463,7 +494,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="center" axis="vertical" distribution="equalCentering" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="Nof-oW-fvz">
-                                        <rect key="frame" x="0.0" y="250" width="414" height="236"/>
+                                        <rect key="frame" x="0.0" y="400" width="414" height="236"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7N1-VY-kom" customClass="PersonalizationSliderSectionView" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="236"/>
@@ -496,7 +527,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="gi6-EI-CEg">
-                                        <rect key="frame" x="414" y="270" width="414" height="196"/>
+                                        <rect key="frame" x="414" y="420" width="414" height="196"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izb-pk-CBl" customClass="PersonalizationSliderSectionView" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="196"/>
@@ -521,7 +552,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" spacing="72" translatesAutoresizingMaskIntoConstraints="NO" id="pXG-0h-3KG">
-                                        <rect key="frame" x="828" y="270" width="414" height="196"/>
+                                        <rect key="frame" x="828" y="420" width="414" height="196"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jpS-Bo-JKz" customClass="PersonalizationSliderSectionView" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="196"/>
@@ -554,11 +585,11 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                     <constraint firstItem="Nof-oW-fvz" firstAttribute="leading" secondItem="kYU-Es-rcX" secondAttribute="leading" id="CDe-1J-aCF"/>
                                     <constraint firstItem="EZS-J2-oy1" firstAttribute="top" secondItem="kYU-Es-rcX" secondAttribute="top" id="Etn-QH-BFY"/>
                                     <constraint firstItem="EZS-J2-oy1" firstAttribute="leading" secondItem="kYU-Es-rcX" secondAttribute="leading" id="GB1-e6-3NJ"/>
-                                    <constraint firstItem="Nof-oW-fvz" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" id="NBh-n3-L3N"/>
-                                    <constraint firstItem="pXG-0h-3KG" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" id="Q1W-OG-RSK"/>
+                                    <constraint firstItem="Nof-oW-fvz" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" constant="150" id="NBh-n3-L3N"/>
+                                    <constraint firstItem="pXG-0h-3KG" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" constant="150" id="Q1W-OG-RSK"/>
                                     <constraint firstItem="pXG-0h-3KG" firstAttribute="leading" secondItem="gi6-EI-CEg" secondAttribute="trailing" id="QlL-my-1Ff"/>
                                     <constraint firstItem="uaB-x5-aqk" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" id="VEJ-qi-Dja"/>
-                                    <constraint firstItem="gi6-EI-CEg" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" id="Ya0-sX-k5C"/>
+                                    <constraint firstItem="gi6-EI-CEg" firstAttribute="centerY" secondItem="kYU-Es-rcX" secondAttribute="centerY" multiplier="0.9" constant="150" id="Ya0-sX-k5C"/>
                                     <constraint firstItem="uaB-x5-aqk" firstAttribute="leading" secondItem="pXG-0h-3KG" secondAttribute="trailing" id="rXd-bP-OYI"/>
                                     <constraint firstAttribute="trailing" secondItem="uaB-x5-aqk" secondAttribute="trailing" id="zzk-Go-IwQ"/>
                                 </constraints>
@@ -590,32 +621,44 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="PCe-pL-2L8"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="9hf-lg-nO0" firstAttribute="leading" secondItem="PCe-pL-2L8" secondAttribute="leading" id="7tg-cU-aGe"/>
                             <constraint firstItem="gi6-EI-CEg" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="8u7-Sh-yGC"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="bottom" secondItem="kYU-Es-rcX" secondAttribute="bottom" id="Hax-8f-547"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="bottom" secondItem="4Pz-No-tf3" secondAttribute="bottom" constant="19" id="KND-KC-zTQ"/>
                             <constraint firstItem="pXG-0h-3KG" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="Pmb-nI-7cw"/>
                             <constraint firstItem="uaB-x5-aqk" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="TPA-1g-lJH"/>
+                            <constraint firstItem="eMq-cc-6og" firstAttribute="top" secondItem="RgX-RM-i6U" secondAttribute="top" id="Unh-1h-DPN"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="trailing" secondItem="4Pz-No-tf3" secondAttribute="trailing" constant="24" id="VKb-Tc-NWh"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="leading" secondItem="kYU-Es-rcX" secondAttribute="leading" id="ZB3-Lv-Ac5"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="trailing" secondItem="kYU-Es-rcX" secondAttribute="trailing" id="a2e-kX-wJr"/>
+                            <constraint firstItem="eMq-cc-6og" firstAttribute="leading" secondItem="RgX-RM-i6U" secondAttribute="leading" id="bQb-u2-tKP"/>
                             <constraint firstItem="EZS-J2-oy1" firstAttribute="height" secondItem="PCe-pL-2L8" secondAttribute="height" multiplier="0.985941" id="d2z-W2-Hfx"/>
+                            <constraint firstItem="PCe-pL-2L8" firstAttribute="trailing" secondItem="9hf-lg-nO0" secondAttribute="trailing" id="ddc-nX-Z6C"/>
                             <constraint firstItem="PCe-pL-2L8" firstAttribute="top" secondItem="kYU-Es-rcX" secondAttribute="top" id="jAL-lb-NpS"/>
                             <constraint firstItem="Nof-oW-fvz" firstAttribute="width" secondItem="RgX-RM-i6U" secondAttribute="width" id="oiK-e7-5fO"/>
+                            <constraint firstAttribute="trailing" secondItem="eMq-cc-6og" secondAttribute="trailing" id="tXE-0C-WTa"/>
+                            <constraint firstItem="eMq-cc-6og" firstAttribute="height" secondItem="RgX-RM-i6U" secondAttribute="height" id="xur-kk-Jaj"/>
+                            <constraint firstAttribute="bottom" secondItem="9hf-lg-nO0" secondAttribute="bottom" id="yP2-3j-9Fu"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="firstSectionStackView" destination="Nof-oW-fvz" id="CZh-IM-zyG"/>
+                        <outlet property="firstSectionStackViewVerticalConstraint" destination="NBh-n3-L3N" id="KL7-x8-Xiy"/>
                         <outlet property="investingApproachSourceView" destination="GPc-W6-FJT" id="eJl-vV-cVx"/>
                         <outlet property="lastSectionStackView" destination="uaB-x5-aqk" id="Yzs-fu-wx9"/>
                         <outlet property="marketReturnsSourceView" destination="ycn-tZ-v55" id="VPm-jQ-Ik9"/>
                         <outlet property="nextButton" destination="4Pz-No-tf3" id="tfo-Pc-UGJ"/>
+                        <outlet property="playerView" destination="eMq-cc-6og" id="qlp-dz-zOt"/>
+                        <outlet property="playerViewTopConstraint" destination="Unh-1h-DPN" id="XGY-Af-L6y"/>
                         <outlet property="scrollView" destination="kYU-Es-rcX" id="ieH-pf-79v"/>
                         <outlet property="secondSectionStackView" destination="gi6-EI-CEg" id="9Vz-2S-hdk"/>
+                        <outlet property="secondSectionStackViewVerticalConstraint" destination="Ya0-sX-k5C" id="JqM-Yd-owt"/>
                         <outlet property="sliderViewDamageOfFailure" destination="jpS-Bo-JKz" id="Lse-dD-2VT"/>
                         <outlet property="sliderViewInvestmentGoals" destination="7N1-VY-kom" id="hOk-0q-fb5"/>
                         <outlet property="sliderViewInvestmentHorizon" destination="izb-pk-CBl" id="vK0-zp-CXW"/>
                         <outlet property="sliderViewStockMarketRisks" destination="hcr-Oh-NPY" id="kob-tg-201"/>
                         <outlet property="thirdSectionStackView" destination="pXG-0h-3KG" id="4mQ-Un-Xpr"/>
+                        <outlet property="thirdSectionStackViewVerticalConstraint" destination="Q1W-OG-RSK" id="apu-rm-3U8"/>
                         <outlet property="urgentMoneySourceView" destination="1I8-b9-zBH" id="dc8-PG-KVv"/>
                     </connections>
                 </viewController>
@@ -643,7 +686,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <rect key="frame" x="-33" y="213" width="480" height="480"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v">
-                                        <rect key="frame" x="61" y="202" width="358" height="76.5"/>
+                                        <rect key="frame" x="61" y="202.5" width="358" height="75"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>

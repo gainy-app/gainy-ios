@@ -136,7 +136,6 @@ extension EditProfileCollectionViewController: UICollectionViewDelegate, UIColle
             return collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.reuseIdentifier, for: indexPath)
         }
         let cell: PickInterestOrCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: PickInterestOrCategoryCell.reuseIdentifier, for: indexPath) as! PickInterestOrCategoryCell
-        cell.selectedColorHexString = "#5999FF"
         var isSelected: Bool = false
         if collectionType == .AppInterests {
             let profileInterest: AppInterestsQuery.Data.Interest? = self.interests?[indexPath.row]

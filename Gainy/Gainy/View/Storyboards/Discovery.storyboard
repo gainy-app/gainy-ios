@@ -1221,7 +1221,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMPARE STOCKS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wAr-G6-J4q">
-                                <rect key="frame" x="149.5" y="72" width="115" height="24"/>
+                                <rect key="frame" x="143" y="72" width="128.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="b4H-RB-PSH"/>
                                 </constraints>
@@ -1398,13 +1398,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gainy is not a trading app but a recomendation system, so please choose your option. " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QrZ-i8-xjP">
-                                <rect key="frame" x="24" y="116" width="366" height="38.5"/>
+                                <rect key="frame" x="24" y="116" width="366" height="37.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <color key="textColor" red="0.41607797149999998" green="0.45061999559999999" blue="0.47059148550000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gg9-pY-FmF">
-                                <rect key="frame" x="14" y="186.5" width="386" height="665.5"/>
+                                <rect key="frame" x="14" y="185.5" width="386" height="666.5"/>
                                 <color key="backgroundColor" red="1" green="0.99999994039999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HoP-mS-s1y">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1486,7 +1486,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SETTINGS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwW-01-m2g">
-                                <rect key="frame" x="176.5" y="72" width="61.5" height="17"/>
+                                <rect key="frame" x="173.5" y="72" width="67.5" height="17"/>
                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1500,7 +1500,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ixL-Yz-pT3">
-                                <rect key="frame" x="0.0" y="181" width="414" height="580"/>
+                                <rect key="frame" x="0.0" y="181" width="414" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PTg-xR-UgY">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1520,7 +1520,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="viV-Ty-oQy">
-                                <rect key="frame" x="0.0" y="181" width="414" height="649"/>
+                                <rect key="frame" x="0.0" y="181" width="414" height="641"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NIy-hs-R86">
                                     <size key="itemSize" width="128" height="128"/>
@@ -1556,12 +1556,13 @@
                             <constraint firstItem="6FZ-EV-pCf" firstAttribute="trailing" secondItem="viV-Ty-oQy" secondAttribute="trailing" id="hnM-51-855"/>
                             <constraint firstItem="ixL-Yz-pT3" firstAttribute="top" secondItem="634-RH-2ZX" secondAttribute="bottom" constant="32" id="poA-Gu-clu"/>
                             <constraint firstItem="634-RH-2ZX" firstAttribute="top" secondItem="WwW-01-m2g" secondAttribute="bottom" constant="20" id="qeR-rK-yVt"/>
-                            <constraint firstItem="6FZ-EV-pCf" firstAttribute="bottom" secondItem="ixL-Yz-pT3" secondAttribute="bottom" constant="101" id="woV-DI-8xV"/>
-                            <constraint firstItem="6FZ-EV-pCf" firstAttribute="bottom" secondItem="viV-Ty-oQy" secondAttribute="bottom" constant="32" id="wph-vz-v4u"/>
+                            <constraint firstItem="6FZ-EV-pCf" firstAttribute="bottom" secondItem="ixL-Yz-pT3" secondAttribute="bottom" constant="40" id="woV-DI-8xV"/>
+                            <constraint firstItem="6FZ-EV-pCf" firstAttribute="bottom" secondItem="viV-Ty-oQy" secondAttribute="bottom" constant="40" id="wph-vz-v4u"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="ixL-Yz-pT3" id="7Js-gu-iaV"/>
+                        <outlet property="collectionViewBottomConstraint" destination="woV-DI-8xV" id="vXH-PO-0yP"/>
                         <outlet property="searchCollectionView" destination="viV-Ty-oQy" id="qgy-N9-8sL"/>
                         <outlet property="searchTextField" destination="634-RH-2ZX" id="hw6-MM-tUi"/>
                         <outlet property="titleLbl" destination="WwW-01-m2g" id="cBK-eB-OfF"/>

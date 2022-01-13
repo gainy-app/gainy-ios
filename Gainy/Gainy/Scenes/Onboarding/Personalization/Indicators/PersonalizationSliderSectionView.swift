@@ -87,7 +87,7 @@ final class PersonalizationSliderSectionView: UIView {
         
         self.titleLabel.font = UIFont.proDisplayBold(20.0)
         self.titleLabel.textColor = UIColor.black
-        self.titleLabel.textAlignment = .left
+        self.titleLabel.textAlignment = .center
         self.titleLabel.text = "Title"
     }
     
@@ -102,7 +102,7 @@ final class PersonalizationSliderSectionView: UIView {
         
         self.descriptionLabel.font = UIFont.proDisplayRegular(16.0)
         self.descriptionLabel.textColor = UIColor(hexString: "#09141F")
-        self.descriptionLabel.textAlignment = .left
+        self.descriptionLabel.textAlignment = .center
         self.descriptionLabel.text = "Description Description Description Description Description Description Description Description"
         self.descriptionLabel.sizeToFit()
     }
@@ -117,7 +117,7 @@ final class PersonalizationSliderSectionView: UIView {
         
         self.explanationLabel.font = UIFont.proDisplayRegular(14.0)
         self.explanationLabel.textColor = UIColor(hexString: "#09141F")
-        self.explanationLabel.textAlignment = .left
+        self.explanationLabel.textAlignment = .center
         self.explanationLabel.text = ""
     }
     
