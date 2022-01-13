@@ -54,7 +54,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name
                 tagView.loadImage(url: tag.url)
-                let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0

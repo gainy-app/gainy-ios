@@ -35,7 +35,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
             switch matchData.matchScore {
             case 0..<35:
-                colorView.backgroundColor = UIColor(hexString: "FFE380", alpha: 1.0)
+                colorView.backgroundColor = UIColor(hexString: "FFD600", alpha: 1.0)
                 scoreLbl.textColor = UIColor(named: "mainText")
                 break
             case 35..<65:
@@ -70,7 +70,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                     tagsStack.addSubview(tagView)
                     tagView.tagName = tag.name
                     tagView.loadImage(url: tag.url)
-                    let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+                    let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                     tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                     if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                         xPos = 0.0
