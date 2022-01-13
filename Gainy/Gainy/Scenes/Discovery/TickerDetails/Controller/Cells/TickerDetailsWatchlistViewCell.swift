@@ -15,7 +15,7 @@ protocol TickerDetailsWatchlistViewCellDelegate: AnyObject {
 
 final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 123.0
+    static let cellHeight: CGFloat = 153.0
     static let cellHeightExpanded: CGFloat = 153.0
     
     public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
