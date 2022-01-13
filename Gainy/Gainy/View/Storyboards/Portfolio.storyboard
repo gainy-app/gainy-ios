@@ -451,7 +451,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="80"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJR-CL-6Du" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
-                                                                                        <rect key="frame" x="181" y="17" width="12" height="12"/>
+                                                                                        <rect key="frame" x="181" y="18.5" width="12" height="12"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="12" id="KiJ-wg-cGg"/>
@@ -464,7 +464,7 @@
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORx-FV-DkZ">
-                                                                                        <rect key="frame" x="197" y="16" width="21" height="14.5"/>
+                                                                                        <rect key="frame" x="197" y="17.5" width="21" height="14.5"/>
                                                                                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                         <color key="textColor" name="mainText"/>
                                                                                         <nil key="highlightedColor"/>
@@ -495,8 +495,8 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Ufv-SD-vLw">
-                                                                                <rect key="frame" x="16" y="16" width="157" height="14"/>
-                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <rect key="frame" x="16" y="16" width="157" height="17"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
