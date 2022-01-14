@@ -123,18 +123,18 @@ struct ScatterChartView: View {
                     VStack(alignment: .trailing, spacing: 0) {
                         HStack(alignment: .lastTextBaseline, spacing: 4) {
                             Text(statsDayName)
-                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(12).uiFont)
+                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                                 .padding(.top, 2)
                             Text(statsDayValue)
                                 .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(12).uiFont)
+                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                             Spacer()
                         }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                         HStack {
                             Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
                                 .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(20).uiFont)
+                                .font(UIFont.compactRoundedSemibold(24.0).uiFont)
                                 .animation(.none)
                             
                                 Spacer()
@@ -351,7 +351,7 @@ struct ScatterChartView: View {
                             .frame(height: 24)
                             .frame(minWidth: 48)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
+                            .foregroundColor(tag == selectedTag ? Color.white : UIColor(hexString: "09141F", alpha: 1.0)!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }
                     .animation(.easeIn)

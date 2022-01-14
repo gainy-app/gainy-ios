@@ -94,14 +94,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_open", params: ["user_id" : "anonymous"])
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_close", params: ["user_id" : "anonymous"])
-    }
-    
     //MARK: - CoreData
     
     lazy var persistentContainer: NSPersistentContainer = {

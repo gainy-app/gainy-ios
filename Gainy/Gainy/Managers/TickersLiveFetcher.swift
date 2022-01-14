@@ -44,13 +44,10 @@ final class TickersLiveFetcher {
                     Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: batch)) { result in
                         switch result {
                         case .success(let graphQLResult):
-                            dprint("LiveData returned: \((graphQLResult.data?.fetchLivePrices ?? []).compactMap{$0?.symbol}.joined(separator: ", "))")
-                            for data in (graphQLResult.data?.fetchLivePrices ?? []) {
-                                
-                                if let data = data {
-                                    TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
-                                    self.currentlyFetching.remove(data.symbol ?? "")
-                                }
+                            dprint("LiveData returned: \((graphQLResult.data?.tickers ?? []).compactMap{$0.symbol}.joined(separator: ", "))")
+                            for data in (graphQLResult.data?.tickers.compactMap(\.realtimeMetrics) ?? []) {
+                                TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
+                                self.currentlyFetching.remove(data.symbol ?? "")
                             }
                             group.leave()
                         case .failure(let error):
@@ -71,7 +68,7 @@ final class TickersLiveFetcher {
                 if !self.currentlyFetching.isEmpty {
                     dprint("Left after get: \(self.currentlyFetching.joined(separator: ", "))")
                     for unfetched in self.currentlyFetching {
-                        TickerLiveStorage.shared.setSymbolData(unfetched, data: LivePrice.init(close: 0.0, dailyChange: 0.0, dailyChangeP: 0.0, datetime: "", symbol: unfetched))
+                        TickerLiveStorage.shared.setSymbolData(unfetched, data: LivePrice(absoluteDailyChange: 0.0, actualPrice: 0.0, dailyVolume: 0.0, relativeDailyChange: 0.0, symbol: unfetched, time: ""))
                     }
                     self.currentlyFetching.removeAll()
                 }
@@ -87,13 +84,10 @@ final class TickersLiveFetcher {
                 Network.shared.apollo.fetch(query: FetchLiveTickersDataQuery(symbols: Array(currentlyFetching))) { result in
                     switch result {
                     case .success(let graphQLResult):
-                        dprint("LiveData returned: \((graphQLResult.data?.fetchLivePrices ?? []).compactMap{$0?.symbol}.joined(separator: ", "))")
-                        for data in (graphQLResult.data?.fetchLivePrices ?? []) {
-                            
-                            if let data = data {
-                                TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
-                                self.currentlyFetching.remove(data.symbol ?? "")
-                            }
+                        dprint("LiveData returned: \((graphQLResult.data?.tickers ?? []).compactMap{$0.symbol}.joined(separator: ", "))")
+                        for data in (graphQLResult.data?.tickers.compactMap(\.realtimeMetrics) ?? []) {                            
+                            TickerLiveStorage.shared.setSymbolData(data.symbol ?? "", data: data)
+                            self.currentlyFetching.remove(data.symbol ?? "")
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                             completion()
