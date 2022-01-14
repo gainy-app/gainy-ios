@@ -1,12 +1,14 @@
-iOS v1.0.2 #130 available
+iOS v1.0.2 #131 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Onboarding videos integrated
+• -
 
 :hammer_and_wrench: Improvements
 • UI Bugs
+• New Charts API
+• New Live Tickers data
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -168,7 +168,7 @@ struct ScatterChartView: View {
             }
         }
         .padding(.all, 0)
-        .frame(height: 74)
+        .frame(height: 76)
         .animation(.easeIn)
     }
     
@@ -346,7 +346,7 @@ struct ScatterChartView: View {
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .fill(tag == selectedTag ? UIColor(hexString: "09141F", alpha: 1.0)!.uiColor : Color.clear)
                             .cornerRadius(16.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
