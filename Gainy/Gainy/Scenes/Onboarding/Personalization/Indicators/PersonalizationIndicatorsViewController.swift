@@ -481,31 +481,31 @@ extension PersonalizationIndicatorsViewController {
     
     func setMarketReturnsHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.marketReturnsSourceView.isHidden = isHidden
+        self.firstSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.marketReturnsSourceView.isHidden = isHidden
             self.marketReturnsSourceView.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.firstSectionStackView.layoutIfNeeded()
         }
     }
     
     func setMoneySourceViewHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.urgentMoneySourceView.isHidden = isHidden
+        self.secondSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.urgentMoneySourceView.isHidden = isHidden
             self.urgentMoneySourceView.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.secondSectionStackView.layoutIfNeeded()
         }
     }
     
     func setStockMarketRisksHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.sliderViewStockMarketRisks.isHidden = isHidden
+        self.thirdSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.sliderViewStockMarketRisks.isHidden = isHidden
             self.sliderViewStockMarketRisks.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.thirdSectionStackView.layoutIfNeeded()
         }
     }
 }
