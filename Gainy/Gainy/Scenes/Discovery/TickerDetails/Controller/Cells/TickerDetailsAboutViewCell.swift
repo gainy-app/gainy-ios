@@ -28,7 +28,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.numberOfLines = 3
         
         let tagHeight: CGFloat = 24.0
-        let margin: CGFloat = 12.0
+        let margin: CGFloat = 8.0
         
         if tagsStack.subviews.count == 0 {
             
@@ -42,15 +42,19 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
                 if tag.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.lightGray
+                    tagView.backgroundColor = UIColor.white
+                    tagView.tagLabel.textColor = UIColor(named: "mainText")
+                    tagView.layer.borderWidth = 1.0
                 } else {
-                    tagView.backgroundColor = UIColor(hex: 0x3A4448)
+                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                    tagView.tagLabel.textColor = .white
+                    tagView.layer.borderWidth = 0.0
                 }
                 
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name
                 tagView.loadImage(url: tag.url)
-                let width = 22.0 + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(14)) + margin
+                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0
@@ -97,7 +101,6 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
         return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
-        return 0.0
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
@@ -132,7 +135,7 @@ class TagView: UIButton {
         return tagImageView
     }()
     
-    private lazy var tagLabel: UILabel = {
+    private(set) lazy var tagLabel: UILabel = {
         let tagLabel = UILabel()
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)
@@ -154,10 +157,15 @@ class TagView: UIButton {
         setupView()
     }
     
+    private var textLeadingConst: NSLayoutConstraint?
+    
     private func setupView() {
         layer.cornerRadius = 4.0
         clipsToBounds = true
-        backgroundColor = UIColor(hexString: "3A4448")!
+        backgroundColor = .white
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor(hexString: "#E7EAEE", alpha: 1.0)?.cgColor
+        layer.cornerRadius = 12.0
         
         addSubview(tagImageView)
         tagImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 12))
@@ -165,7 +173,7 @@ class TagView: UIButton {
         tagImageView.autoAlignAxis(toSuperviewAxis: .horizontal)
         
         addSubview(tagLabel)
-        tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
+        textLeadingConst = tagLabel.autoPinEdge(.leading, to: .leading, of: self, withOffset: 25)
         tagLabel.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: 8)
         tagLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
@@ -173,7 +181,9 @@ class TagView: UIButton {
     
     func loadImage(url: String) {
         guard !url.isEmpty else {
-            tagImageView.image = UIImage(named: "demoRocket")
+            tagImageView.image = nil
+            textLeadingConst?.constant = 8.0
+            layoutIfNeeded()
             return
         }
         let processor = DownsamplingImageProcessor(size: CGSize(width: 19, height: 14))

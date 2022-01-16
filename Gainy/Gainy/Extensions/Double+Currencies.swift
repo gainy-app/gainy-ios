@@ -19,6 +19,17 @@ extension Double {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
+    var priceRaw: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.init(identifier: "en_US")
+
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return formattedValue.hasPrefix("-") ? "$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
+    }
+    
     var percent: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -93,6 +104,17 @@ extension Float {
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
+    }
+    
+    var priceRaw: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.init(identifier: "en_US")
+
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return formattedValue.hasPrefix("-") ? "$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
     var percent: String {

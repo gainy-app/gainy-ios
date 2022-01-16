@@ -8,9 +8,9 @@ public final class DiscoverChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query DiscoverCharts($period: String!, $symbol: String!, $dateG: timestamp!, $dateL: timestamp!) {
-      historical_prices_aggregated(
-        where: {symbol: {_eq: $symbol}, period: {_eq: $period}, datetime: {_gte: $dateG, _lte: $dateL}}
+    query DiscoverCharts($period: String!, $symbol: String!) {
+      chart(
+        where: {symbol: {_eq: $symbol}, period: {_eq: $period}}
         order_by: {datetime: asc}
       ) {
         __typename
@@ -31,18 +31,14 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
   public var period: String
   public var symbol: String
-  public var dateG: timestamp
-  public var dateL: timestamp
 
-  public init(period: String, symbol: String, dateG: timestamp, dateL: timestamp) {
+  public init(period: String, symbol: String) {
     self.period = period
     self.symbol = symbol
-    self.dateG = dateG
-    self.dateL = dateL
   }
 
   public var variables: GraphQLMap? {
-    return ["period": period, "symbol": symbol, "dateG": dateG, "dateL": dateL]
+    return ["period": period, "symbol": symbol]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -50,7 +46,7 @@ public final class DiscoverChartsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("historical_prices_aggregated", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")], "period": ["_eq": GraphQLVariable("period")], "datetime": ["_gte": GraphQLVariable("dateG"), "_lte": GraphQLVariable("dateL")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(HistoricalPricesAggregated.selections))))),
+        GraphQLField("chart", arguments: ["where": ["symbol": ["_eq": GraphQLVariable("symbol")], "period": ["_eq": GraphQLVariable("period")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(Chart.selections))))),
       ]
     }
 
@@ -60,22 +56,22 @@ public final class DiscoverChartsQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(historicalPricesAggregated: [HistoricalPricesAggregated]) {
-      self.init(unsafeResultMap: ["__typename": "query_root", "historical_prices_aggregated": historicalPricesAggregated.map { (value: HistoricalPricesAggregated) -> ResultMap in value.resultMap }])
+    public init(chart: [Chart]) {
+      self.init(unsafeResultMap: ["__typename": "query_root", "chart": chart.map { (value: Chart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "historical_prices_aggregated"
-    public var historicalPricesAggregated: [HistoricalPricesAggregated] {
+    /// fetch data from the table: "chart"
+    public var chart: [Chart] {
       get {
-        return (resultMap["historical_prices_aggregated"] as! [ResultMap]).map { (value: ResultMap) -> HistoricalPricesAggregated in HistoricalPricesAggregated(unsafeResultMap: value) }
+        return (resultMap["chart"] as! [ResultMap]).map { (value: ResultMap) -> Chart in Chart(unsafeResultMap: value) }
       }
       set {
-        resultMap.updateValue(newValue.map { (value: HistoricalPricesAggregated) -> ResultMap in value.resultMap }, forKey: "historical_prices_aggregated")
+        resultMap.updateValue(newValue.map { (value: Chart) -> ResultMap in value.resultMap }, forKey: "chart")
       }
     }
 
-    public struct HistoricalPricesAggregated: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["historical_prices_aggregated"]
+    public struct Chart: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["chart"]
 
       public static var selections: [GraphQLSelection] {
         return [
@@ -99,7 +95,7 @@ public final class DiscoverChartsQuery: GraphQLQuery {
       }
 
       public init(symbol: String? = nil, datetime: timestamp? = nil, period: String? = nil, `open`: float8? = nil, high: float8? = nil, low: float8? = nil, close: float8? = nil, adjustedClose: float8? = nil, volume: float8? = nil) {
-        self.init(unsafeResultMap: ["__typename": "historical_prices_aggregated", "symbol": symbol, "datetime": datetime, "period": period, "open": `open`, "high": high, "low": low, "close": close, "adjusted_close": adjustedClose, "volume": volume])
+        self.init(unsafeResultMap: ["__typename": "chart", "symbol": symbol, "datetime": datetime, "period": period, "open": `open`, "high": high, "low": low, "close": close, "adjusted_close": adjustedClose, "volume": volume])
       }
 
       public var __typename: String {

@@ -123,18 +123,18 @@ struct ScatterChartView: View {
                     VStack(alignment: .trailing, spacing: 0) {
                         HStack(alignment: .lastTextBaseline, spacing: 4) {
                             Text(statsDayName)
-                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(12).uiFont)
+                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                                 .padding(.top, 2)
                             Text(statsDayValue)
                                 .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(12).uiFont)
+                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                             Spacer()
                         }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                         HStack {
                             Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
                                 .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.compactRoundedMedium(20).uiFont)
+                                .font(UIFont.compactRoundedSemibold(24.0).uiFont)
                                 .animation(.none)
                             
                                 Spacer()
@@ -168,7 +168,7 @@ struct ScatterChartView: View {
             }
         }
         .padding(.all, 0)
-        .frame(height: 74)
+        .frame(height: 76)
         .animation(.easeIn)
     }
     
@@ -292,6 +292,25 @@ struct ScatterChartView: View {
     var bottomMedian: some View {
         HStack(spacing: 8) {
             Button(action: {
+                hapticTouch.impactOccurred()
+                delegate.comparePressed()
+            }, label: {
+                HStack {
+                    Image("tiny plus")
+                        .renderingMode(.original)
+                    Text("Compare stocks")
+                        .padding(.all, 0)
+                        .font(UIFont.compactRoundedSemibold(12).uiFont)
+                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                }
+                .padding(.leading, 8)
+                .padding(.trailing, 8)
+                .padding(.top, 4)
+                .padding(.bottom, 4)
+                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+            })
+            
+            Button(action: {
                 isMedianVisible.toggle()
                 hapticTouch.impactOccurred()
             }, label: {
@@ -300,7 +319,7 @@ struct ScatterChartView: View {
                         .renderingMode(.original)
                     Text("Industry median")
                         .padding(.all, 0)
-                        .font(UIFont.proDisplayRegular(13).uiFont)
+                        .font(UIFont.compactRoundedSemibold(12).uiFont)
                         .foregroundColor(isMedianVisible ? Color.white : UIColor(named: "mainText")!.uiColor)
                 }
                 .padding(.leading, 8)
@@ -311,24 +330,7 @@ struct ScatterChartView: View {
             })
                 .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             
-            Button(action: {
-                hapticTouch.impactOccurred()
-                delegate.comparePressed()
-            }, label: {
-                HStack {
-                    Image("tiny plus")
-                        .renderingMode(.original)
-                    Text("Compare")
-                        .padding(.all, 0)
-                        .font(UIFont.proDisplayRegular(13).uiFont)
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                }
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
-                .padding(.top, 4)
-                .padding(.bottom, 4)
-                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
-            })
+            
             Spacer()
         }.padding(.leading, 20)
             .padding(.top, 8)
@@ -344,12 +346,12 @@ struct ScatterChartView: View {
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .fill(tag == selectedTag ? UIColor(hexString: "09141F", alpha: 1.0)!.uiColor : Color.clear)
                             .cornerRadius(16.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
+                            .foregroundColor(tag == selectedTag ? Color.white : UIColor(hexString: "09141F", alpha: 1.0)!.uiColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                     }
                     .animation(.easeIn)

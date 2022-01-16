@@ -1,4 +1,4 @@
-  query GetPortfolioCharts($profileID: Int!, $period: String!, $dateG: timestamp!, $dateL: timestamp!) {
+query GetPortfolioCharts($profileID: Int!, $period: String!, $dateG: timestamp!, $dateL: timestamp!) {
     portfolio_chart(where: {profile_id: {_eq: $profileID}, period: {_eq: $period}, datetime: {_gte: $dateG, _lte: $dateL}}, order_by: {datetime: asc}) {
         datetime
         period

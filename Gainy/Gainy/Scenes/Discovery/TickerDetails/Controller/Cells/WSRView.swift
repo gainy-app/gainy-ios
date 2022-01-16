@@ -90,6 +90,7 @@ struct WSRView: View {
                     }
                 }
                 .frame(width: 119, height: 119)
+                .offset(y: 32)
                 
                 Spacer().frame(width: 62)
                 VStack(alignment: .center, spacing: 10) {
@@ -111,7 +112,9 @@ struct WSRView: View {
             }
             .fixedSize(horizontal: false, vertical: false)
             .onAppear(perform: {
-                loadStats()
+                DispatchQueue.main.async {
+                    self.loadStats()
+                }
             })
             targetView
                 .offset(x:8, y: 30)
@@ -129,15 +132,19 @@ struct WSRView: View {
         let totalCount = Double(viewModel.progress.map(\.count).reduce(0, +))
         
         pieData.removeAll()
-        viewModel.progress.forEach({
-            let progress = Double($0.count) / totalCount
-            pieData.append(PieData.init(startAngle: lastAngle,
+        
+        var pieDataList: [PieData] = []
+        for val in viewModel.progress {
+            let progress = Double(val.count) / totalCount
+            
+            pieDataList.append(PieData.init(startAngle: lastAngle,
                                         progress: progress,
                                         color: colors.popLast()!,
-                                        name: $0.name,
-                                        count: $0.count))
+                                        name: val.name,
+                                        count: val.count))
             lastAngle = .degrees(lastAngle.degrees + (360 * progress))
-        })
+        }
+        pieData.append(contentsOf: pieDataList)
     }
     
     var totalText: String {
@@ -168,7 +175,7 @@ struct WSRView: View {
                             .padding(.trailing, 8)
                     }
                 }.background(Rectangle().cornerRadius(8.0).foregroundColor(UIColor(hexString: "F7F8F9")!.uiColor).frame(height: 32.0))
-                    .frame(width: 156)
+                    .frame(width: 168)
                     .frame(height: 32.0)
             }
         }

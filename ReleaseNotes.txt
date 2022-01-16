@@ -1,12 +1,14 @@
-iOS v1.0.2 #120 available
+iOS v1.0.2 #131 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Merry Christmas!
+• -
 
 :hammer_and_wrench: Improvements
-• Portfolio: detail names changed, expiry changes, sorting
+• UI Bugs
+• New Charts API
+• New Live Tickers data
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

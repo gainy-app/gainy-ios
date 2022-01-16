@@ -107,9 +107,8 @@ class TickerInfo {
     
     private(set) var isMainDataLoaded: Bool = false
     private(set) var isChartDataLoaded: Bool = false
-    
     private var matchLoadTask: Task<Void, Never>?
-    
+
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()

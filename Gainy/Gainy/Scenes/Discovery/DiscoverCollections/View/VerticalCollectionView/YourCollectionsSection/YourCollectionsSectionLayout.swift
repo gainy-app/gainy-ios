@@ -14,22 +14,13 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let yourCollectionGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(92) // original is 88
+                heightDimension: .estimated(92)
             ),
             subitems: [yourCollectionItem]
         )
 
         // Section
         let yourCollectionsSection = NSCollectionLayoutSection(group: yourCollectionGroup)
-        let yourCollectionsHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(74)
-            ),
-            elementKind: UICollectionView.elementKindSectionHeader,
-            alignment: .top
-        )
-        yourCollectionsSection.boundarySupplementaryItems = [yourCollectionsHeader]
         yourCollectionsSection.interGroupSpacing = 8
         yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
             top: 16.0,

@@ -92,7 +92,7 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
     }
 }
 
-typealias RemoteChartData = DiscoverChartsQuery.Data.HistoricalPricesAggregated
+typealias RemoteChartData = DiscoverChartsQuery.Data.Chart
 
 extension RemoteChartData: RemoteDateTimeConvertable {
         
@@ -107,7 +107,7 @@ extension RemoteChartData: RemoteDateTimeConvertable {
             formatter.dateFormat = "MM-dd"
             break
         case .y5, .all:
-            formatter.dateFormat = "yyyy"
+            formatter.dateFormat = "MM-yy"
             break
         default:
             formatter.dateFormat = "MM-dd"
@@ -130,7 +130,7 @@ extension GetPortfolioChartsQuery.Data.PortfolioChart : RemoteDateTimeConvertabl
             formatter.dateFormat = "MM-dd"
             break
         case .y5, .all:
-            formatter.dateFormat = "yyyy"
+            formatter.dateFormat = "MM-yy"
             break
         default:
             formatter.dateFormat = "MM-dd"

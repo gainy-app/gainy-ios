@@ -12,6 +12,7 @@ import Network
 import LinkKit
 import Lottie
 import PureLayout
+import FirebaseAuth
 
 protocol LinkOAuthHandling {
     var linkHandler: Handler? { get }
@@ -98,8 +99,14 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
         
-        animationView.alpha = 0.0
-        view.addSubview(animationView)
+        animationContainerView.alpha = 0.0
+        
+        
+        view.addSubview(animationContainerView)
+        animationContainerView.autoSetDimensions(to: .init(width: 64, height: 64))
+        animationContainerView.autoCenterInSuperview()
+        
+        animationContainerView.addSubview(animationView)
         animationView.autoSetDimensions(to: .init(width: 32, height: 32))
         animationView.autoCenterInSuperview()
         
@@ -125,6 +132,7 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     
     //MARK: - Loaders
     
+    private let animationContainerView = UIView()
     private let animationView = AnimationView()
     
     lazy var keyWindow: UIView =  {
@@ -136,11 +144,11 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     
     /// Show Network HUD
     func showNetworkLoader() {
-        animationView.backgroundColor = .white
-        animationView.alpha = 1.0
-        animationView.layer.cornerRadius = 8.0
-        animationView.clipsToBounds = true
-        view.bringSubviewToFront(animationView)
+        animationContainerView.backgroundColor = .white
+        animationContainerView.alpha = 1.0
+        animationContainerView.layer.cornerRadius = 16.0
+        animationContainerView.clipsToBounds = true
+        view.bringSubviewToFront(animationContainerView)
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.repeat(.infinity), completion: nil)
         isNetworkLoading = true
     }
@@ -150,14 +158,14 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         
         if Thread.isMainThread {
             self.animationView.stop()
-            self.animationView.alpha = 0.0
+            self.animationContainerView.alpha = 0.0
             self.isNetworkLoading = false
             return
         }
         
         DispatchQueue.main.async { [weak self] in
             self?.animationView.stop()
-            self?.animationView.alpha = 0.0
+            self?.animationContainerView.alpha = 0.0
             self?.isNetworkLoading = false
         }
     }
@@ -199,8 +207,9 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     }
     
     func postLeaveAnalytics() {
+        let userID: String = Auth.auth().currentUser?.uid ?? "anonymous"
         var initialParams = ["screen_id" : String(describing: self).components(separatedBy: ".").last!,
-                             "user_id" : "anonymous",
+                             "user_id" : userID,
                              "start_ts" : loadTime.timeIntervalSinceReferenceDate,
                              "end_ts" : Date().timeIntervalSinceReferenceDate,
                              "elapsed_s" : Date().timeIntervalSinceReferenceDate - loadTime.timeIntervalSinceReferenceDate,

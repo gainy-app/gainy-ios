@@ -32,6 +32,7 @@
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
+		331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331D4522278EC14200F990DF /* UserDefaults+Ext.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
 		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
@@ -304,6 +305,7 @@
 		8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCF827399DF00061AB36 /* BrokerViewCell.xib */; };
 		8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */; };
 		8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */; };
+		851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
@@ -369,6 +371,9 @@
 		85DF2122278480D200F2899B /* OnboardingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DF2121278480D200F2899B /* OnboardingInfo.swift */; };
 		85DF212427848DCF00F2899B /* UpdateProfileScoringSettings.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85DF212327848DCE00F2899B /* UpdateProfileScoringSettings.graphql */; };
 		85DF21262784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DF21252784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift */; };
+		85DF212A278CA25000F2899B /* investment_goals.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 85DF2127278CA24F00F2899B /* investment_goals.mp4 */; };
+		85DF212B278CA25000F2899B /* investment_horizon.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 85DF2128278CA24F00F2899B /* investment_horizon.mp4 */; };
+		85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 85DF2129278CA25000F2899B /* investment_failure.mp4 */; };
 		85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */; };
 		85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A27F2755184F00C0E5C5 /* InfoDataSource.swift */; };
 		85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */; };
@@ -505,6 +510,7 @@
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
+		331D4522278EC14200F990DF /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		3330BD0C26FA6B850079C899 /* FetchStockMedianDay.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedianDay.graphql; sourceTree = "<group>"; };
@@ -786,6 +792,7 @@
 		8505FCF827399DF00061AB36 /* BrokerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerViewCell.xib; sourceTree = "<group>"; };
 		8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerFooterView.swift; sourceTree = "<group>"; };
 		8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerFooterView.xib; sourceTree = "<group>"; };
+		851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistSectionLayout.swift; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
 		8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDescriptionViewController.swift; sourceTree = "<group>"; };
@@ -850,6 +857,9 @@
 		85DF2121278480D200F2899B /* OnboardingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingInfo.swift; sourceTree = "<group>"; };
 		85DF212327848DCE00F2899B /* UpdateProfileScoringSettings.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpdateProfileScoringSettings.graphql; sourceTree = "<group>"; };
 		85DF21252784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileScoringSettings.graphql.swift; sourceTree = "<group>"; };
+		85DF2127278CA24F00F2899B /* investment_goals.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = investment_goals.mp4; sourceTree = "<group>"; };
+		85DF2128278CA24F00F2899B /* investment_horizon.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = investment_horizon.mp4; sourceTree = "<group>"; };
+		85DF2129278CA25000F2899B /* investment_failure.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = investment_failure.mp4; sourceTree = "<group>"; };
 		85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioFilteringViewController.swift; sourceTree = "<group>"; };
 		85E4A27F2755184F00C0E5C5 /* InfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDataSource.swift; sourceTree = "<group>"; };
 		85E4A28227551D2300C0E5C5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -1473,6 +1483,7 @@
 			children = (
 				335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */,
 				3AD40FB9266923C1005679DE /* YourCollectionsSectionLayout.swift */,
+				851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */,
 				3A859426268A50D500CB8DD6 /* YourCollectionsHeader */,
 				3A85942D268A515400CB8DD6 /* YourCollectionViewCell */,
 			);
@@ -1684,6 +1695,9 @@
 			isa = PBXGroup;
 			children = (
 				854299242769F24D00E8C433 /* intro.mp4 */,
+				85DF2129278CA25000F2899B /* investment_failure.mp4 */,
+				85DF2127278CA24F00F2899B /* investment_goals.mp4 */,
+				85DF2128278CA24F00F2899B /* investment_horizon.mp4 */,
 				907B227B275029C900FB4B1E /* loader3.json */,
 				33B9116C2706E21E00C00B0D /* UploadDsym */,
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
@@ -1871,6 +1885,7 @@
 				85ED4DDC2701F47D00FE6926 /* UIImage+Serialization.swift */,
 				33F1947C27143BE200C438AA /* String+Hash.swift */,
 				33387FDD274E7DF30070A733 /* String+Attributed.swift */,
+				331D4522278EC14200F990DF /* UserDefaults+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2442,8 +2457,10 @@
 				85E4A2CA2762101A00C0E5C5 /* SearchCollectionDetailsAlgolia.graphql in Resources */,
 				859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
+				85DF212A278CA25000F2899B /* investment_goals.mp4 in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				85EDC14B27281EA700866AD2 /* FetchTickers.graphql in Resources */,
+				85DF212B278CA25000F2899B /* investment_horizon.mp4 in Resources */,
 				85695AFA2746BAD400759569 /* InsertMetricsSessingsForCollection.graphql in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
 				85695AEB27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib in Resources */,
@@ -2460,6 +2477,7 @@
 				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
 				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
+				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
 				3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */,
@@ -2648,6 +2666,7 @@
 				859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */,
 				3AE795E726638FBE002B40D6 /* MainCoordinator.swift in Sources */,
 				33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */,
+				331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
 				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
@@ -2796,6 +2815,7 @@
 				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
 				338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
+				851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */,
 				85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */,
 				3A01FBF3268634DE007F6FA3 /* CardsTwoColumnGridFlowSectionLayout.swift in Sources */,
 				33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */,
@@ -3041,7 +3061,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3165,7 +3185,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3350,7 +3370,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3379,7 +3399,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 120;
+				CURRENT_PROJECT_VERSION = 131;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

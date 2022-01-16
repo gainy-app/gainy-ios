@@ -29,7 +29,11 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var addProfilePictureButton: UIButton!
     @IBOutlet private weak var logoutButton: BorderButton!
     @IBOutlet private weak var requestFeatureButton: BorderButton!
-    @IBOutlet private weak var sendFeedbackButton: BorderButton!
+    @IBOutlet private weak var sendFeedbackButton: BorderButton! {
+        didSet {
+            sendFeedbackButton.layer.borderWidth = 2.0
+        }
+    }
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
@@ -47,7 +51,7 @@ final class ProfileViewController: BaseViewController {
                 return nil
             }
             
-            let key = "disclaimerShownForProfileWithID" + "\(profileID)" + ".prod.v1.0"
+            let key = "disclaimerShownForProfileWithID" + "\(profileID)" + ".prod.v1.0.1"
             return key
         }
     }
@@ -120,7 +124,18 @@ final class ProfileViewController: BaseViewController {
                     return
                 }
                 
-                self.appInterests = appInterests
+                var health: [AppInterestsQuery.Data.Interest] = []
+                self.appInterests = appInterests.compactMap({ item in
+                    if item.id == 50 || item.id == 55 {
+                        health.append(item)
+                        return nil
+                    }
+                    return item
+                })
+                if let interests = self.appInterests {
+                    self.appInterests?.insert(contentsOf: health, at: interests.count / 2)
+                }
+                
                 self.profileInterests = self.appInterests?.filter({ interest in
                     guard let interestID = interest.id else {
                         return false
@@ -561,7 +576,6 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         
         let cell: PickInterestOrCategoryCell = collectionView.dequeueReusableCell(withReuseIdentifier: PickInterestOrCategoryCell.reuseIdentifier, for: indexPath) as! PickInterestOrCategoryCell
-        cell.selectedColorHexString = "#5999FF"
         var isSelected: Bool = false
         if collectionView == self.interestsCollectionView {
             let profileInterest: AppInterestsQuery.Data.Interest? = self.profileInterests?[indexPath.row]
@@ -623,7 +637,7 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         
         let width = name.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width
-        let size = CGSize.init(width: (ceil(width) + CGFloat(64)), height: CGFloat(40))
+        let size = CGSize.init(width: (ceil(width) + CGFloat(56)), height: CGFloat(40))
         return size
     }
     

@@ -346,11 +346,11 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .volatility52Weeks:
             return "Volatility range\n52 weeks"
         case .revenueGrowthYoy:
-            return "Revenue\nGrowth, TTM"
+            return "Revenue\nGrowth"
         case .revenueGrowthFwd:
-            return "Revenue\nGrowth, FWD"
+            return "Revenue\nGrowth"
         case .ebitdaGrowthYoy:
-            return "EBITDA\nGrowth, TTM"
+            return "EBITDA\nGrowth"
         case .epsGrowthYoy:
             return "EPS\nGrowth, TTM"
         case .epsGrowthFwd:

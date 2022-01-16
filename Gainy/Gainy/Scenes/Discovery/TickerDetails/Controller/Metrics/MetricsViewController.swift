@@ -19,9 +19,17 @@ protocol MetricsViewControllerDelegate: AnyObject {
 
 class MetricsViewController: BaseViewController {
 
+    @IBOutlet private weak var titleLbl: UILabel! {
+       didSet {
+           titleLbl.setKern()
+       }
+   }
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var searchTextField: UITextField!
     @IBOutlet private weak var searchCollectionView: UICollectionView!
+    
+    private var footerViewHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var collectionViewBottomConstraint: NSLayoutConstraint?
     
     var ticker: RemoteTicker? = nil
     var collectionID: Int? = nil
@@ -45,7 +53,7 @@ class MetricsViewController: BaseViewController {
     
     private var bottomView: MetricsBottomView? = nil
     private var isSearching: Bool = false
-    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 10.0 * 2.0 - 32.0) / 3.0
+    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 14.0 * 2.0 - 10.0 * 2.0) / 3.0
     private let itemHeight: CGFloat = 96.0
     
     override func viewDidLoad() {
@@ -117,6 +125,9 @@ class MetricsViewController: BaseViewController {
         searchTextField.layer.cornerRadius = 16
         searchTextField.isUserInteractionEnabled = true
         searchTextField.placeholder = "Search metrics"
+        searchTextField.backgroundColor = UIColor(hexString: "F7F8F9", alpha: 1.0)
+        searchTextField.layer.cornerRadius = 16.0
+        searchTextField.clipsToBounds = true
         let searchIconContainerView = UIView(
             frame: CGRect(
                 x: 0,
@@ -211,7 +222,6 @@ class MetricsViewController: BaseViewController {
         bottomView.autoPinEdge(toSuperviewEdge: .leading)
         bottomView.autoPinEdge(toSuperviewEdge: .trailing)
         bottomView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        bottomView.autoSetDimension(.height, toSize: 101)
         self.bottomView = bottomView
         self.bottomView?.delegate = self
         bottomView.alpha = 1.0
@@ -219,6 +229,7 @@ class MetricsViewController: BaseViewController {
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
         let text = "Select \(self.maxSelectedElements) metrics please"
         self.bottomView?.setText(text: text)
+        self.updateBottomViewPosition()
     }
     
     private func fillDataSource() {
@@ -294,6 +305,20 @@ class MetricsViewController: BaseViewController {
         
         self.collectionView.reloadData()
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
+    }
+    
+    func updateBottomViewPosition() {
+        
+        self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
+        let height = self.selectedSection.count < self.maxSelectedElements ? 30 : 101
+        if self.footerViewHeightConstraint != nil {
+            self.footerViewHeightConstraint?.constant = CGFloat(height)
+        } else {
+            self.footerViewHeightConstraint = self.bottomView?.autoSetDimension(.height, toSize: CGFloat(height))
+        }
+        self.collectionViewBottomConstraint?.constant = self.selectedSection.count < self.maxSelectedElements ? 45 : 0
+        let bottomInset = self.selectedSection.count < self.maxSelectedElements ? 0 : 101
+        self.collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: CGFloat(bottomInset), right: 0.0)
     }
 }
 
@@ -671,6 +696,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
+        self.updateBottomViewPosition()
         
         if self.selectedSection.count == self.maxSelectedElements && isSearching {
             self.textFieldClear()
@@ -723,6 +749,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             }
         }
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
+        self.updateBottomViewPosition()
 //        GainyAnalytics.logEvent("personalization_deselect_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
 }

@@ -1,9 +1,13 @@
 query FetchLiveTickersData($symbols: [String!]) {
-  fetchLivePrices(symbols: $symbols) {
-    close
-    daily_change
-    daily_change_p
-    datetime
+  tickers(where: {symbol: {_in: $symbols}}) {
     symbol
+    realtime_metrics {
+      absolute_daily_change
+      actual_price
+      daily_volume
+      relative_daily_change
+      symbol
+      time
+    }
   }
 }

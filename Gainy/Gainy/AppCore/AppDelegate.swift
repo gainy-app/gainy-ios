@@ -56,9 +56,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().delegate = self
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
         
-#if DEBUG
+
         //AppsFlyerLib.shared().isDebug = true
-#endif
         
         NotificationCenter
             .default
@@ -93,14 +92,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
         }
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_open", params: ["user_id" : "anonymous"])
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_close", params: ["user_id" : "anonymous"])
     }
     
     //MARK: - CoreData

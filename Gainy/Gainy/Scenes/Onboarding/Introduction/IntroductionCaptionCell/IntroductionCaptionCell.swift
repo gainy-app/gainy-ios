@@ -30,7 +30,7 @@ final class IntroductionCaptionCell: UICollectionViewCell {
         guard let imageView = imageView else {return}
         guard imageName.count > 0 else {return}
         guard let image = UIImage(named: imageName) else {return}
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.image = image
     }
     

@@ -2,6 +2,7 @@ import UIKit
 import AppTrackingTransparency
 import AdSupport
 import FacebookCore
+import FirebaseAuth
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Internal
@@ -44,7 +45,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
                     let params = components.queryItems else {
-                        GainyAnalytics.logEvent("first_launch", params: fbParams)
+                        if UserDefaults.isFirstLaunch() {
+                            GainyAnalytics.logEvent("first_launch", params: fbParams)
+                        }
                         return
                 }
 
@@ -58,7 +61,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 fbParams["cs"] = csVal
             }
         }
-        GainyAnalytics.logEvent("first_launch", params: fbParams)
+        if UserDefaults.isFirstLaunch() {
+            GainyAnalytics.logEvent("first_launch", params: fbParams)
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -83,6 +88,16 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             self?.requestTrackingAuthorization()
         }
+    }
+    
+    //MARK: - Open/Close
+    
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
     }
 
     // MARK: Private

@@ -30,6 +30,7 @@ final class GainyAnalytics {
     
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         var newParams = params ?? [:]
+        newParams["sn"] = ""
         
         #if DEBUG
         print("\n###ANALYTICS###")

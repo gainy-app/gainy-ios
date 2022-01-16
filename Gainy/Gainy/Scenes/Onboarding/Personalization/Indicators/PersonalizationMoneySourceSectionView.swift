@@ -117,7 +117,7 @@ final class PersonalizationTitlePickerSectionView: UIView {
         
         self.titleLabel.font = UIFont.proDisplayBold(20.0)
         self.titleLabel.textColor = UIColor.black
-        self.titleLabel.textAlignment = .left
+        self.titleLabel.textAlignment = .center
         self.titleLabel.text = "Title"
     }
     
@@ -131,14 +131,14 @@ final class PersonalizationTitlePickerSectionView: UIView {
         
         self.descriptionLabel.font = UIFont.proDisplayRegular(16.0)
         self.descriptionLabel.textColor = UIColor(hexString: "#09141F")
-        self.descriptionLabel.textAlignment = .left
+        self.descriptionLabel.textAlignment = .center
         self.descriptionLabel.text = "Description Description Description Description Description Description Description Description"
         self.descriptionLabel.sizeToFit()
     }
     
     private func setUpCollectionView() {
         
-        let layout = UICollectionViewLeftAlignedVerticalLayout()
+        let layout = UICollectionViewCenterAlignedLayout()
         layout.sectionFootersPinToVisibleBounds = true
         self.collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         guard let collectionView = self.collectionView else {

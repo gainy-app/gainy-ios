@@ -27,7 +27,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         stocksLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
         
         stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
-        stocksAmountLabel.autoAlignAxis(.vertical, toSameAxisOf: stocksLabel)
+        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
     }
     
     @available(*, unavailable)
@@ -54,6 +54,30 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         imageView.isOpaque = true
         imageView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
         return imageView
+    }()
+    
+    lazy var dotsView: UIView = {
+        let dotsView = UIView.newAutoLayout()
+        dotsView.backgroundColor = UIColor.clear
+        
+        var previousView: UIView?
+        for i in 0 ..< 18 {
+            let view = UIView.newAutoLayout()
+            view.layer.cornerRadius = 1.0
+            view.layer.masksToBounds = true
+            view.backgroundColor = UIColor(hexString: "B1BDC8")
+            dotsView.addSubview(view)
+            view.autoAlignAxis(toSuperviewAxis: .horizontal)
+            view.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+            if let prev = previousView {
+                view.autoPinEdge(.left, to: .right, of: prev, withOffset: 18.0)
+            } else {
+                view.autoPinEdge(toSuperviewEdge: .left)
+            }
+            previousView = view
+        }
+        
+        return dotsView
     }()
     
     lazy var blackAlphaView: UIView = {
@@ -144,6 +168,20 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         self.imageLoaded = true
     }
     
+    private func updateDotsViewBasedOnTag() {
+        
+        if Constants.CollectionDetails.watchlistCollectionID == self.tag {
+            if self.dotsView.superview == nil {
+                self.contentView.addSubview(dotsView)
+                self.dotsView.autoPinEdge(.top, to: .bottom, of: backImageView, withOffset: 15.0)
+                self.dotsView.autoSetDimensions(to: CGSize.init(width: 345, height: 2))
+                self.dotsView.autoAlignAxis(toSuperviewAxis: .vertical)
+            }
+        } else {
+            self.dotsView.removeFromSuperview()
+        }
+    }
+    
     func updateImageBasedOnTag() -> Bool {
         
         self.blackAlphaView.isHidden = true
@@ -169,6 +207,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         if window != nil {
             self.imageLoaded = false
             loadImage()
+            updateDotsViewBasedOnTag()
         }
     }
     
@@ -225,6 +264,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         self.contentView.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
         self.contentView.layer.cornerRadius = isTop20 ? 8.0 : 0.0
         _ = self.updateImageBasedOnTag()
+        updateDotsViewBasedOnTag()
     }
     
     // MARK: Functions
@@ -286,7 +326,7 @@ extension YourCollectionViewCell: SwipeCollectionViewCellDelegate {
         for orientation: SwipeActionsOrientation
     ) -> [SwipeAction]? {
         guard orientation == .right else { return nil }
-        
+        guard self.tag != Constants.CollectionDetails.watchlistCollectionID else { return nil }
         let deleteAction = SwipeAction(style: .default) { [weak self]  _, position in
             self?.onDeleteButtonPressed?()
         }

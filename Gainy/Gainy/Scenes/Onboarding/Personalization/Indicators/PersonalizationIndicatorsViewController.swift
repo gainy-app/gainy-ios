@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 enum PersonalizationTab: Int {
     case investmentsGoals = 0
@@ -22,10 +23,18 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     public weak var coordinator: OnboardingCoordinator?
     public weak var mainCoordinator: MainCoordinator?
     
+    @IBOutlet weak var firstSectionStackViewVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var secondSectionStackViewVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var thirdSectionStackViewVerticalConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var firstSectionStackView: UIStackView!
     @IBOutlet weak var secondSectionStackView: UIStackView!
     @IBOutlet weak var thirdSectionStackView: UIStackView!
+    
     @IBOutlet weak var lastSectionStackView: UIStackView!
+    
+    @IBOutlet weak var playerView: UIView!
+    @IBOutlet weak var playerViewTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var sliderViewInvestmentGoals: PersonalizationSliderSectionView!
     @IBOutlet weak var marketReturnsSourceView: PersonalizationTitlePickerSectionView!
@@ -49,18 +58,27 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private var selectedSources: [PersonalizationInfoValue]?
     private var selectedApproaches: [PersonalizationInfoValue]?
     
+    private var videoURL: URL?
+    
+    var avPlayer: AVPlayer!
+    var avPlayerLayer: AVPlayerLayer!
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.addIndicatorView()
         self.setUpNavigationBar()
+        
         self.setUpInvestmentGoalsView()
         self.setUpMarketReturnsView()
+        
         self.setUpInvestmentHorizonView()
         self.setUpUrgentMoneySourceView()
+        
         self.setUpDamageOfFailureView()
         self.setUpStockMarketRisksView()
+        
         self.setUpInvestingApproachSourceView()
         self.setNextButtonHidden(isHidden: true)
     }
@@ -69,6 +87,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         
         super.viewWillAppear(animated)
         
+        self.setupPlayer(forTab: .investmentsGoals)
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
         if self.currentTab == .stockMarketRisks {
@@ -79,6 +98,54 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     // MARK: - Status Bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    func setupPlayer(forTab tab: PersonalizationTab) {
+        
+        var url: URL?
+        switch tab {
+        case .investmentsGoals:
+            url = Bundle.main.url(forResource:"investment_goals", withExtension: "mp4")
+        case .marketReturns:
+            url = Bundle.main.url(forResource:"investment_goals", withExtension: "mp4")
+        case .investmentHorizon:
+            url = Bundle.main.url(forResource:"investment_horizon", withExtension: "mp4")
+        case .moneySourceView:
+            url = Bundle.main.url(forResource:"investment_horizon", withExtension: "mp4")
+        case .damageOfFailure:
+            url = Bundle.main.url(forResource:"investment_failure", withExtension: "mp4")
+        case .stockMarketRisks:
+            url = Bundle.main.url(forResource:"investment_failure", withExtension: "mp4")
+        case .investingApproach:
+            url = nil
+        }
+        
+        guard let url = url else {
+            return
+        }
+        
+        if let videoURL = videoURL, videoURL.absoluteString == url.absoluteString {
+            avPlayer.seek(to: .zero)
+            avPlayer.play()
+            return
+        }
+        
+        self.videoURL = url
+        
+        if let layer = avPlayerLayer {
+            layer.removeFromSuperlayer()
+        }
+        avPlayer = AVPlayer(url: url)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer.videoGravity = .resizeAspectFill
+        avPlayer.volume = 0
+        avPlayer.actionAtItemEnd = .none
+        
+        avPlayerLayer.frame = view.layer.bounds
+        self.playerView.backgroundColor = .clear
+        self.playerView.layer.insertSublayer(avPlayerLayer, at: 0)
+        
+        avPlayer.play()
     }
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
@@ -140,17 +207,46 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     private func setCurrentTab(newTab: PersonalizationTab) {
         
+        let middleDfaultOffset = 150.0
         self.currentTab = newTab
         self.setNextButtonHidden(isHidden: self.currentTab.rawValue % 2 == 0)
         
         let nextButtonTitle = NSLocalizedString("Next", comment: "Next button title")
         self.nextButton.setTitle(nextButtonTitle, for: UIControl.State.normal)
+        if (self.currentTab.rawValue % 2 == 0) {
+            self.setupPlayer(forTab: newTab)
+        }
+        
+        self.playerView.isHidden = newTab == .investingApproach
+        
+        self.view.setNeedsLayout()
+        UIView.animate(withDuration: 0.25) {
+            self.view.setNeedsLayout()
+            let show = self.currentTab.rawValue % 2 == 0
+            if show {
+                self.playerView.alpha = 1.0
+                self.playerViewTopConstraint.constant = 0.0
+            } else {
+                self.playerView.alpha = 0.0
+                self.playerViewTopConstraint.constant = -self.view.bounds.size.height
+            }
+            self.view.layoutIfNeeded()
+        } completion: { success in
+            
+        }
         
         switch self.currentTab {
         case .investmentsGoals:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentGoals", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.0)
             self.setMarketReturnsHidden(isHidden: true)
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.firstSectionStackViewVerticalConstraint.constant = middleDfaultOffset
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .marketReturns:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "marketReturns", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
@@ -160,10 +256,24 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } else {
                 self.setNextButtonHidden(isHidden: true)
             }
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.firstSectionStackViewVerticalConstraint.constant = 0.0
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .investmentHorizon:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investmentHorizon", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMoneySourceViewHidden(isHidden: true)
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.secondSectionStackViewVerticalConstraint.constant = middleDfaultOffset
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .moneySourceView:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "moneySourceView", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.50)
@@ -173,15 +283,36 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             } else {
                 self.setNextButtonHidden(isHidden: true)
             }
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.secondSectionStackViewVerticalConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .damageOfFailure:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "damageOfFailure", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.50)
             self.setStockMarketRisksHidden(isHidden: true)
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.thirdSectionStackViewVerticalConstraint.constant = middleDfaultOffset
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .stockMarketRisks:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.75)
             self.setStockMarketRisksHidden(isHidden: false)
             self.setNextButtonHidden(isHidden: self.sliderViewStockMarketRisks.isInitialLayout)
+            self.view.setNeedsLayout()
+            UIView.animate(withDuration: 0.25) {
+                self.thirdSectionStackViewVerticalConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            } completion: { success in
+
+            }
         case .investingApproach:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investingApproach", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.90)
@@ -200,7 +331,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14)]
+            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
+                NSAttributedString.Key.kern: 1.25]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Personalization", comment: "Personalization").uppercased()
@@ -349,25 +481,31 @@ extension PersonalizationIndicatorsViewController {
     
     func setMarketReturnsHidden(isHidden: Bool) {
         
+        self.marketReturnsSourceView.isHidden = isHidden
+        self.firstSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.marketReturnsSourceView.isHidden = isHidden
             self.marketReturnsSourceView.alpha = isHidden ? 0.0 : 1.0
+            self.firstSectionStackView.layoutIfNeeded()
         }
     }
     
     func setMoneySourceViewHidden(isHidden: Bool) {
         
+        self.urgentMoneySourceView.isHidden = isHidden
+        self.secondSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.urgentMoneySourceView.isHidden = isHidden
             self.urgentMoneySourceView.alpha = isHidden ? 0.0 : 1.0
+            self.secondSectionStackView.layoutIfNeeded()
         }
     }
     
     func setStockMarketRisksHidden(isHidden: Bool) {
         
+        self.sliderViewStockMarketRisks.isHidden = isHidden
+        self.thirdSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.sliderViewStockMarketRisks.isHidden = isHidden
             self.sliderViewStockMarketRisks.alpha = isHidden ? 0.0 : 1.0
+            self.thirdSectionStackView.layoutIfNeeded()
         }
     }
 }

@@ -12,6 +12,8 @@ final class AuthorizationViewController: BaseViewController {
     @IBOutlet private weak var enterWithAppleButton: BorderButton!
     @IBOutlet private weak var enterWithGoogleButton: BorderButton!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet private weak var imageViewHeightConstraint: NSLayoutConstraint!
     
     weak var coordinator: OnboardingCoordinator?
     weak var authorizationManager: AuthorizationManager?
@@ -96,7 +98,8 @@ final class AuthorizationViewController: BaseViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14)]
+            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
+                NSAttributedString.Key.kern: 1.25]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Welcome on board", comment: "Welcome on board").uppercased()
@@ -113,10 +116,16 @@ final class AuthorizationViewController: BaseViewController {
         self.enterWithGoogleButton.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 16.0)
         
         var title = NSLocalizedString("Hi there!", comment: "Hi there!")
+        self.imageView.image = UIImage.init(named: "sign-in-img")
+        self.imageViewHeightConstraint.constant = 184.0
         if self.onboardingDone != nil {
             title = NSLocalizedString("Almost done!", comment: "Almost done!")
+            self.imageView.image = UIImage.init(named: "sign-up-img")
+            self.imageViewHeightConstraint.constant = 200.0
         }
         self.titleLabel.text = title
+        
+        
     }
     
 }
