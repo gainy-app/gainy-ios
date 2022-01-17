@@ -9,16 +9,7 @@ fragment RemoteCollectionDetails on collections {
   name
   image_url
   description
-  ticker_collections_aggregate {
-    aggregate {
-      count
-    }
-  }
-  ticker_collections {
-    ticker {
-    ...RemoteTickerDetails
-    }
-  }
+  size
 }
 
 fragment RemoteTickerDetails on tickers {

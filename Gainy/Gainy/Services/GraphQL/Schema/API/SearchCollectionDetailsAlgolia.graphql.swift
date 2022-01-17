@@ -25,7 +25,6 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + RemoteCollectionDetails.fragmentDefinition)
-    document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
   }
 
@@ -130,6 +129,10 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
 
         public init(unsafeResultMap: ResultMap) {
           self.resultMap = unsafeResultMap
+        }
+
+        public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
+          self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
         }
 
         public var __typename: String {

@@ -9,17 +9,9 @@ enum CollectionDetailsDTOMapper {
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
-            collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
+            collectionStocksAmount: dto.size ?? 0,
             isInYourCollectionsList: false,
-            cards: dto.tickerCollections.compactMap {
-                if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
-                    return CollectionDetailsDTOMapper.mapTickerDetails(
-                        remoteTickerDetails
-                    )
-                } else {
-                    return nil
-                }
-            }
+            cards: []
         )
     }
     
@@ -31,19 +23,9 @@ enum CollectionDetailsDTOMapper {
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
-            collectionStocksAmount: dto.tickerCollectionsAggregate.aggregate?.count ?? 0,
+            collectionStocksAmount: dto.size ?? 0,
             isInYourCollectionsList: true,
-            cards: dto.tickerCollections.compactMap {
-                if let remoteTickerDetails = $0.ticker?.fragments.remoteTickerDetails {
-                    return CollectionDetailsDTOMapper.mapTickerDetails(
-                        remoteTickerDetails
-                    )
-                } else {
-                    dprint("Missing tickers: \(dto.name ?? "")")
-                    GainyAnalytics.logEvent("Missing tickers", params: ["collection": dto.name ?? "", "id" : dto.id ?? -1])
-                    return nil
-                }
-            }
+            cards: []
         )
     }
     

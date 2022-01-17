@@ -56,9 +56,9 @@ final class CollectionsManager {
                             }
                             return
                         }
-                        for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                        }
+                        //                        for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+                        //                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        //                        }
                         for newCol in collections {
                             if !self.collections.contains(where: {$0.id == newCol.id}) {
                                 self.collections.append(newCol)
@@ -83,7 +83,7 @@ final class CollectionsManager {
                             completion()
                         }
                     }
-                    break                    
+                    break
                 case .failure(_):
                     self.failedToLoad.insert(colID)
                     newCollectionFetched.send(.fetchedFailed)
@@ -127,12 +127,7 @@ final class CollectionsManager {
                     completion()
                     return
                 }
-                
-                let tickerCollection = tickers.map { remoteTicker -> RemoteCollectionDetails.TickerCollection in
-                    
-                    let ticker = RemoteCollectionDetails.TickerCollection.Ticker.init(unsafeResultMap: remoteTicker.resultMap)
-                    return RemoteCollectionDetails.TickerCollection.init(ticker: ticker)
-                }
+                //TO-DO: What to do with Tickers!!!
                 
                 if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
                     let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
@@ -140,7 +135,11 @@ final class CollectionsManager {
                     CollectionsManager.shared.watchlistCollection = nil
                 }
                 
-                let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID, name: "Watchlist", imageUrl: "watchlistCollectionBackgroundImage", description: "", tickerCollectionsAggregate: RemoteCollectionDetails.TickerCollectionsAggregate.init(aggregate: RemoteCollectionDetails.TickerCollectionsAggregate.Aggregate.init(count: UserProfileManager.shared.watchlist.count)), tickerCollections: tickerCollection)
+                let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
+                                                                           name: "Watchlist",
+                                                                           imageUrl: "watchlistCollectionBackgroundImage",
+                                                                           description: "",
+                                                                           size: UserProfileManager.shared.watchlist.count)
                 CollectionsManager.shared.watchlistCollection = collectionRemoteDetails
                 
                 let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
