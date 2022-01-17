@@ -433,6 +433,7 @@
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
 		900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */; };
 		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
+		901727242795520B000C5BC9 /* CollectionsManager+MatchScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */; };
 		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
@@ -919,6 +920,7 @@
 		900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRangeableCell.swift; sourceTree = "<group>"; };
 		900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHoldingsViewController.swift; sourceTree = "<group>"; };
 		90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsModelMapper.swift; sourceTree = "<group>"; };
+		901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionsManager+MatchScore.swift"; sourceTree = "<group>"; };
 		901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedCategories.graphql.swift; sourceTree = "<group>"; };
 		901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedInterests.graphql.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
@@ -1759,6 +1761,7 @@
 				3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */,
 				33626A97271826190013EE6C /* APIModels+Caching.swift */,
 				3381A56F271D48CA001A1EDA /* CollectionsManager.swift */,
+				901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */,
 				3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
@@ -2919,6 +2922,7 @@
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				339FB3AE2747A46800C95748 /* PlainCircullarProgressBarView.swift in Sources */,
+				901727242795520B000C5BC9 /* CollectionsManager+MatchScore.swift in Sources */,
 				85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
