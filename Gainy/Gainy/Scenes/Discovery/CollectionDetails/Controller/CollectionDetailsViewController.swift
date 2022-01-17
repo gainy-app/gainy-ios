@@ -607,10 +607,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     }
                 }
                 
-                //Paging
-                self?.viewModel?.collectionOffset = CollectionsManager.shared.collections.count + 1
-                self?.viewModel?.hasMorePages = (collections.count == 20)
-                
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
                 self?.initViewModelsFromData()

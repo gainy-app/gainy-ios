@@ -153,6 +153,57 @@ final class CollectionsManager {
         }
     }
     
+    //MARK: - Speedup Migration
+    
+    /// This will be our new initla loading
+    /// - Parameter completion: when all done
+    func initialCollectionsLoading(completion: @escaping () -> Void) {
+        //Load our fav collections
+        loadFavCollection {
+            
+        }
+        
+        //Load tickers for each collection basedon server sorting and 20 limit
+        //TO-DO
+        
+        //Load Match Score for each Collection and store sorting order
+        //TO-DO
+        
+        //Load watchlist (need to gather data to insert before first collections)
+        loadWatchlistCollection {
+            
+        }
+    }
+    
+    /// Loading JUST Collection details
+    /// - Parameter completion: when all done
+    fileprivate func loadFavCollection(completion: @escaping () -> Void) {
+        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) {result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                    completion()
+                    return
+                }
+                
+//                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+//                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+//                }
+                
+                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+                }
+                
+                CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+                CollectionsManager.shared.lastLoadDate = Date()
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                completion()
+            }
+        }
+
+    }
+    
     @Atomic
     private(set) var failedToLoad: Set<Int> = Set<Int>()
     
