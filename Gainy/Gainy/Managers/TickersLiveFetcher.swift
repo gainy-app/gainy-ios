@@ -8,6 +8,8 @@
 import UIKit
 import Apollo
 
+typealias CollectionsScores = [Int : [(symbol: String, score: Int)]]
+
 extension Array {
     func chunked(into size: Int) -> [[Element]] {
         return stride(from: 0, to: count, by: size).map {
@@ -159,12 +161,14 @@ final class TickersLiveFetcher {
     /// - Parameters:
     ///   - collectionIds: collection IDs to load
     ///   - completion: when loading completed/failed
-    func getMatchScores(collectionIds: [Int], _ completion: @escaping (() -> Void)) {        
+    func getMatchScores(collectionIds: [Int], _ completion: @escaping ((CollectionsScores) -> Void)) {
         guard let profileID = UserProfileManager.shared.profileID else {
             dprint("Missing profileID")
-            completion()
+            completion([:])
             return
         }
+        
+        var collectionMappings: CollectionsScores = [:]
         
         let group = DispatchGroup()
         for collectionId in collectionIds {
@@ -173,9 +177,12 @@ final class TickersLiveFetcher {
             Network.shared.apollo.fetch(query: FetchTickersMatchDataQuery(profileId: profileID, collectionId: collectionId)) { result in
                 switch result {
                 case .success(let graphQLResult):
+                    var mapData: [(symbol: String, score: Int)] = []
                     for data in (graphQLResult.data?.getMatchScoresByCollection?.compactMap({$0?.fragments.liveMatch}) ?? []) {
                         TickerLiveStorage.shared.setMatchData(data.symbol, data: data)
+                        mapData.append((data.symbol, data.matchScore))
                     }
+                    collectionMappings[collectionId] = mapData
                     dprint("Fetching match ended \(collectionId)")
                     group.leave()
                 case .failure(let error):
@@ -186,10 +193,10 @@ final class TickersLiveFetcher {
         }
         if collectionIds.count > 0 {
             group.notify(queue: .main, execute: {
-                completion()
+                completion(collectionMappings)
             })
         } else {
-            completion()
+            completion(collectionMappings)
         }
         
     }

@@ -28,6 +28,8 @@ final class TickerLiveStorage {
     private var matchesStorage: Storage<String, CachedMatchScore>?
     private var token: ObservationToken?
     
+    var collectionsMatchScores: CollectionsScores = [:]
+    
     //MARK: - Inner
     
     init() {

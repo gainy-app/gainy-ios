@@ -153,7 +153,7 @@ final class CollectionsManager {
         }
     }
     
-    //MARK: - Speedup Migration
+    //MARK: - Speed up Migration
     
     /// This will be our new initla loading
     /// - Parameter completion: when all done
@@ -163,11 +163,12 @@ final class CollectionsManager {
             
         }
         
-        //Load tickers for each collection basedon server sorting and 20 limit
+        //Load tickers for each collection based on server sorting and 20 limit
         //TO-DO
         
         //Load Match Score for each Collection and store sorting order
-        //TO-DO
+        loadInitialMatchScores {
+        }
         
         //Load watchlist (need to gather data to insert before first collections)
         loadWatchlistCollection {
