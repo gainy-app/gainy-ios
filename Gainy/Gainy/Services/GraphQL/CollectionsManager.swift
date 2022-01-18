@@ -164,7 +164,9 @@ final class CollectionsManager {
         }
         
         //Load tickers for each collection based on server sorting and 20 limit
-//        let tickers: [Int : [CollectionCardViewCellModel]] = getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections)
+        self.getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections) { items in
+            
+        }
         
         //Load Match Score for each Collection and store sorting order
         loadInitialMatchScores {
