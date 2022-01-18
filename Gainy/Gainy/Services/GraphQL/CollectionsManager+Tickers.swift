@@ -47,7 +47,11 @@ extension CollectionsManager {
                     return
                 }
                 
-                for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics}).flatMap({$0}) {
+                for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics}).compactMap({$0}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                
+                for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0}) {
                     TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                 }
                 
