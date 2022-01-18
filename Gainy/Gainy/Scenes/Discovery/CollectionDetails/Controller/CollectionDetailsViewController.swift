@@ -801,6 +801,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         } else {
             reloadCollectionIfNeeded()
         }
+        
+        CollectionsManager.shared.initialCollectionsLoading {
+            
+        }
     }
     
     private func reloadCollectionIfNeeded() {
