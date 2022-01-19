@@ -10,12 +10,19 @@ protocol SectionLayout {
     func header(collectionView: UICollectionView,
                 indexPath: IndexPath,
                 viewModel: AnyHashable) -> UICollectionReusableView?
+    func footer(collectionView: UICollectionView,
+                indexPath: IndexPath) -> UICollectionReusableView?
 }
 
 extension SectionLayout {
     func header(collectionView _: UICollectionView,
                 indexPath _: IndexPath,
                 viewModel _: AnyHashable) -> UICollectionReusableView? {
+        nil
+    }
+    
+    func footer(collectionView: UICollectionView,
+                indexPath: IndexPath) -> UICollectionReusableView? {
         nil
     }
 }

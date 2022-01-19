@@ -245,8 +245,35 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.present(self.fpc, animated: true, completion: nil)
                 }
                 cell.onSettingsPressed = {[weak self]  ticker in
-                    guard let self = self else {return}        
+                    guard let self = self else {return}
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
+                }
+                
+                cell.onRefreshPressed = {[weak self]  collectionID in
+                    guard let self = self else {return}
+                    
+                    self.showNetworkLoader()
+                    DispatchQueue.global(qos:.utility).async {
+                        CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                            runOnMain {
+                                self.hideLoader()
+                                collectionView.reloadData()
+                            }
+                        }
+                    }
+                }
+                    
+                cell.onLoadMorePressed = {[weak self] collectionID, offset in
+                    guard let self = self else {return}
+                    
+                    Task {
+                        async let tickers = CollectionsManager.shared.getTickersForCollection(collectionID: collectionID, offset: offset)
+                        
+                        await MainActor.run {
+                            // TODO: Serhii - Change viewModel; append new cells
+                            
+                        }
+                    }
                 }
             }
             return cell
@@ -747,18 +774,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.needTop20Reload {
-            self.showNetworkLoader()
             TickerLiveStorage.shared.clearMatchData()
             CollectionsManager.shared.reloadTop20 {
-                self.hideLoader()
                 self.collectionView.reloadData()
             }
         } else {
             reloadCollectionIfNeeded()
-        }
-        
-        CollectionsManager.shared.initialCollectionsLoading {fetchedModels in
-            
         }
     }
     

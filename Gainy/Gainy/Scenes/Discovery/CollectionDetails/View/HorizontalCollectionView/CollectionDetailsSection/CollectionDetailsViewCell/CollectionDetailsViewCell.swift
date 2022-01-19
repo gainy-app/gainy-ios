@@ -5,6 +5,16 @@ private enum CollectionDetailsSection: Int, CaseIterable {
     case cards
 }
 
+final class CollectionDetailsFooterView: UICollectionReusableView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Lifecycle
     
@@ -36,8 +46,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionViewLayout: customLayout
         )
         
+        internalCollectionView.addSubview(refreshControl)
+        internalCollectionView.alwaysBounceVertical = true
+        
         internalCollectionView.register(CollectionCardCell.self)
         internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
+        
+//        internalCollectionView.register(CollectionDetailsFooterView.self,
+//                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+//                                        withReuseIdentifier: "CollectionDetailsFooterView")
         
         internalCollectionView.showsVerticalScrollIndicator = false
         internalCollectionView.backgroundColor = .clear
@@ -54,7 +71,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionListHeader.isHidden = true
         contentView.addSubview(tickersLoadIndicator)
         tickersLoadIndicator.center = internalCollectionView.center
-        
         
         let recurLock = NSRecursiveLock()
         
@@ -161,6 +177,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             return cell
         }
         
+//        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+//            switch kind {
+//            case UICollectionView.elementKindSectionFooter:
+//                
+//                return self?.sections[indexPath.section].footer(
+//                    collectionView: collectionView,
+//                    indexPath: indexPath
+//                )
+//            default:
+//                return nil
+//            }
+//        }
+        
         initViewModels()
     }
     
@@ -216,6 +245,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
+    var onRefreshPressed: ((Int) -> Void)?
+    var onLoadMorePressed: ((Int, Int) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -293,7 +324,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
-        
+        // TODO: Serhii - call this method as needed; check offset from viewModel?
+        onLoadMorePressed(collectionID, cards.count)
     }
     
     func addRemoteStocks(_ stocks: [RemoteTickerDetails]) {
@@ -338,6 +370,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     
     private var internalCollectionView: UICollectionView!
+    private lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+        return control
+    } ()
     
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
@@ -354,6 +392,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
     
     private func initViewModels() {}
+    
+    @objc func refresh(_ sender:AnyObject) {
+        
+        refreshControl.endRefreshing()
+        onRefreshPressed?(collectionID)
+    }
 }
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {

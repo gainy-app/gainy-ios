@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-
-
 extension CollectionsManager {
     
     typealias TickerModels = [Int: [TickerDetails]]

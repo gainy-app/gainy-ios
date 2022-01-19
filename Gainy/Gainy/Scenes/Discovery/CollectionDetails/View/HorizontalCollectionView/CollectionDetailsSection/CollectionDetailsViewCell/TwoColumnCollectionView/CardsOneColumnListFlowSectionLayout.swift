@@ -47,6 +47,18 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
         twoColumnsGridSection.contentInsets = NSDirectionalEdgeInsets(
             top: 0, leading: 0, bottom: 0, trailing: 0
         )
+        
+        // TODO: Serhii - footer with loading indicator
+        
+//        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+//            layoutSize: NSCollectionLayoutSize(
+//                widthDimension: .fractionalWidth(1.0),
+//                heightDimension: .estimated(64)
+//            ),
+//            elementKind: UICollectionView.elementKindSectionFooter,
+//            alignment: .top
+//        )
+//        twoColumnsGridSection.boundarySupplementaryItems = [sectionFooter]
 
         return twoColumnsGridSection
     }
@@ -174,4 +186,14 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
 
         return cell
     }
+    
+//    func footer(collectionView: UICollectionView,
+//                indexPath: IndexPath) -> UICollectionReusableView? {
+//        let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+//        let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+//        footer.addSubview(spinner)
+//        spinner.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+//        spinner.startAnimating()
+//        return footer
+//    }
 }
