@@ -90,6 +90,17 @@ fragment RemoteTickerDetails on tickers {
       time
       symbol
     }
+    match_score {
+      category_matches
+      fits_categories
+      fits_interests
+      fits_risk
+      interest_matches
+      match_score
+      profile_id
+      risk_similarity
+      symbol
+    }
 }
 
 fragment RemoteTickerDetailsFull on tickers {
