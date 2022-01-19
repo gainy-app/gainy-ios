@@ -49,17 +49,6 @@ extension RemoteTickerDetails: RemotePricable {
     }
 }
 
-extension RemoteTickerDetails: RemoteMatchable {
-    var matchScore: Int {
-        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0
-    }
-    
-//    var isMatch: Bool {
-//        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
-//    }
-    
-}
-
 //MARK: - Fetching extra fields for Tickrs from other storage
 extension FetchLiveTickersDataQuery.Data.Ticker: RemotePricable {
     var currentPrice: Float {
@@ -95,6 +84,12 @@ extension RemoteCollectionDetails: Hashable {
 extension RemoteCollectionDetails: Reorderable {
     typealias OrderElement = Int
     var orderElement: OrderElement { id ?? 0 }
+}
+
+extension RemoteCollectionDetails {
+    var prefetchedTickers: [TickerDetails] {
+        CollectionsManager.shared.prefetchedCollectionsData[id ?? -1] ?? []
+    }
 }
 
 extension RemoteTickerExtraDetails.TickerEvent {

@@ -4,66 +4,6 @@
 import Apollo
 import Foundation
 
-/// Ordering options when selecting data from "profile_ticker_collections".
-public struct ticker_collections_order_by: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - collectionId
-  ///   - profile
-  ///   - profileId
-  ///   - symbol
-  ///   - ticker
-  public init(collectionId: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil) {
-    graphQLMap = ["collection_id": collectionId, "profile": profile, "profile_id": profileId, "symbol": symbol, "ticker": ticker]
-  }
-
-  public var collectionId: Swift.Optional<order_by?> {
-    get {
-      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "collection_id")
-    }
-  }
-
-  public var profile: Swift.Optional<app_profiles_order_by?> {
-    get {
-      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile")
-    }
-  }
-
-  public var profileId: Swift.Optional<order_by?> {
-    get {
-      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-
-  public var symbol: Swift.Optional<order_by?> {
-    get {
-      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "symbol")
-    }
-  }
-
-  public var ticker: Swift.Optional<tickers_order_by?> {
-    get {
-      return graphQLMap["ticker"] as? Swift.Optional<tickers_order_by?> ?? Swift.Optional<tickers_order_by?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "ticker")
-    }
-  }
-}
-
 /// column ordering options
 public enum order_by: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
@@ -128,6 +68,66 @@ public enum order_by: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
       .descNullsFirst,
       .descNullsLast,
     ]
+  }
+}
+
+/// Ordering options when selecting data from "profile_ticker_collections".
+public struct ticker_collections_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profile
+  ///   - profileId
+  ///   - symbol
+  ///   - ticker
+  public init(collectionId: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile": profile, "profile_id": profileId, "symbol": symbol, "ticker": ticker]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_order_by?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var ticker: Swift.Optional<tickers_order_by?> {
+    get {
+      return graphQLMap["ticker"] as? Swift.Optional<tickers_order_by?> ?? Swift.Optional<tickers_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker")
+    }
   }
 }
 
@@ -3627,6 +3627,7 @@ public struct tickers_order_by: GraphQLMapConvertible {
   ///   - industry
   ///   - ipoDate
   ///   - logoUrl
+  ///   - matchScore
   ///   - metricsTransposedAggregate
   ///   - name
   ///   - phone
@@ -3647,8 +3648,8 @@ public struct tickers_order_by: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, historicalGrowthRatesAggregate: Swift.Optional<historical_growth_rate_aggregate_order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, metricsTransposedAggregate: Swift.Optional<ticker_metrics_transposed_aggregate_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerFinancialsAggregate: Swift.Optional<ticker_financials_aggregate_order_by?> = nil, tickerGrowthRate_1mAggregate: Swift.Optional<growth_rate_1m_aggregate_order_by?> = nil, tickerGrowthRate_1wAggregate: Swift.Optional<growth_rate_1w_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates_aggregate": historicalGrowthRatesAggregate, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "metrics_transposed_aggregate": metricsTransposedAggregate, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_financials_aggregate": tickerFinancialsAggregate, "ticker_growth_rate_1m_aggregate": tickerGrowthRate_1mAggregate, "ticker_growth_rate_1w_aggregate": tickerGrowthRate_1wAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, historicalGrowthRatesAggregate: Swift.Optional<historical_growth_rate_aggregate_order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> = nil, metricsTransposedAggregate: Swift.Optional<ticker_metrics_transposed_aggregate_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerFinancialsAggregate: Swift.Optional<ticker_financials_aggregate_order_by?> = nil, tickerGrowthRate_1mAggregate: Swift.Optional<growth_rate_1m_aggregate_order_by?> = nil, tickerGrowthRate_1wAggregate: Swift.Optional<growth_rate_1w_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates_aggregate": historicalGrowthRatesAggregate, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "metrics_transposed_aggregate": metricsTransposedAggregate, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_financials_aggregate": tickerFinancialsAggregate, "ticker_growth_rate_1m_aggregate": tickerGrowthRate_1mAggregate, "ticker_growth_rate_1w_aggregate": tickerGrowthRate_1wAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<order_by?> {
@@ -3747,6 +3748,15 @@ public struct tickers_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "logo_url")
+    }
+  }
+
+  public var matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<app_profile_ticker_match_score_order_by?> ?? Swift.Optional<app_profile_ticker_match_score_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
     }
   }
 
@@ -4707,6 +4717,116 @@ public struct historical_growth_rate_variance_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "app.profile_ticker_match_score".
+public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryMatches
+  ///   - fitsCategories
+  ///   - fitsInterests
+  ///   - fitsRisk
+  ///   - interestMatches
+  ///   - matchScore
+  ///   - profile
+  ///   - profileId
+  ///   - riskSimilarity
+  ///   - symbol
+  public init(categoryMatches: Swift.Optional<order_by?> = nil, fitsCategories: Swift.Optional<order_by?> = nil, fitsInterests: Swift.Optional<order_by?> = nil, fitsRisk: Swift.Optional<order_by?> = nil, interestMatches: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskSimilarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  }
+
+  public var categoryMatches: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_matches"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_matches")
+    }
+  }
+
+  public var fitsCategories: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["fits_categories"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_categories")
+    }
+  }
+
+  public var fitsInterests: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["fits_interests"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_interests")
+    }
+  }
+
+  public var fitsRisk: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["fits_risk"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_risk")
+    }
+  }
+
+  public var interestMatches: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_matches"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_matches")
+    }
+  }
+
+  public var matchScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_order_by?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var riskSimilarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["risk_similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_similarity")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
     }
   }
 }
@@ -12612,6 +12732,7 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - industry
   ///   - ipoDate
   ///   - logoUrl
+  ///   - matchScore
   ///   - metricsTransposed
   ///   - name
   ///   - phone
@@ -12632,8 +12753,8 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, historicalGrowthRates: Swift.Optional<historical_growth_rate_bool_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, metricsTransposed: Swift.Optional<ticker_metrics_transposed_bool_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerFinancials: Swift.Optional<ticker_financials_bool_exp?> = nil, tickerGrowthRate_1m: Swift.Optional<growth_rate_1m_bool_exp?> = nil, tickerGrowthRate_1w: Swift.Optional<growth_rate_1w_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates": historicalGrowthRates, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "metrics_transposed": metricsTransposed, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_financials": tickerFinancials, "ticker_growth_rate_1m": tickerGrowthRate_1m, "ticker_growth_rate_1w": tickerGrowthRate_1w, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, historicalGrowthRates: Swift.Optional<historical_growth_rate_bool_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, metricsTransposed: Swift.Optional<ticker_metrics_transposed_bool_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerFinancials: Swift.Optional<ticker_financials_bool_exp?> = nil, tickerGrowthRate_1m: Swift.Optional<growth_rate_1m_bool_exp?> = nil, tickerGrowthRate_1w: Swift.Optional<growth_rate_1w_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates": historicalGrowthRates, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "metrics_transposed": metricsTransposed, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_financials": tickerFinancials, "ticker_growth_rate_1m": tickerGrowthRate_1m, "ticker_growth_rate_1w": tickerGrowthRate_1w, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var _and: Swift.Optional<[tickers_bool_exp]?> {
@@ -12759,6 +12880,15 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "logo_url")
+    }
+  }
+
+  public var matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<app_profile_ticker_match_score_bool_exp?> ?? Swift.Optional<app_profile_ticker_match_score_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
     }
   }
 
@@ -13156,6 +13286,246 @@ public struct date_comparison_exp: GraphQLMapConvertible {
   public var _nin: Swift.Optional<[date]?> {
     get {
       return graphQLMap["_nin"] as? Swift.Optional<[date]?> ?? Swift.Optional<[date]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_nin")
+    }
+  }
+}
+
+/// Boolean expression to filter rows from the table "app.profile_ticker_match_score". All fields are combined with a logical 'AND'.
+public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - categoryMatches
+  ///   - fitsCategories
+  ///   - fitsInterests
+  ///   - fitsRisk
+  ///   - interestMatches
+  ///   - matchScore
+  ///   - profile
+  ///   - profileId
+  ///   - riskSimilarity
+  ///   - symbol
+  public init(_and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, categoryMatches: Swift.Optional<_int4_comparison_exp?> = nil, fitsCategories: Swift.Optional<Int_comparison_exp?> = nil, fitsInterests: Swift.Optional<Int_comparison_exp?> = nil, fitsRisk: Swift.Optional<Int_comparison_exp?> = nil, interestMatches: Swift.Optional<_int4_comparison_exp?> = nil, matchScore: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskSimilarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  }
+
+  public var _and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> ?? Swift.Optional<[app_profile_ticker_match_score_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<app_profile_ticker_match_score_bool_exp?> ?? Swift.Optional<app_profile_ticker_match_score_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> ?? Swift.Optional<[app_profile_ticker_match_score_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var categoryMatches: Swift.Optional<_int4_comparison_exp?> {
+    get {
+      return graphQLMap["category_matches"] as? Swift.Optional<_int4_comparison_exp?> ?? Swift.Optional<_int4_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_matches")
+    }
+  }
+
+  public var fitsCategories: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["fits_categories"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_categories")
+    }
+  }
+
+  public var fitsInterests: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["fits_interests"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_interests")
+    }
+  }
+
+  public var fitsRisk: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["fits_risk"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_risk")
+    }
+  }
+
+  public var interestMatches: Swift.Optional<_int4_comparison_exp?> {
+    get {
+      return graphQLMap["interest_matches"] as? Swift.Optional<_int4_comparison_exp?> ?? Swift.Optional<_int4_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_matches")
+    }
+  }
+
+  public var matchScore: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_bool_exp?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var riskSimilarity: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["risk_similarity"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_similarity")
+    }
+  }
+
+  public var symbol: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// Boolean expression to compare columns of type "_int4". All fields are combined with logical 'AND'.
+public struct _int4_comparison_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _eq
+  ///   - _gt
+  ///   - _gte
+  ///   - _in
+  ///   - _isNull
+  ///   - _lt
+  ///   - _lte
+  ///   - _neq
+  ///   - _nin
+  public init(_eq: Swift.Optional<_int4?> = nil, _gt: Swift.Optional<_int4?> = nil, _gte: Swift.Optional<_int4?> = nil, _in: Swift.Optional<[_int4]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<_int4?> = nil, _lte: Swift.Optional<_int4?> = nil, _neq: Swift.Optional<_int4?> = nil, _nin: Swift.Optional<[_int4]?> = nil) {
+    graphQLMap = ["_eq": _eq, "_gt": _gt, "_gte": _gte, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
+  }
+
+  public var _eq: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_eq"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_eq")
+    }
+  }
+
+  public var _gt: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_gt"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gt")
+    }
+  }
+
+  public var _gte: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_gte"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gte")
+    }
+  }
+
+  public var _in: Swift.Optional<[_int4]?> {
+    get {
+      return graphQLMap["_in"] as? Swift.Optional<[_int4]?> ?? Swift.Optional<[_int4]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_in")
+    }
+  }
+
+  public var _isNull: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_is_null")
+    }
+  }
+
+  public var _lt: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_lt"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lt")
+    }
+  }
+
+  public var _lte: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_lte"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lte")
+    }
+  }
+
+  public var _neq: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["_neq"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_neq")
+    }
+  }
+
+  public var _nin: Swift.Optional<[_int4]?> {
+    get {
+      return graphQLMap["_nin"] as? Swift.Optional<[_int4]?> ?? Swift.Optional<[_int4]?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "_nin")
@@ -18574,6 +18944,7 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   ///   - industry
   ///   - ipoDate
   ///   - logoUrl
+  ///   - matchScore
   ///   - metricsTransposed
   ///   - name
   ///   - phone
@@ -18594,8 +18965,8 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, exchange: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, historicalGrowthRates: Swift.Optional<historical_growth_rate_arr_rel_insert_input?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, logoUrl: Swift.Optional<String?> = nil, metricsTransposed: Swift.Optional<ticker_metrics_transposed_arr_rel_insert_input?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerFinancials: Swift.Optional<ticker_financials_arr_rel_insert_input?> = nil, tickerGrowthRate_1m: Swift.Optional<growth_rate_1m_arr_rel_insert_input?> = nil, tickerGrowthRate_1w: Swift.Optional<growth_rate_1w_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
-    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates": historicalGrowthRates, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "metrics_transposed": metricsTransposed, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_financials": tickerFinancials, "ticker_growth_rate_1m": tickerGrowthRate_1m, "ticker_growth_rate_1w": tickerGrowthRate_1w, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, exchange: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, historicalGrowthRates: Swift.Optional<historical_growth_rate_arr_rel_insert_input?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, logoUrl: Swift.Optional<String?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> = nil, metricsTransposed: Swift.Optional<ticker_metrics_transposed_arr_rel_insert_input?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerFinancials: Swift.Optional<ticker_financials_arr_rel_insert_input?> = nil, tickerGrowthRate_1m: Swift.Optional<growth_rate_1m_arr_rel_insert_input?> = nil, tickerGrowthRate_1w: Swift.Optional<growth_rate_1w_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
+    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates": historicalGrowthRates, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "metrics_transposed": metricsTransposed, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_financials": tickerFinancials, "ticker_growth_rate_1m": tickerGrowthRate_1m, "ticker_growth_rate_1w": tickerGrowthRate_1w, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<String?> {
@@ -18694,6 +19065,15 @@ public struct tickers_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "logo_url")
+    }
+  }
+
+  public var matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> ?? Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
     }
   }
 
@@ -19152,6 +19532,136 @@ public enum historical_growth_rate_update_column: RawRepresentable, Equatable, H
       .id,
       .symbol,
     ]
+  }
+}
+
+/// input type for inserting object relation for remote table "app.profile_ticker_match_score"
+public struct app_profile_ticker_match_score_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  public init(data: app_profile_ticker_match_score_insert_input) {
+    graphQLMap = ["data": data]
+  }
+
+  public var data: app_profile_ticker_match_score_insert_input {
+    get {
+      return graphQLMap["data"] as! app_profile_ticker_match_score_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+}
+
+/// input type for inserting data into table "app.profile_ticker_match_score"
+public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryMatches
+  ///   - fitsCategories
+  ///   - fitsInterests
+  ///   - fitsRisk
+  ///   - interestMatches
+  ///   - matchScore
+  ///   - profile
+  ///   - profileId
+  ///   - riskSimilarity
+  ///   - symbol
+  public init(categoryMatches: Swift.Optional<_int4?> = nil, fitsCategories: Swift.Optional<Int?> = nil, fitsInterests: Swift.Optional<Int?> = nil, fitsRisk: Swift.Optional<Int?> = nil, interestMatches: Swift.Optional<_int4?> = nil, matchScore: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskSimilarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  }
+
+  public var categoryMatches: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["category_matches"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_matches")
+    }
+  }
+
+  public var fitsCategories: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["fits_categories"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_categories")
+    }
+  }
+
+  public var fitsInterests: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["fits_interests"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_interests")
+    }
+  }
+
+  public var fitsRisk: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["fits_risk"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fits_risk")
+    }
+  }
+
+  public var interestMatches: Swift.Optional<_int4?> {
+    get {
+      return graphQLMap["interest_matches"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_matches")
+    }
+  }
+
+  public var matchScore: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["match_score"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "match_score")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var riskSimilarity: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["risk_similarity"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_similarity")
+    }
+  }
+
+  public var symbol: Swift.Optional<String?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
   }
 }
 

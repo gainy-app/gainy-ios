@@ -253,8 +253,7 @@ class MetricsViewController: BaseViewController {
                 continue
             }
             
-            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue &&
-               metric.rawValue <= MarketDataField.volatility52Weeks.rawValue {
+            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue {
                 self.tradingSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.revenueGrowthYoy.rawValue &&
                       metric.rawValue <= MarketDataField.epsGrowthFwd.rawValue {

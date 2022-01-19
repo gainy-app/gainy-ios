@@ -169,6 +169,14 @@ final class TickerLiveStorage {
         }
     }
     
+    
+    func setMatchData(_ symbol: String, data: RemoteTickerDetails.MatchScore) {
+        matchesQueue.sync {
+            guard !symbol.isEmpty else {return}
+            try? matchesStorage?.setObject(CachedMatchScore(remoteMatch: data), forKey: symbol)
+        }
+    }
+    
     func clearMatchData() {
         try? matchesStorage?.removeAll()
         matchScoreCleared.send()

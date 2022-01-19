@@ -82,8 +82,6 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                     vals.append(viewModel.beta)
                 case .impliedVolatility:
                     vals.append(viewModel.impliedVolatility)
-                case .volatility52Weeks:
-                    vals.append(viewModel.volatility52Weeks)
                 case .revenueGrowthFwd:
                     vals.append(viewModel.revenueGrowthFwd)
                 case .ebitdaGrowthYoy:

@@ -63,6 +63,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
                             self?.getRemoteData(loadProfile: true) {
                                 DispatchQueue.main.async {
+                                    self?.initViewModelsFromData()
                                     self?.initViewModels()
                                     self?.centerInitialCollectionInTheCollectionView()
                                 }
@@ -577,41 +578,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 return
             }
         }
-        
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back
-                    self?.hideLoader()
-                    completion()
-                    return
-                }
-                
-//                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-//                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-//                }
-                
-                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
-                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
-                }
-                
-                CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                CollectionsManager.shared.lastLoadDate = Date()
-                
-                DispatchQueue.main.async {
-                    CollectionsManager.shared.loadWatchlistCollection {
-                        self?.initViewModelsFromData()
-                        self?.hideLoader()
-                        completion()
-                    }
-                }
-                
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+        CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            DispatchQueue.main.async {
                 self?.initViewModelsFromData()
-                completion()
                 self?.hideLoader()
+                completion()
             }
         }
     }
@@ -802,7 +773,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             reloadCollectionIfNeeded()
         }
         
-        CollectionsManager.shared.initialCollectionsLoading {
+        CollectionsManager.shared.initialCollectionsLoading {fetchedModels in
             
         }
     }

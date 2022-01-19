@@ -8,69 +8,116 @@
 import UIKit
 
 
+
+
 extension CollectionsManager {
     
-    func getTickersForCollections(collectionIDs: [Int], completion: @escaping ([Int: [CollectionCardViewCellModel]]) -> Void)  {
-        
-        var result: [Int: [CollectionCardViewCellModel]] = [:]
-        let group = DispatchGroup()
-        
-        for collectionID in collectionIDs {
-            group.enter()
-            self.getTickersForCollection(collectionID: collectionID, offset: 0) { viewModels in
-                result[collectionID] = viewModels
-                group.leave()
+    typealias TickerModels = [Int: [TickerDetails]]
+    func getTickersForCollections(collectionIDs: [Int]) async -> TickerModels {
+        await withTaskGroup(
+            of: (Int, [TickerDetails]).self,
+            returning: TickerModels.self
+        ) { [self] group in
+            for collectionID in collectionIDs {
+                group.addTask {
+                    await (collectionID, getTickersForCollection(collectionID: collectionID, offset: 0))
+                }
             }
-        }
-        
-        group.notify(queue: DispatchQueue.global()) {
-            completion(result)
+
+            var models: TickerModels = [:]
+            for await result in group {
+                models[result.0] = result.1
+            }
+
+            return models
         }
     }
     
-    func getTickersForCollection(collectionID id: Int, offset: Int, completion: @escaping ([CollectionCardViewCellModel]) -> Void) {
+    func getTickersForCollection(collectionID id: Int, offset: Int) async -> [TickerDetails] {
         
-        var resultModel: [CollectionCardViewCellModel] = []
+        var resultModel: [TickerDetails] = []
         let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(id)
         
         let tickerMetricsOrder = CollectionsDetailsSettingsManager.shared.tickerMetricsOrderForMarketData(filed: settings.sorting, ascending: settings.ascending)
+        
+        
         let tickersOrder = tickers_order_by.init(tickerMetrics: tickerMetricsOrder)
         let orderBy = ticker_collections_order_by.init(ticker: tickersOrder)
         let query = GetTickersForCollectionQuery.init(collectionId: id, offset: offset, orderBy: [orderBy])
+        let msQuery = GetTickersByMsForCollectionQuery.init(collectionId: id, offset: offset, orderBy: settings.ascending ? order_by.ascNullsLast : order_by.descNullsLast)
         
-        Network.shared.apollo.fetch(query: query){ result in
-            switch result {
-            case .success(let graphQLResult):
-                
-                guard let collections = graphQLResult.data?.tickerCollections else {
-                    completion(resultModel)
-                    return
-                }
-                
-                for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics}).compactMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
-                
-                for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
-                
-                for collection in collections {
-                    guard let ticker = collection.ticker else {
-                        completion(resultModel)
+        return await
+        withCheckedContinuation { continuation in
+            if settings.sorting == .matchScore {
+            Network.shared.apollo.fetch(query: msQuery){ result in
+                switch result {
+                case .success(let graphQLResult):
+                    
+                    guard let collections = graphQLResult.data?.tickerCollections else {
+                        continuation.resume(returning: resultModel)
                         return
                     }
-                    let tickerDetails: TickerDetails = CollectionDetailsDTOMapper.mapTickerDetails(ticker.fragments.remoteTickerDetails)
-                    let tickerModel = CollectionDetailsViewModelMapper.map(tickerDetails)
-                    resultModel.append(tickerModel)
+                    
+                    for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics}).compactMap({$0}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    let matchesList = collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0})
+                    for tickMatch in matchesList {
+                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol ?? "", data: tickMatch)
+                    }
+                    if matchesList.count == 0 {
+                        print(id)
+                    }
+                    
+                    for collection in collections {
+                        guard let ticker = collection.ticker else {
+                            continuation.resume(returning: resultModel)
+                            return
+                        }
+                        let tickerDetails: TickerDetails = CollectionDetailsDTOMapper.mapTickerDetails(ticker.fragments.remoteTickerDetails)
+                        resultModel.append(tickerDetails)
+                    }
+                    
+                    continuation.resume(returning: resultModel)
+                    break
+                case .failure(let error):
+                    continuation.resume(returning: resultModel)
+                    break
                 }
-                
-                completion(resultModel)
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                completion(resultModel)
-                break
+            }
+            } else {
+                Network.shared.apollo.fetch(query: query){ result in
+                    switch result {
+                    case .success(let graphQLResult):
+                        
+                        guard let collections = graphQLResult.data?.tickerCollections else {
+                            continuation.resume(returning: resultModel)
+                            return
+                        }
+                        
+                        for tickLivePrice in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics}).compactMap({$0}) {
+                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                        }
+                        for tickMatch in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0}) {
+                            TickerLiveStorage.shared.setMatchData(tickMatch.symbol ?? "", data: tickMatch)
+                        }
+                        
+                        for collection in collections {
+                            guard let ticker = collection.ticker else {
+                                continuation.resume(returning: resultModel)
+                                return
+                            }
+                            let tickerDetails: TickerDetails = CollectionDetailsDTOMapper.mapTickerDetails(ticker.fragments.remoteTickerDetails)
+                            resultModel.append(tickerDetails)
+                        }
+                        
+                        continuation.resume(returning: resultModel)
+                        break
+                    case .failure(let error):
+                        continuation.resume(returning: resultModel)
+                        break
+                    }
+                }
             }
         }
     }

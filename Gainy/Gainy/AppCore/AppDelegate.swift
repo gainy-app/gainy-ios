@@ -55,9 +55,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
-        
 
-        //AppsFlyerLib.shared().isDebug = true
+        AppsFlyerLib.shared().isDebug = true
         
         NotificationCenter
             .default

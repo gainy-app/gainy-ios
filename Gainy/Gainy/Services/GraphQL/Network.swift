@@ -11,6 +11,7 @@ public typealias numeric = Double
 public typealias smallint = Int
 public typealias date = String
 public typealias bigint = Int
+public typealias _int4 = String
 
 private let iso8601DateFormatter = ISO8601DateFormatter()
 

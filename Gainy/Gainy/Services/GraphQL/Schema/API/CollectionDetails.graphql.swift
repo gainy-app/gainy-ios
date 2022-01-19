@@ -290,6 +290,18 @@ public struct RemoteTickerDetails: GraphQLFragment {
         time
         symbol
       }
+      match_score {
+        __typename
+        category_matches
+        fits_categories
+        fits_interests
+        fits_risk
+        interest_matches
+        match_score
+        profile_id
+        risk_similarity
+        symbol
+      }
     }
     """
 
@@ -304,6 +316,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("ticker_highlights", type: .nonNull(.list(.nonNull(.object(TickerHighlight.selections))))),
       GraphQLField("ticker_metrics", type: .object(TickerMetric.selections)),
       GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
+      GraphQLField("match_score", type: .object(MatchScore.selections)),
     ]
   }
 
@@ -313,8 +326,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -380,6 +393,16 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "realtime_metrics")
+    }
+  }
+
+  /// An object relationship
+  public var matchScore: MatchScore? {
+    get {
+      return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
     }
   }
 
@@ -1047,6 +1070,125 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "time")
+      }
+    }
+
+    public var symbol: String? {
+      get {
+        return resultMap["symbol"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "symbol")
+      }
+    }
+  }
+
+  public struct MatchScore: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["app_profile_ticker_match_score"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("category_matches", type: .scalar(_int4.self)),
+        GraphQLField("fits_categories", type: .scalar(Int.self)),
+        GraphQLField("fits_interests", type: .scalar(Int.self)),
+        GraphQLField("fits_risk", type: .scalar(Int.self)),
+        GraphQLField("interest_matches", type: .scalar(_int4.self)),
+        GraphQLField("match_score", type: .scalar(Int.self)),
+        GraphQLField("profile_id", type: .scalar(Int.self)),
+        GraphQLField("risk_similarity", type: .scalar(float8.self)),
+        GraphQLField("symbol", type: .scalar(String.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(categoryMatches: _int4? = nil, fitsCategories: Int? = nil, fitsInterests: Int? = nil, fitsRisk: Int? = nil, interestMatches: _int4? = nil, matchScore: Int? = nil, profileId: Int? = nil, riskSimilarity: float8? = nil, symbol: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var categoryMatches: _int4? {
+      get {
+        return resultMap["category_matches"] as? _int4
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_matches")
+      }
+    }
+
+    public var fitsCategories: Int? {
+      get {
+        return resultMap["fits_categories"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_categories")
+      }
+    }
+
+    public var fitsInterests: Int? {
+      get {
+        return resultMap["fits_interests"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_interests")
+      }
+    }
+
+    public var fitsRisk: Int? {
+      get {
+        return resultMap["fits_risk"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_risk")
+      }
+    }
+
+    public var interestMatches: _int4? {
+      get {
+        return resultMap["interest_matches"] as? _int4
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_matches")
+      }
+    }
+
+    public var matchScore: Int? {
+      get {
+        return resultMap["match_score"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "match_score")
+      }
+    }
+
+    public var profileId: Int? {
+      get {
+        return resultMap["profile_id"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "profile_id")
+      }
+    }
+
+    public var riskSimilarity: float8? {
+      get {
+        return resultMap["risk_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_similarity")
       }
     }
 

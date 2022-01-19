@@ -11,7 +11,7 @@ enum CollectionDetailsDTOMapper {
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
             isInYourCollectionsList: false,
-            cards: []
+            cards: dto.prefetchedTickers
         )
     }
     
@@ -25,7 +25,7 @@ enum CollectionDetailsDTOMapper {
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
             isInYourCollectionsList: true,
-            cards: []
+            cards: dto.prefetchedTickers
         )
     }
     

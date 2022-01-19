@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+
 final class CollectionsManager {
     
     static let shared = CollectionsManager()
@@ -27,7 +28,9 @@ final class CollectionsManager {
     var collections: [RemoteCollectionDetails] = []
     var watchlistCollection: RemoteCollectionDetails?
     
-    private var newCollectionFetched: PassthroughSubject<FetchResult, Never> = PassthroughSubject.init()
+    internal(set) var prefetchedCollectionsData: [Int : [TickerDetails]] = [:]
+    
+    var newCollectionFetched: PassthroughSubject<FetchResult, Never> = PassthroughSubject.init()
     var newCollectionsPublisher: AnyPublisher<FetchResult, Never> {
         newCollectionFetched.share().eraseToAnyPublisher()
     }
@@ -42,6 +45,7 @@ final class CollectionsManager {
     
     //MARK: - Fetching
     
+    //Need update with prefetch
     func loadNewCollectionDetails(_ colID: Int, completion: @escaping () -> Void) {
         DispatchQueue.global(qos: .background).async {
             Network.shared.apollo.clearCache()
@@ -56,9 +60,9 @@ final class CollectionsManager {
                             }
                             return
                         }
-                        //                        for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                        //                            TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                        //                        }
+                        
+                        //Load prefetched tickers
+                        
                         for newCol in collections {
                             if !self.collections.contains(where: {$0.id == newCol.id}) {
                                 self.collections.append(newCol)
@@ -107,104 +111,75 @@ final class CollectionsManager {
         }
     }
     
-    func loadWatchlistCollection(completion: @escaping () -> Void) {
-        
-        guard UserProfileManager.shared.watchlist.count > 0 else {
-            
-            if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
-                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
-                self.newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                CollectionsManager.shared.watchlistCollection = nil
-            }
-            completion()
-            return
-        }
-        
-        Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let tickers = graphQLResult.data?.tickers else {
-                    completion()
-                    return
-                }
-                //TO-DO: What to do with Tickers!!!
-                
-                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
-                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
-                    self?.newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                    CollectionsManager.shared.watchlistCollection = nil
-                }
-                
-                let collectionRemoteDetails = RemoteCollectionDetails.init(id: Constants.CollectionDetails.watchlistCollectionID,
-                                                                           name: "Watchlist",
-                                                                           imageUrl: "watchlistCollectionBackgroundImage",
-                                                                           description: "",
-                                                                           size: UserProfileManager.shared.watchlist.count)
-                CollectionsManager.shared.watchlistCollection = collectionRemoteDetails
-                
-                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
-                self?.newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                completion()
-                
-            case .failure(let error):
-                completion()
-                dprint("Failure when making GraphQL request. Error: \(error)")
-            }
-        }
-    }
-    
     //MARK: - Speed up Migration
     
     /// This will be our new initla loading
     /// - Parameter completion: when all done
-    func initialCollectionsLoading(completion: @escaping () -> Void) {
-        //Load our fav collections
-        loadFavCollection {
+    func initialCollectionsLoading(completion: @escaping ([CollectionDetailViewCellModel]) -> Void) {
+        
+        Task {
+            async let favs = loadFavCollection()
+            async let tickersMap = getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections)
+            async let watchList = loadWatchlistCollection()
+            let (favsRes, tickersMapRes, watchListRes) = await (favs, tickersMap, watchList)
             
+            //Adding preloaded tickers
+            
+            for colID in tickersMapRes.keys {
+                print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
+                prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
+            }
+            
+            //Favs handler
+            if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+            }
+            
+            CollectionsManager.shared.collections = favsRes.reorder(by: UserProfileManager.shared.favoriteCollections)
+            CollectionsManager.shared.lastLoadDate = Date()
+            
+            //WatchList Handler
+            if let watchListRes = watchListRes {
+                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
+                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+                    newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    CollectionsManager.shared.watchlistCollection = nil
+                }
+                
+                CollectionsManager.shared.watchlistCollection = watchListRes
+                
+                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
+                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+            }
+            
+            await MainActor.run {
+                completion([])
+            }
         }
         
-        //Load tickers for each collection based on server sorting and 20 limit
-        self.getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections) { items in
-            
-        }
-        
-        //Load Match Score for each Collection and store sorting order
-        loadInitialMatchScores {
-        }
-        
-        //Load watchlist (need to gather data to insert before first collections)
-        loadWatchlistCollection {
-            
-        }
     }
     
     /// Loading JUST Collection details
     /// - Parameter completion: when all done
-    fileprivate func loadFavCollection(completion: @escaping () -> Void) {
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) {result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    completion()
-                    return
+    fileprivate func loadFavCollection() async -> [RemoteCollectionDetails] {
+        
+        let emptyRes: [RemoteCollectionDetails] = []
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
+                        continuation.resume(returning: emptyRes)
+                        return
+                    }
+                    continuation.resume(returning: collections)
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    continuation.resume(returning: emptyRes)
                 }
-                
-//                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-//                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-//                }
-                
-                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
-                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
-                }
-                
-                CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                CollectionsManager.shared.lastLoadDate = Date()
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                completion()
             }
         }
-
     }
     
     @Atomic

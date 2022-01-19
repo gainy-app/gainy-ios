@@ -151,7 +151,7 @@ final class CollectionsDetailsSettingsManager {
         switch filed {
             
         case .matchScore:
-            orderBy = ticker_metrics_order_by.init()
+            orderBy = ticker_metrics_order_by.init(ticker: tickers_order_by(matchScore: app_profile_ticker_match_score_order_by(matchScore: order)))
         case .avgVolume10d:
             orderBy = ticker_metrics_order_by.init(avgVolume_10d: order)
         case .sharesOutstanding:
@@ -168,9 +168,6 @@ final class CollectionsDetailsSettingsManager {
             orderBy = ticker_metrics_order_by.init(beta: order)
         case .impliedVolatility:
             orderBy = ticker_metrics_order_by.init(impliedVolatility: order)
-        case .volatility52Weeks:
-            orderBy = ticker_metrics_order_by.init(relativeHistoricalVolatilityAdjustedMax_1y: order,
-                                                   relativeHistoricalVolatilityAdjustedMin_1y: order)
         case .revenueGrowthYoy:
             orderBy = ticker_metrics_order_by.init(revenueGrowthYoy: order)
         case .revenueGrowthFwd:

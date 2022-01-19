@@ -22,7 +22,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
     shortRatio, // short_ratio
     beta, // beta
     impliedVolatility, // implied_volatility,
-    volatility52Weeks,
     //absolute_historical_volatility_adjusted_current
     //relative_historical_volatility_adjusted_current
     //absolute_historical_volatility_adjusted_min_1y
@@ -91,16 +90,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     func mapToMarketData(ticker: RemoteTicker) -> TickerInfo.MarketData? {
         
         var marketData: TickerInfo.MarketData? = nil
-        var volatility52Weeks = "null"
-        let min = ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMin_1y ?? float8(0.0)
-        let max = ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMax_1y ?? float8(0.0)
-        if ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMin_1y != nil,
-           ticker.tickerMetrics?.relativeHistoricalVolatilityAdjustedMax_1y != nil {
-            volatility52Weeks = (min * 100.0).zeroDecimal + "-" + (max * 100.0).zeroDecimal + "%"
-        }
-            
+        
         switch self {
-            
         case .avgVolume10d:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "10 DAYS", value: Float(ticker.tickerMetrics?.avgVolume_10d ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .sharesOutstanding:
@@ -125,10 +116,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.beta ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .impliedVolatility:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.impliedVolatility ?? 0).zeroDecimalP, marketDataField: self)
-        case .volatility52Weeks:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: volatility52Weeks, marketDataField: self)
-                                       
-        
         case .revenueGrowthYoy:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "QUarterly, YoY", value: (Float(ticker.tickerMetrics?.revenueGrowthYoy ?? 0.0) * 100.0).cleanOneDecimalP, marketDataField: self)
         case .revenueGrowthFwd:
@@ -244,8 +231,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "beta"
         case .impliedVolatility:
             return "Implied Volatility Current"
-        case .volatility52Weeks:
-            return "Volatility range 52 weeks"
         case .revenueGrowthYoy:
             return "Revenue Growth, TTM"
         case .revenueGrowthFwd:
@@ -343,8 +328,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "beta"
         case .impliedVolatility:
             return "Implied Volatility\nCurrent"
-        case .volatility52Weeks:
-            return "Volatility range\n52 weeks"
         case .revenueGrowthYoy:
             return "Revenue\nGrowth"
         case .revenueGrowthFwd:
@@ -442,8 +425,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return "beta"
         case .impliedVolatility:
             return "implied_volatility"
-        case .volatility52Weeks:
-            return "relative_historical_volatility_adjusted_min_1y"
         case .revenueGrowthYoy:
             return "revenue_growth_yoy"
         case .revenueGrowthFwd:
@@ -541,8 +522,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
             return false
         case .impliedVolatility:
             return true
-        case .volatility52Weeks:
-            return true
         case .revenueGrowthYoy:
             return true
         case .revenueGrowthFwd:
@@ -625,7 +604,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         if isAsc {
             switch self {
             case .matchScore:
-                return lhs.rawTicker.matchScore < rhs.rawTicker.matchScore
+                return (lhs.rawTicker.matchScore?.matchScore ?? 0) < (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .sharesOutstanding:
                 return (lhs.rawTicker.tickerMetrics?.sharesOutstanding ?? 0) < (rhs.rawTicker.tickerMetrics?.sharesOutstanding ?? 0)
             case .shortPercentOutstanding:
@@ -642,8 +621,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
                 return (lhs.rawTicker.tickerMetrics?.beta ?? 0.0) < (rhs.rawTicker.tickerMetrics?.beta ?? 0.0)
             case .impliedVolatility:
                 return (lhs.rawTicker.tickerMetrics?.impliedVolatility ?? 0.0) < (rhs.rawTicker.tickerMetrics?.impliedVolatility ?? 0.0)
-            case .volatility52Weeks:
-                return (lhs.rawTicker.tickerMetrics?.absoluteHistoricalVolatilityAdjustedCurrent ?? 0.0) < (rhs.rawTicker.tickerMetrics?.absoluteHistoricalVolatilityAdjustedCurrent ?? 0.0)
             case .revenueGrowthYoy:
                 return (lhs.rawTicker.tickerMetrics?.revenueGrowthYoy ?? 0.0) < (rhs.rawTicker.tickerMetrics?.revenueGrowthYoy ?? 0.0)
             case .revenueGrowthFwd:
@@ -722,7 +699,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         } else {
             switch self {
             case .matchScore:
-                return lhs.rawTicker.matchScore > rhs.rawTicker.matchScore
+                return (lhs.rawTicker.matchScore?.matchScore ?? 0) > (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .sharesOutstanding:
                 return (lhs.rawTicker.tickerMetrics?.sharesOutstanding ?? 0) > (rhs.rawTicker.tickerMetrics?.sharesOutstanding ?? 0)
             case .shortPercentOutstanding:
@@ -739,8 +716,6 @@ enum MarketDataField: Int, Codable, CaseIterable {
                 return (lhs.rawTicker.tickerMetrics?.beta ?? 0.0) > (rhs.rawTicker.tickerMetrics?.beta ?? 0.0)
             case .impliedVolatility:
                 return (lhs.rawTicker.tickerMetrics?.impliedVolatility ?? 0.0) > (rhs.rawTicker.tickerMetrics?.impliedVolatility ?? 0.0)
-            case .volatility52Weeks:
-                return (lhs.rawTicker.tickerMetrics?.absoluteHistoricalVolatilityAdjustedCurrent ?? 0.0) > (rhs.rawTicker.tickerMetrics?.absoluteHistoricalVolatilityAdjustedCurrent ?? 0.0)
             case .revenueGrowthYoy:
                 return (lhs.rawTicker.tickerMetrics?.revenueGrowthYoy ?? 0.0) > (rhs.rawTicker.tickerMetrics?.revenueGrowthYoy ?? 0.0)
             case .revenueGrowthFwd:

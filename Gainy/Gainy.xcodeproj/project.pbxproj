@@ -104,6 +104,8 @@
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
 		338142AD2754F1D3006867AE /* PortfolioSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */; };
 		3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381A56F271D48CA001A1EDA /* CollectionsManager.swift */; };
+		3381D3B32797EA9F00BE7567 /* LinkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3381D3B22797EA9F00BE7567 /* LinkKit */; };
+		3381D3B6279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */; };
 		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
 		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
@@ -436,14 +438,12 @@
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
 		900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */; };
 		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
-		901727242795520B000C5BC9 /* CollectionsManager+MatchScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */; };
+		901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */; };
 		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
-		90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; };
-		90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 33571F27273BF5AE007B587F /* LinkKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */; };
 		9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE6274B6FE4007C588A /* GetPortfolioCharts.graphql */; };
 		9068DDEA274B7350007C588A /* GetProfileGains.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068DDE8274B7350007C588A /* GetProfileGains.graphql.swift */; };
@@ -480,7 +480,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				90491E31274645ED00B5E642 /* LinkKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,7 +555,6 @@
 		33571F20273B9F57007B587F /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		33571F22273BE463007B587F /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
 		33571F25273BEADA007B587F /* LinkKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LinkKit.xcframework; path = "../../../Downloads/plaid-link-ios-master-2/LinkKit.xcframework"; sourceTree = "<group>"; };
-		33571F27273BF5AE007B587F /* LinkKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = LinkKit.xcframework; sourceTree = "<group>"; };
 		33571F29273BF830007B587F /* BaseViewController+LinkToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseViewController+LinkToken.swift"; sourceTree = "<group>"; };
 		335D7D76270617CF00337262 /* YourCollectionTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourCollectionTipCell.swift; sourceTree = "<group>"; };
 		335D7D78270619D500337262 /* YourCollectionTipCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YourCollectionTipCell.xib; sourceTree = "<group>"; };
@@ -590,6 +588,8 @@
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSettingsManager.swift; sourceTree = "<group>"; };
 		3381A56F271D48CA001A1EDA /* CollectionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
+		3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickersByMSForCollection.graphql; sourceTree = "<group>"; };
+		3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickersByMSForCollection.graphql.swift; sourceTree = "<group>"; };
 		338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidHoldings.graphql.swift; sourceTree = "<group>"; };
 		338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickersDetailsViewController.swift; sourceTree = "<group>"; };
 		3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Extensions.swift"; sourceTree = "<group>"; };
@@ -926,7 +926,7 @@
 		900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingRangeableCell.swift; sourceTree = "<group>"; };
 		900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHoldingsViewController.swift; sourceTree = "<group>"; };
 		90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsModelMapper.swift; sourceTree = "<group>"; };
-		901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionsManager+MatchScore.swift"; sourceTree = "<group>"; };
+		901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionsManager+WatchList.swift"; sourceTree = "<group>"; };
 		901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedCategories.graphql.swift; sourceTree = "<group>"; };
 		901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedInterests.graphql.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
@@ -961,6 +961,7 @@
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				33467CEC26C66FA300811F74 /* FirebaseDatabase in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
+				3381D3B32797EA9F00BE7567 /* LinkKit in Frameworks */,
 				336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */,
 				33467CF226C66FA300811F74 /* FirebaseCrashlytics in Frameworks */,
 				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
@@ -975,7 +976,6 @@
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
-				90491E30274645ED00B5E642 /* LinkKit.xcframework in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
 				33467CF426C66FA300811F74 /* FirebaseRemoteConfig in Frameworks */,
 			);
@@ -1054,6 +1054,7 @@
 				901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */,
 				85DF21252784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift */,
 				85C873D02796ACE10060BAF3 /* GetTickersForCollection.graphql.swift */,
+				3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1768,7 +1769,7 @@
 				3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */,
 				33626A97271826190013EE6C /* APIModels+Caching.swift */,
 				3381A56F271D48CA001A1EDA /* CollectionsManager.swift */,
-				901727232795520B000C5BC9 /* CollectionsManager+MatchScore.swift */,
+				901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */,
 				85D1E00027955C480097046A /* CollectionsManager+Tickers.swift */,
 				3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
@@ -1792,6 +1793,7 @@
 				906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */,
 				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
+				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
 				85695AF42746BAD400759569 /* Metrics */,
 				33019611273E824100BE4FDC /* Plaid */,
 				859B2EC6270605430084CCDC /* Profile */,
@@ -1966,7 +1968,6 @@
 		3AE90346266A2FDF00574923 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
-				33571F27273BF5AE007B587F /* LinkKit.xcframework */,
 				3A5ADA51268DA15F008659E8 /* SwipeCellKit */,
 			);
 			path = ThirdParty;
@@ -2320,6 +2321,7 @@
 				906B28E92768C0FF0058528B /* Lottie */,
 				9072F56E277C4FA70057596B /* FacebookCore */,
 				9017BF5E2780D88600F3910A /* Deviice */,
+				3381D3B22797EA9F00BE7567 /* LinkKit */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2411,6 +2413,7 @@
 				906B28E82768C0FF0058528B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */,
+				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2714,6 +2717,7 @@
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				85ED4DEF2703486600FE6926 /* Categories.graphql.swift in Sources */,
+				3381D3B6279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,
 				3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
@@ -2934,7 +2938,7 @@
 				85D4F80D26E66AA8004EC21D /* PersonalizationSliderSectionView.swift in Sources */,
 				33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */,
 				339FB3AE2747A46800C95748 /* PlainCircullarProgressBarView.swift in Sources */,
-				901727242795520B000C5BC9 /* CollectionsManager+MatchScore.swift in Sources */,
+				901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */,
 				85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
@@ -3630,6 +3634,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/plaid/plaid-link-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -3782,6 +3794,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 336970B12716BA2E0001625C /* XCRemoteSwiftPackageReference "BugfenderSDK-iOS" */;
 			productName = BugfenderLibrary;
+		};
+		3381D3B22797EA9F00BE7567 /* LinkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
+			productName = LinkKit;
 		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
