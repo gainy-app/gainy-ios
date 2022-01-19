@@ -135,29 +135,10 @@ final class SingleCollectionDetailsViewModel: NSObject {
             completed?()
         } else {
             loadingSubject.send(true)
-            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: [collectionId])) { [weak self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                        //Going back
-                        self?.loadingSubject.send(false)
-                        return
-                    }
-                    
-//                    for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-//                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-//                    }
-                    
-                    let selectedCollections = collections
-                    DispatchQueue.main.async {
-                        self?.convertToModels(selectedCollections)
-                        self?.loadingSubject.send(false)
-                        completed?()
-                    }
-                    
-                case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
-                    self?.convertToModels([])
+            CollectionsManager.shared.reloadNewCollectionsDetails([collectionId]) {[weak self] collections in
+                let selectedCollections = collections
+                DispatchQueue.main.async {
+                    self?.convertToModels(selectedCollections)
                     self?.loadingSubject.send(false)
                     completed?()
                 }

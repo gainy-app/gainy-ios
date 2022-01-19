@@ -589,36 +589,20 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: Array(CollectionsManager.shared.failedToLoad))) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back
-                    self?.hideLoader()
-                    completion()
-                    return
-                }
-//                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-//                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-//                }
-                CollectionsManager.shared.collections.append(contentsOf: collections)
-                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
-                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
-                }
-                CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+        
+        CollectionsManager.shared.reloadNewCollectionsDetails(Array(CollectionsManager.shared.failedToLoad)) {[weak self] collections in
+            CollectionsManager.shared.collections.append(contentsOf: collections)
+            if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+            }
+            CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+            
+            CollectionsManager.shared.lastLoadDate = Date()
+            DispatchQueue.main.async {
                 
-                CollectionsManager.shared.lastLoadDate = Date()
-                DispatchQueue.main.async {
-                    
-                    let newModels = CollectionsManager.shared.convertToModel(collections)
-                    self?.addNewCollections(newModels)
-                    
-                    completion()
-                    self?.hideLoader()
-                }
+                let newModels = CollectionsManager.shared.convertToModel(collections)
+                self?.addNewCollections(newModels)
                 
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion()
                 self?.hideLoader()
             }

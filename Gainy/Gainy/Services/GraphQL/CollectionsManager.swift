@@ -45,58 +45,75 @@ final class CollectionsManager {
     
     //MARK: - Fetching
     
-    //Need update with prefetch
     func loadNewCollectionDetails(_ colID: Int, completion: @escaping () -> Void) {
-        DispatchQueue.global(qos: .background).async {
-            Network.shared.apollo.clearCache()
+        Task {
+            async let newCols = loadCollections([colID])
+            async let tickersMap = getTickersForCollections(collectionIDs: [colID])
+            let (newColsRes, tickersMapRes) = await (newCols, tickersMap)
             
-            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery.init(ids: [colID])) {[unowned self] result in
-                switch result {
-                case .success(let graphQLResult):
-                    DispatchQueue.global(qos: .background).async {
-                        guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                            DispatchQueue.main.async {
-                                completion()
-                            }
-                            return
-                        }
-                        
-                        //Load prefetched tickers
-                        
-                        for newCol in collections {
-                            if !self.collections.contains(where: {$0.id == newCol.id}) {
-                                self.collections.append(newCol)
-                                
-                                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
-                                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                                
-                                
-                            } else {
-                                if let index = self.collections.firstIndex(where: {$0.id == newCol.id}) {
-                                    self.collections[index] = newCol
-                                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
-                                    newCollectionFetched.send(.updated(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                                }
-                            }
-                            
-                            if self.failedToLoad.contains(colID) {
-                                self.failedToLoad.remove(colID)
-                            }
-                        }
-                        DispatchQueue.main.async {
-                            completion()
-                        }
+            //Adding preloaded tickers
+            
+            for colID in tickersMapRes.keys {
+                print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
+                prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
+            }
+            
+            if newColsRes.isEmpty {
+                self.failedToLoad.insert(colID)
+                newCollectionFetched.send(.fetchedFailed)
+                await MainActor.run {
+                    completion()
+                }
+                return
+            }
+            
+            for newCol in newColsRes {
+                if !self.collections.contains(where: {$0.id == newCol.id}) {
+                    self.collections.append(newCol)
+                    
+                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                    newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    
+                    
+                } else {
+                    if let index = self.collections.firstIndex(where: {$0.id == newCol.id}) {
+                        self.collections[index] = newCol
+                        let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(newCol)
+                        newCollectionFetched.send(.updated(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
                     }
-                    break
-                case .failure(_):
-                    self.failedToLoad.insert(colID)
-                    newCollectionFetched.send(.fetchedFailed)
-                    DispatchQueue.main.async {
-                        completion()
-                    }
-                    break
                 }
                 
+                if self.failedToLoad.contains(colID) {
+                    self.failedToLoad.remove(colID)
+                }
+            }
+            await MainActor.run {
+                completion()
+            }
+        }
+    }
+    
+    func reloadNewCollectionsDetails(_ colIDs: [Int], completion: @escaping ([RemoteCollectionDetails]) -> Void) {
+        Task {
+            async let newCols = loadCollections(colIDs)
+            async let tickersMap = getTickersForCollections(collectionIDs: colIDs)
+            let (newColsRes, tickersMapRes) = await (newCols, tickersMap)
+            
+            //Adding preloaded tickers
+            
+            for colID in tickersMapRes.keys {
+                print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
+                prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
+            }
+            
+            if newColsRes.isEmpty {
+                await MainActor.run {
+                    completion([])
+                }
+                return
+            }
+            await MainActor.run {
+                completion(newColsRes)
             }
         }
     }
@@ -118,7 +135,7 @@ final class CollectionsManager {
     func initialCollectionsLoading(completion: @escaping ([CollectionDetailViewCellModel]) -> Void) {
         
         Task {
-            async let favs = loadFavCollection()
+            async let favs = loadCollections(UserProfileManager.shared.favoriteCollections)
             async let tickersMap = getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections)
             async let watchList = loadWatchlistCollection()
             let (favsRes, tickersMapRes, watchListRes) = await (favs, tickersMap, watchList)
@@ -161,12 +178,12 @@ final class CollectionsManager {
     
     /// Loading JUST Collection details
     /// - Parameter completion: when all done
-    fileprivate func loadFavCollection() async -> [RemoteCollectionDetails] {
+    fileprivate func loadCollections(_ ids: [Int]) async -> [RemoteCollectionDetails] {
         
         let emptyRes: [RemoteCollectionDetails] = []
         return await
         withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) {result in
+            Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: ids)) {result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
