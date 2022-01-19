@@ -325,7 +325,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private func loadMoreTickers() {
         // TODO: Serhii - call this method as needed; check offset from viewModel?
-        onLoadMorePressed(collectionID, cards.count)
+        onLoadMorePressed?(collectionID, cards.count)
     }
     
     func addRemoteStocks(_ stocks: [RemoteTickerDetails]) {
