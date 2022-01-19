@@ -86,6 +86,7 @@ extension Double {
             numFormatter.minimumIntegerDigits = 1
             numFormatter.minimumFractionDigits = 0
             numFormatter.maximumFractionDigits = 0
+            numFormatter.numberStyle = .decimal
 
         if self < 0 {
             return "-$" + numFormatter.string(from: NSNumber(value:(value * -1.0)))!

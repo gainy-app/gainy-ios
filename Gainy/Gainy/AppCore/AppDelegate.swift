@@ -178,9 +178,13 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // Overriding the onConversionDataSuccess and onConversionDataFail
     // callbacks to process conversions and enable deferred deep linking
     
-    func onConversionDataSuccess(_: [AnyHashable: Any]) {}
+    func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
+        print("Conv sc \(installData)")
+    }
     
-    func onConversionDataFail(_: Error) {}
+    func onConversionDataFail(_ err: Error) {
+        print("Conv err \(err)")
+    }
 }
 
 // Google SignIn

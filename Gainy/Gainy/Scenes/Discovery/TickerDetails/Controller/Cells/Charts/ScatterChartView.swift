@@ -168,7 +168,7 @@ struct ScatterChartView: View {
             }
         }
         .padding(.all, 0)
-        .frame(height: 76)
+        .frame(height: 78)
         .animation(.easeIn)
     }
     

@@ -4,6 +4,10013 @@
 import Apollo
 import Foundation
 
+/// Ordering options when selecting data from "profile_ticker_collections".
+public struct ticker_collections_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profile
+  ///   - profileId
+  ///   - symbol
+  ///   - ticker
+  public init(collectionId: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile": profile, "profile_id": profileId, "symbol": symbol, "ticker": ticker]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_order_by?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var ticker: Swift.Optional<tickers_order_by?> {
+    get {
+      return graphQLMap["ticker"] as? Swift.Optional<tickers_order_by?> ?? Swift.Optional<tickers_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker")
+    }
+  }
+}
+
+/// column ordering options
+public enum order_by: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// in ascending order, nulls last
+  case asc
+  /// in ascending order, nulls first
+  case ascNullsFirst
+  /// in ascending order, nulls last
+  case ascNullsLast
+  /// in descending order, nulls first
+  case desc
+  /// in descending order, nulls first
+  case descNullsFirst
+  /// in descending order, nulls last
+  case descNullsLast
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "asc": self = .asc
+      case "asc_nulls_first": self = .ascNullsFirst
+      case "asc_nulls_last": self = .ascNullsLast
+      case "desc": self = .desc
+      case "desc_nulls_first": self = .descNullsFirst
+      case "desc_nulls_last": self = .descNullsLast
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .asc: return "asc"
+      case .ascNullsFirst: return "asc_nulls_first"
+      case .ascNullsLast: return "asc_nulls_last"
+      case .desc: return "desc"
+      case .descNullsFirst: return "desc_nulls_first"
+      case .descNullsLast: return "desc_nulls_last"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: order_by, rhs: order_by) -> Bool {
+    switch (lhs, rhs) {
+      case (.asc, .asc): return true
+      case (.ascNullsFirst, .ascNullsFirst): return true
+      case (.ascNullsLast, .ascNullsLast): return true
+      case (.desc, .desc): return true
+      case (.descNullsFirst, .descNullsFirst): return true
+      case (.descNullsLast, .descNullsLast): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [order_by] {
+    return [
+      .asc,
+      .ascNullsFirst,
+      .ascNullsLast,
+      .desc,
+      .descNullsFirst,
+      .descNullsLast,
+    ]
+  }
+}
+
+/// Ordering options when selecting data from "app.profiles".
+public struct app_profiles_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avatarUrl
+  ///   - createdAt
+  ///   - email
+  ///   - firstName
+  ///   - gender
+  ///   - id
+  ///   - lastName
+  ///   - legalAddress
+  ///   - portfolioGains
+  ///   - profileCategoriesAggregate
+  ///   - profileFavoriteCollectionsAggregate
+  ///   - profileHoldingsAggregate
+  ///   - profileInterestsAggregate
+  ///   - profilePlaidAccessTokensAggregate
+  ///   - profileScoringSetting
+  ///   - profileWatchlistTickersAggregate
+  ///   - userId
+  public init(avatarUrl: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, email: Swift.Optional<order_by?> = nil, firstName: Swift.Optional<order_by?> = nil, gender: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, lastName: Swift.Optional<order_by?> = nil, legalAddress: Swift.Optional<order_by?> = nil, portfolioGains: Swift.Optional<portfolio_gains_order_by?> = nil, profileCategoriesAggregate: Swift.Optional<app_profile_categories_aggregate_order_by?> = nil, profileFavoriteCollectionsAggregate: Swift.Optional<app_profile_favorite_collections_aggregate_order_by?> = nil, profileHoldingsAggregate: Swift.Optional<app_profile_holdings_aggregate_order_by?> = nil, profileInterestsAggregate: Swift.Optional<app_profile_interests_aggregate_order_by?> = nil, profilePlaidAccessTokensAggregate: Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_order_by?> = nil, profileWatchlistTickersAggregate: Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?> = nil, userId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories_aggregate": profileCategoriesAggregate, "profile_favorite_collections_aggregate": profileFavoriteCollectionsAggregate, "profile_holdings_aggregate": profileHoldingsAggregate, "profile_interests_aggregate": profileInterestsAggregate, "profile_plaid_access_tokens_aggregate": profilePlaidAccessTokensAggregate, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers_aggregate": profileWatchlistTickersAggregate, "user_id": userId]
+  }
+
+  public var avatarUrl: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["avatar_url"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avatar_url")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var email: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["email"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "email")
+    }
+  }
+
+  public var firstName: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["first_name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "first_name")
+    }
+  }
+
+  public var gender: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["gender"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gender")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var lastName: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["last_name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_name")
+    }
+  }
+
+  public var legalAddress: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["legal_address"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "legal_address")
+    }
+  }
+
+  public var portfolioGains: Swift.Optional<portfolio_gains_order_by?> {
+    get {
+      return graphQLMap["portfolio_gains"] as? Swift.Optional<portfolio_gains_order_by?> ?? Swift.Optional<portfolio_gains_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "portfolio_gains")
+    }
+  }
+
+  public var profileCategoriesAggregate: Swift.Optional<app_profile_categories_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_categories_aggregate"] as? Swift.Optional<app_profile_categories_aggregate_order_by?> ?? Swift.Optional<app_profile_categories_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_categories_aggregate")
+    }
+  }
+
+  public var profileFavoriteCollectionsAggregate: Swift.Optional<app_profile_favorite_collections_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_favorite_collections_aggregate"] as? Swift.Optional<app_profile_favorite_collections_aggregate_order_by?> ?? Swift.Optional<app_profile_favorite_collections_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_favorite_collections_aggregate")
+    }
+  }
+
+  public var profileHoldingsAggregate: Swift.Optional<app_profile_holdings_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_holdings_aggregate"] as? Swift.Optional<app_profile_holdings_aggregate_order_by?> ?? Swift.Optional<app_profile_holdings_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_holdings_aggregate")
+    }
+  }
+
+  public var profileInterestsAggregate: Swift.Optional<app_profile_interests_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_interests_aggregate"] as? Swift.Optional<app_profile_interests_aggregate_order_by?> ?? Swift.Optional<app_profile_interests_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_interests_aggregate")
+    }
+  }
+
+  public var profilePlaidAccessTokensAggregate: Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_plaid_access_tokens_aggregate"] as? Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_plaid_access_tokens_aggregate")
+    }
+  }
+
+  public var profileScoringSetting: Swift.Optional<app_profile_scoring_settings_order_by?> {
+    get {
+      return graphQLMap["profile_scoring_setting"] as? Swift.Optional<app_profile_scoring_settings_order_by?> ?? Swift.Optional<app_profile_scoring_settings_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_scoring_setting")
+    }
+  }
+
+  public var profileWatchlistTickersAggregate: Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?> {
+    get {
+      return graphQLMap["profile_watchlist_tickers_aggregate"] as? Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers_aggregate")
+    }
+  }
+
+  public var userId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["user_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "user_id")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "portfolio_gains".
+public struct portfolio_gains_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - absoluteGain_1d
+  ///   - absoluteGain_1m
+  ///   - absoluteGain_1w
+  ///   - absoluteGain_1y
+  ///   - absoluteGain_3m
+  ///   - absoluteGain_5y
+  ///   - absoluteGainTotal
+  ///   - actualValue
+  ///   - profile
+  ///   - profileId
+  ///   - relativeGain_1d
+  ///   - relativeGain_1m
+  ///   - relativeGain_1w
+  ///   - relativeGain_1y
+  ///   - relativeGain_3m
+  ///   - relativeGain_5y
+  ///   - relativeGainTotal
+  ///   - updatedAt
+  public init(absoluteGain_1d: Swift.Optional<order_by?> = nil, absoluteGain_1m: Swift.Optional<order_by?> = nil, absoluteGain_1w: Swift.Optional<order_by?> = nil, absoluteGain_1y: Swift.Optional<order_by?> = nil, absoluteGain_3m: Swift.Optional<order_by?> = nil, absoluteGain_5y: Swift.Optional<order_by?> = nil, absoluteGainTotal: Swift.Optional<order_by?> = nil, actualValue: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, relativeGain_1d: Swift.Optional<order_by?> = nil, relativeGain_1m: Swift.Optional<order_by?> = nil, relativeGain_1w: Swift.Optional<order_by?> = nil, relativeGain_1y: Swift.Optional<order_by?> = nil, relativeGain_3m: Swift.Optional<order_by?> = nil, relativeGain_5y: Swift.Optional<order_by?> = nil, relativeGainTotal: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "actual_value": actualValue, "profile": profile, "profile_id": profileId, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "updated_at": updatedAt]
+  }
+
+  public var absoluteGain_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_1d")
+    }
+  }
+
+  public var absoluteGain_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_1m")
+    }
+  }
+
+  public var absoluteGain_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_1w")
+    }
+  }
+
+  public var absoluteGain_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_1y")
+    }
+  }
+
+  public var absoluteGain_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_3m")
+    }
+  }
+
+  public var absoluteGain_5y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_5y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_5y")
+    }
+  }
+
+  public var absoluteGainTotal: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_gain_total"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_gain_total")
+    }
+  }
+
+  public var actualValue: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["actual_value"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "actual_value")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_order_by?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var relativeGain_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_1d")
+    }
+  }
+
+  public var relativeGain_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_1m")
+    }
+  }
+
+  public var relativeGain_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_1w")
+    }
+  }
+
+  public var relativeGain_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_1y")
+    }
+  }
+
+  public var relativeGain_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_3m")
+    }
+  }
+
+  public var relativeGain_5y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_5y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_5y")
+    }
+  }
+
+  public var relativeGainTotal: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_gain_total"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_gain_total")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_categories"
+public struct app_profile_categories_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_categories_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_categories_max_order_by?> = nil, min: Swift.Optional<app_profile_categories_min_order_by?> = nil, stddev: Swift.Optional<app_profile_categories_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_categories_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_categories_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_categories_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_categories_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_categories_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_categories_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_categories_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_categories_avg_order_by?> ?? Swift.Optional<app_profile_categories_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_categories_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_categories_max_order_by?> ?? Swift.Optional<app_profile_categories_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_categories_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_categories_min_order_by?> ?? Swift.Optional<app_profile_categories_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_categories_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_categories_stddev_order_by?> ?? Swift.Optional<app_profile_categories_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_categories_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_categories_stddev_pop_order_by?> ?? Swift.Optional<app_profile_categories_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_categories_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_categories_stddev_samp_order_by?> ?? Swift.Optional<app_profile_categories_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_categories_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_categories_sum_order_by?> ?? Swift.Optional<app_profile_categories_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_categories_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_categories_var_pop_order_by?> ?? Swift.Optional<app_profile_categories_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_categories_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_categories_var_samp_order_by?> ?? Swift.Optional<app_profile_categories_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_categories_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_categories_variance_order_by?> ?? Swift.Optional<app_profile_categories_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_categories"
+public struct app_profile_categories_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_categories"
+public struct app_profile_categories_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_categories"
+public struct app_profile_categories_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_categories"
+public struct app_profile_categories_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_categories"
+public struct app_profile_categories_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_categories"
+public struct app_profile_categories_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_categories"
+public struct app_profile_categories_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_categories"
+public struct app_profile_categories_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_categories"
+public struct app_profile_categories_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_categories"
+public struct app_profile_categories_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - profileId
+  public init(categoryId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile_id": profileId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_favorite_collections_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_favorite_collections_max_order_by?> = nil, min: Swift.Optional<app_profile_favorite_collections_min_order_by?> = nil, stddev: Swift.Optional<app_profile_favorite_collections_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_favorite_collections_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_favorite_collections_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_favorite_collections_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_favorite_collections_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_favorite_collections_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_favorite_collections_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_favorite_collections_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_favorite_collections_avg_order_by?> ?? Swift.Optional<app_profile_favorite_collections_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_favorite_collections_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_favorite_collections_max_order_by?> ?? Swift.Optional<app_profile_favorite_collections_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_favorite_collections_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_favorite_collections_min_order_by?> ?? Swift.Optional<app_profile_favorite_collections_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_favorite_collections_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_favorite_collections_stddev_order_by?> ?? Swift.Optional<app_profile_favorite_collections_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_favorite_collections_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_favorite_collections_stddev_pop_order_by?> ?? Swift.Optional<app_profile_favorite_collections_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_favorite_collections_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_favorite_collections_stddev_samp_order_by?> ?? Swift.Optional<app_profile_favorite_collections_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_favorite_collections_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_favorite_collections_sum_order_by?> ?? Swift.Optional<app_profile_favorite_collections_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_favorite_collections_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_favorite_collections_var_pop_order_by?> ?? Swift.Optional<app_profile_favorite_collections_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_favorite_collections_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_favorite_collections_var_samp_order_by?> ?? Swift.Optional<app_profile_favorite_collections_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_favorite_collections_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_favorite_collections_variance_order_by?> ?? Swift.Optional<app_profile_favorite_collections_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_favorite_collections"
+public struct app_profile_favorite_collections_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_holdings"
+public struct app_profile_holdings_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_holdings_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_holdings_max_order_by?> = nil, min: Swift.Optional<app_profile_holdings_min_order_by?> = nil, stddev: Swift.Optional<app_profile_holdings_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_holdings_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_holdings_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_holdings_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_holdings_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_holdings_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_holdings_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_holdings_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_holdings_avg_order_by?> ?? Swift.Optional<app_profile_holdings_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_holdings_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_holdings_max_order_by?> ?? Swift.Optional<app_profile_holdings_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_holdings_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_holdings_min_order_by?> ?? Swift.Optional<app_profile_holdings_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_holdings_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_holdings_stddev_order_by?> ?? Swift.Optional<app_profile_holdings_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_holdings_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_holdings_stddev_pop_order_by?> ?? Swift.Optional<app_profile_holdings_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_holdings_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_holdings_stddev_samp_order_by?> ?? Swift.Optional<app_profile_holdings_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_holdings_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_holdings_sum_order_by?> ?? Swift.Optional<app_profile_holdings_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_holdings_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_holdings_var_pop_order_by?> ?? Swift.Optional<app_profile_holdings_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_holdings_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_holdings_var_samp_order_by?> ?? Swift.Optional<app_profile_holdings_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_holdings_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_holdings_variance_order_by?> ?? Swift.Optional<app_profile_holdings_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - createdAt
+  ///   - id
+  ///   - isoCurrencyCode
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - refId
+  ///   - securityId
+  ///   - updatedAt
+  public init(accountId: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, isoCurrencyCode: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, refId: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "created_at": createdAt, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security_id": securityId, "updated_at": updatedAt]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var isoCurrencyCode: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["iso_currency_code"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "iso_currency_code")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var refId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - createdAt
+  ///   - id
+  ///   - isoCurrencyCode
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - refId
+  ///   - securityId
+  ///   - updatedAt
+  public init(accountId: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, isoCurrencyCode: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, refId: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "created_at": createdAt, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security_id": securityId, "updated_at": updatedAt]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var isoCurrencyCode: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["iso_currency_code"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "iso_currency_code")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var refId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_holdings"
+public struct app_profile_holdings_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accountId
+  ///   - id
+  ///   - plaidAccessTokenId
+  ///   - profileId
+  ///   - quantity
+  ///   - securityId
+  public init(accountId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, plaidAccessTokenId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, quantity: Swift.Optional<order_by?> = nil, securityId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["account_id": accountId, "id": id, "plaid_access_token_id": plaidAccessTokenId, "profile_id": profileId, "quantity": quantity, "security_id": securityId]
+  }
+
+  public var accountId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["account_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "account_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var plaidAccessTokenId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["plaid_access_token_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "plaid_access_token_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var quantity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quantity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quantity")
+    }
+  }
+
+  public var securityId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["security_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_interests"
+public struct app_profile_interests_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_interests_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_interests_max_order_by?> = nil, min: Swift.Optional<app_profile_interests_min_order_by?> = nil, stddev: Swift.Optional<app_profile_interests_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_interests_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_interests_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_interests_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_interests_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_interests_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_interests_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_interests_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_interests_avg_order_by?> ?? Swift.Optional<app_profile_interests_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_interests_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_interests_max_order_by?> ?? Swift.Optional<app_profile_interests_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_interests_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_interests_min_order_by?> ?? Swift.Optional<app_profile_interests_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_interests_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_interests_stddev_order_by?> ?? Swift.Optional<app_profile_interests_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_interests_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_interests_stddev_pop_order_by?> ?? Swift.Optional<app_profile_interests_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_interests_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_interests_stddev_samp_order_by?> ?? Swift.Optional<app_profile_interests_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_interests_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_interests_sum_order_by?> ?? Swift.Optional<app_profile_interests_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_interests_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_interests_var_pop_order_by?> ?? Swift.Optional<app_profile_interests_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_interests_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_interests_var_samp_order_by?> ?? Swift.Optional<app_profile_interests_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_interests_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_interests_variance_order_by?> ?? Swift.Optional<app_profile_interests_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_interests"
+public struct app_profile_interests_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_interests"
+public struct app_profile_interests_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_interests"
+public struct app_profile_interests_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_interests"
+public struct app_profile_interests_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_interests"
+public struct app_profile_interests_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_interests"
+public struct app_profile_interests_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_interests"
+public struct app_profile_interests_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_interests"
+public struct app_profile_interests_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_interests"
+public struct app_profile_interests_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_interests"
+public struct app_profile_interests_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  ///   - profileId
+  public init(interestId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile_id": profileId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_plaid_access_tokens_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_plaid_access_tokens_max_order_by?> = nil, min: Swift.Optional<app_profile_plaid_access_tokens_min_order_by?> = nil, stddev: Swift.Optional<app_profile_plaid_access_tokens_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_plaid_access_tokens_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_plaid_access_tokens_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_plaid_access_tokens_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_plaid_access_tokens_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_plaid_access_tokens_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_plaid_access_tokens_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_plaid_access_tokens_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_plaid_access_tokens_avg_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_plaid_access_tokens_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_plaid_access_tokens_max_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_plaid_access_tokens_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_plaid_access_tokens_min_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_plaid_access_tokens_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_plaid_access_tokens_stddev_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_plaid_access_tokens_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_plaid_access_tokens_stddev_pop_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_plaid_access_tokens_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_plaid_access_tokens_stddev_samp_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_plaid_access_tokens_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_plaid_access_tokens_sum_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_plaid_access_tokens_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_plaid_access_tokens_var_pop_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_plaid_access_tokens_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_plaid_access_tokens_var_samp_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_plaid_access_tokens_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_plaid_access_tokens_variance_order_by?> ?? Swift.Optional<app_profile_plaid_access_tokens_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accessToken
+  ///   - createdAt
+  ///   - id
+  ///   - itemId
+  ///   - profileId
+  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile_id": profileId]
+  }
+
+  public var accessToken: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var itemId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["item_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "item_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accessToken
+  ///   - createdAt
+  ///   - id
+  ///   - itemId
+  ///   - profileId
+  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile_id": profileId]
+  }
+
+  public var accessToken: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var itemId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["item_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "item_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - profileId
+  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "profile_id": profileId]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "app.profile_scoring_settings".
+public struct app_profile_scoring_settings_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - averageMarketReturn
+  ///   - createdAt
+  ///   - damageOfFailure
+  ///   - ifMarketDrops_20IWillBuy
+  ///   - ifMarketDrops_40IWillBuy
+  ///   - investmentHorizon
+  ///   - profile
+  ///   - profileId
+  ///   - riskLevel
+  ///   - stockMarketRiskLevel
+  ///   - tradingExperience
+  ///   - unexpectedPurchasesSource
+  public init(averageMarketReturn: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, damageOfFailure: Swift.Optional<order_by?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<order_by?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<order_by?> = nil, investmentHorizon: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskLevel: Swift.Optional<order_by?> = nil, stockMarketRiskLevel: Swift.Optional<order_by?> = nil, tradingExperience: Swift.Optional<order_by?> = nil, unexpectedPurchasesSource: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
+  }
+
+  public var averageMarketReturn: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["average_market_return"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "average_market_return")
+    }
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var damageOfFailure: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["damage_of_failure"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "damage_of_failure")
+    }
+  }
+
+  public var ifMarketDrops_20IWillBuy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["if_market_drops_20_i_will_buy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "if_market_drops_20_i_will_buy")
+    }
+  }
+
+  public var ifMarketDrops_40IWillBuy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["if_market_drops_40_i_will_buy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "if_market_drops_40_i_will_buy")
+    }
+  }
+
+  public var investmentHorizon: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["investment_horizon"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "investment_horizon")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_order_by?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var riskLevel: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["risk_level"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_level")
+    }
+  }
+
+  public var stockMarketRiskLevel: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["stock_market_risk_level"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stock_market_risk_level")
+    }
+  }
+
+  public var tradingExperience: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["trading_experience"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "trading_experience")
+    }
+  }
+
+  public var unexpectedPurchasesSource: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["unexpected_purchases_source"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "unexpected_purchases_source")
+    }
+  }
+}
+
+/// order by aggregate values of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<app_profile_watchlist_tickers_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<app_profile_watchlist_tickers_max_order_by?> = nil, min: Swift.Optional<app_profile_watchlist_tickers_min_order_by?> = nil, stddev: Swift.Optional<app_profile_watchlist_tickers_stddev_order_by?> = nil, stddevPop: Swift.Optional<app_profile_watchlist_tickers_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<app_profile_watchlist_tickers_stddev_samp_order_by?> = nil, sum: Swift.Optional<app_profile_watchlist_tickers_sum_order_by?> = nil, varPop: Swift.Optional<app_profile_watchlist_tickers_var_pop_order_by?> = nil, varSamp: Swift.Optional<app_profile_watchlist_tickers_var_samp_order_by?> = nil, variance: Swift.Optional<app_profile_watchlist_tickers_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<app_profile_watchlist_tickers_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<app_profile_watchlist_tickers_avg_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<app_profile_watchlist_tickers_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<app_profile_watchlist_tickers_max_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<app_profile_watchlist_tickers_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<app_profile_watchlist_tickers_min_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<app_profile_watchlist_tickers_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<app_profile_watchlist_tickers_stddev_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<app_profile_watchlist_tickers_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<app_profile_watchlist_tickers_stddev_pop_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<app_profile_watchlist_tickers_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<app_profile_watchlist_tickers_stddev_samp_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<app_profile_watchlist_tickers_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<app_profile_watchlist_tickers_sum_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<app_profile_watchlist_tickers_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<app_profile_watchlist_tickers_var_pop_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<app_profile_watchlist_tickers_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<app_profile_watchlist_tickers_var_samp_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<app_profile_watchlist_tickers_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<app_profile_watchlist_tickers_variance_order_by?> ?? Swift.Optional<app_profile_watchlist_tickers_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  ///   - symbol
+  public init(profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId, "symbol": symbol]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  ///   - symbol
+  public init(profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId, "symbol": symbol]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "app.profile_watchlist_tickers"
+public struct app_profile_watchlist_tickers_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - profileId
+  public init(profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["profile_id": profileId]
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "tickers".
+public struct tickers_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - countryName
+  ///   - description
+  ///   - exchange
+  ///   - gicGroup
+  ///   - gicIndustry
+  ///   - gicSector
+  ///   - gicSubIndustry
+  ///   - historicalGrowthRatesAggregate
+  ///   - industry
+  ///   - ipoDate
+  ///   - logoUrl
+  ///   - metricsTransposedAggregate
+  ///   - name
+  ///   - phone
+  ///   - realtimeMetrics
+  ///   - sector
+  ///   - symbol
+  ///   - tickerAnalystRatings
+  ///   - tickerCategoriesAggregate
+  ///   - tickerCollectionsAggregate
+  ///   - tickerEventsAggregate
+  ///   - tickerFinancialsAggregate
+  ///   - tickerGrowthRate_1mAggregate
+  ///   - tickerGrowthRate_1wAggregate
+  ///   - tickerHighlightsAggregate
+  ///   - tickerIndustriesAggregate
+  ///   - tickerInterestsAggregate
+  ///   - tickerMetrics
+  ///   - type
+  ///   - updatedAt
+  ///   - webUrl
+  public init(countryName: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, historicalGrowthRatesAggregate: Swift.Optional<historical_growth_rate_aggregate_order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, metricsTransposedAggregate: Swift.Optional<ticker_metrics_transposed_aggregate_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerFinancialsAggregate: Swift.Optional<ticker_financials_aggregate_order_by?> = nil, tickerGrowthRate_1mAggregate: Swift.Optional<growth_rate_1m_aggregate_order_by?> = nil, tickerGrowthRate_1wAggregate: Swift.Optional<growth_rate_1w_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "historical_growth_rates_aggregate": historicalGrowthRatesAggregate, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "metrics_transposed_aggregate": metricsTransposedAggregate, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_financials_aggregate": tickerFinancialsAggregate, "ticker_growth_rate_1m_aggregate": tickerGrowthRate_1mAggregate, "ticker_growth_rate_1w_aggregate": tickerGrowthRate_1wAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  }
+
+  public var countryName: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["country_name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "country_name")
+    }
+  }
+
+  public var description: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var exchange: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["exchange"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange")
+    }
+  }
+
+  public var gicGroup: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["gic_group"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gic_group")
+    }
+  }
+
+  public var gicIndustry: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["gic_industry"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gic_industry")
+    }
+  }
+
+  public var gicSector: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["gic_sector"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gic_sector")
+    }
+  }
+
+  public var gicSubIndustry: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["gic_sub_industry"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gic_sub_industry")
+    }
+  }
+
+  public var historicalGrowthRatesAggregate: Swift.Optional<historical_growth_rate_aggregate_order_by?> {
+    get {
+      return graphQLMap["historical_growth_rates_aggregate"] as? Swift.Optional<historical_growth_rate_aggregate_order_by?> ?? Swift.Optional<historical_growth_rate_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "historical_growth_rates_aggregate")
+    }
+  }
+
+  public var industry: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry")
+    }
+  }
+
+  public var ipoDate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ipo_date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ipo_date")
+    }
+  }
+
+  public var logoUrl: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["logo_url"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "logo_url")
+    }
+  }
+
+  public var metricsTransposedAggregate: Swift.Optional<ticker_metrics_transposed_aggregate_order_by?> {
+    get {
+      return graphQLMap["metrics_transposed_aggregate"] as? Swift.Optional<ticker_metrics_transposed_aggregate_order_by?> ?? Swift.Optional<ticker_metrics_transposed_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "metrics_transposed_aggregate")
+    }
+  }
+
+  public var name: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var phone: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["phone"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "phone")
+    }
+  }
+
+  public var realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> {
+    get {
+      return graphQLMap["realtime_metrics"] as? Swift.Optional<ticker_realtime_metrics_order_by?> ?? Swift.Optional<ticker_realtime_metrics_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "realtime_metrics")
+    }
+  }
+
+  public var sector: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sector"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sector")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> {
+    get {
+      return graphQLMap["ticker_analyst_ratings"] as? Swift.Optional<analyst_ratings_order_by?> ?? Swift.Optional<analyst_ratings_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_analyst_ratings")
+    }
+  }
+
+  public var tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_categories_aggregate"] as? Swift.Optional<ticker_categories_aggregate_order_by?> ?? Swift.Optional<ticker_categories_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_categories_aggregate")
+    }
+  }
+
+  public var tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_collections_aggregate"] as? Swift.Optional<ticker_collections_aggregate_order_by?> ?? Swift.Optional<ticker_collections_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_collections_aggregate")
+    }
+  }
+
+  public var tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_events_aggregate"] as? Swift.Optional<ticker_events_aggregate_order_by?> ?? Swift.Optional<ticker_events_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_events_aggregate")
+    }
+  }
+
+  public var tickerFinancialsAggregate: Swift.Optional<ticker_financials_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_financials_aggregate"] as? Swift.Optional<ticker_financials_aggregate_order_by?> ?? Swift.Optional<ticker_financials_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_financials_aggregate")
+    }
+  }
+
+  public var tickerGrowthRate_1mAggregate: Swift.Optional<growth_rate_1m_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_growth_rate_1m_aggregate"] as? Swift.Optional<growth_rate_1m_aggregate_order_by?> ?? Swift.Optional<growth_rate_1m_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_growth_rate_1m_aggregate")
+    }
+  }
+
+  public var tickerGrowthRate_1wAggregate: Swift.Optional<growth_rate_1w_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_growth_rate_1w_aggregate"] as? Swift.Optional<growth_rate_1w_aggregate_order_by?> ?? Swift.Optional<growth_rate_1w_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_growth_rate_1w_aggregate")
+    }
+  }
+
+  public var tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_highlights_aggregate"] as? Swift.Optional<ticker_highlights_aggregate_order_by?> ?? Swift.Optional<ticker_highlights_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_highlights_aggregate")
+    }
+  }
+
+  public var tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_industries_aggregate"] as? Swift.Optional<ticker_industries_aggregate_order_by?> ?? Swift.Optional<ticker_industries_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_industries_aggregate")
+    }
+  }
+
+  public var tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> {
+    get {
+      return graphQLMap["ticker_interests_aggregate"] as? Swift.Optional<ticker_interests_aggregate_order_by?> ?? Swift.Optional<ticker_interests_aggregate_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_interests_aggregate")
+    }
+  }
+
+  public var tickerMetrics: Swift.Optional<ticker_metrics_order_by?> {
+    get {
+      return graphQLMap["ticker_metrics"] as? Swift.Optional<ticker_metrics_order_by?> ?? Swift.Optional<ticker_metrics_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker_metrics")
+    }
+  }
+
+  public var type: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+
+  public var webUrl: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["web_url"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "web_url")
+    }
+  }
+}
+
+/// order by aggregate values of table "historical_growth_rate"
+public struct historical_growth_rate_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<historical_growth_rate_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<historical_growth_rate_max_order_by?> = nil, min: Swift.Optional<historical_growth_rate_min_order_by?> = nil, stddev: Swift.Optional<historical_growth_rate_stddev_order_by?> = nil, stddevPop: Swift.Optional<historical_growth_rate_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<historical_growth_rate_stddev_samp_order_by?> = nil, sum: Swift.Optional<historical_growth_rate_sum_order_by?> = nil, varPop: Swift.Optional<historical_growth_rate_var_pop_order_by?> = nil, varSamp: Swift.Optional<historical_growth_rate_var_samp_order_by?> = nil, variance: Swift.Optional<historical_growth_rate_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<historical_growth_rate_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<historical_growth_rate_avg_order_by?> ?? Swift.Optional<historical_growth_rate_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<historical_growth_rate_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<historical_growth_rate_max_order_by?> ?? Swift.Optional<historical_growth_rate_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<historical_growth_rate_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<historical_growth_rate_min_order_by?> ?? Swift.Optional<historical_growth_rate_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<historical_growth_rate_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<historical_growth_rate_stddev_order_by?> ?? Swift.Optional<historical_growth_rate_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<historical_growth_rate_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<historical_growth_rate_stddev_pop_order_by?> ?? Swift.Optional<historical_growth_rate_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<historical_growth_rate_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<historical_growth_rate_stddev_samp_order_by?> ?? Swift.Optional<historical_growth_rate_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<historical_growth_rate_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<historical_growth_rate_sum_order_by?> ?? Swift.Optional<historical_growth_rate_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<historical_growth_rate_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<historical_growth_rate_var_pop_order_by?> ?? Swift.Optional<historical_growth_rate_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<historical_growth_rate_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<historical_growth_rate_var_samp_order_by?> ?? Swift.Optional<historical_growth_rate_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<historical_growth_rate_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<historical_growth_rate_variance_order_by?> ?? Swift.Optional<historical_growth_rate_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by max() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  ///   - id
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "id": id, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  ///   - id
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m, "id": id, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by sum() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by variance() on columns of table "historical_growth_rate"
+public struct historical_growth_rate_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate_1d
+  ///   - growthRate_1m
+  ///   - growthRate_1w
+  ///   - growthRate_1y
+  ///   - growthRate_3m
+  public init(growthRate_1d: Swift.Optional<order_by?> = nil, growthRate_1m: Swift.Optional<order_by?> = nil, growthRate_1w: Swift.Optional<order_by?> = nil, growthRate_1y: Swift.Optional<order_by?> = nil, growthRate_3m: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate_1d": growthRate_1d, "growth_rate_1m": growthRate_1m, "growth_rate_1w": growthRate_1w, "growth_rate_1y": growthRate_1y, "growth_rate_3m": growthRate_3m]
+  }
+
+  public var growthRate_1d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1d")
+    }
+  }
+
+  public var growthRate_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1m")
+    }
+  }
+
+  public var growthRate_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1w")
+    }
+  }
+
+  public var growthRate_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_1y")
+    }
+  }
+
+  public var growthRate_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate_3m")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_metrics_transposed_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_metrics_transposed_max_order_by?> = nil, min: Swift.Optional<ticker_metrics_transposed_min_order_by?> = nil, stddev: Swift.Optional<ticker_metrics_transposed_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_metrics_transposed_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_metrics_transposed_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_metrics_transposed_sum_order_by?> = nil, varPop: Swift.Optional<ticker_metrics_transposed_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_metrics_transposed_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_metrics_transposed_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_metrics_transposed_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_metrics_transposed_avg_order_by?> ?? Swift.Optional<ticker_metrics_transposed_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_metrics_transposed_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_metrics_transposed_max_order_by?> ?? Swift.Optional<ticker_metrics_transposed_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_metrics_transposed_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_metrics_transposed_min_order_by?> ?? Swift.Optional<ticker_metrics_transposed_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_metrics_transposed_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_metrics_transposed_stddev_order_by?> ?? Swift.Optional<ticker_metrics_transposed_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_metrics_transposed_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_metrics_transposed_stddev_pop_order_by?> ?? Swift.Optional<ticker_metrics_transposed_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_metrics_transposed_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_metrics_transposed_stddev_samp_order_by?> ?? Swift.Optional<ticker_metrics_transposed_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_metrics_transposed_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_metrics_transposed_sum_order_by?> ?? Swift.Optional<ticker_metrics_transposed_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_metrics_transposed_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_metrics_transposed_var_pop_order_by?> ?? Swift.Optional<ticker_metrics_transposed_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_metrics_transposed_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_metrics_transposed_var_samp_order_by?> ?? Swift.Optional<ticker_metrics_transposed_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_metrics_transposed_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_metrics_transposed_variance_order_by?> ?? Swift.Optional<ticker_metrics_transposed_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - metricId
+  ///   - symbol
+  ///   - valueBigint
+  ///   - valueDouble
+  ///   - valueString
+  public init(id: Swift.Optional<order_by?> = nil, metricId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil, valueString: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "metric_id": metricId, "symbol": symbol, "value_bigint": valueBigint, "value_double": valueDouble, "value_string": valueString]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var metricId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["metric_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "metric_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+
+  public var valueString: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_string"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_string")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - metricId
+  ///   - symbol
+  ///   - valueBigint
+  ///   - valueDouble
+  ///   - valueString
+  public init(id: Swift.Optional<order_by?> = nil, metricId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil, valueString: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "metric_id": metricId, "symbol": symbol, "value_bigint": valueBigint, "value_double": valueDouble, "value_string": valueString]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var metricId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["metric_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "metric_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+
+  public var valueString: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_string"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_string")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by sum() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// order by variance() on columns of table "ticker_metrics_transposed"
+public struct ticker_metrics_transposed_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - valueBigint
+  ///   - valueDouble
+  public init(valueBigint: Swift.Optional<order_by?> = nil, valueDouble: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["value_bigint": valueBigint, "value_double": valueDouble]
+  }
+
+  public var valueBigint: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_bigint"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_bigint")
+    }
+  }
+
+  public var valueDouble: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["value_double"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "value_double")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "ticker_realtime_metrics".
+public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - absoluteDailyChange
+  ///   - actualPrice
+  ///   - dailyVolume
+  ///   - relativeDailyChange
+  ///   - symbol
+  ///   - time
+  public init(absoluteDailyChange: Swift.Optional<order_by?> = nil, actualPrice: Swift.Optional<order_by?> = nil, dailyVolume: Swift.Optional<order_by?> = nil, relativeDailyChange: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, time: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
+  }
+
+  public var absoluteDailyChange: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_daily_change"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_daily_change")
+    }
+  }
+
+  public var actualPrice: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["actual_price"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "actual_price")
+    }
+  }
+
+  public var dailyVolume: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["daily_volume"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "daily_volume")
+    }
+  }
+
+  public var relativeDailyChange: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_daily_change"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_daily_change")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var time: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["time"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "time")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "analyst_ratings".
+public struct analyst_ratings_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - buy
+  ///   - hold
+  ///   - rating
+  ///   - sell
+  ///   - strongBuy
+  ///   - strongSell
+  ///   - symbol
+  ///   - targetPrice
+  public init(buy: Swift.Optional<order_by?> = nil, hold: Swift.Optional<order_by?> = nil, rating: Swift.Optional<order_by?> = nil, sell: Swift.Optional<order_by?> = nil, strongBuy: Swift.Optional<order_by?> = nil, strongSell: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, targetPrice: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["buy": buy, "hold": hold, "rating": rating, "sell": sell, "strong_buy": strongBuy, "strong_sell": strongSell, "symbol": symbol, "target_price": targetPrice]
+  }
+
+  public var buy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["buy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "buy")
+    }
+  }
+
+  public var hold: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["hold"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "hold")
+    }
+  }
+
+  public var rating: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["rating"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "rating")
+    }
+  }
+
+  public var sell: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sell"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sell")
+    }
+  }
+
+  public var strongBuy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["strong_buy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "strong_buy")
+    }
+  }
+
+  public var strongSell: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["strong_sell"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "strong_sell")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var targetPrice: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["target_price"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "target_price")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_categories"
+public struct ticker_categories_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_categories_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_categories_max_order_by?> = nil, min: Swift.Optional<ticker_categories_min_order_by?> = nil, stddev: Swift.Optional<ticker_categories_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_categories_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_categories_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_categories_sum_order_by?> = nil, varPop: Swift.Optional<ticker_categories_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_categories_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_categories_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_categories_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_categories_avg_order_by?> ?? Swift.Optional<ticker_categories_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_categories_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_categories_max_order_by?> ?? Swift.Optional<ticker_categories_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_categories_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_categories_min_order_by?> ?? Swift.Optional<ticker_categories_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_categories_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_categories_stddev_order_by?> ?? Swift.Optional<ticker_categories_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_categories_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_categories_stddev_pop_order_by?> ?? Swift.Optional<ticker_categories_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_categories_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_categories_stddev_samp_order_by?> ?? Swift.Optional<ticker_categories_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_categories_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_categories_sum_order_by?> ?? Swift.Optional<ticker_categories_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_categories_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_categories_var_pop_order_by?> ?? Swift.Optional<ticker_categories_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_categories_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_categories_var_samp_order_by?> ?? Swift.Optional<ticker_categories_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_categories_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_categories_variance_order_by?> ?? Swift.Optional<ticker_categories_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "ticker_categories"
+public struct ticker_categories_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_categories"
+public struct ticker_categories_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - id
+  ///   - symbol
+  ///   - updatedAt
+  public init(categoryId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "id": id, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_categories"
+public struct ticker_categories_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  ///   - id
+  ///   - symbol
+  ///   - updatedAt
+  public init(categoryId: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId, "id": id, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "ticker_categories"
+public struct ticker_categories_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "ticker_categories"
+public struct ticker_categories_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "ticker_categories"
+public struct ticker_categories_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "ticker_categories"
+public struct ticker_categories_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "ticker_categories"
+public struct ticker_categories_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "ticker_categories"
+public struct ticker_categories_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "ticker_categories"
+public struct ticker_categories_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - categoryId
+  public init(categoryId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_id": categoryId]
+  }
+
+  public var categoryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["category_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "category_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "profile_ticker_collections"
+public struct ticker_collections_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_collections_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_collections_max_order_by?> = nil, min: Swift.Optional<ticker_collections_min_order_by?> = nil, stddev: Swift.Optional<ticker_collections_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_collections_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_collections_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_collections_sum_order_by?> = nil, varPop: Swift.Optional<ticker_collections_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_collections_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_collections_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_collections_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_collections_avg_order_by?> ?? Swift.Optional<ticker_collections_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_collections_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_collections_max_order_by?> ?? Swift.Optional<ticker_collections_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_collections_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_collections_min_order_by?> ?? Swift.Optional<ticker_collections_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_collections_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_collections_stddev_order_by?> ?? Swift.Optional<ticker_collections_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_collections_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_collections_stddev_pop_order_by?> ?? Swift.Optional<ticker_collections_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_collections_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_collections_stddev_samp_order_by?> ?? Swift.Optional<ticker_collections_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_collections_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_collections_sum_order_by?> ?? Swift.Optional<ticker_collections_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_collections_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_collections_var_pop_order_by?> ?? Swift.Optional<ticker_collections_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_collections_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_collections_var_samp_order_by?> ?? Swift.Optional<ticker_collections_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_collections_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_collections_variance_order_by?> ?? Swift.Optional<ticker_collections_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "profile_ticker_collections"
+public struct ticker_collections_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "profile_ticker_collections"
+public struct ticker_collections_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  ///   - symbol
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId, "symbol": symbol]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "profile_ticker_collections"
+public struct ticker_collections_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  ///   - symbol
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId, "symbol": symbol]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "profile_ticker_collections"
+public struct ticker_collections_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "profile_ticker_collections"
+public struct ticker_collections_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "profile_ticker_collections"
+public struct ticker_collections_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "profile_ticker_collections"
+public struct ticker_collections_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "profile_ticker_collections"
+public struct ticker_collections_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "profile_ticker_collections"
+public struct ticker_collections_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "profile_ticker_collections"
+public struct ticker_collections_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - collectionId
+  ///   - profileId
+  public init(collectionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["collection_id": collectionId, "profile_id": profileId]
+  }
+
+  public var collectionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["collection_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "collection_id")
+    }
+  }
+
+  public var profileId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_events"
+public struct ticker_events_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - count
+  ///   - max
+  ///   - min
+  public init(count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_events_max_order_by?> = nil, min: Swift.Optional<ticker_events_min_order_by?> = nil) {
+    graphQLMap = ["count": count, "max": max, "min": min]
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_events_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_events_max_order_by?> ?? Swift.Optional<ticker_events_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_events_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_events_min_order_by?> ?? Swift.Optional<ticker_events_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_events"
+public struct ticker_events_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - date
+  ///   - description
+  ///   - id
+  ///   - symbol
+  ///   - timestamp
+  ///   - type
+  public init(createdAt: Swift.Optional<order_by?> = nil, date: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, timestamp: Swift.Optional<order_by?> = nil, type: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "date": date, "description": description, "id": id, "symbol": symbol, "timestamp": timestamp, "type": type]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var description: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var timestamp: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["timestamp"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "timestamp")
+    }
+  }
+
+  public var type: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_events"
+public struct ticker_events_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - date
+  ///   - description
+  ///   - id
+  ///   - symbol
+  ///   - timestamp
+  ///   - type
+  public init(createdAt: Swift.Optional<order_by?> = nil, date: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, timestamp: Swift.Optional<order_by?> = nil, type: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "date": date, "description": description, "id": id, "symbol": symbol, "timestamp": timestamp, "type": type]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var description: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var timestamp: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["timestamp"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "timestamp")
+    }
+  }
+
+  public var type: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_financials"
+public struct ticker_financials_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_financials_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_financials_max_order_by?> = nil, min: Swift.Optional<ticker_financials_min_order_by?> = nil, stddev: Swift.Optional<ticker_financials_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_financials_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_financials_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_financials_sum_order_by?> = nil, varPop: Swift.Optional<ticker_financials_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_financials_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_financials_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_financials_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_financials_avg_order_by?> ?? Swift.Optional<ticker_financials_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_financials_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_financials_max_order_by?> ?? Swift.Optional<ticker_financials_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_financials_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_financials_min_order_by?> ?? Swift.Optional<ticker_financials_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_financials_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_financials_stddev_order_by?> ?? Swift.Optional<ticker_financials_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_financials_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_financials_stddev_pop_order_by?> ?? Swift.Optional<ticker_financials_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_financials_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_financials_stddev_samp_order_by?> ?? Swift.Optional<ticker_financials_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_financials_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_financials_sum_order_by?> ?? Swift.Optional<ticker_financials_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_financials_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_financials_var_pop_order_by?> ?? Swift.Optional<ticker_financials_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_financials_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_financials_var_samp_order_by?> ?? Swift.Optional<ticker_financials_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_financials_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_financials_variance_order_by?> ?? Swift.Optional<ticker_financials_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "ticker_financials"
+public struct ticker_financials_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_financials"
+public struct ticker_financials_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - highlight
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  ///   - symbol
+  public init(createdAt: Swift.Optional<order_by?> = nil, dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, highlight: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "highlight": highlight, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm, "symbol": symbol]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var highlight: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["highlight"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "highlight")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_financials"
+public struct ticker_financials_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - highlight
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  ///   - symbol
+  public init(createdAt: Swift.Optional<order_by?> = nil, dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, highlight: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "highlight": highlight, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm, "symbol": symbol]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var highlight: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["highlight"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "highlight")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "ticker_financials"
+public struct ticker_financials_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "ticker_financials"
+public struct ticker_financials_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "ticker_financials"
+public struct ticker_financials_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by sum() on columns of table "ticker_financials"
+public struct ticker_financials_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "ticker_financials"
+public struct ticker_financials_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "ticker_financials"
+public struct ticker_financials_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by variance() on columns of table "ticker_financials"
+public struct ticker_financials_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - dividendGrowth
+  ///   - enterpriseValueToSales
+  ///   - marketCapitalization
+  ///   - monthPricePerformance
+  ///   - netProfitMargin
+  ///   - peRatio
+  ///   - quarterAgoClose
+  ///   - quarterPricePerformance
+  ///   - quarterlyRevenueGrowthYoy
+  ///   - revenueTtm
+  public init(dividendGrowth: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, monthPricePerformance: Swift.Optional<order_by?> = nil, netProfitMargin: Swift.Optional<order_by?> = nil, peRatio: Swift.Optional<order_by?> = nil, quarterAgoClose: Swift.Optional<order_by?> = nil, quarterPricePerformance: Swift.Optional<order_by?> = nil, quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["dividend_growth": dividendGrowth, "enterprise_value_to_sales": enterpriseValueToSales, "market_capitalization": marketCapitalization, "month_price_performance": monthPricePerformance, "net_profit_margin": netProfitMargin, "pe_ratio": peRatio, "quarter_ago_close": quarterAgoClose, "quarter_price_performance": quarterPricePerformance, "quarterly_revenue_growth_yoy": quarterlyRevenueGrowthYoy, "revenue_ttm": revenueTtm]
+  }
+
+  public var dividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_growth")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var monthPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["month_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "month_price_performance")
+    }
+  }
+
+  public var netProfitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_profit_margin")
+    }
+  }
+
+  public var peRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["pe_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "pe_ratio")
+    }
+  }
+
+  public var quarterAgoClose: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_ago_close"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_ago_close")
+    }
+  }
+
+  public var quarterPricePerformance: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarter_price_performance"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarter_price_performance")
+    }
+  }
+
+  public var quarterlyRevenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["quarterly_revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "quarterly_revenue_growth_yoy")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+}
+
+/// order by aggregate values of table "growth_rate_1m"
+public struct growth_rate_1m_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<growth_rate_1m_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<growth_rate_1m_max_order_by?> = nil, min: Swift.Optional<growth_rate_1m_min_order_by?> = nil, stddev: Swift.Optional<growth_rate_1m_stddev_order_by?> = nil, stddevPop: Swift.Optional<growth_rate_1m_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<growth_rate_1m_stddev_samp_order_by?> = nil, sum: Swift.Optional<growth_rate_1m_sum_order_by?> = nil, varPop: Swift.Optional<growth_rate_1m_var_pop_order_by?> = nil, varSamp: Swift.Optional<growth_rate_1m_var_samp_order_by?> = nil, variance: Swift.Optional<growth_rate_1m_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<growth_rate_1m_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<growth_rate_1m_avg_order_by?> ?? Swift.Optional<growth_rate_1m_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<growth_rate_1m_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<growth_rate_1m_max_order_by?> ?? Swift.Optional<growth_rate_1m_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<growth_rate_1m_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<growth_rate_1m_min_order_by?> ?? Swift.Optional<growth_rate_1m_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<growth_rate_1m_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<growth_rate_1m_stddev_order_by?> ?? Swift.Optional<growth_rate_1m_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<growth_rate_1m_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<growth_rate_1m_stddev_pop_order_by?> ?? Swift.Optional<growth_rate_1m_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<growth_rate_1m_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<growth_rate_1m_stddev_samp_order_by?> ?? Swift.Optional<growth_rate_1m_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<growth_rate_1m_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<growth_rate_1m_sum_order_by?> ?? Swift.Optional<growth_rate_1m_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<growth_rate_1m_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<growth_rate_1m_var_pop_order_by?> ?? Swift.Optional<growth_rate_1m_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<growth_rate_1m_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<growth_rate_1m_var_samp_order_by?> ?? Swift.Optional<growth_rate_1m_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<growth_rate_1m_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<growth_rate_1m_variance_order_by?> ?? Swift.Optional<growth_rate_1m_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by max() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate": growthRate, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate": growthRate, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by sum() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by variance() on columns of table "growth_rate_1m"
+public struct growth_rate_1m_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by aggregate values of table "growth_rate_1w"
+public struct growth_rate_1w_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<growth_rate_1w_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<growth_rate_1w_max_order_by?> = nil, min: Swift.Optional<growth_rate_1w_min_order_by?> = nil, stddev: Swift.Optional<growth_rate_1w_stddev_order_by?> = nil, stddevPop: Swift.Optional<growth_rate_1w_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<growth_rate_1w_stddev_samp_order_by?> = nil, sum: Swift.Optional<growth_rate_1w_sum_order_by?> = nil, varPop: Swift.Optional<growth_rate_1w_var_pop_order_by?> = nil, varSamp: Swift.Optional<growth_rate_1w_var_samp_order_by?> = nil, variance: Swift.Optional<growth_rate_1w_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<growth_rate_1w_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<growth_rate_1w_avg_order_by?> ?? Swift.Optional<growth_rate_1w_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<growth_rate_1w_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<growth_rate_1w_max_order_by?> ?? Swift.Optional<growth_rate_1w_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<growth_rate_1w_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<growth_rate_1w_min_order_by?> ?? Swift.Optional<growth_rate_1w_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<growth_rate_1w_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<growth_rate_1w_stddev_order_by?> ?? Swift.Optional<growth_rate_1w_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<growth_rate_1w_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<growth_rate_1w_stddev_pop_order_by?> ?? Swift.Optional<growth_rate_1w_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<growth_rate_1w_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<growth_rate_1w_stddev_samp_order_by?> ?? Swift.Optional<growth_rate_1w_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<growth_rate_1w_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<growth_rate_1w_sum_order_by?> ?? Swift.Optional<growth_rate_1w_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<growth_rate_1w_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<growth_rate_1w_var_pop_order_by?> ?? Swift.Optional<growth_rate_1w_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<growth_rate_1w_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<growth_rate_1w_var_samp_order_by?> ?? Swift.Optional<growth_rate_1w_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<growth_rate_1w_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<growth_rate_1w_variance_order_by?> ?? Swift.Optional<growth_rate_1w_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by max() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate": growthRate, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - date
+  ///   - growthRate
+  ///   - symbol
+  public init(date: Swift.Optional<order_by?> = nil, growthRate: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["date": date, "growth_rate": growthRate, "symbol": symbol]
+  }
+
+  public var date: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "date")
+    }
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by sum() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by variance() on columns of table "growth_rate_1w"
+public struct growth_rate_1w_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - growthRate
+  public init(growthRate: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["growth_rate": growthRate]
+  }
+
+  public var growthRate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["growth_rate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "growth_rate")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_highlights"
+public struct ticker_highlights_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - count
+  ///   - max
+  ///   - min
+  public init(count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_highlights_max_order_by?> = nil, min: Swift.Optional<ticker_highlights_min_order_by?> = nil) {
+    graphQLMap = ["count": count, "max": max, "min": min]
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_highlights_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_highlights_max_order_by?> ?? Swift.Optional<ticker_highlights_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_highlights_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_highlights_min_order_by?> ?? Swift.Optional<ticker_highlights_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_highlights"
+public struct ticker_highlights_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - highlight
+  ///   - id
+  ///   - symbol
+  public init(createdAt: Swift.Optional<order_by?> = nil, highlight: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "highlight": highlight, "id": id, "symbol": symbol]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var highlight: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["highlight"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "highlight")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_highlights"
+public struct ticker_highlights_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - highlight
+  ///   - id
+  ///   - symbol
+  public init(createdAt: Swift.Optional<order_by?> = nil, highlight: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["created_at": createdAt, "highlight": highlight, "id": id, "symbol": symbol]
+  }
+
+  public var createdAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var highlight: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["highlight"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "highlight")
+    }
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_industries"
+public struct ticker_industries_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_industries_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_industries_max_order_by?> = nil, min: Swift.Optional<ticker_industries_min_order_by?> = nil, stddev: Swift.Optional<ticker_industries_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_industries_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_industries_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_industries_sum_order_by?> = nil, varPop: Swift.Optional<ticker_industries_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_industries_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_industries_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_industries_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_industries_avg_order_by?> ?? Swift.Optional<ticker_industries_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_industries_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_industries_max_order_by?> ?? Swift.Optional<ticker_industries_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_industries_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_industries_min_order_by?> ?? Swift.Optional<ticker_industries_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_industries_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_industries_stddev_order_by?> ?? Swift.Optional<ticker_industries_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_industries_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_industries_stddev_pop_order_by?> ?? Swift.Optional<ticker_industries_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_industries_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_industries_stddev_samp_order_by?> ?? Swift.Optional<ticker_industries_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_industries_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_industries_sum_order_by?> ?? Swift.Optional<ticker_industries_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_industries_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_industries_var_pop_order_by?> ?? Swift.Optional<ticker_industries_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_industries_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_industries_var_samp_order_by?> ?? Swift.Optional<ticker_industries_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_industries_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_industries_variance_order_by?> ?? Swift.Optional<ticker_industries_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "ticker_industries"
+public struct ticker_industries_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_industries"
+public struct ticker_industries_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - industryId
+  ///   - industryOrder
+  ///   - symbol
+  ///   - updatedAt
+  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_industries"
+public struct ticker_industries_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - industryId
+  ///   - industryOrder
+  ///   - symbol
+  ///   - updatedAt
+  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "ticker_industries"
+public struct ticker_industries_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "ticker_industries"
+public struct ticker_industries_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "ticker_industries"
+public struct ticker_industries_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by sum() on columns of table "ticker_industries"
+public struct ticker_industries_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "ticker_industries"
+public struct ticker_industries_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "ticker_industries"
+public struct ticker_industries_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by variance() on columns of table "ticker_industries"
+public struct ticker_industries_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - industryId
+  ///   - industryOrder
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  }
+
+  public var industryId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_id")
+    }
+  }
+
+  public var industryOrder: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["industry_order"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+}
+
+/// order by aggregate values of table "ticker_interests"
+public struct ticker_interests_aggregate_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - avg
+  ///   - count
+  ///   - max
+  ///   - min
+  ///   - stddev
+  ///   - stddevPop
+  ///   - stddevSamp
+  ///   - sum
+  ///   - varPop
+  ///   - varSamp
+  ///   - variance
+  public init(avg: Swift.Optional<ticker_interests_avg_order_by?> = nil, count: Swift.Optional<order_by?> = nil, max: Swift.Optional<ticker_interests_max_order_by?> = nil, min: Swift.Optional<ticker_interests_min_order_by?> = nil, stddev: Swift.Optional<ticker_interests_stddev_order_by?> = nil, stddevPop: Swift.Optional<ticker_interests_stddev_pop_order_by?> = nil, stddevSamp: Swift.Optional<ticker_interests_stddev_samp_order_by?> = nil, sum: Swift.Optional<ticker_interests_sum_order_by?> = nil, varPop: Swift.Optional<ticker_interests_var_pop_order_by?> = nil, varSamp: Swift.Optional<ticker_interests_var_samp_order_by?> = nil, variance: Swift.Optional<ticker_interests_variance_order_by?> = nil) {
+    graphQLMap = ["avg": avg, "count": count, "max": max, "min": min, "stddev": stddev, "stddev_pop": stddevPop, "stddev_samp": stddevSamp, "sum": sum, "var_pop": varPop, "var_samp": varSamp, "variance": variance]
+  }
+
+  public var avg: Swift.Optional<ticker_interests_avg_order_by?> {
+    get {
+      return graphQLMap["avg"] as? Swift.Optional<ticker_interests_avg_order_by?> ?? Swift.Optional<ticker_interests_avg_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg")
+    }
+  }
+
+  public var count: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "count")
+    }
+  }
+
+  public var max: Swift.Optional<ticker_interests_max_order_by?> {
+    get {
+      return graphQLMap["max"] as? Swift.Optional<ticker_interests_max_order_by?> ?? Swift.Optional<ticker_interests_max_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max")
+    }
+  }
+
+  public var min: Swift.Optional<ticker_interests_min_order_by?> {
+    get {
+      return graphQLMap["min"] as? Swift.Optional<ticker_interests_min_order_by?> ?? Swift.Optional<ticker_interests_min_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "min")
+    }
+  }
+
+  public var stddev: Swift.Optional<ticker_interests_stddev_order_by?> {
+    get {
+      return graphQLMap["stddev"] as? Swift.Optional<ticker_interests_stddev_order_by?> ?? Swift.Optional<ticker_interests_stddev_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev")
+    }
+  }
+
+  public var stddevPop: Swift.Optional<ticker_interests_stddev_pop_order_by?> {
+    get {
+      return graphQLMap["stddev_pop"] as? Swift.Optional<ticker_interests_stddev_pop_order_by?> ?? Swift.Optional<ticker_interests_stddev_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_pop")
+    }
+  }
+
+  public var stddevSamp: Swift.Optional<ticker_interests_stddev_samp_order_by?> {
+    get {
+      return graphQLMap["stddev_samp"] as? Swift.Optional<ticker_interests_stddev_samp_order_by?> ?? Swift.Optional<ticker_interests_stddev_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "stddev_samp")
+    }
+  }
+
+  public var sum: Swift.Optional<ticker_interests_sum_order_by?> {
+    get {
+      return graphQLMap["sum"] as? Swift.Optional<ticker_interests_sum_order_by?> ?? Swift.Optional<ticker_interests_sum_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sum")
+    }
+  }
+
+  public var varPop: Swift.Optional<ticker_interests_var_pop_order_by?> {
+    get {
+      return graphQLMap["var_pop"] as? Swift.Optional<ticker_interests_var_pop_order_by?> ?? Swift.Optional<ticker_interests_var_pop_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_pop")
+    }
+  }
+
+  public var varSamp: Swift.Optional<ticker_interests_var_samp_order_by?> {
+    get {
+      return graphQLMap["var_samp"] as? Swift.Optional<ticker_interests_var_samp_order_by?> ?? Swift.Optional<ticker_interests_var_samp_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "var_samp")
+    }
+  }
+
+  public var variance: Swift.Optional<ticker_interests_variance_order_by?> {
+    get {
+      return graphQLMap["variance"] as? Swift.Optional<ticker_interests_variance_order_by?> ?? Swift.Optional<ticker_interests_variance_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "variance")
+    }
+  }
+}
+
+/// order by avg() on columns of table "ticker_interests"
+public struct ticker_interests_avg_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by max() on columns of table "ticker_interests"
+public struct ticker_interests_max_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - interestId
+  ///   - symbol
+  ///   - updatedAt
+  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "interest_id": interestId, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by min() on columns of table "ticker_interests"
+public struct ticker_interests_min_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - id
+  ///   - interestId
+  ///   - symbol
+  ///   - updatedAt
+  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "interest_id": interestId, "symbol": symbol, "updated_at": updatedAt]
+  }
+
+  public var id: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// order by stddev() on columns of table "ticker_interests"
+public struct ticker_interests_stddev_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by stddev_pop() on columns of table "ticker_interests"
+public struct ticker_interests_stddev_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by stddev_samp() on columns of table "ticker_interests"
+public struct ticker_interests_stddev_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by sum() on columns of table "ticker_interests"
+public struct ticker_interests_sum_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by var_pop() on columns of table "ticker_interests"
+public struct ticker_interests_var_pop_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by var_samp() on columns of table "ticker_interests"
+public struct ticker_interests_var_samp_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// order by variance() on columns of table "ticker_interests"
+public struct ticker_interests_variance_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - interestId
+  public init(interestId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId]
+  }
+
+  public var interestId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["interest_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "ticker_metrics".
+public struct ticker_metrics_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - absoluteHistoricalVolatilityAdjustedCurrent
+  ///   - absoluteHistoricalVolatilityAdjustedMax_1y
+  ///   - absoluteHistoricalVolatilityAdjustedMin_1y
+  ///   - addressCity
+  ///   - addressCounty
+  ///   - addressFull
+  ///   - addressState
+  ///   - assetCashAndEquivalents
+  ///   - avgVolume_10d
+  ///   - avgVolume_90d
+  ///   - beatenQuarterlyEpsEstimationCountTtm
+  ///   - beta
+  ///   - dividendFrequency
+  ///   - dividendPayoutRatio
+  ///   - dividendYield
+  ///   - dividendsPerShare
+  ///   - ebitda
+  ///   - ebitdaGrowthYoy
+  ///   - ebitdaTtm
+  ///   - enterpriseValueToEbitda
+  ///   - enterpriseValueToSales
+  ///   - epsActual
+  ///   - epsDifference
+  ///   - epsEstimate
+  ///   - epsGrowthFwd
+  ///   - epsGrowthYoy
+  ///   - epsSurprise
+  ///   - epsTtm
+  ///   - exchangeName
+  ///   - impliedVolatility
+  ///   - marketCapitalization
+  ///   - netDebt
+  ///   - netIncome
+  ///   - netIncomeTtm
+  ///   - priceChange_1m
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceToBookValue
+  ///   - priceToEarningsTtm
+  ///   - priceToSalesTtm
+  ///   - profitMargin
+  ///   - relativeHistoricalVolatilityAdjustedCurrent
+  ///   - relativeHistoricalVolatilityAdjustedMax_1y
+  ///   - relativeHistoricalVolatilityAdjustedMin_1y
+  ///   - revenueActual
+  ///   - revenueEstimateAvg_0y
+  ///   - revenueGrowthFwd
+  ///   - revenueGrowthYoy
+  ///   - revenuePerShareTtm
+  ///   - revenueTtm
+  ///   - roa
+  ///   - roi
+  ///   - sharesFloat
+  ///   - sharesOutstanding
+  ///   - shortPercent
+  ///   - shortPercentOutstanding
+  ///   - shortRatio
+  ///   - symbol
+  ///   - ticker
+  ///   - totalAssets
+  ///   - yearsOfConsecutiveDividendGrowth
+  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, addressCity: Swift.Optional<order_by?> = nil, addressCounty: Swift.Optional<order_by?> = nil, addressFull: Swift.Optional<order_by?> = nil, addressState: Swift.Optional<order_by?> = nil, assetCashAndEquivalents: Swift.Optional<order_by?> = nil, avgVolume_10d: Swift.Optional<order_by?> = nil, avgVolume_90d: Swift.Optional<order_by?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<order_by?> = nil, beta: Swift.Optional<order_by?> = nil, dividendFrequency: Swift.Optional<order_by?> = nil, dividendPayoutRatio: Swift.Optional<order_by?> = nil, dividendYield: Swift.Optional<order_by?> = nil, dividendsPerShare: Swift.Optional<order_by?> = nil, ebitda: Swift.Optional<order_by?> = nil, ebitdaGrowthYoy: Swift.Optional<order_by?> = nil, ebitdaTtm: Swift.Optional<order_by?> = nil, enterpriseValueToEbitda: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, epsActual: Swift.Optional<order_by?> = nil, epsDifference: Swift.Optional<order_by?> = nil, epsEstimate: Swift.Optional<order_by?> = nil, epsGrowthFwd: Swift.Optional<order_by?> = nil, epsGrowthYoy: Swift.Optional<order_by?> = nil, epsSurprise: Swift.Optional<order_by?> = nil, epsTtm: Swift.Optional<order_by?> = nil, exchangeName: Swift.Optional<order_by?> = nil, impliedVolatility: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, netDebt: Swift.Optional<order_by?> = nil, netIncome: Swift.Optional<order_by?> = nil, netIncomeTtm: Swift.Optional<order_by?> = nil, priceChange_1m: Swift.Optional<order_by?> = nil, priceChange_1y: Swift.Optional<order_by?> = nil, priceChange_3m: Swift.Optional<order_by?> = nil, priceToBookValue: Swift.Optional<order_by?> = nil, priceToEarningsTtm: Swift.Optional<order_by?> = nil, priceToSalesTtm: Swift.Optional<order_by?> = nil, profitMargin: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, revenueActual: Swift.Optional<order_by?> = nil, revenueEstimateAvg_0y: Swift.Optional<order_by?> = nil, revenueGrowthFwd: Swift.Optional<order_by?> = nil, revenueGrowthYoy: Swift.Optional<order_by?> = nil, revenuePerShareTtm: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil, roa: Swift.Optional<order_by?> = nil, roi: Swift.Optional<order_by?> = nil, sharesFloat: Swift.Optional<order_by?> = nil, sharesOutstanding: Swift.Optional<order_by?> = nil, shortPercent: Swift.Optional<order_by?> = nil, shortPercentOutstanding: Swift.Optional<order_by?> = nil, shortRatio: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil, totalAssets: Swift.Optional<order_by?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_current"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_max_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["absolute_historical_volatility_adjusted_min_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "absolute_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var addressCity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["address_city"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_city")
+    }
+  }
+
+  public var addressCounty: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["address_county"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_county")
+    }
+  }
+
+  public var addressFull: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["address_full"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_full")
+    }
+  }
+
+  public var addressState: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["address_state"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "address_state")
+    }
+  }
+
+  public var assetCashAndEquivalents: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["asset_cash_and_equivalents"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_cash_and_equivalents")
+    }
+  }
+
+  public var avgVolume_10d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["avg_volume_10d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg_volume_10d")
+    }
+  }
+
+  public var avgVolume_90d: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["avg_volume_90d"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "avg_volume_90d")
+    }
+  }
+
+  public var beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["beaten_quarterly_eps_estimation_count_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "beaten_quarterly_eps_estimation_count_ttm")
+    }
+  }
+
+  public var beta: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["beta"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "beta")
+    }
+  }
+
+  public var dividendFrequency: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_frequency"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_frequency")
+    }
+  }
+
+  public var dividendPayoutRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_payout_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_payout_ratio")
+    }
+  }
+
+  public var dividendYield: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividend_yield"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividend_yield")
+    }
+  }
+
+  public var dividendsPerShare: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["dividends_per_share"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "dividends_per_share")
+    }
+  }
+
+  public var ebitda: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ebitda"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda")
+    }
+  }
+
+  public var ebitdaGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ebitda_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda_growth_yoy")
+    }
+  }
+
+  public var ebitdaTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ebitda_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ebitda_ttm")
+    }
+  }
+
+  public var enterpriseValueToEbitda: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_ebitda"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_ebitda")
+    }
+  }
+
+  public var enterpriseValueToSales: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["enterprise_value_to_sales"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "enterprise_value_to_sales")
+    }
+  }
+
+  public var epsActual: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_actual"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_actual")
+    }
+  }
+
+  public var epsDifference: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_difference"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_difference")
+    }
+  }
+
+  public var epsEstimate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_estimate"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_estimate")
+    }
+  }
+
+  public var epsGrowthFwd: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_growth_fwd"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_fwd")
+    }
+  }
+
+  public var epsGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_growth_yoy")
+    }
+  }
+
+  public var epsSurprise: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_surprise"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_surprise")
+    }
+  }
+
+  public var epsTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["eps_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "eps_ttm")
+    }
+  }
+
+  public var exchangeName: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["exchange_name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_name")
+    }
+  }
+
+  public var impliedVolatility: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["implied_volatility"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "implied_volatility")
+    }
+  }
+
+  public var marketCapitalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capitalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capitalization")
+    }
+  }
+
+  public var netDebt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_debt"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_debt")
+    }
+  }
+
+  public var netIncome: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_income"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_income")
+    }
+  }
+
+  public var netIncomeTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["net_income_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "net_income_ttm")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceToBookValue: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_to_book_value"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_book_value")
+    }
+  }
+
+  public var priceToEarningsTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_to_earnings_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_earnings_ttm")
+    }
+  }
+
+  public var priceToSalesTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_to_sales_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_to_sales_ttm")
+    }
+  }
+
+  public var profitMargin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["profit_margin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profit_margin")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_current"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_current")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_max_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_max_1y")
+    }
+  }
+
+  public var relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["relative_historical_volatility_adjusted_min_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "relative_historical_volatility_adjusted_min_1y")
+    }
+  }
+
+  public var revenueActual: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_actual"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_actual")
+    }
+  }
+
+  public var revenueEstimateAvg_0y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_estimate_avg_0y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_estimate_avg_0y")
+    }
+  }
+
+  public var revenueGrowthFwd: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_growth_fwd"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_fwd")
+    }
+  }
+
+  public var revenueGrowthYoy: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_growth_yoy"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_growth_yoy")
+    }
+  }
+
+  public var revenuePerShareTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_per_share_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_per_share_ttm")
+    }
+  }
+
+  public var revenueTtm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["revenue_ttm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "revenue_ttm")
+    }
+  }
+
+  public var roa: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["roa"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roa")
+    }
+  }
+
+  public var roi: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["roi"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "roi")
+    }
+  }
+
+  public var sharesFloat: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["shares_float"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "shares_float")
+    }
+  }
+
+  public var sharesOutstanding: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["shares_outstanding"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "shares_outstanding")
+    }
+  }
+
+  public var shortPercent: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["short_percent"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "short_percent")
+    }
+  }
+
+  public var shortPercentOutstanding: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["short_percent_outstanding"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "short_percent_outstanding")
+    }
+  }
+
+  public var shortRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["short_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "short_ratio")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var ticker: Swift.Optional<tickers_order_by?> {
+    get {
+      return graphQLMap["ticker"] as? Swift.Optional<tickers_order_by?> ?? Swift.Optional<tickers_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ticker")
+    }
+  }
+
+  public var totalAssets: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["total_assets"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_assets")
+    }
+  }
+
+  public var yearsOfConsecutiveDividendGrowth: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["years_of_consecutive_dividend_growth"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "years_of_consecutive_dividend_growth")
+    }
+  }
+}
+
 /// input type for inserting data into table "app.profile_interests"
 public struct app_profile_interests_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap

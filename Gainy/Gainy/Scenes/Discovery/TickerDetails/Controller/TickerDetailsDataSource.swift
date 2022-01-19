@@ -215,11 +215,20 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
-            if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
-                wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
-                wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
-                wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
-                wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+            if #available(iOS 14, *) {
+                if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -40)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                }
+            } else {
+                if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                }
             }
             wsrModel.totalScore = ticker.wsjData.rate
             wsrModel.priceTarget = ticker.wsjData.targetPrice

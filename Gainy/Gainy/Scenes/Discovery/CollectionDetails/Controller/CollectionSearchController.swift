@@ -536,7 +536,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .suggestedCollection:
             let collection = self.recommendedCollections[indexPath.row]
-            GainyAnalytics.logEvent("collections_search_recommended_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
+            GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
             localFavHash = UserProfileManager.shared.favHash
             coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self)
             
