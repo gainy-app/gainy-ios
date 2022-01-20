@@ -52,9 +52,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         internalCollectionView.register(CollectionCardCell.self)
         internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
         
-//        internalCollectionView.register(CollectionDetailsFooterView.self,
-//                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-//                                        withReuseIdentifier: "CollectionDetailsFooterView")
+        internalCollectionView.register(CollectionDetailsFooterView.self,
+                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                        withReuseIdentifier: "CollectionDetailsFooterView")
         
         internalCollectionView.showsVerticalScrollIndicator = false
         internalCollectionView.backgroundColor = .clear
@@ -69,8 +69,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         contentView.addSubview(collectionListHeader)
         collectionListHeader.frame = CGRect.init(x: 4, y: 144, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
         collectionListHeader.isHidden = true
-        contentView.addSubview(tickersLoadIndicator)
-        tickersLoadIndicator.center = internalCollectionView.center
         
         let recurLock = NSRecursiveLock()
         
@@ -177,18 +175,21 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             return cell
         }
         
-//        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-//            switch kind {
-//            case UICollectionView.elementKindSectionFooter:
-//                
-//                return self?.sections[indexPath.section].footer(
-//                    collectionView: collectionView,
-//                    indexPath: indexPath
-//                )
-//            default:
-//                return nil
-//            }
-//        }
+        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+            switch kind {
+            case UICollectionView.elementKindSectionFooter:
+                
+                guard let self = self else { return UICollectionReusableView() }
+                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+                footer.addSubview(self.loadMoreActivityIndicatorView)
+                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+                self.loadMoreActivityIndicatorView.startAnimating()
+                return footer
+                
+            default:
+                return nil
+            }
+        }
         
         initViewModels()
     }
@@ -245,7 +246,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
-    var onLoadMorePressed: ((Int, Int) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -323,8 +323,27 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
-        // TODO: Serhii - call this method as needed; check offset from viewModel?
-        onLoadMorePressed?(collectionID, cards.count)
+        
+        if (self.collectionID == -1) {
+            return
+        }
+        
+        self.isLoadingMoreTickers = true
+        
+        DispatchQueue.global(qos:.utility).async {
+            CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.collectionID, offset: self.cards.count) { tickerDetails in
+                runOnMain {
+                    
+                    let tickers = tickerDetails.compactMap { item in
+                        item.rawTicker
+                    }
+                    self.addRemoteStocks(tickers)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                        self?.isLoadingMoreTickers = false
+                    }
+                }
+            }
+        }
     }
     
     func addRemoteStocks(_ stocks: [RemoteTickerDetails]) {
@@ -335,7 +354,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             snap.appendItems(cardsDTO, toSection: .cards)
             dataSource?.apply(snap, animatingDifferences: true)
         }
-        collectionHorizontalView.stocksAmountLabel.text = "\(cards.count)"
     }
     
     func sortSections(_ completion: (() -> Void)? = nil) {
@@ -367,7 +385,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
-    
+    private var isLoadingMoreTickers: Bool = false
     private var internalCollectionView: UICollectionView!
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
@@ -378,18 +396,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return control
     } ()
     
+    private lazy var loadMoreActivityIndicatorView: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        return spinner
+    } ()
+    
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
             self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
-    }()
-    
-    private lazy var tickersLoadIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-        indicator.tintColor = UIColor(named: "mainText")
-        indicator.hidesWhenStopped = true
-        return indicator
     }()
     
     private func initViewModels() {}
@@ -398,6 +414,17 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         refreshControl.endRefreshing()
         self.isLoadingTickers = true
+        
+        if self.collectionID == -1 {
+            CollectionsManager.shared.watchlistCollectionsLoading { models in
+                runOnMain {
+                    self.isLoadingTickers = false
+                    self.internalCollectionView.reloadData()
+                }
+            }
+            return
+        }
+        
         DispatchQueue.global(qos:.utility).async {
             CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) {
                 runOnMain {
@@ -415,6 +442,21 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
                                                            "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onCardPressed?(cards[indexPath.row].rawTicker)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+    
+        guard UICollectionView.elementKindSectionFooter == elementKind else { return }
+        if self.stocksCount == self.cards.count || self.collectionID == -1 {
+            self.loadMoreActivityIndicatorView.isHidden = true
+        } else {
+            if self.isLoadingMoreTickers {
+                return
+            }
+            self.loadMoreActivityIndicatorView.isHidden = false
+            self.loadMoreActivityIndicatorView.startAnimating()
+            self.loadMoreTickers()
+        }
     }
 }
 

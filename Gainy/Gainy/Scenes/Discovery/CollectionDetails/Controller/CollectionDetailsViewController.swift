@@ -248,19 +248,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard let self = self else {return}
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
                 }
-                    
-                cell.onLoadMorePressed = {[weak self] collectionID, offset in
-                    guard let self = self else {return}
-                    
-                    Task {
-                        async let tickers = CollectionsManager.shared.getTickersForCollection(collectionID: collectionID, offset: offset)
-                        
-                        await MainActor.run {
-                            // TODO: Serhii - Change viewModel; append new cells
-                            
-                        }
-                    }
-                }
             }
             return cell
         }

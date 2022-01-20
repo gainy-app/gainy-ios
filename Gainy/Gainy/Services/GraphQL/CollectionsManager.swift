@@ -176,6 +176,51 @@ final class CollectionsManager {
         
     }
     
+    func loadMoreTickersLoading(collectionID id: Int, offset: Int, completion: @escaping ([TickerDetails]) -> Void) {
+        
+        Task {
+            async let tickersMap = getTickersForCollection(collectionID: id, offset: offset)
+            let tickersMapRes = await tickersMap
+            
+            //Adding preloaded tickers
+            
+            print("Got \((tickersMapRes ).count) more tickers for \(id)")
+            var curTickers = prefetchedCollectionsData[id]
+            curTickers?.append(contentsOf: tickersMapRes)
+            prefetchedCollectionsData[id] = curTickers
+            
+            
+            await MainActor.run {
+                completion(tickersMapRes)
+            }
+        }
+    }
+    
+    func watchlistCollectionsLoading(completion: @escaping ([CollectionDetailViewCellModel]) -> Void) {
+        
+        Task {
+            async let watchList = loadWatchlistCollection()
+            
+            //WatchList Handler
+            if let watchListRes = await watchList {
+                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
+                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+                    newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                    CollectionsManager.shared.watchlistCollection = nil
+                }
+                
+                CollectionsManager.shared.watchlistCollection = watchListRes
+                
+                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
+                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+            }
+            
+            await MainActor.run {
+                completion([])
+            }
+        }
+    }
+    
     /// Loading JUST Collection details
     /// - Parameter completion: when all done
     fileprivate func loadCollections(_ ids: [Int]) async -> [RemoteCollectionDetails] {
