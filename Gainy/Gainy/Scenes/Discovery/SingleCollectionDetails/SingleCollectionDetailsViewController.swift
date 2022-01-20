@@ -242,18 +242,6 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: collectionID, delegate: self)
     }
     
-    func refreshPressed(source: SingleCollectionDetailsViewModel, collectionID: Int) {
-        self.showNetworkLoader()
-        DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
-                runOnMain {
-                    self.hideLoader()
-                    self.collectionView.reloadData()
-                }
-            }
-        }
-    }
-    
     func loadMorePressed(source: SingleCollectionDetailsViewModel, collectionID: Int, offset: Int) {
         Task {
             async let tickers = CollectionsManager.shared.getTickersForCollection(collectionID: collectionID, offset: offset)

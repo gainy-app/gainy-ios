@@ -248,20 +248,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard let self = self else {return}
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
                 }
-                
-                cell.onRefreshPressed = {[weak self]  collectionID in
-                    guard let self = self else {return}
-                    
-                    self.showNetworkLoader()
-                    DispatchQueue.global(qos:.utility).async {
-                        CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
-                            runOnMain {
-                                self.hideLoader()
-                                collectionView.reloadData()
-                            }
-                        }
-                    }
-                }
                     
                 cell.onLoadMorePressed = {[weak self] collectionID, offset in
                     guard let self = self else {return}

@@ -219,7 +219,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                 }
                 
-                internalCollectionView.isScrollEnabled = false
+//                internalCollectionView.isScrollEnabled = false
                 internalCollectionView.isUserInteractionEnabled = false
                 internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
             } else {
@@ -231,7 +231,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         rightCell.hideSkeleton()
                     }
                 }
-                internalCollectionView.isScrollEnabled = true
+//                internalCollectionView.isScrollEnabled = true
                 internalCollectionView.isUserInteractionEnabled = true
             }
         }
@@ -245,7 +245,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
-    var onRefreshPressed: ((Int) -> Void)?
     var onLoadMorePressed: ((Int, Int) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
@@ -372,6 +371,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var internalCollectionView: UICollectionView!
     private lazy var refreshControl: UIRefreshControl = {
         let control = UIRefreshControl()
+        control.layer.zPosition = -1
+        control.clipsToBounds = true
         control.attributedTitle = NSAttributedString(string: "Pull to refresh")
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
@@ -396,7 +397,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     @objc func refresh(_ sender:AnyObject) {
         
         refreshControl.endRefreshing()
-        onRefreshPressed?(collectionID)
+        self.isLoadingTickers = true
+        DispatchQueue.global(qos:.utility).async {
+            CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) {
+                runOnMain {
+                    self.isLoadingTickers = false
+                    self.internalCollectionView.reloadData()
+                }
+            }
+        }
     }
 }
 

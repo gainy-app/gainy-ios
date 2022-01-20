@@ -13,7 +13,6 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func addStockPressed(source: SingleCollectionDetailsViewModel)
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails)
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
-    func refreshPressed(source: SingleCollectionDetailsViewModel, collectionID: Int)
     func loadMorePressed(source: SingleCollectionDetailsViewModel, collectionID: Int, offset: Int)
 }
 
@@ -72,11 +71,6 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.onSettingsPressed = {[weak self]  ticker in
                     guard let self = self else {return}
                     self.delegate?.settingsPressed(source: self, collectionID: self.collectionId, ticker: ticker)
-                }
-                
-                cell.onRefreshPressed = {[weak self]  collectionID in
-                    guard let self = self else {return}
-                    self.delegate?.refreshPressed(source: self, collectionID: collectionID)
                 }
                 
                 cell.onLoadMorePressed = {[weak self] collectionID, offset in
