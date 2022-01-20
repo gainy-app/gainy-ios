@@ -370,7 +370,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries  = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
                             if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0
@@ -398,7 +398,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries  = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first {
                             if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0
@@ -429,7 +429,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries  = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first {
                             if let dailyStats = industries.gainyIndustry?.industryStatsDailies.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0
@@ -460,7 +460,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first {
                             if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1w.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0
@@ -491,7 +491,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries  = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first {
                             if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1m.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0
@@ -522,7 +522,7 @@ class TickerInfo {
                 switch result {
                 case .success(let graphQLResult):
                     if let tickers = graphQLResult.data?.tickers.first {
-                        if let industries  = tickers.tickerIndustries.first {
+                        if let industries  = tickers.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first {
                             if let dailyStats = industries.gainyIndustry?.tickerIndustryMedian_1m.compactMap({$0.medianPrice}), dailyStats.count > 1 {
                                 let firstDay = dailyStats.first ?? 0.0
                                 let lastDay = dailyStats.last ?? 0.0

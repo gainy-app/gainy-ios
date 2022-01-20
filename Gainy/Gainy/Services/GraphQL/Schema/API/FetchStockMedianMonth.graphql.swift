@@ -13,6 +13,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
         __typename
         ticker_industries {
           __typename
+          industry_order
           gainy_industry {
             __typename
             ticker_industry_median_1m(where: {date: {_gte: $date}}) {
@@ -115,6 +116,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("industry_order", type: .scalar(Int.self)),
             GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
           ]
         }
@@ -125,8 +127,8 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(gainyIndustry: GainyIndustry? = nil) {
-          self.init(unsafeResultMap: ["__typename": "ticker_industries", "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
+        public init(industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -135,6 +137,15 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var industryOrder: Int? {
+          get {
+            return resultMap["industry_order"] as? Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "industry_order")
           }
         }
 
