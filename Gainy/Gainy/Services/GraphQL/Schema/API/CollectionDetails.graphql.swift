@@ -1088,14 +1088,14 @@ public struct RemoteTickerDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("category_matches", type: .scalar(_int4.self)),
-        GraphQLField("fits_categories", type: .scalar(Int.self)),
-        GraphQLField("fits_interests", type: .scalar(Int.self)),
-        GraphQLField("fits_risk", type: .scalar(Int.self)),
-        GraphQLField("interest_matches", type: .scalar(_int4.self)),
-        GraphQLField("match_score", type: .scalar(Int.self)),
-        GraphQLField("risk_similarity", type: .scalar(float8.self)),
-        GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("category_matches", type: .nonNull(.scalar(String.self))),
+        GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("interest_matches", type: .nonNull(.scalar(String.self))),
+        GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("risk_similarity", type: .nonNull(.scalar(float8.self))),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
       ]
     }
 
@@ -1105,7 +1105,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(categoryMatches: _int4? = nil, fitsCategories: Int? = nil, fitsInterests: Int? = nil, fitsRisk: Int? = nil, interestMatches: _int4? = nil, matchScore: Int? = nil, riskSimilarity: float8? = nil, symbol: String? = nil) {
+    public init(categoryMatches: String, fitsCategories: Int, fitsInterests: Int, fitsRisk: Int, interestMatches: String, matchScore: Int, riskSimilarity: float8, symbol: String) {
       self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "risk_similarity": riskSimilarity, "symbol": symbol])
     }
 
@@ -1118,72 +1118,72 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
     }
 
-    public var categoryMatches: _int4? {
+    public var categoryMatches: String {
       get {
-        return resultMap["category_matches"] as? _int4
+        return resultMap["category_matches"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "category_matches")
       }
     }
 
-    public var fitsCategories: Int? {
+    public var fitsCategories: Int {
       get {
-        return resultMap["fits_categories"] as? Int
+        return resultMap["fits_categories"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "fits_categories")
       }
     }
 
-    public var fitsInterests: Int? {
+    public var fitsInterests: Int {
       get {
-        return resultMap["fits_interests"] as? Int
+        return resultMap["fits_interests"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "fits_interests")
       }
     }
 
-    public var fitsRisk: Int? {
+    public var fitsRisk: Int {
       get {
-        return resultMap["fits_risk"] as? Int
+        return resultMap["fits_risk"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "fits_risk")
       }
     }
 
-    public var interestMatches: _int4? {
+    public var interestMatches: String {
       get {
-        return resultMap["interest_matches"] as? _int4
+        return resultMap["interest_matches"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "interest_matches")
       }
     }
 
-    public var matchScore: Int? {
+    public var matchScore: Int {
       get {
-        return resultMap["match_score"] as? Int
+        return resultMap["match_score"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "match_score")
       }
     }
 
-    public var riskSimilarity: float8? {
+    public var riskSimilarity: float8 {
       get {
-        return resultMap["risk_similarity"] as? float8
+        return resultMap["risk_similarity"]! as! float8
       }
       set {
         resultMap.updateValue(newValue, forKey: "risk_similarity")
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")

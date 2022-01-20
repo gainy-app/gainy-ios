@@ -2787,9 +2787,10 @@ public struct app_profile_plaid_access_tokens_avg_order_by: GraphQLMapConvertibl
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -2798,6 +2799,15 @@ public struct app_profile_plaid_access_tokens_avg_order_by: GraphQLMapConvertibl
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -2819,10 +2829,11 @@ public struct app_profile_plaid_access_tokens_max_order_by: GraphQLMapConvertibl
   ///   - accessToken
   ///   - createdAt
   ///   - id
+  ///   - institutionId
   ///   - itemId
   ///   - profileId
-  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile_id": profileId]
+  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "institution_id": institutionId, "item_id": itemId, "profile_id": profileId]
   }
 
   public var accessToken: Swift.Optional<order_by?> {
@@ -2849,6 +2860,15 @@ public struct app_profile_plaid_access_tokens_max_order_by: GraphQLMapConvertibl
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -2879,10 +2899,11 @@ public struct app_profile_plaid_access_tokens_min_order_by: GraphQLMapConvertibl
   ///   - accessToken
   ///   - createdAt
   ///   - id
+  ///   - institutionId
   ///   - itemId
   ///   - profileId
-  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile_id": profileId]
+  public init(accessToken: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, itemId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "institution_id": institutionId, "item_id": itemId, "profile_id": profileId]
   }
 
   public var accessToken: Swift.Optional<order_by?> {
@@ -2912,6 +2933,15 @@ public struct app_profile_plaid_access_tokens_min_order_by: GraphQLMapConvertibl
     }
   }
 
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
+    }
+  }
+
   public var itemId: Swift.Optional<order_by?> {
     get {
       return graphQLMap["item_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
@@ -2937,9 +2967,10 @@ public struct app_profile_plaid_access_tokens_stddev_order_by: GraphQLMapConvert
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -2948,6 +2979,15 @@ public struct app_profile_plaid_access_tokens_stddev_order_by: GraphQLMapConvert
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -2967,9 +3007,10 @@ public struct app_profile_plaid_access_tokens_stddev_pop_order_by: GraphQLMapCon
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -2978,6 +3019,15 @@ public struct app_profile_plaid_access_tokens_stddev_pop_order_by: GraphQLMapCon
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -2997,9 +3047,10 @@ public struct app_profile_plaid_access_tokens_stddev_samp_order_by: GraphQLMapCo
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -3008,6 +3059,15 @@ public struct app_profile_plaid_access_tokens_stddev_samp_order_by: GraphQLMapCo
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -3027,9 +3087,10 @@ public struct app_profile_plaid_access_tokens_sum_order_by: GraphQLMapConvertibl
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -3038,6 +3099,15 @@ public struct app_profile_plaid_access_tokens_sum_order_by: GraphQLMapConvertibl
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -3057,9 +3127,10 @@ public struct app_profile_plaid_access_tokens_var_pop_order_by: GraphQLMapConver
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -3068,6 +3139,15 @@ public struct app_profile_plaid_access_tokens_var_pop_order_by: GraphQLMapConver
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -3087,9 +3167,10 @@ public struct app_profile_plaid_access_tokens_var_samp_order_by: GraphQLMapConve
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -3098,6 +3179,15 @@ public struct app_profile_plaid_access_tokens_var_samp_order_by: GraphQLMapConve
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -3117,9 +3207,10 @@ public struct app_profile_plaid_access_tokens_variance_order_by: GraphQLMapConve
 
   /// - Parameters:
   ///   - id
+  ///   - institutionId
   ///   - profileId
-  public init(id: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "profile_id": profileId]
+  public init(id: Swift.Optional<order_by?> = nil, institutionId: Swift.Optional<order_by?> = nil, profileId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "institution_id": institutionId, "profile_id": profileId]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -3128,6 +3219,15 @@ public struct app_profile_plaid_access_tokens_variance_order_by: GraphQLMapConve
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institutionId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
     }
   }
 
@@ -4736,8 +4836,9 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
-  public init(categoryMatches: Swift.Optional<order_by?> = nil, fitsCategories: Swift.Optional<order_by?> = nil, fitsInterests: Swift.Optional<order_by?> = nil, fitsRisk: Swift.Optional<order_by?> = nil, interestMatches: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskSimilarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  ///   - updatedAt
+  public init(categoryMatches: Swift.Optional<order_by?> = nil, fitsCategories: Swift.Optional<order_by?> = nil, fitsInterests: Swift.Optional<order_by?> = nil, fitsRisk: Swift.Optional<order_by?> = nil, interestMatches: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskSimilarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var categoryMatches: Swift.Optional<order_by?> {
@@ -4827,6 +4928,15 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
     }
   }
 }
@@ -11901,6 +12011,7 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
   ///   - _and
   ///   - _not
   ///   - _or
+  ///   - accessToken
   ///   - account
   ///   - accountId
   ///   - createdAt
@@ -11917,8 +12028,8 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
   ///   - security
   ///   - securityId
   ///   - updatedAt
-  public init(_and: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_holdings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_bool_exp?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_bool_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_holdings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_holdings_bool_exp]?> = nil, accessToken: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_bool_exp?> = nil, accountId: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_bool_exp?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_bool_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, isoCurrencyCode: Swift.Optional<String_comparison_exp?> = nil, plaidAccessTokenId: Swift.Optional<Int_comparison_exp?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_bool_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, quantity: Swift.Optional<float8_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, security: Swift.Optional<app_portfolio_securities_bool_exp?> = nil, securityId: Swift.Optional<Int_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "access_token": accessToken, "account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[app_profile_holdings_bool_exp]?> {
@@ -11945,6 +12056,15 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var accessToken: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> ?? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
     }
   }
 
@@ -12080,6 +12200,216 @@ public struct app_profile_holdings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "security_id")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// Boolean expression to filter rows from the table "app.profile_plaid_access_tokens". All fields are combined with a logical 'AND'.
+public struct app_profile_plaid_access_tokens_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - accessToken
+  ///   - createdAt
+  ///   - id
+  ///   - institution
+  ///   - institutionId
+  ///   - itemId
+  ///   - profile
+  ///   - profileId
+  public init(_and: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> = nil, _not: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, _or: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> = nil, accessToken: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, institution: Swift.Optional<app_plaid_institutions_bool_exp?> = nil, institutionId: Swift.Optional<Int_comparison_exp?> = nil, itemId: Swift.Optional<String_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "access_token": accessToken, "created_at": createdAt, "id": id, "institution": institution, "institution_id": institutionId, "item_id": itemId, "profile": profile, "profile_id": profileId]
+  }
+
+  public var _and: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> ?? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> ?? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> ?? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var accessToken: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
+    }
+  }
+
+  public var createdAt: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institution: Swift.Optional<app_plaid_institutions_bool_exp?> {
+    get {
+      return graphQLMap["institution"] as? Swift.Optional<app_plaid_institutions_bool_exp?> ?? Swift.Optional<app_plaid_institutions_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution")
+    }
+  }
+
+  public var institutionId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
+    }
+  }
+
+  public var itemId: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["item_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "item_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_bool_exp?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// Boolean expression to filter rows from the table "app.plaid_institutions". All fields are combined with a logical 'AND'.
+public struct app_plaid_institutions_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - createdAt
+  ///   - id
+  ///   - name
+  ///   - refId
+  ///   - updatedAt
+  public init(_and: Swift.Optional<[app_plaid_institutions_bool_exp]?> = nil, _not: Swift.Optional<app_plaid_institutions_bool_exp?> = nil, _or: Swift.Optional<[app_plaid_institutions_bool_exp]?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, refId: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "created_at": createdAt, "id": id, "name": name, "ref_id": refId, "updated_at": updatedAt]
+  }
+
+  public var _and: Swift.Optional<[app_plaid_institutions_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[app_plaid_institutions_bool_exp]?> ?? Swift.Optional<[app_plaid_institutions_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<app_plaid_institutions_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<app_plaid_institutions_bool_exp?> ?? Swift.Optional<app_plaid_institutions_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[app_plaid_institutions_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[app_plaid_institutions_bool_exp]?> ?? Swift.Optional<[app_plaid_institutions_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var createdAt: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var name: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var refId: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
     }
   }
 
@@ -13311,8 +13641,9 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
-  public init(_and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, categoryMatches: Swift.Optional<_int4_comparison_exp?> = nil, fitsCategories: Swift.Optional<Int_comparison_exp?> = nil, fitsInterests: Swift.Optional<Int_comparison_exp?> = nil, fitsRisk: Swift.Optional<Int_comparison_exp?> = nil, interestMatches: Swift.Optional<_int4_comparison_exp?> = nil, matchScore: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskSimilarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  ///   - updatedAt
+  public init(_and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, categoryMatches: Swift.Optional<String_comparison_exp?> = nil, fitsCategories: Swift.Optional<Int_comparison_exp?> = nil, fitsInterests: Swift.Optional<Int_comparison_exp?> = nil, fitsRisk: Swift.Optional<Int_comparison_exp?> = nil, interestMatches: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskSimilarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> {
@@ -13342,9 +13673,9 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var categoryMatches: Swift.Optional<_int4_comparison_exp?> {
+  public var categoryMatches: Swift.Optional<String_comparison_exp?> {
     get {
-      return graphQLMap["category_matches"] as? Swift.Optional<_int4_comparison_exp?> ?? Swift.Optional<_int4_comparison_exp?>.none
+      return graphQLMap["category_matches"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "category_matches")
@@ -13378,9 +13709,9 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var interestMatches: Swift.Optional<_int4_comparison_exp?> {
+  public var interestMatches: Swift.Optional<String_comparison_exp?> {
     get {
-      return graphQLMap["interest_matches"] as? Swift.Optional<_int4_comparison_exp?> ?? Swift.Optional<_int4_comparison_exp?>.none
+      return graphQLMap["interest_matches"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "interest_matches")
@@ -13431,104 +13762,13 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "symbol")
     }
   }
-}
 
-/// Boolean expression to compare columns of type "_int4". All fields are combined with logical 'AND'.
-public struct _int4_comparison_exp: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - _eq
-  ///   - _gt
-  ///   - _gte
-  ///   - _in
-  ///   - _isNull
-  ///   - _lt
-  ///   - _lte
-  ///   - _neq
-  ///   - _nin
-  public init(_eq: Swift.Optional<_int4?> = nil, _gt: Swift.Optional<_int4?> = nil, _gte: Swift.Optional<_int4?> = nil, _in: Swift.Optional<[_int4]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<_int4?> = nil, _lte: Swift.Optional<_int4?> = nil, _neq: Swift.Optional<_int4?> = nil, _nin: Swift.Optional<[_int4]?> = nil) {
-    graphQLMap = ["_eq": _eq, "_gt": _gt, "_gte": _gte, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
-  }
-
-  public var _eq: Swift.Optional<_int4?> {
+  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
     get {
-      return graphQLMap["_eq"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "_eq")
-    }
-  }
-
-  public var _gt: Swift.Optional<_int4?> {
-    get {
-      return graphQLMap["_gt"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_gt")
-    }
-  }
-
-  public var _gte: Swift.Optional<_int4?> {
-    get {
-      return graphQLMap["_gte"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_gte")
-    }
-  }
-
-  public var _in: Swift.Optional<[_int4]?> {
-    get {
-      return graphQLMap["_in"] as? Swift.Optional<[_int4]?> ?? Swift.Optional<[_int4]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_in")
-    }
-  }
-
-  public var _isNull: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_is_null")
-    }
-  }
-
-  public var _lt: Swift.Optional<_int4?> {
-    get {
-      return graphQLMap["_lt"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_lt")
-    }
-  }
-
-  public var _lte: Swift.Optional<_int4?> {
-    get {
-      return graphQLMap["_lte"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_lte")
-    }
-  }
-
-  public var _neq: Swift.Optional<_int4?> {
-    get {
-      return graphQLMap["_neq"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_neq")
-    }
-  }
-
-  public var _nin: Swift.Optional<[_int4]?> {
-    get {
-      return graphQLMap["_nin"] as? Swift.Optional<[_int4]?> ?? Swift.Optional<[_int4]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_nin")
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
     }
   }
 }
@@ -17153,106 +17393,6 @@ public struct app_profile_interests_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "app.profile_plaid_access_tokens". All fields are combined with a logical 'AND'.
-public struct app_profile_plaid_access_tokens_bool_exp: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - _and
-  ///   - _not
-  ///   - _or
-  ///   - accessToken
-  ///   - createdAt
-  ///   - id
-  ///   - itemId
-  ///   - profile
-  ///   - profileId
-  public init(_and: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> = nil, _not: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, _or: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> = nil, accessToken: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, itemId: Swift.Optional<String_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile": profile, "profile_id": profileId]
-  }
-
-  public var _and: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> {
-    get {
-      return graphQLMap["_and"] as? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> ?? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_and")
-    }
-  }
-
-  public var _not: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> {
-    get {
-      return graphQLMap["_not"] as? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> ?? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_not")
-    }
-  }
-
-  public var _or: Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> {
-    get {
-      return graphQLMap["_or"] as? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?> ?? Swift.Optional<[app_profile_plaid_access_tokens_bool_exp]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_or")
-    }
-  }
-
-  public var accessToken: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["access_token"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "access_token")
-    }
-  }
-
-  public var createdAt: Swift.Optional<timestamptz_comparison_exp?> {
-    get {
-      return graphQLMap["created_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "created_at")
-    }
-  }
-
-  public var id: Swift.Optional<Int_comparison_exp?> {
-    get {
-      return graphQLMap["id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "id")
-    }
-  }
-
-  public var itemId: Swift.Optional<String_comparison_exp?> {
-    get {
-      return graphQLMap["item_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "item_id")
-    }
-  }
-
-  public var profile: Swift.Optional<app_profiles_bool_exp?> {
-    get {
-      return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile")
-    }
-  }
-
-  public var profileId: Swift.Optional<Int_comparison_exp?> {
-    get {
-      return graphQLMap["profile_id"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-}
-
 /// Boolean expression to filter rows from the table "app.profile_scoring_settings". All fields are combined with a logical 'AND'.
 public struct app_profile_scoring_settings_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -17901,6 +18041,7 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
+  ///   - accessToken
   ///   - account
   ///   - accountId
   ///   - createdAt
@@ -17917,8 +18058,17 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
   ///   - security
   ///   - securityId
   ///   - updatedAt
-  public init(account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, accountId: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_obj_rel_insert_input?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_arr_rel_insert_input?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, plaidAccessTokenId: Swift.Optional<Int?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  public init(accessToken: Swift.Optional<app_profile_plaid_access_tokens_obj_rel_insert_input?> = nil, account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> = nil, accountId: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, holdingDetails: Swift.Optional<portfolio_holding_details_obj_rel_insert_input?> = nil, holdingTransactions: Swift.Optional<app_profile_portfolio_transactions_arr_rel_insert_input?> = nil, id: Swift.Optional<Int?> = nil, isoCurrencyCode: Swift.Optional<String?> = nil, plaidAccessTokenId: Swift.Optional<Int?> = nil, portfolioHoldingGains: Swift.Optional<portfolio_holding_gains_obj_rel_insert_input?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, quantity: Swift.Optional<float8?> = nil, refId: Swift.Optional<String?> = nil, security: Swift.Optional<app_portfolio_securities_obj_rel_insert_input?> = nil, securityId: Swift.Optional<Int?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["access_token": accessToken, "account": account, "account_id": accountId, "created_at": createdAt, "holding_details": holdingDetails, "holding_transactions": holdingTransactions, "id": id, "iso_currency_code": isoCurrencyCode, "plaid_access_token_id": plaidAccessTokenId, "portfolio_holding_gains": portfolioHoldingGains, "profile": profile, "profile_id": profileId, "quantity": quantity, "ref_id": refId, "security": security, "security_id": securityId, "updated_at": updatedAt]
+  }
+
+  public var accessToken: Swift.Optional<app_profile_plaid_access_tokens_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<app_profile_plaid_access_tokens_obj_rel_insert_input?> ?? Swift.Optional<app_profile_plaid_access_tokens_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
+    }
   }
 
   public var account: Swift.Optional<app_profile_portfolio_accounts_obj_rel_insert_input?> {
@@ -18063,6 +18213,506 @@ public struct app_profile_holdings_insert_input: GraphQLMapConvertible {
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
     }
+  }
+}
+
+/// input type for inserting object relation for remote table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: app_profile_plaid_access_tokens_insert_input, onConflict: Swift.Optional<app_profile_plaid_access_tokens_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: app_profile_plaid_access_tokens_insert_input {
+    get {
+      return graphQLMap["data"] as! app_profile_plaid_access_tokens_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<app_profile_plaid_access_tokens_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_plaid_access_tokens_on_conflict?> ?? Swift.Optional<app_profile_plaid_access_tokens_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - accessToken
+  ///   - createdAt
+  ///   - id
+  ///   - institution
+  ///   - institutionId
+  ///   - itemId
+  ///   - profile
+  ///   - profileId
+  public init(accessToken: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, id: Swift.Optional<Int?> = nil, institution: Swift.Optional<app_plaid_institutions_obj_rel_insert_input?> = nil, institutionId: Swift.Optional<Int?> = nil, itemId: Swift.Optional<String?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil) {
+    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "institution": institution, "institution_id": institutionId, "item_id": itemId, "profile": profile, "profile_id": profileId]
+  }
+
+  public var accessToken: Swift.Optional<String?> {
+    get {
+      return graphQLMap["access_token"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "access_token")
+    }
+  }
+
+  public var createdAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var institution: Swift.Optional<app_plaid_institutions_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["institution"] as? Swift.Optional<app_plaid_institutions_obj_rel_insert_input?> ?? Swift.Optional<app_plaid_institutions_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution")
+    }
+  }
+
+  public var institutionId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["institution_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "institution_id")
+    }
+  }
+
+  public var itemId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["item_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "item_id")
+    }
+  }
+
+  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile")
+    }
+  }
+
+  public var profileId: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+}
+
+/// input type for inserting object relation for remote table "app.plaid_institutions"
+public struct app_plaid_institutions_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: app_plaid_institutions_insert_input, onConflict: Swift.Optional<app_plaid_institutions_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: app_plaid_institutions_insert_input {
+    get {
+      return graphQLMap["data"] as! app_plaid_institutions_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<app_plaid_institutions_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<app_plaid_institutions_on_conflict?> ?? Swift.Optional<app_plaid_institutions_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "app.plaid_institutions"
+public struct app_plaid_institutions_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - createdAt
+  ///   - id
+  ///   - name
+  ///   - refId
+  ///   - updatedAt
+  public init(createdAt: Swift.Optional<timestamptz?> = nil, id: Swift.Optional<Int?> = nil, name: Swift.Optional<String?> = nil, refId: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["created_at": createdAt, "id": id, "name": name, "ref_id": refId, "updated_at": updatedAt]
+  }
+
+  public var createdAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["created_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "created_at")
+    }
+  }
+
+  public var id: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var name: Swift.Optional<String?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var refId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["ref_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ref_id")
+    }
+  }
+
+  public var updatedAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// on conflict condition type for table "app.plaid_institutions"
+public struct app_plaid_institutions_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: app_plaid_institutions_constraint, updateColumns: [app_plaid_institutions_update_column], `where`: Swift.Optional<app_plaid_institutions_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: app_plaid_institutions_constraint {
+    get {
+      return graphQLMap["constraint"] as! app_plaid_institutions_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [app_plaid_institutions_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [app_plaid_institutions_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<app_plaid_institutions_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<app_plaid_institutions_bool_exp?> ?? Swift.Optional<app_plaid_institutions_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "app.plaid_institutions"
+public enum app_plaid_institutions_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case plaidInstitutionsPkey
+  /// unique or primary key constraint
+  case plaidInstitutionsRefIdKey
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "plaid_institutions_pkey": self = .plaidInstitutionsPkey
+      case "plaid_institutions_ref_id_key": self = .plaidInstitutionsRefIdKey
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .plaidInstitutionsPkey: return "plaid_institutions_pkey"
+      case .plaidInstitutionsRefIdKey: return "plaid_institutions_ref_id_key"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_plaid_institutions_constraint, rhs: app_plaid_institutions_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.plaidInstitutionsPkey, .plaidInstitutionsPkey): return true
+      case (.plaidInstitutionsRefIdKey, .plaidInstitutionsRefIdKey): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_plaid_institutions_constraint] {
+    return [
+      .plaidInstitutionsPkey,
+      .plaidInstitutionsRefIdKey,
+    ]
+  }
+}
+
+/// update columns of table "app.plaid_institutions"
+public enum app_plaid_institutions_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case createdAt
+  /// column name
+  case id
+  /// column name
+  case name
+  /// column name
+  case refId
+  /// column name
+  case updatedAt
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "created_at": self = .createdAt
+      case "id": self = .id
+      case "name": self = .name
+      case "ref_id": self = .refId
+      case "updated_at": self = .updatedAt
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .createdAt: return "created_at"
+      case .id: return "id"
+      case .name: return "name"
+      case .refId: return "ref_id"
+      case .updatedAt: return "updated_at"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_plaid_institutions_update_column, rhs: app_plaid_institutions_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.createdAt, .createdAt): return true
+      case (.id, .id): return true
+      case (.name, .name): return true
+      case (.refId, .refId): return true
+      case (.updatedAt, .updatedAt): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_plaid_institutions_update_column] {
+    return [
+      .createdAt,
+      .id,
+      .name,
+      .refId,
+      .updatedAt,
+    ]
+  }
+}
+
+/// on conflict condition type for table "app.profile_plaid_access_tokens"
+public struct app_profile_plaid_access_tokens_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: app_profile_plaid_access_tokens_constraint, updateColumns: [app_profile_plaid_access_tokens_update_column], `where`: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: app_profile_plaid_access_tokens_constraint {
+    get {
+      return graphQLMap["constraint"] as! app_profile_plaid_access_tokens_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [app_profile_plaid_access_tokens_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [app_profile_plaid_access_tokens_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> ?? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "app.profile_plaid_access_tokens"
+public enum app_profile_plaid_access_tokens_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case profilePlaidAccessTokensPkey
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "profile_plaid_access_tokens_pkey": self = .profilePlaidAccessTokensPkey
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .profilePlaidAccessTokensPkey: return "profile_plaid_access_tokens_pkey"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_plaid_access_tokens_constraint, rhs: app_profile_plaid_access_tokens_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.profilePlaidAccessTokensPkey, .profilePlaidAccessTokensPkey): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_plaid_access_tokens_constraint] {
+    return [
+      .profilePlaidAccessTokensPkey,
+    ]
+  }
+}
+
+/// update columns of table "app.profile_plaid_access_tokens"
+public enum app_profile_plaid_access_tokens_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case accessToken
+  /// column name
+  case createdAt
+  /// column name
+  case id
+  /// column name
+  case institutionId
+  /// column name
+  case itemId
+  /// column name
+  case profileId
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "access_token": self = .accessToken
+      case "created_at": self = .createdAt
+      case "id": self = .id
+      case "institution_id": self = .institutionId
+      case "item_id": self = .itemId
+      case "profile_id": self = .profileId
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .accessToken: return "access_token"
+      case .createdAt: return "created_at"
+      case .id: return "id"
+      case .institutionId: return "institution_id"
+      case .itemId: return "item_id"
+      case .profileId: return "profile_id"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_plaid_access_tokens_update_column, rhs: app_profile_plaid_access_tokens_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.accessToken, .accessToken): return true
+      case (.createdAt, .createdAt): return true
+      case (.id, .id): return true
+      case (.institutionId, .institutionId): return true
+      case (.itemId, .itemId): return true
+      case (.profileId, .profileId): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_plaid_access_tokens_update_column] {
+    return [
+      .accessToken,
+      .createdAt,
+      .id,
+      .institutionId,
+      .itemId,
+      .profileId,
+    ]
   }
 }
 
@@ -19541,8 +20191,9 @@ public struct app_profile_ticker_match_score_obj_rel_insert_input: GraphQLMapCon
 
   /// - Parameters:
   ///   - data
-  public init(data: app_profile_ticker_match_score_insert_input) {
-    graphQLMap = ["data": data]
+  ///   - onConflict: on conflict condition
+  public init(data: app_profile_ticker_match_score_insert_input, onConflict: Swift.Optional<app_profile_ticker_match_score_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
   }
 
   public var data: app_profile_ticker_match_score_insert_input {
@@ -19551,6 +20202,16 @@ public struct app_profile_ticker_match_score_obj_rel_insert_input: GraphQLMapCon
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<app_profile_ticker_match_score_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<app_profile_ticker_match_score_on_conflict?> ?? Swift.Optional<app_profile_ticker_match_score_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
   }
 }
@@ -19570,13 +20231,14 @@ public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
-  public init(categoryMatches: Swift.Optional<_int4?> = nil, fitsCategories: Swift.Optional<Int?> = nil, fitsInterests: Swift.Optional<Int?> = nil, fitsRisk: Swift.Optional<Int?> = nil, interestMatches: Swift.Optional<_int4?> = nil, matchScore: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskSimilarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil) {
-    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol]
+  ///   - updatedAt
+  public init(categoryMatches: Swift.Optional<String?> = nil, fitsCategories: Swift.Optional<Int?> = nil, fitsInterests: Swift.Optional<Int?> = nil, fitsRisk: Swift.Optional<Int?> = nil, interestMatches: Swift.Optional<String?> = nil, matchScore: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskSimilarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
-  public var categoryMatches: Swift.Optional<_int4?> {
+  public var categoryMatches: Swift.Optional<String?> {
     get {
-      return graphQLMap["category_matches"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+      return graphQLMap["category_matches"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "category_matches")
@@ -19610,9 +20272,9 @@ public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible
     }
   }
 
-  public var interestMatches: Swift.Optional<_int4?> {
+  public var interestMatches: Swift.Optional<String?> {
     get {
-      return graphQLMap["interest_matches"] as? Swift.Optional<_int4?> ?? Swift.Optional<_int4?>.none
+      return graphQLMap["interest_matches"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "interest_matches")
@@ -19662,6 +20324,183 @@ public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible
     set {
       graphQLMap.updateValue(newValue, forKey: "symbol")
     }
+  }
+
+  public var updatedAt: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "updated_at")
+    }
+  }
+}
+
+/// on conflict condition type for table "app.profile_ticker_match_score"
+public struct app_profile_ticker_match_score_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: app_profile_ticker_match_score_constraint, updateColumns: [app_profile_ticker_match_score_update_column], `where`: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: app_profile_ticker_match_score_constraint {
+    get {
+      return graphQLMap["constraint"] as! app_profile_ticker_match_score_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [app_profile_ticker_match_score_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [app_profile_ticker_match_score_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<app_profile_ticker_match_score_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<app_profile_ticker_match_score_bool_exp?> ?? Swift.Optional<app_profile_ticker_match_score_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "app.profile_ticker_match_score"
+public enum app_profile_ticker_match_score_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case profileTickerMatchScorePkey
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "profile_ticker_match_score_pkey": self = .profileTickerMatchScorePkey
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .profileTickerMatchScorePkey: return "profile_ticker_match_score_pkey"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_ticker_match_score_constraint, rhs: app_profile_ticker_match_score_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.profileTickerMatchScorePkey, .profileTickerMatchScorePkey): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_ticker_match_score_constraint] {
+    return [
+      .profileTickerMatchScorePkey,
+    ]
+  }
+}
+
+/// update columns of table "app.profile_ticker_match_score"
+public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case categoryMatches
+  /// column name
+  case fitsCategories
+  /// column name
+  case fitsInterests
+  /// column name
+  case fitsRisk
+  /// column name
+  case interestMatches
+  /// column name
+  case matchScore
+  /// column name
+  case profileId
+  /// column name
+  case riskSimilarity
+  /// column name
+  case symbol
+  /// column name
+  case updatedAt
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "category_matches": self = .categoryMatches
+      case "fits_categories": self = .fitsCategories
+      case "fits_interests": self = .fitsInterests
+      case "fits_risk": self = .fitsRisk
+      case "interest_matches": self = .interestMatches
+      case "match_score": self = .matchScore
+      case "profile_id": self = .profileId
+      case "risk_similarity": self = .riskSimilarity
+      case "symbol": self = .symbol
+      case "updated_at": self = .updatedAt
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .categoryMatches: return "category_matches"
+      case .fitsCategories: return "fits_categories"
+      case .fitsInterests: return "fits_interests"
+      case .fitsRisk: return "fits_risk"
+      case .interestMatches: return "interest_matches"
+      case .matchScore: return "match_score"
+      case .profileId: return "profile_id"
+      case .riskSimilarity: return "risk_similarity"
+      case .symbol: return "symbol"
+      case .updatedAt: return "updated_at"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: app_profile_ticker_match_score_update_column, rhs: app_profile_ticker_match_score_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.categoryMatches, .categoryMatches): return true
+      case (.fitsCategories, .fitsCategories): return true
+      case (.fitsInterests, .fitsInterests): return true
+      case (.fitsRisk, .fitsRisk): return true
+      case (.interestMatches, .interestMatches): return true
+      case (.matchScore, .matchScore): return true
+      case (.profileId, .profileId): return true
+      case (.riskSimilarity, .riskSimilarity): return true
+      case (.symbol, .symbol): return true
+      case (.updatedAt, .updatedAt): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [app_profile_ticker_match_score_update_column] {
+    return [
+      .categoryMatches,
+      .fitsCategories,
+      .fitsInterests,
+      .fitsRisk,
+      .interestMatches,
+      .matchScore,
+      .profileId,
+      .riskSimilarity,
+      .symbol,
+      .updatedAt,
+    ]
   }
 }
 
@@ -21147,15 +21986,12 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
-  case publicTickerEventsSymbol
-  /// unique or primary key constraint
   case tickerEventsUniqueId
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "public_ticker_events_symbol": self = .publicTickerEventsSymbol
       case "ticker_events_unique_id": self = .tickerEventsUniqueId
       default: self = .__unknown(rawValue)
     }
@@ -21163,7 +21999,6 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public var rawValue: RawValue {
     switch self {
-      case .publicTickerEventsSymbol: return "public_ticker_events_symbol"
       case .tickerEventsUniqueId: return "ticker_events_unique_id"
       case .__unknown(let value): return value
     }
@@ -21171,7 +22006,6 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static func == (lhs: ticker_events_constraint, rhs: ticker_events_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.publicTickerEventsSymbol, .publicTickerEventsSymbol): return true
       case (.tickerEventsUniqueId, .tickerEventsUniqueId): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
@@ -21180,7 +22014,6 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static var allCases: [ticker_events_constraint] {
     return [
-      .publicTickerEventsSymbol,
       .tickerEventsUniqueId,
     ]
   }
@@ -26907,214 +27740,6 @@ public struct app_profile_plaid_access_tokens_arr_rel_insert_input: GraphQLMapCo
     set {
       graphQLMap.updateValue(newValue, forKey: "on_conflict")
     }
-  }
-}
-
-/// input type for inserting data into table "app.profile_plaid_access_tokens"
-public struct app_profile_plaid_access_tokens_insert_input: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - accessToken
-  ///   - createdAt
-  ///   - id
-  ///   - itemId
-  ///   - profile
-  ///   - profileId
-  public init(accessToken: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, id: Swift.Optional<Int?> = nil, itemId: Swift.Optional<String?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil) {
-    graphQLMap = ["access_token": accessToken, "created_at": createdAt, "id": id, "item_id": itemId, "profile": profile, "profile_id": profileId]
-  }
-
-  public var accessToken: Swift.Optional<String?> {
-    get {
-      return graphQLMap["access_token"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "access_token")
-    }
-  }
-
-  public var createdAt: Swift.Optional<timestamptz?> {
-    get {
-      return graphQLMap["created_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "created_at")
-    }
-  }
-
-  public var id: Swift.Optional<Int?> {
-    get {
-      return graphQLMap["id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "id")
-    }
-  }
-
-  public var itemId: Swift.Optional<String?> {
-    get {
-      return graphQLMap["item_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "item_id")
-    }
-  }
-
-  public var profile: Swift.Optional<app_profiles_obj_rel_insert_input?> {
-    get {
-      return graphQLMap["profile"] as? Swift.Optional<app_profiles_obj_rel_insert_input?> ?? Swift.Optional<app_profiles_obj_rel_insert_input?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile")
-    }
-  }
-
-  public var profileId: Swift.Optional<Int?> {
-    get {
-      return graphQLMap["profile_id"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "profile_id")
-    }
-  }
-}
-
-/// on conflict condition type for table "app.profile_plaid_access_tokens"
-public struct app_profile_plaid_access_tokens_on_conflict: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - constraint
-  ///   - updateColumns
-  ///   - where
-  public init(constraint: app_profile_plaid_access_tokens_constraint, updateColumns: [app_profile_plaid_access_tokens_update_column], `where`: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil) {
-    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
-  }
-
-  public var constraint: app_profile_plaid_access_tokens_constraint {
-    get {
-      return graphQLMap["constraint"] as! app_profile_plaid_access_tokens_constraint
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "constraint")
-    }
-  }
-
-  public var updateColumns: [app_profile_plaid_access_tokens_update_column] {
-    get {
-      return graphQLMap["update_columns"] as! [app_profile_plaid_access_tokens_update_column]
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "update_columns")
-    }
-  }
-
-  public var `where`: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> {
-    get {
-      return graphQLMap["where"] as? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> ?? Swift.Optional<app_profile_plaid_access_tokens_bool_exp?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "where")
-    }
-  }
-}
-
-/// unique or primary key constraints on table "app.profile_plaid_access_tokens"
-public enum app_profile_plaid_access_tokens_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  /// unique or primary key constraint
-  case profilePlaidAccessTokensPkey
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "profile_plaid_access_tokens_pkey": self = .profilePlaidAccessTokensPkey
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .profilePlaidAccessTokensPkey: return "profile_plaid_access_tokens_pkey"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: app_profile_plaid_access_tokens_constraint, rhs: app_profile_plaid_access_tokens_constraint) -> Bool {
-    switch (lhs, rhs) {
-      case (.profilePlaidAccessTokensPkey, .profilePlaidAccessTokensPkey): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [app_profile_plaid_access_tokens_constraint] {
-    return [
-      .profilePlaidAccessTokensPkey,
-    ]
-  }
-}
-
-/// update columns of table "app.profile_plaid_access_tokens"
-public enum app_profile_plaid_access_tokens_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
-  public typealias RawValue = String
-  /// column name
-  case accessToken
-  /// column name
-  case createdAt
-  /// column name
-  case id
-  /// column name
-  case itemId
-  /// column name
-  case profileId
-  /// Auto generated constant for unknown enum values
-  case __unknown(RawValue)
-
-  public init?(rawValue: RawValue) {
-    switch rawValue {
-      case "access_token": self = .accessToken
-      case "created_at": self = .createdAt
-      case "id": self = .id
-      case "item_id": self = .itemId
-      case "profile_id": self = .profileId
-      default: self = .__unknown(rawValue)
-    }
-  }
-
-  public var rawValue: RawValue {
-    switch self {
-      case .accessToken: return "access_token"
-      case .createdAt: return "created_at"
-      case .id: return "id"
-      case .itemId: return "item_id"
-      case .profileId: return "profile_id"
-      case .__unknown(let value): return value
-    }
-  }
-
-  public static func == (lhs: app_profile_plaid_access_tokens_update_column, rhs: app_profile_plaid_access_tokens_update_column) -> Bool {
-    switch (lhs, rhs) {
-      case (.accessToken, .accessToken): return true
-      case (.createdAt, .createdAt): return true
-      case (.id, .id): return true
-      case (.itemId, .itemId): return true
-      case (.profileId, .profileId): return true
-      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
-      default: return false
-    }
-  }
-
-  public static var allCases: [app_profile_plaid_access_tokens_update_column] {
-    return [
-      .accessToken,
-      .createdAt,
-      .id,
-      .itemId,
-      .profileId,
-    ]
   }
 }
 

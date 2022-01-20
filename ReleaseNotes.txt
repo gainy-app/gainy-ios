@@ -1,4 +1,4 @@
-iOS v1.1 #131 available
+iOS v1.1 #133 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,9 +6,11 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• UI Bugs
-• New Charts API
-• New Live Tickers data
+• Initial loading speed up
+• Tickers loading
+• Search speed up
+• Loading of single collections
+• 2nd industry
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
