@@ -96,8 +96,7 @@ fragment RemoteTickerDetails on tickers {
       fits_interests
       fits_risk
       interest_matches
-      match_score
-      profile_id
+      match_score      
       risk_similarity
       symbol
     }

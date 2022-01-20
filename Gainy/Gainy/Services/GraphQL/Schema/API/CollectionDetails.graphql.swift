@@ -298,7 +298,6 @@ public struct RemoteTickerDetails: GraphQLFragment {
         fits_risk
         interest_matches
         match_score
-        profile_id
         risk_similarity
         symbol
       }
@@ -1095,7 +1094,6 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("fits_risk", type: .scalar(Int.self)),
         GraphQLField("interest_matches", type: .scalar(_int4.self)),
         GraphQLField("match_score", type: .scalar(Int.self)),
-        GraphQLField("profile_id", type: .scalar(Int.self)),
         GraphQLField("risk_similarity", type: .scalar(float8.self)),
         GraphQLField("symbol", type: .scalar(String.self)),
       ]
@@ -1107,8 +1105,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(categoryMatches: _int4? = nil, fitsCategories: Int? = nil, fitsInterests: Int? = nil, fitsRisk: Int? = nil, interestMatches: _int4? = nil, matchScore: Int? = nil, profileId: Int? = nil, riskSimilarity: float8? = nil, symbol: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol])
+    public init(categoryMatches: _int4? = nil, fitsCategories: Int? = nil, fitsInterests: Int? = nil, fitsRisk: Int? = nil, interestMatches: _int4? = nil, matchScore: Int? = nil, riskSimilarity: float8? = nil, symbol: String? = nil) {
+      self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "risk_similarity": riskSimilarity, "symbol": symbol])
     }
 
     public var __typename: String {
@@ -1171,15 +1169,6 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "match_score")
-      }
-    }
-
-    public var profileId: Int? {
-      get {
-        return resultMap["profile_id"] as? Int
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "profile_id")
       }
     }
 
