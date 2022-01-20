@@ -511,8 +511,8 @@ extension PersonalizationIndicatorsViewController {
 }
 
 extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSectionViewDelegate {
+    
     func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [PersonalizationInfoValue]?) {
-        
         if marketReturnsSourceView == sender {
             self.selectedMarketReturns = sources
             if let selectedMarketReturns = self.selectedMarketReturns {
@@ -527,7 +527,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                         if let averageMarketReturnValue = Int(averageMarketReturn) {
                             self.coordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
                             self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
-                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "ec" : "PersonalizationIndicators"])
                         }
                     }
                 }

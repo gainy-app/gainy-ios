@@ -48,6 +48,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         return
                     }
                 })
+        
+            GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
     }
     
     private func initializeAppsFlyer() {
@@ -64,6 +66,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                          selector: NSSelectorFromString("sendLaunch"),
                          name: UIApplication.didBecomeActiveNotification,
                          object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("sendClose"),
+                         name: UIApplication.didEnterBackgroundNotification,
+                         object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("sendClose"),
+                         name: UIApplication.willTerminateNotification,
+                         object: nil)
+    }
+    
+    @objc
+    private func sendClose() {
+        GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
     }
     
     private func initFirebase() {

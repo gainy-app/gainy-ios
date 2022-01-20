@@ -91,14 +91,6 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     //MARK: - Open/Close
-    
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
-    }
-    
-    func sceneWillResignActive(_ scene: UIScene) {
-        GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
-    }
 
     // MARK: Private
     
