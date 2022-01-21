@@ -690,7 +690,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                 }
                 self.coordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
                 self.mainCoordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
-                GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : stockMarketRisks, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             }
         }
     }

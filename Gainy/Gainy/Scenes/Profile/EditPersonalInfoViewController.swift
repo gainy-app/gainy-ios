@@ -48,7 +48,6 @@ final class EditPersonalInfoViewController: BaseViewController {
         super.viewDidDisappear(animated)
         scrollView.contentInset.bottom = 0
         self.didTapDone(sender: nil)
-        self.finishEditing()
     }
     
     @objc private func backButtonTap(sender: UIBarButtonItem) {
@@ -100,8 +99,8 @@ final class EditPersonalInfoViewController: BaseViewController {
             return
         }
         
-        if self.hasValidChanges() {
-            self.delegate?.didUpdateProfile(with: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
+        if hasValidChanges() {
+            delegate?.didUpdateProfile(with: firstName, lastName: lastName, email: email, legalAddress: legalAddress)
         }
     }
     
@@ -235,8 +234,10 @@ extension EditPersonalInfoViewController: UITextFieldDelegate {
         && lastName?.count ?? 0 > 0
         && email?.count ?? 0 > 0
         && legalAddress?.count ?? 0 > 0
+        
+        let changedFromStored = UserProfileManager.shared.firstName != firstName ||  UserProfileManager.shared.lastName != lastName || UserProfileManager.shared.email != email || UserProfileManager.shared.address != legalAddress
      
-        let hasValidChanges = filled && self.isValidEmailString(emailString: self.emailTextField.text ?? "")
+        let hasValidChanges = filled && self.isValidEmailString(emailString: self.emailTextField.text ?? "") && changedFromStored
         return hasValidChanges
     }
     

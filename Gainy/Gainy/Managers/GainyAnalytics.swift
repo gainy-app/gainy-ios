@@ -32,14 +32,12 @@ final class GainyAnalytics {
         var newParams = params ?? [:]
         newParams["sn"] = ""
         
-        #if DEBUG
-        print("\n###ANALYTICS###")
-        print(name)
+#if DEBUG
+        print("\n###ANALYTICS### \(name)")
         if let params = params {
             print(params)
         }
-        print("\n")
-        #endif
+#endif
         
         newParams["v"] = 1
         newParams["tid"] = UUID().uuidString
@@ -59,6 +57,36 @@ final class GainyAnalytics {
         newParams["ul"] = Locale.current.identifier
         Analytics.logEvent(name, parameters: newParams)
         AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+    }
+    
+    class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {
+        var newParams = params ?? [:]
+        newParams["sn"] = ""
+        
+#if DEBUG
+        print("\n###ANALYTICS### \(name)")
+        if let params = params {
+            print(params)
+        }
+#endif
+        
+        newParams["v"] = 1
+        newParams["tid"] = UUID().uuidString
+        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
+            newParams["t"] = "screen_view"
+        } else {
+            newParams["t"] = "event"
+        }
+        newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
+        newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
+        newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""
+        newParams["ul"] = Locale.current.identifier
+        newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
+        if  let user = Auth.auth().currentUser {
+            newParams["uid"] = user.uid
+        }
+        newParams["ul"] = Locale.current.identifier
+        Analytics.logEvent(name, parameters: newParams)
     }
     
     /// Add marketing info to extrnal link

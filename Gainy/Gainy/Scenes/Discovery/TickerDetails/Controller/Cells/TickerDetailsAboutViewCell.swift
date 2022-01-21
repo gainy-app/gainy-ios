@@ -71,7 +71,13 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         self.tagsStack.layoutIfNeeded()
         
         let calculatedHeight: CGFloat = (152.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-        minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+        if isMoreSelected {
+            aboutLbl.numberOfLines = 0
+            minHeightUpdated?(max( (152.0 + 44.0), heightBasedOnString((tickerInfo?.about ?? ""))))
+        } else {
+            aboutLbl.numberOfLines = 3
+            minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+        }
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -83,9 +89,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     }
     
     //MARK: - Actions
+    private var isMoreSelected: Bool = false
     @IBAction func showMoreAction(_ sender: UIButton) {
         sender.isSelected.toggle()
-        
+        isMoreSelected.toggle()
         if sender.isSelected {
             aboutLbl.numberOfLines = 0
             sender.setTitle("show less", for: .normal)

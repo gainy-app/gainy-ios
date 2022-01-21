@@ -114,7 +114,22 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
             switch result {
             case .success(let graphQLResult):
-                if let fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                    
+                    if range == .d1 {
+                        if let lastDay = fetchedData.last {
+                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+                                if index == 0 {
+                                    fetchedData = filtered
+                                } else {
+                                    fetchedData = Array(fetchedData[(index-1)...])
+                                }
+                            }
+                        }
+                    }
+                    
+                    
                     completion(fetchedData)
                 } else {
                     completion([])
@@ -126,5 +141,6 @@ final class HistoricalChartsLoader {
                 break
             }
         }
+        
     }
 }

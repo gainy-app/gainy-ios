@@ -198,7 +198,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     @IBAction func shareAction(_ sender: Any) {
         NotificationManager.shared.showMessage(title: "Sorry", text: "Sharing will be added soon", cancelTitle: "OK", actions: nil)
-        GainyAnalytics.logEvent("close_single_collection", params: ["collectionID" : collectionId])
+        GainyAnalytics.logEvent("share_single_collection", params: ["collectionID" : collectionId])
     }
     
     @IBAction func toggleCollectionAction(_ sender: Any) {

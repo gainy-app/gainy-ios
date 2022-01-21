@@ -53,6 +53,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
         updateWatchlistCellHeight()
     }
+    private(set) var isAboutExpanded: Bool = true
     
     private func updateWatchlistCellHeight() {
         if UserProfileManager.shared.selectedBrokerToTrade != nil {
@@ -289,6 +290,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
 extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = Row(rawValue: indexPath.row)!
+        if row == .about {
+            print(cellHeights[row] ?? 0.0)
+        }
         return cellHeights[row] ?? 0.0
     }
 }
