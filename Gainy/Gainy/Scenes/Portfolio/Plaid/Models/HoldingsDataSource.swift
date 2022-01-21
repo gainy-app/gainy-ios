@@ -27,6 +27,7 @@ final class HoldingsDataSource: NSObject {
     private weak var tableView: UITableView?
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
+    var settings: PortfolioSettings?
     var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
         didSet {
@@ -41,7 +42,8 @@ final class HoldingsDataSource: NSObject {
     
     
     func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
-        holdings = originalHoldings.sortedAndFilter(by: settings)
+        self.settings = settings
+        holdings = originalHoldings.sortedAndFilter(by: settings, chartRange: self.chartRange)
     }
     
     //MARK: - Charts
@@ -171,6 +173,9 @@ extension HoldingsDataSource: UITableViewDelegate {
 extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         chartRange = period
+        if let settings = self.settings {
+            self.sortAndFilterHoldingsBy(settings)
+        }
         if let rangeData = profileGains[period] {
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
