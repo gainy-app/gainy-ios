@@ -6,11 +6,12 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Initial loading speed up
-• Tickers loading
-• Search speed up
-• Loading of single collections
-• 2nd industry
+• QA of Analytics
+• WSR hidden when no data
+• Portfolio loading speed up
+• Tags improved
+• No data (reconnect after 5 mins) view
+
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

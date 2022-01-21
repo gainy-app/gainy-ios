@@ -712,8 +712,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags for this company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HfX-c0-Hmc">
-                                                    <rect key="frame" x="24" y="160" width="118.5" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your interests and categories that match" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HfX-c0-Hmc">
+                                                    <rect key="frame" x="24" y="160" width="217" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="aKX-bQ-OVd"/>
                                                     </constraints>

@@ -55,6 +55,10 @@ final class UserProfileManager {
     var profileLoaded: Bool?
     
     var isPlaidLinked: Bool = false
+    
+    @UserDefault<Date>("linkPlaidDate")
+    var linkPlaidDate: Date?
+    
     var linkedPlaidAccessTokens: [Int] = Array()
     
     var linkedPlaidAccounts: [PlaidAccountData] = []

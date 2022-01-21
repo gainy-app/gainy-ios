@@ -142,6 +142,12 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.upcomingEvents] = 0.0
         }
+        
+        if ticker.wsrAnalystsCount > 0 {
+            cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
+        } else {
+            cellHeights[.wsr] = 0.0
+        }
     }
     
     private lazy var chartDelegate: ScatterChartDelegate = {

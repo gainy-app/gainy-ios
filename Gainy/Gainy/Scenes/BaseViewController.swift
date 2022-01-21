@@ -146,7 +146,7 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
     func showNetworkLoader() {
         animationContainerView.backgroundColor = .white
         animationContainerView.alpha = 1.0
-        animationContainerView.layer.cornerRadius = 16.0
+        animationContainerView.layer.cornerRadius = 32.0
         animationContainerView.clipsToBounds = true
         view.bringSubviewToFront(animationContainerView)
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.repeat(.infinity), completion: nil)
