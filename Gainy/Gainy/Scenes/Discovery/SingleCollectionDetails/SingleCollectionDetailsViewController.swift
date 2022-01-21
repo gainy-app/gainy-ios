@@ -231,7 +231,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func addStockPressed(source: SingleCollectionDetailsViewModel) {
         guard self.presentedViewController == nil else {return}
         searchStocksVC.delegate = self
-        GainyAnalytics.logEvent("add_stock_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        //GainyAnalytics.logEvent("add_stock_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         fpc.layout = SearchPanelLayout()
         self.fpc.set(contentViewController: searchStocksVC)
         self.present(self.fpc, animated: true, completion: nil)

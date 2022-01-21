@@ -101,7 +101,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             sender.setTitle("show more", for: .normal)
         }
         cellHeightChanged?(heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")))
-        GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        if sender.isSelected {
+            GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        } else {
+            GainyAnalytics.logEvent("ticker_about_less_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        }
     }
     
     private func heightBasedOnString(_ str: String) -> CGFloat {

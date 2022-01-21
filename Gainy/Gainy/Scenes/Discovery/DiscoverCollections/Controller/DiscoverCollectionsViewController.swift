@@ -796,8 +796,10 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: 0)
         }
         else if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
-            //TO-Do: - Serhii plz check this
-            //GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            
+            if indexPath.row < UserProfileManager.shared.yourCollections.count {
+                GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "ec" : "DiscoverCollections"])
+            }
             let index = indexPath.row
             let increment = (viewModel?.watchlistCollections.count ?? 0) > 0 ? 1 : 0
             self.goToCollectionDetails(at: index + increment)
@@ -805,7 +807,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
             }
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         }
     }
 }
