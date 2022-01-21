@@ -141,7 +141,6 @@ final class CollectionsManager {
             let (favsRes, tickersMapRes, watchListRes) = await (favs, tickersMap, watchList)
             
             //Adding preloaded tickers
-            
             for colID in tickersMapRes.keys {
                 print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
                 prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []

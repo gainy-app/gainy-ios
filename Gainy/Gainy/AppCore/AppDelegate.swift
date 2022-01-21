@@ -72,12 +72,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                          selector: NSSelectorFromString("sendClose"),
                          name: UIApplication.didEnterBackgroundNotification,
                          object: nil)
-        NotificationCenter
-            .default
-            .addObserver(self,
-                         selector: NSSelectorFromString("sendClose"),
-                         name: UIApplication.willTerminateNotification,
-                         object: nil)
     }
     
     @objc
@@ -105,11 +99,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var config = Configuration()
     private func initBugfender() {
-        if config.environment == .staging {
+        //if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
-        }
+        //}
     }
     
     //MARK: - CoreData

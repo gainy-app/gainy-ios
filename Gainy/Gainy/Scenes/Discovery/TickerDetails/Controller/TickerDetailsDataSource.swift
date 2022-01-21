@@ -174,8 +174,6 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
                 chartHosting.view.alpha = 0.0
             }
-            
-        
                 cell.contentView.addSubview(chartLoader)
                 chartLoader.translatesAutoresizingMaskIntoConstraints = false
                 chartLoader.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
@@ -225,7 +223,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 }
             } else {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
-                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0 - 28.0)
                     wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
                     wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
                     wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
