@@ -12,8 +12,7 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
     case
     
     purchasedDate = 0,
-    oneYearPriceChange,
-    todayPriceChange,
+    priceChangeForPeriod,
     percentOFPortfolio,
     matchScore,
     name,
@@ -24,10 +23,8 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
         switch self {
         case .purchasedDate:
             return "Purchased Date"
-        case .oneYearPriceChange:
-            return "1 Year Price Change"
-        case .todayPriceChange:
-            return "Today Price Change"
+        case .priceChangeForPeriod:
+            return "Price Change For Period"
         case .percentOFPortfolio:
             return "% of Portfolio"
         case .matchScore:
@@ -42,5 +39,5 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
     }
     
     /// Order to place on sorting
-    static let rawOrder: [PortfolioSortingField] = [purchasedDate, oneYearPriceChange, todayPriceChange, percentOFPortfolio, matchScore, name, marketCap, earningsDate]
+    static let rawOrder: [PortfolioSortingField] = [purchasedDate, priceChangeForPeriod, percentOFPortfolio, matchScore, name, marketCap, earningsDate]
 }
