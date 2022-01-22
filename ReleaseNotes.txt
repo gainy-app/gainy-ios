@@ -1,4 +1,4 @@
-iOS v1.1 #134 available
+iOS v1.1 #135 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,12 +6,9 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• QA of Analytics
-• WSR hidden when no data
-• Portfolio loading speed up
-• Tags improved
-• No data (reconnect after 5 mins) view
-
+• Stock loading improved
+• Median repositioned
+• New Pull-to-Refresh
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

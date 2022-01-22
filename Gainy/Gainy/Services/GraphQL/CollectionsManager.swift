@@ -183,7 +183,7 @@ final class CollectionsManager {
             
             //Adding preloaded tickers
             
-            print("Got \((tickersMapRes ).count) more tickers for \(id)")
+            print("Got \((tickersMapRes).count) more tickers for \(id)")
             var curTickers = prefetchedCollectionsData[id]
             curTickers?.append(contentsOf: tickersMapRes)
             prefetchedCollectionsData[id] = curTickers

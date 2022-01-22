@@ -48,6 +48,8 @@ final class HoldingsViewController: BaseViewController {
     
     //MARK: - Outlets
     
+    private let refreshControl = LottieRefreshControl()
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
@@ -62,6 +64,8 @@ final class HoldingsViewController: BaseViewController {
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
             viewModel.dataSource.delegate = self
+            tableView.refreshControl = refreshControl
+            refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         }
     }
     
@@ -81,7 +85,7 @@ final class HoldingsViewController: BaseViewController {
         tableView.setContentOffset(.zero, animated: true)
     }
     
-    func loadData(){
+    @objc func loadData() {
         settingsButton.isUserInteractionEnabled = false
         sortButton.isUserInteractionEnabled = false
         linkPlaidButton.isUserInteractionEnabled = false
@@ -100,6 +104,7 @@ final class HoldingsViewController: BaseViewController {
             self?.updateSortButton()
             self?.updateFilterButtonTitle()
             self?.tableView.reloadData()
+            self?.refreshControl.endRefreshing()
         }
     }
     
@@ -306,6 +311,10 @@ extension HoldingsViewController: FloatingPanelControllerDelegate {
 }
 
 extension HoldingsViewController: HoldingsDataSourceDelegate {
+    func scrollChanged(_ offsetY: CGFloat) {
+        refreshControl.updateProgress(with: offsetY)
+    }
+    
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull) {
         coordinator?.showCardsDetailsViewController([TickerInfo.init(ticker: stock.fragments.remoteTickerDetails)], index: 0)
     }

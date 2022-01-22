@@ -57,6 +57,7 @@ struct CollectionCardViewCellModel {
 extension CollectionCardViewCellModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(tickerSymbol)
+        hasher.combine(tickerCompanyName)
     }
 
     static func == (lhs: CollectionCardViewCellModel, rhs: CollectionCardViewCellModel) -> Bool {

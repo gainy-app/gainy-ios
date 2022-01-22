@@ -6,7 +6,11 @@ struct CollectionDetailViewCellModel {
     let description: String
     let stocksAmount: String
     let inYourCollectionList: Bool
-    let cards: [CollectionCardViewCellModel]
+    var cards: [CollectionCardViewCellModel]
+    
+    mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
+        cards.append(contentsOf: newCards)
+    }
 }
 
 extension CollectionDetailViewCellModel: Hashable {

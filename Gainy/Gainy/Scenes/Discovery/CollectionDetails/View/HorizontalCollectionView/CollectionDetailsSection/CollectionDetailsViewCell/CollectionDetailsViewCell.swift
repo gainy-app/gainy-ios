@@ -246,6 +246,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
+    var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -334,9 +335,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.collectionID, offset: self.cards.count) { tickerDetails in
                 runOnMain {
                     
-                    let tickers = tickerDetails.compactMap { item in
+                    var tickers = tickerDetails.compactMap { item in
                         item.rawTicker
                     }
+                    let curSymbols = self.cards.compactMap({$0.tickerSymbol})
+                    tickers.removeAll(where: {curSymbols.contains($0.symbol ?? "")})
                     self.addRemoteStocks(tickers)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
                         self?.isLoadingMoreTickers = false
@@ -350,9 +353,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         let cardsDTO = stocks.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
         cards.append(contentsOf: cardsDTO)
+        onNewCardsLoaded?(cardsDTO)
         if var snap = dataSource?.snapshot() {
-            snap.appendItems(cardsDTO, toSection: .cards)
-            dataSource?.apply(snap, animatingDifferences: true)
+            if let lastItem = snap.itemIdentifiers(inSection: .cards).last {
+                snap.insertItems(cardsDTO, afterItem: lastItem)
+            } else {
+                snap.appendItems(cardsDTO, toSection: .cards)
+            }
+            dataSource?.apply(snap, animatingDifferences: false)
         }
     }
     
@@ -387,11 +395,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     private var isLoadingMoreTickers: Bool = false
     private var internalCollectionView: UICollectionView!
-    private lazy var refreshControl: UIRefreshControl = {
-        let control = UIRefreshControl()
+    private lazy var refreshControl: LottieRefreshControl = {
+        let control = LottieRefreshControl()
         control.layer.zPosition = -1
         control.clipsToBounds = true
-        control.attributedTitle = NSAttributedString(string: "Pull to refresh")
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
     } ()

@@ -99,6 +99,7 @@ struct ScatterChartView: View {
                 chartView
                     .padding(.leading, 8)
                     .padding(.trailing, 8)
+                    .padding(.top, 20)
                 bottomMedian
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
@@ -116,7 +117,7 @@ struct ScatterChartView: View {
     //MARK:- Body sections
     
     private var headerView: some View {
-        VStack(spacing: 0) {
+        
             ZStack {
                 HStack(spacing: 0) {
                     //Right Stock price
@@ -126,7 +127,10 @@ struct ScatterChartView: View {
                                 .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
                                 .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                                 .padding(.top, 2)
-                            Text(statsDayValue)
+                            Image(uiImage: UIImage(named: statsDayValueRaw >= 0 ? "small_up" : "small_down")!)
+                                .resizable()
+                                .frame(width: 8, height: 8)
+                            Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
                                 .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                                 .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                             Spacer()
@@ -139,55 +143,50 @@ struct ScatterChartView: View {
                             
                                 Spacer()
                         }
-                        
-                    }
-                  Spacer()
-                }
-                .padding(.leading, 24)
-                .padding(.top, 0)
-                .offset(y: -20)
-                
-                HStack(spacing: 0) {
-                    //Right median
-                    VStack(spacing: 2) {
-                        HStack(alignment: .firstTextBaseline, spacing: 2) {
+                        HStack(alignment: .firstTextBaseline, spacing: 4) {
                             Text("MEDIAN")
                                 .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                 .font(UIFont.proDisplaySemibold(9).uiFont)
                                 .padding(.top, 2)
-                            Text("\(viewModel.localTicker.medianGrow >= 0 ? "+" : "")\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%")
+                            Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
+                                .resizable()
+                                .frame(width: 8, height: 8)
+                            Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
                                 .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                                 .font(UIFont.proDisplaySemibold(11).uiFont)
-                        }.frame(height: 12)
-                        Spacer()
-                    }.padding(.leading, 24)
+                            Spacer()
+                        }
                         .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
-                    
-                    Spacer()
-                }.offset(y: 37)
-            }
+                        
+                    }
+                    .frame(height: 78)
+                  Spacer()
+                }
+                .padding(.leading, 24)
+                .padding(.top, 0)
+                .offset(y: -10)
+            
         }
         .padding(.all, 0)
-        .frame(height: 78)
         .animation(.easeIn)
     }
     
     private var statsDayName: String {
         switch selectedTag {
         case .d1:
-            return "TODAY"
+            return "Today"
         case .w1:
-            return "WEEK"
+            return "Week"
         case .m1:
-            return "MONTH"
+            return "Month"
         case .m3:
             return "3M"
         case .y1:
-            return "YEAR"
+            return "Year"
         case .y5:
             return "5Y"
         case .all:
-            return "ALL"
+            return "All"
             
         }
     }

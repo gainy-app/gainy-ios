@@ -14,6 +14,7 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
+    func scrollChanged(_ offsetY: CGFloat)
 }
 
 final class HoldingsDataSource: NSObject {
@@ -25,6 +26,7 @@ final class HoldingsDataSource: NSObject {
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
+    private let refreshControl = LottieRefreshControl()
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var settings: PortfolioSettings?
@@ -193,6 +195,10 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     
     func comparePressed() {
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.scrollChanged(scrollView.contentOffset.y)
     }
 }
 

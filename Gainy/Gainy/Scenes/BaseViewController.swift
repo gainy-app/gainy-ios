@@ -93,7 +93,6 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
             .store(in: &cancellables)
     }
     private func setupAnimation() {
-        let path = Bundle.main.path(forResource: "loader3", ofType: "json")
         let animation = Animation.named("loader3")
         
         animationView.animation = animation

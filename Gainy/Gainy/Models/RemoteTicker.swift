@@ -219,10 +219,10 @@ class TickerInfo {
                             TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                         }
                         
-                        TickersLiveFetcher.shared.getMatchScores(symbols: tickerSymbols) {
-                            mainDS.leave()
+                        for mScore in tickers.compactMap(\.matchScore) {
+                            TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
                         }
-                        
+                        mainDS.leave()
                         break
                     case .failure(let error):
                         dprint("Failure when making GraphQL request. Error: \(error)")

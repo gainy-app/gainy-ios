@@ -37,7 +37,7 @@ final class TickerDetailsDataSource: NSObject {
     fileprivate var lastOffset: CGFloat = 0.0
     
     private var aboutMinHeight: CGFloat = 164.0 + 44.0
-    private let chatHeight: CGFloat = 291.0 + 10
+    private let chatHeight: CGFloat = 291.0 + 50
     
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
