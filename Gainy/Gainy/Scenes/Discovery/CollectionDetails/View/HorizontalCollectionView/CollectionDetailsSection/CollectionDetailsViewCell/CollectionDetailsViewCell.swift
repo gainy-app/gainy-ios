@@ -117,33 +117,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                 }
                 
-                let hasMatchScore = TickerLiveStorage.shared.haveMatchScore(model.tickerSymbol)
-                let isLoadingMatchScore = self?.loadingMatchScoreArray.contains(where: { item in
-                    item == model.tickerSymbol
-                }) ?? false
-                let needLoadMatchScore = !hasMatchScore && !isLoadingMatchScore
-                
-                if  needLoadMatchScore{
-                    loadingItems += 1
-                    self?.loadingMatchScoreArray.append(model.tickerSymbol)
-                    if collectionView.visibleCells.count == 0 {
-                        cell?.showAnimatedGradientSkeleton()
-                    } else {
-                        self?.isLoadingTickers = true
-                    }
-                    dprint("Fetching match started")
-                    dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getMatchScores(symbols: self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
-                        self?.loadingMatchScoreArray.removeAll(where: { item in
-                            item == model.tickerSymbol
-                        })
-                        
-                        self?.sortSections({
-                            dispatchGroup.leave()
-                            dprint("Fetching match ended")
-                        })
-                    }
-                }
                 if loadingItems > 0 {
                 dispatchGroup.notify(queue: DispatchQueue.main, execute: {
                     dprint("Fetching ended \(model.tickerSymbol)")
@@ -494,7 +467,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
         }
         
         sections.swapAt(0, 1)
-        internalCollectionView.clipsToBounds = false
+        internalCollectionView.clipsToBounds = true
         internalCollectionView.reloadData()
     }
     

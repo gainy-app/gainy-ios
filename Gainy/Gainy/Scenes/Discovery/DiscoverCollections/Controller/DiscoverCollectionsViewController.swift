@@ -134,7 +134,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -228,7 +228,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             case UICollectionView.elementKindSectionHeader:
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
-                    title: "Your collections",
+                    title: Constants.CollectionDetails.yourCollections,
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(

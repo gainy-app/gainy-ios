@@ -60,7 +60,7 @@ extension CollectionsManager {
                     }
                     let matchesList = collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0})
                     for tickMatch in matchesList {
-                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol ?? "", data: tickMatch)
+                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
                     }
                     if matchesList.count == 0 {
                         print(id)
@@ -96,7 +96,7 @@ extension CollectionsManager {
                             TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                         }
                         for tickMatch in collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0}) {
-                            TickerLiveStorage.shared.setMatchData(tickMatch.symbol ?? "", data: tickMatch)
+                            TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
                         }
                         
                         for collection in collections {

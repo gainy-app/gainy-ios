@@ -3,6 +3,7 @@ import UIKit
 final class YourCollectionsHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
 
+    private var topConstraint: NSLayoutConstraint?
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -14,6 +15,11 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         let sectionHorizontalInset: CGFloat = 16
 
         // TODO: 1: replace with pure layout
+        
+        topConstraint = titleLabel
+            .topAnchor
+            .constraint(equalTo: topAnchor, constant: 24)
+        
         NSLayoutConstraint.activate([
             titleLabel
                 .leadingAnchor
@@ -21,9 +27,8 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
             titleLabel
                 .trailingAnchor
                 .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
-            titleLabel
-                .topAnchor
-                .constraint(equalTo: topAnchor, constant: 24),
+            topConstraint!
+            ,
             titleLabel
                 .bottomAnchor
                 .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
@@ -86,6 +91,11 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
     func configureWith(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
+        if title == Constants.CollectionDetails.yourCollections {
+            topConstraint?.constant = 4
+        } else {
+            topConstraint?.constant = 24
+        }
     }
 
     // MARK: Private
