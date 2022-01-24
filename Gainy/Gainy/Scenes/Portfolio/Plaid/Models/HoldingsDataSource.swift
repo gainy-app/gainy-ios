@@ -14,6 +14,7 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func stockSelected(source: HoldingsDataSource, stock: RemoteTickerDetailsFull)
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
+    func scrollChanged(_ offsetY: CGFloat)
 }
 
 final class HoldingsDataSource: NSObject {
@@ -25,8 +26,10 @@ final class HoldingsDataSource: NSObject {
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
+    private let refreshControl = LottieRefreshControl()
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
+    var settings: PortfolioSettings?
     var originalHoldings: [HoldingViewModel] = []
     var holdings: [HoldingViewModel] = [] {
         didSet {
@@ -41,7 +44,8 @@ final class HoldingsDataSource: NSObject {
     
     
     func sortAndFilterHoldingsBy(_ settings: PortfolioSettings) {
-        holdings = originalHoldings.sortedAndFilter(by: settings)
+        self.settings = settings
+        holdings = originalHoldings.sortedAndFilter(by: settings, chartRange: self.chartRange)
     }
     
     //MARK: - Charts
@@ -161,6 +165,9 @@ extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let stock = holdings[indexPath.row].rawTicker {
             delegate?.stockSelected(source: self, stock: stock)
+            GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
+                "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
+                                                               "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         }
     }
 }
@@ -168,6 +175,9 @@ extension HoldingsDataSource: UITableViewDelegate {
 extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         chartRange = period
+        if let settings = self.settings {
+            self.sortAndFilterHoldingsBy(settings)
+        }
         if let rangeData = profileGains[period] {
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
@@ -185,6 +195,10 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
     
     func comparePressed() {
         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.scrollChanged(scrollView.contentOffset.y)
     }
 }
 

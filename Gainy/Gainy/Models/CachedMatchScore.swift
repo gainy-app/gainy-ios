@@ -30,6 +30,18 @@ struct CachedMatchScore: Codable {
         categoryMatches = remoteMatch.categoryMatches ?? ""
     }
     
+    init(remoteMatch: RemoteTickerDetails.MatchScore) {
+        symbol = remoteMatch.symbol
+        matchScore = remoteMatch.matchScore
+        fitsRisk = remoteMatch.fitsRisk
+        fitsCategories = remoteMatch.fitsCategories
+        fitsInterests = remoteMatch.fitsInterests
+        
+        riskSimilarity = Double(remoteMatch.riskSimilarity)
+        interestMatches = remoteMatch.interestMatches
+        categoryMatches = remoteMatch.categoryMatches
+    }   
+    
     private func interests() async -> [TickerTag] {
         let matches = interestMatches.dropFirst().dropLast()
         if matches.isEmpty {
@@ -90,6 +102,7 @@ struct CachedMatchScore: Codable {
             }
         }
     }
+    
     func combinedTags() async -> [TickerTag] {
         async let interests = interests()
         async let categories = categories()

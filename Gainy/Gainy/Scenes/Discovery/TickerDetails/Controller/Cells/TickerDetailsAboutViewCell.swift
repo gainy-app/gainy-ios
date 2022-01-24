@@ -54,7 +54,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
                 tagView.tagName = tag.name
                 tagView.loadImage(url: tag.url)
-                let width = (tag.url.isEmpty ? 4.0 : 22.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
                 if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
                     xPos = 0.0
@@ -71,7 +71,13 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         self.tagsStack.layoutIfNeeded()
         
         let calculatedHeight: CGFloat = (152.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-        minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+        if isMoreSelected {
+            aboutLbl.numberOfLines = 0
+            minHeightUpdated?(max( (152.0 + 44.0), heightBasedOnString((tickerInfo?.about ?? ""))))
+        } else {
+            aboutLbl.numberOfLines = 3
+            minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+        }
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -83,9 +89,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     }
     
     //MARK: - Actions
+    private var isMoreSelected: Bool = false
     @IBAction func showMoreAction(_ sender: UIButton) {
         sender.isSelected.toggle()
-        
+        isMoreSelected.toggle()
         if sender.isSelected {
             aboutLbl.numberOfLines = 0
             sender.setTitle("show less", for: .normal)
@@ -94,7 +101,11 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             sender.setTitle("show more", for: .normal)
         }
         cellHeightChanged?(heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")))
-        GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        if sender.isSelected {
+            GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        } else {
+            GainyAnalytics.logEvent("ticker_about_less_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        }
     }
     
     private func heightBasedOnString(_ str: String) -> CGFloat {

@@ -21,7 +21,6 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + RemoteCollectionDetails.fragmentDefinition)
-    document.append("\n" + RemoteTickerDetails.fragmentDefinition)
     return document
   }
 
@@ -80,6 +79,10 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
+      public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
+      }
+
       public var __typename: String {
         get {
           return resultMap["__typename"]! as! String
@@ -128,20 +131,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       name
       image_url
       description
-      ticker_collections_aggregate {
-        __typename
-        aggregate {
-          __typename
-          count
-        }
-      }
-      ticker_collections {
-        __typename
-        ticker {
-          __typename
-          ...RemoteTickerDetails
-        }
-      }
+      size
     }
     """
 
@@ -154,8 +144,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("ticker_collections_aggregate", type: .nonNull(.object(TickerCollectionsAggregate.selections))),
-      GraphQLField("ticker_collections", type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
+      GraphQLField("size", type: .scalar(Int.self)),
     ]
   }
 
@@ -165,8 +154,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, tickerCollectionsAggregate: TickerCollectionsAggregate, tickerCollections: [TickerCollection]) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "ticker_collections_aggregate": tickerCollectionsAggregate.resultMap, "ticker_collections": tickerCollections.map { (value: TickerCollection) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
   }
 
   public var __typename: String {
@@ -214,193 +203,12 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
   }
 
-  /// An aggregate relationship
-  public var tickerCollectionsAggregate: TickerCollectionsAggregate {
+  public var size: Int? {
     get {
-      return TickerCollectionsAggregate(unsafeResultMap: resultMap["ticker_collections_aggregate"]! as! ResultMap)
+      return resultMap["size"] as? Int
     }
     set {
-      resultMap.updateValue(newValue.resultMap, forKey: "ticker_collections_aggregate")
-    }
-  }
-
-  /// An array relationship
-  public var tickerCollections: [TickerCollection] {
-    get {
-      return (resultMap["ticker_collections"] as! [ResultMap]).map { (value: ResultMap) -> TickerCollection in TickerCollection(unsafeResultMap: value) }
-    }
-    set {
-      resultMap.updateValue(newValue.map { (value: TickerCollection) -> ResultMap in value.resultMap }, forKey: "ticker_collections")
-    }
-  }
-
-  public struct TickerCollectionsAggregate: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["ticker_collections_aggregate"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("aggregate", type: .object(Aggregate.selections)),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(aggregate: Aggregate? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var aggregate: Aggregate? {
-      get {
-        return (resultMap["aggregate"] as? ResultMap).flatMap { Aggregate(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "aggregate")
-      }
-    }
-
-    public struct Aggregate: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["ticker_collections_aggregate_fields"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("count", type: .nonNull(.scalar(Int.self))),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(count: Int) {
-        self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate_fields", "count": count])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var count: Int {
-        get {
-          return resultMap["count"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "count")
-        }
-      }
-    }
-  }
-
-  public struct TickerCollection: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["ticker_collections"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("ticker", type: .object(Ticker.selections)),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(ticker: Ticker? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_collections", "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    /// An object relationship
-    public var ticker: Ticker? {
-      get {
-        return (resultMap["ticker"] as? ResultMap).flatMap { Ticker(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "ticker")
-      }
-    }
-
-    public struct Ticker: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["tickers"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLFragmentSpread(RemoteTickerDetails.self),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var fragments: Fragments {
-        get {
-          return Fragments(unsafeResultMap: resultMap)
-        }
-        set {
-          resultMap += newValue.resultMap
-        }
-      }
-
-      public struct Fragments {
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public var remoteTickerDetails: RemoteTickerDetails {
-          get {
-            return RemoteTickerDetails(unsafeResultMap: resultMap)
-          }
-          set {
-            resultMap += newValue.resultMap
-          }
-        }
-      }
+      resultMap.updateValue(newValue, forKey: "size")
     }
   }
 }
@@ -482,6 +290,17 @@ public struct RemoteTickerDetails: GraphQLFragment {
         time
         symbol
       }
+      match_score {
+        __typename
+        category_matches
+        fits_categories
+        fits_interests
+        fits_risk
+        interest_matches
+        match_score
+        risk_similarity
+        symbol
+      }
     }
     """
 
@@ -496,6 +315,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       GraphQLField("ticker_highlights", type: .nonNull(.list(.nonNull(.object(TickerHighlight.selections))))),
       GraphQLField("ticker_metrics", type: .object(TickerMetric.selections)),
       GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
+      GraphQLField("match_score", type: .object(MatchScore.selections)),
     ]
   }
 
@@ -505,8 +325,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }])
+  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -572,6 +392,16 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue?.resultMap, forKey: "realtime_metrics")
+    }
+  }
+
+  /// An object relationship
+  public var matchScore: MatchScore? {
+    get {
+      return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
     }
   }
 
@@ -1245,6 +1075,115 @@ public struct RemoteTickerDetails: GraphQLFragment {
     public var symbol: String? {
       get {
         return resultMap["symbol"] as? String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "symbol")
+      }
+    }
+  }
+
+  public struct MatchScore: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["app_profile_ticker_match_score"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("category_matches", type: .nonNull(.scalar(String.self))),
+        GraphQLField("fits_categories", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("fits_interests", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("fits_risk", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("interest_matches", type: .nonNull(.scalar(String.self))),
+        GraphQLField("match_score", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("risk_similarity", type: .nonNull(.scalar(float8.self))),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(categoryMatches: String, fitsCategories: Int, fitsInterests: Int, fitsRisk: Int, interestMatches: String, matchScore: Int, riskSimilarity: float8, symbol: String) {
+      self.init(unsafeResultMap: ["__typename": "app_profile_ticker_match_score", "category_matches": categoryMatches, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "match_score": matchScore, "risk_similarity": riskSimilarity, "symbol": symbol])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var categoryMatches: String {
+      get {
+        return resultMap["category_matches"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_matches")
+      }
+    }
+
+    public var fitsCategories: Int {
+      get {
+        return resultMap["fits_categories"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_categories")
+      }
+    }
+
+    public var fitsInterests: Int {
+      get {
+        return resultMap["fits_interests"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_interests")
+      }
+    }
+
+    public var fitsRisk: Int {
+      get {
+        return resultMap["fits_risk"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "fits_risk")
+      }
+    }
+
+    public var interestMatches: String {
+      get {
+        return resultMap["interest_matches"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_matches")
+      }
+    }
+
+    public var matchScore: Int {
+      get {
+        return resultMap["match_score"]! as! Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "match_score")
+      }
+    }
+
+    public var riskSimilarity: float8 {
+      get {
+        return resultMap["risk_similarity"]! as! float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_similarity")
+      }
+    }
+
+    public var symbol: String {
+      get {
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")

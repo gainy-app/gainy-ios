@@ -48,6 +48,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         return
                     }
                 })
+        
+            GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
     }
     
     private func initializeAppsFlyer() {
@@ -55,9 +57,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
-        
 
-        //AppsFlyerLib.shared().isDebug = true
+        AppsFlyerLib.shared().isDebug = true
         
         NotificationCenter
             .default
@@ -65,6 +66,17 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                          selector: NSSelectorFromString("sendLaunch"),
                          name: UIApplication.didBecomeActiveNotification,
                          object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("sendClose"),
+                         name: UIApplication.didEnterBackgroundNotification,
+                         object: nil)
+    }
+    
+    @objc
+    private func sendClose() {
+        GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
     }
     
     private func initFirebase() {
@@ -87,19 +99,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var config = Configuration()
     private func initBugfender() {
-        if config.environment == .staging {
+        //if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
-        }
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_open", params: ["user_id" : "anonymous"])
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        GainyAnalytics.logEvent("app_close", params: ["user_id" : "anonymous"])
+        //}
     }
     
     //MARK: - CoreData
@@ -186,9 +190,13 @@ extension AppDelegate: AppsFlyerLibDelegate {
     // Overriding the onConversionDataSuccess and onConversionDataFail
     // callbacks to process conversions and enable deferred deep linking
     
-    func onConversionDataSuccess(_: [AnyHashable: Any]) {}
+    func onConversionDataSuccess(_ installData: [AnyHashable: Any]) {
+        print("Conv sc \(installData)")
+    }
     
-    func onConversionDataFail(_: Error) {}
+    func onConversionDataFail(_ err: Error) {
+        print("Conv err \(err)")
+    }
 }
 
 // Google SignIn

@@ -143,4 +143,107 @@ final class CollectionsDetailsSettingsManager {
         let cur = getSettingByID(id)
         settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: ascending, viewMode: cur.viewMode )
     }
+    
+    func tickerMetricsOrderForMarketData(filed: MarketDataField, ascending: Bool) -> ticker_metrics_order_by {
+
+        let order = ascending ? order_by.asc : order_by.desc
+        var orderBy = ticker_metrics_order_by.init()
+        switch filed {
+            
+        case .matchScore:
+            orderBy = ticker_metrics_order_by.init(ticker: tickers_order_by(matchScore: app_profile_ticker_match_score_order_by(matchScore: order)))
+        case .avgVolume10d:
+            orderBy = ticker_metrics_order_by.init(avgVolume_10d: order)
+        case .sharesOutstanding:
+            orderBy = ticker_metrics_order_by.init(sharesOutstanding: order)
+        case .shortPercentOutstanding:
+            orderBy = ticker_metrics_order_by.init(shortPercentOutstanding: order)
+        case .avgVolume90d:
+            orderBy = ticker_metrics_order_by.init(avgVolume_90d: order)
+        case .sharesFloat:
+            orderBy = ticker_metrics_order_by.init(sharesFloat: order)
+        case .shortRatio:
+            orderBy = ticker_metrics_order_by.init(shortRatio: order)
+        case .beta:
+            orderBy = ticker_metrics_order_by.init(beta: order)
+        case .impliedVolatility:
+            orderBy = ticker_metrics_order_by.init(impliedVolatility: order)
+        case .revenueGrowthYoy:
+            orderBy = ticker_metrics_order_by.init(revenueGrowthYoy: order)
+        case .revenueGrowthFwd:
+            orderBy = ticker_metrics_order_by.init(revenueGrowthFwd: order)
+        case .ebitdaGrowthYoy:
+            orderBy = ticker_metrics_order_by.init(ebitdaGrowthYoy: order)
+        case .epsGrowthYoy:
+            orderBy = ticker_metrics_order_by.init(epsGrowthYoy: order)
+        case .epsGrowthFwd:
+            orderBy = ticker_metrics_order_by.init(epsGrowthFwd: order)
+        case .address:
+            orderBy = ticker_metrics_order_by.init(addressCity: order)
+        case .exchangeName:
+            orderBy = ticker_metrics_order_by.init(exchangeName: order)
+        case .marketCapitalization:
+            orderBy = ticker_metrics_order_by.init(marketCapitalization: order)
+        case .enterpriseValueToSales:
+            orderBy = ticker_metrics_order_by.init(enterpriseValueToSales: order)
+        case .priceToEarningsTtm:
+            orderBy = ticker_metrics_order_by.init(priceToEarningsTtm: order)
+        case .priceToSalesTtm:
+            orderBy = ticker_metrics_order_by.init(priceToSalesTtm: order)
+        case .priceToBookValue:
+            orderBy = ticker_metrics_order_by.init(priceToBookValue: order)
+        case .enterpriseValueToEbitda:
+            orderBy = ticker_metrics_order_by.init(enterpriseValueToEbitda: order)
+        case .priceChange1m:
+            orderBy = ticker_metrics_order_by.init(priceChange_1m: order)
+        case .priceChange3m:
+            orderBy = ticker_metrics_order_by.init(priceChange_3m: order)
+        case .priceChange1y:
+            orderBy = ticker_metrics_order_by.init(priceChange_1y: order)
+        case .dividendYield:
+            orderBy = ticker_metrics_order_by.init(dividendYield: order)
+        case .dividendsPerShare:
+            orderBy = ticker_metrics_order_by.init(dividendsPerShare: order)
+        case .dividendPayoutRatio:
+            orderBy = ticker_metrics_order_by.init(dividendPayoutRatio: order)
+        case .yearsOfConsecutiveDividendGrowth:
+            orderBy = ticker_metrics_order_by.init(yearsOfConsecutiveDividendGrowth: order)
+        case .dividendFrequency:
+            orderBy = ticker_metrics_order_by.init(dividendFrequency: order)
+        case .epsActual:
+            orderBy = ticker_metrics_order_by.init(epsActual: order)
+        case .epsEstimate:
+            orderBy = ticker_metrics_order_by.init(epsEstimate: order)
+        case .beatenQuarterlyEpsEstimationCountTtm:
+            orderBy = ticker_metrics_order_by.init(beatenQuarterlyEpsEstimationCountTtm: order)
+        case .epsSurprise:
+            orderBy = ticker_metrics_order_by.init(epsSurprise: order)
+        case .revenueEstimateAvg0y:
+            orderBy = ticker_metrics_order_by.init(revenueEstimateAvg_0y: order)
+        case .revenueActual:
+            orderBy = ticker_metrics_order_by.init(revenueActual: order)
+        case .revenueTtm:
+            orderBy = ticker_metrics_order_by.init(revenueTtm: order)
+        case .revenuePerShareTtm:
+            orderBy = ticker_metrics_order_by.init(revenuePerShareTtm: order)
+        case .roi:
+            orderBy = ticker_metrics_order_by.init(roi: order)
+        case .netIncome:
+            orderBy = ticker_metrics_order_by.init(netIncome: order)
+        case .assetCashAndEquivalents:
+            orderBy = ticker_metrics_order_by.init(assetCashAndEquivalents: order)
+        case .roa:
+            orderBy = ticker_metrics_order_by.init(roa: order)
+        case .totalAssets:
+            orderBy = ticker_metrics_order_by.init(totalAssets: order)
+        case .ebitda:
+            orderBy = ticker_metrics_order_by.init(ebitda: order)
+        case .profitMargin:
+            orderBy = ticker_metrics_order_by.init(profitMargin: order)
+        case .netDebt:
+            orderBy = ticker_metrics_order_by.init(netDebt: order)
+        }
+        
+        return orderBy
+    }
 }

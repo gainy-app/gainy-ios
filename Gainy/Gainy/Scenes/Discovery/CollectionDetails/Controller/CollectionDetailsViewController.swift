@@ -13,7 +13,7 @@ private enum CollectionDetailsSection: Int, CaseIterable {
 final class CollectionDetailsViewController: BaseViewController, CollectionDetailsViewControllerProtocol {    
     // MARK: Internal
     private let barrierQueue = DispatchQueue(label: "CollectionsFetcherQueue", attributes: .concurrent)
-
+    
     
     // MARK: Properties
     
@@ -63,6 +63,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
                             self?.getRemoteData(loadProfile: true) {
                                 DispatchQueue.main.async {
+                                    self?.initViewModelsFromData()
                                     self?.initViewModels()
                                     self?.centerInitialCollectionInTheCollectionView()
                                 }
@@ -76,16 +77,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileInterests)
             .receive(on: DispatchQueue.main)
             .sink { _ in
-        } receiveValue: {[weak self] notification in
-            self?.needTop20Reload = true
-        }.store(in: &cancellables)
+            } receiveValue: {[weak self] notification in
+                self?.needTop20Reload = true
+            }.store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileCategories)
             .receive(on: DispatchQueue.main)
             .sink { _ in
-        } receiveValue: {[weak self] notification in
-            self?.needTop20Reload = true
-        }.store(in: &cancellables)
+            } receiveValue: {[weak self] notification in
+                self?.needTop20Reload = true
+            }.store(in: &cancellables)
     }
     
     override func viewDidLoad() {
@@ -227,8 +228,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     if !(ticker.name?.hasPrefix(Constants.CollectionDetails.demoNamePrefix) ?? false) {
-                        if let index = modelItem.cards.firstIndex(where: {$0.tickerSymbol == ticker.symbol}) {
-                            self?.onShowCardDetails?(modelItem.cards.map(\.rawTicker), index)
+                        if let model = self?.viewModel?.collectionDetails[indexPath.row] {
+                            if let index = model.cards.firstIndex(where: {$0.tickerSymbol == ticker.symbol}) {
+                                self?.onShowCardDetails?(model.cards.map(\.rawTicker), index)
+                            }
                         }
                     }
                 }
@@ -236,16 +239,23 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard let self = self else {return}
                     guard self.presentedViewController == nil else {return}
                     
-                        self.sortingVS.collectionId = modelItem.id
-                        self.sortingVS.collectionCell = cell
-                        self.currentCollectionToChange = modelItem.id
-                        GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                    self.sortingVS.collectionId = modelItem.id
+                    self.sortingVS.collectionCell = cell
+                    self.currentCollectionToChange = modelItem.id
+                    GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     
                     self.present(self.fpc, animated: true, completion: nil)
                 }
                 cell.onSettingsPressed = {[weak self]  ticker in
-                    guard let self = self else {return}        
+                    guard let self = self else {return}
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
+                }
+                cell.onNewCardsLoaded = { [weak self] newCards in
+                    if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
+                        oldModel.addCards(newCards)
+                        self?.viewModel?.collectionDetails[indexPath.row] = oldModel
+                    }
+                    
                 }
             }
             return cell
@@ -300,26 +310,26 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         CollectionsManager.shared.newCollectionsPublisher
             .receive(on: RunLoop.main)
             .sink {[unowned self] result in
-            switch result {
-            case .fetched(let model):
-                barrierQueue.async(flags: .barrier) {
-                    self.addNewCollections([model])
+                switch result {
+                case .fetched(let model):
+                    barrierQueue.async(flags: .barrier) {
+                        self.addNewCollections([model])
+                    }
+                    break
+                case .deleted(let model):
+                    barrierQueue.async(flags: .barrier) {
+                        self.deleteCollections([model])
+                    }
+                    break
+                case .updated(model: let model):
+                    barrierQueue.async(flags: .barrier) {
+                        self.updateCollections([model])
+                    }
+                    break
+                case .fetchedFailed:
+                    break
                 }
-                break
-            case .deleted(let model):
-                barrierQueue.async(flags: .barrier) {
-                    self.deleteCollections([model])
-                }
-                break
-            case .updated(model: let model):
-                barrierQueue.async(flags: .barrier) {
-                    self.updateCollections([model])
-                }
-                break
-            case .fetchedFailed:
-                break
-            }
-        }.store(in: &self.cancellables)
+            }.store(in: &self.cancellables)
         
         TickerLiveStorage.shared.matchScoreClearedPublisher
             .receive(on: RunLoop.main)
@@ -342,85 +352,85 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
         runOnMain {
-        let collections = models.filter { item in
-            item.id >= 0
-        }
-        if collections.count > 0 {
-            self.viewModel?.collectionDetails.append(contentsOf: collections)
-            if var snapshot = self.dataSource?.snapshot() {
-                if snapshot.indexOfSection(.collectionWithCards) != nil {
-                    if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
-                        snapshot.insertItems(collections, afterItem: last)
-                    } else {
-                        snapshot.appendItems(collections,
-                                             toSection: .collectionWithCards)
+            let collections = models.filter { item in
+                item.id >= 0
+            }
+            if collections.count > 0 {
+                self.viewModel?.collectionDetails.append(contentsOf: collections)
+                if var snapshot = self.dataSource?.snapshot() {
+                    if snapshot.indexOfSection(.collectionWithCards) != nil {
+                        if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
+                            snapshot.insertItems(collections, afterItem: last)
+                        } else {
+                            snapshot.appendItems(collections,
+                                                 toSection: .collectionWithCards)
+                        }
+                        self.dataSource?.apply(snapshot, animatingDifferences: false)
                     }
-                    self.dataSource?.apply(snapshot, animatingDifferences: false)
                 }
             }
-        }
         }
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
         runOnMain {
-        let watchlistCollections = models.filter { item in
-            item.id < 0
-        }
-        if let firstItem = watchlistCollections.first {
-            deleteCollections(watchlistCollections)
-            self.viewModel?.collectionDetails.insert(firstItem, at: 0)
-            if var snapshot = self.dataSource?.snapshot() {
-                if snapshot.indexOfSection(.collectionWithCards) != nil {
-                    if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
-                        snapshot.insertItems(watchlistCollections, beforeItem: first)
-                    } else {
-                        snapshot.appendItems(watchlistCollections,
-                                             toSection: .collectionWithCards)
+            let watchlistCollections = models.filter { item in
+                item.id < 0
+            }
+            if let firstItem = watchlistCollections.first {
+                deleteCollections(watchlistCollections)
+                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
+                if var snapshot = self.dataSource?.snapshot() {
+                    if snapshot.indexOfSection(.collectionWithCards) != nil {
+                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+                            snapshot.insertItems(watchlistCollections, beforeItem: first)
+                        } else {
+                            snapshot.appendItems(watchlistCollections,
+                                                 toSection: .collectionWithCards)
+                        }
+                        self.dataSource?.apply(snapshot, animatingDifferences: false)
                     }
-                    self.dataSource?.apply(snapshot, animatingDifferences: false)
                 }
             }
-        }
         }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
         runOnMain {
-        self.appendNewCollectionsFromModels(models)
-        self.appendWatchlistCollectionsFromModels(models)
+            self.appendNewCollectionsFromModels(models)
+            self.appendWatchlistCollectionsFromModels(models)
         }
     }
     
     private func deleteCollections(_ models: [CollectionDetailViewCellModel]) {
         runOnMain {
-        self.viewModel?.collectionDetails.removeAll(where: { item in
-            models.contains(item)
-        })
-        if var snapshot = self.dataSource?.snapshot() {
-            if snapshot.indexOfSection(.collectionWithCards) != nil {
-                snapshot.deleteItems(models)
-                self.dataSource?.apply(snapshot, animatingDifferences: false)
+            self.viewModel?.collectionDetails.removeAll(where: { item in
+                models.contains(item)
+            })
+            if var snapshot = self.dataSource?.snapshot() {
+                if snapshot.indexOfSection(.collectionWithCards) != nil {
+                    snapshot.deleteItems(models)
+                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                }
             }
-        }
         }
     }
     
     private func updateCollections(_ models: [CollectionDetailViewCellModel]) {
         runOnMain {
-        for model in models {
-            if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
-                self.viewModel?.collectionDetails[modelIndex] = model
-            }
-            if var snapshot = self.dataSource?.snapshot() {
-                
-                if let modelIndex = snapshot.itemIdentifiers(inSection: .collectionWithCards).firstIndex(where: {$0.id == model.id}) {
-                    snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
-                    snapshot.insertItems([model], afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+            for model in models {
+                if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
+                    self.viewModel?.collectionDetails[modelIndex] = model
                 }
-                self.dataSource?.apply(snapshot, animatingDifferences: false)
+                if var snapshot = self.dataSource?.snapshot() {
+                    
+                    if let modelIndex = snapshot.itemIdentifiers(inSection: .collectionWithCards).firstIndex(where: {$0.id == model.id}) {
+                        snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
+                        snapshot.insertItems([model], afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+                    }
+                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                }
             }
-        }
         }
     }
     
@@ -577,81 +587,31 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 return
             }
         }
-        
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: UserProfileManager.shared.favoriteCollections)) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back
-                    self?.hideLoader()
-                    completion()
-                    return
-                }
-                
-                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
-                
-                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
-                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
-                }
-                
-                CollectionsManager.shared.collections = collections.reorder(by: UserProfileManager.shared.favoriteCollections)
-                CollectionsManager.shared.lastLoadDate = Date()
-                
-                DispatchQueue.main.async {
-                    CollectionsManager.shared.loadWatchlistCollection {
-                        self?.initViewModelsFromData()
-                        self?.hideLoader()
-                        completion()
-                    }
-                }
-                
-                //Paging
-                self?.viewModel?.collectionOffset = CollectionsManager.shared.collections.count + 1
-                self?.viewModel?.hasMorePages = (collections.count == 20)
-                
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+        CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            DispatchQueue.main.async {
                 self?.initViewModelsFromData()
-                completion()
                 self?.hideLoader()
+                completion()
             }
         }
     }
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: FetchSelectedCollectionsQuery(ids: Array(CollectionsManager.shared.failedToLoad))) { [weak self] result in
-            switch result {
-            case .success(let graphQLResult):
-                guard let collections = graphQLResult.data?.collections.compactMap({$0.fragments.remoteCollectionDetails}) else {
-                    //Going back
-                    self?.hideLoader()
-                    completion()
-                    return
-                }
-                for tickLivePrice in collections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
-                CollectionsManager.shared.collections.append(contentsOf: collections)
-                if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
-                    UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
-                }
-                CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+        
+        CollectionsManager.shared.reloadNewCollectionsDetails(Array(CollectionsManager.shared.failedToLoad)) {[weak self] collections in
+            CollectionsManager.shared.collections.append(contentsOf: collections)
+            if let index = UserProfileManager.shared.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), UserProfileManager.shared.favoriteCollections.count > 1 {
+                UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
+            }
+            CollectionsManager.shared.collections = CollectionsManager.shared.collections.reorder(by: UserProfileManager.shared.favoriteCollections)
+            
+            CollectionsManager.shared.lastLoadDate = Date()
+            DispatchQueue.main.async {
                 
-                CollectionsManager.shared.lastLoadDate = Date()
-                DispatchQueue.main.async {
-                    
-                    let newModels = CollectionsManager.shared.convertToModel(collections)
-                    self?.addNewCollections(newModels)
-                    
-                    completion()
-                    self?.hideLoader()
-                }
+                let newModels = CollectionsManager.shared.convertToModel(collections)
+                self?.addNewCollections(newModels)
                 
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
                 completion()
                 self?.hideLoader()
             }
@@ -674,8 +634,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             if !(discoverCollectionsBtn?.isEnabled ?? false){
                 if snap.sectionIdentifiers.count > 0 {
                     collectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
-                                                                 at: .centeredHorizontally,
-                                                                 animated: false)
+                                                at: .centeredHorizontally,
+                                                animated: false)
                 }
             }
             return
@@ -684,8 +644,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         if snap.sectionIdentifiers.count > 0 {
             collectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
-                                                         at: .centeredHorizontally,
-                                                         animated: false)
+                                        at: .centeredHorizontally,
+                                        animated: false)
         }
     }
     
@@ -796,10 +756,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.needTop20Reload {
-            self.showNetworkLoader()
             TickerLiveStorage.shared.clearMatchData()
             CollectionsManager.shared.reloadTop20 {
-                self.hideLoader()
                 self.collectionView.reloadData()
             }
         } else {
@@ -898,6 +856,9 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        
+        
+        
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         self.fpc.dismiss(animated: true, completion: nil)
     }

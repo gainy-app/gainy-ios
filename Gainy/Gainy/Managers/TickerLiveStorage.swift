@@ -10,7 +10,7 @@ import Cache
 import Combine
 
 typealias RealtimePrice = RemoteTickerDetails.RealtimeMetric
-typealias LivePrice = FetchLiveTickersDataQuery.Data.FetchLivePrice
+typealias LivePrice = FetchLiveTickersDataQuery.Data.Ticker.RealtimeMetric
 
 final class TickerLiveStorage {
         
@@ -27,6 +27,8 @@ final class TickerLiveStorage {
     private let matchesQueue = DispatchQueue.init(label: "TickerLiveMatchStorage")
     private var matchesStorage: Storage<String, CachedMatchScore>?
     private var token: ObservationToken?
+    
+    var collectionsMatchScores: CollectionsScores = [:]
     
     //MARK: - Inner
     
@@ -141,10 +143,10 @@ final class TickerLiveStorage {
     }
     
     func setSymbolData(_ symbol: String, data: RealtimePrice) {
-        //dataQueue.sync {
+        dataQueue.sync {
             guard !symbol.isEmpty else {return}
             try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
-        //}
+        }
     }    
     
     //MARK: - Match Score Data
@@ -161,6 +163,14 @@ final class TickerLiveStorage {
     }
     
     func setMatchData(_ symbol: String, data: LiveMatch) {
+        matchesQueue.sync {
+            guard !symbol.isEmpty else {return}
+            try? matchesStorage?.setObject(CachedMatchScore(remoteMatch: data), forKey: symbol)
+        }
+    }
+    
+    
+    func setMatchData(_ symbol: String, data: RemoteTickerDetails.MatchScore) {
         matchesQueue.sync {
             guard !symbol.isEmpty else {return}
             try? matchesStorage?.setObject(CachedMatchScore(remoteMatch: data), forKey: symbol)

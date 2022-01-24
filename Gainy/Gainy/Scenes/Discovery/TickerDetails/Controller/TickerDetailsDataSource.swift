@@ -37,7 +37,7 @@ final class TickerDetailsDataSource: NSObject {
     fileprivate var lastOffset: CGFloat = 0.0
     
     private var aboutMinHeight: CGFloat = 164.0 + 44.0
-    private let chatHeight: CGFloat = 291.0 + 10
+    private let chatHeight: CGFloat = 291.0 + 50
     
     private var cellHeights: [Row: CGFloat] = [:]
     private func populateInitialHeights() {
@@ -53,6 +53,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
         updateWatchlistCellHeight()
     }
+    private(set) var isAboutExpanded: Bool = true
     
     private func updateWatchlistCellHeight() {
         if UserProfileManager.shared.selectedBrokerToTrade != nil {
@@ -141,6 +142,12 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.upcomingEvents] = 0.0
         }
+        
+        if ticker.wsrAnalystsCount > 0 {
+            cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
+        } else {
+            cellHeights[.wsr] = 0.0
+        }
     }
     
     private lazy var chartDelegate: ScatterChartDelegate = {
@@ -173,8 +180,6 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
                 chartHosting.view.alpha = 0.0
             }
-            
-        
                 cell.contentView.addSubview(chartLoader)
                 chartLoader.translatesAutoresizingMaskIntoConstraints = false
                 chartLoader.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
@@ -215,11 +220,20 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
-            if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
-                wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
-                wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
-                wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
-                wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+            if #available(iOS 14, *) {
+                if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0 - 28.0)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                }
+            } else {
+                if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -40)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                }
             }
             wsrModel.totalScore = ticker.wsjData.rate
             wsrModel.priceTarget = ticker.wsjData.targetPrice
@@ -280,6 +294,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
 extension TickerDetailsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let row = Row(rawValue: indexPath.row)!
+        if row == .about {
+            print(cellHeights[row] ?? 0.0)
+        }
         return cellHeights[row] ?? 0.0
     }
 }

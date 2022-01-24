@@ -41,8 +41,8 @@ struct HoldingViewModel {
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
         return (range.longName,
                 UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
-                absoluteGains[range]?.price ?? "",
-                relativeGains[range]?.cleanTwoDecimalP ?? "",
+                absoluteGains[range]?.priceRaw ?? "",
+                (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
                 relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
                 relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
     }
@@ -56,12 +56,12 @@ struct HoldingViewModel {
             if event != nil {
                 height += eventHeight
             }
-            return height
+            return height + 8.0
         } else {
             if event != nil {
-                return 232.0 + 16.0
+                return 232.0 + 22.0
             } else {
-                return 184.0 + 16.0
+                return 184.0 + 22.0
             }
             
         }

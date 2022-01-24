@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftUI
+import SwiftDate
 
 final class PortfolioViewController: BaseViewController {
     
@@ -105,18 +106,29 @@ extension PortfolioViewController: NoPlaidViewControllerDelegate {
 
 extension PortfolioViewController: HoldingsViewControllerDelegate {
     func noHoldings(controller: HoldingsViewController) {
-        state = .inProgress
+        if let connectDate = UserProfileManager.shared.linkPlaidDate {
+            if connectDate + 5.minutes < Date() {
+                state = .linkedNoHoldings
+            } else {
+                state = .inProgress
+            }
+        } else {
+            UserProfileManager.shared.linkPlaidDate = Date()
+            state = .inProgress
+        }
     }
     
     func plaidUnlinked(controller: HoldingsViewController) {
-        
+        UserProfileManager.shared.linkPlaidDate = Date()
         self.loadBasedOnState()
     }
 }
 
 extension PortfolioViewController: NoHoldingsViewControllerDelegate {
-    func reconnectPressed(vc: NoHoldingsViewController) {
+    func plaidLinked(vc: NoHoldingsViewController) {
+        UserProfileManager.shared.linkPlaidDate = Date()
         state = .linkHasHoldings
+        self.loadBasedOnState()
     }
 }
 

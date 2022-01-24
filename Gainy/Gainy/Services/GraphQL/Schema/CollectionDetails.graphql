@@ -9,16 +9,7 @@ fragment RemoteCollectionDetails on collections {
   name
   image_url
   description
-  ticker_collections_aggregate {
-    aggregate {
-      count
-    }
-  }
-  ticker_collections {
-    ticker {
-    ...RemoteTickerDetails
-    }
-  }
+  size
 }
 
 fragment RemoteTickerDetails on tickers {
@@ -97,6 +88,16 @@ fragment RemoteTickerDetails on tickers {
     actual_price
       relative_daily_change
       time
+      symbol
+    }
+    match_score {
+      category_matches
+      fits_categories
+      fits_interests
+      fits_risk
+      interest_matches
+      match_score      
+      risk_similarity
       symbol
     }
 }

@@ -47,6 +47,16 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
         twoColumnsGridSection.contentInsets = NSDirectionalEdgeInsets(
             top: 0, leading: 0, bottom: 0, trailing: 0
         )
+        
+        let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .estimated(64)
+            ),
+            elementKind: UICollectionView.elementKindSectionFooter,
+            alignment: .bottom
+        )
+        twoColumnsGridSection.boundarySupplementaryItems = [sectionFooter]
 
         return twoColumnsGridSection
     }
@@ -82,8 +92,6 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
                     vals.append(viewModel.beta)
                 case .impliedVolatility:
                     vals.append(viewModel.impliedVolatility)
-                case .volatility52Weeks:
-                    vals.append(viewModel.volatility52Weeks)
                 case .revenueGrowthFwd:
                     vals.append(viewModel.revenueGrowthFwd)
                 case .ebitdaGrowthYoy:
@@ -176,4 +184,5 @@ struct CardsOneColumnListFlowSectionLayout: SectionLayout {
 
         return cell
     }
+    
 }

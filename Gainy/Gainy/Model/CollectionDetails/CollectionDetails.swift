@@ -6,7 +6,15 @@ struct CollectionDetails {
     let collectionDescription: String
     let collectionStocksAmount: Int
     let isInYourCollectionsList: Bool
-    let cards: [TickerDetails]
+    var cards: [TickerDetails]
+    
+    mutating func insertCards(_ newCards: [TickerDetails]) {
+        cards.append(contentsOf: newCards)
+    }
+    
+    mutating func clearCards() {
+        cards.removeAll()
+    }
 }
 
 extension CollectionDetails: Hashable {

@@ -11,6 +11,7 @@ public typealias numeric = Double
 public typealias smallint = Int
 public typealias date = String
 public typealias bigint = Int
+public typealias _int4 = String
 
 private let iso8601DateFormatter = ISO8601DateFormatter()
 
@@ -118,8 +119,8 @@ final class CustomInterceptor: ApolloInterceptor {
     ) {
         func makeRequest() {
             if Thread.isMainThread {
-                print("Why main")
                 DispatchQueue.global(qos: .background).async {
+                    print("REQ TRACK\(request.operation.operationName)")
                     chain.proceedAsync(request: request,
                                        response: response,
                                        completion: completion)

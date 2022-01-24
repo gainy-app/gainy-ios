@@ -134,7 +134,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        discoverCollectionsCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -228,7 +228,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             case UICollectionView.elementKindSectionHeader:
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
-                    title: "Your collections",
+                    title: Constants.CollectionDetails.yourCollections,
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(
@@ -458,7 +458,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [
-        WatchlistSectionLayout(),
+        CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
         RecommendedCollectionsSectionLayout(),
     ]
@@ -518,7 +518,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         showNetworkLoader()
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
+            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) { remoteTickers in
                 runOnMain {
                     self.hideLoader()
                 }
@@ -597,14 +597,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
             
             snapshot.deleteItems([yourCollectionItemToRemove])
-            if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
-                if let item = $0 as? RecommendedCollectionViewCellModel {
-                    return item.id == itemId
-                }
-                return false
-            }) as? RecommendedCollectionViewCellModel {
-                snapshot.reloadItems([itemToReload])
-            }
+            snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
+            
             dataSource?.apply(snapshot, animatingDifferences: true)
             
             onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
@@ -802,8 +796,10 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: 0)
         }
         else if indexPath.section == DiscoverCollectionsSection.yourCollections.rawValue {
-            //TO-Do: - Serhii plz check this
-            //GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            
+            if indexPath.row < UserProfileManager.shared.yourCollections.count {
+                GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.yourCollections[indexPath.row].id, "type" : "yours", "ec" : "DiscoverCollections"])
+            }
             let index = indexPath.row
             let increment = (viewModel?.watchlistCollections.count ?? 0) > 0 ? 1 : 0
             self.goToCollectionDetails(at: index + increment)
@@ -811,7 +807,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
                 coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
             }
-            GainyAnalytics.logEvent("your_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+            GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         }
     }
 }

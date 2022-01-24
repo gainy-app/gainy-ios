@@ -243,7 +243,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         nameLabel.frame = CGRect(
             x: hMargin,
-            y: topMarginLeftSide,
+            y: nameLabel.text == "Watchlist" ? 34.0 : topMarginLeftSide,
             width: bounds.width - (hMargin + 71),
             height: nameHeight
         )

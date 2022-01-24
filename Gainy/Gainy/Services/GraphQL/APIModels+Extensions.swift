@@ -49,25 +49,14 @@ extension RemoteTickerDetails: RemotePricable {
     }
 }
 
-extension RemoteTickerDetails: RemoteMatchable {
-    var matchScore: Int {
-        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.matchScore ?? 0
-    }
-    
-//    var isMatch: Bool {
-//        TickerLiveStorage.shared.getMatchData(symbol ?? "")?.isMatch ?? false
-//    }
-    
-}
-
 //MARK: - Fetching extra fields for Tickrs from other storage
-extension FetchLiveTickersDataQuery.Data.FetchLivePrice: RemotePricable {
+extension FetchLiveTickersDataQuery.Data.Ticker: RemotePricable {
     var currentPrice: Float {
-        Float(close ?? 0.0) + Float(dailyChange ?? 0.0)
+        Float(realtimeMetrics?.actualPrice ?? 0.0)
     }
     
     var priceChangeToday: Float {
-        Float(dailyChangeP ?? 0.0)
+        Float(realtimeMetrics?.relativeDailyChange ?? 0.0)
     }
 }
 
@@ -95,6 +84,12 @@ extension RemoteCollectionDetails: Hashable {
 extension RemoteCollectionDetails: Reorderable {
     typealias OrderElement = Int
     var orderElement: OrderElement { id ?? 0 }
+}
+
+extension RemoteCollectionDetails {
+    var prefetchedTickers: [TickerDetails] {
+        CollectionsManager.shared.prefetchedCollectionsData[id ?? -1] ?? []
+    }
 }
 
 extension RemoteTickerExtraDetails.TickerEvent {
@@ -132,7 +127,7 @@ protocol ChartMergable {
     }
 }
 
-extension DiscoverChartsQuery.Data.HistoricalPricesAggregated: ChartMergable {
+extension DiscoverChartsQuery.Data.Chart: ChartMergable {
     var val: Float {
         adjustedClose ?? 0.0
     }

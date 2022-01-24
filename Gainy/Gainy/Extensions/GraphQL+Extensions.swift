@@ -92,7 +92,7 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
     }
 }
 
-typealias RemoteChartData = DiscoverChartsQuery.Data.HistoricalPricesAggregated
+typealias RemoteChartData = DiscoverChartsQuery.Data.Chart
 
 extension RemoteChartData: RemoteDateTimeConvertable {
         

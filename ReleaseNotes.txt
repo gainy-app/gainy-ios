@@ -1,12 +1,14 @@
-iOS v1.0.2 #126 available
+iOS v1.1 #137 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Onboarding videos integrated
+• -
 
 :hammer_and_wrench: Improvements
-• UI Bugs
+• UI improvements
+• Fix duplicated Earnings Date field in Portfolio sorting
+• Fix sorting/refreshing logic
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

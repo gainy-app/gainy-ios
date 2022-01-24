@@ -481,38 +481,38 @@ extension PersonalizationIndicatorsViewController {
     
     func setMarketReturnsHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.marketReturnsSourceView.isHidden = isHidden
+        self.firstSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.marketReturnsSourceView.isHidden = isHidden
             self.marketReturnsSourceView.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.firstSectionStackView.layoutIfNeeded()
         }
     }
     
     func setMoneySourceViewHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.urgentMoneySourceView.isHidden = isHidden
+        self.secondSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.urgentMoneySourceView.isHidden = isHidden
             self.urgentMoneySourceView.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.secondSectionStackView.layoutIfNeeded()
         }
     }
     
     func setStockMarketRisksHidden(isHidden: Bool) {
         
-        self.view.setNeedsLayout()
+        self.sliderViewStockMarketRisks.isHidden = isHidden
+        self.thirdSectionStackView.setNeedsLayout()
         UIView.animate(withDuration: 0.25) {
-            self.sliderViewStockMarketRisks.isHidden = isHidden
             self.sliderViewStockMarketRisks.alpha = isHidden ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
+            self.thirdSectionStackView.layoutIfNeeded()
         }
     }
 }
 
 extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSectionViewDelegate {
+    
     func personalizationTitlePickerDidPickSources(sender: PersonalizationTitlePickerSectionView, sources: [PersonalizationInfoValue]?) {
-        
         if marketReturnsSourceView == sender {
             self.selectedMarketReturns = sources
             if let selectedMarketReturns = self.selectedMarketReturns {
@@ -527,7 +527,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                         if let averageMarketReturnValue = Int(averageMarketReturn) {
                             self.coordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
                             self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = averageMarketReturnValue
-                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                            GainyAnalytics.logEvent("average_market_return_picked", params: ["average_market_return" : "\(averageMarketReturnValue)", "ec" : "PersonalizationIndicators"])
                         }
                     }
                 }
@@ -690,7 +690,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
                 }
                 self.coordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
                 self.mainCoordinator?.onboardingInfoBuilder.stockMarketRiskLevel = stockMarketRisks
-                GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
+                GainyAnalytics.logEvent("stock_market_risks_picked", params: ["stock_market_risks" : stockMarketRisks, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             }
         }
     }

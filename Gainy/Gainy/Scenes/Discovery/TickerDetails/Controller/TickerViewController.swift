@@ -279,7 +279,7 @@ extension TickerViewController: SingleCollectionDetailsViewControllerDelegate {
                         cell.setButtonChecked(isChecked: success)
                     }
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
                     
                 }
             }

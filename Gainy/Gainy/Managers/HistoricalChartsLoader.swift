@@ -35,38 +35,32 @@ final class HistoricalChartsLoader {
             }
             
             dateString = (Date().startOfTradingDay - daysToTake.days).toFormat(backTimeFormat)
-            periodString = "15min"
+            periodString = "1d"
         case .w1:
             dateString = (Date().startOfTradingDay - 1.weeks).toFormat(backTimeFormat)
-            periodString = "1d"
+            periodString = "1w"
         case .m1:
             dateString = (Date().startOfTradingDay - 1.months).toFormat(backTimeFormat)
-            periodString = "1d"
+            periodString = "1m"
         case .m3:
             dateString = (Date().startOfTradingDay - 3.months).toFormat(backTimeFormat)
-            periodString = "1w"
+            periodString = "3m"
         case .y1:
             dateString = (Date().startOfTradingDay - 1.years).toFormat(backTimeFormat)
-            periodString = "1w"
+            periodString = "1y"
         case .y5:
             dateString = (Date().startOfTradingDay - 5.years).toFormat(backTimeFormat)
-            periodString = "1m"
+            periodString = "5y"
         case .all:
             dateString = "1900-01-01"
-            periodString = "1m"
+            periodString = "all"
         }
-        Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
+        Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol)) {result in
             switch result {
             case .success(let graphQLResult):
-                if var fetchedData = graphQLResult.data?.historicalPricesAggregated.filter({$0.close != nil}) {
-                    print("CG \(range) : \(fetchedData.count)")
-                    
-                    if range == .d1 {
-                        print("CG")
-                    }
+                if let fetchedData = graphQLResult.data?.chart.filter({$0.close != nil}) {
                     completion(ChartData.init(points: fetchedData, period: range), fetchedData)
                 } else {
-                    print("CG \(range) : \(0)")
                     completion(ChartData.init(points: [0.0]), [])
                 }
                 break
@@ -120,7 +114,22 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
             switch result {
             case .success(let graphQLResult):
-                if let fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                    
+                    if range == .d1 {
+                        if let lastDay = fetchedData.last {
+                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
+                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
+                                if index == 0 {
+                                    fetchedData = filtered
+                                } else {
+                                    fetchedData = Array(fetchedData[(index-1)...])
+                                }
+                            }
+                        }
+                    }
+                    
+                    
                     completion(fetchedData)
                 } else {
                     completion([])
@@ -132,5 +141,6 @@ final class HistoricalChartsLoader {
                 break
             }
         }
+        
     }
 }

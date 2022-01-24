@@ -38,7 +38,7 @@ final class HoldingsViewModel {
     
     func loadNewChartData(period: ScatterChartView.ChartPeriod, _ completion: ( () -> Void)? = nil) {
         if let chartCache = chartsCache[period] {
-
+            
             completion?()
         } else {
         }
@@ -54,11 +54,12 @@ final class HoldingsViewModel {
                 
                 let loadGroup = DispatchGroup()
                 loadGroup.enter()
-                print("\(Date()) Holdings load start")
+                dprint("\(Date()) Holdings load start")
                 Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileID)) {[weak self] result in
                     switch result {
                     case .success(let graphQLResult):
                         guard let holdingsCount = graphQLResult.data?.profileHoldingGroups, let portfolioGains = graphQLResult.data?.portfolioGains  else {
+                            dprint("\(graphQLResult)")
                             NotificationManager.shared.showError("Sorry, you have no holdings")
                             completion?()
                             return
@@ -71,11 +72,11 @@ final class HoldingsViewModel {
                         NotificationManager.shared.showError(error.localizedDescription)
                         break
                     }
-                    print("\(Date()) Holdings load end")
+                    dprint("\(Date()) Holdings load end")
                     loadGroup.leave()
                 }
                 
-                print("\(Date()) Holdings charts start")
+                dprint("\(Date()) Holdings charts start")
                 for range in [ScatterChartView.ChartPeriod.d1]{
                     loadGroup.enter()
                     HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
@@ -95,7 +96,7 @@ final class HoldingsViewModel {
                         completion?()
                         return
                     }
-                    print("\(Date()) Holdings charts enede")
+                    dprint("\(Date()) Holdings charts enede")
                     self.dataSource.chartRange = .d1
                     
                     var tickSymbols: [String] = []
@@ -120,6 +121,10 @@ final class HoldingsViewModel {
                         if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
                             realtimeMetrics.append(metric)
                             TickerLiveStorage.shared.setSymbolData(metric.symbol ?? "", data: metric)
+                        }
+                        
+                        if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
+                            TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
                         }
                     }
                     securityTypesRaw = securityTypesRaw.uniqued()
@@ -163,35 +168,32 @@ final class HoldingsViewModel {
                         PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
-                    print("\(Date()) Holdings match score start")
-                    TickersLiveFetcher.shared.getMatchScores(symbols: tickSymbols) {
-                        
-                        let today = HoldingsModelMapper.topChartGains(range: .d1,
-                                                                              chartsCache: self.chartsCache,
-                                                                              sypChartsCache: self.sypChartsCache,
-                                                                              portfolioGains: self.portfolioGains)
-                        let sypChartReal = today.sypChartData
-                        
-                        let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
-                                                              rangeGrow: today.rangeGrow,
-                                                              rangeGrowBalance: today.rangeGrowBalance,
-                                                              spGrow: Float(sypChartReal.startEndDiff),
-                                                              chartData: today.chartData,
-                                                              sypChartData: sypChartReal)
-                        
-                        let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
-                                                                             profileHoldings: self.portfolioGains)
-                        print("\(Date()) Holdings match score end")
-                        self.dataSource.chartViewModel = live
-                        self.dataSource.profileGains = [.d1 : today]
-                        self.dataSource.originalHoldings = originalHoldings
-                        self.dataSource.holdings = originalHoldings
-                        if let settings = settings {
-                            self.dataSource.sortAndFilterHoldingsBy(settings)
-                        }
-                        print("\(Date()) Holdings fianl end")
-                        completion?()
+                    
+                    let today = HoldingsModelMapper.topChartGains(range: .d1,
+                                                                  chartsCache: self.chartsCache,
+                                                                  sypChartsCache: self.sypChartsCache,
+                                                                  portfolioGains: self.portfolioGains)
+                    let sypChartReal = today.sypChartData
+                    
+                    let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
+                                                          rangeGrow: today.rangeGrow,
+                                                          rangeGrowBalance: today.rangeGrowBalance,
+                                                          spGrow: Float(sypChartReal.startEndDiff),
+                                                          chartData: today.chartData,
+                                                          sypChartData: sypChartReal)
+                    
+                    let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
+                                                                         profileHoldings: self.portfolioGains)
+                    dprint("\(Date()) Holdings match score end")
+                    self.dataSource.chartViewModel = live
+                    self.dataSource.profileGains = [.d1 : today]
+                    self.dataSource.originalHoldings = originalHoldings
+                    self.dataSource.holdings = originalHoldings
+                    if let settings = settings {
+                        self.dataSource.sortAndFilterHoldingsBy(settings)
                     }
+                    dprint("\(Date()) Holdings fianl end")
+                    completion?()
                 }
             }
         }
@@ -199,7 +201,7 @@ final class HoldingsViewModel {
     
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         if let profileID = UserProfileManager.shared.profileID {
-        let loadGroup = DispatchGroup()
+            let loadGroup = DispatchGroup()
             loadGroup.enter()
             HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range) {[weak self] chartData in
                 self?.chartsCache[range] = chartData
@@ -211,20 +213,20 @@ final class HoldingsViewModel {
                 self?.sypChartsCache[range] = rawData
                 loadGroup.leave()
             }
-        
-        loadGroup.notify(queue: .main) {[weak self] in
-            guard let self = self else {
-                completion?(nil)
-                return
+            
+            loadGroup.notify(queue: .main) {[weak self] in
+                guard let self = self else {
+                    completion?(nil)
+                    return
+                }
+                
+                let chartModel = HoldingsModelMapper.topChartGains(range: range,
+                                                                   chartsCache: self.chartsCache,
+                                                                   sypChartsCache: self.sypChartsCache,
+                                                                   portfolioGains: self.portfolioGains)
+                completion?(chartModel)
+                
             }
-            
-            let chartModel = HoldingsModelMapper.topChartGains(range: range,
-                                                                  chartsCache: self.chartsCache,
-                                                                  sypChartsCache: self.sypChartsCache,
-                                                                  portfolioGains: self.portfolioGains)
-            completion?(chartModel)
-            
-        }
         } else {
             completion?(nil)
         }

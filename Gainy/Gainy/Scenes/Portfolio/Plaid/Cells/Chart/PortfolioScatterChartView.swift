@@ -225,7 +225,7 @@ struct PortfolioScatterChartView: View {
                     Image(viewModel.spGrow >= 0 ? "small_up" : "small_down")
                         .resizable()
                         .frame(width: 8.0, height: 8.0)
-                    Text("\(viewModel.spGrow.cleanTwoDecimalP)")
+                    Text("\(viewModel.spGrow.cleanTwoDecimalP.replacingOccurrences(of: "+", with: "").replacingOccurrences(of: "-", with: ""))")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(13).uiFont)
                         .foregroundColor(UIColor(named: viewModel.spGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)

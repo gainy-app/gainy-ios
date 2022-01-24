@@ -70,7 +70,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="35" width="375" height="320"/>
+                                <rect key="frame" x="0.0" y="35" width="375" height="317"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -96,13 +96,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="462" width="311" height="56"/>
+                                <rect key="frame" x="32" y="460.5" width="311" height="57.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="371" width="311" height="75"/>
+                                <rect key="frame" x="32" y="368" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -260,7 +260,7 @@
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="8"/>
+                                                                    <integer key="value" value="4"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
@@ -451,7 +451,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="80"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJR-CL-6Du" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
-                                                                                        <rect key="frame" x="181" y="17" width="12" height="12"/>
+                                                                                        <rect key="frame" x="181" y="18.5" width="12" height="12"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
                                                                                             <constraint firstAttribute="width" constant="12" id="KiJ-wg-cGg"/>
@@ -464,8 +464,8 @@
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORx-FV-DkZ">
-                                                                                        <rect key="frame" x="197" y="16" width="21" height="14.5"/>
-                                                                                        <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                        <rect key="frame" x="197" y="16" width="24.5" height="17"/>
+                                                                                        <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                         <color key="textColor" name="mainText"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
@@ -489,50 +489,50 @@
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avg Cost" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sh5-ED-C8S">
-                                                                                <rect key="frame" x="16" y="57.5" width="47.5" height="14.5"/>
+                                                                                <rect key="frame" x="16" y="49.5" width="47.5" height="14.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" translatesAutoresizingMaskIntoConstraints="NO" id="Ufv-SD-vLw">
-                                                                                <rect key="frame" x="16" y="16" width="157" height="14"/>
-                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <rect key="frame" x="16" y="16" width="157" height="17"/>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$58.30" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zIE-SB-6Pk">
-                                                                                <rect key="frame" x="67.5" y="56.5" width="44.5" height="17"/>
+                                                                                <rect key="frame" x="67.5" y="48.5" width="44.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sb7-QH-Qp7">
-                                                                                <rect key="frame" x="154.5" y="56.5" width="32" height="14.5"/>
+                                                                                <rect key="frame" x="154.5" y="48.5" width="32" height="14.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7z-ed-rEj">
-                                                                                <rect key="frame" x="202.5" y="55" width="44" height="17"/>
+                                                                                <rect key="frame" x="202.5" y="47" width="44" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainRed"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ujg-I5-Bg6">
-                                                                                <rect key="frame" x="256.5" y="55" width="38.5" height="17"/>
+                                                                                <rect key="frame" x="256.5" y="47" width="38.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainRed"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="3AF-T2-rk0">
-                                                                                <rect key="frame" x="250.5" y="62.5" width="2" height="2"/>
+                                                                                <rect key="frame" x="250.5" y="54.5" width="2" height="2"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="2" id="9uV-Oz-BHV"/>
                                                                                     <constraint firstAttribute="height" constant="2" id="ir0-b2-jIg"/>
                                                                                 </constraints>
                                                                             </imageView>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="NJv-O2-oMT">
-                                                                                <rect key="frame" x="190.5" y="59.5" width="8" height="8"/>
+                                                                                <rect key="frame" x="190.5" y="51.5" width="8" height="8"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="8" id="Dvy-xd-IpC"/>
                                                                                     <constraint firstAttribute="height" constant="8" id="dmN-Cn-cwP"/>
@@ -541,7 +541,7 @@
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstItem="3AF-T2-rk0" firstAttribute="leading" secondItem="a7z-ed-rEj" secondAttribute="trailing" constant="4" id="0dB-bJ-Tck"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="Sh5-ED-C8S" secondAttribute="bottom" constant="16" id="11X-fM-z4T"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="Sh5-ED-C8S" secondAttribute="bottom" constant="24" id="11X-fM-z4T"/>
                                                                             <constraint firstAttribute="trailing" secondItem="hxU-QX-iO9" secondAttribute="trailing" constant="16" id="1Qp-Qr-kyM"/>
                                                                             <constraint firstItem="zIE-SB-6Pk" firstAttribute="centerY" secondItem="Sh5-ED-C8S" secondAttribute="centerY" id="5bD-ut-6ec"/>
                                                                             <constraint firstItem="3AF-T2-rk0" firstAttribute="centerY" secondItem="a7z-ed-rEj" secondAttribute="centerY" id="71J-JV-oRY"/>
@@ -557,7 +557,7 @@
                                                                             <constraint firstItem="kJR-CL-6Du" firstAttribute="centerY" secondItem="Ufv-SD-vLw" secondAttribute="centerY" id="bWn-2d-3OL"/>
                                                                             <constraint firstItem="YtC-Z6-wj0" firstAttribute="top" secondItem="J4f-lQ-zE5" secondAttribute="top" id="dLK-Kz-3uX"/>
                                                                             <constraint firstAttribute="trailing" secondItem="YtC-Z6-wj0" secondAttribute="trailing" id="eVp-fm-zVK"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="ujg-I5-Bg6" secondAttribute="bottom" constant="16" id="gzW-1n-ru7"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="ujg-I5-Bg6" secondAttribute="bottom" constant="24" id="gzW-1n-ru7"/>
                                                                             <constraint firstItem="a7z-ed-rEj" firstAttribute="leading" secondItem="NJv-O2-oMT" secondAttribute="trailing" constant="4" id="iUx-Ug-UO0"/>
                                                                             <constraint firstItem="NJv-O2-oMT" firstAttribute="leading" secondItem="Sb7-QH-Qp7" secondAttribute="trailing" constant="4" id="jR1-kl-noK"/>
                                                                             <constraint firstItem="NJv-O2-oMT" firstAttribute="centerY" secondItem="3AF-T2-rk0" secondAttribute="centerY" id="jSE-hb-dGn"/>
@@ -742,10 +742,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyi-Yi-fOM" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="5" width="382" height="231"/>
+                                                    <rect key="frame" x="16" y="5" width="343" height="231"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Activision" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayP-eB-G2i">
-                                                            <rect key="frame" x="48" y="16" width="226" height="19.5"/>
+                                                            <rect key="frame" x="48" y="16" width="187" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
@@ -757,7 +757,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$15,427.00" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jG-Ee-sxG">
-                                                            <rect key="frame" x="290" y="16" width="76" height="19.5"/>
+                                                            <rect key="frame" x="251" y="16" width="76" height="19.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
@@ -795,7 +795,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z1S-kK-mmT">
-                                                            <rect key="frame" x="313" y="56" width="53" height="24"/>
+                                                            <rect key="frame" x="274" y="56" width="53" height="24"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="⌛ LTT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vB-Dp-DrL">
                                                                     <rect key="frame" x="8" y="5" width="37" height="14.5"/>
@@ -845,7 +845,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKH-vd-CGT">
-                                                            <rect key="frame" x="237" y="93" width="32" height="14.5"/>
+                                                            <rect key="frame" x="198" y="93" width="32" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -878,7 +878,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-Sl-xGo">
-                                                            <rect key="frame" x="285" y="93" width="38" height="14.5"/>
+                                                            <rect key="frame" x="246" y="93" width="38" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
@@ -890,7 +890,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrZ-jx-9Aa">
-                                                            <rect key="frame" x="333" y="93" width="33" height="14.5"/>
+                                                            <rect key="frame" x="294" y="93" width="33" height="14.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
@@ -902,7 +902,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="Bt8-2B-NXf">
-                                                            <rect key="frame" x="327" y="99.5" width="2" height="2"/>
+                                                            <rect key="frame" x="288" y="99.5" width="2" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="Y3f-QC-H5b"/>
                                                                 <constraint firstAttribute="width" constant="2" id="ZbO-NY-dHx"/>
@@ -913,7 +913,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="8rT-ar-NuV">
-                                                            <rect key="frame" x="273" y="96.5" width="8" height="8"/>
+                                                            <rect key="frame" x="234" y="96.5" width="8" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="8" id="Cdr-qS-NCu"/>
                                                                 <constraint firstAttribute="height" constant="8" id="Qkc-Ct-j3h"/>
@@ -923,7 +923,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ppf-nM-m4W">
-                                                            <rect key="frame" x="16" y="128" width="350" height="1"/>
+                                                            <rect key="frame" x="16" y="128" width="311" height="1"/>
                                                             <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="nza-RK-Tpy"/>
@@ -933,7 +933,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l32-3e-ZCe">
-                                                            <rect key="frame" x="334" y="135" width="44" height="44"/>
+                                                            <rect key="frame" x="295" y="135" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="0ht-HM-xiQ"/>
                                                                 <constraint firstAttribute="height" constant="44" id="RZQ-Id-Tuz"/>
@@ -966,10 +966,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bjt-nW-HgK">
-                                                            <rect key="frame" x="16" y="183" width="350" height="32"/>
+                                                            <rect key="frame" x="16" y="183" width="311" height="32"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Earnings date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zII-7k-Ov6">
-                                                                    <rect key="frame" x="12" y="9" width="330" height="14.5"/>
+                                                                    <rect key="frame" x="12" y="9" width="291" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
@@ -980,7 +980,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="📣" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-gp-bFH">
-                                                                    <rect key="frame" x="326" y="9" width="16" height="14.5"/>
+                                                                    <rect key="frame" x="287" y="9" width="16" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
@@ -1322,13 +1322,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="434" width="311" height="75"/>
+                                <rect key="frame" x="32" y="432.5" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="32" width="311" height="370"/>
+                                <rect key="frame" x="32" y="32" width="311" height="368.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -1367,7 +1367,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="no_holdings_back" translatesAutoresizingMaskIntoConstraints="NO" id="G8Y-tg-Sgt">
-                                <rect key="frame" x="22" y="90" width="331" height="242.5"/>
+                                <rect key="frame" x="-60" y="90" width="495" height="291.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-w8-DmJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1392,16 +1392,15 @@
                                     <action selector="reloadAction:" destination="GhH-QD-AEX" eventType="touchUpInside" id="lgR-ls-7ir"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q12-ty-27c">
-                                <rect key="frame" x="32" y="402.5" width="311" height="116.5"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Sorry, we could not get enough data to display the information correctly. Try to reconnect your account or contact us" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q12-ty-27c">
+                                <rect key="frame" x="32" y="452.5" width="311" height="66.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis </string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-2w-RgT">
-                                <rect key="frame" x="32" y="348.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="397.5" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1411,7 +1410,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="HHy-Lw-Y76" secondAttribute="trailing" id="3Gd-IZ-MH9"/>
-                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" constant="22" id="5QJ-aV-cNU"/>
+                            <constraint firstItem="G8Y-tg-Sgt" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" constant="-60" id="5QJ-aV-cNU"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="leading" secondItem="q12-ty-27c" secondAttribute="leading" id="751-sM-aTk"/>
                             <constraint firstItem="HHy-Lw-Y76" firstAttribute="top" secondItem="9sm-hl-fhu" secondAttribute="top" id="Eg2-Zv-IcN"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="top" secondItem="G8Y-tg-Sgt" secondAttribute="bottom" constant="16" id="J3B-WG-saD"/>
@@ -1421,7 +1420,7 @@
                             <constraint firstItem="G8Y-tg-Sgt" firstAttribute="top" secondItem="Rup-Ob-90A" secondAttribute="top" constant="90" id="ZA5-fD-94E"/>
                             <constraint firstItem="q12-ty-27c" firstAttribute="leading" secondItem="wZc-w8-DmJ" secondAttribute="leading" id="akq-8U-hy2"/>
                             <constraint firstItem="wZc-w8-DmJ" firstAttribute="leading" secondItem="Rup-Ob-90A" secondAttribute="leading" constant="32" id="bdV-sz-LJn"/>
-                            <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="G8Y-tg-Sgt" secondAttribute="trailing" constant="22" id="bz5-YD-wqB"/>
+                            <constraint firstItem="Rup-Ob-90A" firstAttribute="trailing" secondItem="G8Y-tg-Sgt" secondAttribute="trailing" constant="-60" id="bz5-YD-wqB"/>
                             <constraint firstItem="WXe-2w-RgT" firstAttribute="trailing" secondItem="q12-ty-27c" secondAttribute="trailing" id="cSU-ly-Ysq"/>
                             <constraint firstItem="wZc-w8-DmJ" firstAttribute="top" secondItem="q12-ty-27c" secondAttribute="bottom" constant="52" id="fx4-cO-557"/>
                             <constraint firstAttribute="bottom" secondItem="HHy-Lw-Y76" secondAttribute="bottom" id="h9a-Lw-6KS"/>
@@ -1449,7 +1448,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="holdings_in_progress" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-gv-H6K">
-                                <rect key="frame" x="0.0" y="30" width="375" height="398.5"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="396"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-cx-pen" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1475,7 +1474,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To connect your portfolio it might take a few minutes to a couple hours. Please get back shortly." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
-                                <rect key="frame" x="32" y="462" width="311" height="56"/>
+                                <rect key="frame" x="32" y="460.5" width="311" height="57.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sAJ-U9-vw5"/>
                                 </constraints>
@@ -1484,7 +1483,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work in progress" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh3-qn-c7V">
-                                <rect key="frame" x="32" y="408.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="406" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1520,16 +1519,16 @@
     </scenes>
     <designables>
         <designable name="X8f-cx-pen">
-            <size key="intrinsicContentSize" width="139" height="33"/>
+            <size key="intrinsicContentSize" width="138.5" height="33.5"/>
         </designable>
         <designable name="arh-iU-hih">
-            <size key="intrinsicContentSize" width="185.5" height="33"/>
+            <size key="intrinsicContentSize" width="187" height="33.5"/>
         </designable>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="147" height="33"/>
+            <size key="intrinsicContentSize" width="149" height="33.5"/>
         </designable>
         <designable name="wZc-w8-DmJ">
-            <size key="intrinsicContentSize" width="74.5" height="33"/>
+            <size key="intrinsicContentSize" width="74.5" height="33.5"/>
         </designable>
     </designables>
     <resources>

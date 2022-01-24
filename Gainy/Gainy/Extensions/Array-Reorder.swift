@@ -63,7 +63,7 @@ extension Array where Element: Hashable {
 }
 
 extension Array where Element == HoldingViewModel {
-    func sortedAndFilter(by settings: PortfolioSettings) -> [Element] {
+    func sortedAndFilter(by settings: PortfolioSettings, chartRange: ScatterChartView.ChartPeriod) -> [Element] {
         
         //Sortings
         let sortingField: PortfolioSortingField = settings.sorting
@@ -83,18 +83,9 @@ extension Array where Element == HoldingViewModel {
                 } else {
                     return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
-            case .oneYearPriceChange:
-                guard let lhd = lhs.relativeGains[.y1], let rhd = rhs.relativeGains[.y1] else {
-                    return false
-                }
-              
-                if ascending {
-                    return lhd < rhd
-                } else {
-                    return lhd > rhd
-                }
-            case .todayPriceChange:
-                guard let lhd = lhs.relativeGains[.d1], let rhd = rhs.relativeGains[.d1] else {
+                
+            case .priceChangeForPeriod:
+                guard let lhd = lhs.relativeGains[chartRange], let rhd = rhs.relativeGains[chartRange] else {
                     return false
                 }
               

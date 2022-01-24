@@ -198,7 +198,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     @IBAction func shareAction(_ sender: Any) {
         NotificationManager.shared.showMessage(title: "Sorry", text: "Sharing will be added soon", cancelTitle: "OK", actions: nil)
-        GainyAnalytics.logEvent("close_single_collection", params: ["collectionID" : collectionId])
+        GainyAnalytics.logEvent("share_single_collection", params: ["collectionID" : collectionId])
     }
     
     @IBAction func toggleCollectionAction(_ sender: Any) {
@@ -231,7 +231,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func addStockPressed(source: SingleCollectionDetailsViewModel) {
         guard self.presentedViewController == nil else {return}
         searchStocksVC.delegate = self
-        GainyAnalytics.logEvent("add_stock_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        //GainyAnalytics.logEvent("add_stock_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         fpc.layout = SearchPanelLayout()
         self.fpc.set(contentViewController: searchStocksVC)
         self.present(self.fpc, animated: true, completion: nil)

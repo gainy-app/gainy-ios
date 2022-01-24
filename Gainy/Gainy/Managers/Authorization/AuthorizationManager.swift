@@ -425,6 +425,17 @@ final class AuthorizationManager {
     
     private func hasProfilesMatchingUserID(userID: String, completion: @escaping (_ success: Bool) -> Void) {
         
+        func processProfs(appProfiles: [AppProfilesUserIDsQuery.Data.AppProfile]) {
+            let filteredProfiles = appProfiles.filter { profile in
+                profile.userId == userID
+            }
+            if filteredProfiles.count > 0 {
+                let profile = filteredProfiles.first
+                UserProfileManager.shared.profileID = profile?.id
+            }
+            completion(filteredProfiles.count > 0)
+        }
+        
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: AppProfilesUserIDsQuery()) { [weak self] result in
             guard self != nil else {
@@ -438,15 +449,7 @@ final class AuthorizationManager {
                     completion(false)
                     return
                 }
-                
-                let filteredProfiles = appProfiles.filter { profile in
-                    profile.userId == userID
-                }
-                if filteredProfiles.count > 0 {
-                    let profile = filteredProfiles.first
-                    UserProfileManager.shared.profileID = profile?.id
-                }
-                completion(filteredProfiles.count > 0)
+                processProfs(appProfiles: appProfiles)
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")

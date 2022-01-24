@@ -2,6 +2,7 @@
 query FetchStockMedianDay($symbol: String!, $date: timestamp!) {
     tickers(where: {symbol: {_eq: $symbol}}) {
         ticker_industries {
+        industry_order
             gainy_industry {
                 industry_stats_dailies(where: {date: {_gte: $date}}) {
                     median_growth_rate_1d

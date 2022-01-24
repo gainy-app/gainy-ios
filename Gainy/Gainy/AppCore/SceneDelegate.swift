@@ -2,6 +2,7 @@ import UIKit
 import AppTrackingTransparency
 import AdSupport
 import FacebookCore
+import FirebaseAuth
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // MARK: Internal
@@ -88,6 +89,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self?.requestTrackingAuthorization()
         }
     }
+    
+    //MARK: - Open/Close
 
     // MARK: Private
     

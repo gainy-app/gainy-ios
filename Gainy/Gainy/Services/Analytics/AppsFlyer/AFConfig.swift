@@ -1,3 +1,3 @@
 enum AFConfig {
-    static let appId = "id1570419845"
+    static let appId = "1570419845"
 }

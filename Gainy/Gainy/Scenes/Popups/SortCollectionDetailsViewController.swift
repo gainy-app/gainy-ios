@@ -129,8 +129,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
             CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
-                self?.collectionCell?.sortSections()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
+                self?.collectionCell?.refreshData()
             }
             delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
             return
@@ -153,8 +153,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
         if let key = btnsMapping().key(forValue: sender.tag) {
             CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: key)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
-            self?.collectionCell?.sortSections()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
+            self?.collectionCell?.refreshData()
         }
         
         delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortingsForCollectionID(collectionID: collectionId)[sender.tag])
@@ -163,8 +163,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
     @IBAction func ascTapped(_ sender: UIButton) {
         ascBtn.isSelected.toggle()
         CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {[weak self] in
-            self?.collectionCell?.sortSections()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
+            self?.collectionCell?.refreshData()
         }
         delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .enterpriseValueToSales).title)
     }

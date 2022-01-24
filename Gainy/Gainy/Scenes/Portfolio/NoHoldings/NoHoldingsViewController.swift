@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 
 protocol NoHoldingsViewControllerDelegate: AnyObject {
-    func reconnectPressed(vc: NoHoldingsViewController)
+    func plaidLinked(vc: NoHoldingsViewController)
 }
 
 final class NoHoldingsViewController: BaseViewController {
@@ -18,6 +18,20 @@ final class NoHoldingsViewController: BaseViewController {
     weak var delegate: NoHoldingsViewControllerDelegate?
     
     //MARK: - Outlets
+    
+    //MARK: - Plaid Listeners
+        
+    override func plaidLinked() {
+        super.plaidLinked()
+        
+        GainyAnalytics.logEvent("portfolio_plaid_link_success")
+        delegate?.plaidLinked(vc: self)
+    }
+    
+    override func plaidLinkFailed() {
+        super.plaidLinkFailed()
+        GainyAnalytics.logEvent("portfolio_plaid_link_failed")
+    }
     
     @IBOutlet weak var infoLbl: UITextView!
     
@@ -27,17 +41,35 @@ final class NoHoldingsViewController: BaseViewController {
         super.viewDidLoad()
         
         infoLbl.delegate = self
-        let str = "Sorry, we could not get enough data to display the information correctly. Try to reconnect your account or contact us".mutableAttr(font: .proDisplayRegular(16), color: UIColor(named: "mainText")!)
-        let foundRange = str.mutableString.range(of: "contact us")
+        let str = "Sorry, we could not get enough data to display the information correctly. Try to reconnect your account or contact us in Profile".mutableAttr(font: .proDisplayRegular(16), color: UIColor(named: "mainText")!)
+        let foundRange = str.mutableString.range(of: "contact us in Profile")
         if foundRange.location != NSNotFound {
-            str.addAttribute(NSAttributedString.Key.link, value: "https:\\www.google.com", range: foundRange)
+            str.addAttribute(NSAttributedString.Key.link, value: "", range: foundRange)
         }
         infoLbl.attributedText = str
     }
     
     //MARK: - Actions
     @IBAction func reloadAction(_ sender: Any) {
-        delegate?.reconnectPressed(vc: self)
+        
+        GainyAnalytics.logEvent("portfolio_plaid_reconnect_pressed")
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        
+        showNetworkLoader()
+        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
+            self?.hideLoader()
+            switch result {
+            case .success(let graphQLResult):
+                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+                    return
+                }
+                self?.presentPlaidLinkUsingLinkToken(linkToken)
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                break
+            }
+        }
     }
 }
 

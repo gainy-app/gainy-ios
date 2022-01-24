@@ -686,7 +686,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <rect key="frame" x="-33" y="213" width="480" height="480"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v">
-                                        <rect key="frame" x="61" y="202.5" width="358" height="75"/>
+                                        <rect key="frame" x="61" y="202" width="358" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>

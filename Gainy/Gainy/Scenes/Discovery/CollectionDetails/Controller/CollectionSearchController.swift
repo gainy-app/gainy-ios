@@ -79,7 +79,7 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
-                                           stocksAmount: "\(collection.tickerCollectionsAggregate.aggregate?.count ?? 0)",
+                                           stocksAmount: "\(collection.size ?? 0)",
                                            imageName: "",
                                            plusButtonState: buttonState)
                         
@@ -327,9 +327,9 @@ final class CollectionSearchController: NSObject {
                 let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection.fragments.remoteCollectionDetails})
                 self?.collections = mappedCollections
                 
-                for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                }
+//                for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
+//                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+//                }
                 
                 dispatchGroup.leave()
                 break
@@ -536,7 +536,7 @@ extension CollectionSearchController: UICollectionViewDelegate {
             break
         case .suggestedCollection:
             let collection = self.recommendedCollections[indexPath.row]
-            GainyAnalytics.logEvent("collections_search_recommended_collection_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
+            GainyAnalytics.logEvent("coll_search_rec_coll_pressed", params: ["collectionId" : collection.id, "ec" : "CollectionDetails"])
             localFavHash = UserProfileManager.shared.favHash
             coordinator?.showCollectionDetails(collectionID: collection.id, delegate:  self)
             
@@ -582,7 +582,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
                     
                 }
             }
