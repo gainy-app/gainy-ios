@@ -328,11 +328,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         cards.append(contentsOf: cardsDTO)
         onNewCardsLoaded?(cardsDTO)
         if var snap = dataSource?.snapshot() {
-            if let lastItem = snap.itemIdentifiers(inSection: .cards).last {
-                snap.insertItems(cardsDTO, afterItem: lastItem)
-            } else {
-                snap.appendItems(cardsDTO, toSection: .cards)
-            }
+            snap.appendItems(cardsDTO, toSection: .cards)
             dataSource?.apply(snap, animatingDifferences: false)
         }
     }
@@ -348,7 +344,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         snapshot.deleteAllItems()
         dataSource?.apply(snapshot, animatingDifferences: false)
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {[weak self] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {[weak self] in
             guard var snapshot = self?.snapshot else {return}
             snapshot.appendSections([.cards])
             snapshot.appendItems(self?.cards ?? [], toSection: .cards)
@@ -404,7 +400,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             self.dataSource?.apply(self.snapshot, animatingDifferences: false)
             self.cards.removeAll()
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {[weak self] in
                 guard var snapshot = self?.snapshot else {return}
                 snapshot.appendSections([.cards])
                 snapshot.appendItems(cards, toSection: .cards)
