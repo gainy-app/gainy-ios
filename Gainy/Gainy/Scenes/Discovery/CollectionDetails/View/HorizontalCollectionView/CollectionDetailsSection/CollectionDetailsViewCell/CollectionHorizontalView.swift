@@ -28,12 +28,12 @@ final class CollectionHorizontalView: UIView {
         addSubview(showListViewButton)
         addSubview(showGridViewButton)
         
-        layer.cornerRadius = 16.0
+        layer.cornerRadius = 0.0
         layer.cornerCurve = .continuous
         layer.masksToBounds = true
         
         layer.isOpaque = true
-        backgroundColor = .clear
+        backgroundColor = UIColor.Gainy.white
     }
     
     @available(*, unavailable)
@@ -58,8 +58,8 @@ final class CollectionHorizontalView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
-        imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 16.0
+        imageView.backgroundColor = UIColor.Gainy.white
+        imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
         return imageView
     }()

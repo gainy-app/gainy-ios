@@ -767,8 +767,8 @@
                                     <action selector="onPrivacyNoticeTap:" destination="JCo-7j-pCN" eventType="touchUpInside" id="rfV-g1-HsQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (ADV Part 3)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
-                                <rect key="frame" x="28" y="225" width="162" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (Q&amp;A)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
+                                <rect key="frame" x="28" y="225" width="119.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uU2-BH-8Z5"/>
                                 </constraints>
@@ -793,8 +793,8 @@
                                     <action selector="onFormCRSTap:" destination="JCo-7j-pCN" eventType="touchUpInside" id="V8g-Fc-pDS"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 2A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
-                                <rect key="frame" x="28" y="275" width="87" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
+                                <rect key="frame" x="28" y="275" width="77" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="trU-KV-Uv6"/>
                                 </constraints>

@@ -35,12 +35,12 @@ class TickerDetailsViewCell: UITableViewCell {
 extension UITableViewCell {
     func addSwiftUIIfPossible(_ view: UIView, viewTag: Int = TickerDetailsDataSource.hostingTag, oldTag: Int = -1) -> Bool {
         if oldTag != -1 {
-            subviews.filter({$0.tag == oldTag}).forEach({$0.removeFromSuperview()})
+            contentView.subviews.filter({$0.tag == oldTag}).forEach({$0.removeFromSuperview()})
         }
-        guard !subviews.contains(where: {$0.tag == viewTag}) else {
+        guard !contentView.subviews.contains(where: {$0.tag == viewTag}) else {
             return false
         }
-        addSubview(view)
+        contentView.insertSubview(view, at: 0)
         return true
     }
 }

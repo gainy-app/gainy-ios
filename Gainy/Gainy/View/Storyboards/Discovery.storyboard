@@ -179,21 +179,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kVv-wA-qYJ" id="bjb-iO-XyG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TGb-C2-Unk">
-                                                    <rect key="frame" x="8" y="0.0" width="398" height="100"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="TGb-C2-Unk" secondAttribute="trailing" constant="8" id="1e9-zX-XRx"/>
-                                                <constraint firstAttribute="bottom" secondItem="TGb-C2-Unk" secondAttribute="bottom" id="I8d-6K-FxH"/>
-                                                <constraint firstItem="TGb-C2-Unk" firstAttribute="leading" secondItem="bjb-iO-XyG" secondAttribute="leading" constant="8" id="h8w-BI-goj"/>
-                                                <constraint firstItem="TGb-C2-Unk" firstAttribute="top" secondItem="bjb-iO-XyG" secondAttribute="top" id="miq-NS-7MO"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsAboutViewCell" rowHeight="240" id="XUF-xV-OXl" customClass="TickerDetailsAboutViewCell" customModule="Gainy" customModuleProvider="target">

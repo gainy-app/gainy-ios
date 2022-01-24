@@ -458,7 +458,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [
-        WatchlistSectionLayout(),
+        CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
         RecommendedCollectionsSectionLayout(),
     ]
