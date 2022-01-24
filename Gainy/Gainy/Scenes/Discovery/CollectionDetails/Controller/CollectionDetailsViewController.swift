@@ -856,6 +856,9 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        
+        
+        
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         self.fpc.dismiss(animated: true, completion: nil)
     }

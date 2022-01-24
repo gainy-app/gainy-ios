@@ -45,24 +45,24 @@ final class CollectionsManager {
     
     //MARK: - Fetching
     
-    func loadNewCollectionDetails(_ colID: Int, completion: @escaping () -> Void) {
+    func loadNewCollectionDetails(_ colID: Int, completion: @escaping ([TickerDetails]) -> Void) {
         Task {
             async let newCols = loadCollections([colID])
             async let tickersMap = getTickersForCollections(collectionIDs: [colID])
             let (newColsRes, tickersMapRes) = await (newCols, tickersMap)
             
             //Adding preloaded tickers
-            
             for colID in tickersMapRes.keys {
                 print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
                 prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
             }
             
+            let remoteTickersMap = await tickersMap[colID] ?? []
             if newColsRes.isEmpty {
                 self.failedToLoad.insert(colID)
                 newCollectionFetched.send(.fetchedFailed)
                 await MainActor.run {
-                    completion()
+                    completion([])
                 }
                 return
             }
@@ -88,7 +88,7 @@ final class CollectionsManager {
                 }
             }
             await MainActor.run {
-                completion()
+                completion(remoteTickersMap)
             }
         }
     }
@@ -123,7 +123,7 @@ final class CollectionsManager {
             completion()
             return
         }
-        loadNewCollectionDetails(Constants.CollectionDetails.top20ID) {
+        loadNewCollectionDetails(Constants.CollectionDetails.top20ID) {_ in 
             completion()
         }
     }
@@ -211,11 +211,17 @@ final class CollectionsManager {
                 CollectionsManager.shared.watchlistCollection = watchListRes
                 
                 let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
-                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-            }
-            
-            await MainActor.run {
-                completion([])
+                let collectionDetailsViewCellModel = CollectionDetailsViewModelMapper.map(collectionDTO)
+                newCollectionFetched.send(.fetched(model: collectionDetailsViewCellModel))
+                
+                await MainActor.run {
+                    completion([collectionDetailsViewCellModel])
+                }
+            } else {
+                
+                await MainActor.run {
+                    completion([])
+                }
             }
         }
     }
@@ -252,7 +258,7 @@ final class CollectionsManager {
     
     func reloadUnfetched() {
         failedToLoad.forEach({
-            loadNewCollectionDetails($0) {
+            loadNewCollectionDetails($0) { remoteTickers in
                 
             }
         })

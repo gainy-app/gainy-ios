@@ -582,7 +582,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                     }
                     self.collectionsUpdated?()
                 }
-                CollectionsManager.shared.loadNewCollectionDetails(collectionID) {
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
                     
                 }
             }

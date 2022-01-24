@@ -390,29 +390,60 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private func initViewModels() {}
     
-    @objc func refresh(_ sender:AnyObject) {
+    private func finishRefreshWithSorting(cards: [CollectionCardViewCellModel]) {
+        runOnMain {
+            
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
+            self.collectionHorizontalView.updateChargeLbl(settings.sortingText())
+            self.collectionListHeader.updateMetrics(settings.marketDataToShow)
+            self.cards = cards.sorted(by: { lhs, rhs in
+                settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
+            })
+            
+            self.snapshot.deleteAllItems()
+            self.dataSource?.apply(self.snapshot, animatingDifferences: false)
+            self.cards.removeAll()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {[weak self] in
+                guard var snapshot = self?.snapshot else {return}
+                snapshot.appendSections([.cards])
+                snapshot.appendItems(cards, toSection: .cards)
+                self?.dataSource?.apply(snapshot, animatingDifferences: true)
+                self?.isLoadingTickers = false
+            }
+        }
+    }
+    
+    func refreshData() {
         
         refreshControl.endRefreshing()
         self.isLoadingTickers = true
         
         if self.collectionID == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading { models in
-                runOnMain {
-                    self.isLoadingTickers = false
-                    self.internalCollectionView.reloadData()
+                if let cards = models.first?.cards {
+                    self.finishRefreshWithSorting(cards: cards)
                 }
             }
             return
         }
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) {
+            CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) { remoteTickers in
                 runOnMain {
-                    self.isLoadingTickers = false
-                    self.internalCollectionView.reloadData()
+                    let tickers = remoteTickers.compactMap { item in
+                        item.rawTicker
+                    }
+                    let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
+                    self.finishRefreshWithSorting(cards: cards)
                 }
             }
         }
+    }
+    
+    @objc func refresh(_ sender:AnyObject) {
+        
+        self.refreshData()
     }
 }
 

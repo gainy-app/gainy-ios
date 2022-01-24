@@ -518,7 +518,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         showNetworkLoader()
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) {
+            CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) { remoteTickers in
                 runOnMain {
                     self.hideLoader()
                 }
