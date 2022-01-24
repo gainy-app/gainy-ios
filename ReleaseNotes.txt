@@ -7,6 +7,8 @@ Bugfixes
 
 :hammer_and_wrench: Improvements
 • UI improvements
+• Fix duplicated Earnings Date field in Portfolio sorting
+• Fix sorting/refreshing logic
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
