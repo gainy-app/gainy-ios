@@ -8,6 +8,7 @@
 import UIKit
 import SkeletonView
 import FloatingPanel
+import Combine
 
 protocol HoldingsViewControllerDelegate: AnyObject {
     func plaidUnlinked(controller: HoldingsViewController)
@@ -83,6 +84,14 @@ final class HoldingsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.setContentOffset(.zero, animated: true)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.portoTabPressedNotification)
+            .receive(on: DispatchQueue.main)
+            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .sink {[weak self] _ in
+                self?.tableView.setContentOffset(.zero, animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     @objc func loadData() {
@@ -106,6 +115,10 @@ final class HoldingsViewController: BaseViewController {
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         }
+    }
+    
+    deinit {
+        cancellables.removeAll()
     }
     
     //MARK: - Actions

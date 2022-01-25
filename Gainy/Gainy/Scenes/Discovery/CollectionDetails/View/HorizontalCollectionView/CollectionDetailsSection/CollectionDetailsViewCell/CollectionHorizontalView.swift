@@ -34,6 +34,7 @@ final class CollectionHorizontalView: UIView {
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
+        skeletonCornerRadius = 16
     }
     
     @available(*, unavailable)
@@ -61,6 +62,7 @@ final class CollectionHorizontalView: UIView {
         imageView.backgroundColor = UIColor.Gainy.white
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
+        imageView.skeletonCornerRadius = 16
         return imageView
     }()
     

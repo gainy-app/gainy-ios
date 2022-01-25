@@ -130,6 +130,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
                 
                 self.tabBar.items?[i].setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
                 self.tabBar.items?[i].setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
+                self.tabBar.items?[i].tag = i
             }
         }
         

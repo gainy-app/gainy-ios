@@ -53,7 +53,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
         updateWatchlistCellHeight()
     }
-    private(set) var isAboutExpanded: Bool = true
+    private(set) var isAboutExpanded: Bool = false
     
     private func updateWatchlistCellHeight() {
         if UserProfileManager.shared.selectedBrokerToTrade != nil {
@@ -206,6 +206,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                     tableView.endUpdates()
                 }
             }
+            cell.isMoreSelected = self.isAboutExpanded
             cell.tickerInfo = ticker
             return cell
         case .highlights:
@@ -220,9 +221,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
-            if #available(iOS 14, *) {
+            if #available(iOS 15, *) {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
-                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0 - 28.0)
+                    wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
                     wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
                     wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
                     wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
@@ -359,5 +360,9 @@ extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
     func requestOpenCollection(withID id: Int) {
         
         self.delegate?.requestOpenCollection(withID: id)
+    }
+    
+    func aboutExtended(isExtended: Bool) {
+        self.isAboutExpanded = isExtended
     }
 }

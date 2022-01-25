@@ -15,6 +15,7 @@ class NotificationManager: NSObject {
     static let appBecomeInactiveNotification = "appBecomeInactiveNotification"
     static let appBecomeActiveNotification = "appBecomeActiveNotification"
     static let tickerScrollNotification = Notification.Name.init("tickerScrollNotification")
+    static let portoTabPressedNotification = Notification.Name.init("portoTabPressedNotification")
     
     // Singleton
     static let shared = NotificationManager()

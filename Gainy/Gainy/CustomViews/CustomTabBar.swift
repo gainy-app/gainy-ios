@@ -22,6 +22,19 @@ class CustomTabBar: UITabBar {
     
     enum Tab: Int {
         case discovery = 0, portfolio, profile
+        
+        init(title: String) {
+            switch title {
+            case "Discovery":
+                self = .discovery
+            case "Portfolio":
+                self = .portfolio
+            case "Profile":
+                self = .profile
+            default:
+                self = .discovery
+            }
+        }
     }
     
     private let profileWidth: CGFloat = 24.0
@@ -139,11 +152,14 @@ class CustomTabBar: UITabBar {
     
     override var selectedItem: UITabBarItem? {
         didSet {
-            let oldTab = Tab.init(rawValue: oldValue?.tag ?? 0)!
-            let newTab = Tab.init(rawValue: selectedItem?.tag ?? 0)!
+            let oldTab = Tab.init(title: oldValue?.title ?? "")
+            let newTab = Tab.init(title: selectedItem?.title ?? "")
             if oldTab != newTab {
                 self.customDelegate?.otherTabPressedLong(tabBar: self)
                 //Possible selection
+            }
+            if newTab == .portfolio {
+                NotificationCenter.default.post(name: NotificationManager.portoTabPressedNotification, object: nil)
             }
         }
     }

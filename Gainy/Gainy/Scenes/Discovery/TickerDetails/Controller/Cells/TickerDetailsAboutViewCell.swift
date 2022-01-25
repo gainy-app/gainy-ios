@@ -10,17 +10,22 @@ import PureLayout
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
+    func aboutExtended(isExtended: Bool)
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     public weak var delegate: TickerDetailsAboutViewCellDelegate?
     
+    //MARK: - Outlets
     @IBOutlet private weak var aboutLbl: UILabel!
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
     
+    //MARK: - DI
     var minHeightUpdated: ((CGFloat) -> Void)?
+    var isMoreSelected: Bool = false
+    
     private var lines: Int = 1
     
     override func updateFromTickerData() {
@@ -89,10 +94,10 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     }
     
     //MARK: - Actions
-    private var isMoreSelected: Bool = false
     @IBAction func showMoreAction(_ sender: UIButton) {
         sender.isSelected.toggle()
         isMoreSelected.toggle()
+        delegate?.aboutExtended(isExtended: isMoreSelected)
         if sender.isSelected {
             aboutLbl.numberOfLines = 0
             sender.setTitle("show less", for: .normal)
