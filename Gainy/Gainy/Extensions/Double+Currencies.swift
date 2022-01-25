@@ -9,6 +9,7 @@ import Foundation
 
 extension Double {
     var price: String {
+        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -20,6 +21,7 @@ extension Double {
     }
     
     var priceRaw: String {
+        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -97,6 +99,7 @@ extension Double {
 
 extension Float {
     var price: String {
+        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -108,6 +111,7 @@ extension Float {
     }
     
     var priceRaw: String {
+        guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2

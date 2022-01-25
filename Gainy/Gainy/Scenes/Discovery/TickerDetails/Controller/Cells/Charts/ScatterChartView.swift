@@ -118,53 +118,59 @@ struct ScatterChartView: View {
     
     private var headerView: some View {
         
-            ZStack {
-                HStack(spacing: 0) {
-                    //Right Stock price
-                    VStack(alignment: .trailing, spacing: 0) {
-                        HStack(alignment: .lastTextBaseline, spacing: 4) {
-                            Text(statsDayName)
-                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+        ZStack {
+            HStack(spacing: 0) {
+                //Right Stock price
+                VStack(alignment: .trailing, spacing: 0) {
+                    HStack(alignment: .lastTextBaseline, spacing: 4) {
+                        Text(statsDayName)
+                            .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(14.0).uiFont)
+                            .padding(.top, 2)
+                        Image(uiImage: UIImage(named: statsDayValueRaw >= 0 ? "small_up" : "small_down")!)
+                            .resizable()
+                            .frame(width: 8, height: 8)
+                        if statsDayValueRaw == 0.0 {
+                            Text("-")
+                                .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                                 .font(UIFont.compactRoundedSemibold(14.0).uiFont)
-                                .padding(.top, 2)
-                            Image(uiImage: UIImage(named: statsDayValueRaw >= 0 ? "small_up" : "small_down")!)
-                                .resizable()
-                                .frame(width: 8, height: 8)
+                        } else {
                             Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
                                 .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                                 .font(UIFont.compactRoundedSemibold(14.0).uiFont)
-                            Spacer()
-                        }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
-                        HStack {
-                            Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
-                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.compactRoundedSemibold(24.0).uiFont)
-                                .animation(.none)
-                            
-                                Spacer()
                         }
-                        HStack(alignment: .firstTextBaseline, spacing: 4) {
-                            Text("MEDIAN")
-                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                .font(UIFont.proDisplaySemibold(9).uiFont)
-                                .padding(.top, 2)
-                            Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
-                                .resizable()
-                                .frame(width: 8, height: 8)
-                            Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
-                                .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                                .font(UIFont.proDisplaySemibold(11).uiFont)
-                            Spacer()
-                        }
-                        .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
+                        Spacer()
+                    }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                    HStack {
+                        Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
+                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(24.0).uiFont)
+                            .animation(.none)
                         
+                        Spacer()
                     }
-                    .frame(height: 78)
-                  Spacer()
+                    HStack(alignment: .firstTextBaseline, spacing: 4) {
+                        Text("MEDIAN")
+                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(9).uiFont)
+                            .padding(.top, 2)
+                        Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
+                            .resizable()
+                            .frame(width: 8, height: 8)
+                        Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
+                            .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                            .font(UIFont.proDisplaySemibold(11).uiFont)
+                        Spacer()
+                    }
+                    .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
+                    
                 }
-                .padding(.leading, 24)
-                .padding(.top, 0)
-                .offset(y: -10)
+                .frame(height: 78)
+                Spacer()
+            }
+            .padding(.leading, 24)
+            .padding(.top, 0)
+            .offset(y: -10)
             
         }
         .padding(.all, 0)
@@ -195,6 +201,8 @@ struct ScatterChartView: View {
         switch selectedTag {
         case .d1:
             return (viewModel.ticker.priceChangeToday * 100.0).percentRaw
+        case .m1:
+            return ((viewModel.ticker.tickerMetrics?.priceChange_1m ?? 0.0) * 100.0).percentRaw
         default:
             return viewModel.chartData.startEndDiffString
         }
@@ -204,6 +212,8 @@ struct ScatterChartView: View {
         switch selectedTag {
         case .d1:
             return viewModel.ticker.priceChangeToday
+        case .m1:
+            return viewModel.ticker.tickerMetrics?.priceChange_1m ?? 0.0
         default:
             return Float(viewModel.chartData.startEndDiff)
         }

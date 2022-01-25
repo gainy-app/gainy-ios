@@ -8,7 +8,7 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchRecommendedCollections($profileId: Int!) {
+    query FetchRecommendedCollections($profileId: Int!) @cached(ttl: 300) {
       get_recommended_collections(profile_id: $profileId) {
         __typename
         id

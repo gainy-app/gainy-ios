@@ -8,7 +8,7 @@ public final class FetchSelectedCollectionsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchSelectedCollections($ids: [Int!]) {
+    query FetchSelectedCollections($ids: [Int!]) @cached(ttl: 300) {
       collections(where: {id: {_in: $ids}, enabled: {_eq: "1"}}) {
         __typename
         ...RemoteCollectionDetails

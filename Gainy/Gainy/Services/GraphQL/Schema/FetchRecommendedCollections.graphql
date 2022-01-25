@@ -1,4 +1,4 @@
-query FetchRecommendedCollections($profileId: Int!) {
+query FetchRecommendedCollections($profileId: Int!) @cached(ttl: 300) {
     get_recommended_collections(profile_id: $profileId) {
         id
         collection {
