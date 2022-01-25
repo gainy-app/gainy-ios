@@ -21,7 +21,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initDataDog()
         initBugfender()
         TickerLiveStorage.shared.clearAllLiveData()
-        NotificationManager.trackingRequest()
         return true
     }
     

@@ -42,23 +42,9 @@ class NotificationManager: NSObject {
            
             UNUserNotificationCenter.current().delegate = NotificationManager.shared
             
-            //ATT Tracking
-            if #available(iOS 14, *) {
-                ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in
-                })
-            } else {
-            }
         }
     }
     
-    class func trackingRequest() {
-        //ATT Tracking
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization(completionHandler: { _ in
-            })
-        } else {
-        }
-    }
     
     class func registerOrEnableNotifications() {
         
