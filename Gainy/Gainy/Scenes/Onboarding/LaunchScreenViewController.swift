@@ -104,10 +104,5 @@ class LaunchScreenViewController: BaseViewController {
         self.authorizationManager?.resetStatus()
         GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
+    }    
 }

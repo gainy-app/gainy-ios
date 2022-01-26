@@ -102,4 +102,8 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
             return nil
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
