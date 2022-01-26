@@ -106,7 +106,7 @@ class TickerInfo {
     }
     
     private(set) var isMainDataLoaded: Bool = false
-    private(set) var isChartDataLoaded: Bool = false
+    var isChartDataLoaded: Bool = false
     private var matchLoadTask: Task<Void, Never>?
 
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
@@ -211,9 +211,6 @@ class TickerInfo {
                         
                         //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
                         self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued()
-                        
-                        let tickerSymbols = (self?.altStocks ?? []).compactMap(\.symbol)
-                        
 
                         for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
                             TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)

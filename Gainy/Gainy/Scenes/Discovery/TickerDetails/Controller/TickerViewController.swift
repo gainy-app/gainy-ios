@@ -17,12 +17,14 @@ final class TickerViewController: BaseViewController {
     var viewModel: TickerDetailsViewModel?
     
     //MARK: - Outlets
-    
+    private let refreshControl = LottieRefreshControl()
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = viewModel?.dataSource
             tableView.delegate = viewModel?.dataSource
+            tableView.refreshControl = refreshControl
             viewModel?.dataSource.delegate = self
+            refreshControl.addTarget(self, action: #selector(loadTicketInfo), for: .valueChanged)
         }
     }
     
@@ -40,7 +42,10 @@ final class TickerViewController: BaseViewController {
         super.viewDidAppear(animated)
     }
     
-    func loadTicketInfo() {
+    @objc func loadTicketInfo() {
+        refreshControl.endRefreshing()
+        viewModel?.dataSource.ticker.isChartDataLoaded = false
+        
         tableView.contentOffset = .zero
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
@@ -70,10 +75,10 @@ final class TickerViewController: BaseViewController {
         })
     }
     
-    private var isLoadingInfo: Bool = false {
+    @MainActor private var isLoadingInfo: Bool = false {
         didSet {
             if isLoadingInfo {
-                
+                print("SHOWING SKELTON")
                 for cell in tableView.visibleCells {
                     if let rightCell = cell as? TickerDetailsViewCell {
                         rightCell.showAnimatedGradientSkeleton()
@@ -82,6 +87,7 @@ final class TickerViewController: BaseViewController {
                 tableView.isScrollEnabled = false
                 tableView.isUserInteractionEnabled = false
             } else {
+                print("HIDING SKELTON")
                 for cell in tableView.visibleCells {
                     if let rightCell = cell as? TickerDetailsViewCell {
                         rightCell.hideSkeleton()

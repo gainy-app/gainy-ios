@@ -26,10 +26,6 @@ final class ViewControllerFactory {
         let vc = LaunchScreenViewController.instantiate(.onboarding)
         vc.coordinator = coordinator
         vc.authorizationManager = authorizationManager
-        
-        if !BetaDisclaimerViewController.betaDisclaimerWasShown {
-            vc.betaDisclaimerViewController = self.initializeBetaDisclaimer(coordinator: coordinator)
-        }
         return vc
     }
     

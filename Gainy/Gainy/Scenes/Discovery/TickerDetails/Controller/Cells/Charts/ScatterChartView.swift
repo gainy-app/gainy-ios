@@ -130,15 +130,9 @@ struct ScatterChartView: View {
                         Image(uiImage: UIImage(named: statsDayValueRaw >= 0 ? "small_up" : "small_down")!)
                             .resizable()
                             .frame(width: 8, height: 8)
-                        if statsDayValueRaw == 0.0 {
-                            Text("-")
-                                .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
-                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
-                        } else {
-                            Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
-                                .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
-                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
-                        }
+                        Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
+                            .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                         Spacer()
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     HStack {

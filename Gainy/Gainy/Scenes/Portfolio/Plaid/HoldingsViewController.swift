@@ -87,7 +87,6 @@ final class HoldingsViewController: BaseViewController {
         
         NotificationCenter.default.publisher(for: NotificationManager.portoTabPressedNotification)
             .receive(on: DispatchQueue.main)
-            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
             .sink {[weak self] _ in
                 self?.tableView.setContentOffset(.zero, animated: true)
             }

@@ -16,7 +16,6 @@ class LaunchScreenViewController: BaseViewController {
     
     weak var authorizationManager: AuthorizationManager?
     weak var coordinator: OnboardingCoordinator?
-    var betaDisclaimerViewController: BetaDisclaimerViewController?
     
     var avPlayer: AVPlayer!
     var avPlayerLayer: AVPlayerLayer!
@@ -25,11 +24,6 @@ class LaunchScreenViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        if let betaDisclaimerViewController = self.betaDisclaimerViewController {
-            betaDisclaimerViewController.modalPresentationStyle = .fullScreen
-            self.present(betaDisclaimerViewController, animated: false, completion: nil)
-        }
         self.setupPlayer()
     }
     

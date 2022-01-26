@@ -29,6 +29,7 @@
 		3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */; };
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
+		330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */; };
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
@@ -512,6 +513,7 @@
 		3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityTableViewCell.swift; sourceTree = "<group>"; };
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
+		330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradient_Stars.mp4; sourceTree = "<group>"; };
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
@@ -1710,6 +1712,7 @@
 		3A930F1B265C1B96000FD3EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */,
 				854299242769F24D00E8C433 /* intro.mp4 */,
 				85DF2129278CA25000F2899B /* investment_failure.mp4 */,
 				85DF2127278CA24F00F2899B /* investment_goals.mp4 */,
@@ -2448,6 +2451,7 @@
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
 				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
 				907B227C275029C900FB4B1E /* loader3.json in Resources */,
+				330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */,
 				85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */,
 				85695AF3274594BF00759569 /* MetricsFooterView.xib in Resources */,
 				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
@@ -3089,7 +3093,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3213,7 +3217,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3398,7 +3402,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3427,7 +3431,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 138;
+				CURRENT_PROJECT_VERSION = 139;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
