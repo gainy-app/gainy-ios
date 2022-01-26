@@ -10,7 +10,7 @@ import AppTrackingTransparency
 import AdSupport
 import AVFoundation
 
-final class IDFARequestViewController: UIViewController {
+final class IDFARequestViewController: UIViewController, Storyboarded {
     
     //MARK: - Player
     
@@ -21,11 +21,7 @@ final class IDFARequestViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-//        if let betaDisclaimerViewController = self.betaDisclaimerViewController {
-//            betaDisclaimerViewController.modalPresentationStyle = .fullScreen
-//            self.present(betaDisclaimerViewController, animated: false, completion: nil)
-//        }
+        self.modalPresentationStyle = .fullScreen
         self.setupPlayer()
     }
     
@@ -93,6 +89,7 @@ final class IDFARequestViewController: UIViewController {
                 @unknown default:
                     break
                 }
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }

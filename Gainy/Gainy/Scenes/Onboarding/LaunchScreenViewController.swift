@@ -24,7 +24,6 @@ class LaunchScreenViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        self.setupPlayer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,12 +31,31 @@ class LaunchScreenViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        avPlayer.play()
-        paused = false
+        
+    }
+    
+    @UserDefaultBool("isIDFAShown")
+    private var isIDFAShown: Bool
+    
+    private func showIDFAIfNeeded() {
+        guard !isIDFAShown else {return}
+        let idfaVC = IDFARequestViewController.instantiate(.popups)
+        idfaVC.modalPresentationStyle = .fullScreen
+        present(idfaVC, animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        
+        self.setupPlayer()
+        
+        avPlayer.play()
+        paused = false
+        
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -86,6 +104,10 @@ class LaunchScreenViewController: BaseViewController {
         self.authorizationManager?.resetStatus()
         GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
 }

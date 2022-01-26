@@ -147,10 +147,22 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         return nil
     }
     
+    @UserDefaultBool("isIDFAShown")
+    private var isIDFAShown: Bool
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
+    }
+    
+    private func showIDFAIfNeeded() {
+        guard !isIDFAShown else {return}
+        let idfaVC = IDFARequestViewController.instantiate(.popups)
+        present(idfaVC, animated: true, completion: nil)
+        isIDFAShown = true
     }
     
     // MARK: - Status Bar
