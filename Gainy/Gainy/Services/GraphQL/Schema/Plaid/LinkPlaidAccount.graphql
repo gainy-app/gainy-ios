@@ -1,5 +1,6 @@
 query LinkPlaidAccount($profileId: Int!, $publicToken: String!) {
 link_plaid_account(profile_id: $profileId, public_token: $publicToken) {
 result
+plaid_access_token_id
 }
 }

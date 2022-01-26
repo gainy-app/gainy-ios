@@ -83,6 +83,13 @@ fragment RemoteTickerDetails on tickers {
       total_assets
       ebitda
       net_debt
+      
+      price_change_1m
+price_change_1w
+price_change_1y
+price_change_3m
+price_change_5y
+price_change_all
     }
     realtime_metrics{
     actual_price

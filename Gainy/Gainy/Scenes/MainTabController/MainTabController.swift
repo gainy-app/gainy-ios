@@ -161,6 +161,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     private func showIDFAIfNeeded() {
         guard !isIDFAShown else {return}
         let idfaVC = IDFARequestViewController.instantiate(.popups)
+        idfaVC.modalPresentationStyle = .fullScreen
         present(idfaVC, animated: true, completion: nil)
         isIDFAShown = true
     }

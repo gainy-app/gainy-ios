@@ -9661,8 +9661,11 @@ public struct ticker_metrics_order_by: GraphQLMapConvertible {
   ///   - netIncome
   ///   - netIncomeTtm
   ///   - priceChange_1m
+  ///   - priceChange_1w
   ///   - priceChange_1y
   ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
   ///   - priceToBookValue
   ///   - priceToEarningsTtm
   ///   - priceToSalesTtm
@@ -9687,8 +9690,8 @@ public struct ticker_metrics_order_by: GraphQLMapConvertible {
   ///   - ticker
   ///   - totalAssets
   ///   - yearsOfConsecutiveDividendGrowth
-  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, addressCity: Swift.Optional<order_by?> = nil, addressCounty: Swift.Optional<order_by?> = nil, addressFull: Swift.Optional<order_by?> = nil, addressState: Swift.Optional<order_by?> = nil, assetCashAndEquivalents: Swift.Optional<order_by?> = nil, avgVolume_10d: Swift.Optional<order_by?> = nil, avgVolume_90d: Swift.Optional<order_by?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<order_by?> = nil, beta: Swift.Optional<order_by?> = nil, dividendFrequency: Swift.Optional<order_by?> = nil, dividendPayoutRatio: Swift.Optional<order_by?> = nil, dividendYield: Swift.Optional<order_by?> = nil, dividendsPerShare: Swift.Optional<order_by?> = nil, ebitda: Swift.Optional<order_by?> = nil, ebitdaGrowthYoy: Swift.Optional<order_by?> = nil, ebitdaTtm: Swift.Optional<order_by?> = nil, enterpriseValueToEbitda: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, epsActual: Swift.Optional<order_by?> = nil, epsDifference: Swift.Optional<order_by?> = nil, epsEstimate: Swift.Optional<order_by?> = nil, epsGrowthFwd: Swift.Optional<order_by?> = nil, epsGrowthYoy: Swift.Optional<order_by?> = nil, epsSurprise: Swift.Optional<order_by?> = nil, epsTtm: Swift.Optional<order_by?> = nil, exchangeName: Swift.Optional<order_by?> = nil, impliedVolatility: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, netDebt: Swift.Optional<order_by?> = nil, netIncome: Swift.Optional<order_by?> = nil, netIncomeTtm: Swift.Optional<order_by?> = nil, priceChange_1m: Swift.Optional<order_by?> = nil, priceChange_1y: Swift.Optional<order_by?> = nil, priceChange_3m: Swift.Optional<order_by?> = nil, priceToBookValue: Swift.Optional<order_by?> = nil, priceToEarningsTtm: Swift.Optional<order_by?> = nil, priceToSalesTtm: Swift.Optional<order_by?> = nil, profitMargin: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, revenueActual: Swift.Optional<order_by?> = nil, revenueEstimateAvg_0y: Swift.Optional<order_by?> = nil, revenueGrowthFwd: Swift.Optional<order_by?> = nil, revenueGrowthYoy: Swift.Optional<order_by?> = nil, revenuePerShareTtm: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil, roa: Swift.Optional<order_by?> = nil, roi: Swift.Optional<order_by?> = nil, sharesFloat: Swift.Optional<order_by?> = nil, sharesOutstanding: Swift.Optional<order_by?> = nil, shortPercent: Swift.Optional<order_by?> = nil, shortPercentOutstanding: Swift.Optional<order_by?> = nil, shortRatio: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil, totalAssets: Swift.Optional<order_by?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
+  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, addressCity: Swift.Optional<order_by?> = nil, addressCounty: Swift.Optional<order_by?> = nil, addressFull: Swift.Optional<order_by?> = nil, addressState: Swift.Optional<order_by?> = nil, assetCashAndEquivalents: Swift.Optional<order_by?> = nil, avgVolume_10d: Swift.Optional<order_by?> = nil, avgVolume_90d: Swift.Optional<order_by?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<order_by?> = nil, beta: Swift.Optional<order_by?> = nil, dividendFrequency: Swift.Optional<order_by?> = nil, dividendPayoutRatio: Swift.Optional<order_by?> = nil, dividendYield: Swift.Optional<order_by?> = nil, dividendsPerShare: Swift.Optional<order_by?> = nil, ebitda: Swift.Optional<order_by?> = nil, ebitdaGrowthYoy: Swift.Optional<order_by?> = nil, ebitdaTtm: Swift.Optional<order_by?> = nil, enterpriseValueToEbitda: Swift.Optional<order_by?> = nil, enterpriseValueToSales: Swift.Optional<order_by?> = nil, epsActual: Swift.Optional<order_by?> = nil, epsDifference: Swift.Optional<order_by?> = nil, epsEstimate: Swift.Optional<order_by?> = nil, epsGrowthFwd: Swift.Optional<order_by?> = nil, epsGrowthYoy: Swift.Optional<order_by?> = nil, epsSurprise: Swift.Optional<order_by?> = nil, epsTtm: Swift.Optional<order_by?> = nil, exchangeName: Swift.Optional<order_by?> = nil, impliedVolatility: Swift.Optional<order_by?> = nil, marketCapitalization: Swift.Optional<order_by?> = nil, netDebt: Swift.Optional<order_by?> = nil, netIncome: Swift.Optional<order_by?> = nil, netIncomeTtm: Swift.Optional<order_by?> = nil, priceChange_1m: Swift.Optional<order_by?> = nil, priceChange_1w: Swift.Optional<order_by?> = nil, priceChange_1y: Swift.Optional<order_by?> = nil, priceChange_3m: Swift.Optional<order_by?> = nil, priceChange_5y: Swift.Optional<order_by?> = nil, priceChangeAll: Swift.Optional<order_by?> = nil, priceToBookValue: Swift.Optional<order_by?> = nil, priceToEarningsTtm: Swift.Optional<order_by?> = nil, priceToSalesTtm: Swift.Optional<order_by?> = nil, profitMargin: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<order_by?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<order_by?> = nil, revenueActual: Swift.Optional<order_by?> = nil, revenueEstimateAvg_0y: Swift.Optional<order_by?> = nil, revenueGrowthFwd: Swift.Optional<order_by?> = nil, revenueGrowthYoy: Swift.Optional<order_by?> = nil, revenuePerShareTtm: Swift.Optional<order_by?> = nil, revenueTtm: Swift.Optional<order_by?> = nil, roa: Swift.Optional<order_by?> = nil, roi: Swift.Optional<order_by?> = nil, sharesFloat: Swift.Optional<order_by?> = nil, sharesOutstanding: Swift.Optional<order_by?> = nil, shortPercent: Swift.Optional<order_by?> = nil, shortPercentOutstanding: Swift.Optional<order_by?> = nil, shortRatio: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, ticker: Swift.Optional<tickers_order_by?> = nil, totalAssets: Swift.Optional<order_by?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
   }
 
   public var absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<order_by?> {
@@ -10006,6 +10009,15 @@ public struct ticker_metrics_order_by: GraphQLMapConvertible {
     }
   }
 
+  public var priceChange_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
   public var priceChange_1y: Swift.Optional<order_by?> {
     get {
       return graphQLMap["price_change_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
@@ -10021,6 +10033,24 @@ public struct ticker_metrics_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
     }
   }
 
@@ -15846,8 +15876,11 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   ///   - netIncome
   ///   - netIncomeTtm
   ///   - priceChange_1m
+  ///   - priceChange_1w
   ///   - priceChange_1y
   ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
   ///   - priceToBookValue
   ///   - priceToEarningsTtm
   ///   - priceToSalesTtm
@@ -15872,8 +15905,8 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   ///   - ticker
   ///   - totalAssets
   ///   - yearsOfConsecutiveDividendGrowth
-  public init(_and: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, addressCity: Swift.Optional<String_comparison_exp?> = nil, addressCounty: Swift.Optional<String_comparison_exp?> = nil, addressFull: Swift.Optional<String_comparison_exp?> = nil, addressState: Swift.Optional<String_comparison_exp?> = nil, assetCashAndEquivalents: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_10d: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_90d: Swift.Optional<float8_comparison_exp?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int_comparison_exp?> = nil, beta: Swift.Optional<float8_comparison_exp?> = nil, dividendFrequency: Swift.Optional<String_comparison_exp?> = nil, dividendPayoutRatio: Swift.Optional<float8_comparison_exp?> = nil, dividendYield: Swift.Optional<float8_comparison_exp?> = nil, dividendsPerShare: Swift.Optional<float8_comparison_exp?> = nil, ebitda: Swift.Optional<float8_comparison_exp?> = nil, ebitdaGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, ebitdaTtm: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToEbitda: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToSales: Swift.Optional<float8_comparison_exp?> = nil, epsActual: Swift.Optional<float8_comparison_exp?> = nil, epsDifference: Swift.Optional<float8_comparison_exp?> = nil, epsEstimate: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, epsSurprise: Swift.Optional<float8_comparison_exp?> = nil, epsTtm: Swift.Optional<float8_comparison_exp?> = nil, exchangeName: Swift.Optional<String_comparison_exp?> = nil, impliedVolatility: Swift.Optional<float8_comparison_exp?> = nil, marketCapitalization: Swift.Optional<bigint_comparison_exp?> = nil, netDebt: Swift.Optional<float8_comparison_exp?> = nil, netIncome: Swift.Optional<float8_comparison_exp?> = nil, netIncomeTtm: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1y: Swift.Optional<float8_comparison_exp?> = nil, priceChange_3m: Swift.Optional<float8_comparison_exp?> = nil, priceToBookValue: Swift.Optional<float8_comparison_exp?> = nil, priceToEarningsTtm: Swift.Optional<float8_comparison_exp?> = nil, priceToSalesTtm: Swift.Optional<float8_comparison_exp?> = nil, profitMargin: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, revenueActual: Swift.Optional<float8_comparison_exp?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, revenuePerShareTtm: Swift.Optional<float8_comparison_exp?> = nil, revenueTtm: Swift.Optional<float8_comparison_exp?> = nil, roa: Swift.Optional<float8_comparison_exp?> = nil, roi: Swift.Optional<float8_comparison_exp?> = nil, sharesFloat: Swift.Optional<bigint_comparison_exp?> = nil, sharesOutstanding: Swift.Optional<bigint_comparison_exp?> = nil, shortPercent: Swift.Optional<float8_comparison_exp?> = nil, shortPercentOutstanding: Swift.Optional<float8_comparison_exp?> = nil, shortRatio: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, totalAssets: Swift.Optional<float8_comparison_exp?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
+  public init(_and: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_metrics_bool_exp]?> = nil, absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, addressCity: Swift.Optional<String_comparison_exp?> = nil, addressCounty: Swift.Optional<String_comparison_exp?> = nil, addressFull: Swift.Optional<String_comparison_exp?> = nil, addressState: Swift.Optional<String_comparison_exp?> = nil, assetCashAndEquivalents: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_10d: Swift.Optional<float8_comparison_exp?> = nil, avgVolume_90d: Swift.Optional<float8_comparison_exp?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int_comparison_exp?> = nil, beta: Swift.Optional<float8_comparison_exp?> = nil, dividendFrequency: Swift.Optional<String_comparison_exp?> = nil, dividendPayoutRatio: Swift.Optional<float8_comparison_exp?> = nil, dividendYield: Swift.Optional<float8_comparison_exp?> = nil, dividendsPerShare: Swift.Optional<float8_comparison_exp?> = nil, ebitda: Swift.Optional<float8_comparison_exp?> = nil, ebitdaGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, ebitdaTtm: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToEbitda: Swift.Optional<float8_comparison_exp?> = nil, enterpriseValueToSales: Swift.Optional<float8_comparison_exp?> = nil, epsActual: Swift.Optional<float8_comparison_exp?> = nil, epsDifference: Swift.Optional<float8_comparison_exp?> = nil, epsEstimate: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, epsGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, epsSurprise: Swift.Optional<float8_comparison_exp?> = nil, epsTtm: Swift.Optional<float8_comparison_exp?> = nil, exchangeName: Swift.Optional<String_comparison_exp?> = nil, impliedVolatility: Swift.Optional<float8_comparison_exp?> = nil, marketCapitalization: Swift.Optional<bigint_comparison_exp?> = nil, netDebt: Swift.Optional<float8_comparison_exp?> = nil, netIncome: Swift.Optional<float8_comparison_exp?> = nil, netIncomeTtm: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1w: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1y: Swift.Optional<float8_comparison_exp?> = nil, priceChange_3m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_5y: Swift.Optional<float8_comparison_exp?> = nil, priceChangeAll: Swift.Optional<float8_comparison_exp?> = nil, priceToBookValue: Swift.Optional<float8_comparison_exp?> = nil, priceToEarningsTtm: Swift.Optional<float8_comparison_exp?> = nil, priceToSalesTtm: Swift.Optional<float8_comparison_exp?> = nil, profitMargin: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8_comparison_exp?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8_comparison_exp?> = nil, revenueActual: Swift.Optional<float8_comparison_exp?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthFwd: Swift.Optional<float8_comparison_exp?> = nil, revenueGrowthYoy: Swift.Optional<float8_comparison_exp?> = nil, revenuePerShareTtm: Swift.Optional<float8_comparison_exp?> = nil, revenueTtm: Swift.Optional<float8_comparison_exp?> = nil, roa: Swift.Optional<float8_comparison_exp?> = nil, roi: Swift.Optional<float8_comparison_exp?> = nil, sharesFloat: Swift.Optional<bigint_comparison_exp?> = nil, sharesOutstanding: Swift.Optional<bigint_comparison_exp?> = nil, shortPercent: Swift.Optional<float8_comparison_exp?> = nil, shortPercentOutstanding: Swift.Optional<float8_comparison_exp?> = nil, shortRatio: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, totalAssets: Swift.Optional<float8_comparison_exp?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
   }
 
   public var _and: Swift.Optional<[ticker_metrics_bool_exp]?> {
@@ -16218,6 +16251,15 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var priceChange_1w: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
   public var priceChange_1y: Swift.Optional<float8_comparison_exp?> {
     get {
       return graphQLMap["price_change_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
@@ -16233,6 +16275,24 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
     }
   }
 
@@ -24378,8 +24438,11 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   ///   - netIncome
   ///   - netIncomeTtm
   ///   - priceChange_1m
+  ///   - priceChange_1w
   ///   - priceChange_1y
   ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
   ///   - priceToBookValue
   ///   - priceToEarningsTtm
   ///   - priceToSalesTtm
@@ -24404,8 +24467,8 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   ///   - ticker
   ///   - totalAssets
   ///   - yearsOfConsecutiveDividendGrowth
-  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, addressCity: Swift.Optional<String?> = nil, addressCounty: Swift.Optional<String?> = nil, addressFull: Swift.Optional<String?> = nil, addressState: Swift.Optional<String?> = nil, assetCashAndEquivalents: Swift.Optional<float8?> = nil, avgVolume_10d: Swift.Optional<float8?> = nil, avgVolume_90d: Swift.Optional<float8?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int?> = nil, beta: Swift.Optional<float8?> = nil, dividendFrequency: Swift.Optional<String?> = nil, dividendPayoutRatio: Swift.Optional<float8?> = nil, dividendYield: Swift.Optional<float8?> = nil, dividendsPerShare: Swift.Optional<float8?> = nil, ebitda: Swift.Optional<float8?> = nil, ebitdaGrowthYoy: Swift.Optional<float8?> = nil, ebitdaTtm: Swift.Optional<float8?> = nil, enterpriseValueToEbitda: Swift.Optional<float8?> = nil, enterpriseValueToSales: Swift.Optional<float8?> = nil, epsActual: Swift.Optional<float8?> = nil, epsDifference: Swift.Optional<float8?> = nil, epsEstimate: Swift.Optional<float8?> = nil, epsGrowthFwd: Swift.Optional<float8?> = nil, epsGrowthYoy: Swift.Optional<float8?> = nil, epsSurprise: Swift.Optional<float8?> = nil, epsTtm: Swift.Optional<float8?> = nil, exchangeName: Swift.Optional<String?> = nil, impliedVolatility: Swift.Optional<float8?> = nil, marketCapitalization: Swift.Optional<bigint?> = nil, netDebt: Swift.Optional<float8?> = nil, netIncome: Swift.Optional<float8?> = nil, netIncomeTtm: Swift.Optional<float8?> = nil, priceChange_1m: Swift.Optional<float8?> = nil, priceChange_1y: Swift.Optional<float8?> = nil, priceChange_3m: Swift.Optional<float8?> = nil, priceToBookValue: Swift.Optional<float8?> = nil, priceToEarningsTtm: Swift.Optional<float8?> = nil, priceToSalesTtm: Swift.Optional<float8?> = nil, profitMargin: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, revenueActual: Swift.Optional<float8?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8?> = nil, revenueGrowthFwd: Swift.Optional<float8?> = nil, revenueGrowthYoy: Swift.Optional<float8?> = nil, revenuePerShareTtm: Swift.Optional<float8?> = nil, revenueTtm: Swift.Optional<float8?> = nil, roa: Swift.Optional<float8?> = nil, roi: Swift.Optional<float8?> = nil, sharesFloat: Swift.Optional<bigint?> = nil, sharesOutstanding: Swift.Optional<bigint?> = nil, shortPercent: Swift.Optional<float8?> = nil, shortPercentOutstanding: Swift.Optional<float8?> = nil, shortRatio: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, totalAssets: Swift.Optional<float8?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int?> = nil) {
-    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
+  public init(absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, absoluteHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, addressCity: Swift.Optional<String?> = nil, addressCounty: Swift.Optional<String?> = nil, addressFull: Swift.Optional<String?> = nil, addressState: Swift.Optional<String?> = nil, assetCashAndEquivalents: Swift.Optional<float8?> = nil, avgVolume_10d: Swift.Optional<float8?> = nil, avgVolume_90d: Swift.Optional<float8?> = nil, beatenQuarterlyEpsEstimationCountTtm: Swift.Optional<Int?> = nil, beta: Swift.Optional<float8?> = nil, dividendFrequency: Swift.Optional<String?> = nil, dividendPayoutRatio: Swift.Optional<float8?> = nil, dividendYield: Swift.Optional<float8?> = nil, dividendsPerShare: Swift.Optional<float8?> = nil, ebitda: Swift.Optional<float8?> = nil, ebitdaGrowthYoy: Swift.Optional<float8?> = nil, ebitdaTtm: Swift.Optional<float8?> = nil, enterpriseValueToEbitda: Swift.Optional<float8?> = nil, enterpriseValueToSales: Swift.Optional<float8?> = nil, epsActual: Swift.Optional<float8?> = nil, epsDifference: Swift.Optional<float8?> = nil, epsEstimate: Swift.Optional<float8?> = nil, epsGrowthFwd: Swift.Optional<float8?> = nil, epsGrowthYoy: Swift.Optional<float8?> = nil, epsSurprise: Swift.Optional<float8?> = nil, epsTtm: Swift.Optional<float8?> = nil, exchangeName: Swift.Optional<String?> = nil, impliedVolatility: Swift.Optional<float8?> = nil, marketCapitalization: Swift.Optional<bigint?> = nil, netDebt: Swift.Optional<float8?> = nil, netIncome: Swift.Optional<float8?> = nil, netIncomeTtm: Swift.Optional<float8?> = nil, priceChange_1m: Swift.Optional<float8?> = nil, priceChange_1w: Swift.Optional<float8?> = nil, priceChange_1y: Swift.Optional<float8?> = nil, priceChange_3m: Swift.Optional<float8?> = nil, priceChange_5y: Swift.Optional<float8?> = nil, priceChangeAll: Swift.Optional<float8?> = nil, priceToBookValue: Swift.Optional<float8?> = nil, priceToEarningsTtm: Swift.Optional<float8?> = nil, priceToSalesTtm: Swift.Optional<float8?> = nil, profitMargin: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMax_1y: Swift.Optional<float8?> = nil, relativeHistoricalVolatilityAdjustedMin_1y: Swift.Optional<float8?> = nil, revenueActual: Swift.Optional<float8?> = nil, revenueEstimateAvg_0y: Swift.Optional<float8?> = nil, revenueGrowthFwd: Swift.Optional<float8?> = nil, revenueGrowthYoy: Swift.Optional<float8?> = nil, revenuePerShareTtm: Swift.Optional<float8?> = nil, revenueTtm: Swift.Optional<float8?> = nil, roa: Swift.Optional<float8?> = nil, roi: Swift.Optional<float8?> = nil, sharesFloat: Swift.Optional<bigint?> = nil, sharesOutstanding: Swift.Optional<bigint?> = nil, shortPercent: Swift.Optional<float8?> = nil, shortPercentOutstanding: Swift.Optional<float8?> = nil, shortRatio: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, totalAssets: Swift.Optional<float8?> = nil, yearsOfConsecutiveDividendGrowth: Swift.Optional<Int?> = nil) {
+    graphQLMap = ["absolute_historical_volatility_adjusted_current": absoluteHistoricalVolatilityAdjustedCurrent, "absolute_historical_volatility_adjusted_max_1y": absoluteHistoricalVolatilityAdjustedMax_1y, "absolute_historical_volatility_adjusted_min_1y": absoluteHistoricalVolatilityAdjustedMin_1y, "address_city": addressCity, "address_county": addressCounty, "address_full": addressFull, "address_state": addressState, "asset_cash_and_equivalents": assetCashAndEquivalents, "avg_volume_10d": avgVolume_10d, "avg_volume_90d": avgVolume_90d, "beaten_quarterly_eps_estimation_count_ttm": beatenQuarterlyEpsEstimationCountTtm, "beta": beta, "dividend_frequency": dividendFrequency, "dividend_payout_ratio": dividendPayoutRatio, "dividend_yield": dividendYield, "dividends_per_share": dividendsPerShare, "ebitda": ebitda, "ebitda_growth_yoy": ebitdaGrowthYoy, "ebitda_ttm": ebitdaTtm, "enterprise_value_to_ebitda": enterpriseValueToEbitda, "enterprise_value_to_sales": enterpriseValueToSales, "eps_actual": epsActual, "eps_difference": epsDifference, "eps_estimate": epsEstimate, "eps_growth_fwd": epsGrowthFwd, "eps_growth_yoy": epsGrowthYoy, "eps_surprise": epsSurprise, "eps_ttm": epsTtm, "exchange_name": exchangeName, "implied_volatility": impliedVolatility, "market_capitalization": marketCapitalization, "net_debt": netDebt, "net_income": netIncome, "net_income_ttm": netIncomeTtm, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "price_to_book_value": priceToBookValue, "price_to_earnings_ttm": priceToEarningsTtm, "price_to_sales_ttm": priceToSalesTtm, "profit_margin": profitMargin, "relative_historical_volatility_adjusted_current": relativeHistoricalVolatilityAdjustedCurrent, "relative_historical_volatility_adjusted_max_1y": relativeHistoricalVolatilityAdjustedMax_1y, "relative_historical_volatility_adjusted_min_1y": relativeHistoricalVolatilityAdjustedMin_1y, "revenue_actual": revenueActual, "revenue_estimate_avg_0y": revenueEstimateAvg_0y, "revenue_growth_fwd": revenueGrowthFwd, "revenue_growth_yoy": revenueGrowthYoy, "revenue_per_share_ttm": revenuePerShareTtm, "revenue_ttm": revenueTtm, "roa": roa, "roi": roi, "shares_float": sharesFloat, "shares_outstanding": sharesOutstanding, "short_percent": shortPercent, "short_percent_outstanding": shortPercentOutstanding, "short_ratio": shortRatio, "symbol": symbol, "ticker": ticker, "total_assets": totalAssets, "years_of_consecutive_dividend_growth": yearsOfConsecutiveDividendGrowth]
   }
 
   public var absoluteHistoricalVolatilityAdjustedCurrent: Swift.Optional<float8?> {
@@ -24723,6 +24786,15 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var priceChange_1w: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
   public var priceChange_1y: Swift.Optional<float8?> {
     get {
       return graphQLMap["price_change_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
@@ -24738,6 +24810,24 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
     }
   }
 
@@ -25109,9 +25199,15 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
   /// column name
   case priceChange_1m
   /// column name
+  case priceChange_1w
+  /// column name
   case priceChange_1y
   /// column name
   case priceChange_3m
+  /// column name
+  case priceChange_5y
+  /// column name
+  case priceChangeAll
   /// column name
   case priceToBookValue
   /// column name
@@ -25198,8 +25294,11 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
       case "net_income": self = .netIncome
       case "net_income_ttm": self = .netIncomeTtm
       case "price_change_1m": self = .priceChange_1m
+      case "price_change_1w": self = .priceChange_1w
       case "price_change_1y": self = .priceChange_1y
       case "price_change_3m": self = .priceChange_3m
+      case "price_change_5y": self = .priceChange_5y
+      case "price_change_all": self = .priceChangeAll
       case "price_to_book_value": self = .priceToBookValue
       case "price_to_earnings_ttm": self = .priceToEarningsTtm
       case "price_to_sales_ttm": self = .priceToSalesTtm
@@ -25264,8 +25363,11 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
       case .netIncome: return "net_income"
       case .netIncomeTtm: return "net_income_ttm"
       case .priceChange_1m: return "price_change_1m"
+      case .priceChange_1w: return "price_change_1w"
       case .priceChange_1y: return "price_change_1y"
       case .priceChange_3m: return "price_change_3m"
+      case .priceChange_5y: return "price_change_5y"
+      case .priceChangeAll: return "price_change_all"
       case .priceToBookValue: return "price_to_book_value"
       case .priceToEarningsTtm: return "price_to_earnings_ttm"
       case .priceToSalesTtm: return "price_to_sales_ttm"
@@ -25330,8 +25432,11 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
       case (.netIncome, .netIncome): return true
       case (.netIncomeTtm, .netIncomeTtm): return true
       case (.priceChange_1m, .priceChange_1m): return true
+      case (.priceChange_1w, .priceChange_1w): return true
       case (.priceChange_1y, .priceChange_1y): return true
       case (.priceChange_3m, .priceChange_3m): return true
+      case (.priceChange_5y, .priceChange_5y): return true
+      case (.priceChangeAll, .priceChangeAll): return true
       case (.priceToBookValue, .priceToBookValue): return true
       case (.priceToEarningsTtm, .priceToEarningsTtm): return true
       case (.priceToSalesTtm, .priceToSalesTtm): return true
@@ -25397,8 +25502,11 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
       .netIncome,
       .netIncomeTtm,
       .priceChange_1m,
+      .priceChange_1w,
       .priceChange_1y,
       .priceChange_3m,
+      .priceChange_5y,
+      .priceChangeAll,
       .priceToBookValue,
       .priceToEarningsTtm,
       .priceToSalesTtm,

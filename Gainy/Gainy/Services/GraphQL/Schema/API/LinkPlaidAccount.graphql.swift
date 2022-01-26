@@ -12,6 +12,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
       link_plaid_account(profile_id: $profileId, public_token: $publicToken) {
         __typename
         result
+        plaid_access_token_id
       }
     }
     """
@@ -65,6 +66,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("result", type: .nonNull(.scalar(Bool.self))),
+          GraphQLField("plaid_access_token_id", type: .scalar(Int.self)),
         ]
       }
 
@@ -74,8 +76,8 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(result: Bool) {
-        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result])
+      public init(result: Bool, plaidAccessTokenId: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "LinkPlaidAccountOutput", "result": result, "plaid_access_token_id": plaidAccessTokenId])
       }
 
       public var __typename: String {
@@ -93,6 +95,15 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "result")
+        }
+      }
+
+      public var plaidAccessTokenId: Int? {
+        get {
+          return resultMap["plaid_access_token_id"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "plaid_access_token_id")
         }
       }
     }

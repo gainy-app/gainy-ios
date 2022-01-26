@@ -197,8 +197,16 @@ struct ScatterChartView: View {
             return (viewModel.ticker.priceChangeToday * 100.0).percentRaw
         case .m1:
             return ((viewModel.ticker.tickerMetrics?.priceChange_1m ?? 0.0) * 100.0).percentRaw
-        default:
-            return viewModel.chartData.startEndDiffString
+        case .w1:
+            return ((viewModel.ticker.tickerMetrics?.priceChange_1w ?? 0.0) * 100.0).percentRaw
+        case .m3:
+            return ((viewModel.ticker.tickerMetrics?.priceChange_3m ?? 0.0) * 100.0).percentRaw
+        case .y1:
+            return ((viewModel.ticker.tickerMetrics?.priceChange_1y ?? 0.0) * 100.0).percentRaw
+        case .y5:
+            return ((viewModel.ticker.tickerMetrics?.priceChange_5y ?? 0.0) * 100.0).percentRaw
+        case .all:
+            return ((viewModel.ticker.tickerMetrics?.priceChangeAll ?? 0.0) * 100.0).percentRaw
         }
     }
     
@@ -206,10 +214,18 @@ struct ScatterChartView: View {
         switch selectedTag {
         case .d1:
             return viewModel.ticker.priceChangeToday
+        case .w1:
+            return viewModel.ticker.tickerMetrics?.priceChange_1w ?? 0.0
         case .m1:
             return viewModel.ticker.tickerMetrics?.priceChange_1m ?? 0.0
-        default:
-            return Float(viewModel.chartData.startEndDiff)
+        case .m3:
+            return viewModel.ticker.tickerMetrics?.priceChange_3m ?? 0.0
+        case .y1:
+            return viewModel.ticker.tickerMetrics?.priceChange_1y ?? 0.0
+        case .y5:
+            return viewModel.ticker.tickerMetrics?.priceChange_5y ?? 0.0
+        case .all:
+            return viewModel.ticker.tickerMetrics?.priceChangeAll ?? 0.0
         }
     }
     

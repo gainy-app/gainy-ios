@@ -118,17 +118,10 @@ final class HistoricalChartsLoader {
                     
                     if range == .d1 {
                         if let lastDay = fetchedData.last {
-                            let filtered = fetchedData.filter({$0.date.day == lastDay.date.day && $0.date.month == lastDay.date.month})
-                            if let index = fetchedData.firstIndex(where: {$0.datetime == filtered.first?.datetime}) {
-                                if index == 0 {
-                                    fetchedData = filtered
-                                } else {
-                                    fetchedData = Array(fetchedData[(index-1)...])
-                                }
-                            }
+                            let filtered = fetchedData.filter({$0.date.compare(toDate: lastDay.date, granularity: .day) == .orderedSame})
+                            fetchedData = filtered
                         }
                     }
-                    
                     
                     completion(fetchedData)
                 } else {
