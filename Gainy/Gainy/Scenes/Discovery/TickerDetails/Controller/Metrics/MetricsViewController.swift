@@ -693,6 +693,8 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             } else {
                 self.collectionView.reloadSections(IndexSet.init(integer: 0))
             }
+            
+            GainyAnalytics.logEvent("metrics_settings_selected", params: ["name" : marketData.name, "field" : marketData.marketDataField.fieldName, "ec" : "MetricsViewController"])
         }
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
         self.updateBottomViewPosition()
@@ -700,9 +702,6 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
         if self.selectedSection.count == self.maxSelectedElements && isSearching {
             self.textFieldClear()
         }
-
-        
-//        GainyAnalytics.logEvent("personalization_select_interest", params: ["interest_id" : interest.id, "interest_name" : interest.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

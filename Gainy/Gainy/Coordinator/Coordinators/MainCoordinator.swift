@@ -153,10 +153,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {
+    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false) {
         let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID)
         vc.delegate = delegate
         vc.coordinator = self
+        vc.isFromSearch = isFromSearch
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])

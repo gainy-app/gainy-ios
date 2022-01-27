@@ -18,10 +18,11 @@ extension BaseViewController {
             Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken)) {[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
-                    guard let isAccountLinked = graphQLResult.data?.linkPlaidAccount?.result else {
+                    guard let linkData = graphQLResult.data?.linkPlaidAccount else {
                         return
                     }
-                    if isAccountLinked {
+                    if linkData.result {
+                        UserProfileManager.shared.linkPlaidID = linkData.plaidAccessTokenId
                         self?.plaidLinked()
                     } else {
                         self?.plaidLinkFailed()

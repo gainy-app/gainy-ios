@@ -59,6 +59,9 @@ final class UserProfileManager {
     @UserDefault<Date>("linkPlaidDate")
     var linkPlaidDate: Date?
     
+    @UserDefault<Int>("linkPlaidID")
+    var linkPlaidID: Int?
+    
     var linkedPlaidAccessTokens: [Int] = Array()
     
     var linkedPlaidAccounts: [PlaidAccountData] = []
@@ -154,6 +157,8 @@ final class UserProfileManager {
                 self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
                     item.id
                 })
+                
+                self.updatePlaidPortfolio()
                 
                 completion(true)
                 
@@ -405,6 +410,17 @@ final class UserProfileManager {
                 
                 self.fetchProfile(completion: completion)
             }
+        }
+    }
+    
+    //MARK: - Porto Tricks
+    
+    public func updatePlaidPortfolio() {
+        guard let profileID = self.profileID else {
+            return
+        }
+        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ result in
+            print(result)
         }
     }
 }

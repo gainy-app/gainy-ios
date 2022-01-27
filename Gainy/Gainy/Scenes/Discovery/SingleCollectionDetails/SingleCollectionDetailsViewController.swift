@@ -38,6 +38,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     var coordiantor: MainCoordinator?
     var collectionId: Int!
     var model: CollectionDetailViewCellModel!
+    var isFromSearch: Bool = false
     
     weak var coordinator: MainCoordinator?
     weak var delegate: SingleCollectionDetailsViewControllerDelegate?
@@ -204,7 +205,11 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     @IBAction func toggleCollectionAction(_ sender: Any) {
         toggleBtn.isSelected.toggle()
         delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)
-        GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
+        if isFromSearch {
+            GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_searched_added_to_yours" :  "single_searched_removed_from_yours", params: ["collectionID" : collectionId])
+        } else {
+            GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
+        }
     }
 }
 

@@ -67,6 +67,7 @@ final class PersonalInfoViewController: BaseViewController {
         
         let onboardingFinished = self.onboardingDone ?? false
         if onboardingFinished {
+            GainyAnalytics.logEvent("questioner_done", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
             self.coordinator?.presentOnboardingFinalizingViewController()
         } else {
             self.coordinator?.setRootIntroductionViewController()

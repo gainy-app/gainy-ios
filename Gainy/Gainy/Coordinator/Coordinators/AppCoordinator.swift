@@ -97,5 +97,6 @@ final class AppCoordinator: BaseCoordinator {
         
         let isAutorized = (self.authorizationManager.authorizationStatus == .authorizedFully)
         self.launchInstructor = LaunchInstructor.configure(isAutorized: isAutorized)
+        
     }
 }

@@ -54,20 +54,25 @@ final class NoHoldingsViewController: BaseViewController {
         
         GainyAnalytics.logEvent("portfolio_plaid_reconnect_pressed")
         guard let profileID = UserProfileManager.shared.profileID else {return}
+        guard let plaidID = UserProfileManager.shared.linkPlaidID else {return}
         
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
-            self?.hideLoader()
-            switch result {
-            case .success(let graphQLResult):
-                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
-                    return
+        
+        let query = UnlinkPlaidAccountMutation(publicTokenID: plaidID)
+        Network.shared.apollo.perform(mutation: query) { result in           
+            Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
+                self?.hideLoader()
+                switch result {
+                case .success(let graphQLResult):
+                    guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+                        return
+                    }
+                    self?.presentPlaidLinkUsingLinkToken(linkToken)
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    break
                 }
-                self?.presentPlaidLinkUsingLinkToken(linkToken)
-                break
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                break
             }
         }
     }
