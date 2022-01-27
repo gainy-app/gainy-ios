@@ -804,7 +804,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func reloadCollection() {
         guard let profileID = UserProfileManager.shared.profileID else { return }
-        guard !UserProfileManager.shared.favoriteCollections.isEmpty else {
+        let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+        guard !isEmpty else {
             self.onDiscoverCollections?(false)
             return
         }
