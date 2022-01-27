@@ -370,7 +370,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpInvestmentGoalsView() {
         
         let title = NSLocalizedString("Investments goals", comment: "Investment Goals Title")
-        let description = NSLocalizedString("What are your annual return expectations? Usually, the riskier you go than more money you make but the chance to lose increases as well.", comment: "Investment Goals Description")
+        let description = NSLocalizedString("What are your annual return expectations? Usually, the riskier you go the more money you make but the chance to lose increases as well.", comment: "Investment Goals Description")
         self.sliderViewInvestmentGoals.configureWith(title: title)
         self.sliderViewInvestmentGoals.configureWith(description: description)
         let minValueCaption = NSLocalizedString("Less risky", comment: "Investment Goals Min Caption")
@@ -426,7 +426,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     private func setUpDamageOfFailureView() {
         
         let title = NSLocalizedString("Damage of failure", comment: "Damage of failure Title")
-        let description = NSLocalizedString("If the investment doesn’t pan out, how serious\nis the consequence", comment: "Damage of failure Description")
+        let description = NSLocalizedString("If the investment doesn’t pan out, how serious\nis the consequence?", comment: "Damage of failure Description")
         self.sliderViewDamageOfFailure.configureWith(title: title)
         self.sliderViewDamageOfFailure.configureWith(description: description)
         let minValueCaption = NSLocalizedString("Very sensitive", comment: "Damage of failure Min Caption")

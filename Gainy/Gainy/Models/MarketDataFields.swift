@@ -109,7 +109,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .avgVolume90d:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "90 DAYS", value: Float(ticker.tickerMetrics?.avgVolume_90d ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .sharesFloat:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.sharesFloat ?? 0).formatUsingAbbrevation(), marketDataField: self)
+            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.sharesFloat ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .shortRatio:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.shortRatio ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .beta:
@@ -186,7 +186,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .revenueTtm:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenueTtm ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .revenuePerShareTtm:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenuePerShareTtm ?? 0.0).cleanOneDecimal, marketDataField: self)
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenuePerShareTtm ?? 0.0).percent, marketDataField: self)
         case .roi:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value:  (ticker.tickerMetrics?.roi ?? 0.0).percent, marketDataField: self)
         case .netIncome:

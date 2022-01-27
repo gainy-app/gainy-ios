@@ -163,6 +163,7 @@ extension HoldingsDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section != 0 else {return}
         if let stock = holdings[indexPath.row].rawTicker {
             delegate?.stockSelected(source: self, stock: stock)
             GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
