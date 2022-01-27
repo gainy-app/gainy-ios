@@ -57,7 +57,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         return
                     }
                     
-                    if UserProfileManager.shared.favoriteCollections.isEmpty {
+                    let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+                    if isEmpty {
                         self?.onDiscoverCollections?(false)
                     } else {
                         if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
