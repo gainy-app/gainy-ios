@@ -84,6 +84,9 @@ final class AuthorizationViewController: BaseViewController {
                 self.coordinator?.dismissModule()
                 finishFlow()
             }
+            if GainyAnalytics.shared.isLogin {
+                GainyAnalytics.logEvent("login_success")
+            }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
             GainyAnalytics.logEvent("authorization_need_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             self.coordinator?.pushPersonalInfoViewController(isOnboardingDone: self.onboardingDone)

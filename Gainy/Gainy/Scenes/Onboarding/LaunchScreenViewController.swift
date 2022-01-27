@@ -42,6 +42,7 @@ class LaunchScreenViewController: BaseViewController {
         let idfaVC = IDFARequestViewController.instantiate(.popups)
         idfaVC.modalPresentationStyle = .fullScreen
         present(idfaVC, animated: true, completion: nil)
+        isIDFAShown = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -95,12 +96,13 @@ class LaunchScreenViewController: BaseViewController {
     
     @IBAction func signInTouchUpInside(_ sender: Any) {
         
+        GainyAnalytics.shared.isLogin = true
         GainyAnalytics.logEvent("sign_in_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.presentAuthorizationViewController()
     }
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {
-        
+        GainyAnalytics.shared.isRegistration = true
         self.authorizationManager?.resetStatus()
         GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
