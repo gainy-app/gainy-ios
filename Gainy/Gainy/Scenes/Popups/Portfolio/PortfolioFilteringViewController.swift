@@ -91,24 +91,12 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
             }
             cell.dotsImageView.isHidden = false
             return cell
-        case 2: let cell: SwitchTableViewCell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.cellIdentifier, for: indexPath) as! SwitchTableViewCell
-            
-//            if indexPath.row == 0 {
-//                cell.customTitleLabel.text = "Include closed positions"
-//                cell.valueSwitch.setOn(self.includeClosedPositions, animated: false)
-//            } else if indexPath.row == 1 {
-            cell.customTitleLabel.text = "Only long capital gain tax"
-            cell.valueSwitch.setOn(self.onlyLongCapitalGainTax, animated: false)
-//            }
-            cell.delegate = self
-            cell.dotsImageView.isHidden = (indexPath.row == 1) ? true : false
-            return cell
         default: return UITableViewCell.newAutoLayout()
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,7 +104,6 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
         switch section {
         case 0: return self.brokers.count
         case 1: return 3
-        case 2: return 1
         default: return 0
         }
     }
@@ -177,14 +164,6 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
                 item.accountData
             }
             PortfolioSettingsManager.shared.changedisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
-            self.delegate?.didChangeFilterSettings(self)
-        case 2:
-            guard let userID = UserProfileManager.shared.profileID else {return}
-//            if indexPath.row == 0 {
-//                PortfolioSettingsManager.shared.changeIncludeClosedPositionsForUserId(userID, includeClosedPositions: sender.valueSwitch.isOn)
-//            } else if indexPath.row == 1 {
-            PortfolioSettingsManager.shared.changeOnlyLongCapitalGainTaxForUserId(userID, onlyLongCapitalGainTax: sender.valueSwitch.isOn)
-//            }
             self.delegate?.didChangeFilterSettings(self)
         default: return
         }

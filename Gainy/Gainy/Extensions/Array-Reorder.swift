@@ -166,12 +166,9 @@ extension Array where Element == HoldingViewModel {
             var inSec = false
             let modelSecs = model.securityTypes
             inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
-            
-            let isLTT = settings.onlyLongCapitalGainTax ? model.showLTT : true
+        
             
             let inAccount = !notInAccount
-            let canBeShown = inAccount && isLTT
-            
             let showFilteredByAll = (inInterests && inCats && inSec)
             
             let showFilteredByInterests = inInterests
@@ -209,7 +206,7 @@ extension Array where Element == HoldingViewModel {
                 show = showFilteredBySec
             }
             
-            return canBeShown && show
+            return inAccount && show
         }
     }
 }
