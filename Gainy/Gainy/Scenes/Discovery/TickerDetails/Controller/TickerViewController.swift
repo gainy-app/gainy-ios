@@ -81,7 +81,9 @@ final class TickerViewController: BaseViewController {
                 print("SHOWING SKELTON")
                 for cell in tableView.visibleCells {
                     if let rightCell = cell as? TickerDetailsViewCell {
-                        rightCell.showAnimatedGradientSkeleton()
+                        if !(cell is TickerDetailsChartViewCell) {
+                            rightCell.showAnimatedGradientSkeleton()
+                        }
                     }
                 }
                 tableView.isScrollEnabled = false

@@ -239,7 +239,7 @@ struct ScatterChartView: View {
         GeometryReader{ geometry in
             ZStack {
                 if viewModel.chartData.onlyPoints().uniqued().count > 1 {
-                    LineView(data: viewModel.chartData, title: "Full chart", style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                    LineView(data: viewModel.chartData, title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
                 } else {
                     VStack {
                         Spacer()

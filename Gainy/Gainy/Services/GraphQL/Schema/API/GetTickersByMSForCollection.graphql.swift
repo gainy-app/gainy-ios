@@ -11,7 +11,7 @@ public final class GetTickersByMsForCollectionQuery: GraphQLQuery {
     query GetTickersByMSForCollection($collectionId: Int!, $offset: Int!, $orderBy: order_by!) {
       ticker_collections(
         where: {collection_id: {_eq: $collectionId}}
-        order_by: {ticker: {match_score: {match_score: $orderBy}}}
+        order_by: {ticker: {match_score: {match_score: $orderBy}, name: asc}}
         limit: 20
         offset: $offset
       ) {
@@ -52,7 +52,7 @@ public final class GetTickersByMsForCollectionQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("ticker_collections", arguments: ["where": ["collection_id": ["_eq": GraphQLVariable("collectionId")]], "order_by": ["ticker": ["match_score": ["match_score": GraphQLVariable("orderBy")]]], "limit": 20, "offset": GraphQLVariable("offset")], type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
+        GraphQLField("ticker_collections", arguments: ["where": ["collection_id": ["_eq": GraphQLVariable("collectionId")]], "order_by": ["ticker": ["match_score": ["match_score": GraphQLVariable("orderBy")], "name": "asc"]], "limit": 20, "offset": GraphQLVariable("offset")], type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
       ]
     }
 

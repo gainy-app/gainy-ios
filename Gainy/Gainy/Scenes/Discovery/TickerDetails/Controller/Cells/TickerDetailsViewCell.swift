@@ -40,6 +40,7 @@ extension UITableViewCell {
         guard !contentView.subviews.contains(where: {$0.tag == viewTag}) else {
             return false
         }
+        view.isSkeletonable = false
         contentView.insertSubview(view, at: 0)
         return true
     }
