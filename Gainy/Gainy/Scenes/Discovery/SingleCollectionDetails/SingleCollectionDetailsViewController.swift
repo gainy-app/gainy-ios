@@ -95,12 +95,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             viewModel?.initCollectionView(collectionView: collectionView)
         }
         
-        
-        
         viewModel?.loadCollectionDetails({
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: { [weak self] in
-                self?.centerInitialCollectionInTheCollectionView()
-            })
+            self.centerInitialCollectionInTheCollectionView()
         })
     }
     

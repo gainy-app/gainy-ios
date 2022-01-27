@@ -545,7 +545,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 snapshot.deleteItems([collectionItemToAdd])
                 self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
                 
-                self.dataSource?.apply(snapshot, animatingDifferences: true)
+                self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                    
+                })
             }
         }
     }
@@ -599,9 +601,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.deleteItems([yourCollectionItemToRemove])
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
             
-            dataSource?.apply(snapshot, animatingDifferences: true)
-            
-            onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
+            dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                self.onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
+            })
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
                 if let model = AnyHashable as? YourCollectionViewCellModel {
@@ -650,8 +652,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snapshot.appendItems([recColl], toSection: .recommendedCollections)
                     viewModel?.addedRecs.removeValue(forKey: yourCollectionItemToRemove.id)
                 }
-                dataSource?.apply(snapshot, animatingDifferences: true)
-                onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
+                dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                    self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
+                })
             }
             
         }
@@ -687,7 +690,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.moveItem(sourceItem, beforeItem: destItem)
         }
         
-        dataSource?.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+        })
         dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
     }
     

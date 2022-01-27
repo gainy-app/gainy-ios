@@ -130,23 +130,25 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 snapshot.appendSections([.collectionWithCards])
                 snapshot.appendItems(collectionDetailsModels, toSection: .collectionWithCards)
                 
-                dataSource?.apply(snapshot, animatingDifferences: false)
+                dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                    completed?()
+                })
             }
-            completed?()
         } else {
             loadingSubject.send(true)
             CollectionsManager.shared.reloadNewCollectionsDetails([collectionId]) {[weak self] collections in
                 let selectedCollections = collections
                 DispatchQueue.main.async {
-                    self?.convertToModels(selectedCollections)
-                    self?.loadingSubject.send(false)
-                    completed?()
+                    self?.convertToModels(selectedCollections) {
+                        self?.loadingSubject.send(false)
+                        completed?()
+                    }
                 }
             }
         }
     }
     
-    fileprivate func convertToModels(_ collection: [RemoteCollectionDetails]) {
+    fileprivate func convertToModels(_ collection: [RemoteCollectionDetails], _ completed: (() -> Void)? = nil) {
         let yourCollections = collection
             .map { CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections($0) }
         
@@ -162,7 +164,9 @@ final class SingleCollectionDetailsViewModel: NSObject {
             snapshot.appendSections([.collectionWithCards])
             snapshot.appendItems(collectionDetailsModels, toSection: .collectionWithCards)
             
-            dataSource?.apply(snapshot, animatingDifferences: false)
+            dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                completed?()
+            })
         }
         
         

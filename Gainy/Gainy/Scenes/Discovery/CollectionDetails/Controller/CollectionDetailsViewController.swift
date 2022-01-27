@@ -342,7 +342,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                             let ids =  self.collectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
                             snapshot.reloadItems(ids)
                         }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false)
+                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                            
+                        })
                     }
                 }
             }.store(in: &self.cancellables)
@@ -350,7 +352,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         addLoaders()
     }
     
-    private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
+    private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             let collections = models.filter { item in
                 item.id >= 0
@@ -365,14 +367,22 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                             snapshot.appendItems(collections,
                                                  toSection: .collectionWithCards)
                         }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false)
+                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                            completed?()
+                        })
+                    } else {
+                        completed?()
                     }
+                } else {
+                    completed?()
                 }
+            } else {
+                completed?()
             }
         }
     }
     
-    private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel]) {
+    private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             let watchlistCollections = models.filter { item in
                 item.id < 0
@@ -388,21 +398,32 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                             snapshot.appendItems(watchlistCollections,
                                                  toSection: .collectionWithCards)
                         }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false)
+                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                            completed?()
+                        })
+                    } else {
+                        completed?()
                     }
+                } else {
+                    completed?()
+                }
+            } else {
+                completed?()
+            }
+        }
+    }
+    
+    private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
+        runOnMain {
+            self.appendNewCollectionsFromModels(models) {
+                self.appendWatchlistCollectionsFromModels(models) {
+                    completed?()
                 }
             }
         }
     }
     
-    private func addNewCollections(_ models: [CollectionDetailViewCellModel]) {
-        runOnMain {
-            self.appendNewCollectionsFromModels(models)
-            self.appendWatchlistCollectionsFromModels(models)
-        }
-    }
-    
-    private func deleteCollections(_ models: [CollectionDetailViewCellModel]) {
+    private func deleteCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             self.viewModel?.collectionDetails.removeAll(where: { item in
                 models.contains(item)
@@ -410,14 +431,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             if var snapshot = self.dataSource?.snapshot() {
                 if snapshot.indexOfSection(.collectionWithCards) != nil {
                     snapshot.deleteItems(models)
-                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                    self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                        completed?()
+                    })
                 }
             }
         }
     }
     
-    private func updateCollections(_ models: [CollectionDetailViewCellModel]) {
+    private func updateCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
+            let mainDS = DispatchGroup()
             for model in models {
                 if let modelIndex = self.viewModel?.collectionDetails.firstIndex(where: {$0.id == model.id}) {
                     self.viewModel?.collectionDetails[modelIndex] = model
@@ -428,8 +452,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
                         snapshot.insertItems([model], afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
                     }
-                    self.dataSource?.apply(snapshot, animatingDifferences: false)
+                    mainDS.enter()
+                    self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                        mainDS.leave()
+                    })
                 }
+            }
+            
+            mainDS.notify(queue: DispatchQueue.main) {
+                completed?()
             }
         }
     }
@@ -610,10 +641,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             DispatchQueue.main.async {
                 
                 let newModels = CollectionsManager.shared.convertToModel(collections)
-                self?.addNewCollections(newModels)
-                
-                completion()
-                self?.hideLoader()
+                self?.addNewCollections(newModels) {
+                    completion()
+                    self?.hideLoader()
+                }
             }
         }
     }
@@ -678,7 +709,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             snapshot.appendItems(viewModel?.collectionDetails ?? [],
                                  toSection: .collectionWithCards)
             
-            dataSource?.apply(snapshot, animatingDifferences: false)
+            dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                
+            })
         }
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
@@ -695,16 +728,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             snapshot.appendItems(CollectionDetailsDTOMapper.loaderModels(),
                                  toSection: .collectionWithCards)
             
-            dataSource?.apply(snapshot, animatingDifferences: false)
+            dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                runOnMain {
+                    self.centerInitialCollectionInTheCollectionView()
+                }
+            })
         }
         searchTextField?.isEnabled = false
         discoverCollectionsBtn?.isEnabled = false
-        
-        delay(0.2) {
-            runOnMain {
-                self.centerInitialCollectionInTheCollectionView()
-            }
-        }
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)
@@ -818,7 +849,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }) else {return}
         
         snapshot.moveItem(sourceItem, beforeItem: destItem)
-        dataSource?.apply(snapshot)
+        dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+            
+        })
     }
     
     //MARK: - Delete Items
@@ -837,7 +870,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return false
         }) {
             snapshot.deleteItems([sourceItem])
-            dataSource?.apply(snapshot)
+            dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+                
+            })
         }
     }
 }
