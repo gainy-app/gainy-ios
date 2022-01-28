@@ -64,9 +64,6 @@ extension CollectionsManager {
                     for tickMatch in matchesList {
                         TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
                     }
-                    if matchesList.count == 0 {
-                        print(id)
-                    }
                     
                     for collection in collections {
                         guard let ticker = collection.ticker else {

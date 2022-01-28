@@ -421,8 +421,8 @@ final class UserProfileManager {
         guard let profileID = self.profileID else {
             return
         }
-        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ result in
-            print(result)
+        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ _ in
+            //print(result)
         }
     }
 }

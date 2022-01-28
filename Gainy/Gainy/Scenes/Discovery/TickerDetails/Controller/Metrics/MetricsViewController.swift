@@ -53,7 +53,7 @@ class MetricsViewController: BaseViewController {
     
     private var bottomView: MetricsBottomView? = nil
     private var isSearching: Bool = false
-    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 14.0 * 2.0 - 10.0 * 2.0) / 3.0
+    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 16.0 * 2.0 - 10.0 * 2.0) / 3.0
     private let itemHeight: CGFloat = 96.0
     
     override func viewDidLoad() {
@@ -215,7 +215,7 @@ class MetricsViewController: BaseViewController {
     private func setUpBottomView() {
         
         let bottomView = UINib(nibName:"MetricsBottomView",bundle:.main).instantiate(withOwner: nil, options: nil).first as! MetricsBottomView
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        //bottomView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(bottomView)
         
          
@@ -247,14 +247,16 @@ class MetricsViewController: BaseViewController {
         }
         
         for metric in MarketDataField.allCases {
-            
+            if metric == .address {
+                print("stop")
+            }
             let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
             guard let marketData = marketData else {
                 continue
             }
             
-            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue {
-                self.tradingSection.append(marketData)
+            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue &&
+               metric.rawValue <= MarketDataField.impliedVolatility.rawValue {                self.tradingSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.revenueGrowthYoy.rawValue &&
                       metric.rawValue <= MarketDataField.epsGrowthFwd.rawValue {
                 self.growthSection.append(marketData)
@@ -276,6 +278,7 @@ class MetricsViewController: BaseViewController {
             } else if metric.rawValue >= MarketDataField.revenueTtm.rawValue &&
                       metric.rawValue <= MarketDataField.netDebt.rawValue {
                 self.financialsSection.append(marketData)
+                
             }
             
             if tickerMetrics.count == 0 {
