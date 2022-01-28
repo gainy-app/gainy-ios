@@ -47,7 +47,7 @@ final class FeatureDescriptionViewController: BaseViewController {
                 if let self = self {
                     WebPresenter.openLink(vc: self, url: url)
                 }
-                return true
+                return false
             }
         }
     }
