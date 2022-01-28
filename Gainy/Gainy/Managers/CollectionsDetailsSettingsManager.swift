@@ -58,20 +58,26 @@ struct CollectionSettings: Codable {
         if tickerMetrics.count == 0 {
             sortingList = defaultSortingList
         } else {
-            sortingList.append(.matchScore)
-            for metric in MarketDataField.allCases {
-                for item in tickerMetrics {
+            for item in tickerMetrics {
+                for metric in MarketDataField.allCases {
                     if metric.fieldName == item.fieldName {
                         sortingList.append(metric)
                     }
                 }
             }
+            
+            if let index = sortingList.firstIndex(where: {$0 == sorting}) {
+                sortingList.remove(at: index)
+                sortingList.insert(sorting, at: 0)
+            }
+            
+            if sortingList.count > 0 {
+                sortingList.insert(.matchScore, at: sortingList.count - 1)
+            } else {
+                sortingList.append(.matchScore)
+            }
         }
         
-        if let index = sortingList.firstIndex(where: {$0 == sorting}) {
-            sortingList.remove(at: index)
-            sortingList.insert(sorting, at: 0)
-        }
         return sortingList
     }
 }

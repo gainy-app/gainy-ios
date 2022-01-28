@@ -618,43 +618,95 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         layoutIfNeeded()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.isSkeletonable = false
+    }
+    
     // MARK: Private
     
     // MARK: Functions
     
     @objc
     private func firstMarketMarkerTapped(_: UIButton) {
-        let matchScoreExmplanationVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
-        let description = NSLocalizedString("This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
-        matchScoreExmplanationVc.configureWith(title: title)
-        matchScoreExmplanationVc.configureWith(description: description)
-        FloatingPanelManager.shared.configureWithHeight(height: 135.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: matchScoreExmplanationVc)
-        FloatingPanelManager.shared.showFloatingPanel()
+        self.showExplanationForFieldAtIndex(index: 0)
     }
     
     @objc
     private func secondMarketMarkerTapped(_: UIButton) {
-        let revenuGrowthVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Quarterly Revenue Growth, Year over Year", comment: "revenu growth explanation title")
-        let description = NSLocalizedString("Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter.\nUsually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on investopedia.", comment: "revenu growth explanation description")
-        revenuGrowthVc.configureWith(title: title)
-        revenuGrowthVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp")
-        FloatingPanelManager.shared.configureWithHeight(height: 185.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: revenuGrowthVc)
-        FloatingPanelManager.shared.showFloatingPanel()
+        self.showExplanationForFieldAtIndex(index: 1)
     }
     
     @objc
     private func thirdMarketMarkerTapped(_: UIButton) {
-        let evsVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Enterprise Value-to-Sales", comment: "Enterprise Value-to-Sales explanation title")
-        let description = NSLocalizedString("In simple terms, it shows how much the company is valued compared to its sales (revenue) results.\nUsually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on investopedia.", comment: "Enterprise Value-to-Sales explanation description")
-        evsVc.configureWith(title: title)
-        evsVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/e/enterprisevaluesales.asp")
-        FloatingPanelManager.shared.configureWithHeight(height: 175.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: evsVc)
+        self.showExplanationForFieldAtIndex(index: 2)
+    }
+    
+    private func showExplanationForFieldAtIndex(index: Int) {
+        
+        let collectionID = self.tag
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
+        let marketDataToShow = settings.marketDataToShow.prefix(3)
+        guard marketDataToShow.count == 3 else {
+            return
+        }
+ 
+        let marketData = marketDataToShow[index]
+        
+        var title = NSLocalizedString("Title", comment: "title")
+        var description = NSLocalizedString("Description", comment: "description")
+        var height: CGFloat = CGFloat(135.0)
+        var linkString: String? = nil
+        var link: String? = nil
+        
+        if marketData == .revenueGrowthYoy {
+            title = NSLocalizedString("Quarterly Revenue Growth, Year over Year", comment: "revenu growth explanation title")
+            description = NSLocalizedString("Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter.\nUsually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on investopedia.", comment: "revenu growth explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp"
+            height = 185.0
+            
+        } else if marketData == .enterpriseValueToSales {
+            title = NSLocalizedString("Enterprise Value-to-Sales", comment: "Enterprise Value-to-Sales explanation title")
+            description = NSLocalizedString("In simple terms, it shows how much the company is valued compared to its sales (revenue) results.\nUsually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on investopedia.", comment: "Enterprise Value-to-Sales explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/e/enterprisevaluesales.asp"
+            height = 175.0
+        } else if marketData == .marketCapitalization {
+            title = NSLocalizedString("Market Capitalization", comment: "Market Capitalization explanation title")
+            description = NSLocalizedString("Market capitalization, or \"market cap\" is the aggregate market value of a company represented in dollar amount. Read more on investopedia.", comment: "Market Capitalization explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/investing/market-capitalization-defined/"
+            height = 135.0
+        } else if marketData == .priceChange1m {
+            title = NSLocalizedString("30 days price change", comment: "30 days price change explanation title")
+            description = NSLocalizedString("This simple metric shows how a price changed in percentage over the past 30 days to give a perspective on how an asset moved. ", comment: "30 days price change explanation description")
+            height = 135.0
+        } else if marketData == .matchScore {
+            title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
+            description = NSLocalizedString("This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
+            height = 135.0
+        } else if marketData == .profitMargin {
+            title = NSLocalizedString("Net Profit Margin", comment:"Net Profit Margin title")
+            description = NSLocalizedString("The net profit margin, or simply net margin, measures how much net income or profit is generated as a percentage of revenue. Read more on investopedia.", comment: "Net Profit Margin explanation description")
+            linkString = "Read more on investopedia"
+            link = "https://www.investopedia.com/terms/n/net_margin.asp"
+            height = 135.0
+        } else {
+            return
+        }
+        
+        self.showExplanationWith(title: title, description: description, height: height, linkText: linkString, link: link)
+    }
+    
+    private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: title)
+        explanationVc.configureWith(description: description, linkString: linkText, link: link)
+        FloatingPanelManager.shared.configureWithHeight(height: height)
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
     }
 }

@@ -106,11 +106,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if needLoadSymbol {
                     loadingItems += 1
                     self?.loadingSymbolArray.append(model.tickerSymbol)
-                    if collectionView.visibleCells.count == 0 {
-                        cell?.showAnimatedGradientSkeleton()
-                    } else {
-                        self?.isLoadingTickers = true
-                    }
+                    self?.isLoadingTickers = true
+                    
                     dprint("Fetching dt started \(model.tickerSymbol)")
                     dispatchGroup.enter()
                     TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {

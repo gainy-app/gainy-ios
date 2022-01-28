@@ -795,8 +795,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     }
         
     /// Order to place on sorting
-    static let rawOrder: [MarketDataField] = [matchScore, revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, matchScore]
     
     /// Default metrics for ticker details
-    static let metricsOrder: [MarketDataField] = [matchScore, revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, matchScore]
 }

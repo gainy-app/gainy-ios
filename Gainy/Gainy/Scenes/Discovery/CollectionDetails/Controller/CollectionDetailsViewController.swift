@@ -252,6 +252,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
                 }
                 cell.onNewCardsLoaded = { [weak self] newCards in
+                    if newCards.count == 0 {
+                        return
+                    }
+                    
                     if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
                         oldModel.addCards(newCards)
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
