@@ -459,7 +459,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     
                     if let modelIndex = snapshot.itemIdentifiers(inSection: .collectionWithCards).firstIndex(where: {$0.id == model.id}) {
                         snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
-                        snapshot.insertItems([model], afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+                        if snapshot.itemIdentifiers(inSection: .collectionWithCards).count > 0 {
+                            snapshot.insertItems([model],
+                                                 afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+                        } else {
+                            snapshot.appendItems([model], toSection: .collectionWithCards)
+                        }
                     }
                     mainDS.enter()
                     self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
