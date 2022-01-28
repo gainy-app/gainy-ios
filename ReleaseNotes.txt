@@ -1,4 +1,4 @@
-iOS v1.1 #140 available
+iOS v1.1 #141 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -7,7 +7,6 @@ Bugfixes
 
 :hammer_and_wrench: Improvements
 • UI improvements
-• Critical bugs and crashes are fixed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
