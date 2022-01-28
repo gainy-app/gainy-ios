@@ -3,7 +3,7 @@ iOS v1.1 #141 available
 Bugfixes
 
 :new: New:
-• -
+• All metrics exmplanation
 
 :hammer_and_wrench: Improvements
 • UI improvements
