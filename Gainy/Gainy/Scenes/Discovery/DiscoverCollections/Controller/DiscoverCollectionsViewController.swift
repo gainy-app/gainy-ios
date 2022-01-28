@@ -139,6 +139,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         
+        discoverCollectionsCollectionView.register(YourCollectionTipCell.self)
         discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
         discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
         
@@ -293,6 +294,36 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
         
         searchController?.coordinator = coordinator
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
+        } receiveValue: { notification in
+            guard let dataSource = self.dataSource else {return}
+            var snap = dataSource.snapshot()
+                
+            if snap.sectionIdentifiers.count > 0 {
+                if let watchlistCol = self.viewModel?.watchlistCollections, watchlistCol.count > 0 {
+                    snap.deleteItems(watchlistCol)
+                }
+                self.initViewModelsFromData()
+                
+                if let watchlistCol = self.viewModel?.watchlistCollections, watchlistCol.count > 0 {
+                    snap.appendItems(watchlistCol, toSection: .watchlist)
+                }
+                snap.reloadSections([.watchlist])
+                
+                self.sections = [
+                    CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+                    YourCollectionsSectionLayout(),
+                    RecommendedCollectionsSectionLayout(),
+                ]
+                let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
+                    self?.sections[sectionIndex].layoutSection(within: env)
+                }
+                self.customLayout = layout
+
+                dataSource.apply(snap, animatingDifferences: false)
+            }
+        }.store(in: &cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -528,7 +559,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
             self.viewModel?.yourCollections.append(yourCollectionItem)
-            UserProfileManager.shared.recommendedCollections[indexRow].isInYourCollections = true
+            
+            if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
+                item.id == yourCollectionItem.id
+            } {
+                UserProfileManager.shared.recommendedCollections[index].isInYourCollections = true
+            }
             
             UserProfileManager.shared.yourCollections.append(
                 Collection(id: yourCollectionItem.id,
@@ -544,7 +580,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
                 snapshot.deleteItems([collectionItemToAdd])
                 self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
-                
+                self.viewModel?.recommendedCollections.removeAll(where: { item in
+                    item.id == yourCollectionItem.id
+                })
                 self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     
                 })
@@ -561,6 +599,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self.hideLoader()
                     self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
                 }
+                return
             }
         }
         
@@ -591,12 +630,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 isInYourCollections: false
             )
             
-            if let indexOfRecommendedItemToDelete = viewModel?
-                .recommendedCollections
-                .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
-                viewModel?.recommendedCollections[indexOfRecommendedItemToDelete] = updatedRecommendedItem
-                UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
+            if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
+                item.id == recommendedItem.id
+            } {
+                UserProfileManager.shared.recommendedCollections[index].isInYourCollections = false
             }
+            viewModel?.recommendedCollections.append(updatedRecommendedItem)
             
             snapshot.deleteItems([yourCollectionItemToRemove])
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
@@ -726,9 +765,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             .map { CollectionViewModelMapper.map($0) }
         
         
-        if let watchlist = CollectionsManager.shared.watchlistCollection,  viewModel?.watchlistCollections.count == 0 {
+        if let watchlist = CollectionsManager.shared.watchlistCollection {
             let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
+            viewModel?.watchlistCollections.removeAll()
             viewModel?.watchlistCollections.insert(watchDTO, at: 0)
+        } else {
+            viewModel?.watchlistCollections.removeAll()
         }
         
         var recColls: [RecommendedCollectionViewCellModel] = []

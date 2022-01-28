@@ -1,5 +1,7 @@
 import UIKit
 import SkeletonView
+import Combine
+
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case cards
@@ -219,6 +221,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Properties
     
     var viewModel: CollectionCardViewCellModel?
+    var cancellables = Set<AnyCancellable>()
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
@@ -298,12 +301,21 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionHorizontalView.updateChargeLbl(settings.sortingText())
         self.cards = cards
         sortSections()
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
+        } receiveValue: { notification in
+            if Constants.CollectionDetails.watchlistCollectionID == collectionId {
+                self.refreshData {
+                    
+                }
+            }
+        }.store(in: &cancellables)
     }
     private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
         
-        if (self.collectionID == -1) {
+        if (self.collectionID == Constants.CollectionDetails.watchlistCollectionID) {
             return
         }
         if (self.isLoadingMoreTickers) {

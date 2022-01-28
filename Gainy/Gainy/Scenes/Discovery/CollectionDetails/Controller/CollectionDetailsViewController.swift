@@ -351,6 +351,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }.store(in: &self.cancellables)
         
         addLoaders()
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
+        } receiveValue: { notification in
+            let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+            if isEmpty {
+                // TODO: Proably show discovery collections
+            }
+        }.store(in: &cancellables)
     }
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {

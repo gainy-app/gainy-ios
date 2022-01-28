@@ -316,6 +316,7 @@ final class UserProfileManager {
             
             self.watchlist.append(symbol)
             CollectionsManager.shared.loadWatchlistCollection {
+                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }
@@ -340,6 +341,7 @@ final class UserProfileManager {
                 element == symbol
             }
             CollectionsManager.shared.loadWatchlistCollection {
+                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }
