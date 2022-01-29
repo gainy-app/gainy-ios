@@ -6,7 +6,9 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• -
+• Your Collection restored
+• Charts changed
+• Stock loading improved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
