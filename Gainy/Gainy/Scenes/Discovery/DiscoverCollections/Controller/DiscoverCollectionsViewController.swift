@@ -21,12 +21,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     var viewModel: DiscoverCollectionsViewModelProtocol?
     weak var coordinator: MainCoordinator?
     
+    
     var onGoToCollectionDetails: ((Int) -> Void)?
     var onRemoveCollectionFromYourCollections: (() -> Void)?
     var onSwapItems: ((Int, Int) -> Void)?
     var onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?
     var showNextButton: Bool = false
     
+    private var refreshControl = LottieRefreshControl()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -135,6 +137,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
+        
+        discoverCollectionsCollectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
@@ -330,6 +335,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         super.viewWillAppear(animated)
         
+        refreshAction()
+    }
+    
+    @objc func refreshAction() {
         showNetworkLoader()
         getRemoteData(loadProfile: true ) {
             DispatchQueue.main.async { [weak self] in
