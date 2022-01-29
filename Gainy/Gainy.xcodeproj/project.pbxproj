@@ -457,6 +457,9 @@
 		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
 		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
+		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
+		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
+		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
@@ -949,6 +952,9 @@
 		906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		907B227B275029C900FB4B1E /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetFavouriteCollections.graphql; sourceTree = "<group>"; };
+		908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetFavouriteCollections.graphql.swift; sourceTree = "<group>"; };
+		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		90A8017A275AB7E9003D548D /* GetNextTickersForCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetNextTickersForCollection.graphql; sourceTree = "<group>"; };
 		90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNextTickersForCollection.graphql.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
@@ -1068,6 +1074,7 @@
 				85C873D02796ACE10060BAF3 /* GetTickersForCollection.graphql.swift */,
 				3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */,
 				33CBAF7727A28581008F6F88 /* UpdatePlaidPortfolio.graphql.swift */,
+				908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1338,6 +1345,7 @@
 				33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */,
 				33A1F5722702F5F6000DAF33 /* CachedMatchScore.swift */,
 				33A1F57427032390000DAF33 /* UserProfileManager.swift */,
+				908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */,
 				33376FAE26F8AFCD00618CD7 /* CoreData */,
 			);
 			path = Models;
@@ -2134,6 +2142,7 @@
 				859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */,
 				85EDC1422728019F00866AD2 /* InsertTickerToWatchlist.graphql */,
 				85EDC1432728019F00866AD2 /* DeleteTickerFromWatchlist.graphql */,
+				908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2510,6 +2519,7 @@
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
 				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */,
+				908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */,
 				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
 				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
@@ -2730,6 +2740,7 @@
 				33F1947D27143BE200C438AA /* String+Hash.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
 				9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */,
+				908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */,
 				3A672317268F16B700DB04D1 /* CollectionCardViewCellModel.swift in Sources */,
 				90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */,
 				33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */,
@@ -2804,6 +2815,7 @@
 				3A5ADAFA2690B68A008659E8 /* UIScrollView+Extensions.swift in Sources */,
 				85695B042746C18200759569 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */,
 				33CD8DB92744E4150032C1F2 /* GetPlaidTransactions.graphql.swift in Sources */,
+				908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */,
 				3336860926E5F4B600D448AA /* CompareStockFieldsView.swift in Sources */,
 				3A498F5D266C2E2B008437F1 /* CollectionDetailsViewModel.swift in Sources */,
 				33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */,

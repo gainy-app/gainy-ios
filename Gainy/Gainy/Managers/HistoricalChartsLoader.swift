@@ -58,7 +58,20 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol)) {result in
             switch result {
             case .success(let graphQLResult):
-                if let fetchedData = graphQLResult.data?.chart.filter({$0.close != nil}) {
+                if var fetchedData = graphQLResult.data?.chart.filter({$0.close != nil}) {
+                    if range == .d1 && fetchedData.count == 2 {
+                        if let firstData = fetchedData.first {
+                            fetchedData.insert(DiscoverChartsQuery.Data.Chart(symbol: firstData.symbol,
+                                                                              datetime: firstData.datetime,
+                                                                              period: firstData.period,
+                                                                              open: firstData.open,
+                                                                              high: firstData.high,
+                                                                              low: firstData.low,
+                                                                              close: firstData.close,
+                                                                              adjustedClose: firstData.open,
+                                                                              volume: firstData.volume), at: 0)
+                        }
+                    }
                     completion(ChartData.init(points: fetchedData, period: range), fetchedData)
                 } else {
                     completion(ChartData.init(points: [0.0]), [])
