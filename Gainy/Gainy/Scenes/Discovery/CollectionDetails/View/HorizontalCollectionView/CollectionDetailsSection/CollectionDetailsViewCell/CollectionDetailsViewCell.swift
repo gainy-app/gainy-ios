@@ -225,6 +225,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
+    var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -416,13 +417,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             self.cards = cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
-            
+            self.onRefreshedCardsLoaded?(self.cards)
             self.snapshot.deleteAllItems()
             self.snapshot.appendSections([.cards])
-            self.snapshot.appendItems(cards, toSection: .cards)
+            self.snapshot.appendItems(self.cards, toSection: .cards)
             
-            self.dataSource?.apply(self.snapshot, animatingDifferences: false,completion: {
+            self.dataSource?.apply(self.snapshot, animatingDifferences: false, completion: {
                 self.isLoadingTickers = false
+                self.internalCollectionView.reloadData()
             })
         }
     }

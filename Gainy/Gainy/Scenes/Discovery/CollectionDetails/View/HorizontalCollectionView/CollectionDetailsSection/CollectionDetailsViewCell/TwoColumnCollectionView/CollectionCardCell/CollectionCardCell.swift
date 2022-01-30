@@ -577,27 +577,15 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         
         let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
         let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
-        
-        
-        if markerMetricHeaders.first == Constants.CollectionDetails.matchScore {
-            for (ind ,val) in markerMetricHeaders.enumerated() {
-                headers.reversed()[ind].text = val
-                values.reversed()[ind].text = markerMetric[ind]
-                headers.reversed()[ind].sizeToFit()
-                values.reversed()[ind].sizeToFit()
-            }
-        } else {
-            for (ind ,val) in markerMetricHeaders.enumerated() {
-                headers[ind].text = val
-                values[ind].text = markerMetric[ind]
-                headers[ind].sizeToFit()
-                values[ind].sizeToFit()
-            }
+        for (ind ,val) in markerMetricHeaders.enumerated() {
+            headers[ind].text = val
+            values[ind].text = markerMetric[ind]
+            headers[ind].sizeToFit()
+            values[ind].sizeToFit()
         }
         
         highlightLabel.text = highlight
         highlightLabel.sizeToFit()
-        
         
         matchLabel.text = matchScore
         let matchVal = Int(matchScore) ?? 0
@@ -620,6 +608,20 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
+        companyNameLabel.text = ""
+        tickerSymbolLabel.text = ""
+        tickerPercentChangeLabel.text = ""
+        tickerTotalPriceLabel.text = ""
+        
+        let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
+        let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
+        for (ind, _) in headers.enumerated() {
+            headers[ind].text = ""
+            values[ind].text = ""
+        }
+        highlightLabel.text = ""
+        matchLabel.text = ""
         
         self.isSkeletonable = false
     }

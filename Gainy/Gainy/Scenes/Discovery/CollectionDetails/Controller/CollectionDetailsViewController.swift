@@ -30,6 +30,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     private var needTop20Reload = false
+    private var currentCollectionViewCell: CollectionDetailsViewCell?
     
     //Analytics
     var collectionID: Int {
@@ -240,8 +241,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     guard let self = self else {return}
                     guard self.presentedViewController == nil else {return}
                     
+                    self.currentCollectionViewCell = cell
                     self.sortingVS.collectionId = modelItem.id
-                    self.sortingVS.collectionCell = cell
                     self.currentCollectionToChange = modelItem.id
                     GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     
@@ -260,7 +261,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         oldModel.addCards(newCards)
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
+                }
+                
+                cell.onRefreshedCardsLoaded = { [weak self] newCards in
+                    if newCards.count == 0 {
+                        return
+                    }
                     
+                    if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
+                        oldModel.cards = newCards
+                        self?.viewModel?.collectionDetails[indexPath.row] = oldModel
+                    }
                 }
             }
             return cell
@@ -464,8 +475,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     if let modelIndex = snapshot.itemIdentifiers(inSection: .collectionWithCards).firstIndex(where: {$0.id == model.id}) {
                         snapshot.deleteItems([snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex]])
                         if snapshot.itemIdentifiers(inSection: .collectionWithCards).count > 0 {
-                            snapshot.insertItems([model],
-                                                 afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex > 1 ? modelIndex - 1 : 0])
+                            if modelIndex > 0 {
+                                snapshot.insertItems([model],
+                                                     afterItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[modelIndex - 1])
+                            } else {
+                                snapshot.insertItems([model],
+                                                     beforeItem: snapshot.itemIdentifiers(inSection: .collectionWithCards)[0])
+                            }
                         } else {
                             snapshot.appendItems([model], toSection: .collectionWithCards)
                         }
@@ -910,11 +926,10 @@ extension CollectionDetailsViewController: UITextFieldDelegate {
 
 extension CollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
-        
-        
-        
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": currentCollectionToChange, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        self.fpc.dismiss(animated: true, completion: nil)
+        self.fpc.dismiss(animated: true) {
+            self.currentCollectionViewCell?.refreshData()
+        }
     }
 }
 

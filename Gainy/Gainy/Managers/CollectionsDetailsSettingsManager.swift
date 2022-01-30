@@ -65,17 +65,17 @@ struct CollectionSettings: Codable {
                     }
                 }
             }
-            
-            if let index = sortingList.firstIndex(where: {$0 == sorting}) {
-                sortingList.remove(at: index)
-                sortingList.insert(sorting, at: 0)
-            }
-            
-            if sortingList.count > 0 {
-                sortingList.insert(.matchScore, at: sortingList.count - 1)
-            } else {
-                sortingList.append(.matchScore)
-            }
+        }
+        
+        if let index = sortingList.firstIndex(where: {$0 == sorting}) {
+            sortingList.remove(at: index)
+            sortingList.insert(sorting, at: 0)
+        }
+        
+        if sortingList.count > 0 {
+            sortingList.insert(.matchScore, at: sortingList.count - 1)
+        } else {
+            sortingList.append(.matchScore)
         }
         
         return sortingList
@@ -105,7 +105,6 @@ final class CollectionsDetailsSettingsManager {
         if tickerMetrics.count == 0 {
             sortingList = defaultSortingList
         } else {
-            sortingList.append(.matchScore)
             for metric in MarketDataField.allCases {
                 for item in tickerMetrics {
                     if metric.fieldName == item.fieldName {
@@ -114,6 +113,8 @@ final class CollectionsDetailsSettingsManager {
                 }
             }
         }
+        
+        sortingList.insert(.matchScore, at: 0)
         
         return sortingList.map { item in
             return item.title

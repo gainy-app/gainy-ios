@@ -11,10 +11,10 @@ import UIKit
 enum MarketDataField: Int, Codable, CaseIterable {
     
     /// Order to place on sorting
-    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, matchScore]
+    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
     
     /// Default metrics for ticker details
-    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, matchScore]
+    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
     
     case
     
