@@ -43,7 +43,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var fullNameTitle: UILabel!
     @IBOutlet weak var versionLbl: UILabel! {
         didSet {
-            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber)"
+            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")"
         }
     }
     
