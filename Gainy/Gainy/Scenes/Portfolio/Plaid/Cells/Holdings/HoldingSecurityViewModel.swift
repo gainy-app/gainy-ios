@@ -11,7 +11,7 @@ import UIKit
 struct HoldingSecurityViewModel {
     
     enum SecType: String {
-        case option = "Option", share = "Share"
+        case option = "Option", share = "Shares", cash = "Cash"
     }
     
     let name: String
@@ -42,10 +42,10 @@ struct HoldingSecurityViewModel {
             if rawType == "equity" {
                 type = .share
             } else {
-                type = .share
+                type = .cash
             }
         }
-        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : "Shares")
+        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)
         
         self.name = correctName + " x\(holding.quantity ?? 0.0)"
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0

@@ -161,7 +161,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Prices
         
         if let curPrice = TickerLiveStorage.shared.getSymbolData(model.tickerSymbol) {
-            (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text, avgGrowLbl.textColor) = (curPrice.currentPrice.price,
+                (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text, avgGrowLbl.textColor) = (curPrice.currentPrice.price,
                                                                                              UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!,
                                                                                              (curPrice.priceChangeToday * 100.0).cleanTwoDecimalP.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
                                                                                              curPrice.priceChangeToday >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))

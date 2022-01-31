@@ -153,7 +153,7 @@ final class CollectionsDetailsSettingsManager {
     
     func tickerMetricsOrderForMarketData(filed: MarketDataField, ascending: Bool) -> ticker_metrics_order_by {
 
-        let order = ascending ? order_by.asc : order_by.desc
+        let order = ascending ? order_by.ascNullsFirst : order_by.descNullsLast
         var orderBy = ticker_metrics_order_by.init()
         switch filed {
             

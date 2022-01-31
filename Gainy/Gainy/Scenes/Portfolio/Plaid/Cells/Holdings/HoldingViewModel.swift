@@ -13,7 +13,7 @@ struct HoldingViewModel {
     let balance: Float
     let tickerSymbol: String
     
-
+    
     let industries: [RemoteTickerDetailsFull.TickerIndustry]
     let categories: [RemoteTickerDetailsFull.TickerCategory]
     
@@ -39,12 +39,16 @@ struct HoldingViewModel {
     let rawTicker: RemoteTickerDetailsFull?
     
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
-        return (range.longName,
-                UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
-                absoluteGains[range]?.priceRaw ?? "",
-                (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
-                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
-                relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
+        if tickerSymbol.hasPrefix("CUR") {
+            return ("", UIImage(), "", "", .clear, .clear)
+        } else {
+            return (range.longName,
+                    UIImage(named: relativeGains[range] ?? 0.0 >= 0.0 ?  "small_up" : "small_down")!,
+                    absoluteGains[range]?.priceRaw ?? "",
+                    (relativeGains[range]?.cleanTwoDecimalP ?? "").replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
+                    relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"),
+                    relativeGains[range] ?? 0.0 >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
+        }
     }
     
     //Height calc
@@ -67,7 +71,7 @@ struct HoldingViewModel {
         }
     }
     
-    var holdingsCount: NSMutableAttributedString {        
+    var holdingsCount: NSMutableAttributedString {
         var secCount: [HoldingSecurityViewModel.SecType : Float] = [:]
         for sec in securities {
             if let haveCount = secCount[sec.type] {
@@ -80,8 +84,8 @@ struct HoldingViewModel {
         var attrArr: [NSMutableAttributedString] = []
         for key in secCount.keys {
             attrArr.append(key.rawValue.attr(font: .compactRoundedSemibold(14.0),
-                                    color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\(secCount[key]!)".attr(font: .compactRoundedSemibold(14.0),
-                                                                                                               color: .init(hexString: "09141F", alpha: 1.0)!))
+                                             color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " x\(secCount[key]!)".attr(font: .compactRoundedSemibold(14.0),
+                                                                                                                          color: .init(hexString: "09141F", alpha: 1.0)!))
         }
         let totalList = NSMutableAttributedString.init(string: "")
         for share in attrArr {
