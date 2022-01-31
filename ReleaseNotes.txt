@@ -1,15 +1,12 @@
-iOS v1.1 #143 available
+iOS v1.1 #144 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Metrics explanation on "view all" metrics screen + Long tap to select logic.
+• -
 
 :hammer_and_wrench: Improvements
-• Fix "Metrics explanation in cards doesn’t not always work."
-• Fix "Sorting works differently in different collections."
-• Fix "Sorting doesn’t show a metrics that you sort with in a card view."
-• Fix "Sorting stops working in compare stocks."
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
