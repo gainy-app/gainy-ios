@@ -8,8 +8,12 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query LinkPlaidAccount($profileId: Int!, $publicToken: String!) {
-      link_plaid_account(profile_id: $profileId, public_token: $publicToken) {
+    query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!) {
+      link_plaid_account(
+        profile_id: $profileId
+        public_token: $publicToken
+        env: $env
+      ) {
         __typename
         result
         plaid_access_token_id
@@ -21,14 +25,16 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
 
   public var profileId: Int
   public var publicToken: String
+  public var env: String
 
-  public init(profileId: Int, publicToken: String) {
+  public init(profileId: Int, publicToken: String, env: String) {
     self.profileId = profileId
     self.publicToken = publicToken
+    self.env = env
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "publicToken": publicToken]
+    return ["profileId": profileId, "publicToken": publicToken, "env": env]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -36,7 +42,7 @@ public final class LinkPlaidAccountQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("link_plaid_account", arguments: ["profile_id": GraphQLVariable("profileId"), "public_token": GraphQLVariable("publicToken")], type: .object(LinkPlaidAccount.selections)),
+        GraphQLField("link_plaid_account", arguments: ["profile_id": GraphQLVariable("profileId"), "public_token": GraphQLVariable("publicToken"), "env": GraphQLVariable("env")], type: .object(LinkPlaidAccount.selections)),
       ]
     }
 

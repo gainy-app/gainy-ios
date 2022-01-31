@@ -39,7 +39,7 @@ final class NoPlaidViewController: BaseViewController {
         guard let profileID = UserProfileManager.shared.profileID else {return}
         
         showNetworkLoader()
-        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI)) {[weak self] result in
+        Network.shared.apollo.fetch(query: CreatePlaidLinkQuery.init(profileId: profileID, redirectUri: Constants.Plaid.redirectURI, env: "production")) {[weak self] result in
             self?.hideLoader()
             switch result {
             case .success(let graphQLResult):

@@ -23,6 +23,9 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
         super.viewDidLoad()
         self.modalPresentationStyle = .fullScreen
         self.setupPlayer()
+        
+        avPlayer.play()
+        paused = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,8 +33,6 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        avPlayer.play()
-        paused = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

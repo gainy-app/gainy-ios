@@ -49,6 +49,7 @@ final class TickerViewController: BaseViewController {
         tableView.contentOffset = .zero
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
             return
         }
         delay(0.3) {

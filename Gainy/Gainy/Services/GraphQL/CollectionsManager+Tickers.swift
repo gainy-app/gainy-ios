@@ -43,7 +43,7 @@ extension CollectionsManager {
         let extraOrder = ticker_collections_order_by.init(ticker: tickers_order_by.init(name: order_by.asc))
         
         let query = GetTickersForCollectionQuery.init(collectionId: id, offset: offset, orderBy: [orderBy, extraOrder])
-        let msQuery = GetTickersByMsForCollectionQuery.init(collectionId: id, offset: offset, orderBy: settings.ascending ? order_by.ascNullsLast : order_by.descNullsLast)
+        let msQuery = GetTickersByMsForCollectionQuery.init(collectionId: id, offset: offset, orderBy: settings.ascending ? order_by.ascNullsFirst : order_by.descNullsLast)
         
         return await
         withCheckedContinuation { continuation in

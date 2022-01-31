@@ -44,6 +44,7 @@ final class AuthorizationViewController: BaseViewController {
         
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
             return
         }
         showNetworkLoader()
@@ -58,6 +59,7 @@ final class AuthorizationViewController: BaseViewController {
     @IBAction func enterWithGoogleButtonTap(_ sender: Any) {
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
             return
         }
         showNetworkLoader()

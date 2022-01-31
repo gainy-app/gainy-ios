@@ -804,6 +804,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         guard haveNetwork else {
             completion()
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
             return
         }
         

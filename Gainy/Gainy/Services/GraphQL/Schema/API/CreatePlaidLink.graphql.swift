@@ -8,8 +8,12 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query CreatePlaidLink($profileId: Int!, $redirectUri: String!) {
-      create_plaid_link_token(profile_id: $profileId, redirect_uri: $redirectUri) {
+    query CreatePlaidLink($profileId: Int!, $redirectUri: String!, $env: String!) {
+      create_plaid_link_token(
+        profile_id: $profileId
+        redirect_uri: $redirectUri
+        env: $env
+      ) {
         __typename
         link_token
       }
@@ -20,14 +24,16 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
 
   public var profileId: Int
   public var redirectUri: String
+  public var env: String
 
-  public init(profileId: Int, redirectUri: String) {
+  public init(profileId: Int, redirectUri: String, env: String) {
     self.profileId = profileId
     self.redirectUri = redirectUri
+    self.env = env
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "redirectUri": redirectUri]
+    return ["profileId": profileId, "redirectUri": redirectUri, "env": env]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -35,7 +41,7 @@ public final class CreatePlaidLinkQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("create_plaid_link_token", arguments: ["profile_id": GraphQLVariable("profileId"), "redirect_uri": GraphQLVariable("redirectUri")], type: .object(CreatePlaidLinkToken.selections)),
+        GraphQLField("create_plaid_link_token", arguments: ["profile_id": GraphQLVariable("profileId"), "redirect_uri": GraphQLVariable("redirectUri"), "env": GraphQLVariable("env")], type: .object(CreatePlaidLinkToken.selections)),
       ]
     }
 

@@ -107,6 +107,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         guard haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
             completion()
             return
         }
