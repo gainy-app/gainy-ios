@@ -1,4 +1,4 @@
-iOS v1.1 #145 available
+iOS v1.1 #146 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,8 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Sorting bugs fixed
-• Minor fixes
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
