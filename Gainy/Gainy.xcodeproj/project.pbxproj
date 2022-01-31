@@ -94,6 +94,7 @@
 		33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */; };
 		33722499270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */; };
 		3372ED352710490300D8D8E1 /* DDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372ED342710490300D8D8E1 /* DDLog.swift */; };
+		33765BF227A8215700D1F0A9 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33765BF127A8215700D1F0A9 /* Bundle+Version.swift */; };
 		3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */; };
 		3376FE16276B44060098CDF7 /* SFCompactRounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
@@ -587,6 +588,7 @@
 		33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		33722498270D9FDF00C8C18F /* SingleCollectionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewModel.swift; sourceTree = "<group>"; };
 		3372ED342710490300D8D8E1 /* DDLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLog.swift; sourceTree = "<group>"; };
+		33765BF127A8215700D1F0A9 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsInProgressViewController.swift; sourceTree = "<group>"; };
 		3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.ttf"; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
@@ -1925,6 +1927,7 @@
 				33F1947C27143BE200C438AA /* String+Hash.swift */,
 				33387FDD274E7DF30070A733 /* String+Attributed.swift */,
 				331D4522278EC14200F990DF /* UserDefaults+Ext.swift */,
+				33765BF127A8215700D1F0A9 /* Bundle+Version.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2685,6 +2688,7 @@
 				33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */,
 				85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */,
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
+				33765BF227A8215700D1F0A9 /* Bundle+Version.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
 				338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */,

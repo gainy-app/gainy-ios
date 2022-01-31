@@ -57,7 +57,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1026"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1046"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -287,8 +287,15 @@
                                             <constraint firstAttribute="height" constant="64" id="p8V-aO-gZb"/>
                                         </constraints>
                                     </stackView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
+                                        <rect key="frame" x="207" y="637" width="0.0" height="0.0"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="179.5" y="968" width="55" height="31"/>
+                                        <rect key="frame" x="180.5" y="968" width="53" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -337,7 +344,7 @@
                                     <constraint firstAttribute="trailing" secondItem="k6u-eu-s6j" secondAttribute="trailing" id="cty-0I-s0C"/>
                                     <constraint firstAttribute="trailing" secondItem="l8n-Hb-aF4" secondAttribute="trailing" constant="39" id="gVc-4x-qQa"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" constant="39" id="gyW-Xv-98t"/>
-                                    <constraint firstAttribute="bottom" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="27" id="ht0-17-WLe"/>
+                                    <constraint firstAttribute="bottom" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="47" id="ht0-17-WLe"/>
                                     <constraint firstItem="Tkh-yK-8sU" firstAttribute="top" secondItem="Okm-BU-joa" secondAttribute="bottom" constant="20" id="i81-UQ-98m"/>
                                     <constraint firstAttribute="trailing" secondItem="dd7-zi-omX" secondAttribute="trailing" constant="39" id="kZN-tE-e44"/>
                                     <constraint firstAttribute="bottom" secondItem="YdM-LP-G3m" secondAttribute="bottom" id="kib-z9-Ofl"/>
@@ -383,6 +390,7 @@
                         <outlet property="relLaunchOnboardingQuestionnaireButton" destination="l8n-Hb-aF4" id="SMu-df-GER"/>
                         <outlet property="requestFeatureButton" destination="BIg-BP-mtL" id="ggm-dz-NTA"/>
                         <outlet property="sendFeedbackButton" destination="Jma-YX-kmP" id="M4P-DN-wd4"/>
+                        <outlet property="versionLbl" destination="wKX-vB-M9Z" id="9x0-ph-DMY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q1E-Gl-f05" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -922,7 +930,7 @@
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="BIg-BP-mtL">
-            <size key="intrinsicContentSize" width="118" height="31"/>
+            <size key="intrinsicContentSize" width="116" height="32"/>
         </designable>
         <designable name="BUb-bn-GzG">
             <size key="intrinsicContentSize" width="16" height="22"/>
@@ -934,13 +942,13 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="Jma-YX-kmP">
-            <size key="intrinsicContentSize" width="113" height="31"/>
+            <size key="intrinsicContentSize" width="110" height="32"/>
         </designable>
         <designable name="JoU-5e-oXP">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="NW4-FE-EBm">
-            <size key="intrinsicContentSize" width="55" height="31"/>
+            <size key="intrinsicContentSize" width="53" height="32"/>
         </designable>
         <designable name="l1e-sc-Ubw">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
