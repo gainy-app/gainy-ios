@@ -41,7 +41,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
     @IBOutlet private weak var profilePictureImageView: UIImageView!
     @IBOutlet private weak var fullNameTitle: UILabel!
-    @IBOutlet weak var versionLbl: UILabel! {
+    @IBOutlet private weak var versionLbl: UILabel! {
         didSet {
             versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")"
         }
