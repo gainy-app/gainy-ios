@@ -15,7 +15,7 @@ extension BaseViewController {
         var linkConfiguration = LinkTokenConfiguration(token: linkToken) { success in
             dprint("public-token: \(success.publicToken) metadata: \(success.metadata)")
             guard let profileID = UserProfileManager.shared.profileID else { return }
-            Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken)) {[weak self] result in
+            Network.shared.apollo.fetch(query: LinkPlaidAccountQuery(profileId: profileID, publicToken: success.publicToken, env: "production")) {[weak self] result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let linkData = graphQLResult.data?.linkPlaidAccount else {
