@@ -239,8 +239,9 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         self.present(self.fpc, animated: true, completion: nil)
     }
     
-    func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails) {
+    func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails, cell: CollectionDetailsViewCell) {
         
+        self.currentCollectionViewCell = cell
         self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: collectionID, delegate: self)
     }
 }
@@ -311,8 +312,11 @@ extension SingleCollectionDetailsViewController: SearchStocksViewControllerDeleg
 
 extension SingleCollectionDetailsViewController: MetricsViewControllerDelegate {
     
-    func didDismissMetricsViewController() {
-        
-        self.collectionView.reloadData()
+    func didDismissMetricsViewController(needRefresh: Bool) {
+        if needRefresh {
+            self.currentCollectionViewCell?.refreshData()
+        } else {
+            self.collectionView.reloadData()
+        }
     }
 }

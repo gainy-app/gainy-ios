@@ -310,7 +310,7 @@ extension TickerViewController: BrokersViewControllerDelegate {
 
 extension TickerViewController: MetricsViewControllerDelegate {
     
-    func didDismissMetricsViewController() {
+    func didDismissMetricsViewController(needRefresh: Bool) {
         
         viewModel?.dataSource.ticker.updateMarketData()
         self.tableView.reloadData()

@@ -250,6 +250,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 cell.onSettingsPressed = {[weak self]  ticker in
                     guard let self = self else {return}
+                    self.currentCollectionViewCell = cell
                     self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: modelItem.id, delegate: self)
                 }
                 cell.onNewCardsLoaded = { [weak self] newCards in
@@ -960,8 +961,11 @@ extension CollectionDetailsViewController: FloatingPanelControllerDelegate {
 
 extension CollectionDetailsViewController: MetricsViewControllerDelegate {
     
-    func didDismissMetricsViewController() {
-        
-        self.collectionView.reloadData()
+    func didDismissMetricsViewController(needRefresh: Bool) {
+        if needRefresh {
+            self.currentCollectionViewCell?.refreshData()
+        } else {
+            self.collectionView.reloadData()
+        }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
-    func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails)
+    func settingsPressed(source: SingleCollectionDetailsViewModel, collectionID: Int, ticker: RemoteTickerDetails, cell: CollectionDetailsViewCell)
     func addStockPressed(source: SingleCollectionDetailsViewModel)
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails)
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
@@ -69,7 +69,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 }
                 cell.onSettingsPressed = {[weak self]  ticker in
                     guard let self = self else {return}
-                    self.delegate?.settingsPressed(source: self, collectionID: self.collectionId, ticker: ticker)
+                    self.delegate?.settingsPressed(source: self, collectionID: self.collectionId, ticker: ticker, cell: cell)
                 }
             }
             return cell

@@ -9,6 +9,12 @@ import UIKit
 import AppTrackingTransparency
 import AdSupport
 import AVFoundation
+import Apollo
+
+protocol IDFARequestViewControllerDelegate: AnyObject {
+    
+    func didChooseResponse()
+}
 
 final class IDFARequestViewController: UIViewController, Storyboarded {
     
@@ -17,6 +23,8 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
     private var avPlayer: AVPlayer!
     private var avPlayerLayer: AVPlayerLayer!
     private var paused: Bool = false
+    
+    var delegate: IDFARequestViewControllerDelegate?
     
     override func viewDidLoad() {
         
@@ -76,7 +84,12 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
     }
     
     private func requestTrackingAuthorization() {
-        guard #available(iOS 14, *) else { return }
+        guard #available(iOS 14, *) else {
+            self.dismiss(animated: true) {
+                self.delegate?.didChooseResponse()
+            }
+            return
+        }
         ATTrackingManager.requestTrackingAuthorization { status in
             DispatchQueue.main.async {
                 switch status {
@@ -90,7 +103,9 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
                 @unknown default:
                     break
                 }
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true) {
+                    self.delegate?.didChooseResponse()
+                }
             }
         }
     }

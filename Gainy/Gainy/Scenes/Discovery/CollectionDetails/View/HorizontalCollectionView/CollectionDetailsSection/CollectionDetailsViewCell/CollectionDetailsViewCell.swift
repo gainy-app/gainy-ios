@@ -348,6 +348,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             if var snap = dataSource?.snapshot() {
                 snap.appendItems(cardsDTO, toSection: .cards)
                 dataSource?.apply(snap, animatingDifferences: false, completion: {
+                    self.internalCollectionView.reloadData()
                     completed?()
                 })
             } else {
@@ -370,6 +371,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             snapshot.appendItems(self.cards, toSection: .cards)
             dataSource?.apply(snapshot, animatingDifferences: false, completion: { [weak self] in
                 
+                self?.internalCollectionView.reloadData()
                 completion?()
             })
         }

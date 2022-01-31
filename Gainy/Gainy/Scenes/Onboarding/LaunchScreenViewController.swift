@@ -24,6 +24,11 @@ class LaunchScreenViewController: BaseViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        self.setupPlayer()
+        delay(1.0) {
+            self.showIDFAIfNeeded()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,23 +45,16 @@ class LaunchScreenViewController: BaseViewController {
     private func showIDFAIfNeeded() {
         guard !isIDFAShown else {return}
         let idfaVC = IDFARequestViewController.instantiate(.popups)
+        idfaVC.delegate = self
         idfaVC.modalPresentationStyle = .fullScreen
-        present(idfaVC, animated: true, completion: nil)
-        isIDFAShown = true
+        self.present(idfaVC, animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
-        self.setupPlayer()
-        
+
         avPlayer.play()
         paused = false
-        
-        delay(1.0) {
-            self.showIDFAIfNeeded()
-        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -107,4 +105,14 @@ class LaunchScreenViewController: BaseViewController {
         GainyAnalytics.logEvent("get_started_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
         self.coordinator?.pushIntroductionViewController()
     }    
+}
+
+extension LaunchScreenViewController: IDFARequestViewControllerDelegate {
+    
+    func didChooseResponse() {
+        
+        isIDFAShown = true
+        avPlayer.play()
+        paused = false
+    }
 }

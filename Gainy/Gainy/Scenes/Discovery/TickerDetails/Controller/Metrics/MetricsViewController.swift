@@ -14,7 +14,7 @@ enum MetricsViewControllerSection: Int, CaseIterable, Hashable {
 
 protocol MetricsViewControllerDelegate: AnyObject {
     
-    func didDismissMetricsViewController()
+    func didDismissMetricsViewController(needRefresh: Bool)
 }
 
 class MetricsViewController: BaseViewController {
@@ -363,18 +363,20 @@ class MetricsViewController: BaseViewController {
         }
         
         self.collectionView.reloadData()
-        self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
+        self.updateBottomViewPosition()
     }
     
     func updateBottomViewPosition() {
         
         self.bottomView?.setSaveButtonHidden(hidden: self.selectedSection.count < self.maxSelectedElements)
         let height = self.selectedSection.count < self.maxSelectedElements ? 30 : 101
+        self.view.setNeedsLayout()
         if self.footerViewHeightConstraint != nil {
             self.footerViewHeightConstraint?.constant = CGFloat(height)
         } else {
             self.footerViewHeightConstraint = self.bottomView?.autoSetDimension(.height, toSize: CGFloat(height))
         }
+        self.view.layoutIfNeeded()
         self.collectionViewBottomConstraint?.constant = self.selectedSection.count < self.maxSelectedElements ? 45 : 0
         let bottomInset = self.selectedSection.count < self.maxSelectedElements ? 0 : 101
         self.collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: CGFloat(bottomInset), right: 0.0)
@@ -407,24 +409,38 @@ extension MetricsViewController: MetricsBottomViewDelegate {
         let f4 = self.selectedSection[3].marketDataField.fieldName
         let f5 = self.selectedSection[4].marketDataField.fieldName
         
+        var allFields = [self.selectedSection[0].marketDataField,
+                         self.selectedSection[1].marketDataField,
+                         self.selectedSection[2].marketDataField,
+                         self.selectedSection[3].marketDataField,
+                         self.selectedSection[4].marketDataField]
+        
         var f6 = ""
         if self.maxSelectedElements > 5 {
             f6 = self.selectedSection[5].marketDataField.fieldName
+            allFields.append(self.selectedSection[5].marketDataField)
         }
     
         showNetworkLoader()
         if let collectionID = self.collectionID {
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
+            let containsCurrent = allFields.contains { item in
+                settings.sortingValue() == item
+            }
             UserProfileManager.shared.updateMetricsForCollection(collectionID, f1, f2, f3, f4, f5) { success in
+                if !containsCurrent {
+                    CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionID, sorting: .matchScore)
+                }
                 self.hideLoader()
                 self.dismiss(animated: true) {
-                    self.delegate?.didDismissMetricsViewController()
+                    self.delegate?.didDismissMetricsViewController(needRefresh: !containsCurrent)
                 }
             }
         } else {
             UserProfileManager.shared.updateMetricsForTicker(f1, f2, f3, f4, f5, f6) { success in
                 self.hideLoader()
                 self.dismiss(animated: true) {
-                    self.delegate?.didDismissMetricsViewController()
+                    self.delegate?.didDismissMetricsViewController(needRefresh: false)
                 }
             }
         }
