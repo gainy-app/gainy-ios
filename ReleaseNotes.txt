@@ -6,7 +6,8 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• -
+• Plaid link updated
+• Minor QA changes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
