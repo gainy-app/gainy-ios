@@ -219,6 +219,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             return cell
         case .wsr:
             let cell: TickerDetailsWSRViewCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.isSkeletonable = false
             cell.tickerInfo = ticker
             wsrHosting.view.clipsToBounds = false
             if #available(iOS 15, *) {

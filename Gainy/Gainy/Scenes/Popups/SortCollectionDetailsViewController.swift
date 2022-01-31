@@ -49,8 +49,6 @@ final class SortCollectionDetailsViewController: BaseViewController {
     }
     
     var collectionId: Int = 0
-    //TO-DO: Remove it from here
-    weak var collectionCell: CollectionDetailsViewCell?
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,10 +68,10 @@ final class SortCollectionDetailsViewController: BaseViewController {
             left.order < right.order
         }
         var sortingList: [MarketDataField] = []
+        
         if tickerMetrics.count == 0 {
             sortingList = defaultSortingList
         } else {
-            sortingList.append(.matchScore)
             for item in tickerMetrics {
                 for metric in MarketDataField.allCases {
                     if metric.fieldName == item.fieldName {
@@ -82,6 +80,8 @@ final class SortCollectionDetailsViewController: BaseViewController {
                 }
             }
         }
+        
+        sortingList.insert(.matchScore, at: 0)
         
         var result: [MarketDataField: Int] = [:]
         for (index, item) in sortingList.enumerated() {
@@ -129,9 +129,6 @@ final class SortCollectionDetailsViewController: BaseViewController {
         guard !sender.isSelected else {
             ascBtn.isSelected.toggle()
             CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
-                self?.collectionCell?.refreshData()
-            }
             delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sender.tag) ?? .matchScore).title)
             return
         }
@@ -153,9 +150,6 @@ final class SortCollectionDetailsViewController: BaseViewController {
         if let key = btnsMapping().key(forValue: sender.tag) {
             CollectionsDetailsSettingsManager.shared.changeSortingForId(collectionId, sorting: key)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
-            self?.collectionCell?.refreshData()
-        }
         
         delegate?.selectionChanged(vc: self, sorting: CollectionsDetailsSettingsManager.shared.sortingsForCollectionID(collectionID: collectionId)[sender.tag])
     }
@@ -163,9 +157,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
     @IBAction func ascTapped(_ sender: UIButton) {
         ascBtn.isSelected.toggle()
         CollectionsDetailsSettingsManager.shared.changeAscendingForId(collectionId, ascending: ascBtn.isSelected)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {[weak self] in
-            self?.collectionCell?.refreshData()
-        }
+
         delegate?.selectionChanged(vc: self, sorting: (btnsMapping().key(forValue: sortBtns.first(where: {$0.isSelected})?.tag ?? 0) ?? .enterpriseValueToSales).title)
     }
 }

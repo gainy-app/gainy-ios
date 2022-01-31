@@ -118,6 +118,12 @@ class TickerInfo {
             DispatchQueue.main.async {
                 mainDataLoaded()
             }
+        } else {
+            delay(3.0) {
+                DispatchQueue.main.async {
+                    mainDataLoaded()
+                }
+            }
         }
         
         if isChartDataLoaded {

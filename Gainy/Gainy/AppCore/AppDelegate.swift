@@ -39,11 +39,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func sendLaunch() {
         AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
                     if (error != nil){
-                        print(error ?? "")
+                        //dprint(error ?? "")
                         return
                     } else {
                         dprint("AppsFlyerLib started")
-                        print(dictionary ?? "")
                         return
                     }
                 })

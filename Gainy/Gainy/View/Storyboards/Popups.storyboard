@@ -271,7 +271,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STOCK TO COMPARE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8MS-ye-TTR">
-                                <rect key="frame" x="144" y="72" width="126" height="24"/>
+                                <rect key="frame" x="136" y="72" width="142" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="6U7-fj-cNt"/>
                                 </constraints>
@@ -308,7 +308,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTDOY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wTU-hG-Iev">
-                                                    <rect key="frame" x="24" y="24" width="35.5" height="20"/>
+                                                    <rect key="frame" x="24" y="24" width="41" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="acH-NF-2le"/>
                                                         <constraint firstAttribute="height" constant="20" id="hPJ-YL-riV"/>
@@ -318,7 +318,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nintendo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cBV-Xd-T4m">
-                                                    <rect key="frame" x="323" y="0.0" width="67" height="20"/>
+                                                    <rect key="frame" x="324.5" y="0.0" width="65.5" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="fHf-jm-bAg"/>
                                                     </constraints>
@@ -327,7 +327,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NTDOY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oPc-wO-BkZ">
-                                                    <rect key="frame" x="354.5" y="24" width="35.5" height="20"/>
+                                                    <rect key="frame" x="349" y="24" width="41" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="P1O-KS-CoZ"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="twN-0w-4iQ"/>
@@ -680,7 +680,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="ifda_prompt_space" translatesAutoresizingMaskIntoConstraints="NO" id="m9R-WX-Zq3">
-                                <rect key="frame" x="0.0" y="134" width="414" height="466.5"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="434.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKe-Fi-Pis" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -706,18 +706,18 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QX2-yb-bdK">
-                                <rect key="frame" x="32" y="673" width="350" height="40"/>
+                                <rect key="frame" x="32" y="641" width="350" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EGp-2G-qdz"/>
                                 </constraints>
                                 <string key="text">Please allow us to know where you came 
 from so we can give you more personalized content.</string>
-                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Improve your experience" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKS-kk-3pt">
-                                <rect key="frame" x="32" y="580.5" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="548.5" width="350" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <color key="textColor" red="0.14509803921568626" green="0.91764705882352937" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

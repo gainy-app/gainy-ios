@@ -40,7 +40,9 @@ extension CollectionsManager {
         
         let tickersOrder = tickers_order_by.init(tickerMetrics: tickerMetricsOrder)
         let orderBy = ticker_collections_order_by.init(ticker: tickersOrder)
-        let query = GetTickersForCollectionQuery.init(collectionId: id, offset: offset, orderBy: [orderBy])
+        let extraOrder = ticker_collections_order_by.init(ticker: tickers_order_by.init(name: order_by.asc))
+        
+        let query = GetTickersForCollectionQuery.init(collectionId: id, offset: offset, orderBy: [orderBy, extraOrder])
         let msQuery = GetTickersByMsForCollectionQuery.init(collectionId: id, offset: offset, orderBy: settings.ascending ? order_by.ascNullsLast : order_by.descNullsLast)
         
         return await
@@ -61,9 +63,6 @@ extension CollectionsManager {
                     let matchesList = collections.compactMap({$0.ticker?.fragments.remoteTickerDetails.matchScore}).compactMap({$0})
                     for tickMatch in matchesList {
                         TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
-                    }
-                    if matchesList.count == 0 {
-                        print(id)
                     }
                     
                     for collection in collections {

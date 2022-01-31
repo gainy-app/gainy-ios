@@ -108,7 +108,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("quantity", type: .nonNull(.scalar(Double.self))),
-          GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
+          GraphQLField("iso_currency_code", type: .scalar(String.self)),
           GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("security_id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("security", type: .nonNull(.object(Security.selections))),
@@ -127,7 +127,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, quantity: Double, isoCurrencyCode: String, profileId: Int, securityId: Int, security: Security, account: Account, amount: Double, date: String, fees: Double, name: String, price: Double) {
+      public init(id: Int, quantity: Double, isoCurrencyCode: String? = nil, profileId: Int, securityId: Int, security: Security, account: Account, amount: Double, date: String, fees: Double, name: String, price: Double) {
         self.init(unsafeResultMap: ["__typename": "PortfolioTransaction", "id": id, "quantity": quantity, "iso_currency_code": isoCurrencyCode, "profile_id": profileId, "security_id": securityId, "security": security.resultMap, "account": account.resultMap, "amount": amount, "date": date, "fees": fees, "name": name, "price": price])
       }
 
@@ -158,9 +158,9 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
         }
       }
 
-      public var isoCurrencyCode: String {
+      public var isoCurrencyCode: String? {
         get {
-          return resultMap["iso_currency_code"]! as! String
+          return resultMap["iso_currency_code"] as? String
         }
         set {
           resultMap.updateValue(newValue, forKey: "iso_currency_code")
@@ -257,7 +257,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
-            GraphQLField("iso_currency_code", type: .nonNull(.scalar(String.self))),
+            GraphQLField("iso_currency_code", type: .scalar(String.self)),
             GraphQLField("id", type: .nonNull(.scalar(Int.self))),
             GraphQLField("name", type: .nonNull(.scalar(String.self))),
             GraphQLField("ticker_symbol", type: .scalar(String.self)),
@@ -273,7 +273,7 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(createdAt: timestamptz, isoCurrencyCode: String, id: Int, name: String, tickerSymbol: String? = nil, tickers: Ticker? = nil, type: String? = nil, updatedAt: timestamptz) {
+        public init(createdAt: timestamptz, isoCurrencyCode: String? = nil, id: Int, name: String, tickerSymbol: String? = nil, tickers: Ticker? = nil, type: String? = nil, updatedAt: timestamptz) {
           self.init(unsafeResultMap: ["__typename": "app_portfolio_securities", "created_at": createdAt, "iso_currency_code": isoCurrencyCode, "id": id, "name": name, "ticker_symbol": tickerSymbol, "tickers": tickers.flatMap { (value: Ticker) -> ResultMap in value.resultMap }, "type": type, "updated_at": updatedAt])
         }
 
@@ -295,9 +295,9 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           }
         }
 
-        public var isoCurrencyCode: String {
+        public var isoCurrencyCode: String? {
           get {
-            return resultMap["iso_currency_code"]! as! String
+            return resultMap["iso_currency_code"] as? String
           }
           set {
             resultMap.updateValue(newValue, forKey: "iso_currency_code")

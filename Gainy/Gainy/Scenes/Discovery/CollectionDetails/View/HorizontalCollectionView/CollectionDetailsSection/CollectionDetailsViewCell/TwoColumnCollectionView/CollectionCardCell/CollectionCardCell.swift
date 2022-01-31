@@ -577,27 +577,15 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         
         let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
         let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
-        
-        
-        if markerMetricHeaders.first == Constants.CollectionDetails.matchScore {
-            for (ind ,val) in markerMetricHeaders.enumerated() {
-                headers.reversed()[ind].text = val
-                values.reversed()[ind].text = markerMetric[ind]
-                headers.reversed()[ind].sizeToFit()
-                values.reversed()[ind].sizeToFit()
-            }
-        } else {
-            for (ind ,val) in markerMetricHeaders.enumerated() {
-                headers[ind].text = val
-                values[ind].text = markerMetric[ind]
-                headers[ind].sizeToFit()
-                values[ind].sizeToFit()
-            }
+        for (ind ,val) in markerMetricHeaders.enumerated() {
+            headers[ind].text = val
+            values[ind].text = markerMetric[ind]
+            headers[ind].sizeToFit()
+            values[ind].sizeToFit()
         }
         
         highlightLabel.text = highlight
         highlightLabel.sizeToFit()
-        
         
         matchLabel.text = matchScore
         let matchVal = Int(matchScore) ?? 0
@@ -618,43 +606,63 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         layoutIfNeeded()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        companyNameLabel.text = ""
+        tickerSymbolLabel.text = ""
+        tickerPercentChangeLabel.text = ""
+        tickerTotalPriceLabel.text = ""
+        
+        let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
+        let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
+        for (ind, _) in headers.enumerated() {
+            headers[ind].text = ""
+            values[ind].text = ""
+        }
+        highlightLabel.text = ""
+        matchLabel.text = ""
+        
+        self.isSkeletonable = false
+    }
+    
     // MARK: Private
     
     // MARK: Functions
     
     @objc
     private func firstMarketMarkerTapped(_: UIButton) {
-        let matchScoreExmplanationVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Profile matching score", comment: "match score explanation title")
-        let description = NSLocalizedString("This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio.", comment: "match score explanation description")
-        matchScoreExmplanationVc.configureWith(title: title)
-        matchScoreExmplanationVc.configureWith(description: description)
-        FloatingPanelManager.shared.configureWithHeight(height: 135.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: matchScoreExmplanationVc)
-        FloatingPanelManager.shared.showFloatingPanel()
+        self.showExplanationForFieldAtIndex(index: 0)
     }
     
     @objc
     private func secondMarketMarkerTapped(_: UIButton) {
-        let revenuGrowthVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Quarterly Revenue Growth, Year over Year", comment: "revenu growth explanation title")
-        let description = NSLocalizedString("Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter.\nUsually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on investopedia.", comment: "revenu growth explanation description")
-        revenuGrowthVc.configureWith(title: title)
-        revenuGrowthVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp")
-        FloatingPanelManager.shared.configureWithHeight(height: 185.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: revenuGrowthVc)
-        FloatingPanelManager.shared.showFloatingPanel()
+        self.showExplanationForFieldAtIndex(index: 1)
     }
     
     @objc
     private func thirdMarketMarkerTapped(_: UIButton) {
-        let evsVc = FeatureDescriptionViewController.init()
-        let title = NSLocalizedString("Enterprise Value-to-Sales", comment: "Enterprise Value-to-Sales explanation title")
-        let description = NSLocalizedString("In simple terms, it shows how much the company is valued compared to its sales (revenue) results.\nUsually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on investopedia.", comment: "Enterprise Value-to-Sales explanation description")
-        evsVc.configureWith(title: title)
-        evsVc.configureWith(description: description, linkString: "Read more on investopedia", link: "https://www.investopedia.com/terms/e/enterprisevaluesales.asp")
-        FloatingPanelManager.shared.configureWithHeight(height: 175.0)
-        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: evsVc)
+        self.showExplanationForFieldAtIndex(index: 2)
+    }
+    
+    private func showExplanationForFieldAtIndex(index: Int) {
+        
+        let collectionID = self.tag
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
+        let marketDataToShow = settings.marketDataToShow.prefix(3)
+        guard marketDataToShow.count == 3 else {
+            return
+        }
+ 
+        let marketData = marketDataToShow[index]
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: marketData.explanationTitle)
+        explanationVc.configureWith(description: marketData.explanationDescription,
+                                    linkString: marketData.explanationLinkString,
+                                    link: marketData.explanationLink)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
     }
 }

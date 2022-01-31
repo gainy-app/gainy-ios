@@ -33,6 +33,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
+    private var currentCollectionViewCell: CollectionDetailsViewCell?
     
     //MARK: - DI
     var coordiantor: MainCoordinator?
@@ -95,12 +96,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             viewModel?.initCollectionView(collectionView: collectionView)
         }
         
-        
-        
         viewModel?.loadCollectionDetails({
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: { [weak self] in
-                self?.centerInitialCollectionInTheCollectionView()
-            })
+            self.centerInitialCollectionInTheCollectionView()
         })
     }
     
@@ -224,8 +221,8 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell) {
         guard self.presentedViewController == nil else {return}
+        self.currentCollectionViewCell = cell
         self.sortingVS.collectionId = model.id
-        self.sortingVS.collectionCell = cell
         self.currentCollectionToChange = model.id
         GainyAnalytics.logEvent("sorting_pressed", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         fpc.layout = SortPanelLayout()
@@ -251,7 +248,14 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
         GainyAnalytics.logEvent("sorting_changed", params: ["collectionID": collectionId, "sorting" : sorting, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        self.fpc.dismiss(animated: true, completion: nil)
+        self.fpc.dismiss(animated: true) {
+            let compareStocks = (self.collectionId == Constants.CollectionDetails.compareCollectionID)
+            if compareStocks {
+                self.currentCollectionViewCell?.sortSections()
+            } else {
+                self.currentCollectionViewCell?.refreshData()
+            }
+        }
     }
 }
 

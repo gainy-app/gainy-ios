@@ -65,7 +65,8 @@ struct CardsTwoColumnGridFlowSectionLayout: SectionLayout {
 
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionID)
         let markers = settings.marketDataToShow.prefix(3)
-                
+        cell.tag = collectionID
+        
         if let viewModel = viewModel as? CollectionCardViewCellModel {
             
             var vals: [String] = []

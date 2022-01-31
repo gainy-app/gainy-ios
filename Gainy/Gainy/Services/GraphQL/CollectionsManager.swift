@@ -143,6 +143,9 @@ final class CollectionsManager {
             //Adding preloaded tickers
             for colID in tickersMapRes.keys {
                 print("Got \((tickersMapRes[colID] ?? []).count) tickers for \(colID)")
+                if colID == 42 {
+                    print((tickersMapRes[colID] ?? []).compactMap({$0.tickerSymbol}))
+                }
                 prefetchedCollectionsData[colID] = tickersMapRes[colID] ?? []
             }
             
@@ -178,12 +181,12 @@ final class CollectionsManager {
     func loadMoreTickersLoading(collectionID id: Int, offset: Int, completion: @escaping ([TickerDetails]) -> Void) {
         
         Task {
-            async let tickersMap = getTickersForCollection(collectionID: id, offset: offset)
-            let tickersMapRes = await tickersMap
+            let tickersMapRes = await getTickersForCollection(collectionID: id, offset: offset)
             
             //Adding preloaded tickers
             
             print("Got \((tickersMapRes).count) more tickers for \(id)")
+            print(tickersMapRes.compactMap({$0.tickerSymbol}))
             var curTickers = prefetchedCollectionsData[id]
             curTickers?.append(contentsOf: tickersMapRes)
             prefetchedCollectionsData[id] = curTickers

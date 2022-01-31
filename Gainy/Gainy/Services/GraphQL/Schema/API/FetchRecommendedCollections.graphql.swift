@@ -131,6 +131,10 @@ public final class FetchRecommendedCollectionsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
+        public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, size: Int? = nil) {
+          self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "size": size])
+        }
+
         public var __typename: String {
           get {
             return resultMap["__typename"]! as! String
@@ -181,13 +185,7 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       image_url
       enabled
       description
-      ticker_collections_aggregate {
-        __typename
-        aggregate {
-          __typename
-          count
-        }
-      }
+      size
     }
     """
 
@@ -201,7 +199,7 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("enabled", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
-      GraphQLField("ticker_collections_aggregate", type: .nonNull(.object(TickerCollectionsAggregate.selections))),
+      GraphQLField("size", type: .scalar(Int.self)),
     ]
   }
 
@@ -211,8 +209,8 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, tickerCollectionsAggregate: TickerCollectionsAggregate) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "ticker_collections_aggregate": tickerCollectionsAggregate.resultMap])
+  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, size: Int? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "size": size])
   }
 
   public var __typename: String {
@@ -269,91 +267,12 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
     }
   }
 
-  /// An aggregate relationship
-  public var tickerCollectionsAggregate: TickerCollectionsAggregate {
+  public var size: Int? {
     get {
-      return TickerCollectionsAggregate(unsafeResultMap: resultMap["ticker_collections_aggregate"]! as! ResultMap)
+      return resultMap["size"] as? Int
     }
     set {
-      resultMap.updateValue(newValue.resultMap, forKey: "ticker_collections_aggregate")
-    }
-  }
-
-  public struct TickerCollectionsAggregate: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["ticker_collections_aggregate"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("aggregate", type: .object(Aggregate.selections)),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(aggregate: Aggregate? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate", "aggregate": aggregate.flatMap { (value: Aggregate) -> ResultMap in value.resultMap }])
-    }
-
-    public var __typename: String {
-      get {
-        return resultMap["__typename"]! as! String
-      }
-      set {
-        resultMap.updateValue(newValue, forKey: "__typename")
-      }
-    }
-
-    public var aggregate: Aggregate? {
-      get {
-        return (resultMap["aggregate"] as? ResultMap).flatMap { Aggregate(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "aggregate")
-      }
-    }
-
-    public struct Aggregate: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["ticker_collections_aggregate_fields"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("count", type: .nonNull(.scalar(Int.self))),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(count: Int) {
-        self.init(unsafeResultMap: ["__typename": "ticker_collections_aggregate_fields", "count": count])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var count: Int {
-        get {
-          return resultMap["count"]! as! Int
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "count")
-        }
-      }
+      resultMap.updateValue(newValue, forKey: "size")
     }
   }
 }

@@ -331,7 +331,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9K7-6E-QR2">
-                                <rect key="frame" x="0.0" y="76" width="414" height="670"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="722"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vkg-d4-aZM">
                                     <size key="itemSize" width="128" height="128"/>
@@ -382,8 +382,8 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                             <constraint firstAttribute="trailing" secondItem="k2A-ik-Er1" secondAttribute="trailing" id="Sdu-VB-63G"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="trailing" secondItem="Xzu-k0-XRA" secondAttribute="trailing" constant="24" id="TL4-bH-ORr"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="Xzu-k0-XRA" secondAttribute="bottom" constant="19" id="kwe-FO-jbF"/>
-                            <constraint firstItem="9K7-6E-QR2" firstAttribute="top" secondItem="zFk-4A-9Vb" secondAttribute="top" constant="32" id="m4Q-w3-KnX"/>
-                            <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="9K7-6E-QR2" secondAttribute="bottom" constant="116" id="mGX-Jo-7Qh"/>
+                            <constraint firstItem="9K7-6E-QR2" firstAttribute="top" secondItem="zFk-4A-9Vb" secondAttribute="top" id="m4Q-w3-KnX"/>
+                            <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="9K7-6E-QR2" secondAttribute="bottom" constant="96" id="mGX-Jo-7Qh"/>
                             <constraint firstItem="9K7-6E-QR2" firstAttribute="leading" secondItem="zFk-4A-9Vb" secondAttribute="leading" id="q8a-HJ-94P"/>
                         </constraints>
                     </view>
@@ -675,9 +675,9 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uBu-P2-mYr">
-                                <rect key="frame" x="20.5" y="213" width="373" height="480"/>
+                                <rect key="frame" x="20.5" y="297.5" width="373" height="311.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building your personalized feed" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW7-XV-p9v" userLabel="Building your personalized feed">
                                         <rect key="frame" x="61" y="219" width="251" height="76.5"/>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                         <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -697,6 +697,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                                     <constraint firstAttribute="trailing" secondItem="lW7-XV-p9v" secondAttribute="trailing" constant="61" id="B4a-4h-sqa"/>
                                     <constraint firstItem="lW7-XV-p9v" firstAttribute="top" secondItem="HL3-8F-YWR" secondAttribute="bottom" constant="69" id="HE0-tl-IhK"/>
                                     <constraint firstItem="HL3-8F-YWR" firstAttribute="centerX" secondItem="uBu-P2-mYr" secondAttribute="centerX" id="bGs-b3-dMK"/>
+                                    <constraint firstAttribute="bottom" secondItem="lW7-XV-p9v" secondAttribute="bottom" constant="16" id="iYE-Ig-QLj"/>
                                     <constraint firstItem="HL3-8F-YWR" firstAttribute="top" secondItem="uBu-P2-mYr" secondAttribute="top" id="lfw-3j-BYw"/>
                                     <constraint firstItem="lW7-XV-p9v" firstAttribute="leading" secondItem="uBu-P2-mYr" secondAttribute="leading" constant="61" id="oAK-02-Akh"/>
                                 </constraints>
@@ -711,8 +712,8 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="Xn4-eU-4Dc"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="gG9-QC-bjo" secondAttribute="centerY" id="RKm-og-PeZ"/>
                             <constraint firstItem="uBu-P2-mYr" firstAttribute="centerY" secondItem="Xn4-eU-4Dc" secondAttribute="centerY" id="l7i-2O-XMc"/>
-                            <constraint firstItem="uBu-P2-mYr" firstAttribute="centerX" secondItem="Xn4-eU-4Dc" secondAttribute="centerX" id="yzd-pn-zU8"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>

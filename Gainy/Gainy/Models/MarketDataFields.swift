@@ -6,8 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 enum MarketDataField: Int, Codable, CaseIterable {
+    
+    /// Order to place on sorting
+    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    
+    /// Default metrics for ticker details
+    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    
     case
     
     // MATCH SCORE
@@ -109,7 +117,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .avgVolume90d:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "90 DAYS", value: Float(ticker.tickerMetrics?.avgVolume_90d ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .sharesFloat:
-            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.sharesFloat ?? 0).formatUsingAbbrevation(), marketDataField: self)
+            marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.sharesFloat ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .shortRatio:
             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value: Float(ticker.tickerMetrics?.shortRatio ?? 0).formatUsingAbbrevation(false), marketDataField: self)
         case .beta:
@@ -186,7 +194,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .revenueTtm:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenueTtm ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .revenuePerShareTtm:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenuePerShareTtm ?? 0.0).cleanOneDecimal, marketDataField: self)
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "ANNUAL, TTM", value:  (ticker.tickerMetrics?.revenuePerShareTtm ?? 0.0).percent, marketDataField: self)
         case .roi:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value:  (ticker.tickerMetrics?.roi ?? 0.0).percent, marketDataField: self)
         case .netIncome:
@@ -793,10 +801,429 @@ enum MarketDataField: Int, Codable, CaseIterable {
             }
         }
     }
-        
-    /// Order to place on sorting
-    static let rawOrder: [MarketDataField] = [matchScore, revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+     
+    var explanationTitle: String {
+        switch self {
+        case .matchScore:
+            return "Profile matching score"
+        case .avgVolume10d:
+            return "Trading volume"
+        case .sharesOutstanding:
+            return "Shares Outstanding"
+        case .shortPercentOutstanding:
+            return "Short of Outstanding Stocks"
+        case .avgVolume90d:
+            return "Average Trading volume over last 90 days"
+        case .sharesFloat:
+            return "Shares Float"
+        case .shortRatio:
+            return "Short Ratio"
+        case .beta:
+            return "beta"
+        case .impliedVolatility:
+            return "Implied Volatility Current"
+        case .revenueGrowthYoy:
+            return "Quarterly Revenue Growth, Year over Year over last 12 trailing months"
+        case .revenueGrowthFwd:
+            return "Quarterly Revenue Growth, Year over Year forward"
+        case .ebitdaGrowthYoy:
+            return "Earnings Before Interest, Taxes, Depreciation, and Amortization over the last trailing 12 months"
+        case .epsGrowthYoy:
+            return "The growth of earnings per share over the last trailing 12 months"
+        case .epsGrowthFwd:
+            return "The growth of earnings per share over for the future quarter based on earning estimates"
+        case .address:
+            return "Company HQ location"
+        case .exchangeName:
+            return "Exchange name"
+        case .marketCapitalization:
+            return "Market Capitalization"
+        case .enterpriseValueToSales:
+            return "Enterprise Value-to-Sales over last 12 trailing months"
+        case .priceToEarningsTtm:
+            return "Price-to-Earnings (P/E) Ratio based on 12 trailing months data"
+        case .priceToSalesTtm:
+            return "Price-to-Sales (P/S) Ratio based on 12 trailing months data"
+        case .priceToBookValue:
+            return "Price-To-Book based on 12 trailing months data"
+        case .enterpriseValueToEbitda:
+            return "Enterprise Multiple based on 12 trailing months data"
+        case .priceChange1m:
+            return "30 days price change"
+        case .priceChange3m:
+            return "90 days price change"
+        case .priceChange1y:
+            return "1 year price change"
+        case .dividendYield:
+            return "Dividend yield"
+        case .dividendsPerShare:
+            return "Dividends per Share"
+        case .dividendPayoutRatio:
+            return "Dividend Payout Ratio"
+        case .yearsOfConsecutiveDividendGrowth:
+            return "Years of dividend growth"
+        case .dividendFrequency:
+            return "Dividend Frequency"
+        case .epsActual:
+            return "Primary Earnings Per Share (EPS)"
+        case .epsEstimate:
+            return "Estimate for Primary Earnings Per Share (EPS) based on last earnings results"
+        case .beatenQuarterlyEpsEstimationCountTtm:
+            return "Beaten expectations"
+        case .epsSurprise:
+            return "EPS Surprise"
+        case .revenueEstimateAvg0y:
+            return "Next Earnings Revenue Estimate"
+        case .revenueActual:
+            return "Revenue Actual"
+        case .revenueTtm:
+            return "Revenues"
+        case .revenuePerShareTtm:
+            return "Revenue Per share"
+        case .roi:
+            return "Return on Investment (ROI)"
+        case .netIncome:
+            return "Net income"
+        case .assetCashAndEquivalents:
+            return "Cash And Cash Equivalents (CCE)"
+        case .roa:
+            return "Return on Assets (ROA)"
+        case .totalAssets:
+            return "Total Assets"
+        case .ebitda:
+            return "Earnings Before Interest, Taxes, Depreciation, and Amortization"
+        case .profitMargin:
+            return "Net Profit Margin"
+        case .netDebt:
+            return "Total Debt / Net debt"
+        }
+    }
     
-    /// Default metrics for ticker details
-    static let metricsOrder: [MarketDataField] = [matchScore, revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    var explanationDescription: String {
+        switch self {
+        case .matchScore:
+            return "This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio."
+        case .avgVolume10d:
+            return "Trading volume is a measure of how much of a given financial asset has traded in a period of time. For stocks, volume is measured in the number of shares traded and, for futures and options, it is based on how many contracts have changed hands. Read more on Investopedia."
+        case .sharesOutstanding:
+            return "Shares outstanding refer to a company's stock currently held by all its shareholders. Read more on Investopedia."
+        case .shortPercentOutstanding:
+            return "How much this stock is shorted on the market today. Read more on Investopedia."
+        case .avgVolume90d:
+            return "Trading volume is a measure of how much of a given financial asset has traded in a period of time. For stocks, volume is measured in the number of shares traded and, for futures and options, it is based on how many contracts have changed hands. Read more on Investopedia."
+        case .sharesFloat:
+            return "The term float refers to the regular shares a company has issued to the public that are available for investors to trade. Read more on Investopedia."
+        case .shortRatio:
+            return "The short ratio indicates the number of shares that investors sell short over the average daily volume of the stock on the basis of 1 or 3 months. Read more on Investopedia."
+        case .beta:
+            return "Beta is a measure of a stock's volatility in relation to the overall market. Read more on Investopedia."
+        case .impliedVolatility:
+            return "Then higher Implied volatility then higher changes to a price you should expect. Read more on Investopedia."
+        case .revenueGrowthYoy:
+            return "Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter. Usually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on Investopedia."
+        case .revenueGrowthFwd:
+            return "Quarterly Revenue Growth, Year over Year for the future quarter based on earnings estimates. Read more on Investopedia."
+        case .ebitdaGrowthYoy:
+            return "Is used as an alternative to net income in some circumstances. Read more at Investopedia."
+        case .epsGrowthYoy:
+            return "Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. Read more on Investopedia."
+        case .epsGrowthFwd:
+            return "Earnings per share (EPS) is calculated as a company's profit divided by the outstanding shares of its common stock. Read more on Investopedia."
+        case .address:
+            return "Geographic location where the company headquarters is located"
+        case .exchangeName:
+            return "What the exchange company is traded in"
+        case .marketCapitalization:
+            return "Market capitalization, or \"market cap\" is the aggregate market value of a company represented in dollar amount. Read more on Investopedia."
+        case .enterpriseValueToSales:
+            return "In simple terms, it shows how much the company is valued compared to its sales (revenue) results. Usually, a lower EV/sales multiple will indicate that a company may be more attractive or undervalued in the market. Read more on Investopedia."
+        case .priceToEarningsTtm:
+            return "A metric that show the relative value of a company's shares in an apples-to-apples comparison. Usually the higher PE the most expensive stock. Read more on Investopedia. "
+        case .priceToSalesTtm:
+            return "It is an indicator of the value that financial markets have placed on each dollar of a company’s sales or revenues. It shows the relative value of a company's shares in an apples-to-apples comparison. Usually the higher P/S the most expensive stock. Read more on Investopedia."
+        case .priceToBookValue:
+            return "It's calculated by dividing the company's stock price per share by its book value per share (BVPS). Read more on Investopedia."
+        case .enterpriseValueToEbitda:
+            return "The enterprise multiple takes into account a company's debt and cash levels in addition to its stock price and relates that value to the firm's cash profitability. Read more on Investopedia."
+        case .priceChange1m:
+            return "This simple metric shows how a price changed in percentage over the past 30 days to give a perspective on how an asset moved."
+        case .priceChange3m:
+            return "This simple metric shows how a price changed in percentage over the past 90 days to give a perspective on how an asset moved. "
+        case .priceChange1y:
+            return "This simple metric shows how a price changed in percentage over the last year to give a perspective on how an asset moved. "
+        case .dividendYield:
+            return "The dividend yield—displayed as a percentage—is the amount of money a company pays shareholders for owning a share of its stock divided by its current stock price. Read more on Investopedia."
+        case .dividendsPerShare:
+            return "It is the number of dividends each shareholder of a company receives on a per-share basis. Read more on Investopedia. "
+        case .dividendPayoutRatio:
+            return "The ratio of the total amount of dividends paid out to shareholders relative to the net income of the company. Read more on Investopedia."
+        case .yearsOfConsecutiveDividendGrowth:
+            return "How many years company continues to increase dividend."
+        case .dividendFrequency:
+            return "Dividend frequency is how often a stock or fund pays a dividend. Read more on Investopedia. "
+        case .epsActual:
+            return "Primary Earnings Per Share (EPS) based on last earnings results. It's a measure of a company's earnings per common share, prior to the conversion of any outstanding convertible securities. Read more on Investopedia. "
+        case .epsEstimate:
+            return "Next quarter estimate for Primary Earnings Per Share (EPS) based on last earnings results. Earnings Per Share (EPS) based on last earnings results. It's a measure of a company's earnings per common share, prior to the conversion of any outstanding convertible securities. Read more on Investopedia."
+        case .beatenQuarterlyEpsEstimationCountTtm:
+            return "How many times a company beat quarter earnings estimates during last year. Usually this metric counts during one year, so the company can beat or miss four times."
+        case .epsSurprise:
+            return "An earnings surprise occurs when a company's reported quarterly or annual profits are above or below analysts' expectations."
+        case .revenueEstimateAvg0y:
+            return "How much Revenue a company estimates to deliver during next earnings."
+        case .revenueActual:
+            return "How much Revenue a company delivered during last earnings. "
+        case .revenueTtm:
+            return "How much Revenue a company delivered during last earnings. "
+        case .revenuePerShareTtm:
+            return "Sales results per share is a ratio that computes the total revenue earned per share over a designated period. Read more on Investopedia."
+        case .roi:
+            return "ROI is expressed as a percentage and is calculated by dividing an investment's net profit (or loss) by its initial cost or outlay. Read more on Investopedia."
+        case .netIncome:
+            return "Net income includes all of the costs and expenses that a company incurred, which are subtracted from revenue. Read more on Investopedia. "
+        case .assetCashAndEquivalents:
+            return "Value of a company's assets that are cash or can be converted into cash immediately. Read more on Investopedia."
+        case .roa:
+            return "An indicator of how profitable a company is relative to its total assets. Read more on Investopedia."
+        case .totalAssets:
+            return "Everything that belongs to a company. Read more on Investopedia."
+        case .ebitda:
+            return "A measure of a company's overall financial performance and is used as an alternative to net income in some circumstances. Read more on Investopedia. "
+        case .profitMargin:
+            return "The net profit margin, or simply net margin, measures how much net income or profit is generated as a percentage of revenue. Read more on Investopedia."
+        case .netDebt:
+            return "Net debt shows much debt a company has on its balance sheet compared to its liquid assets. Read more on Investopedia."
+        }
+    }
+    
+    var explanationLinkString: String? {
+        switch self {
+        case .matchScore:
+            return nil
+        case .avgVolume10d:
+            return "Read more on Investopedia"
+        case .sharesOutstanding:
+            return "Read more on Investopedia"
+        case .shortPercentOutstanding:
+            return "Read more on Investopedia"
+        case .avgVolume90d:
+            return "Read more on Investopedia"
+        case .sharesFloat:
+            return "Read more on Investopedia"
+        case .shortRatio:
+            return "Read more on Investopedia"
+        case .beta:
+            return "Read more on Investopedia"
+        case .impliedVolatility:
+            return "Read more on Investopedia"
+        case .revenueGrowthYoy:
+            return "Read more on Investopedia"
+        case .revenueGrowthFwd:
+            return "Read more on Investopedia"
+        case .ebitdaGrowthYoy:
+            return "Read more on Investopedia"
+        case .epsGrowthYoy:
+            return "Read more on Investopedia"
+        case .epsGrowthFwd:
+            return "Read more on Investopedia"
+        case .address:
+            return nil
+        case .exchangeName:
+            return nil
+        case .marketCapitalization:
+            return "Read more on Investopedia"
+        case .enterpriseValueToSales:
+            return "Read more on Investopedia"
+        case .priceToEarningsTtm:
+            return "Read more on Investopedia"
+        case .priceToSalesTtm:
+            return "Read more on Investopedia"
+        case .priceToBookValue:
+            return "Read more on Investopedia"
+        case .enterpriseValueToEbitda:
+            return "Read more on Investopedia"
+        case .priceChange1m:
+            return nil
+        case .priceChange3m:
+            return nil
+        case .priceChange1y:
+            return nil
+        case .dividendYield:
+            return "Read more on Investopedia"
+        case .dividendsPerShare:
+            return "Read more on Investopedia"
+        case .dividendPayoutRatio:
+            return "Read more on Investopedia"
+        case .yearsOfConsecutiveDividendGrowth:
+            return nil
+        case .dividendFrequency:
+            return "Read more on Investopedia"
+        case .epsActual:
+            return "Read more on Investopedia"
+        case .epsEstimate:
+            return "Read more on Investopedia"
+        case .beatenQuarterlyEpsEstimationCountTtm:
+            return nil
+        case .epsSurprise:
+            return nil
+        case .revenueEstimateAvg0y:
+            return nil
+        case .revenueActual:
+            return nil
+        case .revenueTtm:
+            return nil
+        case .revenuePerShareTtm:
+            return "Read more on Investopedia"
+        case .roi:
+            return "Read more on Investopedia"
+        case .netIncome:
+            return "Read more on Investopedia"
+        case .assetCashAndEquivalents:
+            return "Read more on Investopedia"
+        case .roa:
+            return "Read more on Investopedia"
+        case .totalAssets:
+            return "Read more on Investopedia"
+        case .ebitda:
+            return "Read more on Investopedia"
+        case .profitMargin:
+            return "Read more on Investopedia"
+        case .netDebt:
+            return "Read more on Investopedia"
+        }
+    }
+    
+    var explanationLink: String? {
+        switch self {
+        case .matchScore:
+            return nil
+        case .avgVolume10d:
+            return "https://www.investopedia.com/articles/technical/02/010702.asp"
+        case .sharesOutstanding:
+            return "https://www.investopedia.com/terms/o/outstandingshares.asp"
+        case .shortPercentOutstanding:
+            return "https://www.investopedia.com/articles/01/082201.asp"
+        case .avgVolume90d:
+            return "https://www.investopedia.com/articles/technical/02/010702.asp"
+        case .sharesFloat:
+            return "https://www.investopedia.com/ask/answers/what-is-companys-float/"
+        case .shortRatio:
+            return "https://www.investopedia.com/terms/s/shortinterestratio.asp"
+        case .beta:
+            return "https://www.investopedia.com/investing/beta-know-risk/"
+        case .impliedVolatility:
+            return "https://www.investopedia.com/terms/i/iv.asp"
+        case .revenueGrowthYoy:
+            return "https://www.investopedia.com/terms/q/quarterlyrevenuegrowth.asp"
+        case .revenueGrowthFwd:
+            return "https://www.investopedia.com/terms/f/fowardlookingearnings.asp"
+        case .ebitdaGrowthYoy:
+            return "https://www.investopedia.com/terms/e/ebitda.asp"
+        case .epsGrowthYoy:
+            return "https://www.investopedia.com/terms/e/eps.asp"
+        case .epsGrowthFwd:
+            return "https://www.investopedia.com/terms/e/eps.asp"
+        case .address:
+            return nil
+        case .exchangeName:
+            return nil
+        case .marketCapitalization:
+            return "https://www.investopedia.com/investing/market-capitalization-defined/"
+        case .enterpriseValueToSales:
+            return "https://www.investopedia.com/terms/e/enterprisevaluesales.asp"
+        case .priceToEarningsTtm:
+            return "https://www.investopedia.com/terms/p/price-earningsratio.asp"
+        case .priceToSalesTtm:
+            return "https://www.investopedia.com/terms/p/price-to-salesratio.asp"
+        case .priceToBookValue:
+            return "https://www.investopedia.com/terms/p/price-to-bookratio.asp"
+        case .enterpriseValueToEbitda:
+            return "https://www.investopedia.com/terms/e/ev-ebitda.asp"
+        case .priceChange1m:
+            return nil
+        case .priceChange3m:
+            return nil
+        case .priceChange1y:
+            return nil
+        case .dividendYield:
+            return "https://www.investopedia.com/terms/d/dividendyield.asp"
+        case .dividendsPerShare:
+            return "https://www.investopedia.com/ask/answers/032515/what-difference-between-earnings-share-and-dividends-share.asp"
+        case .dividendPayoutRatio:
+            return "https://www.investopedia.com/terms/d/dividendpayoutratio.asp"
+        case .yearsOfConsecutiveDividendGrowth:
+            return nil
+        case .dividendFrequency:
+            return "https://www.investopedia.com/terms/d/dividend_frequency.asp"
+        case .epsActual:
+            return "https://www.investopedia.com/terms/p/primary-eps.asp"
+        case .epsEstimate:
+            return "https://www.investopedia.com/terms/p/primary-eps.asp"
+        case .beatenQuarterlyEpsEstimationCountTtm:
+            return nil
+        case .epsSurprise:
+            return nil
+        case .revenueEstimateAvg0y:
+            return nil
+        case .revenueActual:
+            return nil
+        case .revenueTtm:
+            return nil
+        case .revenuePerShareTtm:
+            return "https://www.investopedia.com/terms/s/salespershare.asp"
+        case .roi:
+            return "https://www.investopedia.com/terms/r/returnoninvestment.asp"
+        case .netIncome:
+            return "https://www.investopedia.com/ask/answers/101314/what-are-differences-between-gross-profit-and-net-income.asp"
+        case .assetCashAndEquivalents:
+            return "https://www.investopedia.com/terms/c/cashandcashequivalents.asp"
+        case .roa:
+            return "https://www.investopedia.com/terms/r/returnonassets.asp"
+        case .totalAssets:
+            return "https://www.investopedia.com/terms/a/asset.asp"
+        case .ebitda:
+            return "https://www.investopedia.com/terms/e/ebitda.asp"
+        case .profitMargin:
+            return "https://www.investopedia.com/terms/n/net_margin.asp"
+        case .netDebt:
+            return "https://www.investopedia.com/terms/e/ebitda.asp"
+        }
+    }
+    
+    var explanationHeight: Float {
+    
+        let width = UIScreen.main.bounds.width
+        let titleTopOffset = 20.0
+        let titleEdgeOffset = 28.0
+        let descriptionEdgeOffset = 24.0
+        let descriptionTopOffset = 16.0
+        let bottomOffset = 10.0
+        
+        let titleWidth = width - titleEdgeOffset * 2.0
+        let descriptionWidth = width - descriptionEdgeOffset * 2.0
+        
+        let title = self.explanationTitle
+        let description = self.explanationDescription
+        
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.proDisplaySemibold(20.0)
+        titleLabel.textColor = UIColor.init(hexString: "#1F2E35", alpha: 1.0)
+        titleLabel.textAlignment = .left
+        titleLabel.text = title
+        titleLabel.numberOfLines = 0
+        let titleSize = titleLabel.sizeThatFits(CGSize(width: titleWidth,
+                                                      height: CGFloat.greatestFiniteMagnitude))
+        
+        let descriptionTextView = UITextView()
+        descriptionTextView.font = UIFont.proDisplayRegular(14.0)
+        descriptionTextView.contentInset = .zero
+        descriptionTextView.textColor = UIColor(hexString: "#687379")
+        descriptionTextView.textAlignment = .left
+        descriptionTextView.text = description
+        let descriptionSize = descriptionTextView.sizeThatFits(CGSize(width: descriptionWidth,
+                                                               height: CGFloat.greatestFiniteMagnitude))
+        
+        let height = titleTopOffset + titleSize.height + descriptionTopOffset + descriptionSize.height + bottomOffset
+        return Float(height)
+    }
 }

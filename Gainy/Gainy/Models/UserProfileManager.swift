@@ -208,44 +208,35 @@ final class UserProfileManager {
             return
         }
         
-        
-        Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) { [weak self] result in
+        Task {
+            async let favs = getFavCollections()
+            async let recommeneded = getRecommenedCollections()
+            let (favsRes, recommenededRes) = await (favs, recommeneded)
             
-            guard let self = self else { return }
-            switch result {
-            case .success(let graphQLResult):
-                
-                guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
-                    NotificationManager.shared.showError("Error fetching Recommended Collections")
+            guard !recommenededRes.isEmpty else {
+                NotificationManager.shared.showError("Sorry... No Collections to display.")
+                await MainActor.run {
                     completion(false)
-                    return
                 }
-                
-                guard let firstCollections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}).prefix(24) else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
-                    completion(false)
-                    return
-                }
-                
-                self.recommendedCollections = firstCollections.map {
-                    CollectionDTOMapper.map($0)
-                }
-                
-                if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
-                    self.favoriteCollections.swapAt(index, 0)
-                }
-                
-                self.yourCollections = collections.filter({self.favoriteCollections.contains($0.id ?? 0)}).map {
-                    CollectionDTOMapper.map($0)
-                }.reorder(by: self.favoriteCollections)
-                
-                completion(true)
-                
-            case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
-                completion(false)
+                return
             }
+            
+            let firstCollections = recommenededRes.prefix(24)
+            
+            self.recommendedCollections = firstCollections.map {
+                CollectionDTOMapper.map($0)
+            }
+            
+            if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
+                self.favoriteCollections.swapAt(index, 0)
+            }
+            
+            self.yourCollections = favsRes.map {
+                CollectionDTOMapper.map($0)
+            }.reorder(by: self.favoriteCollections)
+            completion(true)
         }
+        
     }
     
     public func addFavouriteCollection(_ collectionID: Int, completion: @escaping (_ success: Bool) -> Void) {
@@ -316,6 +307,7 @@ final class UserProfileManager {
             
             self.watchlist.append(symbol)
             CollectionsManager.shared.loadWatchlistCollection {
+                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }
@@ -340,6 +332,7 @@ final class UserProfileManager {
                 element == symbol
             }
             CollectionsManager.shared.loadWatchlistCollection {
+                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }
@@ -419,8 +412,8 @@ final class UserProfileManager {
         guard let profileID = self.profileID else {
             return
         }
-        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ result in
-            print(result)
+        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ _ in
+            //print(result)
         }
     }
 }

@@ -32,7 +32,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[1].image = UIImage(named: "fits_risk\(matchData.fitsInterests)")
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
             
-            recLbls[0].attributedText = "Fit your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
+            recLbls[0].attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
             switch matchData.matchScore {
             case 0..<35:
                 colorView.backgroundColor = UIColor.Gainy.mainRed

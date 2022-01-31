@@ -59,7 +59,7 @@ final class CollectionHorizontalView: UIView {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true
-        imageView.backgroundColor = UIColor.Gainy.white
+        imageView.backgroundColor = UIColor.Gainy.gray
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
         imageView.skeletonCornerRadius = 16

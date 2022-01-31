@@ -122,9 +122,10 @@ final class CollectionListCardCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        self.isSkeletonable = false
         contentView.removeConstraints(matchView.constraints)
         [nameLbl, symbolLbl, priceLbl, growthLbl, yieldLbl, peLbl, marketLbl, mlpLbl].forEach({
-            $0?.isSkeletonable = true
+//            $0?.isSkeletonable = false
             $0?.linesCornerRadius = 6
             $0?.numberOfLines = 1
         })

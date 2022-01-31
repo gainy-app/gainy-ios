@@ -53,7 +53,7 @@ class MetricsViewController: BaseViewController {
     
     private var bottomView: MetricsBottomView? = nil
     private var isSearching: Bool = false
-    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 14.0 * 2.0 - 10.0 * 2.0) / 3.0
+    private let itemWidth: CGFloat = (UIScreen.main.bounds.width - 16.0 * 2.0 - 10.0 * 2.0) / 3.0
     private let itemHeight: CGFloat = 96.0
     
     override func viewDidLoad() {
@@ -116,6 +116,54 @@ class MetricsViewController: BaseViewController {
         isSearching = false
         self.textFieldClear()
         GainyAnalytics.logEvent("metrics_search_ended", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Metrics"])
+    }
+    
+    @objc func handleLongPress(gestureRecognizer: UILongPressGestureRecognizer) {
+        if (gestureRecognizer.state != .began) {
+            return
+        }
+
+        let collectionView = isSearching ? searchCollectionView : collectionView
+        guard let collectionView = collectionView else {
+            return
+        }
+                
+        let pointInView = gestureRecognizer.location(in: collectionView)
+        if let indexPath = collectionView.indexPathForItem(at: pointInView) {
+            
+            let isSelected = collectionView.indexPathsForSelectedItems?.contains(where: { item in
+                item == indexPath
+            }) ?? false
+            
+            if isSelected {
+                if collectionView == self.searchCollectionView {
+                    self.collectionView(collectionView, didDeselectItemAt: indexPath)
+                    return
+                }
+                if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
+                    if metricSection == .selected {
+                        return
+                    }
+                }
+                self.collectionView(collectionView, didDeselectItemAt: indexPath)
+            } else {
+                if collectionView == self.searchCollectionView {
+                    if self.selectedSection.count < self.maxSelectedElements {
+                        self.collectionView(collectionView, didSelectItemAt: indexPath)
+                    }
+                    return
+                }
+                if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
+                    if metricSection == .selected {
+                        return
+                    }
+                    if self.selectedSection.count >= self.maxSelectedElements {
+                        return
+                    }
+                }
+                self.collectionView(collectionView, didSelectItemAt: indexPath)
+            }
+        }
     }
     
     private func setUpSearchTextField() {
@@ -196,6 +244,7 @@ class MetricsViewController: BaseViewController {
         collectionView.dataSource = self
         collectionView.dragDelegate = self
         collectionView.dropDelegate = self
+        setupLongGestureRecognizerOnCollection(collectionView: collectionView)
     }
     
     private func setUpSearchColelctionView() {
@@ -210,12 +259,20 @@ class MetricsViewController: BaseViewController {
         searchCollectionView.delegate = self
         searchCollectionView.dataSource = self
         searchCollectionView.alpha = 0.0
+        setupLongGestureRecognizerOnCollection(collectionView: searchCollectionView)
+    }
+    
+    private func setupLongGestureRecognizerOnCollection(collectionView: UICollectionView) {
+        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gestureRecognizer:)))
+        longPressedGesture.minimumPressDuration = 0.5
+        longPressedGesture.delaysTouchesBegan = true
+        collectionView.addGestureRecognizer(longPressedGesture)
     }
     
     private func setUpBottomView() {
         
         let bottomView = UINib(nibName:"MetricsBottomView",bundle:.main).instantiate(withOwner: nil, options: nil).first as! MetricsBottomView
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        //bottomView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(bottomView)
         
          
@@ -247,14 +304,16 @@ class MetricsViewController: BaseViewController {
         }
         
         for metric in MarketDataField.allCases {
-            
+            if metric == .address {
+                print("stop")
+            }
             let marketData: TickerInfo.MarketData? = metric.mapToMarketData(ticker: ticker)
             guard let marketData = marketData else {
                 continue
             }
             
-            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue {
-                self.tradingSection.append(marketData)
+            if metric.rawValue >= MarketDataField.avgVolume10d.rawValue &&
+               metric.rawValue <= MarketDataField.impliedVolatility.rawValue {                self.tradingSection.append(marketData)
             } else if metric.rawValue >= MarketDataField.revenueGrowthYoy.rawValue &&
                       metric.rawValue <= MarketDataField.epsGrowthFwd.rawValue {
                 self.growthSection.append(marketData)
@@ -276,6 +335,7 @@ class MetricsViewController: BaseViewController {
             } else if metric.rawValue >= MarketDataField.revenueTtm.rawValue &&
                       metric.rawValue <= MarketDataField.netDebt.rawValue {
                 self.financialsSection.append(marketData)
+                
             }
             
             if tickerMetrics.count == 0 {
@@ -610,7 +670,9 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
             if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
                 if metricSection == .selected {
                     let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MetricsFooterView.reuseIdentifier, for: indexPath) as! MetricsFooterView
-                    footerView.textLabel.text = "To pin another Market Data metrics — select items\nbelow. You can pin only \(self.maxSelectedElements) items."
+
+                    let attributedString = "To pin another Market Data metrics — ".attr(font: .proDisplayRegular(14), color: UIColor(hex: 0x687379)!) + "long tap".attr(font: .proDisplaySemibold(14), color: UIColor(hex: 0x687379)!) + " on the\nitems below. You can pin only \(self.maxSelectedElements) items.".attr(font: .proDisplayRegular(14), color: UIColor(hex: 0x687379)!)
+                    footerView.textLabel.attributedText = attributedString
                     result = footerView
                 }
             }
@@ -619,45 +681,65 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
         return result
     }
     
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        
+    func collectionView(_ collectionView: UICollectionView, didTapAt indexPath: IndexPath) {
+       
+        var marketDataInfo: TickerInfo.MarketData? = nil
         if collectionView == self.searchCollectionView {
-            return true
-        }
-        
-        if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
-            if metricSection == .selected {
-                return false
+            marketDataInfo = self.searchDataSourceMetrics[indexPath.row]
+        } else {
+            if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
+                switch metricSection {
+                case .selected:
+                    marketDataInfo = self.selectedSection[indexPath.row]
+                case .trading:
+                    marketDataInfo = self.tradingSection[indexPath.row]
+                case .growth:
+                    marketDataInfo = self.growthSection[indexPath.row]
+                case .general:
+                    marketDataInfo = self.generalSection[indexPath.row]
+                case .valuation:
+                    marketDataInfo = self.valuationSection[indexPath.row]
+                case .momentum:
+                    marketDataInfo = self.momentumSection[indexPath.row]
+                case .dividend:
+                    marketDataInfo = self.dividendSection[indexPath.row]
+                case .earnings:
+                    marketDataInfo = self.earningsSection[indexPath.row]
+                case .financials:
+                    marketDataInfo = self.financialsSection[indexPath.row]
+                }
             }
         }
         
-        return true
+        guard let marketData = marketDataInfo?.marketDataField else {
+            return
+        }
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: marketData.explanationTitle)
+        explanationVc.configureWith(description: marketData.explanationDescription,
+                                    linkString: marketData.explanationLinkString,
+                                    link: marketData.explanationLink)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        
+        self.collectionView(collectionView, didTapAt: indexPath)
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         
-        if collectionView == self.searchCollectionView {
-            if self.selectedSection.count >= self.maxSelectedElements {
-                return false
-            }
-            return true
-        }
-        
-        if let metricSection = MetricsViewControllerSection.init(rawValue: indexPath.section) {
-            if metricSection == .selected {
-                return false
-            }
-            
-            if self.selectedSection.count >= self.maxSelectedElements {
-                return false
-            }
-        }
-        
-        return true
+        self.collectionView(collectionView, didTapAt: indexPath)
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
         var marketData: TickerInfo.MarketData? = nil
         if collectionView == self.searchCollectionView {
             marketData = self.searchDataSourceMetrics[indexPath.row]
@@ -706,6 +788,7 @@ extension MetricsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
 
+        collectionView.deselectItem(at: indexPath, animated: false)
         var marketData: TickerInfo.MarketData? = nil
         if collectionView == self.searchCollectionView {
             marketData = self.searchDataSourceMetrics[indexPath.row]
@@ -847,7 +930,7 @@ extension MetricsViewController: UICollectionViewDropDelegate {
             )
         }
         
-        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
+        guard destination.section == MetricsViewControllerSection.selected.rawValue else {
             return UICollectionViewDropProposal(
                 operation: .cancel,
                 intent: .unspecified

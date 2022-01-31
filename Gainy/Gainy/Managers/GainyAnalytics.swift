@@ -28,6 +28,11 @@ final class GainyAnalytics {
     
     static let shared = GainyAnalytics()
     
+    //MARK: - Onboarding
+    
+    var isLogin: Bool = false
+    var isRegistration: Bool = false
+    
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         var newParams = params ?? [:]
         newParams["sn"] = ""
