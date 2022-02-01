@@ -310,24 +310,24 @@ struct ScatterChartView: View {
     
     var bottomMedian: some View {
         HStack(spacing: 8) {
-            Button(action: {
-                hapticTouch.impactOccurred()
-                delegate.comparePressed()
-            }, label: {
-                HStack {
-                    Image("tiny plus")
-                        .renderingMode(.original)
-                    Text("Compare stocks")
-                        .padding(.all, 0)
-                        .font(UIFont.compactRoundedSemibold(12).uiFont)
-                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                }
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
-                .padding(.top, 4)
-                .padding(.bottom, 4)
-                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
-            })
+//            Button(action: {
+//                hapticTouch.impactOccurred()
+//                delegate.comparePressed()
+//            }, label: {
+//                HStack {
+//                    Image("tiny plus")
+//                        .renderingMode(.original)
+//                    Text("Compare stocks")
+//                        .padding(.all, 0)
+//                        .font(UIFont.compactRoundedSemibold(12).uiFont)
+//                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+//                }
+//                .padding(.leading, 8)
+//                .padding(.trailing, 8)
+//                .padding(.top, 4)
+//                .padding(.bottom, 4)
+//                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+//            })
             
             Button(action: {
                 isMedianVisible.toggle()

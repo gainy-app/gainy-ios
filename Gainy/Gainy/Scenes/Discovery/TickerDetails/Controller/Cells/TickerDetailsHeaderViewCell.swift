@@ -13,7 +13,9 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
-    @IBOutlet private weak var addToWatchlistToggle: UIButton!
+    @IBOutlet private weak var addToWatchlistButton: UIButton!
+    @IBOutlet private weak var compareStocksButton: UIButton!
+    @IBOutlet private weak var addToWatchlistButtonWidthConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,7 +43,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
         GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
     
-    fileprivate func updateAddToWatchlistToggle() {
+    public func updateAddToWatchlistToggle() {
        
         guard let symbol = tickerInfo?.symbol else {
             return
@@ -50,6 +52,11 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
         let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
             item == symbol
         }
-        self.addToWatchlistToggle.isSelected = addedToWatchlist
+        
+        self.contentView.setNeedsLayout()
+        self.addToWatchlistButton.isSelected = addedToWatchlist
+        self.addToWatchlistButton.backgroundColor = addedToWatchlist ? UIColor(hex: 0x0062FF) : UIColor(hex: 0xF7F8F9)
+        self.addToWatchlistButtonWidthConstraint.constant = addedToWatchlist ? 118.0 : 104.0
+        self.contentView.layoutIfNeeded()
     }
 }

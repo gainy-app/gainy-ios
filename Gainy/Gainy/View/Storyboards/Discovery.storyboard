@@ -46,7 +46,7 @@
             <objects>
                 <viewController storyboardIdentifier="TickerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yfJ-n1-GhL" customClass="TickerViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qp4-Xo-X4Q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="2100"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CiU-XQ-WcC">
@@ -72,33 +72,29 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-Yr-eF3">
-                                                    <rect key="frame" x="354" y="16" width="44" height="44"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-Yr-eF3" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                    <rect key="frame" x="350" y="26" width="44" height="24"/>
+                                                    <color key="backgroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="VFr-dC-laL"/>
-                                                        <constraint firstAttribute="height" constant="44" id="x0w-sD-yIB"/>
+                                                        <constraint firstAttribute="width" constant="104" id="4SE-sf-xVF"/>
+                                                        <constraint firstAttribute="height" constant="24" id="7Pt-0f-A85"/>
                                                     </constraints>
-                                                    <state key="normal" image="ticket_plus"/>
-                                                    <state key="selected" image="collection_added"/>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                    <state key="normal" title=" Add to watchlist ">
+                                                        <color key="titleColor" red="0.043908372520000002" green="0.077603302900000004" blue="0.11765200639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                    <state key="selected" title=" Added to watchlist ">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="addToWatchlistToggleAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="UT1-Db-aeY"/>
-                                                    </connections>
-                                                </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOe-EY-ZVb">
-                                                    <rect key="frame" x="310" y="16" width="44" height="44"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="44" id="4Yr-fz-jRD"/>
-                                                        <constraint firstAttribute="height" constant="44" id="UZG-ek-Xx7"/>
-                                                    </constraints>
-                                                    <state key="normal" image="ticket_share"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="shareAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="yo6-oH-FBc"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-5h-LtD">
@@ -145,20 +141,45 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxd-Jp-DXE" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                    <rect key="frame" x="292" y="26" width="44" height="24"/>
+                                                    <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="106" id="P6p-66-jdT"/>
+                                                        <constraint firstAttribute="height" constant="24" id="THT-ZR-ttg"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                    <state key="normal" title=" Compare  stocks ">
+                                                        <color key="titleColor" red="0.043908372520000002" green="0.077603302900000004" blue="0.11765200639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                    <state key="selected">
+                                                        <color key="titleColor" red="0.043908372520000002" green="0.077603302900000004" blue="0.11765200639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="compareStocksAction:" destination="yfJ-n1-GhL" eventType="touchUpInside" id="eRu-Hb-9Gh"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="rOe-EY-ZVb" firstAttribute="top" secondItem="qKu-Yr-eF3" secondAttribute="top" id="1kV-V7-YNg"/>
+                                                <constraint firstItem="qKu-Yr-eF3" firstAttribute="centerY" secondItem="lxd-Jp-DXE" secondAttribute="centerY" id="4bn-jt-IP1"/>
                                                 <constraint firstItem="fVb-yA-YhU" firstAttribute="leading" secondItem="xdc-yJ-fA4" secondAttribute="leading" constant="24" id="BHd-uZ-ydJ"/>
                                                 <constraint firstItem="fVb-yA-YhU" firstAttribute="top" secondItem="xdc-yJ-fA4" secondAttribute="top" constant="72" id="BhO-F5-Vzo"/>
                                                 <constraint firstAttribute="trailing" secondItem="wgA-OL-Whj" secondAttribute="trailing" constant="24" id="Tkx-JP-nz2"/>
-                                                <constraint firstItem="qKu-Yr-eF3" firstAttribute="leading" secondItem="rOe-EY-ZVb" secondAttribute="trailing" id="WVl-Ui-Asc"/>
-                                                <constraint firstAttribute="trailing" secondItem="qKu-Yr-eF3" secondAttribute="trailing" constant="16" id="chl-c0-fa5"/>
                                                 <constraint firstItem="wgA-OL-Whj" firstAttribute="centerY" secondItem="fVb-yA-YhU" secondAttribute="centerY" id="dvw-P8-94Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="qKu-Yr-eF3" secondAttribute="trailing" constant="24" id="eS6-jk-vHE"/>
                                                 <constraint firstItem="LS1-5h-LtD" firstAttribute="top" secondItem="xdc-yJ-fA4" secondAttribute="top" constant="16" id="jV1-Mr-KAO"/>
                                                 <constraint firstItem="9qX-Ul-sNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fVb-yA-YhU" secondAttribute="trailing" constant="16" id="lMu-ro-MtA"/>
+                                                <constraint firstItem="qKu-Yr-eF3" firstAttribute="leading" secondItem="lxd-Jp-DXE" secondAttribute="trailing" constant="8" id="lUm-78-QPU"/>
                                                 <constraint firstItem="LS1-5h-LtD" firstAttribute="leading" secondItem="xdc-yJ-fA4" secondAttribute="leading" constant="12" id="rUW-PK-43D"/>
                                                 <constraint firstAttribute="bottom" secondItem="fVb-yA-YhU" secondAttribute="bottom" constant="16" id="rrN-Cx-hD8"/>
-                                                <constraint firstItem="qKu-Yr-eF3" firstAttribute="top" secondItem="xdc-yJ-fA4" secondAttribute="top" constant="16" id="vKI-FX-1CT"/>
+                                                <constraint firstItem="qKu-Yr-eF3" firstAttribute="centerY" secondItem="LS1-5h-LtD" secondAttribute="centerY" id="sTr-DZ-d5J"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
@@ -168,7 +189,9 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <outlet property="addToWatchlistToggle" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
+                                            <outlet property="addToWatchlistButton" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
+                                            <outlet property="addToWatchlistButtonWidthConstraint" destination="4SE-sf-xVF" id="LzD-Nf-q7d"/>
+                                            <outlet property="compareStocksButton" destination="lxd-Jp-DXE" id="c0l-wG-8HV"/>
                                             <outlet property="symbolLbl" destination="9qX-Ul-sNd" id="y6P-VA-VvQ"/>
                                             <outlet property="tickerNameLbl" destination="fVb-yA-YhU" id="1Dw-VB-nVj"/>
                                         </connections>

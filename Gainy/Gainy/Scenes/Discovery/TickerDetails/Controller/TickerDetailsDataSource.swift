@@ -64,6 +64,7 @@ final class TickerDetailsDataSource: NSObject {
     }
     
     let ticker: TickerInfo
+    var headerCell: TickerDetailsHeaderViewCell?
     
     enum Row: Int {
         case header = 0, chart, about, recommended, highlights, marketData, wsr, news, alternativeStocks, upcomingEvents, watchlist
@@ -169,6 +170,7 @@ extension TickerDetailsDataSource: UITableViewDataSource {
         case .header:
             let cell: TickerDetailsHeaderViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
+            headerCell = cell;
             return cell
         case .chart:
             let cell: TickerDetailsChartViewCell = tableView.dequeueReusableCell(for: indexPath)

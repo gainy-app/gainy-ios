@@ -130,6 +130,15 @@ final class TickerViewController: BaseViewController {
         self.coordinator?.showBrokersViewController(symbol: symbol, delegate: self)
     }
     
+    @IBAction func compareStocksAction(_ sender: UIButton) {
+       
+        guard let ticker = viewModel?.dataSource.ticker else {
+            return
+        }
+        
+        self.openCompareWithSelf(ticker: ticker)
+    }
+    
     @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {
         
         guard let symbol = viewModel?.dataSource.ticker.symbol else {
@@ -144,6 +153,10 @@ final class TickerViewController: BaseViewController {
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = false
+                    guard let cell = self.viewModel?.dataSource.headerCell else {
+                        return
+                    }
+                    cell.updateAddToWatchlistToggle()
                 }
             }
         } else {
@@ -151,6 +164,10 @@ final class TickerViewController: BaseViewController {
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
+                    guard let cell = self.viewModel?.dataSource.headerCell else {
+                        return
+                    }
+                    cell.updateAddToWatchlistToggle()
                 }
             }
         }
