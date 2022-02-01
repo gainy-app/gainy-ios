@@ -1,9 +1,9 @@
-iOS v1.1.1 #146 available
+iOS v1.1.1 #147 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• New compare stocks and add to watchlist buttons
+• -
 
 :hammer_and_wrench: Improvements
 • -
