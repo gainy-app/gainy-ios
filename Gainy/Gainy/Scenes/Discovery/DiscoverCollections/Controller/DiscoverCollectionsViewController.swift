@@ -656,7 +656,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
             
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                self.onItemDelete?(DiscoverCollectionsSection.recommendedCollections ,itemId)
+                self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
             })
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
@@ -686,11 +686,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     isInYourCollections: false
                 )
                 
-                if let indexOfRecommendedItemToDelete = UserProfileManager.shared.recommendedCollections
+                if let indexOfRecommendedItemToUpdate = UserProfileManager.shared.recommendedCollections
                     .firstIndex(where: { $0.id == yourCollectionItemToRemove.id }) {
-                    UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToDelete].isInYourCollections = false
+                    UserProfileManager.shared.recommendedCollections[indexOfRecommendedItemToUpdate].isInYourCollections = false
                     
-                    if var itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
+                    if let itemToReload  = snapshot.itemIdentifiers(inSection: .recommendedCollections).first(where: {
                         if let item = $0 as? RecommendedCollectionViewCellModel {
                             return item.id == itemId
                         }
@@ -700,12 +700,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     }
                 }
                 
-                snapshot.deleteItems([deleteItems])
+                viewModel?.recommendedCollections.append(updatedRecommendedItem)
                 
-                if let recColl = viewModel?.addedRecs[yourCollectionItemToRemove.id] {
-                    snapshot.appendItems([recColl], toSection: .recommendedCollections)
-                    viewModel?.addedRecs.removeValue(forKey: yourCollectionItemToRemove.id)
-                }
+                snapshot.deleteItems([deleteItems])
+                snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
+        
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
                 })
