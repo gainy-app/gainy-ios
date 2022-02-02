@@ -26,6 +26,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         let symbol = tickerInfo?.symbol ?? ""
+        guard !(tickerInfo?.isETF ?? false) else {return}
         if let matchData  = TickerLiveStorage.shared.getMatchData(symbol) {
             scoreLbl.text = "\(matchData.matchScore)"
             recImgs[0].image = UIImage(named: "fits_risk\(matchData.fitsRisk)")

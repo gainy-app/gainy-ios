@@ -6,7 +6,10 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• -
+• Discover Collections: reload
+• ETF for Stock
+• More tags for Recommended
+• No crush on double pick of compared stock
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

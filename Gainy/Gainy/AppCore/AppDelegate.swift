@@ -48,6 +48,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 })
         
             GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
+        NotificationCenter.default.post(name: NotificationManager.appBecomeActiveNotification, object: nil)
     }
     
     private func initializeAppsFlyer() {
@@ -97,11 +98,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private var config = Configuration()
     private func initBugfender() {
-        //if config.environment == .staging {
+        if config.environment == .staging {
             Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
             Bugfender.enableCrashReporting()
             Bugfender.enableUIEventLogging()
-        //}
+        }
     }
     
     //MARK: - CoreData

@@ -43,7 +43,7 @@ struct CachedMatchScore: Codable {
     }   
     
     private func interests() async -> [TickerTag] {
-        let matches = interestMatches.dropFirst().dropLast()
+        let matches = interestMatches.dropFirst().dropLast().replacingOccurrences(of: " ", with: "")
         if matches.isEmpty {
             return []
         } else {
@@ -73,7 +73,7 @@ struct CachedMatchScore: Codable {
     }
     
     private func categories() async -> [TickerTag] {
-        let matches = categoryMatches.dropFirst().dropLast()
+        let matches = categoryMatches.dropFirst().dropLast().replacingOccurrences(of: " ", with: "")
         if matches.isEmpty {
             return []
         } else {

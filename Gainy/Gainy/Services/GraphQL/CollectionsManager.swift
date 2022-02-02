@@ -154,7 +154,7 @@ final class CollectionsManager {
                 UserProfileManager.shared.favoriteCollections.swapAt(index, 0)
             }
             
-            CollectionsManager.shared.collections = favsRes.reorder(by: UserProfileManager.shared.favoriteCollections)
+            CollectionsManager.shared.collections = favsRes.uniqued().reorder(by: UserProfileManager.shared.favoriteCollections)
             CollectionsManager.shared.lastLoadDate = Date()
             
             //WatchList Handler

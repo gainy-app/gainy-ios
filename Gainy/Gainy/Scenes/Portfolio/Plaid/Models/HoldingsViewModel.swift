@@ -36,19 +36,15 @@ final class HoldingsViewModel {
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     
-    func loadNewChartData(period: ScatterChartView.ChartPeriod, _ completion: ( () -> Void)? = nil) {
-        if let chartCache = chartsCache[period] {
-            
-            completion?()
-        } else {
-        }
-    }
     
     //MARK: - Network
     
     private var config = Configuration()
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
+        chartsCache.removeAll()
+        sypChartsCache.removeAll()
+        
         DispatchQueue.global().async {
             if let profileID = UserProfileManager.shared.profileID {
                 

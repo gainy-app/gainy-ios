@@ -24,7 +24,7 @@ final class TickerViewController: BaseViewController {
             tableView.delegate = viewModel?.dataSource
             tableView.refreshControl = refreshControl
             viewModel?.dataSource.delegate = self
-            refreshControl.addTarget(self, action: #selector(loadTicketInfo), for: .valueChanged)
+            refreshControl.addTarget(self, action: #selector(refreshTicketInfo), for: .valueChanged)
         }
     }
     
@@ -42,6 +42,12 @@ final class TickerViewController: BaseViewController {
         super.viewDidAppear(animated)
     }
     
+    @objc func refreshTicketInfo() {
+        delay(0.5) {
+            self.loadTicketInfo()
+        }
+    }
+    
     @objc func loadTicketInfo() {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
@@ -52,7 +58,7 @@ final class TickerViewController: BaseViewController {
             GainyAnalytics.logEvent("no_internet")
             return
         }
-        delay(0.3) {
+        delay(1.0) {
             if !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? true) {
                 self.isLoadingInfo = true
             }

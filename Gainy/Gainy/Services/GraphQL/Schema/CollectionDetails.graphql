@@ -16,6 +16,7 @@ fragment RemoteTickerDetails on tickers {
     symbol
     name
     description
+    type
     ticker_highlights {
       highlight
     }

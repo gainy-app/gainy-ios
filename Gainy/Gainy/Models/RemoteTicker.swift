@@ -45,6 +45,9 @@ class TickerInfo {
         self.updateMarketData()
     }
 
+    var isETF: Bool {
+        (ticker.type ?? "") == "ETF"
+    }
     
     let debugStr =
     """
@@ -216,7 +219,9 @@ class TickerInfo {
                         }
                         
                         //let tickers = graphQLResult.data?.tickerIndustries.compactMap({$0.gainyIndustry?.tickerIndustries.compactMap($0.ticker.fragments.remoteTickerDetails) }) ?? []
-                        self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued()
+                        self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued().sorted(by: {
+                            ($0.matchScore?.matchScore ?? 0) > ($1.matchScore?.matchScore ?? 0)
+                        })
 
                         for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
                             TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)

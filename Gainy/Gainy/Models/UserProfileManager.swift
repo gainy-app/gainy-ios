@@ -198,7 +198,9 @@ final class UserProfileManager {
             self.fetchProfile { success in
                 
                 guard success == true else {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    runOnMain {
+                        NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    }                    
                     completion(false)
                     return
                 }
@@ -214,7 +216,9 @@ final class UserProfileManager {
             let (favsRes, recommenededRes) = await (favs, recommeneded)
             
             guard !recommenededRes.isEmpty else {
-                NotificationManager.shared.showError("Sorry... No Collections to display.")
+                runOnMain {
+                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                }
                 await MainActor.run {
                     completion(false)
                 }

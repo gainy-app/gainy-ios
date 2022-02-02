@@ -118,6 +118,7 @@ final class TickerDetailsDataSource: NSObject {
     }
     
     func calculateHeights() {
+        print(ticker.ticker.type ?? "")
         //Highlights
         if ticker.highlights.count > 0 {
             cellHeights[.highlights] = TickerDetailsHighlightsViewCell.cellHeight
@@ -148,6 +149,11 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
         } else {
             cellHeights[.wsr] = 0.0
+        }
+        
+        if ticker.isETF {
+            cellHeights[.recommended] = 0.0
+            cellHeights[.marketData] = 0.0
         }
     }
     

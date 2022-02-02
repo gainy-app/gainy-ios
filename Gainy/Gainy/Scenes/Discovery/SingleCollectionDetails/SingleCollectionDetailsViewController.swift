@@ -285,6 +285,12 @@ extension SingleCollectionDetailsViewController: FloatingPanelControllerDelegate
 extension SingleCollectionDetailsViewController: SearchStocksViewControllerDelegate {
     func stockSelected(source: SearchStocksViewController, stock: RemoteTickerDetails) {
         self.fpc.dismiss(animated: true, completion: nil)
+        
+        guard !model.cards.contains(where: {$0.tickerSymbol == stock.symbol}) else {
+            NotificationManager.shared.showMessage(title: "Warning", text: "Sorry, this stock is already in compare", cancelTitle: "OK", actions: nil)
+            return
+        }
+        
         if collectionView.cellForItem(at: IndexPath.init(row: 0, section: 0)) as? CollectionDetailsViewCell != nil {
             if let first = viewModel?.collectionDetailsModels.first {
                 let cardsDTO = [stock].compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})

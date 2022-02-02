@@ -329,12 +329,18 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 dataSource.apply(snap, animatingDifferences: false)
             }
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] _ in
+            self?.refreshAction()
+        }.store(in: &cancellables)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         super.viewWillAppear(animated)
-        
         refreshAction()
     }
     
@@ -805,11 +811,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             completion()
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             GainyAnalytics.logEvent("no_internet")
+            refreshControl.endRefreshing()
             return
         }
         
         UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile) { success in
-            
+            self.refreshControl.endRefreshing()
             guard success == true  else {
                 self.initViewModels()
                 completion()
