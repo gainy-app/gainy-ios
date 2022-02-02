@@ -1,4 +1,4 @@
-iOS v1.1.1 #147 available
+iOS v1.1.1 #148 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,11 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Discover Collections: reload
-• ETF for Stock
-• More tags for Recommended
-• No crush on double pick of compared stock
-
+• More Analytics added
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 

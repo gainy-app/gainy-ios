@@ -83,11 +83,13 @@ final class CollectionSearchController: NSObject {
                                            imageName: "",
                                            plusButtonState: buttonState)
                         
-                        cell.onPlusButtonPressed = { [weak self] in                            
+                        cell.onPlusButtonPressed = { [weak self] in
+                            GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id ?? 0)
                         }
                         
                         cell.onCheckButtonPressed = { [weak self] in
+                            GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id ?? 0)
                         }
                     }
@@ -117,12 +119,12 @@ final class CollectionSearchController: NSObject {
                                            imageName: "",
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in
-                            
+                            GainyAnalytics.logEvent("single_searched_added_to_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: true, collectionID: collection.id)
                         }
                         
                         cell.onCheckButtonPressed = { [weak self] in
-                            
+                            GainyAnalytics.logEvent("single_searched_removed_from_yours", params: ["collectionID" : collection.id])
                             self?.mutateFavouriteCollections(senderCell: cell, isAdded: false, collectionID: collection.id)
                         }
                     }

@@ -379,8 +379,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
+            let existingIDs = self.viewModel?.collectionDetails.compactMap({$0.id}) ?? []
             let collections = models.filter { item in
-                item.id >= 0
+                item.id >= 0 && !existingIDs.contains(item.id)
             }
             if collections.count > 0 {
                 self.viewModel?.collectionDetails.append(contentsOf: collections)
