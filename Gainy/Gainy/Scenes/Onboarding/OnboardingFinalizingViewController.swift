@@ -22,6 +22,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
         } else {
             self.finalizeAuthorizationFlow()
         }
+        GainyAnalytics.logEvent("questioner_done", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
     }
     
     override func viewWillAppear(_ animated: Bool) {
