@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftDate
 
 struct AppProfileMetricsSetting {
     
@@ -103,12 +104,14 @@ final class UserProfileManager {
             case .success(let graphQLResult):
                 
                 guard let appProfile = graphQLResult.data?.appProfiles.first else {
+                    dprint("Err_GetProfileQuery_1: \(graphQLResult)")
                     NotificationManager.shared.showError("Sorry... Failed to load profile info.")
                     completion(false)
                     self.profileLoaded = false
                     return
                 }
                 guard let profileMetricsSettings = graphQLResult.data?.appProfileTickerMetricsSettings else {
+                    dprint("Err_GetProfileQuery_2: \(graphQLResult)")
                     NotificationManager.shared.showError("Sorry... Failed to load profile info.")
                     completion(false)
                     self.profileLoaded = false
@@ -157,12 +160,10 @@ final class UserProfileManager {
                 self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
                     item.id
                 })
-                
-                self.updatePlaidPortfolio()
-                
                 completion(true)
                 
             case .failure(let error):
+                dprint("Err_GetProfileQuery_3: \(error)")
                 dprint("Failure when making GraphQL request. Error: \(error)")
                 self.profileLoaded = false
                 completion(false)
@@ -199,7 +200,9 @@ final class UserProfileManager {
                 
                 guard success == true else {
                     runOnMain {
-                        NotificationManager.shared.showError("Sorry... No Collections to display.")
+                        NotificationManager.shared.showError("Sorry... Profile fetching failed.") {[weak self] in
+                            self?.getProfileCollections(loadProfile: loadProfile, completion: completion)
+                        }
                     }                    
                     completion(false)
                     return
@@ -212,12 +215,15 @@ final class UserProfileManager {
         
         Task {
             async let favs = getFavCollections()
-            async let recommeneded = getRecommenedCollections()
+            async let recommeneded = getRecommenedCollectionsWithRetry()
             let (favsRes, recommenededRes) = await (favs, recommeneded)
             
             guard !recommenededRes.isEmpty else {
+                dprint("getProfileCollections empty")
                 runOnMain {
-                    NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    NotificationManager.shared.showError("Sorry... No Collections to display.") {[weak self] in
+                        self?.getProfileCollections(loadProfile: loadProfile, completion: completion)
+                    }
                 }
                 await MainActor.run {
                     completion(false)
@@ -412,12 +418,15 @@ final class UserProfileManager {
     
     //MARK: - Porto Tricks
     
+    private var plaidUpdateDate: Date?
     public func updatePlaidPortfolio() {
         guard let profileID = self.profileID else {
             return
         }
-        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){ _ in
+        guard plaidUpdateDate?.compare(toDate: Date(), granularity: .minute) != .orderedSame else {return}
+        Network.shared.apollo.fetch(query: UpdatePlaidPortfolioQuery(profileId: profileID)){[weak self] _ in
             //print(result)
+            self?.plaidUpdateDate = Date()
         }
     }
 }

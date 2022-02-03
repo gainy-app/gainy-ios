@@ -106,6 +106,25 @@ class NotificationManager: NSObject {
         }
     }
     
+    func showError(_ errorText: String, withRetry: @escaping (() -> Void)) {
+        let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment: ""), style: .default) { _ in
+            withRetry()
+        }
+        alert.addAction(retryAction)
+        
+        if let topViewController = BaseViewController.topViewController {
+            if topViewController.presentedViewController == nil && !(topViewController is UIAlertController) {
+                topViewController.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+
+    
     class func broadcastNotification(name: NSNotification.Name, object: Any?) {
         NotificationCenter.default.post(name: name, object: nil)
     }

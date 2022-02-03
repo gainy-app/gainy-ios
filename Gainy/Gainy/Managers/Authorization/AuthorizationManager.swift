@@ -384,7 +384,7 @@ final class AuthorizationManager {
                         completion()
                         return
                     }
-                    
+                    UserProfileManager.shared.updatePlaidPortfolio()
                     self.getFirebaseAuthToken { success in
                         guard success == true else {
                             self.authorizationStatus = .authorizingFailed
@@ -432,6 +432,8 @@ final class AuthorizationManager {
             if filteredProfiles.count > 0 {
                 let profile = filteredProfiles.first
                 UserProfileManager.shared.profileID = profile?.id
+            } else {
+                dprint("Err_AppProfilesUserIDsQuery_NoSuch \(appProfiles)")
             }
             completion(filteredProfiles.count > 0)
         }
@@ -446,13 +448,15 @@ final class AuthorizationManager {
             case .success(let graphQLResult):
                 
                 guard let appProfiles = graphQLResult.data?.appProfiles else {
+                    dprint("Err_AppProfilesUserIDsQuery_Empty \(graphQLResult)")
                     completion(false)
                     return
                 }
+                
                 processProfs(appProfiles: appProfiles)
                 
             case .failure(let error):
-                dprint("Failure when making GraphQL request. Error: \(error)")
+                dprint("Err_AppProfilesUserIDsQuery_Failed \(error)")
                 NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
                 completion(false)
             }

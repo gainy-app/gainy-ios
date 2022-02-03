@@ -34,8 +34,25 @@ extension UserProfileManager {
         }
     }
     
+    /// Get Rec Colls with retry
+    /// - Returns: list of cols or empty list
+    func getRecommenedCollectionsWithRetry() async -> [RemoteShortCollectionDetails] {
+        var recs = await getRecommenedCollections()
+        if recs.isEmpty {
+            recs = await getRecommenedCollections()
+            if recs.isEmpty {
+                return await getRecommenedCollections()
+            } else {
+                return [RemoteShortCollectionDetails]()
+            }
+        } else {
+            return recs
+        }
+    }
+    
     func getRecommenedCollections() async -> [RemoteShortCollectionDetails] {
         guard let profileID = self.profileID else {
+            dprint("Err_FetchRecommendedCollectionsQuery_1 [No profile ID]")
             return [RemoteShortCollectionDetails]()
         }
         return await
@@ -45,13 +62,13 @@ extension UserProfileManager {
                 switch result {
                 case .success(let graphQLResult):
                     guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
-                        NotificationManager.shared.showError("Error fetching Recommended Collections")
+                        dprint("Err_FetchRecommendedCollectionsQuery_2 \(graphQLResult)")
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return
                     }
                     continuation.resume(returning:collections)
                 case .failure(let error):
-                    dprint("GetRecommenedCollections failed. Error: \(error)")
+                    dprint("Err_FetchRecommendedCollectionsQuery_3 Error: \(error)")
                     continuation.resume(returning: [RemoteShortCollectionDetails]())
                 }
             }
