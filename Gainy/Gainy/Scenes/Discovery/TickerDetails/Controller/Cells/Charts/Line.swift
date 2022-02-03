@@ -52,10 +52,16 @@ public struct Line: View {
         }
         return 0
     }
-    var path: Path {
-        let points = self.data.onlyPoints()        
-        return curvedLines ? Path.quadCurvedPathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight), globalOffset: minDataValue) : Path.linePathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
+    var curvedPath: Path {
+        let points = self.data.onlyPoints()
+        return Path.quadCurvedPathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight), globalOffset: minDataValue)
     }
+    
+    var plainPath: Path {
+        let points = self.data.onlyPoints()
+        return Path.linePathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
+    }
+    
     var closedPath: Path {
         let points = self.data.onlyPoints()
         return curvedLines ? Path.quadClosedCurvedPathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight), globalOffset: minDataValue) : Path.closedLinePathWithPoints(points: points, step: CGPoint(x: stepWidth, y: stepHeight))
@@ -71,18 +77,34 @@ public struct Line: View {
                     .transition(.opacity)
                     .animation(.easeIn(duration: 1.6))
             }
-            self.path
-                .trim(from: 0, to: self.showFull ? 1:0)
-                .stroke(LinearGradient(gradient: gradient.getGradient(), startPoint: .leading, endPoint: .trailing) ,style: StrokeStyle(lineWidth: 2, lineJoin: .round))
-                .rotationEffect(.degrees(180), anchor: .center)
-                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-                .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
-                .onAppear {
-                    self.showFull = true
+            if data.points.count > 2 {
+                self.curvedPath
+                    .trim(from: 0, to: self.showFull ? 1:0)
+                    .stroke(LinearGradient(gradient: gradient.getGradient(), startPoint: .leading, endPoint: .trailing) ,style: StrokeStyle(lineWidth: 2, lineJoin: .round))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
+                    .onAppear {
+                        self.showFull = true
+                    }
+                    .onDisappear {
+                        self.showFull = false
+                    }
+            } else {
+                self.plainPath
+                    .trim(from: 0, to: self.showFull ? 1:0)
+                    .stroke(LinearGradient(gradient: gradient.getGradient(), startPoint: .leading, endPoint: .trailing) ,style: StrokeStyle(lineWidth: 2, lineJoin: .round))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .animation(Animation.easeOut(duration: 1.2).delay(Double(self.index)*0.4))
+                    .onAppear {
+                        self.showFull = true
+                    }
+                    .onDisappear {
+                        self.showFull = false
+                    }
             }
-            .onDisappear {
-                self.showFull = false
-            }
+            
             if(self.showIndicator && !isSPYVisible) {
                 MagnifierRect(currentNumber: $indicatorVal)
                     .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80))
@@ -95,8 +117,13 @@ public struct Line: View {
     }
     
     func getClosestPointOnPath(touchLocation: CGPoint) -> CGPoint {
-        let closest = self.path.point(to: touchLocation.x)
-        return closest
+        if data.points.count > 2 {
+            let closest = self.curvedPath.point(to: touchLocation.x)
+            return closest
+        } else {
+            let closest = self.plainPath.point(to: touchLocation.x)
+            return closest
+        }
     }
     
 }

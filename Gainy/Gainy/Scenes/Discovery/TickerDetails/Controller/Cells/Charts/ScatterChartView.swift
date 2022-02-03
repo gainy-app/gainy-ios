@@ -240,6 +240,7 @@ struct ScatterChartView: View {
             ZStack {
                 if viewModel.chartData.onlyPoints().uniqued().count > 1 {
                     LineView(data: viewModel.chartData, title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                    //LineView(data: ChartData.init(points: [45, 30]), title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
                 } else {
                     VStack {
                         Spacer()
