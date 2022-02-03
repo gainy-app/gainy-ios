@@ -120,7 +120,6 @@ final class CustomInterceptor: ApolloInterceptor {
         func makeRequest() {
             if Thread.isMainThread {
                 DispatchQueue.global(qos: .background).async {
-                    print("REQ TRACK\(request.operation.operationName)")
                     chain.proceedAsync(request: request,
                                        response: response,
                                        completion: completion)

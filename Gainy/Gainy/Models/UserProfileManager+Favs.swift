@@ -44,16 +44,14 @@ extension UserProfileManager {
                 
                 switch result {
                 case .success(let graphQLResult):
-                    
                     guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
                         NotificationManager.shared.showError("Error fetching Recommended Collections")
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return
                     }
                     continuation.resume(returning:collections)
-                    
                 case .failure(let error):
-                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dprint("GetRecommenedCollections failed. Error: \(error)")
                     continuation.resume(returning: [RemoteShortCollectionDetails]())
                 }
             }
