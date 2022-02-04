@@ -24,6 +24,7 @@ enum AuthorizationStatus: Int {
     case authorizedFully = 4
     case authorizedNeedCreateProfile = 5
     case notAuthorized = 6
+    case authorizingFailed_EmailAlreadyInUse = 7
 }
 
 final class AuthorizationManager {
@@ -177,6 +178,28 @@ final class AuthorizationManager {
                                              unexpectedPurchaseSource: onboardingInfo.unexpectedPurchasesSource)
         Network.shared.apollo.clearCache()
         Network.shared.apollo.perform(mutation: query) { result in
+            
+            if let error = (try? result.get().errors?.first) {
+                
+                let extensions: [String : Any]? = error.extensions
+                let code: String? = extensions?["code"] as? String
+                if let code = code, code == "constraint-violation" {
+                    let message = error.message
+                    if let message = message, message.contains("profile_email_key") {
+                        self.authorizationStatus = .authorizingFailed;
+                        GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+                        completion(.authorizingFailed_EmailAlreadyInUse)
+                        return
+                    }
+                }
+                
+                // TODO: Serhii - Handle more possible errors?
+                self.authorizationStatus = .authorizingFailed
+                GainyAnalytics.logEvent("sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+                completion(self.authorizationStatus)
+                return
+            }
+            
             
             guard (try? result.get().data) != nil else {
                 self.authorizationStatus = .authorizingFailed

@@ -187,14 +187,12 @@ class PersonalizationIndicatorsViewController: BaseViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
                 return
             }
-            if let email = self.coordinator?.profileInfoBuilder.email {
-                if email.count > 0 {
-                    self.coordinator?.pushOnboardingFinalizingViewController()
+            if let coordinator = self.coordinator {
+                if coordinator.authorizationManager.isAuthorized() {
+                    self.coordinator?.pushPersonalInfoViewController()
                 } else {
-                    self.coordinator?.presentAuthorizationViewController(isOnboardingDone: true)
+                    self.coordinator?.pushAuthorizationViewController(isOnboardingDone: true)
                 }
-            } else {
-                self.coordinator?.presentAuthorizationViewController(isOnboardingDone: true)
             }
             
             return
@@ -316,7 +314,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         case .investingApproach:
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "investingApproach", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.90)
-            let doneButtonTitle = NSLocalizedString("Done", comment: "Done button title")
+            let doneButtonTitle = NSLocalizedString("Next", comment: "Next button title")
             self.nextButton.setTitle(doneButtonTitle, for: UIControl.State.normal)
             if let selectedApproaches = self.selectedApproaches {
                 self.setNextButtonHidden(isHidden: selectedApproaches.count == 0)

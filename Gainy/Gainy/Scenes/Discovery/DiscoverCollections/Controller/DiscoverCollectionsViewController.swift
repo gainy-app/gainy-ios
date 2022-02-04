@@ -599,7 +599,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     item.id == yourCollectionItem.id
                 })
                 self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                    
+                    self.addNextButtonAsNeeded()
                 })
             }
         }
@@ -773,6 +773,23 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         onGoToCollectionDetails?(collectionPosition)
     }
     
+    private func addNextButtonAsNeeded() {
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        guard let yourCollections = viewModel?.yourCollections else {return}
+        guard let watchlistCollections = viewModel?.watchlistCollections else {return}
+        let empty = yourCollections.isEmpty && watchlistCollections.isEmpty
+        if (!empty) {
+            let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
+            let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
+            if !shown {
+                UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
+                self.showNextButton = true
+                addBottomButton()
+                return
+            }
+        }
+    }
+    
     private func initViewModelsFromData() {
         viewModel?.yourCollections = UserProfileManager.shared
             .yourCollections
@@ -786,6 +803,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         } else {
             viewModel?.watchlistCollections.removeAll()
         }
+        
+        self.addNextButtonAsNeeded()
         
         var recColls: [RecommendedCollectionViewCellModel] = []
         

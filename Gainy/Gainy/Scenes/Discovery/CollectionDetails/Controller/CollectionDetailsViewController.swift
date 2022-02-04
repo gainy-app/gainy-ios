@@ -852,14 +852,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()
                 self?.hideLoader()
-                
-                let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
-                let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-                if !shown {
-                    UserDefaults.standard.set(true, forKey: discoverShownForProfileKey)
-                    self?.onDiscoverCollections?(true)
-                    return
-                }
             }
         }
     }

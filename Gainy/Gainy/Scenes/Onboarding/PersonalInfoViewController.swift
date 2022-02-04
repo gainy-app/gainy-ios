@@ -12,8 +12,6 @@ final class PersonalInfoViewController: BaseViewController {
     weak var coordinator: OnboardingCoordinator?
     weak var authorizationManager: AuthorizationManager?
     
-    public var onboardingDone: Bool?
-    
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var registerButton: BorderButton!
     @IBOutlet private weak var firstNameTextField: GainyTextField!
@@ -64,19 +62,13 @@ final class PersonalInfoViewController: BaseViewController {
         self.coordinator?.profileInfoBuilder.lastName = self.lastNameTextField.text
         self.coordinator?.profileInfoBuilder.email = self.emailTextField.text
         self.coordinator?.profileInfoBuilder.legalAddress = self.legalAddressTextView.text
-        
-        let onboardingFinished = self.onboardingDone ?? false
-        if onboardingFinished {
-            self.coordinator?.presentOnboardingFinalizingViewController()
-        } else {
-            self.coordinator?.setRootIntroductionViewController()
-        }
+        self.coordinator?.presentOnboardingFinalizingViewController()
     }
     
-    @objc private func closeButtonTap(sender: UIBarButtonItem) {
+    @objc private func backButtonTap(sender: UIBarButtonItem) {
         
-        GainyAnalytics.logEvent("personalization_info_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
-        self.coordinator?.dismissModule()
+        GainyAnalytics.logEvent("personalization_info_back", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPersonalInfo"])
+        self.coordinator?.popModule()
     }
     
     @objc private func didTapDone(sender: Any?) {
@@ -114,7 +106,6 @@ final class PersonalInfoViewController: BaseViewController {
     
     private func setUpNavigationBar() {
         
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
                 NSAttributedString.Key.foregroundColor: UIColor.black,
             NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
@@ -123,11 +114,10 @@ final class PersonalInfoViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.title = NSLocalizedString("Welcome on board", comment: "Welcome on board").uppercased()
    
-        let closeImage = UIImage(named: "iconClose")
-        let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
-        closeItem.tintColor = UIColor.black
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        self.navigationItem.rightBarButtonItems = [closeItem]
+        let backImage = UIImage(named: "iconArrowLeft")
+        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
+        backItem.tintColor = UIColor.black
+        self.navigationItem.leftBarButtonItems = [backItem]
     }
     
     private func setUpTextFields() {

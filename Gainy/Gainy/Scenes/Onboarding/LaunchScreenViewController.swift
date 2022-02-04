@@ -96,7 +96,7 @@ class LaunchScreenViewController: BaseViewController {
         
         GainyAnalytics.shared.isLogin = true
         GainyAnalytics.logEvent("sign_in_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LaunchScreen"])
-        self.coordinator?.presentAuthorizationViewController()
+        self.coordinator?.pushAuthorizationViewController(isOnboardingDone: false)
     }
     
     @IBAction func getStartedTouchUpInside(_ sender: Any) {

@@ -74,7 +74,13 @@ final class AuthorizationViewController: BaseViewController {
     @objc func closeButtonTap(sender: UIBarButtonItem) {
         
         GainyAnalytics.logEvent("authorization_close_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
-        self.coordinator?.dismissModule()
+        self.coordinator?.popToRootModule()
+    }
+    
+    @objc func backButtonTap(sender: UIBarButtonItem) {
+        
+        GainyAnalytics.logEvent("authorization_back_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+        self.coordinator?.popModule()
     }
     
     private func handleAuthorizationStatus(authorizationStatus: AuthorizationStatus) {
@@ -90,8 +96,12 @@ final class AuthorizationViewController: BaseViewController {
                 GainyAnalytics.logEvent("login_success")
             }
         } else if authorizationStatus == .authorizedNeedCreateProfile {
-            GainyAnalytics.logEvent("authorization_need_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
-            self.coordinator?.pushPersonalInfoViewController(isOnboardingDone: self.onboardingDone)
+            if let done = self.onboardingDone, done == true {
+                GainyAnalytics.logEvent("authorization_need_create_profile", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+                self.coordinator?.pushPersonalInfoViewController()
+            } else {
+                self.coordinator?.pushIntroductionViewController()
+            }
         } else if authorizationStatus != .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.")
@@ -109,11 +119,15 @@ final class AuthorizationViewController: BaseViewController {
                 NSAttributedString.Key.kern: 1.25]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.title = NSLocalizedString("Welcome on board", comment: "Welcome on board").uppercased()
-   
+        self.navigationController?.navigationBar.backgroundColor = UIColor.clear
+        self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
+        let backImage = UIImage(named: "iconArrowLeft")
+        let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
+        backItem.tintColor = UIColor.black
         let closeImage = UIImage(named: "iconClose")
         let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
         closeItem.tintColor = UIColor.black
+        self.navigationItem.leftBarButtonItems = [backItem]
         self.navigationItem.rightBarButtonItems = [closeItem]
     }
     
@@ -125,7 +139,7 @@ final class AuthorizationViewController: BaseViewController {
         var title = NSLocalizedString("Hi there!", comment: "Hi there!")
         self.imageView.image = UIImage.init(named: "sign-in-img")
         self.imageViewHeightConstraint.constant = 184.0
-        if self.onboardingDone != nil {
+        if let done = self.onboardingDone, done == true {
             title = NSLocalizedString("Almost done!", comment: "Almost done!")
             self.imageView.image = UIImage.init(named: "sign-up-img")
             self.imageViewHeightConstraint.constant = 200.0
