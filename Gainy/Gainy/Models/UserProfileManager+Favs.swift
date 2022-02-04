@@ -66,6 +66,7 @@ extension UserProfileManager {
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return
                     }
+                    dprint("FetchRecommendedCollectionsQuery_Done")
                     continuation.resume(returning:collections)
                 case .failure(let error):
                     dprint("Err_FetchRecommendedCollectionsQuery_3 Error: \(error)")

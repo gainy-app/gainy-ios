@@ -7,6 +7,7 @@
 
 import UIKit
 import SwiftDate
+import BugfenderLibrary
 
 struct AppProfileMetricsSetting {
     
@@ -160,6 +161,7 @@ final class UserProfileManager {
                 self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
                     item.id
                 })
+                Bugfender.setDeviceString(profileID, forKey: "ProfileID")
                 completion(true)
                 
             case .failure(let error):
