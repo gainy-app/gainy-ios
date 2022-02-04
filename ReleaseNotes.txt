@@ -1,4 +1,4 @@
-iOS v1.1.2 #149 available
+iOS v1.1.2 #150 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• More Analytics added
+• Onboarding + Authorization refactor (error handling, no internet, navigation issues and crashes, UI fixes etc.)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
