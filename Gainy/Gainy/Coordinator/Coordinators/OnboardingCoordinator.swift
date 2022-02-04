@@ -34,13 +34,6 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         }
     }
     
-    public func setRootIntroductionViewController() {
-        let vc = viewControllerFactory.instantiateIntroduction(coordinator: self)
-        vc.coordinator = self
-        self.dismissModule()
-        router.setRootModule(vc)
-    }
-    
     public func pushIntroductionViewController() {
         let vc = viewControllerFactory.instantiateIntroduction(coordinator: self)
         vc.coordinator = self
@@ -66,31 +59,20 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.push(vc)
     }
     
-    public func presentAuthorizationViewController(isOnboardingDone: Bool? = nil) {
+    public func pushAuthorizationViewController(isOnboardingDone: Bool? = nil) {
         
         let vc = viewControllerFactory.instantiateAuthorization(coordinator: self)
         vc.coordinator = self
-        vc.authorizationManager = self.authorizationManager
         vc.onboardingDone = isOnboardingDone
-        let navigationController = UINavigationController.init(rootViewController: vc)
-        navigationController.modalPresentationStyle = .fullScreen
-        router.present(navigationController)
-        self.authenticationNavigationController = navigationController
+        vc.authorizationManager = self.authorizationManager
+        router.push(vc)
     }
     
-    public func pushPersonalInfoViewController(isOnboardingDone: Bool? = nil) {
+    public func pushPersonalInfoViewController() {
         let vc = viewControllerFactory.instantiatePersonalInfo(coordinator: self)
         vc.coordinator = self
         vc.authorizationManager = self.authorizationManager
-        vc.onboardingDone = isOnboardingDone
-        if let authenticationNavigationController = self.authenticationNavigationController {
-            authenticationNavigationController.pushViewController(vc, animated: true)
-        } else {
-            let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
-            router.present(navigationController)
-            self.authenticationNavigationController = navigationController
-        }
+        router.push(vc)
     }
     
     public func presentOnboardingFinalizingViewController() {
@@ -98,19 +80,20 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.coordinator = self
         vc.coordinator = self
         vc.authorizationManager = self.authorizationManager
-        if let authenticationNavigationController = self.authenticationNavigationController {
-            authenticationNavigationController.pushViewController(vc, animated: true)
-        } else {
-            let navigationController = UINavigationController.init(rootViewController: vc)
-            navigationController.modalPresentationStyle = .fullScreen
-            router.present(navigationController)
-            self.authenticationNavigationController = navigationController
-        }
+        let navigationController = UINavigationController.init(rootViewController: vc)
+        navigationController.modalPresentationStyle = .fullScreen
+        router.present(navigationController)
+        self.authenticationNavigationController = navigationController
     }
     
     public func dismissModule() {
         
         router.dismissModule()
+        self.authenticationNavigationController = nil
+    }
+    
+    func dismissModule(animated: Bool, completion: (() -> Void)?) {
+        router.dismissModule(animated: animated, completion: completion)
         self.authenticationNavigationController = nil
     }
     
@@ -128,7 +111,7 @@ final class OnboardingCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     // MARK: Properties
 
-    private let authorizationManager: AuthorizationManager
+    public let authorizationManager: AuthorizationManager
     private let router: RouterProtocol
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
