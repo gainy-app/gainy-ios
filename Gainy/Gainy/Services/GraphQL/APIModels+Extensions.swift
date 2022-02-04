@@ -86,6 +86,11 @@ extension RemoteCollectionDetails: Reorderable {
     var orderElement: OrderElement { id ?? 0 }
 }
 
+extension RemoteShortCollectionDetails: Reorderable {
+    typealias OrderElement = Int
+    var orderElement: OrderElement { id ?? 0 }
+}
+
 extension RemoteCollectionDetails {
     var prefetchedTickers: [TickerDetails] {
         CollectionsManager.shared.prefetchedCollectionsData[id ?? -1] ?? []

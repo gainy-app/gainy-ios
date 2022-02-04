@@ -43,7 +43,7 @@ extension UserProfileManager {
             if recs.isEmpty {
                 return await getRecommenedCollections()
             } else {
-                return [RemoteShortCollectionDetails]()
+                return recs
             }
         } else {
             return recs
@@ -71,6 +71,32 @@ extension UserProfileManager {
                 case .failure(let error):
                     dprint("Err_FetchRecommendedCollectionsQuery_3 Error: \(error)")
                     continuation.resume(returning: [RemoteShortCollectionDetails]())
+                }
+            }
+        }
+    }
+    
+    func getRecommenedCollectionIDs() async -> [Int] {
+        guard let profileID = self.profileID else {
+            dprint("Err_FetchRecommendedCollectionIDs_1 [No profile ID]")
+            return [Int]()
+        }
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.apollo.fetch(query: FetchRecommendedCollectionIDsQuery(profileId: profileID)) {result in
+                
+                switch result {
+                case .success(let graphQLResult):
+                    guard let collectionIDs = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.id}) else {
+                        dprint("Err_FetchRecommendedCollectionIDs_2 \(graphQLResult)")
+                        continuation.resume(returning: [Int]())
+                        return
+                    }
+                    dprint("FetchRecommendedCollectionIDs_Done")
+                    continuation.resume(returning:collectionIDs)
+                case .failure(let error):
+                    dprint("Err_FetchRecommendedCollectionIDs_3 Error: \(error)")
+                    continuation.resume(returning: [Int]())
                 }
             }
         }

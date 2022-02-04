@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftDate
-import BugfenderLibrary
+import BugfenderSDK
 
 struct AppProfileMetricsSetting {
     
@@ -161,7 +161,7 @@ final class UserProfileManager {
                 self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
                     item.id
                 })
-                Bugfender.setDeviceString(profileID, forKey: "ProfileID")
+                Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
                 completion(true)
                 
             case .failure(let error):
@@ -218,7 +218,8 @@ final class UserProfileManager {
         Task {
             async let favs = getFavCollections()
             async let recommeneded = getRecommenedCollectionsWithRetry()
-            let (favsRes, recommenededRes) = await (favs, recommeneded)
+            async let recommendedIDs = getRecommenedCollectionIDs()
+            let (favsRes, recommenededRes, recommendedIDsRes) = await (favs, recommeneded, recommendedIDs)
             
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
@@ -233,7 +234,7 @@ final class UserProfileManager {
                 return
             }
             
-            let firstCollections = recommenededRes.prefix(24)
+            let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
             
             self.recommendedCollections = firstCollections.map {
                 CollectionDTOMapper.map($0)
