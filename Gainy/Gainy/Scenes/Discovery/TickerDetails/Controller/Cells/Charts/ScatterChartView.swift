@@ -242,22 +242,41 @@ struct ScatterChartView: View {
                     LineView(data: viewModel.chartData, title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
                     //LineView(data: ChartData.init(points: [45, 30]), title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
                 } else {
-                    VStack {
-                        Spacer()
-                        HStack {
-                            Spacer()
-                            VStack {
-                                Text("Not enough data")
+                    //no_data_graph_down
+                    if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
+                        ZStack {
+                            Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                            VStack(spacing: 8.0) {
+                                Text(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))
+                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                Text(metrics.lastKnownPrice?.price ?? "")
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                    .font(UIFont.proDisplaySemibold(12).uiFont)
-                                Rectangle()
-                                    .fill(UIColor(named: "mainGreen")!.uiColor)
-                                    .frame(height: 2)
+                                    .font(UIFont.compactRoundedSemibold(24).uiFont)
+                                Text("Market is open, but we have no data yet\nThis is the last known price")
+                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                    .multilineTextAlignment(.center)
                             }
-                            Spacer()
                         }
-                        Spacer()
                     }
+                    
+//                    VStack {
+//                        Spacer()
+//                        HStack {
+//                            Spacer()
+//                            VStack {
+//                                Text("Not enough data")
+//                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
+//                                    .font(UIFont.proDisplaySemibold(12).uiFont)
+//                                Rectangle()
+//                                    .fill(UIColor(named: "mainGreen")!.uiColor)
+//                                    .frame(height: 2)
+//                            }
+//                            Spacer()
+//                        }
+//                        Spacer()
+//                    }
                 }
                 //            VStack(alignment: .leading) {
                 //                Spacer()

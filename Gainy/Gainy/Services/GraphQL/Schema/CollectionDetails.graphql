@@ -97,6 +97,9 @@ price_change_all
       relative_daily_change
       time
       symbol
+      last_known_price
+        last_known_price_datetime
+previous_day_close_price
     }
     match_score {
       category_matches

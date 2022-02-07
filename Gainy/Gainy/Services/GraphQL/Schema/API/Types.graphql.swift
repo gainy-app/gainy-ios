@@ -5449,11 +5449,14 @@ public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
   ///   - absoluteDailyChange
   ///   - actualPrice
   ///   - dailyVolume
+  ///   - lastKnownPrice
+  ///   - lastKnownPriceDatetime
+  ///   - previousDayClosePrice
   ///   - relativeDailyChange
   ///   - symbol
   ///   - time
-  public init(absoluteDailyChange: Swift.Optional<order_by?> = nil, actualPrice: Swift.Optional<order_by?> = nil, dailyVolume: Swift.Optional<order_by?> = nil, relativeDailyChange: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, time: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
+  public init(absoluteDailyChange: Swift.Optional<order_by?> = nil, actualPrice: Swift.Optional<order_by?> = nil, dailyVolume: Swift.Optional<order_by?> = nil, lastKnownPrice: Swift.Optional<order_by?> = nil, lastKnownPriceDatetime: Swift.Optional<order_by?> = nil, previousDayClosePrice: Swift.Optional<order_by?> = nil, relativeDailyChange: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, time: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
   }
 
   public var absoluteDailyChange: Swift.Optional<order_by?> {
@@ -5480,6 +5483,33 @@ public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "daily_volume")
+    }
+  }
+
+  public var lastKnownPrice: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["last_known_price"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price")
+    }
+  }
+
+  public var lastKnownPriceDatetime: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["last_known_price_datetime"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price_datetime")
+    }
+  }
+
+  public var previousDayClosePrice: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["previous_day_close_price"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "previous_day_close_price")
     }
   }
 
@@ -13214,11 +13244,14 @@ public struct ticker_realtime_metrics_bool_exp: GraphQLMapConvertible {
   ///   - absoluteDailyChange
   ///   - actualPrice
   ///   - dailyVolume
+  ///   - lastKnownPrice
+  ///   - lastKnownPriceDatetime
+  ///   - previousDayClosePrice
   ///   - relativeDailyChange
   ///   - symbol
   ///   - time
-  public init(_and: Swift.Optional<[ticker_realtime_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_realtime_metrics_bool_exp]?> = nil, absoluteDailyChange: Swift.Optional<float8_comparison_exp?> = nil, actualPrice: Swift.Optional<float8_comparison_exp?> = nil, dailyVolume: Swift.Optional<float8_comparison_exp?> = nil, relativeDailyChange: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, time: Swift.Optional<timestamp_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
+  public init(_and: Swift.Optional<[ticker_realtime_metrics_bool_exp]?> = nil, _not: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, _or: Swift.Optional<[ticker_realtime_metrics_bool_exp]?> = nil, absoluteDailyChange: Swift.Optional<float8_comparison_exp?> = nil, actualPrice: Swift.Optional<float8_comparison_exp?> = nil, dailyVolume: Swift.Optional<float8_comparison_exp?> = nil, lastKnownPrice: Swift.Optional<float8_comparison_exp?> = nil, lastKnownPriceDatetime: Swift.Optional<timestamp_comparison_exp?> = nil, previousDayClosePrice: Swift.Optional<float8_comparison_exp?> = nil, relativeDailyChange: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, time: Swift.Optional<timestamp_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
   }
 
   public var _and: Swift.Optional<[ticker_realtime_metrics_bool_exp]?> {
@@ -13272,6 +13305,33 @@ public struct ticker_realtime_metrics_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "daily_volume")
+    }
+  }
+
+  public var lastKnownPrice: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["last_known_price"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price")
+    }
+  }
+
+  public var lastKnownPriceDatetime: Swift.Optional<timestamp_comparison_exp?> {
+    get {
+      return graphQLMap["last_known_price_datetime"] as? Swift.Optional<timestamp_comparison_exp?> ?? Swift.Optional<timestamp_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price_datetime")
+    }
+  }
+
+  public var previousDayClosePrice: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["previous_day_close_price"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "previous_day_close_price")
     }
   }
 
@@ -19562,11 +19622,14 @@ public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
   ///   - absoluteDailyChange
   ///   - actualPrice
   ///   - dailyVolume
+  ///   - lastKnownPrice
+  ///   - lastKnownPriceDatetime
+  ///   - previousDayClosePrice
   ///   - relativeDailyChange
   ///   - symbol
   ///   - time
-  public init(absoluteDailyChange: Swift.Optional<float8?> = nil, actualPrice: Swift.Optional<float8?> = nil, dailyVolume: Swift.Optional<float8?> = nil, relativeDailyChange: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, time: Swift.Optional<timestamp?> = nil) {
-    graphQLMap = ["absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
+  public init(absoluteDailyChange: Swift.Optional<float8?> = nil, actualPrice: Swift.Optional<float8?> = nil, dailyVolume: Swift.Optional<float8?> = nil, lastKnownPrice: Swift.Optional<float8?> = nil, lastKnownPriceDatetime: Swift.Optional<timestamp?> = nil, previousDayClosePrice: Swift.Optional<float8?> = nil, relativeDailyChange: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, time: Swift.Optional<timestamp?> = nil) {
+    graphQLMap = ["absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time]
   }
 
   public var absoluteDailyChange: Swift.Optional<float8?> {
@@ -19593,6 +19656,33 @@ public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "daily_volume")
+    }
+  }
+
+  public var lastKnownPrice: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["last_known_price"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price")
+    }
+  }
+
+  public var lastKnownPriceDatetime: Swift.Optional<timestamp?> {
+    get {
+      return graphQLMap["last_known_price_datetime"] as? Swift.Optional<timestamp?> ?? Swift.Optional<timestamp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "last_known_price_datetime")
+    }
+  }
+
+  public var previousDayClosePrice: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["previous_day_close_price"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "previous_day_close_price")
     }
   }
 
@@ -19711,6 +19801,12 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
   /// column name
   case dailyVolume
   /// column name
+  case lastKnownPrice
+  /// column name
+  case lastKnownPriceDatetime
+  /// column name
+  case previousDayClosePrice
+  /// column name
   case relativeDailyChange
   /// column name
   case symbol
@@ -19724,6 +19820,9 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
       case "absolute_daily_change": self = .absoluteDailyChange
       case "actual_price": self = .actualPrice
       case "daily_volume": self = .dailyVolume
+      case "last_known_price": self = .lastKnownPrice
+      case "last_known_price_datetime": self = .lastKnownPriceDatetime
+      case "previous_day_close_price": self = .previousDayClosePrice
       case "relative_daily_change": self = .relativeDailyChange
       case "symbol": self = .symbol
       case "time": self = .time
@@ -19736,6 +19835,9 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
       case .absoluteDailyChange: return "absolute_daily_change"
       case .actualPrice: return "actual_price"
       case .dailyVolume: return "daily_volume"
+      case .lastKnownPrice: return "last_known_price"
+      case .lastKnownPriceDatetime: return "last_known_price_datetime"
+      case .previousDayClosePrice: return "previous_day_close_price"
       case .relativeDailyChange: return "relative_daily_change"
       case .symbol: return "symbol"
       case .time: return "time"
@@ -19748,6 +19850,9 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
       case (.absoluteDailyChange, .absoluteDailyChange): return true
       case (.actualPrice, .actualPrice): return true
       case (.dailyVolume, .dailyVolume): return true
+      case (.lastKnownPrice, .lastKnownPrice): return true
+      case (.lastKnownPriceDatetime, .lastKnownPriceDatetime): return true
+      case (.previousDayClosePrice, .previousDayClosePrice): return true
       case (.relativeDailyChange, .relativeDailyChange): return true
       case (.symbol, .symbol): return true
       case (.time, .time): return true
@@ -19761,6 +19866,9 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
       .absoluteDailyChange,
       .actualPrice,
       .dailyVolume,
+      .lastKnownPrice,
+      .lastKnownPriceDatetime,
+      .previousDayClosePrice,
       .relativeDailyChange,
       .symbol,
       .time,

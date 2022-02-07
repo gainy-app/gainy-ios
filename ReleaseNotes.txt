@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• 
+• No data for Stock View replaced with last known price
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

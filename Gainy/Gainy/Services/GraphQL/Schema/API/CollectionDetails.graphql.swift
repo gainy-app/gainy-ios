@@ -296,6 +296,9 @@ public struct RemoteTickerDetails: GraphQLFragment {
         relative_daily_change
         time
         symbol
+        last_known_price
+        last_known_price_datetime
+        previous_day_close_price
       }
       match_score {
         __typename
@@ -1073,6 +1076,9 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("time", type: .scalar(timestamp.self)),
         GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("last_known_price", type: .scalar(float8.self)),
+        GraphQLField("last_known_price_datetime", type: .scalar(timestamp.self)),
+        GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
       ]
     }
 
@@ -1082,8 +1088,8 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String? = nil) {
-      self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "actual_price": actualPrice, "relative_daily_change": relativeDailyChange, "time": time, "symbol": symbol])
+    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String? = nil, lastKnownPrice: float8? = nil, lastKnownPriceDatetime: timestamp? = nil, previousDayClosePrice: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "actual_price": actualPrice, "relative_daily_change": relativeDailyChange, "time": time, "symbol": symbol, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice])
     }
 
     public var __typename: String {
@@ -1128,6 +1134,33 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
+      }
+    }
+
+    public var lastKnownPrice: float8? {
+      get {
+        return resultMap["last_known_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "last_known_price")
+      }
+    }
+
+    public var lastKnownPriceDatetime: timestamp? {
+      get {
+        return resultMap["last_known_price_datetime"] as? timestamp
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "last_known_price_datetime")
+      }
+    }
+
+    public var previousDayClosePrice: float8? {
+      get {
+        return resultMap["previous_day_close_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "previous_day_close_price")
       }
     }
   }

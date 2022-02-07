@@ -89,6 +89,8 @@ final class GainyAnalytics {
         newParams["vp"] = "\(UIScreen.main.bounds.height)-\(UIScreen.main.bounds.width)"
         if  let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
+        } else {
+            newParams["uid"] = "anonymous"
         }
         newParams["ul"] = Locale.current.identifier
         Analytics.logEvent(name, parameters: newParams)
