@@ -247,16 +247,15 @@ struct ScatterChartView: View {
                         ZStack {
                             Image(uiImage: UIImage(named: "no_data_graph_up")!)
                             VStack(spacing: 8.0) {
-                                Text(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))
-                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                
+                            Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                .multilineTextAlignment(.center)
+                                
                                 Text(metrics.lastKnownPrice?.price ?? "")
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                     .font(UIFont.compactRoundedSemibold(24).uiFont)
-                                Text("Market is open, but we have no data yet\nThis is the last known price")
-                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
-                                    .multilineTextAlignment(.center)
                             }
                         }
                     }

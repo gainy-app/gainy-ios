@@ -442,9 +442,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.isLoadingTickers = true
         
         if self.collectionID == -1 {
-            CollectionsManager.shared.watchlistCollectionsLoading { models in
+            CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
                 if let cards = models.first?.cards {
-                    self.finishRefreshWithSorting(cards: cards) {
+                    self?.finishRefreshWithSorting(cards: cards) {
                         completion?()
                     }
                 }
