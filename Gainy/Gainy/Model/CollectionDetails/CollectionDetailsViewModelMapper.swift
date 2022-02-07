@@ -74,7 +74,7 @@ enum CollectionDetailsViewModelMapper {
             epsActual: model.tickerMetrics.epsActual.formatUsingAbbrevation(),
             epsEstimate: model.tickerMetrics.epsEstimate.formatUsingAbbrevation(),
             beatenQuarterlyEpsEstimationCountTtm: beatenQuarterlyEpsEstimationCountTtm,
-            epsSurprise: model.tickerMetrics.epsSurprise.formatUsingAbbrevation(),
+            epsSurprise: model.tickerMetrics.epsSurprise.percent,
             revenueEstimateAvg0y: model.tickerMetrics.revenueEstimateAvg0y.formatUsingAbbrevation(),
             revenueActual: model.tickerMetrics.revenueActual.formatUsingAbbrevation(),
             revenueTtm: model.tickerMetrics.revenueTtm.formatUsingAbbrevation(),

@@ -103,11 +103,11 @@ extension RemoteChartData: RemoteDateTimeConvertable {
         case .d1:
             formatter.dateFormat = "HH:mm"
             break
-        case .m1:
-            formatter.dateFormat = "MM-dd"
+        case .w1:
+            formatter.dateFormat = "MM-dd HH:mm"
             break
-        case .y5, .all:
-            formatter.dateFormat = "MM-yy"
+        case .y5:
+            formatter.dateFormat = "MM-dd"
             break
         default:
             formatter.dateFormat = "MM-dd"
@@ -126,11 +126,11 @@ extension GetPortfolioChartsQuery.Data.PortfolioChart : RemoteDateTimeConvertabl
         case .d1:
             formatter.dateFormat = "HH:mm"
             break
-        case .m1:
-            formatter.dateFormat = "MM-dd"
+        case .w1:
+            formatter.dateFormat = "MM-dd HH:mm"
             break
-        case .y5, .all:
-            formatter.dateFormat = "MM-yy"
+        case .y5:
+            formatter.dateFormat = "MM-dd"
             break
         default:
             formatter.dateFormat = "MM-dd"

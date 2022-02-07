@@ -95,6 +95,12 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
                 tagsHeaderLbl.isHidden = true
             }
+        } else {
+            scoreLbl.text = "0"
+            colorView.backgroundColor = UIColor.Gainy.mainRed
+            scoreLbl.textColor = UIColor(named: "mainText")
+            cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
+            tagsHeaderLbl.isHidden = true
         }
     }
     

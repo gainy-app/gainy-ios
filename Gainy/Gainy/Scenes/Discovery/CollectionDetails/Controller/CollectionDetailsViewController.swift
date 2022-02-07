@@ -267,8 +267,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 cell.onRefreshedCardsLoaded = { [weak self] newCards in
                     if newCards.count == 0 {
                         return
-                    }
-                    
+                    }                    
                     if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
                         oldModel.cards = newCards
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
