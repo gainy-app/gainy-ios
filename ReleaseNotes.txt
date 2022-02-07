@@ -8,6 +8,9 @@ Bugfixes
 :hammer_and_wrench: Improvements
 • No data for Stock View replaced with last known price
 
+*Model update*
+• realtime_metrics: added last_known_price, last_known_price_datetime, previous_day_close_price
+
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
