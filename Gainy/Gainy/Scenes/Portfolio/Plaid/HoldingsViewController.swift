@@ -31,20 +31,7 @@ final class HoldingsViewController: BaseViewController {
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
-    @IBOutlet weak var settingsLabel: UILabel!
-    @IBOutlet weak var sortLabel: UILabel!
-    @IBOutlet weak var sortButton: ResponsiveButton! {
-        didSet {
-            sortButton.layer.cornerRadius = 8.0
-            sortButton.clipsToBounds = true
-        }
-    }
-    @IBOutlet weak var settingsButton: ResponsiveButton! {
-        didSet {
-            settingsButton.layer.cornerRadius = 8.0
-            settingsButton.clipsToBounds = true
-        }
-    }
+    
     @IBOutlet weak var linkPlaidButton: UIButton!
     
     //MARK: - Outlets
@@ -94,8 +81,6 @@ final class HoldingsViewController: BaseViewController {
     }
     
     @objc func loadData() {
-        settingsButton.isUserInteractionEnabled = false
-        sortButton.isUserInteractionEnabled = false
         linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
@@ -106,11 +91,7 @@ final class HoldingsViewController: BaseViewController {
                 }
             }
             self?.tableView.hideSkeleton()
-            self?.settingsButton.isUserInteractionEnabled = true
-            self?.sortButton.isUserInteractionEnabled = true
             self?.linkPlaidButton.isUserInteractionEnabled = true
-            self?.updateSortButton()
-            self?.updateFilterButtonTitle()
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         }
@@ -122,7 +103,7 @@ final class HoldingsViewController: BaseViewController {
     
     //MARK: - Actions
     
-    @IBAction func onSortButtonTapped(_ sender: Any) {
+    func onSortButtonTapped() {
         
         guard self.presentedViewController == nil else {return}
         
@@ -138,7 +119,7 @@ final class HoldingsViewController: BaseViewController {
         self.showLinkUnlinkPlaid()
     }
     
-    @IBAction func onSettingsButtonTapped(_ sender: Any) {
+    func onSettingsButtonTapped() {
         
         guard self.presentedViewController == nil else {return}
         
@@ -146,18 +127,7 @@ final class HoldingsViewController: BaseViewController {
         self.showFilteringPanel()
     }
     
-    private func updateSortButton() {
-        
-        guard let userID = UserProfileManager.shared.profileID else {
-            return
-        }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
-            return
-        }
-        
-        let title = settings.sorting.title
-        sortLabel.text = title
-    }
+    
     
     private func setupPanel() {
         fpc = FloatingPanelController()
@@ -205,29 +175,6 @@ final class HoldingsViewController: BaseViewController {
         self.present(self.fpc, animated: true, completion: nil)
     }
     
-    private func updateFilterButtonTitle() {
-        
-        guard let userID = UserProfileManager.shared.profileID else {
-            return
-        }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
-            return
-        }
-        
-        
-        let selectedInterests = settings.interests.filter { item in
-            item.selected
-        }
-        let selectedCategories = settings.categories.filter { item in
-            item.selected
-        }
-        let selectedSecurityTypes = settings.securityTypes.filter { item in
-            item.selected
-        }
-        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count + settings.disabledAccounts.count
-        self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All"
-    }
-    
     private func showLinkUnlinkPlaid() {
         
         self.linkUnlinkVC.delegate = self
@@ -272,7 +219,6 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         vc.dismiss(animated: true)
         viewModel.settings = settings
         tableView.reloadData()
-        updateSortButton()
     }
 }
 
@@ -296,7 +242,6 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         viewModel.settings = settings
         tableView.reloadData()
-        self.updateFilterButtonTitle()
     }
 }
 

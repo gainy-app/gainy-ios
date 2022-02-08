@@ -49,10 +49,15 @@ struct PortfolioScatterChartView: View {
     var body: some View {
         VStack {
             headerView
+            ZStack {
+            LinearGradient(
+                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
+                    startPoint: .top, endPoint: .bottom)
             chartView
                 .padding(.leading, 8)
                 .padding(.trailing, 8)
                 .frame(height: 220)
+            }
             Spacer()
             sppView
                 .offset(y: -16)
@@ -91,7 +96,8 @@ struct PortfolioScatterChartView: View {
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(14).uiFont)
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                } .opacity(0.0)
+                } .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                    .animation(.none)
             }
             HStack(spacing: 4) {
                 Text(viewModel.balance.price)
@@ -103,8 +109,8 @@ struct PortfolioScatterChartView: View {
                     .padding(.all, 0)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                
-                .opacity(0.0)
+                    .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                    .animation(.none)
             }
         }
         .padding(.leading, 16)
@@ -175,7 +181,6 @@ struct PortfolioScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .background(Rectangle().fill().foregroundColor(.white))
             .gesture(DragGesture(minimumDistance: 0)
                         .onChanged({ value in
                 lineViewModel.dragLocation = value.location
@@ -253,10 +258,13 @@ struct PortfolioScatterChartView: View {
                             .cornerRadius(16.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
+                            .padding(.all, 0)
                         Text(tag.rawValue)
                             .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
+                            .padding(.all, 0)
                     }
+                    .padding(.all, 0)
                     .animation(.easeIn)
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
@@ -267,7 +275,7 @@ struct PortfolioScatterChartView: View {
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        (UIScreen.main.bounds.width - 16.0 * 2.0 - 2.0 * 6) / 7.0
+        (UIScreen.main.bounds.width - 10.0 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 

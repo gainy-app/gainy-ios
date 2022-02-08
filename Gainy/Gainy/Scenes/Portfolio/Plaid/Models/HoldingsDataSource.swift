@@ -15,6 +15,9 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel)
     func requestOpenCollection(withID id: Int)
     func scrollChanged(_ offsetY: CGFloat)
+    
+        func onSortButtonTapped()
+        func onSettingsButtonTapped()
 }
 
 final class HoldingsDataSource: NSObject {
@@ -116,14 +119,15 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.tableView = tableView
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 6.0)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
-
+            cell.updateButtons()
+            cell.delegate = self
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
@@ -156,7 +160,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return tableView.sk.isSkeletonActive ? 252.0 : chartHeight
+            return tableView.sk.isSkeletonActive ? 252.0 : 426.0
         } else {
             return cellHeights[indexPath.row] ?? 0.0
         }
@@ -208,5 +212,15 @@ extension HoldingsDataSource: HoldingTableViewCellDelegate {
     func requestOpenCollection(withID id: Int) {
         
         self.delegate?.requestOpenCollection(withID: id)
+    }
+}
+
+extension HoldingsDataSource: HoldingChartTableViewCellDelegate {
+    func onSortButtonTapped() {
+        delegate?.onSortButtonTapped()
+    }
+    
+    func onSettingsButtonTapped() {
+        delegate?.onSettingsButtonTapped()
     }
 }
