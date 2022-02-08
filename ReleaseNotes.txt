@@ -1,4 +1,4 @@
-iOS v1.1.3 #151 available
+iOS v1.1.4 #151 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 

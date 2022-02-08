@@ -38,20 +38,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     @objc
     private func sendLaunch() {
         AppsFlyerLib.shared().start(completionHandler: { (dictionary, error) in
-                    if (error != nil){
-                        //dprint(error ?? "")
-                        return
-                    } else {
-                        dprint("AppsFlyerLib started")
-                        return
-                    }
-                })
-        
-            GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
+            if (error != nil){
+                //dprint(error ?? "")
+                return
+            } else {
+                dprint("AppsFlyerLib started")
+                return
+            }
+        })        
         NotificationCenter.default.post(name: NotificationManager.appBecomeActiveNotification, object: nil)
-        if Auth.auth().currentUser?.uid != nil {
-            UserProfileManager.shared.updatePlaidPortfolio()
-        }
     }
     
     private func initializeAppsFlyer() {
@@ -59,7 +54,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         AppsFlyerLib.shared().appleAppID = AFConfig.appId
         AppsFlyerLib.shared().delegate = self
         AppsFlyerLib.shared().waitForATTUserAuthorization(timeoutInterval: 60)
-
+        
         AppsFlyerLib.shared().isDebug = true
         
         NotificationCenter
@@ -74,6 +69,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                          selector: NSSelectorFromString("sendClose"),
                          name: UIApplication.didEnterBackgroundNotification,
                          object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("trackOpen"),
+                         name: UIApplication.willEnterForegroundNotification,
+                         object: nil)
     }
     
     @objc
@@ -81,22 +82,30 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         GainyAnalytics.logEvent("app_close", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous"])
     }
     
+    @objc
+    private func trackOpen() {
+        GainyAnalytics.logEvent("app_open", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous" ])
+        if Auth.auth().currentUser?.uid != nil {
+            UserProfileManager.shared.updatePlaidPortfolio()
+        }
+    }
+    
     private func initFirebase() {
         FirebaseApp.configure()
     }
     
     private func initDataDog() {
-//        Datadog.initialize(
-//            appContext: .init(),
-//            trackingConsent: .granted,
-//            configuration: Datadog.Configuration
-//                .builderUsing(clientToken: "pub0e6507a595775f78e400ca18143aab43", environment: "production")
-//                .set(serviceName: "gainy-ios")
-//                .build()
-//        )
-//#if DEBUG
-//        Datadog.verbosityLevel = .debug
-//#endif
+        //        Datadog.initialize(
+        //            appContext: .init(),
+        //            trackingConsent: .granted,
+        //            configuration: Datadog.Configuration
+        //                .builderUsing(clientToken: "pub0e6507a595775f78e400ca18143aab43", environment: "production")
+        //                .set(serviceName: "gainy-ios")
+        //                .build()
+        //        )
+        //#if DEBUG
+        //        Datadog.verbosityLevel = .debug
+        //#endif
     }
     
     private var config = Configuration()
@@ -161,27 +170,27 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let sceneDelegate = windowScene.delegate as? SceneDelegate
+              let sceneDelegate = windowScene.delegate as? SceneDelegate
         else {
-          return false
+            return false
         }
-
+        
         // The Plaid Link SDK ignores unexpected URLs passed to `continue(from:)` as
         // per Apple’s recommendations, so there is no need to filter out unrelated URLs.
         // Doing so may prevent a valid URL from being passed to `continue(from:)` and
         // OAuth may not continue as expected.
         // For details see https://plaid.com/docs/link/ios/#set-up-universal-links
         guard let linkOAuthHandler = sceneDelegate.window?.rootViewController as? LinkOAuthHandling,
-            let handler = linkOAuthHandler.linkHandler
+              let handler = linkOAuthHandler.linkHandler
         else {
             return false
         }
-
+        
         // Continue the Link flow
         handler.continue(from: webpageURL)
         return true
     }
-    // <!-- SMARTDOWN_OAUTH_SUPPORT -->    
+    // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     
 }
 
@@ -207,20 +216,20 @@ extension AppDelegate {
         return GIDSignIn.sharedInstance.handle(url)
     }
     
-//    private func handleGAILink(_ url: URL) {
-//        let tracker1 = GAI.sharedInstance().tracker(withTrackingId: "...")
-//                    let hitParams = GAIDictionaryBuilder()
-//                    hitParams.setCampaignParametersFromUrl(path)
-//                    let medium = self.getQueryStringParameter(url: path, param: "utm_medium")
-//
-//                    hitParams.set(medium, forKey: kGAICampaignMedium)
-//                    hitParams.set(path, forKey: kGAICampaignSource)
-//
-//                    let hitParamsDict = hitParams.build()
-//
-//                    tracker1?.allowIDFACollection = true
-//
-//                    tracker1?.set(kGAIScreenName, value: "...")
-//                    tracker1?.send(GAIDictionaryBuilder.createScreenView().setAll(hitParamsDict as? [AnyHashable : Any]).build() as? [AnyHashable : Any])
-//    }
+    //    private func handleGAILink(_ url: URL) {
+    //        let tracker1 = GAI.sharedInstance().tracker(withTrackingId: "...")
+    //                    let hitParams = GAIDictionaryBuilder()
+    //                    hitParams.setCampaignParametersFromUrl(path)
+    //                    let medium = self.getQueryStringParameter(url: path, param: "utm_medium")
+    //
+    //                    hitParams.set(medium, forKey: kGAICampaignMedium)
+    //                    hitParams.set(path, forKey: kGAICampaignSource)
+    //
+    //                    let hitParamsDict = hitParams.build()
+    //
+    //                    tracker1?.allowIDFACollection = true
+    //
+    //                    tracker1?.set(kGAIScreenName, value: "...")
+    //                    tracker1?.send(GAIDictionaryBuilder.createScreenView().setAll(hitParamsDict as? [AnyHashable : Any]).build() as? [AnyHashable : Any])
+    //    }
 }
