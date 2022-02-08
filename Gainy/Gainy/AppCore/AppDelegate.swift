@@ -45,7 +45,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 dprint("AppsFlyerLib started")
                 return
             }
-        })        
+        })
         NotificationCenter.default.post(name: NotificationManager.appBecomeActiveNotification, object: nil)
     }
     

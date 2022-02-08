@@ -20782,12 +20782,15 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
+  case publicTickerEventsSymbol
+  /// unique or primary key constraint
   case tickerEventsUniqueId
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
   public init?(rawValue: RawValue) {
     switch rawValue {
+      case "public_ticker_events_symbol": self = .publicTickerEventsSymbol
       case "ticker_events_unique_id": self = .tickerEventsUniqueId
       default: self = .__unknown(rawValue)
     }
@@ -20795,6 +20798,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public var rawValue: RawValue {
     switch self {
+      case .publicTickerEventsSymbol: return "public_ticker_events_symbol"
       case .tickerEventsUniqueId: return "ticker_events_unique_id"
       case .__unknown(let value): return value
     }
@@ -20802,6 +20806,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static func == (lhs: ticker_events_constraint, rhs: ticker_events_constraint) -> Bool {
     switch (lhs, rhs) {
+      case (.publicTickerEventsSymbol, .publicTickerEventsSymbol): return true
       case (.tickerEventsUniqueId, .tickerEventsUniqueId): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
@@ -20810,6 +20815,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
 
   public static var allCases: [ticker_events_constraint] {
     return [
+      .publicTickerEventsSymbol,
       .tickerEventsUniqueId,
     ]
   }
