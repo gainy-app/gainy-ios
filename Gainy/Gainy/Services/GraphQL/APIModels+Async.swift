@@ -19,7 +19,8 @@ extension Network {
                         continuation.resume(returning: [])
                         return
                     }
-                    continuation.resume(returning: categories.compactMap({TickerTag(name: $0.name ?? "", url: "", collectionID: -404)}))
+                    continuation.resume(returning: categories.compactMap({TickerTag(name: $0.name ?? "", url: "", collectionID: -404,
+                                                                                    id: $0.id ?? -1)}))
                     break
                 case .failure(_):
                     continuation.resume(returning: [])

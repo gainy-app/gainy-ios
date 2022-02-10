@@ -119,8 +119,10 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         //Tags
         
         let industries = model.industries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
-                                                                     url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404)  })
-        let categories = model.categories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404)})
+                                                                     url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404,
+                                                                     id: $0.gainyIndustry?.id ?? -1)  })
+        let categories = model.categories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404,
+                                                                     id: $0.categories?.id ?? -1)})
         let tags = categories + industries
         
         

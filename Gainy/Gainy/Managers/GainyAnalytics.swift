@@ -77,11 +77,6 @@ final class GainyAnalytics {
         
         newParams["v"] = 1
         newParams["tid"] = UUID().uuidString
-        if ["gois_screen_view", "tab_changed", "discover_collections_pressed", "your_collection_pressed", "ticker_pressed"].contains(name) {
-            newParams["t"] = "screen_view"
-        } else {
-            newParams["t"] = "event"
-        }
         newParams[FirebaseAnalytics.AnalyticsParameterSource] = "app"
         newParams["av"] = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
         newParams["an"] = (Bundle.main.infoDictionary?[kCFBundleNameKey as String] as? String) ?? ""

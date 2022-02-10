@@ -8,6 +8,7 @@ Bugfixes
 :hammer_and_wrench: Improvements
 • Portfolio UI changes
 • Charts dates changed
+• Wrong Industry Button
 
 *Model update*
 • -

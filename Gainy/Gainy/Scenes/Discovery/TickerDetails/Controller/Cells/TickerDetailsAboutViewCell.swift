@@ -39,7 +39,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         
         if tagsStack.subviews.count == 0 {
             
-            let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 * 2.0
+            let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 - 64.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
             
@@ -135,6 +135,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     @IBAction func wrongIndAction(_ sender: UIButton) {
         delegate?.wrongIndPressed()
+        highlightIndustries()
     }
     
     func highlightIndustries() {

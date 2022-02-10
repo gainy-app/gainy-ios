@@ -224,19 +224,21 @@ final class TickerViewController: BaseViewController {
     
     //MARK: - Wrong Ind Logic
     
+    private var wrongIndTimer: Timer?
     @IBAction func closeWrongIndViewAction(_ sender: Any) {
         hideWrongIndView()
     }
     
     @IBAction func undoWrongIndViewAction(_ sender: Any) {
-        GainyAnalytics.logDevEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,
-                                                                   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+        GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                    "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                    "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
-        wrongIndLbl.text = "Categories and indusstries marked as right, thank you!"
-        delay(15.0) { [weak self] in
+        wrongIndLbl.text = "Categories and industries marked as right, thank you!"
+        
+        wrongIndTimer?.invalidate()
+        wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWrongIndView()
-        }
+        })
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
@@ -307,20 +309,19 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     }
     
     func wrongIndPressed() {
-        tableView.scrollToRow(at: IndexPath.init(row: 2, section: 0), at: .top, animated: true)
+        //tableView.scrollToRow(at: IndexPath.init(row: 2, section: 0), at: .top, animated: true)
         showWrongIndView()
     }
     
     func showWrongIndView() {
         wrongIndView.isHidden = false
-        GainyAnalytics.logDevEvent("wrong_industry", params: ["timestamp": Date().timeIntervalSinceReferenceDate,
-                                                                   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+        GainyAnalytics.logEvent("wrong_industry", params: [ "timestamp": Date().timeIntervalSinceReferenceDate, "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                    "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
                                                                    "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
-        
-        delay(15.0) {[weak self] in
+        wrongIndTimer?.invalidate()
+        wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
             self?.hideWrongIndView()
-        }
+        })
     }
     
     func hideWrongIndView() {
