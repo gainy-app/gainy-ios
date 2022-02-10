@@ -11,6 +11,7 @@ import PureLayout
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
     func aboutExtended(isExtended: Bool)
+    func wrongIndPressed()
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
@@ -21,6 +22,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     @IBOutlet private weak var aboutLbl: UILabel!
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
+    @IBOutlet private weak var wrongIndBtn: UIButton!
     
     //MARK: - DI
     var minHeightUpdated: ((CGFloat) -> Void)?
@@ -44,7 +46,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             for tag in tickerInfo?.tags ?? [] {
                 let tagView = TagView()
                 tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
-                                 for: .touchUpInside)
+                                  for: .touchUpInside)
                 tagsStack.addSubview(tagView)
                 if tag.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white
@@ -71,7 +73,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
                 xPos += width + margin
             }
         }
-            
+        
         self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsStack.layoutIfNeeded()
         
@@ -127,6 +129,43 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         FloatingPanelManager.shared.configureWithHeight(height: height)
         FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
+    }
+    
+    //MARK: - Wrong Industry Logic
+    
+    @IBAction func wrongIndAction(_ sender: UIButton) {
+        delegate?.wrongIndPressed()
+    }
+    
+    func highlightIndustries() {
+        wrongIndBtn.isSelected = true
+        wrongIndBtn.isEnabled = false
+        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
+            if let tagView = tagsStack.subviews[ind] as? TagView {
+                
+                tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
+                tagView.tagLabel.textColor = .white
+                tagView.layer.borderWidth = 0.0
+            }
+        }
+    }
+    
+    func unhighlightIndustries() {
+        wrongIndBtn.isSelected = false
+        wrongIndBtn.isEnabled = true
+        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
+            if let tagView = tagsStack.subviews[ind] as? TagView {
+                if tagInfo.collectionID < 0 {
+                    tagView.backgroundColor = UIColor.white
+                    tagView.tagLabel.textColor = UIColor(named: "mainText")
+                    tagView.layer.borderWidth = 1.0
+                } else {
+                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                    tagView.tagLabel.textColor = .white
+                    tagView.layer.borderWidth = 0.0
+                }
+            }
+        }
     }
 }
 

@@ -17,6 +17,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func didRequestShowBrokersListForSymbol(symbol: String)
     func openCompareWithSelf(ticker: TickerInfo)
     func requestOpenCollection(withID id: Int)
+    func wrongIndPressed()
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -373,5 +374,9 @@ extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
     
     func aboutExtended(isExtended: Bool) {
         self.isAboutExpanded = isExtended
+    }
+    
+    func wrongIndPressed() {
+        delegate?.wrongIndPressed()
     }
 }

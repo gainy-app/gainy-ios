@@ -18,7 +18,7 @@ final class TickerViewController: BaseViewController {
     
     //MARK: - Outlets
     private let refreshControl = LottieRefreshControl()
-    @IBOutlet weak var tableView: UITableView! {
+    @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = viewModel?.dataSource
             tableView.delegate = viewModel?.dataSource
@@ -27,6 +27,8 @@ final class TickerViewController: BaseViewController {
             refreshControl.addTarget(self, action: #selector(refreshTicketInfo), for: .valueChanged)
         }
     }
+    @IBOutlet private weak var wrongIndView: UIView!
+    @IBOutlet private weak var wrongIndLbl: UILabel!
     
     //MARK:- Inner
     
@@ -219,6 +221,23 @@ final class TickerViewController: BaseViewController {
         
         self.bottomViews.forEach({$0.alpha = 0; $0.isUserInteractionEnabled = false;})
     }
+    
+    //MARK: - Wrong Ind Logic
+    
+    @IBAction func closeWrongIndViewAction(_ sender: Any) {
+        hideWrongIndView()
+    }
+    
+    @IBAction func undoWrongIndViewAction(_ sender: Any) {
+        GainyAnalytics.logDevEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,
+                                                                   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+                                                                   "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
+                                                                   "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
+        wrongIndLbl.text = "Categories and indusstries marked as right, thank you!"
+        delay(15.0) { [weak self] in
+            self?.hideWrongIndView()
+        }
+    }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
     
@@ -285,6 +304,30 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     
     func requestOpenCollection(withID id: Int) {
         coordinator?.showCollectionDetails(collectionID: id, delegate: self)
+    }
+    
+    func wrongIndPressed() {
+        tableView.scrollToRow(at: IndexPath.init(row: 2, section: 0), at: .top, animated: true)
+        showWrongIndView()
+    }
+    
+    func showWrongIndView() {
+        wrongIndView.isHidden = false
+        GainyAnalytics.logDevEvent("wrong_industry", params: ["timestamp": Date().timeIntervalSinceReferenceDate,
+                                                                   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+                                                                   "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
+                                                                   "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
+        
+        delay(15.0) {[weak self] in
+            self?.hideWrongIndView()
+        }
+    }
+    
+    func hideWrongIndView() {
+        wrongIndView.isHidden = true
+        if let cell = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as? TickerDetailsAboutViewCell {
+            cell.unhighlightIndustries()
+        }
     }
 }
 
