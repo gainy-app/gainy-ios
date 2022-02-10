@@ -1,4 +1,4 @@
-iOS v1.1.4 #152 available
+iOS v1.1.4 #153 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,10 +6,11 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio updated
+• Portfolio UI changes
+• Charts dates changed
 
 *Model update*
-• realtime_metrics: added last_known_price, last_known_price_datetime, previous_day_close_price
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

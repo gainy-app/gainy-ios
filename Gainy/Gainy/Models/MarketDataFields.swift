@@ -920,7 +920,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         case .impliedVolatility:
             return "Then higher Implied volatility then higher changes to a price you should expect. Read more on Investopedia."
         case .revenueGrowthYoy:
-            return "Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter. Usually, then bigger Revenue Growth than a more attractive financial asset as it has a potential future upside. Read more on Investopedia."
+            return "Quarterly revenue growth is an increase in a company's sales in one quarter compared to sales of a different quarter. Usually, the bigger Revenue Growth - more attractive financial asset as it has a potential future upside. Read more on Investopedia."
         case .revenueGrowthFwd:
             return "Quarterly Revenue Growth, Year over Year for the future quarter based on earnings estimates. Read more on Investopedia."
         case .ebitdaGrowthYoy:
@@ -1197,7 +1197,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         let titleEdgeOffset = 28.0
         let descriptionEdgeOffset = 24.0
         let descriptionTopOffset = 16.0
-        let bottomOffset = 10.0
+        let bottomOffset = 24.0
         
         let titleWidth = width - titleEdgeOffset * 2.0
         let descriptionWidth = width - descriptionEdgeOffset * 2.0
@@ -1211,8 +1211,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
         titleLabel.textAlignment = .left
         titleLabel.text = title
         titleLabel.numberOfLines = 0
-        let titleSize = titleLabel.sizeThatFits(CGSize(width: titleWidth,
-                                                      height: CGFloat.greatestFiniteMagnitude))
+        let titleSize = self.explanationTitle.heightWithConstrainedWidth(width: titleWidth, font: UIFont.proDisplaySemibold(20.0))
         
         let descriptionTextView = UITextView()
         descriptionTextView.font = UIFont.proDisplayRegular(14.0)
@@ -1220,10 +1219,9 @@ enum MarketDataField: Int, Codable, CaseIterable {
         descriptionTextView.textColor = UIColor(hexString: "#687379")
         descriptionTextView.textAlignment = .left
         descriptionTextView.text = description
-        let descriptionSize = descriptionTextView.sizeThatFits(CGSize(width: descriptionWidth,
-                                                               height: CGFloat.greatestFiniteMagnitude))
+        let descriptionSize = self.explanationDescription.heightWithConstrainedWidth(width: descriptionWidth, font: UIFont.proDisplayRegular(14.0))
         
-        let height = titleTopOffset + titleSize.height + descriptionTopOffset + descriptionSize.height + bottomOffset
+        let height = titleTopOffset + titleSize + descriptionTopOffset + descriptionSize + bottomOffset
         return Float(height)
     }
 }

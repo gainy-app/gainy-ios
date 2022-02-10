@@ -53,6 +53,7 @@ struct PortfolioScatterChartView: View {
             LinearGradient(
                 colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
                     startPoint: .top, endPoint: .bottom)
+                    .padding(.top, 8)
             chartView
                 .padding(.leading, 8)
                 .padding(.trailing, 8)
@@ -61,6 +62,7 @@ struct PortfolioScatterChartView: View {
             Spacer()
             sppView
                 .offset(y: -16)
+                .frame(height: 24)
             GeometryReader(content: { geometry in
                 bottomMenu(geometry)
             })
@@ -239,8 +241,9 @@ struct PortfolioScatterChartView: View {
                 .padding(.trailing, 16)
                 .padding(.top, 6)
                 .padding(.bottom, 6)
-                .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
             })
+            .frame(height: 24)            
+            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(12))
             Spacer()
         }
         .padding(.leading, 16)
