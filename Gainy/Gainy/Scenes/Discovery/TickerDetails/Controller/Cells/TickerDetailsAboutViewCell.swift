@@ -11,7 +11,7 @@ import PureLayout
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
     func aboutExtended(isExtended: Bool)
-    func wrongIndPressed()
+    func wrongIndPressed(isTicked: Bool)
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
@@ -85,6 +85,12 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             aboutLbl.numberOfLines = 3
             minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
         }
+        wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
+        if wrongIndBtn.isSelected {
+            highlightIndustries()
+        } else {
+            unhighlightIndustries()
+        }
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -134,13 +140,18 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     //MARK: - Wrong Industry Logic
     
     @IBAction func wrongIndAction(_ sender: UIButton) {
-        delegate?.wrongIndPressed()
-        highlightIndustries()
+        sender.isSelected.toggle()
+        delegate?.wrongIndPressed(isTicked: sender.isSelected)
+        
+        if sender.isSelected {
+            highlightIndustries()
+        } else {
+            unhighlightIndustries()
+        }
     }
     
     func highlightIndustries() {
         wrongIndBtn.isSelected = true
-        wrongIndBtn.isEnabled = false
         for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 
@@ -153,7 +164,6 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     func unhighlightIndustries() {
         wrongIndBtn.isSelected = false
-        wrongIndBtn.isEnabled = true
         for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 if tagInfo.collectionID < 0 {

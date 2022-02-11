@@ -123,7 +123,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 6.0 - 8.0)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
             cell.updateButtons()

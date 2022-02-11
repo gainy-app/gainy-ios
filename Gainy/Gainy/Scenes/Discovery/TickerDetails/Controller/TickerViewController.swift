@@ -230,15 +230,23 @@ final class TickerViewController: BaseViewController {
     }
     
     @IBAction func undoWrongIndViewAction(_ sender: Any) {
-        GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
-                                                                   "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
-                                                                   "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
-        wrongIndLbl.text = "Categories and industries marked as right, thank you!"
-        
-        wrongIndTimer?.invalidate()
-        wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
-            self?.hideWrongIndView()
-        })
+        guard let symbol = viewModel?.ticker.symbol else {return}
+        guard let cell = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as? TickerDetailsAboutViewCell else {return}
+
+        if WrongIndustryManager.shared.isIndWrong(symbol) {
+            GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+                                                                       "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
+                                                                       "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
+            WrongIndustryManager.shared.removeFromWrong(symbol)
+            cell.unhighlightIndustries()
+        } else {
+            GainyAnalytics.logEvent("wrong_industry", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+                                                                       "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
+                                                                       "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
+            WrongIndustryManager.shared.addToWrong(symbol)
+            cell.highlightIndustries()
+        }
+        hideWrongIndView()
     }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
@@ -308,12 +316,18 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         coordinator?.showCollectionDetails(collectionID: id, delegate: self)
     }
     
-    func wrongIndPressed() {
-        //tableView.scrollToRow(at: IndexPath.init(row: 2, section: 0), at: .top, animated: true)
-        showWrongIndView()
+    func wrongIndPressed(isTicked: Bool) {
+        if isTicked {
+            WrongIndustryManager.shared.addToWrong(viewModel?.ticker.symbol ?? "")
+            showWrongIndView()
+        } else {
+            WrongIndustryManager.shared.removeFromWrong(viewModel?.ticker.symbol ?? "")
+            showUndoIndView()
+        }
     }
     
     func showWrongIndView() {
+        wrongIndLbl.text = "Categories and indusstries marked as wrong. We will double check them, thank you!"
         wrongIndView.isHidden = false
         GainyAnalytics.logEvent("wrong_industry", params: [ "timestamp": Date().timeIntervalSinceReferenceDate, "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                    "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
@@ -324,11 +338,20 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         })
     }
     
+    func showUndoIndView() {
+        wrongIndLbl.text = "Categories and industries marked as right, thank you!"
+        wrongIndView.isHidden = false
+        GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
+                                                                   "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],
+                                                                   "tag_names": viewModel?.ticker.tags.compactMap({$0.name}) ?? []])
+        wrongIndTimer?.invalidate()
+        wrongIndTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
+            self?.hideWrongIndView()
+        })
+    }
+    
     func hideWrongIndView() {
         wrongIndView.isHidden = true
-        if let cell = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as? TickerDetailsAboutViewCell {
-            cell.unhighlightIndustries()
-        }
     }
 }
 

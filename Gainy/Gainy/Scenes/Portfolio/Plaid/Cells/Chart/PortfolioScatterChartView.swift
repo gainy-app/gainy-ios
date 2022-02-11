@@ -53,7 +53,7 @@ struct PortfolioScatterChartView: View {
             LinearGradient(
                 colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
                     startPoint: .top, endPoint: .bottom)
-                    .padding(.top, 8)
+                    .padding(.top, 0)
             chartView
                 .padding(.leading, 8)
                 .padding(.trailing, 8)

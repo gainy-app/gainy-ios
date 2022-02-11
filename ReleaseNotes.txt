@@ -1,4 +1,4 @@
-iOS v1.1.4 #153 available
+iOS v1.1.4 #154 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,9 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio UI changes
-• Charts dates changed
-• Wrong Industry Button
+• Wrong Industry Button finally
 
 *Model update*
 • -

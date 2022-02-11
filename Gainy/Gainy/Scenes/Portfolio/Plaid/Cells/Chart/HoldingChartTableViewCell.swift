@@ -19,13 +19,13 @@ final class HoldingChartTableViewCell: HoldingRangeableCell {
     
     @IBOutlet private weak var sortButton: ResponsiveButton! {
         didSet {
-            sortButton.layer.cornerRadius = 12.0
+            sortButton.layer.cornerRadius = 20.0
             sortButton.clipsToBounds = true
         }
     }
     @IBOutlet private weak var settingsButton: ResponsiveButton! {
         didSet {
-            settingsButton.layer.cornerRadius = 12.0
+            settingsButton.layer.cornerRadius = 20.0
             settingsButton.clipsToBounds = true
         }
     }
