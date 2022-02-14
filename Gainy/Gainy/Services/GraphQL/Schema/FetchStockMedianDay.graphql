@@ -5,7 +5,6 @@ query FetchStockMedianDay($symbol: String!, $date: timestamp!) {
         industry_order
             gainy_industry {
                 industry_stats_dailies(where: {date: {_gte: $date}}) {
-                    median_growth_rate_1d
                     median_price
                     date
                 }

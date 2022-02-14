@@ -18,7 +18,6 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
             __typename
             ticker_industry_median_1m(where: {date: {_gte: $date}}) {
               __typename
-              median_growth_rate
               median_price
               date
             }
@@ -204,7 +203,6 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
             public static var selections: [GraphQLSelection] {
               return [
                 GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("median_growth_rate", type: .scalar(float8.self)),
                 GraphQLField("median_price", type: .scalar(float8.self)),
                 GraphQLField("date", type: .scalar(timestamp.self)),
               ]
@@ -216,8 +214,8 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
               self.resultMap = unsafeResultMap
             }
 
-            public init(medianGrowthRate: float8? = nil, medianPrice: float8? = nil, date: timestamp? = nil) {
-              self.init(unsafeResultMap: ["__typename": "industry_median_1m", "median_growth_rate": medianGrowthRate, "median_price": medianPrice, "date": date])
+            public init(medianPrice: float8? = nil, date: timestamp? = nil) {
+              self.init(unsafeResultMap: ["__typename": "industry_median_1m", "median_price": medianPrice, "date": date])
             }
 
             public var __typename: String {
@@ -226,15 +224,6 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
               }
               set {
                 resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var medianGrowthRate: float8? {
-              get {
-                return resultMap["median_growth_rate"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "median_growth_rate")
               }
             }
 

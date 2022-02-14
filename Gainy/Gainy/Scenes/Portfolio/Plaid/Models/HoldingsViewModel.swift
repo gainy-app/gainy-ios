@@ -92,7 +92,7 @@ final class HoldingsViewModel {
                         completion?()
                         return
                     }
-                    dprint("\(Date()) Holdings charts enede")
+                    dprint("\(Date()) Holdings charts ended")
                     self.dataSource.chartRange = .d1
                     
                     var tickSymbols: [String] = []
@@ -117,6 +117,7 @@ final class HoldingsViewModel {
                         if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
                             realtimeMetrics.append(metric)
                             TickerLiveStorage.shared.setSymbolData(metric.symbol ?? "", data: metric)
+                            dprint("Set \(metric.actualPrice ?? 0.0) - \(metric.relativeDailyChange ?? 0.0) for \(metric.symbol ?? "")")
                         }
                         
                         if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
