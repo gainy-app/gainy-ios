@@ -124,9 +124,11 @@ final class HistoricalChartsLoader {
             dateString = "1900-01-01"
             periodString = "1m"
         }
+        let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        let institutionIds = []
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
-                                                                        interestIds: settings.interests.compactMap({$0.id}), accountIds: [], categoryIds: settings.categories.compactMap({$0.id}), institutionIds: [], lttOnly: settings.onlyLongCapitalGainTax, securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
+                                                                        interestIds: settings.interests.compactMap({$0.id}), accountIds: accountIds, categoryIds: settings.categories.compactMap({$0.id}), institutionIds: institutionIds, lttOnly: settings.onlyLongCapitalGainTax, securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.close != nil}).compactMap({$0}) {
