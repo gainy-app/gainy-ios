@@ -376,6 +376,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }.store(in: &cancellables)
     }
     
+    override func userLoggedOut() {
+        super.userLoggedOut()
+        
+        if var snapshot = self.dataSource?.snapshot() {
+            snapshot.deleteAllItems()
+            self.dataSource?.apply(snapshot)
+        }
+    }
+    
+    
     private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             let existingIDs = self.viewModel?.collectionDetails.compactMap({$0.id}) ?? []

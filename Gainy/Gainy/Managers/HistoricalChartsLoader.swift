@@ -90,7 +90,7 @@ final class HistoricalChartsLoader {
     ///   - profileID: User Profile ID
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, completion: @escaping ([ChartNormalized]) -> Void) {
+    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, completion: @escaping ([ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -124,10 +124,12 @@ final class HistoricalChartsLoader {
             dateString = "1900-01-01"
             periodString = "1m"
         }
-        Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileID: profileID, period: periodString, dateG: dateString, dateL: (Date()).toFormat(backTimeFormat))) {result in
+        Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
+                                                                        periods: [periodString],
+                                                                        interestIds: settings.interests.compactMap({$0.id}), accountIds: [], categoryIds: settings.categories.compactMap({$0.id}), institutionIds: [], lttOnly: settings.onlyLongCapitalGainTax, securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
             switch result {
             case .success(let graphQLResult):
-                if var fetchedData = graphQLResult.data?.portfolioChart.filter({$0.value != nil}) {
+                if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.close != nil}).compactMap({$0}) {
                     
                     if range == .d1 {
                         if let lastDay = fetchedData.last {

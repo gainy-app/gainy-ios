@@ -81,6 +81,8 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         
         observeNetworkStatus()
         setupAnimation()
+        
+        
     }
     
     // MARK: - Network Status Observation
@@ -108,6 +110,18 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         animationContainerView.addSubview(animationView)
         animationView.autoSetDimensions(to: .init(width: 32, height: 32))
         animationView.autoCenterInSuperview()
+        
+    }
+    
+    private func observeLogout() {
+        NotificationCenter.default.publisher(for: NotificationManager.userLogoutNotification, object: nil)
+            .sink { [weak self] status in
+                self?.userLoggedOut()
+            }
+            .store(in: &cancellables)
+    }
+    
+    func userLoggedOut() {
         
     }
     

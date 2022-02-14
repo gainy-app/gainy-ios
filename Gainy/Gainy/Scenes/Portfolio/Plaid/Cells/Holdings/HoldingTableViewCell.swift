@@ -166,6 +166,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                                                                                              UIImage(named: curPrice.priceChangeToday >= 0.0 ?  "small_up" : "small_down")!,
                                                                                              (curPrice.priceChangeToday * 100.0).cleanTwoDecimalP.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
                                                                                              curPrice.priceChangeToday >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
+            dprint("Set \(curPrice.currentPrice) - \(curPrice.priceChangeToday) for \(model.tickerSymbol)")
         } else {
             (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = ("", nil, "")
         }

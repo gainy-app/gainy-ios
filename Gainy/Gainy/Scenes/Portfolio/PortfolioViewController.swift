@@ -95,6 +95,12 @@ final class PortfolioViewController: BaseViewController {
         
         state = .linkHasHoldings
     }
+    
+    override func userLoggedOut() {
+        super.userLoggedOut()
+        
+        state = .noLink
+    }
 }
 
 extension PortfolioViewController: NoPlaidViewControllerDelegate {

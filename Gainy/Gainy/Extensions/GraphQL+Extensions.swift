@@ -121,7 +121,7 @@ extension RemoteChartData: RemoteDateTimeConvertable {
     }
 }
 
-extension GetPortfolioChartsQuery.Data.PortfolioChart : RemoteDateTimeConvertable {
+extension GetPortfolioChartsQuery.Data.GetPortfolioChart : RemoteDateTimeConvertable {
         
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
         let formatter = DateFormatter()

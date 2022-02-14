@@ -284,6 +284,7 @@ final class ProfileViewController: BaseViewController {
             
             GainyAnalytics.logEvent("profile_log_out_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
             self.authorizationManager?.signOut()
+            NotificationCenter.default.post(name: NotificationManager.userLogoutNotification, object: nil)
             if let finishFlow = self.mainCoordinator?.finishFlow {
                 finishFlow()
             }

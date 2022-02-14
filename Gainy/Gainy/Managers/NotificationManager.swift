@@ -10,7 +10,7 @@ import AppTrackingTransparency
 
 class NotificationManager: NSObject {
     // Notifications
-    static let userLogoutNotification = "userLogoutNotification"
+    static let userLogoutNotification = Notification.Name.init("userLogoutNotification")
     static let userLoginNotification = "userLoginNotification"
     static let appBecomeInactiveNotification = "appBecomeInactiveNotification"
     static let tickerScrollNotification = Notification.Name.init("tickerScrollNotification")

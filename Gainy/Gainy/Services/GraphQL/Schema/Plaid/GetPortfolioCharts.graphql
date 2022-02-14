@@ -1,7 +1,28 @@
-query GetPortfolioCharts($profileID: Int!, $period: String!, $dateG: timestamp!, $dateL: timestamp!) {
-    portfolio_chart(where: {profile_id: {_eq: $profileID}, period: {_eq: $period}, datetime: {_gte: $dateG, _lte: $dateL}}, order_by: {datetime: asc}) {
+query GetPortfolioCharts(
+    $profileId: Int!,
+    $periods: [String]!,
+    $interestIds: [Int],
+    $accountIds: [Int],
+    $categoryIds: [Int],
+    $institutionIds: [Int],
+    $lttOnly: Boolean,
+    $securityTypes: [String]
+) {
+    get_portfolio_chart(
+        profile_id: $profileId,
+        periods: $periods,
+        interest_ids: $interestIds,
+        account_ids: $accountIds,
+        category_ids: $categoryIds,
+        institution_ids: $institutionIds,
+        ltt_only: $lttOnly,
+        security_types: $securityTypes
+    ) {
         datetime
         period
-        value
+        open
+        high
+        low
+        close
     }
 }

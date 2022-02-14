@@ -81,10 +81,14 @@ final class HoldingsViewController: BaseViewController {
     }
     
     @objc func loadData() {
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHoldingsAndSecurities {[weak self] in
+        viewModel.loadHoldingsAndSecurities(settings: settings) {[weak self] in
             if !(self?.viewModel.haveHoldings ?? false) {
                 if let self = self {
                     self.delegate?.noHoldings(controller: self)
@@ -218,7 +222,7 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         
         vc.dismiss(animated: true)
         viewModel.settings = settings
-        tableView.reloadData()
+        loadData()
     }
 }
 
@@ -241,7 +245,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         viewModel.settings = settings
-        tableView.reloadData()
+        loadData()
     }
 }
 
@@ -277,8 +281,11 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
     }
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
+        
+        guard let userID = UserProfileManager.shared.profileID else {return}
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         showNetworkLoader()
-        self.viewModel.loadChartsForRange(range: range) {[weak self] model in
+        self.viewModel.loadChartsForRange(range: range, settings: settings) {[weak self] model in
             runOnMain {
                 if let model = model {
                     self?.viewModel.dataSource.profileGains[range] = model

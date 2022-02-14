@@ -138,9 +138,15 @@ extension DiscoverChartsQuery.Data.Chart: ChartMergable {
     }
 }
 
-extension GetPortfolioChartsQuery.Data.PortfolioChart: ChartMergable {
+extension GetPortfolioChartsQuery.Data.GetPortfolioChart {
+    var date: Date {
+        return ((datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date
+    }
+}
+
+extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
     var val: Float {
-        value ?? 0.0
+        Float(close ?? 0.0)
     }
 }
 
