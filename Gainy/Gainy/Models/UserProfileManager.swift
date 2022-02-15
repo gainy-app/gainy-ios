@@ -47,6 +47,8 @@ final class UserProfileManager {
     
     var email: String?
     
+    var avatarUrl: String?
+    
     var address: String?
     
     var userID: String?
@@ -156,6 +158,7 @@ final class UserProfileManager {
                 self.email = appProfile.email
                 self.address = appProfile.legalAddress
                 self.userID = appProfile.userId
+                self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
                 self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in

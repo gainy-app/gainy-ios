@@ -10,6 +10,9 @@ import UIKit
 import MessageUI
 import PureLayout
 import Combine
+import AvatarImagePicker
+import FirebaseStorage
+import Kingfisher
 
 final class ProfileViewController: BaseViewController {
     
@@ -208,11 +211,49 @@ final class ProfileViewController: BaseViewController {
     @IBAction func addProfilePictureButtonTap(_ sender: Any) {
         
         GainyAnalytics.logEvent("profile_add_picture_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
-        pickerController.mediaTypes = ["public.image"]
-        present(pickerController, animated: true, completion: nil)
+        
+        let picker = AvatarImagePicker.instance
+        picker.dismissAnimated = true
+#if targetEnvironment(simulator)
+        picker.sourceTypes = [.photoLibrary]
+#else
+        picker.sourceTypes = [.camera, .photoLibrary]
+#endif
+        picker.presentStyle = .overFullScreen
+        
+        // this method includes authorizing for photolibrary and camera.
+        picker.present(allowsEditing: true, selected: { (image) in
+            
+            self.profilePictureImageView.image = image
+            guard let profileID = UserProfileManager.shared.profileID else {
+                return
+            }
+            // Data in memory
+            guard let data = image.pngData() else {
+                return
+            }
+            
+            // Get a reference to the storage service using the default Firebase App
+            let storage = Storage.storage()
+
+            // Create a storage reference from our storage service
+            let storageRef = storage.reference()
+
+            let avatarFileName = "avatar_\(profileID).png"
+            // Create a reference to 'avatars/<avatarFileName>'
+            let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
+
+            // Upload the file to the path "images/rivers.jpg"
+            let uploadTask = avatarImageRef.putData(data, metadata: nil) { (metadata, error) in
+                guard error != nil else {
+                    return
+                }
+                GainyAnalytics.logEvent("profile_finished_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            }
+            uploadTask.resume()
+        }) {
+            GainyAnalytics.logEvent("profile_cancelled_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        }
     }
     
     @IBAction func reLaunchOnboardingButtonTap(_ sender: Any) {
@@ -445,20 +486,41 @@ final class ProfileViewController: BaseViewController {
         profilePictureImageView.layer.borderColor = UIColor(hexString: "#0062FF", alpha: 1.0)?.cgColor
         profilePictureImageView.layer.masksToBounds = true
         
-        let fileName = "profile.png"
-        do {
-            let documentsDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
-                                                                    appropriateFor: nil,
-                                                                    create: false)
-            let fileURL = documentsDirectory.appendingPathComponent(fileName)
-            if let image = UIImage.init(fileURLWithPath: fileURL) {
-                self.profilePictureImageView.image = image
-            } else {
-                self.profilePictureImageView.image = UIImage.init(named: "profilePlaceholder")
-            }
+        
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return
         }
-        catch {
-            self.profilePictureImageView.image = UIImage.init(named: "profilePlaceholder")
+        
+        self.profilePictureImageView.image = nil
+        self.profilePictureImageView.isSkeletonable = true
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+
+        let avatarFileName = "avatar_\(profileID).png"
+        // Create a reference to 'avatars/<avatarFileName>'
+        let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
+        avatarImageRef.downloadURL { (url, error) in
+            
+            guard let downloadURL = url else {
+                self.profilePictureImageView.isSkeletonable = false
+                self.profilePictureImageView.image = UIImage.init(named: "profilePlaceholder")
+                return
+            }
+            
+            let processor = DownsamplingImageProcessor(size: self.profilePictureImageView.bounds.size)
+            self.profilePictureImageView.kf.setImage(with: downloadURL, placeholder: UIImage(), options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ]) { receivedSize, totalSize in
+    //            print("-----\(receivedSize), \(totalSize)")
+            } completionHandler: { result in
+                self.profilePictureImageView.isSkeletonable = false
+            }
         }
     }
     
@@ -735,29 +797,6 @@ extension ProfileViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         
         controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        
-        GainyAnalytics.logEvent("profile_cancelled_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            if let image = UIImage(fileURLWithPath: imageURL) {
-                self.profilePictureImageView.image = image
-                if let url = image.save(at: FileManager.SearchPathDirectory.documentDirectory, pathAndImageName: "profile.png") {
-                    NotificationCenter.default.post(name: NSNotification.Name.didPickProfileImage, object: url)
-                    GainyAnalytics.logEvent("profile_finished_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-                }
-            }
-        }
-        picker.dismiss(animated: true, completion: nil)
     }
 }
 

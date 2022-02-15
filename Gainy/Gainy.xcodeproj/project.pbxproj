@@ -316,6 +316,7 @@
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
 		8520F9F92722BBF0002234B2 /* FeatureDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */; };
 		8520F9FB2722C5A8002234B2 /* LinkTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9FA2722C5A8002234B2 /* LinkTextView.swift */; };
+		8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */; };
 		8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8531030426F9ECA500AAAA91 /* GainyTextField.swift */; };
 		854299252769F24D00E8C433 /* intro.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 854299242769F24D00E8C433 /* intro.mp4 */; };
 		854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */; };
@@ -975,6 +976,7 @@
 			files = (
 				9072F56F277C4FA70057596B /* FacebookCore in Frameworks */,
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
+				8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
 				336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */,
@@ -2360,6 +2362,7 @@
 				9072F56E277C4FA70057596B /* FacebookCore */,
 				9017BF5E2780D88600F3910A /* Deviice */,
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
+				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2452,6 +2455,7 @@
 				9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */,
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
+				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3740,6 +3744,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/janlionly/AvatarImagePicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 		85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -3879,6 +3891,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 33FBDE86270ADEEA003B6DDB /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
 			productName = JWTDecode;
+		};
+		8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */;
+			productName = AvatarImagePicker;
 		};
 		85CD154826F8B22C001C060C /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
