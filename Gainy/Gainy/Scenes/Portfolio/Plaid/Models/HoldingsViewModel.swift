@@ -36,6 +36,10 @@ final class HoldingsViewModel {
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     
+    func clearChats() {
+        chartsCache.removeAll()
+        sypChartsCache.removeAll()
+    }
     
     //MARK: - Network
     
@@ -198,31 +202,49 @@ final class HoldingsViewModel {
     
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         if let profileID = UserProfileManager.shared.profileID {
+            
+            
             let loadGroup = DispatchGroup()
-            loadGroup.enter()
-            HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings) {[weak self] chartData in
-                self?.chartsCache[range] = chartData
-                loadGroup.leave()
-            }
+            var haveSomethingToLoad = false
             
-            loadGroup.enter()
-            HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
-                self?.sypChartsCache[range] = rawData
-                loadGroup.leave()
-            }
-            
-            loadGroup.notify(queue: .main) {[weak self] in
-                guard let self = self else {
-                    completion?(nil)
-                    return
+            if chartsCache[range] == nil {
+                loadGroup.enter()
+                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings) {[weak self] chartData in
+                    self?.chartsCache[range] = chartData
+                    loadGroup.leave()
                 }
-                
+                haveSomethingToLoad = true
+            }
+            
+            if sypChartsCache[range] == nil {
+                loadGroup.enter()
+                HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
+                    self?.sypChartsCache[range] = rawData
+                    loadGroup.leave()
+                }
+                haveSomethingToLoad = true
+            }
+            
+            if haveSomethingToLoad {
+                loadGroup.notify(queue: .main) {[weak self] in
+                    guard let self = self else {
+                        completion?(nil)
+                        return
+                    }
+                    
+                    let chartModel = HoldingsModelMapper.topChartGains(range: range,
+                                                                       chartsCache: self.chartsCache,
+                                                                       sypChartsCache: self.sypChartsCache,
+                                                                       portfolioGains: self.portfolioGains)
+                    completion?(chartModel)
+                    
+                }
+            } else {
                 let chartModel = HoldingsModelMapper.topChartGains(range: range,
                                                                    chartsCache: self.chartsCache,
                                                                    sypChartsCache: self.sypChartsCache,
                                                                    portfolioGains: self.portfolioGains)
                 completion?(chartModel)
-                
             }
         } else {
             completion?(nil)

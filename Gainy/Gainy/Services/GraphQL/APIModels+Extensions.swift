@@ -146,7 +146,7 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart {
 
 extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
     var val: Float {
-        Float(close ?? 0.0)
+        Float(adjustedClose ?? 0.0)
     }
 }
 

@@ -38,8 +38,12 @@ struct HoldingViewModel {
     let tickerCategories: [Int]
     let rawTicker: RemoteTickerDetailsFull?
     
+    var isCash: Bool {
+        tickerSymbol.hasPrefix("CUR")
+    }
+    
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
-        if tickerSymbol.hasPrefix("CUR") {
+        if isCash {
             return ("", UIImage(), "", "", .clear, .clear)
         } else {
             return (range.longName,
@@ -57,11 +61,18 @@ struct HoldingViewModel {
         if isExpaned {
             let secHeight: CGFloat = Double(securities.count) * 80.0 + Double(securities.count - 1) * 8.0
             var height = 184.0 + secHeight + 16.0 + 16.0
+            if isCash {
+                return 112.0 + secHeight + 16.0 + 16.0
+            }
             if event != nil {
                 height += eventHeight
             }
             return height + 8.0
         } else {
+            
+            if isCash {
+                return 112.0 + 16.0
+            }
             if event != nil {
                 return 232.0 + 22.0
             } else {
@@ -72,6 +83,7 @@ struct HoldingViewModel {
     }
     
     var holdingsCount: NSMutableAttributedString {
+        guard !isCash else { return NSMutableAttributedString.init(string: "") }
         var secCount: [HoldingSecurityViewModel.SecType : Float] = [:]
         for sec in securities {
             if let haveCount = secCount[sec.type] {

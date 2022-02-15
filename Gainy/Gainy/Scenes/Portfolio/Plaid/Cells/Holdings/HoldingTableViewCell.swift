@@ -55,6 +55,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet weak var avgArrowView: UIImageView!
     @IBOutlet weak var avgPriceLbl: UILabel!
     @IBOutlet weak var avgGrowLbl: UILabel!
+    @IBOutlet var dots: [UIImageView]!
+    @IBOutlet weak var secsTopMargin: NSLayoutConstraint!
     
     @IBOutlet weak var rangeArrowView: UIImageView!
     @IBOutlet weak var rangeNameLbl: UILabel!
@@ -113,6 +115,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
         amountLbl.text = model.balance.price
         symbolLbl.text = model.tickerSymbol
+        symbolLbl.isHidden = false
+        symbolLbl.superview?.isHidden = false
         
         categoriesView.subviews.forEach({$0.removeFromSuperview()})
         
@@ -131,9 +135,6 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         let totalWidth: CGFloat = UIScreen.main.bounds.width - 81.0 - 32.0
         var xPos: CGFloat = 0.0
-        
-        
-        
         
         for tag in tags {
             let tagView = TagView()
@@ -167,8 +168,10 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                                                                                              (curPrice.priceChangeToday * 100.0).cleanTwoDecimalP.replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: ""),
                                                                                              curPrice.priceChangeToday >= 0.0 ? UIColor(named: "mainGreen") :  UIColor(named: "mainRed"))
             dprint("Set \(curPrice.currentPrice) - \(curPrice.priceChangeToday) for \(model.tickerSymbol)")
+            dots.forEach({$0.isHidden = false})
         } else {
             (avgPriceLbl.text, avgArrowView.image, avgGrowLbl.text) = ("", nil, "")
+            dots.forEach({$0.isHidden = true})
         }
         (rangeNameLbl.text, rangeArrowView.image, rangePriceLbl.text, rangeGrowLbl.text, rangePriceLbl.textColor, rangeGrowLbl.textColor) = model.infoForRange(chartRange)
         
@@ -187,6 +190,22 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             secTableHeight.constant = Double(model.securities.count) * 80.0 + Double(model.securities.count - 1) * 8.0
         }
         securitiesTableView.reloadData()
+        
+        if model.isCash {
+            matchCircleView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
+            matchScoreLbl.text = "$"
+            nameLbl.text = "Cash Balance"
+            
+            symbolLbl.isHidden = true
+            symbolLbl.superview?.isHidden = true
+            secsTopMargin.constant = 56.0
+            transactionsTotalLbl.isHidden = true
+            categoriesView.isHidden = true
+        } else {
+            secsTopMargin.constant = 128.0
+            transactionsTotalLbl.isHidden = false
+            categoriesView.isHidden = false
+        }
     }
     
     private var holding: HoldingViewModel?
@@ -253,7 +272,7 @@ extension HoldingTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: HoldingSecurityTableViewCell = tableView.dequeueReusableCell(withIdentifier: HoldingSecurityTableViewCell.cellIdentifier, for: indexPath) as! HoldingSecurityTableViewCell
+        let cell: HoldingSecurityTableViewCell = tableView.dequeueReusableCell(withIdentifier: (holding?.isCash ?? false) ? HoldingSecurityTableViewCell.cashCellIdentifier : HoldingSecurityTableViewCell.cellIdentifier, for: indexPath) as! HoldingSecurityTableViewCell
         if let security = holding?.securities[indexPath.row] {
             cell.setModel(security, chartRange)
         }

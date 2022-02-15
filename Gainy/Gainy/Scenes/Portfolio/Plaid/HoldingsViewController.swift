@@ -222,7 +222,12 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         
         vc.dismiss(animated: true)
         viewModel.settings = settings
-        loadData()
+        tableView.reloadData()
+        
+        viewModel.clearChats()
+        chartsForRangeRequested(range: viewModel.dataSource.chartRange,
+                                viewModel: viewModel.dataSource.chartViewModel)
+        
     }
 }
 
@@ -245,7 +250,12 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         viewModel.settings = settings
-        loadData()
+        tableView.reloadData()
+        
+        viewModel.clearChats()
+        viewModel.clearChats()
+        chartsForRangeRequested(range: viewModel.dataSource.chartRange,
+                                viewModel: viewModel.dataSource.chartViewModel)        
     }
 }
 

@@ -8,6 +8,7 @@ Bugfixes
 :hammer_and_wrench: Improvements
 • Portfolio update
 • QA updates
+• New Portfolio chart filtering
 
 *Model update*
 • -

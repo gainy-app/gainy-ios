@@ -23,6 +23,6 @@ query GetPortfolioCharts(
         open
         high
         low
-        close
+        adjusted_close
     }
 }

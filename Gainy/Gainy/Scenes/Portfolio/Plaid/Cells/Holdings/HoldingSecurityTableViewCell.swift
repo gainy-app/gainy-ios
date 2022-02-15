@@ -8,6 +8,11 @@
 import UIKit
 
 final class HoldingSecurityTableViewCell: HoldingRangeableCell {
+    
+    class var cashCellIdentifier: String {
+        "HoldingSecurityCashTableViewCell"
+    }
+    
     @IBOutlet weak var cornerView: UIView!
     
     @IBOutlet weak var balanceLbl: UILabel!
@@ -28,6 +33,10 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
         balanceLbl.text = model.totalPrice.price
         progressLbl.text = (model.percentInHolding * 100).cleanOneDecimalP
         
+        if model.type == .cash {
+            return
+        }
+            
         if model.type == .option {
             bottomNameLbl.text = "Exp"
             bottomPriceLbl.text = model.singlePrice

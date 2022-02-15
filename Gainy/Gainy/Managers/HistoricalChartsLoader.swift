@@ -104,33 +104,38 @@ final class HistoricalChartsLoader {
             }
             
             dateString = (Date().startOfTradingDay - daysToTake.days).toFormat(backTimeFormat)
-            periodString = "15min"
+            periodString = "1d"
         case .w1:
             dateString = (Date().startOfTradingDay - 1.weeks).toFormat(backTimeFormat)
-            periodString = "1d"
+            periodString = "1w"
         case .m1:
             dateString = (Date().startOfTradingDay - 1.months).toFormat(backTimeFormat)
-            periodString = "1d"
+            periodString = "1m"
         case .m3:
             dateString = (Date().startOfTradingDay - 3.months).toFormat(backTimeFormat)
-            periodString = "1w"
+            periodString = "3m"
         case .y1:
             dateString = (Date().startOfTradingDay - 1.years).toFormat(backTimeFormat)
-            periodString = "1w"
+            periodString = "1y"
         case .y5:
             dateString = (Date().startOfTradingDay - 5.years).toFormat(backTimeFormat)
-            periodString = "1m"
+            periodString = "5y"
         case .all:
             dateString = "1900-01-01"
-            periodString = "1m"
+            periodString = "all"
         }
         let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
-                                                                        interestIds: settings.interests.compactMap({$0.id}), accountIds: accountIds, categoryIds: settings.categories.compactMap({$0.id}), institutionIds: [], lttOnly: settings.onlyLongCapitalGainTax, securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
+                                                                        interestIds: settings.interests.compactMap({$0.id}),
+                                                                        accountIds: accountIds,
+                                                                        categoryIds: settings.categories.compactMap({$0.id}),
+                                                                        institutionIds: [],
+                                                                        lttOnly: settings.onlyLongCapitalGainTax,
+                                                                        securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
             switch result {
             case .success(let graphQLResult):
-                if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.close != nil}).compactMap({$0}) {
+                if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.adjustedClose != nil}).compactMap({$0}) {
                     
                     if range == .d1 {
                         if let lastDay = fetchedData.last {
