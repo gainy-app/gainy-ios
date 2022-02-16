@@ -154,32 +154,6 @@ final class HoldingsViewModel {
                         PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
-                    let today = HoldingsModelMapper.topChartGains(range: .d1,
-                                                                  chartsCache: self.chartsCache,
-                                                                  sypChartsCache: self.sypChartsCache,
-                                                                  portfolioGains: self.portfolioGains)
-                    let sypChartReal = today.sypChartData
-                    
-                    let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
-                                                          rangeGrow: today.rangeGrow,
-                                                          rangeGrowBalance: today.rangeGrowBalance,
-                                                          spGrow: Float(sypChartReal.startEndDiff),
-                                                          chartData: today.chartData,
-                                                          sypChartData: sypChartReal)
-                    
-                    let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
-                                                                         profileHoldings: self.portfolioGains)
-                    dprint("\(Date()) Holdings match score end")
-                    self.dataSource.chartViewModel = live
-                    self.dataSource.profileGains = [.d1 : today]
-                    self.dataSource.originalHoldings = originalHoldings
-                    self.dataSource.holdings = originalHoldings
-                    if let settings = settings {
-                        self.dataSource.sortAndFilterHoldingsBy(settings)
-                    }
-                    dprint("\(Date()) Holdings final end")
-                    
-                    
                     let innerChartsGroup = DispatchGroup()
                     dprint("\(Date()) Holdings charts start")
                     for range in [ScatterChartView.ChartPeriod.d1]{
@@ -198,6 +172,31 @@ final class HoldingsViewModel {
                     
                     innerChartsGroup.notify(queue: .main) {
                         dprint("\(Date()) Holdings charts ended")
+                        
+                        let today = HoldingsModelMapper.topChartGains(range: .d1,
+                                                                      chartsCache: self.chartsCache,
+                                                                      sypChartsCache: self.sypChartsCache,
+                                                                      portfolioGains: self.portfolioGains)
+                        let sypChartReal = today.sypChartData
+                        
+                        let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
+                                                              rangeGrow: today.rangeGrow,
+                                                              rangeGrowBalance: today.rangeGrowBalance,
+                                                              spGrow: Float(sypChartReal.startEndDiff),
+                                                              chartData: today.chartData,
+                                                              sypChartData: sypChartReal)
+                        
+                        let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
+                                                                             profileHoldings: self.portfolioGains)
+                        dprint("\(Date()) Holdings match score end")
+                        self.dataSource.chartViewModel = live
+                        self.dataSource.profileGains = [.d1 : today]
+                        self.dataSource.originalHoldings = originalHoldings
+                        self.dataSource.holdings = originalHoldings
+                        if let settings = settings {
+                            self.dataSource.sortAndFilterHoldingsBy(settings)
+                        }
+                        dprint("\(Date()) Holdings final end")
                         completion?()
                     }
                 }

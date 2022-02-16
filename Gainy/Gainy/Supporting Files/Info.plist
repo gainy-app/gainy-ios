@@ -97,14 +97,14 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>We will use Camera to pick your avatar image</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We will use Photo Library to pick your avatar image</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>We will use Calendar to inform about upcoming financial events</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We will use Camera to pick your avatar image</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We will use Contacts to inform about upcoming financial events</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We will use Photo Library to pick your avatar image</string>
 	<key>NSRemindersUsageDescription</key>
 	<string>We will use Reminders to inform about upcoming financial events</string>
 	<key>NSUserTrackingUsageDescription</key>
