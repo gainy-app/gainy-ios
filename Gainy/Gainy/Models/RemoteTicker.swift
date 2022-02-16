@@ -117,6 +117,7 @@ class TickerInfo {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
         let chartsDS = DispatchGroup()
+        chartsCache.removeAll()
         
         if isMainDataLoaded {
             DispatchQueue.main.async {

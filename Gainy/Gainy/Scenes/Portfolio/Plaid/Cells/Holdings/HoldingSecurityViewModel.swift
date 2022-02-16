@@ -47,7 +47,11 @@ struct HoldingSecurityViewModel {
         }
         let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)
         
-        self.name = type == .cash ? (holding.name ?? "") :  correctName + " ×\(holding.quantity ?? 0.0)"
+        let accountID =  (UserProfileManager.shared.linkedPlaidAccounts.first(where: {
+            $0.id == (holding.accountId ?? 0)
+        })?.name ?? (holding.name ?? ""))
+        
+        self.name = (type == .cash ? accountID :  (correctName + " ×\(holding.quantity ?? 0.0)"))
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
         self.quantity = Float(holding.quantity ?? 0.0)

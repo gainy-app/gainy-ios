@@ -207,6 +207,8 @@ extension Array where Element == HoldingViewModel {
             }
             
             return inAccount && show
-        }
+        }.sorted(by: {
+            $0.isCash && !$1.isCash
+        })
     }
 }

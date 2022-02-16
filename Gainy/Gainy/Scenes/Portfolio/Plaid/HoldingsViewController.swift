@@ -81,10 +81,9 @@ final class HoldingsViewController: BaseViewController {
     }
     
     @objc func loadData() {
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard UserProfileManager.shared.profileID != nil else {
             return
         }
-        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()

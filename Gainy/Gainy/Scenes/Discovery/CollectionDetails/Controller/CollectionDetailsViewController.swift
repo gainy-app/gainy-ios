@@ -834,7 +834,11 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         super.viewWillAppear(animated)
         if self.needTop20Reload {
             TickerLiveStorage.shared.clearMatchData()
-            reloadCollectionIfNeeded()
+            showNetworkLoader()
+            CollectionsManager.shared.reloadTop20 { [weak self] in
+                CollectionsManager.shared.collections.removeAll()
+                self?.reloadCollectionIfNeeded()
+            }
         } else {
             reloadCollectionIfNeeded()
         }

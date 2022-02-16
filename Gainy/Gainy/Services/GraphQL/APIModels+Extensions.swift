@@ -140,7 +140,7 @@ extension DiscoverChartsQuery.Data.Chart: ChartMergable {
 
 extension GetPortfolioChartsQuery.Data.GetPortfolioChart {
     var date: Date {
-        return ((datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date
+        return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
     }
 }
 
