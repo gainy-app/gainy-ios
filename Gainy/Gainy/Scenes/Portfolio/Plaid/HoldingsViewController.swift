@@ -88,7 +88,7 @@ final class HoldingsViewController: BaseViewController {
         linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHoldingsAndSecurities(settings: settings) {[weak self] in
+        viewModel.loadHoldingsAndSecurities {[weak self] in
             if !(self?.viewModel.haveHoldings ?? false) {
                 if let self = self {
                     self.delegate?.noHoldings(controller: self)

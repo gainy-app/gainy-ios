@@ -45,7 +45,7 @@ final class HoldingsViewModel {
     
     private var config = Configuration()
     
-    func loadHoldingsAndSecurities(settings: PortfolioSettings, _ completion: (() -> Void)?) {
+    func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
         chartsCache.removeAll()
         sypChartsCache.removeAll()
         
@@ -76,27 +76,12 @@ final class HoldingsViewModel {
                     loadGroup.leave()
                 }
                 
-                dprint("\(Date()) Holdings charts start")
-                for range in [ScatterChartView.ChartPeriod.d1]{
-                    loadGroup.enter()
-                    HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings) {[weak self] chartData in
-                        self?.chartsCache[range] = chartData
-                        loadGroup.leave()
-                    }
-                    
-                    loadGroup.enter()
-                    HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
-                        self?.sypChartsCache[range] = rawData
-                        loadGroup.leave()
-                    }
-                }
-                
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {
                         completion?()
                         return
                     }
-                    dprint("\(Date()) Holdings charts ended")
+                    
                     self.dataSource.chartRange = .d1
                     
                     var tickSymbols: [String] = []
@@ -169,7 +154,6 @@ final class HoldingsViewModel {
                         PortfolioSettingsManager.shared.changeSecurityTypesForUserId(profileID, securityTypes: securityTypes)
                     }
                     
-                    
                     let today = HoldingsModelMapper.topChartGains(range: .d1,
                                                                   chartsCache: self.chartsCache,
                                                                   sypChartsCache: self.sypChartsCache,
@@ -193,8 +177,29 @@ final class HoldingsViewModel {
                     if let settings = settings {
                         self.dataSource.sortAndFilterHoldingsBy(settings)
                     }
-                    dprint("\(Date()) Holdings fianl end")
-                    completion?()
+                    dprint("\(Date()) Holdings final end")
+                    
+                    
+                    let innerChartsGroup = DispatchGroup()
+                    dprint("\(Date()) Holdings charts start")
+                    for range in [ScatterChartView.ChartPeriod.d1]{
+                        innerChartsGroup.enter()
+                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings) {[weak self] chartData in
+                            self?.chartsCache[range] = chartData
+                            innerChartsGroup.leave()
+                        }
+                        
+                        innerChartsGroup.enter()
+                        HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
+                            self?.sypChartsCache[range] = rawData
+                            innerChartsGroup.leave()
+                        }
+                    }
+                    
+                    innerChartsGroup.notify(queue: .main) {
+                        dprint("\(Date()) Holdings charts ended")
+                        completion?()
+                    }
                 }
             }
         }
