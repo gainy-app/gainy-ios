@@ -177,7 +177,7 @@ final class UserProfileManager {
         }
     }
     
-    public func getProfileCollections(loadProfile: Bool = false, completion: @escaping (Bool) -> Void) {
+    public func getProfileCollections(loadProfile: Bool = false, forceReload: Bool = false, completion: @escaping (Bool) -> Void) {
         
         guard let profileID = self.profileID else {
             
@@ -221,8 +221,8 @@ final class UserProfileManager {
         
         Task {
             async let favs = getFavCollections()
-            async let recommeneded = getRecommenedCollectionsWithRetry()
-            async let recommendedIDs = getRecommenedCollectionIDs()
+            async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
+            async let recommendedIDs = getRecommenedCollectionIDs(forceReload: forceReload)
             let (favsRes, recommenededRes, recommendedIDsRes) = await (favs, recommeneded, recommendedIDs)
             
             guard !recommenededRes.isEmpty else {

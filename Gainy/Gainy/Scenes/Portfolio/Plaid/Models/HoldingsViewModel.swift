@@ -160,12 +160,14 @@ final class HoldingsViewModel {
                         innerChartsGroup.enter()
                         HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
+                            dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
                         }
                         
                         innerChartsGroup.enter()
                         HistoricalChartsLoader.shared.loadChart(symbol: Constants.Chart.sypSymbol, range: range) {[weak self] chartData, rawData in
                             self?.sypChartsCache[range] = rawData
+                            dprint("Holdings SPP charts last \(rawData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
                         }
                     }
@@ -205,6 +207,7 @@ final class HoldingsViewModel {
     }
     
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
+        
         if let profileID = UserProfileManager.shared.profileID {
             
             

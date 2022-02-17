@@ -162,7 +162,11 @@ func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -
     guard first1 != first2 else {return (chart1, chart2)}
     
     let small = first1 < first2 ? chart2 : chart1
-    let large =  first1 < first2 ? chart1 : chart2
+    var large =  first1 < first2 ? chart1 : chart2
+    
+    if let firstSmall = small.first?.date {
+        large = Array(large.drop(while: {$0.date < firstSmall}))
+    }
     var reconstructed: [ChartNormalized] = []
     
     let firstSmallDate = small.first!.date
@@ -177,7 +181,7 @@ func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -
         reconstructed.append(contentsOf: small)
     }
     
-    return first1 < first2 ? (large, reconstructed) : (reconstructed, large)
+    return first1 < first2 ? (large, small) : (small, large)
 }
 
 extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {

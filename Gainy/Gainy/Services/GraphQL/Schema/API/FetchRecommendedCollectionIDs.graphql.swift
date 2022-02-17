@@ -8,8 +8,8 @@ public final class FetchRecommendedCollectionIDsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchRecommendedCollectionIDs($profileId: Int!) @cached(ttl: 300) {
-      get_recommended_collections(profile_id: $profileId) {
+    query FetchRecommendedCollectionIDs($profileId: Int!, $forceReload: Boolean!) @cached(ttl: 300) {
+      get_recommended_collections(profile_id: $profileId, force: $forceReload) {
         __typename
         id
       }
@@ -19,13 +19,15 @@ public final class FetchRecommendedCollectionIDsQuery: GraphQLQuery {
   public let operationName: String = "FetchRecommendedCollectionIDs"
 
   public var profileId: Int
+  public var forceReload: Bool
 
-  public init(profileId: Int) {
+  public init(profileId: Int, forceReload: Bool) {
     self.profileId = profileId
+    self.forceReload = forceReload
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId]
+    return ["profileId": profileId, "forceReload": forceReload]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -33,7 +35,7 @@ public final class FetchRecommendedCollectionIDsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId")], type: .list(.object(GetRecommendedCollection.selections))),
+        GraphQLField("get_recommended_collections", arguments: ["profile_id": GraphQLVariable("profileId"), "force": GraphQLVariable("forceReload")], type: .list(.object(GetRecommendedCollection.selections))),
       ]
     }
 

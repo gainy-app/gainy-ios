@@ -36,12 +36,12 @@ extension UserProfileManager {
     
     /// Get Rec Colls with retry
     /// - Returns: list of cols or empty list
-    func getRecommenedCollectionsWithRetry() async -> [RemoteShortCollectionDetails] {
-        var recs = await getRecommenedCollections()
+    func getRecommenedCollectionsWithRetry(forceReload: Bool = false) async -> [RemoteShortCollectionDetails] {
+        var recs = await getRecommenedCollections(forceReload: forceReload)
         if recs.isEmpty {
-            recs = await getRecommenedCollections()
+            recs = await getRecommenedCollections(forceReload: forceReload)
             if recs.isEmpty {
-                return await getRecommenedCollections()
+                return await getRecommenedCollections(forceReload: forceReload)
             } else {
                 return recs
             }
@@ -50,14 +50,14 @@ extension UserProfileManager {
         }
     }
     
-    func getRecommenedCollections() async -> [RemoteShortCollectionDetails] {
+    func getRecommenedCollections(forceReload: Bool = false) async -> [RemoteShortCollectionDetails] {
         guard let profileID = self.profileID else {
             dprint("Err_FetchRecommendedCollectionsQuery_1 [No profile ID]")
             return [RemoteShortCollectionDetails]()
         }
         return await
         withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID)) {result in
+            Network.shared.apollo.fetch(query: FetchRecommendedCollectionsQuery(profileId: profileID, forceReload: forceReload)) {result in
                 
                 switch result {
                 case .success(let graphQLResult):
@@ -76,14 +76,14 @@ extension UserProfileManager {
         }
     }
     
-    func getRecommenedCollectionIDs() async -> [Int] {
+    func getRecommenedCollectionIDs(forceReload: Bool = false) async -> [Int] {
         guard let profileID = self.profileID else {
             dprint("Err_FetchRecommendedCollectionIDs_1 [No profile ID]")
             return [Int]()
         }
         return await
         withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: FetchRecommendedCollectionIDsQuery(profileId: profileID)) {result in
+            Network.shared.apollo.fetch(query: FetchRecommendedCollectionIDsQuery(profileId: profileID, forceReload: forceReload)) {result in
                 
                 switch result {
                 case .success(let graphQLResult):

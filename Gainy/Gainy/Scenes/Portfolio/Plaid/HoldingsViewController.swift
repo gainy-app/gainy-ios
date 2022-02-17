@@ -293,6 +293,8 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        
+        self.viewModel.clearChats()
         showNetworkLoader()
         self.viewModel.loadChartsForRange(range: range, settings: settings) {[weak self] model in
             runOnMain {

@@ -873,7 +873,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if self.needTop20Reload {
             TickerLiveStorage.shared.clearMatchData()
             showNetworkLoader()
-            CollectionsManager.shared.reloadTop20 { [weak self] in
+            
+            let asyncGroup = DispatchGroup()
+            asyncGroup.enter()
+            UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
+                asyncGroup.leave()
+            }
+            asyncGroup.enter()
+            CollectionsManager.shared.reloadTop20 {
+                asyncGroup.leave()
+            }
+            asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
                 self?.reloadCollectionIfNeeded()
             }
