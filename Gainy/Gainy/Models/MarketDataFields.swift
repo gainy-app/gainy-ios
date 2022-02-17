@@ -185,7 +185,7 @@ enum MarketDataField: Int, Codable, CaseIterable {
             }
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "", value:valueString, marketDataField: self)
         case .epsSurprise:
-             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "Beats or Misses by", value: Float(ticker.tickerMetrics?.epsSurprise ?? 0.0).percent, marketDataField: self)
+             marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "Beats or Misses by", value: Float(ticker.tickerMetrics?.epsSurprise ?? 0.0).cleanTwoDecimalP, marketDataField: self)
         case .revenueEstimateAvg0y:
              marketData = TickerInfo.MarketData.init(name: "\(self.title)", period: "annual", value: Float(ticker.tickerMetrics?.revenueEstimateAvg_0y ?? 0.0).formatUsingAbbrevation(), marketDataField: self)
         case .revenueActual:
