@@ -1,4 +1,4 @@
-iOS v1.1.4 #156 available
+iOS v1.1.4 #157 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,9 +6,10 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio update
-• QA updates
-• New Portfolio chart filtering
+• Fixed: Often cards are not clicking in discovery (240)
+• Fixed: Not all collections are clickable correctly (255)
+• Fixed: Wrong metrics (237)
+• Fixed: Images are not the same (257)
 
 *Model update*
 • -
