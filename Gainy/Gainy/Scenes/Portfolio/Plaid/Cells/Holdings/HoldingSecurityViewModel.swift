@@ -14,7 +14,7 @@ struct HoldingSecurityViewModel {
         case option = "Option", share = "Shares", cash = "Cash"
     }
     
-    let name: String
+    let name: NSAttributedString
     let type: SecType
     let percentInHolding: Float
     let totalPrice: Float
@@ -51,7 +51,7 @@ struct HoldingSecurityViewModel {
             $0.id == (holding.accountId ?? 0)
         })?.name ?? (holding.name ?? ""))
         
-        self.name = (type == .cash ? accountID :  (correctName + " ×\(holding.quantity ?? 0.0)"))
+        self.name = (type == .cash ? accountID.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) :  (correctName.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) + " ×".attr(font: .compactRoundedSemibold(12), color: UIColor(named: "mainText")!) + "\(holding.quantity ?? 0.0)".attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!)))
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
         self.quantity = Float(holding.quantity ?? 0.0)

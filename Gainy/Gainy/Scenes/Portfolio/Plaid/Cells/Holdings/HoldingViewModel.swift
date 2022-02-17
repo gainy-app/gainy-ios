@@ -96,7 +96,8 @@ struct HoldingViewModel {
         var attrArr: [NSMutableAttributedString] = []
         for key in secCount.keys {
             attrArr.append(key.rawValue.attr(font: .compactRoundedSemibold(14.0),
-                                             color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " ×\(secCount[key]!)".attr(font: .compactRoundedSemibold(14.0),
+                                             color: .init(hexString: "B1BDC8", alpha: 1.0)!) + " ×".attr(font: .compactRoundedSemibold(12.0),
+                                                                                                         color: .init(hexString: "09141F", alpha: 1.0)!) + "\(secCount[key]!)".attr(font: .compactRoundedSemibold(14.0),
                                                                                                                           color: .init(hexString: "09141F", alpha: 1.0)!))
         }
         let totalList = NSMutableAttributedString.init(string: "")
