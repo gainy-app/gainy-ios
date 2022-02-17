@@ -165,6 +165,7 @@ final class UserProfileManager {
                     item.id
                 })
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
+                NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 completion(true)
                 
             case .failure(let error):

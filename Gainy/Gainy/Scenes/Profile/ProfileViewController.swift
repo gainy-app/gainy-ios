@@ -249,6 +249,7 @@ final class ProfileViewController: BaseViewController {
                     return
                 }
                 GainyAnalytics.logEvent("profile_finished_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+                NotificationCenter.default.post(name: NSNotification.Name.didPickProfileImage, object: nil)
             }
             uploadTask.resume()
         }) {

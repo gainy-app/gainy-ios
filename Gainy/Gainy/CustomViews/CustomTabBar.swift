@@ -8,6 +8,8 @@
 import UIKit
 import PureLayout
 import Combine
+import FirebaseStorage
+import Kingfisher
 
 protocol CustomTabBarDelegate: AnyObject {
     func profileTabPressed(tabBar: CustomTabBar)
@@ -40,7 +42,7 @@ class CustomTabBar: UITabBar {
     private let profileWidth: CGFloat = 24.0
     lazy var profileView: UIView = {
         let profileView = UIView(frame: CGRect.init(x: 0, y: 0, width: profileWidth, height: profileWidth))
-        profileView.backgroundColor = .green
+        profileView.backgroundColor = .clear
         profileView.clipsToBounds = true
         profileView.layer.cornerRadius = 8.0
         profileView.isUserInteractionEnabled = true
@@ -57,7 +59,6 @@ class CustomTabBar: UITabBar {
         profileView.clipsToBounds = true
         profileView.layer.cornerRadius = 8
         profileView.contentMode = .scaleAspectFill
-        profileView.image = getProfileImage()
         return profileView
     }()
     
@@ -99,11 +100,20 @@ class CustomTabBar: UITabBar {
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))
         profileView.addSubview(profileImageView)
         profileImageView.autoPinEdgesToSuperviewEdges()
+        profileImageView.backgroundColor = UIColor.clear
+        profileImageView.image = nil
         NotificationCenter.default.publisher(for: Notification.Name.didPickProfileImage)
             .receive(on: DispatchQueue.main)
             .sink { _ in
         } receiveValue: {[weak self] notification in
-            self?.profileImageView.image = self?.getProfileImage()
+            self?.updateProfileImage()
+        }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: Notification.Name.didLoadProfile)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.updateProfileImage()
         }.store(in: &cancellables)
     }
     
@@ -172,23 +182,38 @@ class CustomTabBar: UITabBar {
         }
     }
     
-    private func getProfileImage() -> UIImage? {
+    private func updateProfileImage() {
         
-        let fileName = "profile.png"
-        do {
-            let documentsDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask,
-                                                                    appropriateFor: nil,
-                                                                    create: false)
-            let fileURL = documentsDirectory.appendingPathComponent(fileName)
-            if let image = UIImage.init(fileURLWithPath: fileURL) {
-                return image
-                NotificationCenter.default.post(name: NSNotification.Name.didPickProfileImage, object: nil)
-            } else {
-                return UIImage.init(named: "profilePlaceholder")
-            }
+        guard let profileID = UserProfileManager.shared.profileID else {
+            return
         }
-        catch {
-            return UIImage.init(named: "profilePlaceholder")
+        
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+
+        let avatarFileName = "avatar_\(profileID).png"
+        // Create a reference to 'avatars/<avatarFileName>'
+        let avatarImageRef = storageRef.child("avatars/\(avatarFileName)")
+        avatarImageRef.downloadURL { (url, error) in
+            
+            guard let downloadURL = url else {
+                self.profileImageView.image = UIImage.init(named: "profilePlaceholder")
+                return
+            }
+            
+            let processor = DownsamplingImageProcessor(size: self.profileImageView.bounds.size)
+            self.profileImageView.kf.setImage(with: downloadURL, placeholder: UIImage(), options: [
+                .processor(processor),
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ]) { receivedSize, totalSize in
+    //            print("-----\(receivedSize), \(totalSize)")
+            } completionHandler: { result in
+            }
         }
     }
 }
