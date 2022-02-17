@@ -573,7 +573,15 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         UserProfileManager.shared.addFavouriteCollection(yourCollectionItem.id) { success in
             
-            self.viewModel?.yourCollections.append(yourCollectionItem)
+            guard success == true else {
+                return
+            }
+            
+            if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
+                self.viewModel?.yourCollections.insert(yourCollectionItem, at: 0)
+            } else {
+                self.viewModel?.yourCollections.append(yourCollectionItem)
+            }
             
             if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
                 item.id == yourCollectionItem.id
@@ -581,18 +589,30 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 UserProfileManager.shared.recommendedCollections[index].isInYourCollections = true
             }
             
-            UserProfileManager.shared.yourCollections.append(
-                Collection(id: yourCollectionItem.id,
-                           image: yourCollectionItem.image,
-                           imageUrl: yourCollectionItem.imageUrl,
-                           name: yourCollectionItem.name,
-                           description: yourCollectionItem.description,
-                           stocksAmount: Int(yourCollectionItem.stocksAmount)!,
-                           isInYourCollections: true)
-            )
+            let collection =  Collection(id: yourCollectionItem.id,
+                                         image: yourCollectionItem.image,
+                                         imageUrl: yourCollectionItem.imageUrl,
+                                         name: yourCollectionItem.name,
+                                         description: yourCollectionItem.description,
+                                         stocksAmount: Int(yourCollectionItem.stocksAmount)!,
+                                         isInYourCollections: true)
+            
+            if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
+                UserProfileManager.shared.yourCollections.insert(collection, at: 0)
+            } else {
+                UserProfileManager.shared.yourCollections.append(collection)
+            }
             
             if var snapshot = self.dataSource?.snapshot() {
-                snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+                if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
+                    if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
+                        snapshot.insertItems([yourCollectionItem], beforeItem: first)
+                    } else {
+                        snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+                    }
+                } else {
+                    snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
+                }
                 snapshot.deleteItems([collectionItemToAdd])
                 self.viewModel?.addedRecs[collectionItemToAdd.id] = collectionItemToAdd
                 self.viewModel?.recommendedCollections.removeAll(where: { item in

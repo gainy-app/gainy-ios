@@ -385,35 +385,72 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
-    
-    private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
+    private func appendNewCollectionFromModel(_ model: CollectionDetailViewCellModel, _ completed: (() -> Void)? = nil) {
         runOnMain {
             let existingIDs = self.viewModel?.collectionDetails.compactMap({$0.id}) ?? []
-            let collections = models.filter { item in
-                item.id >= 0 && !existingIDs.contains(item.id)
+            let needAdd = (model.id >= 0 && !existingIDs.contains(model.id))
+            guard needAdd == true else {
+                completed?()
+                return
             }
-            if collections.count > 0 {
-                self.viewModel?.collectionDetails.append(contentsOf: collections)
-                if var snapshot = self.dataSource?.snapshot() {
-                    if snapshot.indexOfSection(.collectionWithCards) != nil {
-                        if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
-                            snapshot.insertItems(collections, afterItem: last)
-                        } else {
-                            snapshot.appendItems(collections,
-                                                 toSection: .collectionWithCards)
-                        }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
-                            completed?()
-                        })
-                    } else {
-                        completed?()
-                    }
+            
+            if Constants.CollectionDetails.top20ID == model.id {
+                if let first = self.viewModel?.collectionDetails.first, first.id == Constants.CollectionDetails.watchlistCollectionID {
+                    self.viewModel?.collectionDetails.insert(model, at: 1)
                 } else {
-                    completed?()
+                    self.viewModel?.collectionDetails.insert(model, at: 0)
                 }
             } else {
-                completed?()
+                self.viewModel?.collectionDetails.append(model)
             }
+            
+            guard var snapshot = self.dataSource?.snapshot() else {
+                completed?()
+                return;
+            }
+            guard snapshot.indexOfSection(.collectionWithCards) != nil else {
+                completed?()
+                return;
+            }
+            
+            if Constants.CollectionDetails.top20ID != model.id {
+                if let last = snapshot.itemIdentifiers(inSection: .collectionWithCards).last {
+                    snapshot.insertItems([model], afterItem: last)
+                } else {
+                    snapshot.appendItems([model],
+                                         toSection: .collectionWithCards)
+                }
+            } else {
+                if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+                    if let firstDetails = self.viewModel?.collectionDetails.first, firstDetails.id == Constants.CollectionDetails.watchlistCollectionID {
+                        snapshot.insertItems([model], afterItem: first)
+                    } else {
+                        snapshot.insertItems([model], beforeItem: first)
+                    }
+                } else {
+                    snapshot.appendItems([model],
+                                         toSection: .collectionWithCards)
+                }
+            }
+            
+            self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+                completed?()
+            })
+        }
+    }
+    
+    private func appendNewCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
+        
+        let mainDS = DispatchGroup()
+        for item in models {
+            mainDS.enter()
+            appendNewCollectionFromModel(item) {
+                mainDS.leave()
+            }
+        }
+        
+        mainDS.notify(queue: DispatchQueue.main) {
+            completed?()
         }
     }
     
@@ -758,6 +795,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             dataSource?.apply(snapshot, animatingDifferences: false, completion: {
                 
             })
+            collectionView.reloadData()
         }
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true

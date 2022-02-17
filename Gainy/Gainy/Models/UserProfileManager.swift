@@ -274,7 +274,13 @@ final class UserProfileManager {
                     return
                 }
                 
-                self.favoriteCollections.append(collectionID)
+                if collectionID == Constants.CollectionDetails.top20ID {
+                    self.favoriteCollections.insert(collectionID, at: 0)
+                } else {
+                    self.favoriteCollections.append(collectionID)
+                }
+                
+                
                 runOnMain {
                     completion(true)
                 }
