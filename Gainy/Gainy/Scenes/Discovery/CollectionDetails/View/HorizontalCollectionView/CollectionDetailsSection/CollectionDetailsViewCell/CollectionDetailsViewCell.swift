@@ -198,7 +198,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
                 
 //                internalCollectionView.isScrollEnabled = false
-                internalCollectionView.isUserInteractionEnabled = false
+//                internalCollectionView.isUserInteractionEnabled = false
                 internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
             } else {
                 for cell in internalCollectionView.visibleCells {
@@ -210,7 +210,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                 }
 //                internalCollectionView.isScrollEnabled = true
-                internalCollectionView.isUserInteractionEnabled = true
+//                internalCollectionView.isUserInteractionEnabled = true
             }
         }
     }
