@@ -124,7 +124,9 @@ final class HistoricalChartsLoader {
             dateString = "1900-01-01"
             periodString = "all"
         }
+        dprint("GetPortfolioChartsQuery start")
         let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(settings.interests.compactMap({$0.id})) accs: \(accountIds) cats: \(settings.categories.compactMap({$0.id})) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         interestIds: settings.interests.compactMap({$0.id}),
@@ -136,7 +138,8 @@ final class HistoricalChartsLoader {
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.adjustedClose != nil}).compactMap({$0}) {
-                    
+                    dprint("GetPortfolioChartsQuery min: \(String(describing: fetchedData.min(by: {($0.adjustedClose ?? 0.0) < ($1.adjustedClose ?? 0.0)})))")
+                    dprint("GetPortfolioChartsQuery max: \(String(describing: fetchedData.max(by: {($0.adjustedClose ?? 0.0) < ($1.adjustedClose ?? 0.0)})))")
                     if range == .d1 {
                         if let lastDay = fetchedData.last {
                             let filtered = fetchedData.filter({$0.date.compare(toDate: lastDay.date, granularity: .day) == .orderedSame})

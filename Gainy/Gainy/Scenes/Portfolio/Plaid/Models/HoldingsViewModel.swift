@@ -48,6 +48,8 @@ final class HoldingsViewModel {
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
         chartsCache.removeAll()
         sypChartsCache.removeAll()
+        Network.shared.apollo.clearCache()
+        dataSource.chartRange = .d1
         
         DispatchQueue.global().async {
             if let profileID = UserProfileManager.shared.profileID {
@@ -181,6 +183,7 @@ final class HoldingsViewModel {
                                                                       portfolioGains: self.portfolioGains)
                         let sypChartReal = today.sypChartData
                         
+                        dprint("Porto balance: \(self.portfolioGains?.actualValue ?? 0.0)")
                         let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
                                                               rangeGrow: today.rangeGrow,
                                                               rangeGrowBalance: today.rangeGrowBalance,
@@ -191,7 +194,16 @@ final class HoldingsViewModel {
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
                                                                              profileHoldings: self.portfolioGains)
                         dprint("\(Date()) Holdings match score end")
-                        self.dataSource.chartViewModel = live
+                        if self.dataSource.chartViewModel == nil {
+                            self.dataSource.chartViewModel = live
+                        } else {
+                            self.dataSource.chartViewModel.balance = live.balance
+                            self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
+                            self.dataSource.chartViewModel.rangeGrowBalance = live.rangeGrowBalance
+                            self.dataSource.chartViewModel.spGrow = live.spGrow
+                            self.dataSource.chartViewModel.chartData = live.chartData
+                            self.dataSource.chartViewModel.sypChartData = live.sypChartData
+                        }
                         self.dataSource.profileGains = [.d1 : today]
                         self.dataSource.originalHoldings = originalHoldings
                         self.dataSource.holdings = originalHoldings

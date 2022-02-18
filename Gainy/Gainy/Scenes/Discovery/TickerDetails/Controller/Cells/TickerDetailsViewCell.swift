@@ -27,9 +27,6 @@ class TickerDetailsViewCell: UITableViewCell {
     func updateFromTickerData() {
         
     }
-    
-    
-    
 }
 
 extension UITableViewCell {
