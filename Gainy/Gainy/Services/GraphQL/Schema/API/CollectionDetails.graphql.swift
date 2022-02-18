@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220217142653.profile_collections"
+    /// fetch data from the table: "public_220217172253.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -385,7 +385,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
   }
 
-  /// An array relationship
+  /// fetch data from the table: "public_220217172253.ticker_highlights"
   public var tickerHighlights: [TickerHighlight] {
     get {
       return (resultMap["ticker_highlights"] as! [ResultMap]).map { (value: ResultMap) -> TickerHighlight in TickerHighlight(unsafeResultMap: value) }

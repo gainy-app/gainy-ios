@@ -8,7 +8,7 @@ final class ViewControllerFactory {
         false
     }
     
-    private let tabNames: [String] = ["Discovery", "Portfolio", "Profile"]
+    private let tabNames: [String] = ["Home", "Discovery", "Portfolio", "Profile"]
     var selectedColor: UIColor {
         isLightTheme ? UIColor(named: "mainText")! : UIColor(named: "tabbar_tint_color")!
     }
@@ -162,8 +162,8 @@ final class ViewControllerFactory {
     ///   - tab: Tab name
     private func setupTabWithIndex(vc: BaseViewController, tab: CustomTabBar.Tab) {
         let index = tab.rawValue
-        vc.tabBarItem = UITabBarItem(title: tabNames[index], image: UIImage(named: "tab\(index + 1)_passive")!.withRenderingMode(.alwaysOriginal),
-                                     selectedImage: UIImage(named: "tab\(index + 1)_active")!.withRenderingMode(.alwaysOriginal))
+        vc.tabBarItem = UITabBarItem(title: tabNames[index], image: UIImage(named: "tab\(index)_passive")!.withRenderingMode(.alwaysOriginal),
+                                     selectedImage: UIImage(named: "tab\(index)_active")!.withRenderingMode(.alwaysOriginal))
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: unselectedColor], for: .normal)
         vc.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: selectedColor], for: .selected)
     }
@@ -172,6 +172,13 @@ final class ViewControllerFactory {
         let vc = PortfolioViewController.instantiate(.portfolio)
         vc.mainCoordinator = coordinator
         setupTabWithIndex(vc: vc, tab: .portfolio)
+        return vc
+    }
+    
+    func instantiateHomeVC(coordinator: MainCoordinator) -> HomeViewController {
+        let vc = HomeViewController.instantiate(.home)
+        vc.mainCoordinator = coordinator
+        setupTabWithIndex(vc: vc, tab: .home)
         return vc
     }
     

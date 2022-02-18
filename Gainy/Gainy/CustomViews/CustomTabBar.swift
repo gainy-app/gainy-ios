@@ -23,10 +23,12 @@ class CustomTabBar: UITabBar {
     weak var customDelegate: CustomTabBarDelegate?
     
     enum Tab: Int {
-        case discovery = 0, portfolio, profile
+        case home = 0, discovery, portfolio, profile
         
         init(title: String) {
             switch title {
+            case "Home":
+                self = .home
             case "Discovery":
                 self = .discovery
             case "Portfolio":

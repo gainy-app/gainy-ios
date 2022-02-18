@@ -30,6 +30,15 @@
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
 		330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */; };
+		331243D027BF6EA8008C2BCC /* FetchHomeData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 331243CF27BF6EA8008C2BCC /* FetchHomeData.graphql */; };
+		331243D227BF7241008C2BCC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331243D127BF7241008C2BCC /* Home.storyboard */; };
+		331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243D427BF7276008C2BCC /* HomeViewController.swift */; };
+		331243D727BF72C2008C2BCC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243D627BF72C2008C2BCC /* HomeViewModel.swift */; };
+		331243D927BF72EF008C2BCC /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243D827BF72EF008C2BCC /* HomeDataSource.swift */; };
+		331243DC27BF7488008C2BCC /* HomeIndexesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */; };
+		331243DE27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */; };
+		331243E027BF74A4008C2BCC /* HomeTickersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */; };
+		331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */; };
 		331675082704623400CA92F6 /* Array-Reorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331675072704623400CA92F6 /* Array-Reorder.swift */; };
 		3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3316750927048A9800CA92F6 /* ImagePickerManager.swift */; };
 		331C0ED926EA3E1D00C08C98 /* ResponsiveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */; };
@@ -524,6 +533,15 @@
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
 		330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradient_Stars.mp4; sourceTree = "<group>"; };
+		331243CF27BF6EA8008C2BCC /* FetchHomeData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchHomeData.graphql; sourceTree = "<group>"; };
+		331243D127BF7241008C2BCC /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		331243D427BF7276008C2BCC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		331243D627BF72C2008C2BCC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		331243D827BF72EF008C2BCC /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
+		331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexesTableViewCell.swift; sourceTree = "<group>"; };
+		331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsTableViewCell.swift; sourceTree = "<group>"; };
+		331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersTableViewCell.swift; sourceTree = "<group>"; };
+		331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		331675072704623400CA92F6 /* Array-Reorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-Reorder.swift"; sourceTree = "<group>"; };
 		3316750927048A9800CA92F6 /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
@@ -1114,6 +1132,36 @@
 			path = "Compare Stocks";
 			sourceTree = "<group>";
 		};
+		331243CE27BF6E85008C2BCC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				331243CF27BF6EA8008C2BCC /* FetchHomeData.graphql */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		331243D327BF7259008C2BCC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				331243D427BF7276008C2BCC /* HomeViewController.swift */,
+				331243D627BF72C2008C2BCC /* HomeViewModel.swift */,
+				331243D827BF72EF008C2BCC /* HomeDataSource.swift */,
+				331243DA27BF7468008C2BCC /* Cells */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		331243DA27BF7468008C2BCC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */,
+				331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */,
+				331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */,
+				331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		33376FAE26F8AFCD00618CD7 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -1470,6 +1518,7 @@
 				33467CFD26C698A200811F74 /* MainTabController */,
 				33D3D4F826CBA2E2005A859B /* Discovery */,
 				33D3D4FB26CBA399005A859B /* Portfolio */,
+				331243D327BF7259008C2BCC /* Home */,
 				33D3D4F926CBA388005A859B /* Analytics */,
 				33D3D4FA26CBA393005A859B /* Profile */,
 				3342C87526DE0C5B0049763E /* Popups */,
@@ -1773,6 +1822,7 @@
 				33D3D4F426CBA2C7005A859B /* Analytics.storyboard */,
 				33D3D4F226CBA2BE005A859B /* Profile.storyboard */,
 				33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */,
+				331243D127BF7241008C2BCC /* Home.storyboard */,
 				33D3D4F626CBA2D2005A859B /* Popups.storyboard */,
 			);
 			path = Storyboards;
@@ -1830,6 +1880,7 @@
 				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
 				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
+				331243CE27BF6E85008C2BCC /* Home */,
 				85695AF42746BAD400759569 /* Metrics */,
 				33019611273E824100BE4FDC /* Plaid */,
 				859B2EC6270605430084CCDC /* Profile */,
@@ -2539,6 +2590,7 @@
 				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
+				331243D227BF7241008C2BCC /* Home.storyboard in Resources */,
 				3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */,
 				33D3D4F326CBA2BE005A859B /* Profile.storyboard in Resources */,
 				85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */,
@@ -2557,6 +2609,7 @@
 				854299252769F24D00E8C433 /* intro.mp4 in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
+				331243D027BF6EA8008C2BCC /* FetchHomeData.graphql in Resources */,
 				3A8593F02689CC1A00CB8DD6 /* CollectionDetails.graphql in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
@@ -2798,6 +2851,7 @@
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
+				331243D927BF72EF008C2BCC /* HomeDataSource.swift in Sources */,
 				330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */,
 				3AE7957626638360002B40D6 /* BaseCoordinator.swift in Sources */,
 				8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */,
@@ -2818,9 +2872,11 @@
 				33BEB93A27235B02005237CB /* ScatterChartViewModel.swift in Sources */,
 				337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */,
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
+				331243DE27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift in Sources */,
 				859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */,
 				900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */,
 				9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */,
+				331243E027BF74A4008C2BCC /* HomeTickersTableViewCell.swift in Sources */,
 				3302E0AF26DCB4B5008DBC76 /* CollectionSearchController.swift in Sources */,
 				33BDCF7B26CE8B89000DE770 /* TickerDetailsUpcomingViewCell.swift in Sources */,
 				85ED4DDF2701FE0200FE6926 /* EditProfileCollectionViewController.swift in Sources */,
@@ -2845,6 +2901,7 @@
 				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
+				331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */,
 				33571F23273BE463007B587F /* PortfolioViewModel.swift in Sources */,
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
 				90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */,
@@ -2864,6 +2921,7 @@
 				3AE7952D266222CC002B40D6 /* YourCollectionViewCell.swift in Sources */,
 				3372ED352710490300D8D8E1 /* DDLog.swift in Sources */,
 				335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */,
+				331243D727BF72C2008C2BCC /* HomeViewModel.swift in Sources */,
 				33376F9726F8A75300618CD7 /* GainyModel.xcdatamodeld in Sources */,
 				85E4A28427551D2300C0E5C5 /* SwitchTableViewCell.swift in Sources */,
 				33CD8DB72744E1910032C1F2 /* RectangularDashedView.swift in Sources */,
@@ -2902,6 +2960,7 @@
 				85DF21262784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift in Sources */,
 				33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */,
 				900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */,
+				331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
@@ -2995,6 +3054,7 @@
 				901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */,
 				85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
+				331243DC27BF7488008C2BCC /* HomeIndexesTableViewCell.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,

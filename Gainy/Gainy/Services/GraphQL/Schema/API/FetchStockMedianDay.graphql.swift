@@ -60,7 +60,7 @@ public final class FetchStockMedianDayQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220217142653.tickers"
+    /// fetch data from the table: "public_220217172253.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
