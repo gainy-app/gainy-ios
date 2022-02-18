@@ -150,6 +150,12 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
     }
 }
 
+extension FetchStockMedianQuery.Data.IndustryMedianChart: ChartMergable {
+    var val: Float {
+        Float(medianPrice ?? 0.0)
+    }
+}
+
 typealias ChartNormalized = RemoteDateTimeConvertable & ChartMergable
 
 func normalizeCharts(_ chart1: [ChartNormalized], _ chart2: [ChartNormalized]) -> ([ChartNormalized], [ChartNormalized]) {
