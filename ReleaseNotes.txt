@@ -1,4 +1,4 @@
-iOS v1.1.4 #158 available
+iOS v1.1.4 #159 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-•
+• Median chart
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

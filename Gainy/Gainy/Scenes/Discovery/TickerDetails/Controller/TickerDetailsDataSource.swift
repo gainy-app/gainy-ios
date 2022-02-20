@@ -98,7 +98,7 @@ final class TickerDetailsDataSource: NSObject {
     private(set) var chartViewModel: ScatterChartViewModel!
     private lazy var chartHosting: CustomHostingController<ScatterChartView> = {
         
-        chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData)
+        chartViewModel = ScatterChartViewModel.init(ticker: ticker.ticker, localTicker: ticker, chartData: ticker.localChartData, medianData: ticker.localMedianData)
         var rootView = ScatterChartView(viewModel: chartViewModel,
                                         delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
@@ -113,6 +113,7 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
+        chartViewModel.medianData = ticker.localMedianData
         wsrModel.totalScore = ticker.wsjData.rate
         wsrModel.priceTarget = ticker.wsjData.targetPrice
         wsrModel.progress = ticker.wsjData.detailedStats
@@ -321,6 +322,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             guard let self = self else {return}
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
+            self.chartViewModel.medianData = self.ticker.localMedianData
             self.delegate?.loadingState(started: false)
         }
     }

@@ -442,6 +442,8 @@
 		85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */; };
 		85F8B8B926DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */; };
 		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
+		9004AECB27C2C50000821A29 /* HomeIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECA27C2C50000821A29 /* HomeIndexView.swift */; };
+		9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */; };
 		900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */; };
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
@@ -947,6 +949,8 @@
 		85F8B8B526DD335B000C73D3 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		85F8B8B826DD37C3000C73D3 /* PersonalizationPickInterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsViewController.swift; sourceTree = "<group>"; };
 		85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppInterests.graphql; sourceTree = "<group>"; };
+		9004AECA27C2C50000821A29 /* HomeIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexView.swift; sourceTree = "<group>"; };
+		9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexViewModel.swift; sourceTree = "<group>"; };
 		900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartViewModel.swift; sourceTree = "<group>"; };
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
@@ -1144,7 +1148,7 @@
 		331243DA27BF7468008C2BCC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */,
+				9004AECC27C2C64900821A29 /* Indexes */,
 				331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */,
 				331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */,
 				331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */,
@@ -2301,6 +2305,16 @@
 			path = Personalization;
 			sourceTree = "<group>";
 		};
+		9004AECC27C2C64900821A29 /* Indexes */ = {
+			isa = PBXGroup;
+			children = (
+				331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */,
+				9004AECA27C2C50000821A29 /* HomeIndexView.swift */,
+				9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */,
+			);
+			path = Indexes;
+			sourceTree = "<group>";
+		};
 		900CEAED274974DE00CF1597 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2882,6 +2896,7 @@
 				9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
+				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
 				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
 				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
 				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
@@ -2955,6 +2970,7 @@
 				85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */,
 				33FE9E4926D519A700FABC70 /* LineView.swift in Sources */,
 				85DF2122278480D200F2899B /* OnboardingInfo.swift in Sources */,
+				9004AECB27C2C50000821A29 /* HomeIndexView.swift in Sources */,
 				33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */,
 				85EDC14D2728282400866AD2 /* FetchTickers.graphql.swift in Sources */,
 				85695B032746C18200759569 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */,
@@ -3179,7 +3195,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 159;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3303,7 +3319,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 159;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3488,7 +3504,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 159;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3517,7 +3533,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 158;
+				CURRENT_PROJECT_VERSION = 159;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

@@ -240,7 +240,10 @@ struct ScatterChartView: View {
             ZStack {
                 if viewModel.chartData.onlyPoints().uniqued().count > 1 {
                     LineView(data: viewModel.chartData, title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
-                    //LineView(data: ChartData.init(points: [45, 30]), title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                    
+                    if isMedianVisible && viewModel.localTicker.haveMedian &&  viewModel.medianData.onlyPoints().uniqued().count > 1 {
+                        LineView(data: viewModel.medianData, title: "Full chart", style: viewModel.medianData.startEndDiff >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                    }
                 } else {
                     //no_data_graph_down
                     if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {

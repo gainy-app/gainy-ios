@@ -16,14 +16,18 @@ protocol HomeDataSourceDelegate: AnyObject {
 
 final class HomeDataSource: NSObject {
     
+    override init() {
+        cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
+    }
+    
     //MARK: - Delegate
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 5
+    private let sectionsCount = 1
     
     enum Section: Int {
-        case index = 0, collections, gainers, losers, articles
+        case index = 0, gainers, losers, collections, articles
         
         var name: String {
             switch self {
@@ -45,7 +49,7 @@ final class HomeDataSource: NSObject {
     private var articles: [String] = []
     
     //MARK: - Heights
-    private var cellHeights: [Int: CGFloat] = [:]
+    private var cellHeights: [Section: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
@@ -91,13 +95,22 @@ extension HomeDataSource: SkeletonTableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.tableView = tableView
         
+        switch Section(rawValue: indexPath.section)! {
+        case .index:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
+            cell.updateIndexes()
+            return cell
+        default:
+            break
+        }
+        
         return UITableViewCell()
     }
 }
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[indexPath.row] ?? 0.0
+        return cellHeights[Section(rawValue: indexPath.section)!] ?? 0.0
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

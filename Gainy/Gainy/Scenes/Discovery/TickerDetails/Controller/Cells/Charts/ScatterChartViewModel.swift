@@ -9,10 +9,11 @@ import SwiftUI
 
 final class ScatterChartViewModel: ObservableObject {
     
-    init(ticker: RemoteTicker, localTicker: TickerInfo, chartData: ChartData) {
+    init(ticker: RemoteTicker, localTicker: TickerInfo, chartData: ChartData, medianData: ChartData) {
         self.ticker = ticker
         self.localTicker = localTicker
         self.chartData = chartData
+        self.medianData = medianData
     }
     
     @Published
@@ -23,4 +24,7 @@ final class ScatterChartViewModel: ObservableObject {
     
     @Published
     var chartData: ChartData
+    
+    @Published
+    var medianData: ChartData
 }

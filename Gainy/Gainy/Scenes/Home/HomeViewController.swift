@@ -16,6 +16,9 @@ final class HomeViewController: BaseViewController {
     //MARK: - Inner
     private let viewModel = HomeViewModel()
     
+    //MARK: - Inner
+    @IBOutlet weak var nameLbl: UILabel!
+    
     //MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -31,6 +34,12 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
+        if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
+            nameLbl.text = "Hi, \(first) \(last)"
+        } else {
+            nameLbl.text = ""
+        }
+        tableView.reloadData()
     }
     
     override func userLoggedOut() {

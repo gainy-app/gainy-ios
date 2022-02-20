@@ -144,7 +144,9 @@ class TickerInfo {
             
             if !self.isChartDataLoaded {
                 //Load Chart
-                self.loadAllCharts(dispatchGroup: chartsDS)
+                self.loadChartFromServer(period: .d1, dispatchGroup: chartsDS) {
+                    
+                }
             }
             
             if !self.isMainDataLoaded {
@@ -295,33 +297,6 @@ class TickerInfo {
         }
     }
     
-    /// Loading all charts at once
-    /// - Parameter dispatchGroup: Group to sync work
-    private func loadAllCharts(dispatchGroup: DispatchGroup) {
-        
-//        for period in ScatterChartView.ChartPeriod.allCases {
-//            chartsCache[period] = ChartDataCache()
-//        }
-//        
-        dispatchGroup.enter()
-        HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: ScatterChartView.ChartPeriod.d1) {[weak self] chartData, _ in
-            self?.setChartsCache(.d1, chartData: chartData)
-            self?.updateChartData(chartData)
-            dispatchGroup.leave()
-        }
-
-        
-        //Load day median
-        loadMedianForRange(.d1, industryId: medianIndustry, dispatchGroup: dispatchGroup)
-        
-//        loadChartFromServer(period: .w1, dispatchGroup: dispatchGroup, nil)
-//        loadChartFromServer(period: .m1, dispatchGroup: dispatchGroup, nil)
-//        loadChartFromServer(period: .m3, dispatchGroup: dispatchGroup, nil)
-//        loadChartFromServer(period: .y1, dispatchGroup: dispatchGroup, nil)
-//        loadChartFromServer(period: .y5, dispatchGroup: dispatchGroup, nil)
-//        loadChartFromServer(period: .all, dispatchGroup: dispatchGroup, nil)
-    }
-    
     /// Update direct Chart only
     func loadNewChartData(period: ScatterChartView.ChartPeriod, _ completion: ( () -> Void)? = nil) {
         if let chartCache = chartsCache[chartRange] {
@@ -355,8 +330,10 @@ class TickerInfo {
     private func loadChartFromServer(period: ScatterChartView.ChartPeriod, dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)?) {
         dispatchGroup?.enter()
         
-        let innerGroup = DispatchGroup()
+        var mainChart: [ChartNormalized] = []
+        var medianChart: [ChartNormalized] = []
         
+        let innerGroup = DispatchGroup()
         innerGroup.enter()
         HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: period) {[weak self] chartData, chartRemData in
             
@@ -365,48 +342,69 @@ class TickerInfo {
             if dispatchGroup == nil {
                 self?.updateChartData(chartData)
             }
+            mainChart = chartRemData
             
             innerGroup.leave()
         }
         
-        loadMedianForRange(period, industryId: medianIndustry, dispatchGroup: innerGroup) {
+        innerGroup.enter()
+        loadMedianForRange(period, industryId: medianIndustry) {[weak self] dailyStats in
+            
+            if dailyStats.count > 1 {
+                let firstDay = dailyStats.first?.medianPrice ?? 0.0
+                let lastDay = dailyStats.last?.medianPrice  ?? 0.0
+                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                self?.haveMedian = true
+                self?.setMedianData(period, medianGrow: self?.pctDiff(firstDay, lastDay) ?? 0.0, haveMedian: true)
+            } else {
+                self?.medianGrow = 0.0
+                self?.haveMedian = false
+                self?.setMedianData(period, medianGrow: 0.0, haveMedian: false)
+            }
+            medianChart = dailyStats
+            
+            innerGroup.leave()
         }
         
-        innerGroup.notify(queue: .main) {
+        innerGroup.notify(queue: .main) { [weak self] in
+            guard let self = self else {return}
+            
+            //Normalize
+            let (main, median) = normalizeCharts(mainChart, medianChart)
+            
+            let mainData = ChartData(points: main, period: period)
+            let medianData = ChartData(points: median, period: period)
+            
+            self.setChartsCache(period, chartData: mainData)
+            
+            //if dispatchGroup == nil {
+            self.updateChartData(mainData)
+            self.updateMedianData(medianData)
+            //}
+            
+            self.setMedianData(period, medianGrow: self.medianGrow, haveMedian: self.haveMedian, medianChart: medianData)
             completion?()
             dispatchGroup?.leave()
         }
     }
     
     private var medianLoader: Cancellable?
-    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, industryId: Int,  dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)? = nil) {
-        dispatchGroup?.enter()
+    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, industryId: Int, _ completion: ( ([FetchStockMedianQuery.Data.IndustryMedianChart]) -> Void)? = nil) {
+        
         haveMedian = false
         
         Network.shared.apollo.fetch(query: FetchStockMedianQuery.init(industryId: industryId, period: range.rawValue.lowercased())) {[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 if let dailyStats = graphQLResult.data?.industryMedianChart {
-                        if dailyStats.count > 1 {
-                            let firstDay = dailyStats.first?.medianPrice ?? 0.0
-                            let lastDay = dailyStats.last?.medianPrice  ?? 0.0
-                            self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
-                            self?.haveMedian = true
-                            self?.setMedianData(range, medianGrow: self?.pctDiff(firstDay, lastDay) ?? 0.0, haveMedian: true, medianChart: ChartData.init(points: dailyStats, period: range))
-                        }
+                    completion?(dailyStats)
+                } else {
+                    completion?([])
                 }
-                dispatchGroup?.leave()
-                completion?()
                 break
             case .failure(let error):
                 dprint("Failure when making FetchStockMedianQuery request. Error: \(error)")
-                
-                self?.medianGrow = 0.0
-                self?.haveMedian = false
-                self?.setMedianData(range, medianGrow: 0.0, haveMedian: false)
-                
-                dispatchGroup?.leave()
-                completion?()
+                completion?([])
                 break
             }
         }
@@ -421,6 +419,10 @@ class TickerInfo {
         self.localChartData = data
     }
     
+    private func updateMedianData(_ data: ChartData) {
+        self.localMedianData = data
+    }
+    
     private func updateNewsData(_ data: [DiscoverNewsQuery.Data.FetchNewsDatum]) {
         self.news = data
     }
@@ -431,7 +433,8 @@ class TickerInfo {
     
     //MARK: - Chart
     var chartRange: ScatterChartView.ChartPeriod = .d1
-    var localChartData: ChartData =  ChartData.init(points: [0.0])
+    var localChartData: ChartData = ChartData.init(points: [0.0])
+    var localMedianData: ChartData = ChartData.init(points: [0.0])
     
     //MARK: - About
     let about: String
