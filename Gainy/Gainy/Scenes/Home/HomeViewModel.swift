@@ -71,7 +71,7 @@ final class HomeViewModel {
                         async let gainers = self.getStocks(symbols: gainersTopSymbols)
                         async let losers = self.getStocks(symbols: losersTopSymbols)
                         let (gainersList, losersList) = await (gainers, losers)
-                        continuation.resume(returning: TopTickers(topGainers: gainersList, topLosers: losersList))
+                        continuation.resume(returning: TopTickers(topGainers: gainersList.reorder(by: gainersTopSymbols), topLosers: losersList.reorder(by: losersTopSymbols)))
                     }
                     
                     break
