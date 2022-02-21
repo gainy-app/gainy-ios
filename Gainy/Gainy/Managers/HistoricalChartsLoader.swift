@@ -132,7 +132,7 @@ final class HistoricalChartsLoader {
                                                                         interestIds: settings.interests.compactMap({$0.id}),
                                                                         accountIds: accountIds,
                                                                         categoryIds: settings.categories.compactMap({$0.id}),
-                                                                        institutionIds: [],
+                                                                        institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
                                                                         securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
             switch result {

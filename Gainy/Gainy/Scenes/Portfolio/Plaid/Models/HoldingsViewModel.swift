@@ -28,6 +28,8 @@ final class HoldingsViewModel {
         }
     }
     
+    //TO-DO: Save all interests/categs
+    
     var haveHoldings: Bool {
         self.dataSource.originalHoldings.count > 0
     }

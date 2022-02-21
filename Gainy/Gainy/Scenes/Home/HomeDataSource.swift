@@ -9,6 +9,7 @@ import UIKit
 import SkeletonView
 import Apollo
 import SwiftDate
+import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
     
@@ -16,15 +17,20 @@ protocol HomeDataSourceDelegate: AnyObject {
 
 final class HomeDataSource: NSObject {
     
-    override init() {
+    init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
+        cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
+        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight
+        self.viewModel = viewModel
     }
+    
+    private weak var viewModel: HomeViewModel?
     
     //MARK: - Delegate
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 1
+    private let sectionsCount = 3
     
     enum Section: Int {
         case index = 0, gainers, losers, collections, articles
@@ -100,6 +106,14 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes()
             return cell
+        case .gainers:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
+            cell.gainers = viewModel?.topGainers ?? []
+            return cell
+        case .losers:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
+            cell.gainers = viewModel?.topLosers ?? []
+            return cell
         default:
             break
         }
@@ -124,14 +138,21 @@ extension HomeDataSource: UITableViewDelegate {
         headerLabel.textColor = UIColor(named: "mainText")!
         headerLabel.font = .proDisplaySemibold(20)        
         headerLabel.text = Section(rawValue: section)!.name
-        return headerLabel
+        
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        
+        headerView.addSubview(headerLabel)
+        headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+        
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == Section.index.rawValue {
             return 0.0
         } else {
-            return 62.0
+            return 24.0 + 16.0 + 16
         }
     }
 }

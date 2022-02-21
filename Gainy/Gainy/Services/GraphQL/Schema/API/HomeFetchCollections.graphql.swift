@@ -4,12 +4,12 @@
 import Apollo
 import Foundation
 
-public final class GetFavoriteCollectionsQuery: GraphQLQuery {
+public final class HomeFetchCollectionsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetFavoriteCollections($profileId: Int) {
-      app_profile_favorite_collections(where: {profile_id: {_eq: $profileId}}) {
+    query HomeFetchCollections($profileID: Int!) {
+      app_profile_favorite_collections(where: {profile_id: {_eq: $profileID}}) {
         __typename
         collection {
           __typename
@@ -19,7 +19,7 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "GetFavoriteCollections"
+  public let operationName: String = "HomeFetchCollections"
 
   public var queryDocument: String {
     var document: String = operationDefinition
@@ -27,14 +27,14 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
     return document
   }
 
-  public var profileId: Int?
+  public var profileID: Int
 
-  public init(profileId: Int? = nil) {
-    self.profileId = profileId
+  public init(profileID: Int) {
+    self.profileID = profileID
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId]
+    return ["profileID": profileID]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -42,7 +42,7 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_profile_favorite_collections", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileId")]]], type: .nonNull(.list(.nonNull(.object(AppProfileFavoriteCollection.selections))))),
+        GraphQLField("app_profile_favorite_collections", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileID")]]], type: .nonNull(.list(.nonNull(.object(AppProfileFavoriteCollection.selections))))),
       ]
     }
 

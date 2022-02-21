@@ -14,4 +14,10 @@ fragment RemoteShortCollectionDetails on collections {
   enabled
   description
   size
+  
+        metrics {
+        absolute_daily_change
+        relative_daily_change
+        updated_at
+      }
 }

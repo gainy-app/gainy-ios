@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import SwiftDate
+import SkeletonView
 
 final class HomeViewController: BaseViewController {
     
@@ -23,6 +24,7 @@ final class HomeViewController: BaseViewController {
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = viewModel.dataSource
+            tableView.delegate = viewModel.dataSource
         }
     }
     
@@ -39,7 +41,11 @@ final class HomeViewController: BaseViewController {
         } else {
             nameLbl.text = ""
         }
-        tableView.reloadData()
+        tableView.showSkeleton()
+        viewModel.loadHomeData { [weak tableView] in
+            tableView?.hideSkeleton()
+            tableView?.reloadData()
+        }
     }
     
     override func userLoggedOut() {
