@@ -77,13 +77,13 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var wlBtn: UIButton! {
         didSet {
-            wlBtn.setImage(UIImage(named: "add_to_wl"), for: .selected)
+            wlBtn.setImage(UIImage(named: "remove_from_wl"), for: .selected)
             wlBtn.setTitle("", for: .selected)
             
-            wlBtn.setImage(UIImage(named: "remove_from_wl"), for: .normal)
+            wlBtn.setImage(UIImage(named: "add_to_wl"), for: .normal)
             wlBtn.setTitle("", for: .normal)
             
-            wlBtn.addTarget(self, action: #selector(compareAction), for: .touchUpInside)
+            wlBtn.addTarget(self, action: #selector(addToWatchlistToggleAction(_:)), for: .touchUpInside)
         }
     }
     @IBOutlet private weak var matchCircle: UIImageView! {
@@ -127,6 +127,10 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             growLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
             arrowImgView.image = UIImage(named: priceChange >= 0.0 ? "small_up" : "small_down")
             
+            let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+                item == stock.symbol
+            }
+            isInWL = addedToWatchlist
             if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
                 matchLabel.text = "\(matchScore)"
                 switch matchScore {
@@ -151,8 +155,29 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     
     //MARK: - Actions
     
-    @objc func compareAction() {
-       
+    @IBAction func addToWatchlistToggleAction(_ sender: UIButton) {        
+        guard let symbol = stock?.symbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == symbol
+        }
+        if addedToWatchlist {
+            GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = false
+                }
+            }
+        } else {
+            GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+            UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                if success {
+                    sender.isSelected = true
+                }
+            }
+        }
     }
 }
 

@@ -90,7 +90,7 @@ final class HistoricalChartsLoader {
     ///   - profileID: User Profile ID
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, completion: @escaping ([ChartNormalized]) -> Void) {
+    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int,  completion: @escaping ([ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -125,13 +125,15 @@ final class HistoricalChartsLoader {
             periodString = "all"
         }
         dprint("GetPortfolioChartsQuery start")
+        let intersIDs = settings.interests.compactMap({$0.id})
+        let catsIDs = settings.categories.compactMap({$0.id})
         let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
-        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(settings.interests.compactMap({$0.id})) accs: \(accountIds) cats: \(settings.categories.compactMap({$0.id})) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) accs: \(accountIds) cats: \(catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
-                                                                        interestIds: settings.interests.compactMap({$0.id}),
+                                                                        interestIds: intersIDs.count == interestsCount ? nil : intersIDs,
                                                                         accountIds: accountIds,
-                                                                        categoryIds: settings.categories.compactMap({$0.id}),
+                                                                        categoryIds: catsIDs.count == categoriesCount ? nil : catsIDs,
                                                                         institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
                                                                         securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in

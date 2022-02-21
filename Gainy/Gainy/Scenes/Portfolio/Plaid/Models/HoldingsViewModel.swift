@@ -43,6 +43,9 @@ final class HoldingsViewModel {
         sypChartsCache.removeAll()
     }
     
+    var interestsCount: Int = 0
+    var categoriesCount: Int = 0
+    
     //MARK: - Network
     
     private var config = Configuration()
@@ -104,8 +107,10 @@ final class HoldingsViewModel {
                         }
                         
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
+                        self.interestsCount = interestsRaw.count
                         
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
+                        self.categoriesCount = categoriesRaw.count
                         
                         if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
                             realtimeMetrics.append(metric)
@@ -162,7 +167,7 @@ final class HoldingsViewModel {
                     dprint("\(Date()) Holdings charts start")
                     for range in [ScatterChartView.ChartPeriod.d1]{
                         innerChartsGroup.enter()
-                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings) {[weak self] chartData in
+                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
                             dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
@@ -223,14 +228,13 @@ final class HoldingsViewModel {
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         
         if let profileID = UserProfileManager.shared.profileID {
-            
-            
+                        
             let loadGroup = DispatchGroup()
             var haveSomethingToLoad = false
             
             if chartsCache[range] == nil {
                 loadGroup.enter()
-                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings) {[weak self] chartData in
+                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
                     self?.chartsCache[range] = chartData
                     loadGroup.leave()
                 }
