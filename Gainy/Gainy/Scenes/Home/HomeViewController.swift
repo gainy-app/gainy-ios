@@ -23,8 +23,18 @@ final class HomeViewController: BaseViewController {
     //MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
+            tableView.rowHeight = UITableView.automaticDimension
+            tableView.sectionHeaderHeight = UITableView.automaticDimension
+            tableView.sectionFooterHeight = UITableView.automaticDimension
+            tableView.estimatedRowHeight = 144.0
+            tableView.estimatedSectionFooterHeight = 0
+            tableView.estimatedSectionHeaderHeight = 80.0
+            tableView.backgroundColor = .clear
+            tableView.showsHorizontalScrollIndicator = false
+            tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
+            viewModel.dataSource.delegate = self
         }
     }
     
@@ -41,15 +51,35 @@ final class HomeViewController: BaseViewController {
         } else {
             nameLbl.text = ""
         }
-        tableView.showSkeleton()
+        tableView.isSkeletonable = true
+        view.showAnimatedGradientSkeleton()
         viewModel.loadHomeData { [weak tableView] in
             tableView?.hideSkeleton()
             tableView?.reloadData()
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            view.showAnimatedSkeleton()
+        }
+    
     override func userLoggedOut() {
         super.userLoggedOut()
         
+    }
+}
+
+extension HomeViewController: HomeDataSourceDelegate {
+    func altStockPressed(stock: AltStockTicker, isGainers: Bool) {
+        if isGainers {
+            if let index = viewModel.topGainers.firstIndex(where: {$0.symbol == stock.symbol}) {
+                mainCoordinator?.showCardsDetailsViewController(viewModel.topGainers.compactMap({TickerInfo(ticker: $0)}), index: index)
+            }
+        } else {
+            if let index = viewModel.topLosers.firstIndex(where: {$0.symbol == stock.symbol}) {
+                mainCoordinator?.showCardsDetailsViewController(viewModel.topLosers.compactMap({TickerInfo(ticker: $0)}), index: index)
+            }
+        }
     }
 }

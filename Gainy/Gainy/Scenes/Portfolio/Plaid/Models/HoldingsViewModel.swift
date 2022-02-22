@@ -106,11 +106,8 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                         }
                         
-                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
-                        self.interestsCount = interestsRaw.count
-                        
+                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])                        
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
-                        self.categoriesCount = categoriesRaw.count
                         
                         if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
                             realtimeMetrics.append(metric)
@@ -138,6 +135,7 @@ final class HoldingsViewModel {
                         }) ?? false
                         return InfoDataSource.init(type: .Interst, id:item.interest?.id ?? 0, title: item.interest?.name ?? "", iconURL: item.interest?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
+                    self.interestsCount = interests.count
                     
                     let categories = categoriesRaw.map { item -> InfoDataSource in
                         let selected = settings?.categories.contains(where: { item in
@@ -145,6 +143,7 @@ final class HoldingsViewModel {
                         }) ?? false
                         return InfoDataSource.init(type: .Category, id:item.categories?.id ?? 0, title: item.categories?.name ?? "", iconURL: item.categories?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
+                    self.categoriesCount = categories.count
                     
                     let defaultSettings = PortfolioSettings.init(sorting: .matchScore,
                                                                  ascending: false,

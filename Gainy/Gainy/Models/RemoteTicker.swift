@@ -174,12 +174,12 @@ class TickerInfo {
                         
                          if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
                             self?.upcomingEvents = tickerDetails.tickerEvents
-                            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                             let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name: "(IN)" + ($0.gainyIndustry?.name ?? ""),
                                                                                                        url: "",
                                                                                                        collectionID: $0.gainyIndustry?.collectionId ?? -404,
                                                                                                        id: $0.gainyIndustry?.id ?? -404
                             )  })
-                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "",
+                            let categories = tickerDetails.tickerCategories.compactMap({TickerTag.init(name: "C" + ($0.categories?.name ?? ""), url: $0.categories?.iconUrl ?? "",
                                                                                                        collectionID: $0.categories?.collectionId ?? -404,
                                                                                                        id: $0.categories?.id ?? -404
                             )})

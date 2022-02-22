@@ -8,9 +8,7 @@
 import UIKit
 
 protocol HomeTickersTableViewCellDelegate: AnyObject {
-    func altStockPressed(stock: AltStockTicker)
-    func comparePressed(stock: AltStockTicker)
-    func isStockCompared(stock: AltStockTicker) -> Bool
+    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell)
 }
 
 final class HomeTickersTableViewCell: UITableViewCell {
@@ -33,6 +31,8 @@ final class HomeTickersTableViewCell: UITableViewCell {
             innerCollectionView.reloadData()
         }
     }
+    
+    var isGainers: Bool = false
 }
 
 extension HomeTickersTableViewCell: UICollectionViewDataSource {
@@ -59,7 +59,7 @@ extension HomeTickersTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension HomeTickersTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         //let stock = gainers[indexPath.row]
+        delegate?.altStockPressed(stock: gainers[indexPath.row], cell: self)
     }
 }
 
@@ -180,17 +180,3 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
         }
     }
 }
-
-//extension TickerDetailsAlternativeStocksViewCell: TickerDetailsAlternativeStocksViewCellDelegate {
-//    func isStockCompared(stock: AltStockTicker) -> Bool {
-//        delegate?.isStockCompared(stock: stock) ?? false
-//    }
-//
-//    func altStockPressed(stock: AltStockTicker) {
-//        delegate?.altStockPressed(stock: stock)
-//    }
-//
-//    func comparePressed(stock: AltStockTicker) {
-//        delegate?.comparePressed(stock: stock)
-//    }
-//}

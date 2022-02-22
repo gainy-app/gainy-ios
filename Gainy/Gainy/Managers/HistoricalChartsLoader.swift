@@ -128,7 +128,7 @@ final class HistoricalChartsLoader {
         let intersIDs = settings.interests.compactMap({$0.id})
         let catsIDs = settings.categories.compactMap({$0.id})
         let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
-        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) accs: \(accountIds) cats: \(catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount ? nil : intersIDs)) accs: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         interestIds: intersIDs.count == interestsCount ? nil : intersIDs,

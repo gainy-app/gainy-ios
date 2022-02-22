@@ -12,7 +12,7 @@ import SwiftDate
 import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
-    
+    func altStockPressed(stock: AltStockTicker, isGainers: Bool)
 }
 
 final class HomeDataSource: NSObject {
@@ -66,24 +66,7 @@ final class HomeDataSource: NSObject {
 extension HomeDataSource: SkeletonTableViewDataSource {
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
-        return HoldingsSkeletonTableViewCell.cellIdentifier
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
-    }
-    
-    func collectionSkeletonView(_ skeletonView: UITableView, skeletonCellForRowAt indexPath: IndexPath) -> UITableViewCell? {
-        let cell = skeletonView.dequeueReusableCell(withIdentifier: HoldingsSkeletonTableViewCell.cellIdentifier, for: indexPath) as? HoldingsSkeletonTableViewCell
-        cell?.isSkeletonable = true
-        cell?.contentView.subviews[0].subviews.forEach({
-            $0.isSkeletonable = true
-            $0.skeletonCornerRadius = 6
-            if let lbl =  $0 as? UILabel {
-                lbl.linesCornerRadius = 6
-            }
-        })
-        return cell
+        return HomeSkeletonTableViewCell.cellIdentifier
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,10 +92,14 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .gainers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
             cell.gainers = viewModel?.topGainers ?? []
+            cell.delegate = self
+            cell.isGainers = true
             return cell
         case .losers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
             cell.gainers = viewModel?.topLosers ?? []
+            cell.delegate = self
+            cell.isGainers = false
             return cell
         default:
             break
@@ -154,6 +141,12 @@ extension HomeDataSource: UITableViewDelegate {
         } else {
             return 24.0 + 16.0 + 16
         }
+    }
+}
+
+extension HomeDataSource: HomeTickersTableViewCellDelegate {
+    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
+        delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
     }
 }
 

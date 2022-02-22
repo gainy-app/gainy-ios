@@ -1,12 +1,11 @@
-iOS v1.1.4 #160 available
+iOS v1.1.4 #161 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• Top gainers/losers - first approach
+• Top gainers/losers - click support
 
 :hammer_and_wrench: Improvements
-• Portfolio: 1D balance changed (thx to Mikhail)
 • Portfolio: filtering improved (thx to Mikhail)
 
 :red_circle: Important Notes:
