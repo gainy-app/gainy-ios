@@ -93,7 +93,7 @@ struct HoldingsModelMapper {
             switch range {
             case .d1:
                 let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1d ?? 0.0) * 100.0,
-                                                                       rangeGrowBalance: portfolioGains?.relativeGain_1d ?? 0.0,
+                                                                       rangeGrowBalance: portfolioGains?.absoluteGain_1d ?? 0.0,
                                                                        chartData: chartDataPort,
                                                                        spGrow: Float(chartDataSP.startEndDiff),
                                                                        sypChartData: chartDataSP)

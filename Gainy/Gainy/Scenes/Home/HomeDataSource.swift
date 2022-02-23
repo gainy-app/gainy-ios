@@ -1,0 +1,152 @@
+//
+//  HomeDataSource.swift
+//  Gainy
+//
+//  Created by Anton Gubarenko on 18.02.2022.
+//
+
+import UIKit
+import SkeletonView
+import Apollo
+import SwiftDate
+import PureLayout
+
+protocol HomeDataSourceDelegate: AnyObject {
+    func altStockPressed(stock: AltStockTicker, isGainers: Bool)
+}
+
+final class HomeDataSource: NSObject {
+    
+    init(viewModel: HomeViewModel) {
+        cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
+        cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
+        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight
+        self.viewModel = viewModel
+    }
+    
+    private weak var viewModel: HomeViewModel?
+    
+    //MARK: - Delegate
+    weak var delegate: HomeDataSourceDelegate?
+    
+    //MARK: - Sections
+    private let sectionsCount = 3
+    
+    enum Section: Int {
+        case index = 0, gainers, losers, collections, articles
+        
+        var name: String {
+            switch self {
+            case .index:
+                return ""
+            case .collections:
+                return "Updates in your collections"
+            case .gainers:
+                return "Top gainers in your collections"
+            case .losers:
+                return "Top loser in your collections"
+            case .articles:
+                return "Articles for you you"
+                
+            }
+        }
+    }
+    
+    private var articles: [String] = []
+    
+    //MARK: - Heights
+    private var cellHeights: [Section: CGFloat] = [:]
+    private var expandedCells: Set<String> = Set<String>()
+    private weak var tableView: UITableView?
+    private let refreshControl = LottieRefreshControl()
+
+    //
+}
+
+extension HomeDataSource: SkeletonTableViewDataSource {
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return HomeSkeletonTableViewCell.cellIdentifier
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == Section.articles.rawValue {
+            return articles.count
+        } else {
+            return 1
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionsCount
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        self.tableView = tableView
+        
+        switch Section(rawValue: indexPath.section)! {
+        case .index:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
+            cell.updateIndexes()
+            return cell
+        case .gainers:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
+            cell.gainers = viewModel?.topGainers ?? []
+            cell.delegate = self
+            cell.isGainers = true
+            return cell
+        case .losers:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
+            cell.gainers = viewModel?.topLosers ?? []
+            cell.delegate = self
+            cell.isGainers = false
+            return cell
+        default:
+            break
+        }
+        
+        return UITableViewCell()
+    }
+}
+
+extension HomeDataSource: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeights[Section(rawValue: indexPath.section)!] ?? 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      
+    }
+    
+    //MARK: - Headers
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerLabel = UILabel()
+        headerLabel.textColor = UIColor(named: "mainText")!
+        headerLabel.font = .proDisplaySemibold(20)        
+        headerLabel.text = Section(rawValue: section)!.name
+        
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        
+        headerView.addSubview(headerLabel)
+        headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == Section.index.rawValue {
+            return 0.0
+        } else {
+            return 24.0 + 16.0 + 16
+        }
+    }
+}
+
+extension HomeDataSource: HomeTickersTableViewCellDelegate {
+    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
+        delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
+    }
+}
+

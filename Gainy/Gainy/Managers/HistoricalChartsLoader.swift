@@ -90,7 +90,7 @@ final class HistoricalChartsLoader {
     ///   - profileID: User Profile ID
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, completion: @escaping ([ChartNormalized]) -> Void) {
+    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int,  completion: @escaping ([ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -124,19 +124,24 @@ final class HistoricalChartsLoader {
             dateString = "1900-01-01"
             periodString = "all"
         }
+        dprint("GetPortfolioChartsQuery start")
+        let intersIDs = settings.interests.compactMap({$0.id})
+        let catsIDs = settings.categories.compactMap({$0.id})
         let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount ? nil : intersIDs)) accs: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
-                                                                        interestIds: settings.interests.compactMap({$0.id}),
+                                                                        interestIds: intersIDs.count == interestsCount ? nil : intersIDs,
                                                                         accountIds: accountIds,
-                                                                        categoryIds: settings.categories.compactMap({$0.id}),
-                                                                        institutionIds: [],
+                                                                        categoryIds: catsIDs.count == categoriesCount ? nil : catsIDs,
+                                                                        institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
                                                                         securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.adjustedClose != nil}).compactMap({$0}) {
-                    
+                    dprint("GetPortfolioChartsQuery min: \(String(describing: fetchedData.min(by: {($0.adjustedClose ?? 0.0) < ($1.adjustedClose ?? 0.0)})))")
+                    dprint("GetPortfolioChartsQuery max: \(String(describing: fetchedData.max(by: {($0.adjustedClose ?? 0.0) < ($1.adjustedClose ?? 0.0)})))")
                     if range == .d1 {
                         if let lastDay = fetchedData.last {
                             let filtered = fetchedData.filter({$0.date.compare(toDate: lastDay.date, granularity: .day) == .orderedSame})

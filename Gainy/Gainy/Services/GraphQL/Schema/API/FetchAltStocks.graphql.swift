@@ -63,7 +63,7 @@ public final class FetchAltStocksQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }])
     }
 
-    /// An array relationship
+    /// fetch data from the table: "public_220222145854.ticker_industries"
     public var tickerIndustries: [TickerIndustry] {
       get {
         return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }
@@ -151,7 +151,7 @@ public final class FetchAltStocksQuery: GraphQLQuery {
           }
         }
 
-        /// An array relationship
+        /// fetch data from the table: "public_220222145854.ticker_industries"
         public var tickerIndustries: [TickerIndustry] {
           get {
             return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }

@@ -133,6 +133,8 @@ fragment RemoteTickerDetailsFull on tickers {
       }
     }
     ticker_industries {
+    industry_id
+      industry_order
       gainy_industry {
         id
         name
@@ -177,6 +179,8 @@ fragment RemoteTickerExtraDetails on tickers {
       }
     }
     ticker_industries {
+        industry_id
+      industry_order
       gainy_industry {
         id
         name

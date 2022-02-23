@@ -121,10 +121,6 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, size: Int? = nil) {
-          self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "size": size])
-        }
-
         public var __typename: String {
           get {
             return resultMap["__typename"]! as! String

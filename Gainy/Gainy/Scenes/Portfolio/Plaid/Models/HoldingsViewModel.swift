@@ -28,6 +28,8 @@ final class HoldingsViewModel {
         }
     }
     
+    //TO-DO: Save all interests/categs
+    
     var haveHoldings: Bool {
         self.dataSource.originalHoldings.count > 0
     }
@@ -41,6 +43,9 @@ final class HoldingsViewModel {
         sypChartsCache.removeAll()
     }
     
+    var interestsCount: Int = 0
+    var categoriesCount: Int = 0
+    
     //MARK: - Network
     
     private var config = Configuration()
@@ -48,6 +53,8 @@ final class HoldingsViewModel {
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
         chartsCache.removeAll()
         sypChartsCache.removeAll()
+        Network.shared.apollo.clearCache()
+        dataSource.chartRange = .d1
         
         DispatchQueue.global().async {
             if let profileID = UserProfileManager.shared.profileID {
@@ -99,8 +106,7 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                         }
                         
-                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
-                        
+                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])                        
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
                         
                         if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
@@ -129,6 +135,7 @@ final class HoldingsViewModel {
                         }) ?? false
                         return InfoDataSource.init(type: .Interst, id:item.interest?.id ?? 0, title: item.interest?.name ?? "", iconURL: item.interest?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
+                    self.interestsCount = interests.count
                     
                     let categories = categoriesRaw.map { item -> InfoDataSource in
                         let selected = settings?.categories.contains(where: { item in
@@ -136,6 +143,7 @@ final class HoldingsViewModel {
                         }) ?? false
                         return InfoDataSource.init(type: .Category, id:item.categories?.id ?? 0, title: item.categories?.name ?? "", iconURL: item.categories?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
+                    self.categoriesCount = categories.count
                     
                     let defaultSettings = PortfolioSettings.init(sorting: .matchScore,
                                                                  ascending: false,
@@ -158,7 +166,7 @@ final class HoldingsViewModel {
                     dprint("\(Date()) Holdings charts start")
                     for range in [ScatterChartView.ChartPeriod.d1]{
                         innerChartsGroup.enter()
-                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings) {[weak self] chartData in
+                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
                             dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
@@ -181,6 +189,7 @@ final class HoldingsViewModel {
                                                                       portfolioGains: self.portfolioGains)
                         let sypChartReal = today.sypChartData
                         
+                        dprint("Porto balance: \(self.portfolioGains?.actualValue ?? 0.0)")
                         let live = HoldingChartViewModel.init(balance: self.portfolioGains?.actualValue ?? 0.0,
                                                               rangeGrow: today.rangeGrow,
                                                               rangeGrowBalance: today.rangeGrowBalance,
@@ -191,7 +200,16 @@ final class HoldingsViewModel {
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
                                                                              profileHoldings: self.portfolioGains)
                         dprint("\(Date()) Holdings match score end")
-                        self.dataSource.chartViewModel = live
+                        if self.dataSource.chartViewModel == nil {
+                            self.dataSource.chartViewModel = live
+                        } else {
+                            self.dataSource.chartViewModel.balance = live.balance
+                            self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
+                            self.dataSource.chartViewModel.rangeGrowBalance = live.rangeGrowBalance
+                            self.dataSource.chartViewModel.spGrow = live.spGrow
+                            self.dataSource.chartViewModel.chartData = live.chartData
+                            self.dataSource.chartViewModel.sypChartData = live.sypChartData
+                        }
                         self.dataSource.profileGains = [.d1 : today]
                         self.dataSource.originalHoldings = originalHoldings
                         self.dataSource.holdings = originalHoldings
@@ -209,14 +227,13 @@ final class HoldingsViewModel {
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         
         if let profileID = UserProfileManager.shared.profileID {
-            
-            
+                        
             let loadGroup = DispatchGroup()
             var haveSomethingToLoad = false
             
             if chartsCache[range] == nil {
                 loadGroup.enter()
-                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings) {[weak self] chartData in
+                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
                     self?.chartsCache[range] = chartData
                     loadGroup.leave()
                 }

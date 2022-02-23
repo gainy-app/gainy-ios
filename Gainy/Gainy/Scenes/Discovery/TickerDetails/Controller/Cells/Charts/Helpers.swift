@@ -210,8 +210,7 @@ public class ChartData: ObservableObject, Identifiable {
     
     init(points: [ChartNormalized], period: ScatterChartView.ChartPeriod) {
         self.points = points.compactMap{
-                return ($0.labelForPeriod(period), Double($0.val))
-
+            return ($0.labelForPeriod(period), Double($0.val))
         }
     }
     
