@@ -47,31 +47,64 @@ struct PortfolioScatterChartView: View {
     private var isLeftDurationVis: Bool = true
     
     var body: some View {
-        VStack {
-            headerView
-            ZStack {
-//            LinearGradient(
-//                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
-//                    startPoint: .top, endPoint: .bottom)
-//                    .padding(.top, 0)
-            chartView
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
-                .frame(height: 220)
+        if #available(iOS 14.0, *) {
+            VStack {
+                headerView
+                ZStack {
+                    //            LinearGradient(
+                    //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
+                    //                    startPoint: .top, endPoint: .bottom)
+                    //                    .padding(.top, 0)
+                    chartView
+                        .padding(.leading, 8)
+                        .padding(.trailing, 8)
+                        .frame(height: 220)
+                }
+                Spacer()
+                sppView
+                    .offset(y: -16)
+                    .frame(height: 24)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                })
+                
             }
-            Spacer()
-            sppView
-                .offset(y: -16)
-                .frame(height: 24)
-            GeometryReader(content: { geometry in
-                bottomMenu(geometry)
+            .background(Color.white)
+            .onAppear(perform: {
+                hapticTouch.prepare()
             })
-            
+            .frame(height: 360)
+            .ignoresSafeArea()
+            .padding(.top, 0)
+        } else {
+            VStack {
+                headerView
+                ZStack {
+                    //            LinearGradient(
+                    //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
+                    //                    startPoint: .top, endPoint: .bottom)
+                    //                    .padding(.top, 0)
+                    chartView
+                        .padding(.leading, 8)
+                        .padding(.trailing, 8)
+                        .frame(height: 220)
+                }
+                Spacer()
+                sppView
+                    .offset(y: -16)
+                    .frame(height: 24)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                })
+                
+            }
+            .background(Color.white)
+            .onAppear(perform: {
+                hapticTouch.prepare()
+            })
+            .frame(height: 360)
+            .padding(.top, 0)
         }
-        .background(Color.white)
-        .onAppear(perform: {
-            hapticTouch.prepare()
-        })
     }
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()

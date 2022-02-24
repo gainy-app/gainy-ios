@@ -3,10 +3,12 @@ iOS v1.1.4 #162 available
 Bugfixes
 
 :new: New:
-• Top gainers/losers - click support
+• Median chart
 
 :hammer_and_wrench: Improvements
 • Portfolio: filtering improved (thx to Mikhail)
+• A lot of QA questions
+• Balance and chart are not sliding down
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

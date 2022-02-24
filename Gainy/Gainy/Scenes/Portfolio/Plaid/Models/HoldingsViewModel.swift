@@ -54,7 +54,6 @@ final class HoldingsViewModel {
         chartsCache.removeAll()
         sypChartsCache.removeAll()
         Network.shared.apollo.clearCache()
-        dataSource.chartRange = .d1
         
         DispatchQueue.global().async {
             if let profileID = UserProfileManager.shared.profileID {
@@ -88,8 +87,6 @@ final class HoldingsViewModel {
                         completion?()
                         return
                     }
-                    
-                    self.dataSource.chartRange = .d1
                     
                     var tickSymbols: [String] = []
                     var securityTypesRaw: [String] = []
@@ -164,7 +161,7 @@ final class HoldingsViewModel {
                     
                     let innerChartsGroup = DispatchGroup()
                     dprint("\(Date()) Holdings charts start")
-                    for range in [ScatterChartView.ChartPeriod.d1]{
+                    for range in [self.dataSource.chartRange]{
                         innerChartsGroup.enter()
                         HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
@@ -183,7 +180,7 @@ final class HoldingsViewModel {
                     innerChartsGroup.notify(queue: .main) {
                         dprint("\(Date()) Holdings charts ended")
                         
-                        let today = HoldingsModelMapper.topChartGains(range: .d1,
+                        let today = HoldingsModelMapper.topChartGains(range: self.dataSource.chartRange,
                                                                       chartsCache: self.chartsCache,
                                                                       sypChartsCache: self.sypChartsCache,
                                                                       portfolioGains: self.portfolioGains)
@@ -210,7 +207,7 @@ final class HoldingsViewModel {
                             self.dataSource.chartViewModel.chartData = live.chartData
                             self.dataSource.chartViewModel.sypChartData = live.sypChartData
                         }
-                        self.dataSource.profileGains = [.d1 : today]
+                        self.dataSource.profileGains = [self.dataSource.chartRange : today]
                         self.dataSource.originalHoldings = originalHoldings
                         self.dataSource.holdings = originalHoldings
                         if let settings = settings {

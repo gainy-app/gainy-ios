@@ -197,7 +197,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         button.backgroundColor = UIColor.Gainy.white
         
         button.addTarget(self,
-                         action: #selector(firstMarketMarkerTapped(_:)),
+                         action: #selector(matchScoreTapped(_:)),
                          for: .touchUpInside)
         
         return button
@@ -629,6 +629,19 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     // MARK: Private
     
     // MARK: Functions
+    @objc
+    private func matchScoreTapped(_: UIButton) {
+        let marketData = MarketDataField.matchScore
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: marketData.explanationTitle)
+        explanationVc.configureWith(description: marketData.explanationDescription,
+                                    linkString: marketData.explanationLinkString,
+                                    link: marketData.explanationLink)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
     
     @objc
     private func firstMarketMarkerTapped(_: UIButton) {

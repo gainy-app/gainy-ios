@@ -185,9 +185,9 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.tickerInfo = ticker
             if cell.addSwiftUIIfPossible(chartHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                 chartHosting.view.autoSetDimension(.height, toSize: chatHeight)
-                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell)
-                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
                 chartHosting.view.alpha = 0.0
             }
                 cell.contentView.addSubview(chartLoader)
@@ -209,7 +209,6 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             }
             cell.minHeightUpdated = { [weak self] minHeight in
                 DispatchQueue.main.async {
-                    dprint("New min height: \(minHeight)")
                     self?.aboutMinHeight = max(minHeight, self?.aboutMinHeight ?? 0.0)
                     tableView.beginUpdates()
                     self?.cellHeights[.about] = minHeight
@@ -235,16 +234,16 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             if #available(iOS 15, *) {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                     wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
-                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
-                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
-                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: 0)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView, withOffset: -28)
                 }
             } else {
                 if cell.addSwiftUIIfPossible(wsrHosting.view, viewTag: TickerDetailsDataSource.hostingTag, oldTag: TickerDetailsDataSource.oldHostingTag) {
                     wsrHosting.view.autoSetDimension(.height, toSize: 179.0)
-                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell, withOffset: 28)
-                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -40)
-                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell, withOffset: -28)
+                    wsrHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView, withOffset: 28)
+                    wsrHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: -40)
+                    wsrHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView, withOffset: -28)
                 }
             }
             wsrModel.totalScore = ticker.wsjData.rate

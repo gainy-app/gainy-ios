@@ -93,24 +93,52 @@ struct ScatterChartView: View {
     private var isLeftDurationVis: Bool = true
     
     var body: some View {
-        GeometryReader(content: { rootGeo in
-            VStack {
-                headerView
-                chartView
-                    .padding(.leading, 8)
-                    .padding(.trailing, 8)
-                    .padding(.top, 20)
-                bottomMedian
-                GeometryReader(content: { geometry in
-                    bottomMenu(geometry)
-                }).frame(maxHeight: 40)
-                
-            }
-            .background(Color.white)
-        }).onAppear(perform: {
-            hapticTouch.prepare()
-        })
+        if #available(iOS 14.0, *) {
+            GeometryReader(content: { rootGeo in
+                VStack {
+                    headerView
+                        .background(Color.red)
+                    chartView
+                        .padding(.leading, 8)
+                        .padding(.trailing, 8)
+                        .padding(.top, 20)
+                    bottomMedian
+                    GeometryReader(content: { geometry in
+                        bottomMenu(geometry)
+                    }).frame(maxHeight: 40)
+                    
+                }
+                .background(Color.green)
+                .frame(height: 341)
+            }).onAppear(perform: {
+                hapticTouch.prepare()
+            }).frame(height: 341)
+                .ignoresSafeArea()
+                .padding(.top, 0)
+        } else {
+            GeometryReader(content: { rootGeo in
+                VStack {
+                    headerView
+                        .background(Color.red)
+                    chartView
+                        .padding(.leading, 8)
+                        .padding(.trailing, 8)
+                        .padding(.top, 20)
+                    bottomMedian
+                    GeometryReader(content: { geometry in
+                        bottomMenu(geometry)
+                    }).frame(maxHeight: 40)
+                    
+                }
+                .background(Color.green)
+                .frame(height: 341)
+            }).onAppear(perform: {
+                hapticTouch.prepare()
+            }).frame(height: 341)
+                .padding(.top, 0)
+        }
     }
+    
     //MARK:- Haptics
     private let hapticTouch = UIImpactFeedbackGenerator()
     
@@ -140,6 +168,7 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedSemibold(24.0).uiFont)
                             .animation(.none)
+                            .opacity(isMedianVisible ? 0.0 : 1.0)
                         
                         Spacer()
                     }
@@ -239,10 +268,16 @@ struct ScatterChartView: View {
         GeometryReader{ geometry in
             ZStack {
                 if viewModel.chartData.onlyPoints().uniqued().count > 1 {
-                    LineView(data: viewModel.chartData, title: "Full chart", style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                    LineView(data: viewModel.chartData,
+                             title: "Full chart",
+                             style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                             viewModel: lineViewModel).offset(y: -60)
                     
                     if isMedianVisible && viewModel.localTicker.haveMedian &&  viewModel.medianData.onlyPoints().uniqued().count > 1 {
-                        LineView(data: viewModel.medianData, title: "Full chart", style: viewModel.medianData.startEndDiff >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop, viewModel: lineViewModel).offset(y: -60)
+                        LineView(data: viewModel.medianData,
+                                 title: "Full chart",
+                                 style: viewModel.medianData.startEndDiff >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                                 viewModel: lineViewModel).offset(y: -60)
                     }
                 } else {
                     //no_data_graph_down
@@ -251,10 +286,10 @@ struct ScatterChartView: View {
                             Image(uiImage: UIImage(named: "no_data_graph_up")!)
                             VStack(spacing: 8.0) {
                                 
-                            Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
-                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                .font(UIFont.compactRoundedSemibold(14).uiFont)
-                                .multilineTextAlignment(.center)
+                                Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                    .multilineTextAlignment(.center)
                                 
                                 Text(metrics.lastKnownPrice?.price ?? "")
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -263,22 +298,22 @@ struct ScatterChartView: View {
                         }
                     }
                     
-//                    VStack {
-//                        Spacer()
-//                        HStack {
-//                            Spacer()
-//                            VStack {
-//                                Text("Not enough data")
-//                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
-//                                    .font(UIFont.proDisplaySemibold(12).uiFont)
-//                                Rectangle()
-//                                    .fill(UIColor(named: "mainGreen")!.uiColor)
-//                                    .frame(height: 2)
-//                            }
-//                            Spacer()
-//                        }
-//                        Spacer()
-//                    }
+                    //                    VStack {
+                    //                        Spacer()
+                    //                        HStack {
+                    //                            Spacer()
+                    //                            VStack {
+                    //                                Text("Not enough data")
+                    //                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                    //                                    .font(UIFont.proDisplaySemibold(12).uiFont)
+                    //                                Rectangle()
+                    //                                    .fill(UIColor(named: "mainGreen")!.uiColor)
+                    //                                    .frame(height: 2)
+                    //                            }
+                    //                            Spacer()
+                    //                        }
+                    //                        Spacer()
+                    //                    }
                 }
                 //            VStack(alignment: .leading) {
                 //                Spacer()
@@ -297,7 +332,7 @@ struct ScatterChartView: View {
             .padding(.all, 0)
             .animation(.linear)
             .background(Rectangle().fill().foregroundColor(.white))
-            .gesture(DragGesture(minimumDistance: 0)
+            .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
                         .onChanged({ value in
                 lineViewModel.dragLocation = value.location
                 lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
@@ -310,7 +345,7 @@ struct ScatterChartView: View {
                 lineViewModel.hideHorizontalLines = false
                 lineViewModel.indicatorLocation = .zero
             }
-                                )
+            )
             )
         }
     }
@@ -332,27 +367,29 @@ struct ScatterChartView: View {
     
     var bottomMedian: some View {
         HStack(spacing: 8) {
-//            Button(action: {
-//                hapticTouch.impactOccurred()
-//                delegate.comparePressed()
-//            }, label: {
-//                HStack {
-//                    Image("tiny plus")
-//                        .renderingMode(.original)
-//                    Text("Compare stocks")
-//                        .padding(.all, 0)
-//                        .font(UIFont.compactRoundedSemibold(12).uiFont)
-//                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
-//                }
-//                .padding(.leading, 8)
-//                .padding(.trailing, 8)
-//                .padding(.top, 4)
-//                .padding(.bottom, 4)
-//                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
-//            })
+            //            Button(action: {
+            //                hapticTouch.impactOccurred()
+            //                delegate.comparePressed()
+            //            }, label: {
+            //                HStack {
+            //                    Image("tiny plus")
+            //                        .renderingMode(.original)
+            //                    Text("Compare stocks")
+            //                        .padding(.all, 0)
+            //                        .font(UIFont.compactRoundedSemibold(12).uiFont)
+            //                        .foregroundColor(UIColor(named: "mainText")!.uiColor)
+            //                }
+            //                .padding(.leading, 8)
+            //                .padding(.trailing, 8)
+            //                .padding(.top, 4)
+            //                .padding(.bottom, 4)
+            //                .background(Rectangle().fill(UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+            //            })
             
             Button(action: {
                 isMedianVisible.toggle()
+                lineViewModel.isSPYVisible = isMedianVisible
+                lineViewModel.hideHorizontalLines = isMedianVisible
                 hapticTouch.impactOccurred()
             }, label: {
                 HStack {

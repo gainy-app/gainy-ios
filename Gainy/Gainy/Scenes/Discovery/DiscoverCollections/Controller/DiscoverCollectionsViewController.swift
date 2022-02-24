@@ -862,9 +862,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 completion()
                 return
             }
-            
-            self.initViewModelsFromData()
-            completion()
+            runOnMain {
+                self.initViewModelsFromData()
+                completion()
+            }
         }
     }
 }

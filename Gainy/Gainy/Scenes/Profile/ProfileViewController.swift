@@ -155,7 +155,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
                 completion(false)
             }
         }
@@ -193,7 +193,7 @@ final class ProfileViewController: BaseViewController {
                 
             case .failure(let error):
                 dprint("Failure when making GraphQL request. Error: \(error)")
-                NotificationManager.shared.showError("Sorry... Something went wrong. Please, try again later.")
+                NotificationManager.shared.showError("Sorry... \(error.localizedDescription). Please, try again later.")
                 completion(false)
             }
         }
