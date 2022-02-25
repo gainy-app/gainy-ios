@@ -97,7 +97,6 @@ struct ScatterChartView: View {
             GeometryReader(content: { rootGeo in
                 VStack {
                     headerView
-                        .background(Color.red)
                     chartView
                         .padding(.leading, 8)
                         .padding(.trailing, 8)
@@ -108,7 +107,6 @@ struct ScatterChartView: View {
                     }).frame(maxHeight: 40)
                     
                 }
-                .background(Color.green)
                 .frame(height: 341)
             }).onAppear(perform: {
                 hapticTouch.prepare()
@@ -119,7 +117,6 @@ struct ScatterChartView: View {
             GeometryReader(content: { rootGeo in
                 VStack {
                     headerView
-                        .background(Color.red)
                     chartView
                         .padding(.leading, 8)
                         .padding(.trailing, 8)
@@ -130,7 +127,6 @@ struct ScatterChartView: View {
                     }).frame(maxHeight: 40)
                     
                 }
-                .background(Color.green)
                 .frame(height: 341)
             }).onAppear(perform: {
                 hapticTouch.prepare()
