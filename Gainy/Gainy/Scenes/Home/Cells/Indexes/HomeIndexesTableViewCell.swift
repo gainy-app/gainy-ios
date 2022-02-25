@@ -16,10 +16,9 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     
     @IBOutlet private var indexViews: [HomeIndexView]!
     
-    func updateIndexes() {
-        
-        for ind in HomeIndex.allCases {
-            indexViews[ind.rawValue].indexModel = HomeIndexViewModel.demoData[ind.rawValue]
+    func updateIndexes(models: [HomeIndexViewModel]) {        
+        for (ind, val) in models.enumerated() {
+            indexViews[ind].indexModel = val
         }
     }
 }

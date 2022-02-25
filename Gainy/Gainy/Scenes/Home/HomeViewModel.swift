@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class HomeViewModel {
     
@@ -15,9 +16,40 @@ final class HomeViewModel {
     
     private func initSource() {
         self.dataSource = HomeDataSource(viewModel: self)
+        
+        cancellable = Timer.publish(every: 60, on: .main, in: .default)
+                .autoconnect()
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: {_  in
+                    
+                }, receiveValue: {[weak self]_  in
+                    guard let self = self else {return}
+                    Task {
+                        let indexes = await self.getStocks(symbols: self.indexSymbols)
+                        self.topIndexes = indexes.reorder(by: self.indexSymbols).compactMap({
+                            HomeIndexViewModel.init(name: $0.name ?? "",
+                                                    grow: $0.realtimeMetrics?.relativeDailyChange ?? 0.0,
+                                                    value: $0.realtimeMetrics?.actualPrice ?? 0.0)
+                        })
+                        
+                        await MainActor.run {
+                            print("Indexes updated \(Date())")
+                            self.dataSource.updateIndexes(models: self.topIndexes)
+                        }
+                    }
+                })
     }
     
     private(set) var dataSource: HomeDataSource!
+    
+    deinit {
+        cancellable?.cancel()
+    }
+    
+    //MARK: - Indexes
+    private var cancellable: Cancellable?
+    private let indexSymbols = ["DJI", "GSPC", "IXIC", "BTC"]
+    var topIndexes: [HomeIndexViewModel] = []
     
     //MARK: - Collections
     var favCollections: [RemoteShortCollectionDetails] = []
@@ -41,6 +73,13 @@ final class HomeViewModel {
             
             self.topGainers = gainers.topGainers
             self.topLosers = gainers.topLosers
+            
+            let indexes = await getStocks(symbols: indexSymbols)
+            topIndexes = indexes.reorder(by: indexSymbols).compactMap({
+                HomeIndexViewModel.init(name: $0.name ?? "",
+                                        grow: $0.realtimeMetrics?.relativeDailyChange ?? 0.0,
+                                        value: $0.realtimeMetrics?.actualPrice ?? 0.0)
+            })
             
             await MainActor.run {
                 completion()

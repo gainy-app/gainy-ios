@@ -54,6 +54,14 @@ final class HomeDataSource: NSObject {
     
     private var articles: [String] = []
     
+    private var indexes: [HomeIndexViewModel] = []
+    func updateIndexes(models: [HomeIndexViewModel]) {
+        indexes = models
+        if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
+            cell.updateIndexes(models: models)
+        }
+    }
+    
     //MARK: - Heights
     private var cellHeights: [Section: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
@@ -87,7 +95,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         switch Section(rawValue: indexPath.section)! {
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
-            cell.updateIndexes()
+            cell.updateIndexes(models: indexes)
             return cell
         case .gainers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
