@@ -123,6 +123,8 @@
 		3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */; };
 		3394BA222750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */; };
 		3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */; };
+		3396C8F627CD13A200D85BF0 /* FetchRealtimeMetrics.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */; };
+		3396C8F827CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */; };
 		339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */; };
 		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
 		339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */; };
@@ -632,6 +634,8 @@
 		3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetMatchScoreForTickers.graphql; sourceTree = "<group>"; };
 		3394BA212750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetMatchScoreForTickers.graphql.swift; sourceTree = "<group>"; };
 		3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioChartGainsViewModel.swift; sourceTree = "<group>"; };
+		3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchRealtimeMetrics.graphql; sourceTree = "<group>"; };
+		3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRealtimeMetrics.graphql.swift; sourceTree = "<group>"; };
 		339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventsManager.swift; sourceTree = "<group>"; };
 		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
 		339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersNoSpace.graphql; sourceTree = "<group>"; };
@@ -1068,6 +1072,7 @@
 				85EDC1472728065A00866AD2 /* DeleteTickerFromWatchlist.graphql.swift */,
 				85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */,
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
+				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
 				85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */,
 				85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */,
@@ -1144,6 +1149,7 @@
 			children = (
 				331243CF27BF6EA8008C2BCC /* HomeFetchCollections.graphql */,
 				339BDA7127C36F3C00E3D9D2 /* HomeFetchGainers.graphql */,
+				3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2613,6 +2619,7 @@
 				908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */,
 				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
 				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
+				3396C8F627CD13A200D85BF0 /* FetchRealtimeMetrics.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
 				331243D227BF7241008C2BCC /* Home.storyboard in Resources */,
@@ -3067,6 +3074,7 @@
 				90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */,
 				8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */,
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
+				3396C8F827CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */,
 				3305EAB22743983B00A95FA0 /* HoldingsViewModel.swift in Sources */,
