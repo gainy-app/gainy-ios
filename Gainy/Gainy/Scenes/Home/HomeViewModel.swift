@@ -25,12 +25,23 @@ final class HomeViewModel {
             }, receiveValue: {[weak self]_  in
                 guard let self = self else {return}
                 Task {
-                    let indexes = await self.getStocks(symbols: self.indexSymbols)
-                    self.topIndexes = indexes.reorder(by: self.indexSymbols).compactMap({
-                        HomeIndexViewModel.init(name: $0.name ?? "",
-                                                grow: $0.realtimeMetrics?.relativeDailyChange ?? 0.0,
-                                                value: $0.realtimeMetrics?.actualPrice ?? 0.0)
-                    })
+                    let indexes = await self.getRealtimeMetrics(symbols: self.indexSymbols)
+                    
+                    self.topIndexes.removeAll()
+                    
+                    for (ind, val) in self.indexNames.enumerated() {
+                        
+                        if let metric = indexes.first(where: { $0.symbol == self.indexSymbols[ind]}) {
+                            
+                            self.topIndexes.append(HomeIndexViewModel.init(name: val,
+                                                                      grow: metric.relativeDailyChange ?? 0.0,
+                                                                      value: metric.actualPrice ?? 0.0))
+                        } else  {
+                            self.topIndexes.append(HomeIndexViewModel.init(name: val,
+                                                                      grow: 0.0,
+                                                                      value: 0.0))
+                        }
+                    }
                     
                     await MainActor.run {
                         print("Indexes updated \(Date())")
@@ -92,6 +103,7 @@ final class HomeViewModel {
                                                               value: 0.0))
                 }
             }
+            self.dataSource.updateIndexes(models: self.topIndexes)
             
             await MainActor.run {
                 completion()
