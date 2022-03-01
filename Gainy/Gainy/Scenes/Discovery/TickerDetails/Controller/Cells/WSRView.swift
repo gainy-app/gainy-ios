@@ -121,18 +121,21 @@ struct WSRView: View {
                 .background(Color.green)
                 
             }
-            .frame(height: 179.0)
-                .ignoresSafeArea()
-                .padding(.top, 0)
             .onAppear(perform: {
                 DispatchQueue.main.async {
                     self.loadStats()
                 }
             })
+            .frame(height: 179.0)
+                .ignoresSafeArea()
+                .padding(.top, 0)
             targetView
                 .offset(x:8, y: 30)
         }
         .background(Color.red)
+        .frame(height: 179.0)
+        .ignoresSafeArea()
+        .padding(.top, 0)
         .onReceive(viewModel.progressUpdate) { _ in
             DispatchQueue.main.async {
                 self.loadStats()

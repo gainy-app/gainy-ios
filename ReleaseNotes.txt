@@ -1,14 +1,12 @@
-iOS v1.1.4 #162 available
+iOS v1.1.4 #163 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Median chart
+• -
 
 :hammer_and_wrench: Improvements
-• Portfolio: filtering improved (thx to Mikhail)
-• A lot of QA questions
-• Balance and chart are not sliding down
+• Stock card: pull-to-refresh improved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

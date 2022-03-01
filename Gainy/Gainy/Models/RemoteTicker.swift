@@ -144,7 +144,7 @@ class TickerInfo {
             
             if !self.isChartDataLoaded {
                 //Load Chart
-                self.loadChartFromServer(period: .d1, dispatchGroup: chartsDS) {
+                self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
                     
                 }
             }
