@@ -71,6 +71,76 @@ struct WSRView: View {
         return formatter.string(from: NSNumber(value: viewModel.totalScore)) ?? ""
     }
     var body: some View {
+        if #available(iOS 14.0, *) {
+            newView
+        } else {
+            oldView
+        }
+    }
+    
+    @available(iOS 14.0, *)
+    var newView: some View {
+        ZStack {
+            HStack {
+                ZStack {
+                    ForEach(pieData, id: \.self) { pie in
+                        ArcShape(startAngle: pie.startAngle,
+                                 partialProgress: pie.progress
+                        ).fill(pie.color).frame(width: 119, height: 119)
+                    }.scaleEffect(CGSize(width: 1.0, height: -1.0))
+                    
+                    VStack {
+                        Text("\(totalPriceString)")
+                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
+                            .font(UIFont.compactRoundedSemibold(28).uiFont)
+                        Text(totalText)
+                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
+                            .font(UIFont.compactRoundedRegular(11).uiFont)
+                    }
+                }
+                .background(Color.green)
+                .frame(width: 119, height: 119)
+                .offset(y: 32)
+                
+                Spacer().frame(width: 62)
+                VStack(alignment: .center, spacing: 10) {
+                    ForEach(pieData, id: \.self) { curProgress in
+                        HStack {
+                            Text(curProgress.name)
+                                .foregroundColor(UIColor(hexString: "687379")!.uiColor)
+                                .font(UIFont.compactRoundedRegular(11).uiFont)
+                                .frame(height: 16)
+                            Spacer()
+                            Text("\(curProgress.count)")
+                                .foregroundColor(curProgress.color)
+                                .font(UIFont.compactRoundedSemibold(15).uiFont)
+                                .frame(height: 16)
+                        }
+                    }
+                }
+                .background(Color.green)
+                
+            }
+            .frame(height: 179.0)
+                .ignoresSafeArea()
+                .padding(.top, 0)
+            .onAppear(perform: {
+                DispatchQueue.main.async {
+                    self.loadStats()
+                }
+            })
+            targetView
+                .offset(x:8, y: 30)
+        }
+        .background(Color.red)
+        .onReceive(viewModel.progressUpdate) { _ in
+            DispatchQueue.main.async {
+                self.loadStats()
+            }
+        }
+    }
+    
+    var oldView: some View {
         ZStack {
             HStack {
                 ZStack {
@@ -122,7 +192,8 @@ struct WSRView: View {
             DispatchQueue.main.async {
                 self.loadStats()
             }
-        }
+        }.frame(height: 179.0)
+            .padding(.top, 0)
     }
     
     func loadStats() {
