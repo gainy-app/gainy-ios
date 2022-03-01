@@ -102,10 +102,9 @@ final class HomeViewModel {
                                                               grow: 0.0,
                                                               value: 0.0))
                 }
-            }
-            self.dataSource.updateIndexes(models: self.topIndexes)
-            
+            }         
             await MainActor.run {
+                self.dataSource.updateIndexes(models: self.topIndexes)
                 completion()
             }
         }

@@ -20,6 +20,9 @@
         <array key="SFProDisplay-Bold.ttf">
             <string>SFProDisplay-Bold</string>
         </array>
+        <array key="SFProDisplay-Regular.ttf">
+            <string>SFProDisplay-Regular</string>
+        </array>
         <array key="SFProDisplay-Semibold.ttf">
             <string>SFProDisplay-Semibold</string>
         </array>
@@ -903,18 +906,83 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
+                            <view hidden="YES" alpha="0.89999997615814209" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rH-gu-Z2U" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="16" y="750" width="382" height="96"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Mlv-NX-ub7">
+                                        <rect key="frame" x="24" y="31.5" width="279" height="33.5"/>
+                                        <string key="text">Stock name 
+added to your whatchlist!</string>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
+                                        <color key="textColor" red="0.14509803921568626" green="0.91764705882352937" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="skeletonLineSpacing">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b7n-O3-pRR">
+                                        <rect key="frame" x="345" y="5" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="5Ua-vK-vKA"/>
+                                            <constraint firstAttribute="height" constant="32" id="MsM-aR-IDR"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="wl_popup_close"/>
+                                        <connections>
+                                            <action selector="closeWLViewAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Lbs-mG-Uxc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s4p-1I-aeP">
+                                        <rect key="frame" x="322" y="48" width="44" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="O5l-54-hkJ"/>
+                                            <constraint firstAttribute="height" constant="24" id="rVF-Zr-rkQ"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="wrong_ind_undo"/>
+                                        <connections>
+                                            <action selector="undoWLAction:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="R13-UZ-M8K"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="s4p-1I-aeP" secondAttribute="trailing" constant="16" id="BNL-Q2-M5S"/>
+                                    <constraint firstAttribute="trailing" secondItem="b7n-O3-pRR" secondAttribute="trailing" constant="5" id="OTu-tK-biN"/>
+                                    <constraint firstAttribute="bottom" secondItem="s4p-1I-aeP" secondAttribute="bottom" constant="24" id="ThX-YG-178"/>
+                                    <constraint firstItem="b7n-O3-pRR" firstAttribute="top" secondItem="3rH-gu-Z2U" secondAttribute="top" constant="5" id="Ube-iF-1Iy"/>
+                                    <constraint firstAttribute="height" constant="96" id="bKg-kJ-nub"/>
+                                    <constraint firstItem="Mlv-NX-ub7" firstAttribute="leading" secondItem="3rH-gu-Z2U" secondAttribute="leading" constant="24" id="hN3-r3-kT2"/>
+                                    <constraint firstItem="Mlv-NX-ub7" firstAttribute="centerY" secondItem="3rH-gu-Z2U" secondAttribute="centerY" id="yYH-8a-OUw"/>
+                                    <constraint firstAttribute="trailing" secondItem="Mlv-NX-ub7" secondAttribute="trailing" constant="79" id="yeF-ew-xty"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="xmq-0f-huh" secondAttribute="bottom" id="65R-qH-LHE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3rH-gu-Z2U" secondAttribute="trailing" constant="16" id="ABv-Te-18D"/>
                             <constraint firstItem="xmq-0f-huh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Q1K-lu-oTm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="9J1-0o-15Z" secondAttribute="trailing" constant="24" id="RX0-IU-GkD"/>
                             <constraint firstItem="9J1-0o-15Z" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="24" id="Sx2-lr-KB6"/>
                             <constraint firstItem="gya-Xb-6wP" firstAttribute="centerY" secondItem="9J1-0o-15Z" secondAttribute="centerY" id="YZh-cS-DkP"/>
                             <constraint firstItem="9J1-0o-15Z" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gya-Xb-6wP" secondAttribute="trailing" constant="24" id="cki-9g-LIM"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="3rH-gu-Z2U" secondAttribute="bottom" constant="16" id="dTW-zj-32l"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="xmq-0f-huh" secondAttribute="trailing" id="p0U-FP-h7P"/>
                             <constraint firstItem="gya-Xb-6wP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="24" id="pEb-gr-2X0"/>
+                            <constraint firstItem="3rH-gu-Z2U" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="rY8-GF-477"/>
                             <constraint firstItem="xmq-0f-huh" firstAttribute="top" secondItem="gya-Xb-6wP" secondAttribute="bottom" constant="16" id="z1u-08-Tzc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -924,6 +992,7 @@
                     <connections>
                         <outlet property="nameLbl" destination="gya-Xb-6wP" id="NmK-mm-0MN"/>
                         <outlet property="tableView" destination="xmq-0f-huh" id="LqF-O7-K6F"/>
+                        <outlet property="wlView" destination="3rH-gu-Z2U" id="FO5-hA-dB3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -935,6 +1004,8 @@
         <image name="arrow-up-green" width="8" height="8"/>
         <image name="match_circle" width="25" height="25"/>
         <image name="small_down" width="8" height="8"/>
+        <image name="wl_popup_close" width="16" height="16"/>
+        <image name="wrong_ind_undo" width="49" height="24"/>
         <namedColor name="mainGreen">
             <color red="0.14509803921568629" green="0.77647058823529413" blue="0.52156862745098043" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

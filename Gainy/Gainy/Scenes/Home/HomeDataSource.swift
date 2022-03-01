@@ -13,6 +13,7 @@ import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool)
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
 }
 
 final class HomeDataSource: NSObject {
@@ -55,6 +56,7 @@ final class HomeDataSource: NSObject {
     private var articles: [String] = []
     
     private var indexes: [HomeIndexViewModel] = []
+    
     func updateIndexes(models: [HomeIndexViewModel]) {
         indexes = models
         if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
@@ -155,6 +157,10 @@ extension HomeDataSource: UITableViewDelegate {
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
     func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
         delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
+    }
+    
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
     }
 }
 
