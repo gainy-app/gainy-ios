@@ -272,7 +272,7 @@ struct ScatterChartView: View {
                     if isMedianVisible && viewModel.localTicker.haveMedian &&  viewModel.medianData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.medianData,
                                  title: "Full chart",
-                                 style: viewModel.medianData.startEndDiff >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                                 style: Styles.lineChartStyleMedian,
                                  viewModel: lineViewModel).offset(y: -60)
                     }
                 } else {
