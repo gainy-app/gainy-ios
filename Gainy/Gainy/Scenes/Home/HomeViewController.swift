@@ -119,4 +119,10 @@ extension HomeViewController: HomeDataSourceDelegate {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
     }
+    
+    func articlePressed() {
+        let articleVC = ArticleViewController.instantiate(.home)
+        articleVC.articleUrl = "https://wip-gainy.webflow.io/blog-test"
+        present(articleVC, animated: true, completion: nil)
+    }
 }

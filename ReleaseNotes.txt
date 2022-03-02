@@ -1,12 +1,13 @@
-iOS v1.1.4 #161 available
+iOS v1.2 #164 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• Top gainers/losers - click support
+• Demo articles
+• Demo article browsing
 
 :hammer_and_wrench: Improvements
-• Portfolio: filtering improved (thx to Mikhail)
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

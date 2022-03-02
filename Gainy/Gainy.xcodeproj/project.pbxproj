@@ -185,6 +185,7 @@
 		33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */; };
 		33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */; };
 		33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D50126CBB8DC005A859B /* ProfileViewController.swift */; };
+		33DBF4E827CF5EC800918EFF /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBF4E727CF5EC800918EFF /* ArticleViewController.swift */; };
 		33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */; };
 		33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */; };
 		33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E1827926D3804600A1D2AC /* WSRView.swift */; };
@@ -692,6 +693,7 @@
 		33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Portfolio.storyboard; sourceTree = "<group>"; };
 		33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController.swift; sourceTree = "<group>"; };
 		33D3D50126CBB8DC005A859B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		33DBF4E727CF5EC800918EFF /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataFields.swift; sourceTree = "<group>"; };
 		33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTicker.swift; sourceTree = "<group>"; };
 		33E1827926D3804600A1D2AC /* WSRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRView.swift; sourceTree = "<group>"; };
@@ -1161,6 +1163,7 @@
 				331243D627BF72C2008C2BCC /* HomeViewModel.swift */,
 				331243D827BF72EF008C2BCC /* HomeDataSource.swift */,
 				333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */,
+				33DBF4E627CF5EB800918EFF /* Article */,
 				331243DA27BF7468008C2BCC /* Cells */,
 			);
 			path = Home;
@@ -1416,6 +1419,14 @@
 				8501A7F726E7051F0005EA7C /* OnboardingFinalizingViewController.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		33DBF4E627CF5EB800918EFF /* Article */ = {
+			isa = PBXGroup;
+			children = (
+				33DBF4E727CF5EC800918EFF /* ArticleViewController.swift */,
+			);
+			path = Article;
 			sourceTree = "<group>";
 		};
 		33DF57EE26EF268000FC1B9A /* Models */ = {
@@ -2804,6 +2815,7 @@
 				33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */,
 				85CD154F26F8FC4B001C060C /* ProfileInfo.swift in Sources */,
 				33571F2A273BF830007B587F /* BaseViewController+LinkToken.swift in Sources */,
+				33DBF4E827CF5EC800918EFF /* ArticleViewController.swift in Sources */,
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
 				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,
@@ -3231,7 +3243,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 164;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3241,7 +3253,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3355,7 +3367,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 164;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3365,7 +3377,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3540,7 +3552,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 164;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3550,7 +3562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3569,7 +3581,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 164;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3579,7 +3591,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.4;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -14,6 +14,7 @@ import PureLayout
 protocol HomeDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func articlePressed()
 }
 
 final class HomeDataSource: NSObject {
@@ -31,10 +32,10 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 3
+    private let sectionsCount = 4
     
     enum Section: Int {
-        case index = 0, gainers, losers, collections, articles
+        case index = 0, gainers, losers, articles, collections
         
         var name: String {
             switch self {
@@ -81,7 +82,8 @@ extension HomeDataSource: SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == Section.articles.rawValue {
-            return articles.count
+            //return articles.count
+            return 1
         } else {
             return 1
         }
@@ -111,6 +113,9 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.delegate = self
             cell.isGainers = false
             return cell
+        case .articles:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
+            return cell
         default:
             break
         }
@@ -121,11 +126,23 @@ extension HomeDataSource: SkeletonTableViewDataSource {
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[Section(rawValue: indexPath.section)!] ?? 0.0
+        return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+        switch Section(rawValue: indexPath.section)! {
+        case .index:
+            break
+        case .gainers:
+            break
+        case .losers:
+            break
+        case .articles:
+            delegate?.articlePressed()
+            break
+        default:
+            break
+        }
     }
     
     //MARK: - Headers
