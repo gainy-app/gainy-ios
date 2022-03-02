@@ -29,7 +29,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
-        descriptionLabel.autoSetDimension(.height, toSize: 43)
+        descriptionLabel.autoSetDimension(.height, toSize: 45)
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white

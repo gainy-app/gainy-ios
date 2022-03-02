@@ -227,7 +227,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         )
         
         let nameHeight: CGFloat = 24
-        let minDescHeight: CGFloat = neededSize.width > availableWidth ? 32 : 16
+        let minDescHeight: CGFloat = neededSize.width > availableWidth ? 34 : 18
         let pairedHeight = nameHeight + 4 + minDescHeight
         
         
