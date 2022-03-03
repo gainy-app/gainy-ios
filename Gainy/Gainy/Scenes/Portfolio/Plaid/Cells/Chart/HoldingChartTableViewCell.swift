@@ -71,7 +71,13 @@ final class HoldingChartTableViewCell: HoldingRangeableCell {
         let selectedSecurityTypes = settings.securityTypes.filter { item in
             item.selected
         }
-        let selectedSum = selectedInterests.count + selectedCategories.count + selectedSecurityTypes.count + settings.disabledAccounts.count
+        
+        if settings.interests.count == selectedInterests.count && selectedCategories.count == settings.categories.count && settings.disabledAccounts.count == 0 {
+            self.settingsLabel.text = "All"
+            return
+        }
+        
+        let selectedSum = (selectedInterests.count) + (selectedCategories.count) + (selectedSecurityTypes.count) + settings.disabledAccounts.count
         self.settingsLabel.text = selectedSum > 0 ? "Filter applied" : "All"
     }
     

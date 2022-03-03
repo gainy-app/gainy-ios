@@ -139,6 +139,10 @@ extension Array where Element == HoldingViewModel {
             }
         }.filter { model in
             
+            if model.tickerSymbol == "CUR:USD" {
+                print("break")
+            }
+            
             let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
             
             let selectedInterestsFilter = settings.interests.filter { item in

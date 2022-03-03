@@ -125,18 +125,32 @@ final class HistoricalChartsLoader {
             periodString = "all"
         }
         dprint("GetPortfolioChartsQuery start")
-        let intersIDs = settings.interests.compactMap({$0.id})
-        let catsIDs = settings.categories.compactMap({$0.id})
-        let accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
-        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount ? nil : intersIDs)) accs: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(settings.securityTypes.compactMap({$0.title}))")
+                
+        let intersIDs = settings.interests.filter { item in
+            item.selected
+        }.compactMap({$0.id})
+        
+        let catsIDs = settings.categories.filter { item in
+            item.selected
+        }.compactMap({$0.id})
+        
+        let securityTypes = settings.securityTypes.filter { item in
+            item.selected
+        }.compactMap({$0.title})
+        
+        var accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
+        accountIds = accountIds.filter({!disabledAccounts.contains($0)})
+        
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accs: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
-                                                                        interestIds: intersIDs.count == interestsCount ? nil : intersIDs,
+                                                                        interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
                                                                         accountIds: accountIds,
-                                                                        categoryIds: catsIDs.count == categoriesCount ? nil : catsIDs,
+                                                                        categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
-                                                                        securityTypes: settings.securityTypes.compactMap({$0.title}))) { result in
+                                                                        securityTypes: securityTypes)) { result in
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.getPortfolioChart?.filter({$0?.adjustedClose != nil}).compactMap({$0}) {

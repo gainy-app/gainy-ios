@@ -68,7 +68,7 @@ struct HoldingsModelMapper {
                                              relativeGains: relGains,
                                              percentInProfile: (holdingGroup.details?.valueToPortfolioValue ?? 0.0) * 100.0,
                                              securities: securities,
-                                             securityTypes: [],
+                                             securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
