@@ -65,7 +65,7 @@ public struct LineView: View {
                             .frame(height: 1)
                             .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
                             .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
-                            .opacity(viewModel.hideHorizontalLines ? 0.0 : 1.0)
+                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
                         }
                         
                         if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){

@@ -113,6 +113,7 @@ struct ScatterChartView: View {
             }).frame(height: 341)
                 .ignoresSafeArea()
                 .padding(.top, 0)
+                .background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         } else {
             GeometryReader(content: { rootGeo in
                 VStack {
@@ -132,6 +133,7 @@ struct ScatterChartView: View {
                 hapticTouch.prepare()
             }).frame(height: 341)
                 .padding(.top, 0)
+                //.background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         }
     }
     
@@ -159,6 +161,7 @@ struct ScatterChartView: View {
                             .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                         Spacer()
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                        .padding(.top, 10)
                     HStack {
                         Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -166,7 +169,7 @@ struct ScatterChartView: View {
                             .animation(.none)
                         
                         Spacer()
-                    }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                    }
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text("MEDIAN")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -326,7 +329,7 @@ struct ScatterChartView: View {
             }
             .padding(.all, 0)
             .animation(.linear)
-            .background(Rectangle().fill().foregroundColor(.white))
+            .background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
             .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
                         .onChanged({ value in
                 lineViewModel.dragLocation = value.location
