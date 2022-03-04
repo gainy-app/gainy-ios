@@ -1,4 +1,4 @@
-iOS v1.1.4 #164 available
+iOS v1.1.4 #165 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,8 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Stock card: pull-to-refresh improved
-• QA improvements
+• Stock card: chart layout updated
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
