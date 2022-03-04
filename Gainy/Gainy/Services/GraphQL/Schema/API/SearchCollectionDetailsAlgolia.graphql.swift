@@ -131,10 +131,6 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
-          self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
-        }
-
         public var __typename: String {
           get {
             return resultMap["__typename"]! as! String

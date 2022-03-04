@@ -79,10 +79,6 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
-        self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
-      }
-
       public var __typename: String {
         get {
           return resultMap["__typename"]! as! String
@@ -132,6 +128,13 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       image_url
       description
       size
+      metrics {
+        __typename
+        absolute_daily_change
+        profile_id
+        relative_daily_change
+        updated_at
+      }
     }
     """
 
@@ -145,6 +148,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("size", type: .scalar(Int.self)),
+      GraphQLField("metrics", type: .object(Metric.selections)),
     ]
   }
 
@@ -154,8 +158,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size])
+  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -209,6 +213,85 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "size")
+    }
+  }
+
+  /// An object relationship
+  public var metrics: Metric? {
+    get {
+      return (resultMap["metrics"] as? ResultMap).flatMap { Metric(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "metrics")
+    }
+  }
+
+  public struct Metric: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["collection_metrics"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
+        GraphQLField("profile_id", type: .scalar(Int.self)),
+        GraphQLField("relative_daily_change", type: .scalar(float8.self)),
+        GraphQLField("updated_at", type: .scalar(timestamp.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var absoluteDailyChange: float8? {
+      get {
+        return resultMap["absolute_daily_change"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "absolute_daily_change")
+      }
+    }
+
+    public var profileId: Int? {
+      get {
+        return resultMap["profile_id"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "profile_id")
+      }
+    }
+
+    public var relativeDailyChange: float8? {
+      get {
+        return resultMap["relative_daily_change"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "relative_daily_change")
+      }
+    }
+
+    public var updatedAt: timestamp? {
+      get {
+        return resultMap["updated_at"] as? timestamp
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "updated_at")
+      }
     }
   }
 }

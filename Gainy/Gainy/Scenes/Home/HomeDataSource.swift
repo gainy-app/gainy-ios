@@ -22,7 +22,8 @@ final class HomeDataSource: NSObject {
     init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
-        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight
+        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
+        cellHeights[.collections] = 376.0
         self.viewModel = viewModel
     }
     
@@ -32,10 +33,10 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 4
+    private let sectionsCount = 5
     
     enum Section: Int {
-        case index = 0, gainers, losers, articles, collections
+        case index = 0, collections, gainers, losers, articles
         
         var name: String {
             switch self {
@@ -48,8 +49,7 @@ final class HomeDataSource: NSObject {
             case .losers:
                 return "Top loser in your collections"
             case .articles:
-                return "Articles for you you"
-                
+                return "Articles for you"
             }
         }
     }
@@ -116,16 +116,17 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
             return cell
-        default:
-            break
+        case .collections:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
+            cell.collections = viewModel?.favCollections ?? []
+            return cell
         }
-        
-        return UITableViewCell()
     }
 }
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        print("\(indexPath.section) \(cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension)")
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
@@ -157,7 +158,11 @@ extension HomeDataSource: UITableViewDelegate {
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+        if section == Section.articles.rawValue {
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
+        } else {
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+        }
         
         return headerView
     }
@@ -166,7 +171,11 @@ extension HomeDataSource: UITableViewDelegate {
         if section == Section.index.rawValue {
             return 0.0
         } else {
-            return 24.0 + 16.0 + 16
+            if section == Section.articles.rawValue {
+                return 40.0
+            } else {
+                return 24.0 + 16.0 + 16
+            }
         }
     }
 }

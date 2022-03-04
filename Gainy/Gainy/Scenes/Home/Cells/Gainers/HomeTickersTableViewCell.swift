@@ -26,6 +26,7 @@ final class HomeTickersTableViewCell: UITableViewCell {
             innerCollectionView.delegate = self
         }
     }
+    @IBOutlet private weak var bottomDots: UIImageView!
     
     var gainers: [RemoteTicker] = [] {
         didSet {
@@ -33,7 +34,11 @@ final class HomeTickersTableViewCell: UITableViewCell {
         }
     }
     
-    var isGainers: Bool = false
+    var isGainers: Bool = false {
+        didSet {
+            bottomDots.isHidden = isGainers
+        }
+    }
 }
 
 extension HomeTickersTableViewCell: UICollectionViewDataSource {

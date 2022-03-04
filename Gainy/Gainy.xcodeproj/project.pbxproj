@@ -1173,11 +1173,19 @@
 			isa = PBXGroup;
 			children = (
 				9004AECC27C2C64900821A29 /* Indexes */,
-				331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */,
 				339BDA7027C3699900E3D9D2 /* Gainers */,
 				331243E127BF74CB008C2BCC /* HomeArticlesTableViewCell.swift */,
+				333020FF27D1EA9200A0E6B3 /* Collections */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		333020FF27D1EA9200A0E6B3 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				331243DD27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift */,
+			);
+			path = Collections;
 			sourceTree = "<group>";
 		};
 		33376FAE26F8AFCD00618CD7 /* CoreData */ = {
