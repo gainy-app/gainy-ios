@@ -164,10 +164,9 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedSemibold(24.0).uiFont)
                             .animation(.none)
-                            .opacity(isMedianVisible ? 0.0 : 1.0)
                         
                         Spacer()
-                    }
+                    }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
                         Text("MEDIAN")
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
@@ -385,7 +384,6 @@ struct ScatterChartView: View {
             Button(action: {
                 isMedianVisible.toggle()
                 lineViewModel.isSPYVisible = isMedianVisible
-                lineViewModel.hideHorizontalLines = isMedianVisible
                 hapticTouch.impactOccurred()
             }, label: {
                 HStack {

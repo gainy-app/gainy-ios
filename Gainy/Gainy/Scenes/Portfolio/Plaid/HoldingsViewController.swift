@@ -252,7 +252,6 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         tableView.reloadData()
         
         viewModel.clearChats()
-        viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)        
     }
