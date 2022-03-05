@@ -79,7 +79,7 @@ final class HomeViewModel {
             return
         }
         Task {
-            self.favCollections = await UserProfileManager.shared.getFavCollections()
+            self.favCollections = await UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections)
             
             let gainers = await getGainers(profileId: profielId)
             

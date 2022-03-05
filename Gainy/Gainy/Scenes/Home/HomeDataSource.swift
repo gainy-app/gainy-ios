@@ -23,7 +23,6 @@ final class HomeDataSource: NSObject {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
         cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
-        cellHeights[.collections] = 376.0
         self.viewModel = viewModel
     }
     
@@ -118,6 +117,11 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             return cell
         case .collections:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
+            cell.heightUpdated = {[weak self] newHeight in
+                self?.tableView?.beginUpdates()
+                self?.cellHeights[.collections] = newHeight
+                self?.tableView?.endUpdates()
+            }
             cell.collections = viewModel?.favCollections ?? []
             return cell
         }
@@ -126,7 +130,6 @@ extension HomeDataSource: SkeletonTableViewDataSource {
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        print("\(indexPath.section) \(cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension)")
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
@@ -158,7 +161,7 @@ extension HomeDataSource: UITableViewDelegate {
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        if section == Section.articles.rawValue {
+        if section == Section.articles.rawValue || section == Section.gainers.rawValue{
             headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
         } else {
             headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))

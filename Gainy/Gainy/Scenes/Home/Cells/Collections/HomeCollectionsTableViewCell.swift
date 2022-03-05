@@ -6,17 +6,29 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class HomeCollectionsTableViewCell: UITableViewCell {
     
     private let cellWidth: CGFloat = 88
     
+    var heightUpdated: ((CGFloat) -> Void)?
+    
     @IBOutlet private weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
         }
     }
+    
+    private let homeLayout: HomeCollectionsFlowLayout = HomeCollectionsFlowLayout()
+    private lazy var customLayout: UICollectionViewLayout = {
+        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
+            self?.homeLayout.layoutSection(within: env)
+        }
+        return layout
+    }()
     
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
     @IBOutlet weak var expandBtn: UIButton!
@@ -30,9 +42,14 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
             } else {
                 collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0
             }
+            delay(0.1) {
+                self.heightUpdated?(self.collectionHeight.constant + 47)
+            }
             layoutIfNeeded()
         }
     }
+    
+
     
     //MARK: - Actions
     @IBAction func expandToggleAction(_ sender: UIButton) {
@@ -42,6 +59,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
         } else {
             collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0
         }
+        heightUpdated?(collectionHeight.constant + 47)
         layoutIfNeeded()
     }
 }
@@ -56,21 +74,6 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         cell.collection = collections[indexPath.row]
         return cell
     }
-}
-
-extension HomeCollectionsTableViewCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: collectionView.bounds.width, height: cellWidth)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        8
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        8
-    }
-    
 }
 
 extension HomeCollectionsTableViewCell: UICollectionViewDelegate {
@@ -94,26 +97,57 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
     @IBOutlet weak var backImgView: UIImageView!
     
     //MARK: - Properties
+    private var imageUrl: String = ""
+    private var imageLoaded: Bool = false
     
     var collection: RemoteShortCollectionDetails? {
         didSet {
             guard let collection = collection else {return}
+            imageUrl = collection.imageUrl ?? ""
             nameLbl.text = collection.name
             stockAmountLbl.text = "\(collection.size ?? 0) stock\((collection.size ?? 0) > 1 ? "s" : "")"
             
             if (collection.metrics?.relativeDailyChange ?? 0.0) > 0.0 {
                 growContainer.backgroundColor = UIColor.Gainy.mainGreen
-                backImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
-                backImgView.tintColor = UIColor.Gainy.mainText
+                arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                arrowImgView.tintColor = UIColor.Gainy.mainText
                 growLbl.textColor = UIColor.Gainy.mainText
                 
             } else {
                 growContainer.backgroundColor = UIColor.Gainy.mainRed
-                backImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
-                backImgView.tintColor = .white
+                arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                arrowImgView.tintColor = .white
                 growLbl.textColor = .white
             }
             growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percent
         }
+    }
+    
+    //MARK: - Image
+    
+    private func loadImage() {
+        
+        guard self.imageLoaded == false, backImgView.bounds.size.width > 0, backImgView.bounds.size.height > 0 else {
+            return
+        }
+        
+        let processor = DownsamplingImageProcessor(size: backImgView.bounds.size)
+        backImgView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
+            .processor(processor),
+            .scaleFactor(UIScreen.main.scale),
+            .transition(.fade(1)),
+            .cacheOriginalImage
+        ]) { receivedSize, totalSize in
+//            print("-----\(receivedSize), \(totalSize)")
+        } completionHandler: { result in
+//            print("-----\(result)")
+        }
+        self.imageLoaded = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.loadImage()
     }
 }
