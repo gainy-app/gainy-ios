@@ -1,4 +1,4 @@
-iOS v1.2 #166 available
+iOS v1.2 #167 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
