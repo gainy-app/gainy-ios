@@ -15,6 +15,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func articlePressed()
+    func collectionSelected(collection: RemoteShortCollectionDetails)
 }
 
 final class HomeDataSource: NSObject {
@@ -187,6 +188,12 @@ extension HomeDataSource: HomeTickersTableViewCellDelegate {
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
+    }
+}
+
+extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
+    func collectionSelected(collection: RemoteShortCollectionDetails) {
+        delegate?.collectionSelected(collection: collection)
     }
 }
 

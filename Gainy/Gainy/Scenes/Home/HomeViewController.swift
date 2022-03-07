@@ -125,4 +125,8 @@ extension HomeViewController: HomeDataSourceDelegate {
         articleVC.articleUrl = "https://wip-gainy.webflow.io/blog-test"
         present(articleVC, animated: true, completion: nil)
     }
+    
+    func collectionSelected(collection: RemoteShortCollectionDetails) {
+        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0)
+    }
 }

@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol HomeCollectionsTableViewCellDelegate: AnyObject {
+    func collectionSelected(collection: RemoteShortCollectionDetails)
+}
+
 final class HomeCollectionsTableViewCell: UITableViewCell {
     
+    weak var delegate: HomeCollectionsTableViewCellDelegate?
     private let cellWidth: CGFloat = 88
     
     @IBOutlet private weak var innerCollectionView: UICollectionView! {
@@ -75,7 +80,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension HomeCollectionsTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        delegate?.collectionSelected(collection: self.collections[indexPath.row])
     }
 }
 

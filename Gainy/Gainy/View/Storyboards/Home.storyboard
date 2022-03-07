@@ -447,7 +447,7 @@
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Telecome company name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="EvW-Qr-Qkj">
-                                                                                <rect key="frame" x="16" y="16" width="231.5" height="24"/>
+                                                                                <rect key="frame" x="16" y="16" width="309" height="24"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="26" id="psc-4i-4DU"/>
                                                                                 </constraints>
@@ -503,6 +503,7 @@
                                                                             <constraint firstAttribute="bottom" secondItem="51h-ZV-odC" secondAttribute="bottom" constant="16" id="JLH-hT-3jf"/>
                                                                             <constraint firstAttribute="height" constant="88" id="MpH-zn-YyP"/>
                                                                             <constraint firstAttribute="bottom" secondItem="FA0-pu-9ap" secondAttribute="bottom" id="WOo-Sm-wzA"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="EvW-Qr-Qkj" secondAttribute="trailing" constant="50" id="WuQ-1d-iZ1"/>
                                                                             <constraint firstItem="ger-ki-FB9" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" constant="24" id="XLU-m8-BGy"/>
                                                                             <constraint firstItem="FA0-pu-9ap" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" id="bat-CU-1Mh"/>
                                                                             <constraint firstAttribute="trailing" secondItem="ger-ki-FB9" secondAttribute="trailing" constant="17" id="e0z-VP-uwl"/>
