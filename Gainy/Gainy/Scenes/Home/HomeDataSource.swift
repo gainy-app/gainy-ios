@@ -124,6 +124,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
                 self?.tableView?.endUpdates()
             }
             cell.collections = viewModel?.favCollections ?? []
+            cell.delegate = self
             return cell
         }
     }
