@@ -176,7 +176,7 @@ extension HomeDataSource: UITableViewDelegate {
         if section == Section.index.rawValue {
             return 0.0
         } else {
-            if section == Section.articles.rawValue {
+            if section == Section.articles.rawValue || section == Section.gainers.rawValue {
                 return 40.0
             } else {
                 return 24.0 + 16.0 + 16
