@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20036.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20018.1"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -389,7 +389,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-iV-7g2">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BUN-iV-7g2">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
@@ -413,10 +413,14 @@
                                                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9mC-BO-ugK" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FA0-pu-9ap">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FA0-pu-9ap">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </imageView>
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fux-9N-Vkx">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                                            </view>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51h-ZV-odC" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                                                 <rect key="frame" x="16" y="51" width="36.5" height="21"/>
                                                                                 <subviews>
@@ -499,14 +503,17 @@
                                                                         <constraints>
                                                                             <constraint firstItem="EvW-Qr-Qkj" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="16" id="47o-ic-UwF"/>
                                                                             <constraint firstItem="EvW-Qr-Qkj" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" constant="16" id="58U-xl-Owe"/>
+                                                                            <constraint firstItem="fux-9N-Vkx" firstAttribute="top" secondItem="FA0-pu-9ap" secondAttribute="top" id="5Ua-7k-B2U"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Ufx-p3-ZNr" secondAttribute="bottom" constant="16" id="HGq-z4-F5Z"/>
                                                                             <constraint firstAttribute="bottom" secondItem="51h-ZV-odC" secondAttribute="bottom" constant="16" id="JLH-hT-3jf"/>
-                                                                            <constraint firstAttribute="height" constant="88" id="MpH-zn-YyP"/>
+                                                                            <constraint firstItem="fux-9N-Vkx" firstAttribute="trailing" secondItem="FA0-pu-9ap" secondAttribute="trailing" id="WIE-Dj-a6W"/>
                                                                             <constraint firstAttribute="bottom" secondItem="FA0-pu-9ap" secondAttribute="bottom" id="WOo-Sm-wzA"/>
                                                                             <constraint firstAttribute="trailing" secondItem="EvW-Qr-Qkj" secondAttribute="trailing" constant="50" id="WuQ-1d-iZ1"/>
                                                                             <constraint firstItem="ger-ki-FB9" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" constant="24" id="XLU-m8-BGy"/>
                                                                             <constraint firstItem="FA0-pu-9ap" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" id="bat-CU-1Mh"/>
                                                                             <constraint firstAttribute="trailing" secondItem="ger-ki-FB9" secondAttribute="trailing" constant="17" id="e0z-VP-uwl"/>
+                                                                            <constraint firstItem="fux-9N-Vkx" firstAttribute="leading" secondItem="FA0-pu-9ap" secondAttribute="leading" id="jRx-1W-jo4"/>
+                                                                            <constraint firstItem="fux-9N-Vkx" firstAttribute="bottom" secondItem="FA0-pu-9ap" secondAttribute="bottom" id="kc2-Hz-Uez"/>
                                                                             <constraint firstItem="FA0-pu-9ap" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" id="mWT-rY-MaM"/>
                                                                             <constraint firstItem="51h-ZV-odC" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="16" id="rNT-34-XtE"/>
                                                                             <constraint firstAttribute="trailing" secondItem="FA0-pu-9ap" secondAttribute="trailing" id="w5P-jY-VjO"/>
