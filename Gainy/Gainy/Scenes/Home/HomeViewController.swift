@@ -120,9 +120,9 @@ extension HomeViewController: HomeDataSourceDelegate {
         showWLView(stock: stock, cell: cell)
     }
     
-    func articlePressed() {
+    func articlePressed(article: WebArticle) {
         let articleVC = ArticleViewController.instantiate(.home)
-        articleVC.articleUrl = "https://wip-gainy.webflow.io/blog-test"
+        articleVC.articleUrl = article.url ?? ""
         present(articleVC, animated: true, completion: nil)
     }
     

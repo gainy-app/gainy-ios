@@ -14,7 +14,7 @@ import PureLayout
 protocol HomeDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
-    func articlePressed()
+    func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails)
 }
 
@@ -54,7 +54,7 @@ final class HomeDataSource: NSObject {
         }
     }
     
-    private var articles: [String] = []
+    private var articles: [WebArticle] = []
     
     private var indexes: [HomeIndexViewModel] = []
     
@@ -82,8 +82,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == Section.articles.rawValue {
-            //return articles.count
-            return 1
+            return viewModel?.articles.count ?? 0
         } else {
             return 1
         }
@@ -115,6 +114,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             return cell
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
+            cell.article = viewModel?.articles[indexPath.row]
             return cell
         case .collections:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
@@ -144,10 +144,19 @@ extension HomeDataSource: UITableViewDelegate {
         case .losers:
             break
         case .articles:
-            delegate?.articlePressed()
+            if let article = viewModel?.articles[indexPath.row] {
+                delegate?.articlePressed(article: article)
+            }
             break
         default:
             break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell:
+    UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? HomeArticlesTableViewCell {
+            cell.coverImgView.kf.cancelDownloadTask()
         }
     }
     

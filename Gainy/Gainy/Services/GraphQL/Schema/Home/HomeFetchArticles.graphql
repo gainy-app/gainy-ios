@@ -1,0 +1,14 @@
+query HomeFetchArticles {
+    website_blog_articles(order_by: {published_on: desc}) {
+        id
+        category_name
+        main_image
+        post_summary
+        published_on
+        rate_rating
+        rate_votes
+        title
+        updated_on
+        url
+    }
+}

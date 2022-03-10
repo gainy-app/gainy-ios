@@ -8,6 +8,8 @@
 import UIKit
 import Combine
 
+typealias WebArticle = HomeFetchArticlesQuery.Data.WebsiteBlogArticle
+
 final class HomeViewModel {
     
     internal init() {
@@ -70,6 +72,9 @@ final class HomeViewModel {
     var topGainers: [RemoteTicker] = []
     var topLosers: [RemoteTicker] = []
     
+    
+    var articles: [WebArticle] = []
+    
     //MARK: - Loading
     
     func loadHomeData(_ completion: @escaping (() -> Void)) {
@@ -82,6 +87,8 @@ final class HomeViewModel {
             self.favCollections = await UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections)
             
             let gainers = await getGainers(profileId: profielId)
+            
+            self.articles = await getArticles()
             
             self.topGainers = gainers.topGainers
             self.topLosers = gainers.topLosers
@@ -192,6 +199,28 @@ final class HomeViewModel {
                 case .failure(let error):
                     dprint("Failure when making FetchTickersQuery request. Error: \(error)")
                     continuation.resume(returning: [FetchRealtimeMetricsQuery.Data.TickerRealtimeMetric]())
+                    break
+                }
+            }
+        }
+    }
+    
+    func getArticles() async -> [WebArticle] {
+        return await
+        withCheckedContinuation { continuation in
+            Network.shared.apollo.fetch(query: HomeFetchArticlesQuery()) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let articles = graphQLResult.data?.websiteBlogArticles.compactMap({$0}) else {
+                        continuation.resume(returning: [WebArticle]())
+                        return
+                    }
+                    
+                    continuation.resume(returning: articles)
+                    break
+                case .failure(let error):
+                    dprint("Failure when making HomeFetchArticlesQuery request. Error: \(error)")
+                    continuation.resume(returning: [WebArticle]())
                     break
                 }
             }

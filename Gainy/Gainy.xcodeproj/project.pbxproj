@@ -462,6 +462,7 @@
 		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
+		901D5EDE27DA6CA8001B1697 /* HomeFetchArticles.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
@@ -977,6 +978,8 @@
 		901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionsManager+WatchList.swift"; sourceTree = "<group>"; };
 		901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedCategories.graphql.swift; sourceTree = "<group>"; };
 		901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedInterests.graphql.swift; sourceTree = "<group>"; };
+		901D5EDC27DA6ADD001B1697 /* HomeFetchArticles.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = HomeFetchArticles.graphql; sourceTree = "<group>"; };
+		901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFetchArticles.graphql.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
@@ -1078,6 +1081,7 @@
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
 				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */,
 				85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */,
 				85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */,
 				85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */,
@@ -1154,6 +1158,7 @@
 				331243CF27BF6EA8008C2BCC /* HomeFetchCollections.graphql */,
 				339BDA7127C36F3C00E3D9D2 /* HomeFetchGainers.graphql */,
 				3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */,
+				901D5EDC27DA6ADD001B1697 /* HomeFetchArticles.graphql */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -2950,6 +2955,7 @@
 				33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */,
 				3A498F58266C17C6008437F1 /* CollectionDetailsViewController.swift in Sources */,
 				9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */,
+				901D5EDE27DA6CA8001B1697 /* HomeFetchArticles.graphql.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
 				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
@@ -3255,7 +3261,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3379,7 +3385,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3564,7 +3570,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3593,7 +3599,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 167;
+				CURRENT_PROJECT_VERSION = 168;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
