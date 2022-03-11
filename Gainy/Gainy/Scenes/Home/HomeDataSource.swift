@@ -89,7 +89,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsCount
+        return tableView.sk.isSkeletonActive ? 1 : sectionsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,6 +99,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes(models: indexes)
+            cell.gains = viewModel?.gains
             return cell
         case .gainers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
@@ -132,6 +133,9 @@ extension HomeDataSource: SkeletonTableViewDataSource {
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView.sk.isSkeletonActive {
+            return HomeSkeletonTableViewCell.cellHeight
+        }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     

@@ -169,7 +169,7 @@ final class HoldingsViewController: BaseViewController {
         }
         
         let layout = MyFloatingPanelLayout()
-        layout.height = min(380.0 + 64.0 * CGFloat(brokers.count), self.view.bounds.height)
+        layout.height = min(380.0 + 64.0 * CGFloat(brokers.count) - 64.0, self.view.bounds.height)
         fpc.layout = layout
         filterVC.delegate = self
         filterVC.configure(brokers, settings.interests, settings.categories, settings.securityTypes, settings.includeClosedPositions, settings.onlyLongCapitalGainTax)

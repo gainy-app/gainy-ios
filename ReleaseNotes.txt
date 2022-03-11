@@ -1,9 +1,10 @@
-iOS v1.2 #168 available
+iOS v1.2 #169 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• Articles loading
+• New loader added
+• Portfolio data added
 
 :hammer_and_wrench: Improvements
 • -

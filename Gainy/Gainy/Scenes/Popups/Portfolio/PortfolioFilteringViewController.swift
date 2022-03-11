@@ -103,7 +103,7 @@ extension PortfolioFilteringViewController: UITableViewDelegate, UITableViewData
         
         switch section {
         case 0: return self.brokers.count
-        case 1: return 3
+        case 1: return 2
         default: return 0
         }
     }

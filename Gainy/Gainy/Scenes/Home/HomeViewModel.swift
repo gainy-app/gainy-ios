@@ -36,12 +36,12 @@ final class HomeViewModel {
                         if let metric = indexes.first(where: { $0.symbol == self.indexSymbols[ind]}) {
                             
                             self.topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                                      grow: metric.relativeDailyChange ?? 0.0,
-                                                                      value: metric.actualPrice ?? 0.0))
+                                                                           grow: metric.relativeDailyChange ?? 0.0,
+                                                                           value: metric.actualPrice ?? 0.0))
                         } else  {
                             self.topIndexes.append(HomeIndexViewModel.init(name: val,
-                                                                      grow: 0.0,
-                                                                      value: 0.0))
+                                                                           grow: 0.0,
+                                                                           value: 0.0))
                         }
                     }
                     
@@ -72,6 +72,8 @@ final class HomeViewModel {
     var topGainers: [RemoteTicker] = []
     var topLosers: [RemoteTicker] = []
     
+    //
+    var gains: GetPlaidHoldingsQuery.Data.PortfolioGain?
     
     var articles: [WebArticle] = []
     
@@ -88,6 +90,7 @@ final class HomeViewModel {
             
             let gainers = await getGainers(profileId: profielId)
             
+            self.gains = await getPortfolioGains(profileId: profielId)
             self.articles = await getArticles()
             
             self.topGainers = gainers.topGainers
@@ -109,7 +112,7 @@ final class HomeViewModel {
                                                               grow: 0.0,
                                                               value: 0.0))
                 }
-            }         
+            }
             await MainActor.run {
                 self.dataSource.updateIndexes(models: self.topIndexes)
                 completion()
@@ -221,6 +224,32 @@ final class HomeViewModel {
                 case .failure(let error):
                     dprint("Failure when making HomeFetchArticlesQuery request. Error: \(error)")
                     continuation.resume(returning: [WebArticle]())
+                    break
+                }
+            }
+        }
+    }
+    
+    func getPortfolioGains(profileId: Int) async -> GetPlaidHoldingsQuery.Data.PortfolioGain? {
+        return await
+        withCheckedContinuation { continuation in
+            
+            Network.shared.apollo.fetch(query: GetPlaidHoldingsQuery.init(profileId: profileId)) {result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let portfolioGains = graphQLResult.data?.portfolioGains else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+                    if let gains = portfolioGains.first {
+                        continuation.resume(returning: gains)
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
+                    break
+                case .failure(let error):
+                    dprint("Failure when making GetPlaidHoldingsQuery request. Error: \(error)")
+                    continuation.resume(returning: nil)
                     break
                 }
             }
