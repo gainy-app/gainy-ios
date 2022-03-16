@@ -1,13 +1,16 @@
-iOS v1.2 #169 available
+iOS v1.2 #170 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• New loader added
-• Portfolio data added
+• -
 
 :hammer_and_wrench: Improvements
-• -
+• QA bugs
+• Updated Home loader
+• Indexes removed
+• Home loading improved
+• Crashes closed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

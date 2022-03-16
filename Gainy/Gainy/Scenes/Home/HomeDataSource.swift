@@ -21,7 +21,7 @@ protocol HomeDataSourceDelegate: AnyObject {
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
-        cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
+        cellHeights[.index] = 70.0
         cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
         cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
         self.viewModel = viewModel
@@ -136,6 +136,13 @@ extension HomeDataSource: UITableViewDelegate {
         if tableView.sk.isSkeletonActive {
             return HomeSkeletonTableViewCell.cellHeight
         }
+        let section = Section(rawValue: indexPath.section)!
+        if section == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+            return 0.0
+        }
+        if section == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            return 0.0
+        }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
@@ -167,6 +174,18 @@ extension HomeDataSource: UITableViewDelegate {
     //MARK: - Headers
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionType = Section(rawValue: section)!
+        if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+            return nil
+        }
+        if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+            return nil
+        }
+        if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            return nil
+        }
+        
         let headerLabel = UILabel()
         headerLabel.textColor = UIColor(named: "mainText")!
         headerLabel.font = .proDisplaySemibold(20)        
@@ -179,7 +198,7 @@ extension HomeDataSource: UITableViewDelegate {
         if section == Section.articles.rawValue || section == Section.gainers.rawValue{
             headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
         } else {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
         }
         
         return headerView
@@ -189,11 +208,18 @@ extension HomeDataSource: UITableViewDelegate {
         if section == Section.index.rawValue {
             return 0.0
         } else {
-            if section == Section.articles.rawValue || section == Section.gainers.rawValue {
-                return 40.0
-            } else {
-                return 24.0 + 16.0 + 16
+            let sectionType = Section(rawValue: section)!
+            if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+                return 0.0
             }
+            if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+                return 0.0
+            }
+            if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+                return 0.0
+            }
+            
+            return 40.0
         }
     }
 }

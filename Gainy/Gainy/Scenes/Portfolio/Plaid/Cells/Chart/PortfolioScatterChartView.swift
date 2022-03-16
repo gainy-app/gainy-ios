@@ -68,7 +68,6 @@ struct PortfolioScatterChartView: View {
             })
             
         }
-        .background(Color.white)
         .onAppear(perform: {
             hapticTouch.prepare()
         })

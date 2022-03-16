@@ -43,7 +43,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
             innerCollectionView.reloadData()
             expandBtn.isHidden = collections.count < 5
             if collections.count < 5 {
-                collectionHeight.constant = CGFloat(collections.count) * cellWidth + CGFloat(collections.count - 1) * 8.0
+                collectionHeight.constant = max(0.0, CGFloat(collections.count) * cellWidth + CGFloat(collections.count - 1) * 8.0)
             } else {
                 collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0
             }

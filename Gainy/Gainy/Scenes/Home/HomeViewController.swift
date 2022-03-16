@@ -22,6 +22,7 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Outlets
     @IBOutlet weak var wlView: UIView!
+    @IBOutlet weak var wlInfoLbl: UILabel!
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
@@ -75,6 +76,7 @@ final class HomeViewController: BaseViewController {
     private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
     func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         wlInfo = (stock, cell)
+        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
         wlView.isHidden = false
         wlTimer?.invalidate()
         wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in

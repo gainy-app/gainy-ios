@@ -789,7 +789,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 snapshot.deleteSections([.collectionWithCards])
             }
             snapshot.appendSections([.collectionWithCards])
-            snapshot.appendItems(viewModel?.collectionDetails ?? [],
+            snapshot.appendItems((viewModel?.collectionDetails ?? []),
                                  toSection: .collectionWithCards)
             
             dataSource?.apply(snapshot, animatingDifferences: false, completion: {

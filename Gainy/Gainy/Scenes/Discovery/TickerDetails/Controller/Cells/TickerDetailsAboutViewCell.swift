@@ -164,6 +164,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     
     func unhighlightIndustries() {
         wrongIndBtn.isSelected = false
+        guard (tickerInfo?.tags ?? []).count == tagsStack.subviews.count else {return}
         for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 if tagInfo.collectionID < 0 {
