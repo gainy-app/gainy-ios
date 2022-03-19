@@ -136,16 +136,28 @@ final class TickerLiveStorage {
     }
     
     func setSymbolData(_ symbol: String, data: LivePrice) {
+        var expiry: Expiry = Expiry.seconds(15 * 60)
+        if let minsDiff = data.date.differences(in: [.minute], from: Date())[.minute] {
+            if minsDiff < 15 {
+                expiry = Expiry.seconds((15.0 - Double(minsDiff)) * 60)
+            }
+        }
         dataQueue.sync {
             guard !symbol.isEmpty else {return}
-            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
+            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol, expiry: expiry)
         }
     }
     
     func setSymbolData(_ symbol: String, data: RealtimePrice) {
+        var expiry: Expiry = Expiry.seconds(15 * 60)
+        if let minsDiff = data.date.differences(in: [.minute], from: Date())[.minute] {
+            if minsDiff < 15 {
+                expiry = Expiry.seconds((15.0 - Double(minsDiff)) * 60)
+            }
+        }
         dataQueue.sync {
             guard !symbol.isEmpty else {return}
-            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol)
+            try? dataStorage?.setObject(CachedLivePrice(remotePrice: data), forKey: symbol, expiry: expiry)
         }
     }    
     

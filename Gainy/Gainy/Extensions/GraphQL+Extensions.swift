@@ -25,6 +25,26 @@ extension RemoteDateTimeConvertable {
     }
 }
 
+extension LivePrice {
+    var date: Date {
+        if let zDate = (time ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return zDate
+        } else {
+            return (time ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+        }
+    }
+}
+
+extension RealtimePrice {
+    var date: Date {
+        if let zDate = (time ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return zDate
+        } else {
+            return (time ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+        }
+    }
+}
+
 extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
     
     var timeAgoSince: String {
