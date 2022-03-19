@@ -99,9 +99,10 @@ struct PortfolioScatterChartView: View {
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                 } .opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .animation(.none)
+                    .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
             HStack(spacing: 4) {
-                Text(viewModel.balance.price)
+                Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : viewModel.balance.price)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(hexString: "09141F", alpha: 1.0)?.uiColor)
                 Spacer()
