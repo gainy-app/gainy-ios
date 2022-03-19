@@ -6,7 +6,8 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• QA bugs
+• Stock price stored relative to fetch date (thx to Mike Stukalo)
+• Portfolio chart tap value slider
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
