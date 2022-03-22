@@ -21,7 +21,7 @@ protocol HomeDataSourceDelegate: AnyObject {
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
-        cellHeights[.index] = 70.0
+        cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
         cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
         self.viewModel = viewModel

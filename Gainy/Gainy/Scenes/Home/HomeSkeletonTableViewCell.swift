@@ -10,7 +10,7 @@ import SkeletonView
 
 final class HomeSkeletonTableViewCell: UITableViewCell {
     
-    static let cellHeight: CGFloat = 677.0
+    static let cellHeight: CGFloat = 780.0
     
     override func awakeFromNib() {
         super.awakeFromNib()

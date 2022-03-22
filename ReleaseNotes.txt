@@ -1,14 +1,12 @@
-iOS v1.2 #171 available
+iOS v1.2 #172 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• -
+• Home indexes are back! Thx to Michael
 
 :hammer_and_wrench: Improvements
-• Stock price stored relative to fetch date (thx to Mike Stukalo)
-• Portfolio chart tap value slider
-• Some company names are truncated - not anymore
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
