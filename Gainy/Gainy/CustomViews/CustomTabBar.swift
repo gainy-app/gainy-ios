@@ -23,10 +23,12 @@ class CustomTabBar: UITabBar {
     weak var customDelegate: CustomTabBarDelegate?
     
     enum Tab: Int {
-        case discovery = 0, portfolio, profile
+        case home = 0, discovery, portfolio, profile
         
         init(title: String) {
             switch title {
+            case "Home":
+                self = .home
             case "Discovery":
                 self = .discovery
             case "Portfolio":
@@ -142,7 +144,7 @@ class CustomTabBar: UITabBar {
         layer.shadowOpacity = 1.0
         layer.shadowColor = UIColor(hexString: "#4F6169", alpha: Float(0.1))?.cgColor
         
-        let lastTabFrame = frameForTab(atIndex: 2)
+        let lastTabFrame = frameForTab(atIndex: 3)
         profileView.center = CGPoint(x: lastTabFrame.midX, y: lastTabFrame.midY - 5)
     }
     

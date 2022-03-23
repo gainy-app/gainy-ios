@@ -25,8 +25,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     fileprivate func setupTabs() {
         if let coordinator = coordinator {
             collectionDetailsViewController = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
-            // coordinator.viewControllerFactory.instantiateHomeVC(coordinator: coordinator),
-            setViewControllers([collectionDetailsViewController as! UIViewController,
+            setViewControllers([coordinator.viewControllerFactory.instantiateHomeVC(coordinator: coordinator),
+                                collectionDetailsViewController as! UIViewController,
                                 coordinator.viewControllerFactory.instantiatePortfolioVC(coordinator: coordinator),
                                 coordinator.viewControllerFactory.instantiateProfileVC(coordinator: coordinator)], animated: false)
         }
@@ -34,6 +34,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     
     fileprivate func initialSetup() {
         self.title = NSLocalizedString("Main", comment: "")
+        
+        //Discovery is Default
+        selectedIndex = 1
+        
         tabBar.barStyle = .default
         tabBar.isTranslucent = false
         //setupTabBarLayout()
@@ -82,6 +86,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         }
         let tab = CustomTabBar.Tab(rawValue: selectedIndex)
         switch tab {
+        case .home:
+            GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Home", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
         case .discovery:
             GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Discovery", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
             if let vc = self.collectionDetailsViewController {
@@ -96,10 +102,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         }
     }
     
-    let arrayOfImageNameForSelectedState = ["tab1_active", "tab2_active", "tab3_active"]
-    let arrayOfImageNameForUnselectedState = ["tab1_passive", "tab2_passive", "tab3_passive"]
+    let arrayOfImageNameForSelectedState = ["tab0_active", "tab1_active", "tab2_active", "tab3_active"]
+    let arrayOfImageNameForUnselectedState = ["tab0_passive", "tab1_passive", "tab2_passive", "tab3_passive"]
     
-    private let tabNames: [String] = ["Discovery", "Portfolio", "Profile"]
+    private let tabNames: [String] = ["Home", "Discovery", "Portfolio", "Profile"]
     
     func setupTabBarItems(_ notif: Notification? = nil) {
         

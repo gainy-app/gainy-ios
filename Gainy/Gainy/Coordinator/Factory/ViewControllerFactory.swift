@@ -8,7 +8,7 @@ final class ViewControllerFactory {
         false
     }
     
-    private let tabNames: [String] = ["Discovery", "Portfolio", "Profile"]
+    private let tabNames: [String] = ["Home", "Discovery", "Portfolio", "Profile"]
     var selectedColor: UIColor {
         isLightTheme ? UIColor(named: "mainText")! : UIColor(named: "tabbar_tint_color")!
     }
@@ -179,7 +179,7 @@ final class ViewControllerFactory {
     func instantiateHomeVC(coordinator: MainCoordinator) -> HomeViewController {
         let vc = HomeViewController.instantiate(.home)
         vc.mainCoordinator = coordinator
-        //setupTabWithIndex(vc: vc, tab: .home)
+        setupTabWithIndex(vc: vc, tab: .home)
         return vc
     }
     
