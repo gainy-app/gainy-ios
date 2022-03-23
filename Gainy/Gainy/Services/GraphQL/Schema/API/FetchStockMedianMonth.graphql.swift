@@ -60,7 +60,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220222145854.tickers"
+    /// fetch data from the table: "public_220319155133.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
@@ -99,7 +99,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
         }
       }
 
-      /// fetch data from the table: "public_220222145854.ticker_industries"
+      /// An array relationship
       public var tickerIndustries: [TickerIndustry] {
         get {
           return (resultMap["ticker_industries"] as! [ResultMap]).map { (value: ResultMap) -> TickerIndustry in TickerIndustry(unsafeResultMap: value) }

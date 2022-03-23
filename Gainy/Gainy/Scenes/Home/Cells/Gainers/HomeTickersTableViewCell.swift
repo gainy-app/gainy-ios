@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeTickersTableViewCellDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell)
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
 }
 
 final class HomeTickersTableViewCell: UITableViewCell {
@@ -25,6 +26,7 @@ final class HomeTickersTableViewCell: UITableViewCell {
             innerCollectionView.delegate = self
         }
     }
+    @IBOutlet private weak var bottomDots: UIImageView!
     
     var gainers: [RemoteTicker] = [] {
         didSet {
@@ -32,7 +34,11 @@ final class HomeTickersTableViewCell: UITableViewCell {
         }
     }
     
-    var isGainers: Bool = false
+    var isGainers: Bool = false {
+        didSet {
+            bottomDots.isHidden = isGainers
+        }
+    }
 }
 
 extension HomeTickersTableViewCell: UICollectionViewDataSource {
@@ -43,6 +49,7 @@ extension HomeTickersTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.stock = gainers[indexPath.row]
+        cell.delegate = self
         return cell
     }
 }
@@ -63,11 +70,20 @@ extension HomeTickersTableViewCell: UICollectionViewDelegate {
     }
 }
 
+extension HomeTickersTableViewCell: HomeTickerInnerTableViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
+    }
+}
+
+protocol HomeTickerInnerTableViewCellDelegate: AnyObject {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+}
+
 //Will be used further
 final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     
-    
-    weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
+    weak var delegate: HomeTickerInnerTableViewCellDelegate?
     
     //MARK: - Outlets
     
@@ -169,13 +185,16 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                 if success {
                     sender.isSelected = false
                 }
-            }
+            }            
         } else {
             GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     sender.isSelected = true
                 }
+            }
+            if let stock = stock {
+                delegate?.wlPressed(stock: stock, cell: self)
             }
         }
     }

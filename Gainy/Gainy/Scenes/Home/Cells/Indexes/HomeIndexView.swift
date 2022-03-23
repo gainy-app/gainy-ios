@@ -18,10 +18,21 @@ final class HomeIndexView: CornerView {
         didSet {
             if let indexModel = indexModel {
                 nameLbl.text = indexModel.name
+                if indexModel.grow != 0 {
                 growImgView.image = indexModel.grow >= 0.0 ? UIImage(named: "small_up") : UIImage(named: "small_down")
                 growLbl.text = indexModel.grow.percent
                 growLbl.textColor = UIColor(named: indexModel.grow >= 0.0 ? "mainGreen" : "mainRed")
-                valueLbl.text = indexModel.value.cleanTwoDecimal
+                } else {
+                    growImgView.image = nil
+                    growLbl.text = "-"
+                    growLbl.textColor = .lightGray
+                }
+                
+                if indexModel.value != 0 {
+                    valueLbl.text = indexModel.value.cleanTwoDecimal
+                } else {
+                    valueLbl.text = "-"
+                }
             }
         }
     }

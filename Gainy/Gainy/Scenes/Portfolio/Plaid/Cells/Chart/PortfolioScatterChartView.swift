@@ -133,9 +133,10 @@ struct PortfolioScatterChartView: View {
                         .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                 } .opacity(selectedTag == .d1 ? 1.0 : 0.0)
                     .animation(.none)
+                    .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
             }
             HStack(spacing: 4) {
-                Text(viewModel.balance.price)
+                Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : viewModel.balance.price)
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(hexString: "09141F", alpha: 1.0)?.uiColor)
                 Spacer()
@@ -178,6 +179,14 @@ struct PortfolioScatterChartView: View {
         return viewModel.chartData.startEndDiffString
     }
     
+    private var isChartGrows: Bool {
+        if selectedTag == .d1 {
+            return viewModel.rangeGrow >= 0.0
+        } else {
+            return viewModel.chartData.startEndDiff >= 0.0
+        }
+    }
+    
     @ObservedObject
     var lineViewModel: LineViewModel = LineViewModel()
     
@@ -190,7 +199,7 @@ struct PortfolioScatterChartView: View {
                 if viewModel.chartData.onlyPoints().uniqued().count > 2 {
                     LineView(data: viewModel.chartData,
                              title: "Full chart",
-                             style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                             style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel)
                 }  else {
                     VStack {

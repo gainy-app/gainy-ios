@@ -1,0 +1,8 @@
+query FetchRealtimeMetrics($symbols: [String!]) {
+  ticker_realtime_metrics(where: {symbol: {_in: $symbols}}) {
+    symbol
+    actual_price
+    absolute_daily_change
+    relative_daily_change
+  }
+}

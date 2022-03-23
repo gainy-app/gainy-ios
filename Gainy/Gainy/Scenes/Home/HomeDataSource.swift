@@ -13,6 +13,9 @@ import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool)
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func articlePressed(article: WebArticle)
+    func collectionSelected(collection: RemoteShortCollectionDetails)
 }
 
 final class HomeDataSource: NSObject {
@@ -20,7 +23,7 @@ final class HomeDataSource: NSObject {
     init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
         cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
-        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight
+        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
         self.viewModel = viewModel
     }
     
@@ -30,10 +33,10 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 3
+    private let sectionsCount = 5
     
     enum Section: Int {
-        case index = 0, gainers, losers, collections, articles
+        case index = 0, collections, gainers, losers, articles
         
         var name: String {
             switch self {
@@ -46,13 +49,21 @@ final class HomeDataSource: NSObject {
             case .losers:
                 return "Top loser in your collections"
             case .articles:
-                return "Articles for you you"
-                
+                return "Articles for you"
             }
         }
     }
     
-    private var articles: [String] = []
+    private var articles: [WebArticle] = []
+    
+    private var indexes: [HomeIndexViewModel] = []
+    
+    func updateIndexes(models: [HomeIndexViewModel]) {
+        indexes = models
+        if let cell = tableView?.visibleCells.first(where: {$0 is HomeIndexesTableViewCell}) as? HomeIndexesTableViewCell {
+            cell.updateIndexes(models: models)
+        }
+    }
     
     //MARK: - Heights
     private var cellHeights: [Section: CGFloat] = [:]
@@ -71,14 +82,14 @@ extension HomeDataSource: SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == Section.articles.rawValue {
-            return articles.count
+            return viewModel?.articles.count ?? 0
         } else {
             return 1
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionsCount
+        return tableView.sk.isSkeletonActive ? 1 : sectionsCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,7 +98,8 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         switch Section(rawValue: indexPath.section)! {
         case .index:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
-            cell.updateIndexes()
+            cell.updateIndexes(models: indexes)
+            cell.gains = viewModel?.gains
             return cell
         case .gainers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
@@ -101,26 +113,79 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.delegate = self
             cell.isGainers = false
             return cell
-        default:
-            break
+        case .articles:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
+            cell.article = viewModel?.articles[indexPath.row]
+            return cell
+        case .collections:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
+            cell.heightUpdated = {[weak self] newHeight in
+                self?.tableView?.beginUpdates()
+                self?.cellHeights[.collections] = newHeight
+                self?.tableView?.endUpdates()
+            }
+            cell.collections = viewModel?.favCollections ?? []
+            cell.delegate = self
+            return cell
         }
-        
-        return UITableViewCell()
     }
 }
 
 extension HomeDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[Section(rawValue: indexPath.section)!] ?? 0.0
+        if tableView.sk.isSkeletonActive {
+            return HomeSkeletonTableViewCell.cellHeight
+        }
+        let section = Section(rawValue: indexPath.section)!
+        if section == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+            return 0.0
+        }
+        if section == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            return 0.0
+        }
+        return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+        switch Section(rawValue: indexPath.section)! {
+        case .index:
+            break
+        case .gainers:
+            break
+        case .losers:
+            break
+        case .articles:
+            if let article = viewModel?.articles[indexPath.row] {
+                delegate?.articlePressed(article: article)
+            }
+            break
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell:
+    UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let cell = cell as? HomeArticlesTableViewCell {
+            cell.coverImgView.kf.cancelDownloadTask()
+        }
     }
     
     //MARK: - Headers
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let sectionType = Section(rawValue: section)!
+        if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+            return nil
+        }
+        if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+            return nil
+        }
+        if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            return nil
+        }
+        
         let headerLabel = UILabel()
         headerLabel.textColor = UIColor(named: "mainText")!
         headerLabel.font = .proDisplaySemibold(20)        
@@ -130,7 +195,11 @@ extension HomeDataSource: UITableViewDelegate {
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 16, left: 24, bottom: 16, right: 24))
+        if section == Section.articles.rawValue || section == Section.gainers.rawValue{
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
+        } else {
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
+        }
         
         return headerView
     }
@@ -139,7 +208,18 @@ extension HomeDataSource: UITableViewDelegate {
         if section == Section.index.rawValue {
             return 0.0
         } else {
-            return 24.0 + 16.0 + 16
+            let sectionType = Section(rawValue: section)!
+            if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+                return 0.0
+            }
+            if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
+                return 0.0
+            }
+            if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+                return 0.0
+            }
+            
+            return 40.0
         }
     }
 }
@@ -147,6 +227,16 @@ extension HomeDataSource: UITableViewDelegate {
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
     func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
         delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
+    }
+    
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
+    }
+}
+
+extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
+    func collectionSelected(collection: RemoteShortCollectionDetails) {
+        delegate?.collectionSelected(collection: collection)
     }
 }
 

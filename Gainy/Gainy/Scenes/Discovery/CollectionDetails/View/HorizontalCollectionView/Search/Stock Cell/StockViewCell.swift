@@ -26,7 +26,7 @@ final class StockViewCell: UICollectionViewCell {
     var ticker: RemoteTickerDetails? {
         didSet {
             if let ticker = ticker {
-                nameLbl.text = ticker.name
+                nameLbl.text = ticker.name?.companyMarkRemoved ?? ""
                 symbolLbl.text = ticker.symbol
                 let priceChange = (ticker.realtimeMetrics?.relativeDailyChange ?? 0.0) * 100.0
                 priceLbl.text = ticker.realtimeMetrics?.actualPrice?.price ?? ""

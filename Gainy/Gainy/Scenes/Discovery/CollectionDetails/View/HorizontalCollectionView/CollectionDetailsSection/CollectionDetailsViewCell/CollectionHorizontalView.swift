@@ -25,6 +25,16 @@ final class CollectionHorizontalView: UIView {
         addSubview(settingsButton)
         addSubview(extraActionButton)
         addSubview(sortByButton)
+        
+        addSubview(growContainer)
+        growContainer.addSubview(growLbl)
+        growContainer.addSubview(arrowImgView)
+        growContainer.addSubview(growValueLbl)
+        growContainer.isHidden = true
+        
+        addSubview(sortSmallButton)
+        sortSmallButton.isHidden = true
+        
         addSubview(showListViewButton)
         addSubview(showGridViewButton)
         
@@ -51,9 +61,85 @@ final class CollectionHorizontalView: UIView {
     var onShowListViewButtonPressed: (() -> Void)?
     var onShowGridViewButtonPressed: (() -> Void)?
     
+    var shortCollection: RemoteShortCollectionDetails? = nil {
+        didSet {
+            if shortCollection != nil {
+                self.backImageView.layer.cornerRadius = 0
+                self.backImageView.skeletonCornerRadius = 0
+                self.sortSmallButton.isHidden = false
+                self.growContainer.isHidden = false
+                
+                self.growContainer.translatesAutoresizingMaskIntoConstraints = false
+                self.growContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+                self.growContainer.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+                self.growContainer.autoSetDimension(.height, toSize: 24)
+//                self.growContainer.autoSetDimension(.width, toSize: 151)
+                self.growContainer.cornerRadius = 12
+                
+                self.growLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 8)
+                self.growLbl.autoAlignAxis(toSuperviewAxis: .horizontal)
+                self.growLbl.autoSetDimension(.width, toSize: 68)
+
+                self.arrowImgView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
+                self.arrowImgView.autoAlignAxis(toSuperviewAxis: .horizontal)
+                self.arrowImgView.autoPinEdge(.left, to: .right, of: self.growLbl, withOffset: 4)
+                
+                self.growValueLbl.autoAlignAxis(toSuperviewAxis: .horizontal)
+                self.growValueLbl.autoSetDimension(.height, toSize: 16)
+                self.growValueLbl.autoPinEdge(.left, to: .right, of: self.arrowImgView, withOffset: 4)
+                self.growValueLbl.autoPinEdge(toSuperviewEdge: .right, withInset: 8)
+                
+                if (shortCollection!.metrics?.relativeDailyChange ?? 0.0) > 0.0 {
+                    growContainer.backgroundColor = UIColor.Gainy.secondaryGreen
+                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = UIColor.Gainy.mainText
+                    growLbl.textColor = UIColor.Gainy.mainText
+                    growValueLbl.textColor = UIColor.Gainy.mainText
+                    
+                } else {
+                    growContainer.backgroundColor = UIColor.Gainy.mainRed
+                    arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = .white
+                    growLbl.textColor = .white
+                    growValueLbl.textColor = .white
+                }
+                growValueLbl.text = (shortCollection!.metrics?.relativeDailyChange ?? 0.0).percent
+                growValueLbl.sizeToFit()
+                growContainer.sizeToFit()
+                
+                self.settingsButton.isHidden = true
+                self.extraActionButton.isHidden = true
+                self.sortByButton.isHidden = true
+            }
+        }
+    }
+    
     private var imageUrl: String = ""
     private var imageName: String = ""
     private var imageLoaded: Bool = false
+    
+    lazy var growContainer: CornerView = {
+        let cornerView = CornerView()
+        return cornerView
+    }()
+    
+    lazy var arrowImgView: UIImageView = {
+        let arrowImgView = UIImageView()
+        return arrowImgView
+    }()
+    
+    lazy var growLbl: UILabel = {
+        let growLbl = UILabel()
+        growLbl.font = UIFont(name: "SFCompactRounded-Semibold", size: 12)
+        growLbl.text = "Today gain".uppercased()
+        return growLbl
+    }()
+    
+    lazy var growValueLbl: UILabel = {
+        let growValueLbl = UILabel()
+        growValueLbl.font = UIFont(name: "SFCompactRounded-Semibold", size: 16)
+        return growValueLbl
+    }()
     
     lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
@@ -287,6 +373,22 @@ final class CollectionHorizontalView: UIView {
         return button
     }()
     
+    lazy var sortSmallButton: ResponsiveButton = {
+        let button = ResponsiveButton()
+        
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 4
+        button.layer.cornerCurve = .continuous
+        
+        button.setImage(UIImage(named: "sortSmall"), for: .normal)
+        
+        button.addTarget(self,
+                         action: #selector(sortTapped),
+                         for: .touchUpInside)
+        
+        return button
+    }()
+    
     lazy var showGridViewButton: ResponsiveButton = {
         let button = ResponsiveButton()
         
@@ -361,8 +463,8 @@ final class CollectionHorizontalView: UIView {
         
         
         let hMargin: CGFloat = 16
-        let topMarginLeftSide: CGFloat = 16
-        let topMarginRightSide: CGFloat = 19
+        let topMarginLeftSide: CGFloat = (self.shortCollection != nil) ? 56 : 16
+        let topMarginRightSide: CGFloat = (self.shortCollection != nil) ? 60 : 19
         let bottomMargin: CGFloat = 16
         
         let availableWidth = bounds.width - (hMargin + 71)
@@ -450,6 +552,13 @@ final class CollectionHorizontalView: UIView {
             x: hMargin + 84,
             y: bounds.height - (24 + bottomMargin),
             width: 149,
+            height: 24
+        )
+        
+        sortSmallButton.frame = CGRect(
+            x: bounds.width - (24 + 8 + 24 + 8 + 24 + hMargin),
+            y: bounds.height - (24 + bottomMargin),
+            width: 24,
             height: 24
         )
         

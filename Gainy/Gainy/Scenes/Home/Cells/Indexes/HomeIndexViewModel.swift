@@ -9,8 +9,8 @@ import Foundation
 
 struct HomeIndexViewModel {
     let name: String
-    let grow: Double
-    let value: Double
+    let grow: Float
+    let value: Float
     
     static var demoData: [HomeIndexViewModel] = [
         HomeIndexViewModel(name: "Dow Jones", grow: 1.05, value: 35_090),

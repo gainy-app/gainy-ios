@@ -153,8 +153,8 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false) {
-        let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID)
+    func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false, collection: RemoteShortCollectionDetails? = nil) {
+        let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID, collection: collection!)
         vc.delegate = delegate
         vc.coordinator = self
         vc.isFromSearch = isFromSearch

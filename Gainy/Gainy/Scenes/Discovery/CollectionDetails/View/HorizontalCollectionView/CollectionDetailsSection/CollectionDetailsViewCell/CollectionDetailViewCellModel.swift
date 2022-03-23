@@ -16,7 +16,6 @@ struct CollectionDetailViewCellModel {
 extension CollectionDetailViewCellModel: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
-        hasher.combine(inYourCollectionList)
         hasher.combine(name)
         hasher.combine(stocksAmount)
     }

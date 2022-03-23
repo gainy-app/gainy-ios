@@ -10,6 +10,12 @@ fragment RemoteCollectionDetails on collections {
   image_url
   description
   size
+  metrics {
+    absolute_daily_change
+    profile_id
+    relative_daily_change
+    updated_at
+    }
 }
 
 fragment RemoteTickerDetails on tickers {

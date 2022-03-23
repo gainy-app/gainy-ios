@@ -21,6 +21,8 @@ final class HomeViewController: BaseViewController {
     @IBOutlet weak var nameLbl: UILabel!
     
     //MARK: - Outlets
+    @IBOutlet weak var wlView: UIView!
+    @IBOutlet weak var wlInfoLbl: UILabel!
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
@@ -68,6 +70,39 @@ final class HomeViewController: BaseViewController {
         super.userLoggedOut()
         
     }
+    
+    //MARK: - Popup
+    
+    private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
+    func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        wlInfo = (stock, cell)
+        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
+        wlView.isHidden = false
+        wlTimer?.invalidate()
+        wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
+            self?.hideWLView()
+        })
+    }
+    
+    private var wlTimer: Timer?
+    @IBAction func closeWLViewAction(_ sender: Any) {
+        hideWLView()
+    }
+    
+    @IBAction func undoWLAction(_ sender: Any) {
+        guard let wlInfo = wlInfo else {return}
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+            if success {
+                wlInfo.cell.isInWL = false
+            }
+        }
+        hideWLView()
+    }
+    
+    func hideWLView() {
+        wlView.isHidden = true
+    }
 }
 
 extension HomeViewController: HomeDataSourceDelegate {
@@ -81,5 +116,19 @@ extension HomeViewController: HomeDataSourceDelegate {
                 mainCoordinator?.showCardsDetailsViewController(viewModel.topLosers.compactMap({TickerInfo(ticker: $0)}), index: index)
             }
         }
+    }
+    
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        showWLView(stock: stock, cell: cell)
+    }
+    
+    func articlePressed(article: WebArticle) {
+        let articleVC = ArticleViewController.instantiate(.home)
+        articleVC.articleUrl = article.url ?? ""
+        present(articleVC, animated: true, completion: nil)
+    }
+    
+    func collectionSelected(collection: RemoteShortCollectionDetails) {
+        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, collection: collection)
     }
 }
