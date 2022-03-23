@@ -7,6 +7,7 @@
 
 import UIKit
 import FloatingPanel
+import PureLayout
 
 protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int)
@@ -18,6 +19,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     //MARK: - Outlets
     @IBOutlet weak var toggleBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
     // MARK: Properties
     private var viewModel: SingleCollectionDetailsViewModel?
@@ -40,6 +42,13 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     var collectionId: Int!
     var model: CollectionDetailViewCellModel!
     var isFromSearch: Bool = false
+    var shortCollection: RemoteShortCollectionDetails?
+    
+    var showShortCollectionDetails: Bool {
+        get {
+            return (self.shortCollection != nil) ? true : false
+        }
+    }
     
     weak var coordinator: MainCoordinator?
     weak var delegate: SingleCollectionDetailsViewControllerDelegate?
@@ -49,6 +58,20 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         setupViewModel()
         initCollectionView()
         setupPanel()
+        
+        self.toggleBtn.isHidden = self.showShortCollectionDetails
+        self.shareBtn.isHidden = self.showShortCollectionDetails
+        if self.showShortCollectionDetails {
+            self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
+            self.view.bringSubviewToFront(self.closeButton)
+            self.closeButton.translatesAutoresizingMaskIntoConstraints = false
+            for item in self.closeButton.constraints {
+                item.autoRemove()
+            }
+            self.closeButton.autoPinEdge(toSuperviewEdge: .left, withInset: 12)
+            self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 22)
+            self.closeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        }
     }
     
     fileprivate func setupViewModel() {
@@ -81,8 +104,9 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 frame: CGRect.zero,
                 collectionViewLayout: collectionId == Constants.CollectionDetails.compareCollectionID ? cmpLayout : layout
             )
+            let offset = self.showShortCollectionDetails ? 0 : 72
             view.addSubview(collectionView)
-            collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 72)
+            collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: CGFloat(offset))
             collectionView.autoPinEdge(.leading, to: .leading, of: view)
             collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
             collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
@@ -93,7 +117,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             collectionView.showsVerticalScrollIndicator = false
             collectionView.dragInteractionEnabled = true
             collectionView.bounces = false
-            viewModel?.initCollectionView(collectionView: collectionView)
+            viewModel?.initCollectionView(collectionView: collectionView, shortCollection: self.shortCollection)
         }
         
         viewModel?.loadCollectionDetails({

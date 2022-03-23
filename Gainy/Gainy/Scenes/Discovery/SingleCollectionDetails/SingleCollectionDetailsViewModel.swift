@@ -37,7 +37,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
         collectionId == Constants.CollectionDetails.compareCollectionID
     }
     
-    func initCollectionView(collectionView: UICollectionView) {
+    func initCollectionView(collectionView: UICollectionView, shortCollection: RemoteShortCollectionDetails? = nil) {
         self.dataSource = UICollectionViewDiffableDataSource<CollectionDetailSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
         ) {[weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
@@ -54,6 +54,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
             ))
             
             if let cell = cell as? CollectionDetailsViewCell {
+                cell.shortCollection = shortCollection
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}

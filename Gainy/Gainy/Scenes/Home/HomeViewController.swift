@@ -129,6 +129,6 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
-        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0)
+        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, collection: collection)
     }
 }

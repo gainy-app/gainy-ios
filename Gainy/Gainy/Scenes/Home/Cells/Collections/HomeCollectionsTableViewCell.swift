@@ -113,7 +113,7 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             stockAmountLbl.text = "\(collection.size ?? 0) stock\((collection.size ?? 0) > 1 ? "s" : "")"
             
             if (collection.metrics?.relativeDailyChange ?? 0.0) > 0.0 {
-                growContainer.backgroundColor = UIColor.Gainy.mainGreen
+                growContainer.backgroundColor = UIColor.Gainy.secondaryGreen
                 arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
                 arrowImgView.tintColor = UIColor.Gainy.mainText
                 growLbl.textColor = UIColor.Gainy.mainText

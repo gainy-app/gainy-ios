@@ -137,9 +137,10 @@ final class ViewControllerFactory {
         return vc
     }
     
-    func instantiateCollectionDetails(colID: Int) -> SingleCollectionDetailsViewController {
+    func instantiateCollectionDetails(colID: Int, collection: RemoteShortCollectionDetails? = nil) -> SingleCollectionDetailsViewController {
         let vc = SingleCollectionDetailsViewController.instantiate(.discovery)
         vc.collectionId = colID
+        vc.shortCollection = collection
         return vc
     }
     

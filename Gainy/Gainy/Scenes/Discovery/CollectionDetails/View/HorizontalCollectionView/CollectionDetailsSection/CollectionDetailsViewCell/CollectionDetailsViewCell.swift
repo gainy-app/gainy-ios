@@ -226,6 +226,28 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
+    var shortCollection: RemoteShortCollectionDetails? = nil {
+        didSet {
+            if shortCollection != nil {
+                collectionHorizontalView.shortCollection = shortCollection
+                collectionHorizontalView.frame = CGRect(
+                    x: -12,
+                    y: 0,
+                    width: UIScreen.main.bounds.width,
+                    height: 184
+                )
+                
+                internalCollectionView.frame = CGRect(
+                    x: 0,
+                    y: 184,
+                    width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
+                    height: UIScreen.main.bounds.height - (80 + 184 + 20)
+                )
+                collectionListHeader.frame = CGRect.init(x: 4, y: 184, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
+                internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 184, right: 0)
+            }
+        }
+    }
     
     lazy var collectionHorizontalView: CollectionHorizontalView = {
         let view = CollectionHorizontalView()
@@ -270,13 +292,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         //Gettings settings
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
+        let offset = (self.shortCollection != nil) ? 184 : 144
         if settings.viewMode == .list {
             collectionListHeader.isHidden = false
             internalCollectionView.frame = CGRect(
                 x: 0,
-                y: 144 + 36,
+                y: CGFloat(offset) + 36,
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
+                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
             )
             sections = [
                 CardsOneColumnListFlowSectionLayout(collectionID: collectionID),
@@ -286,9 +309,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionListHeader.isHidden = true
             internalCollectionView.frame = CGRect(
                 x: 0,
-                y: 144,
+                y: CGFloat(offset),
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20)
+                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
             )
             sections =  [
                 CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
@@ -501,14 +524,14 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
         if isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout  {return}
         if !isGrid && sections.first! is CardsOneColumnListFlowSectionLayout {return}
-        
+        let offset = (self.shortCollection != nil) ? 184 : 144
         if isGrid {
             collectionListHeader.isHidden = true
             internalCollectionView.frame = CGRect(
                 x: 0,
-                y: 144,
+                y: CGFloat(offset),
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20)
+                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
             )
             //stocks_view_changed
             GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
@@ -516,9 +539,9 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
             collectionListHeader.isHidden = false
             internalCollectionView.frame = CGRect(
                 x: 0,
-                y: 144 + 36,
+                y: CGFloat(offset) + 36,
                 width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20) - 36
+                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
             )
             GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list", "ec" : "CollectionDetails"])
         }
