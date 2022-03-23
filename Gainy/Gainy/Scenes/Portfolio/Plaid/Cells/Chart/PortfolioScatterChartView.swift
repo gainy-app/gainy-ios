@@ -145,6 +145,14 @@ struct PortfolioScatterChartView: View {
         return viewModel.chartData.startEndDiffString
     }
     
+    private var isChartGrows: Bool {
+        if selectedTag == .d1 {
+            return viewModel.rangeGrow >= 0.0
+        } else {
+            return viewModel.chartData.startEndDiff >= 0.0
+        }
+    }
+    
     @ObservedObject
     var lineViewModel: LineViewModel = LineViewModel()
     
@@ -157,7 +165,7 @@ struct PortfolioScatterChartView: View {
                 if viewModel.chartData.onlyPoints().uniqued().count > 2 {
                     LineView(data: viewModel.chartData,
                              title: "Full chart",
-                             style: viewModel.chartData.startEndDiff > 0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
+                             style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel)
                 }  else {
                     VStack {

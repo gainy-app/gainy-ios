@@ -456,6 +456,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
+            let lock = NSLock()
+            lock.lock()
             let watchlistCollections = models.filter { item in
                 item.id < 0
             }
@@ -482,12 +484,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             } else {
                 completed?()
             }
+            lock.unlock()
         }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             self.appendNewCollectionsFromModels(models) {
+                
                 self.appendWatchlistCollectionsFromModels(models) {
                     completed?()
                 }
