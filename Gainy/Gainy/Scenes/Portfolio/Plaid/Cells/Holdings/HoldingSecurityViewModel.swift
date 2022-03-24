@@ -11,7 +11,7 @@ import UIKit
 struct HoldingSecurityViewModel {
     
     enum SecType: String {
-        case option = "Option", share = "Shares", cash = "Cash"
+        case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto"
     }
     
     let name: NSAttributedString
@@ -42,7 +42,11 @@ struct HoldingSecurityViewModel {
             if rawType == "equity" {
                 type = .share
             } else {
-                type = .cash
+                if rawType == "crypto" {
+                    type = .crypto
+                } else {
+                    type = .cash
+                }
             }
         }
         let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)

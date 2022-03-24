@@ -42,6 +42,10 @@ struct HoldingViewModel {
         tickerSymbol.hasPrefix("CUR")
     }
     
+    var isCrypro: Bool {
+        securities.contains(where: {$0.type == .crypto})
+    }
+    
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
         if isCash {
             return ("", UIImage(), "", "", .clear, .clear)

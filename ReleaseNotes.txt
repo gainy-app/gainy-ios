@@ -3,7 +3,8 @@ iOS v1.2 #172 available
 Bugfixes
 
 :new: New:
-• Home indexes are back! Thx to Michael
+• Home: Collection details view updated
+• Portfolio: Crypto card added
 
 :hammer_and_wrench: Improvements
 • -
