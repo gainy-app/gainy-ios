@@ -202,9 +202,21 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             transactionsTotalLbl.isHidden = true
             categoriesView.isHidden = true
         } else {
-            secsTopMargin.constant = 128.0
-            transactionsTotalLbl.isHidden = false
-            categoriesView.isHidden = false
+            if model.isCrypro {
+                matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                matchScoreLbl.text = "B"
+                nameLbl.text = "Crypto Currencies"
+                
+                symbolLbl.isHidden = true
+                symbolLbl.superview?.isHidden = true
+                secsTopMargin.constant = 56.0
+                transactionsTotalLbl.isHidden = true
+                categoriesView.isHidden = true
+            } else {
+                secsTopMargin.constant = 128.0
+                transactionsTotalLbl.isHidden = false
+                categoriesView.isHidden = false
+            }
         }
     }
     
