@@ -5,6 +5,7 @@ Bugfixes
 :new: New:
 • Home: Collection details view updated
 • Portfolio: Crypto card added
+• Portfolio: Chart UI adjusted
 
 :hammer_and_wrench: Improvements
 • -

@@ -51,10 +51,6 @@ struct PortfolioScatterChartView: View {
             VStack {
                 headerView
                 ZStack {
-                    //            LinearGradient(
-                    //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
-                    //                    startPoint: .top, endPoint: .bottom)
-                    //                    .padding(.top, 0)
                     chartView
                         .padding(.leading, 8)
                         .padding(.trailing, 8)
@@ -69,7 +65,9 @@ struct PortfolioScatterChartView: View {
                 })
                 
             }
-            .background(Color.white)
+            .background(LinearGradient(
+                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
+                    startPoint: .bottom, endPoint: .top))
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
@@ -146,6 +144,7 @@ struct PortfolioScatterChartView: View {
                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                     .foregroundColor(UIColor(named: viewModel.rangeGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                     .opacity(selectedTag == .d1 ? 1.0 : 0.0)
+                    .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                     .animation(.none)
             }
         }

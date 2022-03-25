@@ -123,7 +123,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 24.0)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
             }
             cell.updateButtons()
@@ -160,7 +160,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0
+            return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 + 24.0
         } else {
             return cellHeights[indexPath.row] ?? 0.0
         }

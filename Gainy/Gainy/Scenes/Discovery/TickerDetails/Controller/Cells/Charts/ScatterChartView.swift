@@ -113,7 +113,6 @@ struct ScatterChartView: View {
             }).frame(height: 341)
                 .ignoresSafeArea()
                 .padding(.top, 0)
-                .background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         } else {
             GeometryReader(content: { rootGeo in
                 VStack {
