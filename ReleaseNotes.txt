@@ -6,6 +6,8 @@ Bugfixes
 • Home: Collection details view updated
 • Portfolio: Crypto card added
 • Portfolio: Chart UI adjusted
+• Portfolio: Use brokers instead of accounts in portfolio filters
+• Portfolio: Add names of brokerages to a connection section in portfolio
 
 :hammer_and_wrench: Improvements
 • -
