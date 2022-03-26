@@ -143,7 +143,7 @@ extension Array where Element == HoldingViewModel {
                 print("break")
             }
             
-            let notInAccount = settings.disabledAccounts.contains(where: {model.accountIds.contains($0.id)})
+            let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
             
             let selectedInterestsFilter = settings.interests.filter { item in
                 item.selected

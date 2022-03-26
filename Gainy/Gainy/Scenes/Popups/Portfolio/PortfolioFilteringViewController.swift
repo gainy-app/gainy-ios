@@ -163,7 +163,7 @@ extension PortfolioFilteringViewController: SwitchTableViewCellDelegate {
             let disabledAccounts = disabledBrokers.map { item in
                 item.accountData
             }
-            PortfolioSettingsManager.shared.changedisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+            PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
             self.delegate?.didChangeFilterSettings(self)
         default: return
         }

@@ -71,6 +71,17 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           type
           holding_details {
             __typename
+            holding {
+              __typename
+              access_token {
+                __typename
+                institution {
+                  __typename
+                  id
+                  name
+                }
+              }
+            }
             purchase_date
             relative_gain_total
             relative_gain_1d
@@ -877,6 +888,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("holding", type: .object(Holding.selections)),
               GraphQLField("purchase_date", type: .scalar(timestamp.self)),
               GraphQLField("relative_gain_total", type: .scalar(float8.self)),
               GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
@@ -896,8 +908,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(purchaseDate: timestamp? = nil, relativeGainTotal: float8? = nil, relativeGain_1d: float8? = nil, valueToPortfolioValue: float8? = nil, tickerName: String? = nil, marketCapitalization: bigint? = nil, nextEarningsDate: timestamp? = nil, lttQuantityTotal: float8? = nil, securityType: String? = nil, accountId: Int? = nil) {
-            self.init(unsafeResultMap: ["__typename": "portfolio_holding_details", "purchase_date": purchaseDate, "relative_gain_total": relativeGainTotal, "relative_gain_1d": relativeGain_1d, "value_to_portfolio_value": valueToPortfolioValue, "ticker_name": tickerName, "market_capitalization": marketCapitalization, "next_earnings_date": nextEarningsDate, "ltt_quantity_total": lttQuantityTotal, "security_type": securityType, "account_id": accountId])
+          public init(holding: Holding? = nil, purchaseDate: timestamp? = nil, relativeGainTotal: float8? = nil, relativeGain_1d: float8? = nil, valueToPortfolioValue: float8? = nil, tickerName: String? = nil, marketCapitalization: bigint? = nil, nextEarningsDate: timestamp? = nil, lttQuantityTotal: float8? = nil, securityType: String? = nil, accountId: Int? = nil) {
+            self.init(unsafeResultMap: ["__typename": "portfolio_holding_details", "holding": holding.flatMap { (value: Holding) -> ResultMap in value.resultMap }, "purchase_date": purchaseDate, "relative_gain_total": relativeGainTotal, "relative_gain_1d": relativeGain_1d, "value_to_portfolio_value": valueToPortfolioValue, "ticker_name": tickerName, "market_capitalization": marketCapitalization, "next_earnings_date": nextEarningsDate, "ltt_quantity_total": lttQuantityTotal, "security_type": securityType, "account_id": accountId])
           }
 
           public var __typename: String {
@@ -906,6 +918,16 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          /// An object relationship
+          public var holding: Holding? {
+            get {
+              return (resultMap["holding"] as? ResultMap).flatMap { Holding(unsafeResultMap: $0) }
+            }
+            set {
+              resultMap.updateValue(newValue?.resultMap, forKey: "holding")
             }
           }
 
@@ -996,6 +1018,135 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "account_id")
+            }
+          }
+
+          public struct Holding: GraphQLSelectionSet {
+            public static let possibleTypes: [String] = ["app_profile_holdings"]
+
+            public static var selections: [GraphQLSelection] {
+              return [
+                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                GraphQLField("access_token", type: .object(AccessToken.selections)),
+              ]
+            }
+
+            public private(set) var resultMap: ResultMap
+
+            public init(unsafeResultMap: ResultMap) {
+              self.resultMap = unsafeResultMap
+            }
+
+            public init(accessToken: AccessToken? = nil) {
+              self.init(unsafeResultMap: ["__typename": "app_profile_holdings", "access_token": accessToken.flatMap { (value: AccessToken) -> ResultMap in value.resultMap }])
+            }
+
+            public var __typename: String {
+              get {
+                return resultMap["__typename"]! as! String
+              }
+              set {
+                resultMap.updateValue(newValue, forKey: "__typename")
+              }
+            }
+
+            /// An object relationship
+            public var accessToken: AccessToken? {
+              get {
+                return (resultMap["access_token"] as? ResultMap).flatMap { AccessToken(unsafeResultMap: $0) }
+              }
+              set {
+                resultMap.updateValue(newValue?.resultMap, forKey: "access_token")
+              }
+            }
+
+            public struct AccessToken: GraphQLSelectionSet {
+              public static let possibleTypes: [String] = ["app_profile_plaid_access_tokens"]
+
+              public static var selections: [GraphQLSelection] {
+                return [
+                  GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                  GraphQLField("institution", type: .object(Institution.selections)),
+                ]
+              }
+
+              public private(set) var resultMap: ResultMap
+
+              public init(unsafeResultMap: ResultMap) {
+                self.resultMap = unsafeResultMap
+              }
+
+              public init(institution: Institution? = nil) {
+                self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "institution": institution.flatMap { (value: Institution) -> ResultMap in value.resultMap }])
+              }
+
+              public var __typename: String {
+                get {
+                  return resultMap["__typename"]! as! String
+                }
+                set {
+                  resultMap.updateValue(newValue, forKey: "__typename")
+                }
+              }
+
+              /// An object relationship
+              public var institution: Institution? {
+                get {
+                  return (resultMap["institution"] as? ResultMap).flatMap { Institution(unsafeResultMap: $0) }
+                }
+                set {
+                  resultMap.updateValue(newValue?.resultMap, forKey: "institution")
+                }
+              }
+
+              public struct Institution: GraphQLSelectionSet {
+                public static let possibleTypes: [String] = ["app_plaid_institutions"]
+
+                public static var selections: [GraphQLSelection] {
+                  return [
+                    GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+                    GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+                    GraphQLField("name", type: .scalar(String.self)),
+                  ]
+                }
+
+                public private(set) var resultMap: ResultMap
+
+                public init(unsafeResultMap: ResultMap) {
+                  self.resultMap = unsafeResultMap
+                }
+
+                public init(id: Int, name: String? = nil) {
+                  self.init(unsafeResultMap: ["__typename": "app_plaid_institutions", "id": id, "name": name])
+                }
+
+                public var __typename: String {
+                  get {
+                    return resultMap["__typename"]! as! String
+                  }
+                  set {
+                    resultMap.updateValue(newValue, forKey: "__typename")
+                  }
+                }
+
+                public var id: Int {
+                  get {
+                    return resultMap["id"]! as! Int
+                  }
+                  set {
+                    resultMap.updateValue(newValue, forKey: "id")
+                  }
+                }
+
+                public var name: String? {
+                  get {
+                    return resultMap["name"] as? String
+                  }
+                  set {
+                    resultMap.updateValue(newValue, forKey: "name")
+                  }
+                }
+              }
             }
           }
         }

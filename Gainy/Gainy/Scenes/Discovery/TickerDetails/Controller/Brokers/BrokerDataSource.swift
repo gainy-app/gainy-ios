@@ -10,6 +10,7 @@ import Foundation
 struct PlaidAccountData: Codable {
     
     let id: Int
+    let institutionID: Int
     let name: String
 }
 

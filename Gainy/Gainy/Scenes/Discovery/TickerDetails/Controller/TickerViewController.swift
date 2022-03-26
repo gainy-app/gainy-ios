@@ -118,8 +118,8 @@ final class TickerViewController: BaseViewController {
         guard let symbol = viewModel?.dataSource.ticker.symbol else {
             return
         }
-        if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
-            if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
+        if let currentBroker = UserProfileManager.shared.selectedBrokerToTrade {
+            if let url = currentBroker.brokerURLWithSymbol(symbol: symbol) {
                 WebPresenter.openLink(vc: self, url: url)
                 GainyAnalytics.logEvent("ticker_shared", params: ["tickerSymbol" : symbol])
             }

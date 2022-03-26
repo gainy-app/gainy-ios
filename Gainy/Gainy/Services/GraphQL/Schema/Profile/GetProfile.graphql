@@ -22,6 +22,10 @@
     profile_plaid_access_tokens {
       id
       created_at
+      institution {
+        id
+        name
+      }
     }
   }
   app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
@@ -33,6 +37,7 @@
   app_profile_portfolio_accounts {
     id
     name
+    official_name
     mask
   }
 }

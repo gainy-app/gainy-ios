@@ -62,7 +62,7 @@ final class PortfolioSettingsManager {
     
     static let shared = PortfolioSettingsManager()
     
-    @UserDefault("PortfolioSettingsManager.settings_v1.0_prod")
+    @UserDefault("PortfolioSettingsManager.settings_v1.0.1_prod")
     private var settings: [UserId : PortfolioSettings]?
     
     //All Sortings
@@ -124,7 +124,7 @@ final class PortfolioSettingsManager {
         settings?[id] = PortfolioSettings(sorting: cur.sorting, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, securityTypes: securityTypes, disabledAccounts: cur.disabledAccounts)
     }
     
-    func changedisabledAccountsForUserId(_ id: Int, disabledAccounts: [PlaidAccountData]) {
+    func changeDisabledAccountsForUserId(_ id: Int, disabledAccounts: [PlaidAccountData]) {
         guard let cur = getSettingByUserID(id) else { return }
         settings?[id] = PortfolioSettings(sorting: cur.sorting, ascending: cur.ascending, includeClosedPositions: cur.includeClosedPositions, onlyLongCapitalGainTax: cur.onlyLongCapitalGainTax, interests: cur.interests, categories: cur.categories, securityTypes: cur.securityTypes, disabledAccounts: disabledAccounts)
     }

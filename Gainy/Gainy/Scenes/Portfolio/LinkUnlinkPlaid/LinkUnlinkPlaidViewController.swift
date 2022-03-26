@@ -16,11 +16,11 @@ class LinkUnlinkPlaidViewController: BaseViewController {
 
     weak var delegate: LinkUnlinkPlaidViewControllerDelegate?
     
-    private var accountIDs: [Int] = []
+    private var accounts: [PlaidAccountData] = []
     
-    public func configure(_ accountIDs: [Int]) {
+    public func configure(_ accounts: [PlaidAccountData]) {
         
-        self.accountIDs = accountIDs
+        self.accounts = accounts
     }
     
     @IBOutlet private weak var tableView: UITableView! {
@@ -123,9 +123,9 @@ class LinkUnlinkPlaidViewController: BaseViewController {
         let disabledAccounts = disabledBrokers.map { item in
             item.accountData
         }
-        PortfolioSettingsManager.shared.changedisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
+        PortfolioSettingsManager.shared.changeDisabledAccountsForUserId(userID, disabledAccounts: disabledAccounts)
         
-        self.accountIDs = UserProfileManager.shared.linkedPlaidAccessTokens
+        self.accounts = UserProfileManager.shared.linkedPlaidAccounts
         self.tableView.reloadData()
     }
 }
@@ -135,7 +135,8 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: ButtonTableViewCell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.cellIdentifier, for: indexPath) as! ButtonTableViewCell
-        cell.customTitleLabel.text = "Account \(indexPath.row + 1)"
+        let accountName = self.accounts[indexPath.row].name
+        cell.customTitleLabel.text = accountName
         cell.dotsImageView.isHidden = false
         cell.delegate = self
         
@@ -149,7 +150,7 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.accountIDs.count
+        return self.accounts.count
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -173,7 +174,7 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
     func disconnectButtonTouchUpInside(_ sender: ButtonTableViewCell) {
         
         guard let indexPath = tableView.indexPath(for: sender) else {return}
-        let accountID = self.accountIDs[indexPath.row]
+        let accountID = self.accounts[indexPath.row].id
         
         let yesAction = UIAlertAction.init(title: "Yes", style: .destructive) { action in
             GainyAnalytics.logEvent("plaid_account_unlinked", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "LinkUnlinkPlaidViewController"])

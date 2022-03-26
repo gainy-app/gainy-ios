@@ -38,6 +38,11 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           id
           created_at
+          institution {
+            __typename
+            id
+            name
+          }
         }
       }
       app_profile_ticker_metrics_settings(where: {profile: {id: {_eq: $profileID}}}) {
@@ -51,6 +56,7 @@ public final class GetProfileQuery: GraphQLQuery {
         __typename
         id
         name
+        official_name
         mask
       }
     }
@@ -436,6 +442,7 @@ public final class GetProfileQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("id", type: .nonNull(.scalar(Int.self))),
             GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+            GraphQLField("institution", type: .object(Institution.selections)),
           ]
         }
 
@@ -445,8 +452,8 @@ public final class GetProfileQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int, createdAt: timestamptz) {
-          self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "created_at": createdAt])
+        public init(id: Int, createdAt: timestamptz, institution: Institution? = nil) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "created_at": createdAt, "institution": institution.flatMap { (value: Institution) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -473,6 +480,65 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "created_at")
+          }
+        }
+
+        /// An object relationship
+        public var institution: Institution? {
+          get {
+            return (resultMap["institution"] as? ResultMap).flatMap { Institution(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "institution")
+          }
+        }
+
+        public struct Institution: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["app_plaid_institutions"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("id", type: .nonNull(.scalar(Int.self))),
+              GraphQLField("name", type: .scalar(String.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(id: Int, name: String? = nil) {
+            self.init(unsafeResultMap: ["__typename": "app_plaid_institutions", "id": id, "name": name])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var id: Int {
+            get {
+              return resultMap["id"]! as! Int
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "id")
+            }
+          }
+
+          public var name: String? {
+            get {
+              return resultMap["name"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "name")
+            }
           }
         }
       }
@@ -555,6 +621,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
+          GraphQLField("official_name", type: .scalar(String.self)),
           GraphQLField("mask", type: .nonNull(.scalar(String.self))),
         ]
       }
@@ -565,8 +632,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, name: String, mask: String) {
-        self.init(unsafeResultMap: ["__typename": "app_profile_portfolio_accounts", "id": id, "name": name, "mask": mask])
+      public init(id: Int, name: String, officialName: String? = nil, mask: String) {
+        self.init(unsafeResultMap: ["__typename": "app_profile_portfolio_accounts", "id": id, "name": name, "official_name": officialName, "mask": mask])
       }
 
       public var __typename: String {
@@ -593,6 +660,15 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var officialName: String? {
+        get {
+          return resultMap["official_name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "official_name")
         }
       }
 

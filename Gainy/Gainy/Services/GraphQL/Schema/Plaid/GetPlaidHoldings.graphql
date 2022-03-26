@@ -56,6 +56,14 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
             ticker_symbol
             type
             holding_details {
+                holding {
+                    access_token {
+                        institution {
+                            id
+                            name
+                        }
+                    }
+                }
                 purchase_date
                 relative_gain_total
                 relative_gain_1d

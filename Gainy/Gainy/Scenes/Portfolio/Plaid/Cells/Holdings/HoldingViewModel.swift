@@ -33,6 +33,7 @@ struct HoldingViewModel {
     
     let event: String?
     
+    let institutionIds: [Int]
     let accountIds: [Int]
     let tickerInterests: [Int]
     let tickerCategories: [Int]

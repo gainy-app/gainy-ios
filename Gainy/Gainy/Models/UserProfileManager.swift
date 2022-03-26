@@ -66,8 +66,6 @@ final class UserProfileManager {
     @UserDefault<Int>("linkPlaidID")
     var linkPlaidID: Int?
     
-    var linkedPlaidAccessTokens: [Int] = Array()
-    
     var linkedPlaidAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
@@ -120,13 +118,6 @@ final class UserProfileManager {
                     self.profileLoaded = false
                     return
                 }
-                
-                if let profilePortfolioAccounts = graphQLResult.data?.appProfilePortfolioAccounts {
-                    self.linkedPlaidAccounts = profilePortfolioAccounts.map({ item in
-                        let result = PlaidAccountData.init(id: item.id, name: item.name)
-                        return result
-                    })
-                }
             
                 self.profileMetricsSettings = profileMetricsSettings.map({ item in
                     let result = AppProfileMetricsSetting.init(id: item.id, fieldName: item.fieldName, collectionId: item.collectionId, order: item.order)
@@ -161,8 +152,9 @@ final class UserProfileManager {
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
-                self.linkedPlaidAccessTokens = appProfile.profilePlaidAccessTokens.map({ item in
-                    item.id
+                self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
+                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker")
+                    return result
                 })
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)

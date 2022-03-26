@@ -80,8 +80,8 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
             return
         }
         GainyAnalytics.logEvent("ticker_trade_pressed", params: ["tickerSymbol" : symbol])
-        if let currentBrocker = UserProfileManager.shared.selectedBrokerToTrade {
-            if let url = currentBrocker.brokerURLWithSymbol(symbol: symbol) {
+        if let currentBroker = UserProfileManager.shared.selectedBrokerToTrade {
+            if let url = currentBroker.brokerURLWithSymbol(symbol: symbol) {
                 
                 if let vc = self.window?.rootViewController {
                     WebPresenter.openLink(vc: vc, url: url)

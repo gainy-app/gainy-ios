@@ -181,7 +181,7 @@ final class HoldingsViewController: BaseViewController {
     private func showLinkUnlinkPlaid() {
         
         self.linkUnlinkVC.delegate = self
-        self.linkUnlinkVC.configure(UserProfileManager.shared.linkedPlaidAccessTokens)
+        self.linkUnlinkVC.configure(UserProfileManager.shared.linkedPlaidAccounts)
         let navigationController = UINavigationController.init(rootViewController: self.linkUnlinkVC)
         self.present(navigationController, animated: true, completion: nil)
     }

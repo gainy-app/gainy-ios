@@ -55,6 +55,10 @@ struct HoldingsModelMapper {
                     catItem.id
                 }
             }) ?? []
+            
+            let institutionIds = holdingGroup.holdings.compactMap { item in
+                item.holdingDetails?.holding?.accessToken?.institution?.id
+            }
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: (ticker?.fragments.remoteTickerDetails.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
@@ -71,6 +75,7 @@ struct HoldingsModelMapper {
                                              securityTypes: holdingGroup.holdings.compactMap({$0.holdingDetails?.securityType}),
                                              holdingDetails: holdingGroup.details,
                                              event: holdingGroup.details?.nextEarningsDate,
+                                             institutionIds: institutionIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
                                              tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
                                              tickerCategories:categories,
