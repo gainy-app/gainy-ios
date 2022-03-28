@@ -120,23 +120,23 @@ final class HoldingsViewModel {
                     
                     var settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID)
                     let securityTypes = securityTypesRaw.map { item -> InfoDataSource in
-                        let selected = settings?.securityTypes.contains(where: { item in
-                            item.selected
+                        let selected = settings?.securityTypes.contains(where: { securityTypeItem in
+                            securityTypeItem.selected && securityTypeItem.id == item.hashValue
                         }) ?? false
                         return InfoDataSource.init(type: .SecurityType, id:item.hashValue, title: item, iconURL: InfoDataSourceType.securityTypeToIconURL[item] ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
                     
                     let interests = interestsRaw.map { item -> InfoDataSource in
-                        let selected = settings?.interests.contains(where: { item in
-                            item.selected
+                        let selected = settings?.interests.contains(where: { interestItem in
+                            interestItem.selected && interestItem.id == (item.interest?.id ?? 0)
                         }) ?? false
                         return InfoDataSource.init(type: .Interst, id:item.interest?.id ?? 0, title: item.interest?.name ?? "", iconURL: item.interest?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
                     self.interestsCount = interests.count
                     
                     let categories = categoriesRaw.map { item -> InfoDataSource in
-                        let selected = settings?.categories.contains(where: { item in
-                            item.selected
+                        let selected = settings?.categories.contains(where: { categoryItem in
+                            categoryItem.selected && categoryItem.id == (item.categories?.id ?? 0)
                         }) ?? false
                         return InfoDataSource.init(type: .Category, id:item.categories?.id ?? 0, title: item.categories?.name ?? "", iconURL: item.categories?.iconUrl ?? "", selected: selected)
                     }.uniqueUsingKey{$0.id}
