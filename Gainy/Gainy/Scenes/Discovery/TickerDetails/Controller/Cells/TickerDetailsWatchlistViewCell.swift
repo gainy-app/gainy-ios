@@ -47,6 +47,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         if let selectedBroker = UserProfileManager.shared.selectedBrokerToTrade {
             changeCurrentBrokerBtn.isHidden = false
             changeCurrentBrokerBtn.setTitle("Change current broker — " + selectedBroker.brokerName, for: .normal)
+            changeCurrentBrokerBtn.titleLabel?.textColor = UIColor.init(hexString: "#0062FF")
         } else {
             changeCurrentBrokerBtn.isHidden = true
         }
