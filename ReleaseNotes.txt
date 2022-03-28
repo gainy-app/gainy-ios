@@ -8,6 +8,9 @@ Bugfixes
 • Portfolio: Chart UI adjusted
 • Portfolio: Use brokers instead of accounts in portfolio filters
 • Portfolio: Add names of brokerages to a connection section in portfolio
+• Portfolio: All the items in filters are selected after Portfolio refresh - fixed
+• Stock details: No label for button “Change current broker” - fixed
+• Discovery: Stock details: Nothing happens if tap Trade. - fixed
 
 :hammer_and_wrench: Improvements
 • -
