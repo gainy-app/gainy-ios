@@ -165,20 +165,19 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        loadImage()
-        
-        let hMargin: CGFloat = 8
-        let tMargin: CGFloat = 8
-        let bMargin: CGFloat = 8
-
-
         backImageView.frame = CGRect(
             x: 0,
             y: 0,
             width: bounds.width,
             height: bounds.height
         )
-
+        
+        loadImage()
+        
+        let hMargin: CGFloat = 8
+        let tMargin: CGFloat = 8
+        let bMargin: CGFloat = 8
+        
         plusButton.frame = CGRect(
             x: bounds.width - (28 + hMargin),
             y: bounds.height - (28 + bMargin),
@@ -186,7 +185,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             height: 28
         )
         
-        let isTop20 = (Constants.CollectionDetails.top20ID == self.tag) ? true : false
+        let isTop20 = false//(Constants.CollectionDetails.top20ID == self.tag) ? true : false
         self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
         self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
         self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow

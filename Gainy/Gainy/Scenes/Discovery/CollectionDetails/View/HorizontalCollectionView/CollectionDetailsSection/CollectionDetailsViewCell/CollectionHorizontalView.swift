@@ -576,7 +576,7 @@ final class CollectionHorizontalView: UIView {
             height: 24
         )
         
-        let isTop20 = (Constants.CollectionDetails.top20ID == self.tag) ? true : false
+        let isTop20 = false//(Constants.CollectionDetails.top20ID == self.tag) ? true : false
         self.stocksLabel.textColor = isTop20 ? UIColor(hexString: "#09141F", alpha: 1.0) : UIColor.Gainy.white
         self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
         self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
