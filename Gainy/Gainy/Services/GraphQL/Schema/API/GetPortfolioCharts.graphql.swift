@@ -8,11 +8,12 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetPortfolioCharts($profileId: Int!, $periods: [String]!, $interestIds: [Int], $accountIds: [Int], $categoryIds: [Int], $institutionIds: [Int], $lttOnly: Boolean, $securityTypes: [String]) {
+    query GetPortfolioCharts($profileId: Int!, $periods: [String]!, $interestIds: [Int], $accessTokenIds: [Int], $accountIds: [Int], $categoryIds: [Int], $institutionIds: [Int], $lttOnly: Boolean, $securityTypes: [String]) {
       get_portfolio_chart(
         profile_id: $profileId
         periods: $periods
         interest_ids: $interestIds
+        access_token_ids: $accessTokenIds
         account_ids: $accountIds
         category_ids: $categoryIds
         institution_ids: $institutionIds
@@ -35,16 +36,18 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
   public var profileId: Int
   public var periods: [String?]
   public var interestIds: [Int?]?
+  public var accessTokenIds: [Int?]?
   public var accountIds: [Int?]?
   public var categoryIds: [Int?]?
   public var institutionIds: [Int?]?
   public var lttOnly: Bool?
   public var securityTypes: [String?]?
 
-  public init(profileId: Int, periods: [String?], interestIds: [Int?]? = nil, accountIds: [Int?]? = nil, categoryIds: [Int?]? = nil, institutionIds: [Int?]? = nil, lttOnly: Bool? = nil, securityTypes: [String?]? = nil) {
+  public init(profileId: Int, periods: [String?], interestIds: [Int?]? = nil, accessTokenIds: [Int?]? = nil, accountIds: [Int?]? = nil, categoryIds: [Int?]? = nil, institutionIds: [Int?]? = nil, lttOnly: Bool? = nil, securityTypes: [String?]? = nil) {
     self.profileId = profileId
     self.periods = periods
     self.interestIds = interestIds
+    self.accessTokenIds = accessTokenIds
     self.accountIds = accountIds
     self.categoryIds = categoryIds
     self.institutionIds = institutionIds
@@ -53,7 +56,7 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
   }
 
   public var variables: GraphQLMap? {
-    return ["profileId": profileId, "periods": periods, "interestIds": interestIds, "accountIds": accountIds, "categoryIds": categoryIds, "institutionIds": institutionIds, "lttOnly": lttOnly, "securityTypes": securityTypes]
+    return ["profileId": profileId, "periods": periods, "interestIds": interestIds, "accessTokenIds": accessTokenIds, "accountIds": accountIds, "categoryIds": categoryIds, "institutionIds": institutionIds, "lttOnly": lttOnly, "securityTypes": securityTypes]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -61,7 +64,7 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("get_portfolio_chart", arguments: ["profile_id": GraphQLVariable("profileId"), "periods": GraphQLVariable("periods"), "interest_ids": GraphQLVariable("interestIds"), "account_ids": GraphQLVariable("accountIds"), "category_ids": GraphQLVariable("categoryIds"), "institution_ids": GraphQLVariable("institutionIds"), "ltt_only": GraphQLVariable("lttOnly"), "security_types": GraphQLVariable("securityTypes")], type: .list(.object(GetPortfolioChart.selections))),
+        GraphQLField("get_portfolio_chart", arguments: ["profile_id": GraphQLVariable("profileId"), "periods": GraphQLVariable("periods"), "interest_ids": GraphQLVariable("interestIds"), "access_token_ids": GraphQLVariable("accessTokenIds"), "account_ids": GraphQLVariable("accountIds"), "category_ids": GraphQLVariable("categoryIds"), "institution_ids": GraphQLVariable("institutionIds"), "ltt_only": GraphQLVariable("lttOnly"), "security_types": GraphQLVariable("securityTypes")], type: .list(.object(GetPortfolioChart.selections))),
       ]
     }
 

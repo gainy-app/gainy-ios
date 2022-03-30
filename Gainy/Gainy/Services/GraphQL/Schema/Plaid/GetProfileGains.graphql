@@ -43,23 +43,6 @@
         }
       }
       holding_transactions {
-        portfolio_transaction_gains {
-                absolute_gain_1d
-          absolute_gain_1m
-          absolute_gain_1w
-          absolute_gain_1y
-          absolute_gain_3m
-          absolute_gain_5y
-          absolute_gain_total
-                  relative_gain_1d
-          relative_gain_1m
-          relative_gain_1w
-          relative_gain_1y
-          relative_gain_3m
-          relative_gain_5y
-          relative_gain_total
-          transaction_id
-        }
         security_id
         profile_id
       }

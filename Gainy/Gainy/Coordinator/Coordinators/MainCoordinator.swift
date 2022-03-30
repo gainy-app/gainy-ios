@@ -154,13 +154,23 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
     
     func showCollectionDetails(collectionID: Int, delegate: SingleCollectionDetailsViewControllerDelegate? = nil, isFromSearch: Bool = false, collection: RemoteShortCollectionDetails? = nil) {
-        let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID, collection: collection!)
-        vc.delegate = delegate
-        vc.coordinator = self
-        vc.isFromSearch = isFromSearch
-        vc.modalTransitionStyle = .coverVertical
-        router.showDetailed(vc)
-        GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])
+        if let coll = collection {
+            let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID, collection: coll)
+            vc.delegate = delegate
+            vc.coordinator = self
+            vc.isFromSearch = isFromSearch
+            vc.modalTransitionStyle = .coverVertical
+            router.showDetailed(vc)
+            GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])
+        } else {
+            let vc = self.viewControllerFactory.instantiateCollectionDetails(colID: collectionID)
+            vc.delegate = delegate
+            vc.coordinator = self
+            vc.isFromSearch = isFromSearch
+            vc.modalTransitionStyle = .coverVertical
+            router.showDetailed(vc)
+            GainyAnalytics.logEvent("show_single_collection", params: ["collectionID" : collectionID])
+        }
     }
     
     func showCompareDetails(model: CollectionDetailViewCellModel, delegate: SingleCollectionDetailsViewControllerDelegate? = nil) {

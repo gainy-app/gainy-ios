@@ -134,23 +134,22 @@ final class HistoricalChartsLoader {
             item.selected
         }.compactMap({$0.id})
         
-        let securityTypes = settings.securityTypes.filter { item in
-            item.selected
-        }.compactMap({$0.title})
+        let securityTypes = settings.securityTypes.compactMap({$0.title})
         
         var accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
         let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
         accountIds = accountIds.filter({!disabledAccounts.contains($0)})
         
-        let institutionIDs = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.institutionID})
+        //let institutionIDs = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.institutionID})
         
-        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accs: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
+        dprint("GetPortfolioChartsQuery profile: \(profileID) period: \(periodString) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
-                                                                        accountIds: accountIds,
+                                                                        accessTokenIds: accountIds,
+                                                                        accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
-                                                                        institutionIds: institutionIDs,
+                                                                        institutionIds: nil,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,
                                                                         securityTypes: securityTypes)) { result in
             switch result {

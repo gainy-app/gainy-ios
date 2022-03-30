@@ -59,24 +59,6 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           }
           holding_transactions {
             __typename
-            portfolio_transaction_gains {
-              __typename
-              absolute_gain_1d
-              absolute_gain_1m
-              absolute_gain_1w
-              absolute_gain_1y
-              absolute_gain_3m
-              absolute_gain_5y
-              absolute_gain_total
-              relative_gain_1d
-              relative_gain_1m
-              relative_gain_1w
-              relative_gain_1y
-              relative_gain_3m
-              relative_gain_5y
-              relative_gain_total
-              transaction_id
-            }
             security_id
             profile_id
           }
@@ -702,7 +684,6 @@ public final class GetProfileGainsQuery: GraphQLQuery {
           public static var selections: [GraphQLSelection] {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("portfolio_transaction_gains", type: .object(PortfolioTransactionGain.selections)),
               GraphQLField("security_id", type: .nonNull(.scalar(Int.self))),
               GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
             ]
@@ -714,8 +695,8 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(portfolioTransactionGains: PortfolioTransactionGain? = nil, securityId: Int, profileId: Int) {
-            self.init(unsafeResultMap: ["__typename": "app_profile_portfolio_transactions", "portfolio_transaction_gains": portfolioTransactionGains.flatMap { (value: PortfolioTransactionGain) -> ResultMap in value.resultMap }, "security_id": securityId, "profile_id": profileId])
+          public init(securityId: Int, profileId: Int) {
+            self.init(unsafeResultMap: ["__typename": "app_profile_portfolio_transactions", "security_id": securityId, "profile_id": profileId])
           }
 
           public var __typename: String {
@@ -724,16 +705,6 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          /// An object relationship
-          public var portfolioTransactionGains: PortfolioTransactionGain? {
-            get {
-              return (resultMap["portfolio_transaction_gains"] as? ResultMap).flatMap { PortfolioTransactionGain(unsafeResultMap: $0) }
-            }
-            set {
-              resultMap.updateValue(newValue?.resultMap, forKey: "portfolio_transaction_gains")
             }
           }
 
@@ -752,185 +723,6 @@ public final class GetProfileGainsQuery: GraphQLQuery {
             }
             set {
               resultMap.updateValue(newValue, forKey: "profile_id")
-            }
-          }
-
-          public struct PortfolioTransactionGain: GraphQLSelectionSet {
-            public static let possibleTypes: [String] = ["portfolio_transaction_gains"]
-
-            public static var selections: [GraphQLSelection] {
-              return [
-                GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-                GraphQLField("absolute_gain_1d", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_1m", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_1w", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_1y", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_3m", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_5y", type: .scalar(float8.self)),
-                GraphQLField("absolute_gain_total", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_1d", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_1m", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_1w", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_1y", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_3m", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_5y", type: .scalar(float8.self)),
-                GraphQLField("relative_gain_total", type: .scalar(float8.self)),
-                GraphQLField("transaction_id", type: .scalar(Int.self)),
-              ]
-            }
-
-            public private(set) var resultMap: ResultMap
-
-            public init(unsafeResultMap: ResultMap) {
-              self.resultMap = unsafeResultMap
-            }
-
-            public init(absoluteGain_1d: float8? = nil, absoluteGain_1m: float8? = nil, absoluteGain_1w: float8? = nil, absoluteGain_1y: float8? = nil, absoluteGain_3m: float8? = nil, absoluteGain_5y: float8? = nil, absoluteGainTotal: float8? = nil, relativeGain_1d: float8? = nil, relativeGain_1m: float8? = nil, relativeGain_1w: float8? = nil, relativeGain_1y: float8? = nil, relativeGain_3m: float8? = nil, relativeGain_5y: float8? = nil, relativeGainTotal: float8? = nil, transactionId: Int? = nil) {
-              self.init(unsafeResultMap: ["__typename": "portfolio_transaction_gains", "absolute_gain_1d": absoluteGain_1d, "absolute_gain_1m": absoluteGain_1m, "absolute_gain_1w": absoluteGain_1w, "absolute_gain_1y": absoluteGain_1y, "absolute_gain_3m": absoluteGain_3m, "absolute_gain_5y": absoluteGain_5y, "absolute_gain_total": absoluteGainTotal, "relative_gain_1d": relativeGain_1d, "relative_gain_1m": relativeGain_1m, "relative_gain_1w": relativeGain_1w, "relative_gain_1y": relativeGain_1y, "relative_gain_3m": relativeGain_3m, "relative_gain_5y": relativeGain_5y, "relative_gain_total": relativeGainTotal, "transaction_id": transactionId])
-            }
-
-            public var __typename: String {
-              get {
-                return resultMap["__typename"]! as! String
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "__typename")
-              }
-            }
-
-            public var absoluteGain_1d: float8? {
-              get {
-                return resultMap["absolute_gain_1d"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_1d")
-              }
-            }
-
-            public var absoluteGain_1m: float8? {
-              get {
-                return resultMap["absolute_gain_1m"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_1m")
-              }
-            }
-
-            public var absoluteGain_1w: float8? {
-              get {
-                return resultMap["absolute_gain_1w"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_1w")
-              }
-            }
-
-            public var absoluteGain_1y: float8? {
-              get {
-                return resultMap["absolute_gain_1y"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_1y")
-              }
-            }
-
-            public var absoluteGain_3m: float8? {
-              get {
-                return resultMap["absolute_gain_3m"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_3m")
-              }
-            }
-
-            public var absoluteGain_5y: float8? {
-              get {
-                return resultMap["absolute_gain_5y"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_5y")
-              }
-            }
-
-            public var absoluteGainTotal: float8? {
-              get {
-                return resultMap["absolute_gain_total"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "absolute_gain_total")
-              }
-            }
-
-            public var relativeGain_1d: float8? {
-              get {
-                return resultMap["relative_gain_1d"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_1d")
-              }
-            }
-
-            public var relativeGain_1m: float8? {
-              get {
-                return resultMap["relative_gain_1m"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_1m")
-              }
-            }
-
-            public var relativeGain_1w: float8? {
-              get {
-                return resultMap["relative_gain_1w"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_1w")
-              }
-            }
-
-            public var relativeGain_1y: float8? {
-              get {
-                return resultMap["relative_gain_1y"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_1y")
-              }
-            }
-
-            public var relativeGain_3m: float8? {
-              get {
-                return resultMap["relative_gain_3m"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_3m")
-              }
-            }
-
-            public var relativeGain_5y: float8? {
-              get {
-                return resultMap["relative_gain_5y"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_5y")
-              }
-            }
-
-            public var relativeGainTotal: float8? {
-              get {
-                return resultMap["relative_gain_total"] as? float8
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "relative_gain_total")
-              }
-            }
-
-            public var transactionId: Int? {
-              get {
-                return resultMap["transaction_id"] as? Int
-              }
-              set {
-                resultMap.updateValue(newValue, forKey: "transaction_id")
-              }
             }
           }
         }

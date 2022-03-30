@@ -327,7 +327,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     }
     
     func showWrongIndView() {
-        wrongIndLbl.text = "Categories and indusstries marked as wrong. We will double check them, thank you!"
+        wrongIndLbl.text = "Categories and industries marked as wrong. We will double check them, thank you!"
         wrongIndView.isHidden = false
         GainyAnalytics.logEvent("wrong_industry", params: [ "timestamp": Date().timeIntervalSinceReferenceDate, "ticker_symbol": viewModel?.ticker.symbol ?? "",
                                                                    "tag_ids": viewModel?.ticker.tags.compactMap({$0.id}) ?? [],

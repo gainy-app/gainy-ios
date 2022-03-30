@@ -491,9 +491,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             self.appendNewCollectionsFromModels(models) {
-                
-                self.appendWatchlistCollectionsFromModels(models) {
-                    completed?()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.appendWatchlistCollectionsFromModels(models) {
+                        completed?()
+                    }
                 }
             }
         }

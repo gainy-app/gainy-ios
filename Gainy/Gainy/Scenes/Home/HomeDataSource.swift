@@ -137,6 +137,9 @@ extension HomeDataSource: UITableViewDelegate {
             return HomeSkeletonTableViewCell.cellHeight
         }
         let section = Section(rawValue: indexPath.section)!
+        if section == .index {
+            return viewModel?.gains == nil ? HomeIndexesTableViewCell.smallCellHeight : HomeIndexesTableViewCell.cellHeight
+        }
         if section == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
             return 0.0
         }

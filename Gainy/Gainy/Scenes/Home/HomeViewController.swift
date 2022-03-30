@@ -16,6 +16,7 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Inner
     private let viewModel = HomeViewModel()
+    private var refreshControl = LottieRefreshControl()
     
     //MARK: - Inner
     @IBOutlet weak var nameLbl: UILabel!
@@ -37,6 +38,8 @@ final class HomeViewController: BaseViewController {
             tableView.dataSource = viewModel.dataSource
             tableView.delegate = viewModel.dataSource
             viewModel.dataSource.delegate = self
+            tableView.refreshControl = refreshControl
+            refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
     }
     
@@ -56,6 +59,7 @@ final class HomeViewController: BaseViewController {
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         viewModel.loadHomeData { [weak tableView] in
+            
             tableView?.hideSkeleton()
             tableView?.reloadData()
         }
@@ -69,6 +73,10 @@ final class HomeViewController: BaseViewController {
     override func userLoggedOut() {
         super.userLoggedOut()
         
+    }
+    
+    @objc func refreshAction() {
+        loadBasedOnState()
     }
     
     //MARK: - Popup
