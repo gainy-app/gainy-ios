@@ -812,9 +812,36 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        guard self.haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
+            return
+        }
+        
         let query = InsertProfileInterestMutation.init(profileID: profileID, interestID: interestID)
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
+            
+            guard self.haveNetwork else {
+                GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+                NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+                GainyAnalytics.logEvent("no_internet")
+                return
+            }
+            
+            if let error = (try? result.get().errors?.first) {
+                
+                let extensions: [String : Any]? = error.extensions
+                let code: String? = extensions?["code"] as? String
+                if let code = code, code == "constraint-violation" {
+                    return
+                }
+                else {
+                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                }
+            }
+            
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
@@ -841,6 +868,13 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        guard self.haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
+            return
+        }
+        
         let index = self.profileInterestsSelected?.lastIndex(where: { element in
             element.id == interest.id
         })
@@ -848,6 +882,26 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             let query = DeleteProfileInterestMutation.init(profileID: profileID, interestID: interestID)
             Network.shared.apollo.perform(mutation: query) { result in
                 dprint("\(result)")
+                
+                guard self.haveNetwork else {
+                    GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+                    NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+                    GainyAnalytics.logEvent("no_internet")
+                    return
+                }
+                
+                if let error = (try? result.get().errors?.first) {
+                    
+                    let extensions: [String : Any]? = error.extensions
+                    let code: String? = extensions?["code"] as? String
+                    if let code = code, code == "constraint-violation" {
+                        return
+                    }
+                    else {
+                        NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                    }
+                }
+                
                 guard (try? result.get().data) != nil else {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
@@ -874,9 +928,36 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        guard haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
+            return
+        }
+        
         let query = InsertProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
         Network.shared.apollo.perform(mutation: query) { result in
             dprint("\(result)")
+            
+            guard self.haveNetwork else {
+                GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+                NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+                GainyAnalytics.logEvent("no_internet")
+                return
+            }
+            
+            if let error = (try? result.get().errors?.first) {
+                
+                let extensions: [String : Any]? = error.extensions
+                let code: String? = extensions?["code"] as? String
+                if let code = code, code == "constraint-violation" {
+                    return
+                }
+                else {
+                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                }
+            }
+            
             guard (try? result.get().data) != nil else {
                 NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                 return
@@ -904,6 +985,13 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         
+        guard self.haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+            GainyAnalytics.logEvent("no_internet")
+            return
+        }
+        
         let index = self.profileCategoriesSelected?.lastIndex(where: { element in
             element.id == category.id
         })
@@ -911,6 +999,26 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             let query = DeleteProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
             Network.shared.apollo.perform(mutation: query) { result in
                 dprint("\(result)")
+                
+                guard self.haveNetwork else {
+                    GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+                    NotificationManager.shared.showError("Sorry... No Internet connection right now.")
+                    GainyAnalytics.logEvent("no_internet")
+                    return
+                }
+                
+                if let error = (try? result.get().errors?.first) {
+                    
+                    let extensions: [String : Any]? = error.extensions
+                    let code: String? = extensions?["code"] as? String
+                    if let code = code, code == "constraint-violation" {
+                        return
+                    }
+                    else {
+                        NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
+                    }
+                }
+                
                 guard (try? result.get().data) != nil else {
                     NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
                     return
