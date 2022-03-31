@@ -1,16 +1,9 @@
-iOS v1.2 #173 available
+iOS v1.2 #174 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Home: Collection details view updated
-• Portfolio: Crypto card added
-• Portfolio: Chart UI adjusted
-• Portfolio: Use brokers instead of accounts in portfolio filters
-• Portfolio: Add names of brokerages to a connection section in portfolio
-• Portfolio: All the items in filters are selected after Portfolio refresh - fixed
-• Stock details: No label for button “Change current broker” - fixed
-• Discovery: Stock details: Nothing happens if tap Trade. - fixed
+• Portfolio: Crypto card updated
 
 :hammer_and_wrench: Improvements
 • -
