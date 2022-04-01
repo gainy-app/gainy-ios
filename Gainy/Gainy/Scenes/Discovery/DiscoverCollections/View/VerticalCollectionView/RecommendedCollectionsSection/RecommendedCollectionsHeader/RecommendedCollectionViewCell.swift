@@ -17,19 +17,19 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
-        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
-        nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 8)
+        nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
+        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
+        nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         
         stocksAmountLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
         stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -44)
         stocksAmountLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
         
         
-        descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
-        descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
+        descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
+        descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
-        descriptionLabel.autoSetDimension(.height, toSize: 45)
+        descriptionLabel.autoSetDimension(.height, toSize: 55.0, relation: .lessThanOrEqual)
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
@@ -57,6 +57,8 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true        
         imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 16
+        imageView.clipsToBounds = true
         return imageView
     }()
 

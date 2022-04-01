@@ -212,7 +212,7 @@ extension Array where Element == HoldingViewModel {
             
             return inAccount && show
         }.sorted(by: {
-            $0.isCrypro && !$1.isCrypro
+            $0.isCrypto && !$1.isCrypto
         }).sorted(by: {
             $0.isCash && !$1.isCash
         })

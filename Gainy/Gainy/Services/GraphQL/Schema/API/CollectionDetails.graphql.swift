@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220330042711.profile_collections"
+    /// fetch data from the table: "public_220331100754.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -1758,7 +1758,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("industry_id", type: .scalar(bigint.self)),
-        GraphQLField("industry_order", type: .scalar(Int.self)),
+        GraphQLField("industry_order", type: .scalar(bigint.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
     }
@@ -1769,7 +1769,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint? = nil, industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: bigint? = nil, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -1791,9 +1791,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       }
     }
 
-    public var industryOrder: Int? {
+    public var industryOrder: bigint? {
       get {
-        return resultMap["industry_order"] as? Int
+        return resultMap["industry_order"] as? bigint
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_order")
@@ -2436,7 +2436,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("industry_id", type: .scalar(bigint.self)),
-        GraphQLField("industry_order", type: .scalar(Int.self)),
+        GraphQLField("industry_order", type: .scalar(bigint.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
     }
@@ -2447,7 +2447,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint? = nil, industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: bigint? = nil, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -2469,9 +2469,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
     }
 
-    public var industryOrder: Int? {
+    public var industryOrder: bigint? {
       get {
-        return resultMap["industry_order"] as? Int
+        return resultMap["industry_order"] as? bigint
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_order")
