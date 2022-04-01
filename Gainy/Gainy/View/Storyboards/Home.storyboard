@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1025,8 +1025,26 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.64000000000000001" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                             </view>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GiR-j8-u4a">
+                                                                                <rect key="frame" x="16" y="49.5" width="24" height="24"/>
+                                                                                <color key="backgroundColor" name="mainYellow"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="24" id="3MQ-Bw-vZc"/>
+                                                                                    <constraint firstAttribute="width" constant="24" id="a1e-KY-UNS"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="match_score_col" translatesAutoresizingMaskIntoConstraints="NO" id="AjD-Vf-QAL">
+                                                                                <rect key="frame" x="17" y="50.5" width="22" height="22"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="width" constant="22" id="Lkv-YO-4L1"/>
+                                                                                    <constraint firstAttribute="height" constant="22" id="dp6-XZ-ubI"/>
+                                                                                </constraints>
+                                                                            </imageView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51h-ZV-odC" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                                                <rect key="frame" x="16" y="51" width="36.5" height="21"/>
+                                                                                <rect key="frame" x="48" y="51" width="36.5" height="21"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATVI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7j-2c-ks1">
                                                                                         <rect key="frame" x="4" y="2" width="28.5" height="17"/>
@@ -1105,9 +1123,11 @@
                                                                         </subviews>
                                                                         <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <constraints>
+                                                                            <constraint firstItem="GiR-j8-u4a" firstAttribute="centerY" secondItem="51h-ZV-odC" secondAttribute="centerY" id="0Po-ep-KQO"/>
                                                                             <constraint firstItem="EvW-Qr-Qkj" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="16" id="47o-ic-UwF"/>
                                                                             <constraint firstItem="EvW-Qr-Qkj" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" constant="16" id="58U-xl-Owe"/>
                                                                             <constraint firstItem="fux-9N-Vkx" firstAttribute="top" secondItem="FA0-pu-9ap" secondAttribute="top" id="5Ua-7k-B2U"/>
+                                                                            <constraint firstItem="GiR-j8-u4a" firstAttribute="centerX" secondItem="AjD-Vf-QAL" secondAttribute="centerX" id="5bW-4y-yAt"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Ufx-p3-ZNr" secondAttribute="bottom" constant="16" id="HGq-z4-F5Z"/>
                                                                             <constraint firstAttribute="bottom" secondItem="51h-ZV-odC" secondAttribute="bottom" constant="16" id="JLH-hT-3jf"/>
                                                                             <constraint firstItem="fux-9N-Vkx" firstAttribute="trailing" secondItem="FA0-pu-9ap" secondAttribute="trailing" id="WIE-Dj-a6W"/>
@@ -1118,8 +1138,10 @@
                                                                             <constraint firstAttribute="trailing" secondItem="ger-ki-FB9" secondAttribute="trailing" constant="17" id="e0z-VP-uwl"/>
                                                                             <constraint firstItem="fux-9N-Vkx" firstAttribute="leading" secondItem="FA0-pu-9ap" secondAttribute="leading" id="jRx-1W-jo4"/>
                                                                             <constraint firstItem="fux-9N-Vkx" firstAttribute="bottom" secondItem="FA0-pu-9ap" secondAttribute="bottom" id="kc2-Hz-Uez"/>
+                                                                            <constraint firstItem="GiR-j8-u4a" firstAttribute="centerY" secondItem="AjD-Vf-QAL" secondAttribute="centerY" id="kx5-Yp-HCl"/>
                                                                             <constraint firstItem="FA0-pu-9ap" firstAttribute="top" secondItem="9mC-BO-ugK" secondAttribute="top" id="mWT-rY-MaM"/>
-                                                                            <constraint firstItem="51h-ZV-odC" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="16" id="rNT-34-XtE"/>
+                                                                            <constraint firstItem="GiR-j8-u4a" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="16" id="qhl-pH-W3V"/>
+                                                                            <constraint firstItem="51h-ZV-odC" firstAttribute="leading" secondItem="9mC-BO-ugK" secondAttribute="leading" constant="48" id="rNT-34-XtE"/>
                                                                             <constraint firstAttribute="trailing" secondItem="FA0-pu-9ap" secondAttribute="trailing" id="w5P-jY-VjO"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Ufx-p3-ZNr" secondAttribute="trailing" constant="16" id="x2J-W1-bXu"/>
                                                                         </constraints>
@@ -1146,6 +1168,7 @@
                                                                 <outlet property="backImgView" destination="FA0-pu-9ap" id="bdd-Yk-KDi"/>
                                                                 <outlet property="growContainer" destination="Ufx-p3-ZNr" id="d4A-4I-CsP"/>
                                                                 <outlet property="growLbl" destination="xU3-b7-uWw" id="w6r-uN-fI6"/>
+                                                                <outlet property="msLbl" destination="GiR-j8-u4a" id="IT6-nK-C8x"/>
                                                                 <outlet property="nameLbl" destination="EvW-Qr-Qkj" id="pYE-KW-0zD"/>
                                                                 <outlet property="stockAmountLbl" destination="h7j-2c-ks1" id="1KN-gJ-yyT"/>
                                                             </connections>
@@ -1676,6 +1699,7 @@ added to your watchlist!</string>
         <image name="arrow-up-green" width="8" height="8"/>
         <image name="iconClose" width="24" height="24"/>
         <image name="match_circle" width="25" height="25"/>
+        <image name="match_score_col" width="22" height="22"/>
         <image name="show_less" width="82" height="24"/>
         <image name="show_more" width="87" height="24"/>
         <image name="small_down" width="8" height="8"/>
