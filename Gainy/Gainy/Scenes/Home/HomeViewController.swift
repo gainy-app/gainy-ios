@@ -58,10 +58,11 @@ final class HomeViewController: BaseViewController {
         }
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHomeData { [weak tableView] in
+        viewModel.loadHomeData { [weak tableView, weak refreshControl] in
             
             tableView?.hideSkeleton()
             tableView?.reloadData()
+            refreshControl?.endRefreshing()
         }
     }
     

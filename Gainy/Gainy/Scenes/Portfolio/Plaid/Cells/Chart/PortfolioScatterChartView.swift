@@ -226,6 +226,7 @@ struct PortfolioScatterChartView: View {
             .animation(.linear)
             .gesture(DragGesture(minimumDistance: 0)
                         .onChanged({ value in
+                            guard viewModel.chartData.onlyPoints().uniqued().count > 2 else {return}
                 lineViewModel.dragLocation = value.location
                 lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
                 lineViewModel.opacity = 1

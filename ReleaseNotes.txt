@@ -1,4 +1,4 @@
-iOS v1.2 #175 available
+iOS v1.2.1 #177 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• -
+• Portfolio: crypto card updated
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

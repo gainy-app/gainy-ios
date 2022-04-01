@@ -33,7 +33,7 @@ final class HoldingSecurityTableViewCell: HoldingRangeableCell {
         balanceLbl.text = model.totalPrice.price
         progressLbl.text = (model.percentInHolding * 100).cleanOneDecimalP
         
-        if model.type == .cash {
+        if model.type == .cash || model.type == .crypto  {
             return
         }
             
