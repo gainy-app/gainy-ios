@@ -1,5 +1,5 @@
-iOS v1.2 #175 available
-:globe_with_meridians: Server - PROD
+iOS v1.3 #176 available
+:globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
@@ -12,4 +12,4 @@ Bugfixes
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-General flow
+TTF
