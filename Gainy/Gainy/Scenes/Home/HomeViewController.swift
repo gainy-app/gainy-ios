@@ -116,6 +116,7 @@ final class HomeViewController: BaseViewController {
 
 extension HomeViewController: HomeDataSourceDelegate {
     func altStockPressed(stock: AltStockTicker, isGainers: Bool) {
+        GainyAnalytics.logEvent("home_stock_tap", params: ["symbol": stock.symbol ?? "", "isGainers": isGainers])
         if isGainers {
             if let index = viewModel.topGainers.firstIndex(where: {$0.symbol == stock.symbol}) {
                 mainCoordinator?.showCardsDetailsViewController(viewModel.topGainers.compactMap({TickerInfo(ticker: $0)}), index: index)
@@ -128,16 +129,19 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        GainyAnalytics.logEvent("home_wl_tap", params: ["symbol": stock.symbol ?? ""])
         showWLView(stock: stock, cell: cell)
     }
     
     func articlePressed(article: WebArticle) {
+        GainyAnalytics.logEvent("home_article_tap", params: ["id": article.id ?? ""])
         let articleVC = ArticleViewController.instantiate(.home)
         articleVC.articleUrl = article.url ?? ""
         present(articleVC, animated: true, completion: nil)
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
+        GainyAnalytics.logEvent("home_coll_tap", params: ["id": collection.id ?? 0])
         mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, collection: collection)
     }
 }

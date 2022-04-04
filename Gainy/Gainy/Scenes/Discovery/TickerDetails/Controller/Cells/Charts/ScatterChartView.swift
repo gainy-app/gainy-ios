@@ -331,6 +331,7 @@ struct ScatterChartView: View {
             .background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
             .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
                         .onChanged({ value in
+                            guard viewModel.chartData.onlyPoints().uniqued().count > 2 else {return}
                 lineViewModel.dragLocation = value.location
                 lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
                 lineViewModel.opacity = 1
