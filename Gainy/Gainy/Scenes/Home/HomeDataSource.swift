@@ -100,6 +100,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes(models: indexes)
             cell.gains = viewModel?.gains
+            cell.bottomDots.isHidden = (viewModel?.gains == nil)
             return cell
         case .gainers:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell

@@ -89,8 +89,11 @@ final class HomeViewModel {
             self.favCollections = await UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections)
             
             let gainers = await getGainers(profileId: profielId)
-            
-            self.gains = await getPortfolioGains(profileId: profielId)
+            if UserProfileManager.shared.isPlaidLinked {
+                self.gains = await getPortfolioGains(profileId: profielId)
+            } else {
+                self.gains = nil
+            }
             self.articles = await getArticles()
             
             self.topGainers = gainers.topGainers

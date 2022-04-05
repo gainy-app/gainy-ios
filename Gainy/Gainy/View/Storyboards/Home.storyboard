@@ -977,6 +977,7 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="balanceLbl" destination="VSR-oJ-u5b" id="efY-xm-t3u"/>
+                                            <outlet property="bottomDots" destination="Lf3-Po-ocH" id="62u-ZR-cTE"/>
                                             <outlet property="growArrow" destination="fVW-ZB-Nve" id="Xn2-L9-56x"/>
                                             <outlet property="growLbl" destination="1gA-6w-Pqe" id="T69-zR-f14"/>
                                             <outlet property="growPriceLbl" destination="zgH-OK-0Fg" id="pXh-jd-Yqi"/>

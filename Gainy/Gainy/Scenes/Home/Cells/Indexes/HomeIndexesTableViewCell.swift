@@ -19,6 +19,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet private weak var balanceLbl: UILabel!
     @IBOutlet private weak var growLbl: UILabel!
     @IBOutlet private weak var growArrow: UIImageView!
+    @IBOutlet weak var bottomDots: UIImageView!
     @IBOutlet private weak var growPriceLbl: UILabel!
     
     func updateIndexes(models: [HomeIndexViewModel]) {        

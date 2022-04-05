@@ -41,6 +41,8 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
     var collections: [RemoteShortCollectionDetails] = [] {
         didSet {
             innerCollectionView.reloadData()
+            innerCollectionView.isScrollEnabled = false
+            expandBtn.isSelected = false
             expandBtn.isHidden = collections.count < 5
             if collections.count < 5 {
                 collectionHeight.constant = max(0.0, CGFloat(collections.count) * cellWidth + CGFloat(collections.count - 1) * 8.0)
