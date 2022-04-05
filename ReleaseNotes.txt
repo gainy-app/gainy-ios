@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio: crypto card updated
+• Stock card: median chart fixed
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
