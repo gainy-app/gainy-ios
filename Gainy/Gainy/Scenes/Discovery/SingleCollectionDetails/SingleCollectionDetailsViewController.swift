@@ -195,6 +195,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
+        GainyAnalytics.logEvent("open_single_collection", params: ["collectionID" : collectionId, "isFromSearch" : isFromSearch])
     }
     
     fileprivate func centerInitialCollectionInTheCollectionView() {
