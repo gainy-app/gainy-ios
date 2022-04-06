@@ -54,7 +54,7 @@ public final class HomeFetchGainersQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "profile_collection_tickers_performance_ranked": profileCollectionTickersPerformanceRanked.map { (value: ProfileCollectionTickersPerformanceRanked) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220401110900.profile_collection_tickers_performance_ranked"
+    /// fetch data from the table: "public_220404091348.profile_collection_tickers_performance_ranked"
     public var profileCollectionTickersPerformanceRanked: [ProfileCollectionTickersPerformanceRanked] {
       get {
         return (resultMap["profile_collection_tickers_performance_ranked"] as! [ResultMap]).map { (value: ResultMap) -> ProfileCollectionTickersPerformanceRanked in ProfileCollectionTickersPerformanceRanked(unsafeResultMap: value) }
