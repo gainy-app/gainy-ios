@@ -118,7 +118,17 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         symbol
         ticker {
           __typename
+          name
           ...RemoteTickerDetailsFull
+          realtime_metrics {
+            __typename
+            absolute_daily_change
+            actual_price
+            daily_volume
+            relative_daily_change
+            symbol
+            time
+          }
         }
       }
     }
@@ -1357,7 +1367,9 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("name", type: .scalar(String.self)),
             GraphQLFragmentSpread(RemoteTickerDetailsFull.self),
+            GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
           ]
         }
 
@@ -1373,6 +1385,25 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var name: String? {
+          get {
+            return resultMap["name"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "name")
+          }
+        }
+
+        /// An object relationship
+        public var realtimeMetrics: RealtimeMetric? {
+          get {
+            return (resultMap["realtime_metrics"] as? ResultMap).flatMap { RealtimeMetric(unsafeResultMap: $0) }
+          }
+          set {
+            resultMap.updateValue(newValue?.resultMap, forKey: "realtime_metrics")
           }
         }
 
@@ -1398,6 +1429,95 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
             set {
               resultMap += newValue.resultMap
+            }
+          }
+        }
+
+        public struct RealtimeMetric: GraphQLSelectionSet {
+          public static let possibleTypes: [String] = ["ticker_realtime_metrics"]
+
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
+              GraphQLField("actual_price", type: .scalar(float8.self)),
+              GraphQLField("daily_volume", type: .scalar(float8.self)),
+              GraphQLField("relative_daily_change", type: .scalar(float8.self)),
+              GraphQLField("symbol", type: .scalar(String.self)),
+              GraphQLField("time", type: .scalar(timestamp.self)),
+            ]
+          }
+
+          public private(set) var resultMap: ResultMap
+
+          public init(unsafeResultMap: ResultMap) {
+            self.resultMap = unsafeResultMap
+          }
+
+          public init(absoluteDailyChange: float8? = nil, actualPrice: float8? = nil, dailyVolume: float8? = nil, relativeDailyChange: float8? = nil, symbol: String? = nil, time: timestamp? = nil) {
+            self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time])
+          }
+
+          public var __typename: String {
+            get {
+              return resultMap["__typename"]! as! String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "__typename")
+            }
+          }
+
+          public var absoluteDailyChange: float8? {
+            get {
+              return resultMap["absolute_daily_change"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "absolute_daily_change")
+            }
+          }
+
+          public var actualPrice: float8? {
+            get {
+              return resultMap["actual_price"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "actual_price")
+            }
+          }
+
+          public var dailyVolume: float8? {
+            get {
+              return resultMap["daily_volume"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "daily_volume")
+            }
+          }
+
+          public var relativeDailyChange: float8? {
+            get {
+              return resultMap["relative_daily_change"] as? float8
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "relative_daily_change")
+            }
+          }
+
+          public var symbol: String? {
+            get {
+              return resultMap["symbol"] as? String
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "symbol")
+            }
+          }
+
+          public var time: timestamp? {
+            get {
+              return resultMap["time"] as? timestamp
+            }
+            set {
+              resultMap.updateValue(newValue, forKey: "time")
             }
           }
         }

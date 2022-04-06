@@ -6,7 +6,8 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Stock card: median chart fixed
+• Stock card: median chart diff corrected
+• Portfolio: cash card redesign
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

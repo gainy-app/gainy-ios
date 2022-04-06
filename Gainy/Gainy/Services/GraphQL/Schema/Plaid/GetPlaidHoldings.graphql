@@ -99,7 +99,16 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
         symbol
                         
                     ticker {
+                    name
                         ...RemoteTickerDetailsFull
+                            realtime_metrics {
+      absolute_daily_change
+      actual_price
+      daily_volume
+      relative_daily_change
+      symbol
+      time
+    }
                     }
     }
 }

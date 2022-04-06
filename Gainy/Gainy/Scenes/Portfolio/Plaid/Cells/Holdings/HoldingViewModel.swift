@@ -48,7 +48,7 @@ struct HoldingViewModel {
     }
     
     func infoForRange(_ range: ScatterChartView.ChartPeriod) -> (String, UIImage, String, String, UIColor?, UIColor?) {
-        if isCash || isCrypto {
+        if isCash {
             return ("", UIImage(), "", "", .clear, .clear)
         } else {
             return (range.longName,
@@ -66,7 +66,7 @@ struct HoldingViewModel {
         if isExpaned {
             let secHeight: CGFloat = Double(securities.count) * 80.0 + Double(securities.count - 1) * 8.0
             var height = 184.0 + secHeight + 16.0 + 16.0
-            if isCash || isCrypto {
+            if isCash {
                 return 112.0 + secHeight + 16.0 + 16.0
             }
             if event != nil {
@@ -75,7 +75,7 @@ struct HoldingViewModel {
             return height + 8.0
         } else {
             
-            if isCash || isCrypto {
+            if isCash {
                 return 112.0 + 16.0
             }
             if event != nil {
@@ -89,7 +89,6 @@ struct HoldingViewModel {
     
     var holdingsCount: NSMutableAttributedString {
         guard !isCash else { return NSMutableAttributedString.init(string: "") }
-        guard !isCrypto else { return NSMutableAttributedString.init(string: "") }
         var secCount: [HoldingSecurityViewModel.SecType : Float] = [:]
         for sec in securities {
             if let haveCount = secCount[sec.type] {

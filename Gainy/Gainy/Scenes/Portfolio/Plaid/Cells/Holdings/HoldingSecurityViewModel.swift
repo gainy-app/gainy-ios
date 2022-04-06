@@ -52,7 +52,7 @@ struct HoldingSecurityViewModel {
         let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)
         
         let accountID =  (UserProfileManager.shared.linkedPlaidAccounts.first(where: {
-            $0.id == (holding.accountId ?? 0)
+            $0.institutionID == (holding.holdingDetails?.holding?.accessToken?.institution?.id ?? 0)
         })?.name ?? (holding.name ?? ""))
         
         self.name = (type == .cash ? accountID.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) :  (correctName.attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!) + " ×".attr(font: .compactRoundedSemibold(12), color: UIColor(named: "mainText")!) + "\(holding.quantity ?? 0.0)".attr(font: .compactRoundedSemibold(14), color: UIColor(named: "mainText")!)))

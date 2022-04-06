@@ -384,6 +384,12 @@ class TickerInfo {
             //Normalize
             let (main, median) = normalizeCharts(mainChart, medianChart)
             
+            let firstDay = median.first?.val ?? 0.0
+            let lastDay = median.last?.val  ?? 0.0
+            self.medianGrow = self.pctDiff(firstDay, lastDay)
+            self.haveMedian = true
+            self.setMedianData(period, medianGrow: self.medianGrow, haveMedian: true)
+            
             let mainData = ChartData(points: main, period: period)
             let medianData = ChartData(points: median, period: period)
             

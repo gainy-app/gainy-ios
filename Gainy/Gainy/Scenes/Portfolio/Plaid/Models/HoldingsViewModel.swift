@@ -106,9 +106,10 @@ final class HoldingsViewModel {
                         interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])                        
                         categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
                         
-                        if let metric = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.realtimeMetrics {
-                            realtimeMetrics.append(metric)
-                            TickerLiveStorage.shared.setSymbolData(metric.symbol ?? "", data: metric)
+                        if let metric = holdingGroup.ticker?.realtimeMetrics {
+                            let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
+                            realtimeMetrics.append(localMetric)
+                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol ?? "", data: localMetric)
                             dprint("Got \(metric.actualPrice ?? 0.0) - \(metric.relativeDailyChange ?? 0.0) for \(metric.symbol ?? "")")
                         }
                         

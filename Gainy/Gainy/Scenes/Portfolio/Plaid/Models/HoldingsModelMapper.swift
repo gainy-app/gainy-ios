@@ -60,7 +60,7 @@ struct HoldingsModelMapper {
                 item.holdingDetails?.holding?.accessToken?.institution?.id
             }
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
-                                             name: (ticker?.fragments.remoteTickerDetails.name ?? "").companyMarkRemoved,
+                                             name: (holdingGroup.ticker?.name ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              industries: ticker?.tickerIndustries ?? [],

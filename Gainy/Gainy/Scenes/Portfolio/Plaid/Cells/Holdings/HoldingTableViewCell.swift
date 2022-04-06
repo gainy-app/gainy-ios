@@ -204,14 +204,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         } else {
             if model.isCrypto {
                 matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                matchScoreLbl.text = "B"
-                nameLbl.text = "Crypto Currencies"
+                matchScoreLbl.text = "C"
                 
-                symbolLbl.isHidden = true
-                symbolLbl.superview?.isHidden = true
-                secsTopMargin.constant = 56.0
-                transactionsTotalLbl.isHidden = true
-                categoriesView.isHidden = true
+                secsTopMargin.constant = 128.0
+                transactionsTotalLbl.isHidden = false
+                categoriesView.isHidden = false
             } else {
                 secsTopMargin.constant = 128.0
                 transactionsTotalLbl.isHidden = false
@@ -284,7 +281,7 @@ extension HoldingTableViewCell: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: HoldingSecurityTableViewCell = tableView.dequeueReusableCell(withIdentifier: ((holding?.isCash ?? false) || (holding?.isCrypto ?? false)) ? HoldingSecurityTableViewCell.cashCellIdentifier : HoldingSecurityTableViewCell.cellIdentifier, for: indexPath) as! HoldingSecurityTableViewCell
+        let cell: HoldingSecurityTableViewCell = tableView.dequeueReusableCell(withIdentifier: (holding?.isCash ?? false) ? HoldingSecurityTableViewCell.cashCellIdentifier : HoldingSecurityTableViewCell.cellIdentifier, for: indexPath) as! HoldingSecurityTableViewCell
         if let security = holding?.securities[indexPath.row] {
             cell.setModel(security, chartRange)
         }
