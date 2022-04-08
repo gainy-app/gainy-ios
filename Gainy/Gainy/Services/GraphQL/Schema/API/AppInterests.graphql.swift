@@ -42,7 +42,7 @@ public final class AppInterestsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "interests": interests.map { (value: Interest) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220404091348.interests"
+    /// fetch data from the table: "public_220408111934.interests"
     public var interests: [Interest] {
       get {
         return (resultMap["interests"] as! [ResultMap]).map { (value: ResultMap) -> Interest in Interest(unsafeResultMap: value) }

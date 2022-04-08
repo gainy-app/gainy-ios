@@ -1,13 +1,12 @@
 iOS v1.2.1 #179 available
-:globe_with_meridians: Server - PROD
+:globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
 • -
 
 :hammer_and_wrench: Improvements
-• Stock card: median chart diff corrected
-• Portfolio: cash card redesign
+• Portfolio: crypto card redesign
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

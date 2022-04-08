@@ -114,7 +114,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             matchScoreLbl.text = "-"
         }
         amountLbl.text = model.balance.price
-        symbolLbl.text = model.tickerSymbol
+        symbolLbl.text = model.tickerSymbol.cryptoRemoved
         symbolLbl.isHidden = false
         symbolLbl.superview?.isHidden = false
         

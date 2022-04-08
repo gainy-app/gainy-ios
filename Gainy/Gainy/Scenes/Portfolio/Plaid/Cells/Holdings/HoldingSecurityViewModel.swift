@@ -12,6 +12,19 @@ struct HoldingSecurityViewModel {
     
     enum SecType: String {
         case option = "Option", share = "Shares", cash = "Cash", crypto = "Crypto"
+        
+        var name: String {
+            switch self {
+            case .option:
+                return "Option"
+            case .share:
+                return "Shares"
+            case .cash:
+                return "Cash"
+            case .crypto:
+                return "Coins"
+            }
+        }
     }
     
     let name: NSAttributedString
@@ -49,7 +62,7 @@ struct HoldingSecurityViewModel {
                 }
             }
         }
-        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)
+        let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.name)
         
         let accountID =  (UserProfileManager.shared.linkedPlaidAccounts.first(where: {
             $0.institutionID == (holding.holdingDetails?.holding?.accessToken?.institution?.id ?? 0)
@@ -59,7 +72,7 @@ struct HoldingSecurityViewModel {
         self.percentInHolding = holding.holdingDetails?.valueToPortfolioValue ?? 0.0
         self.totalPrice = Float(holding.gains?.actualValue ?? 0.0)
         self.quantity = Float(holding.quantity ?? 0.0)
-        self.singlePrice = holding.expiryDateString
+        self.singlePrice = type == .crypto ? accountID : holding.expiryDateString
         let absGains: [ScatterChartView.ChartPeriod : Float] = [
             .d1 : holding.gains?.absoluteGain_1d ?? 0.0,
             .w1 : holding.gains?.absoluteGain_1w ?? 0.0,
@@ -94,6 +107,10 @@ extension String {
             }
         }
         return old
+    }
+    
+    var cryptoRemoved: String {
+        return self.hasSuffix(".CC") ? self.replacingOccurrences(of: ".CC", with: "") : self
     }
 }
 
