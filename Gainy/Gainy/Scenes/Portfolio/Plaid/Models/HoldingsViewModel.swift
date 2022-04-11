@@ -28,10 +28,9 @@ final class HoldingsViewModel {
         }
     }
     
-    //TO-DO: Save all interests/categs
-    
+    //TO-DO: Save all interests/categories
     var haveHoldings: Bool {
-        self.dataSource.originalHoldings.count > 0
+        dataSource.originalHoldings.count > 0
     }
     
     //MARK: - Caching
@@ -103,8 +102,8 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                         }
                         
-                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull?.tickerInterests.compactMap({$0}) ?? [])
-                        categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull?.tickerCategories.compactMap({$0}) ?? [])
+                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
+                        categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
                         
                         if let metric = holdingGroup.ticker?.realtimeMetrics {
                             let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
@@ -113,7 +112,7 @@ final class HoldingsViewModel {
                             dprint("Got \(metric.actualPrice ?? 0.0) - \(metric.relativeDailyChange ?? 0.0) for \(metric.symbol ?? "")")
                         }
                         
-                        if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull?.fragments.remoteTickerDetails.matchScore {
+                        if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
                             TickerLiveStorage.shared.setMatchData(mScore.symbol, data: mScore)
                         }
                     }

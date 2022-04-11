@@ -60,7 +60,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220408111934.tickers"
+    /// fetch data from the table: "public_220404091348.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
@@ -115,7 +115,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("industry_order", type: .scalar(bigint.self)),
+            GraphQLField("industry_order", type: .scalar(Int.self)),
             GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
           ]
         }
@@ -126,7 +126,7 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
+        public init(industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
           self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
         }
 
@@ -139,9 +139,9 @@ public final class FetchStockMedianMonthQuery: GraphQLQuery {
           }
         }
 
-        public var industryOrder: bigint? {
+        public var industryOrder: Int? {
           get {
-            return resultMap["industry_order"] as? bigint
+            return resultMap["industry_order"] as? Int
           }
           set {
             resultMap.updateValue(newValue, forKey: "industry_order")
