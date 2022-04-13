@@ -12,22 +12,57 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         contentView.addSubview(backImageView)
         contentView.addSubview(nameLabel)
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(stocksLabel)
-        contentView.addSubview(stocksAmountLabel)
+        contentView.addSubview(stocksView)
+        stocksView.addSubview(stocksAmountLabel)
+        contentView.addSubview(todayLabel)
+        
+        contentView.addSubview(msLabel)
+        contentView.addSubview(msCircle)
+        
+        contentView.addSubview(gainsView)
+        gainsView.addSubview(growArrowImgView)
+        gainsView.addSubview(gainsLabel)
         
         backImageView.clipsToBounds = true
-        backImageView.layer.cornerRadius = 8
+        backImageView.layer.cornerRadius = 19
         backImageView.layer.cornerCurve = .continuous
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
-                
-        stocksLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 20)
-        stocksLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
         
-        stocksAmountLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 36)
-        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16.0)
+        stocksView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+        stocksView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 48.0)
+        stocksView.autoSetDimension(.height, toSize: 24)
+        
+        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: stocksView, withOffset: -8)
+        stocksAmountLabel.autoPinEdge(.leading, to: .leading, of: stocksView, withOffset: 8)
+        stocksAmountLabel.autoAlignAxis(.horizontal, toSameAxisOf: stocksView)
+                
+        todayLabel.autoAlignAxis(.horizontal, toSameAxisOf: nameLabel)
+        todayLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -24.0)
+        
+        nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
+        nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
+        
+        msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+        msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
+        msLabel.autoSetDimensions(to: .init(width: 24, height: 24))
+        
+        msCircle.autoSetDimensions(to: .init(width: 22, height: 22))
+        msCircle.autoAlignAxis(.horizontal, toSameAxisOf: msLabel, withMultiplier: 1.0)
+        msCircle.autoAlignAxis(.vertical, toSameAxisOf: msLabel, withMultiplier: 1.0)
+        
+        gainsView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
+        gainsView.autoSetDimension(.height, toSize: 24)
+        
+        growArrowImgView.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 8)
+        growArrowImgView.autoAlignAxis(.horizontal, toSameAxisOf: gainsView, withMultiplier: 1.0)
+        growArrowImgView.autoSetDimensions(to: .init(width: 8, height: 8))
+        
+        gainsLabel.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 20)
+        gainsLabel.autoPinEdge(.trailing, to: .trailing, of: gainsView, withOffset: -8)
+        gainsLabel.autoAlignAxis(.horizontal, toSameAxisOf: gainsView, withMultiplier: 1.0)
     }
     
     @available(*, unavailable)
@@ -38,7 +73,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     // MARK: Internal
     
     private var shadowLayer: CAShapeLayer!
-    private var cornerRadius: CGFloat = 8.0
+    private var cornerRadius: CGFloat = 16.0
     private var fillColor: UIColor = .blue
     private var imageUrl: String = ""
     private var imageLoaded: Bool = false
@@ -94,55 +129,88 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 20)
+        label.font = .proDisplayBold(20)
         label.textColor = UIColor.Gainy.white
         
-        label.numberOfLines = 0
-        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 1
         label.textAlignment = .left
         
         return label
     }()
     
-    lazy var descriptionLabel: UITextView = {
-        let label = UITextView()
-        
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.textColor = UIColor.Gainy.white
-        label.backgroundColor = .clear
-        label.isUserInteractionEnabled = false
-        label.automaticallyAdjustsScrollIndicatorInsets = false
-        label.contentInsetAdjustmentBehavior = .never
-        label.contentInset = UIEdgeInsets(top: -8, left: -4,
-                                          bottom: 0, right: 0)
-        
-        return label
-    }()
-    
-    lazy var stocksLabel: UILabel = {
+    lazy var todayLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFCompactRounded-Medium", size: 9)
+        label.font = .compactRoundedMedium(12)
         label.textColor = UIColor.Gainy.white
         label.numberOfLines = 1
         label.textAlignment = .right
-        label.text = "STOCKS"
+        label.text = "TODAY"
         label.sizeToFit()
         
         return label
     }()
     
+    lazy var stocksView: UIView = {
+        let stocksView = UIView()
+        stocksView.backgroundColor = UIColor(hexString: "687379")?.withAlphaComponent(0.4)
+        stocksView.layer.cornerRadius = 12.0
+        stocksView.clipsToBounds = true
+        return stocksView
+    }()
+    
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 32)
-        label.textColor = UIColor.Gainy.yellow
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 14)
+        label.textColor = UIColor.Gainy.white
         
         label.numberOfLines = 1
         label.textAlignment = .right
         label.minimumScaleFactor = 0.1
         
         return label
+    }()
+    
+    //MARK: - MS
+    
+    lazy var msLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .compactRoundedSemibold(12.0)
+        label.layer.cornerRadius = 12.0
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    lazy var msCircle: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "match_score_col")
+        return imageView
+    }()
+    
+    //MARK: - Gains
+    
+    lazy var gainsView: UIView = {
+        let stocksView = UIView()
+        stocksView.layer.cornerRadius = 12.0
+        stocksView.clipsToBounds = true
+        return stocksView
+    }()
+    
+    lazy var gainsLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .compactRoundedSemibold(14.0)
+        return label
+    }()
+    
+    lazy var growArrowImgView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "match_score_col")
+        return imageView
     }()
     
     private func loadImage() {
@@ -161,9 +229,9 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             .transition(.fade(1)),
             .cacheOriginalImage
         ]) { receivedSize, totalSize in
-//            print("-----\(receivedSize), \(totalSize)")
+            //            print("-----\(receivedSize), \(totalSize)")
         } completionHandler: { result in
-//            print("-----\(result)")
+            //            print("-----\(result)")
         }
         self.imageLoaded = true
     }
@@ -216,24 +284,6 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         self.loadImage()
         
-        let hMargin: CGFloat = 16
-        
-        let availableWidth = bounds.width - (hMargin + 71)
-        let descLabelFont = UIFont(name: "SFProDisplay-Regular", size: 14)
-        let neededSize = descriptionLabel.text.size(
-            withAttributes: [
-                NSAttributedString.Key.font: descLabelFont as Any,
-            ]
-        )
-        
-        let nameHeight: CGFloat = 24
-        let minDescHeight: CGFloat = neededSize.width > availableWidth ? 34 : 18
-        let pairedHeight = nameHeight + 4 + minDescHeight
-        
-        
-        let topMarginRightSide: CGFloat = 20
-        let topMarginLeftSide = (bounds.height - pairedHeight) / 2
-        
         backImageView.frame = CGRect(
             x: 0,
             y: 0,
@@ -241,28 +291,12 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             height: bounds.height
         )
         
-        nameLabel.frame = CGRect(
-            x: hMargin,
-            y: nameLabel.text == "Watchlist" ? 34.0 : topMarginLeftSide,
-            width: bounds.width - (hMargin + 71),
-            height: nameHeight
-        )
-        
-        descriptionLabel.frame = CGRect(
-            x: hMargin,
-            y: topMarginLeftSide + nameLabel.bounds.height + 4,
-            width: bounds.width - (hMargin + 71),
-            height: minDescHeight
-        )
-        
         let isTop20 = false //(Constants.CollectionDetails.top20ID == self.tag) ? true : false
-        self.stocksLabel.textColor = isTop20 ? UIColor(hexString: "#09141F", alpha: 1.0) : UIColor.Gainy.white
         self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
-        self.descriptionLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
-        self.stocksAmountLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.yellow
+        self.stocksAmountLabel.textColor = .white
         self.contentView.layer.borderWidth = isTop20 ? 1.0 : 0.0
         self.contentView.layer.borderColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0)?.cgColor : UIColor.clear.cgColor
-        self.contentView.layer.cornerRadius = isTop20 ? 8.0 : 0.0
+        self.contentView.layer.cornerRadius = 16.0
         _ = self.updateImageBasedOnTag()
         updateDotsViewBasedOnTag()
     }
@@ -280,14 +314,16 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             onCellStopDragging?()
         default:
             return
-        } 
+        }
     }
     
     func configureWith(
         name: String,
         imageUrl: String,
         description: String,
-        stocksAmount: String,
+        stocksAmount: Int,
+        matchScore: Int,
+        dailyGrow: Float,
         imageName: String
     ) {
         backImageView.contentMode = .scaleAspectFill
@@ -298,12 +334,51 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         nameLabel.text = name
         nameLabel.sizeToFit()
         
-        descriptionLabel.text = description
-        descriptionLabel.sizeToFit()
+        stocksAmountLabel.text = "\(stocksAmount) stock\(stocksAmount > 1 ? "s" : "")"
         
-        stocksAmountLabel.text = stocksAmount
-        if stocksAmount.count > 3 {
-            stocksAmountLabel.font = UIFont(name: "SFCompactRounded-Semibold", size: 24)
+        if dailyGrow > 0.0 {
+            gainsView.backgroundColor = UIColor.Gainy.secondaryGreen
+            growArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+            growArrowImgView.tintColor = UIColor.Gainy.mainText
+            gainsLabel.textColor = UIColor.Gainy.mainText
+            
+        } else {
+            gainsView.backgroundColor = UIColor.Gainy.mainRed
+            growArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+            growArrowImgView.tintColor = .white
+            gainsLabel.textColor = .white
+        }
+        gainsLabel.text = dailyGrow.percent
+        
+        msLabel.text = "\(Int(matchScore))"
+        switch matchScore {
+        case 0..<35:
+            msLabel.backgroundColor = UIColor.Gainy.mainRed
+            break
+        case 35..<65:
+            msLabel.backgroundColor = UIColor.Gainy.mainYellow
+            break
+        case 65...:
+            msLabel.backgroundColor = UIColor.Gainy.mainGreen
+            break
+        default:
+            break
+        }
+        
+        
+        let isWS = nameLabel.text == "Watchlist"
+        msLabel.isHidden = isWS
+        msCircle.isHidden = isWS
+        
+        todayLabel.isHidden = isWS
+        stocksView.isHidden = isWS
+        
+        gainsView.isHidden = isWS
+        if isWS {
+            contentView.removeConstraints(nameLabel.constraints)
+            nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
+            nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
+            nameLabel.autoAlignAxis(.horizontal, toSameAxisOf: contentView)
         }
         
         layoutIfNeeded()

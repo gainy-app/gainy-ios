@@ -16,6 +16,9 @@ fragment RemoteCollectionDetails on collections {
     relative_daily_change
     updated_at
     }
+      match_score {
+    match_score
+  }
 }
 
 fragment RemoteTickerDetails on tickers {

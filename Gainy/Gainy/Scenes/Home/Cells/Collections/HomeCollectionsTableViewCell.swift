@@ -133,20 +133,23 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             }
             growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percent
             
-            let matchScore = Int.random(in: 1..<100)
-            msLbl.text = "\(matchScore)"
-            switch matchScore {
-            case 0..<35:
-                msLbl.backgroundColor = UIColor.Gainy.mainRed
-                break
-            case 35..<65:
-                msLbl.backgroundColor = UIColor.Gainy.mainYellow
-                break
-            case 65...:
-                msLbl.backgroundColor = UIColor.Gainy.mainGreen
-                break
-            default:
-                break
+            if let matchScore = collection.matchScore?.matchScore {
+                msLbl.text = "\(Int(matchScore))"
+                switch matchScore {
+                case 0..<35:
+                    msLbl.backgroundColor = UIColor.Gainy.mainRed
+                    break
+                case 35..<65:
+                    msLbl.backgroundColor = UIColor.Gainy.mainYellow
+                    break
+                case 65...:
+                    msLbl.backgroundColor = UIColor.Gainy.mainGreen
+                    break
+                default:
+                    break
+                }
+            } else {
+                msLbl.text = "-"
             }
         }
     }

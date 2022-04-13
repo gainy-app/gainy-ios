@@ -79,7 +79,9 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
-                                           stocksAmount: "\(collection.size ?? 0)",
+                                           stocksAmount: (collection.size ?? 0),
+                                           matchScore: Int(collection.matchScore?.matchScore ?? 0),
+                                           dailyGrow: collection.metrics?.relativeDailyChange ?? 0.0,
                                            imageName: "",
                                            plusButtonState: buttonState)
                         
@@ -115,7 +117,9 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name,
                                            imageUrl: collection.imageUrl,
                                            description: collection.description,
-                                           stocksAmount:collection.stocksAmount,
+                                           stocksAmount: collection.stocksAmount,
+                                           matchScore: collection.matchScore,
+                                           dailyGrow: collection.dailyGrow,
                                            imageName: "",
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in

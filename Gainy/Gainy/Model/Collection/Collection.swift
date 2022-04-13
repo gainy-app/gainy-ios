@@ -1,3 +1,4 @@
+import Darwin
 struct Collection {
     let id: Int
     let image: String
@@ -5,6 +6,8 @@ struct Collection {
     let name: String
     let description: String
     let stocksAmount: Int
+    let matchScore: Int
+    let dailyGrow: Float
     var isInYourCollections: Bool
 }
 

@@ -4,7 +4,9 @@ struct RecommendedCollectionViewCellModel {
     let imageUrl: String
     let name: String
     let description: String
-    let stocksAmount: String
+    let stocksAmount: Int
+    let matchScore: Int
+    let dailyGrow: Float
     var isInYourCollections: Bool
 }
 

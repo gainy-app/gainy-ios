@@ -53,7 +53,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "industry_median_chart": industryMedianChart.map { (value: IndustryMedianChart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220331100754.industry_median_chart"
+    /// fetch data from the table: "public_220413060411.industry_median_chart"
     public var industryMedianChart: [IndustryMedianChart] {
       get {
         return (resultMap["industry_median_chart"] as! [ResultMap]).map { (value: ResultMap) -> IndustryMedianChart in IndustryMedianChart(unsafeResultMap: value) }

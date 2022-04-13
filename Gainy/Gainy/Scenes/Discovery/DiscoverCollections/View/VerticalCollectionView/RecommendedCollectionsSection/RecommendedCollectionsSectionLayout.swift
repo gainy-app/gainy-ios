@@ -16,7 +16,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(144)
+                heightDimension: .absolute(152.0)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
@@ -81,6 +81,8 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
                 imageUrl: viewModel.imageUrl,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
+                matchScore: viewModel.matchScore,
+                dailyGrow: viewModel.dailyGrow,
                 imageName: viewModel.image,
                 plusButtonState: buttonState
             )

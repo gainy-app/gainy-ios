@@ -215,6 +215,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         name: modelItem.name,
                         description: modelItem.description,
                         stocksAmount: modelItem.stocksAmount,
+                        matchScore: modelItem.matchScore,
+                        dailyGrow: modelItem.dailyGrow,
                         recommendedIdentifier: modelItem
                     )
                     self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: yourCollectionItem)
@@ -547,6 +549,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             name: collectionItemToAdd.name,
             description: collectionItemToAdd.description,
             stocksAmount: collectionItemToAdd.stocksAmount,
+            matchScore: collectionItemToAdd.matchScore,
+            dailyGrow: collectionItemToAdd.dailyGrow,
             isInYourCollections: true
         )
         
@@ -557,6 +561,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             name: collectionItemToAdd.name,
             description: collectionItemToAdd.description,
             stocksAmount: collectionItemToAdd.stocksAmount,
+            matchScore: collectionItemToAdd.matchScore,
+            dailyGrow: collectionItemToAdd.dailyGrow,
             recommendedIdentifier: updatedRecommendedItem
         )
         
@@ -594,7 +600,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                                          imageUrl: yourCollectionItem.imageUrl,
                                          name: yourCollectionItem.name,
                                          description: yourCollectionItem.description,
-                                         stocksAmount: Int(yourCollectionItem.stocksAmount)!,
+                                         stocksAmount: yourCollectionItem.stocksAmount,
+                                         matchScore: yourCollectionItem.matchScore,
+                                         dailyGrow: yourCollectionItem.dailyGrow,
                                          isInYourCollections: true)
             
             if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -652,6 +660,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 name: recommendedItem.name,
                 description: recommendedItem.description,
                 stocksAmount: recommendedItem.stocksAmount,
+                matchScore: recommendedItem.matchScore,
+                dailyGrow: recommendedItem.dailyGrow,
                 isInYourCollections: true
             )
             
@@ -662,6 +672,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 name: recommendedItem.name,
                 description: recommendedItem.description,
                 stocksAmount: recommendedItem.stocksAmount,
+                matchScore: recommendedItem.matchScore,
+                dailyGrow: recommendedItem.dailyGrow,
                 isInYourCollections: false
             )
             
@@ -693,6 +705,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     name: yourCollectionItemToRemove.name,
                     description: yourCollectionItemToRemove.description,
                     stocksAmount: yourCollectionItemToRemove.stocksAmount,
+                    matchScore: yourCollectionItemToRemove.matchScore,
+                    dailyGrow: yourCollectionItemToRemove.dailyGrow,
                     isInYourCollections: true
                 )
                 
@@ -703,6 +717,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     name: yourCollectionItemToRemove.name,
                     description: yourCollectionItemToRemove.description,
                     stocksAmount: yourCollectionItemToRemove.stocksAmount,
+                    matchScore: yourCollectionItemToRemove.matchScore,
+                    dailyGrow: yourCollectionItemToRemove.dailyGrow,
                     isInYourCollections: false
                 )
                 

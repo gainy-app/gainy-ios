@@ -12,24 +12,45 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         contentView.addSubview(backImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(descriptionLabel)
-        contentView.addSubview(stocksAmountLabel)
-        contentView.addSubview(plusButton)
+        
+        contentView.addSubview(msLabel)
+        contentView.addSubview(msCircle)
+        
+        contentView.addSubview(gainsView)
+        gainsView.addSubview(growArrowImgView)
+        gainsView.addSubview(gainsLabel)
         
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
         nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
-        
-        stocksAmountLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8)
-        stocksAmountLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -44)
-        stocksAmountLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
-        
-        
+               
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
         descriptionLabel.autoSetDimension(.height, toSize: 55.0, relation: .lessThanOrEqual)
+        
+        msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
+        msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8.0)
+        msLabel.autoSetDimensions(to: .init(width: 24, height: 24))
+        
+        msCircle.autoSetDimensions(to: .init(width: 22, height: 22))
+        msCircle.autoAlignAxis(.horizontal, toSameAxisOf: msLabel, withMultiplier: 1.0)
+        msCircle.autoAlignAxis(.vertical, toSameAxisOf: msLabel, withMultiplier: 1.0)
+        
+        gainsView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
+        gainsView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 40)
+        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
+        gainsView.autoSetDimension(.height, toSize: 24)
+        
+        growArrowImgView.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 8)
+        growArrowImgView.autoAlignAxis(.horizontal, toSameAxisOf: gainsView, withMultiplier: 1.0)
+        growArrowImgView.autoSetDimensions(to: .init(width: 8, height: 8))
+        
+        gainsLabel.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 20)
+        gainsLabel.autoPinEdge(.trailing, to: .trailing, of: gainsView, withOffset: -8)
+        gainsLabel.autoAlignAxis(.horizontal, toSameAxisOf: gainsView, withMultiplier: 1.0)
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
@@ -113,6 +134,47 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
                          for: .touchUpInside)
 
         return button
+    }()
+    
+    //MARK: - MS
+    
+    lazy var msLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .compactRoundedSemibold(12.0)
+        label.layer.cornerRadius = 12.0
+        label.clipsToBounds = true
+        return label
+    }()
+    
+    lazy var msCircle: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "match_score_col")
+        return imageView
+    }()
+    
+    //MARK: - Gains
+    
+    lazy var gainsView: UIView = {
+        let stocksView = UIView()
+        stocksView.layer.cornerRadius = 12.0
+        stocksView.clipsToBounds = true
+        return stocksView
+    }()
+    
+    lazy var gainsLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.font = .compactRoundedSemibold(14.0)
+        return label
+    }()
+    
+    lazy var growArrowImgView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "match_score_col")
+        return imageView
     }()
 
     private func loadImage() {
@@ -204,7 +266,9 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         name: String,
         imageUrl: String,
         description: String,
-        stocksAmount: String,
+        stocksAmount: Int,
+        matchScore: Int,
+        dailyGrow: Float,
         imageName: String,
         plusButtonState: RecommendedCellButtonState
     ) {
@@ -219,7 +283,34 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.text = description
         descriptionLabel.sizeToFit()
 
-        stocksAmountLabel.text = stocksAmount
+        if dailyGrow > 0.0 {
+            gainsView.backgroundColor = UIColor.Gainy.secondaryGreen
+            growArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+            growArrowImgView.tintColor = UIColor.Gainy.mainText
+            gainsLabel.textColor = UIColor.Gainy.mainText
+            
+        } else {
+            gainsView.backgroundColor = UIColor.Gainy.mainRed
+            growArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+            growArrowImgView.tintColor = .white
+            gainsLabel.textColor = .white
+        }
+        gainsLabel.text = dailyGrow.percent
+        
+        msLabel.text = "\(Int(matchScore))"
+        switch matchScore {
+        case 0..<35:
+            msLabel.backgroundColor = UIColor.Gainy.mainRed
+            break
+        case 35..<65:
+            msLabel.backgroundColor = UIColor.Gainy.mainYellow
+            break
+        case 65...:
+            msLabel.backgroundColor = UIColor.Gainy.mainGreen
+            break
+        default:
+            break
+        }
 
         buttonState = plusButtonState
         buttonState == .checked

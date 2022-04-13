@@ -190,6 +190,10 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
         relative_daily_change
         updated_at
       }
+      match_score {
+        __typename
+        match_score
+      }
     }
     """
 
@@ -205,6 +209,7 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("size", type: .scalar(Int.self)),
       GraphQLField("metrics", type: .object(Metric.selections)),
+      GraphQLField("match_score", type: .object(MatchScore.selections)),
     ]
   }
 
@@ -214,8 +219,8 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, enabled: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "enabled": enabled, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -291,6 +296,16 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
     }
   }
 
+  /// An object relationship
+  public var matchScore: MatchScore? {
+    get {
+      return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
+    }
+  }
+
   public struct Metric: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["collection_metrics"]
 
@@ -346,6 +361,45 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")
+      }
+    }
+  }
+
+  public struct MatchScore: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["collection_match_score"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("match_score", type: .scalar(float8.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(matchScore: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_match_score", "match_score": matchScore])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var matchScore: float8? {
+      get {
+        return resultMap["match_score"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "match_score")
       }
     }
   }
