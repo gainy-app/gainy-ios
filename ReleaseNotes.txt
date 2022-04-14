@@ -1,5 +1,5 @@
-iOS v1.2.1 #180 available
-:globe_with_meridians: Server - PROD
+iOS v1.2.2 #182 available
+:globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:

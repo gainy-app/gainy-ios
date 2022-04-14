@@ -173,7 +173,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_gains": portfolioGains.map { (value: PortfolioGain) -> ResultMap in value.resultMap }, "profile_holding_groups": profileHoldingGroups.map { (value: ProfileHoldingGroup) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220404091348.portfolio_gains"
+    /// fetch data from the table: "public_220413044555.portfolio_gains"
     public var portfolioGains: [PortfolioGain] {
       get {
         return (resultMap["portfolio_gains"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioGain in PortfolioGain(unsafeResultMap: value) }
@@ -183,7 +183,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_220404091348.profile_holding_groups"
+    /// fetch data from the table: "public_220413044555.profile_holding_groups"
     public var profileHoldingGroups: [ProfileHoldingGroup] {
       get {
         return (resultMap["profile_holding_groups"] as! [ResultMap]).map { (value: ResultMap) -> ProfileHoldingGroup in ProfileHoldingGroup(unsafeResultMap: value) }

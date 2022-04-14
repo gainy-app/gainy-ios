@@ -71,7 +71,7 @@ public enum order_by: RawRepresentable, Equatable, Hashable, CaseIterable, Apoll
   }
 }
 
-/// Ordering options when selecting data from "public_220404091348.profile_ticker_collections".
+/// Ordering options when selecting data from "public_220413044555.profile_ticker_collections".
 public struct ticker_collections_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -311,7 +311,7 @@ public struct app_profiles_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_220404091348.portfolio_gains".
+/// Ordering options when selecting data from "public_220413044555.portfolio_gains".
 public struct portfolio_gains_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -3275,11 +3275,12 @@ public struct app_profile_scoring_settings_order_by: GraphQLMapConvertible {
   ///   - profile
   ///   - profileId
   ///   - riskLevel
+  ///   - riskScore
   ///   - stockMarketRiskLevel
   ///   - tradingExperience
   ///   - unexpectedPurchasesSource
-  public init(averageMarketReturn: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, damageOfFailure: Swift.Optional<order_by?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<order_by?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<order_by?> = nil, investmentHorizon: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskLevel: Swift.Optional<order_by?> = nil, stockMarketRiskLevel: Swift.Optional<order_by?> = nil, tradingExperience: Swift.Optional<order_by?> = nil, unexpectedPurchasesSource: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
+  public init(averageMarketReturn: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, damageOfFailure: Swift.Optional<order_by?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<order_by?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<order_by?> = nil, investmentHorizon: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskLevel: Swift.Optional<order_by?> = nil, riskScore: Swift.Optional<order_by?> = nil, stockMarketRiskLevel: Swift.Optional<order_by?> = nil, tradingExperience: Swift.Optional<order_by?> = nil, unexpectedPurchasesSource: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "risk_score": riskScore, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
   }
 
   public var averageMarketReturn: Swift.Optional<order_by?> {
@@ -3360,6 +3361,15 @@ public struct app_profile_scoring_settings_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "risk_level")
+    }
+  }
+
+  public var riskScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["risk_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_score")
     }
   }
 
@@ -3731,14 +3741,17 @@ public struct app_profile_watchlist_tickers_variance_order_by: GraphQLMapConvert
   }
 }
 
-/// Ordering options when selecting data from "public_220404091348.tickers".
+/// Ordering options when selecting data from "public_220413044555.tickers".
 public struct tickers_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - countryName
+  ///   - cryptoMetrics
+  ///   - cryptoRealtimeMetrics
   ///   - description
   ///   - exchange
+  ///   - exchangeCanonical
   ///   - gicGroup
   ///   - gicIndustry
   ///   - gicSector
@@ -3763,8 +3776,8 @@ public struct tickers_order_by: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<order_by?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_order_by?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_order_by?> = nil, description: Swift.Optional<order_by?> = nil, exchange: Swift.Optional<order_by?> = nil, exchangeCanonical: Swift.Optional<order_by?> = nil, gicGroup: Swift.Optional<order_by?> = nil, gicIndustry: Swift.Optional<order_by?> = nil, gicSector: Swift.Optional<order_by?> = nil, gicSubIndustry: Swift.Optional<order_by?> = nil, industry: Swift.Optional<order_by?> = nil, ipoDate: Swift.Optional<order_by?> = nil, logoUrl: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_order_by?> = nil, name: Swift.Optional<order_by?> = nil, phone: Swift.Optional<order_by?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_order_by?> = nil, sector: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_order_by?> = nil, tickerCategoriesAggregate: Swift.Optional<ticker_categories_aggregate_order_by?> = nil, tickerCollectionsAggregate: Swift.Optional<ticker_collections_aggregate_order_by?> = nil, tickerEventsAggregate: Swift.Optional<ticker_events_aggregate_order_by?> = nil, tickerHighlightsAggregate: Swift.Optional<ticker_highlights_aggregate_order_by?> = nil, tickerIndustriesAggregate: Swift.Optional<ticker_industries_aggregate_order_by?> = nil, tickerInterestsAggregate: Swift.Optional<ticker_interests_aggregate_order_by?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_order_by?> = nil, type: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil, webUrl: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories_aggregate": tickerCategoriesAggregate, "ticker_collections_aggregate": tickerCollectionsAggregate, "ticker_events_aggregate": tickerEventsAggregate, "ticker_highlights_aggregate": tickerHighlightsAggregate, "ticker_industries_aggregate": tickerIndustriesAggregate, "ticker_interests_aggregate": tickerInterestsAggregate, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<order_by?> {
@@ -3773,6 +3786,24 @@ public struct tickers_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "country_name")
+    }
+  }
+
+  public var cryptoMetrics: Swift.Optional<crypto_metrics_order_by?> {
+    get {
+      return graphQLMap["crypto_metrics"] as? Swift.Optional<crypto_metrics_order_by?> ?? Swift.Optional<crypto_metrics_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_metrics")
+    }
+  }
+
+  public var cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_order_by?> {
+    get {
+      return graphQLMap["crypto_realtime_metrics"] as? Swift.Optional<crypto_realtime_metrics_order_by?> ?? Swift.Optional<crypto_realtime_metrics_order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_realtime_metrics")
     }
   }
 
@@ -3791,6 +3822,15 @@ public struct tickers_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "exchange")
+    }
+  }
+
+  public var exchangeCanonical: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["exchange_canonical"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_canonical")
     }
   }
 
@@ -4011,6 +4051,626 @@ public struct tickers_order_by: GraphQLMapConvertible {
   }
 }
 
+/// Ordering options when selecting data from "public_220413044555.crypto_metrics".
+public struct crypto_metrics_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - alexaRank
+  ///   - assetPlatformId
+  ///   - bingMatches
+  ///   - categories
+  ///   - coingeckoRank
+  ///   - coingeckoScore
+  ///   - communityFacebookLikes
+  ///   - communityRedditAccountsActive_48h
+  ///   - communityRedditAverageComments_48h
+  ///   - communityRedditAveragePosts_48h
+  ///   - communityRedditSubscribers
+  ///   - communityScore
+  ///   - communityTelegramChannelUserCount
+  ///   - communityTwitterFollowers
+  ///   - countryOrigin
+  ///   - description
+  ///   - developmentClosedIssues
+  ///   - developmentCodeAdditionsDeletions_4WeeksAdditions
+  ///   - developmentCodeAdditionsDeletions_4WeeksDeletions
+  ///   - developmentCommitCount_4Weeks
+  ///   - developmentForks
+  ///   - developmentPullRequestContributors
+  ///   - developmentPullRequestsMerged
+  ///   - developmentScore
+  ///   - developmentStars
+  ///   - developmentSubscribers
+  ///   - developmentTotalIssues
+  ///   - hashingAlgorithm
+  ///   - icoEndDate
+  ///   - icoStartDate
+  ///   - imageLarge
+  ///   - imageSmall
+  ///   - imageThumb
+  ///   - links
+  ///   - liquidityScore
+  ///   - marketCapRank
+  ///   - marketFdvToTvlRatio
+  ///   - marketMcapToTvlRatio
+  ///   - marketTotalValueLocked
+  ///   - name
+  ///   - priceChange_1m
+  ///   - priceChange_1w
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
+  ///   - publicInterestScore
+  ///   - sentimentVotesDownPercentage
+  ///   - sentimentVotesUpPercentage
+  ///   - symbol
+  public init(alexaRank: Swift.Optional<order_by?> = nil, assetPlatformId: Swift.Optional<order_by?> = nil, bingMatches: Swift.Optional<order_by?> = nil, categories: Swift.Optional<order_by?> = nil, coingeckoRank: Swift.Optional<order_by?> = nil, coingeckoScore: Swift.Optional<order_by?> = nil, communityFacebookLikes: Swift.Optional<order_by?> = nil, communityRedditAccountsActive_48h: Swift.Optional<order_by?> = nil, communityRedditAverageComments_48h: Swift.Optional<order_by?> = nil, communityRedditAveragePosts_48h: Swift.Optional<order_by?> = nil, communityRedditSubscribers: Swift.Optional<order_by?> = nil, communityScore: Swift.Optional<order_by?> = nil, communityTelegramChannelUserCount: Swift.Optional<order_by?> = nil, communityTwitterFollowers: Swift.Optional<order_by?> = nil, countryOrigin: Swift.Optional<order_by?> = nil, description: Swift.Optional<order_by?> = nil, developmentClosedIssues: Swift.Optional<order_by?> = nil, developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<order_by?> = nil, developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<order_by?> = nil, developmentCommitCount_4Weeks: Swift.Optional<order_by?> = nil, developmentForks: Swift.Optional<order_by?> = nil, developmentPullRequestContributors: Swift.Optional<order_by?> = nil, developmentPullRequestsMerged: Swift.Optional<order_by?> = nil, developmentScore: Swift.Optional<order_by?> = nil, developmentStars: Swift.Optional<order_by?> = nil, developmentSubscribers: Swift.Optional<order_by?> = nil, developmentTotalIssues: Swift.Optional<order_by?> = nil, hashingAlgorithm: Swift.Optional<order_by?> = nil, icoEndDate: Swift.Optional<order_by?> = nil, icoStartDate: Swift.Optional<order_by?> = nil, imageLarge: Swift.Optional<order_by?> = nil, imageSmall: Swift.Optional<order_by?> = nil, imageThumb: Swift.Optional<order_by?> = nil, links: Swift.Optional<order_by?> = nil, liquidityScore: Swift.Optional<order_by?> = nil, marketCapRank: Swift.Optional<order_by?> = nil, marketFdvToTvlRatio: Swift.Optional<order_by?> = nil, marketMcapToTvlRatio: Swift.Optional<order_by?> = nil, marketTotalValueLocked: Swift.Optional<order_by?> = nil, name: Swift.Optional<order_by?> = nil, priceChange_1m: Swift.Optional<order_by?> = nil, priceChange_1w: Swift.Optional<order_by?> = nil, priceChange_1y: Swift.Optional<order_by?> = nil, priceChange_3m: Swift.Optional<order_by?> = nil, priceChange_5y: Swift.Optional<order_by?> = nil, priceChangeAll: Swift.Optional<order_by?> = nil, publicInterestScore: Swift.Optional<order_by?> = nil, sentimentVotesDownPercentage: Swift.Optional<order_by?> = nil, sentimentVotesUpPercentage: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["alexa_rank": alexaRank, "asset_platform_id": assetPlatformId, "bing_matches": bingMatches, "categories": categories, "coingecko_rank": coingeckoRank, "coingecko_score": coingeckoScore, "community_facebook_likes": communityFacebookLikes, "community_reddit_accounts_active_48h": communityRedditAccountsActive_48h, "community_reddit_average_comments_48h": communityRedditAverageComments_48h, "community_reddit_average_posts_48h": communityRedditAveragePosts_48h, "community_reddit_subscribers": communityRedditSubscribers, "community_score": communityScore, "community_telegram_channel_user_count": communityTelegramChannelUserCount, "community_twitter_followers": communityTwitterFollowers, "country_origin": countryOrigin, "description": description, "development_closed_issues": developmentClosedIssues, "development_code_additions_deletions_4_weeks_additions": developmentCodeAdditionsDeletions_4WeeksAdditions, "development_code_additions_deletions_4_weeks_deletions": developmentCodeAdditionsDeletions_4WeeksDeletions, "development_commit_count_4_weeks": developmentCommitCount_4Weeks, "development_forks": developmentForks, "development_pull_request_contributors": developmentPullRequestContributors, "development_pull_requests_merged": developmentPullRequestsMerged, "development_score": developmentScore, "development_stars": developmentStars, "development_subscribers": developmentSubscribers, "development_total_issues": developmentTotalIssues, "hashing_algorithm": hashingAlgorithm, "ico_end_date": icoEndDate, "ico_start_date": icoStartDate, "image_large": imageLarge, "image_small": imageSmall, "image_thumb": imageThumb, "links": links, "liquidity_score": liquidityScore, "market_cap_rank": marketCapRank, "market_fdv_to_tvl_ratio": marketFdvToTvlRatio, "market_mcap_to_tvl_ratio": marketMcapToTvlRatio, "market_total_value_locked": marketTotalValueLocked, "name": name, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "public_interest_score": publicInterestScore, "sentiment_votes_down_percentage": sentimentVotesDownPercentage, "sentiment_votes_up_percentage": sentimentVotesUpPercentage, "symbol": symbol]
+  }
+
+  public var alexaRank: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["alexa_rank"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "alexa_rank")
+    }
+  }
+
+  public var assetPlatformId: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["asset_platform_id"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_platform_id")
+    }
+  }
+
+  public var bingMatches: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["bing_matches"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "bing_matches")
+    }
+  }
+
+  public var categories: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["categories"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "categories")
+    }
+  }
+
+  public var coingeckoRank: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["coingecko_rank"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_rank")
+    }
+  }
+
+  public var coingeckoScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["coingecko_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_score")
+    }
+  }
+
+  public var communityFacebookLikes: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_facebook_likes"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_facebook_likes")
+    }
+  }
+
+  public var communityRedditAccountsActive_48h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_reddit_accounts_active_48h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_accounts_active_48h")
+    }
+  }
+
+  public var communityRedditAverageComments_48h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_reddit_average_comments_48h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_comments_48h")
+    }
+  }
+
+  public var communityRedditAveragePosts_48h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_reddit_average_posts_48h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_posts_48h")
+    }
+  }
+
+  public var communityRedditSubscribers: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_reddit_subscribers"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_subscribers")
+    }
+  }
+
+  public var communityScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_score")
+    }
+  }
+
+  public var communityTelegramChannelUserCount: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_telegram_channel_user_count"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_telegram_channel_user_count")
+    }
+  }
+
+  public var communityTwitterFollowers: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["community_twitter_followers"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_twitter_followers")
+    }
+  }
+
+  public var countryOrigin: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["country_origin"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "country_origin")
+    }
+  }
+
+  public var description: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var developmentClosedIssues: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_closed_issues"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_closed_issues")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_additions"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_additions")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_deletions"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_deletions")
+    }
+  }
+
+  public var developmentCommitCount_4Weeks: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_commit_count_4_weeks"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_commit_count_4_weeks")
+    }
+  }
+
+  public var developmentForks: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_forks"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_forks")
+    }
+  }
+
+  public var developmentPullRequestContributors: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_pull_request_contributors"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_request_contributors")
+    }
+  }
+
+  public var developmentPullRequestsMerged: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_pull_requests_merged"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_requests_merged")
+    }
+  }
+
+  public var developmentScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_score")
+    }
+  }
+
+  public var developmentStars: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_stars"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_stars")
+    }
+  }
+
+  public var developmentSubscribers: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_subscribers"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_subscribers")
+    }
+  }
+
+  public var developmentTotalIssues: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["development_total_issues"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_total_issues")
+    }
+  }
+
+  public var hashingAlgorithm: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["hashing_algorithm"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "hashing_algorithm")
+    }
+  }
+
+  public var icoEndDate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ico_end_date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_end_date")
+    }
+  }
+
+  public var icoStartDate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ico_start_date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_start_date")
+    }
+  }
+
+  public var imageLarge: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["image_large"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_large")
+    }
+  }
+
+  public var imageSmall: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["image_small"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_small")
+    }
+  }
+
+  public var imageThumb: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["image_thumb"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_thumb")
+    }
+  }
+
+  public var links: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["links"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "links")
+    }
+  }
+
+  public var liquidityScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["liquidity_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "liquidity_score")
+    }
+  }
+
+  public var marketCapRank: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_cap_rank"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_cap_rank")
+    }
+  }
+
+  public var marketFdvToTvlRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_fdv_to_tvl_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_fdv_to_tvl_ratio")
+    }
+  }
+
+  public var marketMcapToTvlRatio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_mcap_to_tvl_ratio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_mcap_to_tvl_ratio")
+    }
+  }
+
+  public var marketTotalValueLocked: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_total_value_locked"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_total_value_locked")
+    }
+  }
+
+  public var name: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1w: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
+    }
+  }
+
+  public var publicInterestScore: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["public_interest_score"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "public_interest_score")
+    }
+  }
+
+  public var sentimentVotesDownPercentage: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sentiment_votes_down_percentage"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_down_percentage")
+    }
+  }
+
+  public var sentimentVotesUpPercentage: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sentiment_votes_up_percentage"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_up_percentage")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// Ordering options when selecting data from "public_220413044555.crypto_realtime_metrics".
+public struct crypto_realtime_metrics_order_by: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - ath
+  ///   - atl
+  ///   - circulatingSupply
+  ///   - high_24h
+  ///   - low_24h
+  ///   - marketCapiptalization
+  ///   - maxSupply
+  ///   - symbol
+  ///   - totalSupply
+  ///   - volume_24h
+  public init(ath: Swift.Optional<order_by?> = nil, atl: Swift.Optional<order_by?> = nil, circulatingSupply: Swift.Optional<order_by?> = nil, high_24h: Swift.Optional<order_by?> = nil, low_24h: Swift.Optional<order_by?> = nil, marketCapiptalization: Swift.Optional<order_by?> = nil, maxSupply: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, totalSupply: Swift.Optional<order_by?> = nil, volume_24h: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["ath": ath, "atl": atl, "circulating_supply": circulatingSupply, "high_24h": high_24h, "low_24h": low_24h, "market_capiptalization": marketCapiptalization, "max_supply": maxSupply, "symbol": symbol, "total_supply": totalSupply, "volume_24h": volume_24h]
+  }
+
+  public var ath: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["ath"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ath")
+    }
+  }
+
+  public var atl: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["atl"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "atl")
+    }
+  }
+
+  public var circulatingSupply: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["circulating_supply"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "circulating_supply")
+    }
+  }
+
+  public var high_24h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["high_24h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "high_24h")
+    }
+  }
+
+  public var low_24h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["low_24h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "low_24h")
+    }
+  }
+
+  public var marketCapiptalization: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["market_capiptalization"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capiptalization")
+    }
+  }
+
+  public var maxSupply: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["max_supply"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max_supply")
+    }
+  }
+
+  public var symbol: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var totalSupply: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["total_supply"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_supply")
+    }
+  }
+
+  public var volume_24h: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["volume_24h"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "volume_24h")
+    }
+  }
+}
+
 /// Ordering options when selecting data from "app.profile_ticker_match_score".
 public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -4024,13 +4684,14 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
   ///   - interestMatches
   ///   - interestSimilarity
   ///   - matchScore
+  ///   - matchesPortfolio
   ///   - profile
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
   ///   - updatedAt
-  public init(categoryMatches: Swift.Optional<order_by?> = nil, categorySimilarity: Swift.Optional<order_by?> = nil, fitsCategories: Swift.Optional<order_by?> = nil, fitsInterests: Swift.Optional<order_by?> = nil, fitsRisk: Swift.Optional<order_by?> = nil, interestMatches: Swift.Optional<order_by?> = nil, interestSimilarity: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskSimilarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
+  public init(categoryMatches: Swift.Optional<order_by?> = nil, categorySimilarity: Swift.Optional<order_by?> = nil, fitsCategories: Swift.Optional<order_by?> = nil, fitsInterests: Swift.Optional<order_by?> = nil, fitsRisk: Swift.Optional<order_by?> = nil, interestMatches: Swift.Optional<order_by?> = nil, interestSimilarity: Swift.Optional<order_by?> = nil, matchScore: Swift.Optional<order_by?> = nil, matchesPortfolio: Swift.Optional<order_by?> = nil, profile: Swift.Optional<app_profiles_order_by?> = nil, profileId: Swift.Optional<order_by?> = nil, riskSimilarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "matches_portfolio": matchesPortfolio, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var categoryMatches: Swift.Optional<order_by?> {
@@ -4105,6 +4766,15 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
     }
   }
 
+  public var matchesPortfolio: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["matches_portfolio"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "matches_portfolio")
+    }
+  }
+
   public var profile: Swift.Optional<app_profiles_order_by?> {
     get {
       return graphQLMap["profile"] as? Swift.Optional<app_profiles_order_by?> ?? Swift.Optional<app_profiles_order_by?>.none
@@ -4151,7 +4821,7 @@ public struct app_profile_ticker_match_score_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_220404091348.ticker_realtime_metrics".
+/// Ordering options when selecting data from "public_220413044555.ticker_realtime_metrics".
 public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4251,7 +4921,7 @@ public struct ticker_realtime_metrics_order_by: GraphQLMapConvertible {
   }
 }
 
-/// Ordering options when selecting data from "public_220404091348.analyst_ratings".
+/// Ordering options when selecting data from "public_220413044555.analyst_ratings".
 public struct analyst_ratings_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4341,7 +5011,7 @@ public struct analyst_ratings_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_220404091348.ticker_categories"
+/// order by aggregate values of table "public_220413044555.ticker_categories"
 public struct ticker_categories_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4461,7 +5131,7 @@ public struct ticker_categories_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_220404091348.ticker_categories"
+/// order by avg() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4481,7 +5151,7 @@ public struct ticker_categories_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_220404091348.ticker_categories"
+/// order by max() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4531,7 +5201,7 @@ public struct ticker_categories_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.ticker_categories"
+/// order by min() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4581,7 +5251,7 @@ public struct ticker_categories_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_220404091348.ticker_categories"
+/// order by stddev() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4601,7 +5271,7 @@ public struct ticker_categories_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_220404091348.ticker_categories"
+/// order by stddev_pop() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4621,7 +5291,7 @@ public struct ticker_categories_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_220404091348.ticker_categories"
+/// order by stddev_samp() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4641,7 +5311,7 @@ public struct ticker_categories_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_220404091348.ticker_categories"
+/// order by sum() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4661,7 +5331,7 @@ public struct ticker_categories_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_220404091348.ticker_categories"
+/// order by var_pop() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4681,7 +5351,7 @@ public struct ticker_categories_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_220404091348.ticker_categories"
+/// order by var_samp() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4701,7 +5371,7 @@ public struct ticker_categories_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_220404091348.ticker_categories"
+/// order by variance() on columns of table "public_220413044555.ticker_categories"
 public struct ticker_categories_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4721,7 +5391,7 @@ public struct ticker_categories_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_220404091348.profile_ticker_collections"
+/// order by aggregate values of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4841,7 +5511,7 @@ public struct ticker_collections_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by avg() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4871,7 +5541,7 @@ public struct ticker_collections_avg_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by max() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4911,7 +5581,7 @@ public struct ticker_collections_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by min() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4951,7 +5621,7 @@ public struct ticker_collections_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by stddev() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -4981,7 +5651,7 @@ public struct ticker_collections_stddev_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_pop() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by stddev_pop() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5011,7 +5681,7 @@ public struct ticker_collections_stddev_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev_samp() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by stddev_samp() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5041,7 +5711,7 @@ public struct ticker_collections_stddev_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by sum() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by sum() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5071,7 +5741,7 @@ public struct ticker_collections_sum_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_pop() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by var_pop() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5101,7 +5771,7 @@ public struct ticker_collections_var_pop_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by var_samp() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by var_samp() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5131,7 +5801,7 @@ public struct ticker_collections_var_samp_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by variance() on columns of table "public_220404091348.profile_ticker_collections"
+/// order by variance() on columns of table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5161,7 +5831,7 @@ public struct ticker_collections_variance_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_220404091348.ticker_events"
+/// order by aggregate values of table "public_220413044555.ticker_events"
 public struct ticker_events_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5201,7 +5871,7 @@ public struct ticker_events_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_220404091348.ticker_events"
+/// order by max() on columns of table "public_220413044555.ticker_events"
 public struct ticker_events_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5281,7 +5951,7 @@ public struct ticker_events_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.ticker_events"
+/// order by min() on columns of table "public_220413044555.ticker_events"
 public struct ticker_events_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5361,7 +6031,7 @@ public struct ticker_events_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_220404091348.ticker_highlights"
+/// order by aggregate values of table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5401,7 +6071,7 @@ public struct ticker_highlights_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by max() on columns of table "public_220404091348.ticker_highlights"
+/// order by max() on columns of table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5451,7 +6121,7 @@ public struct ticker_highlights_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.ticker_highlights"
+/// order by min() on columns of table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5501,7 +6171,7 @@ public struct ticker_highlights_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by aggregate values of table "public_220404091348.ticker_industries"
+/// order by aggregate values of table "public_220413044555.ticker_industries"
 public struct ticker_industries_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5621,15 +6291,16 @@ public struct ticker_industries_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_220404091348.ticker_industries"
+/// order by avg() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5649,9 +6320,18 @@ public struct ticker_industries_avg_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by max() on columns of table "public_220404091348.ticker_industries"
+/// order by max() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5659,10 +6339,11 @@ public struct ticker_industries_max_order_by: GraphQLMapConvertible {
   ///   - id
   ///   - industryId
   ///   - industryOrder
+  ///   - similarity
   ///   - symbol
   ///   - updatedAt
-  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "updated_at": updatedAt]
+  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "similarity": similarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -5692,6 +6373,15 @@ public struct ticker_industries_max_order_by: GraphQLMapConvertible {
     }
   }
 
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
+
   public var symbol: Swift.Optional<order_by?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
@@ -5711,7 +6401,7 @@ public struct ticker_industries_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.ticker_industries"
+/// order by min() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -5719,10 +6409,11 @@ public struct ticker_industries_min_order_by: GraphQLMapConvertible {
   ///   - id
   ///   - industryId
   ///   - industryOrder
+  ///   - similarity
   ///   - symbol
   ///   - updatedAt
-  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "updated_at": updatedAt]
+  public init(id: Swift.Optional<order_by?> = nil, industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "industry_id": industryId, "industry_order": industryOrder, "similarity": similarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -5752,6 +6443,15 @@ public struct ticker_industries_min_order_by: GraphQLMapConvertible {
     }
   }
 
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
+
   public var symbol: Swift.Optional<order_by?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
@@ -5771,15 +6471,16 @@ public struct ticker_industries_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_220404091348.ticker_industries"
+/// order by stddev() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5799,17 +6500,27 @@ public struct ticker_industries_stddev_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by stddev_pop() on columns of table "public_220404091348.ticker_industries"
+/// order by stddev_pop() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5829,17 +6540,27 @@ public struct ticker_industries_stddev_pop_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by stddev_samp() on columns of table "public_220404091348.ticker_industries"
+/// order by stddev_samp() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5859,17 +6580,27 @@ public struct ticker_industries_stddev_samp_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by sum() on columns of table "public_220404091348.ticker_industries"
+/// order by sum() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5889,17 +6620,27 @@ public struct ticker_industries_sum_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by var_pop() on columns of table "public_220404091348.ticker_industries"
+/// order by var_pop() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5919,17 +6660,27 @@ public struct ticker_industries_var_pop_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by var_samp() on columns of table "public_220404091348.ticker_industries"
+/// order by var_samp() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5949,17 +6700,27 @@ public struct ticker_industries_var_samp_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by variance() on columns of table "public_220404091348.ticker_industries"
+/// order by variance() on columns of table "public_220413044555.ticker_industries"
 public struct ticker_industries_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - industryId
   ///   - industryOrder
-  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder]
+  ///   - similarity
+  public init(industryId: Swift.Optional<order_by?> = nil, industryOrder: Swift.Optional<order_by?> = nil, similarity: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["industry_id": industryId, "industry_order": industryOrder, "similarity": similarity]
   }
 
   public var industryId: Swift.Optional<order_by?> {
@@ -5979,9 +6740,18 @@ public struct ticker_industries_variance_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
     }
   }
+
+  public var similarity: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
+    }
+  }
 }
 
-/// order by aggregate values of table "public_220404091348.ticker_interests"
+/// order by aggregate values of table "public_220413044555.ticker_interests"
 public struct ticker_interests_aggregate_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -6101,14 +6871,15 @@ public struct ticker_interests_aggregate_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by avg() on columns of table "public_220404091348.ticker_interests"
+/// order by avg() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_avg_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6119,19 +6890,29 @@ public struct ticker_interests_avg_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by max() on columns of table "public_220404091348.ticker_interests"
+/// order by max() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_max_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - id
   ///   - interestId
+  ///   - simDif
   ///   - symbol
   ///   - updatedAt
-  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "interest_id": interestId, "symbol": symbol, "updated_at": updatedAt]
+  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "interest_id": interestId, "sim_dif": simDif, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -6149,6 +6930,15 @@ public struct ticker_interests_max_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
     }
   }
 
@@ -6171,17 +6961,18 @@ public struct ticker_interests_max_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by min() on columns of table "public_220404091348.ticker_interests"
+/// order by min() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_min_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - id
   ///   - interestId
+  ///   - simDif
   ///   - symbol
   ///   - updatedAt
-  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["id": id, "interest_id": interestId, "symbol": symbol, "updated_at": updatedAt]
+  public init(id: Swift.Optional<order_by?> = nil, interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil, symbol: Swift.Optional<order_by?> = nil, updatedAt: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["id": id, "interest_id": interestId, "sim_dif": simDif, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var id: Swift.Optional<order_by?> {
@@ -6199,6 +6990,15 @@ public struct ticker_interests_min_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
+    }
+  }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
     }
   }
 
@@ -6221,14 +7021,15 @@ public struct ticker_interests_min_order_by: GraphQLMapConvertible {
   }
 }
 
-/// order by stddev() on columns of table "public_220404091348.ticker_interests"
+/// order by stddev() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_stddev_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6239,16 +7040,26 @@ public struct ticker_interests_stddev_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by stddev_pop() on columns of table "public_220404091348.ticker_interests"
+/// order by stddev_pop() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_stddev_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6259,16 +7070,26 @@ public struct ticker_interests_stddev_pop_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by stddev_samp() on columns of table "public_220404091348.ticker_interests"
+/// order by stddev_samp() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_stddev_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6279,16 +7100,26 @@ public struct ticker_interests_stddev_samp_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by sum() on columns of table "public_220404091348.ticker_interests"
+/// order by sum() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_sum_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6299,16 +7130,26 @@ public struct ticker_interests_sum_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by var_pop() on columns of table "public_220404091348.ticker_interests"
+/// order by var_pop() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_var_pop_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6319,16 +7160,26 @@ public struct ticker_interests_var_pop_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by var_samp() on columns of table "public_220404091348.ticker_interests"
+/// order by var_samp() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_var_samp_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6339,16 +7190,26 @@ public struct ticker_interests_var_samp_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// order by variance() on columns of table "public_220404091348.ticker_interests"
+/// order by variance() on columns of table "public_220413044555.ticker_interests"
 public struct ticker_interests_variance_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - interestId
-  public init(interestId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["interest_id": interestId]
+  ///   - simDif
+  public init(interestId: Swift.Optional<order_by?> = nil, simDif: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["interest_id": interestId, "sim_dif": simDif]
   }
 
   public var interestId: Swift.Optional<order_by?> {
@@ -6359,9 +7220,18 @@ public struct ticker_interests_variance_order_by: GraphQLMapConvertible {
       graphQLMap.updateValue(newValue, forKey: "interest_id")
     }
   }
+
+  public var simDif: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
 }
 
-/// Ordering options when selecting data from "public_220404091348.ticker_metrics".
+/// Ordering options when selecting data from "public_220413044555.ticker_metrics".
 public struct ticker_metrics_order_by: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7262,7 +8132,7 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.portfolio_gains"
+/// input type for inserting object relation for remote table "public_220413044555.portfolio_gains"
 public struct portfolio_gains_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7293,7 +8163,7 @@ public struct portfolio_gains_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.portfolio_gains"
+/// input type for inserting data into table "public_220413044555.portfolio_gains"
 public struct portfolio_gains_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7483,7 +8353,7 @@ public struct portfolio_gains_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.portfolio_gains"
+/// on conflict condition type for table "public_220413044555.portfolio_gains"
 public struct portfolio_gains_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -7523,7 +8393,7 @@ public struct portfolio_gains_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.portfolio_gains"
+/// unique or primary key constraints on table "public_220413044555.portfolio_gains"
 public enum portfolio_gains_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -7560,7 +8430,7 @@ public enum portfolio_gains_constraint: RawRepresentable, Equatable, Hashable, C
   }
 }
 
-/// update columns of table "public_220404091348.portfolio_gains"
+/// update columns of table "public_220413044555.portfolio_gains"
 public enum portfolio_gains_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -7693,7 +8563,7 @@ public enum portfolio_gains_update_column: RawRepresentable, Equatable, Hashable
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.portfolio_gains". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.portfolio_gains". All fields are combined with a logical 'AND'.
 public struct portfolio_gains_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8783,7 +9653,7 @@ public struct app_profile_favorite_collections_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.profile_collections". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.profile_collections". All fields are combined with a logical 'AND'.
 public struct collections_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -8963,7 +9833,7 @@ public struct collections_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.collection_match_score". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.collection_match_score". All fields are combined with a logical 'AND'.
 public struct collection_match_score_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9113,7 +9983,7 @@ public struct collection_match_score_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.collection_match_score_explanation". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.collection_match_score_explanation". All fields are combined with a logical 'AND'.
 public struct collection_match_score_explanation_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9233,7 +10103,7 @@ public struct collection_match_score_explanation_bool_exp: GraphQLMapConvertible
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.categories". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.categories". All fields are combined with a logical 'AND'.
 public struct categories_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9333,7 +10203,7 @@ public struct categories_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.interests". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.interests". All fields are combined with a logical 'AND'.
 public struct interests_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9433,7 +10303,7 @@ public struct interests_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_interests". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_interests". All fields are combined with a logical 'AND'.
 public struct ticker_interests_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9444,11 +10314,12 @@ public struct ticker_interests_bool_exp: GraphQLMapConvertible {
   ///   - id
   ///   - interest
   ///   - interestId
+  ///   - simDif
   ///   - symbol
   ///   - ticker
   ///   - updatedAt
-  public init(_and: Swift.Optional<[ticker_interests_bool_exp]?> = nil, _not: Swift.Optional<ticker_interests_bool_exp?> = nil, _or: Swift.Optional<[ticker_interests_bool_exp]?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, interest: Swift.Optional<interests_bool_exp?> = nil, interestId: Swift.Optional<Int_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "id": id, "interest": interest, "interest_id": interestId, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[ticker_interests_bool_exp]?> = nil, _not: Swift.Optional<ticker_interests_bool_exp?> = nil, _or: Swift.Optional<[ticker_interests_bool_exp]?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, interest: Swift.Optional<interests_bool_exp?> = nil, interestId: Swift.Optional<Int_comparison_exp?> = nil, simDif: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "id": id, "interest": interest, "interest_id": interestId, "sim_dif": simDif, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[ticker_interests_bool_exp]?> {
@@ -9505,6 +10376,15 @@ public struct ticker_interests_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var simDif: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
+
   public var symbol: Swift.Optional<String_comparison_exp?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
@@ -9523,9 +10403,9 @@ public struct ticker_interests_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
+  public var updatedAt: Swift.Optional<timestamp_comparison_exp?> {
     get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamp_comparison_exp?> ?? Swift.Optional<timestamp_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
@@ -9533,7 +10413,7 @@ public struct ticker_interests_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.tickers". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.tickers". All fields are combined with a logical 'AND'.
 public struct tickers_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -9542,8 +10422,11 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - _not
   ///   - _or
   ///   - countryName
+  ///   - cryptoMetrics
+  ///   - cryptoRealtimeMetrics
   ///   - description
   ///   - exchange
+  ///   - exchangeCanonical
   ///   - gicGroup
   ///   - gicIndustry
   ///   - gicSector
@@ -9568,8 +10451,8 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(_and: Swift.Optional<[tickers_bool_exp]?> = nil, _not: Swift.Optional<tickers_bool_exp?> = nil, _or: Swift.Optional<[tickers_bool_exp]?> = nil, countryName: Swift.Optional<String_comparison_exp?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_bool_exp?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_bool_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, exchange: Swift.Optional<String_comparison_exp?> = nil, exchangeCanonical: Swift.Optional<String_comparison_exp?> = nil, gicGroup: Swift.Optional<String_comparison_exp?> = nil, gicIndustry: Swift.Optional<String_comparison_exp?> = nil, gicSector: Swift.Optional<String_comparison_exp?> = nil, gicSubIndustry: Swift.Optional<String_comparison_exp?> = nil, industry: Swift.Optional<String_comparison_exp?> = nil, ipoDate: Swift.Optional<date_comparison_exp?> = nil, logoUrl: Swift.Optional<String_comparison_exp?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, phone: Swift.Optional<String_comparison_exp?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_bool_exp?> = nil, sector: Swift.Optional<String_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_bool_exp?> = nil, tickerCategories: Swift.Optional<ticker_categories_bool_exp?> = nil, tickerCollections: Swift.Optional<ticker_collections_bool_exp?> = nil, tickerEvents: Swift.Optional<ticker_events_bool_exp?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_bool_exp?> = nil, tickerIndustries: Swift.Optional<ticker_industries_bool_exp?> = nil, tickerInterests: Swift.Optional<ticker_interests_bool_exp?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_bool_exp?> = nil, type: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil, webUrl: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var _and: Swift.Optional<[tickers_bool_exp]?> {
@@ -9608,6 +10491,24 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var cryptoMetrics: Swift.Optional<crypto_metrics_bool_exp?> {
+    get {
+      return graphQLMap["crypto_metrics"] as? Swift.Optional<crypto_metrics_bool_exp?> ?? Swift.Optional<crypto_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_metrics")
+    }
+  }
+
+  public var cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_bool_exp?> {
+    get {
+      return graphQLMap["crypto_realtime_metrics"] as? Swift.Optional<crypto_realtime_metrics_bool_exp?> ?? Swift.Optional<crypto_realtime_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_realtime_metrics")
+    }
+  }
+
   public var description: Swift.Optional<String_comparison_exp?> {
     get {
       return graphQLMap["description"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
@@ -9623,6 +10524,15 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "exchange")
+    }
+  }
+
+  public var exchangeCanonical: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["exchange_canonical"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_canonical")
     }
   }
 
@@ -9843,6 +10753,701 @@ public struct tickers_bool_exp: GraphQLMapConvertible {
   }
 }
 
+/// Boolean expression to filter rows from the table "public_220413044555.crypto_metrics". All fields are combined with a logical 'AND'.
+public struct crypto_metrics_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - alexaRank
+  ///   - assetPlatformId
+  ///   - bingMatches
+  ///   - categories
+  ///   - coingeckoRank
+  ///   - coingeckoScore
+  ///   - communityFacebookLikes
+  ///   - communityRedditAccountsActive_48h
+  ///   - communityRedditAverageComments_48h
+  ///   - communityRedditAveragePosts_48h
+  ///   - communityRedditSubscribers
+  ///   - communityScore
+  ///   - communityTelegramChannelUserCount
+  ///   - communityTwitterFollowers
+  ///   - countryOrigin
+  ///   - description
+  ///   - developmentClosedIssues
+  ///   - developmentCodeAdditionsDeletions_4WeeksAdditions
+  ///   - developmentCodeAdditionsDeletions_4WeeksDeletions
+  ///   - developmentCommitCount_4Weeks
+  ///   - developmentForks
+  ///   - developmentPullRequestContributors
+  ///   - developmentPullRequestsMerged
+  ///   - developmentScore
+  ///   - developmentStars
+  ///   - developmentSubscribers
+  ///   - developmentTotalIssues
+  ///   - hashingAlgorithm
+  ///   - icoEndDate
+  ///   - icoStartDate
+  ///   - imageLarge
+  ///   - imageSmall
+  ///   - imageThumb
+  ///   - links
+  ///   - liquidityScore
+  ///   - marketCapRank
+  ///   - marketFdvToTvlRatio
+  ///   - marketMcapToTvlRatio
+  ///   - marketTotalValueLocked
+  ///   - name
+  ///   - priceChange_1m
+  ///   - priceChange_1w
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
+  ///   - publicInterestScore
+  ///   - sentimentVotesDownPercentage
+  ///   - sentimentVotesUpPercentage
+  ///   - symbol
+  public init(_and: Swift.Optional<[crypto_metrics_bool_exp]?> = nil, _not: Swift.Optional<crypto_metrics_bool_exp?> = nil, _or: Swift.Optional<[crypto_metrics_bool_exp]?> = nil, alexaRank: Swift.Optional<Int_comparison_exp?> = nil, assetPlatformId: Swift.Optional<String_comparison_exp?> = nil, bingMatches: Swift.Optional<Int_comparison_exp?> = nil, categories: Swift.Optional<jsonb_comparison_exp?> = nil, coingeckoRank: Swift.Optional<Int_comparison_exp?> = nil, coingeckoScore: Swift.Optional<float8_comparison_exp?> = nil, communityFacebookLikes: Swift.Optional<Int_comparison_exp?> = nil, communityRedditAccountsActive_48h: Swift.Optional<Int_comparison_exp?> = nil, communityRedditAverageComments_48h: Swift.Optional<float8_comparison_exp?> = nil, communityRedditAveragePosts_48h: Swift.Optional<float8_comparison_exp?> = nil, communityRedditSubscribers: Swift.Optional<Int_comparison_exp?> = nil, communityScore: Swift.Optional<float8_comparison_exp?> = nil, communityTelegramChannelUserCount: Swift.Optional<Int_comparison_exp?> = nil, communityTwitterFollowers: Swift.Optional<Int_comparison_exp?> = nil, countryOrigin: Swift.Optional<String_comparison_exp?> = nil, description: Swift.Optional<String_comparison_exp?> = nil, developmentClosedIssues: Swift.Optional<Int_comparison_exp?> = nil, developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<Int_comparison_exp?> = nil, developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<Int_comparison_exp?> = nil, developmentCommitCount_4Weeks: Swift.Optional<Int_comparison_exp?> = nil, developmentForks: Swift.Optional<Int_comparison_exp?> = nil, developmentPullRequestContributors: Swift.Optional<Int_comparison_exp?> = nil, developmentPullRequestsMerged: Swift.Optional<Int_comparison_exp?> = nil, developmentScore: Swift.Optional<float8_comparison_exp?> = nil, developmentStars: Swift.Optional<Int_comparison_exp?> = nil, developmentSubscribers: Swift.Optional<Int_comparison_exp?> = nil, developmentTotalIssues: Swift.Optional<Int_comparison_exp?> = nil, hashingAlgorithm: Swift.Optional<String_comparison_exp?> = nil, icoEndDate: Swift.Optional<date_comparison_exp?> = nil, icoStartDate: Swift.Optional<date_comparison_exp?> = nil, imageLarge: Swift.Optional<String_comparison_exp?> = nil, imageSmall: Swift.Optional<String_comparison_exp?> = nil, imageThumb: Swift.Optional<String_comparison_exp?> = nil, links: Swift.Optional<jsonb_comparison_exp?> = nil, liquidityScore: Swift.Optional<float8_comparison_exp?> = nil, marketCapRank: Swift.Optional<Int_comparison_exp?> = nil, marketFdvToTvlRatio: Swift.Optional<float8_comparison_exp?> = nil, marketMcapToTvlRatio: Swift.Optional<float8_comparison_exp?> = nil, marketTotalValueLocked: Swift.Optional<float8_comparison_exp?> = nil, name: Swift.Optional<String_comparison_exp?> = nil, priceChange_1m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1w: Swift.Optional<float8_comparison_exp?> = nil, priceChange_1y: Swift.Optional<float8_comparison_exp?> = nil, priceChange_3m: Swift.Optional<float8_comparison_exp?> = nil, priceChange_5y: Swift.Optional<float8_comparison_exp?> = nil, priceChangeAll: Swift.Optional<float8_comparison_exp?> = nil, publicInterestScore: Swift.Optional<float8_comparison_exp?> = nil, sentimentVotesDownPercentage: Swift.Optional<float8_comparison_exp?> = nil, sentimentVotesUpPercentage: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "alexa_rank": alexaRank, "asset_platform_id": assetPlatformId, "bing_matches": bingMatches, "categories": categories, "coingecko_rank": coingeckoRank, "coingecko_score": coingeckoScore, "community_facebook_likes": communityFacebookLikes, "community_reddit_accounts_active_48h": communityRedditAccountsActive_48h, "community_reddit_average_comments_48h": communityRedditAverageComments_48h, "community_reddit_average_posts_48h": communityRedditAveragePosts_48h, "community_reddit_subscribers": communityRedditSubscribers, "community_score": communityScore, "community_telegram_channel_user_count": communityTelegramChannelUserCount, "community_twitter_followers": communityTwitterFollowers, "country_origin": countryOrigin, "description": description, "development_closed_issues": developmentClosedIssues, "development_code_additions_deletions_4_weeks_additions": developmentCodeAdditionsDeletions_4WeeksAdditions, "development_code_additions_deletions_4_weeks_deletions": developmentCodeAdditionsDeletions_4WeeksDeletions, "development_commit_count_4_weeks": developmentCommitCount_4Weeks, "development_forks": developmentForks, "development_pull_request_contributors": developmentPullRequestContributors, "development_pull_requests_merged": developmentPullRequestsMerged, "development_score": developmentScore, "development_stars": developmentStars, "development_subscribers": developmentSubscribers, "development_total_issues": developmentTotalIssues, "hashing_algorithm": hashingAlgorithm, "ico_end_date": icoEndDate, "ico_start_date": icoStartDate, "image_large": imageLarge, "image_small": imageSmall, "image_thumb": imageThumb, "links": links, "liquidity_score": liquidityScore, "market_cap_rank": marketCapRank, "market_fdv_to_tvl_ratio": marketFdvToTvlRatio, "market_mcap_to_tvl_ratio": marketMcapToTvlRatio, "market_total_value_locked": marketTotalValueLocked, "name": name, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "public_interest_score": publicInterestScore, "sentiment_votes_down_percentage": sentimentVotesDownPercentage, "sentiment_votes_up_percentage": sentimentVotesUpPercentage, "symbol": symbol]
+  }
+
+  public var _and: Swift.Optional<[crypto_metrics_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[crypto_metrics_bool_exp]?> ?? Swift.Optional<[crypto_metrics_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<crypto_metrics_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<crypto_metrics_bool_exp?> ?? Swift.Optional<crypto_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[crypto_metrics_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[crypto_metrics_bool_exp]?> ?? Swift.Optional<[crypto_metrics_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var alexaRank: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["alexa_rank"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "alexa_rank")
+    }
+  }
+
+  public var assetPlatformId: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["asset_platform_id"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_platform_id")
+    }
+  }
+
+  public var bingMatches: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["bing_matches"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "bing_matches")
+    }
+  }
+
+  public var categories: Swift.Optional<jsonb_comparison_exp?> {
+    get {
+      return graphQLMap["categories"] as? Swift.Optional<jsonb_comparison_exp?> ?? Swift.Optional<jsonb_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "categories")
+    }
+  }
+
+  public var coingeckoRank: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["coingecko_rank"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_rank")
+    }
+  }
+
+  public var coingeckoScore: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["coingecko_score"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_score")
+    }
+  }
+
+  public var communityFacebookLikes: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["community_facebook_likes"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_facebook_likes")
+    }
+  }
+
+  public var communityRedditAccountsActive_48h: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["community_reddit_accounts_active_48h"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_accounts_active_48h")
+    }
+  }
+
+  public var communityRedditAverageComments_48h: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["community_reddit_average_comments_48h"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_comments_48h")
+    }
+  }
+
+  public var communityRedditAveragePosts_48h: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["community_reddit_average_posts_48h"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_posts_48h")
+    }
+  }
+
+  public var communityRedditSubscribers: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["community_reddit_subscribers"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_subscribers")
+    }
+  }
+
+  public var communityScore: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["community_score"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_score")
+    }
+  }
+
+  public var communityTelegramChannelUserCount: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["community_telegram_channel_user_count"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_telegram_channel_user_count")
+    }
+  }
+
+  public var communityTwitterFollowers: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["community_twitter_followers"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_twitter_followers")
+    }
+  }
+
+  public var countryOrigin: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["country_origin"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "country_origin")
+    }
+  }
+
+  public var description: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var developmentClosedIssues: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_closed_issues"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_closed_issues")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_additions"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_additions")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_deletions"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_deletions")
+    }
+  }
+
+  public var developmentCommitCount_4Weeks: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_commit_count_4_weeks"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_commit_count_4_weeks")
+    }
+  }
+
+  public var developmentForks: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_forks"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_forks")
+    }
+  }
+
+  public var developmentPullRequestContributors: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_pull_request_contributors"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_request_contributors")
+    }
+  }
+
+  public var developmentPullRequestsMerged: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_pull_requests_merged"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_requests_merged")
+    }
+  }
+
+  public var developmentScore: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["development_score"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_score")
+    }
+  }
+
+  public var developmentStars: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_stars"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_stars")
+    }
+  }
+
+  public var developmentSubscribers: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_subscribers"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_subscribers")
+    }
+  }
+
+  public var developmentTotalIssues: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["development_total_issues"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_total_issues")
+    }
+  }
+
+  public var hashingAlgorithm: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["hashing_algorithm"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "hashing_algorithm")
+    }
+  }
+
+  public var icoEndDate: Swift.Optional<date_comparison_exp?> {
+    get {
+      return graphQLMap["ico_end_date"] as? Swift.Optional<date_comparison_exp?> ?? Swift.Optional<date_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_end_date")
+    }
+  }
+
+  public var icoStartDate: Swift.Optional<date_comparison_exp?> {
+    get {
+      return graphQLMap["ico_start_date"] as? Swift.Optional<date_comparison_exp?> ?? Swift.Optional<date_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_start_date")
+    }
+  }
+
+  public var imageLarge: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["image_large"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_large")
+    }
+  }
+
+  public var imageSmall: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["image_small"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_small")
+    }
+  }
+
+  public var imageThumb: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["image_thumb"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_thumb")
+    }
+  }
+
+  public var links: Swift.Optional<jsonb_comparison_exp?> {
+    get {
+      return graphQLMap["links"] as? Swift.Optional<jsonb_comparison_exp?> ?? Swift.Optional<jsonb_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "links")
+    }
+  }
+
+  public var liquidityScore: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["liquidity_score"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "liquidity_score")
+    }
+  }
+
+  public var marketCapRank: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["market_cap_rank"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_cap_rank")
+    }
+  }
+
+  public var marketFdvToTvlRatio: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["market_fdv_to_tvl_ratio"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_fdv_to_tvl_ratio")
+    }
+  }
+
+  public var marketMcapToTvlRatio: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["market_mcap_to_tvl_ratio"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_mcap_to_tvl_ratio")
+    }
+  }
+
+  public var marketTotalValueLocked: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["market_total_value_locked"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_total_value_locked")
+    }
+  }
+
+  public var name: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1w: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
+    }
+  }
+
+  public var publicInterestScore: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["public_interest_score"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "public_interest_score")
+    }
+  }
+
+  public var sentimentVotesDownPercentage: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["sentiment_votes_down_percentage"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_down_percentage")
+    }
+  }
+
+  public var sentimentVotesUpPercentage: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["sentiment_votes_up_percentage"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_up_percentage")
+    }
+  }
+
+  public var symbol: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'.
+public struct jsonb_comparison_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _containedIn: is the column contained in the given json value
+  ///   - _contains: does the column contain the given json value at the top level
+  ///   - _eq
+  ///   - _gt
+  ///   - _gte
+  ///   - _hasKey: does the string exist as a top-level key in the column
+  ///   - _hasKeysAll: do all of these strings exist as top-level keys in the column
+  ///   - _hasKeysAny: do any of these strings exist as top-level keys in the column
+  ///   - _in
+  ///   - _isNull
+  ///   - _lt
+  ///   - _lte
+  ///   - _neq
+  ///   - _nin
+  public init(_containedIn: Swift.Optional<jsonb?> = nil, _contains: Swift.Optional<jsonb?> = nil, _eq: Swift.Optional<jsonb?> = nil, _gt: Swift.Optional<jsonb?> = nil, _gte: Swift.Optional<jsonb?> = nil, _hasKey: Swift.Optional<String?> = nil, _hasKeysAll: Swift.Optional<[String]?> = nil, _hasKeysAny: Swift.Optional<[String]?> = nil, _in: Swift.Optional<[jsonb]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<jsonb?> = nil, _lte: Swift.Optional<jsonb?> = nil, _neq: Swift.Optional<jsonb?> = nil, _nin: Swift.Optional<[jsonb]?> = nil) {
+    graphQLMap = ["_contained_in": _containedIn, "_contains": _contains, "_eq": _eq, "_gt": _gt, "_gte": _gte, "_has_key": _hasKey, "_has_keys_all": _hasKeysAll, "_has_keys_any": _hasKeysAny, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
+  }
+
+  /// is the column contained in the given json value
+  public var _containedIn: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_contained_in"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_contained_in")
+    }
+  }
+
+  /// does the column contain the given json value at the top level
+  public var _contains: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_contains"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_contains")
+    }
+  }
+
+  public var _eq: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_eq"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_eq")
+    }
+  }
+
+  public var _gt: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_gt"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gt")
+    }
+  }
+
+  public var _gte: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_gte"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gte")
+    }
+  }
+
+  /// does the string exist as a top-level key in the column
+  public var _hasKey: Swift.Optional<String?> {
+    get {
+      return graphQLMap["_has_key"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_has_key")
+    }
+  }
+
+  /// do all of these strings exist as top-level keys in the column
+  public var _hasKeysAll: Swift.Optional<[String]?> {
+    get {
+      return graphQLMap["_has_keys_all"] as? Swift.Optional<[String]?> ?? Swift.Optional<[String]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_has_keys_all")
+    }
+  }
+
+  /// do any of these strings exist as top-level keys in the column
+  public var _hasKeysAny: Swift.Optional<[String]?> {
+    get {
+      return graphQLMap["_has_keys_any"] as? Swift.Optional<[String]?> ?? Swift.Optional<[String]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_has_keys_any")
+    }
+  }
+
+  public var _in: Swift.Optional<[jsonb]?> {
+    get {
+      return graphQLMap["_in"] as? Swift.Optional<[jsonb]?> ?? Swift.Optional<[jsonb]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_in")
+    }
+  }
+
+  public var _isNull: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_is_null")
+    }
+  }
+
+  public var _lt: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_lt"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lt")
+    }
+  }
+
+  public var _lte: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_lte"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lte")
+    }
+  }
+
+  public var _neq: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["_neq"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_neq")
+    }
+  }
+
+  public var _nin: Swift.Optional<[jsonb]?> {
+    get {
+      return graphQLMap["_nin"] as? Swift.Optional<[jsonb]?> ?? Swift.Optional<[jsonb]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_nin")
+    }
+  }
+}
+
 /// Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'.
 public struct date_comparison_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -9943,6 +11548,146 @@ public struct date_comparison_exp: GraphQLMapConvertible {
   }
 }
 
+/// Boolean expression to filter rows from the table "public_220413044555.crypto_realtime_metrics". All fields are combined with a logical 'AND'.
+public struct crypto_realtime_metrics_bool_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _and
+  ///   - _not
+  ///   - _or
+  ///   - ath
+  ///   - atl
+  ///   - circulatingSupply
+  ///   - high_24h
+  ///   - low_24h
+  ///   - marketCapiptalization
+  ///   - maxSupply
+  ///   - symbol
+  ///   - totalSupply
+  ///   - volume_24h
+  public init(_and: Swift.Optional<[crypto_realtime_metrics_bool_exp]?> = nil, _not: Swift.Optional<crypto_realtime_metrics_bool_exp?> = nil, _or: Swift.Optional<[crypto_realtime_metrics_bool_exp]?> = nil, ath: Swift.Optional<float8_comparison_exp?> = nil, atl: Swift.Optional<float8_comparison_exp?> = nil, circulatingSupply: Swift.Optional<float8_comparison_exp?> = nil, high_24h: Swift.Optional<float8_comparison_exp?> = nil, low_24h: Swift.Optional<float8_comparison_exp?> = nil, marketCapiptalization: Swift.Optional<float8_comparison_exp?> = nil, maxSupply: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, totalSupply: Swift.Optional<float8_comparison_exp?> = nil, volume_24h: Swift.Optional<float8_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "ath": ath, "atl": atl, "circulating_supply": circulatingSupply, "high_24h": high_24h, "low_24h": low_24h, "market_capiptalization": marketCapiptalization, "max_supply": maxSupply, "symbol": symbol, "total_supply": totalSupply, "volume_24h": volume_24h]
+  }
+
+  public var _and: Swift.Optional<[crypto_realtime_metrics_bool_exp]?> {
+    get {
+      return graphQLMap["_and"] as? Swift.Optional<[crypto_realtime_metrics_bool_exp]?> ?? Swift.Optional<[crypto_realtime_metrics_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_and")
+    }
+  }
+
+  public var _not: Swift.Optional<crypto_realtime_metrics_bool_exp?> {
+    get {
+      return graphQLMap["_not"] as? Swift.Optional<crypto_realtime_metrics_bool_exp?> ?? Swift.Optional<crypto_realtime_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_not")
+    }
+  }
+
+  public var _or: Swift.Optional<[crypto_realtime_metrics_bool_exp]?> {
+    get {
+      return graphQLMap["_or"] as? Swift.Optional<[crypto_realtime_metrics_bool_exp]?> ?? Swift.Optional<[crypto_realtime_metrics_bool_exp]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_or")
+    }
+  }
+
+  public var ath: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["ath"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ath")
+    }
+  }
+
+  public var atl: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["atl"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "atl")
+    }
+  }
+
+  public var circulatingSupply: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["circulating_supply"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "circulating_supply")
+    }
+  }
+
+  public var high_24h: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["high_24h"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "high_24h")
+    }
+  }
+
+  public var low_24h: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["low_24h"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "low_24h")
+    }
+  }
+
+  public var marketCapiptalization: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["market_capiptalization"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capiptalization")
+    }
+  }
+
+  public var maxSupply: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["max_supply"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max_supply")
+    }
+  }
+
+  public var symbol: Swift.Optional<String_comparison_exp?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String_comparison_exp?> ?? Swift.Optional<String_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var totalSupply: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["total_supply"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_supply")
+    }
+  }
+
+  public var volume_24h: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["volume_24h"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "volume_24h")
+    }
+  }
+}
+
 /// Boolean expression to filter rows from the table "app.profile_ticker_match_score". All fields are combined with a logical 'AND'.
 public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -9959,13 +11704,14 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
   ///   - interestMatches
   ///   - interestSimilarity
   ///   - matchScore
+  ///   - matchesPortfolio
   ///   - profile
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
   ///   - updatedAt
-  public init(_and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, categoryMatches: Swift.Optional<String_comparison_exp?> = nil, categorySimilarity: Swift.Optional<float8_comparison_exp?> = nil, fitsCategories: Swift.Optional<Int_comparison_exp?> = nil, fitsInterests: Swift.Optional<Int_comparison_exp?> = nil, fitsRisk: Swift.Optional<Int_comparison_exp?> = nil, interestMatches: Swift.Optional<String_comparison_exp?> = nil, interestSimilarity: Swift.Optional<float8_comparison_exp?> = nil, matchScore: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskSimilarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, _not: Swift.Optional<app_profile_ticker_match_score_bool_exp?> = nil, _or: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> = nil, categoryMatches: Swift.Optional<String_comparison_exp?> = nil, categorySimilarity: Swift.Optional<float8_comparison_exp?> = nil, fitsCategories: Swift.Optional<Int_comparison_exp?> = nil, fitsInterests: Swift.Optional<Int_comparison_exp?> = nil, fitsRisk: Swift.Optional<Int_comparison_exp?> = nil, interestMatches: Swift.Optional<String_comparison_exp?> = nil, interestSimilarity: Swift.Optional<float8_comparison_exp?> = nil, matchScore: Swift.Optional<Int_comparison_exp?> = nil, matchesPortfolio: Swift.Optional<Boolean_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskSimilarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "matches_portfolio": matchesPortfolio, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[app_profile_ticker_match_score_bool_exp]?> {
@@ -10067,6 +11813,15 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
     }
   }
 
+  public var matchesPortfolio: Swift.Optional<Boolean_comparison_exp?> {
+    get {
+      return graphQLMap["matches_portfolio"] as? Swift.Optional<Boolean_comparison_exp?> ?? Swift.Optional<Boolean_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "matches_portfolio")
+    }
+  }
+
   public var profile: Swift.Optional<app_profiles_bool_exp?> {
     get {
       return graphQLMap["profile"] as? Swift.Optional<app_profiles_bool_exp?> ?? Swift.Optional<app_profiles_bool_exp?>.none
@@ -10113,7 +11868,107 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_realtime_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+public struct Boolean_comparison_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _eq
+  ///   - _gt
+  ///   - _gte
+  ///   - _in
+  ///   - _isNull
+  ///   - _lt
+  ///   - _lte
+  ///   - _neq
+  ///   - _nin
+  public init(_eq: Swift.Optional<Bool?> = nil, _gt: Swift.Optional<Bool?> = nil, _gte: Swift.Optional<Bool?> = nil, _in: Swift.Optional<[Bool]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<Bool?> = nil, _lte: Swift.Optional<Bool?> = nil, _neq: Swift.Optional<Bool?> = nil, _nin: Swift.Optional<[Bool]?> = nil) {
+    graphQLMap = ["_eq": _eq, "_gt": _gt, "_gte": _gte, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
+  }
+
+  public var _eq: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_eq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_eq")
+    }
+  }
+
+  public var _gt: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_gt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gt")
+    }
+  }
+
+  public var _gte: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_gte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gte")
+    }
+  }
+
+  public var _in: Swift.Optional<[Bool]?> {
+    get {
+      return graphQLMap["_in"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_in")
+    }
+  }
+
+  public var _isNull: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_is_null")
+    }
+  }
+
+  public var _lt: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_lt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lt")
+    }
+  }
+
+  public var _lte: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_lte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lte")
+    }
+  }
+
+  public var _neq: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_neq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_neq")
+    }
+  }
+
+  public var _nin: Swift.Optional<[Bool]?> {
+    get {
+      return graphQLMap["_nin"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_nin")
+    }
+  }
+}
+
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_realtime_metrics". All fields are combined with a logical 'AND'.
 public struct ticker_realtime_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10343,7 +12198,7 @@ public struct timestamp_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.analyst_ratings". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.analyst_ratings". All fields are combined with a logical 'AND'.
 public struct analyst_ratings_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10463,7 +12318,7 @@ public struct analyst_ratings_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_categories". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_categories". All fields are combined with a logical 'AND'.
 public struct ticker_categories_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10553,7 +12408,7 @@ public struct ticker_categories_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.profile_ticker_collections". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.profile_ticker_collections". All fields are combined with a logical 'AND'.
 public struct ticker_collections_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10643,7 +12498,7 @@ public struct ticker_collections_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_events". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_events". All fields are combined with a logical 'AND'.
 public struct ticker_events_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10753,7 +12608,7 @@ public struct ticker_events_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_highlights". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_highlights". All fields are combined with a logical 'AND'.
 public struct ticker_highlights_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10843,7 +12698,7 @@ public struct ticker_highlights_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_industries". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_industries". All fields are combined with a logical 'AND'.
 public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -10855,11 +12710,12 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   ///   - id
   ///   - industryId
   ///   - industryOrder
+  ///   - similarity
   ///   - symbol
   ///   - ticker
   ///   - updatedAt
-  public init(_and: Swift.Optional<[ticker_industries_bool_exp]?> = nil, _not: Swift.Optional<ticker_industries_bool_exp?> = nil, _or: Swift.Optional<[ticker_industries_bool_exp]?> = nil, gainyIndustry: Swift.Optional<gainy_industries_bool_exp?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, industryId: Swift.Optional<bigint_comparison_exp?> = nil, industryOrder: Swift.Optional<Int_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, updatedAt: Swift.Optional<timestamptz_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "gainy_industry": gainyIndustry, "id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
+  public init(_and: Swift.Optional<[ticker_industries_bool_exp]?> = nil, _not: Swift.Optional<ticker_industries_bool_exp?> = nil, _or: Swift.Optional<[ticker_industries_bool_exp]?> = nil, gainyIndustry: Swift.Optional<gainy_industries_bool_exp?> = nil, id: Swift.Optional<String_comparison_exp?> = nil, industryId: Swift.Optional<bigint_comparison_exp?> = nil, industryOrder: Swift.Optional<bigint_comparison_exp?> = nil, similarity: Swift.Optional<float8_comparison_exp?> = nil, symbol: Swift.Optional<String_comparison_exp?> = nil, ticker: Swift.Optional<tickers_bool_exp?> = nil, updatedAt: Swift.Optional<timestamp_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "gainy_industry": gainyIndustry, "id": id, "industry_id": industryId, "industry_order": industryOrder, "similarity": similarity, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
   }
 
   public var _and: Swift.Optional<[ticker_industries_bool_exp]?> {
@@ -10916,12 +12772,21 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var industryOrder: Swift.Optional<Int_comparison_exp?> {
+  public var industryOrder: Swift.Optional<bigint_comparison_exp?> {
     get {
-      return graphQLMap["industry_order"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+      return graphQLMap["industry_order"] as? Swift.Optional<bigint_comparison_exp?> ?? Swift.Optional<bigint_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+
+  public var similarity: Swift.Optional<float8_comparison_exp?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<float8_comparison_exp?> ?? Swift.Optional<float8_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
     }
   }
 
@@ -10943,9 +12808,9 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
     }
   }
 
-  public var updatedAt: Swift.Optional<timestamptz_comparison_exp?> {
+  public var updatedAt: Swift.Optional<timestamp_comparison_exp?> {
     get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamp_comparison_exp?> ?? Swift.Optional<timestamp_comparison_exp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
@@ -10953,7 +12818,7 @@ public struct ticker_industries_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.gainy_industries". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.gainy_industries". All fields are combined with a logical 'AND'.
 public struct gainy_industries_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11083,7 +12948,7 @@ public struct gainy_industries_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.industry_stats_daily". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.industry_stats_daily". All fields are combined with a logical 'AND'.
 public struct industry_stats_daily_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11273,7 +13138,7 @@ public struct bigint_comparison_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.industry_stats_quarterly". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.industry_stats_quarterly". All fields are combined with a logical 'AND'.
 public struct industry_stats_quarterly_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11363,7 +13228,7 @@ public struct industry_stats_quarterly_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.industry_median_1m". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.industry_median_1m". All fields are combined with a logical 'AND'.
 public struct industry_median_1m_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11443,7 +13308,7 @@ public struct industry_median_1m_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.industry_median_1w". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.industry_median_1w". All fields are combined with a logical 'AND'.
 public struct industry_median_1w_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -11523,7 +13388,7 @@ public struct industry_median_1w_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.ticker_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.ticker_metrics". All fields are combined with a logical 'AND'.
 public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -12203,7 +14068,7 @@ public struct ticker_metrics_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.collection_metrics". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.collection_metrics". All fields are combined with a logical 'AND'.
 public struct collection_metrics_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -12953,7 +14818,7 @@ public struct app_profile_portfolio_accounts_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.portfolio_holding_details". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.portfolio_holding_details". All fields are combined with a logical 'AND'.
 public struct portfolio_holding_details_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -13563,7 +15428,7 @@ public struct app_portfolio_securities_bool_exp: GraphQLMapConvertible {
   }
 }
 
-/// Boolean expression to filter rows from the table "public_220404091348.portfolio_holding_gains". All fields are combined with a logical 'AND'.
+/// Boolean expression to filter rows from the table "public_220413044555.portfolio_holding_gains". All fields are combined with a logical 'AND'.
 public struct portfolio_holding_gains_bool_exp: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -13890,11 +15755,12 @@ public struct app_profile_scoring_settings_bool_exp: GraphQLMapConvertible {
   ///   - profile
   ///   - profileId
   ///   - riskLevel
+  ///   - riskScore
   ///   - stockMarketRiskLevel
   ///   - tradingExperience
   ///   - unexpectedPurchasesSource
-  public init(_and: Swift.Optional<[app_profile_scoring_settings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_scoring_settings_bool_exp]?> = nil, averageMarketReturn: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, damageOfFailure: Swift.Optional<Float_comparison_exp?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<Float_comparison_exp?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<Float_comparison_exp?> = nil, investmentHorizon: Swift.Optional<Float_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskLevel: Swift.Optional<Float_comparison_exp?> = nil, stockMarketRiskLevel: Swift.Optional<String_comparison_exp?> = nil, tradingExperience: Swift.Optional<String_comparison_exp?> = nil, unexpectedPurchasesSource: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
+  public init(_and: Swift.Optional<[app_profile_scoring_settings_bool_exp]?> = nil, _not: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, _or: Swift.Optional<[app_profile_scoring_settings_bool_exp]?> = nil, averageMarketReturn: Swift.Optional<Int_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, damageOfFailure: Swift.Optional<Float_comparison_exp?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<Float_comparison_exp?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<Float_comparison_exp?> = nil, investmentHorizon: Swift.Optional<Float_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, riskLevel: Swift.Optional<Float_comparison_exp?> = nil, riskScore: Swift.Optional<Int_comparison_exp?> = nil, stockMarketRiskLevel: Swift.Optional<String_comparison_exp?> = nil, tradingExperience: Swift.Optional<String_comparison_exp?> = nil, unexpectedPurchasesSource: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "risk_score": riskScore, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
   }
 
   public var _and: Swift.Optional<[app_profile_scoring_settings_bool_exp]?> {
@@ -14002,6 +15868,15 @@ public struct app_profile_scoring_settings_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "risk_level")
+    }
+  }
+
+  public var riskScore: Swift.Optional<Int_comparison_exp?> {
+    get {
+      return graphQLMap["risk_score"] as? Swift.Optional<Int_comparison_exp?> ?? Swift.Optional<Int_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_score")
     }
   }
 
@@ -14475,7 +16350,7 @@ public struct app_profile_favorite_collections_insert_input: GraphQLMapConvertib
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.profile_collections"
+/// input type for inserting object relation for remote table "public_220413044555.profile_collections"
 public struct collections_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14495,7 +16370,7 @@ public struct collections_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.profile_collections"
+/// input type for inserting data into table "public_220413044555.profile_collections"
 public struct collections_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14645,7 +16520,7 @@ public struct collections_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.collection_match_score"
+/// input type for inserting object relation for remote table "public_220413044555.collection_match_score"
 public struct collection_match_score_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14665,7 +16540,7 @@ public struct collection_match_score_obj_rel_insert_input: GraphQLMapConvertible
   }
 }
 
-/// input type for inserting data into table "public_220404091348.collection_match_score"
+/// input type for inserting data into table "public_220413044555.collection_match_score"
 public struct collection_match_score_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14785,7 +16660,7 @@ public struct collection_match_score_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.collection_match_score_explanation"
+/// input type for inserting array relation for remote table "public_220413044555.collection_match_score_explanation"
 public struct collection_match_score_explanation_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14805,7 +16680,7 @@ public struct collection_match_score_explanation_arr_rel_insert_input: GraphQLMa
   }
 }
 
-/// input type for inserting data into table "public_220404091348.collection_match_score_explanation"
+/// input type for inserting data into table "public_220413044555.collection_match_score_explanation"
 public struct collection_match_score_explanation_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14895,7 +16770,7 @@ public struct collection_match_score_explanation_insert_input: GraphQLMapConvert
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.categories"
+/// input type for inserting object relation for remote table "public_220413044555.categories"
 public struct categories_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14926,7 +16801,7 @@ public struct categories_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.categories"
+/// input type for inserting data into table "public_220413044555.categories"
 public struct categories_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -14996,7 +16871,7 @@ public struct categories_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.categories"
+/// on conflict condition type for table "public_220413044555.categories"
 public struct categories_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15036,7 +16911,7 @@ public struct categories_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.categories"
+/// unique or primary key constraints on table "public_220413044555.categories"
 public enum categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -15073,7 +16948,7 @@ public enum categories_constraint: RawRepresentable, Equatable, Hashable, CaseIt
   }
 }
 
-/// update columns of table "public_220404091348.categories"
+/// update columns of table "public_220413044555.categories"
 public enum categories_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -15140,7 +17015,7 @@ public enum categories_update_column: RawRepresentable, Equatable, Hashable, Cas
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.interests"
+/// input type for inserting object relation for remote table "public_220413044555.interests"
 public struct interests_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15171,7 +17046,7 @@ public struct interests_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.interests"
+/// input type for inserting data into table "public_220413044555.interests"
 public struct interests_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15241,7 +17116,7 @@ public struct interests_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.ticker_interests"
+/// input type for inserting array relation for remote table "public_220413044555.ticker_interests"
 public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15272,7 +17147,7 @@ public struct ticker_interests_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_interests"
+/// input type for inserting data into table "public_220413044555.ticker_interests"
 public struct ticker_interests_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15280,11 +17155,12 @@ public struct ticker_interests_insert_input: GraphQLMapConvertible {
   ///   - id
   ///   - interest
   ///   - interestId
+  ///   - simDif
   ///   - symbol
   ///   - ticker
   ///   - updatedAt
-  public init(id: Swift.Optional<String?> = nil, interest: Swift.Optional<interests_obj_rel_insert_input?> = nil, interestId: Swift.Optional<Int?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["id": id, "interest": interest, "interest_id": interestId, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
+  public init(id: Swift.Optional<String?> = nil, interest: Swift.Optional<interests_obj_rel_insert_input?> = nil, interestId: Swift.Optional<Int?> = nil, simDif: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, updatedAt: Swift.Optional<timestamp?> = nil) {
+    graphQLMap = ["id": id, "interest": interest, "interest_id": interestId, "sim_dif": simDif, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
   }
 
   public var id: Swift.Optional<String?> {
@@ -15314,6 +17190,15 @@ public struct ticker_interests_insert_input: GraphQLMapConvertible {
     }
   }
 
+  public var simDif: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["sim_dif"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sim_dif")
+    }
+  }
+
   public var symbol: Swift.Optional<String?> {
     get {
       return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
@@ -15332,9 +17217,9 @@ public struct ticker_interests_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var updatedAt: Swift.Optional<timestamptz?> {
+  public var updatedAt: Swift.Optional<timestamp?> {
     get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamp?> ?? Swift.Optional<timestamp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
@@ -15342,7 +17227,7 @@ public struct ticker_interests_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.tickers"
+/// input type for inserting object relation for remote table "public_220413044555.tickers"
 public struct tickers_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -15373,14 +17258,17 @@ public struct tickers_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.tickers"
+/// input type for inserting data into table "public_220413044555.tickers"
 public struct tickers_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
   ///   - countryName
+  ///   - cryptoMetrics
+  ///   - cryptoRealtimeMetrics
   ///   - description
   ///   - exchange
+  ///   - exchangeCanonical
   ///   - gicGroup
   ///   - gicIndustry
   ///   - gicSector
@@ -15405,8 +17293,8 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   ///   - type
   ///   - updatedAt
   ///   - webUrl
-  public init(countryName: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, exchange: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, logoUrl: Swift.Optional<String?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
-    graphQLMap = ["country_name": countryName, "description": description, "exchange": exchange, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
+  public init(countryName: Swift.Optional<String?> = nil, cryptoMetrics: Swift.Optional<crypto_metrics_obj_rel_insert_input?> = nil, cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?> = nil, description: Swift.Optional<String?> = nil, exchange: Swift.Optional<String?> = nil, exchangeCanonical: Swift.Optional<String?> = nil, gicGroup: Swift.Optional<String?> = nil, gicIndustry: Swift.Optional<String?> = nil, gicSector: Swift.Optional<String?> = nil, gicSubIndustry: Swift.Optional<String?> = nil, industry: Swift.Optional<String?> = nil, ipoDate: Swift.Optional<date?> = nil, logoUrl: Swift.Optional<String?> = nil, matchScore: Swift.Optional<app_profile_ticker_match_score_obj_rel_insert_input?> = nil, name: Swift.Optional<String?> = nil, phone: Swift.Optional<String?> = nil, realtimeMetrics: Swift.Optional<ticker_realtime_metrics_obj_rel_insert_input?> = nil, sector: Swift.Optional<String?> = nil, symbol: Swift.Optional<String?> = nil, tickerAnalystRatings: Swift.Optional<analyst_ratings_obj_rel_insert_input?> = nil, tickerCategories: Swift.Optional<ticker_categories_arr_rel_insert_input?> = nil, tickerCollections: Swift.Optional<ticker_collections_arr_rel_insert_input?> = nil, tickerEvents: Swift.Optional<ticker_events_arr_rel_insert_input?> = nil, tickerHighlights: Swift.Optional<ticker_highlights_arr_rel_insert_input?> = nil, tickerIndustries: Swift.Optional<ticker_industries_arr_rel_insert_input?> = nil, tickerInterests: Swift.Optional<ticker_interests_arr_rel_insert_input?> = nil, tickerMetrics: Swift.Optional<ticker_metrics_obj_rel_insert_input?> = nil, type: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamp?> = nil, webUrl: Swift.Optional<String?> = nil) {
+    graphQLMap = ["country_name": countryName, "crypto_metrics": cryptoMetrics, "crypto_realtime_metrics": cryptoRealtimeMetrics, "description": description, "exchange": exchange, "exchange_canonical": exchangeCanonical, "gic_group": gicGroup, "gic_industry": gicIndustry, "gic_sector": gicSector, "gic_sub_industry": gicSubIndustry, "industry": industry, "ipo_date": ipoDate, "logo_url": logoUrl, "match_score": matchScore, "name": name, "phone": phone, "realtime_metrics": realtimeMetrics, "sector": sector, "symbol": symbol, "ticker_analyst_ratings": tickerAnalystRatings, "ticker_categories": tickerCategories, "ticker_collections": tickerCollections, "ticker_events": tickerEvents, "ticker_highlights": tickerHighlights, "ticker_industries": tickerIndustries, "ticker_interests": tickerInterests, "ticker_metrics": tickerMetrics, "type": type, "updated_at": updatedAt, "web_url": webUrl]
   }
 
   public var countryName: Swift.Optional<String?> {
@@ -15415,6 +17303,24 @@ public struct tickers_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "country_name")
+    }
+  }
+
+  public var cryptoMetrics: Swift.Optional<crypto_metrics_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["crypto_metrics"] as? Swift.Optional<crypto_metrics_obj_rel_insert_input?> ?? Swift.Optional<crypto_metrics_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_metrics")
+    }
+  }
+
+  public var cryptoRealtimeMetrics: Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?> {
+    get {
+      return graphQLMap["crypto_realtime_metrics"] as? Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?> ?? Swift.Optional<crypto_realtime_metrics_obj_rel_insert_input?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "crypto_realtime_metrics")
     }
   }
 
@@ -15433,6 +17339,15 @@ public struct tickers_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "exchange")
+    }
+  }
+
+  public var exchangeCanonical: Swift.Optional<String?> {
+    get {
+      return graphQLMap["exchange_canonical"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "exchange_canonical")
     }
   }
 
@@ -15653,6 +17568,1264 @@ public struct tickers_insert_input: GraphQLMapConvertible {
   }
 }
 
+/// input type for inserting object relation for remote table "public_220413044555.crypto_metrics"
+public struct crypto_metrics_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: crypto_metrics_insert_input, onConflict: Swift.Optional<crypto_metrics_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: crypto_metrics_insert_input {
+    get {
+      return graphQLMap["data"] as! crypto_metrics_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<crypto_metrics_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<crypto_metrics_on_conflict?> ?? Swift.Optional<crypto_metrics_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "public_220413044555.crypto_metrics"
+public struct crypto_metrics_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - alexaRank
+  ///   - assetPlatformId
+  ///   - bingMatches
+  ///   - categories
+  ///   - coingeckoRank
+  ///   - coingeckoScore
+  ///   - communityFacebookLikes
+  ///   - communityRedditAccountsActive_48h
+  ///   - communityRedditAverageComments_48h
+  ///   - communityRedditAveragePosts_48h
+  ///   - communityRedditSubscribers
+  ///   - communityScore
+  ///   - communityTelegramChannelUserCount
+  ///   - communityTwitterFollowers
+  ///   - countryOrigin
+  ///   - description
+  ///   - developmentClosedIssues
+  ///   - developmentCodeAdditionsDeletions_4WeeksAdditions
+  ///   - developmentCodeAdditionsDeletions_4WeeksDeletions
+  ///   - developmentCommitCount_4Weeks
+  ///   - developmentForks
+  ///   - developmentPullRequestContributors
+  ///   - developmentPullRequestsMerged
+  ///   - developmentScore
+  ///   - developmentStars
+  ///   - developmentSubscribers
+  ///   - developmentTotalIssues
+  ///   - hashingAlgorithm
+  ///   - icoEndDate
+  ///   - icoStartDate
+  ///   - imageLarge
+  ///   - imageSmall
+  ///   - imageThumb
+  ///   - links
+  ///   - liquidityScore
+  ///   - marketCapRank
+  ///   - marketFdvToTvlRatio
+  ///   - marketMcapToTvlRatio
+  ///   - marketTotalValueLocked
+  ///   - name
+  ///   - priceChange_1m
+  ///   - priceChange_1w
+  ///   - priceChange_1y
+  ///   - priceChange_3m
+  ///   - priceChange_5y
+  ///   - priceChangeAll
+  ///   - publicInterestScore
+  ///   - sentimentVotesDownPercentage
+  ///   - sentimentVotesUpPercentage
+  ///   - symbol
+  public init(alexaRank: Swift.Optional<Int?> = nil, assetPlatformId: Swift.Optional<String?> = nil, bingMatches: Swift.Optional<Int?> = nil, categories: Swift.Optional<jsonb?> = nil, coingeckoRank: Swift.Optional<Int?> = nil, coingeckoScore: Swift.Optional<float8?> = nil, communityFacebookLikes: Swift.Optional<Int?> = nil, communityRedditAccountsActive_48h: Swift.Optional<Int?> = nil, communityRedditAverageComments_48h: Swift.Optional<float8?> = nil, communityRedditAveragePosts_48h: Swift.Optional<float8?> = nil, communityRedditSubscribers: Swift.Optional<Int?> = nil, communityScore: Swift.Optional<float8?> = nil, communityTelegramChannelUserCount: Swift.Optional<Int?> = nil, communityTwitterFollowers: Swift.Optional<Int?> = nil, countryOrigin: Swift.Optional<String?> = nil, description: Swift.Optional<String?> = nil, developmentClosedIssues: Swift.Optional<Int?> = nil, developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<Int?> = nil, developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<Int?> = nil, developmentCommitCount_4Weeks: Swift.Optional<Int?> = nil, developmentForks: Swift.Optional<Int?> = nil, developmentPullRequestContributors: Swift.Optional<Int?> = nil, developmentPullRequestsMerged: Swift.Optional<Int?> = nil, developmentScore: Swift.Optional<float8?> = nil, developmentStars: Swift.Optional<Int?> = nil, developmentSubscribers: Swift.Optional<Int?> = nil, developmentTotalIssues: Swift.Optional<Int?> = nil, hashingAlgorithm: Swift.Optional<String?> = nil, icoEndDate: Swift.Optional<date?> = nil, icoStartDate: Swift.Optional<date?> = nil, imageLarge: Swift.Optional<String?> = nil, imageSmall: Swift.Optional<String?> = nil, imageThumb: Swift.Optional<String?> = nil, links: Swift.Optional<jsonb?> = nil, liquidityScore: Swift.Optional<float8?> = nil, marketCapRank: Swift.Optional<Int?> = nil, marketFdvToTvlRatio: Swift.Optional<float8?> = nil, marketMcapToTvlRatio: Swift.Optional<float8?> = nil, marketTotalValueLocked: Swift.Optional<float8?> = nil, name: Swift.Optional<String?> = nil, priceChange_1m: Swift.Optional<float8?> = nil, priceChange_1w: Swift.Optional<float8?> = nil, priceChange_1y: Swift.Optional<float8?> = nil, priceChange_3m: Swift.Optional<float8?> = nil, priceChange_5y: Swift.Optional<float8?> = nil, priceChangeAll: Swift.Optional<float8?> = nil, publicInterestScore: Swift.Optional<float8?> = nil, sentimentVotesDownPercentage: Swift.Optional<float8?> = nil, sentimentVotesUpPercentage: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil) {
+    graphQLMap = ["alexa_rank": alexaRank, "asset_platform_id": assetPlatformId, "bing_matches": bingMatches, "categories": categories, "coingecko_rank": coingeckoRank, "coingecko_score": coingeckoScore, "community_facebook_likes": communityFacebookLikes, "community_reddit_accounts_active_48h": communityRedditAccountsActive_48h, "community_reddit_average_comments_48h": communityRedditAverageComments_48h, "community_reddit_average_posts_48h": communityRedditAveragePosts_48h, "community_reddit_subscribers": communityRedditSubscribers, "community_score": communityScore, "community_telegram_channel_user_count": communityTelegramChannelUserCount, "community_twitter_followers": communityTwitterFollowers, "country_origin": countryOrigin, "description": description, "development_closed_issues": developmentClosedIssues, "development_code_additions_deletions_4_weeks_additions": developmentCodeAdditionsDeletions_4WeeksAdditions, "development_code_additions_deletions_4_weeks_deletions": developmentCodeAdditionsDeletions_4WeeksDeletions, "development_commit_count_4_weeks": developmentCommitCount_4Weeks, "development_forks": developmentForks, "development_pull_request_contributors": developmentPullRequestContributors, "development_pull_requests_merged": developmentPullRequestsMerged, "development_score": developmentScore, "development_stars": developmentStars, "development_subscribers": developmentSubscribers, "development_total_issues": developmentTotalIssues, "hashing_algorithm": hashingAlgorithm, "ico_end_date": icoEndDate, "ico_start_date": icoStartDate, "image_large": imageLarge, "image_small": imageSmall, "image_thumb": imageThumb, "links": links, "liquidity_score": liquidityScore, "market_cap_rank": marketCapRank, "market_fdv_to_tvl_ratio": marketFdvToTvlRatio, "market_mcap_to_tvl_ratio": marketMcapToTvlRatio, "market_total_value_locked": marketTotalValueLocked, "name": name, "price_change_1m": priceChange_1m, "price_change_1w": priceChange_1w, "price_change_1y": priceChange_1y, "price_change_3m": priceChange_3m, "price_change_5y": priceChange_5y, "price_change_all": priceChangeAll, "public_interest_score": publicInterestScore, "sentiment_votes_down_percentage": sentimentVotesDownPercentage, "sentiment_votes_up_percentage": sentimentVotesUpPercentage, "symbol": symbol]
+  }
+
+  public var alexaRank: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["alexa_rank"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "alexa_rank")
+    }
+  }
+
+  public var assetPlatformId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["asset_platform_id"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "asset_platform_id")
+    }
+  }
+
+  public var bingMatches: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["bing_matches"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "bing_matches")
+    }
+  }
+
+  public var categories: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["categories"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "categories")
+    }
+  }
+
+  public var coingeckoRank: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["coingecko_rank"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_rank")
+    }
+  }
+
+  public var coingeckoScore: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["coingecko_score"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "coingecko_score")
+    }
+  }
+
+  public var communityFacebookLikes: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["community_facebook_likes"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_facebook_likes")
+    }
+  }
+
+  public var communityRedditAccountsActive_48h: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["community_reddit_accounts_active_48h"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_accounts_active_48h")
+    }
+  }
+
+  public var communityRedditAverageComments_48h: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["community_reddit_average_comments_48h"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_comments_48h")
+    }
+  }
+
+  public var communityRedditAveragePosts_48h: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["community_reddit_average_posts_48h"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_average_posts_48h")
+    }
+  }
+
+  public var communityRedditSubscribers: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["community_reddit_subscribers"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_reddit_subscribers")
+    }
+  }
+
+  public var communityScore: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["community_score"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_score")
+    }
+  }
+
+  public var communityTelegramChannelUserCount: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["community_telegram_channel_user_count"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_telegram_channel_user_count")
+    }
+  }
+
+  public var communityTwitterFollowers: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["community_twitter_followers"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "community_twitter_followers")
+    }
+  }
+
+  public var countryOrigin: Swift.Optional<String?> {
+    get {
+      return graphQLMap["country_origin"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "country_origin")
+    }
+  }
+
+  public var description: Swift.Optional<String?> {
+    get {
+      return graphQLMap["description"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "description")
+    }
+  }
+
+  public var developmentClosedIssues: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_closed_issues"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_closed_issues")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksAdditions: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_additions"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_additions")
+    }
+  }
+
+  public var developmentCodeAdditionsDeletions_4WeeksDeletions: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_code_additions_deletions_4_weeks_deletions"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_code_additions_deletions_4_weeks_deletions")
+    }
+  }
+
+  public var developmentCommitCount_4Weeks: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_commit_count_4_weeks"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_commit_count_4_weeks")
+    }
+  }
+
+  public var developmentForks: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_forks"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_forks")
+    }
+  }
+
+  public var developmentPullRequestContributors: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_pull_request_contributors"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_request_contributors")
+    }
+  }
+
+  public var developmentPullRequestsMerged: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_pull_requests_merged"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_pull_requests_merged")
+    }
+  }
+
+  public var developmentScore: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["development_score"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_score")
+    }
+  }
+
+  public var developmentStars: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_stars"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_stars")
+    }
+  }
+
+  public var developmentSubscribers: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_subscribers"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_subscribers")
+    }
+  }
+
+  public var developmentTotalIssues: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["development_total_issues"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "development_total_issues")
+    }
+  }
+
+  public var hashingAlgorithm: Swift.Optional<String?> {
+    get {
+      return graphQLMap["hashing_algorithm"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "hashing_algorithm")
+    }
+  }
+
+  public var icoEndDate: Swift.Optional<date?> {
+    get {
+      return graphQLMap["ico_end_date"] as? Swift.Optional<date?> ?? Swift.Optional<date?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_end_date")
+    }
+  }
+
+  public var icoStartDate: Swift.Optional<date?> {
+    get {
+      return graphQLMap["ico_start_date"] as? Swift.Optional<date?> ?? Swift.Optional<date?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ico_start_date")
+    }
+  }
+
+  public var imageLarge: Swift.Optional<String?> {
+    get {
+      return graphQLMap["image_large"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_large")
+    }
+  }
+
+  public var imageSmall: Swift.Optional<String?> {
+    get {
+      return graphQLMap["image_small"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_small")
+    }
+  }
+
+  public var imageThumb: Swift.Optional<String?> {
+    get {
+      return graphQLMap["image_thumb"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "image_thumb")
+    }
+  }
+
+  public var links: Swift.Optional<jsonb?> {
+    get {
+      return graphQLMap["links"] as? Swift.Optional<jsonb?> ?? Swift.Optional<jsonb?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "links")
+    }
+  }
+
+  public var liquidityScore: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["liquidity_score"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "liquidity_score")
+    }
+  }
+
+  public var marketCapRank: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["market_cap_rank"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_cap_rank")
+    }
+  }
+
+  public var marketFdvToTvlRatio: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["market_fdv_to_tvl_ratio"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_fdv_to_tvl_ratio")
+    }
+  }
+
+  public var marketMcapToTvlRatio: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["market_mcap_to_tvl_ratio"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_mcap_to_tvl_ratio")
+    }
+  }
+
+  public var marketTotalValueLocked: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["market_total_value_locked"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_total_value_locked")
+    }
+  }
+
+  public var name: Swift.Optional<String?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var priceChange_1m: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1m"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1m")
+    }
+  }
+
+  public var priceChange_1w: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1w"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1w")
+    }
+  }
+
+  public var priceChange_1y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_1y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_1y")
+    }
+  }
+
+  public var priceChange_3m: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_3m"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_3m")
+    }
+  }
+
+  public var priceChange_5y: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_5y"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_5y")
+    }
+  }
+
+  public var priceChangeAll: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["price_change_all"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "price_change_all")
+    }
+  }
+
+  public var publicInterestScore: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["public_interest_score"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "public_interest_score")
+    }
+  }
+
+  public var sentimentVotesDownPercentage: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["sentiment_votes_down_percentage"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_down_percentage")
+    }
+  }
+
+  public var sentimentVotesUpPercentage: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["sentiment_votes_up_percentage"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "sentiment_votes_up_percentage")
+    }
+  }
+
+  public var symbol: Swift.Optional<String?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+}
+
+/// on conflict condition type for table "public_220413044555.crypto_metrics"
+public struct crypto_metrics_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: crypto_metrics_constraint, updateColumns: [crypto_metrics_update_column], `where`: Swift.Optional<crypto_metrics_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: crypto_metrics_constraint {
+    get {
+      return graphQLMap["constraint"] as! crypto_metrics_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [crypto_metrics_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [crypto_metrics_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<crypto_metrics_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<crypto_metrics_bool_exp?> ?? Swift.Optional<crypto_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "public_220413044555.crypto_metrics"
+public enum crypto_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case cryptoMetricsUniqueSymbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "crypto_metrics_unique_symbol": self = .cryptoMetricsUniqueSymbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .cryptoMetricsUniqueSymbol: return "crypto_metrics_unique_symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: crypto_metrics_constraint, rhs: crypto_metrics_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.cryptoMetricsUniqueSymbol, .cryptoMetricsUniqueSymbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [crypto_metrics_constraint] {
+    return [
+      .cryptoMetricsUniqueSymbol,
+    ]
+  }
+}
+
+/// update columns of table "public_220413044555.crypto_metrics"
+public enum crypto_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case alexaRank
+  /// column name
+  case assetPlatformId
+  /// column name
+  case bingMatches
+  /// column name
+  case categories
+  /// column name
+  case coingeckoRank
+  /// column name
+  case coingeckoScore
+  /// column name
+  case communityFacebookLikes
+  /// column name
+  case communityRedditAccountsActive_48h
+  /// column name
+  case communityRedditAverageComments_48h
+  /// column name
+  case communityRedditAveragePosts_48h
+  /// column name
+  case communityRedditSubscribers
+  /// column name
+  case communityScore
+  /// column name
+  case communityTelegramChannelUserCount
+  /// column name
+  case communityTwitterFollowers
+  /// column name
+  case countryOrigin
+  /// column name
+  case description
+  /// column name
+  case developmentClosedIssues
+  /// column name
+  case developmentCodeAdditionsDeletions_4WeeksAdditions
+  /// column name
+  case developmentCodeAdditionsDeletions_4WeeksDeletions
+  /// column name
+  case developmentCommitCount_4Weeks
+  /// column name
+  case developmentForks
+  /// column name
+  case developmentPullRequestContributors
+  /// column name
+  case developmentPullRequestsMerged
+  /// column name
+  case developmentScore
+  /// column name
+  case developmentStars
+  /// column name
+  case developmentSubscribers
+  /// column name
+  case developmentTotalIssues
+  /// column name
+  case hashingAlgorithm
+  /// column name
+  case icoEndDate
+  /// column name
+  case icoStartDate
+  /// column name
+  case imageLarge
+  /// column name
+  case imageSmall
+  /// column name
+  case imageThumb
+  /// column name
+  case links
+  /// column name
+  case liquidityScore
+  /// column name
+  case marketCapRank
+  /// column name
+  case marketFdvToTvlRatio
+  /// column name
+  case marketMcapToTvlRatio
+  /// column name
+  case marketTotalValueLocked
+  /// column name
+  case name
+  /// column name
+  case priceChange_1m
+  /// column name
+  case priceChange_1w
+  /// column name
+  case priceChange_1y
+  /// column name
+  case priceChange_3m
+  /// column name
+  case priceChange_5y
+  /// column name
+  case priceChangeAll
+  /// column name
+  case publicInterestScore
+  /// column name
+  case sentimentVotesDownPercentage
+  /// column name
+  case sentimentVotesUpPercentage
+  /// column name
+  case symbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "alexa_rank": self = .alexaRank
+      case "asset_platform_id": self = .assetPlatformId
+      case "bing_matches": self = .bingMatches
+      case "categories": self = .categories
+      case "coingecko_rank": self = .coingeckoRank
+      case "coingecko_score": self = .coingeckoScore
+      case "community_facebook_likes": self = .communityFacebookLikes
+      case "community_reddit_accounts_active_48h": self = .communityRedditAccountsActive_48h
+      case "community_reddit_average_comments_48h": self = .communityRedditAverageComments_48h
+      case "community_reddit_average_posts_48h": self = .communityRedditAveragePosts_48h
+      case "community_reddit_subscribers": self = .communityRedditSubscribers
+      case "community_score": self = .communityScore
+      case "community_telegram_channel_user_count": self = .communityTelegramChannelUserCount
+      case "community_twitter_followers": self = .communityTwitterFollowers
+      case "country_origin": self = .countryOrigin
+      case "description": self = .description
+      case "development_closed_issues": self = .developmentClosedIssues
+      case "development_code_additions_deletions_4_weeks_additions": self = .developmentCodeAdditionsDeletions_4WeeksAdditions
+      case "development_code_additions_deletions_4_weeks_deletions": self = .developmentCodeAdditionsDeletions_4WeeksDeletions
+      case "development_commit_count_4_weeks": self = .developmentCommitCount_4Weeks
+      case "development_forks": self = .developmentForks
+      case "development_pull_request_contributors": self = .developmentPullRequestContributors
+      case "development_pull_requests_merged": self = .developmentPullRequestsMerged
+      case "development_score": self = .developmentScore
+      case "development_stars": self = .developmentStars
+      case "development_subscribers": self = .developmentSubscribers
+      case "development_total_issues": self = .developmentTotalIssues
+      case "hashing_algorithm": self = .hashingAlgorithm
+      case "ico_end_date": self = .icoEndDate
+      case "ico_start_date": self = .icoStartDate
+      case "image_large": self = .imageLarge
+      case "image_small": self = .imageSmall
+      case "image_thumb": self = .imageThumb
+      case "links": self = .links
+      case "liquidity_score": self = .liquidityScore
+      case "market_cap_rank": self = .marketCapRank
+      case "market_fdv_to_tvl_ratio": self = .marketFdvToTvlRatio
+      case "market_mcap_to_tvl_ratio": self = .marketMcapToTvlRatio
+      case "market_total_value_locked": self = .marketTotalValueLocked
+      case "name": self = .name
+      case "price_change_1m": self = .priceChange_1m
+      case "price_change_1w": self = .priceChange_1w
+      case "price_change_1y": self = .priceChange_1y
+      case "price_change_3m": self = .priceChange_3m
+      case "price_change_5y": self = .priceChange_5y
+      case "price_change_all": self = .priceChangeAll
+      case "public_interest_score": self = .publicInterestScore
+      case "sentiment_votes_down_percentage": self = .sentimentVotesDownPercentage
+      case "sentiment_votes_up_percentage": self = .sentimentVotesUpPercentage
+      case "symbol": self = .symbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .alexaRank: return "alexa_rank"
+      case .assetPlatformId: return "asset_platform_id"
+      case .bingMatches: return "bing_matches"
+      case .categories: return "categories"
+      case .coingeckoRank: return "coingecko_rank"
+      case .coingeckoScore: return "coingecko_score"
+      case .communityFacebookLikes: return "community_facebook_likes"
+      case .communityRedditAccountsActive_48h: return "community_reddit_accounts_active_48h"
+      case .communityRedditAverageComments_48h: return "community_reddit_average_comments_48h"
+      case .communityRedditAveragePosts_48h: return "community_reddit_average_posts_48h"
+      case .communityRedditSubscribers: return "community_reddit_subscribers"
+      case .communityScore: return "community_score"
+      case .communityTelegramChannelUserCount: return "community_telegram_channel_user_count"
+      case .communityTwitterFollowers: return "community_twitter_followers"
+      case .countryOrigin: return "country_origin"
+      case .description: return "description"
+      case .developmentClosedIssues: return "development_closed_issues"
+      case .developmentCodeAdditionsDeletions_4WeeksAdditions: return "development_code_additions_deletions_4_weeks_additions"
+      case .developmentCodeAdditionsDeletions_4WeeksDeletions: return "development_code_additions_deletions_4_weeks_deletions"
+      case .developmentCommitCount_4Weeks: return "development_commit_count_4_weeks"
+      case .developmentForks: return "development_forks"
+      case .developmentPullRequestContributors: return "development_pull_request_contributors"
+      case .developmentPullRequestsMerged: return "development_pull_requests_merged"
+      case .developmentScore: return "development_score"
+      case .developmentStars: return "development_stars"
+      case .developmentSubscribers: return "development_subscribers"
+      case .developmentTotalIssues: return "development_total_issues"
+      case .hashingAlgorithm: return "hashing_algorithm"
+      case .icoEndDate: return "ico_end_date"
+      case .icoStartDate: return "ico_start_date"
+      case .imageLarge: return "image_large"
+      case .imageSmall: return "image_small"
+      case .imageThumb: return "image_thumb"
+      case .links: return "links"
+      case .liquidityScore: return "liquidity_score"
+      case .marketCapRank: return "market_cap_rank"
+      case .marketFdvToTvlRatio: return "market_fdv_to_tvl_ratio"
+      case .marketMcapToTvlRatio: return "market_mcap_to_tvl_ratio"
+      case .marketTotalValueLocked: return "market_total_value_locked"
+      case .name: return "name"
+      case .priceChange_1m: return "price_change_1m"
+      case .priceChange_1w: return "price_change_1w"
+      case .priceChange_1y: return "price_change_1y"
+      case .priceChange_3m: return "price_change_3m"
+      case .priceChange_5y: return "price_change_5y"
+      case .priceChangeAll: return "price_change_all"
+      case .publicInterestScore: return "public_interest_score"
+      case .sentimentVotesDownPercentage: return "sentiment_votes_down_percentage"
+      case .sentimentVotesUpPercentage: return "sentiment_votes_up_percentage"
+      case .symbol: return "symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: crypto_metrics_update_column, rhs: crypto_metrics_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.alexaRank, .alexaRank): return true
+      case (.assetPlatformId, .assetPlatformId): return true
+      case (.bingMatches, .bingMatches): return true
+      case (.categories, .categories): return true
+      case (.coingeckoRank, .coingeckoRank): return true
+      case (.coingeckoScore, .coingeckoScore): return true
+      case (.communityFacebookLikes, .communityFacebookLikes): return true
+      case (.communityRedditAccountsActive_48h, .communityRedditAccountsActive_48h): return true
+      case (.communityRedditAverageComments_48h, .communityRedditAverageComments_48h): return true
+      case (.communityRedditAveragePosts_48h, .communityRedditAveragePosts_48h): return true
+      case (.communityRedditSubscribers, .communityRedditSubscribers): return true
+      case (.communityScore, .communityScore): return true
+      case (.communityTelegramChannelUserCount, .communityTelegramChannelUserCount): return true
+      case (.communityTwitterFollowers, .communityTwitterFollowers): return true
+      case (.countryOrigin, .countryOrigin): return true
+      case (.description, .description): return true
+      case (.developmentClosedIssues, .developmentClosedIssues): return true
+      case (.developmentCodeAdditionsDeletions_4WeeksAdditions, .developmentCodeAdditionsDeletions_4WeeksAdditions): return true
+      case (.developmentCodeAdditionsDeletions_4WeeksDeletions, .developmentCodeAdditionsDeletions_4WeeksDeletions): return true
+      case (.developmentCommitCount_4Weeks, .developmentCommitCount_4Weeks): return true
+      case (.developmentForks, .developmentForks): return true
+      case (.developmentPullRequestContributors, .developmentPullRequestContributors): return true
+      case (.developmentPullRequestsMerged, .developmentPullRequestsMerged): return true
+      case (.developmentScore, .developmentScore): return true
+      case (.developmentStars, .developmentStars): return true
+      case (.developmentSubscribers, .developmentSubscribers): return true
+      case (.developmentTotalIssues, .developmentTotalIssues): return true
+      case (.hashingAlgorithm, .hashingAlgorithm): return true
+      case (.icoEndDate, .icoEndDate): return true
+      case (.icoStartDate, .icoStartDate): return true
+      case (.imageLarge, .imageLarge): return true
+      case (.imageSmall, .imageSmall): return true
+      case (.imageThumb, .imageThumb): return true
+      case (.links, .links): return true
+      case (.liquidityScore, .liquidityScore): return true
+      case (.marketCapRank, .marketCapRank): return true
+      case (.marketFdvToTvlRatio, .marketFdvToTvlRatio): return true
+      case (.marketMcapToTvlRatio, .marketMcapToTvlRatio): return true
+      case (.marketTotalValueLocked, .marketTotalValueLocked): return true
+      case (.name, .name): return true
+      case (.priceChange_1m, .priceChange_1m): return true
+      case (.priceChange_1w, .priceChange_1w): return true
+      case (.priceChange_1y, .priceChange_1y): return true
+      case (.priceChange_3m, .priceChange_3m): return true
+      case (.priceChange_5y, .priceChange_5y): return true
+      case (.priceChangeAll, .priceChangeAll): return true
+      case (.publicInterestScore, .publicInterestScore): return true
+      case (.sentimentVotesDownPercentage, .sentimentVotesDownPercentage): return true
+      case (.sentimentVotesUpPercentage, .sentimentVotesUpPercentage): return true
+      case (.symbol, .symbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [crypto_metrics_update_column] {
+    return [
+      .alexaRank,
+      .assetPlatformId,
+      .bingMatches,
+      .categories,
+      .coingeckoRank,
+      .coingeckoScore,
+      .communityFacebookLikes,
+      .communityRedditAccountsActive_48h,
+      .communityRedditAverageComments_48h,
+      .communityRedditAveragePosts_48h,
+      .communityRedditSubscribers,
+      .communityScore,
+      .communityTelegramChannelUserCount,
+      .communityTwitterFollowers,
+      .countryOrigin,
+      .description,
+      .developmentClosedIssues,
+      .developmentCodeAdditionsDeletions_4WeeksAdditions,
+      .developmentCodeAdditionsDeletions_4WeeksDeletions,
+      .developmentCommitCount_4Weeks,
+      .developmentForks,
+      .developmentPullRequestContributors,
+      .developmentPullRequestsMerged,
+      .developmentScore,
+      .developmentStars,
+      .developmentSubscribers,
+      .developmentTotalIssues,
+      .hashingAlgorithm,
+      .icoEndDate,
+      .icoStartDate,
+      .imageLarge,
+      .imageSmall,
+      .imageThumb,
+      .links,
+      .liquidityScore,
+      .marketCapRank,
+      .marketFdvToTvlRatio,
+      .marketMcapToTvlRatio,
+      .marketTotalValueLocked,
+      .name,
+      .priceChange_1m,
+      .priceChange_1w,
+      .priceChange_1y,
+      .priceChange_3m,
+      .priceChange_5y,
+      .priceChangeAll,
+      .publicInterestScore,
+      .sentimentVotesDownPercentage,
+      .sentimentVotesUpPercentage,
+      .symbol,
+    ]
+  }
+}
+
+/// input type for inserting object relation for remote table "public_220413044555.crypto_realtime_metrics"
+public struct crypto_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - data
+  ///   - onConflict: on conflict condition
+  public init(data: crypto_realtime_metrics_insert_input, onConflict: Swift.Optional<crypto_realtime_metrics_on_conflict?> = nil) {
+    graphQLMap = ["data": data, "on_conflict": onConflict]
+  }
+
+  public var data: crypto_realtime_metrics_insert_input {
+    get {
+      return graphQLMap["data"] as! crypto_realtime_metrics_insert_input
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "data")
+    }
+  }
+
+  /// on conflict condition
+  public var onConflict: Swift.Optional<crypto_realtime_metrics_on_conflict?> {
+    get {
+      return graphQLMap["on_conflict"] as? Swift.Optional<crypto_realtime_metrics_on_conflict?> ?? Swift.Optional<crypto_realtime_metrics_on_conflict?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "on_conflict")
+    }
+  }
+}
+
+/// input type for inserting data into table "public_220413044555.crypto_realtime_metrics"
+public struct crypto_realtime_metrics_insert_input: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - ath
+  ///   - atl
+  ///   - circulatingSupply
+  ///   - high_24h
+  ///   - low_24h
+  ///   - marketCapiptalization
+  ///   - maxSupply
+  ///   - symbol
+  ///   - totalSupply
+  ///   - volume_24h
+  public init(ath: Swift.Optional<float8?> = nil, atl: Swift.Optional<float8?> = nil, circulatingSupply: Swift.Optional<float8?> = nil, high_24h: Swift.Optional<float8?> = nil, low_24h: Swift.Optional<float8?> = nil, marketCapiptalization: Swift.Optional<float8?> = nil, maxSupply: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, totalSupply: Swift.Optional<float8?> = nil, volume_24h: Swift.Optional<float8?> = nil) {
+    graphQLMap = ["ath": ath, "atl": atl, "circulating_supply": circulatingSupply, "high_24h": high_24h, "low_24h": low_24h, "market_capiptalization": marketCapiptalization, "max_supply": maxSupply, "symbol": symbol, "total_supply": totalSupply, "volume_24h": volume_24h]
+  }
+
+  public var ath: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["ath"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ath")
+    }
+  }
+
+  public var atl: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["atl"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "atl")
+    }
+  }
+
+  public var circulatingSupply: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["circulating_supply"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "circulating_supply")
+    }
+  }
+
+  public var high_24h: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["high_24h"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "high_24h")
+    }
+  }
+
+  public var low_24h: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["low_24h"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "low_24h")
+    }
+  }
+
+  public var marketCapiptalization: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["market_capiptalization"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "market_capiptalization")
+    }
+  }
+
+  public var maxSupply: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["max_supply"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "max_supply")
+    }
+  }
+
+  public var symbol: Swift.Optional<String?> {
+    get {
+      return graphQLMap["symbol"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "symbol")
+    }
+  }
+
+  public var totalSupply: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["total_supply"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "total_supply")
+    }
+  }
+
+  public var volume_24h: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["volume_24h"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "volume_24h")
+    }
+  }
+}
+
+/// on conflict condition type for table "public_220413044555.crypto_realtime_metrics"
+public struct crypto_realtime_metrics_on_conflict: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - constraint
+  ///   - updateColumns
+  ///   - where
+  public init(constraint: crypto_realtime_metrics_constraint, updateColumns: [crypto_realtime_metrics_update_column], `where`: Swift.Optional<crypto_realtime_metrics_bool_exp?> = nil) {
+    graphQLMap = ["constraint": constraint, "update_columns": updateColumns, "where": `where`]
+  }
+
+  public var constraint: crypto_realtime_metrics_constraint {
+    get {
+      return graphQLMap["constraint"] as! crypto_realtime_metrics_constraint
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "constraint")
+    }
+  }
+
+  public var updateColumns: [crypto_realtime_metrics_update_column] {
+    get {
+      return graphQLMap["update_columns"] as! [crypto_realtime_metrics_update_column]
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "update_columns")
+    }
+  }
+
+  public var `where`: Swift.Optional<crypto_realtime_metrics_bool_exp?> {
+    get {
+      return graphQLMap["where"] as? Swift.Optional<crypto_realtime_metrics_bool_exp?> ?? Swift.Optional<crypto_realtime_metrics_bool_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "where")
+    }
+  }
+}
+
+/// unique or primary key constraints on table "public_220413044555.crypto_realtime_metrics"
+public enum crypto_realtime_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// unique or primary key constraint
+  case cryptoRealtimeMetricsUniqueSymbol
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "crypto_realtime_metrics_unique_symbol": self = .cryptoRealtimeMetricsUniqueSymbol
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .cryptoRealtimeMetricsUniqueSymbol: return "crypto_realtime_metrics_unique_symbol"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: crypto_realtime_metrics_constraint, rhs: crypto_realtime_metrics_constraint) -> Bool {
+    switch (lhs, rhs) {
+      case (.cryptoRealtimeMetricsUniqueSymbol, .cryptoRealtimeMetricsUniqueSymbol): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [crypto_realtime_metrics_constraint] {
+    return [
+      .cryptoRealtimeMetricsUniqueSymbol,
+    ]
+  }
+}
+
+/// update columns of table "public_220413044555.crypto_realtime_metrics"
+public enum crypto_realtime_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
+  public typealias RawValue = String
+  /// column name
+  case ath
+  /// column name
+  case atl
+  /// column name
+  case circulatingSupply
+  /// column name
+  case high_24h
+  /// column name
+  case low_24h
+  /// column name
+  case marketCapiptalization
+  /// column name
+  case maxSupply
+  /// column name
+  case symbol
+  /// column name
+  case totalSupply
+  /// column name
+  case volume_24h
+  /// Auto generated constant for unknown enum values
+  case __unknown(RawValue)
+
+  public init?(rawValue: RawValue) {
+    switch rawValue {
+      case "ath": self = .ath
+      case "atl": self = .atl
+      case "circulating_supply": self = .circulatingSupply
+      case "high_24h": self = .high_24h
+      case "low_24h": self = .low_24h
+      case "market_capiptalization": self = .marketCapiptalization
+      case "max_supply": self = .maxSupply
+      case "symbol": self = .symbol
+      case "total_supply": self = .totalSupply
+      case "volume_24h": self = .volume_24h
+      default: self = .__unknown(rawValue)
+    }
+  }
+
+  public var rawValue: RawValue {
+    switch self {
+      case .ath: return "ath"
+      case .atl: return "atl"
+      case .circulatingSupply: return "circulating_supply"
+      case .high_24h: return "high_24h"
+      case .low_24h: return "low_24h"
+      case .marketCapiptalization: return "market_capiptalization"
+      case .maxSupply: return "max_supply"
+      case .symbol: return "symbol"
+      case .totalSupply: return "total_supply"
+      case .volume_24h: return "volume_24h"
+      case .__unknown(let value): return value
+    }
+  }
+
+  public static func == (lhs: crypto_realtime_metrics_update_column, rhs: crypto_realtime_metrics_update_column) -> Bool {
+    switch (lhs, rhs) {
+      case (.ath, .ath): return true
+      case (.atl, .atl): return true
+      case (.circulatingSupply, .circulatingSupply): return true
+      case (.high_24h, .high_24h): return true
+      case (.low_24h, .low_24h): return true
+      case (.marketCapiptalization, .marketCapiptalization): return true
+      case (.maxSupply, .maxSupply): return true
+      case (.symbol, .symbol): return true
+      case (.totalSupply, .totalSupply): return true
+      case (.volume_24h, .volume_24h): return true
+      case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
+      default: return false
+    }
+  }
+
+  public static var allCases: [crypto_realtime_metrics_update_column] {
+    return [
+      .ath,
+      .atl,
+      .circulatingSupply,
+      .high_24h,
+      .low_24h,
+      .marketCapiptalization,
+      .maxSupply,
+      .symbol,
+      .totalSupply,
+      .volume_24h,
+    ]
+  }
+}
+
 /// input type for inserting object relation for remote table "app.profile_ticker_match_score"
 public struct app_profile_ticker_match_score_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -15697,13 +18870,14 @@ public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible
   ///   - interestMatches
   ///   - interestSimilarity
   ///   - matchScore
+  ///   - matchesPortfolio
   ///   - profile
   ///   - profileId
   ///   - riskSimilarity
   ///   - symbol
   ///   - updatedAt
-  public init(categoryMatches: Swift.Optional<String?> = nil, categorySimilarity: Swift.Optional<float8?> = nil, fitsCategories: Swift.Optional<Int?> = nil, fitsInterests: Swift.Optional<Int?> = nil, fitsRisk: Swift.Optional<Int?> = nil, interestMatches: Swift.Optional<String?> = nil, interestSimilarity: Swift.Optional<float8?> = nil, matchScore: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskSimilarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
+  public init(categoryMatches: Swift.Optional<String?> = nil, categorySimilarity: Swift.Optional<float8?> = nil, fitsCategories: Swift.Optional<Int?> = nil, fitsInterests: Swift.Optional<Int?> = nil, fitsRisk: Swift.Optional<Int?> = nil, interestMatches: Swift.Optional<String?> = nil, interestSimilarity: Swift.Optional<float8?> = nil, matchScore: Swift.Optional<Int?> = nil, matchesPortfolio: Swift.Optional<Bool?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskSimilarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
+    graphQLMap = ["category_matches": categoryMatches, "category_similarity": categorySimilarity, "fits_categories": fitsCategories, "fits_interests": fitsInterests, "fits_risk": fitsRisk, "interest_matches": interestMatches, "interest_similarity": interestSimilarity, "match_score": matchScore, "matches_portfolio": matchesPortfolio, "profile": profile, "profile_id": profileId, "risk_similarity": riskSimilarity, "symbol": symbol, "updated_at": updatedAt]
   }
 
   public var categoryMatches: Swift.Optional<String?> {
@@ -15775,6 +18949,15 @@ public struct app_profile_ticker_match_score_insert_input: GraphQLMapConvertible
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "match_score")
+    }
+  }
+
+  public var matchesPortfolio: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["matches_portfolio"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "matches_portfolio")
     }
   }
 
@@ -15921,6 +19104,8 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
   /// column name
   case matchScore
   /// column name
+  case matchesPortfolio
+  /// column name
   case profileId
   /// column name
   case riskSimilarity
@@ -15941,6 +19126,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
       case "interest_matches": self = .interestMatches
       case "interest_similarity": self = .interestSimilarity
       case "match_score": self = .matchScore
+      case "matches_portfolio": self = .matchesPortfolio
       case "profile_id": self = .profileId
       case "risk_similarity": self = .riskSimilarity
       case "symbol": self = .symbol
@@ -15959,6 +19145,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
       case .interestMatches: return "interest_matches"
       case .interestSimilarity: return "interest_similarity"
       case .matchScore: return "match_score"
+      case .matchesPortfolio: return "matches_portfolio"
       case .profileId: return "profile_id"
       case .riskSimilarity: return "risk_similarity"
       case .symbol: return "symbol"
@@ -15977,6 +19164,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
       case (.interestMatches, .interestMatches): return true
       case (.interestSimilarity, .interestSimilarity): return true
       case (.matchScore, .matchScore): return true
+      case (.matchesPortfolio, .matchesPortfolio): return true
       case (.profileId, .profileId): return true
       case (.riskSimilarity, .riskSimilarity): return true
       case (.symbol, .symbol): return true
@@ -15996,6 +19184,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
       .interestMatches,
       .interestSimilarity,
       .matchScore,
+      .matchesPortfolio,
       .profileId,
       .riskSimilarity,
       .symbol,
@@ -16004,7 +19193,7 @@ public enum app_profile_ticker_match_score_update_column: RawRepresentable, Equa
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.ticker_realtime_metrics"
+/// input type for inserting object relation for remote table "public_220413044555.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16035,7 +19224,7 @@ public struct ticker_realtime_metrics_obj_rel_insert_input: GraphQLMapConvertibl
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_realtime_metrics"
+/// input type for inserting data into table "public_220413044555.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16135,7 +19324,7 @@ public struct ticker_realtime_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_realtime_metrics"
+/// on conflict condition type for table "public_220413044555.ticker_realtime_metrics"
 public struct ticker_realtime_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16175,7 +19364,7 @@ public struct ticker_realtime_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_realtime_metrics"
+/// unique or primary key constraints on table "public_220413044555.ticker_realtime_metrics"
 public enum ticker_realtime_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -16212,7 +19401,7 @@ public enum ticker_realtime_metrics_constraint: RawRepresentable, Equatable, Has
   }
 }
 
-/// update columns of table "public_220404091348.ticker_realtime_metrics"
+/// update columns of table "public_220413044555.ticker_realtime_metrics"
 public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16297,7 +19486,7 @@ public enum ticker_realtime_metrics_update_column: RawRepresentable, Equatable, 
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.analyst_ratings"
+/// input type for inserting object relation for remote table "public_220413044555.analyst_ratings"
 public struct analyst_ratings_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16328,7 +19517,7 @@ public struct analyst_ratings_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.analyst_ratings"
+/// input type for inserting data into table "public_220413044555.analyst_ratings"
 public struct analyst_ratings_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16418,7 +19607,7 @@ public struct analyst_ratings_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.analyst_ratings"
+/// on conflict condition type for table "public_220413044555.analyst_ratings"
 public struct analyst_ratings_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16458,7 +19647,7 @@ public struct analyst_ratings_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.analyst_ratings"
+/// unique or primary key constraints on table "public_220413044555.analyst_ratings"
 public enum analyst_ratings_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -16495,7 +19684,7 @@ public enum analyst_ratings_constraint: RawRepresentable, Equatable, Hashable, C
   }
 }
 
-/// update columns of table "public_220404091348.analyst_ratings"
+/// update columns of table "public_220413044555.analyst_ratings"
 public enum analyst_ratings_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16574,7 +19763,7 @@ public enum analyst_ratings_update_column: RawRepresentable, Equatable, Hashable
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.ticker_categories"
+/// input type for inserting array relation for remote table "public_220413044555.ticker_categories"
 public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16605,7 +19794,7 @@ public struct ticker_categories_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_categories"
+/// input type for inserting data into table "public_220413044555.ticker_categories"
 public struct ticker_categories_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16665,7 +19854,7 @@ public struct ticker_categories_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_categories"
+/// on conflict condition type for table "public_220413044555.ticker_categories"
 public struct ticker_categories_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16705,11 +19894,9 @@ public struct ticker_categories_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_categories"
+/// unique or primary key constraints on table "public_220413044555.ticker_categories"
 public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
-  /// unique or primary key constraint
-  case symbolCategoryId
   /// unique or primary key constraint
   case tickerCategoriesUniqueId
   /// Auto generated constant for unknown enum values
@@ -16717,7 +19904,6 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public init?(rawValue: RawValue) {
     switch rawValue {
-      case "symbol__category_id": self = .symbolCategoryId
       case "ticker_categories_unique_id": self = .tickerCategoriesUniqueId
       default: self = .__unknown(rawValue)
     }
@@ -16725,7 +19911,6 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public var rawValue: RawValue {
     switch self {
-      case .symbolCategoryId: return "symbol__category_id"
       case .tickerCategoriesUniqueId: return "ticker_categories_unique_id"
       case .__unknown(let value): return value
     }
@@ -16733,7 +19918,6 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public static func == (lhs: ticker_categories_constraint, rhs: ticker_categories_constraint) -> Bool {
     switch (lhs, rhs) {
-      case (.symbolCategoryId, .symbolCategoryId): return true
       case (.tickerCategoriesUniqueId, .tickerCategoriesUniqueId): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
@@ -16742,13 +19926,12 @@ public enum ticker_categories_constraint: RawRepresentable, Equatable, Hashable,
 
   public static var allCases: [ticker_categories_constraint] {
     return [
-      .symbolCategoryId,
       .tickerCategoriesUniqueId,
     ]
   }
 }
 
-/// update columns of table "public_220404091348.ticker_categories"
+/// update columns of table "public_220413044555.ticker_categories"
 public enum ticker_categories_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -16803,7 +19986,7 @@ public enum ticker_categories_update_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.profile_ticker_collections"
+/// input type for inserting array relation for remote table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16823,7 +20006,7 @@ public struct ticker_collections_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.profile_ticker_collections"
+/// input type for inserting data into table "public_220413044555.profile_ticker_collections"
 public struct ticker_collections_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16883,7 +20066,7 @@ public struct ticker_collections_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.ticker_events"
+/// input type for inserting array relation for remote table "public_220413044555.ticker_events"
 public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16914,7 +20097,7 @@ public struct ticker_events_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_events"
+/// input type for inserting data into table "public_220413044555.ticker_events"
 public struct ticker_events_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -16994,7 +20177,7 @@ public struct ticker_events_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_events"
+/// on conflict condition type for table "public_220413044555.ticker_events"
 public struct ticker_events_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17034,7 +20217,7 @@ public struct ticker_events_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_events"
+/// unique or primary key constraints on table "public_220413044555.ticker_events"
 public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -17071,7 +20254,7 @@ public enum ticker_events_constraint: RawRepresentable, Equatable, Hashable, Cas
   }
 }
 
-/// update columns of table "public_220404091348.ticker_events"
+/// update columns of table "public_220413044555.ticker_events"
 public enum ticker_events_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -17144,7 +20327,7 @@ public enum ticker_events_update_column: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.ticker_highlights"
+/// input type for inserting array relation for remote table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17175,7 +20358,7 @@ public struct ticker_highlights_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_highlights"
+/// input type for inserting data into table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17235,7 +20418,7 @@ public struct ticker_highlights_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_highlights"
+/// on conflict condition type for table "public_220413044555.ticker_highlights"
 public struct ticker_highlights_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17275,7 +20458,7 @@ public struct ticker_highlights_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_highlights"
+/// unique or primary key constraints on table "public_220413044555.ticker_highlights"
 public enum ticker_highlights_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -17312,7 +20495,7 @@ public enum ticker_highlights_constraint: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// update columns of table "public_220404091348.ticker_highlights"
+/// update columns of table "public_220413044555.ticker_highlights"
 public enum ticker_highlights_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -17367,7 +20550,7 @@ public enum ticker_highlights_update_column: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.ticker_industries"
+/// input type for inserting array relation for remote table "public_220413044555.ticker_industries"
 public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17398,7 +20581,7 @@ public struct ticker_industries_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_industries"
+/// input type for inserting data into table "public_220413044555.ticker_industries"
 public struct ticker_industries_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17407,11 +20590,12 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
   ///   - id
   ///   - industryId
   ///   - industryOrder
+  ///   - similarity
   ///   - symbol
   ///   - ticker
   ///   - updatedAt
-  public init(gainyIndustry: Swift.Optional<gainy_industries_obj_rel_insert_input?> = nil, id: Swift.Optional<String?> = nil, industryId: Swift.Optional<bigint?> = nil, industryOrder: Swift.Optional<Int?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, updatedAt: Swift.Optional<timestamptz?> = nil) {
-    graphQLMap = ["gainy_industry": gainyIndustry, "id": id, "industry_id": industryId, "industry_order": industryOrder, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
+  public init(gainyIndustry: Swift.Optional<gainy_industries_obj_rel_insert_input?> = nil, id: Swift.Optional<String?> = nil, industryId: Swift.Optional<bigint?> = nil, industryOrder: Swift.Optional<bigint?> = nil, similarity: Swift.Optional<float8?> = nil, symbol: Swift.Optional<String?> = nil, ticker: Swift.Optional<tickers_obj_rel_insert_input?> = nil, updatedAt: Swift.Optional<timestamp?> = nil) {
+    graphQLMap = ["gainy_industry": gainyIndustry, "id": id, "industry_id": industryId, "industry_order": industryOrder, "similarity": similarity, "symbol": symbol, "ticker": ticker, "updated_at": updatedAt]
   }
 
   public var gainyIndustry: Swift.Optional<gainy_industries_obj_rel_insert_input?> {
@@ -17441,12 +20625,21 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var industryOrder: Swift.Optional<Int?> {
+  public var industryOrder: Swift.Optional<bigint?> {
     get {
-      return graphQLMap["industry_order"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+      return graphQLMap["industry_order"] as? Swift.Optional<bigint?> ?? Swift.Optional<bigint?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "industry_order")
+    }
+  }
+
+  public var similarity: Swift.Optional<float8?> {
+    get {
+      return graphQLMap["similarity"] as? Swift.Optional<float8?> ?? Swift.Optional<float8?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "similarity")
     }
   }
 
@@ -17468,9 +20661,9 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
     }
   }
 
-  public var updatedAt: Swift.Optional<timestamptz?> {
+  public var updatedAt: Swift.Optional<timestamp?> {
     get {
-      return graphQLMap["updated_at"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+      return graphQLMap["updated_at"] as? Swift.Optional<timestamp?> ?? Swift.Optional<timestamp?>.none
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
@@ -17478,7 +20671,7 @@ public struct ticker_industries_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.gainy_industries"
+/// input type for inserting object relation for remote table "public_220413044555.gainy_industries"
 public struct gainy_industries_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17509,7 +20702,7 @@ public struct gainy_industries_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.gainy_industries"
+/// input type for inserting data into table "public_220413044555.gainy_industries"
 public struct gainy_industries_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17609,7 +20802,7 @@ public struct gainy_industries_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.industry_stats_daily"
+/// input type for inserting array relation for remote table "public_220413044555.industry_stats_daily"
 public struct industry_stats_daily_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17640,7 +20833,7 @@ public struct industry_stats_daily_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.industry_stats_daily"
+/// input type for inserting data into table "public_220413044555.industry_stats_daily"
 public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17700,7 +20893,7 @@ public struct industry_stats_daily_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.industry_stats_daily"
+/// on conflict condition type for table "public_220413044555.industry_stats_daily"
 public struct industry_stats_daily_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17740,7 +20933,7 @@ public struct industry_stats_daily_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.industry_stats_daily"
+/// unique or primary key constraints on table "public_220413044555.industry_stats_daily"
 public enum industry_stats_daily_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -17777,7 +20970,7 @@ public enum industry_stats_daily_constraint: RawRepresentable, Equatable, Hashab
   }
 }
 
-/// update columns of table "public_220404091348.industry_stats_daily"
+/// update columns of table "public_220413044555.industry_stats_daily"
 public enum industry_stats_daily_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -17838,7 +21031,7 @@ public enum industry_stats_daily_update_column: RawRepresentable, Equatable, Has
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.industry_stats_quarterly"
+/// input type for inserting array relation for remote table "public_220413044555.industry_stats_quarterly"
 public struct industry_stats_quarterly_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17858,7 +21051,7 @@ public struct industry_stats_quarterly_arr_rel_insert_input: GraphQLMapConvertib
   }
 }
 
-/// input type for inserting data into table "public_220404091348.industry_stats_quarterly"
+/// input type for inserting data into table "public_220413044555.industry_stats_quarterly"
 public struct industry_stats_quarterly_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17918,7 +21111,7 @@ public struct industry_stats_quarterly_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.industry_median_1m"
+/// input type for inserting array relation for remote table "public_220413044555.industry_median_1m"
 public struct industry_median_1m_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17938,7 +21131,7 @@ public struct industry_median_1m_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.industry_median_1m"
+/// input type for inserting data into table "public_220413044555.industry_median_1m"
 public struct industry_median_1m_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -17988,7 +21181,7 @@ public struct industry_median_1m_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting array relation for remote table "public_220404091348.industry_median_1w"
+/// input type for inserting array relation for remote table "public_220413044555.industry_median_1w"
 public struct industry_median_1w_arr_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -18008,7 +21201,7 @@ public struct industry_median_1w_arr_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.industry_median_1w"
+/// input type for inserting data into table "public_220413044555.industry_median_1w"
 public struct industry_median_1w_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -18058,7 +21251,7 @@ public struct industry_median_1w_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.gainy_industries"
+/// on conflict condition type for table "public_220413044555.gainy_industries"
 public struct gainy_industries_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -18098,7 +21291,7 @@ public struct gainy_industries_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.gainy_industries"
+/// unique or primary key constraints on table "public_220413044555.gainy_industries"
 public enum gainy_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -18141,7 +21334,7 @@ public enum gainy_industries_constraint: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// update columns of table "public_220404091348.gainy_industries"
+/// update columns of table "public_220413044555.gainy_industries"
 public enum gainy_industries_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -18196,7 +21389,7 @@ public enum gainy_industries_update_column: RawRepresentable, Equatable, Hashabl
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_industries"
+/// on conflict condition type for table "public_220413044555.ticker_industries"
 public struct ticker_industries_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -18236,7 +21429,7 @@ public struct ticker_industries_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_industries"
+/// unique or primary key constraints on table "public_220413044555.ticker_industries"
 public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -18279,7 +21472,7 @@ public enum ticker_industries_constraint: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// update columns of table "public_220404091348.ticker_industries"
+/// update columns of table "public_220413044555.ticker_industries"
 public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -18288,6 +21481,8 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
   case industryId
   /// column name
   case industryOrder
+  /// column name
+  case similarity
   /// column name
   case symbol
   /// column name
@@ -18300,6 +21495,7 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
       case "id": self = .id
       case "industry_id": self = .industryId
       case "industry_order": self = .industryOrder
+      case "similarity": self = .similarity
       case "symbol": self = .symbol
       case "updated_at": self = .updatedAt
       default: self = .__unknown(rawValue)
@@ -18311,6 +21507,7 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
       case .id: return "id"
       case .industryId: return "industry_id"
       case .industryOrder: return "industry_order"
+      case .similarity: return "similarity"
       case .symbol: return "symbol"
       case .updatedAt: return "updated_at"
       case .__unknown(let value): return value
@@ -18322,6 +21519,7 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
       case (.id, .id): return true
       case (.industryId, .industryId): return true
       case (.industryOrder, .industryOrder): return true
+      case (.similarity, .similarity): return true
       case (.symbol, .symbol): return true
       case (.updatedAt, .updatedAt): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
@@ -18334,13 +21532,14 @@ public enum ticker_industries_update_column: RawRepresentable, Equatable, Hashab
       .id,
       .industryId,
       .industryOrder,
+      .similarity,
       .symbol,
       .updatedAt,
     ]
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.ticker_metrics"
+/// input type for inserting object relation for remote table "public_220413044555.ticker_metrics"
 public struct ticker_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -18371,7 +21570,7 @@ public struct ticker_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.ticker_metrics"
+/// input type for inserting data into table "public_220413044555.ticker_metrics"
 public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19021,7 +22220,7 @@ public struct ticker_metrics_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_metrics"
+/// on conflict condition type for table "public_220413044555.ticker_metrics"
 public struct ticker_metrics_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19061,7 +22260,7 @@ public struct ticker_metrics_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_metrics"
+/// unique or primary key constraints on table "public_220413044555.ticker_metrics"
 public enum ticker_metrics_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -19098,7 +22297,7 @@ public enum ticker_metrics_constraint: RawRepresentable, Equatable, Hashable, Ca
   }
 }
 
-/// update columns of table "public_220404091348.ticker_metrics"
+/// update columns of table "public_220413044555.ticker_metrics"
 public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -19507,7 +22706,7 @@ public enum ticker_metrics_update_column: RawRepresentable, Equatable, Hashable,
   }
 }
 
-/// on conflict condition type for table "public_220404091348.tickers"
+/// on conflict condition type for table "public_220413044555.tickers"
 public struct tickers_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19547,7 +22746,7 @@ public struct tickers_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.tickers"
+/// unique or primary key constraints on table "public_220413044555.tickers"
 public enum tickers_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -19584,7 +22783,7 @@ public enum tickers_constraint: RawRepresentable, Equatable, Hashable, CaseItera
   }
 }
 
-/// update columns of table "public_220404091348.tickers"
+/// update columns of table "public_220413044555.tickers"
 public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -19593,6 +22792,8 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
   case description
   /// column name
   case exchange
+  /// column name
+  case exchangeCanonical
   /// column name
   case gicGroup
   /// column name
@@ -19629,6 +22830,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case "country_name": self = .countryName
       case "description": self = .description
       case "exchange": self = .exchange
+      case "exchange_canonical": self = .exchangeCanonical
       case "gic_group": self = .gicGroup
       case "gic_industry": self = .gicIndustry
       case "gic_sector": self = .gicSector
@@ -19652,6 +22854,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case .countryName: return "country_name"
       case .description: return "description"
       case .exchange: return "exchange"
+      case .exchangeCanonical: return "exchange_canonical"
       case .gicGroup: return "gic_group"
       case .gicIndustry: return "gic_industry"
       case .gicSector: return "gic_sector"
@@ -19675,6 +22878,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       case (.countryName, .countryName): return true
       case (.description, .description): return true
       case (.exchange, .exchange): return true
+      case (.exchangeCanonical, .exchangeCanonical): return true
       case (.gicGroup, .gicGroup): return true
       case (.gicIndustry, .gicIndustry): return true
       case (.gicSector, .gicSector): return true
@@ -19699,6 +22903,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
       .countryName,
       .description,
       .exchange,
+      .exchangeCanonical,
       .gicGroup,
       .gicIndustry,
       .gicSector,
@@ -19717,7 +22922,7 @@ public enum tickers_update_column: RawRepresentable, Equatable, Hashable, CaseIt
   }
 }
 
-/// on conflict condition type for table "public_220404091348.ticker_interests"
+/// on conflict condition type for table "public_220413044555.ticker_interests"
 public struct ticker_interests_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19757,7 +22962,7 @@ public struct ticker_interests_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.ticker_interests"
+/// unique or primary key constraints on table "public_220413044555.ticker_interests"
 public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -19800,13 +23005,15 @@ public enum ticker_interests_constraint: RawRepresentable, Equatable, Hashable, 
   }
 }
 
-/// update columns of table "public_220404091348.ticker_interests"
+/// update columns of table "public_220413044555.ticker_interests"
 public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
   case id
   /// column name
   case interestId
+  /// column name
+  case simDif
   /// column name
   case symbol
   /// column name
@@ -19818,6 +23025,7 @@ public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashabl
     switch rawValue {
       case "id": self = .id
       case "interest_id": self = .interestId
+      case "sim_dif": self = .simDif
       case "symbol": self = .symbol
       case "updated_at": self = .updatedAt
       default: self = .__unknown(rawValue)
@@ -19828,6 +23036,7 @@ public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashabl
     switch self {
       case .id: return "id"
       case .interestId: return "interest_id"
+      case .simDif: return "sim_dif"
       case .symbol: return "symbol"
       case .updatedAt: return "updated_at"
       case .__unknown(let value): return value
@@ -19838,6 +23047,7 @@ public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashabl
     switch (lhs, rhs) {
       case (.id, .id): return true
       case (.interestId, .interestId): return true
+      case (.simDif, .simDif): return true
       case (.symbol, .symbol): return true
       case (.updatedAt, .updatedAt): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
@@ -19849,13 +23059,14 @@ public enum ticker_interests_update_column: RawRepresentable, Equatable, Hashabl
     return [
       .id,
       .interestId,
+      .simDif,
       .symbol,
       .updatedAt,
     ]
   }
 }
 
-/// on conflict condition type for table "public_220404091348.interests"
+/// on conflict condition type for table "public_220413044555.interests"
 public struct interests_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -19895,7 +23106,7 @@ public struct interests_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.interests"
+/// unique or primary key constraints on table "public_220413044555.interests"
 public enum interests_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -19932,7 +23143,7 @@ public enum interests_constraint: RawRepresentable, Equatable, Hashable, CaseIte
   }
 }
 
-/// update columns of table "public_220404091348.interests"
+/// update columns of table "public_220413044555.interests"
 public enum interests_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -19993,7 +23204,7 @@ public enum interests_update_column: RawRepresentable, Equatable, Hashable, Case
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.collection_metrics"
+/// input type for inserting object relation for remote table "public_220413044555.collection_metrics"
 public struct collection_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -20013,7 +23224,7 @@ public struct collection_metrics_obj_rel_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// input type for inserting data into table "public_220404091348.collection_metrics"
+/// input type for inserting data into table "public_220413044555.collection_metrics"
 public struct collection_metrics_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21355,7 +24566,7 @@ public enum app_profile_portfolio_accounts_update_column: RawRepresentable, Equa
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.portfolio_holding_details"
+/// input type for inserting object relation for remote table "public_220413044555.portfolio_holding_details"
 public struct portfolio_holding_details_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21386,7 +24597,7 @@ public struct portfolio_holding_details_obj_rel_insert_input: GraphQLMapConverti
   }
 }
 
-/// input type for inserting data into table "public_220404091348.portfolio_holding_details"
+/// input type for inserting data into table "public_220413044555.portfolio_holding_details"
 public struct portfolio_holding_details_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21771,7 +24982,7 @@ public enum app_profile_holdings_update_column: RawRepresentable, Equatable, Has
   }
 }
 
-/// on conflict condition type for table "public_220404091348.portfolio_holding_details"
+/// on conflict condition type for table "public_220413044555.portfolio_holding_details"
 public struct portfolio_holding_details_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -21811,7 +25022,7 @@ public struct portfolio_holding_details_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.portfolio_holding_details"
+/// unique or primary key constraints on table "public_220413044555.portfolio_holding_details"
 public enum portfolio_holding_details_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -21848,7 +25059,7 @@ public enum portfolio_holding_details_constraint: RawRepresentable, Equatable, H
   }
 }
 
-/// update columns of table "public_220404091348.portfolio_holding_details"
+/// update columns of table "public_220413044555.portfolio_holding_details"
 public enum portfolio_holding_details_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -22761,7 +25972,7 @@ public enum app_profile_portfolio_transactions_update_column: RawRepresentable, 
   }
 }
 
-/// input type for inserting object relation for remote table "public_220404091348.portfolio_holding_gains"
+/// input type for inserting object relation for remote table "public_220413044555.portfolio_holding_gains"
 public struct portfolio_holding_gains_obj_rel_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -22792,7 +26003,7 @@ public struct portfolio_holding_gains_obj_rel_insert_input: GraphQLMapConvertibl
   }
 }
 
-/// input type for inserting data into table "public_220404091348.portfolio_holding_gains"
+/// input type for inserting data into table "public_220413044555.portfolio_holding_gains"
 public struct portfolio_holding_gains_insert_input: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23002,7 +26213,7 @@ public struct portfolio_holding_gains_insert_input: GraphQLMapConvertible {
   }
 }
 
-/// on conflict condition type for table "public_220404091348.portfolio_holding_gains"
+/// on conflict condition type for table "public_220413044555.portfolio_holding_gains"
 public struct portfolio_holding_gains_on_conflict: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
@@ -23042,7 +26253,7 @@ public struct portfolio_holding_gains_on_conflict: GraphQLMapConvertible {
   }
 }
 
-/// unique or primary key constraints on table "public_220404091348.portfolio_holding_gains"
+/// unique or primary key constraints on table "public_220413044555.portfolio_holding_gains"
 public enum portfolio_holding_gains_constraint: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// unique or primary key constraint
@@ -23079,7 +26290,7 @@ public enum portfolio_holding_gains_constraint: RawRepresentable, Equatable, Has
   }
 }
 
-/// update columns of table "public_220404091348.portfolio_holding_gains"
+/// update columns of table "public_220413044555.portfolio_holding_gains"
 public enum portfolio_holding_gains_update_column: RawRepresentable, Equatable, Hashable, CaseIterable, Apollo.JSONDecodable, Apollo.JSONEncodable {
   public typealias RawValue = String
   /// column name
@@ -23451,11 +26662,12 @@ public struct app_profile_scoring_settings_insert_input: GraphQLMapConvertible {
   ///   - profile
   ///   - profileId
   ///   - riskLevel
+  ///   - riskScore
   ///   - stockMarketRiskLevel
   ///   - tradingExperience
   ///   - unexpectedPurchasesSource
-  public init(averageMarketReturn: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, damageOfFailure: Swift.Optional<Double?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<Double?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<Double?> = nil, investmentHorizon: Swift.Optional<Double?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskLevel: Swift.Optional<Double?> = nil, stockMarketRiskLevel: Swift.Optional<String?> = nil, tradingExperience: Swift.Optional<String?> = nil, unexpectedPurchasesSource: Swift.Optional<String?> = nil) {
-    graphQLMap = ["average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
+  public init(averageMarketReturn: Swift.Optional<Int?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, damageOfFailure: Swift.Optional<Double?> = nil, ifMarketDrops_20IWillBuy: Swift.Optional<Double?> = nil, ifMarketDrops_40IWillBuy: Swift.Optional<Double?> = nil, investmentHorizon: Swift.Optional<Double?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, riskLevel: Swift.Optional<Double?> = nil, riskScore: Swift.Optional<Int?> = nil, stockMarketRiskLevel: Swift.Optional<String?> = nil, tradingExperience: Swift.Optional<String?> = nil, unexpectedPurchasesSource: Swift.Optional<String?> = nil) {
+    graphQLMap = ["average_market_return": averageMarketReturn, "created_at": createdAt, "damage_of_failure": damageOfFailure, "if_market_drops_20_i_will_buy": ifMarketDrops_20IWillBuy, "if_market_drops_40_i_will_buy": ifMarketDrops_40IWillBuy, "investment_horizon": investmentHorizon, "profile": profile, "profile_id": profileId, "risk_level": riskLevel, "risk_score": riskScore, "stock_market_risk_level": stockMarketRiskLevel, "trading_experience": tradingExperience, "unexpected_purchases_source": unexpectedPurchasesSource]
   }
 
   public var averageMarketReturn: Swift.Optional<Int?> {
@@ -23536,6 +26748,15 @@ public struct app_profile_scoring_settings_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "risk_level")
+    }
+  }
+
+  public var riskScore: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["risk_score"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "risk_score")
     }
   }
 
@@ -23664,6 +26885,8 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
   /// column name
   case riskLevel
   /// column name
+  case riskScore
+  /// column name
   case stockMarketRiskLevel
   /// column name
   case tradingExperience
@@ -23682,6 +26905,7 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
       case "investment_horizon": self = .investmentHorizon
       case "profile_id": self = .profileId
       case "risk_level": self = .riskLevel
+      case "risk_score": self = .riskScore
       case "stock_market_risk_level": self = .stockMarketRiskLevel
       case "trading_experience": self = .tradingExperience
       case "unexpected_purchases_source": self = .unexpectedPurchasesSource
@@ -23699,6 +26923,7 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
       case .investmentHorizon: return "investment_horizon"
       case .profileId: return "profile_id"
       case .riskLevel: return "risk_level"
+      case .riskScore: return "risk_score"
       case .stockMarketRiskLevel: return "stock_market_risk_level"
       case .tradingExperience: return "trading_experience"
       case .unexpectedPurchasesSource: return "unexpected_purchases_source"
@@ -23716,6 +26941,7 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
       case (.investmentHorizon, .investmentHorizon): return true
       case (.profileId, .profileId): return true
       case (.riskLevel, .riskLevel): return true
+      case (.riskScore, .riskScore): return true
       case (.stockMarketRiskLevel, .stockMarketRiskLevel): return true
       case (.tradingExperience, .tradingExperience): return true
       case (.unexpectedPurchasesSource, .unexpectedPurchasesSource): return true
@@ -23734,6 +26960,7 @@ public enum app_profile_scoring_settings_update_column: RawRepresentable, Equata
       .investmentHorizon,
       .profileId,
       .riskLevel,
+      .riskScore,
       .stockMarketRiskLevel,
       .tradingExperience,
       .unexpectedPurchasesSource,

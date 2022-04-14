@@ -84,6 +84,7 @@ final class HoldingsViewController: BaseViewController {
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
+        guard linkPlaidButton.isUserInteractionEnabled else {return}
         linkPlaidButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()

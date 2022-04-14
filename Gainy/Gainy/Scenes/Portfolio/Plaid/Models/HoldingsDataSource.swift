@@ -169,6 +169,10 @@ extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section != 0 else {return}
         if let stock = holdings[indexPath.row].rawTicker {
+            let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""
+            guard !symbol.hasSuffix(".CC") else {
+                return
+            }
             delegate?.stockSelected(source: self, stock: stock)
             GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
                 "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,

@@ -226,7 +226,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             securitiesTableView.isHidden = !isExpanded
             if let holding = holding {
                 if isExpanded {
-                    transactionsTotalLbl.attributedText = "All positions".attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
+                    transactionsTotalLbl.attributedText = (holding.isCrypto ? "Coins" : "All positions").attr(font: .compactRoundedSemibold(14.0), color: .init(hexString: "B1BDC8", alpha: 1.0)!)
                 } else {
                     transactionsTotalLbl.attributedText = holding.holdingsCount
                 }
