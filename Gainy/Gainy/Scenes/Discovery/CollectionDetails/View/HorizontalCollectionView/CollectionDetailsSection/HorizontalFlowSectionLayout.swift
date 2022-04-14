@@ -13,7 +13,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
         // Group
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(environment.container.contentSize.width - (8 + 4 + 4 + 8)),
+                widthDimension: .absolute(environment.container.contentSize.width),
                 heightDimension: .estimated(environment.container.contentSize.height)
             ),
             subitems: [topItem]
@@ -59,9 +59,10 @@ struct HorizontalFlowSectionLayout: SectionLayout {
             )
             if Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) {
                 cell.showAnimatedGradientSkeleton()
-            } else {
-                cell.collectionHorizontalView.hideSkeleton()                
             }
+//            else {
+//                cell.collectionHorizontalView.hideSkeleton()                
+//            }
         }
 
         return cell

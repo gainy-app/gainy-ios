@@ -770,13 +770,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     func currentBackgroundImageFrame() -> CGRect {
         
-        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
-        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
-            let horizontalView = cell.collectionHorizontalView
-            return self.view.convert(horizontalView.frame, from: horizontalView)
-        } else {
+//        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
+//        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
+//            let horizontalView = cell.collectionHorizontalView
+//            return self.view.convert(horizontalView.frame, from: horizontalView)
+//        } else {
             return CGRect.zero
-        }
+//        }
     }
     
     private func initViewModelsFromData() {

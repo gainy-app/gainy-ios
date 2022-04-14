@@ -9,62 +9,63 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         super.init(frame: .zero)
         
         self.isSkeletonable = true
-        contentView.addSubview(companyNameLabel)
-        
-        companyNameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 48)
-        companyNameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
-        companyNameLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
-        companyNameLabel.autoSetDimension(.height, toSize: 40, relation: NSLayoutConstraint.Relation.lessThanOrEqual)
         
         contentView.addSubview(symbolBackView)
         symbolBackView.addSubview(tickerSymbolLabel)
-        contentView.addSubview(todayLabel)
-        contentView.addSubview(percentArrowImgView)
-        contentView.addSubview(tickerPercentChangeLabel)
-        contentView.addSubview(tickerTotalPriceLabel)
-        
-        contentView.addSubview(marketMarkerOneButton)
-        contentView.addSubview(marketMarkerOneTextLabel)
-        contentView.addSubview(marketMarkerOneValueLabel)
-        
-        contentView.addSubview(marketMarkerSecondButton)
-        contentView.addSubview(marketMarkerSecondTextLabel)
-        contentView.addSubview(marketMarkerSecondValueLabel)
-        
-        contentView.addSubview(marketMarkerThirdButton)
-        contentView.addSubview(marketMarkerThirdTextLabel)
-        contentView.addSubview(marketMarkerThirdValueLabel)
-        
-        contentView.addSubview(leftVerticalSeparator)
-        contentView.addSubview(rightVerticalSeparator)
-        
-        contentView.addSubview(highlightsContainerView)
-        contentView.addSubview(highlightLabel)
+        symbolBackView.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
+        symbolBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
+        tickerSymbolLabel.autoPinEdge(.top, to: .top, of: symbolBackView, withOffset: 2)
+        tickerSymbolLabel.autoPinEdge(.left, to: .left, of: symbolBackView, withOffset: 4)
+        tickerSymbolLabel.autoPinEdge(.right, to: .right, of: symbolBackView, withOffset: -4)
+        tickerSymbolLabel.autoPinEdge(.bottom, to: .bottom, of: symbolBackView, withOffset: -2)
         
         contentView.addSubview(matchScoreButton)
         contentView.addSubview(matchLabel)
         contentView.addSubview(matchCircle)
-        
-        symbolBackView.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
-        symbolBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
-        
-        tickerSymbolLabel.autoPinEdge(.top, to: .top, of: symbolBackView, withOffset: 4)
-        tickerSymbolLabel.autoPinEdge(.left, to: .left, of: symbolBackView, withOffset: 8)
-        tickerSymbolLabel.autoPinEdge(.right, to: .right, of: symbolBackView, withOffset: -8)
-        tickerSymbolLabel.autoPinEdge(.bottom, to: .bottom, of: symbolBackView, withOffset: -4)
-        
         matchCircle.autoSetDimensions(to: CGSize.init(width: 22, height: 22))
         matchLabel.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
         matchScoreButton.autoSetDimensions(to: CGSize.init(width: 24.0, height: 24.0))
         matchLabel.layer.cornerRadius = 24.0 / 2.0
         matchLabel.clipsToBounds = true
-        
         matchScoreButton.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         matchScoreButton.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         matchCircle.autoPinEdge(.top, to: .top, of: contentView, withOffset: 17)
         matchCircle.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -17)
         matchLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         matchLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
+        
+        contentView.addSubview(companyNameLabel)
+        companyNameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 56)
+        companyNameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
+        companyNameLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
+        companyNameLabel.autoSetDimension(.height, toSize: 32, relation: NSLayoutConstraint.Relation.lessThanOrEqual)
+        
+    
+        
+        contentView.addSubview(todayLabel)
+        todayLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+        todayLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 40)
+        todayLabel.autoSetDimension(.height, toSize: 16)
+        
+        contentView.addSubview(percentArrowImgView)
+        percentArrowImgView.autoAlignAxis(.horizontal, toSameAxisOf: todayLabel)
+        percentArrowImgView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4)
+        
+        contentView.addSubview(tickerPercentChangeLabel)
+        tickerPercentChangeLabel.autoAlignAxis(.horizontal, toSameAxisOf: todayLabel)
+        tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 40)
+        tickerPercentChangeLabel.autoSetDimension(.height, toSize: 16)
+        tickerPercentChangeLabel.autoPinEdge(.left, to: .right, of: percentArrowImgView, withOffset: 4)
+        
+        contentView.addSubview(tickerTotalPriceLabel)
+        tickerTotalPriceLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+        tickerTotalPriceLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        tickerTotalPriceLabel.autoSetDimension(.height, toSize: 24)
+       
+        contentView.addSubview(addRemoveWatchlistButton)
+        addRemoveWatchlistButton.autoSetDimensions(to: CGSize.init(width: 40, height: 40))
+        addRemoveWatchlistButton.autoPinEdge(toSuperviewEdge: .right)
+        addRemoveWatchlistButton.autoPinEdge(toSuperviewEdge: .bottom)
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
@@ -84,7 +85,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         
         // smth like: UIFont.Gainy.SFProDisplay
         label.font = UIFont(name: "SFProDisplay-Bold", size: 16)
-        label.textColor = UIColor.Gainy.textDark
+        label.textColor = UIColor.init(hexString: "#131313")
         
         label.numberOfLines = 0
         label.lineBreakMode = .byTruncatingTail
@@ -126,7 +127,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     lazy var todayLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFCompactRounded-Medium", size: 10)
+        label.font = .compactRoundedSemibold(14.0)
         label.textColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
         
         label.text = "Today"
@@ -149,8 +150,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     lazy var tickerPercentChangeLabel: UILabel = {
         let label = UILabel()
         
-        label.font = .compactRoundedSemibold(13)
-        label.textColor = UIColor.Gainy.textDark
+        label.font = .compactRoundedSemibold(14)
+        label.textColor = UIColor.Gainy.mainGreen
         
         label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
@@ -175,22 +176,6 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         return label
     }()
     
-    lazy var leftVerticalSeparator: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.Gainy.lightGray
-        
-        return view
-    }()
-    
-    lazy var rightVerticalSeparator: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.Gainy.lightGray
-        
-        return view
-    }()
-    
-    
-    
     lazy var matchScoreButton: UIButton = {
         let button = UIButton()
         
@@ -203,159 +188,12 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         return button
     }()
     
-    lazy var marketMarkerOneButton: UIButton = {
-        let button = UIButton()
-        
-        button.backgroundColor = UIColor.Gainy.white
-        
-        button.addTarget(self,
-                         action: #selector(firstMarketMarkerTapped(_:)),
-                         for: .touchUpInside)
-        
-        return button
-    }()
-    
-    lazy var marketMarkerOneTextLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont.compactRoundedMedium(10)
-        label.textColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.text = "Growth rate CAGR".uppercased()
-        label.numberOfLines = 2
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.minimumScaleFactor = 0.1
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
-    lazy var marketMarkerOneValueLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 14)
-        label.textColor = UIColor.Gainy.textDark
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.minimumScaleFactor = 0.1
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
-    lazy var marketMarkerSecondButton: UIButton = {
-        let button = UIButton()
-        
-        button.backgroundColor = UIColor.Gainy.white
-        
-        button.addTarget(self,
-                         action: #selector(secondMarketMarkerTapped(_:)),
-                         for: .touchUpInside)
-        
-        return button
-    }()
-    
-    lazy var marketMarkerSecondTextLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont.compactRoundedMedium(10)
-        label.textColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.text = "EV/S"
-        label.numberOfLines = 2
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.minimumScaleFactor = 0.1
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
-    lazy var marketMarkerSecondValueLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 14)
-        label.textColor = UIColor.Gainy.textDark
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
-    
-    lazy var marketMarkerThirdButton: UIButton = {
-        let button = UIButton()
-        
-        button.backgroundColor = UIColor.Gainy.white
-        
-        button.addTarget(self,
-                         action: #selector(thirdMarketMarkerTapped(_:)),
-                         for: .touchUpInside)
-        
-        return button
-    }()
-    
-    lazy var marketMarkerThirdTextLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont.compactRoundedMedium(10)
-        label.textColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.text = "MARKET CAP"
-        label.numberOfLines = 2
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.minimumScaleFactor = 0.1
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
-    lazy var marketMarkerThirdValueLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 14)
-        label.textColor = UIColor.Gainy.textDark
-        
-        label.backgroundColor = UIColor.Gainy.white
-        
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .center
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        
-        return label
-    }()
-    
-    lazy var highlightsContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hexString: "#E7EAEE", alpha: 1.0)
-        
-        return view
-    }()
-    
     lazy var matchCircle: UIImageView = {
         let view = UIImageView()
+        view.alpha = 0.63
         view.backgroundColor = .clear
         view.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
-        view.tintColor = .white
+        view.tintColor = UIColor.init(hexString: "#09141F")
         view.isSkeletonable = true
         view.skeletonCornerRadius = 6
         
@@ -366,8 +204,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         let label = UILabel()
         
         label.font = UIFont.compactRoundedSemibold(12.0)
-        label.textColor = .white
-        label.backgroundColor = UIColor(named: "mainGreen")
+        label.textColor = UIColor.init(hexString: "#09141F")
+        label.backgroundColor = UIColor(named: "thirdGreen")
         label.numberOfLines = 1
         label.textAlignment = .center
         label.text = "-"
@@ -376,165 +214,25 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         return label
     }()
     
-    lazy var highlightLabel: UILabel = {
-        let label = UILabel()
+    lazy var addRemoveWatchlistButton: ResponsiveButton = {
+        let button = ResponsiveButton()
         
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        label.textColor = UIColor.Gainy.textDark
+        button.isSkeletonable = true
+        button.isHiddenWhenSkeletonIsActive = true
+        button.backgroundColor = UIColor.clear
+        button.setImage(UIImage.init(named: "add"), for: .normal)
+        button.setImage(UIImage.init(named: "remove"), for: .selected)
+        button.addTarget(self,
+                         action: #selector(addRemoveWatchlistTapped(_:)),
+                         for: .touchUpInside)
         
-        label.numberOfLines = 3
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .left
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        
-        return label
+        return button
     }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         layoutSkeletonIfNeeded()
-        let hMargin: CGFloat = 16
-        let topMargin: CGFloat = 18
-        
-//        companyNameLabel.frame = CGRect(
-//            x: hMargin,
-//            y: topMargin,
-//            width: bounds.width - hMargin * 2.0 - 30.0,
-//            height: 20
-//        )
-        
-        todayLabel.frame = CGRect(
-            x: hMargin,
-            y: 90,
-            width: 26,
-            height: 12
-        )
-        
-        percentArrowImgView.frame = CGRect(
-            x: 46,
-            y: 92,
-            width: 8,
-            height: 8
-        )
-        
-        tickerPercentChangeLabel.frame = CGRect(
-            x: hMargin + todayLabel.bounds.width + 16,
-            y: 90,
-            width: 55,
-            height: 12
-        )
-        
-        tickerTotalPriceLabel.frame = CGRect(
-            x: hMargin,
-            y: 80 + 28,
-            width: 127,
-            height: 20
-        )
-        
-        let markerMarkerWidth = (bounds.width - (12 + 2 + 1 + 2 + 2 + 1 + 2 + 12)) / 3
-        let markerTextWidth: CGFloat = 44
-        
-        marketMarkerOneButton.frame = CGRect(
-            x: hMargin - 4,
-            y: 110 + 24,
-            width: markerMarkerWidth,
-            height: 40
-        )
-        
-        marketMarkerOneTextLabel.frame = CGRect(
-            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
-            y: 110 + 24,
-            width: markerTextWidth, // markerMarkerWidth,
-            height: 24
-        )
-        
-        marketMarkerOneValueLabel.frame = CGRect(
-            x: (hMargin - 4) + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth, // markerMarkerWidth,
-            height: 16
-        )
-        
-        marketMarkerSecondButton.frame = CGRect(
-            x: (hMargin - 4) + markerMarkerWidth + 2 + 1 + 2,
-            y: 110 + 24,
-            width: markerMarkerWidth,
-            height: 40
-        )
-        
-        marketMarkerSecondTextLabel.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
-            y: 110 + 24,
-            width: markerTextWidth,
-            height: 24
-        )
-        
-        marketMarkerSecondValueLabel.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerSecondButton.bounds.width + 2 + 1 + 2 + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth,
-            height: 16
-        )
-        
-        marketMarkerThirdButton.frame = CGRect(
-            x: bounds.width - (markerMarkerWidth + (hMargin - 4)),
-            y: 110 + 24,
-            width: markerMarkerWidth,
-            height: 40
-        )
-        
-        marketMarkerThirdTextLabel.frame = CGRect(
-            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
-            y: 110 + 24,
-            width: markerTextWidth,
-            height: 24
-        )
-        
-        marketMarkerThirdValueLabel.frame = CGRect(
-            x: bounds.width - (marketMarkerThirdButton.bounds.width + (hMargin - 4)) + ((markerMarkerWidth - 44) / 2),
-            y: 134 + 24,
-            width: markerTextWidth,
-            height: 16
-        )
-        
-        leftVerticalSeparator.frame = CGRect(
-            x: (hMargin - 4) + marketMarkerOneButton.bounds.width + 2,
-            y: 112 + 24,
-            width: 1,
-            height: 38
-        )
-        
-        rightVerticalSeparator.frame = CGRect(
-            x: bounds.width - (2 + 1 + markerMarkerWidth + (hMargin - 4)),
-            y: 112 + 24,
-            width: 1,
-            height: 38
-        )
-        
-        highlightsContainerView.frame = CGRect(
-            x: 0,
-            y: 160 + 24,
-            width: bounds.width,
-            height: 64
-        )
-        
-        //        highlightsContainerView.layer.cornerRadius = 8
-        let mask = CAShapeLayer()
-        mask.path = UIBezierPath(
-            roundedRect: highlightsContainerView.bounds,
-            byRoundingCorners: [.bottomLeft, .bottomRight],
-            cornerRadii: CGSize(width: 8, height: 8)
-        ).cgPath
-        highlightsContainerView.layer.mask = mask
-        
-        highlightLabel.frame = CGRect(
-            x: hMargin,
-            y: 160 + 28,
-            width: bounds.width - (hMargin + hMargin) - 16.0,
-            height: highlightsContainerView.bounds.height - (4 + 4)
-        )
     }
     
     // MARK: Functions
@@ -544,14 +242,12 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerSymbol: String,
         tickerPercentChange: String,
         tickerPrice: String,
-        markerMetricHeaders: [String],
-        markerMetric: [String],
-        highlight: String,
         matchScore: String
     ) {
         companyNameLabel.minimumScaleFactor = 0.1
         companyNameLabel.adjustsFontSizeToFitWidth = true
         companyNameLabel.text = companyName
+        companyNameLabel.sizeToFit()
         
         tickerSymbolLabel.text = tickerSymbol
         tickerSymbolLabel.sizeToFit()
@@ -569,35 +265,22 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         } else {
             tickerTotalPriceLabel.text = "$\(tickerPrice)"
             tickerTotalPriceLabel.textColor = tickerPercentChange.hasPrefix(" +")
-            ? UIColor.Gainy.green
-            : UIColor.Gainy.red
+            ? UIColor.Gainy.mainGreen
+            : UIColor.Gainy.mainRed
             tickerTotalPriceLabel.sizeToFit()
         }
-        
-        
-        let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
-        let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
-        for (ind ,val) in markerMetricHeaders.enumerated() {
-            headers[ind].text = val
-            values[ind].text = markerMetric[ind]
-            headers[ind].sizeToFit()
-            values[ind].sizeToFit()
-        }
-        
-        highlightLabel.text = highlight
-        highlightLabel.sizeToFit()
         
         matchLabel.text = matchScore
         let matchVal = Int(matchScore) ?? 0
         switch matchVal {
         case 0..<35:
-            matchLabel.backgroundColor = UIColor.Gainy.mainRed
+            matchLabel.backgroundColor = UIColor.Gainy.secondaryLightGray
             break
         case 35..<65:
-            matchLabel.backgroundColor = UIColor.Gainy.mainYellow
+            matchLabel.backgroundColor = UIColor.Gainy.secondaryYellow
             break
         case 65...:
-            matchLabel.backgroundColor = UIColor.Gainy.mainGreen
+            matchLabel.backgroundColor = UIColor.Gainy.thirdGreen
             break
         default:
             break
@@ -613,16 +296,9 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         tickerSymbolLabel.text = ""
         tickerPercentChangeLabel.text = ""
         tickerTotalPriceLabel.text = ""
-        
-        let headers = [marketMarkerOneTextLabel, marketMarkerSecondTextLabel, marketMarkerThirdTextLabel]
-        let values = [marketMarkerOneValueLabel, marketMarkerSecondValueLabel, marketMarkerThirdValueLabel]
-        for (ind, _) in headers.enumerated() {
-            headers[ind].text = ""
-            values[ind].text = ""
-        }
-        highlightLabel.text = ""
         matchLabel.text = ""
         
+        self.addRemoveWatchlistButton.isSelected = false
         self.isSkeletonable = false
     }
     
@@ -641,6 +317,12 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
         FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
+    }
+    
+    @objc
+    private func addRemoveWatchlistTapped(_: UIButton) {
+        // TODO: Borysov - Add/Remove watchlist
+        self.addRemoveWatchlistButton.isSelected = !self.addRemoveWatchlistButton.isSelected
     }
     
     @objc
