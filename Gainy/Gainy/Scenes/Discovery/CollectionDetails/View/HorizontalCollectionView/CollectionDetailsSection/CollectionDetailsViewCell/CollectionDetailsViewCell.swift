@@ -369,9 +369,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     cell.hideSkeleton()
                 }
             }
-            let recurLock = NSRecursiveLock()
-            //Loading tickers data!
-            recurLock.lock()
+//            let recurLock = NSRecursiveLock()
+//            //Loading tickers data!
+//            recurLock.lock()
             if !self.isLoadingTickers {
                 let dispatchGroup = DispatchGroup()
                 var loadingItems: Int  = 0
@@ -417,7 +417,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
             
-            recurLock.unlock()
+//            recurLock.unlock()
             
             return cell
         }
