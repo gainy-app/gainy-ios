@@ -1,5 +1,5 @@
 query GetFavoriteCollections($profileId: Int) {
-  app_profile_favorite_collections(where: {profile_id: {_eq: $profileId}}) {
+  app_profile_favorite_collections(where: {profile_id: {_eq: $profileId}, collection: {enabled: {_eq: "1"}}}) {
     collection {
       ...RemoteShortCollectionDetails
     }
