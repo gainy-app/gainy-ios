@@ -3,8 +3,10 @@ import FacebookCore
 import FirebaseAuth
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
     // MARK: Internal
-
+    private(set) var preloadVC: ConfigLoaderViewController = ConfigLoaderViewController.instantiate(.popups)
+    
     // MARK: Properites
 
     var window: UIWindow?
@@ -61,6 +63,27 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEvent("first_launch", params: fbParams)
+        }
+        addPreloadOverlay()
+    }
+    
+    private func addPreloadOverlay() {
+//        guard UserProfileManager.shared.profileID == nil else {
+//            RemoteConfigManager.shared.loadDefaults {
+//            }
+//            return
+//        }
+        
+        insertPreloadOverlay()
+    }
+    
+    func insertPreloadOverlay() {
+        if preloadVC.view.superview == nil {
+            preloadVC.view.frame = window?.rootViewController?.view.frame ?? .zero
+            if let view = preloadVC.view {
+                window?.rootViewController?.view.addSubview(view)
+                preloadVC.startLoading()
+            }
         }
     }
     

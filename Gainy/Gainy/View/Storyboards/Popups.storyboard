@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="274"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acQ-D0-DjJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="155.5" y="0.0" width="103" height="44"/>
+                                        <rect key="frame" x="155" y="0.0" width="104" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1fm-PB-N2R"/>
@@ -97,7 +97,7 @@
                                         <rect key="frame" x="156" y="90" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2M-Ac-MJ8" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="139.5" y="92" width="135" height="44"/>
+                                        <rect key="frame" x="139" y="92" width="136" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1ka-OJ-pmN"/>
@@ -155,7 +155,7 @@
                                         <rect key="frame" x="156" y="182" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-UU-s1W" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="120.5" y="184" width="173" height="44"/>
+                                        <rect key="frame" x="119" y="184" width="176" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uBi-iR-wN3"/>
@@ -184,7 +184,7 @@
                                         <rect key="frame" x="156" y="228" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSX-Kd-21I" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="124.5" y="230" width="165" height="44"/>
+                                        <rect key="frame" x="126.5" y="230" width="161" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="lTx-P9-pWB"/>
@@ -212,7 +212,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-VB-HTb">
-                                <rect key="frame" x="177" y="69" width="60" height="24"/>
+                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="TTy-iw-jLP"/>
                                 </constraints>
@@ -412,7 +412,7 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="322"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fus-uX-UAL" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="143.5" y="0.0" width="127" height="44"/>
+                                        <rect key="frame" x="142.5" y="0.0" width="129" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="41j-CE-a9C"/>
@@ -473,7 +473,7 @@
                                         <rect key="frame" x="156" y="92" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avr-6y-FL5" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="151" y="94" width="112" height="44"/>
+                                        <rect key="frame" x="152.5" y="94" width="109" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="APd-OS-iC3"/>
@@ -531,7 +531,7 @@
                                         <rect key="frame" x="156" y="184" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xb-XL-NNV" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="183" y="186" width="48" height="44"/>
+                                        <rect key="frame" x="182.5" y="186" width="49" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uD0-mS-BhC"/>
@@ -617,7 +617,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dSr-Yb-B6Y">
-                                <rect key="frame" x="177" y="69" width="60" height="24"/>
+                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="9Z9-Pw-DiQ"/>
                                 </constraints>
@@ -677,7 +677,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="ifda_prompt_space" translatesAutoresizingMaskIntoConstraints="NO" id="m9R-WX-Zq3">
-                                <rect key="frame" x="0.0" y="134" width="414" height="453"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="449.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKe-Fi-Pis" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -703,7 +703,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please allow us to know where you came from so we can give you more personalized content." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QX2-yb-bdK">
-                                <rect key="frame" x="32" y="643" width="350" height="70"/>
+                                <rect key="frame" x="32" y="641" width="350" height="72"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EGp-2G-qdz"/>
                                 </constraints>
@@ -712,7 +712,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKS-kk-3pt">
-                                <rect key="frame" x="32" y="567" width="350" height="60"/>
+                                <rect key="frame" x="32" y="563.5" width="350" height="61.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Improve your experience">
                                         <attributes>
@@ -748,60 +748,96 @@
             </objects>
             <point key="canvasLocation" x="-581" y="784"/>
         </scene>
+        <!--Config Loader View Controller-->
+        <scene sceneID="jnf-Ne-S9R">
+            <objects>
+                <viewController storyboardIdentifier="ConfigLoaderViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZSd-fE-C1F" customClass="ConfigLoaderViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="53F-0A-4E8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_back" translatesAutoresizingMaskIntoConstraints="NO" id="tNb-4l-2UL">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="N4A-7g-4Rd">
+                                <rect key="frame" x="131.5" y="421.5" width="151" height="53"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="w6q-Mh-eXg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="tNb-4l-2UL" secondAttribute="bottom" id="1ph-MZ-0XO"/>
+                            <constraint firstItem="tNb-4l-2UL" firstAttribute="leading" secondItem="53F-0A-4E8" secondAttribute="leading" id="CnA-DO-2lL"/>
+                            <constraint firstAttribute="trailing" secondItem="tNb-4l-2UL" secondAttribute="trailing" id="Joe-5s-0XZ"/>
+                            <constraint firstItem="tNb-4l-2UL" firstAttribute="top" secondItem="53F-0A-4E8" secondAttribute="top" id="ddM-gQ-jhJ"/>
+                            <constraint firstItem="N4A-7g-4Rd" firstAttribute="centerY" secondItem="53F-0A-4E8" secondAttribute="centerY" id="mKi-6H-GY2"/>
+                            <constraint firstItem="N4A-7g-4Rd" firstAttribute="centerX" secondItem="53F-0A-4E8" secondAttribute="centerX" id="pR0-R5-vA3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="logoImgView" destination="N4A-7g-4Rd" id="MPg-xw-K4I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YVN-IC-sWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1555" y="123"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="4FW-wy-DAv">
-            <size key="intrinsicContentSize" width="95" height="33"/>
+            <size key="intrinsicContentSize" width="95" height="34"/>
         </designable>
         <designable name="5OH-9d-xFr">
-            <size key="intrinsicContentSize" width="114" height="33"/>
+            <size key="intrinsicContentSize" width="114" height="34"/>
         </designable>
         <designable name="9wq-O2-coc">
-            <size key="intrinsicContentSize" width="40" height="33"/>
+            <size key="intrinsicContentSize" width="40" height="34"/>
         </designable>
         <designable name="9xb-XL-NNV">
-            <size key="intrinsicContentSize" width="48" height="33"/>
+            <size key="intrinsicContentSize" width="49" height="34"/>
         </designable>
         <designable name="Fus-uX-UAL">
-            <size key="intrinsicContentSize" width="127" height="33"/>
+            <size key="intrinsicContentSize" width="129" height="34"/>
         </designable>
         <designable name="MAF-bt-lMq">
-            <size key="intrinsicContentSize" width="95" height="33"/>
+            <size key="intrinsicContentSize" width="95" height="34"/>
         </designable>
         <designable name="PKe-Fi-Pis">
-            <size key="intrinsicContentSize" width="57.5" height="33"/>
+            <size key="intrinsicContentSize" width="57" height="33.5"/>
         </designable>
         <designable name="VyM-fK-98V">
-            <size key="intrinsicContentSize" width="166" height="33"/>
+            <size key="intrinsicContentSize" width="166" height="34"/>
         </designable>
         <designable name="ZSX-Kd-21I">
-            <size key="intrinsicContentSize" width="165" height="33"/>
+            <size key="intrinsicContentSize" width="161" height="34"/>
         </designable>
         <designable name="acQ-D0-DjJ">
-            <size key="intrinsicContentSize" width="103" height="33"/>
+            <size key="intrinsicContentSize" width="104" height="34"/>
         </designable>
         <designable name="avr-6y-FL5">
-            <size key="intrinsicContentSize" width="112" height="33"/>
+            <size key="intrinsicContentSize" width="109" height="34"/>
         </designable>
         <designable name="dfl-ps-wgB">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="gfI-UU-s1W">
-            <size key="intrinsicContentSize" width="173" height="33"/>
+            <size key="intrinsicContentSize" width="176" height="34"/>
         </designable>
         <designable name="kzP-zA-30h">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="o2M-Ac-MJ8">
-            <size key="intrinsicContentSize" width="135" height="33"/>
+            <size key="intrinsicContentSize" width="136" height="34"/>
         </designable>
         <designable name="p6C-ym-eft">
-            <size key="intrinsicContentSize" width="101" height="33"/>
+            <size key="intrinsicContentSize" width="101" height="34"/>
         </designable>
     </designables>
     <resources>
         <image name="ifda_prompt_space" width="375" height="438.5"/>
         <image name="sort_dots" width="102" height="2"/>
+        <image name="splash_back" width="375" height="812"/>
+        <image name="splash_logo" width="151" height="53"/>
         <namedColor name="mainLightGray">
             <color red="0.69411764705882351" green="0.74117647058823533" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -95,6 +95,19 @@ final class HoldingsViewModel {
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
                     
                     for holdingGroup in self.holdingGroups {
+                        
+                        if !RemoteConfigManager.shared.showPortoCash {
+                            if holdingGroup.holdings.first?.secType == .cash {
+                                continue
+                            }
+                        }
+                        
+                        if !RemoteConfigManager.shared.showPortoCrypto {
+                            if holdingGroup.holdings.first?.secType == .crypto {
+                                continue
+                            }
+                        }
+                        
                         let symbol = holdingGroup.details?.tickerSymbol ?? ""
                         if !symbol.isEmpty {
                             tickSymbols.append(symbol)

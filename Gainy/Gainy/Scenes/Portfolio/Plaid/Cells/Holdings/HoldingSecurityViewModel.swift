@@ -35,20 +35,7 @@ struct HoldingSecurityViewModel {
     }
     
     init(holding: GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding) {
-        let rawType = holding.holdingDetails?.securityType ?? ""
-        if rawType == "derivative" {
-            type = .option
-        } else {
-            if rawType == "equity" {
-                type = .share
-            } else {
-                if rawType == "crypto" {
-                    type = .crypto
-                } else {
-                    type = .cash
-                }
-            }
-        }
+        self.type = holding.secType
         let correctName = (type == .option ? holding.lovelyTitle.companyMarkRemoved  : type.rawValue)
         
         let accountID =  (UserProfileManager.shared.linkedPlaidAccounts.first(where: {
@@ -105,4 +92,22 @@ extension HoldingSecurityViewModel: Hashable {
     
 }
 
+extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
+    var secType: HoldingSecurityViewModel.SecType {
+        let rawType = holdingDetails?.securityType ?? ""
+        if rawType == "derivative" {
+            return .option
+        } else {
+            if rawType == "equity" {
+                return .share
+            } else {
+                if rawType == "crypto" {
+                    return .crypto
+                } else {
+                    return .cash
+                }
+            }
+        }
+    }
+}
 

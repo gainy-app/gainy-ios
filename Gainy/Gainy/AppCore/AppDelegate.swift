@@ -12,7 +12,7 @@ import FirebaseAnalytics
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal
-    
+        
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
                
@@ -23,6 +23,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         TickerLiveStorage.shared.clearAllLiveData()
         return true
     }
+    
     
     func application(_: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,

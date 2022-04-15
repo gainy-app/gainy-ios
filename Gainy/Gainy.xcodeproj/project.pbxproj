@@ -149,6 +149,8 @@
 		33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33B9887226CA90D0008B8AC9 /* Kingfisher */; };
 		33B9887526CA9781008B8AC9 /* CollectionDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */; };
 		33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */; };
+		33BA6D96280970EC00C3A431 /* ConfigLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6D95280970EC00C3A431 /* ConfigLoaderViewController.swift */; };
+		33BA6D982809711B00C3A431 /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */; };
 		33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */; };
 		33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */; };
 		33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */; };
@@ -660,6 +662,8 @@
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
 		33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.graphql.swift; sourceTree = "<group>"; };
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
+		33BA6D95280970EC00C3A431 /* ConfigLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLoaderViewController.swift; sourceTree = "<group>"; };
+		33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
 		33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesA.xcassets; sourceTree = "<group>"; };
 		33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsDataSource.swift; sourceTree = "<group>"; };
 		33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -1243,6 +1247,7 @@
 				8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */,
 				33F6DC3B2738FDF300CBE4DA /* SearchStocks */,
 				90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */,
+				33BA6D95280970EC00C3A431 /* ConfigLoaderViewController.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -1375,6 +1380,7 @@
 				9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */,
 				90F2B6492761ED1600474909 /* WebPresenter.swift */,
 				9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */,
+				33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2800,6 +2806,7 @@
 				85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
 				85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */,
+				33BA6D96280970EC00C3A431 /* ConfigLoaderViewController.swift in Sources */,
 				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
 				33A1F57927032721000DAF33 /* FetchRecommendedCollections.graphql.swift in Sources */,
 				3AD40FD026693D75005679DE /* UICollectionView+ReusableHeaderSection.swift in Sources */,
@@ -3146,6 +3153,7 @@
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
 				3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */,
+				33BA6D982809711B00C3A431 /* RemoteConfigManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

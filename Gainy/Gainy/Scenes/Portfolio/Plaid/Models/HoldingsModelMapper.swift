@@ -17,6 +17,18 @@ struct HoldingsModelMapper {
         
         for holdingGroup in holdingGroups {
             
+            if !RemoteConfigManager.shared.showPortoCash {
+                if holdingGroup.holdings.first?.secType == .cash {
+                    continue
+                }
+            }
+            
+            if !RemoteConfigManager.shared.showPortoCrypto {
+                if holdingGroup.holdings.first?.secType == .crypto {
+                    continue
+                }
+            }
+            
             let ticker = holdingGroup.ticker?.fragments.remoteTickerDetailsFull
             let symbol = holdingGroup.symbol ?? ""
             

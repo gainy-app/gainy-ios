@@ -55,6 +55,9 @@ struct Constants {
         static let favKey = "favKey"
         static let scheduledSymbolEvents = "scheduledSymbolEvents"
         static let scheduledCalendarEvents = "scheduledCalendarEvents"
+        
+        static let showPortoCash = "showPortoCash"
+        static let showPortoCrypto = "showPortoCrypto"
     }
     
     struct Links {
@@ -76,5 +79,10 @@ struct Constants {
     struct Chart {
         static let sypChartName = "SYPCHART"
         static let sypSymbol = "SPY"
+    }
+    
+    struct RemoteConfig {
+        static let isPortoCash = "isPortoCashEnabled"
+        static let isPortoCrypto = "isPortoCryptoEnabled"
     }
 }
