@@ -9,7 +9,9 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query GetFavoriteCollections($profileId: Int) {
-      app_profile_favorite_collections(where: {profile_id: {_eq: $profileId}}) {
+      app_profile_favorite_collections(
+        where: {profile_id: {_eq: $profileId}, collection: {enabled: {_eq: "1"}}}
+      ) {
         __typename
         collection {
           __typename
@@ -42,7 +44,7 @@ public final class GetFavoriteCollectionsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("app_profile_favorite_collections", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileId")]]], type: .nonNull(.list(.nonNull(.object(AppProfileFavoriteCollection.selections))))),
+        GraphQLField("app_profile_favorite_collections", arguments: ["where": ["profile_id": ["_eq": GraphQLVariable("profileId")], "collection": ["enabled": ["_eq": "1"]]]], type: .nonNull(.list(.nonNull(.object(AppProfileFavoriteCollection.selections))))),
       ]
     }
 

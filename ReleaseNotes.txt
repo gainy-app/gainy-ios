@@ -1,12 +1,12 @@
-iOS v1.2.2 #182 available
-:globe_with_meridians: Server - TEST
+iOS v1.2.2 #183 available
+:globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio: crypto card redesign merged
+• Portfolio: crypto card fix
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
