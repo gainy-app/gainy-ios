@@ -17,7 +17,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         
         contentView.addSubview(tickersCountLabelView)
         tickersCountLabelView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
-        tickersCountLabelView.autoAlignAxis(toSuperviewAxis: .horizontal)
+        tickersCountLabelView.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         tickersCountLabelView.autoSetDimension(.height, toSize: 24.0)
         
         tickersCountLabelView.addSubview(tickersCountLabel)
