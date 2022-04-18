@@ -3,7 +3,6 @@ import SkeletonView
 import Combine
 import PureLayout
 
-
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
     case gain
@@ -149,6 +148,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private var collectionID: Int = 0
     private var stocksCount: Int = 0
+    private var dailyGrow: Float = 0
+    private var companyAbout: String = ""
     
     private var loadingSymbolArray: Array<String> = Array()
     private var loadingMatchScoreArray: Array<String> = Array()
@@ -158,13 +159,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         image collectionImage: String,
         imageUrl: String,
         description collectionDescription: String,
-        stocksAmount: String,
+        stocksAmount: Int,
+        dailyGrow: Float,
         cards: [CollectionCardViewCellModel],
         collectionId: Int
     ) {
         self.collectionID = collectionId
         self.collectionName = collectionName
-        self.stocksCount = Int(stocksAmount) ?? 0
+        self.stocksCount = stocksAmount
+        self.dailyGrow = dailyGrow
+        self.companyAbout = collectionDescription
         self.cards = cards
         sortSections()
         
@@ -345,7 +349,11 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .gain:
             let cell: CollectionDetailsGainCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsGainCell.cellIdentifier, for: indexPath) as! CollectionDetailsGainCell
-            cell.configureWith(tickersCount: self.stocksCount, todaysGain: " +25.05%")
+            if collectionID == Constants.CollectionDetails.watchlistCollectionID {
+                cell.configureAsWatchlist(tickersCount: stocksCount)
+            } else {
+                cell.configureWith(tickersCount: stocksCount, dailyGrow: dailyGrow)
+            }
             return cell
             
         case .chart:
@@ -354,6 +362,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .about:
             let cell: CollectionDetailsAboutCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsAboutCell.cellIdentifier, for: indexPath) as! CollectionDetailsAboutCell
+            cell.configureWith(detail: self.companyAbout)
             return cell
             
         case .recommended:
@@ -489,18 +498,14 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.init(width: width, height: 240.0)
             
         case .about:
+            guard collectionID != Constants.CollectionDetails.watchlistCollectionID else {
+                return .zero
+            }
             let width = collectionView.frame.width
             let aboutTitleWithOffsets = 56.0
-            let textLineHeight = 20.0
-            
-            // TODO: Make dynamic depends on text and state (expanded collapsed)
-            let numberOfLines = 4.0
-            //        let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
-            let aboutTextSize = textLineHeight * numberOfLines
-            
             let bottomOffset = 24.0
-            let height = aboutTitleWithOffsets + aboutTextSize + bottomOffset
-            return CGSize.init(width: width, height: height)
+            let height = aboutTitleWithOffsets + companyAbout.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
+            return CGSize.init(width: collectionView.frame.width, height: height)
             
         case .recommended:
             let width = collectionView.frame.width

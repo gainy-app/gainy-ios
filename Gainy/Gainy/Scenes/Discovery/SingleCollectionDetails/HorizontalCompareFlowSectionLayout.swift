@@ -62,6 +62,7 @@ struct HorizontalCompareFlowSectionLayout: SectionLayout {
                 imageUrl: viewModel.imageUrl,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
+                dailyGrow: viewModel.dailyGrow,
                 cards: viewModel.cards,
                 collectionId: viewModel.id
             )

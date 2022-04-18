@@ -10,6 +10,7 @@ enum CollectionDetailsDTOMapper {
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
+            collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             isInYourCollectionsList: false,
             cards: dto.prefetchedTickers
         )
@@ -24,6 +25,7 @@ enum CollectionDetailsDTOMapper {
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
+            collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             isInYourCollectionsList: true,
             cards: dto.prefetchedTickers
         )
@@ -236,7 +238,7 @@ enum CollectionDetailsDTOMapper {
                                                             tickerHighlights: [])))
             }
             
-            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: "1", inYourCollectionList: false, cards: cards))
+            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: 1, dailyGrow: 0.0, inYourCollectionList: false, cards: cards))
         }
         return collections
     }

@@ -327,7 +327,8 @@ extension SingleCollectionDetailsViewController: SearchStocksViewControllerDeleg
                     imageUrl: "",
                     name: "Compared Stocks",
                     description: "",
-                    stocksAmount: "\(first.cards.count + 1)",
+                    stocksAmount: first.cards.count + 1,
+                    dailyGrow: 0.0,
                     inYourCollectionList: false,
                     cards: cards
                 )

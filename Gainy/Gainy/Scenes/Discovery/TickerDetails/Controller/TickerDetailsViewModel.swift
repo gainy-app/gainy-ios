@@ -45,7 +45,8 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
             imageUrl: "",
             name: "Compared Stocks",
             description: "",
-            stocksAmount: "\(tickersToCompare.count)",
+            stocksAmount: tickersToCompare.count,
+            dailyGrow: 0.0,
             inYourCollectionList: false,
             cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(
                 $0

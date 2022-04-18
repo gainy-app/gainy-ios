@@ -4,7 +4,8 @@ struct CollectionDetailViewCellModel {
     let imageUrl: String
     let name: String
     let description: String
-    let stocksAmount: String
+    let stocksAmount: Int
+    let dailyGrow: Float    
     let inYourCollectionList: Bool
     var cards: [CollectionCardViewCellModel]
     

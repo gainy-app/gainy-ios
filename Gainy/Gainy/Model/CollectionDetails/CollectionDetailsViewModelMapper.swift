@@ -6,7 +6,8 @@ enum CollectionDetailsViewModelMapper {
             imageUrl: model.collectionBackgroundImageUrl,
             name: model.collectionName,
             description: model.collectionDescription,
-            stocksAmount: "\(model.collectionStocksAmount)",
+            stocksAmount: model.collectionStocksAmount,
+            dailyGrow: model.collectionDailyGrow,
             inYourCollectionList: model.isInYourCollectionsList,
             cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
         )

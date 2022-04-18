@@ -5,6 +5,7 @@ struct CollectionDetails {
     let collectionName: String
     let collectionDescription: String
     let collectionStocksAmount: Int
+    let collectionDailyGrow: Float
     let isInYourCollectionsList: Bool
     var cards: [TickerDetails]
     

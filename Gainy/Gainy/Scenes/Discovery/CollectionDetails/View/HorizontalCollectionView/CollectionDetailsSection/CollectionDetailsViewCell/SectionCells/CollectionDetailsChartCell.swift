@@ -15,7 +15,7 @@ final class CollectionDetailsChartCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor.Gainy.gray
+        self.backgroundColor = .white
     }
     
     @available(*, unavailable)

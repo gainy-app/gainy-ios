@@ -59,20 +59,36 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         self.isSkeletonable = false
     }
     
-    func configureWith(tickersCount: Int, todaysGain: String) {
+    func configureWith(tickersCount: Int, dailyGrow: Float) {
         
         tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")
         tickersCountLabel.sizeToFit()
         
-        tickerPercentChangeLabel.text = todaysGain.replacingOccurrences(of: " +", with: "").replacingOccurrences(of: " -", with: "").replacingOccurrences(of: "-", with: "")
-        tickerPercentChangeLabel.textColor = todaysGain.hasPrefix(" +")
-        ? UIColor.Gainy.green
-        : UIColor.Gainy.red
+        if dailyGrow > 0.0 {
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.secondaryGreen
+            percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+            percentArrowImgView.tintColor = UIColor.Gainy.secondaryGreen
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.secondaryGreen
+            
+        } else {
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+            percentArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+            percentArrowImgView.tintColor = UIColor.Gainy.mainRed
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+        }
+        tickerPercentChangeLabel.text = dailyGrow.percent
         tickerPercentChangeLabel.sizeToFit()
         
-        percentArrowImgView.image = todaysGain.hasPrefix(" +") ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
+        todaysGainLabel.text = "Today Gain"
+    }
+    
+    func configureAsWatchlist(tickersCount: Int) {
+        tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")
+        tickersCountLabel.sizeToFit()
         
-        todaysGainLabel.text = "Todays Gain"
+        percentArrowImgView.image = nil
+        tickerPercentChangeLabel.text = ""
+        todaysGainLabel.text = ""
     }
     
     lazy var tickersCountLabelView: UIView = {
