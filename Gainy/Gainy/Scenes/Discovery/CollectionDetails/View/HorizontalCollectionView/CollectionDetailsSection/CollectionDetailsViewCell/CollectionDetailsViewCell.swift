@@ -4,7 +4,6 @@ import Combine
 import PureLayout
 
 
-// TODO: Borysov - add cells for every section
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
     case gain
@@ -39,13 +38,23 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
         
+        collectionView.register(CollectionDetailsTitleCell.self)
+        collectionView.register(CollectionDetailsGainCell.self)
+        collectionView.register(CollectionDetailsChartCell.self)
+        collectionView.register(CollectionDetailsAboutCell.self)
+        collectionView.register(CollectionDetailsRecommendedCell.self)
+        
         collectionView.register(CollectionCardCell.self)
-        collectionView.register(UICollectionViewCell.self)
+        
         collectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
         
         collectionView.register(CollectionDetailsFooterView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
                                 withReuseIdentifier: "CollectionDetailsFooterView")
+        
+        collectionView.register(CollectionDetailsHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "CollectionDetailsHeaderView")
         
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
@@ -120,6 +129,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var model: CollectionCardViewCellModel?
     var cancellables = Set<AnyCancellable>()
+    var collectionName: String? = nil
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
@@ -153,6 +163,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionId: Int
     ) {
         self.collectionID = collectionId
+        self.collectionName = collectionName
         self.stocksCount = Int(stocksAmount) ?? 0
         self.cards = cards
         sortSections()
@@ -320,35 +331,40 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
-            return cell
+            fatalError("invalid section in 'CollectionDetailsViewCell'")
         }
         
         switch section {
         case .title:
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
+
+            cell.configureWith(companyName: self.collectionName ?? "")
             return cell
             
         case .gain:
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            let cell: CollectionDetailsGainCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsGainCell.cellIdentifier, for: indexPath) as! CollectionDetailsGainCell
+            cell.configureWith(tickersCount: self.stocksCount, todaysGain: " +25.05%")
             return cell
             
         case .chart:
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            let cell: CollectionDetailsChartCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsChartCell.cellIdentifier, for: indexPath) as! CollectionDetailsChartCell
             return cell
             
         case .about:
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            let cell: CollectionDetailsAboutCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsAboutCell.cellIdentifier, for: indexPath) as! CollectionDetailsAboutCell
             return cell
             
         case .recommended:
-            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
             return cell
             
         case .cards:
             let cell: CollectionCardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCardCell.cellIdentifier, for: indexPath) as! CollectionCardCell
+            guard indexPath.row < self.cards.count else {
+                return cell
+            }
             let model = self.cards[indexPath.row]
             cell.tag = collectionID
             cell.configureWith(
@@ -455,39 +471,105 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
 extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        //        let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
+    
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
             return CGSize.init(width: collectionView.frame.width, height: 0)
         }
         
-        if section == .cards {
+        switch section {
+        case .title:
+            let width = collectionView.frame.width
+            return CGSize.init(width: width, height: 74.0)
+        case .gain:
+            let width = collectionView.frame.width
+            return CGSize.init(width: width, height: 72.0)
+            
+        case .chart:
+            let width = collectionView.frame.width
+            return CGSize.init(width: width, height: 240.0)
+            
+        case .about:
+            let width = collectionView.frame.width
+            let aboutTitleWithOffsets = 56.0
+            let textLineHeight = 20.0
+            
+            // TODO: Make dynamic depends on text and state (expanded collapsed)
+            let numberOfLines = 4.0
+            //        let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
+            let aboutTextSize = textLineHeight * numberOfLines
+            
+            let bottomOffset = 24.0
+            let height = aboutTitleWithOffsets + aboutTextSize + bottomOffset
+            return CGSize.init(width: width, height: height)
+            
+        case .recommended:
+            let width = collectionView.frame.width
+            let recommendedHeight = 152.0
+            
+            // TODO: Make dynamic depends on  tags for this company
+            let tagsHeight = 112.0
+            
+            let height = recommendedHeight + tagsHeight
+            return CGSize.init(width: width, height: height)
+        
+        case .cards:
             let size = collectionView.frame.width / 2 - 30
             return CGSize.init(width: size, height: size)
         }
-        
-        return CGSize.init(width: collectionView.frame.width, height: 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return CGFloat(20.0)
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGFloat(0.0)
+        }
+        
+        if section == .cards {
+            return CGFloat(20.0)
+        }
+        
+        return CGFloat(0.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return CGFloat(20.0)
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGFloat(0.0)
+        }
+        
+        if section == .cards {
+            return CGFloat(20.0)
+        }
+        
+        return CGFloat(0.0)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return UIEdgeInsets.zero
+        }
+        
+        if section == .cards {
+            return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+        }
+        
+        return UIEdgeInsets.zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize.init(width: collectionView.frame.size.width, height: 9.0)
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGSize.zero
+        }
+        
+        if section == .cards {
+            // TODO: Cards header
+            return CGSize.init(width: collectionView.frame.size.width, height: 9.0)
+        }
+        
+        return CGSize.zero
     }
 }
 
