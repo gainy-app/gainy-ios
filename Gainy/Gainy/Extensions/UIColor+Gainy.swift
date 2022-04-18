@@ -72,6 +72,9 @@ extension UIColor {
         static let mainYellow = UIColor(named: "mainYellow")
         static let mainRed = UIColor(named: "mainRed")
         static let mainText = UIColor(named: "mainText")
+        static let secondaryLightGray = UIColor(named: "secondaryLightGray")
+        static let secondaryYellow = UIColor(named: "secondaryYellow")
+        static let thirdGreen = UIColor(named: "thirdGreen")
         static let tickerSymbol = UIColor(hexString: "6C5DD3", alpha: 1.0)!
     }
 }

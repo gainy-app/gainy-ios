@@ -1,9 +1,16 @@
 import UIKit
 import SkeletonView
 import Combine
+import PureLayout
 
 
+// TODO: Borysov - add cells for every section
 private enum CollectionDetailsSection: Int, CaseIterable {
+    case title = 0
+    case gain
+    case chart
+    case about
+    case recommended
     case cards
 }
 
@@ -23,150 +30,49 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
-        isSkeletonable = true
         layer.isOpaque = true
         backgroundColor = .clear
         
-        collectionHorizontalView.frame = CGRect(
-            x: 4,
-            y: 0,
-            width: UIScreen.main.bounds.width - (16 + 16),
-            height: 144
-        )
+        let layout = UICollectionViewFlowLayout.init()
+        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
         
-        collectionHorizontalView.backgroundColor = .clear
+        collectionView.register(CollectionCardCell.self)
+        collectionView.register(UICollectionViewCell.self)
+        collectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
         
-        contentView.addSubview(collectionHorizontalView)
+        collectionView.register(CollectionDetailsFooterView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: "CollectionDetailsFooterView")
         
-        internalCollectionView = UICollectionView(
-            frame: CGRect(
-                x: 0,
-                y: 144,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20)
-            ),
-            collectionViewLayout: customLayout
-        )
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.contentInset = .init(top: 0, left: 0, bottom: 111, right: 0)
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.clipsToBounds = false
+        contentView.addSubview(collectionView)
+        collectionView.autoPinEdgesToSuperviewEdges()
         
-        internalCollectionView.addSubview(refreshControl)
-        internalCollectionView.alwaysBounceVertical = true
-        
-        internalCollectionView.register(CollectionCardCell.self)
-        internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
-        
-        internalCollectionView.register(CollectionDetailsFooterView.self,
-                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                        withReuseIdentifier: "CollectionDetailsFooterView")
-        
-        internalCollectionView.showsVerticalScrollIndicator = false
-        internalCollectionView.backgroundColor = .clear
-        internalCollectionView.dataSource = dataSource
-        internalCollectionView.delegate = self
-        internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
-        internalCollectionView.contentInsetAdjustmentBehavior = .never
-        internalCollectionView.clipsToBounds = false
-        
-        contentView.addSubview(internalCollectionView)
-        contentView.bringSubviewToFront(collectionHorizontalView)
-        contentView.addSubview(collectionListHeader)
-        collectionListHeader.frame = CGRect.init(x: 4, y: 144, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
-        collectionListHeader.isHidden = true
-        
-        let recurLock = NSRecursiveLock()
-        
-        dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
-            collectionView: internalCollectionView
-        ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
-            let cell = self?.sections[indexPath.section].configureCell(
-                collectionView: collectionView,
-                indexPath: indexPath,
-                viewModel: modelItem,
-                position: indexPath.row
-            )
-            TickerLiveStorage.shared.clearAllExpiredLiveData()
-            
-            if let model = modelItem as? CollectionCardViewCellModel, model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
-                cell?.showAnimatedGradientSkeleton()
-                return cell
-            } else if let isLoading = self?.isLoadingTickers, isLoading == false {
-                cell?.hideSkeleton()
-            }
-            
-            //Loading tickers data!
-            recurLock.lock()
-            if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
-                
-                let dispatchGroup = DispatchGroup()
-                var loadingItems: Int  = 0
-                let hasSymbol = TickerLiveStorage.shared.haveSymbol(model.tickerSymbol)
-                let isLoadingSymbol = self?.loadingSymbolArray.contains(where: { item in
-                    item == model.tickerSymbol
-                }) ?? false
-                let needLoadSymbol = !hasSymbol && !isLoadingSymbol
-                if needLoadSymbol {
-                    loadingItems += 1
-                    self?.loadingSymbolArray.append(model.tickerSymbol)
-                    self?.isLoadingTickers = true
-                    
-                    dprint("Fetching dt started \(model.tickerSymbol)")
-                    dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
-                        self?.loadingSymbolArray.removeAll(where: { item in
-                            item == model.tickerSymbol
-                        })
-                        dispatchGroup.leave()
-                        dprint("Fetching dt ended \(model.tickerSymbol)")
-                    }
-                }
-                
-                if loadingItems > 0 {
-                    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
-                        dprint("Fetching ended \(model.tickerSymbol)")
-                        guard let self = self else {return}
-                        
-                        runOnMain {
-                            if var snapshot = self.dataSource?.snapshot() {
-                                if snapshot.itemIdentifiers.count > 0 {
-                                    let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                                    snapshot.reloadItems(ids)
-                                }
-                                self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                                    cell?.hideSkeleton()
-                                    self.isLoadingTickers = false
-                                })
-                            }
-                        }
-                    })
-                } else {
-                    cell?.hideSkeleton()
-                }
-            }
-
-            recurLock.unlock()
-            
-            if indexPath.row == (self?.cards.count ?? 0) - 1 && self?.cards.count ?? 0 != (self?.stocksCount ?? 0) {
-                //isLoadingTickers = true
-                
-            }
-
-            return cell
-        }
-        
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            switch kind {
-            case UICollectionView.elementKindSectionFooter:
-                
-                guard let self = self else { return UICollectionReusableView() }
-                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
-                footer.addSubview(self.loadMoreActivityIndicatorView)
-                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
-                self.loadMoreActivityIndicatorView.startAnimating()
-                return footer
-                
-            default:
-                return nil
-            }
-        }
+        // TODO: Borysov - add headers/footers for the section
+        //        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
+        //            switch kind {
+        //            case UICollectionView.elementKindSectionFooter:
+        //
+        //                guard let self = self else { return UICollectionReusableView() }
+        //                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+        //                footer.addSubview(self.loadMoreActivityIndicatorView)
+        //                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+        //                self.loadMoreActivityIndicatorView.startAnimating()
+        //                return footer
+        //
+        //            default:
+        //                return nil
+        //            }
+        //        }
         
         initViewModels()
     }
@@ -178,7 +84,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var isCompare: Bool = false {
         didSet {
-            collectionHorizontalView.isCompare = isCompare
+            //            collectionHorizontalView.isCompare = isCompare
         }
     }
     
@@ -188,7 +94,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private var isLoadingTickers: Bool = false {
         didSet {
             if isLoadingTickers {
-                for cell in internalCollectionView.visibleCells {
+                for cell in collectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.showAnimatedGradientSkeleton()
                     }
@@ -196,12 +102,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         rightCell.showAnimatedGradientSkeleton()
                     }
                 }
-                
-//                internalCollectionView.isScrollEnabled = false
-//                internalCollectionView.isUserInteractionEnabled = false
-                internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
+                collectionView.setContentOffset(collectionView.contentOffset, animated: false)
             } else {
-                for cell in internalCollectionView.visibleCells {
+                for cell in collectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.hideSkeleton()
                     }
@@ -209,15 +112,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         rightCell.hideSkeleton()
                     }
                 }
-//                internalCollectionView.isScrollEnabled = true
-//                internalCollectionView.isUserInteractionEnabled = true
             }
         }
     }
     
     // MARK: Properties
     
-    var viewModel: CollectionCardViewCellModel?
+    var model: CollectionCardViewCellModel?
     var cancellables = Set<AnyCancellable>()
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
@@ -226,41 +127,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
+    
+    // TODO: Borysov - Remove this
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
-                collectionHorizontalView.shortCollection = shortCollection
-                collectionHorizontalView.frame = CGRect(
-                    x: -12,
-                    y: 0,
-                    width: UIScreen.main.bounds.width,
-                    height: 184
-                )
-                
-                internalCollectionView.frame = CGRect(
-                    x: 0,
-                    y: 184,
-                    width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                    height: UIScreen.main.bounds.height - (80 + 184 + 20)
-                )
-                collectionListHeader.frame = CGRect.init(x: 4, y: 184, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
-                internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 184, right: 0)
+
             }
         }
     }
-    
-    lazy var collectionHorizontalView: CollectionHorizontalView = {
-        let view = CollectionHorizontalView()
-        view.backgroundColor = .clear
-        view.delegate = self
-        return view
-    }()
-    
-    lazy var collectionListHeader: CollictionsListHeaderView = {
-        let view = CollictionsListHeaderView()
-        view.frame = CGRect.init(x: 0, y: 0, width: contentView.bounds.width, height: 36.0)
-        return view
-    }()
     
     private var collectionID: Int = 0
     private var stocksCount: Int = 0
@@ -279,47 +154,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     ) {
         self.collectionID = collectionId
         self.stocksCount = Int(stocksAmount) ?? 0
-        collectionHorizontalView.tag = collectionId
-        // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
-        collectionHorizontalView.configureWith(
-            name: collectionName,
-            description: collectionDescription,
-            stocksAmount: stocksAmount,
-            imageName: collectionImage,
-            imageUrl: imageUrl,
-            collectionId: collectionId
-        )
-        
-        //Gettings settings
-        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        let offset = (self.shortCollection != nil) ? 184 : 144
-        if settings.viewMode == .list {
-            collectionListHeader.isHidden = false
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset) + 36,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
-            )
-            sections = [
-                CardsOneColumnListFlowSectionLayout(collectionID: collectionID),
-                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID)
-            ]
-        } else {
-            collectionListHeader.isHidden = true
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset),
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
-            )
-            sections =  [
-                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
-                CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
-            ]
-        }
-        
-        collectionHorizontalView.updateChargeLbl(settings.sortingText())
         self.cards = cards
         sortSections()
         
@@ -368,49 +202,25 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let cardsDTO = stocks.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
             cards.append(contentsOf: cardsDTO)
             onNewCardsLoaded?(cardsDTO)
-            if var snap = dataSource?.snapshot() {
-                snap.appendItems(cardsDTO, toSection: .cards)
-                dataSource?.apply(snap, animatingDifferences: false, completion: {
-                    self.internalCollectionView.reloadData()
-                    completed?()
-                })
-            } else {
-                completed?()
-            }
+            completed?()
         }
     }
     
     func sortSections(_ completion: (() -> Void)? = nil) {
         runOnMain {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
-            collectionHorizontalView.updateChargeLbl(settings.sortingText())
-            
-            collectionListHeader.updateMetrics(settings.marketDataToShow)
             self.cards = self.cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
-            snapshot.deleteAllItems()
-            snapshot.appendSections([.cards])
-            snapshot.appendItems(self.cards, toSection: .cards)
-            dataSource?.apply(snapshot, animatingDifferences: false, completion: { [weak self] in
-                
-                self?.internalCollectionView.reloadData()
-                completion?()
-            })
+            self.collectionView.reloadData()
+            completion?()
         }
     }
     
     // MARK: Private
     
-    private lazy var sections: [SectionLayout] = [
-        CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
-        CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
-    ]
-    
-    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
-    private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     private var isLoadingMoreTickers: Bool = false
-    private var internalCollectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
         control.layer.zPosition = -1
@@ -424,33 +234,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return spinner
     } ()
     
-    private lazy var customLayout: UICollectionViewLayout = {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
-            self?.sections[sectionIndex].layoutSection(within: env)
-        }
-        return layout
-    }()
-    
     private func initViewModels() {}
     
     private func finishRefreshWithSorting(cards: [CollectionCardViewCellModel], _ completion: (() -> Void)? = nil) {
         runOnMain {
             
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
-            self.collectionHorizontalView.updateChargeLbl(settings.sortingText())
-            self.collectionListHeader.updateMetrics(settings.marketDataToShow)
             self.cards = cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
             self.onRefreshedCardsLoaded?(self.cards)
-            self.snapshot.deleteAllItems()
-            self.snapshot.appendSections([.cards])
-            self.snapshot.appendItems(self.cards, toSection: .cards)
-            
-            self.dataSource?.apply(self.snapshot, animatingDifferences: false, completion: {
-                self.isLoadingTickers = false
-                self.internalCollectionView.reloadData()
-            })
         }
     }
     
@@ -496,6 +289,143 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
 }
 
+// MARK: UICollectionViewDataSource
+
+extension CollectionDetailsViewCell: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return 0
+        }
+        switch section {
+        case .title:
+            return 1
+        case .gain:
+            return 1
+        case .chart:
+            return 1
+        case .about:
+            return 1
+        case .recommended:
+            return 1
+        case .cards:
+            return self.cards.count
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return CollectionDetailsSection.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+        }
+        
+        switch section {
+        case .title:
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+            
+        case .gain:
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+            
+        case .chart:
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+            
+        case .about:
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+            
+        case .recommended:
+            let cell: UICollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.cellIdentifier, for: indexPath)
+            return cell
+            
+        case .cards:
+            let cell: CollectionCardCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCardCell.cellIdentifier, for: indexPath) as! CollectionCardCell
+            let model = self.cards[indexPath.row]
+            cell.tag = collectionID
+            cell.configureWith(
+                companyName: model.tickerCompanyName,
+                tickerSymbol: model.tickerSymbol,
+                tickerPercentChange: model.priceChangeToday > 0.0 ? " +" + model.priceChangeToday.percentRaw : model.priceChangeToday.percentRaw,
+                tickerPrice:  model.currentPrice > 0.0 ? model.currentPrice.cleanTwoDecimal: "0.00",
+                matchScore: "\(model.matchScore)"
+            )
+            TickerLiveStorage.shared.clearAllExpiredLiveData()
+            
+            if model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
+                cell.showAnimatedGradientSkeleton()
+                return cell
+            } else {
+                let isLoading = self.isLoadingTickers
+                if isLoading == false {
+                    cell.hideSkeleton()
+                }
+            }
+//            let recurLock = NSRecursiveLock()
+//            //Loading tickers data!
+//            recurLock.lock()
+            if !self.isLoadingTickers {
+                let dispatchGroup = DispatchGroup()
+                var loadingItems: Int  = 0
+                let hasSymbol = TickerLiveStorage.shared.haveSymbol(model.tickerSymbol)
+                let isLoadingSymbol = self.loadingSymbolArray.contains(where: { item in
+                    item == model.tickerSymbol
+                })
+                let needLoadSymbol = !hasSymbol && !isLoadingSymbol
+                if needLoadSymbol {
+                    loadingItems += 1
+                    self.loadingSymbolArray.append(model.tickerSymbol)
+                    self.isLoadingTickers = true
+                    
+                    dprint("Fetching dt started \(model.tickerSymbol)")
+                    dispatchGroup.enter()
+                    TickersLiveFetcher.shared.getSymbolsData(self.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ) {
+                        self.loadingSymbolArray.removeAll(where: { item in
+                            item == model.tickerSymbol
+                        })
+                        dispatchGroup.leave()
+                        dprint("Fetching dt ended \(model.tickerSymbol)")
+                    }
+                }
+                
+                if loadingItems > 0 {
+                    
+                    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                        
+                        dprint("Fetching ended \(model.tickerSymbol)")
+                        
+                        
+                        
+                        self.collectionView.reloadData()
+                        
+                        cell.hideSkeleton()
+                        self.isLoadingTickers = false
+                        
+                    })
+                    
+                    
+                } else {
+                    cell.hideSkeleton()
+                }
+            }
+            
+//            recurLock.unlock()
+            
+            return cell
+        }
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID,
@@ -505,7 +435,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-    
+        
         guard UICollectionView.elementKindSectionFooter == elementKind else { return }
         if self.stocksCount == self.cards.count || self.collectionID == -1 {
             self.loadMoreActivityIndicatorView.isHidden = true
@@ -520,35 +450,52 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     }
 }
 
-extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
-    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-        if isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout  {return}
-        if !isGrid && sections.first! is CardsOneColumnListFlowSectionLayout {return}
-        let offset = (self.shortCollection != nil) ? 184 : 144
-        if isGrid {
-            collectionListHeader.isHidden = true
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset),
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
-            )
-            //stocks_view_changed
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
-        } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
-            collectionListHeader.isHidden = false
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset) + 36,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
-            )
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list", "ec" : "CollectionDetails"])
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        //        let width = name?.sizeOfString(usingFont: UIFont.proDisplaySemibold(CGFloat(16.0))).width ?? 0.0
+        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
+            return CGSize.init(width: collectionView.frame.width, height: 0)
         }
         
-        sections.swapAt(0, 1)
-        internalCollectionView.clipsToBounds = true
-        internalCollectionView.reloadData()
+        if section == .cards {
+            let size = collectionView.frame.width / 2 - 30
+            return CGSize.init(width: size, height: size)
+        }
+        
+        return CGSize.init(width: collectionView.frame.width, height: 1)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return CGFloat(20.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return CGFloat(20.0)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize.init(width: collectionView.frame.size.width, height: 9.0)
+    }
+}
+
+extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
+    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
+
+        //            //stocks_view_changed
+        //            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
     }
     
     
