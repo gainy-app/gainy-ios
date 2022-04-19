@@ -124,6 +124,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     fragment RemoteCollectionDetails on collections {
       __typename
       id
+      uniq_id
       name
       image_url
       description
@@ -138,6 +139,12 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       match_score {
         __typename
         match_score
+        risk_level
+        risk_similarity
+        interest_level
+        interest_similarity
+        category_level
+        category_similarity
       }
     }
     """
@@ -148,6 +155,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .scalar(Int.self)),
+      GraphQLField("uniq_id", type: .scalar(String.self)),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
@@ -163,8 +171,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -182,6 +190,15 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var uniqId: String? {
+    get {
+      return resultMap["uniq_id"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "uniq_id")
     }
   }
 
@@ -317,6 +334,12 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("match_score", type: .scalar(float8.self)),
+        GraphQLField("risk_level", type: .scalar(Int.self)),
+        GraphQLField("risk_similarity", type: .scalar(float8.self)),
+        GraphQLField("interest_level", type: .scalar(Int.self)),
+        GraphQLField("interest_similarity", type: .scalar(float8.self)),
+        GraphQLField("category_level", type: .scalar(Int.self)),
+        GraphQLField("category_similarity", type: .scalar(float8.self)),
       ]
     }
 
@@ -326,8 +349,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(matchScore: float8? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_match_score", "match_score": matchScore])
+    public init(matchScore: float8? = nil, riskLevel: Int? = nil, riskSimilarity: float8? = nil, interestLevel: Int? = nil, interestSimilarity: float8? = nil, categoryLevel: Int? = nil, categorySimilarity: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_match_score", "match_score": matchScore, "risk_level": riskLevel, "risk_similarity": riskSimilarity, "interest_level": interestLevel, "interest_similarity": interestSimilarity, "category_level": categoryLevel, "category_similarity": categorySimilarity])
     }
 
     public var __typename: String {
@@ -345,6 +368,60 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "match_score")
+      }
+    }
+
+    public var riskLevel: Int? {
+      get {
+        return resultMap["risk_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_level")
+      }
+    }
+
+    public var riskSimilarity: float8? {
+      get {
+        return resultMap["risk_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_similarity")
+      }
+    }
+
+    public var interestLevel: Int? {
+      get {
+        return resultMap["interest_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_level")
+      }
+    }
+
+    public var interestSimilarity: float8? {
+      get {
+        return resultMap["interest_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_similarity")
+      }
+    }
+
+    public var categoryLevel: Int? {
+      get {
+        return resultMap["category_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_level")
+      }
+    }
+
+    public var categorySimilarity: float8? {
+      get {
+        return resultMap["category_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_similarity")
       }
     }
   }

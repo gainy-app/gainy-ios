@@ -2,12 +2,14 @@ enum CollectionDetailsViewModelMapper {
     static func map(_ model: CollectionDetails) -> CollectionDetailViewCellModel {
         CollectionDetailViewCellModel(
             id: model.id,
+            uniqID: model.uniqId,
             image: model.collectionBackgroundImage,
             imageUrl: model.collectionBackgroundImageUrl,
             name: model.collectionName,
             description: model.collectionDescription,
             stocksAmount: model.collectionStocksAmount,
             dailyGrow: model.collectionDailyGrow,
+            matchScore: model.matchScore,
             inYourCollectionList: model.isInYourCollectionsList,
             cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
         )

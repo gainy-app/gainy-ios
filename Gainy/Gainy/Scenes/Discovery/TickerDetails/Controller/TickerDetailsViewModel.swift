@@ -41,12 +41,14 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
     func compareCollectionDTO() -> CollectionDetailViewCellModel {
         return CollectionDetailViewCellModel(
             id: Constants.CollectionDetails.compareCollectionID,
+            uniqID: "",
             image: "compare_stocks",
             imageUrl: "",
             name: "Compared Stocks",
             description: "",
             stocksAmount: tickersToCompare.count,
             dailyGrow: 0.0,
+            matchScore: RemoteCollectionDetails.MatchScore.init(),
             inYourCollectionList: false,
             cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(
                 $0

@@ -1,0 +1,12 @@
+query GetTTFPieChart($uniqID: String!, $type: String!) {
+collection_piechart(where: {collection_uniq_id: {_eq: $uniqID}, entity_type: {_eq: $type}}) {
+        weight
+        entity_type
+        relative_daily_change
+        entity_name
+        entity_id
+        absolute_value
+        absolute_daily_change
+    }
+}
+

@@ -323,12 +323,14 @@ extension SingleCollectionDetailsViewController: SearchStocksViewControllerDeleg
                 cards.append(contentsOf: cardsDTO)
                 let model = CollectionDetailViewCellModel(
                     id: Constants.CollectionDetails.compareCollectionID,
+                    uniqID: "",
                     image: "compare_stocks",
                     imageUrl: "",
                     name: "Compared Stocks",
                     description: "",
                     stocksAmount: first.cards.count + 1,
                     dailyGrow: 0.0,
+                    matchScore: RemoteCollectionDetails.MatchScore(),
                     inYourCollectionList: false,
                     cards: cards
                 )

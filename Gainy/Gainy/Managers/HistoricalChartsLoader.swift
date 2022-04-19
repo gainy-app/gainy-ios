@@ -174,7 +174,6 @@ final class HistoricalChartsLoader {
                 completion([])
                 break
             }
-        }
-        
+        }        
     }
 }

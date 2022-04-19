@@ -365,7 +365,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }.store(in: &self.cancellables)
         
-        addLoaders()
+        //addLoaders()
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in

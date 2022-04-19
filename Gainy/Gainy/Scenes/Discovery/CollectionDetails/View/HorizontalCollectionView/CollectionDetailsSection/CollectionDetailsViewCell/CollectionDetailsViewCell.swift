@@ -146,6 +146,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
     }
     
+    //Replace to inner model
     private var collectionID: Int = 0
     private var stocksCount: Int = 0
     private var dailyGrow: Float = 0
@@ -180,7 +181,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
             }
         }.store(in: &cancellables)
+        
+        showGradientSkeleton()
+        // Load all data
+        // hideSkeleton()
     }
+    
+    
     private(set) var cards: [CollectionCardViewCellModel] = []
     
     private func loadMoreTickers() {
@@ -490,14 +497,17 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 74.0)
         case .gain:
+            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 72.0)
             
         case .chart:
+            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 240.0)
             
         case .about:
+            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             guard collectionID != Constants.CollectionDetails.watchlistCollectionID else {
                 return .zero
             }
@@ -508,6 +518,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             return CGSize.init(width: collectionView.frame.width, height: height)
             
         case .recommended:
+            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             let recommendedHeight = 152.0
             

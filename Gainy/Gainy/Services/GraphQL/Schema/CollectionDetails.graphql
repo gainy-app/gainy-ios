@@ -6,6 +6,7 @@ query DiscoverCollectionDetails($offset: Int!) {
 
 fragment RemoteCollectionDetails on collections {
   id
+  uniq_id
   name
   image_url
   description
@@ -16,8 +17,14 @@ fragment RemoteCollectionDetails on collections {
     relative_daily_change
     updated_at
     }
-      match_score {
+    match_score {
     match_score
+    risk_level
+        risk_similarity
+        interest_level
+        interest_similarity
+        category_level
+        category_similarity
   }
 }
 

@@ -46,6 +46,14 @@
 		331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331D4522278EC14200F990DF /* UserDefaults+Ext.swift */; };
 		331FB0F7270104050031A8EF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331FB0F6270104050031A8EF /* Constants.swift */; };
 		331FB0FA27011D4B0031A8EF /* Cache in Frameworks */ = {isa = PBXBuildFile; productRef = 331FB0F927011D4B0031A8EF /* Cache */; };
+		33264965280E8F7700CE0D0F /* TTFChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264964280E8F7600CE0D0F /* TTFChartViewModel.swift */; };
+		33264968280E910E00CE0D0F /* GetTTFChart.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33264967280E910E00CE0D0F /* GetTTFChart.graphql */; };
+		3326496A280E940200CE0D0F /* GetTTFChart.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264969280E940200CE0D0F /* GetTTFChart.graphql.swift */; };
+		3326496C280EA11D00CE0D0F /* CollectionManager+TTF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326496B280EA11D00CE0D0F /* CollectionManager+TTF.swift */; };
+		3326496E280ED46700CE0D0F /* GetTTFTags.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 3326496D280ED46700CE0D0F /* GetTTFTags.graphql */; };
+		33264970280ED4A500CE0D0F /* GetTTFPieChart.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 3326496F280ED4A500CE0D0F /* GetTTFPieChart.graphql */; };
+		33264973280ED6C700CE0D0F /* GetTTFTags.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */; };
+		33264974280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
 		3330BD0F26FA6B850079C899 /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0C26FA6B850079C899 /* FetchStockMedian.graphql */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
@@ -562,6 +570,14 @@
 		331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsiveButton.swift; sourceTree = "<group>"; };
 		331D4522278EC14200F990DF /* UserDefaults+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Ext.swift"; sourceTree = "<group>"; };
 		331FB0F6270104050031A8EF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		33264964280E8F7600CE0D0F /* TTFChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFChartViewModel.swift; sourceTree = "<group>"; };
+		33264967280E910E00CE0D0F /* GetTTFChart.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTTFChart.graphql; sourceTree = "<group>"; };
+		33264969280E940200CE0D0F /* GetTTFChart.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFChart.graphql.swift; sourceTree = "<group>"; };
+		3326496B280EA11D00CE0D0F /* CollectionManager+TTF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionManager+TTF.swift"; sourceTree = "<group>"; };
+		3326496D280ED46700CE0D0F /* GetTTFTags.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTTFTags.graphql; sourceTree = "<group>"; };
+		3326496F280ED4A500CE0D0F /* GetTTFPieChart.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTTFPieChart.graphql; sourceTree = "<group>"; };
+		33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFTags.graphql.swift; sourceTree = "<group>"; };
+		33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFPieChart.graphql.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
 		3330BD0C26FA6B850079C899 /* FetchStockMedian.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
@@ -1079,6 +1095,9 @@
 				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
 				85ED4DEE2703486600FE6926 /* Categories.graphql.swift */,
 				33467CE426C6576800811F74 /* Charts.graphql.swift */,
+				33264969280E940200CE0D0F /* GetTTFChart.graphql.swift */,
+				33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */,
+				33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */,
 				90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */,
@@ -1197,6 +1216,25 @@
 				333020FF27D1EA9200A0E6B3 /* Collections */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		33264963280E8F6300CE0D0F /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				85B90DEC280D518500F21DB2 /* CollectionDetailsChartCell.swift */,
+				33264964280E8F7600CE0D0F /* TTFChartViewModel.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		33264966280E90A300CE0D0F /* TTF */ = {
+			isa = PBXGroup;
+			children = (
+				33264967280E910E00CE0D0F /* GetTTFChart.graphql */,
+				3326496D280ED46700CE0D0F /* GetTTFTags.graphql */,
+				3326496F280ED4A500CE0D0F /* GetTTFPieChart.graphql */,
+			);
+			path = TTF;
 			sourceTree = "<group>";
 		};
 		333020FF27D1EA9200A0E6B3 /* Collections */ = {
@@ -1921,6 +1959,7 @@
 				3381A56F271D48CA001A1EDA /* CollectionsManager.swift */,
 				901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */,
 				85D1E00027955C480097046A /* CollectionsManager+Tickers.swift */,
+				3326496B280EA11D00CE0D0F /* CollectionManager+TTF.swift */,
 				3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */,
 				3AA52C7C26600FF2006A6961 /* Schema */,
 			);
@@ -1944,6 +1983,7 @@
 				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
 				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
+				33264966280E90A300CE0D0F /* TTF */,
 				331243CE27BF6E85008C2BCC /* Home */,
 				85695AF42746BAD400759569 /* Metrics */,
 				33019611273E824100BE4FDC /* Plaid */,
@@ -2278,7 +2318,7 @@
 			children = (
 				85B90DE9280D518500F21DB2 /* CollectionDetailsTitleCell.swift */,
 				85B90DED280D518500F21DB2 /* CollectionDetailsGainCell.swift */,
-				85B90DEC280D518500F21DB2 /* CollectionDetailsChartCell.swift */,
+				33264963280E8F6300CE0D0F /* Chart */,
 				85B90DEA280D518500F21DB2 /* CollectionDetailsAboutCell.swift */,
 				85B90DEB280D518500F21DB2 /* CollectionDetailsRecommendedCell.swift */,
 			);
@@ -2615,6 +2655,7 @@
 				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
 				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */,
+				33264968280E910E00CE0D0F /* GetTTFChart.graphql in Resources */,
 				85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */,
 				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
@@ -2854,6 +2895,7 @@
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,
 				85B90DF1280D518500F21DB2 /* CollectionDetailsChartCell.swift in Sources */,
+				33264965280E8F7700CE0D0F /* TTFChartViewModel.swift in Sources */,
 				3316750A27048A9800CA92F6 /* ImagePickerManager.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				33043DDA26E227EF0058887C /* CompareStocksViewController.swift in Sources */,
@@ -2871,6 +2913,7 @@
 				33FBDE85270ADE55003B6DDB /* FirebaseTokenValidator.swift in Sources */,
 				331D4523278EC14200F990DF /* UserDefaults+Ext.swift in Sources */,
 				33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */,
+				3326496E280ED46700CE0D0F /* GetTTFTags.graphql in Sources */,
 				857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */,
 				330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */,
 				3AE7959A266385C1002B40D6 /* BaseViewControllerProtocol.swift in Sources */,
@@ -3029,6 +3072,7 @@
 				85E4A2CD2762115400C0E5C5 /* SearchTickersAlgolia.graphql.swift in Sources */,
 				3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */,
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,
+				33264970280ED4A500CE0D0F /* GetTTFPieChart.graphql in Sources */,
 				85059CC126D9114D0034A9E4 /* LaunchScreenViewController.swift in Sources */,
 				3AD40FC3266923C1005679DE /* SectionLayout.swift in Sources */,
 				85B90DF2280D518500F21DB2 /* CollectionDetailsGainCell.swift in Sources */,
@@ -3036,6 +3080,7 @@
 				8531030526F9ECA500AAAA91 /* GainyTextField.swift in Sources */,
 				85CD154126F8A929001C060C /* AppleAuth.swift in Sources */,
 				85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */,
+				3326496A280E940200CE0D0F /* GetTTFChart.graphql.swift in Sources */,
 				338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */,
 				3AE79536266267C1002B40D6 /* YourCollectionsHeaderView.swift in Sources */,
 				851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */,
@@ -3142,6 +3187,7 @@
 				3AE79569266382EF002B40D6 /* CoordinatorFactory.swift in Sources */,
 				33019615273E836700BE4FDC /* CreatePlaidLink.graphql.swift in Sources */,
 				85C873D12796ACE10060BAF3 /* GetTickersForCollection.graphql.swift in Sources */,
+				33264974280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift in Sources */,
 				3A67230C268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift in Sources */,
 				33BDCF7926CE8B7C000DE770 /* TickerDetailsAlternativeStocksViewCell.swift in Sources */,
 				85CD154D26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift in Sources */,
@@ -3161,6 +3207,7 @@
 				3AE7956E26638349002B40D6 /* Coordinator.swift in Sources */,
 				85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */,
 				3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */,
+				3326496C280EA11D00CE0D0F /* CollectionManager+TTF.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
 				3394BA222750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift in Sources */,
@@ -3168,6 +3215,7 @@
 				33F6DC3F2738FED500CBE4DA /* SearchStockTableViewCell.swift in Sources */,
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */,
+				33264973280ED6C700CE0D0F /* GetTTFTags.graphql.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,
