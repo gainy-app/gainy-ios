@@ -56,16 +56,7 @@ struct HorizontalCompareFlowSectionLayout: SectionLayout {
 
         cell.isCompare = true
         if let viewModel = viewModel as? CollectionDetailViewCellModel {
-            cell.configureWith(
-                name: viewModel.name,
-                image: viewModel.image,
-                imageUrl: viewModel.imageUrl,
-                description: viewModel.description,
-                stocksAmount: viewModel.stocksAmount,
-                dailyGrow: viewModel.dailyGrow,
-                cards: viewModel.cards,
-                collectionId: viewModel.id
-            )
+            cell.configureWith(viewModel: viewModel)
         }
 
         return cell

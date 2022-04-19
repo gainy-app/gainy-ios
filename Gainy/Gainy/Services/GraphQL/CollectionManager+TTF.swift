@@ -10,16 +10,33 @@ import UIKit
 typealias PieChartData = GetTtfPieChartQuery.Data.CollectionPiechart
 
 extension CollectionsManager {
-    func populateTTFCard(viewModel: CollectionDetailViewCellModel) {
+    func populateTTFCard(uniqID: String, _ completion: @escaping ([[ChartNormalized]], [GetTtfPieChartQuery.Data.CollectionPiechart], [TickerTag]) -> Void) {
         
+        Task {
         //Load D1 Top
-        
+            async let allTopCharts = loadChartsForRange(uniqID: uniqID, range: .d1)
+            
         //Load Pie - category
         
+            async let pieChart = loadPieChart(uniqID: uniqID, type: .category)
         //Load Rec Tags
+            async let recTags = loadRecTags(uniqID: uniqID)
+            
+            let allInfo = await (allTopCharts, pieChart, recTags)
+            
+            await MainActor.run {
+                completion(allInfo.0, allInfo.1, allInfo.2)
+            }
+        }
     }
     
-    
+    func loadChartsForRange(uniqID: String, range: ScatterChartView.ChartPeriod) async -> [[ChartNormalized]] {
+        async let chart = loadTopChart(uniqID: uniqID, range: range)
+        async let syp = loadSYPChart(range: range)
+
+        let bothCharts = await [chart, syp]
+        return bothCharts
+    }
     
     private func loadTopChart(uniqID: String, range: ScatterChartView.ChartPeriod) async -> [ChartNormalized] {
         return await

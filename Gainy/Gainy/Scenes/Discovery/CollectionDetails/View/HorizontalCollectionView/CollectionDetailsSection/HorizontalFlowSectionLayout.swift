@@ -48,16 +48,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
             collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = viewModel as? CollectionDetailViewCellModel {
-            cell.configureWith(
-                name: viewModel.name,
-                image: viewModel.image,
-                imageUrl: viewModel.imageUrl,
-                description: viewModel.description,
-                stocksAmount: viewModel.stocksAmount,
-                dailyGrow: viewModel.dailyGrow,
-                cards: viewModel.cards,
-                collectionId: viewModel.id
-            )
+            cell.configureWith(viewModel: viewModel)
             if Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) {
                 cell.showAnimatedGradientSkeleton()
             }

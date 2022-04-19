@@ -11,11 +11,17 @@ struct CollectionDetailViewCellModel {
     let inYourCollectionList: Bool
     var cards: [CollectionCardViewCellModel]
     
+    var combinedTags: [TickerTag] = []
+    
     //Charts
     let topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [0.0]))
     
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
+    }
+    
+    mutating func addTags(_ tags: [TickerTag]) {
+        combinedTags.append(contentsOf: tags)
     }
 }
 

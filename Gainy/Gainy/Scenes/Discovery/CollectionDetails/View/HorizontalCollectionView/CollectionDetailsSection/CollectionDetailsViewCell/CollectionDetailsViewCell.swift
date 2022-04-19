@@ -128,7 +128,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var model: CollectionCardViewCellModel?
     var cancellables = Set<AnyCancellable>()
-    var collectionName: String? = nil
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
@@ -141,46 +140,37 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
-
+                
             }
         }
     }
     
     //Replace to inner model
-    private var collectionID: Int = 0
-    private var stocksCount: Int = 0
-    private var dailyGrow: Float = 0
-    private var companyAbout: String = ""
+    private var viewModel: CollectionDetailViewCellModel!
     
     private var loadingSymbolArray: Array<String> = Array()
     private var loadingMatchScoreArray: Array<String> = Array()
     
-    func configureWith(
-        name collectionName: String,
-        image collectionImage: String,
-        imageUrl: String,
-        description collectionDescription: String,
-        stocksAmount: Int,
-        dailyGrow: Float,
-        cards: [CollectionCardViewCellModel],
-        collectionId: Int
+    func configureWith(viewModel: CollectionDetailViewCellModel
     ) {
-        self.collectionID = collectionId
-        self.collectionName = collectionName
-        self.stocksCount = stocksAmount
-        self.dailyGrow = dailyGrow
-        self.companyAbout = collectionDescription
-        self.cards = cards
+        self.viewModel = viewModel
+        self.cards = viewModel.cards
         sortSections()
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in
-            if Constants.CollectionDetails.watchlistCollectionID == collectionId {
+            if Constants.CollectionDetails.watchlistCollectionID == viewModel.id {
                 self.refreshData {
                     
                 }
             }
         }.store(in: &cancellables)
+        if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
+                self?.viewModel.addTags(tags)
+                self?.hideSkeleton()
+            }
+        }
         
         showGradientSkeleton()
         // Load all data
@@ -192,7 +182,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     private func loadMoreTickers() {
         
-        if (self.collectionID == Constants.CollectionDetails.watchlistCollectionID) {
+        if (viewModel?.id == Constants.CollectionDetails.watchlistCollectionID) {
             return
         }
         if (self.isLoadingMoreTickers) {
@@ -202,7 +192,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.isLoadingMoreTickers = true
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.collectionID, offset: self.cards.count) { tickerDetails in
+            CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.viewModel.id, offset: self.cards.count) { tickerDetails in
                 runOnMain {
                     
                     var tickers = tickerDetails.compactMap { item in
@@ -230,7 +220,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func sortSections(_ completion: (() -> Void)? = nil) {
         runOnMain {
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
             self.cards = self.cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
@@ -261,7 +251,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private func finishRefreshWithSorting(cards: [CollectionCardViewCellModel], _ completion: (() -> Void)? = nil) {
         runOnMain {
             
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             self.cards = cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
@@ -279,7 +269,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         self.isLoadingTickers = true
         
-        if self.collectionID == -1 {
+        if viewModel?.id == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
                 if let cards = models.first?.cards {
                     self?.finishRefreshWithSorting(cards: cards) {
@@ -291,7 +281,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) { remoteTickers in
+            CollectionsManager.shared.loadNewCollectionDetails(self.viewModel.id) { remoteTickers in
                 runOnMain {
                     let tickers = remoteTickers.compactMap { item in
                         item.rawTicker
@@ -342,7 +332,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
             fatalError("invalid section in 'CollectionDetailsViewCell'")
         }
@@ -350,16 +340,16 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         switch section {
         case .title:
             let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
-
-            cell.configureWith(companyName: self.collectionName ?? "")
+            
+            cell.configureWith(companyName: viewModel.name)
             return cell
             
         case .gain:
             let cell: CollectionDetailsGainCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsGainCell.cellIdentifier, for: indexPath) as! CollectionDetailsGainCell
-            if collectionID == Constants.CollectionDetails.watchlistCollectionID {
-                cell.configureAsWatchlist(tickersCount: stocksCount)
+            if viewModel.id == Constants.CollectionDetails.watchlistCollectionID {
+                cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
             } else {
-                cell.configureWith(tickersCount: stocksCount, dailyGrow: dailyGrow)
+                cell.configureWith(tickersCount: viewModel.stocksAmount, dailyGrow: viewModel.dailyGrow)
             }
             return cell
             
@@ -369,7 +359,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .about:
             let cell: CollectionDetailsAboutCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsAboutCell.cellIdentifier, for: indexPath) as! CollectionDetailsAboutCell
-            cell.configureWith(detail: self.companyAbout)
+            cell.configureWith(detail: viewModel.description)
             return cell
             
         case .recommended:
@@ -382,7 +372,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 return cell
             }
             let model = self.cards[indexPath.row]
-            cell.tag = collectionID
+            cell.tag = viewModel.id
             cell.configureWith(
                 companyName: model.tickerCompanyName,
                 tickerSymbol: model.tickerSymbol,
@@ -401,9 +391,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     cell.hideSkeleton()
                 }
             }
-//            let recurLock = NSRecursiveLock()
-//            //Loading tickers data!
-//            recurLock.lock()
+            //            let recurLock = NSRecursiveLock()
+            //            //Loading tickers data!
+            //            recurLock.lock()
             if !self.isLoadingTickers {
                 let dispatchGroup = DispatchGroup()
                 var loadingItems: Int  = 0
@@ -449,7 +439,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
             
-//            recurLock.unlock()
+            //            recurLock.unlock()
             
             return cell
         }
@@ -460,7 +450,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID,
+        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
                                                            "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onCardPressed?(cards[indexPath.row].rawTicker)
@@ -469,7 +459,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         
         guard UICollectionView.elementKindSectionFooter == elementKind else { return }
-        if self.stocksCount == self.cards.count || self.collectionID == -1 {
+        if viewModel.stocksAmount == self.cards.count || viewModel.id == -1 {
             self.loadMoreActivityIndicatorView.isHidden = true
         } else {
             if self.isLoadingMoreTickers {
@@ -487,7 +477,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
 extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    
+        
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
             return CGSize.init(width: collectionView.frame.width, height: 0)
         }
@@ -497,28 +487,28 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 74.0)
         case .gain:
-            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 72.0)
             
         case .chart:
-            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             return CGSize.init(width: width, height: 240.0)
             
         case .about:
-            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
-            guard collectionID != Constants.CollectionDetails.watchlistCollectionID else {
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard viewModel.id != Constants.CollectionDetails.watchlistCollectionID else {
                 return .zero
             }
             let width = collectionView.frame.width
             let aboutTitleWithOffsets = 56.0
             let bottomOffset = 24.0
-            let height = aboutTitleWithOffsets + companyAbout.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
+            let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)
             
         case .recommended:
-            guard (self.collectionID != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
             let recommendedHeight = 152.0
             
@@ -527,7 +517,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             
             let height = recommendedHeight + tagsHeight
             return CGSize.init(width: width, height: height)
-        
+            
         case .cards:
             let size = collectionView.frame.width / 2 - 30
             return CGSize.init(width: size, height: size)
@@ -591,7 +581,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
 
 extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-
+        
         //            //stocks_view_changed
         //            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
     }
