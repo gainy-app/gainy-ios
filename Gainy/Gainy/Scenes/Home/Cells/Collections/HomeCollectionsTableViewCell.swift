@@ -143,7 +143,7 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
                     msLbl.backgroundColor = UIColor.Gainy.mainYellow
                     break
                 case 65...:
-                    msLbl.backgroundColor = UIColor.Gainy.mainGreen
+                    msLbl.backgroundColor = UIColor(hexString: "#E7EAEE")
                     break
                 default:
                     break
@@ -153,6 +153,7 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             }
         }
     }
+    
     
     //MARK: - Image
     

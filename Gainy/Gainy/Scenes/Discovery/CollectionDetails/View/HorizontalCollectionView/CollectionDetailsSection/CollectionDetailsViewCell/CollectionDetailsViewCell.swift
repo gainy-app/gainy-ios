@@ -127,6 +127,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Properties
     
     var model: CollectionCardViewCellModel?
+    fileprivate var lastOffset: CGFloat = 0.0
     var cancellables = Set<AnyCancellable>()
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
@@ -396,6 +397,14 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
+            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
+            
+            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+            } receiveValue: { notif in
+                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                    cell.setTransform(transform)
+                }
+            }.store(in: &cancellables)
             return cell
             
         case .cards:
@@ -475,7 +484,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
             return cell
         }
-    }
+    }  
 }
 
 // MARK: UICollectionViewDelegate
@@ -636,5 +645,18 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
 extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
         
+    }
+}
+
+
+extension CollectionDetailsViewCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let topOffset = scrollView.contentOffset.y
+        if abs(lastOffset - topOffset) > 10 {
+            lastOffset = topOffset
+            let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
+            NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
+        }
     }
 }
