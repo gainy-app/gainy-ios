@@ -65,23 +65,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         contentView.addSubview(collectionView)
         collectionView.autoPinEdgesToSuperviewEdges()
         
-        // TODO: Borysov - add headers/footers for the section
-        //        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-        //            switch kind {
-        //            case UICollectionView.elementKindSectionFooter:
-        //
-        //                guard let self = self else { return UICollectionReusableView() }
-        //                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
-        //                footer.addSubview(self.loadMoreActivityIndicatorView)
-        //                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
-        //                self.loadMoreActivityIndicatorView.startAnimating()
-        //                return footer
-        //
-        //            default:
-        //                return nil
-        //            }
-        //        }
-        
         initViewModels()
     }
     
@@ -331,6 +314,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         return CollectionDetailsSection.allCases.count
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
@@ -444,6 +428,24 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             return cell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var result: UICollectionReusableView = UICollectionReusableView.newAutoLayout()
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionDetailsHeaderView.reuseIdentifier, for: indexPath) as! CollectionDetailsHeaderView
+            result = headerView
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+            footer.addSubview(self.loadMoreActivityIndicatorView)
+            self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+            self.loadMoreActivityIndicatorView.startAnimating()
+            return footer
+        default: fatalError("Unhandlad behaviour")
+        }
+        return result
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -484,16 +486,16 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         
         switch section {
         case .title:
-            let width = collectionView.frame.width
+            let width = collectionView.frame.width - 48.0
             return CGSize.init(width: width, height: 74.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
-            let width = collectionView.frame.width
+            let width = collectionView.frame.width - 48.0
             return CGSize.init(width: width, height: 72.0)
             
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
-            let width = collectionView.frame.width
+            let width = collectionView.frame.width - 32.0
             return CGSize.init(width: width, height: 240.0)
             
         case .about:
@@ -501,7 +503,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             guard viewModel.id != Constants.CollectionDetails.watchlistCollectionID else {
                 return .zero
             }
-            let width = collectionView.frame.width
+            let width = collectionView.frame.width - 48.0
             let aboutTitleWithOffsets = 56.0
             let bottomOffset = 24.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
@@ -557,7 +559,18 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             return UIEdgeInsets.zero
         }
         
-        if section == .cards {
+        switch section {
+        case .title:
+            return UIEdgeInsets.init(top: 0.0, left: 24.0, bottom: 0.0, right: 24.0)
+        case .gain:
+            return UIEdgeInsets.init(top: 0.0, left: 24.0, bottom: 0.0, right: 24.0)
+        case .chart:
+            return UIEdgeInsets.init(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
+        case .about:
+            return UIEdgeInsets.init(top: 0.0, left: 24.0, bottom: 0.0, right: 24.0)
+        case .recommended:
+            return UIEdgeInsets.zero
+        case .cards:
             return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
         }
         
@@ -571,8 +584,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         if section == .cards {
-            // TODO: Cards header
-            return CGSize.init(width: collectionView.frame.size.width, height: 9.0)
+            return CGSize.init(width: collectionView.frame.width, height: CGFloat(CollectionDetailsHeaderViewState.heightForState(state: .grid)))
         }
         
         return CGSize.zero

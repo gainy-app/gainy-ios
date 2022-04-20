@@ -16,7 +16,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         super.init(frame: .zero)
         
         contentView.addSubview(tickersCountLabelView)
-        tickersCountLabelView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        tickersCountLabelView.autoPinEdge(toSuperviewEdge: .left, withInset: 0.0)
         tickersCountLabelView.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         tickersCountLabelView.autoSetDimension(.height, toSize: 24.0)
         
@@ -26,14 +26,14 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         tickersCountLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
         contentView.addSubview(todaysGainLabel)
-        todaysGainLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        todaysGainLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 0.0)
         todaysGainLabel.autoPinEdge(toSuperviewEdge: .top)
         todaysGainLabel.autoSetDimension(.height, toSize: 16.0)
         
         contentView.addSubview(tickerPercentChangeLabel)
 
         tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
-        tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
+        tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
         tickerPercentChangeLabel.autoSetDimension(.height, toSize: 24)
         
         contentView.addSubview(percentArrowImgView)
@@ -65,10 +65,10 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         tickersCountLabel.sizeToFit()
         
         if dailyGrow > 0.0 {
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.secondaryGreen
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
             percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
-            percentArrowImgView.tintColor = UIColor.Gainy.secondaryGreen
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.secondaryGreen
+            percentArrowImgView.tintColor = UIColor.Gainy.mainGreen
+            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
             
         } else {
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
