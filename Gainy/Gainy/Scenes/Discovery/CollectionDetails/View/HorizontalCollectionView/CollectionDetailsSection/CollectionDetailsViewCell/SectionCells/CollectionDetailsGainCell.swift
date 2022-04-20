@@ -16,7 +16,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         super.init(frame: .zero)
         
         contentView.addSubview(tickersCountLabelView)
-        tickersCountLabelView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        tickersCountLabelView.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         tickersCountLabelView.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         tickersCountLabelView.autoSetDimension(.height, toSize: 24.0)
         
@@ -26,14 +26,14 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         tickersCountLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         
         contentView.addSubview(todaysGainLabel)
-        todaysGainLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        todaysGainLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         todaysGainLabel.autoPinEdge(toSuperviewEdge: .top)
         todaysGainLabel.autoSetDimension(.height, toSize: 16.0)
         
         contentView.addSubview(tickerPercentChangeLabel)
 
         tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
-        tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
+        tickerPercentChangeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
         tickerPercentChangeLabel.autoSetDimension(.height, toSize: 24)
         
         contentView.addSubview(percentArrowImgView)

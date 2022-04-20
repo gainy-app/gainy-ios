@@ -100,7 +100,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 x: 0,
                 y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
-                height: 80
+                height: 110
             )
         )
         navigationBarContainer.backgroundColor = UIColor.Gainy.white
@@ -121,6 +121,63 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
+        
+        let currentNumberView = UIView.newAutoLayout()
+        currentNumberView.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        currentNumberView.layer.cornerRadius = 8.0
+        currentNumberView.layer.masksToBounds = true
+        navigationBarContainer.addSubview(currentNumberView)
+        currentNumberView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        currentNumberView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
+        currentNumberView.autoSetDimension(.height, toSize: 24.0)
+        self.currentNumberView = currentNumberView
+        
+        let currentNumberLabel = UILabel()
+        currentNumberLabel.font = .compactRoundedSemibold(14)
+        currentNumberLabel.textColor = UIColor.init(hexString: "#09141F")
+        currentNumberLabel.numberOfLines = 1
+        currentNumberLabel.lineBreakMode = .byTruncatingTail
+        currentNumberLabel.textAlignment = .center
+        currentNumberLabel.isSkeletonable = true
+        currentNumberLabel.linesCornerRadius = 6
+        currentNumberView.addSubview(currentNumberLabel)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4.0)
+        self.currentNumberLabel = currentNumberLabel
+        currentNumberLabel.showSkeleton()
+        
+        let favoriteButton = ResponsiveButton.newAutoLayout()
+        favoriteButton.isSkeletonable = true
+        favoriteButton.skeletonCornerRadius = 6
+        let selectedImage = UIImage.init(named: "save")
+        let normalImage = UIImage.init(named: "save")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        favoriteButton.setImage(normalImage, for: .normal)
+        favoriteButton.setImage(selectedImage, for: .selected)
+        favoriteButton.isSelected = true
+        favoriteButton.tintColor = UIColor.init(hexString: "#000000")
+        navigationBarContainer.addSubview(favoriteButton)
+        favoriteButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        favoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        self.favoriteButton = favoriteButton
+        favoriteButton.showSkeleton()
+        
+        let compareButton = ResponsiveButton.newAutoLayout()
+        compareButton.isSkeletonable = true
+        compareButton.setImage(UIImage.init(named: "compare"), for: .normal)
+        compareButton.setImage(UIImage.init(named: "compare"), for: .selected)
+        navigationBarContainer.addSubview(compareButton)
+        compareButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        compareButton.autoPinEdge(.right, to: .left, of: favoriteButton, withOffset: -16.0)
+        compareButton.addTarget(self, action: #selector(compareButtonTapped), for: .touchUpInside)
+        compareButton.skeletonCornerRadius = 6
+        self.compareButton = compareButton
+        compareButton.showSkeleton()
+        
         let searchTextField = UITextField(
             frame: CGRect(
                 x: 16,
@@ -617,8 +674,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [
-        HorizontalFlowSectionLayout(),
+        self.flowSectionLayout,
     ]
+    
+    private lazy var flowSectionLayout: HorizontalFlowSectionLayout = {
+        var layout = HorizontalFlowSectionLayout()
+        layout.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            
+            if let currentIndex = items.last?.indexPath.row {
+                self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+            }
+        }
+        return layout
+    }()
     
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
@@ -637,6 +705,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var searchController: CollectionSearchController?
     private var discoverCollectionsBtn: UIButton?
     private var searchTextField: UITextField?
+    
+    
+    private var currentNumberView: UIView?
+    private var currentNumberLabel: UILabel?
+    private var compareButton: UIButton?
+    private var favoriteButton: UIButton?
     
     // MARK: Functions
     
@@ -743,12 +817,25 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         onDiscoverCollections?(false)
     }
     
+    @objc
+    private func compareButtonTapped() {
+        
+    }
+    
+    @objc
+    private func favoriteButtonTapped() {
+        
+    }
+    
     private func createNavigationBarContainer() -> UIView {
         UIView()
     }
     
     func centerInitialCollectionInTheCollectionView() {
         guard let snap = dataSource?.snapshot() else {return}
+        self.currentNumberLabel?.hideSkeleton()
+        self.compareButton?.hideSkeleton()
+        self.favoriteButton?.hideSkeleton()
         guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {
             if !(discoverCollectionsBtn?.isEnabled ?? false){
                 if snap.sectionIdentifiers.count > 0 {
