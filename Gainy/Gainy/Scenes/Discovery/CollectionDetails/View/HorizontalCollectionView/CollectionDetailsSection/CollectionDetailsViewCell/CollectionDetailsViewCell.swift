@@ -176,7 +176,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 
                 self?.viewModel.topChart.chartData = ChartData(points: main, period: .d1)
                 let medianData = ChartData(points: median, period: .d1)
-                self?.viewModel.topChart.chartData = medianData
+                self?.viewModel.topChart.sypChartData = medianData
                 self?.viewModel.topChart.spGrow = Float(medianData.startEndDiff)
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
@@ -385,7 +385,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: -24)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
             }
             return cell
@@ -537,7 +537,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: 296)
+            return CGSize.init(width: width, height: chartHeight + 48)
             
         case .about:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
