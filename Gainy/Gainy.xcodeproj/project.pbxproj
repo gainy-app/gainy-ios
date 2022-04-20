@@ -55,7 +55,6 @@
 		33264973280ED6C700CE0D0F /* GetTTFTags.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */; };
 		33264974280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */; };
 		332EB12426CF828D00E1E124 /* UITableViewCell-Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */; };
-		3330BD0F26FA6B850079C899 /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3330BD0C26FA6B850079C899 /* FetchStockMedian.graphql */; };
 		33317F9626D2CFAA009B9371 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33317F9526D2CFAA009B9371 /* Atomic.swift */; };
 		3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 3332BCD2273CFCC3001222A7 /* SkeletonView */; };
 		3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */; };
@@ -132,6 +131,7 @@
 		3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */; };
 		3396C8F627CD13A200D85BF0 /* FetchRealtimeMetrics.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */; };
 		3396C8F827CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */; };
+		33978B922810081F0030B6E4 /* TTFScatterChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33978B912810081F0030B6E4 /* TTFScatterChartView.swift */; };
 		339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */; };
 		339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */; };
 		339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */; };
@@ -579,7 +579,6 @@
 		33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFTags.graphql.swift; sourceTree = "<group>"; };
 		33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTTFPieChart.graphql.swift; sourceTree = "<group>"; };
 		332EB12326CF828D00E1E124 /* UITableViewCell-Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell-Reusable.swift"; sourceTree = "<group>"; };
-		3330BD0C26FA6B850079C899 /* FetchStockMedian.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
 		33317F9526D2CFAA009B9371 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		3333A0D6278C0EEA008FB78E /* APIModels+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Async.swift"; sourceTree = "<group>"; };
 		3336860826E5F4B600D448AA /* CompareStockFieldsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareStockFieldsView.swift; sourceTree = "<group>"; };
@@ -660,6 +659,7 @@
 		3394BA232751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioChartGainsViewModel.swift; sourceTree = "<group>"; };
 		3396C8F527CD13A200D85BF0 /* FetchRealtimeMetrics.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchRealtimeMetrics.graphql; sourceTree = "<group>"; };
 		3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRealtimeMetrics.graphql.swift; sourceTree = "<group>"; };
+		33978B912810081F0030B6E4 /* TTFScatterChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFScatterChartView.swift; sourceTree = "<group>"; };
 		339A17612714AB0900C9EE1A /* CalendarEventsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventsManager.swift; sourceTree = "<group>"; };
 		339A2EAF26FDF0000076BF52 /* SearchTickersWithSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersWithSpace.graphql; sourceTree = "<group>"; };
 		339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = SearchTickersNoSpace.graphql; sourceTree = "<group>"; };
@@ -1222,6 +1222,7 @@
 			isa = PBXGroup;
 			children = (
 				85B90DEC280D518500F21DB2 /* CollectionDetailsChartCell.swift */,
+				33978B912810081F0030B6E4 /* TTFScatterChartView.swift */,
 				33264964280E8F7600CE0D0F /* TTFChartViewModel.swift */,
 			);
 			path = Chart;
@@ -1997,7 +1998,6 @@
 				339A2EB126FDF0140076BF52 /* SearchTickersNoSpace.graphql */,
 				33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */,
 				330B986126F1E93A00099A46 /* FetchAltStocks.graphql */,
-				3330BD0C26FA6B850079C899 /* FetchStockMedian.graphql */,
 				85EDC14A27281EA700866AD2 /* FetchTickers.graphql */,
 				85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */,
 				335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */,
@@ -2668,7 +2668,6 @@
 				85695AF92746BAD400759569 /* DeleteMetricsSessingsForCollection.graphql in Resources */,
 				33D3D4F526CBA2C7005A859B /* Analytics.storyboard in Resources */,
 				33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */,
-				3330BD0F26FA6B850079C899 /* FetchStockMedian.graphql in Resources */,
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
@@ -3220,6 +3219,7 @@
 				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,
 				331FB0F7270104050031A8EF /* Constants.swift in Sources */,
+				33978B922810081F0030B6E4 /* TTFScatterChartView.swift in Sources */,
 				3AE9036F266A507A00574923 /* AFConfig.swift in Sources */,
 				85EDC1482728065B00866AD2 /* InsertTickerToWatchlist.graphql.swift in Sources */,
 				3A9FB0E6266B853200EC85D4 /* RoundedCollectionViewCell.swift in Sources */,

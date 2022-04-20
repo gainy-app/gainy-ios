@@ -42,3 +42,17 @@ extension UITableViewCell {
         return true
     }
 }
+
+extension UICollectionViewCell {
+    func addSwiftUIIfPossible(_ view: UIView, viewTag: Int = TickerDetailsDataSource.hostingTag, oldTag: Int = -1) -> Bool {
+        if oldTag != -1 {
+            contentView.subviews.filter({$0.tag == oldTag}).forEach({$0.removeFromSuperview()})
+        }
+        guard !contentView.subviews.contains(where: {$0.tag == viewTag}) else {
+            return false
+        }
+        view.isSkeletonable = false
+        contentView.insertSubview(view, at: 0)
+        return true
+    }
+}

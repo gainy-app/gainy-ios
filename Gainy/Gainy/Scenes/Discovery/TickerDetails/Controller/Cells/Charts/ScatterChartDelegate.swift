@@ -46,3 +46,16 @@ class HoldingScatterChartDelegate: ObservableObject {
         delegate?.comparePressed()
     }
 }
+
+protocol TTFScatterChartViewDelegate: AnyObject {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel)
+}
+
+class TTFScatterChartDelegate: ObservableObject {
+    
+    weak var delegate: TTFScatterChartViewDelegate?
+    
+    func changeRange(range: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
+        delegate?.chartPeriodChanged(period: range, viewModel: viewModel)
+    }
+}

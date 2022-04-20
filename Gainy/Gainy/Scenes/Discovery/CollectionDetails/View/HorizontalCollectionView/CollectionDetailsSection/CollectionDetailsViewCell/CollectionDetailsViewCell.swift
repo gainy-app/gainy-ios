@@ -167,6 +167,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }.store(in: &cancellables)
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
+                
+                let mainChart = topCharts.first!
+                let medianChart = topCharts.last!
+                
+                let (main, median) = normalizeCharts(mainChart, medianChart)
+                
+                self?.viewModel.topChart.chartData = ChartData(points: main, period: .d1)
+                let medianData = ChartData(points: median, period: .d1)
+                self?.viewModel.topChart.chartData = medianData
+                self?.viewModel.topChart.spGrow = Float(medianData.startEndDiff)
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
             }
@@ -299,6 +309,22 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         self.refreshData()
     }
+    
+    //MARK: - Chart
+    private let chartHeight: CGFloat = 240.0
+    private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
+        var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
+                                        delegate: chartDelegate)
+        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
+        chartHosting.view.tag = TickerDetailsDataSource.hostingTag
+        return chartHosting
+    }()
+    
+    private lazy var chartDelegate: TTFScatterChartDelegate = {
+        let delegateObject =  TTFScatterChartDelegate()
+        delegateObject.delegate = self
+        return delegateObject
+    }()
 }
 
 // MARK: UICollectionViewDataSource
@@ -355,6 +381,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .chart:
             let cell: CollectionDetailsChartCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsChartCell.cellIdentifier, for: indexPath) as! CollectionDetailsChartCell
+            if cell.addSwiftUIIfPossible(chartHosting.view) {
+                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
+            }
             return cell
             
         case .about:
@@ -476,6 +508,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
@@ -494,7 +528,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: 240.0)
+            return CGSize.init(width: width, height: 296)
             
         case .about:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
@@ -581,11 +615,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
 
 extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-        
-        //            //stocks_view_changed
-        //            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
-    }
-    
+    }    
     
     func stockSortPressed(view: CollectionHorizontalView) {
         onSortingPressed?()
@@ -600,5 +630,11 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
             return
         }
         onSettingsPressed?(cards[0].rawTicker)
+    }
+}
+
+extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
+        
     }
 }
