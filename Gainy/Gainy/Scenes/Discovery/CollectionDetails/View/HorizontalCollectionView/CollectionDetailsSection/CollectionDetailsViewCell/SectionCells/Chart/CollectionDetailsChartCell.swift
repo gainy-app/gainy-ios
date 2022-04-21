@@ -15,7 +15,9 @@ final class CollectionDetailsChartCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
-        contentView.backgroundColor = .amethyst
+        contentView.backgroundColor = .white
+        clipsToBounds = false
+        contentView.clipsToBounds = false
     }
     
     @available(*, unavailable)

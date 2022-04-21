@@ -13,7 +13,8 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
-        
+                
+        //contentView.addSubview(largeBack)
         contentView.addSubview(titleLbl)
         contentView.addSubview(tick1)
         contentView.addSubview(tick2)
@@ -66,6 +67,12 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         tagsTitle.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
         tagsTitle.autoPinEdge(.top, to: .bottom, of: tick3, withOffset: 24)
         tagsTitle.autoSetDimension(.height, toSize: 16)
+        
+//        largeBack.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
+//        largeBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
+//        largeBack.autoPinEdge(toSuperviewEdge: .right, withInset: -16.0)
+//        largeBack.autoPinEdge(toSuperviewEdge: .left, withInset: -16)
+//        clipsToBounds = false
     }
     
     
@@ -186,6 +193,13 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         return label
     }()
     
+    lazy var largeBack: UIView = {
+        let view = UIView()
+        view.isSkeletonable = true
+        view.isHiddenWhenSkeletonIsActive = true
+        return view
+    }()
+    
     @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -226,6 +240,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         default:
             break
         }
+        largeBack.backgroundColor = contentView.backgroundColor
     }
     
     func setTransform(_ transform: CGAffineTransform) {

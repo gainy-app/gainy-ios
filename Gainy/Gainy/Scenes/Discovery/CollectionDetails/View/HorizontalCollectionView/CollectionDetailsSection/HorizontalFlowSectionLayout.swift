@@ -8,7 +8,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
         // Items
         let topItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(1)
             )
         )
@@ -16,7 +16,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
         // Group
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(environment.container.contentSize.width),
+                widthDimension: .absolute(environment.container.contentSize.width - 32.0),
                 heightDimension: .estimated(environment.container.contentSize.height)
             ),
             subitems: [topItem]

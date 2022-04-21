@@ -398,7 +398,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: -10)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
             }
             return cell
@@ -550,7 +550,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: chartHeight)
+            return CGSize.init(width: width, height: chartHeight + 10)
             
         case .about:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
@@ -558,7 +558,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return .zero
             }
             let width = collectionView.frame.width
-            let aboutTitleWithOffsets = 56.0
+            let aboutTitleWithOffsets = 46.0
             let bottomOffset = 24.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)
