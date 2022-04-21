@@ -19,12 +19,12 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
         contentView.addSubview(detailsLbl)
         //contentView.addSubview(moreBtn)
         
-        aboutLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+        aboutLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
         aboutLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
         aboutLabel.autoSetDimension(.height, toSize: 24.0)
         
-        detailsLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
-        detailsLbl.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
+        detailsLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
+        detailsLbl.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
         detailsLbl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
         
 //        moreBtn.autoPinEdge(.top, to: .bottom, of: detailsLbl, withOffset: 8.0)
