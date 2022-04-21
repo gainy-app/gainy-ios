@@ -169,23 +169,27 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
                 
-                let mainChart = topCharts.first!
-                let medianChart = topCharts.last!
-                
-                let (main, median) = normalizeCharts(mainChart, medianChart)
-                
-                self?.viewModel.topChart.chartData = ChartData(points: main, period: .d1)
-                let medianData = ChartData(points: median, period: .d1)
-                self?.viewModel.topChart.chartData = medianData
-                self?.viewModel.topChart.spGrow = Float(medianData.startEndDiff)
+                self?.updateCharts(topCharts)
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
             }
         }
-        
         showGradientSkeleton()
         // Load all data
         // hideSkeleton()
+    }
+    
+    @MainActor
+    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
+        let mainChart = topCharts.first!
+        let medianChart = topCharts.last!
+        
+        let (main, median) = normalizeCharts(mainChart, medianChart)
+        
+        viewModel.topChart.chartData = ChartData(points: main, period: .d1)
+        let medianData = ChartData(points: median, period: .d1)
+        viewModel.topChart.chartData = medianData
+        viewModel.topChart.spGrow = Float(medianData.startEndDiff)
     }
     
     
@@ -326,6 +330,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         delegateObject.delegate = self
         return delegateObject
     }()
+    
+    func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
+        self.viewModel.chartRange = range
+        Task {
+            let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
+            updateCharts(topCharts)
+        }
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -644,7 +656,7 @@ extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
 
 extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
-        
+        self.loadChartForRange(period)
     }
 }
 

@@ -13,6 +13,9 @@ struct CollectionDetailViewCellModel {
     
     var combinedTags: [TickerTag] = []
     
+    var chartRange: ScatterChartView.ChartPeriod = .d1
+    var isDataLoaded: Bool = false
+    
     //Charts
     let topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [0.0]))
     
