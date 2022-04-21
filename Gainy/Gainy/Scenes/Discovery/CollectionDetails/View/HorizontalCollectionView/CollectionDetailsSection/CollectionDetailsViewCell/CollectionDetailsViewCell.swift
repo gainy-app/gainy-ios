@@ -64,24 +64,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.clipsToBounds = false
         contentView.addSubview(collectionView)
         collectionView.autoPinEdgesToSuperviewEdges()
-        
-        // TODO: Borysov - add headers/footers for the section
-        //        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-        //            switch kind {
-        //            case UICollectionView.elementKindSectionFooter:
-        //
-        //                guard let self = self else { return UICollectionReusableView() }
-        //                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
-        //                footer.addSubview(self.loadMoreActivityIndicatorView)
-        //                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
-        //                self.loadMoreActivityIndicatorView.startAnimating()
-        //                return footer
-        //
-        //            default:
-        //                return nil
-        //            }
-        //        }
-        
         initViewModels()
     }
     
@@ -497,7 +479,25 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
             return cell
         }
-    }  
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var result: UICollectionReusableView = UICollectionReusableView.newAutoLayout()
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionDetailsHeaderView.reuseIdentifier, for: indexPath) as! CollectionDetailsHeaderView
+            result = headerView
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+            footer.addSubview(self.loadMoreActivityIndicatorView)
+            self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+            self.loadMoreActivityIndicatorView.startAnimating()
+            return footer
+        default: fatalError("Unhandlad behaviour")
+        }
+        return result
+    }
 }
 
 // MARK: UICollectionViewDelegate
@@ -627,8 +627,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         if section == .cards {
-            // TODO: Cards header
-            return CGSize.init(width: collectionView.frame.size.width, height: 9.0)
+            return CGSize.init(width: collectionView.frame.width, height: CGFloat(CollectionDetailsHeaderViewState.heightForState(state: .grid)))
         }
         
         return CGSize.zero
