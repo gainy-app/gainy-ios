@@ -149,13 +149,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }.store(in: &cancellables)
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
-            guard !viewModel.isDataLoaded else {return}                    
+            guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
                 self?.updateCharts(topCharts)
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
                 self?.viewModel.isDataLoaded = true
+                self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue)])
             }
         }
         // Load all data
@@ -302,7 +303,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private let chartHeight: CGFloat = 320.0
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
-                                        delegate: chartDelegate)
+                                           delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
@@ -393,6 +394,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
             cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
+            
             
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
             } receiveValue: { notif in
@@ -566,13 +568,27 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .recommended:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            let recommendedHeight = 152.0
             
-            // TODO: Make dynamic depends on  tags for this company
-            let tagsHeight = 112.0
+            //Tags
+            var lines: Int = 0
+            let tagHeight: CGFloat = 24.0
+            let margin: CGFloat = 8.0
             
-            let height = recommendedHeight + tagsHeight
-            return CGSize.init(width: width, height: height)
+            let totalWidth: CGFloat = UIScreen.main.bounds.width - 34 * 2.0
+            var xPos: CGFloat = 0.0
+            var yPos: CGFloat = 0.0
+            for tag in viewModel.combinedTags {
+                if xPos + width + margin > totalWidth{
+                    xPos = 0.0
+                    yPos = yPos + tagHeight + margin
+                    lines += 1
+                }
+                xPos += width + margin
+            }
+            
+            let calculatedHeight: CGFloat = 192 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+            
+            return CGSize.init(width: width, height: calculatedHeight)
             
         case .cards:
             let size = collectionView.frame.width / 2 - 30
@@ -636,7 +652,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
 
 extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
     func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-    }    
+    }
     
     func stockSortPressed(view: CollectionHorizontalView) {
         onSortingPressed?()

@@ -16,7 +16,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
         // Group
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(environment.container.contentSize.width - 32.0),
+                widthDimension: .absolute(environment.container.contentSize.width),
                 heightDimension: .estimated(environment.container.contentSize.height)
             ),
             subitems: [topItem]

@@ -60,15 +60,14 @@ struct TTFScatterChartView: View {
                 sppView
                     .frame(height: 24).offset(x: 16, y: -16)
             }
-            .background(Rectangle().foregroundColor(.white).cornerRadius(16).frame(height: 320).shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2))
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
             .frame(height: 320)
             .ignoresSafeArea()
             .padding(.top, 0)
-            .padding(.leading, 4)
-            .padding(.trailing, 4)
+            .padding(.leading, 0)
+            .padding(.trailing, 0)
         } else {
             VStack {
                 GeometryReader(content: { geometry in

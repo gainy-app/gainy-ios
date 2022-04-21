@@ -16,8 +16,8 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         super.init(frame: .zero)
         
         contentView.addSubview(companyNameLabel)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
         companyNameLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
     }
     
