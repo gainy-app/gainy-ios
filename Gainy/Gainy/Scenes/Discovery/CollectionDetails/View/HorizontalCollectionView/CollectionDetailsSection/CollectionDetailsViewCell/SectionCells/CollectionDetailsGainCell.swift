@@ -40,6 +40,8 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         percentArrowImgView.autoAlignAxis(.horizontal, toSameAxisOf: tickerPercentChangeLabel)
         percentArrowImgView.autoPinEdge(.right, to: .left, of: tickerPercentChangeLabel, withOffset: -4)
         percentArrowImgView.autoSetDimensions(to: CGSize.init(width: 12, height: 12))
+        
+        contentView.backgroundColor = .white
     }
     
     @available(*, unavailable)

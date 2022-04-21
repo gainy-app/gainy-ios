@@ -167,14 +167,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }.store(in: &cancellables)
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
+            guard !viewModel.isDataLoaded else {return}                    
+            showGradientSkeleton()
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
-                
                 self?.updateCharts(topCharts)
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
+                self?.viewModel.isDataLoaded = true
             }
         }
-        showGradientSkeleton()
         // Load all data
         // hideSkeleton()
     }
@@ -188,7 +189,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         viewModel.topChart.chartData = ChartData(points: main, period: .d1)
         let medianData = ChartData(points: median, period: .d1)
-        viewModel.topChart.chartData = medianData
+        viewModel.topChart.sypChartData = medianData
         viewModel.topChart.spGrow = Float(medianData.startEndDiff)
     }
     
@@ -316,7 +317,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     
     //MARK: - Chart
-    private let chartHeight: CGFloat = 240.0
+    private let chartHeight: CGFloat = 320.0
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
                                         delegate: chartDelegate)
@@ -549,7 +550,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: 296)
+            return CGSize.init(width: width, height: chartHeight)
             
         case .about:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}

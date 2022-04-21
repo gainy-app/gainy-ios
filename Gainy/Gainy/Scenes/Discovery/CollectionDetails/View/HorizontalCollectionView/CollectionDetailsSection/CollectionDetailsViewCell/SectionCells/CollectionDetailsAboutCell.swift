@@ -30,6 +30,8 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
 //        moreBtn.autoPinEdge(.top, to: .bottom, of: detailsLbl, withOffset: 8.0)
 //        moreBtn.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
 //        moreBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
+        
+        contentView.backgroundColor = .white
     }
     
     

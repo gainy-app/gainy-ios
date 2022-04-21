@@ -27,7 +27,7 @@ extension Color {
     }
     
     static let chartBackground = Color.init(hex: "F8FBFD")
-    static let selectorColor = Color.init(hex: "3A4448")
+    static let selectorColor = Color.init(hex: "131313")
     static let textColor = Color.init(hex: "1F2E35")
 }
 

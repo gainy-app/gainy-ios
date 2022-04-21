@@ -51,20 +51,20 @@ struct TTFScatterChartView: View {
             VStack {
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
-                })
+                }).offset(y: 16)
                 Spacer()
                 ZStack {
                     chartView
                         .frame(height: 220)
                 }
                 sppView
-                    .frame(height: 24).offset(y: -16)
+                    .frame(height: 24).offset(x: 16, y: -16)
             }
-            .background(Color.white)
+            .background(Rectangle().foregroundColor(.white).cornerRadius(16).frame(height: 320).shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 4))
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 240)
+            .frame(height: 320)
             .ignoresSafeArea()
             .padding(.top, 0)
             .padding(.leading, 16)
@@ -87,7 +87,7 @@ struct TTFScatterChartView: View {
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 240)
+            .frame(height: 320)
             .padding(.top, 0)
         }
     }
@@ -156,26 +156,28 @@ struct TTFScatterChartView: View {
                              title: Constants.Chart.sypChartName,
                              style: Styles.lineChartStyleMedian,
                              viewModel: lineViewModel)
-                        .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
+                    .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
+                } else {
+                    Text("NO MEDIAN")
                 }
                 
             }
             .padding(.all, 0)
             .animation(.linear)
             .gesture(DragGesture(minimumDistance: 0)
-                        .onChanged({ value in
-                lineViewModel.dragLocation = value.location
-                lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
-                lineViewModel.opacity = 1
-                lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
-                lineViewModel.hideHorizontalLines = true
-            })
-                        .onEnded({ value in
-                lineViewModel.opacity = 0
-                lineViewModel.hideHorizontalLines = false
-                lineViewModel.indicatorLocation = .zero
-            }
-                                )
+                .onChanged({ value in
+                    lineViewModel.dragLocation = value.location
+                    lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+                    lineViewModel.opacity = 1
+                    lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+                    lineViewModel.hideHorizontalLines = true
+                })
+                    .onEnded({ value in
+                        lineViewModel.opacity = 0
+                        lineViewModel.hideHorizontalLines = false
+                        lineViewModel.indicatorLocation = .zero
+                    }
+                            )
             )
         }
     }
@@ -225,7 +227,6 @@ struct TTFScatterChartView: View {
             .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(12))
             Spacer()
         }
-        .padding(.leading, 16)
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
@@ -237,7 +238,7 @@ struct TTFScatterChartView: View {
                     ZStack {
                         Rectangle()
                             .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
-                            .cornerRadius(16.0)
+                            .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                             .padding(.all, 0)
@@ -251,12 +252,11 @@ struct TTFScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }
-            .padding(.top, 16)
-            .frame(width: UIScreen.main.bounds.width - 32)
+        .frame(width: UIScreen.main.bounds.width - 32)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        (UIScreen.main.bounds.width - 16 * 2.0 - 2.0 * 6) / 7.0
+        (UIScreen.main.bounds.width - 32 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 
