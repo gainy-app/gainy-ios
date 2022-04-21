@@ -49,50 +49,45 @@ struct TTFScatterChartView: View {
     var body: some View {
         if #available(iOS 14.0, *) {
             VStack {
-                ZStack {
-                    chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
-                        .frame(height: 220)
-                }
-                Spacer()
-                sppView
-                    .offset(y: -16)
-                    .frame(height: 24)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 })
-                
+                Spacer()
+                ZStack {
+                    chartView
+                        .frame(height: 220)
+                }
+                sppView
+                    .frame(height: 24).offset(y: -16)
             }
             .background(Color.white)
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 360)
+            .frame(height: 240)
             .ignoresSafeArea()
             .padding(.top, 0)
+            .padding(.leading, 16)
+            .padding(.trailing, 16)
         } else {
             VStack {
-                ZStack {
-                    chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
-                        .frame(height: 220)
-                }
-                Spacer()
-                sppView
-                    .offset(y: -16)
-                    .frame(height: 24)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 })
-                
+                Spacer()
+                ZStack {
+                    chartView
+                        .frame(height: 136)
+                }
+                sppView
+                    .frame(height: 24)
+                    .offset(y: -16)
             }
             .background(Color.white)
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 360)
+            .frame(height: 240)
             .padding(.top, 0)
         }
     }
@@ -255,14 +250,13 @@ struct TTFScatterChartView: View {
                     .animation(.easeIn)
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
-        }.padding(.leading, 16)
-            .padding(.trailing, 16)
-            .padding(.top, 0)
-            .frame(width: UIScreen.main.bounds.width)
+        }
+            .padding(.top, 16)
+            .frame(width: UIScreen.main.bounds.width - 32)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        (UIScreen.main.bounds.width - 10.0 * 2.0 - 2.0 * 6) / 7.0
+        (UIScreen.main.bounds.width - 16 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 

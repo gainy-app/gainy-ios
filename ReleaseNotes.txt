@@ -1,12 +1,11 @@
-iOS v1.3 #185 available
+iOS v1.3 #186 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
 • TTF: Global UI
-• TTF: Gains
-• TTF: About
-• TTF: Tickers
+• TTF: Chart
+• TTF: Recommendation
 
 :hammer_and_wrench: Improvements
 • -
