@@ -49,16 +49,15 @@ struct TTFScatterChartView: View {
     var body: some View {
         if #available(iOS 14.0, *) {
             VStack {
-                GeometryReader(content: { geometry in
-                    bottomMenu(geometry)
-                }).offset(y: 16)
-                Spacer()
+//                sppView
+//                    .frame(height: 24).offset(x: 24, y: 12)
                 ZStack {
                     chartView
                         .frame(height: 220)
                 }
-                sppView
-                    .frame(height: 24).offset(x: 16, y: -16)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                })
             }
             .onAppear(perform: {
                 hapticTouch.prepare()
@@ -70,17 +69,17 @@ struct TTFScatterChartView: View {
             .padding(.trailing, 0)
         } else {
             VStack {
-                GeometryReader(content: { geometry in
-                    bottomMenu(geometry)
-                })
-                Spacer()
+                
                 ZStack {
                     chartView
                         .frame(height: 136)
                 }
-                sppView
-                    .frame(height: 24)
-                    .offset(y: -16)
+                GeometryReader(content: { geometry in
+                    bottomMenu(geometry)
+                })
+//                sppView
+//                    .frame(height: 24)
+//                    .offset(y: -16)
             }
             .background(Color.white)
             .onAppear(perform: {
@@ -220,7 +219,7 @@ struct TTFScatterChartView: View {
                 .padding(.bottom, 6)
             })
             .frame(height: 24)
-            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(12))
+            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
             Spacer()
         }
     }
@@ -248,12 +247,12 @@ struct TTFScatterChartView: View {
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
         }
-        .frame(width: UIScreen.main.bounds.width - 32.0 * 2.0)
-        .padding(.leading, 16)
+        .frame(width: UIScreen.main.bounds.width - 24 * 2.0)
+        .padding(.leading, 24)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        (UIScreen.main.bounds.width - 32 * 2.0 - 2.0 * 6) / 7.0
+        (UIScreen.main.bounds.width - 24 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 

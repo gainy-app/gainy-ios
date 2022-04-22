@@ -156,7 +156,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 self?.viewModel.addTags(tags)
                 self?.hideSkeleton()
                 self?.viewModel.isDataLoaded = true
-                self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue)])
+                self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue),
+                                                      IndexPath.init(row: 0, section: CollectionDetailsSection.gain.rawValue)])
             }
         }
         // Load all data
@@ -170,8 +171,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
         
-        viewModel.topChart.chartData = ChartData(points: main, period: .d1)
-        let medianData = ChartData(points: median, period: .d1)
+        //let topChart = ChartData(points: main, period: .d1)
+        //let medianData = ChartData(points: median, period: .d1)
+        
+        let topChart = ChartData(points: [15, 20,12,30])
+        let medianData = ChartData(points: [15, 20,12,30].shuffled())
+        
+        viewModel.topChart.chartData = topChart
         viewModel.topChart.sypChartData = medianData
         viewModel.topChart.spGrow = Float(medianData.startEndDiff)
     }
@@ -300,7 +306,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     
     //MARK: - Chart
-    private let chartHeight: CGFloat = 320.0
+    private let chartHeight: CGFloat = 256
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
                                            delegate: chartDelegate)
@@ -372,7 +378,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if viewModel.id == Constants.CollectionDetails.watchlistCollectionID {
                 cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
             } else {
-                cell.configureWith(tickersCount: viewModel.stocksAmount, dailyGrow: viewModel.dailyGrow)
+                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
             }
             return cell
             
@@ -381,9 +387,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if cell.addSwiftUIIfPossible(chartHosting.view) {
                 chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
                 chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: -10)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: 0)
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
             }
+            chartHosting.view.clipsToBounds = false
             return cell
             
         case .about:
@@ -476,9 +483,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     cell.hideSkeleton()
                 }
             }
-            
-            //            recurLock.unlock()
-            
             return cell
         }
     }
@@ -506,6 +510,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
                                                            "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
@@ -552,7 +557,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .chart:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: chartHeight + 10)
+            return CGSize.init(width: width, height: chartHeight)
             
         case .about:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
@@ -560,7 +565,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return .zero
             }
             let width = collectionView.frame.width
-            let aboutTitleWithOffsets = 46.0
+            let aboutTitleWithOffsets = 32.0
             let bottomOffset = 24.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)

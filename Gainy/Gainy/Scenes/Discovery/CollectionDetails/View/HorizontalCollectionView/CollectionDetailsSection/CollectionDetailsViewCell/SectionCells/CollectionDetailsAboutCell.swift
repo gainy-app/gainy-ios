@@ -20,7 +20,7 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
         //contentView.addSubview(moreBtn)
         
         aboutLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
-        aboutLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 6)
+        aboutLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
         aboutLabel.autoSetDimension(.height, toSize: 24.0)
         
         detailsLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
