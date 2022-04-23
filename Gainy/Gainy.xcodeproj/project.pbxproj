@@ -498,6 +498,7 @@
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
+		90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 90FDE6B828148CE70068F033 /* ActivityIndicatorView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1063,6 +1064,7 @@
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
+				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
@@ -2538,6 +2540,7 @@
 				9017BF5E2780D88600F3910A /* Deviice */,
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
+				90FDE6B828148CE70068F033 /* ActivityIndicatorView */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2631,6 +2634,7 @@
 				9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */,
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
+				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3341,7 +3345,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3463,10 +3467,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 187;
-				DEVELOPMENT_TEAM = M32KF6X3YN;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 188;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Gainy Dev";
@@ -3479,7 +3483,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Stage Prod";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SCHEME_CONFIGURATION = Staging;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3650,7 +3654,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3679,7 +3683,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 187;
+				CURRENT_PROJECT_VERSION = 188;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3990,6 +3994,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -4122,6 +4134,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
+		};
+		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
+			productName = ActivityIndicatorView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

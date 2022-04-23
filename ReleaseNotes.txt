@@ -1,11 +1,10 @@
-iOS v1.3 #187 available
+iOS v1.3 #188 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• TTF: Headers for sections
-• TTF: Chart ranges + median
-• TTF: Recommendation tags
+• TTF: Demo chart data for weekend
+• TTF: Median moved to Gains
 
 :hammer_and_wrench: Improvements
 • -

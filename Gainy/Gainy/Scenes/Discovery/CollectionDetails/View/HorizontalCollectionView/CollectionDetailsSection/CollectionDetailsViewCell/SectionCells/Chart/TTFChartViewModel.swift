@@ -23,10 +23,14 @@ final class TTFChartViewModel: ObservableObject {
     @Published
     var isSPPVisible: Bool
     
+    @Published
+    var isLoading: Bool
+    
     init(spGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
         self.spGrow = spGrow
         self.chartData = chartData
         self.sypChartData = sypChartData
         self.isSPPVisible = isSPPVisible
+        self.isLoading = true
     }
 }

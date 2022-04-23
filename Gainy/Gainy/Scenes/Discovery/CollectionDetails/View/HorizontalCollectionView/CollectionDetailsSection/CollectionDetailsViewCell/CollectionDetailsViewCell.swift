@@ -166,6 +166,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
+        
+        viewModel.topChart.isLoading = false
+        
         let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
@@ -322,7 +325,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
     
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
-        self.viewModel.chartRange = range
+        viewModel.chartRange = range
+        viewModel.topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
@@ -380,6 +384,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             } else {
                 cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
             }
+            cell.delegate = self
             return cell
             
         case .chart:
@@ -691,5 +696,14 @@ extension CollectionDetailsViewCell: UIScrollViewDelegate {
             let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
             NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
         }
+    }
+}
+
+extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
+    func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool) {
+        guard let viewModel = viewModel else {return}
+        viewModel.topChart.isSPPVisible = showMedian
+        
+        GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
 }

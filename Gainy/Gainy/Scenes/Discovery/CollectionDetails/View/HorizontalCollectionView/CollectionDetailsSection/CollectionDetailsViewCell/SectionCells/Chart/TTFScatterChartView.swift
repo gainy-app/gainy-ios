@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftDate
+import ActivityIndicatorView
 
 struct TTFScatterChartView: View {
     
@@ -37,7 +38,7 @@ struct TTFScatterChartView: View {
     private var isSPPVisible: Bool = false {
         didSet {
             if isSPPVisible {
-                GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+                
             }
             lineViewModel.isSPYVisible = isSPPVisible
         }
@@ -54,6 +55,7 @@ struct TTFScatterChartView: View {
                 ZStack {
                     chartView
                         .frame(height: 220)
+                        .activityIndicator(isVisible: viewModel.isLoading)
                 }
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
@@ -61,6 +63,9 @@ struct TTFScatterChartView: View {
             }
             .onAppear(perform: {
                 hapticTouch.prepare()
+            })
+            .onChange(of: viewModel.isSPPVisible, perform: { newValue in
+                lineViewModel.isSPYVisible = newValue
             })
             .frame(height: 320)
             .ignoresSafeArea()

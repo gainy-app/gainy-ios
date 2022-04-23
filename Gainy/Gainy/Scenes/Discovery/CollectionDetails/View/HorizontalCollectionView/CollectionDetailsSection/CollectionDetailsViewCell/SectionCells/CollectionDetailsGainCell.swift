@@ -9,8 +9,13 @@ import UIKit
 import SkeletonView
 import PureLayout
 
+protocol CollectionDetailsGainCellDelegate: AnyObject {
+    func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool)
+}
+
 final class CollectionDetailsGainCell: UICollectionViewCell {
     
+    weak var delegate: CollectionDetailsGainCellDelegate?
 
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -130,7 +135,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
                 medianArrowImgView.tintColor = UIColor.Gainy.mainRed
             }            
         } else {
-            //medianView.isHidden = true
+            medianView.isHidden = true
         }
     }
     
@@ -283,5 +288,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
     
     @objc func medianAction() {
         isMedianVisible.toggle()
+        
+        delegate?.medianToggled(cell: self, showMedian: isMedianVisible)
     }
 }
