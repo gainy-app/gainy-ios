@@ -68,11 +68,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func addPreloadOverlay() {
-//        guard UserProfileManager.shared.profileID == nil else {
-//            RemoteConfigManager.shared.loadDefaults {
-//            }
-//            return
-//        }
+        guard UserProfileManager.shared.profileID == nil else {
+            RemoteConfigManager.shared.loadDefaults {
+            }
+            return
+        }
         
         insertPreloadOverlay()
     }

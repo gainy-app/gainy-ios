@@ -174,11 +174,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
         
-        //let topChart = ChartData(points: main, period: .d1)
-        //let medianData = ChartData(points: median, period: .d1)
+        let topChart = ChartData(points: main, period: .d1)
+        let medianData = ChartData(points: median, period: .d1)
         
-        let topChart = ChartData(points: [15, 20,12,30])
-        let medianData = ChartData(points: [15, 20,12,30].shuffled())
+        //let topChart = ChartData(points: [15, 20,12,30])
+        //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
         viewModel.topChart.chartData = topChart
         viewModel.topChart.sypChartData = medianData

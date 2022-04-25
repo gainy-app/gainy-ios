@@ -158,6 +158,9 @@
 		33B9887826CAD66C008B8AC9 /* OSLog+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */; };
 		33BA6D96280970EC00C3A431 /* ConfigLoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6D95280970EC00C3A431 /* ConfigLoaderViewController.swift */; };
 		33BA6D982809711B00C3A431 /* RemoteConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */; };
+		33BC512D28167A6100AF1004 /* HomeTickersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC512C28167A6100AF1004 /* HomeTickersTableViewCell.xib */; };
+		33BC512F28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BC512E28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift */; };
+		33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */; };
 		33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */; };
 		33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */; };
 		33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */; };
@@ -684,6 +687,9 @@
 		33B9887726CAD66C008B8AC9 /* OSLog+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+Additions.swift"; sourceTree = "<group>"; };
 		33BA6D95280970EC00C3A431 /* ConfigLoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigLoaderViewController.swift; sourceTree = "<group>"; };
 		33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigManager.swift; sourceTree = "<group>"; };
+		33BC512C28167A6100AF1004 /* HomeTickersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickersTableViewCell.xib; sourceTree = "<group>"; };
+		33BC512E28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickerInnerTableViewCell.swift; sourceTree = "<group>"; };
+		33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickerInnerTableViewCell.xib; sourceTree = "<group>"; };
 		33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesA.xcassets; sourceTree = "<group>"; };
 		33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsDataSource.swift; sourceTree = "<group>"; };
 		33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewModel.swift; sourceTree = "<group>"; };
@@ -1384,6 +1390,9 @@
 			isa = PBXGroup;
 			children = (
 				331243DF27BF74A4008C2BCC /* HomeTickersTableViewCell.swift */,
+				33BC512C28167A6100AF1004 /* HomeTickersTableViewCell.xib */,
+				33BC512E28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift */,
+				33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */,
 			);
 			path = Gainers;
 			sourceTree = "<group>";
@@ -2675,6 +2684,7 @@
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
+				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
@@ -2708,6 +2718,7 @@
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
 				335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */,
 				85CD154B26F8CED7001C060C /* AppProfilesUserIDs.graphql in Resources */,
+				33BC512D28167A6100AF1004 /* HomeTickersTableViewCell.xib in Resources */,
 				85C873CF2796AC4E0060BAF3 /* GetTickersForCollection.graphql in Resources */,
 				85C5926A26FA2A82001EBABC /* CreateProfile.graphql in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
@@ -2884,6 +2895,7 @@
 				85D4F81226E69BBD004EC21D /* UICollectionViewLeftAlignedVerticalLayout.swift in Sources */,
 				33765BF227A8215700D1F0A9 /* Bundle+Version.swift in Sources */,
 				3AEF699F2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift in Sources */,
+				33BC512F28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift in Sources */,
 				333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */,
 				338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */,
 				3AE795D626638F4E002B40D6 /* DeepLinkOption.swift in Sources */,

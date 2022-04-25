@@ -98,9 +98,8 @@ struct ScatterChartView: View {
                 VStack {
                     headerView
                     chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
                         .padding(.top, 20)
+                        .activityIndicator(isVisible: viewModel.isLoading)
                     bottomMedian
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
@@ -118,9 +117,8 @@ struct ScatterChartView: View {
                 VStack {
                     headerView
                     chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
                         .padding(.top, 20)
+                        .activityIndicator(isVisible: viewModel.isLoading)
                     bottomMedian
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
@@ -270,11 +268,12 @@ struct ScatterChartView: View {
                              style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel).offset(y: -60)
                     
-                    if isMedianVisible && viewModel.localTicker.haveMedian &&  viewModel.medianData.onlyPoints().uniqued().count > 1 {
+                    if viewModel.medianData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.medianData,
                                  title: "Full chart",
                                  style: Styles.lineChartStyleMedian,
                                  viewModel: lineViewModel).offset(y: -60)
+                            .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                     }
                 } else {
                     //no_data_graph_down
@@ -413,31 +412,33 @@ struct ScatterChartView: View {
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
         HStack(alignment: .center, spacing: 0) {
-            ForEach(ChartPeriod.allCases, id: \.self) { tag in
-                
+            ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
                     selectedTag = tag
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? UIColor(hexString: "09141F", alpha: 1.0)!.uiColor : Color.clear)
-                            .cornerRadius(16.0)
+                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
+                            .padding(.all, 0)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : UIColor(hexString: "09141F", alpha: 1.0)!.uiColor)
+                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
+                            .padding(.all, 0)
                     }
+                    .padding(.all, 0)
                     .animation(.easeIn)
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
-        }.padding(.leading, 20)
-            .padding(.trailing, 20)
-            .padding(.top, 16)
+        }
+        .frame(width: UIScreen.main.bounds.width - 24 * 2.0)
+        .padding(.leading, 24)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        48
+        (UIScreen.main.bounds.width - 24 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 //
