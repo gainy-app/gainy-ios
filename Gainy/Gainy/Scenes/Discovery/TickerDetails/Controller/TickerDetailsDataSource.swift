@@ -93,6 +93,7 @@ final class TickerDetailsDataSource: NSObject {
     func stopLoader() {
         chartLoader.stopAnimating()
         chartHosting.view.alpha = 1.0
+        chartViewModel.isLoading = false
     }
     
     private(set) var chartViewModel: ScatterChartViewModel!
@@ -317,8 +318,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         delegate?.loadingState(started: true)
         ticker.chartRange = period
+        chartViewModel.isLoading = true
         ticker.loadNewChartData(period: period) {[weak self] in
             guard let self = self else {return}
+            self.chartViewModel.isLoading = false
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData
