@@ -103,7 +103,6 @@
 		336970B52716BA5C0001625C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970B02716B9920001625C /* libc++.tbd */; };
 		336970B72716BA5C0001625C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AA2716B9640001625C /* Security.framework */; };
 		336970B82716BA5C0001625C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970A82716B9560001625C /* SystemConfiguration.framework */; };
-		336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */; };
 		336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */; };
 		336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */; };
 		33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */; };
@@ -635,7 +634,6 @@
 		336970B02716B9920001625C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		336C9A2A2775D03900106332 /* GetSelectedCategories.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetSelectedCategories.graphql; sourceTree = "<group>"; };
 		336C9A2B2775D07A00106332 /* GetSelectedInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetSelectedInterests.graphql; sourceTree = "<group>"; };
-		336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionListCardCell.xib; sourceTree = "<group>"; };
 		336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionListCardCell.swift; sourceTree = "<group>"; };
 		336D09FF26D7C5840036EB54 /* ScatterChartDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScatterChartDelegate.swift; sourceTree = "<group>"; };
 		33722496270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCollectionDetailsViewController.swift; sourceTree = "<group>"; };
@@ -1565,10 +1563,9 @@
 			isa = PBXGroup;
 			children = (
 				33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */,
+				3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */,
 				85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */,
 				3A01FBEA26863417007F6FA3 /* CollectionCardCell.swift */,
-				3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */,
-				336D09FB26D7BC140036EB54 /* CollectionListCardCell.xib */,
 				336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */,
 			);
 			path = CollectionCardCell;
@@ -2666,7 +2663,6 @@
 				907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */,
 				85E4A2C92762101A00C0E5C5 /* SearchTickersAlgolia.graphql in Resources */,
 				85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */,
-				336D09FC26D7BC140036EB54 /* CollectionListCardCell.xib in Resources */,
 				85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */,
 				33264968280E910E00CE0D0F /* GetTTFChart.graphql in Resources */,
 				85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */,

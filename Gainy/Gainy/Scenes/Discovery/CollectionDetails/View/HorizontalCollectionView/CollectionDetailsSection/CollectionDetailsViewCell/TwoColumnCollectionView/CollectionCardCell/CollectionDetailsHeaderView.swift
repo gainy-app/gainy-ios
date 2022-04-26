@@ -2,6 +2,7 @@ import UIKit
 import SkeletonView
 import Combine
 import PureLayout
+import Deviice
 
 enum CollectionDetailsHeaderViewState: Int, Codable {
     
@@ -21,6 +22,11 @@ enum CollectionDetailsHeaderViewState: Int, Codable {
 
 final class CollectionDetailsHeaderView: UICollectionReusableView {
     
+    public var onSortingPressed: (() -> Void)?
+    public var onSettingsPressed: (() -> Void)?
+    public var onChartModeButtonPressed: ((Bool) -> Void)?
+    public var onTableListModeButtonPressed: ((Bool) -> Void)?
+    
     private var ttfTickersLabel: UILabel = UILabel.newAutoLayout()
     private var chartModeButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var tableListModeButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
@@ -30,6 +36,8 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartView: UIView? = nil
     private var listTitlesContainerView: UIView? = nil
+    
+    private var marketDataToShow: [MarketDataField]?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -167,16 +175,68 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         settingsByLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         
         settingsByLabel.sizeToFit()
+        
+        self.setupSettingViews()
     }
     
     func updateChargeLbl(_ sort: String) {
         sortLbl?.text = sort
         sortLbl?.sizeToFit()
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    fileprivate func setupSettingViews() {
+        backgroundColor = .white
+        addSubview(tickerLbl)
+        tickerLbl.autoSetDimensions(to: CGSize.init(width: 42, height: 24))
+        tickerLbl.autoPinEdge(.left, to: .left, of: self, withOffset: 32)
+        tickerLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -3)
+        
+        addSubview(firstMarketMarkerButton)
+        firstMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        firstMarketMarkerButton.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
+        firstMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        addSubview(netLbl)
+        netLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        netLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
+        netLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        
+        addSubview(secondMarketMarkerButton)
+        secondMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        secondMarketMarkerButton.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -80)
+        secondMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        addSubview(monthPriceLbl)
+        monthPriceLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        monthPriceLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -80)
+        monthPriceLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        
+        
+        addSubview(thirdMarketMarkerButton)
+        thirdMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        thirdMarketMarkerButton.autoPinEdge(.right, to: .right, of: self, withOffset: -128)
+        thirdMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        addSubview(capLbl)
+        capLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        capLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -128)
+        capLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        
+        addSubview(fourthMarketMarkerButton)
+        fourthMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        fourthMarketMarkerButton.autoPinEdge(.right, to: .right, of: self, withOffset: -176)
+        fourthMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        addSubview(peLbl)
+        peLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
+        peLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -176)
+        peLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
+        
+        settingsViews = [tickerLbl, firstMarketMarkerButton, netLbl, secondMarketMarkerButton, monthPriceLbl, thirdMarketMarkerButton, capLbl, fourthMarketMarkerButton, peLbl]
+    }
+    
     
     func configureWithState(state: CollectionDetailsHeaderViewState) {
         
@@ -186,39 +246,227 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             self.sortByButton.isHidden = false
             self.listTitlesContainerView?.isHidden = true
             self.chartView?.isHidden = true
+            self.tableListModeButton.isSelected = false
+            self.tableListModeButton.isHidden = false
+            self.chartModeButton.isSelected = false
+            for view in settingsViews {
+                view.isHidden = true
+            }
         case .list:
             self.settingsButton.isHidden = false
             self.sortByButton.isHidden = false
             self.listTitlesContainerView?.isHidden = false
             self.chartView?.isHidden = true
+            self.tableListModeButton.isSelected = true
+            self.tableListModeButton.isHidden = false
+            self.chartModeButton.isSelected = false
+            for view in settingsViews {
+                view.isHidden = false
+            }
         case .chart:
             self.settingsButton.isHidden = true
             self.sortByButton.isHidden = true
+            self.tableListModeButton.isHidden = true
             self.listTitlesContainerView?.isHidden = true
             self.chartView?.isHidden = false
+            self.chartModeButton.isSelected = true
+            for view in settingsViews {
+                view.isHidden = true
+            }
         }
     }
     
     @objc
     private func settingsTapped() {
         
-        
+        if let block = self.onSettingsPressed {
+            block()
+        }
     }
     
     @objc
     private func sortTapped() {
         
+        if let block = self.onSortingPressed {
+            block()
+        }
     }
     
     @objc
     private func chartModeButtonTapped() {
         
         self.chartModeButton.isSelected = !self.chartModeButton.isSelected
+        if let block = self.onChartModeButtonPressed {
+            block(self.chartModeButton.isSelected)
+        }
     }
     
     @objc
     private func tableListModeButtonTapped() {
         
         self.tableListModeButton.isSelected = !self.tableListModeButton.isSelected
+        if let block = self.onTableListModeButtonPressed {
+            block(self.tableListModeButton.isSelected)
+        }
     }
+    
+    // MARK: Private
+
+    // MARK: Functions
+
+    func updateMetrics(_ metrics: [MarketDataField]) {
+        
+        self.marketDataToShow = metrics
+        let titles = metrics.prefix(4).map(\.shortTitle)
+        let lbls = [peLbl, capLbl, monthPriceLbl, netLbl]
+        
+        if titles.first == Constants.CollectionDetails.matchScore {
+            for (ind, val) in titles.reversed().enumerated() {
+                lbls[ind].text = val
+            }
+        } else {
+            for (ind, val) in titles.enumerated() {
+                lbls[ind].text = val
+            }
+        }
+    }
+    
+    @objc
+    private func firstMarketMarkerTapped(_: UIButton) {
+        self.showExplanationForFieldAtIndex(index: 3)
+    }
+
+    @objc
+    private func secondMarketMarkerTapped(_: UIButton) {
+        self.showExplanationForFieldAtIndex(index: 2)
+    }
+
+    @objc
+    private func thirdMarketMarkerTapped(_: UIButton) {
+        self.showExplanationForFieldAtIndex(index: 1)
+    }
+    
+    @objc
+    private func fourthMarketMarkerTapped(_: UIButton) {
+        self.showExplanationForFieldAtIndex(index: 0)
+    }
+    
+    private func showExplanationForFieldAtIndex(index: Int) {
+        
+        guard let marketDataToShow = self.marketDataToShow else {
+            return
+        }
+        guard marketDataToShow.count >= 4 else {
+            return
+        }
+        
+        let marketData = marketDataToShow[index]
+        
+        let explanationVc = FeatureDescriptionViewController.init()
+        explanationVc.configureWith(title: marketData.explanationTitle)
+        explanationVc.configureWith(description: marketData.explanationDescription,
+                                    linkString: marketData.explanationLinkString,
+                                    link: marketData.explanationLink)
+        FloatingPanelManager.shared.configureWithHeight(height: CGFloat(marketData.explanationHeight))
+        FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
+        FloatingPanelManager.shared.showFloatingPanel()
+    }
+    
+    lazy var tickerLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
+        label.textColor = UIColor(hexString: "B1BDC8")!
+        label.numberOfLines = 2
+        label.textAlignment = .left
+        label.text = "Stock\nTicker"
+        return label
+    }()
+    
+    lazy var netLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
+        label.textColor = UIColor(hexString: "B1BDC8")!
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "Net Profit".uppercased()
+        return label
+    }()
+    
+    lazy var monthPriceLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
+        label.textColor = UIColor(hexString: "B1BDC8")!
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "Month to day".uppercased()
+        return label
+    }()
+    
+    lazy var capLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
+        label.textColor = UIColor(hexString: "B1BDC8")!
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "Market\ncap".uppercased()
+        return label
+    }()
+    
+    lazy var peLbl: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.compactRoundedMedium(Deviice.current.size == .screen4Dot7Inches ? 6 : 9)
+        label.textColor = UIColor(hexString: "B1BDC8")!
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "EV/S\n".uppercased()
+        return label
+    }()
+    
+    lazy var firstMarketMarkerButton: UIButton = {
+        let button = UIButton()
+
+        button.backgroundColor = UIColor.Gainy.white
+
+        button.addTarget(self,
+                         action: #selector(firstMarketMarkerTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
+    
+    lazy var secondMarketMarkerButton: UIButton = {
+        let button = UIButton()
+
+        button.backgroundColor = UIColor.Gainy.white
+
+        button.addTarget(self,
+                         action: #selector(secondMarketMarkerTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
+    
+    lazy var thirdMarketMarkerButton: UIButton = {
+        let button = UIButton()
+
+        button.backgroundColor = UIColor.Gainy.white
+
+        button.addTarget(self,
+                         action: #selector(thirdMarketMarkerTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
+    
+    lazy var fourthMarketMarkerButton: UIButton = {
+        let button = UIButton()
+
+        button.backgroundColor = UIColor.Gainy.white
+
+        button.addTarget(self,
+                         action: #selector(fourthMarketMarkerTapped(_:)),
+                         for: .touchUpInside)
+
+        return button
+    }()
 }
