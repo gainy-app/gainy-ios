@@ -10,7 +10,7 @@ import UIKit
 typealias PieChartData = GetTtfPieChartQuery.Data.CollectionPiechart
 
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, _ completion: @escaping ([[ChartNormalized]], [GetTtfPieChartQuery.Data.CollectionPiechart], [TickerTag]) -> Void) {
+    func populateTTFCard(uniqID: String, _ completion: @escaping (String, [[ChartNormalized]], [GetTtfPieChartQuery.Data.CollectionPiechart], [TickerTag]) -> Void) {
         
         Task {
         //Load D1 Top
@@ -25,7 +25,7 @@ extension CollectionsManager {
             let allInfo = await (allTopCharts, pieChart, recTags)
             
             await MainActor.run {
-                completion(allInfo.0, allInfo.1, allInfo.2)
+                completion(uniqID, allInfo.0, allInfo.1, allInfo.2)
             }
         }
     }

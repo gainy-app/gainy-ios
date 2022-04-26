@@ -152,13 +152,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] topCharts, pieData, tags in
-                self?.updateCharts(topCharts)
-                self?.viewModel.addTags(tags)
-                self?.hideSkeleton()
-                self?.viewModel.isDataLoaded = true
-                self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue),
-                                                      IndexPath.init(row: 0, section: CollectionDetailsSection.gain.rawValue)])
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
+                if uniqID == self?.viewModel.uniqID {
+                    self?.updateCharts(topCharts)
+                    self?.viewModel.addTags(tags)
+                    self?.hideSkeleton()
+                    self?.viewModel.isDataLoaded = true
+                    self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue),
+                                                          IndexPath.init(row: 0, section: CollectionDetailsSection.gain.rawValue)])
+                }
             }
         }
         // Load all data
@@ -274,19 +276,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func refreshData(_ completion: (() -> Void)? = nil) {
         
-//        refreshControl.endRefreshing()
-//        if self.refreshingTickers {
-//            completion?()
-//            return
-//        }
+        //        refreshControl.endRefreshing()
+        //        if self.refreshingTickers {
+        //            completion?()
+        //            return
+        //        }
         
-//        self.refreshingTickers = true
+        //        self.refreshingTickers = true
         
         if viewModel?.id == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
                 if let cards = models.first?.cards {
                     self?.finishRefreshWithSorting(cards: cards) {
-//                        self?.refreshingTickers = false
+                        //                        self?.refreshingTickers = false
                         completion?()
                     }
                 }
@@ -302,7 +304,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     }
                     let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
                     self.finishRefreshWithSorting(cards: cards) {
-//                        self.refreshingTickers = false
+                        //                        self.refreshingTickers = false
                         completion?()
                     }
                 }
@@ -579,7 +581,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
         }
-
+        
         //Loading tickers data!
         if !self.isLoadingTickers {
             let dispatchGroup = DispatchGroup()
@@ -644,7 +646,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
             headerView.updateChargeLbl(settings.sortingText())
             headerView.updateMetrics(settings.marketDataToShow)
-
+            
             
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {
