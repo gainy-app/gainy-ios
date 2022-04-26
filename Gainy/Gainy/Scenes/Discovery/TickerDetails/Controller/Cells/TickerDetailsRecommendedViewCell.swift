@@ -34,22 +34,8 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
             
             recLbls[0].attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
-            switch matchData.matchScore {
-            case 0..<35:
-                colorView.backgroundColor = UIColor.Gainy.mainRed
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            case 35..<65:
-                colorView.backgroundColor = UIColor.Gainy.mainYellow
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            case 65...:
-                colorView.backgroundColor = UIColor.Gainy.mainGreen
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            default:
-                break
-            }
+            scoreLbl.textColor = MatchScoreManager.textColorFor(matchData.matchScore)
+            colorView.backgroundColor = MatchScoreManager.circleColorFor(matchData.matchScore)
             
             //Tags
             let tagHeight: CGFloat = 24.0

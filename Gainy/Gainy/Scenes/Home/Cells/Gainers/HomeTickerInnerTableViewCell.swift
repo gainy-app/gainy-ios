@@ -77,20 +77,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             isInWL = addedToWatchlist
             if let matchScore = TickerLiveStorage.shared.getMatchData(stock.symbol ?? "")?.matchScore {
                 matchLabel.text = "\(matchScore)"
-                switch matchScore {
-                case 0..<35:
-                    matchLabel.backgroundColor = UIColor.Gainy.mainRed
-                    break
-                case 35..<65:
-                    matchLabel.backgroundColor = UIColor.Gainy.mainYellow
-                    break
-                case 65...:
-                    matchLabel.backgroundColor = UIColor.Gainy.mainGreen
-                    break
-                default:
-                    break
-                }
-                
+                matchLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore)                
             } else {
                 matchLabel.text = "-"
             }

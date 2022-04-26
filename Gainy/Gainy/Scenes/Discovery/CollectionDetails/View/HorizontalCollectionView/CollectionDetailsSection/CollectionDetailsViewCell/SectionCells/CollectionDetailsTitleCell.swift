@@ -18,7 +18,7 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         contentView.addSubview(companyNameLabel)
         companyNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
         companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
-        companyNameLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24.0)
     }
     
     @available(*, unavailable)

@@ -94,7 +94,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.Gainy.white
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
@@ -103,7 +102,21 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 height: 110
             )
         )
-        navigationBarContainer.backgroundColor = UIColor.Gainy.white
+        navigationBarContainer.backgroundColor = .clear
+        
+        let navigationBarTopOffset =
+        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
+        let blurView = BlurEffectView()
+        view.addSubview(blurView)
+        
+        blurView.autoPinEdge(toSuperviewEdge: .leading)
+        blurView.autoPinEdge(toSuperviewEdge: .top)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing)
+        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+        
+        view.backgroundColor = UIColor.Gainy.white
+        
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
@@ -245,8 +258,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         view.addSubview(navigationBarContainer)
         
-        let navigationBarTopOffset =
-        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
         
         collectionView = UICollectionView(
             frame: CGRect(
@@ -258,19 +270,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: customLayout
         )
         collectionView.isSkeletonable = true
-        view.addSubview(collectionView)
-        collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        view.insertSubview(collectionView, at: 0)
+        collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 0)
         collectionView.autoPinEdge(.leading, to: .leading, of: view)
         collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        
+        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)        
         collectionView.register(CollectionDetailsViewCell.self)
         
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.dragInteractionEnabled = true
         collectionView.bounces = false
-        
+        collectionView.clipsToBounds = false
         collectionView.dataSource = dataSource
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
@@ -344,7 +355,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 16)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)

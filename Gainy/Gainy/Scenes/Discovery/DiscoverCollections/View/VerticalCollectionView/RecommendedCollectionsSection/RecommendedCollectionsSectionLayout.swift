@@ -7,7 +7,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         // Items
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
+                widthDimension: .fractionalWidth(0.5),
                 heightDimension: .fractionalHeight(1.0)
             )
         )
@@ -16,12 +16,12 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(152.0)
+                heightDimension: .fractionalWidth(0.5)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
         )
-        recommendedGroup.interItemSpacing = .fixed(8)
+        recommendedGroup.interItemSpacing = .fixed(16)
 
         // Section
         let recommendedCollectionsSection = NSCollectionLayoutSection(group: recommendedGroup)
@@ -94,6 +94,6 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
     // MARK: Private
 
     private enum Constant {
-        static let numberOfColumns = 3
+        static let numberOfColumns = 2
     }
 }

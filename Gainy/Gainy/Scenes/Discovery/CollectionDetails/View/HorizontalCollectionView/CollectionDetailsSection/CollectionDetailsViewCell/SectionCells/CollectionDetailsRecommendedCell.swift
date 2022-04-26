@@ -247,22 +247,9 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         tick3.image = UIImage(named: "fits_risk\(matchData.categoryLevel ?? 0)")
         
         risk1Lbl.attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int((matchData.riskSimilarity ?? 0.0) * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
-        switch matchScore {
-        case 0..<35:
-            largeBack.backgroundColor = UIColor.Gainy.mainRed
-            tagsTitle.textColor = UIColor.Gainy.mainText
-            break
-        case 35..<65:
-            largeBack.backgroundColor = UIColor.Gainy.mainYellow
-            tagsTitle.textColor = UIColor.Gainy.mainText
-            break
-        case 65...:
-            largeBack.backgroundColor = UIColor.Gainy.mainGreen
-            tagsTitle.textColor = .white
-            break
-        default:
-            break
-        }
+        tagsTitle.textColor = MatchScoreManager.textColorFor(matchScore)
+        largeBack.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
+        
         
         //Tags
         let tagHeight: CGFloat = 24.0

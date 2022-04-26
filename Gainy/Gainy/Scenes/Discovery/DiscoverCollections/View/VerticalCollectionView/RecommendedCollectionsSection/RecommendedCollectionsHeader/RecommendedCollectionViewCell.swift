@@ -295,22 +295,10 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
             growArrowImgView.tintColor = .white
             gainsLabel.textColor = .white
         }
-        gainsLabel.text = dailyGrow.percent
+        gainsLabel.text = dailyGrow.percentUnsigned
         
         msLabel.text = "\(Int(matchScore))"
-        switch matchScore {
-        case 0..<35:
-            msLabel.backgroundColor = UIColor.Gainy.mainRed
-            break
-        case 35..<65:
-            msLabel.backgroundColor = UIColor.Gainy.mainYellow
-            break
-        case 65...:
-            msLabel.backgroundColor = UIColor.Gainy.mainGreen
-            break
-        default:
-            break
-        }
+        msLabel.backgroundColor = MatchScoreManager.circleColorFor(matchScore) 
 
         buttonState = plusButtonState
         buttonState == .checked

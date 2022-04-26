@@ -66,6 +66,8 @@
 		333CC16026DCB2DF00690245 /* StockViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333CC15F26DCB2DF00690245 /* StockViewCell.swift */; };
 		333CC16226DCB34700690245 /* StockViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333CC16126DCB34700690245 /* StockViewCell.xib */; };
 		333DAFC627C504BD009C19BE /* HomeSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */; };
+		33423B3E281814DB0023F937 /* MatchScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33423B3D281814DB0023F937 /* MatchScoreManager.swift */; };
+		33423B402818200F0023F937 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33423B3F2818200F0023F937 /* BlurEffectView.swift */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
 		3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 3342C87926DE0E7F0049763E /* FloatingPanel */; };
 		3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* GainyAnalytics.swift */; };
@@ -602,6 +604,8 @@
 		333CC15F26DCB2DF00690245 /* StockViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewCell.swift; sourceTree = "<group>"; };
 		333CC16126DCB34700690245 /* StockViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StockViewCell.xib; sourceTree = "<group>"; };
 		333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonTableViewCell.swift; sourceTree = "<group>"; };
+		33423B3D281814DB0023F937 /* MatchScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchScoreManager.swift; sourceTree = "<group>"; };
+		33423B3F2818200F0023F937 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		3342C87B26DE2DC00049763E /* GainyAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalytics.swift; sourceTree = "<group>"; };
 		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
@@ -1341,6 +1345,7 @@
 				33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */,
 				339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */,
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
+				33423B3F2818200F0023F937 /* BlurEffectView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1437,6 +1442,7 @@
 				90F2B6492761ED1600474909 /* WebPresenter.swift */,
 				9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */,
 				33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */,
+				33423B3D281814DB0023F937 /* MatchScoreManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2877,6 +2883,7 @@
 				85E4A2802755184F00C0E5C5 /* InfoDataSource.swift in Sources */,
 				33BDCF6B26CE8B33000DE770 /* TickerDetailsHeaderViewCell.swift in Sources */,
 				85E4A28827551D3600C0E5C5 /* ListTableViewCell.swift in Sources */,
+				33423B3E281814DB0023F937 /* MatchScoreManager.swift in Sources */,
 				33BA6D96280970EC00C3A431 /* ConfigLoaderViewController.swift in Sources */,
 				3AFE0C452690CEA100C25A8F /* TickerViewController.swift in Sources */,
 				33A1F57927032721000DAF33 /* FetchRecommendedCollections.graphql.swift in Sources */,
@@ -2947,6 +2954,7 @@
 				3336860B26E618BF00D448AA /* CompareScatterChartView.swift in Sources */,
 				3A672311268EDAAA00DB04D1 /* FadeTransitionAnimator.swift in Sources */,
 				85E4A2922756C00B00C0E5C5 /* LinkUnlinkPlaidViewController.swift in Sources */,
+				33423B402818200F0023F937 /* BlurEffectView.swift in Sources */,
 				3302E0B626DCBF20008DBC76 /* SearchTickers.graphql.swift in Sources */,
 				33F1947D27143BE200C438AA /* String+Hash.swift in Sources */,
 				3A5ADA73268DA179008659E8 /* SwipeCollectionViewCell+Display.swift in Sources */,
@@ -3353,7 +3361,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 188;
+				CURRENT_PROJECT_VERSION = 189;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3477,7 +3485,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 188;
+				CURRENT_PROJECT_VERSION = 189;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3662,7 +3670,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 188;
+				CURRENT_PROJECT_VERSION = 189;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3691,7 +3699,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 188;
+				CURRENT_PROJECT_VERSION = 189;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

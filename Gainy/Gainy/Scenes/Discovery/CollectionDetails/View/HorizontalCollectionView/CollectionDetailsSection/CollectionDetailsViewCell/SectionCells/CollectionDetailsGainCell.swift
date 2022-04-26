@@ -113,7 +113,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             percentArrowImgView.tintColor = UIColor.Gainy.mainRed
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
         }
-        tickerPercentChangeLabel.text = viewModel.dailyGrow.percent
+        tickerPercentChangeLabel.text = viewModel.dailyGrow.percentUnsigned
         tickerPercentChangeLabel.sizeToFit()
         
         todaysGainLabel.text = "Today Gain"
@@ -122,7 +122,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         
         if viewModel.topChart.sypChartData.points.count > 0 {
             medianView.isHidden = false
-            medianPercentChangeLabel.text = viewModel.topChart.spGrow.percent
+            medianPercentChangeLabel.text = viewModel.topChart.spGrow.percentUnsigned
             
             if viewModel.topChart.spGrow > 0.0 {
                 medianPercentChangeLabel.textColor = UIColor.Gainy.mainGreen

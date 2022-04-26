@@ -271,21 +271,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         }
         
         matchLabel.text = matchScore
-        let matchVal = Int(matchScore) ?? 0
-        switch matchVal {
-        case 0..<35:
-            matchLabel.backgroundColor = UIColor.Gainy.secondaryLightGray
-            break
-        case 35..<65:
-            matchLabel.backgroundColor = UIColor.Gainy.secondaryYellow
-            break
-        case 65...:
-            matchLabel.backgroundColor = UIColor.Gainy.thirdGreen
-            break
-        default:
-            break
-        }
-        
+        matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)        
         layoutIfNeeded()
     }
     

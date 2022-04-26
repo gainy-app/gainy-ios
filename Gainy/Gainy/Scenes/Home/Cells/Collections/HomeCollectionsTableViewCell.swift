@@ -131,23 +131,11 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
                 arrowImgView.tintColor = .white
                 growLbl.textColor = .white
             }
-            growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percent
+            growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
             
             if let matchScore = collection.matchScore?.matchScore {
                 msLbl.text = "\(Int(matchScore))"
-                switch matchScore {
-                case 0..<35:
-                    msLbl.backgroundColor = UIColor.Gainy.mainRed
-                    break
-                case 35..<65:
-                    msLbl.backgroundColor = UIColor.Gainy.mainYellow
-                    break
-                case 65...:
-                    msLbl.backgroundColor = UIColor(hexString: "#E7EAEE")
-                    break
-                default:
-                    break
-                }
+                msLbl.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore))
             } else {
                 msLbl.text = "-"
             }

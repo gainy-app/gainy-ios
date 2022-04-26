@@ -73,7 +73,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var isCompare: Bool = false {
         didSet {
-            //            collectionHorizontalView.isCompare = isCompare
+            //collectionHorizontalView.isCompare = isCompare
         }
     }
     
@@ -725,7 +725,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section {
         case .title:
             let width = collectionView.frame.width
-            return CGSize.init(width: width, height: 74.0)
+            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
