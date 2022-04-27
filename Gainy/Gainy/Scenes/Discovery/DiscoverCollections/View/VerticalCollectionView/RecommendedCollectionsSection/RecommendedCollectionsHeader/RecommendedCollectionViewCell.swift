@@ -20,6 +20,8 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         gainsView.addSubview(growArrowImgView)
         gainsView.addSubview(gainsLabel)
         
+        contentView.addSubview(plusButton)
+        
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
@@ -28,20 +30,20 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
                
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
-        descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 4)
-        descriptionLabel.autoSetDimension(.height, toSize: 55.0, relation: .lessThanOrEqual)
+        descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 8)
+        descriptionLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 16 + 24.0 + 16, relation: .lessThanOrEqual)
         
-        msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
-        msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 8.0)
+        msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+        msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
         msLabel.autoSetDimensions(to: .init(width: 24, height: 24))
         
         msCircle.autoSetDimensions(to: .init(width: 22, height: 22))
         msCircle.autoAlignAxis(.horizontal, toSameAxisOf: msLabel, withMultiplier: 1.0)
         msCircle.autoAlignAxis(.vertical, toSameAxisOf: msLabel, withMultiplier: 1.0)
         
-        gainsView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -8)
-        gainsView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 40)
-        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -8)
+        gainsView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+        gainsView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 48)
+        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -55)
         gainsView.autoSetDimension(.height, toSize: 24)
         
         growArrowImgView.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 8)
@@ -51,6 +53,10 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         gainsLabel.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 20)
         gainsLabel.autoPinEdge(.trailing, to: .trailing, of: gainsView, withOffset: -8)
         gainsLabel.autoAlignAxis(.horizontal, toSameAxisOf: gainsView, withMultiplier: 1.0)
+        
+        plusButton.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 0)
+        plusButton.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 0)
+        plusButton.autoSetDimensions(to: .init(width: 48, height: 48))
         
         layer.isOpaque = true
         backgroundColor = UIColor.Gainy.white
@@ -125,14 +131,10 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     lazy var plusButton: UIButton = {
         let button = UIButton()
-
-        button.layer.cornerRadius = 14
-        button.backgroundColor = UIColor.Gainy.white
-
+        button.backgroundColor = .clear
         button.addTarget(self,
                          action: #selector(plusButtonTapped(_:)),
                          for: .touchUpInside)
-
         return button
     }()
     
@@ -242,12 +244,6 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         let tMargin: CGFloat = 8
         let bMargin: CGFloat = 8
         
-        plusButton.frame = CGRect(
-            x: bounds.width - (28 + hMargin),
-            y: bounds.height - (28 + bMargin),
-            width: 28,
-            height: 28
-        )
         
         let isTop20 = false//(Constants.CollectionDetails.top20ID == self.tag) ? true : false
         self.nameLabel.textColor = isTop20 ? UIColor(hexString: "#FC5058", alpha: 1.0) : UIColor.Gainy.white
@@ -318,12 +314,12 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     func setButtonUnchecked() {
         buttonState = .unchecked
-        plusButton.setImage(UIImage(named: "plus"), for: .normal)
+        plusButton.setImage(UIImage(named: "add_to_wl_rec"), for: .normal)
     }
 
     func setButtonChecked() {
         buttonState = .checked
-        plusButton.setImage(UIImage(named: "check"), for: .normal)
+        plusButton.setImage(UIImage(named: "remove_from_wl"), for: .normal)
     }
 
     // MARK: Private

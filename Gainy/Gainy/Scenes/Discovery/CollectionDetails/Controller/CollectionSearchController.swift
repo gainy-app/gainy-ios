@@ -451,13 +451,14 @@ extension CollectionSearchController {
             }
             
             if layoutKind == .collections {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(109),
-                                                      heightDimension: .absolute(144))
+                let width = (UIScreen.main.bounds.width - 16 * 3.0) / 2.0
+                let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
+                                                      heightDimension: .absolute(width))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 2)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(109),
-                                                       heightDimension: NSCollectionLayoutDimension.absolute(144))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
+                                                       heightDimension: .absolute(width))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
                 
                 let section = NSCollectionLayoutSection(group: group)
@@ -475,15 +476,15 @@ extension CollectionSearchController {
             
             if layoutKind == .suggestedCollection {
                 let defaultOffset = 16.0
-                let width = (UIScreen.main.bounds.width - defaultOffset * 3.0) / 3.0
+                let width = (UIScreen.main.bounds.width - defaultOffset * 3.0) / 2.0
                 let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
-                                                      heightDimension: .absolute(144))
+                                                      heightDimension: .absolute(width))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: NSCollectionLayoutDimension.absolute(152))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+                                                       heightDimension: .absolute(width))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
