@@ -12,6 +12,6 @@ class RoundedCollectionViewCell: UICollectionViewCell {
     // MARK: Private
 
     private enum Constant {
-        static let cornerRadius = 8.0 as CGFloat
+        static let cornerRadius = 16.0 as CGFloat
     }
 }

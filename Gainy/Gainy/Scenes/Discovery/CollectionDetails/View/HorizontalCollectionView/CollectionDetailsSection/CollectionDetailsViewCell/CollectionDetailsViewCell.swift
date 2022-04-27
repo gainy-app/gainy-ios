@@ -45,6 +45,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionView.register(CollectionCardCell.self)
         collectionView.register(CollectionListCardCell.self)
+        collectionView.register(CollectionChartCardCell.self)
         
         collectionView.register(CollectionDetailsFooterView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
@@ -154,12 +155,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             showGradientSkeleton()
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
                 if uniqID == self?.viewModel.uniqID {
+                    self?.pieChartData = pieData
                     self?.updateCharts(topCharts)
                     self?.viewModel.addTags(tags)
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
-                    self?.collectionView.reloadItems(at: [IndexPath.init(row: 0, section: CollectionDetailsSection.recommended.rawValue),
-                                                          IndexPath.init(row: 0, section: CollectionDetailsSection.gain.rawValue)])
+                    self?.collectionView.reloadData()
                 }
             }
         }
@@ -190,6 +191,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     
     private(set) var cards: [CollectionCardViewCellModel] = []
+    private var pieChartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
     
     private func loadMoreTickers() {
         
@@ -364,7 +366,25 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         case .recommended:
             return 1
         case .cards:
-            return self.cards.count
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                switch settings.pieChartMode {
+                case .tickers:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "ticker"
+                    }.count
+                case .categories:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "category"
+                    }.count
+                case .interests:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "interest"
+                    }.count
+                }
+            } else {
+                return self.cards.count
+            }
         }
     }
     
@@ -428,7 +448,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         case .cards:
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
-                return self.listCellForItemAtIndexPath(indexPath: indexPath)
+                return self.chartCardCellForItemAtIndexPath(indexPath: indexPath)
             } else {
                 if settings.viewMode == .grid {
                     return self.gridCellForItemAtIndexPath(indexPath: indexPath)
@@ -437,6 +457,18 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 }
             }
         }
+    }
+    
+    func chartCardCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: CollectionChartCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionChartCardCell.cellIdentifier, for: indexPath) as! CollectionChartCardCell
+        let chartData = self.currentChartData()
+        guard indexPath.row < chartData.count else {
+            return cell
+        }
+        
+        cell.configureWithChartData(data: chartData[indexPath.row])
+        return cell
     }
     
     func listCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
@@ -631,7 +663,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionDetailsHeaderView.reuseIdentifier, for: indexPath) as! CollectionDetailsHeaderView
             
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
-            
             var state = CollectionDetailsHeaderViewState.grid
             if settings.pieChartSelected {
                 state = CollectionDetailsHeaderViewState.chart
@@ -642,12 +673,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     state = CollectionDetailsHeaderViewState.list
                 }
             }
-            headerView.configureWithState(state: state)
             
+            headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: settings.pieChartMode)
+            headerView.configureWithState(state: state)
             headerView.updateChargeLbl(settings.sortingText())
             headerView.updateMetrics(settings.marketDataToShow)
-            
-            
+
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {
                     return
@@ -671,6 +702,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 self.collectionView.reloadData()
             }
             
+            headerView.onChartTickerButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .tickers)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onChartCategoryButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .categories)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onChartInterestButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .interests)
+                self.collectionView.reloadData()
+            }
+            
             self.headerView = headerView
             result = headerView
         case UICollectionView.elementKindSectionFooter:
@@ -682,6 +728,33 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         default: fatalError("Unhandlad behaviour")
         }
         return result
+    }
+    
+    func currentChartData() -> [GetTtfPieChartQuery.Data.CollectionPiechart] {
+        
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        if settings.pieChartSelected {
+            if settings.pieChartMode == .categories {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "category"
+                }
+            } else if settings.pieChartMode == .interests {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "interest"
+                }
+            } else if settings.pieChartMode == .tickers {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "ticker"
+                }
+            }
+        }
+        
+        chartData = chartData.sorted(by: { itemLeft, itemRight in
+            itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
+        })
+        
+        return chartData
     }
 }
 
@@ -890,23 +963,6 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         return CGSize.zero
     }
 }
-
-//extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
-//    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-//    }
-//
-//    func stockSortPressed(view: CollectionHorizontalView) {
-//
-//    }
-//
-//    func comparePressed(view: CollectionHorizontalView) {
-//        onAddStockPressed?()
-//    }
-//
-//    func settingsPressed(view: CollectionHorizontalView) {
-//
-//    }
-//}
 
 extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {

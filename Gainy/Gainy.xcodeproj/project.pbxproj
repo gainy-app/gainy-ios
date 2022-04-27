@@ -213,7 +213,7 @@
 		33EEECD827424696004C41FE /* HoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EEECD727424696004C41FE /* HoldingsViewController.swift */; };
 		33F1947B27143A2B00C438AA /* LocalNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F1947A27143A2B00C438AA /* LocalNotificationsManager.swift */; };
 		33F1947D27143BE200C438AA /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F1947C27143BE200C438AA /* String+Hash.swift */; };
-		33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */; };
+		33F4066426D90F5900A07713 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F4066326D90F5900A07713 /* PieChartView.swift */; };
 		33F6DC382738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC372738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift */; };
 		33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC392738FB0200CBE4DA /* SearchStocksViewController.swift */; };
 		33F6DC3D2738FE2F00CBE4DA /* SearchStocksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6DC3C2738FE2F00CBE4DA /* SearchStocksViewModel.swift */; };
@@ -336,6 +336,8 @@
 		8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCF827399DF00061AB36 /* BrokerViewCell.xib */; };
 		8505FCFD2739E67E0061AB36 /* BrokerFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */; };
 		8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */; };
+		85070BF5281991F300AB6506 /* CollectionChartCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85070BF4281991F300AB6506 /* CollectionChartCardCell.swift */; };
+		85070BF72819965100AB6506 /* RoundedDashedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85070BF62819965100AB6506 /* RoundedDashedCollectionViewCell.swift */; };
 		851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
@@ -743,7 +745,7 @@
 		33EEECD727424696004C41FE /* HoldingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsViewController.swift; sourceTree = "<group>"; };
 		33F1947A27143A2B00C438AA /* LocalNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsManager.swift; sourceTree = "<group>"; };
 		33F1947C27143BE200C438AA /* String+Hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
-		33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollictionsListHeaderView.swift; sourceTree = "<group>"; };
+		33F4066326D90F5900A07713 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		33F6DC372738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCompareFlowSectionLayout.swift; sourceTree = "<group>"; };
 		33F6DC392738FB0200CBE4DA /* SearchStocksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStocksViewController.swift; sourceTree = "<group>"; };
 		33F6DC3C2738FE2F00CBE4DA /* SearchStocksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStocksViewModel.swift; sourceTree = "<group>"; };
@@ -874,6 +876,8 @@
 		8505FCF827399DF00061AB36 /* BrokerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerViewCell.xib; sourceTree = "<group>"; };
 		8505FCFB2739E67D0061AB36 /* BrokerFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrokerFooterView.swift; sourceTree = "<group>"; };
 		8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerFooterView.xib; sourceTree = "<group>"; };
+		85070BF4281991F300AB6506 /* CollectionChartCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionChartCardCell.swift; sourceTree = "<group>"; };
+		85070BF62819965100AB6506 /* RoundedDashedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedDashedCollectionViewCell.swift; sourceTree = "<group>"; };
 		851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistSectionLayout.swift; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
@@ -1344,6 +1348,7 @@
 				85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */,
 				33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */,
 				339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */,
+				33F4066326D90F5900A07713 /* PieChartView.swift */,
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
 				33423B3F2818200F0023F937 /* BlurEffectView.swift */,
 			);
@@ -1568,10 +1573,10 @@
 		3A01FBFA26873815007F6FA3 /* CollectionCardCell */ = {
 			isa = PBXGroup;
 			children = (
-				33F4066326D90F5900A07713 /* CollictionsListHeaderView.swift */,
 				3A672316268F16B700DB04D1 /* CollectionCardViewCellModel.swift */,
 				85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */,
 				3A01FBEA26863417007F6FA3 /* CollectionCardCell.swift */,
+				85070BF4281991F300AB6506 /* CollectionChartCardCell.swift */,
 				336D09FD26D7BD0A0036EB54 /* CollectionListCardCell.swift */,
 			);
 			path = CollectionCardCell;
@@ -2057,6 +2062,7 @@
 				85ED4DEA27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift */,
 				3AD40FC2266923C1005679DE /* SectionLayout.swift */,
 				3A9FB0E5266B853200EC85D4 /* RoundedCollectionViewCell.swift */,
+				85070BF62819965100AB6506 /* RoundedDashedCollectionViewCell.swift */,
 				3A67230B268E4B2700DB04D1 /* RoundedWithShadowCollectionViewCell.swift */,
 			);
 			path = CollectionViewLayout;
@@ -3052,7 +3058,7 @@
 				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
 				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
 				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
-				33F4066426D90F5900A07713 /* CollictionsListHeaderView.swift in Sources */,
+				33F4066426D90F5900A07713 /* PieChartView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */,
 				85B90DEE280D518500F21DB2 /* CollectionDetailsTitleCell.swift in Sources */,
@@ -3199,6 +3205,7 @@
 				90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */,
 				8501A7F826E7051F0005EA7C /* OnboardingFinalizingViewController.swift in Sources */,
 				33467CE526C6576800811F74 /* Charts.graphql.swift in Sources */,
+				85070BF5281991F300AB6506 /* CollectionChartCardCell.swift in Sources */,
 				3396C8F827CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift in Sources */,
 				3A3214A626698FCC00D6778B /* CollectionViewModelMapper.swift in Sources */,
 				33F6DC3A2738FB0200CBE4DA /* SearchStocksViewController.swift in Sources */,
@@ -3235,6 +3242,7 @@
 				3A3214AE26698FCC00D6778B /* RecommendedCollectionViewCellModel.swift in Sources */,
 				33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */,
 				33264973280ED6C700CE0D0F /* GetTTFTags.graphql.swift in Sources */,
+				85070BF72819965100AB6506 /* RoundedDashedCollectionViewCell.swift in Sources */,
 				3AE7958326638406002B40D6 /* AppCoordinator.swift in Sources */,
 				85F8B8AE26DD2527000C73D3 /* UILabel+LineHeight.swift in Sources */,
 				33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */,

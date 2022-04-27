@@ -27,6 +27,10 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     public var onChartModeButtonPressed: ((Bool) -> Void)?
     public var onTableListModeButtonPressed: ((Bool) -> Void)?
     
+    public var onChartTickerButtonPressed: (() -> Void)?
+    public var onChartCategoryButtonPressed: (() -> Void)?
+    public var onChartInterestButtonPressed: (() -> Void)?
+    
     private var ttfTickersLabel: UILabel = UILabel.newAutoLayout()
     private var chartModeButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var tableListModeButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
@@ -35,8 +39,14 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     private var settingsButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartView: UIView? = nil
+    private var loadingView: UIActivityIndicatorView? = nil
     private var listTitlesContainerView: UIView? = nil
     
+    private var chartTickerButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var chartCategoryButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var chartInterestButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var chartButtons: [UIView] = []
+    private var mode: CollectionSettings.PieChartMode = .categories
     private var marketDataToShow: [MarketDataField]?
     
     override init(frame: CGRect) {
@@ -50,7 +60,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             view.layer.cornerRadius = 1.0
             view.layer.masksToBounds = true
             view.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-            addSubview(view)
+            self.addSubview(view)
             view.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
             view.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
             if i == 0 {
@@ -72,7 +82,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         ttfTickersLabel.skeletonCornerRadius = 6
         ttfTickersLabel.linesCornerRadius = 6
         ttfTickersLabel.text = "TTF Tickers"
-        addSubview(ttfTickersLabel)
+        self.addSubview(ttfTickersLabel)
         
         ttfTickersLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
         ttfTickersLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
@@ -82,7 +92,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         chartModeButton.isSkeletonable = true
         chartModeButton.setImage(UIImage.init(named: "viewPieChart"), for: .normal)
         chartModeButton.setImage(UIImage.init(named: "viewList"), for: .selected)
-        addSubview(chartModeButton)
+        self.addSubview(chartModeButton)
         chartModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         chartModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
         chartModeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
@@ -92,7 +102,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         tableListModeButton.isSkeletonable = true
         tableListModeButton.setImage(UIImage.init(named: "viewTickersList"), for: .normal)
         tableListModeButton.setImage(UIImage.init(named: "viewTickersGridTable"), for: .selected)
-        addSubview(tableListModeButton)
+        self.addSubview(tableListModeButton)
         tableListModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         tableListModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
         tableListModeButton.autoPinEdge(.top, to: .bottom, of: chartModeButton, withOffset: 24.0)
@@ -103,7 +113,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         sortByButton.layer.cornerCurve = .continuous
         sortByButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
-        addSubview(sortByButton)
+        self.addSubview(sortByButton)
         sortByButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
@@ -148,7 +158,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         settingsButton.layer.cornerCurve = .continuous
         settingsButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
-        addSubview(settingsButton)
+        self.addSubview(settingsButton)
         settingsButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)
         settingsButton.autoPinEdge(.left, to: .right, of: sortByButton, withOffset: 8.0)
         settingsButton.autoSetDimension(.height, toSize: 24.0)
@@ -179,6 +189,22 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.setupSettingViews()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        chartTickerButton.backgroundColor = mode == .tickers ? UIColor.init(hexString: "#131313") : UIColor.init(hexString: "#F7F8F9")
+        chartTickerButton.titleLabel?.textColor = mode == .tickers ? UIColor.white : UIColor.init(hexString: "#131313")
+        chartTickerButton.isUserInteractionEnabled = mode == .tickers ? false : true
+        
+        chartCategoryButton.backgroundColor = mode == .categories ? UIColor.init(hexString: "#131313") : UIColor.init(hexString: "#F7F8F9")
+        chartCategoryButton.titleLabel?.textColor = mode == .categories ? UIColor.white : UIColor.init(hexString: "#131313")
+        chartCategoryButton.isUserInteractionEnabled = mode == .categories ? false : true
+        
+        chartInterestButton.backgroundColor = mode == .interests ? UIColor.init(hexString: "#131313") : UIColor.init(hexString: "#F7F8F9")
+        chartInterestButton.titleLabel?.textColor = mode == .interests ? UIColor.white : UIColor.init(hexString: "#131313")
+        chartInterestButton.isUserInteractionEnabled = mode == .interests ? false : true
+    }
+    
     func updateChargeLbl(_ sort: String) {
         sortLbl?.text = sort
         sortLbl?.sizeToFit()
@@ -190,46 +216,45 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func setupSettingViews() {
+    private func setupSettingViews() {
         backgroundColor = .white
-        addSubview(tickerLbl)
+        self.addSubview(tickerLbl)
         tickerLbl.autoSetDimensions(to: CGSize.init(width: 42, height: 24))
         tickerLbl.autoPinEdge(.left, to: .left, of: self, withOffset: 32)
         tickerLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -3)
         
-        addSubview(firstMarketMarkerButton)
+        self.addSubview(firstMarketMarkerButton)
         firstMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         firstMarketMarkerButton.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
         firstMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
-        addSubview(netLbl)
+        self.addSubview(netLbl)
         netLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         netLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
         netLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
-        addSubview(secondMarketMarkerButton)
+        self.addSubview(secondMarketMarkerButton)
         secondMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         secondMarketMarkerButton.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -80)
         secondMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
-        addSubview(monthPriceLbl)
+        self.addSubview(monthPriceLbl)
         monthPriceLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         monthPriceLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -80)
         monthPriceLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
-        
-        addSubview(thirdMarketMarkerButton)
+        self.addSubview(thirdMarketMarkerButton)
         thirdMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         thirdMarketMarkerButton.autoPinEdge(.right, to: .right, of: self, withOffset: -128)
         thirdMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
-        addSubview(capLbl)
+        self.addSubview(capLbl)
         capLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         capLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -128)
         capLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
         
-        addSubview(fourthMarketMarkerButton)
+        self.addSubview(fourthMarketMarkerButton)
         fourthMarketMarkerButton.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         fourthMarketMarkerButton.autoPinEdge(.right, to: .right, of: self, withOffset: -176)
         fourthMarketMarkerButton.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
-        addSubview(peLbl)
+        self.addSubview(peLbl)
         peLbl.autoSetDimensions(to: CGSize.init(width: 48, height: 24))
         peLbl.autoPinEdge(.right, to: .right, of: self, withOffset: -176)
         peLbl.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: 0)
@@ -237,6 +262,234 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         settingsViews = [tickerLbl, firstMarketMarkerButton, netLbl, secondMarketMarkerButton, monthPriceLbl, thirdMarketMarkerButton, capLbl, fourthMarketMarkerButton, peLbl]
     }
     
+    private func setupChartButtons(mode: CollectionSettings.PieChartMode) {
+        
+        for button in chartButtons {
+            button.removeFromSuperview()
+        }
+        chartButtons = []
+        
+        self.addSubview(chartCategoryButton)
+        chartCategoryButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartCategoryButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        chartCategoryButton.autoSetDimensions(to: CGSize.init(width: 75.0, height: 24.0))
+        chartCategoryButton.addTarget(self,
+                         action: #selector(chartCategoryButtonTapped(_:)),
+                         for: .touchUpInside)
+        chartCategoryButton.layer.cornerRadius = 8.0
+        chartCategoryButton.layer.masksToBounds = true
+        chartCategoryButton.titleLabel?.font = UIFont.proDisplaySemibold(12.0)
+        
+        chartCategoryButton.setTitle("Categories", for: .normal)
+        
+        self.addSubview(chartTickerButton)
+        chartTickerButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartTickerButton.autoPinEdge(.right, to: .left, of: chartCategoryButton, withOffset: -8.0)
+        chartTickerButton.autoSetDimensions(to: CGSize.init(width: 55.0, height: 24.0))
+        chartTickerButton.addTarget(self,
+                         action: #selector(chartTickerButtonTapped(_:)),
+                         for: .touchUpInside)
+        chartTickerButton.layer.cornerRadius = 8.0
+        chartTickerButton.layer.masksToBounds = true
+        chartTickerButton.titleLabel?.font = UIFont.proDisplaySemibold(12.0)
+        
+        chartTickerButton.setTitle("Tickers", for: .normal)
+        
+        self.addSubview(chartInterestButton)
+        chartInterestButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartInterestButton.autoPinEdge(.left, to: .right, of: chartCategoryButton, withOffset: 8.0)
+        chartInterestButton.autoSetDimensions(to: CGSize.init(width: 63.0, height: 24.0))
+        chartInterestButton.addTarget(self,
+                         action: #selector(chartInterestButtonTapped(_:)),
+                         for: .touchUpInside)
+        chartInterestButton.layer.cornerRadius = 8.0
+        chartInterestButton.layer.masksToBounds = true
+        chartInterestButton.titleLabel?.font = UIFont.proDisplaySemibold(12.0)
+        
+        chartInterestButton.setTitle("Interests", for: .normal)
+        
+        chartButtons = [chartCategoryButton, chartTickerButton, chartInterestButton]
+        self.mode = mode
+    }
+    
+    public func configureWithPieChartData(pieChartData: [GetTtfPieChartQuery.Data.CollectionPiechart], mode: CollectionSettings.PieChartMode) {
+
+        self.chartView?.removeFromSuperview()
+        self.loadingView?.removeFromSuperview()
+        
+        if pieChartData.count == 0 {
+            let indicatorView = UIActivityIndicatorView.init(style: .medium)
+            indicatorView.hidesWhenStopped = true
+            self.addSubview(indicatorView)
+            indicatorView.autoPinEdge(toSuperviewEdge: .top, withInset: 146.0)
+            let size = self.frame.size.width - 40 * 2
+            indicatorView.autoSetDimensions(to: CGSize.init(width: size, height: size))
+            indicatorView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
+            indicatorView.startAnimating()
+            self.loadingView = indicatorView
+            return
+        }
+        
+        let sumValue = pieChartData.map { item in
+            item.absoluteValue ?? 0.0
+        }.reduce(0, +)
+        let sumChangeValue = pieChartData.map { item in
+            item.absoluteDailyChange ?? 0.0
+        }.reduce(0, +)
+        let sumWeights = pieChartData.map { item in
+            CGFloat((item.weight ?? 0.0) * 100.0)
+        }.reduce(0, +)
+        
+        let relativeSumChange = ((sumValue / (sumValue - sumChangeValue)) - 1.0)
+        
+        let colors = [
+            UIColor.init(hexString: "#1B45FB"),
+            UIColor.init(hexString: "#0062FF"),
+            UIColor.init(hexString: "#6C5DD3"),
+            UIColor.init(hexString: "#38CF92"),
+        
+            UIColor.init(hexString: "#3BF06E"),
+            UIColor.init(hexString: "#F9557B"),
+            UIColor.init(hexString: "#F95664"),
+            
+            UIColor.init(hexString: "#E7EAEE")
+        ]
+        var segments: [PieChartSegment] = []
+        
+        var index = 0
+        let separatorValue = sumWeights / 360.0
+        for element in pieChartData {
+            let separatoeSegment = PieChartSegment(color: .white, value: separatorValue)
+            segments.append(separatoeSegment)
+            let color = (index <= 6 ? colors[index] : colors[7]) ?? UIColor.white
+            let segment = PieChartSegment(color: color, value: CGFloat((element.weight ?? 0.0) * 100.0))
+            segments.append(segment)
+            index = index + 1
+        }
+        
+        let pieChartView = PieChartView()
+        pieChartView.translatesAutoresizingMaskIntoConstraints = false
+        
+        pieChartView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 400)
+        pieChartView.segments = segments
+        self.addSubview(pieChartView)
+        pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0)
+        var size = self.frame.size.width - 40 * 2
+        pieChartView.autoSetDimensions(to: CGSize.init(width: size, height: size))
+        pieChartView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
+        
+        let overlayView = UIView.newAutoLayout()
+        overlayView.backgroundColor = self.backgroundColor
+        pieChartView.addSubview(overlayView)
+        size = self.frame.size.width - 50 * 2
+        overlayView.layer.masksToBounds = true
+        overlayView.layer.cornerRadius = size / 2
+        overlayView.autoCenterInSuperview()
+        overlayView.autoSetDimensions(to: CGSize.init(width: size, height: size))
+        self.chartView = pieChartView
+        
+        let middleContentView = UIView.newAutoLayout()
+        overlayView.addSubview(middleContentView)
+        middleContentView.autoCenterInSuperview()
+        middleContentView.autoSetDimension(.height, toSize: 40.0)
+        
+        
+        var title = ""
+        let count = pieChartData.count
+        if mode == .categories {
+            title = "\(count)" + (count > 1 ? " categories" : " category")
+        } else if mode == .interests {
+            title = "\(count)" + (count > 1 ? " interests" : " interest")
+        } else if mode == .tickers {
+            title = "\(count)" + (count > 1 ? " tickers" : " ticker")
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.font = UIFont.compactRoundedMedium(16)
+        titleLabel.textColor = UIColor.black
+        titleLabel.numberOfLines = 1
+        titleLabel.textAlignment = .center
+        middleContentView.addSubview(titleLabel)
+        titleLabel.autoPinEdge(toSuperviewEdge: .bottom)
+        titleLabel.autoPinEdge(toSuperviewEdge: .left)
+        titleLabel.autoPinEdge(toSuperviewEdge: .right)
+        titleLabel.autoSetDimension(.height, toSize: 16.0)
+        titleLabel.isSkeletonable = true
+        titleLabel.isHiddenWhenSkeletonIsActive = true
+        titleLabel.text = title
+        titleLabel.sizeToFit()
+        
+        let todayLabel = UILabel()
+        todayLabel.font = UIFont.compactRoundedMedium(14)
+        todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
+        todayLabel.numberOfLines = 1
+        todayLabel.textAlignment = .left
+        middleContentView.addSubview(todayLabel)
+        todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+        todayLabel.autoPinEdge(toSuperviewEdge: .left)
+        todayLabel.autoSetDimension(.height, toSize: 14.0)
+        todayLabel.autoSetDimension(.width, toSize: 37.0)
+        todayLabel.isSkeletonable = true
+        todayLabel.isHiddenWhenSkeletonIsActive = true
+        todayLabel.text = "Today"
+        todayLabel.sizeToFit()
+      
+        let arrowView = UIImageView()
+        arrowView.isSkeletonable = true
+        arrowView.isHiddenWhenSkeletonIsActive = true
+        middleContentView.addSubview(arrowView)
+        arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
+        arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
+        arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
+        
+        let totalChangeAbsoluteLabel = UILabel()
+        totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
+        totalChangeAbsoluteLabel.numberOfLines = 1
+        totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
+        totalChangeAbsoluteLabel.textAlignment = .left
+        totalChangeAbsoluteLabel.isSkeletonable = true
+        totalChangeAbsoluteLabel.linesCornerRadius = 6
+        middleContentView.addSubview(totalChangeAbsoluteLabel)
+        totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+        totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
+        totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
+        totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
+        totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
+        ? UIColor.Gainy.mainGreen
+        : UIColor.Gainy.mainRed
+        totalChangeAbsoluteLabel.sizeToFit()
+        
+        let dotView: UIView = UIView.newAutoLayout()
+        dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
+        dotView.layer.cornerRadius = 1.0
+        dotView.layer.masksToBounds = true
+        middleContentView.addSubview(dotView)
+        dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
+        dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+        dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
+        
+        let totalChangeRelativeLabel = UILabel()
+        totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
+        totalChangeRelativeLabel.numberOfLines = 1
+        totalChangeRelativeLabel.lineBreakMode = .byTruncatingTail
+        totalChangeRelativeLabel.textAlignment = .left
+        totalChangeRelativeLabel.isSkeletonable = true
+        totalChangeRelativeLabel.linesCornerRadius = 6
+        middleContentView.addSubview(totalChangeRelativeLabel)
+        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+        totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
+        totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: dotView, withOffset: 4.0)
+        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right)
+        let valueString = abs((relativeSumChange * 100.0)).percentRaw
+        totalChangeRelativeLabel.text = valueString
+        totalChangeRelativeLabel.textColor = relativeSumChange >= 0.0
+        ? UIColor.Gainy.mainGreen
+        : UIColor.Gainy.mainRed
+        totalChangeRelativeLabel.sizeToFit()
+        
+        self.setupChartButtons(mode: mode)
+    }
     
     func configureWithState(state: CollectionDetailsHeaderViewState) {
         
@@ -249,7 +502,11 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             self.tableListModeButton.isSelected = false
             self.tableListModeButton.isHidden = false
             self.chartModeButton.isSelected = false
+            self.loadingView?.isHidden = true
             for view in settingsViews {
+                view.isHidden = true
+            }
+            for view in chartButtons {
                 view.isHidden = true
             }
         case .list:
@@ -260,8 +517,12 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             self.tableListModeButton.isSelected = true
             self.tableListModeButton.isHidden = false
             self.chartModeButton.isSelected = false
+            self.loadingView?.isHidden = true
             for view in settingsViews {
                 view.isHidden = false
+            }
+            for view in chartButtons {
+                view.isHidden = true
             }
         case .chart:
             self.settingsButton.isHidden = true
@@ -269,9 +530,13 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             self.tableListModeButton.isHidden = true
             self.listTitlesContainerView?.isHidden = true
             self.chartView?.isHidden = false
+            self.loadingView?.isHidden = false
             self.chartModeButton.isSelected = true
             for view in settingsViews {
                 view.isHidden = true
+            }
+            for view in chartButtons {
+                view.isHidden = false
             }
         }
     }
@@ -329,6 +594,21 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
                 lbls[ind].text = val
             }
         }
+    }
+    
+    @objc
+    private func chartTickerButtonTapped(_: UIButton) {
+        self.onChartTickerButtonPressed?()
+    }
+    
+    @objc
+    private func chartCategoryButtonTapped(_: UIButton) {
+        self.onChartCategoryButtonPressed?()
+    }
+    
+    @objc
+    private func chartInterestButtonTapped(_: UIButton) {
+        self.onChartInterestButtonPressed?()
     }
     
     @objc

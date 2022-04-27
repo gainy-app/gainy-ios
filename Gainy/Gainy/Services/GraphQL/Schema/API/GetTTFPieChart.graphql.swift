@@ -8,10 +8,8 @@ public final class GetTtfPieChartQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query GetTTFPieChart($uniqID: String!, $type: String!) {
-      collection_piechart(
-        where: {collection_uniq_id: {_eq: $uniqID}, entity_type: {_eq: $type}}
-      ) {
+    query GetTTFPieChart($uniqID: String!) {
+      collection_piechart(where: {collection_uniq_id: {_eq: $uniqID}}) {
         __typename
         weight
         entity_type
@@ -27,15 +25,13 @@ public final class GetTtfPieChartQuery: GraphQLQuery {
   public let operationName: String = "GetTTFPieChart"
 
   public var uniqID: String
-  public var type: String
 
-  public init(uniqID: String, type: String) {
+  public init(uniqID: String) {
     self.uniqID = uniqID
-    self.type = type
   }
 
   public var variables: GraphQLMap? {
-    return ["uniqID": uniqID, "type": type]
+    return ["uniqID": uniqID]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -43,7 +39,7 @@ public final class GetTtfPieChartQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collection_piechart", arguments: ["where": ["collection_uniq_id": ["_eq": GraphQLVariable("uniqID")], "entity_type": ["_eq": GraphQLVariable("type")]]], type: .nonNull(.list(.nonNull(.object(CollectionPiechart.selections))))),
+        GraphQLField("collection_piechart", arguments: ["where": ["collection_uniq_id": ["_eq": GraphQLVariable("uniqID")]]], type: .nonNull(.list(.nonNull(.object(CollectionPiechart.selections))))),
       ]
     }
 

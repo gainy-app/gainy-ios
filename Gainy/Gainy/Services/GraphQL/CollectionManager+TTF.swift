@@ -18,7 +18,7 @@ extension CollectionsManager {
             
         //Load Pie - category
         
-            async let pieChart = loadPieChart(uniqID: uniqID, type: .category)
+            async let pieChart = loadPieChart(uniqID: uniqID)
         //Load Rec Tags
             async let recTags = loadRecTags(uniqID: uniqID)
             
@@ -129,14 +129,10 @@ extension CollectionsManager {
     
     //MARK: - Pie
     
-    enum EntityType: String {
-        case category, ticker, interest
-    }
-    
-    private func loadPieChart(uniqID: String, type: EntityType) async -> [PieChartData] {
+    private func loadPieChart(uniqID: String) async -> [PieChartData] {
         return await
         withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: GetTtfPieChartQuery(uniqID: uniqID, type: type.rawValue)) {result in
+            Network.shared.apollo.fetch(query: GetTtfPieChartQuery(uniqID: uniqID)) {result in
                     switch result {
                     case .success(let graphQLResult):
                         if let fetchedData = graphQLResult.data?.collectionPiechart {
