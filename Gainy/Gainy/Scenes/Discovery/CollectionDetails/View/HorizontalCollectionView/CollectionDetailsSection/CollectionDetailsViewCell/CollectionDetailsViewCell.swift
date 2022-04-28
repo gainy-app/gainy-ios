@@ -246,7 +246,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Private
     
     private var isLoadingMoreTickers: Bool = false
-    private var collectionView: UICollectionView!
+    private(set) var collectionView: UICollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
         control.layer.zPosition = -1
@@ -800,6 +800,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section {
         case .title:
             let width = collectionView.frame.width
+            guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
+                return CGSize.init(width: width, height: 110.0)
+            }
             return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}

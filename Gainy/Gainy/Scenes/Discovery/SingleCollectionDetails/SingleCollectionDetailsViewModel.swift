@@ -55,6 +55,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
             
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.shortCollection = shortCollection
+                cell.collectionView.tag = collectionView.tag
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
                     guard let self = self else {return}

@@ -62,7 +62,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         self.toggleBtn.isHidden = self.showShortCollectionDetails
         self.shareBtn.isHidden = self.showShortCollectionDetails
         if self.showShortCollectionDetails {
-            self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
+            //self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
             self.view.bringSubviewToFront(self.closeButton)
             self.closeButton.translatesAutoresizingMaskIntoConstraints = false
             for item in self.closeButton.constraints {
@@ -110,7 +110,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             collectionView.autoPinEdge(.leading, to: .leading, of: view)
             collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
             collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-            
+            collectionView.tag = Constants.CollectionDetails.singleCollectionId
             collectionView.register(CollectionDetailsViewCell.self)
             
             collectionView.backgroundColor = .clear

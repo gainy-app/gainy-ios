@@ -29,7 +29,7 @@ final class HomeIndexView: CornerView {
                 }
                 
                 if indexModel.value != 0 {
-                    valueLbl.text = indexModel.value.cleanTwoDecimal
+                    valueLbl.text = indexModel.value.cleanTwoDecimalUnsigned
                 } else {
                     valueLbl.text = "-"
                 }

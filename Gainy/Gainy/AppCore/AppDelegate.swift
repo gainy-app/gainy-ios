@@ -7,7 +7,7 @@ import GoogleSignIn
 @_exported import BugfenderSDK
 import LinkKit
 import FirebaseAnalytics
-
+import OneSignal
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +21,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initDataDog()
         initBugfender()
         TickerLiveStorage.shared.clearAllLiveData()
+        initOneSignal(launchOptions: launchOptions)
         return true
     }
     
@@ -113,6 +114,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     private func initBugfender() {
         Bugfender.activateLogger("4gtCSXc1RciksUiOTPCQ5dkleoP8DNbH")
         Bugfender.enableCrashReporting()
+    }
+    
+    private func initOneSignal(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
+          
+          // OneSignal initialization
+          OneSignal.initWithLaunchOptions(launchOptions)
+        OneSignal.setAppId(Constants.OneSignal.appId)
     }
     
     //MARK: - CoreData

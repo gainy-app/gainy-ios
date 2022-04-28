@@ -100,7 +100,6 @@ struct ScatterChartView: View {
                     chartView
                         .padding(.top, 20)
                         .activityIndicator(isVisible: viewModel.isLoading)
-                    bottomMedian
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
@@ -119,7 +118,6 @@ struct ScatterChartView: View {
                     chartView
                         .padding(.top, 20)
                         .activityIndicator(isVisible: viewModel.isLoading)
-                    bottomMedian
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
@@ -130,7 +128,7 @@ struct ScatterChartView: View {
                 hapticTouch.prepare()
             }).frame(height: 341)
                 .padding(.top, 0)
-                //.background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
+            //.background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         }
     }
     
@@ -146,6 +144,21 @@ struct ScatterChartView: View {
                 //Right Stock price
                 VStack(alignment: .trailing, spacing: 0) {
                     HStack(alignment: .lastTextBaseline, spacing: 4) {
+                        
+                        Group {
+                            Text(viewModel.ticker.symbol ?? "")
+                                .foregroundColor(UIColor(hexString: "#6C5DD3")!.uiColor)
+                                .font(UIFont.compactRoundedSemibold(14.0).uiFont)
+                                .padding(.top, 4)
+                                .padding(.bottom, 4)
+                                .padding(.leading, 8)
+                                .padding(.trailing, 8)
+                        }
+                            .background(UIColor(hexString: "#F7F8F9")!.uiColor)
+                            .cornerRadius(8.0)
+                        
+                        Spacer()
+                        
                         Text(statsDayName)
                             .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
                             .font(UIFont.compactRoundedSemibold(14.0).uiFont)
@@ -156,31 +169,25 @@ struct ScatterChartView: View {
                         Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
                             .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                             .font(UIFont.compactRoundedSemibold(14.0).uiFont)
-                        Spacer()
+                            .padding(.trailing, 24)
+                        
                     }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                         .padding(.top, 10)
                     HStack {
+                        
+                        //Median
+                        bottomMedian
+                            .opacity(viewModel.localTicker.haveMedian ? 1.0 : 0.0)
+                        
+                        Spacer()
+                        
                         Text(lineViewModel.hideHorizontalLines ? lineViewModel.currentDataValue : (viewModel.ticker.currentPrice.price))
                             .foregroundColor(UIColor(named: "mainText")!.uiColor)
                             .font(UIFont.compactRoundedSemibold(24.0).uiFont)
                             .animation(.none)
-                        
-                        Spacer()
+                            .padding(.trailing, 24)
                     }
-                    HStack(alignment: .firstTextBaseline, spacing: 4) {
-                        Text("MEDIAN")
-                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                            .font(UIFont.proDisplaySemibold(9).uiFont)
-                            .padding(.top, 2)
-                        Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
-                            .resizable()
-                            .frame(width: 8, height: 8)
-                        Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
-                            .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
-                            .font(UIFont.proDisplaySemibold(11).uiFont)
-                        Spacer()
-                    }
-                    .opacity(isMedianVisible && viewModel.localTicker.haveMedian ? 1.0 : 0.0)
+                    
                     
                 }
                 .frame(height: 78)
@@ -329,19 +336,19 @@ struct ScatterChartView: View {
             .animation(.linear)
             .background(Rectangle().fill().foregroundColor(Color.white).opacity(0.01))
             .gesture(isMedianVisible ? nil : DragGesture(minimumDistance: 0)
-                        .onChanged({ value in
-                lineViewModel.dragLocation = value.location
-                lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
-                lineViewModel.opacity = 1
-                lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
-                lineViewModel.hideHorizontalLines = true
-            })
-                        .onEnded({ value in
-                lineViewModel.opacity = 0
-                lineViewModel.hideHorizontalLines = false
-                lineViewModel.indicatorLocation = .zero
-            }
-            )
+                .onChanged({ value in
+                    lineViewModel.dragLocation = value.location
+                    lineViewModel.indicatorLocation = CGPoint(x: max(value.location.x-chartOffset,0), y: 32)
+                    lineViewModel.opacity = 1
+                    lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
+                    lineViewModel.hideHorizontalLines = true
+                })
+                    .onEnded({ value in
+                        lineViewModel.opacity = 0
+                        lineViewModel.hideHorizontalLines = false
+                        lineViewModel.indicatorLocation = .zero
+                    }
+                            )
             )
         }
     }
@@ -387,25 +394,31 @@ struct ScatterChartView: View {
                 lineViewModel.isSPYVisible = isMedianVisible
                 hapticTouch.impactOccurred()
             }, label: {
-                HStack {
+                HStack(spacing: 4) {
                     Image(isMedianVisible ? "toggle_on" : "toggle_off")
                         .renderingMode(.original)
                     Text("Industry median")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(12).uiFont)
-                        .foregroundColor(isMedianVisible ? Color.white : UIColor(named: "mainText")!.uiColor)
+                        .foregroundColor(isMedianVisible ? Color.white : UIColor(hexString: "#B1BDC8")!.uiColor)
+                    Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
+                        .resizable()
+                        .frame(width: 8, height: 8)
+                    Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
+                        .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
+                        .font(UIFont.proDisplaySemibold(12).uiFont)
                 }
                 .padding(.leading, 8)
                 .padding(.trailing, 8)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
-                .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(20))
+                .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
             })
-                .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
+            .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             
             
             Spacer()
-        }.padding(.leading, 20)
+        }
             .padding(.top, 8)
             .frame(height: 24)
     }

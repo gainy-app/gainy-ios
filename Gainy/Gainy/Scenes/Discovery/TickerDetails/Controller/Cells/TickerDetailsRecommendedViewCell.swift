@@ -34,7 +34,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
             
             recLbls[0].attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
-            scoreLbl.textColor = MatchScoreManager.textColorFor(matchData.matchScore)
+            scoreLbl.textColor = UIColor.Gainy.mainText
             colorView.backgroundColor = MatchScoreManager.circleColorFor(matchData.matchScore)
             
             //Tags

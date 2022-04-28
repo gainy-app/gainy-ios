@@ -523,46 +523,44 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
-        runOnMain {
-            let lock = NSLock()
-            lock.lock()
-            let watchlistCollections = models.filter { item in
-                item.id < 0
-            }
-            if let firstItem = watchlistCollections.first {
-                deleteCollections(watchlistCollections)
-                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
-                if var snapshot = self.dataSource?.snapshot() {
-                    if snapshot.indexOfSection(.collectionWithCards) != nil {
-                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
-                            snapshot.insertItems(watchlistCollections, beforeItem: first)
-                        } else {
-                            snapshot.appendItems(watchlistCollections,
-                                                 toSection: .collectionWithCards)
-                        }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
-                            completed?()
-                        })
-                    } else {
-                        completed?()
-                    }
-                } else {
-                    completed?()
-                }
-            } else {
-                completed?()
-            }
-            lock.unlock()
-        }
+//        runOnMain {
+//            let lock = NSLock()
+//            lock.lock()
+//            let watchlistCollections = models.filter { item in
+//                item.id < 0
+//            }
+//            if let firstItem = watchlistCollections.first {
+//                deleteCollections(watchlistCollections)
+//                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
+//                if var snapshot = self.dataSource?.snapshot() {
+//                    if snapshot.indexOfSection(.collectionWithCards) != nil {
+//                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+//                            snapshot.insertItems(watchlistCollections, beforeItem: first)
+//                        } else {
+//                            snapshot.appendItems(watchlistCollections,
+//                                                 toSection: .collectionWithCards)
+//                        }
+//                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+//                            completed?()
+//                        })
+//                    } else {
+//                        completed?()
+//                    }
+//                } else {
+//                    completed?()
+//                }
+//            } else {
+//                completed?()
+//            }
+//            lock.unlock()
+//        }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             self.appendNewCollectionsFromModels(models) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.appendWatchlistCollectionsFromModels(models) {
-                        completed?()
-                    }
+                    completed?()
                 }
             }
         }

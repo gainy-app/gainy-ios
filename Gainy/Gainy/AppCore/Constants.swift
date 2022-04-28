@@ -38,6 +38,7 @@ struct Constants {
         static let tickersPreloadCount = 20
         static let watchlistCollectionID = -1
         static let compareCollectionID = -2
+        static let singleCollectionId = -3
         static let top20ID = 231
         static let loadingCellIDs = [-10, -11, -12]
         static let demoNamePrefix = "GDEMO:"
@@ -84,5 +85,9 @@ struct Constants {
     struct RemoteConfig {
         static let isPortoCash = "isPortoCashEnabled"
         static let isPortoCrypto = "isPortoCryptoEnabled"
+    }
+    
+    struct OneSignal {
+        static let appId = "a9619aa9-f7b4-4675-96f3-7ae78608c131"
     }
 }

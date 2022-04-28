@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseRemoteConfig
+import OneSignal
 
 final class ConfigLoaderViewController: BaseViewController {
     
@@ -25,11 +26,17 @@ final class ConfigLoaderViewController: BaseViewController {
                 self.showNetworkLoader()
                 RemoteConfigManager.shared.loadDefaults {
                     runOnMain {
+                        
+                        OneSignal.promptForPushNotifications(userResponse: { accepted in
+                            print("User accepted notification: \(accepted)")
+                            GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
+                        })
+                        
                         self.view.removeFromSuperview()
                     }
                 }
             }
         }
-
+        
     }
 }

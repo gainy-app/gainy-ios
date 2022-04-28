@@ -149,6 +149,9 @@
 		33A1F57527032390000DAF33 /* UserProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57427032390000DAF33 /* UserProfileManager.swift */; };
 		33A1F57927032721000DAF33 /* FetchRecommendedCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */; };
 		33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */; };
+		33AA5EB9281AAE960026EA82 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AA5EB8281AAE960026EA82 /* NotificationService.swift */; };
+		33AA5EBD281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		33AA5EC9281AB7100026EA82 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 33AA5EC8281AB7100026EA82 /* OneSignal */; };
 		33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33B07E742727E834003E7504 /* ReleaseNotes.txt */; };
 		33B9116D2706E21E00C00B0D /* UploadDsym in Resources */ = {isa = PBXBuildFile; fileRef = 33B9116C2706E21E00C00B0D /* UploadDsym */; };
 		33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 33B911732706ED3000C00B0D /* SwiftyJSON */; };
@@ -508,6 +511,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		33AA5EBB281AAE960026EA82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A930ECD265C1909000FD3EB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 33AA5EB5281AAE960026EA82;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 		3A930EEC265C190C000FD3EB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A930ECD265C1909000FD3EB /* Project object */;
@@ -525,6 +535,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		33AA5EC3281AAE960026EA82 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				33AA5EBD281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90491E32274645ED00B5E642 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -684,6 +705,11 @@
 		33A1F57427032390000DAF33 /* UserProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileManager.swift; sourceTree = "<group>"; };
 		33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRecommendedCollections.graphql.swift; sourceTree = "<group>"; };
 		33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchSelectedCollections.graphql.swift; sourceTree = "<group>"; };
+		33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		33AA5EB8281AAE960026EA82 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		33AA5EBA281AAE960026EA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33AA5ED0281AC16A0026EA82 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		33AA5ED2281AC16A0026EA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33B07E742727E834003E7504 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReleaseNotes.txt; path = ../../ReleaseNotes.txt; sourceTree = "<group>"; };
 		33B9116C2706E21E00C00B0D /* UploadDsym */ = {isa = PBXFileReference; lastKnownFileType = text; path = UploadDsym; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
@@ -1046,6 +1072,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		33AA5EB3281AAE960026EA82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A930ED2265C1909000FD3EB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1070,6 +1103,7 @@
 				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
 				906B28EA2768C0FF0058528B /* Lottie in Frameworks */,
 				33467CF626C66FA300811F74 /* FirebaseAuth in Frameworks */,
+				33AA5EC9281AB7100026EA82 /* OneSignal in Frameworks */,
 				33467CEE26C66FA300811F74 /* FirebaseAnalytics in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
@@ -1403,6 +1437,24 @@
 				33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */,
 			);
 			path = Gainers;
+			sourceTree = "<group>";
+		};
+		33AA5EB7281AAE960026EA82 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				33AA5EB8281AAE960026EA82 /* NotificationService.swift */,
+				33AA5EBA281AAE960026EA82 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		33AA5ECF281AC16A0026EA82 /* StagingOneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				33AA5ED0281AC16A0026EA82 /* NotificationService.swift */,
+				33AA5ED2281AC16A0026EA82 /* Info.plist */,
+			);
+			path = StagingOneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		33BDCF6726CE51ED000DE770 /* Cells */ = {
@@ -1840,6 +1892,8 @@
 				3A930ED7265C1909000FD3EB /* Gainy */,
 				3A930EEE265C190C000FD3EB /* GainyTests */,
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
+				33AA5EB7281AAE960026EA82 /* OneSignalNotificationServiceExtension */,
+				33AA5ECF281AC16A0026EA82 /* StagingOneSignalNotificationServiceExtension */,
 				3A930ED6265C1909000FD3EB /* Products */,
 				3AA52C95266014BB006A6961 /* Frameworks */,
 			);
@@ -1851,6 +1905,7 @@
 				3A930ED5265C1909000FD3EB /* Gainy.app */,
 				3A930EEB265C190C000FD3EB /* GainyTests.xctest */,
 				3A930EF6265C190C000FD3EB /* GainyUITests.xctest */,
+				33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2512,6 +2567,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		33AA5EB5281AAE960026EA82 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33AA5EBE281AAE960026EA82 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				33AA5EB2281AAE960026EA82 /* Sources */,
+				33AA5EB3281AAE960026EA82 /* Frameworks */,
+				33AA5EB4281AAE960026EA82 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		3A930ED4265C1909000FD3EB /* Gainy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A930EFF265C190C000FD3EB /* Build configuration list for PBXNativeTarget "Gainy" */;
@@ -2525,10 +2597,12 @@
 				33467CF726C6714E00811F74 /* Firebase crashes */,
 				33B9887626CA995C008B8AC9 /* TODO Warnings */,
 				90491E32274645ED00B5E642 /* Embed Frameworks */,
+				33AA5EC3281AAE960026EA82 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				33AA5EBC281AAE960026EA82 /* PBXTargetDependency */,
 			);
 			name = Gainy;
 			packageProductDependencies = (
@@ -2559,6 +2633,7 @@
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
 				90FDE6B828148CE70068F033 /* ActivityIndicatorView */,
+				33AA5EC8281AB7100026EA82 /* OneSignal */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2606,9 +2681,12 @@
 		3A930ECD265C1909000FD3EB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					33AA5EB5281AAE960026EA82 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
 					3A930ED4265C1909000FD3EB = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -2653,6 +2731,7 @@
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2661,11 +2740,19 @@
 				3A930ED4265C1909000FD3EB /* Gainy */,
 				3A930EEA265C190C000FD3EB /* GainyTests */,
 				3A930EF5265C190C000FD3EB /* GainyUITests */,
+				33AA5EB5281AAE960026EA82 /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		33AA5EB4281AAE960026EA82 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A930ED3265C1909000FD3EB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2879,6 +2966,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		33AA5EB2281AAE960026EA82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33AA5EB9281AAE960026EA82 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A930ED1265C1909000FD3EB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3276,6 +3371,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		33AA5EBC281AAE960026EA82 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 33AA5EB5281AAE960026EA82 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 33AA5EBB281AAE960026EA82 /* PBXContainerItemProxy */;
+		};
 		3A930EED265C190C000FD3EB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3A930ED4265C1909000FD3EB /* Gainy */;
@@ -3300,6 +3400,119 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		33AA5EBF281AAE960026EA82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = M32KF6X3YN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		33AA5EC0281AAE960026EA82 /* Debug Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = M32KF6X3YN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Debug Staging";
+		};
+		33AA5EC1281AAE960026EA82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = M32KF6X3YN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		33AA5EC2281AAE960026EA82 /* Release Staging */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 190;
+				DEVELOPMENT_TEAM = M32KF6X3YN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = OneSignalNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = "Release Staging";
+		};
 		33C4E97E2726D1D1008D3006 /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3364,12 +3577,13 @@
 		33C4E97F2726D1D1008D3006 /* Debug Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 189;
+				CURRENT_PROJECT_VERSION = 190;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3488,12 +3702,13 @@
 		33C4E9832726D1D8008D3006 /* Release Staging */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 189;
+				CURRENT_PROJECT_VERSION = 190;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3673,12 +3888,13 @@
 		3A930F00265C190C000FD3EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 189;
+				CURRENT_PROJECT_VERSION = 190;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3702,12 +3918,13 @@
 		3A930F01265C190C000FD3EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 189;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 190;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3721,7 +3938,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Prod Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SCHEME_CONFIGURATION = Prod;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3811,6 +4028,17 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		33AA5EBE281AAE960026EA82 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33AA5EBF281AAE960026EA82 /* Debug */,
+				33AA5EC0281AAE960026EA82 /* Debug Staging */,
+				33AA5EC1281AAE960026EA82 /* Release */,
+				33AA5EC2281AAE960026EA82 /* Release Staging */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3A930ED0265C1909000FD3EB /* Build configuration list for PBXProject "Gainy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -3928,6 +4156,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
+			};
+		};
+		33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
 			};
 		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
@@ -4103,6 +4339,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
 			productName = LinkKit;
+		};
+		33AA5EC8281AB7100026EA82 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
 		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
