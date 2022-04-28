@@ -8,6 +8,7 @@
 import UIKit
 import SwiftDate
 import BugfenderSDK
+import OneSignal
 
 struct AppProfileMetricsSetting {
     
@@ -96,7 +97,7 @@ final class UserProfileManager {
             completion(false)
             return
         }
-        
+        OneSignal.setExternalUserId("\(profileID)")
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
             
@@ -147,6 +148,7 @@ final class UserProfileManager {
                 self.firstName = appProfile.firstName
                 self.lastName = appProfile.lastName
                 self.email = appProfile.email
+                OneSignal.setEmail(appProfile.email)
                 self.address = appProfile.legalAddress
                 self.userID = appProfile.userId
                 self.avatarUrl = appProfile.avatarUrl

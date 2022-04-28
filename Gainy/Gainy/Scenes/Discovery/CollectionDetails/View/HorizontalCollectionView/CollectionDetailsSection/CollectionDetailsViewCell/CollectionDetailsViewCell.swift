@@ -341,6 +341,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
+            await MainActor.run {                
+                let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
+                self.collectionView.reloadSections(indesSet)
+            }
         }
     }
 }
@@ -801,7 +805,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         case .title:
             let width = collectionView.frame.width
             guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
-                return CGSize.init(width: width, height: 110.0)
+                return CGSize.init(width: width, height: 60.0)
             }
             return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
         case .gain:

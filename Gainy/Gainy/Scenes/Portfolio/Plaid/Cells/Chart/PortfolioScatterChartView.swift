@@ -283,6 +283,7 @@ struct PortfolioScatterChartView: View {
             Spacer()
         }
         .padding(.leading, 16)
+        .padding(.top, 30)
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {

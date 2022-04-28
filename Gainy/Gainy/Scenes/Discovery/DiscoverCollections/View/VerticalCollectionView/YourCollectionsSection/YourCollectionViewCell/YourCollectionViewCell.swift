@@ -43,6 +43,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16)
         nameLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
+        nameLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -87.0)
         
         msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
@@ -134,6 +135,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         
         label.numberOfLines = 1
         label.textAlignment = .left
+        label.minimumScaleFactor = 0.1
         
         return label
     }()

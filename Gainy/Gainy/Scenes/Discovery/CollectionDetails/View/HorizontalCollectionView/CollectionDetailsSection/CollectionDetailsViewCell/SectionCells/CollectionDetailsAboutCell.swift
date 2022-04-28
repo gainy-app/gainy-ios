@@ -41,7 +41,7 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
         label.font = .proDisplaySemibold(20)
         label.textColor = UIColor.Gainy.mainText
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.textAlignment = .left
         label.isSkeletonable = true
         label.skeletonCornerRadius = 6
@@ -55,7 +55,7 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
         label.font = UIFont.proDisplayRegular(14.0)
         label.textColor = UIColor.Gainy.mainText
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.textAlignment = .left
         label.isSkeletonable = true
         label.skeletonCornerRadius = 6
