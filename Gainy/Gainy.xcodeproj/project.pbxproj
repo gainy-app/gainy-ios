@@ -151,7 +151,6 @@
 		33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */; };
 		33AA5EB9281AAE960026EA82 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AA5EB8281AAE960026EA82 /* NotificationService.swift */; };
 		33AA5EBD281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		33AA5EC9281AB7100026EA82 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 33AA5EC8281AB7100026EA82 /* OneSignal */; };
 		33B07E752727E834003E7504 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33B07E742727E834003E7504 /* ReleaseNotes.txt */; };
 		33B9116D2706E21E00C00B0D /* UploadDsym in Resources */ = {isa = PBXBuildFile; fileRef = 33B9116C2706E21E00C00B0D /* UploadDsym */; };
 		33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 33B911732706ED3000C00B0D /* SwiftyJSON */; };
@@ -503,6 +502,8 @@
 		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
 		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
+		90A3495C281B232700B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495B281B232700B00CD5 /* OneSignal */; };
+		90A3495F281B25BD00B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495E281B25BD00B00CD5 /* OneSignal */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
@@ -1076,6 +1077,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90A3495F281B25BD00B00CD5 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1103,7 +1105,7 @@
 				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
 				906B28EA2768C0FF0058528B /* Lottie in Frameworks */,
 				33467CF626C66FA300811F74 /* FirebaseAuth in Frameworks */,
-				33AA5EC9281AB7100026EA82 /* OneSignal in Frameworks */,
+				90A3495C281B232700B00CD5 /* OneSignal in Frameworks */,
 				33467CEE26C66FA300811F74 /* FirebaseAnalytics in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
@@ -2580,6 +2582,9 @@
 			dependencies = (
 			);
 			name = OneSignalNotificationServiceExtension;
+			packageProductDependencies = (
+				90A3495E281B25BD00B00CD5 /* OneSignal */,
+			);
 			productName = OneSignalNotificationServiceExtension;
 			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -2633,7 +2638,7 @@
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
 				90FDE6B828148CE70068F033 /* ActivityIndicatorView */,
-				33AA5EC8281AB7100026EA82 /* OneSignal */,
+				90A3495B281B232700B00CD5 /* OneSignal */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2731,7 +2736,8 @@
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
-				33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -4158,14 +4164,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
@@ -4254,6 +4252,22 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4340,11 +4354,6 @@
 			package = 3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
 			productName = LinkKit;
 		};
-		33AA5EC8281AB7100026EA82 /* OneSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 33AA5EC7281AB7100026EA82 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignal;
-		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 33B911722706ED3000C00B0D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
@@ -4399,6 +4408,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
+		};
+		90A3495B281B232700B00CD5 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
+		};
+		90A3495E281B25BD00B00CD5 /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignal;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;

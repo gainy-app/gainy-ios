@@ -3,14 +3,10 @@ iOS v1.3 #190 available
 Bugfixes
 
 :new: New:
-• TTF: Headers added
-• TTF: blur added
-• TTF: Pie chart added
 
 :hammer_and_wrench: Improvements
-• TTF: Median moved to Gains
-• TTF: Rec colors adjusted
-• Discovery: Rec cell updated
+• QA
+• New Chart headers
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
