@@ -67,10 +67,7 @@ final class HomeViewModel {
     
     //MARK: - Collections
     var favCollections: [RemoteShortCollectionDetails] = []
-    
-    //MARK: - Gainers
-    var topGainers: [RemoteTicker] = []
-    var topLosers: [RemoteTicker] = []
+    var watchlist: [RemoteTicker] = []     
     
     //
     var gains: GetPlaidHoldingsQuery.Data.PortfolioGain?
@@ -85,19 +82,16 @@ final class HomeViewModel {
             completion()
             return
         }
-        Task {
-            self.favCollections = await UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections)
+        Task {            
+            let (colAsync, gainsAsync, articlesAsync, indexesAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+                                                                             getPortfolioGains(profileId: profielId),
+                                                                             getArticles(),
+                                                                             getRealtimeMetrics(symbols: indexSymbols))
+            self.favCollections = colAsync
+            self.gains = gainsAsync
+            self.articles = articlesAsync
             
-            let gainers = await getGainers(profileId: profielId)
-            
-            self.gains = await getPortfolioGains(profileId: profielId)
-            self.articles = await getArticles()
-            
-            self.topGainers = gainers.topGainers
-            self.topLosers = gainers.topLosers
-            
-            let indexes = await getRealtimeMetrics(symbols: indexSymbols)
-            
+            let indexes = indexesAsync
             topIndexes.removeAll()
             
             for (ind, val) in indexNames.enumerated() {
@@ -118,73 +112,7 @@ final class HomeViewModel {
                 completion()
             }
         }
-    }
-    
-    struct TopTickers {
-        var topGainers: [RemoteTicker] = []
-        var topLosers: [RemoteTicker] = []
-    }
-    
-    func getGainers(profileId: Int) async -> TopTickers {
-        return await
-        withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: HomeFetchGainersQuery.init(profileId: profileId)) { result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let gainersList = graphQLResult.data?.profileCollectionTickersPerformanceRanked  else {
-                        dprint("GetFavoriteCollectionsQuery empty \(graphQLResult)")
-                        continuation.resume(returning: TopTickers())
-                        return
-                    }
-                    let gainersTopSymbols = Array(gainersList.sorted(by: {($0.gainerRank ?? 0) < ($1.gainerRank ?? 0)}).prefix(10)).compactMap({$0.symbol})
-                    let losersTopSymbols = Array(gainersList.sorted(by: {($0.gainerRank ?? 0) > ($1.gainerRank ?? 0)}).prefix(10)).compactMap({$0.symbol})
-                    
-                    Task {
-                        async let gainers = self.getStocks(symbols: gainersTopSymbols)
-                        async let losers = self.getStocks(symbols: losersTopSymbols)
-                        let (gainersList, losersList) = await (gainers, losers)
-                        continuation.resume(returning: TopTickers(topGainers: gainersList.reorder(by: gainersTopSymbols), topLosers: losersList.reorder(by: losersTopSymbols)))
-                    }
-                    
-                    break
-                case .failure(let error):
-                    dprint("Failure when making GetFavoriteCollectionsQuery request. Error: \(error)")
-                    continuation.resume(returning: TopTickers())
-                    break
-                }
-            }
-        }
-    }
-    
-    func getStocks(symbols: [String]) async -> [RemoteTicker] {
-        return await
-        withCheckedContinuation { continuation in
-            Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: symbols)) { result in
-                switch result {
-                case .success(let graphQLResult):
-                    guard let tickers = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerDetails}) else {
-                        continuation.resume(returning: [RemoteTicker]())
-                        return
-                    }
-                    
-                    for tickLivePrice in tickers.compactMap({$0.realtimeMetrics}) {
-                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
-                    }
-                    
-                    for tickMatch in tickers.compactMap({$0.matchScore}) {
-                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
-                    }
-                    
-                    continuation.resume(returning: tickers)
-                    break
-                case .failure(let error):
-                    dprint("Failure when making FetchTickersQuery request. Error: \(error)")
-                    continuation.resume(returning: [RemoteTicker]())
-                    break
-                }
-            }
-        }
-    }
+    }    
     
     func getRealtimeMetrics(symbols: [String]) async -> [FetchRealtimeMetricsQuery.Data.TickerRealtimeMetric] {
         return await

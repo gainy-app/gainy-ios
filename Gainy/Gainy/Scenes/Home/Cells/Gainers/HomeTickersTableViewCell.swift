@@ -8,7 +8,6 @@
 import UIKit
 
 protocol HomeTickersTableViewCellDelegate: AnyObject {
-    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
 }
 
@@ -67,7 +66,7 @@ extension HomeTickersTableViewCell: UICollectionViewDelegateFlowLayout {
 
 extension HomeTickersTableViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.altStockPressed(stock: gainers[indexPath.row], cell: self)
+        
     }
 }
 

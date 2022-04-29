@@ -12,7 +12,6 @@ import SwiftDate
 import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
-    func altStockPressed(stock: AltStockTicker, isGainers: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails)
@@ -22,8 +21,8 @@ final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
-        cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
-        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
+        //TO-DO: Serhii - Replace with dynamic like Collections
+        cellHeights[.watchlist] = 250.0
         self.viewModel = viewModel
     }
     
@@ -36,7 +35,7 @@ final class HomeDataSource: NSObject {
     private let sectionsCount = 5
     
     enum Section: Int {
-        case index = 0, collections, gainers, losers, articles
+        case index = 0, collections, watchlist, articles
         
         var name: String {
             switch self {
@@ -44,10 +43,8 @@ final class HomeDataSource: NSObject {
                 return ""
             case .collections:
                 return "Updates in your collections"
-            case .gainers:
-                return "Top gainers in your collections"
-            case .losers:
-                return "Top loser in your collections"
+            case .watchlist:
+                return "Watchlist"
             case .articles:
                 return "Articles for you"
             }
@@ -101,17 +98,9 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.updateIndexes(models: indexes)
             cell.gains = viewModel?.gains
             return cell
-        case .gainers:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
-            cell.gainers = viewModel?.topGainers ?? []
-            cell.delegate = self
-            cell.isGainers = true
-            return cell
-        case .losers:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
-            cell.gainers = viewModel?.topLosers ?? []
-            cell.delegate = self
-            cell.isGainers = false
+        case .watchlist:
+            //TO-DO: Serhii - replace with Watchlist
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
             return cell
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
@@ -140,10 +129,7 @@ extension HomeDataSource: UITableViewDelegate {
         if section == .index {
             return viewModel?.gains == nil ? HomeIndexesTableViewCell.smallCellHeight : HomeIndexesTableViewCell.cellHeight
         }
-        if section == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-            return 0.0
-        }
-        if section == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+        if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
         }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
@@ -153,9 +139,7 @@ extension HomeDataSource: UITableViewDelegate {
         switch Section(rawValue: indexPath.section)! {
         case .index:
             break
-        case .gainers:
-            break
-        case .losers:
+        case .watchlist:
             break
         case .articles:
             if let article = viewModel?.articles[indexPath.row] {
@@ -182,10 +166,7 @@ extension HomeDataSource: UITableViewDelegate {
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return nil
         }
-        if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-            return nil
-        }
-        if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+        if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return nil
         }
         
@@ -198,7 +179,7 @@ extension HomeDataSource: UITableViewDelegate {
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        if section == Section.articles.rawValue || section == Section.gainers.rawValue{
+        if section == Section.articles.rawValue || section == Section.watchlist.rawValue{
             headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
         } else {
             headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
@@ -215,10 +196,7 @@ extension HomeDataSource: UITableViewDelegate {
             if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
                 return 0.0
             }
-            if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-                return 0.0
-            }
-            if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
                 return 0.0
             }
             
@@ -228,9 +206,6 @@ extension HomeDataSource: UITableViewDelegate {
 }
 
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
-    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
-        delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
-    }
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)

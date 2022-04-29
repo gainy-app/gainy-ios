@@ -114,17 +114,6 @@ final class HomeViewController: BaseViewController {
 }
 
 extension HomeViewController: HomeDataSourceDelegate {
-    func altStockPressed(stock: AltStockTicker, isGainers: Bool) {
-        if isGainers {
-            if let index = viewModel.topGainers.firstIndex(where: {$0.symbol == stock.symbol}) {
-                mainCoordinator?.showCardsDetailsViewController(viewModel.topGainers.compactMap({TickerInfo(ticker: $0)}), index: index)
-            }
-        } else {
-            if let index = viewModel.topLosers.firstIndex(where: {$0.symbol == stock.symbol}) {
-                mainCoordinator?.showCardsDetailsViewController(viewModel.topLosers.compactMap({TickerInfo(ticker: $0)}), index: index)
-            }
-        }
-    }
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
