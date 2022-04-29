@@ -7,6 +7,9 @@
 
 import UIKit
 
+protocol HomeTickerInnerTableViewCellDelegate: AnyObject {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+}
 
 //Will be used further
 final class HomeTickerInnerTableViewCell: UICollectionViewCell {

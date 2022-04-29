@@ -75,8 +75,3 @@ extension HomeTickersTableViewCell: HomeTickerInnerTableViewCellDelegate {
         delegate?.wlPressed(stock: stock, cell: cell)
     }
 }
-
-protocol HomeTickerInnerTableViewCellDelegate: AnyObject {
-    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
-}
-

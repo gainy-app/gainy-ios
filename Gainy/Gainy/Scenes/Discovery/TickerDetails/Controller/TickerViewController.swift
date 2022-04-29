@@ -17,6 +17,8 @@ final class TickerViewController: BaseViewController {
     var viewModel: TickerDetailsViewModel?
     
     //MARK: - Outlets
+    @IBOutlet private weak var wlView: UIView!
+    @IBOutlet private weak var wlInfoLbl: UILabel!
     private let refreshControl = LottieRefreshControl()
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
@@ -248,8 +250,45 @@ final class TickerViewController: BaseViewController {
         }
         hideWrongIndView()
     }
+    
+    //MARK: - WL Popup
+    
+    private var wlInfo: (stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)?
+    func showWLView(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        wlInfo = (stock, cell)
+        wlInfoLbl.text = "\(stock.name ?? "")\nadded to your watchlist!"
+        wlView.isHidden = false
+        wlTimer?.invalidate()
+        wlTimer = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false, block: {[weak self] _ in
+            self?.hideWLView()
+        })
+    }
+    
+    private var wlTimer: Timer?
+    @IBAction func closeWLViewAction(_ sender: Any) {
+        hideWLView()
+    }
+    
+    @IBAction func undoWLAction(_ sender: Any) {
+        guard let wlInfo = wlInfo else {return}
+        GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : wlInfo.stock.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+        UserProfileManager.shared.removeTickerFromWatchlist(wlInfo.stock.symbol ?? "") { success in
+            if success {
+                wlInfo.cell.isInWL = false
+            }
+        }
+        hideWLView()
+    }
+    
+    func hideWLView() {
+        wlView.isHidden = true
+    }
 }
 extension TickerViewController: TickerDetailsDataSourceDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        showWLView(stock: stock, cell: cell)
+    }
+    
     
     func didRequestShowBrokersListForSymbol(symbol: String) {
         

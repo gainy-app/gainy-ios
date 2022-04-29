@@ -11,11 +11,14 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
     func comparePressed(stock: AltStockTicker)
     func isStockCompared(stock: AltStockTicker) -> Bool
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
 }
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 226.0 + 60.0
+    static let cellHeight: CGFloat = 144.0 + 18.0 + 20 + 42
+    
+    private let cellWidth: CGFloat = 144.0
     
     weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
     
@@ -23,6 +26,7 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.register(UINib.init(nibName: HomeTickerInnerTableViewCell.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier)
         }
     }
     
@@ -38,19 +42,15 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell: TickerDetailsAlternativeInnerStocksViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.stock = tickerInfo?.altStocks[indexPath.row]
-        if let stock = tickerInfo?.altStocks[indexPath.row] {
-            cell.isInCompare = delegate?.isStockCompared(stock: stock) ?? false
-        }       
-        cell.delegate = self
         return cell
     }
 }
 
 extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: 144.0, height: 192.0 + 32.0)
+        .init(width: cellWidth, height: cellWidth)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -148,7 +148,17 @@ final class TickerDetailsAlternativeInnerStocksViewCell: UICollectionViewCell {
     }
 }
 
+extension TickerDetailsAlternativeStocksViewCell: HomeTickerInnerTableViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
+    }
+}
+
 extension TickerDetailsAlternativeStocksViewCell: TickerDetailsAlternativeStocksViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: TickerDetailsAlternativeStocksViewCell) {
+        
+    }
+    
     func isStockCompared(stock: AltStockTicker) -> Bool {
         delegate?.isStockCompared(stock: stock) ?? false
     }

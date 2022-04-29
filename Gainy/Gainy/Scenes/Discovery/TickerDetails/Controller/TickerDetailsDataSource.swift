@@ -18,6 +18,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func openCompareWithSelf(ticker: TickerInfo)
     func requestOpenCollection(withID id: Int)
     func wrongIndPressed(isTicked: Bool)
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -334,6 +335,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
+    }
+    
     func isStockCompared(stock: AltStockTicker) -> Bool {
         delegate?.isStockCompared(stock: stock) ?? false
     }

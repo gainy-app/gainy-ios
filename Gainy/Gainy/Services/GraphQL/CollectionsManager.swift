@@ -168,7 +168,7 @@ final class CollectionsManager {
                 CollectionsManager.shared.watchlistCollection = watchListRes
                 
                 let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
-                newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+                //newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
             }
             
             await MainActor.run {

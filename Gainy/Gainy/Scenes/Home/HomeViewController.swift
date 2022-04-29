@@ -19,11 +19,11 @@ final class HomeViewController: BaseViewController {
     private var refreshControl = LottieRefreshControl()
     
     //MARK: - Inner
-    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet private weak var nameLbl: UILabel!
     
     //MARK: - Outlets
-    @IBOutlet weak var wlView: UIView!
-    @IBOutlet weak var wlInfoLbl: UILabel!
+    @IBOutlet private weak var wlView: UIView!
+    @IBOutlet private weak var wlInfoLbl: UILabel!
     @IBOutlet private weak var tableView: UITableView! {
         didSet {
             tableView.rowHeight = UITableView.automaticDimension
