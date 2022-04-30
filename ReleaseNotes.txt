@@ -1,12 +1,12 @@
-iOS v1.3 #190 available
+iOS v1.3 #191 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
 
 :hammer_and_wrench: Improvements
-• QA
-• New Chart headers
+• Stock Card: Alt Stock redesign
+• WL removed from initial load
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -137,8 +137,7 @@ final class CollectionsManager {
         Task {
             async let favs = loadCollections(UserProfileManager.shared.favoriteCollections)
             async let tickersMap = getTickersForCollections(collectionIDs: UserProfileManager.shared.favoriteCollections)
-            async let watchList = loadWatchlistCollection()
-            let (favsRes, tickersMapRes, watchListRes) = await (favs, tickersMap, watchList)
+            let (favsRes, tickersMapRes) = await (favs, tickersMap)
             
             //Adding preloaded tickers
             for colID in tickersMapRes.keys {
@@ -158,18 +157,18 @@ final class CollectionsManager {
             CollectionsManager.shared.lastLoadDate = Date()
             
             //WatchList Handler
-            if let watchListRes = watchListRes {
-                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
-                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
-                    newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-                    CollectionsManager.shared.watchlistCollection = nil
-                }
-                
-                CollectionsManager.shared.watchlistCollection = watchListRes
-                
-                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
-                //newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
-            }
+//            if let watchListRes = watchListRes {
+//                if let collectionRemoteDetails = CollectionsManager.shared.watchlistCollection {
+//                    let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(collectionRemoteDetails)
+//                    newCollectionFetched.send(.deleted(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+//                    CollectionsManager.shared.watchlistCollection = nil
+//                }
+//                
+//                CollectionsManager.shared.watchlistCollection = watchListRes
+//                
+//                let collectionDTO = CollectionDetailsDTOMapper.mapAsCollectionFromYourCollections(watchListRes)
+//                //newCollectionFetched.send(.fetched(model: CollectionDetailsViewModelMapper.map(collectionDTO)))
+//            }
             
             await MainActor.run {
                 completion([])
