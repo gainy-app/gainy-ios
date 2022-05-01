@@ -217,7 +217,8 @@ final class UserProfileManager {
             async let favs = getFavCollections()
             async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
             async let recommendedIDs = getRecommenedCollectionIDs(forceReload: forceReload)
-            let (favsRes, recommenededRes, recommendedIDsRes) = await (favs, recommeneded, recommendedIDs)
+            async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
+            let (favsRes, recommenededRes, recommendedIDsRes, topTickersRes) = await (favs, recommeneded, recommendedIDs, topTickers)
             
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
@@ -231,6 +232,8 @@ final class UserProfileManager {
                 }
                 return
             }
+            
+            CollectionsManager.shared.topTickers = topTickersRes
             
             let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
             

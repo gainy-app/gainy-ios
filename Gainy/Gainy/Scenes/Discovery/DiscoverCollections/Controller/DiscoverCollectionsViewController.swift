@@ -9,6 +9,8 @@ import Firebase
 enum DiscoverCollectionsSection: Int, CaseIterable {
     case watchlist
     case yourCollections
+    case topGainers
+    case topLosers
     case recommendedCollections
 }
 
@@ -143,10 +145,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
+        discoverCollectionsCollectionView.registerSectionHeader(GainersHeaderView.self)
         
         discoverCollectionsCollectionView.register(YourCollectionTipCell.self)
         discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
         discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
+        discoverCollectionsCollectionView.register(UINib.init(nibName: HomeTickersCollectionViewCell.cellIdentifier, bundle: nil), forCellWithReuseIdentifier: HomeTickersCollectionViewCell.cellIdentifier)
+        
         
         discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
@@ -224,6 +229,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     cell.isUserInteractionEnabled = true
                     GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 }
+            case let (cell as HomeTickersTableViewCell, modelItem as HomeTickersCollectionViewCellModel):
+                break
             default:
                 break
             }
@@ -237,11 +244,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
                     title: Constants.CollectionDetails.yourCollections,
-                    description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
+                    description: ""
                 )
                 : CollectionHeaderViewModel(
-                    title: "Recommended collections",
-                    description: "All collections are sorted by relevancy based on your profile and goals "
+                    title: "Recomended TTF",
+                    description: ""
                 )
                 
                 return self?.sections[indexPath.section].header(
@@ -508,6 +515,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private lazy var sections: [SectionLayout] = [
         CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
+        GainersCollectionSectionLayout(isGainers: true),
+        GainersCollectionSectionLayout(isGainers: false),
         RecommendedCollectionsSectionLayout(),
     ]
     
@@ -790,11 +799,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         var snap = dataSource.snapshot()
         if snap.sectionIdentifiers.count > 0 {
-            snap.deleteSections([.watchlist, .yourCollections, .recommendedCollections])
+            snap.deleteSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
         }
-        snap.appendSections([.watchlist, .yourCollections, .recommendedCollections])
+        snap.appendSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
         snap.appendItems(viewModel?.watchlistCollections ?? [], toSection: .watchlist)
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
+        snap.appendItems(viewModel?.topGainers ?? [], toSection: .topGainers)
+        snap.appendItems(viewModel?.topLosers ?? [], toSection: .topLosers)
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
@@ -839,6 +850,19 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         } else {
             viewModel?.watchlistCollections.removeAll()
         }
+        //Gainers
+        if let topTickers = CollectionsManager.shared.topTickers {
+            let topTickers1: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topGainers, isGainers: true)
+            let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
+            viewModel?.topGainers.removeAll()
+            viewModel?.topLosers.removeAll()
+            viewModel?.topGainers = [topTickers1]
+            viewModel?.topLosers = [topTickers2]
+        } else {
+            viewModel?.topGainers.removeAll()
+            viewModel?.topLosers.removeAll()
+        }
+        
         
         self.addNextButtonAsNeeded()
         

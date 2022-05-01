@@ -27,6 +27,7 @@ final class CollectionsManager {
     
     var collections: [RemoteCollectionDetails] = []
     var watchlistCollection: RemoteCollectionDetails?
+    var topTickers: TopTickers?
     
     internal(set) var prefetchedCollectionsData: [Int : [TickerDetails]] = [:]
     

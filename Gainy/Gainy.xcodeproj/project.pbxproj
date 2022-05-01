@@ -497,6 +497,11 @@
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
 		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
+		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
+		9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */; };
+		9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */; };
+		9075CD13281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD12281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift */; };
+		9075CD15281F2CAA00747A09 /* GainersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD14281F2CAA00747A09 /* GainersHeaderView.swift */; };
 		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
@@ -1059,6 +1064,11 @@
 		9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPortfolioCharts.graphql.swift; path = Gainy/Services/GraphQL/Schema/API/GetPortfolioCharts.graphql.swift; sourceTree = SOURCE_ROOT; };
 		906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickerExtraDetails.graphql; sourceTree = "<group>"; };
 		906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
+		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
+		9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCell.swift; sourceTree = "<group>"; };
+		9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickersCollectionViewCell.xib; sourceTree = "<group>"; };
+		9075CD12281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCellModel.swift; sourceTree = "<group>"; };
+		9075CD14281F2CAA00747A09 /* GainersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersHeaderView.swift; sourceTree = "<group>"; };
 		907B227B275029C900FB4B1E /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetFavouriteCollections.graphql; sourceTree = "<group>"; };
@@ -1437,6 +1447,8 @@
 				33BC512C28167A6100AF1004 /* HomeTickersTableViewCell.xib */,
 				33BC512E28167DBE00AF1004 /* HomeTickerInnerTableViewCell.swift */,
 				33BC513028167DC800AF1004 /* HomeTickerInnerTableViewCell.xib */,
+				9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */,
+				9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */,
 			);
 			path = Gainers;
 			sourceTree = "<group>";
@@ -1807,6 +1819,7 @@
 			children = (
 				3AD40FB4266923C1005679DE /* DiscoverCollectionsViewModelProtocol.swift */,
 				3AEF699E2662025B00B01BB3 /* DiscoverCollectionsViewModel.swift */,
+				9075CD0B281F1C3E00747A09 /* GainersSection */,
 				33E1827D26D3998100A1D2AC /* NewsCell */,
 				3A859420268A505700CB8DD6 /* YourCollectionsSection */,
 				3A859421268A508A00CB8DD6 /* RecommendedCollectionsSection */,
@@ -2566,6 +2579,16 @@
 			path = NoHoldings;
 			sourceTree = "<group>";
 		};
+		9075CD0B281F1C3E00747A09 /* GainersSection */ = {
+			isa = PBXGroup;
+			children = (
+				9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */,
+				9075CD12281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift */,
+				9075CD14281F2CAA00747A09 /* GainersHeaderView.swift */,
+			);
+			path = GainersSection;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2776,6 +2799,7 @@
 				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
 				907B227C275029C900FB4B1E /* loader3.json in Resources */,
 				330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */,
+				9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */,
 				85F2595E27046D5E009DEFFD /* FetchSelectedCollections.graphql in Resources */,
 				85695AF3274594BF00759569 /* MetricsFooterView.xib in Resources */,
 				855B14DF26D931D8006CD1F8 /* ImagesB.xcassets in Resources */,
@@ -3159,6 +3183,7 @@
 				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
 				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
 				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
+				9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */,
 				33F4066426D90F5900A07713 /* PieChartView.swift in Sources */,
 				3A85941D268A502200CB8DD6 /* CollectionHeaderViewModel.swift in Sources */,
 				331243E227BF74CB008C2BCC /* HomeArticlesTableViewCell.swift in Sources */,
@@ -3195,6 +3220,7 @@
 				3A4A98FB2688D495008C1968 /* CollectionDetails.swift in Sources */,
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
 				901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */,
+				9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */,
 				85E4A2CD2762115400C0E5C5 /* SearchTickersAlgolia.graphql.swift in Sources */,
 				3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */,
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,
@@ -3300,6 +3326,7 @@
 				85695B012746C18200759569 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
 				85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */,
 				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,
+				9075CD15281F2CAA00747A09 /* GainersHeaderView.swift in Sources */,
 				339BDA7627C3716B00E3D9D2 /* InsertFavouriteCollection.graphql.swift in Sources */,
 				33E1827C26D3967F00A1D2AC /* String+Sizes.swift in Sources */,
 				33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */,
@@ -3355,6 +3382,7 @@
 				33D3D4ED26CB9EA4005A859B /* Storyboarded.swift in Sources */,
 				3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */,
 				33BA6D982809711B00C3A431 /* RemoteConfigManager.swift in Sources */,
+				9075CD13281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3589,7 +3617,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 191;
+				CURRENT_PROJECT_VERSION = 192;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3714,7 +3742,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 191;
+				CURRENT_PROJECT_VERSION = 192;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3900,7 +3928,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 191;
+				CURRENT_PROJECT_VERSION = 192;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3930,7 +3958,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 191;
+				CURRENT_PROJECT_VERSION = 192;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

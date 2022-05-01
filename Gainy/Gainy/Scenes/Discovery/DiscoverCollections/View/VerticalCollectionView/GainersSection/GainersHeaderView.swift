@@ -1,6 +1,13 @@
+//
+//  GainersHeaderView.swift
+//  Gainy
+//
+//  Created by Anton Gubarenko on 02.05.2022.
+//
+
 import UIKit
 
-final class RecommendedCollectionsHeaderView: UICollectionReusableView {
+final class GainersHeaderView: UICollectionReusableView {
     // MARK: Lifecycle
 
     override init(frame: CGRect) {
@@ -17,17 +24,16 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel
                 .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 24 - sectionHorizontalInset),
+                .constraint(equalTo: leadingAnchor, constant: 24),
             titleLabel
                 .trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -24 + sectionHorizontalInset),
+                .constraint(equalTo: trailingAnchor, constant: -24),
             titleLabel
                 .topAnchor
                 .constraint(equalTo: topAnchor, constant: 40),
             titleLabel
                 .bottomAnchor
-                .constraint(equalTo: bottomAnchor, constant: -16),
-
+                .constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
 
@@ -56,30 +62,15 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         return label
     }()
 
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = UIColor.Gainy.darkGray
-        label.backgroundColor = UIColor.Gainy.white
-        label.isOpaque = true
-
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.textAlignment = .left
-
-        return label
-    }()
 
     // MARK: Functions
 
-    func configureWith(title: String, description: String) {
+    func configureWith(title: String) {
         titleLabel.text = title
-        descriptionLabel.text = description
     }
 
     // MARK: Private
 
     // MARK: Properties
 }
+

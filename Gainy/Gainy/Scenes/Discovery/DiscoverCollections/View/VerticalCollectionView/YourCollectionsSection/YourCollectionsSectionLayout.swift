@@ -23,9 +23,9 @@ struct YourCollectionsSectionLayout: SectionLayout {
         let yourCollectionsSection = NSCollectionLayoutSection(group: yourCollectionGroup)
         yourCollectionsSection.interGroupSpacing = 8
         yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
-            top: 16.0,
+            top: 0.0,
             leading: 16.0,
-            bottom: 32.0,
+            bottom: 0,
             trailing: 16.0
         )
 
