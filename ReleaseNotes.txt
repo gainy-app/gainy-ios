@@ -1,4 +1,4 @@
-iOS v1.3 #192 available
+iOS v1.3 #193 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Top gainers relocate
+• Pie chart cells UI implementation added
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
