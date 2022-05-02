@@ -471,7 +471,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             return cell
         }
         
-        cell.configureWithChartData(data: chartData[indexPath.row])
+        cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
         return cell
     }
     
