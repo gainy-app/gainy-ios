@@ -82,14 +82,16 @@ final class HomeViewModel {
             completion()
             return
         }
-        Task {            
-            let (colAsync, gainsAsync, articlesAsync, indexesAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
-                                                                             getPortfolioGains(profileId: profielId),
-                                                                             getArticles(),
-                                                                             getRealtimeMetrics(symbols: indexSymbols))
+        Task {
+            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+                                                                                             getPortfolioGains(profileId: profielId),
+                                                                                             getArticles(),
+                                                                                             getRealtimeMetrics(symbols: indexSymbols),
+                                                                                             getWatchlist())
             self.favCollections = colAsync
             self.gains = gainsAsync
             self.articles = articlesAsync
+            self.watchlist = watchlistAsync
             
             let indexes = indexesAsync
             topIndexes.removeAll()
@@ -113,6 +115,37 @@ final class HomeViewModel {
             }
         }
     }    
+    
+    func getWatchlist() async -> [RemoteTicker] {
+        return await
+        withCheckedContinuation { continuation in
+            
+            Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let tickers = graphQLResult.data?.tickers else {
+                        continuation.resume(returning: [])
+                        return
+                    }
+                    
+                    for tickLivePrice in tickers.compactMap({$0.fragments.remoteTickerDetails.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    
+                    for tickMatch in tickers.compactMap({$0.fragments.remoteTickerDetails.matchScore}) {
+                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
+                    }
+                    
+                    let remoteTickers = tickers.compactMap({$0.fragments.remoteTickerDetails})
+                    continuation.resume(returning: remoteTickers)
+                    
+                case .failure(let error):
+                    continuation.resume(returning: [])
+                    dprint("Failure when making GraphQL request. Error: \(error)")
+                }
+            }
+        }
+    }
     
     func getRealtimeMetrics(symbols: [String]) async -> [FetchRealtimeMetricsQuery.Data.TickerRealtimeMetric] {
         return await

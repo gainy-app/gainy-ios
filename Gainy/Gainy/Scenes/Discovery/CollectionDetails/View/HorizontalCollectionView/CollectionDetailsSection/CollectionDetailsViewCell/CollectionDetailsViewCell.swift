@@ -121,7 +121,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     
-    // TODO: Borysov - Remove this
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {

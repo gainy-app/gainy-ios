@@ -3,10 +3,11 @@ iOS v1.3 #193 available
 Bugfixes
 
 :new: New:
-• -
+• Watchlist on Home screen
 
 :hammer_and_wrench: Improvements
-• Pie chart cells UI implementation added
+• Pie chart cells - missing UI implementation added
+• Add to watchlist logic on the new discovery screen
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

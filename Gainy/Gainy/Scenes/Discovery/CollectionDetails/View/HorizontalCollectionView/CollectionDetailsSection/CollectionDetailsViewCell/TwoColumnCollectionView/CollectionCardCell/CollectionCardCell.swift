@@ -5,6 +5,8 @@ import SkeletonView
 final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     // MARK: Lifecycle
     
+    var tickerSymbol: String? = nil
+    
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
@@ -220,8 +222,8 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         button.isSkeletonable = true
         button.isHiddenWhenSkeletonIsActive = true
         button.backgroundColor = UIColor.clear
-        button.setImage(UIImage.init(named: "add"), for: .normal)
-        button.setImage(UIImage.init(named: "remove"), for: .selected)
+        button.setImage(UIImage.init(named: "add_to_wl"), for: .normal)
+        button.setImage(UIImage.init(named: "remove_from_wl"), for: .selected)
         button.addTarget(self,
                          action: #selector(addRemoveWatchlistTapped(_:)),
                          for: .touchUpInside)
@@ -249,6 +251,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         companyNameLabel.text = companyName
         companyNameLabel.sizeToFit()
         
+        self.tickerSymbol = tickerSymbol
         tickerSymbolLabel.text = tickerSymbol
         tickerSymbolLabel.sizeToFit()
         
@@ -271,7 +274,12 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         }
         
         matchLabel.text = matchScore
-        matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)        
+        matchLabel.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore) ?? 0)
+        
+        let inWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == tickerSymbol
+        }
+        addRemoveWatchlistButton.isSelected = inWatchlist
         layoutIfNeeded()
     }
     
@@ -307,7 +315,29 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
     
     @objc
     private func addRemoveWatchlistTapped(_: UIButton) {
-        // TODO: Borysov - Add/Remove watchlist
+        
+        guard let symbol = tickerSymbol else {
+            return
+        }
+        
+        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
+            item == tickerSymbol
+        }
+        if addedToWatchlist {
+            GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TTF Card"])
+            UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
+                if success {
+                    self.addRemoveWatchlistButton.isSelected = false
+                }
+            }
+        } else {
+            GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TTF Card"])
+            UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
+                if success {
+                    self.addRemoveWatchlistButton.isSelected = true
+                }
+            }
+        }
         self.addRemoveWatchlistButton.isSelected = !self.addRemoveWatchlistButton.isSelected
     }
     

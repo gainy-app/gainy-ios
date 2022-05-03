@@ -15,14 +15,13 @@ protocol HomeDataSourceDelegate: AnyObject {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails)
+    func tickerSelected(ticker: RemoteTicker)
 }
 
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
-        //TO-DO: Serhii - Replace with dynamic like Collections
-        cellHeights[.watchlist] = 250.0
         self.viewModel = viewModel
     }
     
@@ -42,7 +41,7 @@ final class HomeDataSource: NSObject {
             case .index:
                 return ""
             case .collections:
-                return "Updates in your collections"
+                return "Updates in TTF"
             case .watchlist:
                 return "Watchlist"
             case .articles:
@@ -99,8 +98,14 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.gains = viewModel?.gains
             return cell
         case .watchlist:
-            //TO-DO: Serhii - replace with Watchlist
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeCollectionsTableViewCell.cellIdentifier, for: indexPath) as! HomeCollectionsTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
+            cell.heightUpdated = {[weak self] newHeight in
+                self?.tableView?.beginUpdates()
+                self?.cellHeights[.watchlist] = newHeight
+                self?.tableView?.endUpdates()
+            }
+            cell.watchlist = viewModel?.watchlist ?? []
+            cell.delegate = self
             return cell
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
@@ -215,6 +220,12 @@ extension HomeDataSource: HomeTickersTableViewCellDelegate {
 extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
     func collectionSelected(collection: RemoteShortCollectionDetails) {
         delegate?.collectionSelected(collection: collection)
+    }
+}
+
+extension HomeDataSource: HomeWatchlistTableViewCellDelegate {
+    func tickerSelected(ticker: RemoteTicker) {
+        delegate?.tickerSelected(ticker: ticker)
     }
 }
 
