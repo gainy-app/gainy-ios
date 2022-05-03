@@ -63,7 +63,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collection_match_score_explanation": collectionMatchScoreExplanation.map { (value: CollectionMatchScoreExplanation) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413060411.collection_match_score_explanation"
+    /// fetch data from the table: "public_220503062333.collection_match_score_explanation"
     public var collectionMatchScoreExplanation: [CollectionMatchScoreExplanation] {
       get {
         return (resultMap["collection_match_score_explanation"] as! [ResultMap]).map { (value: ResultMap) -> CollectionMatchScoreExplanation in CollectionMatchScoreExplanation(unsafeResultMap: value) }
@@ -129,7 +129,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .scalar(Int.self)),
+            GraphQLField("id", type: .nonNull(.scalar(Int.self))),
             GraphQLField("name", type: .scalar(String.self)),
             GraphQLField("icon_url", type: .scalar(String.self)),
           ]
@@ -141,7 +141,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil) {
+        public init(id: Int, name: String? = nil, iconUrl: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "interests", "id": id, "name": name, "icon_url": iconUrl])
         }
 
@@ -154,9 +154,9 @@ public final class GetTtfTagsQuery: GraphQLQuery {
           }
         }
 
-        public var id: Int? {
+        public var id: Int {
           get {
-            return resultMap["id"] as? Int
+            return resultMap["id"]! as! Int
           }
           set {
             resultMap.updateValue(newValue, forKey: "id")
@@ -188,7 +188,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
         public static var selections: [GraphQLSelection] {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("id", type: .scalar(Int.self)),
+            GraphQLField("id", type: .nonNull(.scalar(Int.self))),
             GraphQLField("name", type: .scalar(String.self)),
             GraphQLField("icon_url", type: .scalar(String.self)),
             GraphQLField("collection_id", type: .scalar(Int.self)),
@@ -201,7 +201,7 @@ public final class GetTtfTagsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int? = nil, name: String? = nil, iconUrl: String? = nil, collectionId: Int? = nil) {
+        public init(id: Int, name: String? = nil, iconUrl: String? = nil, collectionId: Int? = nil) {
           self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl, "collection_id": collectionId])
         }
 
@@ -214,9 +214,9 @@ public final class GetTtfTagsQuery: GraphQLQuery {
           }
         }
 
-        public var id: Int? {
+        public var id: Int {
           get {
-            return resultMap["id"] as? Int
+            return resultMap["id"]! as! Int
           }
           set {
             resultMap.updateValue(newValue, forKey: "id")

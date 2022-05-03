@@ -73,7 +73,7 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("collection", type: .nonNull(.object(Collection.selections))),
+          GraphQLField("collection", type: .object(Collection.selections)),
         ]
       }
 
@@ -83,8 +83,8 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, collection: Collection) {
-        self.init(unsafeResultMap: ["__typename": "Collection", "id": id, "collection": collection.resultMap])
+      public init(id: Int, collection: Collection? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Collection", "id": id, "collection": collection.flatMap { (value: Collection) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -105,13 +105,12 @@ public final class SearchCollectionDetailsAlgoliaQuery: GraphQLQuery {
         }
       }
 
-      /// An object relationship
-      public var collection: Collection {
+      public var collection: Collection? {
         get {
-          return Collection(unsafeResultMap: resultMap["collection"]! as! ResultMap)
+          return (resultMap["collection"] as? ResultMap).flatMap { Collection(unsafeResultMap: $0) }
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "collection")
+          resultMap.updateValue(newValue?.resultMap, forKey: "collection")
         }
       }
 

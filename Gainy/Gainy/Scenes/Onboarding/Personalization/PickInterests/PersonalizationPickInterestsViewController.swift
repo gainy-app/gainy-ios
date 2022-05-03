@@ -157,8 +157,8 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
         var profileInterestIDs: [Int] = Array()
         for indexPath in indexPaths {
-            if let appInterest = self.appInterests?[indexPath.row], let id = appInterest.id  {
-                profileInterestIDs.append(id)
+            if let appInterest = self.appInterests?[indexPath.row] {
+                profileInterestIDs.append(appInterest.id)
             }
         }
         self.coordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs

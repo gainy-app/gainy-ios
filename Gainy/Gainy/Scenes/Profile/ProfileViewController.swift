@@ -145,10 +145,7 @@ final class ProfileViewController: BaseViewController {
                 }
                 
                 self.profileInterests = self.appInterests?.filter({ interest in
-                    guard let interestID = interest.id else {
-                        return false
-                    }
-                    return profileInterestsIds.contains(interestID)
+                    return profileInterestsIds.contains(interest.id)
                 })
                 self.profileInterestsSelected = self.profileInterests
                 completion(true)
@@ -183,10 +180,7 @@ final class ProfileViewController: BaseViewController {
                 
                 self.appCategories = appCategories
                 self.profileCategories = self.appCategories?.filter({ category in
-                    guard let categoryID = category.id else {
-                        return false
-                    }
-                    return profileCategoryIds.contains(categoryID)
+                    return profileCategoryIds.contains(category.id)
                 })
                 self.profileCategoriesSelected = self.profileCategories
                 completion(true)
@@ -808,9 +802,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let interestID = interest.id else {
-            return
-        }
+        let interestID = interest.id
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
@@ -864,9 +856,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let interestID = interest.id else {
-            return
-        }
+        let interestID = interest.id
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
@@ -924,9 +914,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let categoryID = category.id else {
-            return
-        }
+        let categoryID = category.id
         
         guard haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
@@ -981,9 +969,7 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         guard let profileID = UserProfileManager.shared.profileID else {
             return
         }
-        guard let categoryID = category.id else {
-            return
-        }
+        let categoryID = category.id
         
         guard self.haveNetwork else {
             GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])

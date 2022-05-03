@@ -56,7 +56,7 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413060411.tickers"
+    /// fetch data from the table: "public_220503062333.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }
@@ -72,7 +72,7 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("symbol", type: .scalar(String.self)),
+          GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
           GraphQLField("realtime_metrics", type: .object(RealtimeMetric.selections)),
         ]
       }
@@ -83,7 +83,7 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String? = nil, realtimeMetrics: RealtimeMetric? = nil) {
+      public init(symbol: String, realtimeMetrics: RealtimeMetric? = nil) {
         self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }])
       }
 
@@ -96,9 +96,9 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
         }
       }
 
-      public var symbol: String? {
+      public var symbol: String {
         get {
-          return resultMap["symbol"] as? String
+          return resultMap["symbol"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "symbol")
@@ -125,7 +125,7 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
             GraphQLField("actual_price", type: .scalar(float8.self)),
             GraphQLField("daily_volume", type: .scalar(float8.self)),
             GraphQLField("relative_daily_change", type: .scalar(float8.self)),
-            GraphQLField("symbol", type: .scalar(String.self)),
+            GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
             GraphQLField("time", type: .scalar(timestamp.self)),
           ]
         }
@@ -136,7 +136,7 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(absoluteDailyChange: float8? = nil, actualPrice: float8? = nil, dailyVolume: float8? = nil, relativeDailyChange: float8? = nil, symbol: String? = nil, time: timestamp? = nil) {
+        public init(absoluteDailyChange: float8? = nil, actualPrice: float8? = nil, dailyVolume: float8? = nil, relativeDailyChange: float8? = nil, symbol: String, time: timestamp? = nil) {
           self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "absolute_daily_change": absoluteDailyChange, "actual_price": actualPrice, "daily_volume": dailyVolume, "relative_daily_change": relativeDailyChange, "symbol": symbol, "time": time])
         }
 
@@ -185,9 +185,9 @@ public final class FetchLiveTickersDataQuery: GraphQLQuery {
           }
         }
 
-        public var symbol: String? {
+        public var symbol: String {
           get {
-            return resultMap["symbol"] as? String
+            return resultMap["symbol"]! as! String
           }
           set {
             resultMap.updateValue(newValue, forKey: "symbol")

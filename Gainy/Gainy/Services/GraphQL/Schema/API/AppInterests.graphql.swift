@@ -42,7 +42,7 @@ public final class AppInterestsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "interests": interests.map { (value: Interest) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413060411.interests"
+    /// fetch data from the table: "public_220503062333.interests"
     public var interests: [Interest] {
       get {
         return (resultMap["interests"] as! [ResultMap]).map { (value: ResultMap) -> Interest in Interest(unsafeResultMap: value) }
@@ -59,7 +59,7 @@ public final class AppInterestsQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("icon_url", type: .scalar(String.self)),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
         ]
       }
@@ -70,7 +70,7 @@ public final class AppInterestsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+      public init(iconUrl: String? = nil, id: Int, name: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "interests", "icon_url": iconUrl, "id": id, "name": name])
       }
 
@@ -92,9 +92,9 @@ public final class AppInterestsQuery: GraphQLQuery {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")

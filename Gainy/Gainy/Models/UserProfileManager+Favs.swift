@@ -61,7 +61,7 @@ extension UserProfileManager {
                 
                 switch result {
                 case .success(let graphQLResult):
-                    guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection.fragments.remoteShortCollectionDetails}) else {
+                    guard let collections = graphQLResult.data?.getRecommendedCollections?.compactMap({$0?.collection?.fragments.remoteShortCollectionDetails}) else {
                         dprint("Err_FetchRecommendedCollectionsQuery_2 \(graphQLResult)")
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return

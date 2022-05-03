@@ -292,11 +292,11 @@ final class CollectionSearchController: NSObject {
         networkCalls.append(Network.shared.apollo.fetch(query: tickersQuery){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                let mappedTickers = (graphQLResult.data?.searchTickers ?? []).compactMap({$0?.ticker.fragments.remoteTickerDetails})
+                let mappedTickers = (graphQLResult.data?.searchTickers ?? []).compactMap({$0?.ticker?.fragments.remoteTickerDetails})
                 self?.stocks = mappedTickers
                 
                 for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
                 }
                 dispatchGroup.leave()
                 
@@ -330,7 +330,7 @@ final class CollectionSearchController: NSObject {
         networkCalls.append(Network.shared.apollo.fetch(query: collectionsQuery){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection.fragments.remoteCollectionDetails})
+                let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection?.fragments.remoteCollectionDetails})
                 self?.collections = mappedCollections
                 
 //                for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
