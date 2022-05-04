@@ -123,7 +123,7 @@ extension CollectionsManager {
         var topLosers: [RemoteTicker] = []
     }
     
-    internal func getGainers(profileId: Int) async -> TopTickers {
+    func getGainers(profileId: Int) async -> TopTickers {
         return await
         withCheckedContinuation { continuation in
             Network.shared.apollo.fetch(query: HomeFetchGainersQuery.init(profileId: profileId)) { result in

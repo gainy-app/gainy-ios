@@ -11,6 +11,7 @@ public final class GetTtfChartQuery: GraphQLQuery {
     query GetTTFChart($uniqID: String!, $period: String!) {
       collection_chart(
         where: {collection_uniq_id: {_eq: $uniqID}, period: {_eq: $period}}
+        order_by: {datetime: asc}
       ) {
         __typename
         datetime
@@ -39,7 +40,7 @@ public final class GetTtfChartQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("collection_chart", arguments: ["where": ["collection_uniq_id": ["_eq": GraphQLVariable("uniqID")], "period": ["_eq": GraphQLVariable("period")]]], type: .nonNull(.list(.nonNull(.object(CollectionChart.selections))))),
+        GraphQLField("collection_chart", arguments: ["where": ["collection_uniq_id": ["_eq": GraphQLVariable("uniqID")], "period": ["_eq": GraphQLVariable("period")]], "order_by": ["datetime": "asc"]], type: .nonNull(.list(.nonNull(.object(CollectionChart.selections))))),
       ]
     }
 

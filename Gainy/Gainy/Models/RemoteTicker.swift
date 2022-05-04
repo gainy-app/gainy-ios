@@ -142,12 +142,8 @@ class TickerInfo {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self = self else {return}
             
-            if !self.isChartDataLoaded {
-                //Load Chart
-                self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
-                    
-                }
-            }
+            
+            
             
             if !self.isMainDataLoaded {
                 //Load News data
@@ -194,7 +190,20 @@ class TickerInfo {
                             self?.wsrAnalystsCount = wsrParts.reduce(0, +)
                              
                              if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
-                                 self?.medianIndustry = mainIndustry.industryId ?? 1
+                                 self?.medianIndustry = mainIndustry.industryId
+                             }
+                             if let self = self {
+                                 self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
+                                     self.isChartDataLoaded = true
+                                     if let chartCache = self.chartsCache[.d1] {
+                                         self.updateChartData(chartCache.chartData)
+                                         self.medianGrow = chartCache.medianGrow
+                                         self.haveMedian = chartCache.haveMedian
+                                     }
+                                     DispatchQueue.main.async {
+                                         chartsLoaded()
+                                     }
+                                 }
                              }
                         }
                         

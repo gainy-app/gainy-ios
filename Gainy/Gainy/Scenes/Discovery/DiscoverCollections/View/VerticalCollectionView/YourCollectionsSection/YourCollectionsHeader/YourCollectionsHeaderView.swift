@@ -10,7 +10,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         backgroundColor = UIColor.Gainy.white
 
         addSubview(titleLabel)
-        //addSubview(descriptionLabel)
+        addSubview(descriptionLabel)
 
         let sectionHorizontalInset: CGFloat = 16
 
@@ -31,7 +31,19 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
             ,
             titleLabel
                 .bottomAnchor
-                .constraint(equalTo: bottomAnchor, constant: -16)
+                .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
+
+            descriptionLabel
+                .leadingAnchor
+                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
+            descriptionLabel
+                .trailingAnchor
+                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
+            descriptionLabel
+                .bottomAnchor
+                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 16),
+
+            
         ])
     }
 

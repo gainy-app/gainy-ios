@@ -156,7 +156,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
-
+        
         discoverCollectionsCollectionView.delegate = self
         
         discoverCollectionsCollectionView.dragDelegate = self
@@ -230,6 +230,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 }
             case let (cell as HomeTickersTableViewCell, modelItem as HomeTickersCollectionViewCellModel):
+                cell.delegate = self
                 break
             default:
                 break
@@ -244,11 +245,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
                     title: Constants.CollectionDetails.yourCollections,
-                    description: ""
+                    description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(
-                    title: "Recomended TTF",
-                    description: ""
+                    title: "Recommended collections",
+                    description: "All collections are sorted by relevancy based on your profile and goals "
                 )
                 
                 return self?.sections[indexPath.section].header(
@@ -313,7 +314,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         } receiveValue: { notification in
             guard let dataSource = self.dataSource else {return}
             var snap = dataSource.snapshot()
-                
+            
             if snap.sectionIdentifiers.count > 0 {
                 if let watchlistCol = self.viewModel?.watchlistCollections, watchlistCol.count > 0 {
                     snap.deleteItems(watchlistCol)
@@ -334,7 +335,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     self?.sections[sectionIndex].layoutSection(within: env)
                 }
                 self.customLayout = layout
-
+                
                 dataSource.apply(snap, animatingDifferences: false)
             }
         }.store(in: &cancellables)
@@ -342,9 +343,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { _ in
-        } receiveValue: {[weak self] _ in
-            self?.refreshAction()
-        }.store(in: &cancellables)
+            } receiveValue: {[weak self] _ in
+                self?.refreshAction()
+            }.store(in: &cancellables)
         
     }
     
@@ -515,8 +516,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private lazy var sections: [SectionLayout] = [
         CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
-        GainersCollectionSectionLayout(isGainers: true),
-        GainersCollectionSectionLayout(isGainers: false),
         RecommendedCollectionsSectionLayout(),
     ]
     
@@ -580,8 +579,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         DispatchQueue.global(qos:.utility).async {
             CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) { remoteTickers in
+                Task {
+                    await self.reloadGainers()
+                }
                 runOnMain {
                     self.hideLoader()
+                    
                 }
             }
         }
@@ -640,6 +643,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 })
             }
         }
+        
     }
     
     private func removeFromYourCollection(itemId: Int, yourCollectionItemToRemove: YourCollectionViewCellModel, removeFavourite : Bool = true) {
@@ -648,6 +652,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             if removeFavourite {
                 showNetworkLoader()
                 UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
+                    Task {
+                        await self.reloadGainers()
+                    }
                     self.hideLoader()
                     self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
                 }
@@ -749,13 +756,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 
                 snapshot.deleteItems([deleteItems])
                 snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
-        
+                
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
                 })
             }
             
         }
+        
     }
     
     private func reorderItems(
@@ -774,7 +782,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
         
         let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
-                
+        
         onSwapItems?(sourceItem?.id ?? 0, destItem?.id ?? 0)
         
         let fromIndex = sourceIndexPath.row
@@ -796,16 +804,33 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func initViewModels() {
         
         guard let dataSource = dataSource else {return}
+        sections = [
+            CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+            YourCollectionsSectionLayout(),
+            RecommendedCollectionsSectionLayout()
+        ]
+        if let top1 = viewModel?.topGainers, !top1.isEmpty {
+            sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
+        }
+        if let top2 = viewModel?.topLosers, !top2.isEmpty {
+            sections.insert(GainersCollectionSectionLayout(isGainers: false), at: sections.count - 1)
+        }
         
         var snap = dataSource.snapshot()
         if snap.sectionIdentifiers.count > 0 {
             snap.deleteSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
         }
-        snap.appendSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
+        snap.appendSections(sections.count > 3 ? [.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections] : [.watchlist, .yourCollections, .recommendedCollections])
         snap.appendItems(viewModel?.watchlistCollections ?? [], toSection: .watchlist)
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
-        snap.appendItems(viewModel?.topGainers ?? [], toSection: .topGainers)
-        snap.appendItems(viewModel?.topLosers ?? [], toSection: .topLosers)
+        
+        if let top1 = viewModel?.topGainers, !top1.isEmpty {
+            snap.appendItems(top1, toSection: .topGainers)
+        }
+        if let top2 = viewModel?.topLosers, !top2.isEmpty {
+            snap.appendItems(top2, toSection: .topLosers)
+        }
+        
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
         dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
@@ -813,6 +838,39 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             addBottomButton()
         }
         hideLoader()
+    }
+    
+    internal func reloadGainers() async {
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        guard let dataSource = dataSource else {return}
+        
+        let topTickers = await CollectionsManager.shared.getGainers(profileId: profileID)
+        
+        CollectionsManager.shared.topTickers = topTickers
+        let topTickers1: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topGainers, isGainers: true)
+        let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
+        viewModel?.topGainers.removeAll()
+        viewModel?.topLosers.removeAll()
+        viewModel?.topGainers = [topTickers1]
+        viewModel?.topLosers = [topTickers2]
+        await MainActor.run {
+            var snap = dataSource.snapshot()
+            if let top1 = viewModel?.topGainers, !top1.isEmpty,let top2 = viewModel?.topLosers, !top2.isEmpty  {
+                if !snap.sectionIdentifiers.contains(.topGainers) {
+                    sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
+                    sections.insert(GainersCollectionSectionLayout(isGainers: false), at: sections.count - 1)
+                    snap.deleteSections([.recommendedCollections])
+                    snap.appendSections([.topGainers, .topLosers, .recommendedCollections])
+                    
+                    snap.appendItems(top1, toSection: .topGainers)
+                    snap.appendItems(top2, toSection: .topLosers)
+                    snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
+                    dataSource.apply(snap, animatingDifferences: true)
+                } else {
+                    snap.reloadSections([.topGainers, .topLosers])
+                }
+            }
+        }
     }
     
     private func goToCollectionDetails(at collectionPosition: Int) {
@@ -879,7 +937,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         for (_, val) in UserProfileManager.shared.yourCollections.enumerated() {
             viewModel?.addedRecs[val.id] = CollectionViewModelMapper.map(val)
         }
-    
+        
         viewModel?.recommendedCollections = recColls
     }
     
@@ -1121,3 +1179,8 @@ extension DiscoverCollectionsViewController : SingleCollectionDetailsViewControl
     }
 }
 
+extension DiscoverCollectionsViewController: HomeTickersTableViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        
+    }
+}
