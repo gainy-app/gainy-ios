@@ -124,7 +124,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         searchTextField.delegate = self
         navigationBarContainer.addSubview(searchTextField)
         self.searchTextField = searchTextField
-        
         view.addSubview(navigationBarContainer)
         
         let navigationBarTopOffset =
@@ -140,8 +139,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)
         
-        discoverCollectionsCollectionView.refreshControl = refreshControl
+        //discoverCollectionsCollectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        discoverCollectionsCollectionView.addSubview(refreshControl)
         
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)

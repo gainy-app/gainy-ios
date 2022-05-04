@@ -219,4 +219,11 @@ fragment RemoteTickerExtraDetails on tickers {
       strong_sell
       rating
     }
+    
+    ticker_collections{
+      collection_id
+      collection{
+        ...RemoteCollectionDetails
+      }
+    }
 }

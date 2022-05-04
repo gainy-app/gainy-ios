@@ -21,6 +21,7 @@ public final class GetTickerExtraDetailsQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + RemoteTickerExtraDetails.fragmentDefinition)
+    document.append("\n" + RemoteCollectionDetails.fragmentDefinition)
     return document
   }
 

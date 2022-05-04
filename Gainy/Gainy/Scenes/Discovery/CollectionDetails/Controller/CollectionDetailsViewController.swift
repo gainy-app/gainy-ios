@@ -341,6 +341,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
                 }
+                cell.isSkeletonable = collectionView.isSkeletonable
+                cell.collectionView.isSkeletonable = collectionView.isSkeletonable
+                
+                if collectionView.sk.isSkeletonActive {
+                    cell.showAnimatedGradientSkeleton()
+                } else {
+                    cell.hideSkeleton()
+                }
             }
             return cell
         }
@@ -433,7 +441,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             }.store(in: &self.cancellables)
         
-        //addLoaders()
+        addLoaders()
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in
@@ -798,6 +806,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
+    private func hideSkeletons() {
+        currentNumberLabel?.hideSkeleton()
+        compareButton?.hideSkeleton()
+        favoriteButton?.hideSkeleton()
+        collectionView?.hideSkeleton()
+        
+        searchTextField?.isEnabled = true
+        discoverCollectionsBtn?.isEnabled = true
+    }
+    
     private func fetchFailedCollections(completion: @escaping () -> Void) {
         showNetworkLoader()
         
@@ -842,9 +860,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     func centerInitialCollectionInTheCollectionView() {
         guard let snap = dataSource?.snapshot() else {return}
-        self.currentNumberLabel?.hideSkeleton()
-        self.compareButton?.hideSkeleton()
-        self.favoriteButton?.hideSkeleton()
         guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {
             if !(discoverCollectionsBtn?.isEnabled ?? false){
                 if snap.sectionIdentifiers.count > 0 {
@@ -861,6 +876,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionView.scrollToItem(at: IndexPath(item: initialItemToShow, section: 0),
                                         at: .centeredHorizontally,
                                         animated: false)
+        }
+        
+        if !Constants.CollectionDetails.loadingCellIDs.contains(snap.itemIdentifiers.first?.id ?? -1) {
+            hideSkeletons()
         }
     }
     
@@ -903,6 +922,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func addLoaders() {
+        collectionView.showAnimatedGradientSkeleton()
         if var snapshot = dataSource?.snapshot() {
             if snapshot.sectionIdentifiers.count > 0 {
                 snapshot.deleteSections([.collectionWithCards])
@@ -919,8 +939,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             })
         }
-        searchTextField?.isEnabled = false
-        discoverCollectionsBtn?.isEnabled = false
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)

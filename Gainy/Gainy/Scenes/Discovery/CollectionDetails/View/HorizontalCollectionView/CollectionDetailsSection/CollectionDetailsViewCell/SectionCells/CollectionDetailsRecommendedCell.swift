@@ -216,7 +216,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     lazy var tagsContainer: UIView = {
         let view = UIView()
         view.isSkeletonable = true
-        view.isHiddenWhenSkeletonIsActive = true
+        view.skeletonCornerRadius = 6
         return view
     }()
     

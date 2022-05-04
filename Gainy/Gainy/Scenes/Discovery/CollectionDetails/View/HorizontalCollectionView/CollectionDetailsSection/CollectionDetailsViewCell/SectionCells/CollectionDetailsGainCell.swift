@@ -156,7 +156,8 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         view.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
-        
+        view.isSkeletonable = true
+        view.skeletonCornerRadius = 6
         return view
     }()
     
@@ -208,7 +209,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         label.textAlignment = .left
         label.isSkeletonable = true
         label.linesCornerRadius = 6
-        
+        label.isHiddenWhenSkeletonIsActive = true
         return label
     }()
     
@@ -230,7 +231,8 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         view.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
-        
+        view.isSkeletonable = true
+        view.skeletonCornerRadius = 6
         return view
     }()
     
@@ -268,7 +270,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         label.textAlignment = .left
         label.isSkeletonable = true
         label.linesCornerRadius = 6
-        
+        label.isHiddenWhenSkeletonIsActive = true
         return label
     }()
     

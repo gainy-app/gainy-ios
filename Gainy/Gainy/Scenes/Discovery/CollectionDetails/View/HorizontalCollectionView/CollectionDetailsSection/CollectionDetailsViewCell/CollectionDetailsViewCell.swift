@@ -152,6 +152,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
+            guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
                 if uniqID == self?.viewModel.uniqID {
                     self?.pieChartData = pieData
@@ -407,6 +408,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
             
             cell.configureWith(companyName: viewModel.name)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
             return cell
             
         case .gain:
@@ -417,6 +424,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
             }
             cell.delegate = self
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
             return cell
             
         case .chart:
@@ -428,11 +441,23 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
             }
             chartHosting.view.clipsToBounds = false
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
             return cell
             
         case .about:
             let cell: CollectionDetailsAboutCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsAboutCell.cellIdentifier, for: indexPath) as! CollectionDetailsAboutCell
             cell.configureWith(detail: viewModel.description)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
             return cell
             
         case .recommended:
@@ -446,6 +471,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     cell.setTransform(transform)
                 }
             }.store(in: &cancellables)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
             return cell
             
         case .cards:
