@@ -12,6 +12,8 @@ struct Legend: View {
     @ObservedObject var data: ChartData
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
+    @Binding var minMaxPercent: Bool
+    
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var specifier: String = "%.2f"
     var bigSpecifier: String = "%.0f"
@@ -49,12 +51,12 @@ struct Legend: View {
         ZStack(alignment: .topLeading){
             ForEach((0...1), id: \.self) { height in
                 HStack(alignment: .center){
-                    Text("\(Float(self.getYLegendSafe(height: height)).price)")
-                            .frame(maxHeight: 12)
-                            .minimumScaleFactor(0.1)
-                            .offset(x: getXposition(height: height), y: self.getYposition(height: height) + (height == 0 ? 7 : -3) )
-                            .foregroundColor(UIColor(hexString: "B1BDC8")!.uiColor)
-                            .font(UIFont.compactRoundedSemibold(10).uiFont)
+                    Text(minMaxPercent ? Float(self.getYLegendSafePercent(height: height)).percentRaw : "\(Float(self.getYLegendSafe(height: height)).price)")
+                        .frame(maxHeight: 12)
+                        .minimumScaleFactor(0.1)
+                        .offset(x: getXposition(height: height), y: self.getYposition(height: height) + (height == 0 ? 7 : -3) )
+                        .foregroundColor(UIColor(hexString: "B1BDC8")!.uiColor)
+                        .font(UIFont.compactRoundedSemibold(10).uiFont)
                     self.line(atHeight: self.getYLegendSafe(height: height), width: self.frame.width)
                         .stroke(Color.clear, style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [5,height == 0 ? 0 : 10]))
                         .opacity((self.hideHorizontalLines && height != 0) ? 0 : 1)
@@ -65,6 +67,13 @@ struct Legend: View {
                 }.background(Color.clear)
             }
         }
+    }
+    
+    private func getYLegendSafePercent(height:Int)->CGFloat{
+        if let legend = getYLegendPercent() {
+            return CGFloat(legend[height])
+        }
+        return 0
     }
     
     private func getYLegendSafe(height:Int)->CGFloat{
@@ -80,11 +89,11 @@ struct Legend: View {
             return res
         }
         return 0
-       
+        
     }
     
     private func getXposition(height: Int)-> CGFloat {
-            let points = self.data.onlyPoints()
+        let points = self.data.onlyPoints()
         guard let max = points.max() else { return 0.0}
         guard let min = points.min() else { return 0.0}
         
@@ -111,20 +120,36 @@ struct Legend: View {
         return hLine
     }
     
-    
-    
     private func getYLegend() -> [Double]? {
         let points = self.data.onlyPoints()
         guard let max = points.max() else { return nil }
         guard let min = points.min() else { return nil }
         return [min, max]
     }
+    
+    private func getYLegendPercent() -> [Double]? {
+        func pctDiff(_ x1: Double, _ x2: Double) -> Double {
+            var diff = (x2 - x1) / x1
+            if x1 < 0 && x2 < 0 {
+                diff = -diff
+            }
+            return Double(round(100 * (diff * 100)) / 100)
+        }
+        
+        let points = self.data.onlyPoints()
+        guard let max = points.max() else { return nil }
+        guard let min = points.min() else { return nil }
+        let first = points.first ?? 0.0
+        return [pctDiff(first, min), pctDiff(first, max)]
+    }
+    
+    
 }
 
 struct Legend_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader{ geometry in
-            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false))
+            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false), minMaxPercent: .constant(false))
         }.frame(width: 320, height: 200)
     }
 }

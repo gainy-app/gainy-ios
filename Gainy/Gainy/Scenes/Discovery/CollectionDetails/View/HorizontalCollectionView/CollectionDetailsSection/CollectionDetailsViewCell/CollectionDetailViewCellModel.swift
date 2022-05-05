@@ -26,6 +26,36 @@ struct CollectionDetailViewCellModel {
     mutating func addTags(_ tags: [TickerTag]) {
         combinedTags.append(contentsOf: tags)
     }
+    
+    //Gains
+    
+    var statsDayName: String {
+        switch chartRange {
+        case .d1:
+            return "Today Gain"
+        case .w1:
+            return "Week Gain"
+        case .m1:
+            return "Month Gain"
+        case .m3:
+            return "3M Gain"
+        case .y1:
+            return "Year Gain"
+        case .y5:
+            return "5Y Gain"
+        case .all:
+            return "Total Gain"            
+        }
+    }
+    
+    var statsDayValue: String {
+        switch chartRange {
+        case .d1:
+            return dailyGrow.percentUnsigned
+        default:
+            return topChart.chartData.startEndDiff.percentRawUnsigned
+        }
+    }
 }
 
 extension CollectionDetailViewCellModel: Hashable {

@@ -113,10 +113,10 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             percentArrowImgView.tintColor = UIColor.Gainy.mainRed
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
         }
-        tickerPercentChangeLabel.text = viewModel.dailyGrow.percentUnsigned
+        tickerPercentChangeLabel.text = viewModel.statsDayValue
         tickerPercentChangeLabel.sizeToFit()
         
-        todaysGainLabel.text = "Today Gain"
+        todaysGainLabel.text = viewModel.statsDayName
         
         //SP500
         

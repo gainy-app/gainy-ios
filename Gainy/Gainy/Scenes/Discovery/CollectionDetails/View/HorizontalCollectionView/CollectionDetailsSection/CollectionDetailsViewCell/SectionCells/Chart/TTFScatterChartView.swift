@@ -128,7 +128,7 @@ struct TTFScatterChartView: View {
     }
     
     @ObservedObject
-    var lineViewModel: LineViewModel = LineViewModel()
+    var lineViewModel: LineViewModel = LineViewModel(minMaxPercent: true)
     
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0

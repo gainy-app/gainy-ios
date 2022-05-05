@@ -61,6 +61,17 @@ extension Double {
         return "\(formattedValue)%"
     }
     
+    var percentRawUnsigned: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
+    }
+    
     func formatUsingAbbrevation () -> String {
         let numFormatter = NumberFormatter()
         numFormatter.locale = .current
