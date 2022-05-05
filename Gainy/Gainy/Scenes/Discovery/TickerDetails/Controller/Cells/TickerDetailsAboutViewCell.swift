@@ -37,7 +37,8 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         } else {
             aboutLbl.numberOfLines = 3
             minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
-        }        
+        }
+        innerCollectionView.reloadData()
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -82,7 +83,47 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         FloatingPanelManager.shared.showFloatingPanel()
     }
     
+    //weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
+    private let cellSize: CGSize = .init(width: 240, height: 88)
     
+    @IBOutlet private weak var innerCollectionView: UICollectionView! {
+        didSet {
+            innerCollectionView.dataSource = self
+            innerCollectionView.delegate = self
+        }
+    }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        tickerInfo?.linkedCollections.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: TickerDetailsRelativeCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        if let collection = tickerInfo?.linkedCollections[indexPath.row] {
+            cell.configureWith(collection: collection)
+        }
+        return cell
+    }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        cellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 0, left: 16, bottom: 0, right: 16)
+    }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        if let stock = tickerInfo?.altStocks[indexPath.row] {
+//            delegate?.altStockPressed(stock: stock)
+//        }
+    }
 }
 
 
