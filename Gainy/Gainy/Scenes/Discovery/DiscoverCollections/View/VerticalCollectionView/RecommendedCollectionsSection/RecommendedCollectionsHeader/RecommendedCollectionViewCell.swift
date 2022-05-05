@@ -321,7 +321,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
 
     func setButtonChecked() {
         buttonState = .checked
-        plusButton.setImage(UIImage(named: "remove_from_wl"), for: .normal)
+        plusButton.setImage(UIImage(named: "remove_from_wl_rec"), for: .normal)
     }
 
     // MARK: Private

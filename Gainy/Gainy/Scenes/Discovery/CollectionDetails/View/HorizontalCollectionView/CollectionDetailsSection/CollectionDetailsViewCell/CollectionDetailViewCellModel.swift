@@ -56,6 +56,15 @@ struct CollectionDetailViewCellModel {
             return topChart.chartData.startEndDiff.percentRawUnsigned
         }
     }
+    
+    var statsDayRaw: Float {
+        switch chartRange {
+        case .d1:
+            return dailyGrow
+        default:
+            return Float(topChart.chartData.startEndDiff)
+        }
+    }
 }
 
 extension CollectionDetailViewCellModel: Hashable {

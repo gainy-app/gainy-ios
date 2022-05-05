@@ -20,7 +20,7 @@ final class HomeIndexView: CornerView {
                 nameLbl.text = indexModel.name
                 if indexModel.grow != 0 {
                 growImgView.image = indexModel.grow >= 0.0 ? UIImage(named: "small_up") : UIImage(named: "small_down")
-                growLbl.text = indexModel.grow.percent
+                growLbl.text = indexModel.grow.percentUnsigned
                 growLbl.textColor = UIColor(named: indexModel.grow >= 0.0 ? "mainGreen" : "mainRed")
                 } else {
                     growImgView.image = nil

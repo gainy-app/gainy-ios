@@ -9,9 +9,7 @@ import UIKit
 import PureLayout
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
-    func requestOpenCollection(withID id: Int)
     func aboutExtended(isExtended: Bool)
-    func wrongIndPressed(isTicked: Bool)
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
@@ -21,8 +19,6 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     //MARK: - Outlets
     @IBOutlet private weak var aboutLbl: UILabel!
     @IBOutlet private weak var tagsStack: UIView!
-    @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
-    @IBOutlet private weak var wrongIndBtn: UIButton!
     
     //MARK: - DI
     var minHeightUpdated: ((CGFloat) -> Void)?
@@ -34,71 +30,20 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.text = tickerInfo?.about
         aboutLbl.numberOfLines = 3
         
-        let tagHeight: CGFloat = 24.0
-        let margin: CGFloat = 8.0
-        
-        if tagsStack.subviews.count == 0 {
-            
-            let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 - 64.0
-            var xPos: CGFloat = 0.0
-            var yPos: CGFloat = 0.0
-            
-            for tag in tickerInfo?.tags ?? [] {
-                let tagView = TagView()
-                tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
-                                  for: .touchUpInside)
-                tagsStack.addSubview(tagView)
-                if tag.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.white
-                    tagView.tagLabel.textColor = UIColor(named: "mainText")
-                    tagView.layer.borderWidth = 1.0
-                } else {
-                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                    tagView.tagLabel.textColor = .white
-                    tagView.layer.borderWidth = 0.0
-                }
-                
-                tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
-                tagView.tagName = tag.name
-                tagView.loadImage(url: tag.url)
-                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
-                tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-                if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
-                    xPos = 0.0
-                    yPos = yPos + tagHeight + margin
-                    lines += 1
-                }
-                tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
-                tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
-                xPos += width + margin
-            }
-        }
-        
-        self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-        self.tagsStack.layoutIfNeeded()
-        
-        let calculatedHeight: CGFloat = (152.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        let calculatedHeight: CGFloat = (152.0 + 44.0 + 88)
         if isMoreSelected {
             aboutLbl.numberOfLines = 0
             minHeightUpdated?(max( (152.0 + 44.0), heightBasedOnString((tickerInfo?.about ?? ""))))
         } else {
             aboutLbl.numberOfLines = 3
             minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
-        }
-        wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
-        if wrongIndBtn.isSelected {
-            highlightIndustries()
-        } else {
-            unhighlightIndustries()
-        }
+        }        
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
         guard let collectionID = tagView.collectionID, collectionID > 0 else {
             return
         }
-        
-        self.delegate?.requestOpenCollection(withID: collectionID)
     }
     
     //MARK: - Actions
@@ -124,7 +69,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
-        return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
+        return 60.0 + height + 48.0 + 32.0 + 88.0
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
@@ -137,48 +82,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         FloatingPanelManager.shared.showFloatingPanel()
     }
     
-    //MARK: - Wrong Industry Logic
     
-    @IBAction func wrongIndAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        delegate?.wrongIndPressed(isTicked: sender.isSelected)
-        
-        if sender.isSelected {
-            highlightIndustries()
-        } else {
-            unhighlightIndustries()
-        }
-    }
-    
-    func highlightIndustries() {
-        wrongIndBtn.isSelected = true
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
-            if let tagView = tagsStack.subviews[ind] as? TagView {
-                
-                tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
-                tagView.tagLabel.textColor = .white
-                tagView.layer.borderWidth = 0.0
-            }
-        }
-    }
-    
-    func unhighlightIndustries() {
-        wrongIndBtn.isSelected = false
-        guard (tickerInfo?.tags ?? []).count == tagsStack.subviews.count else {return}
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
-            if let tagView = tagsStack.subviews[ind] as? TagView {
-                if tagInfo.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.white
-                    tagView.tagLabel.textColor = UIColor(named: "mainText")
-                    tagView.layer.borderWidth = 1.0
-                } else {
-                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                    tagView.tagLabel.textColor = .white
-                    tagView.layer.borderWidth = 0.0
-                }
-            }
-        }
-    }
 }
 
 

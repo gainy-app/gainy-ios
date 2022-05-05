@@ -375,16 +375,17 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
-    func requestOpenCollection(withID id: Int) {
-        
-        self.delegate?.requestOpenCollection(withID: id)
-    }
-    
     func aboutExtended(isExtended: Bool) {
         self.isAboutExpanded = isExtended
     }
+}
+
+extension TickerDetailsDataSource: TickerDetailsRecommendedViewCellDelegate {
+    func requestOpenCollection(withID id: Int) {
+        //self.delegate?.requestOpenCollection(withID: id)
+    }
     
     func wrongIndPressed(isTicked: Bool) {
-        delegate?.wrongIndPressed(isTicked: isTicked)
+        self.delegate?.wrongIndPressed(isTicked: isTicked)
     }
 }

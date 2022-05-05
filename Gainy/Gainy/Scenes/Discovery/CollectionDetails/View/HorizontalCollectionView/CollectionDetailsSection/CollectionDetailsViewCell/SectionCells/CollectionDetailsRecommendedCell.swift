@@ -248,7 +248,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         
         risk1Lbl.attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int((matchData.riskSimilarity ?? 0.0) * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
         tagsTitle.textColor = MatchScoreManager.textColorFor(matchScore)
-        largeBack.backgroundColor = MatchScoreManager.circleColorFor(matchScore)
+        largeBack.backgroundColor = MatchScoreManager.backColorFor(matchScore)
         
         
         //Tags

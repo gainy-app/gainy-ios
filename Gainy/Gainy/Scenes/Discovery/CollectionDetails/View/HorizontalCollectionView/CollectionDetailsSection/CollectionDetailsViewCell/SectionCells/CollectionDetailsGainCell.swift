@@ -101,7 +101,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")
         tickersCountLabel.sizeToFit()
         
-        if viewModel.dailyGrow > 0.0 {
+        if viewModel.statsDayRaw > 0.0 {
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
             percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
             percentArrowImgView.tintColor = UIColor.Gainy.mainGreen

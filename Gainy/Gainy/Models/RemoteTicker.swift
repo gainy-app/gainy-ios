@@ -43,6 +43,7 @@ class TickerInfo {
         self.news = []
         self.altStocks = []
         self.upcomingEvents = []
+        self.linkedCollections = []
         
         self.updateMarketData()
     }
@@ -205,6 +206,7 @@ class TickerInfo {
                                      }
                                  }
                              }
+                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails})
                         }
                         
                         mainDS.leave()
@@ -502,4 +504,7 @@ class TickerInfo {
     var medianIndustry: Int = 1
     var medianGrow: Float = 0.0
     var haveMedian: Bool = false
+    
+    //MARK: - Linked Collections
+    var linkedCollections: [RemoteCollectionDetails] = []
 }

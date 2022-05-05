@@ -36,6 +36,19 @@ struct MatchScoreManager {
         case 35..<65:
             return UIColor(hexString: "E7EAEE")!
         case 65...:
+            return UIColor.Gainy.secondaryGreen!
+        default:
+            return UIColor(hexString: "E7EAEE")!
+        }
+    }
+    
+    static func backColorFor(_ matchScore: Int) -> UIColor {
+        switch matchScore {
+        case 0..<35:
+            return UIColor(hexString: "E7EAEE")!
+        case 35..<65:
+            return UIColor(hexString: "E7EAEE")!
+        case 65...:
             return UIColor.Gainy.mainGreen!
         default:
             return UIColor(hexString: "E7EAEE")!

@@ -1,14 +1,12 @@
-iOS v1.3 #194 available
+iOS v1.3 #195 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• TTF: gains periods
-• TTF: chart min-max %
+• Stock View: tags from About removed
 
 :hammer_and_wrench: Improvements
-• Discovery: Top gainers reload
-• Collection Details: loader added
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

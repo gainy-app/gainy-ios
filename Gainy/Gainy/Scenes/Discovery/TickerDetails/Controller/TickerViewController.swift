@@ -233,7 +233,7 @@ final class TickerViewController: BaseViewController {
     
     @IBAction func undoWrongIndViewAction(_ sender: Any) {
         guard let symbol = viewModel?.ticker.symbol else {return}
-        guard let cell = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as? TickerDetailsAboutViewCell else {return}
+        guard let cell = tableView.cellForRow(at: IndexPath.init(row: 3, section: 0)) as? TickerDetailsRecommendedViewCell else {return}
 
         if WrongIndustryManager.shared.isIndWrong(symbol) {
             GainyAnalytics.logEvent("wrong_industry_undo", params: ["timestamp": Date().timeIntervalSinceReferenceDate,   "ticker_symbol": viewModel?.ticker.symbol ?? "",
