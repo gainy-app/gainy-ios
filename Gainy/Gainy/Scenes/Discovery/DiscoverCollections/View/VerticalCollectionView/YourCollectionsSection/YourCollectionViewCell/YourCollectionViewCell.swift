@@ -304,7 +304,6 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     }
     
     // MARK: Functions
-    
     override func dragStateDidChange(_ dragState: UICollectionViewCell.DragState) {
         switch dragState {
         case .lifting:

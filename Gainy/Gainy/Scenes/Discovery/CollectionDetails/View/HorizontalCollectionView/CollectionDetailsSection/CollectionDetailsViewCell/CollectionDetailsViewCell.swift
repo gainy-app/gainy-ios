@@ -64,6 +64,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.clipsToBounds = false
         contentView.addSubview(collectionView)
         collectionView.autoPinEdgesToSuperviewEdges()
+        collectionView.isSkeletonable = true
+        collectionView.skeletonCornerRadius = 6.0
         initViewModels()
     }
     
@@ -853,7 +855,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             guard viewModel.id != Constants.CollectionDetails.watchlistCollectionID else {
                 return .zero
             }
-            let width = collectionView.frame.width
+            
             let aboutTitleWithOffsets = 32.0
             let bottomOffset = 24.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
@@ -868,10 +870,11 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let tagHeight: CGFloat = 24.0
             let margin: CGFloat = 8.0
             
-            let totalWidth: CGFloat = UIScreen.main.bounds.width - 34 * 2.0
+            let totalWidth: CGFloat = UIScreen.main.bounds.width - 32 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
             for tag in viewModel.combinedTags {
+                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 if xPos + width + margin > totalWidth{
                     xPos = 0.0
                     yPos = yPos + tagHeight + margin
@@ -880,9 +883,13 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 xPos += width + margin
             }
             
-            let calculatedHeight: CGFloat = 192 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-            
-            return CGSize.init(width: width, height: calculatedHeight)
+            if viewModel.combinedTags.isEmpty {
+                return CGSize.init(width: width, height: 144.0)
+            } else {
+                print(viewModel.name)
+                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
+                return CGSize.init(width: width, height: calculatedHeight)
+            }
             
         case .cards:
             

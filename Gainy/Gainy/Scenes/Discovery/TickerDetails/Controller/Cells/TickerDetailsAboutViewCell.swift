@@ -10,6 +10,7 @@ import PureLayout
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
     func aboutExtended(isExtended: Bool)
+    func collectionSelected(collection: RemoteCollectionDetails)
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
@@ -30,13 +31,13 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.text = tickerInfo?.about
         aboutLbl.numberOfLines = 3
         
-        let calculatedHeight: CGFloat = (152.0 + 44.0 + 88)
+        let calculatedHeight: CGFloat = (161.0 + 88.0)
         if isMoreSelected {
             aboutLbl.numberOfLines = 0
-            minHeightUpdated?(max( (152.0 + 44.0), heightBasedOnString((tickerInfo?.about ?? ""))))
+            minHeightUpdated?(max( (152.0 + 16.0), heightBasedOnString((tickerInfo?.about ?? ""))))
         } else {
             aboutLbl.numberOfLines = 3
-            minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+            minHeightUpdated?(max( (152.0 + 16.0), calculatedHeight))
         }
         innerCollectionView.reloadData()
     }
@@ -59,7 +60,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             aboutLbl.numberOfLines = 3
             sender.setTitle("show more", for: .normal)
         }
-        cellHeightChanged?(heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")))
+        cellHeightChanged?(sender.isSelected ? heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")) : (161.0 + 88.0))
         if sender.isSelected {
             GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         } else {
@@ -70,7 +71,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
-        return 60.0 + height + 48.0 + 32.0 + 88.0
+        return 60.0 + height + 48.0 + 88.0
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
@@ -90,6 +91,9 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.register(TickerDetailsRelativeCollectionViewCell.self)
+            innerCollectionView.isScrollEnabled = true
+            innerCollectionView.isUserInteractionEnabled = true
         }
     }
 }
@@ -101,8 +105,13 @@ extension TickerDetailsAboutViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: TickerDetailsRelativeCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        //cell.overrideDrag = false
         if let collection = tickerInfo?.linkedCollections[indexPath.row] {
             cell.configureWith(collection: collection)
+            cell.nameLabel.font = .proDisplayBold(16)
+            cell.stocksAmountLabel.font = .proDisplaySemibold(12)
+            cell.gainsLabel.font = .compactRoundedSemibold(12.0)
+            cell.todayLabel.font = .compactRoundedMedium(12)
         }
         return cell
     }
@@ -120,9 +129,9 @@ extension TickerDetailsAboutViewCell: UICollectionViewDelegateFlowLayout {
 
 extension TickerDetailsAboutViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if let stock = tickerInfo?.altStocks[indexPath.row] {
-//            delegate?.altStockPressed(stock: stock)
-//        }
+        if let collection = tickerInfo?.linkedCollections[indexPath.row] {
+            delegate?.collectionSelected(collection: collection)
+        }
     }
 }
 

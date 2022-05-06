@@ -27,7 +27,7 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
         
         setViewControllers([stockControllers[initialIndex]], direction: .forward, animated: false, completion: nil)
         if let tickerVC = stockControllers[initialIndex] as? TickerViewController {
-            tickerVC.loadTicketInfo()
+            tickerVC.loadTicketInfo(fromRefresh: false)
         }
     }
     

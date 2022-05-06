@@ -206,7 +206,7 @@ class TickerInfo {
                                      }
                                  }
                              }
-                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails})
+                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
                         }
                         
                         mainDS.leave()

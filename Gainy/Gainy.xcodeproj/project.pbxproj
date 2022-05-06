@@ -87,6 +87,7 @@
 		33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 33467CF926C6728700811F74 /* MBProgressHUD */; };
 		33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFB26C6786200811F74 /* BaseViewController.swift */; };
 		33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFE26C698BC00811F74 /* MainTabController.swift */; };
+		334F6F5A28252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 334F6F5928252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib */; };
 		33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */; };
 		33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */; };
 		33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */; };
@@ -358,7 +359,7 @@
 		85695AE42745130200759569 /* MetricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE32745130200759569 /* MetricsViewController.swift */; };
 		85695AE827455EF300759569 /* MetricsBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AE627455EF300759569 /* MetricsBottomView.xib */; };
 		85695AE927455EF300759569 /* MetricsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AE727455EF300759569 /* MetricsBottomView.swift */; };
-		85695AEB27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */; };
+		85695AEB27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEA27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib */; };
 		85695AF0274594BF00759569 /* MetricsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AEC274594BE00759569 /* MetricsHeaderView.swift */; };
 		85695AF1274594BF00759569 /* MetricsFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AED274594BF00759569 /* MetricsFooterView.swift */; };
 		85695AF2274594BF00759569 /* MetricsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85695AEE274594BF00759569 /* MetricsHeaderView.xib */; };
@@ -649,6 +650,7 @@
 		33467CE426C6576800811F74 /* Charts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Charts.graphql.swift; sourceTree = "<group>"; };
 		33467CFB26C6786200811F74 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		33467CFE26C698BC00811F74 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		334F6F5928252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickerDetailsMarketInnerViewCell.xib; sourceTree = "<group>"; };
 		33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchLiveTickersData.graphql; sourceTree = "<group>"; };
 		33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerLiveStorage.swift; sourceTree = "<group>"; };
 		33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLiveTickersData.graphql.swift; sourceTree = "<group>"; };
@@ -931,7 +933,7 @@
 		85695AE32745130200759569 /* MetricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsViewController.swift; sourceTree = "<group>"; };
 		85695AE627455EF300759569 /* MetricsBottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetricsBottomView.xib; sourceTree = "<group>"; };
 		85695AE727455EF300759569 /* MetricsBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsBottomView.swift; sourceTree = "<group>"; };
-		85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickerDetailsMarketInnerViewCell.xib; sourceTree = "<group>"; };
+		85695AEA27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LongTickerDetailsMarketInnerViewCell.xib; sourceTree = "<group>"; };
 		85695AEC274594BE00759569 /* MetricsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsHeaderView.swift; sourceTree = "<group>"; };
 		85695AED274594BF00759569 /* MetricsFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricsFooterView.swift; sourceTree = "<group>"; };
 		85695AEE274594BF00759569 /* MetricsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MetricsHeaderView.xib; sourceTree = "<group>"; };
@@ -1492,7 +1494,8 @@
 				33930B8428244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift */,
 				33BDCF7026CE8B4E000DE770 /* TickerDetailsHighlightsViewCell.swift */,
 				33E7AA6826CFD7B100DF1CBE /* TickerDetailsNewsViewCell.swift */,
-				85695AEA27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib */,
+				334F6F5928252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib */,
+				85695AEA27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib */,
 				33BDCF7226CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift */,
 				33BDCF7426CE8B66000DE770 /* TickerDetailsWSRViewCell.swift */,
 				33E1827926D3804600A1D2AC /* WSRView.swift */,
@@ -2856,7 +2859,7 @@
 				85DF212B278CA25000F2899B /* investment_horizon.mp4 in Resources */,
 				85695AFA2746BAD400759569 /* InsertMetricsSessingsForCollection.graphql in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
-				85695AEB27457AAF00759569 /* TickerDetailsMarketInnerViewCell.xib in Resources */,
+				85695AEB27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib in Resources */,
 				85EDC145272801A000866AD2 /* DeleteTickerFromWatchlist.graphql in Resources */,
 				9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */,
 				8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */,
@@ -2882,6 +2885,7 @@
 				85EDC144272801A000866AD2 /* InsertTickerToWatchlist.graphql in Resources */,
 				85695AE827455EF300759569 /* MetricsBottomView.xib in Resources */,
 				339A2EB226FDF0140076BF52 /* SearchTickersNoSpace.graphql in Resources */,
+				334F6F5A28252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib in Resources */,
 				33CBAF7627A2846D008F6F88 /* UpdatePlaidPortfolio.graphql in Resources */,
 				9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,

@@ -287,7 +287,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         //self.tagsContainerHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsContainer.layoutIfNeeded()
         
-        let calculatedHeight: CGFloat = 152 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 16.0
+        let calculatedHeight: CGFloat = 152 + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 16.0
         if tags.count > 0 {
             //cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
             tagsTitle.isHidden = false

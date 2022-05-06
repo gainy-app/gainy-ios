@@ -294,6 +294,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 position: indexPath.row
             )
             
+            cell?.isSkeletonable = collectionView.isSkeletonable
+            
+            if collectionView.sk.isSkeletonActive {
+                cell?.showAnimatedGradientSkeleton()
+            } else {
+                cell?.hideSkeleton()
+            }
+            
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
                 cell.onCardPressed = {[weak self]  ticker in
@@ -341,14 +349,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
                 }
-                cell.isSkeletonable = collectionView.isSkeletonable
-                cell.collectionView.isSkeletonable = collectionView.isSkeletonable
                 
-                if collectionView.sk.isSkeletonActive {
-                    cell.showAnimatedGradientSkeleton()
-                } else {
-                    cell.hideSkeleton()
-                }
             }
             return cell
         }

@@ -52,9 +52,13 @@ final class TickerViewController: BaseViewController {
         }
     }
     
-    @objc func loadTicketInfo() {
+    @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
+        
+        if !fromRefresh {
+            guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}
+        }
         
         tableView.contentOffset = .zero
         guard haveNetwork else {
@@ -62,6 +66,7 @@ final class TickerViewController: BaseViewController {
             GainyAnalytics.logEvent("no_internet")
             return
         }
+        
         delay(1.0) {
             if !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? true) {
                 self.isLoadingInfo = true
@@ -391,6 +396,10 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     
     func hideWrongIndView() {
         wrongIndView.isHidden = true
+    }
+    
+    func collectionSelected(collection: RemoteCollectionDetails) {
+        coordinator?.showCollectionDetails(collectionID: collection.id ?? -1)
     }
 }
 

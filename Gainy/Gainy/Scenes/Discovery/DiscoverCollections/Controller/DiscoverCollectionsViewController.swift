@@ -229,7 +229,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     cell.isUserInteractionEnabled = true
                     GainyAnalytics.logEvent("remove_from_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                 }
-            case let (cell as HomeTickersTableViewCell, modelItem as HomeTickersCollectionViewCellModel):
+            case let (cell as HomeTickersCollectionViewCell, modelItem as HomeTickersCollectionViewCellModel):
                 cell.delegate = self
                 break
             default:
@@ -308,38 +308,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
-        searchController?.coordinator = coordinator
-        
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
-        } receiveValue: { notification in
-            guard let dataSource = self.dataSource else {return}
-            var snap = dataSource.snapshot()
-            
-            if snap.sectionIdentifiers.count > 0 {
-                if let watchlistCol = self.viewModel?.watchlistCollections, watchlistCol.count > 0 {
-                    snap.deleteItems(watchlistCol)
-                }
-                self.initViewModelsFromData()
-                
-                if let watchlistCol = self.viewModel?.watchlistCollections, watchlistCol.count > 0 {
-                    snap.appendItems(watchlistCol, toSection: .watchlist)
-                }
-                snap.reloadSections([.watchlist])
-                
-                self.sections = [
-                    CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
-                    YourCollectionsSectionLayout(),
-                    RecommendedCollectionsSectionLayout(),
-                ]
-                let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
-                    self?.sections[sectionIndex].layoutSection(within: env)
-                }
-                self.customLayout = layout
-                
-                dataSource.apply(snap, animatingDifferences: false)
-            }
-        }.store(in: &cancellables)
-        
+        searchController?.coordinator = coordinator        
         NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { _ in
@@ -855,6 +824,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         viewModel?.topLosers = [topTickers2]
         await MainActor.run {
             var snap = dataSource.snapshot()
+            
+            //Update Your Collections
+            
+            if snap.itemIdentifiers(inSection: .yourCollections).isEmpty && !(viewModel?.yourCollections.isEmpty ?? true) {
+                snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
+            }
+            
             if let top1 = viewModel?.topGainers, !top1.isEmpty,let top2 = viewModel?.topLosers, !top2.isEmpty  {
                 if !snap.sectionIdentifiers.contains(.topGainers) {
                     sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
@@ -1179,8 +1155,26 @@ extension DiscoverCollectionsViewController : SingleCollectionDetailsViewControl
     }
 }
 
-extension DiscoverCollectionsViewController: HomeTickersTableViewCellDelegate {
+extension DiscoverCollectionsViewController: HomeTickersCollectionViewCellDelegate {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         
+    }
+    
+    func stockPressed(stock: AltStockTicker, index: Int, cell: HomeTickersCollectionViewCell) {
+        let gainerIndex = viewModel?.topGainers.first?.gainers.firstIndex(where: {
+            $0.symbol == stock.symbol
+        }) ?? -1
+        
+        let loserIndex = viewModel?.topLosers.first?.gainers.firstIndex(where: {
+            $0.symbol == stock.symbol
+        }) ?? -1
+        
+        if gainerIndex != -1 {
+            coordinator?.showCardsDetailsViewController(viewModel?.topGainers.first?.gainers.compactMap({TickerInfo(ticker: $0)}) ?? [], index: gainerIndex)
+        } else {
+            if loserIndex != -1 {
+                coordinator?.showCardsDetailsViewController(viewModel?.topLosers.first?.gainers.compactMap({TickerInfo(ticker: $0)}) ?? [], index: loserIndex)
+            }
+        }
     }
 }

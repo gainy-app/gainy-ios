@@ -9,6 +9,7 @@ import UIKit
 
 protocol HomeTickersCollectionViewCellDelegate: AnyObject {
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func stockPressed(stock: AltStockTicker, index: Int, cell: HomeTickersCollectionViewCell)
 }
 
 final class HomeTickersCollectionViewCell: UICollectionViewCell {
@@ -17,7 +18,7 @@ final class HomeTickersCollectionViewCell: UICollectionViewCell {
     
     private let cellWidth: CGFloat = 144.0
     
-    weak var delegate: HomeTickersTableViewCellDelegate?
+    weak var delegate: HomeTickersCollectionViewCellDelegate?
     
     @IBOutlet private weak var innerCollectionView: UICollectionView! {
         didSet {
@@ -59,7 +60,7 @@ extension HomeTickersCollectionViewCell: UICollectionViewDelegateFlowLayout {
 
 extension HomeTickersCollectionViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        delegate?.stockPressed(stock: gainers[indexPath.row], index: indexPath.row, cell: self)
     }
 }
 

@@ -19,6 +19,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
     func wrongIndPressed(isTicked: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func collectionSelected(collection: RemoteCollectionDetails)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -377,6 +378,9 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
 extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
     func aboutExtended(isExtended: Bool) {
         self.isAboutExpanded = isExtended
+    }
+    func collectionSelected(collection: RemoteCollectionDetails) {
+        delegate?.collectionSelected(collection: collection)
     }
 }
 

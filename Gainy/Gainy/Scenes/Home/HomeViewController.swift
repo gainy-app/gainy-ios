@@ -17,7 +17,7 @@ final class HomeViewController: BaseViewController {
     
     //MARK: - Inner
     private let viewModel = HomeViewModel()
-    private var refreshControl = LottieRefreshControl()
+    private var refreshControl = UIRefreshControl()
     
     //MARK: - Inner
     @IBOutlet private weak var nameLbl: UILabel!
