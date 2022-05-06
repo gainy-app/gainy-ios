@@ -1,15 +1,12 @@
-iOS v1.3 #195 available
+iOS v1.3 #196 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
 :new: New:
-• Stock View: tags from About removed
-• Home: add Sorting of Collections / WL
+•
 
 :hammer_and_wrench: Improvements
-• Onboarding Questions: always show bottom next button for steps
-• Update Next button flow for interests with blur
-• QA
+•
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
