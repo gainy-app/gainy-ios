@@ -8,6 +8,7 @@
 import UIKit
 
 typealias CollectionId = Int
+typealias ProfileId = Int
 
 struct CollectionSettings: Codable {
     enum ViewMode: Int, Codable {
@@ -85,6 +86,64 @@ struct CollectionSettings: Codable {
         }
         
         return sortingList
+    }
+}
+
+struct CollectionsSortingSettings: Codable {
+    
+    enum SortingField: Int, Codable, CaseIterable {
+        case matchScore = 0, todaysGain, timeUpdated, numberOfStocks, name
+        
+        var title: String {
+            switch self {
+            case .matchScore: return "Match Score"
+            case .todaysGain: return "Todays Gain"
+            case .timeUpdated: return "Time Updated"
+            case .numberOfStocks: return "Stocks Count"
+            case .name: return "Name"
+            }
+        }
+    }
+    
+    let profileID: Int
+    let sorting: SortingField
+    let ascending: Bool
+    
+    var sortingFieldsToShow: [SortingField] {
+        
+        return SortingField.allCases
+    }
+}
+
+final class CollectionsSortingSettingsManager {
+    
+    static let shared = CollectionsSortingSettingsManager()
+    
+    @UserDefault("CollectionsSortingSettingsManager.settings_v1.0_prod")
+    private var settings: [ProfileId : CollectionsSortingSettings]?
+    
+    func getSettingByID(_ id: Int) -> CollectionsSortingSettings {
+        if settings == nil {
+            settings = [:]
+        }
+        if let settings = settings?[id] {
+            return settings
+        } else {
+            let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .matchScore, ascending: false)
+            settings?[id] = defSettigns
+            return defSettigns
+        }
+    }
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, sorting: CollectionsSortingSettings.SortingField) {
+        let cur = getSettingByID(id)
+        settings?[id] =  CollectionsSortingSettings.init(profileID: id, sorting: sorting, ascending: cur.ascending)
+    }
+    
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id] = CollectionsSortingSettings.init(profileID: id, sorting: cur.sorting, ascending: ascending)
     }
 }
 

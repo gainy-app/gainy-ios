@@ -386,6 +386,7 @@
 		859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */; };
 		859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */; };
 		85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */; };
+		85B4DD382824A29B006CE0FC /* SortCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */; };
 		85B90DE7280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */; };
 		85B90DEE280D518500F21DB2 /* CollectionDetailsTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DE9280D518500F21DB2 /* CollectionDetailsTitleCell.swift */; };
 		85B90DEF280D518500F21DB2 /* CollectionDetailsAboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DEA280D518500F21DB2 /* CollectionDetailsAboutCell.swift */; };
@@ -958,6 +959,7 @@
 		859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
 		859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
 		85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfile.graphql.swift; sourceTree = "<group>"; };
+		85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionsViewController.swift; sourceTree = "<group>"; };
 		85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsHeaderView.swift; sourceTree = "<group>"; };
 		85B90DE9280D518500F21DB2 /* CollectionDetailsTitleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsTitleCell.swift; sourceTree = "<group>"; };
 		85B90DEA280D518500F21DB2 /* CollectionDetailsAboutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsAboutCell.swift; sourceTree = "<group>"; };
@@ -1357,6 +1359,7 @@
 			isa = PBXGroup;
 			children = (
 				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
+				85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */,
 				85E4A28127551CCB00C0E5C5 /* Portfolio */,
 				8520F9F82722BBF0002234B2 /* FeatureDescriptionViewController.swift */,
 				33F6DC3B2738FDF300CBE4DA /* SearchStocks */,
@@ -3159,6 +3162,7 @@
 				33BDCF7D26CE8B91000DE770 /* TickerDetailsWatchlistViewCell.swift in Sources */,
 				3A9FB0E2266B853100EC85D4 /* RecommendedCollectionsHeaderView.swift in Sources */,
 				33FE9E3826D5183A00FABC70 /* ScatterChartView.swift in Sources */,
+				85B4DD382824A29B006CE0FC /* SortCollectionsViewController.swift in Sources */,
 				90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */,
 				85695AF1274594BF00759569 /* MetricsFooterView.swift in Sources */,
 				33CBAF7827A28581008F6F88 /* UpdatePlaidPortfolio.graphql.swift in Sources */,

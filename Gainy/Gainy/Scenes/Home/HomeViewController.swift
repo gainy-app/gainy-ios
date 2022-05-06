@@ -9,6 +9,7 @@ import UIKit
 import SwiftUI
 import SwiftDate
 import SkeletonView
+import FloatingPanel
 
 final class HomeViewController: BaseViewController {
     
@@ -43,7 +44,24 @@ final class HomeViewController: BaseViewController {
         }
     }
     
+    //Panel
+    private var fpc: FloatingPanelController!
+    
+    //Hosted VCs
+    private lazy var sortingCollectionsVC = SortCollectionsViewController.instantiate(.popups)
+    private lazy var sortingWatchlistVC = SortCollectionDetailsViewController.instantiate(.popups)
+    
+    private var shouldDismissFloatingPanel = false
+    private var floatingPanelPreviousYPosition: CGFloat? = nil
+    
+    
     //MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupPanel()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -77,6 +95,73 @@ final class HomeViewController: BaseViewController {
     
     @objc func refreshAction() {
         loadBasedOnState()
+    }
+    
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        fpc.layout = SortWLPanelLayout()
+        let appearance = SurfaceAppearance()
+        
+        // Define corner radius and background color
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+        
+        // Set the new appearance
+        fpc.surfaceView.appearance = appearance
+        
+        // Assign self as the delegate of the controller.
+        fpc.delegate = self // Optional
+        
+        // Set a content view controller.
+        sortingCollectionsVC.delegate = self
+        sortingWatchlistVC.delegate = self
+        fpc.set(contentViewController: sortingCollectionsVC)
+        fpc.isRemovalInteractionEnabled = true
+        
+        // Add and show the views managed by the `FloatingPanelController` object to self.view.
+        //fpc.addPanel(toParent: self)
+    }
+    
+    class SortWLPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 333.0, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
+    }
+    
+    class SortCollectionsPanelLayout: FloatingPanelLayout {
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
     }
     
     //MARK: - Popup
@@ -131,5 +216,63 @@ extension HomeViewController: HomeDataSourceDelegate {
     
     func tickerSelected(ticker: RemoteTicker) {
         mainCoordinator?._showCardDetailsViewController(TickerInfo.init(ticker: ticker))
+    }
+    
+    func tickerSortCollectionsPressed() {
+        guard self.presentedViewController == nil else {return}
+        sortingCollectionsVC.delegate = self
+        fpc.layout = SortCollectionsPanelLayout()
+        self.fpc.set(contentViewController: sortingCollectionsVC)
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    func tickerSortWLPressed() {
+        guard self.presentedViewController == nil else {return}
+        sortingWatchlistVC.delegate = self
+        sortingWatchlistVC.collectionId = Constants.CollectionDetails.watchlistCollectionID
+        fpc.layout = SortWLPanelLayout()
+        self.fpc.set(contentViewController: sortingWatchlistVC)
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+}
+
+extension HomeViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            
+            if let prevY = floatingPanelPreviousYPosition {
+                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+            }
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y
+            let maxY = vc.surfaceLocation(for: .tip).y
+            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+            floatingPanelPreviousYPosition = max(loc.y, minY)
+        }
+    }
+    
+    func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+        if shouldDismissFloatingPanel {
+            self.fpc.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
+    func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
+        
+        self.fpc.dismiss(animated: true, completion: nil)
+        viewModel.sortWatchlist()
+        self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: SortCollectionsViewControllerDelegate {
+    
+    func selectionChanged(vc: SortCollectionsViewController, sorting: String) {
+        
+        self.fpc.dismiss(animated: true, completion: nil)
+        viewModel.sortFavCollections()
+        self.tableView.reloadData()
     }
 }

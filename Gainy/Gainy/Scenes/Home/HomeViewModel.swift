@@ -89,9 +89,12 @@ final class HomeViewModel {
                                                                                              getRealtimeMetrics(symbols: indexSymbols),
                                                                                              getWatchlist())
             self.favCollections = colAsync
+            self.sortFavCollections()
+            
             self.gains = gainsAsync
             self.articles = articlesAsync
             self.watchlist = watchlistAsync
+            self.sortWatchlist()
             
             let indexes = indexesAsync
             topIndexes.removeAll()
@@ -115,6 +118,53 @@ final class HomeViewModel {
             }
         }
     }    
+    
+    func sortFavCollections() {
+        guard let profielId = UserProfileManager.shared.profileID else { return }
+        let colAsyncSorted = self.favCollections.sorted { lhs, rhs in
+            
+            let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profielId)
+            let sorting = settings.sorting
+            if settings.ascending {
+                switch sorting {
+                case .matchScore:
+                    return lhs.matchScore?.matchScore ?? 0.0 < rhs.matchScore?.matchScore ?? 0.0
+                case .todaysGain:
+                    return lhs.metrics?.relativeDailyChange ?? 0.0 < rhs.metrics?.relativeDailyChange ?? 0.0
+                case .timeUpdated:
+                    return lhs.metrics?.updatedAt ?? "" < rhs.metrics?.updatedAt ?? ""
+                case .numberOfStocks:
+                    return lhs.size ?? 0 < rhs.size ?? 0
+                case .name:
+                    return lhs.name ?? "" < rhs.name ?? ""
+                }
+            } else {
+                switch sorting {
+                case .matchScore:
+                    return lhs.matchScore?.matchScore ?? 0.0 > rhs.matchScore?.matchScore ?? 0.0
+                case .todaysGain:
+                    return lhs.metrics?.relativeDailyChange ?? 0.0 > rhs.metrics?.relativeDailyChange ?? 0.0
+                case .timeUpdated:
+                    return lhs.metrics?.updatedAt ?? "" > rhs.metrics?.updatedAt ?? ""
+                case .numberOfStocks:
+                    return lhs.size ?? 0 > rhs.size ?? 0
+                case .name:
+                    return lhs.name ?? "" > rhs.name ?? ""
+                }
+            }
+        }
+        self.favCollections = colAsyncSorted
+    }
+    
+    func sortWatchlist() {
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
+        let watchlistAsyncSorted = self.watchlist.sorted(by: { lhs, rhs in
+            let llhs = CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(lhs))
+            let rrhs = CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(rhs))
+            return settings.sortingValue().sortFunc(isAsc: settings.ascending, llhs, rrhs)
+        })
+        self.watchlist = watchlistAsyncSorted
+    }
     
     func getWatchlist() async -> [RemoteTicker] {
         return await
