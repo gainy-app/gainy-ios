@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220503062333.profile_collections"
+    /// fetch data from the table: "public_220506032930.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -135,6 +135,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         profile_id
         relative_daily_change
         updated_at
+        previous_day_close_price
       }
       match_score {
         __typename
@@ -268,6 +269,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("profile_id", type: .scalar(Int.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("updated_at", type: .scalar(timestamp.self)),
+        GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
       ]
     }
 
@@ -277,8 +279,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt])
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil, previousDayClosePrice: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice])
     }
 
     public var __typename: String {
@@ -323,6 +325,15 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")
+      }
+    }
+
+    public var previousDayClosePrice: float8? {
+      get {
+        return resultMap["previous_day_close_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "previous_day_close_price")
       }
     }
   }
@@ -1608,7 +1619,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     }
   }
 
-  /// An array relationship
+  /// fetch data from the table: "public_220506032930.ticker_events"
   public var tickerEvents: [TickerEvent] {
     get {
       return (resultMap["ticker_events"] as! [ResultMap]).map { (value: ResultMap) -> TickerEvent in TickerEvent(unsafeResultMap: value) }
@@ -2321,7 +2332,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     }
   }
 
-  /// An array relationship
+  /// fetch data from the table: "public_220506032930.ticker_events"
   public var tickerEvents: [TickerEvent] {
     get {
       return (resultMap["ticker_events"] as! [ResultMap]).map { (value: ResultMap) -> TickerEvent in TickerEvent(unsafeResultMap: value) }

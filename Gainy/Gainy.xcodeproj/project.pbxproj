@@ -490,6 +490,7 @@
 		901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C527766BCD000213DA /* GetSelectedCategories.graphql.swift */; };
 		901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */; };
 		901D5EDE27DA6CA8001B1697 /* HomeFetchArticles.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */; };
+		901EDCF92825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
@@ -501,6 +502,7 @@
 		9068DDEB274B7350007C588A /* GetPortfolioCharts.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */; };
 		906B28EA2768C0FF0058528B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 906B28E92768C0FF0058528B /* Lottie */; };
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
+		9071A8BD2825BB0C0031106E /* GetPortfolioChartMetrics.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */; };
 		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
 		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
 		9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */; };
@@ -1063,6 +1065,7 @@
 		901944C627766BCE000213DA /* GetSelectedInterests.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetSelectedInterests.graphql.swift; sourceTree = "<group>"; };
 		901D5EDC27DA6ADD001B1697 /* HomeFetchArticles.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = HomeFetchArticles.graphql; sourceTree = "<group>"; };
 		901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFetchArticles.graphql.swift; sourceTree = "<group>"; };
+		901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPortfolioChartMetrics.graphql.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
@@ -1074,6 +1077,7 @@
 		9068DDE9274B7350007C588A /* GetPortfolioCharts.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetPortfolioCharts.graphql.swift; path = Gainy/Services/GraphQL/Schema/API/GetPortfolioCharts.graphql.swift; sourceTree = SOURCE_ROOT; };
 		906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickerExtraDetails.graphql; sourceTree = "<group>"; };
 		906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
+		9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPortfolioChartMetrics.graphql; sourceTree = "<group>"; };
 		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
 		9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCell.swift; sourceTree = "<group>"; };
 		9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickersCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1161,6 +1165,7 @@
 		1C3A2C2D26AEB56600FAF107 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */,
 				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
 				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
 				85ED4DEE2703486600FE6926 /* Categories.graphql.swift */,
@@ -1238,6 +1243,7 @@
 				33EEECD0274237A4004C41FE /* GetPlaidTransactions.graphql */,
 				9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */,
 				9068DDE6274B6FE4007C588A /* GetPortfolioCharts.graphql */,
+				9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */,
 				33CBAF7527A2846B008F6F88 /* UpdatePlaidPortfolio.graphql */,
 			);
 			path = Plaid;
@@ -2854,6 +2860,7 @@
 				859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				85DF212A278CA25000F2899B /* investment_goals.mp4 in Resources */,
+				9071A8BD2825BB0C0031106E /* GetPortfolioChartMetrics.graphql in Resources */,
 				3A930EE2265C190C000FD3EB /* Assets.xcassets in Resources */,
 				85EDC14B27281EA700866AD2 /* FetchTickers.graphql in Resources */,
 				85DF212B278CA25000F2899B /* investment_horizon.mp4 in Resources */,
@@ -3061,6 +3068,7 @@
 				33376FAD26F8AED100618CD7 /* LineViewModel.swift in Sources */,
 				3A498F54266C179E008437F1 /* CollectionDetailsViewControllerProtocol.swift in Sources */,
 				85B90DF0280D518500F21DB2 /* CollectionDetailsRecommendedCell.swift in Sources */,
+				901EDCF92825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift in Sources */,
 				3A3214A226698FCC00D6778B /* CollectionDTOMapper.swift in Sources */,
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
 				85E4A28C275687A100C0E5C5 /* PortfolioInfoDataViewController.swift in Sources */,

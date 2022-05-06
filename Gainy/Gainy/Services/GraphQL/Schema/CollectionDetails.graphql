@@ -16,6 +16,7 @@ fragment RemoteCollectionDetails on collections {
     profile_id
     relative_daily_change
     updated_at
+    previous_day_close_price
     }
     match_score {
     match_score
