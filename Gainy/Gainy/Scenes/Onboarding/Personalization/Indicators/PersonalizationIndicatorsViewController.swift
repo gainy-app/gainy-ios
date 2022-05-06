@@ -48,6 +48,12 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     @IBOutlet weak var investingApproachSourceView: PersonalizationTitlePickerSectionView!
     
     @IBOutlet weak var nextButton: UIButton!
+    private var nextButtonUnavailable: Bool = true {
+        didSet {
+            self.nextButton.layer.borderColor = UIColor.clear.cgColor
+            self.nextButton.backgroundColor = self.nextButtonUnavailable ? UIColor.init(hexString: "#B1BDC8"): UIColor.black
+        }
+    }
     
     @IBOutlet weak var scrollView: UIScrollView!
     private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewProgress?
@@ -80,7 +86,8 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         self.setUpStockMarketRisksView()
         
         self.setUpInvestingApproachSourceView()
-        self.setNextButtonHidden(isHidden: true)
+        self.setNextButtonHidden(isHidden: false)
+        self.nextButtonUnavailable = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -178,6 +185,11 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     @IBAction func nextButtonTap(_ sender: Any) {
         
+        if self.nextButtonUnavailable {
+            NotificationManager.shared.showMessage(title: "", text: "Please, select the values above to proceed", cancelTitle: "OK", actions: nil)
+            return
+        }
+        
         GainyAnalytics.logEvent("indicators_next_button_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         if self.currentTab == .investingApproach {
             
@@ -207,7 +219,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
         
         let middleDfaultOffset = 150.0
         self.currentTab = newTab
-        self.setNextButtonHidden(isHidden: self.currentTab.rawValue % 2 == 0)
+        self.nextButtonUnavailable = (self.currentTab.rawValue % 2 == 0)
         
         let nextButtonTitle = NSLocalizedString("Next", comment: "Next button title")
         self.nextButton.setTitle(nextButtonTitle, for: UIControl.State.normal)
@@ -250,9 +262,9 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             self.indicatorViewProgressObject?.progress = Float(0.25)
             self.setMarketReturnsHidden(isHidden: false)
             if let selectedMarketReturns = self.selectedMarketReturns {
-                self.setNextButtonHidden(isHidden: selectedMarketReturns.count == 0)
+                self.nextButtonUnavailable = selectedMarketReturns.count == 0
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
             }
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 0.25) {
@@ -277,9 +289,9 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             self.indicatorViewProgressObject?.progress = Float(0.50)
             self.setMoneySourceViewHidden(isHidden: false)
             if let selectedSources = self.selectedSources {
-                self.setNextButtonHidden(isHidden: selectedSources.count == 0)
+                self.nextButtonUnavailable = selectedSources.count == 0
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
             }
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 0.25) {
@@ -303,7 +315,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             GainyAnalytics.logEvent("indicators_change_tab", params: ["tab" : "stockMarketRisks", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
             self.indicatorViewProgressObject?.progress = Float(0.75)
             self.setStockMarketRisksHidden(isHidden: false)
-            self.setNextButtonHidden(isHidden: self.sliderViewStockMarketRisks.isInitialLayout)
+            self.nextButtonUnavailable = self.sliderViewStockMarketRisks.isInitialLayout
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 0.25) {
                 self.thirdSectionStackViewVerticalConstraint.constant = 0
@@ -317,9 +329,9 @@ class PersonalizationIndicatorsViewController: BaseViewController {
             let doneButtonTitle = NSLocalizedString("Next", comment: "Next button title")
             self.nextButton.setTitle(doneButtonTitle, for: UIControl.State.normal)
             if let selectedApproaches = self.selectedApproaches {
-                self.setNextButtonHidden(isHidden: selectedApproaches.count == 0)
+                self.nextButtonUnavailable = selectedApproaches.count == 0
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
             }
         }
     }
@@ -514,7 +526,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
         if marketReturnsSourceView == sender {
             self.selectedMarketReturns = sources
             if let selectedMarketReturns = self.selectedMarketReturns {
-                self.setNextButtonHidden(isHidden: selectedMarketReturns.count == 0)
+                self.nextButtonUnavailable = selectedMarketReturns.count == 0
                 if (selectedMarketReturns.count == 0) {
                     self.coordinator?.onboardingInfoBuilder.averageMarketReturn = nil
                     self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = nil
@@ -530,7 +542,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                     }
                 }
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
                 self.coordinator?.onboardingInfoBuilder.averageMarketReturn = nil
                 self.mainCoordinator?.onboardingInfoBuilder.averageMarketReturn = nil
             }
@@ -538,7 +550,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
         else if self.urgentMoneySourceView == sender {
             self.selectedSources = sources
             if let selectedSources = self.selectedSources {
-                self.setNextButtonHidden(isHidden: selectedSources.count == 0)
+                self.nextButtonUnavailable = selectedSources.count == 0
                 if (selectedSources.count == 0) {
                     self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
                     self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
@@ -551,14 +563,14 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                     }
                 }
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
                 self.coordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
                 self.mainCoordinator?.onboardingInfoBuilder.unexpectedPurchasesSource = nil
             }
         } else if self.investingApproachSourceView == sender {
             self.selectedApproaches = sources
             if let selectedApproaches = self.selectedApproaches {
-                self.setNextButtonHidden(isHidden: selectedApproaches.count == 0)
+                self.nextButtonUnavailable = selectedApproaches.count == 0
                 if (selectedApproaches.count == 0) {
                     self.coordinator?.onboardingInfoBuilder.tradingExperience = nil
                     self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = nil
@@ -571,7 +583,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationTitlePickerSec
                     }
                 }
             } else {
-                self.setNextButtonHidden(isHidden: true)
+                self.nextButtonUnavailable = true
                 self.coordinator?.onboardingInfoBuilder.tradingExperience = nil
                 self.mainCoordinator?.onboardingInfoBuilder.tradingExperience = nil
             }
@@ -671,7 +683,7 @@ extension PersonalizationIndicatorsViewController: PersonalizationSliderSectionV
             self.mainCoordinator?.onboardingInfoBuilder.damageOfFailure = (1.0 - currentValue)
             GainyAnalytics.logEvent("damage_of_failure_picked", params: ["damage_of_failure" : "\((1.0 - currentValue))", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationIndicators"])
         } else {
-            self.setNextButtonHidden(isHidden: false)
+            self.nextButtonUnavailable = false
             if sender == self.sliderViewStockMarketRisks {
                 var stockMarketRisks = "very_safe"
                 let value = Int(100 * currentValue)
