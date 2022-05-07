@@ -50,6 +50,7 @@ final class TickerDetailsViewModel: NSObject, CardDetailsViewModelProtocol {
             dailyGrow: 0.0,
             matchScore: RemoteCollectionDetails.MatchScore.init(),
             inYourCollectionList: false,
+            lastDayPrice: 0.0,
             cards: tickersToCompare.map { CollectionDetailsViewModelMapper.map(CollectionDetailsDTOMapper.mapTickerDetails(
                 $0
             ))}

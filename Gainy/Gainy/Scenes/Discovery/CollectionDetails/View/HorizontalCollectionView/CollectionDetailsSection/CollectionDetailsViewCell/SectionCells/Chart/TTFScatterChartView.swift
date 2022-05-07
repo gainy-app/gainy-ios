@@ -72,6 +72,9 @@ struct TTFScatterChartView: View {
             .padding(.top, 0)
             .padding(.leading, 0)
             .padding(.trailing, 0)
+            .onChange(of: viewModel.lastDayPrice) { newValue in
+                lineViewModel.lastDayPrice = newValue
+            }
         } else {
             VStack {
                 

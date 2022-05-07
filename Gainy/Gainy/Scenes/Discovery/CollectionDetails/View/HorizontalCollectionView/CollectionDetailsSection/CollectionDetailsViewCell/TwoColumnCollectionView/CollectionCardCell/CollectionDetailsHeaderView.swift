@@ -81,7 +81,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         ttfTickersLabel.isSkeletonable = true
         ttfTickersLabel.skeletonCornerRadius = 6
         ttfTickersLabel.linesCornerRadius = 6
-        ttfTickersLabel.text = "TTF Tickers"
+        ttfTickersLabel.text = "TTF Details"
         self.addSubview(ttfTickersLabel)
         
         ttfTickersLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)

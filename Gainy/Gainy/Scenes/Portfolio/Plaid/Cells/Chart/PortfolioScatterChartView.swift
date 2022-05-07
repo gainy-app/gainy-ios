@@ -72,6 +72,9 @@ struct PortfolioScatterChartView: View {
             .frame(height: 360)
             .ignoresSafeArea()
             .padding(.top, 0)
+            .onChange(of: viewModel.lastDayPrice) { newValue in
+                lineViewModel.lastDayPrice = newValue
+            }
         } else {
             VStack {
                 headerView

@@ -110,7 +110,7 @@ struct Legend: View {
             adjustedRes -= maxWidth / 2.0
         }
         let textWidth = (height == 0 ? minWidth : maxWidth)
-        return fmax(0.0, (adjustedRes + textWidth  >= frame.width ? (finalRes - textWidth) : adjustedRes))
+        return fmax(6.0, (adjustedRes + textWidth  >= frame.width ? (finalRes - textWidth - 6.0) : adjustedRes))
     }
     
     private func line(atHeight: CGFloat, width: CGFloat) -> Path {

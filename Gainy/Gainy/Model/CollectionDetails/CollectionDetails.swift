@@ -9,6 +9,7 @@ struct CollectionDetails {
     let collectionDailyGrow: Float
     let matchScore: RemoteCollectionDetails.MatchScore
     let isInYourCollectionsList: Bool
+    let lastDayPrice: Float
     var cards: [TickerDetails]
     
     mutating func insertCards(_ newCards: [TickerDetails]) {

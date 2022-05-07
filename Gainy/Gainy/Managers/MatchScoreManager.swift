@@ -20,7 +20,7 @@ struct MatchScoreManager {
         case 35..<65:
             return UIColor.Gainy.mainText!
         case 65...:
-            return .white
+            return UIColor.Gainy.mainText!
         default:
             return UIColor.Gainy.mainText!
         }

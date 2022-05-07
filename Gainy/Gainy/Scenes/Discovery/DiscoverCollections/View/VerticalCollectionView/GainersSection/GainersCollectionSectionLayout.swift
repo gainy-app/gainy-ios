@@ -60,7 +60,7 @@ struct GainersCollectionSectionLayout: SectionLayout {
         collectionView.dequeueReusableSectionHeader(for: indexPath)
         
         headerView.configureWith(
-            title: isGainers ? "Top gainers in your TTF" : "Top losers in your TTF"
+            title: isGainers ? "Top gainers in your TTFs" : "Top losers in your TTFs"
         )
         
         return headerView

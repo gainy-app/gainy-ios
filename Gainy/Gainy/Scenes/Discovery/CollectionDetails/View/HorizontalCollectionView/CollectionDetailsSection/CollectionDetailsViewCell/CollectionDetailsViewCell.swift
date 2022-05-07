@@ -186,6 +186,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
+        viewModel.topChart.lastDayPrice = viewModel.lastDayPrice
         viewModel.topChart.chartData = topChart
         viewModel.topChart.sypChartData = medianData
         viewModel.topChart.spGrow = Float(medianData.startEndDiff)
@@ -884,7 +885,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             }
             
             if viewModel.combinedTags.isEmpty {
-                return CGSize.init(width: width, height: 144.0)
+                return CGSize.init(width: width, height: 144.0 + 32)
             } else {
                 print(viewModel.name)
                 let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0

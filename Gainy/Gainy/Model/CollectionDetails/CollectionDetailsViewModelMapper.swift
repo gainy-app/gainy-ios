@@ -11,6 +11,7 @@ enum CollectionDetailsViewModelMapper {
             dailyGrow: model.collectionDailyGrow,
             matchScore: model.matchScore,
             inYourCollectionList: model.isInYourCollectionsList,
+            lastDayPrice: model.lastDayPrice,
             cards: model.cards.map { CollectionDetailsViewModelMapper.map($0) }
         )
     }

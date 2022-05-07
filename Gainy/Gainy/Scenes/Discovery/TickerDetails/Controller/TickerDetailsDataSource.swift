@@ -113,6 +113,7 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
+        chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData

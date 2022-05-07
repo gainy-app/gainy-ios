@@ -26,11 +26,15 @@ final class TTFChartViewModel: ObservableObject {
     @Published
     var isLoading: Bool
     
+    @Published
+    var lastDayPrice: Float = 0
+    
     init(spGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
         self.spGrow = spGrow
         self.chartData = chartData
         self.sypChartData = sypChartData
         self.isSPPVisible = isSPPVisible
         self.isLoading = true
+        self.lastDayPrice = 0.0
     }
 }

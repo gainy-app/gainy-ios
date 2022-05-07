@@ -111,6 +111,9 @@ struct ScatterChartView: View {
             }).frame(height: 341)
                 .ignoresSafeArea()
                 .padding(.top, 0)
+                .onChange(of: viewModel.lastDayPrice) { newValue in
+                    lineViewModel.lastDayPrice = newValue
+                }
         } else {
             GeometryReader(content: { rootGeo in
                 VStack {

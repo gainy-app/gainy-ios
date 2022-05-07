@@ -1,4 +1,4 @@
-iOS v1.3 #196 available
+iOS v1.3 #197 available
 :globe_with_meridians: Server - TEST
 Bugfixes
 
@@ -6,8 +6,6 @@ Bugfixes
 •
 
 :hammer_and_wrench: Improvements
-• Article crashes removed
-• Stock View: related collections
 • QA
 
 :red_circle: Important Notes:

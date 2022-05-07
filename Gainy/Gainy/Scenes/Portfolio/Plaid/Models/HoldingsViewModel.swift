@@ -37,6 +37,7 @@ final class HoldingsViewModel {
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
+    private var metrics: PortofolioMetrics?
     
     func clearChats() {
         chartsCache.removeAll()
@@ -81,6 +82,8 @@ final class HoldingsViewModel {
                     dprint("\(Date()) Holdings load end")
                     loadGroup.leave()
                 }
+                
+                
                 
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {
@@ -188,6 +191,14 @@ final class HoldingsViewModel {
                             dprint("Holdings SPP charts last \(rawData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
                         }
+                    }
+                    
+                    innerChartsGroup.enter()
+                    dprint("\(Date()) Metrics for Porto load start")
+                    HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] metrics in
+                        self?.metrics = metrics
+                        dprint("\(Date()) Metrics for Porto load end")
+                        innerChartsGroup.leave()
                     }
                     
                     innerChartsGroup.notify(queue: .main) {

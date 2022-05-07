@@ -14,6 +14,7 @@ enum CollectionDetailsDTOMapper {
             collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             matchScore: dto.matchScore ?? RemoteCollectionDetails.MatchScore(),
             isInYourCollectionsList: false,
+            lastDayPrice: dto.metrics?.previousDayClosePrice ?? 0.0,
             cards: dto.prefetchedTickers
         )
     }
@@ -31,6 +32,7 @@ enum CollectionDetailsDTOMapper {
             collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             matchScore: dto.matchScore ?? RemoteCollectionDetails.MatchScore(),
             isInYourCollectionsList: true,
+            lastDayPrice: dto.metrics?.previousDayClosePrice ?? 0.0,
             cards: dto.prefetchedTickers
         )
     }
@@ -241,7 +243,7 @@ enum CollectionDetailsDTOMapper {
                                                             description: randomString(20),
                                                             tickerHighlights: [])))
             }
-            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], uniqID: "", image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: 1, dailyGrow: 0.0, matchScore: RemoteCollectionDetails.MatchScore(), inYourCollectionList: false, cards: cards))
+            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], uniqID: "", image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: 1, dailyGrow: 0.0, matchScore: RemoteCollectionDetails.MatchScore(), inYourCollectionList: false, lastDayPrice: 0.0, cards: cards))
         }
         return collections
     }

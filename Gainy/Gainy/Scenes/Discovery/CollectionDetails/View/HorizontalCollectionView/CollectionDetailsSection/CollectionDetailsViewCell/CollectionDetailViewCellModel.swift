@@ -9,6 +9,7 @@ struct CollectionDetailViewCellModel {
     let dailyGrow: Float
     let matchScore: RemoteCollectionDetails.MatchScore
     let inYourCollectionList: Bool
+    let lastDayPrice: Float
     var cards: [CollectionCardViewCellModel]
     
     var combinedTags: [TickerTag] = []
