@@ -90,4 +90,9 @@ struct Constants {
     struct OneSignal {
         static let appId = "a9619aa9-f7b4-4675-96f3-7ae78608c131"
     }
+    
+    struct RevenueCat {
+        static let appId = "appf92c1b5c1c"
+        static let publicKey = "appl_frKqXzekPjQXwJaYRTwGkPSuCiF"
+    }
 }

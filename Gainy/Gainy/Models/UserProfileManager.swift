@@ -149,6 +149,7 @@ final class UserProfileManager {
                 self.lastName = appProfile.lastName
                 self.email = appProfile.email
                 OneSignal.setEmail(appProfile.email)
+                SubscriptionManager.shared.setEmail(email: appProfile.email)
                 self.address = appProfile.legalAddress
                 self.userID = appProfile.userId
                 self.avatarUrl = appProfile.avatarUrl

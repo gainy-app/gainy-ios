@@ -22,6 +22,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initBugfender()
         TickerLiveStorage.shared.clearAllLiveData()
         initOneSignal(launchOptions: launchOptions)
+        SubscriptionManager.shared.setup()
         return true
     }
     

@@ -762,6 +762,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             Network.shared.apollo.clearCache()
             UserProfileManager.shared.fetchProfile { success in
                 
+                if let profileId = UserProfileManager.shared.profileID {
+                    SubscriptionManager.shared.login(profileId: profileId)
+                    SubscriptionManager.shared.getSubscription()
+                    SubscriptionManager.shared.getProducts()
+                }
+                
                 guard success == true else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
                     completion()

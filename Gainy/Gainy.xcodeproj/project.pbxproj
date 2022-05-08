@@ -479,6 +479,12 @@
 		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
 		9004AECB27C2C50000821A29 /* HomeIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECA27C2C50000821A29 /* HomeIndexView.swift */; };
 		9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */; };
+		9006307C282857C1009EEB65 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9006307B282857C1009EEB65 /* RevenueCat */; };
+		9006307F282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006307E282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift */; };
+		9006308128285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */; };
+		90063083282859B0009EEB65 /* SubscriptionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */; };
+		9006308528285A7B009EEB65 /* RevenueCatSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */; };
+		9006308728285CBF009EEB65 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308628285CBF009EEB65 /* SubscriptionManager.swift */; };
 		900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */; };
 		900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF3274976D600CF1597 /* HoldingViewModel.swift */; };
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
@@ -1054,6 +1060,11 @@
 		85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppInterests.graphql; sourceTree = "<group>"; };
 		9004AECA27C2C50000821A29 /* HomeIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexView.swift; sourceTree = "<group>"; };
 		9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexViewModel.swift; sourceTree = "<group>"; };
+		9006307E282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInfoStorageProtocol.swift; sourceTree = "<group>"; };
+		9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPurchaseInfoStorage.swift; sourceTree = "<group>"; };
+		90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionServiceProtocol.swift; sourceTree = "<group>"; };
+		9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevenueCatSubscriptionService.swift; sourceTree = "<group>"; };
+		9006308628285CBF009EEB65 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		900CEAEF2749752E00CF1597 /* HoldingChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartViewModel.swift; sourceTree = "<group>"; };
 		900CEAF3274976D600CF1597 /* HoldingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingViewModel.swift; sourceTree = "<group>"; };
 		900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityViewModel.swift; sourceTree = "<group>"; };
@@ -1135,6 +1146,7 @@
 				33467CEA26C66FA300811F74 /* FirebaseFirestore in Frameworks */,
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
+				9006307C282857C1009EEB65 /* RevenueCat in Frameworks */,
 				33467CF026C66FA300811F74 /* FirebaseStorage in Frameworks */,
 				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
@@ -2051,6 +2063,7 @@
 		3A930F21265C1C6B000FD3EB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9006307D282857CE009EEB65 /* Purchases */,
 				3AE90361266A4EDE00574923 /* Analytics */,
 				3AD40F5B266021AA005679DE /* LocalBundleReader */,
 				3AA52C7B26600FEC006A6961 /* GraphQL */,
@@ -2556,6 +2569,18 @@
 			path = Indexes;
 			sourceTree = "<group>";
 		};
+		9006307D282857CE009EEB65 /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				9006307E282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift */,
+				9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */,
+				90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */,
+				9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */,
+				9006308628285CBF009EEB65 /* SubscriptionManager.swift */,
+			);
+			path = Purchases;
+			sourceTree = "<group>";
+		};
 		900CEAED274974DE00CF1597 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -2691,6 +2716,7 @@
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
 				90FDE6B828148CE70068F033 /* ActivityIndicatorView */,
 				90A3495B281B232700B00CD5 /* OneSignal */,
+				9006307B282857C1009EEB65 /* RevenueCat */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2790,6 +2816,7 @@
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
+				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -3039,6 +3066,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9006307F282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift in Sources */,
 				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
@@ -3087,6 +3115,7 @@
 				3AD40F5D266021BD005679DE /* BundleReader.swift in Sources */,
 				33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */,
 				8505FCF5273965170061AB36 /* BrokerDataSource.swift in Sources */,
+				90063083282859B0009EEB65 /* SubscriptionServiceProtocol.swift in Sources */,
 				8505FCF32739648D0061AB36 /* BrokersViewController.swift in Sources */,
 				85ED4DE92703166B00FE6926 /* GetProfile.graphql.swift in Sources */,
 				33FE9E3C26D518FE00FABC70 /* IndicatorPoint.swift in Sources */,
@@ -3103,6 +3132,7 @@
 				85ED4DE32701FE7500FE6926 /* EditPersonalInfoViewController.swift in Sources */,
 				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
 				3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */,
+				9006308728285CBF009EEB65 /* SubscriptionManager.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */,
@@ -3283,6 +3313,7 @@
 				3A5ADA7B268DA179008659E8 /* SwipeOptions.swift in Sources */,
 				3A498F63266C2E62008437F1 /* CollectionDetailsViewModelProtocol.swift in Sources */,
 				85DF21262784936E00F2899B /* UpdateProfileScoringSettings.graphql.swift in Sources */,
+				9006308528285A7B009EEB65 /* RevenueCatSubscriptionService.swift in Sources */,
 				33BDCF7726CE8B6F000DE770 /* TickerDetailsRecommendedViewCell.swift in Sources */,
 				900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */,
 				331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */,
@@ -3387,6 +3418,7 @@
 				901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */,
 				85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */,
 				3AE7959526638596002B40D6 /* Presentable.swift in Sources */,
+				9006308128285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift in Sources */,
 				331243DC27BF7488008C2BCC /* HomeIndexesTableViewCell.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionHorizontalView.swift in Sources */,
@@ -3476,7 +3508,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3505,7 +3537,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3534,7 +3566,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3564,7 +3596,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3657,7 +3689,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3782,7 +3814,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3968,7 +4000,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3998,7 +4030,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 197;
+				CURRENT_PROJECT_VERSION = 198;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4296,6 +4328,14 @@
 				minimumVersion = 6.0.2;
 			};
 		};
+		9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		9017BF5D2780D88600F3910A /* XCRemoteSwiftPackageReference "Deviice" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/andrealufino/Deviice.git";
@@ -4461,6 +4501,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 85CD154726F8B22B001C060C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		9006307B282857C1009EEB65 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
 		};
 		9017BF5E2780D88600F3910A /* Deviice */ = {
 			isa = XCSwiftPackageProductDependency;
