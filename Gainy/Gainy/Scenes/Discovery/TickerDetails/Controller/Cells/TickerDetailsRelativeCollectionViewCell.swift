@@ -113,7 +113,7 @@ final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = .proDisplayBold(20)
+        label.font = .proDisplayBold(18)
         label.textColor = UIColor.Gainy.white
         
         label.numberOfLines = 1
@@ -147,7 +147,7 @@ final class TickerDetailsRelativeCollectionViewCell: UICollectionViewCell {
     lazy var stocksAmountLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 14)
+        label.font = UIFont(name: "SFCompactRounded-Semibold", size: 10)
         label.textColor = UIColor.Gainy.white
         
         label.numberOfLines = 1

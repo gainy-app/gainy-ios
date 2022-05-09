@@ -147,7 +147,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     func highlightIndustries() {
         wrongIndBtn.isSelected = true
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
+        for (ind, tagInfo) in (tickerInfo?.matchTags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 
                 tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
@@ -159,8 +159,8 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     func unhighlightIndustries() {
         wrongIndBtn.isSelected = false
-        guard (tickerInfo?.tags ?? []).count == tagsStack.subviews.count else {return}
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
+        guard (tickerInfo?.matchTags ?? []).count == tagsStack.subviews.count else {return}
+        for (ind, tagInfo) in (tickerInfo?.matchTags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 if tagInfo.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white

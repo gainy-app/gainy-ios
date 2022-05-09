@@ -9,9 +9,9 @@ import Foundation
 import RevenueCat
 
 struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
+    private var config = Configuration()
     
     func setup() {
-        var config = Configuration()
         guard config.environment == .production else {return}
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: Constants.RevenueCat.publicKey,
@@ -22,7 +22,6 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func login(profileId: Int) {
-        var config = Configuration()
         guard config.environment == .production else {return}
         
         Purchases.shared.logIn("\(profileId)") {(customerInfo, created, error) in
@@ -31,11 +30,15 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func setEmail(email: String) {
+        
+        guard config.environment == .production else {return}
+
         Purchases.shared.setEmail(email)
     }
     
     func getSubscription() -> SuscriptionType {
-        .free
+        guard config.environment == .production else {return .pro}
+        return .free
     }
     
     func getProducts() {
