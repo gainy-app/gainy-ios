@@ -1,5 +1,5 @@
 query GetSelectedInterests($ids: [Int!]) {
-  interests(where: {enabled: {_eq: "1"}, id: {_in: $ids}}, order_by: {sort_order: ASC}) {
+  interests(where: {enabled: {_eq: "1"}, id: {_in: $ids}}, order_by: {sort_order: asc}) {
     icon_url
     id
     name
