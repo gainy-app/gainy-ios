@@ -12,7 +12,33 @@ protocol SubscriptionManagerProtocol: SubscriptionServiceProtocol{
     var storage: PurchaseInfoStorageProtocol { get }
 }
 
+enum ProductVariant: String {
+    case a, b, c
+}
+
+enum Product {
+    case month(variant: ProductVariant)
+    case month6(variant: ProductVariant)
+    case year(variant: ProductVariant)
+    
+    var identifier: String {
+        switch self {
+        case .month(let variant):
+            return "gainy_m1_"
+        case .month6(let variant):
+            return "gainy_m6_"
+        case .year(let variant):
+            return "gainy_y1_"
+        }
+    }
+}
+
 class SubscriptionManager: SubscriptionManagerProtocol {
+    
+    //MARK: - Enttlms
+    
+    private let enttlm = "pro"
+    
     
     var service: SubscriptionServiceProtocol
     

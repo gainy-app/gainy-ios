@@ -20,4 +20,12 @@ struct UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         UserDefaults.standard.set(max(0, amount), forKey: "profile_limit_\(profileId)")
     }
     
+    func viewedCollections() -> [Int] {
+        []
+    }
+    
+    func viewCollection(colId: Int) -> Bool {
+        true
+    }
+    
 }

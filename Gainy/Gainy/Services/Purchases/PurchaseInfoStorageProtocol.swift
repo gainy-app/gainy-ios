@@ -10,6 +10,7 @@ import Foundation
 /// Protocol to store/save limits usage
 protocol PurchaseInfoStorageProtocol {
     var collectionViewLimit: Int {get}
-    func getCollectionViewCount(profileId: Int) -> Int
-    func setCollectionViewCount(profileId: Int, amount: Int)
+    
+    func viewedCollections() -> [Int]
+    func viewCollection(colId: Int) -> Bool
 }
