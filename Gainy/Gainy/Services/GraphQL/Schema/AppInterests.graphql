@@ -1,5 +1,5 @@
 query AppInterests {
-  interests(where: {enabled: {_eq: "1"}}, order_by: {sort_order: ASC}) {
+  interests(where: {enabled: {_eq: "1"}}, order_by: {sort_order: asc}) {
     icon_url
     id
     name
