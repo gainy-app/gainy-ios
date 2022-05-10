@@ -510,6 +510,7 @@
 		906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */; };
 		9071A8BD2825BB0C0031106E /* GetPortfolioChartMetrics.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */; };
 		9072F56F277C4FA70057596B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9072F56E277C4FA70057596B /* FacebookCore */; };
+		90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */; };
 		9075CD0D281F1C8D00747A09 /* GainersCollectionSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */; };
 		9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */; };
 		9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */; };
@@ -1089,6 +1090,7 @@
 		906D009327516AAE00EE0400 /* GetTickerExtraDetails.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickerExtraDetails.graphql; sourceTree = "<group>"; };
 		906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerExtraDetails.graphql.swift; sourceTree = "<group>"; };
 		9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetPortfolioChartMetrics.graphql; sourceTree = "<group>"; };
+		90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagingSubscriptionService.swift; sourceTree = "<group>"; };
 		9075CD0C281F1C8D00747A09 /* GainersCollectionSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersCollectionSectionLayout.swift; sourceTree = "<group>"; };
 		9075CD0E281F1D5800747A09 /* HomeTickersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCell.swift; sourceTree = "<group>"; };
 		9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickersCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2576,6 +2578,7 @@
 				9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */,
 				90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */,
 				9006308428285A7B009EEB65 /* RevenueCatSubscriptionService.swift */,
+				90759392282AE72E0004F9A9 /* StagingSubscriptionService.swift */,
 				9006308628285CBF009EEB65 /* SubscriptionManager.swift */,
 			);
 			path = Purchases;
@@ -3172,6 +3175,7 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
+				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */,

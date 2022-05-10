@@ -764,8 +764,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 if let profileId = UserProfileManager.shared.profileID {
                     SubscriptionManager.shared.login(profileId: profileId)
-                    SubscriptionManager.shared.getSubscription()
-                    SubscriptionManager.shared.getProducts()
+                    SubscriptionManager.shared.getSubscription { _ in
+                        
+                    }
                 }
                 
                 guard success == true else {

@@ -12,7 +12,6 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     private var config = Configuration()
     
     func setup() {
-        guard config.environment == .production else {return}
         Purchases.logLevel = .debug
         Purchases.configure(withAPIKey: Constants.RevenueCat.publicKey,
                             appUserID: nil,
@@ -22,7 +21,6 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func login(profileId: Int) {
-        guard config.environment == .production else {return}
         
         Purchases.shared.logIn("\(profileId)") {(customerInfo, created, error) in
             dprint("RevenueCat login \(customerInfo)")
@@ -30,15 +28,12 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func setEmail(email: String) {
-        
-        guard config.environment == .production else {return}
 
         Purchases.shared.setEmail(email)
     }
     
-    func getSubscription() -> SuscriptionType {
-        guard config.environment == .production else {return .pro}
-        return .free
+    func getSubscription(_ completion: (SuscriptionType) -> Void) {
+        completion(.free)
     }
     
     func getProducts() {

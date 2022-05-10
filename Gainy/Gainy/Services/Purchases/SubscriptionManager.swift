@@ -10,12 +10,9 @@ import Foundation
 protocol SubscriptionManagerProtocol: SubscriptionServiceProtocol{
     var service: SubscriptionServiceProtocol { get }
     var storage: PurchaseInfoStorageProtocol { get }
-    
-    var subscribtionType: SuscriptionType {get}
 }
 
 class SubscriptionManager: SubscriptionManagerProtocol {
-    
     
     var service: SubscriptionServiceProtocol
     
@@ -23,18 +20,19 @@ class SubscriptionManager: SubscriptionManagerProtocol {
     
     static let shared = SubscriptionManager()
     
+    private var config = Configuration()
+    
     init(
         service: SubscriptionServiceProtocol = RevenueCatSubscriptionService(),
         storage: PurchaseInfoStorageProtocol = UserDefaultsPurchaseInfoStorage()
     ) {
-        self.service = service
         self.storage = storage
+        if config.environment == .production {
+            self.service = service
+        } else {
+            self.service = StagingSubscriptionService()
+        }
     }
-    
-    var subscribtionType: SuscriptionType {
-        service.getSubscription()
-    }
-    
 }
 
 
@@ -51,8 +49,12 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.setEmail(email: email)
     }
     
-    func getSubscription() -> SuscriptionType {
-        service.getSubscription()
+    func getSubscription(_ completion: (SuscriptionType) -> Void) {
+        service.getSubscription { type in
+            NotificationManager.broadcastSubscriptionChangeNotification(type: type)
+            completion(type)
+        }
+        
     }
     
     func getProducts() {
