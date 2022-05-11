@@ -8,6 +8,7 @@
 import UIKit
 import SwiftDate
 import BugfenderSDK
+import OneSignal
 
 struct AppProfileMetricsSetting {
     
@@ -96,7 +97,7 @@ final class UserProfileManager {
             completion(false)
             return
         }
-        
+        OneSignal.setExternalUserId("\(profileID)")
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
             
@@ -147,6 +148,8 @@ final class UserProfileManager {
                 self.firstName = appProfile.firstName
                 self.lastName = appProfile.lastName
                 self.email = appProfile.email
+                OneSignal.setEmail(appProfile.email)
+                SubscriptionManager.shared.setEmail(email: appProfile.email)
                 self.address = appProfile.legalAddress
                 self.userID = appProfile.userId
                 self.avatarUrl = appProfile.avatarUrl
@@ -215,7 +218,8 @@ final class UserProfileManager {
             async let favs = getFavCollections()
             async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
             async let recommendedIDs = getRecommenedCollectionIDs(forceReload: forceReload)
-            let (favsRes, recommenededRes, recommendedIDsRes) = await (favs, recommeneded, recommendedIDs)
+            async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
+            let (favsRes, recommenededRes, recommendedIDsRes, topTickersRes) = await (favs, recommeneded, recommendedIDs, topTickers)
             
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
@@ -229,6 +233,8 @@ final class UserProfileManager {
                 }
                 return
             }
+            
+            CollectionsManager.shared.topTickers = topTickersRes
             
             let firstCollections = recommenededRes.reorder(by: recommendedIDsRes).prefix(24)
             
@@ -322,7 +328,7 @@ final class UserProfileManager {
             
             self.watchlist.append(symbol)
             CollectionsManager.shared.loadWatchlistCollection {
-                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
+                //NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }
@@ -347,7 +353,7 @@ final class UserProfileManager {
                 element == symbol
             }
             CollectionsManager.shared.loadWatchlistCollection {
-                NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
+                //NotificationCenter.default.post(name: NSNotification.Name.didUpdateWatchlist, object: nil)
                 completion(true)
             }
         }

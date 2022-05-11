@@ -16,6 +16,7 @@ class NotificationManager: NSObject {
     static let tickerScrollNotification = Notification.Name.init("tickerScrollNotification")
     static let portoTabPressedNotification = Notification.Name.init("portoTabPressedNotification")
     static let appBecomeActiveNotification = Notification.Name.init("appBecomeActiveNotification")
+    static let subscriptionChangedNotification = Notification.Name.init("subscriptionChangedNotification")
     
     // Singleton
     static let shared = NotificationManager()
@@ -131,6 +132,10 @@ class NotificationManager: NSObject {
     
     class func broadcastNotification(name: String, object: Any?, shortcutIndex: Int) {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: name), object: nil, userInfo: [:])
+    }
+    
+    class func broadcastSubscriptionChangeNotification(type: SuscriptionType) {
+        NotificationCenter.default.post(name: subscriptionChangedNotification, object: nil, userInfo: ["type": type])
     }
     
     

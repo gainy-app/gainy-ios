@@ -18,6 +18,8 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func openCompareWithSelf(ticker: TickerInfo)
     func requestOpenCollection(withID id: Int)
     func wrongIndPressed(isTicked: Bool)
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
+    func collectionSelected(collection: RemoteCollectionDetails)
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -93,6 +95,7 @@ final class TickerDetailsDataSource: NSObject {
     func stopLoader() {
         chartLoader.stopAnimating()
         chartHosting.view.alpha = 1.0
+        chartViewModel.isLoading = false
     }
     
     private(set) var chartViewModel: ScatterChartViewModel!
@@ -110,6 +113,7 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
+        chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
@@ -317,8 +321,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
         delegate?.loadingState(started: true)
         ticker.chartRange = period
+        chartViewModel.isLoading = true
         ticker.loadNewChartData(period: period) {[weak self] in
             guard let self = self else {return}
+            self.chartViewModel.isLoading = false
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData
@@ -331,6 +337,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegate {
+    func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
+        delegate?.wlPressed(stock: stock, cell: cell)
+    }
+    
     func isStockCompared(stock: AltStockTicker) -> Bool {
         delegate?.isStockCompared(stock: stock) ?? false
     }
@@ -367,16 +377,20 @@ extension TickerDetailsDataSource: UIScrollViewDelegate {
 }
 
 extension TickerDetailsDataSource: TickerDetailsAboutViewCellDelegate {
-    func requestOpenCollection(withID id: Int) {
-        
-        self.delegate?.requestOpenCollection(withID: id)
-    }
-    
     func aboutExtended(isExtended: Bool) {
         self.isAboutExpanded = isExtended
     }
+    func collectionSelected(collection: RemoteCollectionDetails) {
+        delegate?.collectionSelected(collection: collection)
+    }
+}
+
+extension TickerDetailsDataSource: TickerDetailsRecommendedViewCellDelegate {
+    func requestOpenCollection(withID id: Int) {
+        //self.delegate?.requestOpenCollection(withID: id)
+    }
     
     func wrongIndPressed(isTicked: Bool) {
-        delegate?.wrongIndPressed(isTicked: isTicked)
+        self.delegate?.wrongIndPressed(isTicked: isTicked)
     }
 }

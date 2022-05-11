@@ -7,6 +7,8 @@
 
 import SwiftDate
 
+typealias PortofolioMetrics = GetPortfolioChartMetricsQuery.Data.GetPortfolioChartPreviousPeriodClose
+
 /// Charts loader helper
 final class HistoricalChartsLoader {
     
@@ -174,7 +176,47 @@ final class HistoricalChartsLoader {
                 completion([])
                 break
             }
-        }
+        }        
+    }
+    
+    func loadPlaidPortfolioChartMetrics(profileID: Int, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int, completion: @escaping (PortofolioMetrics?) -> Void) {
+        let intersIDs = settings.interests.filter { item in
+            item.selected
+        }.compactMap({$0.id})
         
+        let catsIDs = settings.categories.filter { item in
+            item.selected
+        }.compactMap({$0.id})
+        
+        let securityTypes = settings.securityTypes.compactMap({$0.title})
+        
+        var accountIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.id})
+        let disabledAccounts = settings.disabledAccounts.compactMap({$0.id})
+        accountIds = accountIds.filter({!disabledAccounts.contains($0)})
+        
+        //let institutionIDs = UserProfileManager.shared.linkedPlaidAccounts.compactMap({$0.institutionID})
+        
+        dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
+        Network.shared.apollo.fetch(query: GetPortfolioChartMetricsQuery.init(profileId: profileID,
+                                                                        interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
+                                                                        accessTokenIds: accountIds,
+                                                                        accountIds: nil,
+                                                                        categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
+                                                                        lttOnly: settings.onlyLongCapitalGainTax,
+                                                                        securityTypes: securityTypes)) { result in
+            switch result {
+            case .success(let graphQLResult):
+                if let fetchedData = graphQLResult.data?.getPortfolioChartPreviousPeriodClose {
+                    completion(fetchedData)
+                } else {
+                    completion(nil)
+                }
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                completion(nil)
+                break
+            }
+        }
     }
 }

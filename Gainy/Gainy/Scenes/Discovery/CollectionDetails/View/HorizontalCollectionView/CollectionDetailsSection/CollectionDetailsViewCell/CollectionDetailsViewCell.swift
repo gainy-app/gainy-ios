@@ -1,9 +1,14 @@
 import UIKit
 import SkeletonView
 import Combine
-
+import PureLayout
 
 private enum CollectionDetailsSection: Int, CaseIterable {
+    case title = 0
+    case gain
+    case chart
+    case about
+    case recommended
     case cards
 }
 
@@ -23,151 +28,44 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
-        isSkeletonable = true
         layer.isOpaque = true
         backgroundColor = .clear
         
-        collectionHorizontalView.frame = CGRect(
-            x: 4,
-            y: 0,
-            width: UIScreen.main.bounds.width - (16 + 16),
-            height: 144
-        )
+        let layout = UICollectionViewFlowLayout.init()
+        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.addSubview(refreshControl)
+        collectionView.alwaysBounceVertical = true
         
-        collectionHorizontalView.backgroundColor = .clear
+        collectionView.register(CollectionDetailsTitleCell.self)
+        collectionView.register(CollectionDetailsGainCell.self)
+        collectionView.register(CollectionDetailsChartCell.self)
+        collectionView.register(CollectionDetailsAboutCell.self)
+        collectionView.register(CollectionDetailsRecommendedCell.self)
         
-        contentView.addSubview(collectionHorizontalView)
+        collectionView.register(CollectionCardCell.self)
+        collectionView.register(CollectionListCardCell.self)
+        collectionView.register(CollectionChartCardCell.self)
         
-        internalCollectionView = UICollectionView(
-            frame: CGRect(
-                x: 0,
-                y: 144,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + 144 + 20)
-            ),
-            collectionViewLayout: customLayout
-        )
+        collectionView.register(CollectionDetailsFooterView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: "CollectionDetailsFooterView")
         
-        internalCollectionView.addSubview(refreshControl)
-        internalCollectionView.alwaysBounceVertical = true
+        collectionView.register(CollectionDetailsHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "CollectionDetailsHeaderView")
         
-        internalCollectionView.register(CollectionCardCell.self)
-        internalCollectionView.register(UINib(nibName: "CollectionListCardCell", bundle: nil), forCellWithReuseIdentifier: CollectionListCardCell.cellIdentifier)
-        
-        internalCollectionView.register(CollectionDetailsFooterView.self,
-                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                        withReuseIdentifier: "CollectionDetailsFooterView")
-        
-        internalCollectionView.showsVerticalScrollIndicator = false
-        internalCollectionView.backgroundColor = .clear
-        internalCollectionView.dataSource = dataSource
-        internalCollectionView.delegate = self
-        internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 144, right: 0)
-        internalCollectionView.contentInsetAdjustmentBehavior = .never
-        internalCollectionView.clipsToBounds = false
-        
-        contentView.addSubview(internalCollectionView)
-        contentView.bringSubviewToFront(collectionHorizontalView)
-        contentView.addSubview(collectionListHeader)
-        collectionListHeader.frame = CGRect.init(x: 4, y: 144, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
-        collectionListHeader.isHidden = true
-        
-        let recurLock = NSRecursiveLock()
-        
-        dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>(
-            collectionView: internalCollectionView
-        ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
-            let cell = self?.sections[indexPath.section].configureCell(
-                collectionView: collectionView,
-                indexPath: indexPath,
-                viewModel: modelItem,
-                position: indexPath.row
-            )
-            TickerLiveStorage.shared.clearAllExpiredLiveData()
-            
-            if let model = modelItem as? CollectionCardViewCellModel, model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
-                cell?.showAnimatedGradientSkeleton()
-                return cell
-            } else if let isLoading = self?.isLoadingTickers, isLoading == false {
-                cell?.hideSkeleton()
-            }
-            
-            //Loading tickers data!
-            recurLock.lock()
-            if let model = modelItem as? CollectionCardViewCellModel, !(self?.isLoadingTickers ?? false) {
-                
-                let dispatchGroup = DispatchGroup()
-                var loadingItems: Int  = 0
-                let hasSymbol = TickerLiveStorage.shared.haveSymbol(model.tickerSymbol)
-                let isLoadingSymbol = self?.loadingSymbolArray.contains(where: { item in
-                    item == model.tickerSymbol
-                }) ?? false
-                let needLoadSymbol = !hasSymbol && !isLoadingSymbol
-                if needLoadSymbol {
-                    loadingItems += 1
-                    self?.loadingSymbolArray.append(model.tickerSymbol)
-                    self?.isLoadingTickers = true
-                    
-                    dprint("Fetching dt started \(model.tickerSymbol)")
-                    dispatchGroup.enter()
-                    TickersLiveFetcher.shared.getSymbolsData(self?.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ?? []) {
-                        self?.loadingSymbolArray.removeAll(where: { item in
-                            item == model.tickerSymbol
-                        })
-                        dispatchGroup.leave()
-                        dprint("Fetching dt ended \(model.tickerSymbol)")
-                    }
-                }
-                
-                if loadingItems > 0 {
-                    dispatchGroup.notify(queue: DispatchQueue.main, execute: {
-                        dprint("Fetching ended \(model.tickerSymbol)")
-                        guard let self = self else {return}
-                        
-                        runOnMain {
-                            if var snapshot = self.dataSource?.snapshot() {
-                                if snapshot.itemIdentifiers.count > 0 {
-                                    let ids =  self.internalCollectionView.indexPathsForVisibleItems.compactMap({$0.row}).compactMap({snapshot.itemIdentifiers[$0]})
-                                    snapshot.reloadItems(ids)
-                                }
-                                self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                                    cell?.hideSkeleton()
-                                    self.isLoadingTickers = false
-                                })
-                            }
-                        }
-                    })
-                } else {
-                    cell?.hideSkeleton()
-                }
-            }
-
-            recurLock.unlock()
-            
-            if indexPath.row == (self?.cards.count ?? 0) - 1 && self?.cards.count ?? 0 != (self?.stocksCount ?? 0) {
-                //isLoadingTickers = true
-                
-            }
-
-            return cell
-        }
-        
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            switch kind {
-            case UICollectionView.elementKindSectionFooter:
-                
-                guard let self = self else { return UICollectionReusableView() }
-                let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
-                footer.addSubview(self.loadMoreActivityIndicatorView)
-                self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
-                self.loadMoreActivityIndicatorView.startAnimating()
-                return footer
-                
-            default:
-                return nil
-            }
-        }
-        
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.contentInset = .init(top: 0, left: 0, bottom: 111, right: 0)
+        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.clipsToBounds = false
+        contentView.addSubview(collectionView)
+        collectionView.autoPinEdgesToSuperviewEdges()
+        collectionView.isSkeletonable = true
+        collectionView.skeletonCornerRadius = 6.0
         initViewModels()
     }
     
@@ -178,17 +76,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     var isCompare: Bool = false {
         didSet {
-            collectionHorizontalView.isCompare = isCompare
+            //collectionHorizontalView.isCompare = isCompare
         }
     }
     
     // MARK: Internal
     
+    private var refreshingTickers: Bool = false
+    private var headerView: CollectionDetailsHeaderView? = nil
     @MainActor
     private var isLoadingTickers: Bool = false {
         didSet {
             if isLoadingTickers {
-                for cell in internalCollectionView.visibleCells {
+                for cell in collectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.showAnimatedGradientSkeleton()
                     }
@@ -196,12 +96,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         rightCell.showAnimatedGradientSkeleton()
                     }
                 }
-                
-//                internalCollectionView.isScrollEnabled = false
-//                internalCollectionView.isUserInteractionEnabled = false
-                internalCollectionView.setContentOffset(internalCollectionView.contentOffset, animated: false)
+                collectionView.setContentOffset(collectionView.contentOffset, animated: false)
             } else {
-                for cell in internalCollectionView.visibleCells {
+                for cell in collectionView.visibleCells {
                     if let rightCell = cell as? CollectionCardCell {
                         rightCell.hideSkeleton()
                     }
@@ -209,15 +106,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         rightCell.hideSkeleton()
                     }
                 }
-//                internalCollectionView.isScrollEnabled = true
-//                internalCollectionView.isUserInteractionEnabled = true
             }
         }
     }
     
     // MARK: Properties
     
-    var viewModel: CollectionCardViewCellModel?
+    var model: CollectionCardViewCellModel?
+    fileprivate var lastOffset: CGFloat = 0.0
     var cancellables = Set<AnyCancellable>()
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
@@ -226,117 +122,83 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
+    
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
-                collectionHorizontalView.shortCollection = shortCollection
-                collectionHorizontalView.frame = CGRect(
-                    x: -12,
-                    y: 0,
-                    width: UIScreen.main.bounds.width,
-                    height: 184
-                )
                 
-                internalCollectionView.frame = CGRect(
-                    x: 0,
-                    y: 184,
-                    width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                    height: UIScreen.main.bounds.height - (80 + 184 + 20)
-                )
-                collectionListHeader.frame = CGRect.init(x: 4, y: 184, width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8 + 8), height: 36.0)
-                internalCollectionView.contentInset = .init(top: 0, left: 0, bottom: 184, right: 0)
             }
         }
     }
     
-    lazy var collectionHorizontalView: CollectionHorizontalView = {
-        let view = CollectionHorizontalView()
-        view.backgroundColor = .clear
-        view.delegate = self
-        return view
-    }()
-    
-    lazy var collectionListHeader: CollictionsListHeaderView = {
-        let view = CollictionsListHeaderView()
-        view.frame = CGRect.init(x: 0, y: 0, width: contentView.bounds.width, height: 36.0)
-        return view
-    }()
-    
-    private var collectionID: Int = 0
-    private var stocksCount: Int = 0
+    //Replace to inner model
+    private var viewModel: CollectionDetailViewCellModel!
     
     private var loadingSymbolArray: Array<String> = Array()
     private var loadingMatchScoreArray: Array<String> = Array()
     
-    func configureWith(
-        name collectionName: String,
-        image collectionImage: String,
-        imageUrl: String,
-        description collectionDescription: String,
-        stocksAmount: String,
-        cards: [CollectionCardViewCellModel],
-        collectionId: Int
+    func configureWith(viewModel: CollectionDetailViewCellModel
     ) {
-        self.collectionID = collectionId
-        self.stocksCount = Int(stocksAmount) ?? 0
-        collectionHorizontalView.tag = collectionId
-        // TODO: 1: refactor logic below, think when appendItems/apply/layoutIfNeeded should be called
-        collectionHorizontalView.configureWith(
-            name: collectionName,
-            description: collectionDescription,
-            stocksAmount: stocksAmount,
-            imageName: collectionImage,
-            imageUrl: imageUrl,
-            collectionId: collectionId
-        )
-        
-        //Gettings settings
-        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(collectionId)
-        let offset = (self.shortCollection != nil) ? 184 : 144
-        if settings.viewMode == .list {
-            collectionListHeader.isHidden = false
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset) + 36,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
-            )
-            sections = [
-                CardsOneColumnListFlowSectionLayout(collectionID: collectionID),
-                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID)
-            ]
-        } else {
-            collectionListHeader.isHidden = true
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset),
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
-            )
-            sections =  [
-                CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
-                CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
-            ]
-        }
-        
-        collectionHorizontalView.updateChargeLbl(settings.sortingText())
-        self.cards = cards
+        self.viewModel = viewModel
+        self.cards = viewModel.cards
         sortSections()
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in
-            if Constants.CollectionDetails.watchlistCollectionID == collectionId {
+            if Constants.CollectionDetails.watchlistCollectionID == viewModel.id {
                 self.refreshData {
                     
                 }
             }
         }.store(in: &cancellables)
+        if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
+            guard !viewModel.isDataLoaded else {return}
+            showGradientSkeleton()
+            guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
+                if uniqID == self?.viewModel.uniqID {
+                    self?.pieChartData = pieData
+                    self?.updateCharts(topCharts)
+                    self?.viewModel.addTags(tags)
+                    self?.hideSkeleton()
+                    self?.viewModel.isDataLoaded = true
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+        // Load all data
+        // hideSkeleton()
     }
+    
+    @MainActor
+    fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
+        
+        viewModel.topChart.isLoading = false
+        
+        let mainChart = topCharts.first!
+        let medianChart = topCharts.last!
+        
+        let (main, median) = normalizeCharts(mainChart, medianChart)
+        
+        let topChart = ChartData(points: main, period: viewModel.chartRange)
+        let medianData = ChartData(points: median, period: viewModel.chartRange)
+        
+        //let topChart = ChartData(points: [15, 20,12,30])
+        //let medianData = ChartData(points: [15, 20,12,30].shuffled())
+        
+        viewModel.topChart.lastDayPrice = viewModel.lastDayPrice
+        viewModel.topChart.chartData = topChart
+        viewModel.topChart.sypChartData = medianData
+        viewModel.topChart.spGrow = Float(medianData.startEndDiff)
+    }
+    
+    
     private(set) var cards: [CollectionCardViewCellModel] = []
+    private var pieChartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
     
     private func loadMoreTickers() {
         
-        if (self.collectionID == Constants.CollectionDetails.watchlistCollectionID) {
+        if (viewModel?.id == Constants.CollectionDetails.watchlistCollectionID) {
             return
         }
         if (self.isLoadingMoreTickers) {
@@ -346,7 +208,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.isLoadingMoreTickers = true
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.collectionID, offset: self.cards.count) { tickerDetails in
+            CollectionsManager.shared.loadMoreTickersLoading(collectionID: self.viewModel.id, offset: self.cards.count) { tickerDetails in
                 runOnMain {
                     
                     var tickers = tickerDetails.compactMap { item in
@@ -368,49 +230,26 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let cardsDTO = stocks.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
             cards.append(contentsOf: cardsDTO)
             onNewCardsLoaded?(cardsDTO)
-            if var snap = dataSource?.snapshot() {
-                snap.appendItems(cardsDTO, toSection: .cards)
-                dataSource?.apply(snap, animatingDifferences: false, completion: {
-                    self.internalCollectionView.reloadData()
-                    completed?()
-                })
-            } else {
-                completed?()
-            }
+            self.collectionView.reloadData()
+            completed?()
         }
     }
     
     func sortSections(_ completion: (() -> Void)? = nil) {
         runOnMain {
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
-            collectionHorizontalView.updateChargeLbl(settings.sortingText())
-            
-            collectionListHeader.updateMetrics(settings.marketDataToShow)
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
             self.cards = self.cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
-            snapshot.deleteAllItems()
-            snapshot.appendSections([.cards])
-            snapshot.appendItems(self.cards, toSection: .cards)
-            dataSource?.apply(snapshot, animatingDifferences: false, completion: { [weak self] in
-                
-                self?.internalCollectionView.reloadData()
-                completion?()
-            })
+            self.collectionView.reloadData()
+            completion?()
         }
     }
     
     // MARK: Private
     
-    private lazy var sections: [SectionLayout] = [
-        CardsTwoColumnGridFlowSectionLayout(collectionID: collectionID),
-        CardsOneColumnListFlowSectionLayout(collectionID: collectionID)
-    ]
-    
-    private var dataSource: UICollectionViewDiffableDataSource<CollectionDetailsSection, AnyHashable>?
-    private var snapshot = NSDiffableDataSourceSnapshot<CollectionDetailsSection, AnyHashable>()
     private var isLoadingMoreTickers: Bool = false
-    private var internalCollectionView: UICollectionView!
+    private(set) var collectionView: UICollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
         control.layer.zPosition = -1
@@ -424,50 +263,37 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         return spinner
     } ()
     
-    private lazy var customLayout: UICollectionViewLayout = {
-        let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
-            self?.sections[sectionIndex].layoutSection(within: env)
-        }
-        return layout
-    }()
-    
     private func initViewModels() {}
     
     private func finishRefreshWithSorting(cards: [CollectionCardViewCellModel], _ completion: (() -> Void)? = nil) {
         runOnMain {
             
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(self.collectionID)
-            self.collectionHorizontalView.updateChargeLbl(settings.sortingText())
-            self.collectionListHeader.updateMetrics(settings.marketDataToShow)
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             self.cards = cards.sorted(by: { lhs, rhs in
                 settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
             })
             self.onRefreshedCardsLoaded?(self.cards)
-            self.snapshot.deleteAllItems()
-            self.snapshot.appendSections([.cards])
-            self.snapshot.appendItems(self.cards, toSection: .cards)
-            
-            self.dataSource?.apply(self.snapshot, animatingDifferences: false, completion: {
-                self.isLoadingTickers = false
-                self.internalCollectionView.reloadData()
-            })
+            let indesSet = IndexSet.init(integer: CollectionDetailsSection.cards.rawValue)
+            self.collectionView.reloadSections(indesSet)
+            self.headerView?.updateChargeLbl(settings.sortingText())
         }
     }
     
     func refreshData(_ completion: (() -> Void)? = nil) {
         
-        refreshControl.endRefreshing()
-        if self.isLoadingTickers {
-            completion?()
-            return
-        }
+        //        refreshControl.endRefreshing()
+        //        if self.refreshingTickers {
+        //            completion?()
+        //            return
+        //        }
         
-        self.isLoadingTickers = true
+        //        self.refreshingTickers = true
         
-        if self.collectionID == -1 {
+        if viewModel?.id == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
                 if let cards = models.first?.cards {
                     self?.finishRefreshWithSorting(cards: cards) {
+                        //                        self?.refreshingTickers = false
                         completion?()
                     }
                 }
@@ -476,13 +302,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         
         DispatchQueue.global(qos:.utility).async {
-            CollectionsManager.shared.loadNewCollectionDetails(self.collectionID) { remoteTickers in
+            CollectionsManager.shared.loadNewCollectionDetails(self.viewModel.id) { remoteTickers in
                 runOnMain {
                     let tickers = remoteTickers.compactMap { item in
                         item.rawTicker
                     }
                     let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
                     self.finishRefreshWithSorting(cards: cards) {
+                        //                        self.refreshingTickers = false
                         completion?()
                     }
                 }
@@ -494,20 +321,495 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         self.refreshData()
     }
+    
+    //MARK: - Chart
+    private let chartHeight: CGFloat = 256
+    private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
+        var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
+                                           delegate: chartDelegate)
+        let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
+        chartHosting.view.tag = TickerDetailsDataSource.hostingTag
+        return chartHosting
+    }()
+    
+    private lazy var chartDelegate: TTFScatterChartDelegate = {
+        let delegateObject =  TTFScatterChartDelegate()
+        delegateObject.delegate = self
+        return delegateObject
+    }()
+    
+    func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
+        viewModel.chartRange = range
+        viewModel.topChart.isLoading = true
+        Task {
+            let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
+            updateCharts(topCharts)
+            await MainActor.run {                
+                let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
+                self.collectionView.reloadSections(indesSet)
+            }
+        }
+    }
 }
+
+// MARK: UICollectionViewDataSource
+
+extension CollectionDetailsViewCell: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return 0
+        }
+        switch section {
+        case .title:
+            return 1
+        case .gain:
+            return 1
+        case .chart:
+            return 1
+        case .about:
+            return 1
+        case .recommended:
+            return 1
+        case .cards:
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                switch settings.pieChartMode {
+                case .tickers:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "ticker"
+                    }.count
+                case .categories:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "category"
+                    }.count
+                case .interests:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "interest"
+                    }.count
+                }
+            } else {
+                return self.cards.count
+            }
+        }
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return CollectionDetailsSection.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
+            fatalError("invalid section in 'CollectionDetailsViewCell'")
+        }
+        
+        switch section {
+        case .title:
+            let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
+            
+            cell.configureWith(companyName: viewModel.name)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
+            return cell
+            
+        case .gain:
+            let cell: CollectionDetailsGainCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsGainCell.cellIdentifier, for: indexPath) as! CollectionDetailsGainCell
+            if viewModel.id == Constants.CollectionDetails.watchlistCollectionID {
+                cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
+            } else {
+                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
+            }
+            cell.delegate = self
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
+            return cell
+            
+        case .chart:
+            let cell: CollectionDetailsChartCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsChartCell.cellIdentifier, for: indexPath) as! CollectionDetailsChartCell
+            if cell.addSwiftUIIfPossible(chartHosting.view) {
+                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell.contentView)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell.contentView, withOffset: 0)
+                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
+            }
+            chartHosting.view.clipsToBounds = false
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
+            return cell
+            
+        case .about:
+            let cell: CollectionDetailsAboutCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsAboutCell.cellIdentifier, for: indexPath) as! CollectionDetailsAboutCell
+            cell.configureWith(detail: viewModel.description)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
+            return cell
+            
+        case .recommended:
+            let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
+            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
+            
+            
+            NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
+            } receiveValue: { notif in
+                if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
+                    cell.setTransform(transform)
+                }
+            }.store(in: &cancellables)
+            cell.isSkeletonable = collectionView.isSkeletonable
+            if collectionView.sk.isSkeletonActive {
+                cell.showAnimatedGradientSkeleton()
+            } else {
+                cell.hideSkeleton()
+            }
+            return cell
+            
+        case .cards:
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                return self.chartCardCellForItemAtIndexPath(indexPath: indexPath)
+            } else {
+                if settings.viewMode == .grid {
+                    return self.gridCellForItemAtIndexPath(indexPath: indexPath)
+                } else {
+                    return self.listCellForItemAtIndexPath(indexPath: indexPath)
+                }
+            }
+        }
+    }
+    
+    func chartCardCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: CollectionChartCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionChartCardCell.cellIdentifier, for: indexPath) as! CollectionChartCardCell
+        let chartData = self.currentChartData()
+        guard indexPath.row < chartData.count else {
+            return cell
+        }
+        
+        cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
+        return cell
+    }
+    
+    func listCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: CollectionListCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionListCardCell.cellIdentifier, for: indexPath) as! CollectionListCardCell
+        guard indexPath.row < self.cards.count else {
+            return cell
+        }
+        let model = self.cards[indexPath.row]
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+        let markers = settings.marketDataToShow.prefix(4)
+        var vals: [String] = []
+        for marker in markers {
+            switch marker {
+            case .matchScore:
+                vals.append("\(model.matchScore)")
+            case .sharesOutstanding:
+                vals.append(model.sharesOutstanding)
+            case .shortPercentOutstanding:
+                vals.append(model.shortPercentOutstanding)
+            case .avgVolume90d:
+                vals.append(model.avgVolume90d)
+            case .sharesFloat:
+                vals.append(model.sharesFloat)
+            case .shortRatio:
+                vals.append(model.shortRatio)
+            case .beta:
+                vals.append(model.beta)
+            case .impliedVolatility:
+                vals.append(model.impliedVolatility)
+            case .revenueGrowthFwd:
+                vals.append(model.revenueGrowthFwd)
+            case .ebitdaGrowthYoy:
+                vals.append(model.ebitdaGrowthYoy)
+            case .epsGrowthYoy:
+                vals.append(model.epsGrowthYoy)
+            case .epsGrowthFwd:
+                vals.append(model.epsGrowthFwd)
+            case .address:
+                vals.append(model.address)
+            case .marketCapitalization:
+                vals.append(model.marketCapitalization)
+            case .enterpriseValueToSales:
+                vals.append(model.enterpriseValueToSales)
+            case .priceToEarningsTtm:
+                vals.append(model.priceToEarningsTtm)
+            case .priceToSalesTtm:
+                vals.append(model.priceToSalesTtm)
+            case .priceToBookValue:
+                vals.append(model.priceToBookValue)
+            case .enterpriseValueToEbitda:
+                vals.append(model.enterpriseValueToEbitda)
+            case .priceChange1m:
+                vals.append(model.priceChange1m)
+            case .priceChange3m:
+                vals.append(model.priceChange3m)
+            case .priceChange1y:
+                vals.append(model.priceChange1y)
+            case .dividendYield:
+                vals.append(model.dividendYield)
+            case .dividendsPerShare:
+                vals.append(model.dividendsPerShare)
+            case .dividendPayoutRatio:
+                vals.append(model.dividendPayoutRatio)
+            case .yearsOfConsecutiveDividendGrowth:
+                vals.append(model.yearsOfConsecutiveDividendGrowth)
+            case .dividendFrequency:
+                vals.append(model.dividendFrequency)
+            case .epsActual:
+                vals.append(model.epsActual)
+            case .epsEstimate:
+                vals.append(model.epsEstimate)
+            case .beatenQuarterlyEpsEstimationCountTtm:
+                vals.append(model.beatenQuarterlyEpsEstimationCountTtm)
+            case .epsSurprise:
+                vals.append(model.epsSurprise)
+            case .revenueEstimateAvg0y:
+                vals.append(model.revenueEstimateAvg0y)
+            case .revenueActual:
+                vals.append(model.revenueActual)
+            case .revenueTtm:
+                vals.append(model.revenueTtm)
+            case .revenuePerShareTtm:
+                vals.append(model.revenuePerShareTtm)
+            case .roi:
+                vals.append(model.roi)
+            case .netIncome:
+                vals.append(model.netIncome)
+            case .assetCashAndEquivalents:
+                vals.append(model.assetCashAndEquivalents)
+            case .roa:
+                vals.append(model.roa)
+            case .totalAssets:
+                vals.append(model.totalAssets)
+            case .ebitda:
+                vals.append(model.ebitda)
+            case .profitMargin:
+                vals.append(model.profitMargin)
+            case .netDebt:
+                vals.append(model.netDebt)
+            case .avgVolume10d:
+                vals.append(model.avgVolume10d)
+            case .revenueGrowthYoy:
+                vals.append(model.revenueGrowthYoy)
+            case .exchangeName:
+                vals.append(model.exchangeName)
+            }
+        }
+        
+        cell.configureWith(companyName: model.tickerCompanyName,
+                           tickerSymbol: model.tickerSymbol,
+                           tickerPercentChange: model.priceChangeToday > 0.0 ? " +" + model.priceChangeToday.percentRaw : model.priceChangeToday.percentRaw,
+                           tickerPrice: model.currentPrice > 0.0 ? model.currentPrice.cleanTwoDecimal: "0.00",
+                           markerHeaders:  markers.map(\.shortTitle),
+                           markerMetrics: vals,
+                           matchScore: "\(model.matchScore)")
+        return cell
+    }
+    
+    func gridCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell: CollectionCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionCardCell.cellIdentifier, for: indexPath) as! CollectionCardCell
+        guard indexPath.row < self.cards.count else {
+            return cell
+        }
+        let model = self.cards[indexPath.row]
+        cell.tag = viewModel.id
+        cell.configureWith(
+            companyName: model.tickerCompanyName,
+            tickerSymbol: model.tickerSymbol,
+            tickerPercentChange: model.priceChangeToday > 0.0 ? " +" + model.priceChangeToday.percentRaw : model.priceChangeToday.percentRaw,
+            tickerPrice:  model.currentPrice > 0.0 ? model.currentPrice.cleanTwoDecimal: "0.00",
+            matchScore: "\(model.matchScore)"
+        )
+        TickerLiveStorage.shared.clearAllExpiredLiveData()
+        
+        if model.tickerCompanyName.hasPrefix(Constants.CollectionDetails.demoNamePrefix) {
+            cell.showAnimatedGradientSkeleton()
+            return cell
+        } else {
+            let isLoading = self.isLoadingTickers
+            if isLoading == false {
+                cell.hideSkeleton()
+            }
+        }
+        
+        //Loading tickers data!
+        if !self.isLoadingTickers {
+            let dispatchGroup = DispatchGroup()
+            var loadingItems: Int  = 0
+            let hasSymbol = TickerLiveStorage.shared.haveSymbol(model.tickerSymbol)
+            let isLoadingSymbol = self.loadingSymbolArray.contains(where: { item in
+                item == model.tickerSymbol
+            })
+            let needLoadSymbol = !hasSymbol && !isLoadingSymbol
+            if needLoadSymbol {
+                loadingItems += 1
+                self.loadingSymbolArray.append(model.tickerSymbol)
+                self.isLoadingTickers = true
+                
+                dprint("Fetching dt started \(model.tickerSymbol)")
+                dispatchGroup.enter()
+                TickersLiveFetcher.shared.getSymbolsData(self.cards.dropFirst(indexPath.row).prefix(Constants.CollectionDetails.tickersPreloadCount).compactMap({$0.tickerSymbol}) ) {
+                    self.loadingSymbolArray.removeAll(where: { item in
+                        item == model.tickerSymbol
+                    })
+                    dispatchGroup.leave()
+                    dprint("Fetching dt ended \(model.tickerSymbol)")
+                }
+            }
+            
+            if loadingItems > 0 {
+                dispatchGroup.notify(queue: DispatchQueue.main, execute: {
+                    
+                    dprint("Fetching ended \(model.tickerSymbol)")
+                    self.collectionView.reloadData()
+                    cell.hideSkeleton()
+                    self.isLoadingTickers = false
+                    
+                })
+            } else {
+                cell.hideSkeleton()
+            }
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        var result: UICollectionReusableView = UICollectionReusableView.newAutoLayout()
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionDetailsHeaderView.reuseIdentifier, for: indexPath) as! CollectionDetailsHeaderView
+            
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            var state = CollectionDetailsHeaderViewState.grid
+            if settings.pieChartSelected {
+                state = CollectionDetailsHeaderViewState.chart
+            } else {
+                if settings.viewMode == .grid {
+                    state = CollectionDetailsHeaderViewState.grid
+                } else {
+                    state = CollectionDetailsHeaderViewState.list
+                }
+            }
+            
+            headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: settings.pieChartMode)
+            headerView.configureWithState(state: state)
+            headerView.updateChargeLbl(settings.sortingText())
+            headerView.updateMetrics(settings.marketDataToShow)
+
+            headerView.onSettingsPressed = {
+                guard self.cards.count > 0 else {
+                    return
+                }
+                self.onSettingsPressed?(self.cards[0].rawTicker)
+            }
+            
+            headerView.onSortingPressed = {
+                self.onSortingPressed?()
+            }
+            
+            headerView.onChartModeButtonPressed = { showChart in
+                
+                CollectionsDetailsSettingsManager.shared.changePieChartSelectedForId(self.viewModel?.id ?? -1, pieChartSelected: showChart)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onTableListModeButtonPressed = { showList in
+                let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
+                CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onChartTickerButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .tickers)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onChartCategoryButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .categories)
+                self.collectionView.reloadData()
+            }
+            
+            headerView.onChartInterestButtonPressed = {
+                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(self.viewModel?.id ?? -1, pieChartMode: .interests)
+                self.collectionView.reloadData()
+            }
+            
+            self.headerView = headerView
+            result = headerView
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
+            footer.addSubview(self.loadMoreActivityIndicatorView)
+            self.loadMoreActivityIndicatorView.frame = CGRect(x: 0, y: 0, width: collectionView.bounds.width, height: 64)
+            self.loadMoreActivityIndicatorView.startAnimating()
+            return footer
+        default: fatalError("Unhandlad behaviour")
+        }
+        return result
+    }
+    
+    func currentChartData() -> [GetTtfPieChartQuery.Data.CollectionPiechart] {
+        
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        if settings.pieChartSelected {
+            if settings.pieChartMode == .categories {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "category"
+                }
+            } else if settings.pieChartMode == .interests {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "interest"
+                }
+            } else if settings.pieChartMode == .tickers {
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "ticker"
+                }
+            }
+        }
+        
+        chartData = chartData.sorted(by: { itemLeft, itemRight in
+            itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
+        })
+        
+        return chartData
+    }
+}
+
+// MARK: UICollectionViewDelegate
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": self.collectionID,
+        guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
+        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
                                                            "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
         onCardPressed?(cards[indexPath.row].rawTicker)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-    
+        
         guard UICollectionView.elementKindSectionFooter == elementKind else { return }
-        if self.stocksCount == self.cards.count || self.collectionID == -1 {
+        if viewModel.stocksAmount == self.cards.count || viewModel.id == -1 {
             self.loadMoreActivityIndicatorView.isHidden = true
         } else {
             if self.isLoadingMoreTickers {
@@ -520,50 +822,217 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     }
 }
 
-extension CollectionDetailsViewCell: CollectionHorizontalViewDelegate {
-    func stocksViewModeChanged(view: CollectionHorizontalView, isGrid: Bool) {
-        if isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout  {return}
-        if !isGrid && sections.first! is CardsOneColumnListFlowSectionLayout {return}
-        let offset = (self.shortCollection != nil) ? 184 : 144
-        if isGrid {
-            collectionListHeader.isHidden = true
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset),
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20)
-            )
-            //stocks_view_changed
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.collectionID, "view" : "grid", "ec" : "CollectionDetails"])
-        } else if (!isGrid && sections.first! is CardsTwoColumnGridFlowSectionLayout) {
-            collectionListHeader.isHidden = false
-            internalCollectionView.frame = CGRect(
-                x: 0,
-                y: CGFloat(offset) + 36,
-                width: UIScreen.main.bounds.width - (8 + 4 + 4 + 8),
-                height: UIScreen.main.bounds.height - (80 + CGFloat(offset) + 20) - 36
-            )
-            GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID": self.collectionID, "view" : "list", "ec" : "CollectionDetails"])
+// MARK: UICollectionViewDelegateFlowLayout
+
+extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: indexPath.section) else {
+            return CGSize.init(width: collectionView.frame.width, height: 0)
         }
         
-        sections.swapAt(0, 1)
-        internalCollectionView.clipsToBounds = true
-        internalCollectionView.reloadData()
-    }
-    
-    
-    func stockSortPressed(view: CollectionHorizontalView) {
-        onSortingPressed?()
-    }
-    
-    func comparePressed(view: CollectionHorizontalView) {
-        onAddStockPressed?()
-    }
-    
-    func settingsPressed(view: CollectionHorizontalView) {
-        guard cards.count > 0 else {
-            return
+        switch section {
+        case .title:
+            let width = collectionView.frame.width
+            guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
+                return CGSize.init(width: width, height: 60.0)
+            }
+            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
+        case .gain:
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            let width = collectionView.frame.width
+            return CGSize.init(width: width, height: 72.0)
+            
+        case .chart:
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            let width = collectionView.frame.width
+            return CGSize.init(width: width, height: chartHeight)
+            
+        case .about:
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            guard viewModel.id != Constants.CollectionDetails.watchlistCollectionID else {
+                return .zero
+            }
+            
+            let aboutTitleWithOffsets = 32.0
+            let bottomOffset = 24.0
+            let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
+            return CGSize.init(width: collectionView.frame.width, height: height)
+            
+        case .recommended:
+            guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
+            let width = collectionView.frame.width
+            
+            //Tags
+            var lines: Int = 0
+            let tagHeight: CGFloat = 24.0
+            let margin: CGFloat = 8.0
+            
+            let totalWidth: CGFloat = UIScreen.main.bounds.width - 32 * 2.0
+            var xPos: CGFloat = 0.0
+            var yPos: CGFloat = 0.0
+            for tag in viewModel.combinedTags {
+                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+                if xPos + width + margin > totalWidth{
+                    xPos = 0.0
+                    yPos = yPos + tagHeight + margin
+                    lines += 1
+                }
+                xPos += width + margin
+            }
+            
+            if viewModel.combinedTags.isEmpty {
+                return CGSize.init(width: width, height: 144.0 + 32)
+            } else {
+                print(viewModel.name)
+                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
+                return CGSize.init(width: width, height: calculatedHeight)
+            }
+            
+        case .cards:
+            
+            var width = 0.0
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                width = collectionView.frame.width - 30
+                return CGSize.init(width: width, height: 88.0)
+            } else {
+                if settings.viewMode == .grid {
+                    width = collectionView.frame.width / 2.0 - 30
+                    return CGSize.init(width: width, height: width)
+                } else {
+                    width = collectionView.frame.width - 30
+                    return CGSize.init(width: width, height: 88.0)
+                }
+            }
         }
-        onSettingsPressed?(cards[0].rawTicker)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGFloat(0.0)
+        }
+        
+        if section == .cards {
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                return CGFloat(8.0)
+            } else {
+                if settings.viewMode == .grid {
+                    return CGFloat(20.0)
+                } else {
+                    return CGFloat(8.0)
+                }
+            }
+        }
+        
+        return CGFloat(0.0)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGFloat(0.0)
+        }
+        
+        if section == .cards {
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                return CGFloat(8.0)
+            } else {
+                if settings.viewMode == .grid {
+                    return CGFloat(20.0)
+                } else {
+                    return CGFloat(8.0)
+                }
+            }
+        }
+        
+        return CGFloat(0.0)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return UIEdgeInsets.zero
+        }
+        
+        if section == .cards {
+            return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+        }
+        
+        return UIEdgeInsets.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGSize.zero
+        }
+        
+        if section == .cards {
+            
+            var state = CollectionDetailsHeaderViewState.grid
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            if settings.pieChartSelected {
+                state = CollectionDetailsHeaderViewState.chart
+            } else {
+                if settings.viewMode == .grid {
+                    state = CollectionDetailsHeaderViewState.grid
+                } else {
+                    state = CollectionDetailsHeaderViewState.list
+                }
+            }
+            
+            return CGSize.init(width: collectionView.frame.width, height: CGFloat(CollectionDetailsHeaderViewState.heightForState(state: state)))
+        }
+        
+        return CGSize.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        
+        guard let section = CollectionDetailsSection.init(rawValue: section) else {
+            return CGSize.zero
+        }
+        
+        if section == .cards {
+            return CGSize.init(width: collectionView.frame.width, height:60.0)
+        }
+        
+        return CGSize.zero
+    }
+}
+
+extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
+        self.loadChartForRange(period)
+    }
+}
+
+
+extension CollectionDetailsViewCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let topOffset = scrollView.contentOffset.y
+        if abs(lastOffset - topOffset) > 10 {
+            lastOffset = topOffset
+            let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)
+            NotificationCenter.default.post(name: NotificationManager.tickerScrollNotification, object: nil, userInfo: ["transform" : CGAffineTransform(rotationAngle: angle)])
+        }
+    }
+}
+
+extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
+    func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool) {
+        guard let viewModel = viewModel else {return}
+        viewModel.topChart.isSPPVisible = showMedian
+        
+        GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
 }

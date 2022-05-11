@@ -36,6 +36,7 @@ final class HoldingsViewModel {
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
+    private var metrics: PortofolioMetrics?
     
     func clearChats() {
         chartsCache.removeAll()
@@ -81,6 +82,8 @@ final class HoldingsViewModel {
                     loadGroup.leave()
                 }
                 
+                
+                
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {
                         completion?()
@@ -94,6 +97,19 @@ final class HoldingsViewModel {
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
                     
                     for holdingGroup in self.holdingGroups {
+                        
+                        if !RemoteConfigManager.shared.showPortoCash {
+                            if holdingGroup.holdings.first?.secType == .cash {
+                                continue
+                            }
+                        }
+                        
+                        if !RemoteConfigManager.shared.showPortoCrypto {
+                            if holdingGroup.holdings.first?.secType == .crypto {
+                                continue
+                            }
+                        }
+                        
                         let symbol = holdingGroup.details?.tickerSymbol ?? ""
                         if !symbol.isEmpty {
                             tickSymbols.append(symbol)
@@ -175,6 +191,14 @@ final class HoldingsViewModel {
                             dprint("Holdings SPP charts last \(rawData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
                         }
+                    }
+                    
+                    innerChartsGroup.enter()
+                    dprint("\(Date()) Metrics for Porto load start")
+                    HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] metrics in
+                        self?.metrics = metrics
+                        dprint("\(Date()) Metrics for Porto load end")
+                        innerChartsGroup.leave()
                     }
                     
                     innerChartsGroup.notify(queue: .main) {

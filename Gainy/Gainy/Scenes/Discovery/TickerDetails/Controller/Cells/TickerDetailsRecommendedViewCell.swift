@@ -8,12 +8,21 @@
 import UIKit
 import Kingfisher
 
+protocol TickerDetailsRecommendedViewCellDelegate: AnyObject {
+    func requestOpenCollection(withID id: Int)
+    func wrongIndPressed(isTicked: Bool)
+}
+
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     static let cellHeight: CGFloat = 168.0
     
-    @IBOutlet private weak var rotatableImageView: UIImageView!
+    public weak var delegate: TickerDetailsRecommendedViewCellDelegate?
     
+    
+    @IBOutlet private weak var rotatableImageView: UIImageView!
+    @IBOutlet private weak var wrongIndBtn: UIButton!
+
     @IBOutlet private var recLbls: [UILabel]!
     @IBOutlet private weak var scoreLbl: UILabel!
     @IBOutlet private var recImgs: [UIImageView]!
@@ -34,29 +43,15 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             recImgs[2].image = UIImage(named: "fits_risk\(matchData.fitsCategories)")
             
             recLbls[0].attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int(matchData.riskSimilarity * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
-            switch matchData.matchScore {
-            case 0..<35:
-                colorView.backgroundColor = UIColor.Gainy.mainRed
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            case 35..<65:
-                colorView.backgroundColor = UIColor.Gainy.mainYellow
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            case 65...:
-                colorView.backgroundColor = UIColor.Gainy.mainGreen
-                scoreLbl.textColor = UIColor(named: "mainText")
-                break
-            default:
-                break
-            }
+            scoreLbl.textColor = UIColor.Gainy.mainText
+            colorView.backgroundColor = MatchScoreManager.backColorFor(matchData.matchScore)
             
             //Tags
             let tagHeight: CGFloat = 24.0
             let margin: CGFloat = 8.0
             
             if tagsStack.subviews.count == 0 {
-                let totalWidth: CGFloat = UIScreen.main.bounds.width - 24 * 2.0
+                let totalWidth: CGFloat = UIScreen.main.bounds.width - 34.0 - 71.0
                 var xPos: CGFloat = 0.0
                 var yPos: CGFloat = 0.0
                 for tag in tickerInfo?.matchTags ?? [] {
@@ -95,12 +90,21 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
                 tagsHeaderLbl.isHidden = true
             }
+            wrongIndBtn.isHidden = false
         } else {
             scoreLbl.text = "0"
             colorView.backgroundColor = UIColor.Gainy.mainRed
             scoreLbl.textColor = UIColor(named: "mainText")
             cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
             tagsHeaderLbl.isHidden = true
+            wrongIndBtn.isHidden = true
+        }
+        wrongIndBtn.isHidden = tickerInfo?.linkedCollections.isEmpty ?? true
+        wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
+        if wrongIndBtn.isSelected {
+            highlightIndustries()
+        } else {
+            unhighlightIndustries()
         }
     }
     
@@ -126,5 +130,48 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
         FloatingPanelManager.shared.configureWithHeight(height: height)
         FloatingPanelManager.shared.setupFloatingPanelWithViewController(viewController: explanationVc)
         FloatingPanelManager.shared.showFloatingPanel()
+    }
+    
+    //MARK: - Wrong Industry Logic
+    
+    @IBAction func wrongIndAction(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        delegate?.wrongIndPressed(isTicked: sender.isSelected)
+        
+        if sender.isSelected {
+            highlightIndustries()
+        } else {
+            unhighlightIndustries()
+        }
+    }
+    
+    func highlightIndustries() {
+        wrongIndBtn.isSelected = true
+        for (ind, tagInfo) in (tickerInfo?.matchTags ?? []).enumerated() {
+            if let tagView = tagsStack.subviews[ind] as? TagView {
+                
+                tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
+                tagView.tagLabel.textColor = .white
+                tagView.layer.borderWidth = 0.0
+            }
+        }
+    }
+    
+    func unhighlightIndustries() {
+        wrongIndBtn.isSelected = false
+        guard (tickerInfo?.matchTags ?? []).count == tagsStack.subviews.count else {return}
+        for (ind, tagInfo) in (tickerInfo?.matchTags ?? []).enumerated() {
+            if let tagView = tagsStack.subviews[ind] as? TagView {
+                if tagInfo.collectionID < 0 {
+                    tagView.backgroundColor = UIColor.white
+                    tagView.tagLabel.textColor = UIColor(named: "mainText")
+                    tagView.layer.borderWidth = 1.0
+                } else {
+                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
+                    tagView.tagLabel.textColor = .white
+                    tagView.layer.borderWidth = 0.0
+                }
+            }
+        }
     }
 }

@@ -50,7 +50,7 @@ public final class FetchRealtimeMetricsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "ticker_realtime_metrics": tickerRealtimeMetrics.map { (value: TickerRealtimeMetric) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413044555.ticker_realtime_metrics"
+    /// fetch data from the table: "public_220510085411.ticker_realtime_metrics"
     public var tickerRealtimeMetrics: [TickerRealtimeMetric] {
       get {
         return (resultMap["ticker_realtime_metrics"] as! [ResultMap]).map { (value: ResultMap) -> TickerRealtimeMetric in TickerRealtimeMetric(unsafeResultMap: value) }
@@ -66,7 +66,7 @@ public final class FetchRealtimeMetricsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("symbol", type: .scalar(String.self)),
+          GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
           GraphQLField("actual_price", type: .scalar(float8.self)),
           GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
           GraphQLField("relative_daily_change", type: .scalar(float8.self)),
@@ -79,7 +79,7 @@ public final class FetchRealtimeMetricsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String? = nil, actualPrice: float8? = nil, absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil) {
+      public init(symbol: String, actualPrice: float8? = nil, absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil) {
         self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "symbol": symbol, "actual_price": actualPrice, "absolute_daily_change": absoluteDailyChange, "relative_daily_change": relativeDailyChange])
       }
 
@@ -92,9 +92,9 @@ public final class FetchRealtimeMetricsQuery: GraphQLQuery {
         }
       }
 
-      public var symbol: String? {
+      public var symbol: String {
         get {
-          return resultMap["symbol"] as? String
+          return resultMap["symbol"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "symbol")

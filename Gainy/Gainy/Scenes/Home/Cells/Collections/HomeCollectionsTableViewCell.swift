@@ -56,7 +56,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
         }
     }
     
-
+    
     
     //MARK: - Actions
     @IBAction func expandToggleAction(_ sender: UIButton) {
@@ -102,6 +102,13 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
     @IBOutlet weak var arrowImgView: UIImageView!
     @IBOutlet weak var growLbl: UILabel!
     @IBOutlet weak var backImgView: UIImageView!
+    @IBOutlet weak var msLbl: UILabel! {
+        didSet {
+            msLbl.clipsToBounds = true
+            msLbl.layer.cornerRadius = 12.0
+            msLbl.textColor = UIColor.Gainy.mainText
+        }
+    }
     
     //MARK: - Properties
     private var imageUrl: String = ""
@@ -126,9 +133,17 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
                 arrowImgView.tintColor = .white
                 growLbl.textColor = .white
             }
-            growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percent
+            growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
+            
+            if let matchScore = collection.matchScore?.matchScore {
+                msLbl.text = "\(Int(matchScore))"
+                msLbl.backgroundColor = MatchScoreManager.circleColorFor(Int(matchScore))
+            } else {
+                msLbl.text = "-"
+            }
         }
     }
+    
     
     //MARK: - Image
     
@@ -145,9 +160,9 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             .transition(.fade(1)),
             .cacheOriginalImage
         ]) { receivedSize, totalSize in
-//            print("-----\(receivedSize), \(totalSize)")
+            //            print("-----\(receivedSize), \(totalSize)")
         } completionHandler: { result in
-//            print("-----\(result)")
+            //            print("-----\(result)")
         }
         self.imageLoaded = true
     }

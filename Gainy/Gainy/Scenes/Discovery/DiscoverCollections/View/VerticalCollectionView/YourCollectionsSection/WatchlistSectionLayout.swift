@@ -73,6 +73,8 @@ struct WatchlistSectionLayout: SectionLayout {
                                imageUrl: viewModel.imageUrl,
                                description: viewModel.description,
                                stocksAmount: viewModel.stocksAmount,
+                               matchScore: viewModel.matchScore,
+                               dailyGrow: viewModel.dailyGrow,
                                imageName: viewModel.image)
         }
 

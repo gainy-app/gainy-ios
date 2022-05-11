@@ -18,7 +18,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         
         topConstraint = titleLabel
             .topAnchor
-            .constraint(equalTo: topAnchor, constant: 24)
+            .constraint(equalTo: topAnchor, constant: 40)
         
         NSLayoutConstraint.activate([
             titleLabel
@@ -41,7 +41,9 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
                 .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
             descriptionLabel
                 .bottomAnchor
-                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
+                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 16),
+
+            
         ])
     }
 

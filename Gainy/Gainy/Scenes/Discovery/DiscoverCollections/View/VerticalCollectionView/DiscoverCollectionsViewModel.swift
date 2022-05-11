@@ -8,4 +8,9 @@ final class DiscoverCollectionsViewModel: NSObject, DiscoverCollectionsViewModel
     
     //Temp cache of removed items
     var addedRecs: [Int : RecommendedCollectionViewCellModel] = [:]
+    
+    //MARK: - Gainers
+    var topGainers: [HomeTickersCollectionViewCellModel] = []
+    var topLosers: [HomeTickersCollectionViewCellModel] = []
+
 }

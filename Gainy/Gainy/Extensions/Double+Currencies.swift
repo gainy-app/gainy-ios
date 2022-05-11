@@ -43,8 +43,9 @@ extension Double {
         if (self == 0.0) {
             return "\(formattedValue)%"
         }
-        return "\(formattedValue)%"
+        return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
+    
     
     var percentRaw: String {
         let formatter = NumberFormatter()
@@ -58,6 +59,17 @@ extension Double {
             return "\(formattedValue)%"
         }
         return "\(formattedValue)%"
+    }
+    
+    var percentRawUnsigned: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
     func formatUsingAbbrevation () -> String {
@@ -131,6 +143,17 @@ extension Float {
         let number = NSNumber(value: self * 100.0)
         let formattedValue = formatter.string(from: number)!
         return "\(formattedValue)%"
+    }
+    
+    var percentUnsigned: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self * 100.0)
+        let formattedValue = formatter.string(from: number)!
+        return "\(formattedValue)%".replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
     var percentRaw: String {

@@ -6,6 +6,7 @@ query DiscoverCollectionDetails($offset: Int!) {
 
 fragment RemoteCollectionDetails on collections {
   id
+  uniq_id
   name
   image_url
   description
@@ -15,7 +16,17 @@ fragment RemoteCollectionDetails on collections {
     profile_id
     relative_daily_change
     updated_at
+    previous_day_close_price
     }
+    match_score {
+    match_score
+    risk_level
+        risk_similarity
+        interest_level
+        interest_similarity
+        category_level
+        category_similarity
+  }
 }
 
 fragment RemoteTickerDetails on tickers {
@@ -208,5 +219,12 @@ fragment RemoteTickerExtraDetails on tickers {
       sell
       strong_sell
       rating
+    }
+    
+    ticker_collections{
+      collection_id
+      collection{
+        ...RemoteCollectionDetails
+      }
     }
 }

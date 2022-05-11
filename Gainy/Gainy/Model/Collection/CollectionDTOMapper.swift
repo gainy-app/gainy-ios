@@ -8,6 +8,8 @@ enum CollectionDTOMapper {
             name: dto.name ?? "",
             description: dto.description ?? "",
             stocksAmount: Int(dto.size ?? 0),
+            matchScore: Int(dto.matchScore?.matchScore ?? 0),
+            dailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             isInYourCollections: UserProfileManager.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }
@@ -21,6 +23,8 @@ enum CollectionDTOMapper {
             name: dto.name ?? "",
             description: dto.description ?? "",
             stocksAmount: Int(dto.size ?? 0),
+            matchScore: Int(dto.matchScore?.matchScore ?? 0),
+            dailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
             isInYourCollections: UserProfileManager.shared.favoriteCollections.contains(dto.id ?? -1)
         )
     }

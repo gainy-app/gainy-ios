@@ -70,7 +70,7 @@ public struct LineView: View {
                         
                         if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,
-                                   frame: .constant(reader.frame(in: .local)), hideHorizontalLines: $viewModel.hideHorizontalLines, specifier: legendSpecifier)
+                                   frame: .constant(reader.frame(in: .local)), hideHorizontalLines: $viewModel.hideHorizontalLines, minMaxPercent: $viewModel.minMaxPercent, specifier: legendSpecifier)
                                 .animation(.none)
                         }
                                                 
@@ -109,8 +109,12 @@ public struct LineView: View {
         guard data.points.count > 0 else {return .zero}
         
         let points = data.onlyPoints()
+        let lastDayPointIndex: Int = viewModel.lastDayPrice == 0.0 ? 1 : (points.firstIndex(where: {
+            viewModel.lastDayPrice < Float($0)
+        }) ?? 1)
         let stepHeight: CGFloat = (frame.size.height - 30) / CGFloat(points.max()! - points.min()!)
-        return CGPoint(x: 0, y: (frame.size.height - 25) - CGFloat(points[1] - points.min()!) * stepHeight)
+        return CGPoint(x: 0,
+                       y: (frame.size.height - 25) - CGFloat(points[lastDayPointIndex] - points.min()!) * stepHeight)
     }
 }
 

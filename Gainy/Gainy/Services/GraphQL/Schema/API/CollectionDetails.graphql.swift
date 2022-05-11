@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413044555.profile_collections"
+    /// fetch data from the table: "public_220510085411.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -124,6 +124,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     fragment RemoteCollectionDetails on collections {
       __typename
       id
+      uniq_id
       name
       image_url
       description
@@ -134,6 +135,17 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         profile_id
         relative_daily_change
         updated_at
+        previous_day_close_price
+      }
+      match_score {
+        __typename
+        match_score
+        risk_level
+        risk_similarity
+        interest_level
+        interest_similarity
+        category_level
+        category_similarity
       }
     }
     """
@@ -144,11 +156,13 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("id", type: .scalar(Int.self)),
+      GraphQLField("uniq_id", type: .scalar(String.self)),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("size", type: .scalar(Int.self)),
       GraphQLField("metrics", type: .object(Metric.selections)),
+      GraphQLField("match_score", type: .object(MatchScore.selections)),
     ]
   }
 
@@ -158,8 +172,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -177,6 +191,15 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "id")
+    }
+  }
+
+  public var uniqId: String? {
+    get {
+      return resultMap["uniq_id"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "uniq_id")
     }
   }
 
@@ -226,6 +249,16 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
   }
 
+  /// An object relationship
+  public var matchScore: MatchScore? {
+    get {
+      return (resultMap["match_score"] as? ResultMap).flatMap { MatchScore(unsafeResultMap: $0) }
+    }
+    set {
+      resultMap.updateValue(newValue?.resultMap, forKey: "match_score")
+    }
+  }
+
   public struct Metric: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["collection_metrics"]
 
@@ -236,6 +269,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("profile_id", type: .scalar(Int.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("updated_at", type: .scalar(timestamp.self)),
+        GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
       ]
     }
 
@@ -245,8 +279,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil) {
-      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt])
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil, previousDayClosePrice: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice])
     }
 
     public var __typename: String {
@@ -291,6 +325,114 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")
+      }
+    }
+
+    public var previousDayClosePrice: float8? {
+      get {
+        return resultMap["previous_day_close_price"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "previous_day_close_price")
+      }
+    }
+  }
+
+  public struct MatchScore: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["collection_match_score"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("match_score", type: .scalar(float8.self)),
+        GraphQLField("risk_level", type: .scalar(Int.self)),
+        GraphQLField("risk_similarity", type: .scalar(float8.self)),
+        GraphQLField("interest_level", type: .scalar(Int.self)),
+        GraphQLField("interest_similarity", type: .scalar(float8.self)),
+        GraphQLField("category_level", type: .scalar(Int.self)),
+        GraphQLField("category_similarity", type: .scalar(float8.self)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(matchScore: float8? = nil, riskLevel: Int? = nil, riskSimilarity: float8? = nil, interestLevel: Int? = nil, interestSimilarity: float8? = nil, categoryLevel: Int? = nil, categorySimilarity: float8? = nil) {
+      self.init(unsafeResultMap: ["__typename": "collection_match_score", "match_score": matchScore, "risk_level": riskLevel, "risk_similarity": riskSimilarity, "interest_level": interestLevel, "interest_similarity": interestSimilarity, "category_level": categoryLevel, "category_similarity": categorySimilarity])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var matchScore: float8? {
+      get {
+        return resultMap["match_score"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "match_score")
+      }
+    }
+
+    public var riskLevel: Int? {
+      get {
+        return resultMap["risk_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_level")
+      }
+    }
+
+    public var riskSimilarity: float8? {
+      get {
+        return resultMap["risk_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "risk_similarity")
+      }
+    }
+
+    public var interestLevel: Int? {
+      get {
+        return resultMap["interest_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_level")
+      }
+    }
+
+    public var interestSimilarity: float8? {
+      get {
+        return resultMap["interest_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "interest_similarity")
+      }
+    }
+
+    public var categoryLevel: Int? {
+      get {
+        return resultMap["category_level"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_level")
+      }
+    }
+
+    public var categorySimilarity: float8? {
+      get {
+        return resultMap["category_similarity"] as? float8
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "category_similarity")
       }
     }
   }
@@ -402,7 +544,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
   public static var selections: [GraphQLSelection] {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("symbol", type: .scalar(String.self)),
+      GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
       GraphQLField("name", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("type", type: .scalar(String.self)),
@@ -419,7 +561,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, name: String? = nil, description: String? = nil, type: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
+  public init(symbol: String, name: String? = nil, description: String? = nil, type: String? = nil, tickerHighlights: [TickerHighlight], tickerMetrics: TickerMetric? = nil, realtimeMetrics: RealtimeMetric? = nil, matchScore: MatchScore? = nil) {
     self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "name": name, "description": description, "type": type, "ticker_highlights": tickerHighlights.map { (value: TickerHighlight) -> ResultMap in value.resultMap }, "ticker_metrics": tickerMetrics.flatMap { (value: TickerMetric) -> ResultMap in value.resultMap }, "realtime_metrics": realtimeMetrics.flatMap { (value: RealtimeMetric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
@@ -432,9 +574,9 @@ public struct RemoteTickerDetails: GraphQLFragment {
     }
   }
 
-  public var symbol: String? {
+  public var symbol: String {
     get {
-      return resultMap["symbol"] as? String
+      return resultMap["symbol"]! as! String
     }
     set {
       resultMap.updateValue(newValue, forKey: "symbol")
@@ -1158,7 +1300,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
         GraphQLField("actual_price", type: .scalar(float8.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
         GraphQLField("time", type: .scalar(timestamp.self)),
-        GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
         GraphQLField("last_known_price", type: .scalar(float8.self)),
         GraphQLField("last_known_price_datetime", type: .scalar(timestamp.self)),
         GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
@@ -1171,7 +1313,7 @@ public struct RemoteTickerDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String? = nil, lastKnownPrice: float8? = nil, lastKnownPriceDatetime: timestamp? = nil, previousDayClosePrice: float8? = nil) {
+    public init(actualPrice: float8? = nil, relativeDailyChange: float8? = nil, time: timestamp? = nil, symbol: String, lastKnownPrice: float8? = nil, lastKnownPriceDatetime: timestamp? = nil, previousDayClosePrice: float8? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_realtime_metrics", "actual_price": actualPrice, "relative_daily_change": relativeDailyChange, "time": time, "symbol": symbol, "last_known_price": lastKnownPrice, "last_known_price_datetime": lastKnownPriceDatetime, "previous_day_close_price": previousDayClosePrice])
     }
 
@@ -1211,9 +1353,9 @@ public struct RemoteTickerDetails: GraphQLFragment {
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
@@ -1568,7 +1710,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("collection_id", type: .scalar(Int.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
@@ -1581,7 +1723,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
+      public init(id: Int, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "collection_id": collectionId, "icon_url": iconUrl])
       }
 
@@ -1594,9 +1736,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -1638,8 +1780,8 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("symbol", type: .scalar(String.self)),
-        GraphQLField("interest_id", type: .scalar(Int.self)),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+        GraphQLField("interest_id", type: .nonNull(.scalar(Int.self))),
         GraphQLField("interest", type: .object(Interest.selections)),
       ]
     }
@@ -1650,7 +1792,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(symbol: String? = nil, interestId: Int? = nil, interest: Interest? = nil) {
+    public init(symbol: String, interestId: Int, interest: Interest? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_interests", "symbol": symbol, "interest_id": interestId, "interest": interest.flatMap { (value: Interest) -> ResultMap in value.resultMap }])
     }
 
@@ -1663,18 +1805,18 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
       }
     }
 
-    public var interestId: Int? {
+    public var interestId: Int {
       get {
-        return resultMap["interest_id"] as? Int
+        return resultMap["interest_id"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "interest_id")
@@ -1698,7 +1840,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("icon_url", type: .scalar(String.self)),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
         ]
       }
@@ -1709,7 +1851,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+      public init(iconUrl: String? = nil, id: Int, name: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "interests", "icon_url": iconUrl, "id": id, "name": name])
       }
 
@@ -1731,9 +1873,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -1757,7 +1899,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("industry_id", type: .scalar(bigint.self)),
+        GraphQLField("industry_id", type: .nonNull(.scalar(bigint.self))),
         GraphQLField("industry_order", type: .scalar(bigint.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
@@ -1769,7 +1911,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint? = nil, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: bigint, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -1782,9 +1924,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       }
     }
 
-    public var industryId: bigint? {
+    public var industryId: bigint {
       get {
-        return resultMap["industry_id"] as? bigint
+        return resultMap["industry_id"]! as! bigint
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_id")
@@ -1816,7 +1958,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("collection_id", type: .scalar(Int.self)),
         ]
@@ -1828,7 +1970,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil) {
+      public init(id: Int, name: String? = nil, collectionId: Int? = nil) {
         self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name, "collection_id": collectionId])
       }
 
@@ -1841,9 +1983,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -1878,7 +2020,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("created_at", type: .scalar(timestamptz.self)),
         GraphQLField("description", type: .scalar(String.self)),
-        GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
         GraphQLField("type", type: .scalar(String.self)),
         GraphQLField("timestamp", type: .scalar(timestamptz.self)),
       ]
@@ -1890,7 +2032,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String? = nil, type: String? = nil, timestamp: timestamptz? = nil) {
+    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String, type: String? = nil, timestamp: timestamptz? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_events", "created_at": createdAt, "description": description, "symbol": symbol, "type": type, "timestamp": timestamp])
     }
 
@@ -1921,9 +2063,9 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
@@ -2106,6 +2248,14 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         strong_sell
         rating
       }
+      ticker_collections {
+        __typename
+        collection_id
+        collection {
+          __typename
+          ...RemoteCollectionDetails
+        }
+      }
     }
     """
 
@@ -2114,12 +2264,13 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
   public static var selections: [GraphQLSelection] {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-      GraphQLField("symbol", type: .scalar(String.self)),
+      GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
       GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
       GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
       GraphQLField("ticker_events", type: .nonNull(.list(.nonNull(.object(TickerEvent.selections))))),
       GraphQLField("ticker_analyst_ratings", type: .object(TickerAnalystRating.selections)),
+      GraphQLField("ticker_collections", type: .nonNull(.list(.nonNull(.object(TickerCollection.selections))))),
     ]
   }
 
@@ -2129,8 +2280,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(symbol: String? = nil, tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil) {
-    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }])
+  public init(symbol: String, tickerCategories: [TickerCategory], tickerInterests: [TickerInterest], tickerIndustries: [TickerIndustry], tickerEvents: [TickerEvent], tickerAnalystRatings: TickerAnalystRating? = nil, tickerCollections: [TickerCollection]) {
+    self.init(unsafeResultMap: ["__typename": "tickers", "symbol": symbol, "ticker_categories": tickerCategories.map { (value: TickerCategory) -> ResultMap in value.resultMap }, "ticker_interests": tickerInterests.map { (value: TickerInterest) -> ResultMap in value.resultMap }, "ticker_industries": tickerIndustries.map { (value: TickerIndustry) -> ResultMap in value.resultMap }, "ticker_events": tickerEvents.map { (value: TickerEvent) -> ResultMap in value.resultMap }, "ticker_analyst_ratings": tickerAnalystRatings.flatMap { (value: TickerAnalystRating) -> ResultMap in value.resultMap }, "ticker_collections": tickerCollections.map { (value: TickerCollection) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -2142,9 +2293,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     }
   }
 
-  public var symbol: String? {
+  public var symbol: String {
     get {
-      return resultMap["symbol"] as? String
+      return resultMap["symbol"]! as! String
     }
     set {
       resultMap.updateValue(newValue, forKey: "symbol")
@@ -2201,6 +2352,16 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     }
   }
 
+  /// An array relationship
+  public var tickerCollections: [TickerCollection] {
+    get {
+      return (resultMap["ticker_collections"] as! [ResultMap]).map { (value: ResultMap) -> TickerCollection in TickerCollection(unsafeResultMap: value) }
+    }
+    set {
+      resultMap.updateValue(newValue.map { (value: TickerCollection) -> ResultMap in value.resultMap }, forKey: "ticker_collections")
+    }
+  }
+
   public struct TickerCategory: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["ticker_categories"]
 
@@ -2246,7 +2407,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("collection_id", type: .scalar(Int.self)),
           GraphQLField("icon_url", type: .scalar(String.self)),
@@ -2259,7 +2420,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
+      public init(id: Int, name: String? = nil, collectionId: Int? = nil, iconUrl: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "collection_id": collectionId, "icon_url": iconUrl])
       }
 
@@ -2272,9 +2433,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -2316,8 +2477,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("symbol", type: .scalar(String.self)),
-        GraphQLField("interest_id", type: .scalar(Int.self)),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
+        GraphQLField("interest_id", type: .nonNull(.scalar(Int.self))),
         GraphQLField("interest", type: .object(Interest.selections)),
       ]
     }
@@ -2328,7 +2489,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(symbol: String? = nil, interestId: Int? = nil, interest: Interest? = nil) {
+    public init(symbol: String, interestId: Int, interest: Interest? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_interests", "symbol": symbol, "interest_id": interestId, "interest": interest.flatMap { (value: Interest) -> ResultMap in value.resultMap }])
     }
 
@@ -2341,18 +2502,18 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
       }
     }
 
-    public var interestId: Int? {
+    public var interestId: Int {
       get {
-        return resultMap["interest_id"] as? Int
+        return resultMap["interest_id"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "interest_id")
@@ -2376,7 +2537,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("icon_url", type: .scalar(String.self)),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
         ]
       }
@@ -2387,7 +2548,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+      public init(iconUrl: String? = nil, id: Int, name: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "interests", "icon_url": iconUrl, "id": id, "name": name])
       }
 
@@ -2409,9 +2570,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -2435,7 +2596,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("industry_id", type: .scalar(bigint.self)),
+        GraphQLField("industry_id", type: .nonNull(.scalar(bigint.self))),
         GraphQLField("industry_order", type: .scalar(bigint.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
@@ -2447,7 +2608,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint? = nil, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: bigint, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -2460,9 +2621,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
     }
 
-    public var industryId: bigint? {
+    public var industryId: bigint {
       get {
-        return resultMap["industry_id"] as? bigint
+        return resultMap["industry_id"]! as! bigint
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_id")
@@ -2494,7 +2655,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("collection_id", type: .scalar(Int.self)),
         ]
@@ -2506,7 +2667,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int? = nil, name: String? = nil, collectionId: Int? = nil) {
+      public init(id: Int, name: String? = nil, collectionId: Int? = nil) {
         self.init(unsafeResultMap: ["__typename": "gainy_industries", "id": id, "name": name, "collection_id": collectionId])
       }
 
@@ -2519,9 +2680,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")
@@ -2556,7 +2717,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("created_at", type: .scalar(timestamptz.self)),
         GraphQLField("description", type: .scalar(String.self)),
-        GraphQLField("symbol", type: .scalar(String.self)),
+        GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
         GraphQLField("type", type: .scalar(String.self)),
         GraphQLField("timestamp", type: .scalar(timestamptz.self)),
       ]
@@ -2568,7 +2729,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String? = nil, type: String? = nil, timestamp: timestamptz? = nil) {
+    public init(createdAt: timestamptz? = nil, description: String? = nil, symbol: String, type: String? = nil, timestamp: timestamptz? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_events", "created_at": createdAt, "description": description, "symbol": symbol, "type": type, "timestamp": timestamp])
     }
 
@@ -2599,9 +2760,9 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
     }
 
-    public var symbol: String? {
+    public var symbol: String {
       get {
-        return resultMap["symbol"] as? String
+        return resultMap["symbol"]! as! String
       }
       set {
         resultMap.updateValue(newValue, forKey: "symbol")
@@ -2722,6 +2883,108 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
       set {
         resultMap.updateValue(newValue, forKey: "rating")
+      }
+    }
+  }
+
+  public struct TickerCollection: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["ticker_collections"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+        GraphQLField("collection_id", type: .scalar(Int.self)),
+        GraphQLField("collection", type: .object(Collection.selections)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(collectionId: Int? = nil, collection: Collection? = nil) {
+      self.init(unsafeResultMap: ["__typename": "ticker_collections", "collection_id": collectionId, "collection": collection.flatMap { (value: Collection) -> ResultMap in value.resultMap }])
+    }
+
+    public var __typename: String {
+      get {
+        return resultMap["__typename"]! as! String
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "__typename")
+      }
+    }
+
+    public var collectionId: Int? {
+      get {
+        return resultMap["collection_id"] as? Int
+      }
+      set {
+        resultMap.updateValue(newValue, forKey: "collection_id")
+      }
+    }
+
+    /// An object relationship
+    public var collection: Collection? {
+      get {
+        return (resultMap["collection"] as? ResultMap).flatMap { Collection(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "collection")
+      }
+    }
+
+    public struct Collection: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["collections"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLFragmentSpread(RemoteCollectionDetails.self),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var fragments: Fragments {
+        get {
+          return Fragments(unsafeResultMap: resultMap)
+        }
+        set {
+          resultMap += newValue.resultMap
+        }
+      }
+
+      public struct Fragments {
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public var remoteCollectionDetails: RemoteCollectionDetails {
+          get {
+            return RemoteCollectionDetails(unsafeResultMap: resultMap)
+          }
+          set {
+            resultMap += newValue.resultMap
+          }
+        }
       }
     }
   }

@@ -38,11 +38,12 @@ struct Constants {
         static let tickersPreloadCount = 20
         static let watchlistCollectionID = -1
         static let compareCollectionID = -2
+        static let singleCollectionId = -3
         static let top20ID = 231
         static let loadingCellIDs = [-10, -11, -12]
         static let demoNamePrefix = "GDEMO:"
         static let matchScore = "Match\nScore"
-        static let yourCollections = "Your collections"
+        static let yourCollections = "Your TTFs"
     }
     
     struct Auth {
@@ -55,6 +56,9 @@ struct Constants {
         static let favKey = "favKey"
         static let scheduledSymbolEvents = "scheduledSymbolEvents"
         static let scheduledCalendarEvents = "scheduledCalendarEvents"
+        
+        static let showPortoCash = "showPortoCash"
+        static let showPortoCrypto = "showPortoCrypto"
     }
     
     struct Links {
@@ -76,5 +80,19 @@ struct Constants {
     struct Chart {
         static let sypChartName = "SYPCHART"
         static let sypSymbol = "SPY"
+    }
+    
+    struct RemoteConfig {
+        static let isPortoCash = "isPortoCashEnabled"
+        static let isPortoCrypto = "isPortoCryptoEnabled"
+    }
+    
+    struct OneSignal {
+        static let appId = "a9619aa9-f7b4-4675-96f3-7ae78608c131"
+    }
+    
+    struct RevenueCat {
+        static let appId = "appf92c1b5c1c"
+        static let publicKey = "appl_frKqXzekPjQXwJaYRTwGkPSuCiF"
     }
 }

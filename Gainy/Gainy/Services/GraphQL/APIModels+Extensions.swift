@@ -143,6 +143,8 @@ extension DiscoverChartsQuery.Data.Chart: ChartMergable {
     }
 }
 
+
+
 extension GetPortfolioChartsQuery.Data.GetPortfolioChart {
     var date: Date {
         return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
@@ -158,6 +160,12 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
 extension FetchStockMedianQuery.Data.IndustryMedianChart: ChartMergable {
     var val: Float {
         Float(medianPrice ?? 0.0)
+    }
+}
+
+extension GetTtfChartQuery.Data.CollectionChart: ChartMergable {
+    var val: Float {
+        Float(adjustedClose ?? 0.0)
     }
 }
 

@@ -9,9 +9,8 @@ import UIKit
 import PureLayout
 
 protocol TickerDetailsAboutViewCellDelegate: AnyObject {
-    func requestOpenCollection(withID id: Int)
     func aboutExtended(isExtended: Bool)
-    func wrongIndPressed(isTicked: Bool)
+    func collectionSelected(collection: RemoteCollectionDetails)
 }
 
 final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
@@ -21,8 +20,6 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     //MARK: - Outlets
     @IBOutlet private weak var aboutLbl: UILabel!
     @IBOutlet private weak var tagsStack: UIView!
-    @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
-    @IBOutlet private weak var wrongIndBtn: UIButton!
     
     //MARK: - DI
     var minHeightUpdated: ((CGFloat) -> Void)?
@@ -34,71 +31,21 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.text = tickerInfo?.about
         aboutLbl.numberOfLines = 3
         
-        let tagHeight: CGFloat = 24.0
-        let margin: CGFloat = 8.0
-        
-        if tagsStack.subviews.count == 0 {
-            
-            let totalWidth: CGFloat = UIScreen.main.bounds.width - 24.0 - 64.0
-            var xPos: CGFloat = 0.0
-            var yPos: CGFloat = 0.0
-            
-            for tag in tickerInfo?.tags ?? [] {
-                let tagView = TagView()
-                tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
-                                  for: .touchUpInside)
-                tagsStack.addSubview(tagView)
-                if tag.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.white
-                    tagView.tagLabel.textColor = UIColor(named: "mainText")
-                    tagView.layer.borderWidth = 1.0
-                } else {
-                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                    tagView.tagLabel.textColor = .white
-                    tagView.layer.borderWidth = 0.0
-                }
-                
-                tagView.collectionID = (tag.collectionID > 0) ? tag.collectionID : nil
-                tagView.tagName = tag.name
-                tagView.loadImage(url: tag.url)
-                let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
-                tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-                if xPos + width + margin > totalWidth && tagsStack.subviews.count > 0 {
-                    xPos = 0.0
-                    yPos = yPos + tagHeight + margin
-                    lines += 1
-                }
-                tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
-                tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
-                xPos += width + margin
-            }
-        }
-        
-        self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
-        self.tagsStack.layoutIfNeeded()
-        
-        let calculatedHeight: CGFloat = (152.0 + 44.0 - tagHeight) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        let calculatedHeight: CGFloat = (161.0 + 88.0)
         if isMoreSelected {
             aboutLbl.numberOfLines = 0
-            minHeightUpdated?(max( (152.0 + 44.0), heightBasedOnString((tickerInfo?.about ?? ""))))
+            minHeightUpdated?(max( (152.0 + 16.0), heightBasedOnString((tickerInfo?.about ?? ""))))
         } else {
             aboutLbl.numberOfLines = 3
-            minHeightUpdated?(max( (152.0 + 44.0), calculatedHeight))
+            minHeightUpdated?(max( (152.0 + 16.0), calculatedHeight))
         }
-        wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
-        if wrongIndBtn.isSelected {
-            highlightIndustries()
-        } else {
-            unhighlightIndustries()
-        }
+        innerCollectionView.reloadData()
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
         guard let collectionID = tagView.collectionID, collectionID > 0 else {
             return
         }
-        
-        self.delegate?.requestOpenCollection(withID: collectionID)
     }
     
     //MARK: - Actions
@@ -113,7 +60,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             aboutLbl.numberOfLines = 3
             sender.setTitle("show more", for: .normal)
         }
-        cellHeightChanged?(heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")))
+        cellHeightChanged?(sender.isSelected ? heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")) : (161.0 + 88.0))
         if sender.isSelected {
             GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         } else {
@@ -124,7 +71,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
-        return 60.0 + height + 48.0 + 32.0 + self.tagsStackHeight.constant
+        return 60.0 + height + 48.0 + 88.0
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
@@ -137,46 +84,53 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         FloatingPanelManager.shared.showFloatingPanel()
     }
     
-    //MARK: - Wrong Industry Logic
+    //weak var delegate: TickerDetailsAlternativeStocksViewCellDelegate?
+    private let cellSize: CGSize = .init(width: 240, height: 88)
     
-    @IBAction func wrongIndAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        delegate?.wrongIndPressed(isTicked: sender.isSelected)
-        
-        if sender.isSelected {
-            highlightIndustries()
-        } else {
-            unhighlightIndustries()
+    @IBOutlet private weak var innerCollectionView: UICollectionView! {
+        didSet {
+            innerCollectionView.dataSource = self
+            innerCollectionView.delegate = self
+            innerCollectionView.register(TickerDetailsRelativeCollectionViewCell.self)
+            innerCollectionView.isScrollEnabled = true
+            innerCollectionView.isUserInteractionEnabled = true
         }
     }
-    
-    func highlightIndustries() {
-        wrongIndBtn.isSelected = true
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
-            if let tagView = tagsStack.subviews[ind] as? TagView {
-                
-                tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
-                tagView.tagLabel.textColor = .white
-                tagView.layer.borderWidth = 0.0
-            }
-        }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        tickerInfo?.linkedCollections.count ?? 0
     }
     
-    func unhighlightIndustries() {
-        wrongIndBtn.isSelected = false
-        guard (tickerInfo?.tags ?? []).count == tagsStack.subviews.count else {return}
-        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
-            if let tagView = tagsStack.subviews[ind] as? TagView {
-                if tagInfo.collectionID < 0 {
-                    tagView.backgroundColor = UIColor.white
-                    tagView.tagLabel.textColor = UIColor(named: "mainText")
-                    tagView.layer.borderWidth = 1.0
-                } else {
-                    tagView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
-                    tagView.tagLabel.textColor = .white
-                    tagView.layer.borderWidth = 0.0
-                }
-            }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: TickerDetailsRelativeCollectionViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        //cell.overrideDrag = false
+        if let collection = tickerInfo?.linkedCollections[indexPath.row] {
+            cell.configureWith(collection: collection)
+            cell.nameLabel.font = .proDisplayBold(16)
+            cell.stocksAmountLabel.font = .proDisplaySemibold(12)
+            cell.gainsLabel.font = .compactRoundedSemibold(12.0)
+            cell.todayLabel.font = .compactRoundedMedium(12)
+        }
+        return cell
+    }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        cellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 0, left: 16, bottom: 0, right: 16)
+    }
+}
+
+extension TickerDetailsAboutViewCell: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let collection = tickerInfo?.linkedCollections[indexPath.row] {
+            delegate?.collectionSelected(collection: collection)
         }
     }
 }

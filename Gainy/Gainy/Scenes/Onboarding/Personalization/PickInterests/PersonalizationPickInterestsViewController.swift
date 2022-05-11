@@ -16,7 +16,6 @@ class PersonalizationPickInterestsViewController: BaseViewController {
     private var appInterests: [AppInterestsQuery.Data.Interest]?
     private weak var footerView: PersonalizationPickInterestsFooterView?
     private var footerViewHeightConstraint: NSLayoutConstraint?
-    @IBOutlet weak var collectionViewBottomConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         
@@ -95,11 +94,10 @@ class PersonalizationPickInterestsViewController: BaseViewController {
         
         footerView.autoPinEdge(toSuperviewEdge: .leading)
         footerView.autoPinEdge(toSuperviewEdge: .trailing)
-        footerView.autoPinEdge(toSuperviewSafeArea: .bottom)
+        footerView.autoPinEdge(toSuperviewEdge: .bottom, withInset: -3.0)
       
         self.footerView = footerView
         self.footerView?.delegate = self
-        footerView.alpha = ((self.appInterests?.count ?? 0) > 0 ? 1.0 : 0.0)
         self.updateFooterPosition()
     }
     
@@ -154,11 +152,15 @@ extension PersonalizationPickInterestsViewController: PersonalizationPickInteres
     
     func personalizationPickInterestsFooterDidTapNext(sender: Any) {
         
-        guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
+        guard let indexPaths = self.collectionView.indexPathsForSelectedItems, indexPaths.count > 0 else {
+            NotificationManager.shared.showMessage(title: "", text: "Select at least 1 option please", cancelTitle: "OK", actions: nil)
+            return
+        }
+        
         var profileInterestIDs: [Int] = Array()
         for indexPath in indexPaths {
-            if let appInterest = self.appInterests?[indexPath.row], let id = appInterest.id  {
-                profileInterestIDs.append(id)
+            if let appInterest = self.appInterests?[indexPath.row] {
+                profileInterestIDs.append(appInterest.id)
             }
         }
         self.coordinator?.onboardingInfoBuilder.profileInterestIDs = profileInterestIDs
@@ -252,15 +254,14 @@ extension PersonalizationPickInterestsViewController: UICollectionViewDelegate, 
     func updateFooterPosition() {
         
         guard let indexPaths = self.collectionView.indexPathsForSelectedItems else {return}
-        self.footerView?.setNextButtonHidden(hidden: indexPaths.count == 0)
-        let height = indexPaths.count == 0 ? 30 : 101
+        self.footerView?.setNextButtonActive(active: indexPaths.count > 0)
+        let height = indexPaths.count == 0 ? 147 : 127
         if self.footerViewHeightConstraint != nil {
             self.footerViewHeightConstraint?.constant = CGFloat(height)
         } else {
             self.footerViewHeightConstraint = self.footerView?.autoSetDimension(.height, toSize: CGFloat(height))
         }
-        self.collectionViewBottomConstraint?.constant = indexPaths.count == 0 ? -45 : 0
-        let bottomInset = indexPaths.count == 0 ? 0 : 101
+        let bottomInset = indexPaths.count == 0 ? 147 : 127
         self.collectionView.contentInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: CGFloat(bottomInset), right: 0.0)
     }
 }

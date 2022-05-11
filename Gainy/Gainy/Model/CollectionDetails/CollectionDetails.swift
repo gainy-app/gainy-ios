@@ -1,11 +1,15 @@
 struct CollectionDetails {
     let id: Int
+    let uniqId: String
     let collectionBackgroundImage: String
     let collectionBackgroundImageUrl: String
     let collectionName: String
     let collectionDescription: String
     let collectionStocksAmount: Int
+    let collectionDailyGrow: Float
+    let matchScore: RemoteCollectionDetails.MatchScore
     let isInYourCollectionsList: Bool
+    let lastDayPrice: Float
     var cards: [TickerDetails]
     
     mutating func insertCards(_ newCards: [TickerDetails]) {

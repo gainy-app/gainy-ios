@@ -79,7 +79,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         case 2:
             GainyAnalytics.logEvent("back_to_second_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])
             self.captionsCollectionView.scrollRectToVisible(rect, animated: true)
-            self.currentCaptionIndex = 1
+            self.currentCaptionIndex = 1 
             self.indicatorViewProgressObject?.progress = Float(0.25)
         case 3:
             GainyAnalytics.logEvent("back_to_third_introduction", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Introduction"])

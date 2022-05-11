@@ -45,7 +45,7 @@ enum BuildEnvironment: String {
     }
 }
 
-struct Configuration {
+class Configuration {
     lazy var environment: BuildEnvironment = {
         if let configuration = Bundle.main.object(forInfoDictionaryKey: "SchemeName") as? String {
             if configuration.contains("Staging") {

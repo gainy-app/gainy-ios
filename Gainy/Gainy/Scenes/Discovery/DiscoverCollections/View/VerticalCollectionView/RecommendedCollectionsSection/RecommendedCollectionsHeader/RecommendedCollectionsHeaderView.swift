@@ -9,7 +9,6 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         backgroundColor = UIColor.Gainy.white
 
         addSubview(titleLabel)
-        addSubview(descriptionLabel)
 
         // TODO: extract layout constants to avoid magic numbers across the app
         let sectionHorizontalInset: CGFloat = 16
@@ -18,26 +17,17 @@ final class RecommendedCollectionsHeaderView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel
                 .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
+                .constraint(equalTo: leadingAnchor, constant: 24 - sectionHorizontalInset),
             titleLabel
                 .trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
+                .constraint(equalTo: trailingAnchor, constant: -24 + sectionHorizontalInset),
             titleLabel
                 .topAnchor
-                .constraint(equalTo: topAnchor, constant: 0),
+                .constraint(equalTo: topAnchor, constant: 40),
             titleLabel
                 .bottomAnchor
-                .constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
+                .constraint(equalTo: bottomAnchor, constant: -16),
 
-            descriptionLabel
-                .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
-            descriptionLabel
-                .trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
-            descriptionLabel
-                .bottomAnchor
-                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 0),
         ])
     }
 

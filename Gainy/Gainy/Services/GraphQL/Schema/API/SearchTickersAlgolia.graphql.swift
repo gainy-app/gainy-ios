@@ -73,7 +73,7 @@ public final class SearchTickersAlgoliaQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
-          GraphQLField("ticker", type: .nonNull(.object(Ticker.selections))),
+          GraphQLField("ticker", type: .object(Ticker.selections)),
         ]
       }
 
@@ -83,8 +83,8 @@ public final class SearchTickersAlgoliaQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(symbol: String, ticker: Ticker) {
-        self.init(unsafeResultMap: ["__typename": "Ticker", "symbol": symbol, "ticker": ticker.resultMap])
+      public init(symbol: String, ticker: Ticker? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Ticker", "symbol": symbol, "ticker": ticker.flatMap { (value: Ticker) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -105,13 +105,12 @@ public final class SearchTickersAlgoliaQuery: GraphQLQuery {
         }
       }
 
-      /// An object relationship
-      public var ticker: Ticker {
+      public var ticker: Ticker? {
         get {
-          return Ticker(unsafeResultMap: resultMap["ticker"]! as! ResultMap)
+          return (resultMap["ticker"] as? ResultMap).flatMap { Ticker(unsafeResultMap: $0) }
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "ticker")
+          resultMap.updateValue(newValue?.resultMap, forKey: "ticker")
         }
       }
 

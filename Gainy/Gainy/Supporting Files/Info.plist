@@ -103,6 +103,8 @@
 	<string>We will use Camera to pick your avatar image</string>
 	<key>NSContactsUsageDescription</key>
 	<string>We will use Contacts to inform about upcoming financial events</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Application will use your location to prioritize updates and notifications</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We will use Photo Library to pick your avatar image</string>
 	<key>NSRemindersUsageDescription</key>
@@ -141,6 +143,10 @@
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

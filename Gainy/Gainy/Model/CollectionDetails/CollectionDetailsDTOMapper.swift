@@ -6,11 +6,15 @@ enum CollectionDetailsDTOMapper {
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
+            uniqId: dto.uniqId ?? "",
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
+            collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
+            matchScore: dto.matchScore ?? RemoteCollectionDetails.MatchScore(),
             isInYourCollectionsList: false,
+            lastDayPrice: dto.metrics?.previousDayClosePrice ?? 0.0,
             cards: dto.prefetchedTickers
         )
     }
@@ -20,11 +24,15 @@ enum CollectionDetailsDTOMapper {
     ) -> CollectionDetails {
         CollectionDetails(
             id: dto.id ?? -1,
+            uniqId: dto.uniqId ?? "",
             collectionBackgroundImage: dto.name?.lowercased() ?? "", collectionBackgroundImageUrl: dto.imageUrl ?? "",
             collectionName: dto.name ?? "",
             collectionDescription: dto.description ?? "",
             collectionStocksAmount: dto.size ?? 0,
+            collectionDailyGrow: dto.metrics?.relativeDailyChange ?? 0.0,
+            matchScore: dto.matchScore ?? RemoteCollectionDetails.MatchScore(),
             isInYourCollectionsList: true,
+            lastDayPrice: dto.metrics?.previousDayClosePrice ?? 0.0,
             cards: dto.prefetchedTickers
         )
     }
@@ -235,8 +243,7 @@ enum CollectionDetailsDTOMapper {
                                                             description: randomString(20),
                                                             tickerHighlights: [])))
             }
-            
-            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: "1", inYourCollectionList: false, cards: cards))
+            collections.append(CollectionDetailViewCellModel.init(id: Constants.CollectionDetails.loadingCellIDs[hCell], uniqID: "", image: "", imageUrl: "", name: "Loader 1", description: "Loader 1", stocksAmount: 1, dailyGrow: 0.0, matchScore: RemoteCollectionDetails.MatchScore(), inYourCollectionList: false, lastDayPrice: 0.0, cards: cards))
         }
         return collections
     }

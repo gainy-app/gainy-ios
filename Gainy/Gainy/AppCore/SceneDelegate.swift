@@ -1,10 +1,13 @@
 import UIKit
 import FacebookCore
 import FirebaseAuth
+import OneSignal
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
     // MARK: Internal
-
+    private(set) var preloadVC: ConfigLoaderViewController = ConfigLoaderViewController.instantiate(.popups)
+    
     // MARK: Properites
 
     var window: UIWindow?
@@ -61,6 +64,31 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         if UserDefaults.isFirstLaunch() {
             GainyAnalytics.logEvent("first_launch", params: fbParams)
+        }
+        addPreloadOverlay()
+    }
+    
+    private func addPreloadOverlay() {
+        guard Auth.auth().currentUser == nil else {
+            RemoteConfigManager.shared.loadDefaults {
+            }
+            OneSignal.promptForPushNotifications(userResponse: { accepted in
+                     print("User accepted notification: \(accepted)")
+                GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
+                   })
+            return
+        }
+        
+        insertPreloadOverlay()
+    }
+    
+    func insertPreloadOverlay() {
+        if preloadVC.view.superview == nil {
+            preloadVC.view.frame = window?.rootViewController?.view.frame ?? .zero
+            if let view = preloadVC.view {
+                window?.rootViewController?.view.addSubview(view)
+                preloadVC.startLoading()
+            }
         }
     }
     

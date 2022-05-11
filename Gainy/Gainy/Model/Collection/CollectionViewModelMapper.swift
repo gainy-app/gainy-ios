@@ -6,7 +6,9 @@ enum CollectionViewModelMapper {
             imageUrl: model.imageUrl,
             name: model.name,
             description: model.description,
-            stocksAmount: "\(model.stocksAmount)",
+            stocksAmount: model.stocksAmount,
+            matchScore: model.matchScore,
+            dailyGrow: model.dailyGrow,
             recommendedIdentifier: nil
         )
     }
@@ -18,7 +20,9 @@ enum CollectionViewModelMapper {
             imageUrl: model.imageUrl,
             name: model.name,
             description: model.description,
-            stocksAmount: "\(model.stocksAmount)",
+            stocksAmount: model.stocksAmount,
+            matchScore: model.matchScore,
+            dailyGrow: model.dailyGrow,
             isInYourCollections: model.isInYourCollections
         )
     }

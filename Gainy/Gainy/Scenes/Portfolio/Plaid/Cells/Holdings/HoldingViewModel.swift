@@ -98,6 +98,7 @@ struct HoldingViewModel {
             }
         }
         
+        
         var attrArr: [NSMutableAttributedString] = []
         for key in secCount.keys {
             attrArr.append(key.name.attr(font: .compactRoundedSemibold(14.0),

@@ -8,14 +8,15 @@
 import UIKit
 final class TickerDetailsMarketDataViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 284.0
+    static let cellHeight: CGFloat = 312.0
     
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
             innerCollectionView.allowsMultipleSelection = true
-            innerCollectionView.register(UINib.init(nibName: "TickerDetailsMarketInnerViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: TickerDetailsMarketInnerViewCell.reuseIdentifier)
+            innerCollectionView.register(UINib.init(nibName: "LongTickerDetailsMarketInnerViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: TickerDetailsMarketInnerViewCell.reuseIdentifier)
+            innerCollectionView.isScrollEnabled = false
         }
     }
     
@@ -41,7 +42,7 @@ extension TickerDetailsMarketDataViewCell: UICollectionViewDataSource {
 
 extension TickerDetailsMarketDataViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize.init(width: (UIScreen.main.bounds.width - 16.0 * 2.0 - 10.0 * 2.0) / 3.0, height: 96.0)
+        CGSize.init(width: (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0, height: 80)
     }
 }
 

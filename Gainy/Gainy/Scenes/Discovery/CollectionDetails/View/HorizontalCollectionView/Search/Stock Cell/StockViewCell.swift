@@ -43,9 +43,7 @@ final class StockViewCell: UICollectionViewCell {
         guard let ticker  = self.ticker else {
             return
         }
-        guard let symbol = ticker.symbol else {
-            return
-        }
+        let symbol = ticker.symbol
         
         let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
             item == symbol
@@ -72,9 +70,7 @@ final class StockViewCell: UICollectionViewCell {
         guard let ticker  = self.ticker else {
             return
         }
-        guard let symbol = ticker.symbol else {
-            return
-        }
+        let symbol = ticker.symbol
         
         let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
             item == symbol

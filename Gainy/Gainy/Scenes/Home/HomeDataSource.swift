@@ -12,18 +12,18 @@ import SwiftDate
 import PureLayout
 
 protocol HomeDataSourceDelegate: AnyObject {
-    func altStockPressed(stock: AltStockTicker, isGainers: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func articlePressed(article: WebArticle)
     func collectionSelected(collection: RemoteShortCollectionDetails)
+    func tickerSelected(ticker: RemoteTicker)
+    func tickerSortCollectionsPressed()
+    func tickerSortWLPressed()
 }
 
 final class HomeDataSource: NSObject {
     
     init(viewModel: HomeViewModel) {
         cellHeights[.index] = HomeIndexesTableViewCell.cellHeight
-        cellHeights[.gainers] = HomeTickersTableViewCell.cellHeight
-        cellHeights[.losers] = HomeTickersTableViewCell.cellHeight + 32.0
         self.viewModel = viewModel
     }
     
@@ -33,21 +33,19 @@ final class HomeDataSource: NSObject {
     weak var delegate: HomeDataSourceDelegate?
     
     //MARK: - Sections
-    private let sectionsCount = 5
+    private let sectionsCount = 4
     
     enum Section: Int {
-        case index = 0, collections, gainers, losers, articles
+        case index = 0, collections, watchlist, articles
         
         var name: String {
             switch self {
             case .index:
                 return ""
             case .collections:
-                return "Updates in your collections"
-            case .gainers:
-                return "Top gainers in your collections"
-            case .losers:
-                return "Top loser in your collections"
+                return "Updates in TTF"
+            case .watchlist:
+                return "Watchlist"
             case .articles:
                 return "Articles for you"
             }
@@ -102,17 +100,15 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.gains = viewModel?.gains
             cell.bottomDots.isHidden = (viewModel?.gains == nil)
             return cell
-        case .gainers:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
-            cell.gainers = viewModel?.topGainers ?? []
+        case .watchlist:
+            let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
+            cell.heightUpdated = {[weak self] newHeight in
+                self?.tableView?.beginUpdates()
+                self?.cellHeights[.watchlist] = newHeight
+                self?.tableView?.endUpdates()
+            }
+            cell.watchlist = viewModel?.watchlist ?? []
             cell.delegate = self
-            cell.isGainers = true
-            return cell
-        case .losers:
-            let cell = tableView.dequeueReusableCell(withIdentifier: HomeTickersTableViewCell.cellIdentifier, for: indexPath) as! HomeTickersTableViewCell
-            cell.gainers = viewModel?.topLosers ?? []
-            cell.delegate = self
-            cell.isGainers = false
             return cell
         case .articles:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeArticlesTableViewCell.cellIdentifier, for: indexPath) as! HomeArticlesTableViewCell
@@ -141,10 +137,7 @@ extension HomeDataSource: UITableViewDelegate {
         if section == .index {
             return viewModel?.gains == nil ? HomeIndexesTableViewCell.smallCellHeight : HomeIndexesTableViewCell.cellHeight
         }
-        if section == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-            return 0.0
-        }
-        if section == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+        if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
         }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
@@ -154,9 +147,7 @@ extension HomeDataSource: UITableViewDelegate {
         switch Section(rawValue: indexPath.section)! {
         case .index:
             break
-        case .gainers:
-            break
-        case .losers:
+        case .watchlist:
             break
         case .articles:
             if let article = viewModel?.articles[indexPath.row] {
@@ -183,29 +174,108 @@ extension HomeDataSource: UITableViewDelegate {
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return nil
         }
-        if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-            return nil
-        }
-        if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+        if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return nil
         }
         
         let headerLabel = UILabel()
         headerLabel.textColor = UIColor(named: "mainText")!
         headerLabel.font = .proDisplaySemibold(20)        
-        headerLabel.text = Section(rawValue: section)!.name
+        headerLabel.text = sectionType.name
         
-        let headerView = UIView()
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40.0))
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        if section == Section.articles.rawValue || section == Section.gainers.rawValue{
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
+        if section == Section.articles.rawValue || section == Section.watchlist.rawValue {
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 180))
         } else {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 24))
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 180))
         }
         
+        let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
+        let button = buttonWithLabel.0
+        let sortLabel = buttonWithLabel.1
+        if section == Section.watchlist.rawValue {
+            button.addTarget(self, action: #selector(sortWatchlistTapped), for: .touchUpInside)
+            let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
+            sortLabel.text = settings.sortingText()
+            sortLabel.sizeToFit()
+        } else if section == Section.collections.rawValue, let profileID = UserProfileManager.shared.profileID {
+            button.addTarget(self, action: #selector(sortCollectionsTapped), for: .touchUpInside)
+            let settings: CollectionsSortingSettings = CollectionsSortingSettingsManager.shared.getSettingByID(profileID)
+            sortLabel.text = settings.sorting.title
+            sortLabel.sizeToFit()
+        }
+        
+        headerView.addSubview(button)
+        button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
+        button.autoSetDimension(.height, toSize: 24.0)
+        button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+        button.sizeToFit()
+        
         return headerView
+    }
+    
+    @objc private func sortCollectionsTapped() {
+        
+        delegate?.tickerSortCollectionsPressed()
+    }
+    
+    @objc private func sortWatchlistTapped() {
+        
+        delegate?.tickerSortWLPressed()
+    }
+    
+    func newSortByButton() -> (ResponsiveButton, UILabel) {
+        let button = ResponsiveButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 12
+        button.layer.cornerCurve = .continuous
+        button.backgroundColor = UIColor.Gainy.white
+        
+        let reorderIconImageView = UIImageView(
+            frame: CGRect(x: 0, y: 0, width: 16, height: 16)
+        )
+        reorderIconImageView.image = UIImage(named: "reorder")
+        button.addSubview(reorderIconImageView)
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
+        
+        let sortByLabel = UILabel(
+            frame: CGRect(x: 0, y: 0, width: 36, height: 16)
+        )
+        
+        sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        sortByLabel.textColor = UIColor.Gainy.grayNotDark
+        sortByLabel.numberOfLines = 1
+        sortByLabel.textAlignment = .center
+        sortByLabel.text = "Sort by"
+        
+        button.addSubview(sortByLabel)
+        sortByLabel.autoSetDimensions(to: CGSize.init(width: 36, height: 16))
+        sortByLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 26.0)
+        sortByLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        
+        let textLabel = UILabel(
+            frame: CGRect(x: 0, y: 0, width: 77, height: 16)
+        )
+        
+        textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
+        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.numberOfLines = 1
+        textLabel.textAlignment = .center
+        textLabel.text = "Watchlist"
+        textLabel.minimumScaleFactor = 0.1
+        button.addSubview(textLabel)
+        textLabel.autoSetDimension(.height, toSize: 16)
+        textLabel.autoPinEdge(.left, to: .right, of: sortByLabel, withOffset: 2.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        textLabel.sizeToFit()
+        
+        return (button, textLabel)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -216,10 +286,7 @@ extension HomeDataSource: UITableViewDelegate {
             if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
                 return 0.0
             }
-            if sectionType == .gainers && (viewModel?.topGainers.isEmpty ?? true) {
-                return 0.0
-            }
-            if sectionType == .losers && (viewModel?.topLosers.isEmpty ?? true) {
+            if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
                 return 0.0
             }
             
@@ -229,9 +296,6 @@ extension HomeDataSource: UITableViewDelegate {
 }
 
 extension HomeDataSource: HomeTickersTableViewCellDelegate {
-    func altStockPressed(stock: AltStockTicker, cell: HomeTickersTableViewCell) {
-        delegate?.altStockPressed(stock: stock, isGainers: cell.isGainers)
-    }
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         delegate?.wlPressed(stock: stock, cell: cell)
@@ -241,6 +305,12 @@ extension HomeDataSource: HomeTickersTableViewCellDelegate {
 extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
     func collectionSelected(collection: RemoteShortCollectionDetails) {
         delegate?.collectionSelected(collection: collection)
+    }
+}
+
+extension HomeDataSource: HomeWatchlistTableViewCellDelegate {
+    func tickerSelected(ticker: RemoteTicker) {
+        delegate?.tickerSelected(ticker: ticker)
     }
 }
 

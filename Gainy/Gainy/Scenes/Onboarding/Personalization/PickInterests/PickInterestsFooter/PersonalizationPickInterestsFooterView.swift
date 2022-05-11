@@ -19,13 +19,13 @@ final class PersonalizationPickInterestsFooterView: UIView {
     @IBOutlet private weak var nextButton: BorderButton!
     @IBOutlet private weak var textLabel: UILabel!
     
-    public func setNextButtonHidden(hidden: Bool) {
+    public func setNextButtonActive(active: Bool) {
         
-        UIView.animate(withDuration: 0.25) {
-            
-            self.nextButton?.alpha = hidden ? 0.0 : 1.0
-            self.textLabel?.alpha = !hidden ? 0.0 : 1.0
-        }
+        self.nextButton.isHidden = false
+        self.nextButton?.alpha = 1.0
+        self.textLabel?.alpha = active ? 0.0 : 1.0
+        self.nextButton.layer.borderColor = UIColor.clear.cgColor
+        self.nextButton.backgroundColor = !active ? UIColor.init(hexString: "#B1BDC8"): UIColor.black
     }
     
     @IBAction private func onNextButtonTap(_ sender: Any) {

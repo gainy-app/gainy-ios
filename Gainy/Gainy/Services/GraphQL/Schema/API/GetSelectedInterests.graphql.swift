@@ -9,7 +9,10 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query GetSelectedInterests($ids: [Int!]) {
-      interests(where: {enabled: {_eq: "1"}, id: {_in: $ids}}) {
+      interests(
+        where: {enabled: {_eq: "1"}, id: {_in: $ids}}
+        order_by: {sort_order: asc}
+      ) {
         __typename
         icon_url
         id
@@ -35,7 +38,7 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("interests", arguments: ["where": ["enabled": ["_eq": "1"], "id": ["_in": GraphQLVariable("ids")]]], type: .nonNull(.list(.nonNull(.object(Interest.selections))))),
+        GraphQLField("interests", arguments: ["where": ["enabled": ["_eq": "1"], "id": ["_in": GraphQLVariable("ids")]], "order_by": ["sort_order": "asc"]], type: .nonNull(.list(.nonNull(.object(Interest.selections))))),
       ]
     }
 
@@ -49,7 +52,7 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "interests": interests.map { (value: Interest) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413044555.interests"
+    /// fetch data from the table: "public_220510085411.interests"
     public var interests: [Interest] {
       get {
         return (resultMap["interests"] as! [ResultMap]).map { (value: ResultMap) -> Interest in Interest(unsafeResultMap: value) }
@@ -66,7 +69,7 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("icon_url", type: .scalar(String.self)),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
         ]
       }
@@ -77,7 +80,7 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+      public init(iconUrl: String? = nil, id: Int, name: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "interests", "icon_url": iconUrl, "id": id, "name": name])
       }
 
@@ -99,9 +102,9 @@ public final class GetSelectedInterestsQuery: GraphQLQuery {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")

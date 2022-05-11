@@ -14,6 +14,9 @@ final class ScatterChartViewModel: ObservableObject {
         self.localTicker = localTicker
         self.chartData = chartData
         self.medianData = medianData
+        self.isSPPVisible = false
+        self.isLoading = true
+        self.lastDayPrice = 0.0
     }
     
     @Published
@@ -27,4 +30,13 @@ final class ScatterChartViewModel: ObservableObject {
     
     @Published
     var medianData: ChartData
+    
+    @Published
+    var isSPPVisible: Bool
+    
+    @Published
+    var isLoading: Bool
+    
+    @Published
+    var lastDayPrice: Float = 0
 }

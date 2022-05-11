@@ -50,16 +50,14 @@ struct PortfolioScatterChartView: View {
         if #available(iOS 14.0, *) {
             VStack {
                 headerView
+                sppView
+                    .frame(height: 24)
                 ZStack {
                     chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
                         .frame(height: 220)
                 }
                 Spacer()
-                sppView
-                    .offset(y: -16)
-                    .frame(height: 24)
+                
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 })
@@ -74,23 +72,23 @@ struct PortfolioScatterChartView: View {
             .frame(height: 360)
             .ignoresSafeArea()
             .padding(.top, 0)
+            .onChange(of: viewModel.lastDayPrice) { newValue in
+                lineViewModel.lastDayPrice = newValue
+            }
         } else {
             VStack {
                 headerView
+                sppView
+                    .frame(height: 24)
                 ZStack {
                     //            LinearGradient(
                     //                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
                     //                    startPoint: .top, endPoint: .bottom)
                     //                    .padding(.top, 0)
                     chartView
-                        .padding(.leading, 8)
-                        .padding(.trailing, 8)
                         .frame(height: 220)
                 }
                 Spacer()
-                sppView
-                    .offset(y: -16)
-                    .frame(height: 24)
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                 })
@@ -289,6 +287,7 @@ struct PortfolioScatterChartView: View {
             Spacer()
         }
         .padding(.leading, 16)
+        .padding(.top, 30)
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
@@ -300,7 +299,7 @@ struct PortfolioScatterChartView: View {
                     ZStack {
                         Rectangle()
                             .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
-                            .cornerRadius(16.0)
+                            .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                             .padding(.all, 0)
@@ -313,14 +312,13 @@ struct PortfolioScatterChartView: View {
                     .animation(.easeIn)
                 }).frame(width: widthForGeometry(geometry), height: 20)
             }
-        }.padding(.leading, 16)
-            .padding(.trailing, 16)
-            .padding(.top, 0)
-            .frame(width: UIScreen.main.bounds.width)
+        }
+        .frame(width: UIScreen.main.bounds.width - 24 * 2.0)
+        .padding(.leading, 24)
     }
     
     private func widthForGeometry(_ geometry: GeometryProxy) -> CGFloat {
-        (UIScreen.main.bounds.width - 10.0 * 2.0 - 2.0 * 6) / 7.0
+        (UIScreen.main.bounds.width - 24 * 2.0 - 2.0 * 6) / 7.0
     }
 }
 

@@ -25,7 +25,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
             top: 16.0,
             leading: 16.0,
-            bottom: 32.0,
+            bottom: 0,
             trailing: 16.0
         )
 
@@ -64,6 +64,8 @@ struct YourCollectionsSectionLayout: SectionLayout {
                                imageUrl: viewModel.imageUrl,
                                description: viewModel.description,
                                stocksAmount: viewModel.stocksAmount,
+                               matchScore: viewModel.matchScore,
+                               dailyGrow: viewModel.dailyGrow,
                                imageName: viewModel.image)
         }
 

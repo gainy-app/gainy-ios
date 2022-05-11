@@ -94,16 +94,29 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.Gainy.white
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
                 y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
-                height: 80
+                height: 110
             )
         )
-        navigationBarContainer.backgroundColor = UIColor.Gainy.white
+        navigationBarContainer.backgroundColor = .clear
+        
+        let navigationBarTopOffset =
+        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
+        let blurView = BlurEffectView()
+        view.addSubview(blurView)
+        
+        blurView.autoPinEdge(toSuperviewEdge: .leading)
+        blurView.autoPinEdge(toSuperviewEdge: .top)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing)
+        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+        
+        view.backgroundColor = UIColor.Gainy.white
+        
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
@@ -121,6 +134,63 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
+        
+        let currentNumberView = UIView.newAutoLayout()
+        currentNumberView.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        currentNumberView.layer.cornerRadius = 8.0
+        currentNumberView.layer.masksToBounds = true
+        navigationBarContainer.addSubview(currentNumberView)
+        currentNumberView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
+        currentNumberView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
+        currentNumberView.autoSetDimension(.height, toSize: 24.0)
+        self.currentNumberView = currentNumberView
+        
+        let currentNumberLabel = UILabel()
+        currentNumberLabel.font = .compactRoundedSemibold(14)
+        currentNumberLabel.textColor = UIColor.init(hexString: "#09141F")
+        currentNumberLabel.numberOfLines = 1
+        currentNumberLabel.lineBreakMode = .byTruncatingTail
+        currentNumberLabel.textAlignment = .center
+        currentNumberLabel.isSkeletonable = true
+        currentNumberLabel.linesCornerRadius = 6
+        currentNumberView.addSubview(currentNumberLabel)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        currentNumberLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4.0)
+        self.currentNumberLabel = currentNumberLabel
+        currentNumberLabel.showSkeleton()
+        
+        let favoriteButton = ResponsiveButton.newAutoLayout()
+        favoriteButton.isSkeletonable = true
+        favoriteButton.skeletonCornerRadius = 6
+        let selectedImage = UIImage.init(named: "save")
+        let normalImage = UIImage.init(named: "save")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        favoriteButton.setImage(normalImage, for: .normal)
+        favoriteButton.setImage(selectedImage, for: .selected)
+        favoriteButton.isSelected = true
+        favoriteButton.tintColor = UIColor.init(hexString: "#000000")
+        navigationBarContainer.addSubview(favoriteButton)
+        favoriteButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        favoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        self.favoriteButton = favoriteButton
+        favoriteButton.showSkeleton()
+        
+        let compareButton = ResponsiveButton.newAutoLayout()
+        compareButton.isSkeletonable = true
+        compareButton.setImage(UIImage.init(named: "compare"), for: .normal)
+        compareButton.setImage(UIImage.init(named: "compare"), for: .selected)
+        navigationBarContainer.addSubview(compareButton)
+        compareButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        compareButton.autoPinEdge(.right, to: .left, of: favoriteButton, withOffset: -16.0)
+        compareButton.addTarget(self, action: #selector(compareButtonTapped), for: .touchUpInside)
+        compareButton.skeletonCornerRadius = 6
+        self.compareButton = compareButton
+        compareButton.showSkeleton()
+        
         let searchTextField = UITextField(
             frame: CGRect(
                 x: 16,
@@ -188,8 +258,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         view.addSubview(navigationBarContainer)
         
-        let navigationBarTopOffset =
-        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
         
         collectionView = UICollectionView(
             frame: CGRect(
@@ -201,19 +270,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: customLayout
         )
         collectionView.isSkeletonable = true
-        view.addSubview(collectionView)
-        collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        view.insertSubview(collectionView, at: 0)
+        collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 0)
         collectionView.autoPinEdge(.leading, to: .leading, of: view)
         collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-        
+        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)        
         collectionView.register(CollectionDetailsViewCell.self)
         
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.dragInteractionEnabled = true
         collectionView.bounces = false
-        
+        collectionView.clipsToBounds = false
         collectionView.dataSource = dataSource
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
@@ -225,6 +293,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 viewModel: modelItem,
                 position: indexPath.row
             )
+            
+            cell?.isSkeletonable = collectionView.isSkeletonable
+            
+            if collectionView.sk.isSkeletonActive {
+                cell?.showAnimatedGradientSkeleton()
+            } else {
+                cell?.hideSkeleton()
+            }
             
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
@@ -273,6 +349,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
                 }
+                
             }
             return cell
         }
@@ -287,7 +364,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 16)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
@@ -455,46 +532,44 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
-        runOnMain {
-            let lock = NSLock()
-            lock.lock()
-            let watchlistCollections = models.filter { item in
-                item.id < 0
-            }
-            if let firstItem = watchlistCollections.first {
-                deleteCollections(watchlistCollections)
-                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
-                if var snapshot = self.dataSource?.snapshot() {
-                    if snapshot.indexOfSection(.collectionWithCards) != nil {
-                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
-                            snapshot.insertItems(watchlistCollections, beforeItem: first)
-                        } else {
-                            snapshot.appendItems(watchlistCollections,
-                                                 toSection: .collectionWithCards)
-                        }
-                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
-                            completed?()
-                        })
-                    } else {
-                        completed?()
-                    }
-                } else {
-                    completed?()
-                }
-            } else {
-                completed?()
-            }
-            lock.unlock()
-        }
+//        runOnMain {
+//            let lock = NSLock()
+//            lock.lock()
+//            let watchlistCollections = models.filter { item in
+//                item.id < 0
+//            }
+//            if let firstItem = watchlistCollections.first {
+//                deleteCollections(watchlistCollections)
+//                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
+//                if var snapshot = self.dataSource?.snapshot() {
+//                    if snapshot.indexOfSection(.collectionWithCards) != nil {
+//                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+//                            snapshot.insertItems(watchlistCollections, beforeItem: first)
+//                        } else {
+//                            snapshot.appendItems(watchlistCollections,
+//                                                 toSection: .collectionWithCards)
+//                        }
+//                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+//                            completed?()
+//                        })
+//                    } else {
+//                        completed?()
+//                    }
+//                } else {
+//                    completed?()
+//                }
+//            } else {
+//                completed?()
+//            }
+//            lock.unlock()
+//        }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
         runOnMain {
             self.appendNewCollectionsFromModels(models) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.appendWatchlistCollectionsFromModels(models) {
-                        completed?()
-                    }
+                    completed?()
                 }
             }
         }
@@ -617,8 +692,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [
-        HorizontalFlowSectionLayout(),
+        self.flowSectionLayout,
     ]
+    
+    private lazy var flowSectionLayout: HorizontalFlowSectionLayout = {
+        var layout = HorizontalFlowSectionLayout()
+        layout.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            
+            if let currentIndex = items.last?.indexPath.row {
+                self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+            }
+        }
+        return layout
+    }()
     
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
@@ -637,6 +723,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var searchController: CollectionSearchController?
     private var discoverCollectionsBtn: UIButton?
     private var searchTextField: UITextField?
+    
+    
+    private var currentNumberView: UIView?
+    private var currentNumberLabel: UILabel?
+    private var compareButton: UIButton?
+    private var favoriteButton: UIButton?
     
     // MARK: Functions
     
@@ -669,6 +761,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if (loadProfile) {
             Network.shared.apollo.clearCache()
             UserProfileManager.shared.fetchProfile { success in
+                
+                if let profileId = UserProfileManager.shared.profileID {
+                    SubscriptionManager.shared.login(profileId: profileId)
+                    SubscriptionManager.shared.getSubscription { _ in
+                        
+                    }
+                }
                 
                 guard success == true else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
@@ -715,6 +814,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
+    private func hideSkeletons() {
+        currentNumberLabel?.hideSkeleton()
+        compareButton?.hideSkeleton()
+        favoriteButton?.hideSkeleton()
+        collectionView?.hideSkeleton()
+        
+        searchTextField?.isEnabled = true
+        discoverCollectionsBtn?.isEnabled = true
+    }
+    
     private func fetchFailedCollections(completion: @escaping () -> Void) {
         showNetworkLoader()
         
@@ -743,6 +852,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         onDiscoverCollections?(false)
     }
     
+    @objc
+    private func compareButtonTapped() {
+        
+    }
+    
+    @objc
+    private func favoriteButtonTapped() {
+        
+    }
+    
     private func createNavigationBarContainer() -> UIView {
         UIView()
     }
@@ -766,17 +885,21 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                         at: .centeredHorizontally,
                                         animated: false)
         }
+        
+        if !Constants.CollectionDetails.loadingCellIDs.contains(snap.itemIdentifiers.first?.id ?? -1) {
+            hideSkeletons()
+        }
     }
     
     func currentBackgroundImageFrame() -> CGRect {
         
-        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
-        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
-            let horizontalView = cell.collectionHorizontalView
-            return self.view.convert(horizontalView.frame, from: horizontalView)
-        } else {
+//        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
+//        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
+//            let horizontalView = cell.collectionHorizontalView
+//            return self.view.convert(horizontalView.frame, from: horizontalView)
+//        } else {
             return CGRect.zero
-        }
+//        }
     }
     
     private func initViewModelsFromData() {
@@ -807,6 +930,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func addLoaders() {
+        collectionView.showAnimatedGradientSkeleton()
         if var snapshot = dataSource?.snapshot() {
             if snapshot.sectionIdentifiers.count > 0 {
                 snapshot.deleteSections([.collectionWithCards])
@@ -823,8 +947,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
             })
         }
-        searchTextField?.isEnabled = false
-        discoverCollectionsBtn?.isEnabled = false
     }
     
     private lazy var sortingVS = SortCollectionDetailsViewController.instantiate(.popups)

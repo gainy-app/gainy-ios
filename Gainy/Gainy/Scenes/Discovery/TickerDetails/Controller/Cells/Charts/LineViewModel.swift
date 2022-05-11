@@ -38,4 +38,14 @@ class LineViewModel: ObservableObject {
     
     @Published
     var showCloseLine: Bool = true
+    
+    @Published
+    var minMaxPercent: Bool = false
+    
+    @Published
+    var lastDayPrice: Float = 0
+    
+    init(minMaxPercent: Bool = false) {
+        self.minMaxPercent = minMaxPercent
+    }
 }

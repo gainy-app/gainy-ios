@@ -21,6 +21,7 @@ public final class GetTickerExtraDetailsQuery: GraphQLQuery {
   public var queryDocument: String {
     var document: String = operationDefinition
     document.append("\n" + RemoteTickerExtraDetails.fragmentDefinition)
+    document.append("\n" + RemoteCollectionDetails.fragmentDefinition)
     return document
   }
 
@@ -53,7 +54,7 @@ public final class GetTickerExtraDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "tickers": tickers.map { (value: Ticker) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413044555.tickers"
+    /// fetch data from the table: "public_220510085411.tickers"
     public var tickers: [Ticker] {
       get {
         return (resultMap["tickers"] as! [ResultMap]).map { (value: ResultMap) -> Ticker in Ticker(unsafeResultMap: value) }

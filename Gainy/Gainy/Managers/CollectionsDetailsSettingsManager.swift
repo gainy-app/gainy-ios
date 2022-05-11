@@ -8,16 +8,23 @@
 import UIKit
 
 typealias CollectionId = Int
+typealias ProfileId = Int
 
 struct CollectionSettings: Codable {
     enum ViewMode: Int, Codable {
         case list = 0, grid
     }
     
+    enum PieChartMode: Int, Codable {
+        case tickers = 0, categories, interests
+    }
+    
     let collectionID: Int
     let sorting: MarketDataField
     let ascending: Bool
     let viewMode: ViewMode
+    let pieChartMode: PieChartMode
+    let pieChartSelected: Bool
     
     func sortingValue() -> MarketDataField {
         
@@ -82,6 +89,64 @@ struct CollectionSettings: Codable {
     }
 }
 
+struct CollectionsSortingSettings: Codable {
+    
+    enum SortingField: Int, Codable, CaseIterable {
+        case matchScore = 0, todaysGain, timeUpdated, numberOfStocks, name
+        
+        var title: String {
+            switch self {
+            case .matchScore: return "Match Score"
+            case .todaysGain: return "Todays Gain"
+            case .timeUpdated: return "Time Updated"
+            case .numberOfStocks: return "Stocks Count"
+            case .name: return "Name"
+            }
+        }
+    }
+    
+    let profileID: Int
+    let sorting: SortingField
+    let ascending: Bool
+    
+    var sortingFieldsToShow: [SortingField] {
+        
+        return SortingField.allCases
+    }
+}
+
+final class CollectionsSortingSettingsManager {
+    
+    static let shared = CollectionsSortingSettingsManager()
+    
+    @UserDefault("CollectionsSortingSettingsManager.settings_v1.0_prod")
+    private var settings: [ProfileId : CollectionsSortingSettings]?
+    
+    func getSettingByID(_ id: Int) -> CollectionsSortingSettings {
+        if settings == nil {
+            settings = [:]
+        }
+        if let settings = settings?[id] {
+            return settings
+        } else {
+            let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .matchScore, ascending: false)
+            settings?[id] = defSettigns
+            return defSettigns
+        }
+    }
+    
+    //MARK: - Modifiers
+    func changeSortingForId(_ id: Int, sorting: CollectionsSortingSettings.SortingField) {
+        let cur = getSettingByID(id)
+        settings?[id] =  CollectionsSortingSettings.init(profileID: id, sorting: sorting, ascending: cur.ascending)
+    }
+    
+    func changeAscendingForId(_ id: Int, ascending: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id] = CollectionsSortingSettings.init(profileID: id, sorting: cur.sorting, ascending: ascending)
+    }
+}
+
 final class CollectionsDetailsSettingsManager {
     
     static let shared = CollectionsDetailsSettingsManager()
@@ -128,7 +193,7 @@ final class CollectionsDetailsSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.matchScore, ascending: false, viewMode: .grid)
+            let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.matchScore, ascending: false, viewMode: .grid, pieChartMode: .categories, pieChartSelected: false)
             settings?[id] = defSettigns
             return defSettigns
         }
@@ -138,17 +203,27 @@ final class CollectionsDetailsSettingsManager {
     //MARK: - Modifiers
     func changeSortingForId(_ id: Int, sorting: MarketDataField) {
         let cur = getSettingByID(id)
-        settings?[id] = CollectionSettings(collectionID: id, sorting: sorting, ascending: cur.ascending, viewMode: cur.viewMode)
+        settings?[id] = CollectionSettings(collectionID: id, sorting: sorting, ascending: cur.ascending, viewMode: cur.viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: cur.pieChartSelected)
     }
     
     func changeViewModeForId(_ id: Int, viewMode: CollectionSettings.ViewMode) {
         let cur = getSettingByID(id)
-        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: viewMode )
+        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: cur.pieChartSelected)
+    }
+    
+    func changePieChartSelectedForId(_ id: Int, pieChartSelected: Bool) {
+        let cur = getSettingByID(id)
+        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: cur.viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: pieChartSelected)
+    }
+    
+    func changePieChartModeForId(_ id: Int, pieChartMode: CollectionSettings.PieChartMode) {
+        let cur = getSettingByID(id)
+        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: cur.viewMode, pieChartMode: pieChartMode, pieChartSelected: cur.pieChartSelected)
     }
     
     func changeAscendingForId(_ id: Int, ascending: Bool) {
         let cur = getSettingByID(id)
-        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: ascending, viewMode: cur.viewMode )
+        settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: ascending, viewMode: cur.viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: cur.pieChartSelected)
     }
     
     func tickerMetricsOrderForMarketData(filed: MarketDataField, ascending: Bool) -> ticker_metrics_order_by {

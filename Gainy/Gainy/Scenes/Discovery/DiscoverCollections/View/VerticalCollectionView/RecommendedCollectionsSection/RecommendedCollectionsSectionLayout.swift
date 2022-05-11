@@ -7,7 +7,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         // Items
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
+                widthDimension: .fractionalWidth(0.5),
                 heightDimension: .fractionalHeight(1.0)
             )
         )
@@ -16,19 +16,19 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(144)
+                heightDimension: .fractionalWidth(0.5)
             ),
             subitem: recommendedItem,
             count: Constant.numberOfColumns
         )
-        recommendedGroup.interItemSpacing = .fixed(8)
+        recommendedGroup.interItemSpacing = .fixed(16)
 
         // Section
         let recommendedCollectionsSection = NSCollectionLayoutSection(group: recommendedGroup)
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(64)
+                heightDimension: .estimated(40 + 24 + 16)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
@@ -36,7 +36,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         recommendedCollectionsSection.boundarySupplementaryItems = [sectionHeader]
         recommendedCollectionsSection.interGroupSpacing = 8
         recommendedCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
-            top: 16.0,
+            top: 0,
             leading: 16.0,
             bottom: 28.0,
             trailing: 16.0
@@ -81,6 +81,8 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
                 imageUrl: viewModel.imageUrl,
                 description: viewModel.description,
                 stocksAmount: viewModel.stocksAmount,
+                matchScore: viewModel.matchScore,
+                dailyGrow: viewModel.dailyGrow,
                 imageName: viewModel.image,
                 plusButtonState: buttonState
             )
@@ -92,6 +94,6 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
     // MARK: Private
 
     private enum Constant {
-        static let numberOfColumns = 3
+        static let numberOfColumns = 2
     }
 }

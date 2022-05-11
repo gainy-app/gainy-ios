@@ -33,7 +33,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                 balanceLbl.text = gains.actualValue?.price ?? ""
                 
                 let isGrowing = (gains.relativeGain_1d ?? 0.0) > 0.0
-                growLbl.text = gains.relativeGain_1d?.percent ?? ""
+                growLbl.text = gains.relativeGain_1d?.percentUnsigned ?? ""
                 growPriceLbl.text = gains.absoluteGain_1d?.price ?? ""
                 growArrow.image = UIImage(named: isGrowing ? "small_up" : "small_down")
                 

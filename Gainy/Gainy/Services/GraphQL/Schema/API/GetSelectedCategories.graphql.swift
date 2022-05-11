@@ -49,7 +49,7 @@ public final class GetSelectedCategoriesQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "categories": categories.map { (value: Category) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413044555.categories"
+    /// fetch data from the table: "public_220510085411.categories"
     public var categories: [Category] {
       get {
         return (resultMap["categories"] as! [ResultMap]).map { (value: ResultMap) -> Category in Category(unsafeResultMap: value) }
@@ -66,7 +66,7 @@ public final class GetSelectedCategoriesQuery: GraphQLQuery {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("icon_url", type: .scalar(String.self)),
-          GraphQLField("id", type: .scalar(Int.self)),
+          GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("name", type: .scalar(String.self)),
         ]
       }
@@ -77,7 +77,7 @@ public final class GetSelectedCategoriesQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(iconUrl: String? = nil, id: Int? = nil, name: String? = nil) {
+      public init(iconUrl: String? = nil, id: Int, name: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "categories", "icon_url": iconUrl, "id": id, "name": name])
       }
 
@@ -99,9 +99,9 @@ public final class GetSelectedCategoriesQuery: GraphQLQuery {
         }
       }
 
-      public var id: Int? {
+      public var id: Int {
         get {
-          return resultMap["id"] as? Int
+          return resultMap["id"]! as! Int
         }
         set {
           resultMap.updateValue(newValue, forKey: "id")

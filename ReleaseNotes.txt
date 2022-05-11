@@ -1,16 +1,15 @@
-iOS v1.2.2 #184 available
+iOS v1.3 #198 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• -
+• Purchases init
 
 :hammer_and_wrench: Improvements
-• Portfolio: crypto card fix
-• QA updates
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-General flow
+TTF

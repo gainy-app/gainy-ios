@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAnalytics
 import AppsFlyerLib
 import FirebaseAuth
+import OneSignal
 
 enum AnalyticFields: String {
     case ProtocolVersion = "v", TrackingID = "tid", ClientID = "cid", HitType = "t", CacheBuster = "z", DataSource = "ds",
@@ -62,6 +63,11 @@ final class GainyAnalytics {
         newParams["ul"] = Locale.current.identifier
         Analytics.logEvent(name, parameters: newParams)
         AppsFlyerLib.shared().logEvent(name, withValues: newParams)
+        
+        //    "App is limited to a maximum of 10 tags on a given player"
+//        var oneSignalPrams = newParams
+//        oneSignalPrams["event"] = name
+//        OneSignal.sendTags(oneSignalPrams)
     }
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {

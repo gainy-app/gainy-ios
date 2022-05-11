@@ -111,8 +111,8 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
           GraphQLField("iso_currency_code", type: .scalar(String.self)),
           GraphQLField("profile_id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("security_id", type: .nonNull(.scalar(Int.self))),
-          GraphQLField("security", type: .nonNull(.object(Security.selections))),
-          GraphQLField("account", type: .nonNull(.object(Account.selections))),
+          GraphQLField("security", type: .object(Security.selections)),
+          GraphQLField("account", type: .object(Account.selections)),
           GraphQLField("amount", type: .nonNull(.scalar(Double.self))),
           GraphQLField("date", type: .nonNull(.scalar(String.self))),
           GraphQLField("fees", type: .nonNull(.scalar(Double.self))),
@@ -127,8 +127,8 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: Int, quantity: Double, isoCurrencyCode: String? = nil, profileId: Int, securityId: Int, security: Security, account: Account, amount: Double, date: String, fees: Double, name: String, price: Double) {
-        self.init(unsafeResultMap: ["__typename": "PortfolioTransaction", "id": id, "quantity": quantity, "iso_currency_code": isoCurrencyCode, "profile_id": profileId, "security_id": securityId, "security": security.resultMap, "account": account.resultMap, "amount": amount, "date": date, "fees": fees, "name": name, "price": price])
+      public init(id: Int, quantity: Double, isoCurrencyCode: String? = nil, profileId: Int, securityId: Int, security: Security? = nil, account: Account? = nil, amount: Double, date: String, fees: Double, name: String, price: Double) {
+        self.init(unsafeResultMap: ["__typename": "PortfolioTransaction", "id": id, "quantity": quantity, "iso_currency_code": isoCurrencyCode, "profile_id": profileId, "security_id": securityId, "security": security.flatMap { (value: Security) -> ResultMap in value.resultMap }, "account": account.flatMap { (value: Account) -> ResultMap in value.resultMap }, "amount": amount, "date": date, "fees": fees, "name": name, "price": price])
       }
 
       public var __typename: String {
@@ -185,23 +185,21 @@ public final class GetPlaidTransactionsQuery: GraphQLQuery {
         }
       }
 
-      /// An object relationship
-      public var security: Security {
+      public var security: Security? {
         get {
-          return Security(unsafeResultMap: resultMap["security"]! as! ResultMap)
+          return (resultMap["security"] as? ResultMap).flatMap { Security(unsafeResultMap: $0) }
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "security")
+          resultMap.updateValue(newValue?.resultMap, forKey: "security")
         }
       }
 
-      /// An object relationship
-      public var account: Account {
+      public var account: Account? {
         get {
-          return Account(unsafeResultMap: resultMap["account"]! as! ResultMap)
+          return (resultMap["account"] as? ResultMap).flatMap { Account(unsafeResultMap: $0) }
         }
         set {
-          resultMap.updateValue(newValue.resultMap, forKey: "account")
+          resultMap.updateValue(newValue?.resultMap, forKey: "account")
         }
       }
 

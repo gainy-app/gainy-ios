@@ -1,11 +1,14 @@
 import UIKit
 
 struct HorizontalFlowSectionLayout: SectionLayout {
+    
+    var visibleItemsInvalidationHandler: NSCollectionLayoutSectionVisibleItemsInvalidationHandler?
+    
     func layoutSection(within environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let topItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .fractionalWidth(1.0),
                 heightDimension: .fractionalHeight(1)
             )
         )
@@ -13,7 +16,7 @@ struct HorizontalFlowSectionLayout: SectionLayout {
         // Group
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .absolute(environment.container.contentSize.width - (8 + 4 + 4 + 8)),
+                widthDimension: .absolute(environment.container.contentSize.width),
                 heightDimension: .estimated(environment.container.contentSize.height)
             ),
             subitems: [topItem]
@@ -26,12 +29,15 @@ struct HorizontalFlowSectionLayout: SectionLayout {
 
         collectionsFlowSection.orthogonalScrollingBehavior = .groupPagingCentered
         collectionsFlowSection.visibleItemsInvalidationHandler = { (items, offset, environment) in
+            if let handler = self.visibleItemsInvalidationHandler {
+                handler(items, offset, environment)
+            }
             items.forEach { item in
                 let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
                 let minScale: CGFloat = 0.1
                 let maxScale: CGFloat = 1.0
                 let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-                item.alpha = scale
+                item.alpha = 1.0
             }
         }
         collectionsFlowSection.contentInsets = .zero
@@ -48,20 +54,13 @@ struct HorizontalFlowSectionLayout: SectionLayout {
             collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = viewModel as? CollectionDetailViewCellModel {
-            cell.configureWith(
-                name: viewModel.name,
-                image: viewModel.image,
-                imageUrl: viewModel.imageUrl,
-                description: viewModel.description,
-                stocksAmount: viewModel.stocksAmount,
-                cards: viewModel.cards,
-                collectionId: viewModel.id
-            )
+            cell.configureWith(viewModel: viewModel)
             if Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) {
                 cell.showAnimatedGradientSkeleton()
-            } else {
-                cell.collectionHorizontalView.hideSkeleton()                
             }
+//            else {
+//                cell.collectionHorizontalView.hideSkeleton()                
+//            }
         }
 
         return cell

@@ -122,4 +122,21 @@ extension HoldingSecurityViewModel: Hashable {
     
 }
 
-
+extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
+    var secType: HoldingSecurityViewModel.SecType {
+        let rawType = holdingDetails?.securityType ?? ""
+        if rawType == "derivative" {
+            return .option
+        } else {
+            if rawType == "equity" {
+                return .share
+            } else {
+                if rawType == "crypto" {
+                    return .crypto
+                } else {
+                    return .cash
+                }
+            }
+        }
+    }
+}

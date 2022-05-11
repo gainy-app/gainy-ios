@@ -79,7 +79,9 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name ?? "",
                                            imageUrl: collection.imageUrl ?? "",
                                            description: collection.description ?? "",
-                                           stocksAmount: "\(collection.size ?? 0)",
+                                           stocksAmount: (collection.size ?? 0),
+                                           matchScore: Int(collection.matchScore?.matchScore ?? 0),
+                                           dailyGrow: collection.metrics?.relativeDailyChange ?? 0.0,
                                            imageName: "",
                                            plusButtonState: buttonState)
                         
@@ -115,7 +117,9 @@ final class CollectionSearchController: NSObject {
                         cell.configureWith(name: collection.name,
                                            imageUrl: collection.imageUrl,
                                            description: collection.description,
-                                           stocksAmount:collection.stocksAmount,
+                                           stocksAmount: collection.stocksAmount,
+                                           matchScore: collection.matchScore,
+                                           dailyGrow: collection.dailyGrow,
                                            imageName: "",
                                            plusButtonState: buttonState)
                         cell.onPlusButtonPressed = { [weak self] in
@@ -288,11 +292,11 @@ final class CollectionSearchController: NSObject {
         networkCalls.append(Network.shared.apollo.fetch(query: tickersQuery){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                let mappedTickers = (graphQLResult.data?.searchTickers ?? []).compactMap({$0?.ticker.fragments.remoteTickerDetails})
+                let mappedTickers = (graphQLResult.data?.searchTickers ?? []).compactMap({$0?.ticker?.fragments.remoteTickerDetails})
                 self?.stocks = mappedTickers
                 
                 for tickLivePrice in mappedTickers.compactMap({$0.realtimeMetrics}) {
-                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
                 }
                 dispatchGroup.leave()
                 
@@ -326,7 +330,7 @@ final class CollectionSearchController: NSObject {
         networkCalls.append(Network.shared.apollo.fetch(query: collectionsQuery){[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection.fragments.remoteCollectionDetails})
+                let mappedCollections = (graphQLResult.data?.searchCollections ??  []).compactMap({$0?.collection?.fragments.remoteCollectionDetails})
                 self?.collections = mappedCollections
                 
 //                for tickLivePrice in mappedCollections.compactMap({$0.tickerCollections.compactMap({$0.ticker?.fragments.remoteTickerDetails.realtimeMetrics})}).flatMap({$0}) {
@@ -447,13 +451,14 @@ extension CollectionSearchController {
             }
             
             if layoutKind == .collections {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(109),
-                                                      heightDimension: .absolute(144))
+                let width = (UIScreen.main.bounds.width - 16 * 3.0) / 2.0
+                let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
+                                                      heightDimension: .absolute(width))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 12, bottom: 2, trailing: 2)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(109),
-                                                       heightDimension: NSCollectionLayoutDimension.absolute(144))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
+                                                       heightDimension: .absolute(width))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
                 
                 let section = NSCollectionLayoutSection(group: group)
@@ -471,15 +476,15 @@ extension CollectionSearchController {
             
             if layoutKind == .suggestedCollection {
                 let defaultOffset = 16.0
-                let width = (UIScreen.main.bounds.width - defaultOffset * 3.0) / 3.0
+                let width = (UIScreen.main.bounds.width - defaultOffset * 3.0) / 2.0
                 let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(width),
-                                                      heightDimension: .absolute(144))
+                                                      heightDimension: .absolute(width))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                       heightDimension: NSCollectionLayoutDimension.absolute(144))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+                                                       heightDimension: .absolute(width))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)

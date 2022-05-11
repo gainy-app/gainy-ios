@@ -62,7 +62,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         self.toggleBtn.isHidden = self.showShortCollectionDetails
         self.shareBtn.isHidden = self.showShortCollectionDetails
         if self.showShortCollectionDetails {
-            self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
+            //self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
             self.view.bringSubviewToFront(self.closeButton)
             self.closeButton.translatesAutoresizingMaskIntoConstraints = false
             for item in self.closeButton.constraints {
@@ -110,7 +110,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             collectionView.autoPinEdge(.leading, to: .leading, of: view)
             collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
             collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
-            
+            collectionView.tag = Constants.CollectionDetails.singleCollectionId
             collectionView.register(CollectionDetailsViewCell.self)
             
             collectionView.backgroundColor = .clear
@@ -195,6 +195,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
+        GainyAnalytics.logEvent("open_single_collection", params: ["collectionID" : collectionId, "isFromSearch" : isFromSearch])
     }
     
     fileprivate func centerInitialCollectionInTheCollectionView() {
@@ -322,12 +323,16 @@ extension SingleCollectionDetailsViewController: SearchStocksViewControllerDeleg
                 cards.append(contentsOf: cardsDTO)
                 let model = CollectionDetailViewCellModel(
                     id: Constants.CollectionDetails.compareCollectionID,
+                    uniqID: "",
                     image: "compare_stocks",
                     imageUrl: "",
                     name: "Compared Stocks",
                     description: "",
-                    stocksAmount: "\(first.cards.count + 1)",
+                    stocksAmount: first.cards.count + 1,
+                    dailyGrow: 0.0,
+                    matchScore: RemoteCollectionDetails.MatchScore(),
                     inYourCollectionList: false,
+                    lastDayPrice: 0.0,
                     cards: cards
                 )
                 self.model = model

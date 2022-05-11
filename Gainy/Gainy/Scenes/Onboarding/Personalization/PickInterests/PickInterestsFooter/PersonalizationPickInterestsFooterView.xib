@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,46 +18,62 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="PnD-hV-yxQ" customClass="PersonalizationPickInterestsFooterView" customModule="Gainy" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="101"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SM2-6B-RJx" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                    <rect key="frame" x="32" y="28" width="350" height="64"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="64" id="i0L-cb-y9Y"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
-                    <state key="normal" title="Next">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="20"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="alpha">
-                            <integer key="value" value="0"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="onNextButtonTap:" destination="PnD-hV-yxQ" eventType="touchUpInside" id="tfI-cV-cJZ"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select at least 1 option please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVS-81-J14">
-                    <rect key="frame" x="99.5" y="82" width="215.5" height="19"/>
-                    <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
-                    <color key="textColor" red="0.91161090140000001" green="0.3636762798" blue="0.44705456500000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiI-fe-5Bf">
+                    <rect key="frame" x="0.0" y="2" width="414" height="144"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="S26-cD-zfh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="144"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SM2-6B-RJx" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="48" width="350" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="i0L-cb-y9Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onNextButtonTap:" destination="PnD-hV-yxQ" eventType="touchUpInside" id="tfI-cV-cJZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select at least 1 option please" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVS-81-J14">
+                                <rect key="frame" x="109" y="16" width="196.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="SM2-6B-RJx" secondAttribute="bottom" constant="32" id="7ic-OP-d6h"/>
+                            <constraint firstItem="OVS-81-J14" firstAttribute="centerX" secondItem="S26-cD-zfh" secondAttribute="centerX" id="e4n-NC-YGD"/>
+                            <constraint firstAttribute="trailing" secondItem="SM2-6B-RJx" secondAttribute="trailing" constant="32" id="hGe-Kf-dWZ"/>
+                            <constraint firstItem="OVS-81-J14" firstAttribute="top" secondItem="S26-cD-zfh" secondAttribute="top" constant="16" id="vy0-0w-dmm"/>
+                            <constraint firstItem="SM2-6B-RJx" firstAttribute="leading" secondItem="S26-cD-zfh" secondAttribute="leading" constant="32" id="wQ0-6M-bYD"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="SM2-6B-RJx" firstAttribute="leading" secondItem="PnD-hV-yxQ" secondAttribute="leading" constant="32" id="BPg-bX-Nbr"/>
-                <constraint firstItem="OVS-81-J14" firstAttribute="centerX" secondItem="PnD-hV-yxQ" secondAttribute="centerX" id="Lx8-nT-LDf"/>
-                <constraint firstAttribute="trailing" secondItem="SM2-6B-RJx" secondAttribute="trailing" constant="32" id="dIk-5Y-Bcl"/>
-                <constraint firstAttribute="bottom" secondItem="SM2-6B-RJx" secondAttribute="bottom" constant="9" id="e1g-Md-n9o"/>
-                <constraint firstAttribute="bottom" secondItem="OVS-81-J14" secondAttribute="bottom" id="nTW-ne-c9H"/>
+                <constraint firstItem="jiI-fe-5Bf" firstAttribute="top" secondItem="PnD-hV-yxQ" secondAttribute="top" constant="2" id="BPN-sO-nv7"/>
+                <constraint firstItem="jiI-fe-5Bf" firstAttribute="leading" secondItem="PnD-hV-yxQ" secondAttribute="leading" id="N0B-ac-OX8"/>
+                <constraint firstAttribute="trailing" secondItem="jiI-fe-5Bf" secondAttribute="trailing" id="h5M-Vc-E7o"/>
+                <constraint firstAttribute="bottom" secondItem="jiI-fe-5Bf" secondAttribute="bottom" constant="2" id="qCU-bd-oL6"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -71,7 +87,7 @@
     </objects>
     <designables>
         <designable name="SM2-6B-RJx">
-            <size key="intrinsicContentSize" width="34" height="31"/>
+            <size key="intrinsicContentSize" width="34" height="32"/>
         </designable>
     </designables>
 </document>
