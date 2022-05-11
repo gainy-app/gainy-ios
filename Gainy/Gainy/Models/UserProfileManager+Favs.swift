@@ -20,7 +20,7 @@ extension UserProfileManager {
                 case .success(let graphQLResult):
                     
                     guard let collections = graphQLResult.data?.appProfileFavoriteCollections.compactMap({$0.collection?.fragments.remoteShortCollectionDetails}) else {
-                        NotificationManager.shared.showError("Error fetching Fav Collections")
+                        NotificationManager.shared.showError("Error fetching Fav TTFs")
                         continuation.resume(returning: [RemoteShortCollectionDetails]())
                         return
                     }

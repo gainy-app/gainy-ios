@@ -81,10 +81,12 @@ extension BrokersViewController: UICollectionViewDelegate {
         }
         let broker = self.brokers[indexPath.row]
         UserProfileManager.shared.selectedBrokerToTrade = broker
-        if let url = broker.brokerURLWithSymbol(symbol: symbol) {
-            WebPresenter.openLink(vc: self, url: url)
+        collectionView.reloadData()
+        self.dismiss(animated: false) {
+            if let url = broker.brokerURLWithSymbol(symbol: symbol) {
+                WebPresenter.openLink(vc: self, url: url)
+            }
         }
-        self.dismiss(animated: true)
         self.delegate?.didDismissBrokersViewController()
     }
     

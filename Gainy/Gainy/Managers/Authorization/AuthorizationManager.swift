@@ -130,6 +130,7 @@ final class AuthorizationManager {
             } else if self.googleAuth.isAuthorized() {
                 try self.googleAuth.signOut()
             }
+            UserProfileManager.shared.selectedBrokerToTrade = nil;
             self.firebaseAuthToken = nil
             UserProfileManager.shared.cleanup()
             CollectionsManager.shared.collections = []
