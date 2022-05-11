@@ -36,7 +36,7 @@ final class HoldingsViewModel {
     //MARK: - Caching
     private var chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
     private var sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]] = [:]
-    private var metrics: PortofolioMetrics?
+    private(set) var metrics: PortofolioMetrics?
     
     func clearChats() {
         chartsCache.removeAll()
@@ -224,6 +224,7 @@ final class HoldingsViewModel {
                         if self.dataSource.chartViewModel == nil {
                             self.dataSource.chartViewModel = live
                         } else {
+                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
                             self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
                             self.dataSource.chartViewModel.rangeGrowBalance = live.rangeGrowBalance

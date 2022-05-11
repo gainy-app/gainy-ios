@@ -43,7 +43,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         
         gainsView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         gainsView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 48)
-        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -55, relation: .lessThanOrEqual)
+        gainsView.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -35, relation: .lessThanOrEqual)
         gainsView.autoSetDimension(.height, toSize: 24)
         
         growArrowImgView.autoPinEdge(.leading, to: .leading, of: gainsView, withOffset: 8)

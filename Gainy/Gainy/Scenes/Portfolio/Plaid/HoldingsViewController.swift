@@ -301,6 +301,8 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                 if let model = model {
                     self?.viewModel.dataSource.profileGains[range] = model
                     
+                    viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
+                    
                     viewModel.chartData = model.chartData
                     viewModel.rangeGrow = model.rangeGrow
                     viewModel.rangeGrowBalance = model.rangeGrowBalance

@@ -9,6 +9,27 @@ import SwiftDate
 
 typealias PortofolioMetrics = GetPortfolioChartMetricsQuery.Data.GetPortfolioChartPreviousPeriodClose
 
+extension PortofolioMetrics {
+    func lastDayPrice(range: ScatterChartView.ChartPeriod) -> Double? {
+        switch range {
+        case .d1:
+            return prevClose_1d
+        case .m1:
+            return prevClose_1m
+        case .m3:
+            return prevClose_3m
+        case .w1:
+            return prevClose_1w
+        case .y1:
+            return prevClose_1y
+        case .y5:
+            return prevClose_5y
+        default:
+            return prevClose_1d
+        }
+    }
+}
+
 /// Charts loader helper
 final class HistoricalChartsLoader {
     

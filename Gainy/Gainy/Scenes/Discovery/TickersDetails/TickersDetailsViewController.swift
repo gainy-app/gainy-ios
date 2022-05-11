@@ -76,6 +76,7 @@ extension TickersDetailsViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
         let pageContentViewController = pageViewController.viewControllers![0] as! TickerViewController
         pageContentViewController.loadTicketInfo()
+        initialIndex = stockControllers.firstIndex(of: pageContentViewController) ?? 0
     }
 }
 extension TickersDetailsViewController: UIAdaptivePresentationControllerDelegate {

@@ -364,12 +364,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 16)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 86 + 16)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
         
-        searchCollectionView.backgroundColor = .clear
+        searchCollectionView.backgroundColor = .white
         searchCollectionView.showsVerticalScrollIndicator = false
         searchCollectionView.dragInteractionEnabled = true
         searchCollectionView.bounces = false

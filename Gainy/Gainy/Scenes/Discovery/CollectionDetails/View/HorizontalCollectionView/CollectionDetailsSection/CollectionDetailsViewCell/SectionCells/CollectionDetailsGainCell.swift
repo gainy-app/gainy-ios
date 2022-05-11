@@ -122,7 +122,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         
         if viewModel.topChart.sypChartData.points.count > 0 {
             medianView.isHidden = false
-            medianPercentChangeLabel.text = viewModel.topChart.spGrow.percentUnsigned
+            medianPercentChangeLabel.text = viewModel.topChart.spGrow.percentRawUnsigned
             
             if viewModel.topChart.spGrow > 0.0 {
                 medianPercentChangeLabel.textColor = UIColor.Gainy.mainGreen

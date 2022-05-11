@@ -70,7 +70,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             priceLbl.text = storedData?.currentPrice.price ?? ""
             priceLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
                   
-            growLbl.text = storedData?.priceChangeToday.percent ?? ""
+            growLbl.text = storedData?.priceChangeToday.percentUnsigned ?? ""
             growLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
             arrowImgView.image = UIImage(named: priceChange >= 0.0 ? "small_up" : "small_down")
             

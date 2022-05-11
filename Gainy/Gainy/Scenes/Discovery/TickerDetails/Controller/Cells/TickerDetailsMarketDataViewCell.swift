@@ -8,7 +8,7 @@
 import UIKit
 final class TickerDetailsMarketDataViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 312.0
+    static let cellHeight: CGFloat = 326.0
     
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
