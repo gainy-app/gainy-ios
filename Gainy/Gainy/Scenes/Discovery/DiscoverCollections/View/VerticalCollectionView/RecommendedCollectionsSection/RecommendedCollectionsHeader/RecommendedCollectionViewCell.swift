@@ -31,7 +31,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 8)
-        descriptionLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 16 + 24.0 + 16, relation: .lessThanOrEqual)
+        descriptionLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 16 + 24.0 + 16, relation: .greaterThanOrEqual)
         
         msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)

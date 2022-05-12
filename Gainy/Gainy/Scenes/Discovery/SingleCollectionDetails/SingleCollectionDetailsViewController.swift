@@ -59,7 +59,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         initCollectionView()
         setupPanel()
         
-        self.toggleBtn.isHidden = self.showShortCollectionDetails
+        //self.toggleBtn.isHidden = self.showShortCollectionDetails
         self.shareBtn.isHidden = self.showShortCollectionDetails
         if self.showShortCollectionDetails {
             //self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
@@ -109,7 +109,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: CGFloat(offset))
             collectionView.autoPinEdge(.leading, to: .leading, of: view)
             collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-            collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
+            collectionView.autoPinEdge(.bottom, to: .bottom, of: view)
             collectionView.tag = Constants.CollectionDetails.singleCollectionId
             collectionView.register(CollectionDetailsViewCell.self)
             

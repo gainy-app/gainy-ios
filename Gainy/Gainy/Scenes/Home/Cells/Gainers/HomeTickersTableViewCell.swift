@@ -24,6 +24,7 @@ final class HomeTickersTableViewCell: UITableViewCell {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
             innerCollectionView.register(UINib.init(nibName: HomeTickerInnerTableViewCell.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier)
+            innerCollectionView.clipsToBounds = false
         }
     }
     @IBOutlet private weak var bottomDots: UIImageView!
@@ -50,6 +51,7 @@ extension HomeTickersTableViewCell: UICollectionViewDataSource {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.stock = gainers[indexPath.row]
         cell.delegate = self
+        //cell.addShadows()
         return cell
     }
 }

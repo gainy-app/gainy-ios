@@ -24,11 +24,33 @@ enum Product {
     var identifier: String {
         switch self {
         case .month(let variant):
-            return "gainy_m1_"
+            switch variant {
+            case .a:
+                return "gainy_5_m1"
+            case .b:
+                return "gainy_10_m1"
+            case .c:
+                return "gainy_20_m1"
+            }
+            
         case .month6(let variant):
-            return "gainy_m6_"
+            switch variant {
+            case .a:
+                return "gainy_25_m6"
+            case .b:
+                return "gainy_50_m6"
+            case .c:
+                return "gainy_100_m6"
+            }
         case .year(let variant):
-            return "gainy_y1_"
+            switch variant {
+            case .a:
+                return "gainy_40_y1"
+            case .b:
+                return "gainy_80_y1"
+            case .c:
+                return "gainy_160_y1"
+            }
         }
     }
 }

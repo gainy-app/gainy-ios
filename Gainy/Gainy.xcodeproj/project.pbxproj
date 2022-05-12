@@ -524,6 +524,10 @@
 		90A3495C281B232700B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495B281B232700B00CD5 /* OneSignal */; };
 		90A3495F281B25BD00B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495E281B25BD00B00CD5 /* OneSignal */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
+		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
+		90B7F04C282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
+		90B7F04D282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
+		90B7F04E282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
@@ -1103,6 +1107,7 @@
 		908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileManager+Favs.swift"; sourceTree = "<group>"; };
 		90A8017A275AB7E9003D548D /* GetNextTickersForCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetNextTickersForCollection.graphql; sourceTree = "<group>"; };
 		90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetNextTickersForCollection.graphql.swift; sourceTree = "<group>"; };
+		90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfiguration.storekit; sourceTree = "<group>"; };
 		90C39E6C27ADADF200F47338 /* FetchRecommendedCollectionIDs.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchRecommendedCollectionIDs.graphql; sourceTree = "<group>"; };
 		90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRecommendedCollectionIDs.graphql.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
@@ -2058,6 +2063,7 @@
 			isa = PBXGroup;
 			children = (
 				3A930EE6265C190C000FD3EB /* Info.plist */,
+				90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2838,6 +2844,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B7F04E282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2936,6 +2943,7 @@
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
 				3AFE1A93266E5C7A0091E799 /* SFCompactRounded-Medium.otf in Resources */,
 				331243D027BF6EA8008C2BCC /* HomeFetchCollections.graphql in Resources */,
+				90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 				3A8593F02689CC1A00CB8DD6 /* CollectionDetails.graphql in Resources */,
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
@@ -2949,6 +2957,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B7F04C282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2956,6 +2965,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90B7F04D282D4492008EE097 /* StoreConfiguration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

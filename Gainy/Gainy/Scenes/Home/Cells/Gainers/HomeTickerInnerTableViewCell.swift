@@ -18,10 +18,12 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     
     //MARK: - Outlets
     
+    
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var symbolLbl: UILabel!
     @IBOutlet weak var priceLbl: UILabel!
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var wlBtn: UIButton! {
         didSet {
             wlBtn.setImage(UIImage(named: "remove_from_wl"), for: .selected)
@@ -35,8 +37,8 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
     }
     @IBOutlet private weak var matchCircle: UIImageView! {
         didSet {
-            matchCircle.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
-            matchCircle.tintColor = .white
+//            matchCircle.image = UIImage(named: "match_circle")!.withRenderingMode(.alwaysTemplate)
+//            matchCircle.tintColor = .white
         }
     }
     @IBOutlet private weak var matchLabel: UILabel! {
@@ -86,6 +88,37 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    var cornerRadius: CGFloat = 16.0
+
+        override func awakeFromNib() {
+            super.awakeFromNib()
+                
+            // Apply rounded corners to contentView
+            contentView.layer.cornerRadius = cornerRadius
+            contentView.layer.masksToBounds = true
+            
+            // Set masks to bounds to false to avoid the shadow
+            // from being clipped to the corner radius
+            layer.cornerRadius = cornerRadius
+            layer.masksToBounds = false
+            
+            // Apply a shadow
+            layer.shadowRadius = 8.0
+            layer.shadowOpacity = 0.10
+            layer.shadowColor = UIColor.black.cgColor
+            layer.shadowOffset = CGSize(width: 0, height: 0)
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            
+            // Improve scrolling performance with an explicit shadowPath
+            layer.shadowPath = UIBezierPath(
+                roundedRect: bounds,
+                cornerRadius: cornerRadius
+            ).cgPath
+        }
     
     //MARK: - Actions
     

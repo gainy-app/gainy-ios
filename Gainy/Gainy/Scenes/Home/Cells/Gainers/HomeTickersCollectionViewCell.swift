@@ -25,6 +25,7 @@ final class HomeTickersCollectionViewCell: UICollectionViewCell {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
             innerCollectionView.register(UINib.init(nibName: HomeTickerInnerTableViewCell.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier)
+            innerCollectionView.clipsToBounds = false
         }
     }
     

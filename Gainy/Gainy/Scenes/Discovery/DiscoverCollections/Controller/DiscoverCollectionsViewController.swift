@@ -43,7 +43,19 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 height: 80
             )
         )
-        navigationBarContainer.backgroundColor = UIColor.Gainy.white
+        navigationBarContainer.backgroundColor = .clear
+        let navigationBarTopOffset =
+        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
+        let blurView = BlurEffectView()
+        view.addSubview(blurView)
+        
+        blurView.autoPinEdge(toSuperviewEdge: .leading)
+        blurView.autoPinEdge(toSuperviewEdge: .top)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing)
+        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+        
+        view.backgroundColor = UIColor.Gainy.white
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
@@ -126,8 +138,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         self.searchTextField = searchTextField
         view.addSubview(navigationBarContainer)
         
-        let navigationBarTopOffset =
-        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        
         
         discoverCollectionsCollectionView = UICollectionView(
             frame: view.frame,
@@ -262,7 +273,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         discoverCollectionsCollectionView.dataSource = dataSource
-        
+        discoverCollectionsCollectionView.clipsToBounds = false
         
         searchCollectionView = UICollectionView(
             frame: CGRect(
@@ -315,7 +326,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             } receiveValue: {[weak self] _ in
                 self?.refreshAction()
             }.store(in: &cancellables)
-        
+        view.bringSubviewToFront(blurView)
+        view.bringSubviewToFront(navigationBarContainer)
     }
     
     override func viewWillAppear(_ animated: Bool) {
