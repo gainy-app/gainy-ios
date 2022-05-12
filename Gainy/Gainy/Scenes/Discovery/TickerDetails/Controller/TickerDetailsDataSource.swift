@@ -47,7 +47,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.header] = TickerDetailsHeaderViewCell.cellHeight
         cellHeights[.about] = aboutMinHeight
         cellHeights[.chart] = chatHeight
-        cellHeights[.highlights] = TickerDetailsHighlightsViewCell.cellHeight
+        cellHeights[.highlights] = 0.0
         cellHeights[.marketData] = TickerDetailsMarketDataViewCell.cellHeight
         cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
         cellHeights[.recommended] = TickerDetailsRecommendedViewCell.cellHeight
@@ -127,7 +127,7 @@ final class TickerDetailsDataSource: NSObject {
         print(ticker.ticker.type ?? "")
         //Highlights
         if ticker.highlights.count > 0 {
-            cellHeights[.highlights] = TickerDetailsHighlightsViewCell.cellHeight
+            cellHeights[.highlights] = 0.0
         } else {
             cellHeights[.highlights] = 0.0
         }

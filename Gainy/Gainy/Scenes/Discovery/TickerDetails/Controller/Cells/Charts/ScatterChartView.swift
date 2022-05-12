@@ -72,6 +72,9 @@ struct ScatterChartView: View {
     @State
     private var selectedTag: ChartPeriod = .d1 {
         didSet {
+            guard  lineViewModel.chartPeriod != selectedTag else {return}
+            isMedianVisible = false
+            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             delegate.range = selectedTag
@@ -190,8 +193,6 @@ struct ScatterChartView: View {
                             .animation(.none)
                             .padding(.trailing, 24)
                     }
-                    
-                    
                 }
                 .frame(height: 78)
                 Spacer()

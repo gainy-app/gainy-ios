@@ -255,6 +255,10 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
+        tagsContainer.subviews.forEach({
+            $0.removeFromSuperview()
+        })
+        
         if tagsContainer.subviews.count == 0 {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 34 * 2.0
             var xPos: CGFloat = 0.0

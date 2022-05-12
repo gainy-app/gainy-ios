@@ -339,7 +339,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
     
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
+        
+        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
+            gainsCell.isMedianVisible = false
+        }
+        
         viewModel.chartRange = range
+        viewModel.topChart.isSPPVisible = false
         viewModel.topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
@@ -465,8 +471,8 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
+            print("TF: \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
-            
             
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
             } receiveValue: { notif in
@@ -867,7 +873,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let width = collectionView.frame.width
             
             //Tags
-            var lines: Int = 0
+            var lines: Int = 1
             let tagHeight: CGFloat = 24.0
             let margin: CGFloat = 8.0
             
@@ -884,10 +890,11 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 xPos += width + margin
             }
             
+            print("TF: height \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
+            
             if viewModel.combinedTags.isEmpty {
                 return CGSize.init(width: width, height: 144.0 + 32)
             } else {
-                print(viewModel.name)
                 let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
                 return CGSize.init(width: width, height: calculatedHeight)
             }

@@ -25,6 +25,9 @@ struct PortfolioScatterChartView: View {
     @State
     private var selectedTag: ScatterChartView.ChartPeriod = .d1 {
         didSet {
+            guard  lineViewModel.chartPeriod != selectedTag else {return}
+            isSPPVisible = false
+            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             delegate.changeRange(range: selectedTag, viewModel: viewModel)
