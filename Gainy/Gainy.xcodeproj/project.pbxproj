@@ -524,7 +524,6 @@
 		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
 		90A3495C281B232700B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495B281B232700B00CD5 /* OneSignal */; };
-		90A3495F281B25BD00B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495E281B25BD00B00CD5 /* OneSignal */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
@@ -1119,7 +1118,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90A3495F281B25BD00B00CD5 /* OneSignal in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2671,7 +2669,6 @@
 			);
 			name = OneSignalNotificationServiceExtension;
 			packageProductDependencies = (
-				90A3495E281B25BD00B00CD5 /* OneSignal */,
 			);
 			productName = OneSignalNotificationServiceExtension;
 			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
@@ -2826,7 +2823,6 @@
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
-				90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
@@ -4383,14 +4379,6 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4545,11 +4533,6 @@
 		90A3495B281B232700B00CD5 /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignal;
-		};
-		90A3495E281B25BD00B00CD5 /* OneSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90A3495D281B25BD00B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignal;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
