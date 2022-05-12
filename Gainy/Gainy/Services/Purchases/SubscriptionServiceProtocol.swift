@@ -17,6 +17,7 @@ protocol SubscriptionServiceProtocol {
     func login(profileId: Int)
     
     func setEmail(email: String)
+    func setName(name: String)
     func getSubscription(_ completion: (SuscriptionType) -> Void)
     func getProducts()
     func purchaseProduct(productId: String)

@@ -97,6 +97,10 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.setEmail(email: email)
     }
     
+    func setName(name: String) {
+        service.setName(name: name)
+    }
+    
     func getSubscription(_ completion: (SuscriptionType) -> Void) {
         service.getSubscription { type in
             NotificationManager.broadcastSubscriptionChangeNotification(type: type)

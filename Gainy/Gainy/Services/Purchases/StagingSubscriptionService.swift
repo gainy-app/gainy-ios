@@ -20,6 +20,9 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     func setEmail(email: String) {
     }
     
+    func setName(name: String) {
+    }
+    
     func getSubscription(_ completion: (SuscriptionType) -> Void) {
         completion(.pro)
     }

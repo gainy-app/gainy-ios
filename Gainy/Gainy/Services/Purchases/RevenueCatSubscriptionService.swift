@@ -32,6 +32,10 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         Purchases.shared.setEmail(email)
     }
     
+    func setName(name: String) {
+        Purchases.shared.setDisplayName(name)
+    }
+    
     func getSubscription(_ completion: (SuscriptionType) -> Void) {
         completion(.free)
     }

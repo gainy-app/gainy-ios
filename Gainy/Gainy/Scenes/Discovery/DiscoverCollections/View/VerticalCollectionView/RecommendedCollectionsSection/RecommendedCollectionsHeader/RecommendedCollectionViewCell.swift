@@ -31,7 +31,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         descriptionLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16)
         descriptionLabel.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: -16)
         descriptionLabel.autoPinEdge(.top, to: .bottom, of: nameLabel, withOffset: 8)
-        descriptionLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 16 + 24.0 + 16, relation: .greaterThanOrEqual)
+        descriptionLabel.autoSetDimension(.height, toSize: 45, relation: .lessThanOrEqual)
         
         msLabel.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         msLabel.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 16.0)
@@ -102,18 +102,14 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         return label
     }()
 
-    lazy var descriptionLabel: UITextView = {
-        let label = UITextView()
-
+    lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
         label.font = UIFont(name: "SFProDisplay-Regular", size: 12)
         label.textColor = UIColor.Gainy.white
         label.backgroundColor = .clear
         label.isUserInteractionEnabled = false
-        label.automaticallyAdjustsScrollIndicatorInsets = false
-        label.contentInsetAdjustmentBehavior = .never
-        label.textContainerInset = .zero
-        label.textContainer.lineFragmentPadding = 0
-
+        label.lineBreakMode = .byTruncatingTail
+        label.numberOfLines = 0
         return label
     }()
 

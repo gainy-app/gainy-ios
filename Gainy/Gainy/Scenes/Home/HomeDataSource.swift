@@ -43,7 +43,7 @@ final class HomeDataSource: NSObject {
             case .index:
                 return ""
             case .collections:
-                return "Updates in TTF"
+                return "Updates in TTFs"
             case .watchlist:
                 return "Watchlist"
             case .articles:

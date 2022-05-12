@@ -8,6 +8,9 @@ import GoogleSignIn
 import LinkKit
 import FirebaseAnalytics
 import OneSignal
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -176,8 +179,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
-            return false
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let url = userActivity.webpageURL,
+            let host = url.host else {
+                return false
         }
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -198,8 +203,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Continue the Link flow
-        handler.continue(from: webpageURL)
-        return true
+        handler.continue(from: url)
+
+        let isDynamicLinkHandled =
+        DynamicLinks.dynamicLinks()
+            .handleUniversalLink(userActivity.webpageURL!) { dynamicLink, error in
+
+                guard error == nil,
+                    let dynamicLink = dynamicLink,
+                    let urlString = dynamicLink.url?.absoluteString else {
+                        return
+                }
+
+                dprint("Dynamic link host: \(host)")
+                dprint("Dyanmic link url: \(urlString)")
+                dprint("Dynamic link match type: \(dynamicLink.matchType.rawValue)")
+            }
+        return isDynamicLinkHandled
     }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     
@@ -224,6 +244,16 @@ extension AppDelegate {
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
     -> Bool {
+        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
+                     guard let urlString = dynamicLink.url?.absoluteString  else {
+                         return false
+                     }
+
+                     dprint("Dyanmic link url: \(urlString)")
+                     dprint("Dynamic link match type: \(dynamicLink.matchType.rawValue)")
+
+                     return true
+                 }
         return GIDSignIn.sharedInstance.handle(url)
     }
     

@@ -3,7 +3,7 @@ iOS v1.3 #199 available
 Bugfixes
 
 :new: New:
-• -
+• Deeplinks
 
 :hammer_and_wrench: Improvements
 • QA
