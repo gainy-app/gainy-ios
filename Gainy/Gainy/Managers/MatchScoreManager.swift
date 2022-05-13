@@ -36,7 +36,7 @@ struct MatchScoreManager {
         case 35..<65:
             return UIColor(hexString: "E7EAEE")!
         case 65...:
-            return UIColor.Gainy.secondaryGreen!
+            return UIColor(hexString: "3BF06E")!
         default:
             return UIColor(hexString: "E7EAEE")!
         }
@@ -49,7 +49,7 @@ struct MatchScoreManager {
         case 35..<65:
             return UIColor(hexString: "E7EAEE")!
         case 65...:
-            return UIColor.Gainy.mainGreen!
+            return UIColor(hexString: "38CF92")!
         default:
             return UIColor(hexString: "E7EAEE")!
         }

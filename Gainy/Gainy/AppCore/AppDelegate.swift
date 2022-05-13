@@ -15,10 +15,10 @@ import FirebaseAuth
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Internal
-        
+    
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-               
+        
         initializeAppsFlyer()
         initFirebase()
         initDataDog()
@@ -122,9 +122,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func initOneSignal(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
-          
-          // OneSignal initialization
-          OneSignal.initWithLaunchOptions(launchOptions)
+        
+        // OneSignal initialization
+        OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId(Constants.OneSignal.appId)
     }
     
@@ -180,9 +180,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-            let url = userActivity.webpageURL,
-            let host = url.host else {
-                return false
+              let url = userActivity.webpageURL,
+              let host = url.host else {
+            return false
         }
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -204,21 +204,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Continue the Link flow
         handler.continue(from: url)
-
-        let isDynamicLinkHandled =
-        DynamicLinks.dynamicLinks()
-            .handleUniversalLink(userActivity.webpageURL!) { dynamicLink, error in
-
-                guard error == nil,
-                    let dynamicLink = dynamicLink,
-                    let urlString = dynamicLink.url?.absoluteString else {
-                        return
-                }
-
-                dprint("Dynamic link host: \(host)")
-                dprint("Dyanmic link url: \(urlString)")
-                dprint("Dynamic link match type: \(dynamicLink.matchType.rawValue)")
-            }
+        
+        let isDynamicLinkHandled = DeeplinkHandler.shared.handleUrl(url)
         return isDynamicLinkHandled
     }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
@@ -244,33 +231,9 @@ extension AppDelegate {
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
     -> Bool {
-        if let dynamicLink = DynamicLinks.dynamicLinks().dynamicLink(fromCustomSchemeURL: url) {
-                     guard let urlString = dynamicLink.url?.absoluteString  else {
-                         return false
-                     }
-
-                     dprint("Dyanmic link url: \(urlString)")
-                     dprint("Dynamic link match type: \(dynamicLink.matchType.rawValue)")
-
-                     return true
-                 }
+        if DeeplinkHandler.shared.handleCustomScheme(url) {
+            return true
+        }
         return GIDSignIn.sharedInstance.handle(url)
     }
-    
-    //    private func handleGAILink(_ url: URL) {
-    //        let tracker1 = GAI.sharedInstance().tracker(withTrackingId: "...")
-    //                    let hitParams = GAIDictionaryBuilder()
-    //                    hitParams.setCampaignParametersFromUrl(path)
-    //                    let medium = self.getQueryStringParameter(url: path, param: "utm_medium")
-    //
-    //                    hitParams.set(medium, forKey: kGAICampaignMedium)
-    //                    hitParams.set(path, forKey: kGAICampaignSource)
-    //
-    //                    let hitParamsDict = hitParams.build()
-    //
-    //                    tracker1?.allowIDFACollection = true
-    //
-    //                    tracker1?.set(kGAIScreenName, value: "...")
-    //                    tracker1?.send(GAIDictionaryBuilder.createScreenView().setAll(hitParamsDict as? [AnyHashable : Any]).build() as? [AnyHashable : Any])
-    //    }
 }

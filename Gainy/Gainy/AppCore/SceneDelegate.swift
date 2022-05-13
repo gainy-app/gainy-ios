@@ -2,6 +2,8 @@ import UIKit
 import FacebookCore
 import FirebaseAuth
 import OneSignal
+import FirebaseDynamicLinks
+import GoogleSignIn
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -9,52 +11,56 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private(set) var preloadVC: ConfigLoaderViewController = ConfigLoaderViewController.instantiate(.popups)
     
     // MARK: Properites
-
+    
     var window: UIWindow?
-
+    
     var rootController: UINavigationController {
         guard let vc = self.window?.rootViewController as? UINavigationController else {
             return UINavigationController()
         }
-
+        
         return vc
     }
-
+    
     func scene(_ scene: UIScene,
                willConnectTo _: UISceneSession,
                options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else {
             return
         }
-
+        
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController()
         self.window = window
         window.makeKeyAndVisible()
-
+        
         appCoordinator.start(with: nil)
         
         Settings.setAdvertiserTrackingEnabled(true)
+        
+        if let userActivity = connectionOptions.userActivities.first {
+            DeeplinkHandler.shared.handleActivity(userActivity)
+        }
         
         var isFromPush = connectionOptions.notificationResponse != nil
         var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
         // Determine who sent the URL.
         if let urlContext = connectionOptions.urlContexts.first {
-
+            
             let sendingAppID = urlContext.options.sourceApplication
             let url = urlContext.url
-
+            
             guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-                    let params = components.queryItems else {
-                        if UserDefaults.isFirstLaunch() {
-                            GainyAnalytics.logEvent("first_launch", params: fbParams)
-                        }
-                        return
+                  let params = components.queryItems else {
+                if UserDefaults.isFirstLaunch() {
+                    GainyAnalytics.logEvent("first_launch", params: fbParams)
                 }
-
-                if let cmVal = params.first(where: { $0.name == "сm" })?.value {
-                    fbParams["cm"] = cmVal
-                }
+                return
+            }
+            
+            if let cmVal = params.first(where: { $0.name == "сm" })?.value {
+                fbParams["cm"] = cmVal
+            }
             if let cnVal = params.first(where: { $0.name == "cn" })?.value {
                 fbParams["cn"] = cnVal
             }
@@ -73,9 +79,9 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             RemoteConfigManager.shared.loadDefaults {
             }
             OneSignal.promptForPushNotifications(userResponse: { accepted in
-                     print("User accepted notification: \(accepted)")
+                print("User accepted notification: \(accepted)")
                 GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
-                   })
+            })
             return
         }
         
@@ -96,7 +102,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let url = URLContexts.first?.url else {
             return
         }
-
+        
         ApplicationDelegate.shared.application(
             UIApplication.shared,
             open: url,
@@ -104,7 +110,24 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             annotation: [UIApplication.OpenURLOptionsKey.annotation]
         )
     }
-
+    
+    //MARK: - Deeplinks
+    
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+    -> Bool {
+        if DeeplinkHandler.shared.handleCustomScheme(url) {
+            return true
+        }
+        return GIDSignIn.sharedInstance.handle(url)
+    }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        DeeplinkHandler.shared.handleActivity(userActivity)
+    }
+    
+    
+    
     func sceneWillEnterForeground(_: UIScene) {
         if !UIDevice.current.hasTopNotch {
             if let navController = window?.rootViewController as? UINavigationController {
@@ -114,12 +137,12 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     //MARK: - Open/Close
-
+    
     // MARK: Private
     
-
+    
     // MARK: Properties
-
+    
     private lazy var appCoordinator: Coordinator = AppCoordinator(
         authorizationManager: AuthorizationManager(),
         router: Router(rootController: self.rootController),
@@ -127,5 +150,5 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     )
     
     //MARK: - UTM/Deeplink
-        
+    
 }

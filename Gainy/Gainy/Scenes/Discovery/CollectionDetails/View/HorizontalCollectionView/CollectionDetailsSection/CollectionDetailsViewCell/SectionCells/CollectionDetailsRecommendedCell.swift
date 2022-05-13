@@ -34,7 +34,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         contentView.addSubview(tagsContainer)
         
         titleLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
-        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
+        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
         titleLbl.autoSetDimension(.height, toSize: 24.0)
                 
         tick1.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
@@ -291,7 +291,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         //self.tagsContainerHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsContainer.layoutIfNeeded()
         
-        let calculatedHeight: CGFloat = 152 + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 16.0
+        let calculatedHeight: CGFloat = 152 + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 8.0
         if tags.count > 0 {
             //cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
             tagsTitle.isHidden = false

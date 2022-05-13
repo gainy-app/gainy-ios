@@ -13,6 +13,7 @@ import Combine
 import AvatarImagePicker
 import FirebaseStorage
 import Kingfisher
+import Firebase
 
 final class ProfileViewController: BaseViewController {
     
@@ -49,6 +50,7 @@ final class ProfileViewController: BaseViewController {
             versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")"
         }
     }
+    @IBOutlet weak var subscriptionBtn: UIButton!
     
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
@@ -285,6 +287,63 @@ final class ProfileViewController: BaseViewController {
             let navigationController = UINavigationController.init(rootViewController: vc)
             self.present(navigationController, animated: true, completion: nil)
         }
+    }
+    
+    @IBAction func subscriptionButtonTap(_ sender: Any) {
+        
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "gainy.page.link"
+        components.path = "/invite"
+
+        let itemIDQueryItem = URLQueryItem(name: "refID", value: "\(UserProfileManager.shared.profileID ?? 0)")
+        components.queryItems = [itemIDQueryItem]
+        
+        
+        guard let linkParameter = components.url else { return }
+        print("I am sharing \(linkParameter.absoluteString)")
+        
+        let domain = "https://gainy.page.link"
+        guard let linkBuilder = DynamicLinkComponents
+          .init(link: linkParameter, domainURIPrefix: domain) else {
+            return
+        }
+        
+        if let myBundleId = Bundle.main.bundleIdentifier {
+          linkBuilder.iOSParameters = DynamicLinkIOSParameters(bundleID: myBundleId)
+        }
+        // 2
+        linkBuilder.iOSParameters?.appStoreID = "1570419845"
+        // 3
+        linkBuilder.socialMetaTagParameters = DynamicLinkSocialMetaTagParameters()
+        linkBuilder.socialMetaTagParameters?.title = "I want to share invite from Profile"
+        linkBuilder.socialMetaTagParameters?.descriptionText = "Description for test"
+        linkBuilder.socialMetaTagParameters?.imageURL = URL(string: """
+          https://assets.website-files.com/611e92d9f135c73f8263bcd2/6149f8e59491e27266a422d1_Gainy%20factor.svg
+          """)!
+        
+        linkBuilder.shorten { url, warnings, error in
+          if let error = error {
+            print("Oh no! Got an error! \(error)")
+            return
+          }
+          if let warnings = warnings {
+            for warning in warnings {
+              print("Warning: \(warning)")
+            }
+          }
+          guard let url = url else { return }
+          print("I have a short url to share! \(url.absoluteString)")
+
+            let activity = UIActivityViewController(
+                activityItems: ["I want to share a Gainy app", UIImage(named: "Image"),  url],
+                applicationActivities: nil
+              )
+            self.present(activity, animated: true, completion: nil)
+        }
+
+        
+              
     }
     
     @IBAction func onRequestFeatureTap(_ sender: Any) {
@@ -538,6 +597,24 @@ final class ProfileViewController: BaseViewController {
         privacyImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         privacyImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         privacyImageView.isUserInteractionEnabled = false
+        
+//        let subsTitle = NSLocalizedString("Subscription Test", comment: "Subscription Test")
+//        subscriptionBtn.setTitle("", for: UIControl.State.normal)
+//        subscriptionBtn.titleLabel?.alpha = 0.0
+//        let subLabel = UILabel.newAutoLayout()
+//        subLabel.font = UIFont.proDisplaySemibold(20.0)
+//        subLabel.textAlignment = NSTextAlignment.left
+//        subLabel.text = subsTitle
+//        subscriptionBtn.addSubview(subLabel)
+//        subLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+//        subLabel.sizeToFit()
+//        subLabel.isUserInteractionEnabled = false
+//        let subImageView = UIImageView.newAutoLayout()
+//        subImageView.image = UIImage.init(named: "iconChevronRight")
+//        subscriptionBtn.addSubview(subImageView)
+//        subImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+//        subImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+//        subImageView.isUserInteractionEnabled = false
         
         let personalInformation = NSLocalizedString("Personal information", comment: "Personal information")
         personalInfoButton.setTitle("", for: UIControl.State.normal)

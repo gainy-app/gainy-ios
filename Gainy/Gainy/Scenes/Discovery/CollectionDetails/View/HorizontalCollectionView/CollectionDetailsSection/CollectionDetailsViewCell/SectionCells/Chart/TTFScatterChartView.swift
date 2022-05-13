@@ -236,7 +236,7 @@ struct TTFScatterChartView: View {
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {
-        HStack(alignment: .center, spacing: 0) {
+        HStack(alignment: .center, spacing: 4) {
             ForEach(ScatterChartView.ChartPeriod.allCases, id: \.self) { tag in
                 Button(action: {
                     selectedTag = tag

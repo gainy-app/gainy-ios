@@ -895,7 +895,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             if viewModel.combinedTags.isEmpty {
                 return CGSize.init(width: width, height: 144.0 + 32)
             } else {
-                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
+                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0
                 return CGSize.init(width: width, height: calculatedHeight)
             }
             
@@ -908,7 +908,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return CGSize.init(width: width, height: 88.0)
             } else {
                 if settings.viewMode == .grid {
-                    width = collectionView.frame.width / 2.0 - 30
+                    width = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
                     return CGSize.init(width: width, height: width)
                 } else {
                     width = collectionView.frame.width - 30
@@ -930,7 +930,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return CGFloat(8.0)
             } else {
                 if settings.viewMode == .grid {
-                    return CGFloat(20.0)
+                    return CGFloat(16.0)
                 } else {
                     return CGFloat(8.0)
                 }
@@ -952,7 +952,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return CGFloat(8.0)
             } else {
                 if settings.viewMode == .grid {
-                    return CGFloat(20.0)
+                    return CGFloat(16.0)
                 } else {
                     return CGFloat(8.0)
                 }

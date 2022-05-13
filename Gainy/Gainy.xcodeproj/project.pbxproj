@@ -120,7 +120,8 @@
 		3381D3B6279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */; };
 		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
 		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
-		3385D5DC282E38D90061464E /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 3385D5DB282E38D90061464E /* OneSignal */; };
+		3385D5E0282E522E0061464E /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 3385D5DF282E522E0061464E /* OneSignalExtension */; };
+		3385D5E2282E52380061464E /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 3385D5E1282E52380061464E /* OneSignal */; };
 		33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33930B8428244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
 		3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */; };
@@ -196,6 +197,7 @@
 		33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */; };
 		33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */; };
 		33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D50126CBB8DC005A859B /* ProfileViewController.swift */; };
+		33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D84A91282EE0D2008DAE39 /* DeeplinkHandler.swift */; };
 		33DBF4E827CF5EC800918EFF /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DBF4E727CF5EC800918EFF /* ArticleViewController.swift */; };
 		33DF57ED26EF261300FC1B9A /* MarketDataFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */; };
 		33DF57F526EF75C300FC1B9A /* RemoteTicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */; };
@@ -524,7 +526,6 @@
 		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
 		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
-		90A3495C281B232700B00CD5 /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 90A3495B281B232700B00CD5 /* OneSignal */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
@@ -733,8 +734,6 @@
 		33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		33AA5EB8281AAE960026EA82 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		33AA5EBA281AAE960026EA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		33AA5ED0281AC16A0026EA82 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		33AA5ED2281AC16A0026EA82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33B07E742727E834003E7504 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReleaseNotes.txt; path = ../../ReleaseNotes.txt; sourceTree = "<group>"; };
 		33B9116C2706E21E00C00B0D /* UploadDsym */ = {isa = PBXFileReference; lastKnownFileType = text; path = UploadDsym; sourceTree = "<group>"; };
 		33B9886C26CA6E79008B8AC9 /* News.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = News.graphql; sourceTree = "<group>"; };
@@ -780,6 +779,7 @@
 		33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Portfolio.storyboard; sourceTree = "<group>"; };
 		33D3D4FF26CBB8D0005A859B /* PortfolioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewController.swift; sourceTree = "<group>"; };
 		33D3D50126CBB8DC005A859B /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		33D84A91282EE0D2008DAE39 /* DeeplinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkHandler.swift; sourceTree = "<group>"; };
 		33DBF4E727CF5EC800918EFF /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		33DF57EC26EF261300FC1B9A /* MarketDataFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataFields.swift; sourceTree = "<group>"; };
 		33DF57F426EF75C300FC1B9A /* RemoteTicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTicker.swift; sourceTree = "<group>"; };
@@ -1119,7 +1119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3385D5DC282E38D90061464E /* OneSignal in Frameworks */,
+				3385D5E0282E522E0061464E /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,7 +1147,6 @@
 				336970B52716BA5C0001625C /* libc++.tbd in Frameworks */,
 				9044595E282D9DCD008BAC4E /* FirebaseStorage in Frameworks */,
 				906B28EA2768C0FF0058528B /* Lottie in Frameworks */,
-				90A3495C281B232700B00CD5 /* OneSignal in Frameworks */,
 				9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */,
 				9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
@@ -1158,6 +1157,7 @@
 				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				90445958282D9DCD008BAC4E /* FirebaseDynamicLinks in Frameworks */,
+				3385D5E2282E52380061464E /* OneSignal in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
@@ -1500,15 +1500,6 @@
 			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
-		33AA5ECF281AC16A0026EA82 /* StagingOneSignalNotificationServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				33AA5ED0281AC16A0026EA82 /* NotificationService.swift */,
-				33AA5ED2281AC16A0026EA82 /* Info.plist */,
-			);
-			path = StagingOneSignalNotificationServiceExtension;
-			sourceTree = "<group>";
-		};
 		33BDCF6726CE51ED000DE770 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1554,6 +1545,7 @@
 				9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */,
 				33BA6D972809711B00C3A431 /* RemoteConfigManager.swift */,
 				33423B3D281814DB0023F937 /* MatchScoreManager.swift */,
+				33D84A91282EE0D2008DAE39 /* DeeplinkHandler.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1948,7 +1940,6 @@
 				3A930EEE265C190C000FD3EB /* GainyTests */,
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
 				33AA5EB7281AAE960026EA82 /* OneSignalNotificationServiceExtension */,
-				33AA5ECF281AC16A0026EA82 /* StagingOneSignalNotificationServiceExtension */,
 				3A930ED6265C1909000FD3EB /* Products */,
 				3AA52C95266014BB006A6961 /* Frameworks */,
 			);
@@ -2671,7 +2662,7 @@
 			);
 			name = OneSignalNotificationServiceExtension;
 			packageProductDependencies = (
-				3385D5DB282E38D90061464E /* OneSignal */,
+				3385D5DF282E522E0061464E /* OneSignalExtension */,
 			);
 			productName = OneSignalNotificationServiceExtension;
 			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
@@ -2719,7 +2710,6 @@
 				3381D3B22797EA9F00BE7567 /* LinkKit */,
 				8521E9B527BB8BE30022BDB8 /* AvatarImagePicker */,
 				90FDE6B828148CE70068F033 /* ActivityIndicatorView */,
-				90A3495B281B232700B00CD5 /* OneSignal */,
 				9006307B282857C1009EEB65 /* RevenueCat */,
 				9044594F282D9DCD008BAC4E /* FirebaseAnalytics */,
 				90445951282D9DCD008BAC4E /* FirebaseAuth */,
@@ -2729,6 +2719,7 @@
 				90445959282D9DCD008BAC4E /* FirebaseFirestore */,
 				9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */,
 				9044595D282D9DCD008BAC4E /* FirebaseStorage */,
+				3385D5E1282E52380061464E /* OneSignal */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -3185,6 +3176,7 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
+				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
@@ -4433,7 +4425,12 @@
 			package = 3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
 			productName = LinkKit;
 		};
-		3385D5DB282E38D90061464E /* OneSignal */ = {
+		3385D5DF282E522E0061464E /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
+			productName = OneSignalExtension;
+		};
+		3385D5E1282E52380061464E /* OneSignal */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
 			productName = OneSignal;
@@ -4537,11 +4534,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
-		};
-		90A3495B281B232700B00CD5 /* OneSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignal;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;

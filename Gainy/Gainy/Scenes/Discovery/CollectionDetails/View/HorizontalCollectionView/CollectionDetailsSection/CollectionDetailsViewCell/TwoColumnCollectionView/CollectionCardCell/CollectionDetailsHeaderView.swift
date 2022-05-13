@@ -52,25 +52,25 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let fixedSpace = (frame.width - 36 * 2) / 16.0
-        var prevView: UIView? = nil
-        for i in 0 ..< 15 {
-            
-            let view = UIView.newAutoLayout()
-            view.layer.cornerRadius = 1.0
-            view.layer.masksToBounds = true
-            view.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-            self.addSubview(view)
-            view.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
-            view.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
-            if i == 0 {
-                view.autoPinEdge(toSuperviewEdge: .left, withInset: 36.0)
-            } else if let prevView = prevView {
-                view.autoPinEdge(.left, to: .right, of: prevView, withOffset: fixedSpace)
-            }
-            prevView = view
-        }
-        
+//        let fixedSpace = (frame.width - 36 * 2) / 16.0
+//        var prevView: UIView? = nil
+//        for i in 0 ..< 15 {
+//            
+//            let view = UIView.newAutoLayout()
+//            view.layer.cornerRadius = 1.0
+//            view.layer.masksToBounds = true
+//            view.backgroundColor = UIColor.init(hexString: "#B1BDC8")
+//            self.addSubview(view)
+//            view.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+//            view.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
+//            if i == 0 {
+//                view.autoPinEdge(toSuperviewEdge: .left, withInset: 36.0)
+//            } else if let prevView = prevView {
+//                view.autoPinEdge(.left, to: .right, of: prevView, withOffset: fixedSpace)
+//            }
+//            prevView = view
+//        }
+//        
         ttfTickersLabel.font = UIFont.proDisplaySemibold(20.0)
         ttfTickersLabel.textColor = UIColor.init(hexString: "#09141F")
         ttfTickersLabel.numberOfLines = 1
@@ -89,11 +89,12 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         ttfTickersLabel.autoSetDimension(.height, toSize: 24.0)
         ttfTickersLabel.sizeToFit()
         
+        chartModeButton.contentMode = .scaleAspectFit
         chartModeButton.isSkeletonable = true
         chartModeButton.setImage(UIImage.init(named: "viewPieChart"), for: .normal)
         chartModeButton.setImage(UIImage.init(named: "viewList"), for: .selected)
         self.addSubview(chartModeButton)
-        chartModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        chartModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 30))
         chartModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
         chartModeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
         chartModeButton.skeletonCornerRadius = 6
@@ -109,7 +110,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         tableListModeButton.skeletonCornerRadius = 6
         tableListModeButton.addTarget(self, action: #selector(tableListModeButtonTapped), for: .touchUpInside)
         
-        sortByButton.layer.cornerRadius = 12
+        sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
         sortByButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)

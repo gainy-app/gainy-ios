@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "viewPieChart.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "viewPieChart@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "viewPieChart@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "viewPieChart.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
