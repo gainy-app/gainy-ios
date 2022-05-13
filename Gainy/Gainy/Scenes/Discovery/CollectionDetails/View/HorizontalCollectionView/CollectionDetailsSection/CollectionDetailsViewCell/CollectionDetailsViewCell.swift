@@ -908,7 +908,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return CGSize.init(width: width, height: 88.0)
             } else {
                 if settings.viewMode == .grid {
-                    width = (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0
+                    width = (UIScreen.main.bounds.width - 20.0 * 3.0) / 2.0
                     return CGSize.init(width: width, height: width)
                 } else {
                     width = collectionView.frame.width - 30
