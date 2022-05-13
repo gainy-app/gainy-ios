@@ -1,9 +1,9 @@
-iOS v1.3 #199 available
+iOS v1.3 #200 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Deeplinks
+•
 
 :hammer_and_wrench: Improvements
 • QA
