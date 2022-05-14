@@ -40,7 +40,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         
         tabBar.barStyle = .default
         tabBar.isTranslucent = false
-        //setupTabBarLayout()
+        setupTabBarLayout()
         //setupTabBarItems()
         tabBarHeight = self.tabBar.bounds.height + keyWindow.safeAreaInsets.bottom
         
@@ -50,11 +50,11 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     }
     
     lazy var keyWindow: UIView =  { UIApplication.shared.connectedScenes
-        .filter({$0.activationState == .foregroundActive})
-        .map({$0 as? UIWindowScene})
-        .compactMap({$0})
-        .first?.windows
-        .filter({$0.isKeyWindow}).first ?? UIView()
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first ?? UIView()
     }()
     
     lazy var statusBarHeight: CGFloat = {
@@ -72,6 +72,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             appearance.shadowImage = nil
             appearance.shadowColor = nil
             self.tabBar.standardAppearance = appearance
+            self.tabBar.tintColor = UIColor.Gainy.mainText
         }
     }
     
@@ -146,7 +147,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         //                vc.coordinator = self.coordinator
         //            }
         //        }
-        
         tabBar.isTranslucent = false
     }
     

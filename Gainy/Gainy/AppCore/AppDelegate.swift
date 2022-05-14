@@ -26,6 +26,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         TickerLiveStorage.shared.clearAllLiveData()
         initOneSignal(launchOptions: launchOptions)
         SubscriptionManager.shared.setup()
+        
+        
         return true
     }
     

@@ -14,8 +14,8 @@ final class HomeArticlesTableViewCell: UITableViewCell {
         didSet {
             cornerView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
             cornerView.layer.shadowOpacity = 1
-            cornerView.layer.shadowOffset = CGSize.init(width: 0, height: 4)
-            cornerView.layer.shadowRadius = 10
+            cornerView.layer.shadowOffset = CGSize.init(width: 0, height: 2)
+            cornerView.layer.shadowRadius = 6
             cornerView?.clipsToBounds = false
         }
     }

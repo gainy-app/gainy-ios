@@ -8,7 +8,7 @@ struct RecommendedCollectionsSectionLayout: SectionLayout {
         let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(0.5),
-                heightDimension: .fractionalHeight(1.0)
+                heightDimension: .fractionalWidth(0.5)
             )
         )
 

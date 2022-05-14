@@ -8,7 +8,7 @@
 import UIKit
 final class TickerDetailsMarketDataViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 326.0
+    static let cellHeight: CGFloat = 326.0 + 16.0
     
     @IBOutlet weak var innerCollectionView: UICollectionView! {
         didSet {
@@ -43,6 +43,14 @@ extension TickerDetailsMarketDataViewCell: UICollectionViewDataSource {
 extension TickerDetailsMarketDataViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize.init(width: (UIScreen.main.bounds.width - 16.0 * 3.0) / 2.0, height: 80)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        16.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        16
     }
 }
 
