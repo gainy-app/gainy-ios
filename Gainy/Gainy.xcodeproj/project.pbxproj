@@ -120,8 +120,6 @@
 		3381D3B6279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3381D3B5279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift */; };
 		338464F9274582DD000DE5BC /* GetPlaidHoldings.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */; };
 		338464FC274585F1000DE5BC /* TickersDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338464FB274585F1000DE5BC /* TickersDetailsViewController.swift */; };
-		3385D5E0282E522E0061464E /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 3385D5DF282E522E0061464E /* OneSignalExtension */; };
-		3385D5E2282E52380061464E /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 3385D5E1282E52380061464E /* OneSignal */; };
 		33930B8528244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33930B8428244D3900310821 /* TickerDetailsRelativeCollectionViewCell.swift */; };
 		3393FF3B26E7A81700024537 /* APIModels+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3393FF3A26E7A81700024537 /* APIModels+Extensions.swift */; };
 		3394BA202750F3A500AAE7B8 /* GetMatchScoreForTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */; };
@@ -505,6 +503,9 @@
 		9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 90445959282D9DCD008BAC4E /* FirebaseFirestore */; };
 		9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */; };
 		9044595E282D9DCD008BAC4E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595D282D9DCD008BAC4E /* FirebaseStorage */; };
+		9051BAFC2830142A00019B57 /* CommonLibs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; platformFilter = ios; };
+		9051BAFD2830142A00019B57 /* CommonLibs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9051BAFE2830143600019B57 /* CommonLibs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; platformFilter = ios; };
 		9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */; };
 		9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */; };
 		9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */; };
@@ -556,6 +557,13 @@
 			remoteGlobalIDString = 3A930ED4265C1909000FD3EB;
 			remoteInfo = Gainy;
 		};
+		9051BAFA2830140100019B57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9051BAF62830140100019B57 /* CommonLibs.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9051BAD6282FC75E00019B57;
+			remoteInfo = CommonLibs;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -576,6 +584,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9051BAFD2830142A00019B57 /* CommonLibs.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1085,6 +1094,7 @@
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
 		90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
+		9051BAF62830140100019B57 /* CommonLibs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonLibs.xcodeproj; path = CommonLibs/CommonLibs.xcodeproj; sourceTree = "<group>"; };
 		9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieRefreshControl.swift; sourceTree = "<group>"; };
 		9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsFlowLayout.swift; sourceTree = "<group>"; };
 		9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProfileGains.graphql; sourceTree = "<group>"; };
@@ -1119,7 +1129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3385D5E0282E522E0061464E /* OneSignalExtension in Frameworks */,
+				9051BAFE2830143600019B57 /* CommonLibs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,6 +1160,7 @@
 				9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */,
 				9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
+				9051BAFC2830142A00019B57 /* CommonLibs.framework in Frameworks */,
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */,
@@ -1157,7 +1168,6 @@
 				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				90445958282D9DCD008BAC4E /* FirebaseDynamicLinks in Frameworks */,
-				3385D5E2282E52380061464E /* OneSignal in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
@@ -1936,6 +1946,7 @@
 		3A930ECC265C1909000FD3EB = {
 			isa = PBXGroup;
 			children = (
+				9051BAF62830140100019B57 /* CommonLibs.xcodeproj */,
 				3A930ED7265C1909000FD3EB /* Gainy */,
 				3A930EEE265C190C000FD3EB /* GainyTests */,
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
@@ -2635,6 +2646,14 @@
 			path = NoHoldings;
 			sourceTree = "<group>";
 		};
+		9051BAF72830140100019B57 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9051BAFB2830140100019B57 /* CommonLibs.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		9075CD0B281F1C3E00747A09 /* GainersSection */ = {
 			isa = PBXGroup;
 			children = (
@@ -2662,7 +2681,6 @@
 			);
 			name = OneSignalNotificationServiceExtension;
 			packageProductDependencies = (
-				3385D5DF282E522E0061464E /* OneSignalExtension */,
 			);
 			productName = OneSignalNotificationServiceExtension;
 			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
@@ -2719,7 +2737,6 @@
 				90445959282D9DCD008BAC4E /* FirebaseFirestore */,
 				9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */,
 				9044595D282D9DCD008BAC4E /* FirebaseStorage */,
-				3385D5E1282E52380061464E /* OneSignal */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2816,12 +2833,17 @@
 				3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */,
 				8521E9B427BB8BE20022BDB8 /* XCRemoteSwiftPackageReference "AvatarImagePicker" */,
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
-				90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */,
 				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9051BAF72830140100019B57 /* Products */;
+					ProjectRef = 9051BAF62830140100019B57 /* CommonLibs.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3A930ED4265C1909000FD3EB /* Gainy */,
@@ -2831,6 +2853,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9051BAFB2830140100019B57 /* CommonLibs.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommonLibs.framework;
+			remoteRef = 9051BAFA2830140100019B57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		33AA5EB4281AAE960026EA82 /* Resources */ = {
@@ -4366,14 +4398,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OneSignal/OneSignal-XCFramework";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4424,16 +4448,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3381D3B12797EA9E00BE7567 /* XCRemoteSwiftPackageReference "plaid-link-ios" */;
 			productName = LinkKit;
-		};
-		3385D5DF282E522E0061464E /* OneSignalExtension */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignalExtension;
-		};
-		3385D5E1282E52380061464E /* OneSignal */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 90A3495A281B232600B00CD5 /* XCRemoteSwiftPackageReference "OneSignal-XCFramework" */;
-			productName = OneSignal;
 		};
 		33B911732706ED3000C00B0D /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
