@@ -7,25 +7,26 @@
 
 import Foundation
 
-struct UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
+class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
+    
     var collectionViewLimit: Int {
         3
     }
     
-    func getCollectionViewCount(profileId: Int) -> Int {
-        UserDefaults.standard.integer(forKey: "profile_limit_\(profileId)")
+    @UserDefaultArray(key: "Purchases.viewedCollections")
+    private var viewedCollections: [Int]
+    
+    
+    func isViewedCollection(_ colId: Int) -> Bool {
+        viewedCollections.contains(colId)
     }
     
-    func setCollectionViewCount(profileId: Int, amount: Int) {
-        UserDefaults.standard.set(max(0, amount), forKey: "profile_limit_\(profileId)")
-    }
-    
-    func viewedCollections() -> [Int] {
-        []
-    }
-    
-    func viewCollection(colId: Int) -> Bool {
-        true
+    func viewCollection(_ colId: Int) -> Bool {
+        guard viewedCollections.count < collectionViewLimit else {return false}
+        if !viewedCollections.contains(colId) {
+            viewedCollections.append(colId)
+        }
+        return true
     }
     
 }

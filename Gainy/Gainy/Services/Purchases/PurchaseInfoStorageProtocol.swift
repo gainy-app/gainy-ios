@@ -11,6 +11,6 @@ import Foundation
 protocol PurchaseInfoStorageProtocol {
     var collectionViewLimit: Int {get}
     
-    func viewedCollections() -> [Int]
-    func viewCollection(colId: Int) -> Bool
+    func isViewedCollection(_ colId: Int) -> Bool
+    func viewCollection(_ colId: Int) -> Bool
 }

@@ -9,6 +9,7 @@ import UIKit
 import SwiftDate
 import BugfenderSDK
 import OneSignal
+import RevenueCat
 
 struct AppProfileMetricsSetting {
     
@@ -126,9 +127,10 @@ final class UserProfileManager {
                 })
                 
                 let oldFavs = self.favoriteCollections
-                self.favoriteCollections = appProfile.profileFavoriteCollections.map({ item in
+                let remoteFavs = appProfile.profileFavoriteCollections.map({ item in
                     item.collectionId
-                }).reorder(by: oldFavs)
+                })
+                self.favoriteCollections = remoteFavs.reorder(by: oldFavs)
                 
                 if let index = self.favoriteCollections.firstIndex(of: Constants.CollectionDetails.top20ID), self.favoriteCollections.count > 1 {
                     self.favoriteCollections.swapAt(index, 0)

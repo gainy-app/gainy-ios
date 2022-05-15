@@ -717,7 +717,7 @@
                                     <fragment content="Improve your experience">
                                         <attributes>
                                             <color key="NSColor" red="0.14509803921568626" green="0.91764705882352937" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="32" name="SFProDisplay-Semibold"/>
+                                            <font key="NSFont" metaFont="system" size="32"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="0.80000000000000004" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>

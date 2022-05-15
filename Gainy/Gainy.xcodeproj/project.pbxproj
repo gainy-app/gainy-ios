@@ -484,8 +484,6 @@
 		900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF527497BC200CF1597 /* HoldingSecurityViewModel.swift */; };
 		900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */; };
 		900DF278276A95FB00047E2B /* NoHoldingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DF277276A95FB00047E2B /* NoHoldingsViewController.swift */; };
-		9014E5DD28305341000E773D /* CommonLibs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; platformFilter = ios; };
-		9014E5DE28305341000E773D /* CommonLibs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */; };
 		901727242795520B000C5BC9 /* CollectionsManager+WatchList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901727232795520B000C5BC9 /* CollectionsManager+WatchList.swift */; };
 		9017BF5F2780D88600F3910A /* Deviice in Frameworks */ = {isa = PBXBuildFile; productRef = 9017BF5E2780D88600F3910A /* Deviice */; };
@@ -505,8 +503,6 @@
 		9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 90445959282D9DCD008BAC4E /* FirebaseFirestore */; };
 		9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */; };
 		9044595E282D9DCD008BAC4E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9044595D282D9DCD008BAC4E /* FirebaseStorage */; };
-		9051BAFC2830142A00019B57 /* CommonLibs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; platformFilter = ios; };
-		9051BAFD2830142A00019B57 /* CommonLibs.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9051BAFB2830140100019B57 /* CommonLibs.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9057DACD279C9A1200EC747C /* LottieRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */; };
 		9059824B27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */; };
 		9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */; };
@@ -523,11 +519,15 @@
 		9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */; };
 		9075CD13281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD12281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift */; };
 		9075CD15281F2CAA00747A09 /* GainersHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075CD14281F2CAA00747A09 /* GainersHeaderView.swift */; };
+		9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075EF16283195AA00917718 /* UICollectionView+Blur.swift */; };
+		9075EF192831979A00917718 /* Purchases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9075EF182831979900917718 /* Purchases.storyboard */; };
 		907B227C275029C900FB4B1E /* loader3.json in Resources */ = {isa = PBXBuildFile; fileRef = 907B227B275029C900FB4B1E /* loader3.json */; };
 		907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */; };
 		908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */; };
 		908D5BC327A55020005672C8 /* GetFavouriteCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC227A55020005672C8 /* GetFavouriteCollections.graphql.swift */; };
 		908D5BC527A55037005672C8 /* UserProfileManager+Favs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D5BC427A55037005672C8 /* UserProfileManager+Favs.swift */; };
+		909971642830EC6C00FDEA4B /* OneSignal in Frameworks */ = {isa = PBXBuildFile; productRef = 909971632830EC6C00FDEA4B /* OneSignal */; };
+		909971662830EC6C00FDEA4B /* OneSignalExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 909971652830EC6C00FDEA4B /* OneSignalExtension */; };
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
@@ -558,13 +558,6 @@
 			remoteGlobalIDString = 3A930ED4265C1909000FD3EB;
 			remoteInfo = Gainy;
 		};
-		9051BAFA2830140100019B57 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9051BAF62830140100019B57 /* CommonLibs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9051BAD6282FC75E00019B57;
-			remoteInfo = CommonLibs;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -579,24 +572,12 @@
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9014E5DF28305342000E773D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9014E5DE28305341000E773D /* CommonLibs.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		90491E32274645ED00B5E642 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9051BAFD2830142A00019B57 /* CommonLibs.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1106,7 +1087,6 @@
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
 		90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
-		9051BAF62830140100019B57 /* CommonLibs.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommonLibs.xcodeproj; path = CommonLibs/CommonLibs.xcodeproj; sourceTree = "<group>"; };
 		9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieRefreshControl.swift; sourceTree = "<group>"; };
 		9059824A27D3EDB10081C400 /* HomeCollectionsFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionsFlowLayout.swift; sourceTree = "<group>"; };
 		9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetProfileGains.graphql; sourceTree = "<group>"; };
@@ -1122,6 +1102,8 @@
 		9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTickersCollectionViewCell.xib; sourceTree = "<group>"; };
 		9075CD12281F1EA300747A09 /* HomeTickersCollectionViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTickersCollectionViewCellModel.swift; sourceTree = "<group>"; };
 		9075CD14281F2CAA00747A09 /* GainersHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainersHeaderView.swift; sourceTree = "<group>"; };
+		9075EF16283195AA00917718 /* UICollectionView+Blur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Blur.swift"; sourceTree = "<group>"; };
+		9075EF182831979900917718 /* Purchases.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Purchases.storyboard; sourceTree = "<group>"; };
 		907B227B275029C900FB4B1E /* loader3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loader3.json; sourceTree = "<group>"; };
 		907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetFavouriteCollections.graphql; sourceTree = "<group>"; };
@@ -1141,7 +1123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9014E5DD28305341000E773D /* CommonLibs.framework in Frameworks */,
+				909971662830EC6C00FDEA4B /* OneSignalExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1172,7 +1154,6 @@
 				9044595A282D9DCD008BAC4E /* FirebaseFirestore in Frameworks */,
 				9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
-				9051BAFC2830142A00019B57 /* CommonLibs.framework in Frameworks */,
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */,
@@ -1180,6 +1161,7 @@
 				90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */,
 				9017BF5F2780D88600F3910A /* Deviice in Frameworks */,
 				90445958282D9DCD008BAC4E /* FirebaseDynamicLinks in Frameworks */,
+				909971642830EC6C00FDEA4B /* OneSignal in Frameworks */,
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
@@ -1958,7 +1940,6 @@
 		3A930ECC265C1909000FD3EB = {
 			isa = PBXGroup;
 			children = (
-				9051BAF62830140100019B57 /* CommonLibs.xcodeproj */,
 				3A930ED7265C1909000FD3EB /* Gainy */,
 				3A930EEE265C190C000FD3EB /* GainyTests */,
 				3A930EF9265C190C000FD3EB /* GainyUITests */,
@@ -2070,6 +2051,7 @@
 				33D3D4FD26CBB8BC005A859B /* Portfolio.storyboard */,
 				331243D127BF7241008C2BCC /* Home.storyboard */,
 				33D3D4F626CBA2D2005A859B /* Popups.storyboard */,
+				9075EF182831979900917718 /* Purchases.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2238,6 +2220,7 @@
 				33387FDD274E7DF30070A733 /* String+Attributed.swift */,
 				331D4522278EC14200F990DF /* UserDefaults+Ext.swift */,
 				33765BF127A8215700D1F0A9 /* Bundle+Version.swift */,
+				9075EF16283195AA00917718 /* UICollectionView+Blur.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2658,14 +2641,6 @@
 			path = NoHoldings;
 			sourceTree = "<group>";
 		};
-		9051BAF72830140100019B57 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9051BAFB2830140100019B57 /* CommonLibs.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9075CD0B281F1C3E00747A09 /* GainersSection */ = {
 			isa = PBXGroup;
 			children = (
@@ -2686,7 +2661,6 @@
 				33AA5EB2281AAE960026EA82 /* Sources */,
 				33AA5EB3281AAE960026EA82 /* Frameworks */,
 				33AA5EB4281AAE960026EA82 /* Resources */,
-				9014E5DF28305342000E773D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2694,6 +2668,7 @@
 			);
 			name = OneSignalNotificationServiceExtension;
 			packageProductDependencies = (
+				909971652830EC6C00FDEA4B /* OneSignalExtension */,
 			);
 			productName = OneSignalNotificationServiceExtension;
 			productReference = 33AA5EB6281AAE960026EA82 /* OneSignalNotificationServiceExtension.appex */;
@@ -2750,6 +2725,7 @@
 				90445959282D9DCD008BAC4E /* FirebaseFirestore */,
 				9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */,
 				9044595D282D9DCD008BAC4E /* FirebaseStorage */,
+				909971632830EC6C00FDEA4B /* OneSignal */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2848,15 +2824,10 @@
 				90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 9051BAF72830140100019B57 /* Products */;
-					ProjectRef = 9051BAF62830140100019B57 /* CommonLibs.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				3A930ED4265C1909000FD3EB /* Gainy */,
@@ -2866,16 +2837,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		9051BAFB2830140100019B57 /* CommonLibs.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CommonLibs.framework;
-			remoteRef = 9051BAFA2830140100019B57 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		33AA5EB4281AAE960026EA82 /* Resources */ = {
@@ -2918,6 +2879,7 @@
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
 				85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */,
 				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
+				9075EF192831979A00917718 /* Purchases.storyboard in Resources */,
 				3A01FC1526885926007F6FA3 /* SFCompactRounded-Regular.otf in Resources */,
 				857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */,
 				85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */,
@@ -3296,6 +3258,7 @@
 				901D5EDE27DA6CA8001B1697 /* HomeFetchArticles.graphql.swift in Sources */,
 				33E7AA6326CF870600DF1CBE /* LeftAlignedIconButton.swift in Sources */,
 				3AE90364266A4EFD00574923 /* AFEvent.swift in Sources */,
+				9075EF17283195AA00917718 /* UICollectionView+Blur.swift in Sources */,
 				9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */,
 				85695AE42745130200759569 /* MetricsViewController.swift in Sources */,
 				85E4A27E27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift in Sources */,
@@ -3559,7 +3522,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3588,7 +3551,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3617,7 +3580,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3647,7 +3610,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3740,7 +3703,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3865,7 +3828,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4051,7 +4014,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4081,7 +4044,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202;
+				CURRENT_PROJECT_VERSION = 204;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4411,6 +4374,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OneSignal/OneSignal-iOS-SDK";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4561,6 +4532,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9072F56D277C4FA60057596B /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookCore;
+		};
+		909971632830EC6C00FDEA4B /* OneSignal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignal;
+		};
+		909971652830EC6C00FDEA4B /* OneSignalExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
+			productName = OneSignalExtension;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;

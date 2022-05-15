@@ -22,7 +22,7 @@ struct GainersCollectionSectionLayout: SectionLayout {
         let yourCollectionGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(144)
+                heightDimension: .estimated(144 + 16)
             ),
             subitems: [yourCollectionItem]
         )
@@ -31,7 +31,7 @@ struct GainersCollectionSectionLayout: SectionLayout {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(40 + 16 + 24)
+                heightDimension: .estimated(40 + 16 + 12)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top

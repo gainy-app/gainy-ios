@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Kjl-wv-FQa">
-                        <rect key="frame" x="0.0" y="4" width="305" height="144"/>
+                        <rect key="frame" x="0.0" y="8" width="305" height="144"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="144" id="7u5-6v-k2A"/>
@@ -38,8 +38,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Kjl-wv-FQa" secondAttribute="trailing" id="FGX-ZU-EnR"/>
                     <constraint firstItem="Kjl-wv-FQa" firstAttribute="leading" secondItem="NJp-AL-Vir" secondAttribute="leading" id="MTc-rc-zTl"/>
-                    <constraint firstAttribute="bottom" secondItem="Kjl-wv-FQa" secondAttribute="bottom" id="U4h-P4-OGw"/>
-                    <constraint firstItem="Kjl-wv-FQa" firstAttribute="top" secondItem="NJp-AL-Vir" secondAttribute="top" constant="4" id="fxS-Op-XSD"/>
+                    <constraint firstAttribute="bottom" secondItem="Kjl-wv-FQa" secondAttribute="bottom" constant="8" id="U4h-P4-OGw"/>
+                    <constraint firstItem="Kjl-wv-FQa" firstAttribute="top" secondItem="NJp-AL-Vir" secondAttribute="top" constant="8" id="fxS-Op-XSD"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="305" height="203"/>

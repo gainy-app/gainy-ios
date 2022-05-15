@@ -104,7 +104,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             layer.masksToBounds = false
             
             // Apply a shadow
-            layer.shadowRadius = 8.0
+            layer.shadowRadius = 4.0
             layer.shadowOpacity = 0.10
             layer.shadowColor = UIColor.black.cgColor
             layer.shadowOffset = CGSize(width: 0, height: 0)

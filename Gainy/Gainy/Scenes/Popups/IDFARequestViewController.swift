@@ -55,7 +55,7 @@ final class IDFARequestViewController: UIViewController, Storyboarded {
     
     @objc func playerItemDidReachEnd(notification: Notification) {
         let p: AVPlayerItem = notification.object as! AVPlayerItem
-        p.seek(to: .zero)
+        p.seek(to: .zero, completionHandler: nil)
     }
     
     func setupPlayer() {
