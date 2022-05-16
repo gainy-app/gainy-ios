@@ -36,4 +36,42 @@ final class HomeIndexView: CornerView {
             }
         }
     }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupView()
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .white
+        
+        layer.cornerRadius = 8.0
+        layer.masksToBounds = true
+        
+        // Set masks to bounds to false to avoid the shadow
+        // from being clipped to the corner radius
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = false
+        
+        // Apply a shadow
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.10
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 0)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Improve scrolling performance with an explicit shadowPath
+        layer.shadowPath = UIBezierPath(
+            roundedRect: bounds,
+            cornerRadius: 8.0
+        ).cgPath
+    }
 }

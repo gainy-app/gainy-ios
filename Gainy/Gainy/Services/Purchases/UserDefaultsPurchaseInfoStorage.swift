@@ -5,7 +5,8 @@
 //  Created by Anton Gubarenko on 08.05.2022.
 //
 
-import Foundation
+import UIKit
+import OneSignal
 
 class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     
@@ -17,6 +18,17 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     private var viewedCollections: [Int]
     
     
+    func getViewedCollections() {
+        OneSignal.getTags({[weak self] tags in
+            for tag in (tags ?? [:]) {
+                print(tag)
+            }
+            self?.viewedCollections  = []
+        }, onFailure: { error in
+            dprint("Error getting tags - \(error?.localizedDescription)")
+        })
+    }
+    
     func isViewedCollection(_ colId: Int) -> Bool {
         viewedCollections.contains(colId)
     }
@@ -25,6 +37,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         guard viewedCollections.count < collectionViewLimit else {return false}
         if !viewedCollections.contains(colId) {
             viewedCollections.append(colId)
+            OneSignal.sendTag("Purchases.viewedCollections", value: viewedCollections.compactMap({String($0)}).joined())
         }
         return true
     }

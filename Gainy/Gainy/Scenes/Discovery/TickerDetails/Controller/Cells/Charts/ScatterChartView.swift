@@ -401,7 +401,7 @@ struct ScatterChartView: View {
                 HStack(spacing: 4) {
                     Image(isMedianVisible ? "toggle_on" : "toggle_off")
                         .renderingMode(.original)
-                    Text("TTF median")
+                    Text("Compare to TTF")
                         .padding(.all, 0)
                         .font(UIFont.compactRoundedSemibold(12).uiFont)
                         .foregroundColor(isMedianVisible ? Color.white : UIColor(hexString: "#B1BDC8")!.uiColor)

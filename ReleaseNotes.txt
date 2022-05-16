@@ -1,12 +1,13 @@
-iOS v1.3 #204 available
+iOS v1.3 #205 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-•
+• TTF compare median
 
 :hammer_and_wrench: Improvements
 • Purchases UI init
+• Glitches fixes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

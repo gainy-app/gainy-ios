@@ -193,6 +193,7 @@ class TickerInfo {
                              if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
                                  self?.medianIndustry = mainIndustry.industryId
                              }
+                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
                              if let self = self {
                                  self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
                                      self.isChartDataLoaded = true
@@ -205,8 +206,7 @@ class TickerInfo {
                                          chartsLoaded()
                                      }
                                  }
-                             }
-                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
+                             }                             
                         }
                         
                         mainDS.leave()
@@ -359,11 +359,11 @@ class TickerInfo {
         }
         
         innerGroup.enter()
-        loadMedianForRange(period, industryId: medianIndustry) {[weak self] dailyStats in
+        loadMedianForRange(period, collectionUniqId: linkedCollections.first?.uniqId ?? "") {[weak self] dailyStats in
             
             if dailyStats.count > 1 {
-                let firstDay = dailyStats.first?.medianPrice ?? 0.0
-                let lastDay = dailyStats.last?.medianPrice  ?? 0.0
+                let firstDay = dailyStats.first?.adjustedClose ?? 0.0
+                let lastDay = dailyStats.last?.adjustedClose  ?? 0.0
                 self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
                 self?.haveMedian = true
                 self?.setMedianData(period, medianGrow: self?.pctDiff(firstDay, lastDay) ?? 0.0, haveMedian: true)
@@ -400,14 +400,14 @@ class TickerInfo {
     }
     
     private var medianLoader: Cancellable?
-    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, industryId: Int, _ completion: ( ([FetchStockMedianQuery.Data.IndustryMedianChart]) -> Void)? = nil) {
+    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, collectionUniqId: String, _ completion: ( ([FetchTtfMedianQuery.Data.CollectionChart]) -> Void)? = nil) {
         
         haveMedian = false
         
-        Network.shared.apollo.fetch(query: FetchStockMedianQuery.init(industryId: industryId, period: range.rawValue.lowercased())) {[weak self] result in
+        Network.shared.apollo.fetch(query: FetchTtfMedianQuery.init(collectionUniqId: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
             switch result {
             case .success(let graphQLResult):
-                if let dailyStats = graphQLResult.data?.industryMedianChart {
+                if let dailyStats = graphQLResult.data?.collectionChart {
                     completion?(dailyStats)
                 } else {
                     completion?([])

@@ -8,7 +8,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchStockMedian($industryId: Int!, $period: String!) {
+    query FetchStockMedian($industryId: bigint!, $period: String!) {
       industry_median_chart(
         where: {industry_id: {_eq: $industryId}, period: {_eq: $period}}
       ) {
@@ -53,7 +53,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "industry_median_chart": industryMedianChart.map { (value: IndustryMedianChart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220413060411.industry_median_chart"
+    /// fetch data from the table: "public_220510085411.industry_median_chart"
     public var industryMedianChart: [IndustryMedianChart] {
       get {
         return (resultMap["industry_median_chart"] as! [ResultMap]).map { (value: ResultMap) -> IndustryMedianChart in IndustryMedianChart(unsafeResultMap: value) }
@@ -69,9 +69,9 @@ public final class FetchStockMedianQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("period", type: .scalar(String.self)),
+          GraphQLField("period", type: .nonNull(.scalar(String.self))),
           GraphQLField("median_price", type: .scalar(float8.self)),
-          GraphQLField("datetime", type: .scalar(timestamp.self)),
+          GraphQLField("datetime", type: .nonNull(.scalar(timestamp.self))),
         ]
       }
 
@@ -81,7 +81,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(period: String? = nil, medianPrice: float8? = nil, datetime: timestamp? = nil) {
+      public init(period: String, medianPrice: float8? = nil, datetime: timestamp) {
         self.init(unsafeResultMap: ["__typename": "industry_median_chart", "period": period, "median_price": medianPrice, "datetime": datetime])
       }
 
@@ -94,9 +94,9 @@ public final class FetchStockMedianQuery: GraphQLQuery {
         }
       }
 
-      public var period: String? {
+      public var period: String {
         get {
-          return resultMap["period"] as? String
+          return resultMap["period"]! as! String
         }
         set {
           resultMap.updateValue(newValue, forKey: "period")
@@ -112,9 +112,9 @@ public final class FetchStockMedianQuery: GraphQLQuery {
         }
       }
 
-      public var datetime: timestamp? {
+      public var datetime: timestamp {
         get {
-          return resultMap["datetime"] as? timestamp
+          return resultMap["datetime"]! as! timestamp
         }
         set {
           resultMap.updateValue(newValue, forKey: "datetime")

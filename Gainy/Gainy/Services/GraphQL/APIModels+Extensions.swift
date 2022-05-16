@@ -158,6 +158,14 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
 }
 
 extension FetchStockMedianQuery.Data.IndustryMedianChart: ChartMergable {
+    var date: Date {
+        if let zDate = (datetime).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return zDate
+        } else {
+            return (datetime).toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+        }
+    }
+    
     var val: Float {
         Float(medianPrice ?? 0.0)
     }
@@ -166,6 +174,46 @@ extension FetchStockMedianQuery.Data.IndustryMedianChart: ChartMergable {
 extension GetTtfChartQuery.Data.CollectionChart: ChartMergable {
     var val: Float {
         Float(adjustedClose ?? 0.0)
+    }
+}
+
+extension FetchTtfMedianQuery.Data.CollectionChart: ChartMergable {
+    var date: Date {
+        if let zDate = (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+            return zDate
+        } else {
+            return (datetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
+        }
+    }
+    
+    var val: Float {
+        Float(adjustedClose ?? 0.0)
+    }
+}
+
+extension FetchTtfMedianQuery.Data.CollectionChart: RemoteDateTimeConvertable {
+    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
+        let formatter = DateFormatter()
+        
+        switch period {
+        case .d1:
+            formatter.dateFormat = "HH:mm"
+            break
+        case .w1:
+            formatter.dateFormat = "MM-dd HH:mm"
+            break
+        case .y5,.all:
+            if date.year == Date().year {
+                formatter.dateFormat = "MM-dd"
+            } else {
+                formatter.dateFormat = "MM-dd-yy"
+            }
+            break
+        default:
+            formatter.dateFormat = "MM-dd"
+            break
+        }
+        return formatter.string(from: date)
     }
 }
 

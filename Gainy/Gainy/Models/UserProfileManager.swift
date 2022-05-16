@@ -99,6 +99,7 @@ final class UserProfileManager {
             return
         }
         OneSignal.setExternalUserId("\(profileID)")
+        SubscriptionManager.shared.storage.getViewedCollections()
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
             

@@ -168,33 +168,6 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart : RemoteDateTimeConvert
     }
 }
 
-extension FetchStockMedianQuery.Data.IndustryMedianChart : RemoteDateTimeConvertable {
-        
-    func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
-        let formatter = DateFormatter()
-        
-        switch period {
-        case .d1:
-            formatter.dateFormat = "HH:mm"
-            break
-        case .w1:
-            formatter.dateFormat = "MM-dd HH:mm"
-            break
-        case .y5,.all:
-            if date.year == Date().year {
-                formatter.dateFormat = "MM-dd"
-            } else {
-                formatter.dateFormat = "MM-dd-yy"
-            }
-            break
-        default:
-            formatter.dateFormat = "MM-dd"
-            break
-        }
-        return formatter.string(from: date)
-    }
-}
-
 extension GetTtfChartQuery.Data.CollectionChart: RemoteDateTimeConvertable {
     
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {

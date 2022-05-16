@@ -232,7 +232,7 @@ extension HomeDataSource: UITableViewDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 12
         button.layer.cornerCurve = .continuous
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = UIColor(hexString: "F7F8F9")
         
         let reorderIconImageView = UIImageView(
             frame: CGRect(x: 0, y: 0, width: 16, height: 16)

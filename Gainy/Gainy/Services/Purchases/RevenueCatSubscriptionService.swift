@@ -21,7 +21,6 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func login(profileId: Int) {
-        
         Purchases.shared.logIn("\(profileId)") {(customerInfo, created, error) in
             dprint("RevenueCat login \(customerInfo)")
         }

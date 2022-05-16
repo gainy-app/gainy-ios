@@ -101,7 +101,12 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
     @IBOutlet weak var growContainer: CornerView!
     @IBOutlet weak var arrowImgView: UIImageView!
     @IBOutlet weak var growLbl: UILabel!
-    @IBOutlet weak var backImgView: UIImageView!
+    @IBOutlet weak var backImgView: UIImageView! {
+        didSet {
+            backImgView.isOpaque = true
+            backImgView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
+        }
+    }
     @IBOutlet weak var msLbl: UILabel! {
         didSet {
             msLbl.clipsToBounds = true
