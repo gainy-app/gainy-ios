@@ -10,6 +10,7 @@ import SwiftDate
 import BugfenderSDK
 import OneSignal
 import RevenueCat
+import Branch
 
 struct AppProfileMetricsSetting {
     
@@ -92,6 +93,7 @@ final class UserProfileManager {
         isPlaidLinked = false
     }
     
+    private var configuration = Configuration()
     public func fetchProfile(completion: @escaping (_ success: Bool) -> Void) {
         
         guard let profileID = self.profileID else {
@@ -100,6 +102,9 @@ final class UserProfileManager {
         }
         OneSignal.setExternalUserId("\(profileID)")
         SubscriptionManager.shared.storage.getViewedCollections()
+        if configuration.environment == .production {
+            Branch.getInstance().setIdentity("\(profileID)")
+        }
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
             

@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 import FirebaseAuth
+import Branch
+import OneSignal
 
 enum AuthorizationError: Error, Equatable {
 
@@ -121,6 +123,7 @@ final class AuthorizationManager {
         self.authorizationStatus = .none
     }
     
+    private var configuration = Configuration()
     public func signOut() {
         
         do {
@@ -136,6 +139,10 @@ final class AuthorizationManager {
             CollectionsManager.shared.collections = []
             CollectionsManager.shared.watchlistCollection = nil
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
+            
+            if configuration.environment == .production {
+                Branch.getInstance().logout()
+            }
         } catch let signOutError as NSError {
             dprint("Error signing out: %@", signOutError)
         }

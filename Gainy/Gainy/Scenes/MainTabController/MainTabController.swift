@@ -5,7 +5,7 @@
 //  Created by Anton Gubarenko on 13.08.2021.
 //
 import UIKit
-
+import FirebaseAuth
 
 class MainTabBarViewController: UITabBarController, Storyboarded {
     
@@ -36,7 +36,11 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         self.title = NSLocalizedString("Main", comment: "")
         
         //Discovery is Default
-        selectedIndex = 1
+        if Auth.auth().currentUser?.uid != nil {
+            selectedIndex = 0
+        } else {
+            selectedIndex = 1
+        }
         
         tabBar.barStyle = .default
         tabBar.isTranslucent = false

@@ -11,6 +11,7 @@ import OneSignal
 import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
+import Branch
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +27,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         TickerLiveStorage.shared.clearAllLiveData()
         initOneSignal(launchOptions: launchOptions)
         SubscriptionManager.shared.setup()
-        
+        initBranchIO(launchOptions: launchOptions)
         
         return true
     }
@@ -130,6 +131,23 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.setAppId(Constants.OneSignal.appId)
     }
     
+    private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        #if DEBUG
+        Branch.getInstance().enableLogging()
+        
+        #endif
+        if config.environment == .production {
+            Branch.setUseTestBranchKey(true)
+            Branch.getInstance().checkPasteboardOnInstall()
+            
+        BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
+                  print("BRANCH.io got someths")
+              })
+            //Branch.getInstance().validateSDKIntegration()
+        }
+        
+    }
+    
     //MARK: - CoreData
     
     lazy var persistentContainer: NSPersistentContainer = {
@@ -181,11 +199,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
     ) -> Bool {
-        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-              let url = userActivity.webpageURL,
-              let host = url.host else {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
             return false
         }
+
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let sceneDelegate = windowScene.delegate as? SceneDelegate
@@ -205,11 +222,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Continue the Link flow
-        handler.continue(from: url)
-        
-        let isDynamicLinkHandled = DeeplinkHandler.shared.handleUrl(url)
-        return isDynamicLinkHandled
-    }
+        handler.continue(from: webpageURL)
+        return true    }
     // <!-- SMARTDOWN_OAUTH_SUPPORT -->
     
 }
@@ -233,9 +247,6 @@ extension AppDelegate {
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
     -> Bool {
-        if DeeplinkHandler.shared.handleCustomScheme(url) {
-            return true
-        }
         return GIDSignIn.sharedInstance.handle(url)
     }
 }

@@ -535,6 +535,10 @@
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
+		90E25F252832E3EF005C9EA4 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90E25F242832E3EF005C9EA4 /* Branch */; };
+		90E25F272832E600005C9EA4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E25F262832E600005C9EA4 /* CoreTelephony.framework */; };
+		90E25F292832E60B005C9EA4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E25F282832E60B005C9EA4 /* WebKit.framework */; };
+		90E25F2B2832E615005C9EA4 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90E25F2A2832E615005C9EA4 /* CoreSpotlight.framework */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
 		90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 90FDE6B828148CE70068F033 /* ActivityIndicatorView */; };
 /* End PBXBuildFile section */
@@ -1121,6 +1125,9 @@
 		90C39E6C27ADADF200F47338 /* FetchRecommendedCollectionIDs.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchRecommendedCollectionIDs.graphql; sourceTree = "<group>"; };
 		90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRecommendedCollectionIDs.graphql.swift; sourceTree = "<group>"; };
 		90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDFARequestViewController.swift; sourceTree = "<group>"; };
+		90E25F262832E600005C9EA4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		90E25F282832E60B005C9EA4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		90E25F2A2832E615005C9EA4 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
 		90F2B6492761ED1600474909 /* WebPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1141,6 +1148,7 @@
 				33B911742706ED3000C00B0D /* SwiftyJSON in Frameworks */,
 				8521E9B627BB8BE30022BDB8 /* AvatarImagePicker in Frameworks */,
 				331FB0FA27011D4B0031A8EF /* Cache in Frameworks */,
+				90E25F272832E600005C9EA4 /* CoreTelephony.framework in Frameworks */,
 				33B9887326CA90D0008B8AC9 /* Kingfisher in Frameworks */,
 				336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */,
 				90445956282D9DCD008BAC4E /* FirebaseDatabase in Frameworks */,
@@ -1149,6 +1157,7 @@
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
 				33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */,
+				90E25F252832E3EF005C9EA4 /* Branch in Frameworks */,
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
 				3381D3B32797EA9F00BE7567 /* LinkKit in Frameworks */,
@@ -1161,6 +1170,7 @@
 				9044595C282D9DCD008BAC4E /* FirebaseRemoteConfig in Frameworks */,
 				33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */,
 				336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */,
+				90E25F2B2832E615005C9EA4 /* CoreSpotlight.framework in Frameworks */,
 				3332BCD3273CFCC3001222A7 /* SkeletonView in Frameworks */,
 				90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */,
 				9006307C282857C1009EEB65 /* RevenueCat in Frameworks */,
@@ -1171,6 +1181,7 @@
 				33FBDE88270ADEEA003B6DDB /* JWTDecode in Frameworks */,
 				90445954282D9DCD008BAC4E /* FirebaseCrashlytics in Frameworks */,
 				33B9887026CA8617008B8AC9 /* PureLayout in Frameworks */,
+				90E25F292832E60B005C9EA4 /* WebKit.framework in Frameworks */,
 				336970B72716BA5C0001625C /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2149,6 +2160,9 @@
 		3AA52C95266014BB006A6961 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90E25F2A2832E615005C9EA4 /* CoreSpotlight.framework */,
+				90E25F282832E60B005C9EA4 /* WebKit.framework */,
+				90E25F262832E600005C9EA4 /* CoreTelephony.framework */,
 				33571F25273BEADA007B587F /* LinkKit.xcframework */,
 				33571F20273B9F57007B587F /* CoreServices.framework */,
 				336970B02716B9920001625C /* libc++.tbd */,
@@ -2735,6 +2749,7 @@
 				9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */,
 				9044595D282D9DCD008BAC4E /* FirebaseStorage */,
 				909971632830EC6C00FDEA4B /* OneSignal */,
+				90E25F242832E3EF005C9EA4 /* Branch */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2834,6 +2849,7 @@
 				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
+				90E25F232832E3EF005C9EA4 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -4394,6 +4410,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		90E25F232832E3EF005C9EA4 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-sdk-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4554,6 +4578,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
 			productName = OneSignalExtension;
+		};
+		90E25F242832E3EF005C9EA4 /* Branch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90E25F232832E3EF005C9EA4 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */;
+			productName = Branch;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
