@@ -96,6 +96,7 @@
 		3361D929283272E600AEEC3D /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D928283272E600AEEC3D /* FetchStockMedian.graphql */; };
 		3361D92B2832730400AEEC3D /* FetchTTFMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */; };
 		3361D92D283276C300AEEC3D /* FetchTTFMedian.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */; };
+		3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92F283287C400AEEC3D /* PurchaseViewController.swift */; };
 		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
 		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
@@ -685,6 +686,7 @@
 		3361D928283272E600AEEC3D /* FetchStockMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
 		3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTTFMedian.graphql; sourceTree = "<group>"; };
 		3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTTFMedian.graphql.swift; sourceTree = "<group>"; };
+		3361D92F283287C400AEEC3D /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
 		336970A82716B9560001625C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1416,6 +1418,14 @@
 			path = MainTabController;
 			sourceTree = "<group>";
 		};
+		3361D92E283287AE00AEEC3D /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				3361D92F283287C400AEEC3D /* PurchaseViewController.swift */,
+			);
+			path = Purchases;
+			sourceTree = "<group>";
+		};
 		33722495270D9E9600C8C18F /* SingleCollectionDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1755,6 +1765,7 @@
 				33D3D4F926CBA388005A859B /* Analytics */,
 				33D3D4FA26CBA393005A859B /* Profile */,
 				3342C87526DE0C5B0049763E /* Popups */,
+				3361D92E283287AE00AEEC3D /* Purchases */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -3123,6 +3134,7 @@
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
 				85E4A28C275687A100C0E5C5 /* PortfolioInfoDataViewController.swift in Sources */,
 				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
+				3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,
 				85B90DF1280D518500F21DB2 /* CollectionDetailsChartCell.swift in Sources */,
