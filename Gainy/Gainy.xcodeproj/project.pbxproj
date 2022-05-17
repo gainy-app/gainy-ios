@@ -94,8 +94,6 @@
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
 		3361D929283272E600AEEC3D /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D928283272E600AEEC3D /* FetchStockMedian.graphql */; };
-		3361D92B2832730400AEEC3D /* FetchTTFMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */; };
-		3361D92D283276C300AEEC3D /* FetchTTFMedian.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */; };
 		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
 		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
@@ -687,8 +685,6 @@
 		335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTickerMatchData.graphql; sourceTree = "<group>"; };
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
 		3361D928283272E600AEEC3D /* FetchStockMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
-		3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTTFMedian.graphql; sourceTree = "<group>"; };
-		3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTTFMedian.graphql.swift; sourceTree = "<group>"; };
 		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
 		336970A82716B9560001625C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1206,7 +1202,6 @@
 		1C3A2C2D26AEB56600FAF107 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */,
 				901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */,
 				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
 				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
@@ -2131,7 +2126,6 @@
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
 				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
 				3361D928283272E600AEEC3D /* FetchStockMedian.graphql */,
-				3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */,
 				33264966280E90A300CE0D0F /* TTF */,
 				331243CE27BF6E85008C2BCC /* Home */,
 				85695AF42746BAD400759569 /* Metrics */,
@@ -2899,7 +2893,6 @@
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
-				3361D92B2832730400AEEC3D /* FetchTTFMedian.graphql in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
@@ -3299,7 +3292,6 @@
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
 				90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */,
 				339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */,
-				3361D92D283276C300AEEC3D /* FetchTTFMedian.graphql.swift in Sources */,
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,

@@ -12,7 +12,10 @@ typealias WebArticle = HomeFetchArticlesQuery.Data.WebsiteBlogArticle
 
 final class HomeViewModel {
     
-    internal init() {
+    weak var authorizationManager: AuthorizationManager?
+    
+    init(authorizationManager: AuthorizationManager?) {
+        self.authorizationManager = authorizationManager
         initSource()
     }
     
@@ -76,10 +79,23 @@ final class HomeViewModel {
     
     //MARK: - Loading
     
-    func loadHomeData(_ completion: @escaping (() -> Void)) {
-        
+    func loadHomeData(_ completion: @escaping (() -> Void)) {        
         guard let profielId = UserProfileManager.shared.profileID else {
-            completion()
+            if let authorizationManager = self.authorizationManager {
+                authorizationManager.refreshAuthorizationStatus { status in
+                    if status == .authorizedFully {
+                        guard UserProfileManager.shared.profileID != nil else {
+                            completion()
+                            return
+                        }
+                        self.loadHomeData(completion)
+                    } else {
+                        completion()
+                        return
+                    }
+                }
+                return
+            }
             return
         }
         Task {

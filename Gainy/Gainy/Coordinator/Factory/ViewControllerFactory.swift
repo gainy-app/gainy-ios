@@ -179,6 +179,7 @@ final class ViewControllerFactory {
     func instantiateHomeVC(coordinator: MainCoordinator) -> HomeViewController {
         let vc = HomeViewController.instantiate(.home)
         vc.mainCoordinator = coordinator
+        vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .home)
         return vc
     }

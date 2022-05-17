@@ -1,9 +1,0 @@
-    query FetchTTFMedian($collectionUniqId: String!, $period: String!) {
-      collection_chart(
-        where: {collection_uniq_id: {_eq: $collectionUniqId}, period: {_eq: $period}}
-      ) {
-        datetime
-    period
-    adjusted_close
-      }
-    }

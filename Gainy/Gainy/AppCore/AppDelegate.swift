@@ -132,17 +132,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        #if DEBUG
+#if DEBUG
         Branch.getInstance().enableLogging()
-        
-        #endif
+#endif
         if config.environment == .production {
-            Branch.setUseTestBranchKey(true)
+            
             Branch.getInstance().checkPasteboardOnInstall()
             
-        BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
-                  print("BRANCH.io got someths")
-              })
+            BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
+                if let refId = params?["refId"] as? Int {
+                    dprint("Got invite install from \(refId)")
+                    GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
+                }
+                
+            })
             //Branch.getInstance().validateSDKIntegration()
         }
         
@@ -202,7 +205,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         guard userActivity.activityType == NSUserActivityTypeBrowsingWeb, let webpageURL = userActivity.webpageURL else {
             return false
         }
-
+        
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let sceneDelegate = windowScene.delegate as? SceneDelegate

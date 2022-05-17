@@ -14,9 +14,10 @@ import FloatingPanel
 final class HomeViewController: BaseViewController {
     
     var mainCoordinator: MainCoordinator?
+    weak var authorizationManager: AuthorizationManager?
     
     //MARK: - Inner
-    private let viewModel = HomeViewModel()
+    private var viewModel: HomeViewModel!
     private var refreshControl = UIRefreshControl()
     
     //MARK: - Inner
@@ -36,9 +37,6 @@ final class HomeViewController: BaseViewController {
             tableView.backgroundColor = .clear
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
-            tableView.dataSource = viewModel.dataSource
-            tableView.delegate = viewModel.dataSource
-            viewModel.dataSource.delegate = self
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
@@ -60,6 +58,11 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = HomeViewModel(authorizationManager: authorizationManager)
+        tableView.dataSource = viewModel.dataSource
+        tableView.delegate = viewModel.dataSource
+        viewModel.dataSource.delegate = self
+        
         setupPanel()
     }
     
@@ -69,17 +72,21 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
-        if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
-            nameLbl.text = "Hi, \(first) \(last)"
-        } else {
-            nameLbl.text = ""
-        }
         tableView.isSkeletonable = true
+        nameLbl.text = ""
+        nameLbl.skeletonCornerRadius = 6
+        nameLbl.showAnimatedGradientSkeleton()
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHomeData { [weak tableView, weak refreshControl] in
+        viewModel.loadHomeData { [weak tableView, weak refreshControl, weak nameLbl] in
             refreshControl?.endRefreshing()
             tableView?.hideSkeleton()
             tableView?.reloadData()
+            if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
+                nameLbl?.text = "Hi, \(first) \(last)"
+            } else {
+                nameLbl?.text = ""
+            }
+            nameLbl?.hideSkeleton()
         }
     }
     

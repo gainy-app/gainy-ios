@@ -400,11 +400,11 @@ class TickerInfo {
     }
     
     private var medianLoader: Cancellable?
-    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, collectionUniqId: String, _ completion: ( ([FetchTtfMedianQuery.Data.CollectionChart]) -> Void)? = nil) {
+    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, collectionUniqId: String, _ completion: ( ([GetTtfChartQuery.Data.CollectionChart]) -> Void)? = nil) {
         
         haveMedian = false
         
-        Network.shared.apollo.fetch(query: FetchTtfMedianQuery.init(collectionUniqId: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
+        Network.shared.apollo.fetch(query: GetTtfChartQuery.init(uniqID: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 if let dailyStats = graphQLResult.data?.collectionChart {
