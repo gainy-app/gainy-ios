@@ -58,15 +58,15 @@ public struct LineView: View {
                 ZStack{
                     GeometryReader{ reader in
                         
-                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
-                        HLine()
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                            .foregroundColor(Color(hex: "E0E6EA"))
-                            .frame(height: 1)
-                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
-                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
-                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
-                        }
+//                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
+//                        HLine()
+//                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+//                            .foregroundColor(Color(hex: "E0E6EA"))
+//                            .frame(height: 1)
+//                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
+//                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
+//                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
+//                        }
                         
                         if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,

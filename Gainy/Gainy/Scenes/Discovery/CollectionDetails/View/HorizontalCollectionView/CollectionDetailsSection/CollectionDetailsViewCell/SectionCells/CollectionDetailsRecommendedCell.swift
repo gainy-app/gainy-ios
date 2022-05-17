@@ -243,8 +243,8 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         let matchScore = Int(matchData.matchScore ?? 0)
         msLbl.text = "\(matchScore)"
         tick1.image = UIImage(named: "fits_risk\(matchData.riskLevel ?? 0)")
-        tick2.image = UIImage(named: "fits_risk\(matchData.interestLevel ?? 0)")
-        tick3.image = UIImage(named: "fits_risk\(matchData.categoryLevel ?? 0)")
+        tick2.image = UIImage(named: "fits_risk\(matchData.categoryLevel ?? 0)")
+        tick3.image = UIImage(named: "fits_risk\(matchData.interestLevel ?? 0)")
         
         risk1Lbl.attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int((matchData.riskSimilarity ?? 0.0) * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
         tagsTitle.textColor = MatchScoreManager.textColorFor(matchScore)
