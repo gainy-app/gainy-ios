@@ -135,6 +135,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         // OneSignal initialization
         OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId(Constants.OneSignal.appId)
+        
+        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
+          print("Received Notification: ", notification.notificationId ?? "no id")
+          print("launchURL: ", notification.launchURL ?? "no launch url")
+          print("content_available = \(notification.contentAvailable)")
+
+          if notification.notificationId == "example_silent_notif" {
+            // Complete with null means don't show a notification
+            completion(nil)
+          } else {
+            // Complete with a notification means it will show
+            completion(notification)
+          }
+        }
+        OneSignal.setNotificationWillShowInForegroundHandler(notificationWillShowInForegroundBlock)
     }
     
     private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
