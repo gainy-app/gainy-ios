@@ -28,6 +28,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         initOneSignal(launchOptions: launchOptions)
         SubscriptionManager.shared.setup()
         initBranchIO(launchOptions: launchOptions)
+        NotificationManager.registerNotifications { success in
+            if success {
+                NotificationManager.shared.startObservingTimeSpent()
+                NotificationManager.shared.scheduleLocalSurveyNotification()
+            }
+        }
         
         return true
     }

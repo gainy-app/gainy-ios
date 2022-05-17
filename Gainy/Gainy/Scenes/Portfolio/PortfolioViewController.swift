@@ -94,6 +94,7 @@ final class PortfolioViewController: BaseViewController {
         super.plaidLinked()
         
         state = .linkHasHoldings
+        NotificationManager.shared.requestAppReviewForm()
     }
     
     override func userLoggedOut() {
