@@ -190,6 +190,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         compareButton.skeletonCornerRadius = 6
         self.compareButton = compareButton
         compareButton.showSkeleton()
+        compareButton.isHidden = true
+        compareButton.isUserInteractionEnabled = false
         
         let searchTextField = UITextField(
             frame: CGRect(
@@ -701,6 +703,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             if let currentIndex = items.last?.indexPath.row {
                 self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+                self.currentCollectionID = currentIndex
             }
         }
         return layout
@@ -727,6 +730,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private var currentNumberView: UIView?
     private var currentNumberLabel: UILabel?
+    private var currentCollectionID: Int?
     private var compareButton: UIButton?
     private var favoriteButton: UIButton?
     
@@ -854,12 +858,24 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func compareButtonTapped() {
-        
+        // TODO: Not implemented yet
     }
     
     @objc
     private func favoriteButtonTapped() {
         
+        guard let index = self.currentCollectionID else {
+            return
+        }
+        
+        guard viewModel?.collectionDetails.count ?? 0 > index, let model = viewModel?.collectionDetails[index] else {
+            return
+        }
+        
+        let collectionID = model.id
+        UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+            self.deleteItem(model.id)
+        }
     }
     
     private func createNavigationBarContainer() -> UIView {

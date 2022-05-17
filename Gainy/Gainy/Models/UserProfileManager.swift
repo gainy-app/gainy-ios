@@ -289,6 +289,7 @@ final class UserProfileManager {
                 
                 
                 runOnMain {
+                    NotificationManager.shared.increaseTTFsAdded()
                     completion(true)
                 }
             }
