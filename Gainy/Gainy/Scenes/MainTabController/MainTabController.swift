@@ -35,13 +35,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     fileprivate func initialSetup() {
         self.title = NSLocalizedString("Main", comment: "")
         
-        //Discovery is Default
-        if Auth.auth().currentUser?.uid != nil {
-            selectedIndex = 0
-        } else {
-            selectedIndex = 1
-        }
         
+        selectedIndex = 1
         
         tabBar.barStyle = .default
         tabBar.isTranslucent = false

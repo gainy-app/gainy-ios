@@ -67,6 +67,26 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
+        
+        addUnlockButton()
+    }
+    
+    private var unlockButton: UIButton?
+    fileprivate func addUnlockButton() {
+        let unlockButton = UIButton()
+        unlockButton.layer.cornerRadius = 8.0
+        unlockButton.clipsToBounds = true
+        unlockButton.backgroundColor = UIColor.Gainy.blue
+        unlockButton.setTitleColor(.white, for: .normal)
+        unlockButton.setTitle("Unlock TTF", for: .normal)
+        contentView.addSubview(unlockButton)
+        
+        unlockButton.autoSetDimension(.width, toSize: 150.0)
+        unlockButton.autoSetDimension(.height, toSize: 60.0)
+        unlockButton.autoAlignAxis(toSuperviewAxis: .vertical)
+        unlockButton.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -70)
+        unlockButton.isHidden = true
+        self.unlockButton = unlockButton
     }
     
     @available(*, unavailable)
@@ -168,6 +188,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         // Load all data
         // hideSkeleton()
+        
+        SubscriptionManager.shared.getSubscription {[weak unlockButton] type in
+            if type == .free {
+                unlockButton?.isHidden =  SubscriptionManager.shared.storage.isViewedCollection(viewModel.id)
+                
+            } else {
+                unlockButton?.isHidden = true
+            }
+        }
     }
     
     @MainActor
@@ -288,6 +317,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //        }
         
         //        self.refreshingTickers = true
+        
+        SubscriptionManager.shared.getSubscription {[weak self] type in
+            if type == .free {
+                unlockButton?.isHidden =  SubscriptionManager.shared.storage.isViewedCollection(viewModel.id)
+                
+            } else {
+                unlockButton?.isHidden = true
+            }
+        }
         
         if viewModel?.id == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
@@ -486,6 +524,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             } else {
                 cell.hideSkeleton()
             }
+            SubscriptionManager.shared.getSubscription({ type in
+                if type == .free {
+                    if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                        cell.removeBlur()
+                    } else {
+                        cell.addBlur()
+                    }
+                } else {
+                    cell.removeBlur()
+                }
+            })
             return cell
             
         case .cards:
@@ -511,6 +560,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         }
         
         cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
+        SubscriptionManager.shared.getSubscription({ type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -627,6 +687,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                            markerHeaders:  markers.map(\.shortTitle),
                            markerMetrics: vals,
                            matchScore: "\(model.matchScore)")
+        SubscriptionManager.shared.getSubscription({ type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -695,6 +766,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
         }
+        SubscriptionManager.shared.getSubscription({ type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -761,6 +843,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             self.headerView = headerView
+            SubscriptionManager.shared.getSubscription({ type in
+                if type == .free {
+                    if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                        headerView.removeBlur()
+                    } else {
+                        headerView.addBlur()
+                    }
+                } else {
+                    headerView.removeBlur()
+                }
+            })
             result = headerView
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)

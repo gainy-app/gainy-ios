@@ -9,7 +9,19 @@ import UIKit
 
 class BlurEffectView: UIVisualEffectView {
     
-    var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
+    var intensity: Double = 0.1
+    
+    init(intensity: Double = 0.1) {
+        
+        self.intensity = intensity
+        super.init(effect: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    private var animator = UIViewPropertyAnimator(duration: 1, curve: .linear)
     
     override func didMoveToSuperview() {
         guard let superview = superview else { return }
@@ -25,7 +37,7 @@ class BlurEffectView: UIVisualEffectView {
         animator.addAnimations { [weak self] in
             self?.effect = UIBlurEffect(style: .regular)
         }
-        animator.fractionComplete = 0.1   //This is your blur intensity in range 0 - 1
+        animator.fractionComplete = intensity   //This is your blur intensity in range 0 - 1
     }
     
     deinit {

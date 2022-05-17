@@ -13,7 +13,7 @@ extension UICollectionReusableView {
         guard subviews.first(where: {
             $0.tag == -11
         }) == nil else {return}
-        let blurView = BlurEffectView()
+        let blurView = BlurEffectView(intensity: 0.2)
         blurView.tag = -11
         addSubview(blurView)
         
