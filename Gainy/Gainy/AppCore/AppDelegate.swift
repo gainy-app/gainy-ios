@@ -146,7 +146,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             Branch.getInstance().checkPasteboardOnInstall()
             
             BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
-                if let refId = params?["refId"] as? Int {
+                if let refId = params?["refId"] as? String {
                     dprint("Got invite install from \(refId)")
                     GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
                 }

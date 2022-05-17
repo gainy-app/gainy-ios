@@ -5,6 +5,7 @@ Bugfixes
 :new: New:
 • Ask for app review logic: 1) 3+ favorite TTFs; 2) Portfolio connection; 3) Spent more than 25 minutes in an app
 • Surway local notification placeholder (will be filled with data in next build or moved to OneSignal) - starts after app start in 20 seconds
+• Migrated to Branch.io for deeplinks
 
 :hammer_and_wrench: Improvements
 • Add missing handler for "Unfavorite" button on the discovery screen; hide compare button for now (compare TTFs)

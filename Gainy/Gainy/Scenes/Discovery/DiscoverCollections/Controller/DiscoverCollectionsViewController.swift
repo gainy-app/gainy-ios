@@ -278,7 +278,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         searchCollectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
-                y: navigationBarTopOffset,
+                y: navigationBarTopOffset + 8.0,
                 width: view.bounds.width,
                 height: view.bounds.height - navigationBarTopOffset
             ),
