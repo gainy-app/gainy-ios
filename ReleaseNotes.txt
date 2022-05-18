@@ -3,12 +3,14 @@ iOS v1.3 #207 available
 Bugfixes
 
 :new: New:
-• Local pushes for survey
-• App Review prompt
+• Removed "Local pushes" for survey (will be OneSignal based)
+• App Review prompt (25 mins in app; connect portfolio; add 3 TTFs to favorite)
+• Handled "Daily movers"(Open Home Tab action) and "Most performing TTF" (Open TTF action)
 
 :hammer_and_wrench: Improvements
 • TTF: Rec cell tags changed
 • Search header improved
+• Removed absolute value from the pie chart
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
