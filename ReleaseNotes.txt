@@ -10,7 +10,6 @@ Bugfixes
 :hammer_and_wrench: Improvements
 • TTF: Rec cell tags changed
 • Search header improved
-• Removed absolute value from the pie chart
 • Pie Chart UI fixes (removed not needed values)
 
 :red_circle: Important Notes:
