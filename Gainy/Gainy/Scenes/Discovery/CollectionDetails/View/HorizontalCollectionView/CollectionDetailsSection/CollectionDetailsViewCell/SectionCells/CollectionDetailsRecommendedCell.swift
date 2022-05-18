@@ -29,8 +29,6 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         contentView.addSubview(matchCircle)
         contentView.addSubview(msLbl)
         
-        contentView.addSubview(tagsTitle)
-        
         contentView.addSubview(tagsContainer)
         
         titleLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
@@ -67,15 +65,11 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         
         msLbl.autoAlignAxis(.horizontal, toSameAxisOf: matchCircle)
         msLbl.autoAlignAxis(.vertical, toSameAxisOf: matchCircle)
-        
-        tagsTitle.autoPinEdge(toSuperviewEdge: .left, withInset: 40)
-        tagsTitle.autoPinEdge(.top, to: .bottom, of: tick3, withOffset: 24)
-        tagsTitle.autoSetDimension(.height, toSize: 16)
-        
+                
         //tagsContainer.translatesAutoresizingMaskIntoConstraints = false
         tagsContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
         tagsContainer.autoPinEdge(toSuperviewEdge: .right, withInset: 32)
-        tagsContainer.autoPinEdge(.top, to: .bottom, of: tagsTitle, withOffset: 24)
+        tagsContainer.autoPinEdge(.top, to: .bottom, of: tick3, withOffset: 24)
         self.tagsContainerHeight = tagsContainer.autoSetDimension(.height, toSize: 16)
         
         largeBack.layer.cornerRadius = 16
@@ -192,20 +186,6 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var tagsTitle: UILabel = {
-        let label = UILabel()
-        label.text = "Tags for this company"
-        label.font = .compactRoundedMedium(12)
-        label.textColor = .white
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
-        label.textAlignment = .left
-        label.isSkeletonable = true
-        label.skeletonCornerRadius = 6
-        label.linesCornerRadius = 6
-        return label
-    }()
-    
     lazy var largeBack: UIView = {
         let view = UIView()
         view.isSkeletonable = true
@@ -247,7 +227,6 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         tick3.image = UIImage(named: "fits_risk\(matchData.interestLevel ?? 0)")
         
         risk1Lbl.attributedText = "Fits your risk profile: ".attr(font: .proDisplayRegular(14), color: UIColor(named: "mainText")!) + "\(Int((matchData.riskSimilarity ?? 0.0) * 100.0))%".attr(font: .proDisplayBold(14), color: UIColor(named: "mainText")!)
-        tagsTitle.textColor = MatchScoreManager.textColorFor(matchScore)
         largeBack.backgroundColor = MatchScoreManager.backColorFor(matchScore)
         
         
@@ -291,14 +270,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         //self.tagsContainerHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsContainer.layoutIfNeeded()
         
-        let calculatedHeight: CGFloat = 152 + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 8.0
-        if tags.count > 0 {
-            //cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
-            tagsTitle.isHidden = false
-        } else {
-            //cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
-            tagsTitle.isHidden = true
-        }
+        let calculatedHeight: CGFloat = (176.0 - 32.0) + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 8.0
     }
     
     func setTransform(_ transform: CGAffineTransform) {

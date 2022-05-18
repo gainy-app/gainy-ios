@@ -278,14 +278,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         searchCollectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
-                y: navigationBarTopOffset + 8.0,
+                y: blurView.frame.origin.y + blurView.frame.height,
                 width: view.bounds.width,
                 height: view.bounds.height - navigationBarTopOffset
             ),
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 8)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)

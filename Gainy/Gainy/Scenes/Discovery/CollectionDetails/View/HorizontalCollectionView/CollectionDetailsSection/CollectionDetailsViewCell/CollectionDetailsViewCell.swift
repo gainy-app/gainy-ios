@@ -893,9 +893,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             print("TF: height \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             
             if viewModel.combinedTags.isEmpty {
-                return CGSize.init(width: width, height: 144.0 + 32)
+                return CGSize.init(width: width, height: 144.0 + 16)
             } else {
-                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0
+                let calculatedHeight: CGFloat = (176.0 - 16.0) + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
                 return CGSize.init(width: width, height: calculatedHeight)
             }
             

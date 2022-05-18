@@ -1,15 +1,14 @@
-iOS v1.3 #206 available
+iOS v1.3 #207 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Ask for app review logic: 1) 3+ favorite TTFs; 2) Portfolio connection; 3) Spent more than 25 minutes in an app
-• Surway local notification placeholder (will be filled with data in next build or moved to OneSignal) - starts after app start in 20 seconds
-• Migrated to Branch.io for deeplinks
+• Local pushes for survey
+• App Review prompt
 
 :hammer_and_wrench: Improvements
-• Add missing handler for "Unfavorite" button on the discovery screen; hide compare button for now (compare TTFs)
-• Fix "TTF opened from the Home tab has the X (close button) over the title. Also, it is always visible if scroll the view."
+• TTF: Rec cell tags changed
+• Search header improved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
