@@ -130,7 +130,7 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
     lazy var nameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = .proDisplayBold(20)
+        label.font = .proDisplayBold(18)
         label.textColor = UIColor.Gainy.white
         
         label.numberOfLines = 1

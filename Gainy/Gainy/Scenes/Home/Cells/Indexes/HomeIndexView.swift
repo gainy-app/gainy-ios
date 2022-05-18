@@ -29,7 +29,7 @@ final class HomeIndexView: CornerView {
                 }
                 
                 if indexModel.value != 0 {
-                    valueLbl.text = indexModel.value.cleanTwoDecimalUnsigned
+                    valueLbl.text = indexModel.value.zeroDecimalUnsigned
                 } else {
                     valueLbl.text = "-"
                 }
@@ -50,19 +50,7 @@ final class HomeIndexView: CornerView {
     private func setupView() {
         self.backgroundColor = .white
         
-        layer.cornerRadius = 8.0
-        layer.masksToBounds = true
-        
-        // Set masks to bounds to false to avoid the shadow
-        // from being clipped to the corner radius
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = false
-        
-        // Apply a shadow
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.10
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 0)
+        addDashedBorder()
     }
     
     override func layoutSubviews() {

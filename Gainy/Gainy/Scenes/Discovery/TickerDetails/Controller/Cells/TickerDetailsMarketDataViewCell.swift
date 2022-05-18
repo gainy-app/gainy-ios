@@ -22,6 +22,9 @@ final class TickerDetailsMarketDataViewCell: TickerDetailsViewCell {
     
     override func updateFromTickerData() {
         innerCollectionView.reloadData()
+        delay(1.0) {[weak innerCollectionView] in
+            innerCollectionView?.isScrollEnabled = false
+        }
     }
 }
 

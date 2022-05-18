@@ -230,7 +230,7 @@ extension HomeDataSource: UITableViewDelegate {
     func newSortByButton() -> (ResponsiveButton, UILabel) {
         let button = ResponsiveButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor(hexString: "F7F8F9")
         
