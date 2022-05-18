@@ -8,12 +8,12 @@
 import UIKit
 import PureLayout
 
-extension UICollectionReusableView {
+extension UIView {
     func addBlur() {
         guard subviews.first(where: {
             $0.tag == -11
         }) == nil else {return}
-        let blurView = BlurEffectView(intensity: 0.2)
+        let blurView = BlurEffectView(intensity: 0.3)
         blurView.tag = -11
         addSubview(blurView)
         

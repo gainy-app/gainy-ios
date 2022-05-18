@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 /// Protocol to store/save limits usage
 protocol PurchaseInfoStorageProtocol {
@@ -14,4 +15,6 @@ protocol PurchaseInfoStorageProtocol {
     func getViewedCollections()
     func isViewedCollection(_ colId: Int) -> Bool
     func viewCollection(_ colId: Int) -> Bool
+    
+    var collectionsViewedPublisher: AnyPublisher<Int, Never> {get}
 }

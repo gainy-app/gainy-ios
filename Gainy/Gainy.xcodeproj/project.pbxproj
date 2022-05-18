@@ -497,6 +497,7 @@
 		901EDCF92825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
+		903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903707ED2835867E00E3569B /* TTFBlockView.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
 		9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */; };
 		90445950282D9DCD008BAC4E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9044594F282D9DCD008BAC4E /* FirebaseAnalytics */; };
@@ -1093,6 +1094,7 @@
 		901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPortfolioChartMetrics.graphql.swift; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
+		903707ED2835867E00E3569B /* TTFBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFBlockView.swift; sourceTree = "<group>"; };
 		9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalChartsLoader.swift; sourceTree = "<group>"; };
 		90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = StoreKitTestCertificate.cer; sourceTree = "<group>"; };
 		9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieRefreshControl.swift; sourceTree = "<group>"; };
@@ -1456,6 +1458,7 @@
 				33F4066326D90F5900A07713 /* PieChartView.swift */,
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
 				33423B3F2818200F0023F937 /* BlurEffectView.swift */,
+				903707ED2835867E00E3569B /* TTFBlockView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -3206,6 +3209,7 @@
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
 				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
+				903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */,
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,

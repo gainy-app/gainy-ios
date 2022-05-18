@@ -9,9 +9,9 @@ import UIKit
 
 class BlurEffectView: UIVisualEffectView {
     
-    var intensity: Double = 0.1
+    var intensity: Double = 0.3
     
-    init(intensity: Double = 0.1) {
+    init(intensity: Double = 0.3) {
         
         self.intensity = intensity
         super.init(effect: nil)

@@ -560,17 +560,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         }
         
         cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
-        SubscriptionManager.shared.getSubscription({ type in
-            if type == .free {
-                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
-                    cell.removeBlur()
-                } else {
-                    cell.addBlur()
-                }
-            } else {
-                cell.removeBlur()
-            }
-        })
         return cell
     }
     
@@ -687,17 +676,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                            markerHeaders:  markers.map(\.shortTitle),
                            markerMetrics: vals,
                            matchScore: "\(model.matchScore)")
-        SubscriptionManager.shared.getSubscription({ type in
-            if type == .free {
-                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
-                    cell.removeBlur()
-                } else {
-                    cell.addBlur()
-                }
-            } else {
-                cell.removeBlur()
-            }
-        })
         return cell
     }
     
@@ -766,17 +744,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
         }
-        SubscriptionManager.shared.getSubscription({ type in
-            if type == .free {
-                if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
-                    cell.removeBlur()
-                } else {
-                    cell.addBlur()
-                }
-            } else {
-                cell.removeBlur()
-            }
-        })
         return cell
     }
     
