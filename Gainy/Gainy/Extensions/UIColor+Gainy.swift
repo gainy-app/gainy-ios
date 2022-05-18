@@ -78,16 +78,16 @@ extension UIColor {
         static let tickerSymbol = UIColor(hexString: "6C5DD3", alpha: 1.0)!
         
         static let pieChartColors = [
-            UIColor.init(hexString: "#1B45FB"),
-            UIColor.init(hexString: "#0062FF"),
-            UIColor.init(hexString: "#6C5DD3"),
-            UIColor.init(hexString: "#38CF92"),
-        
-            UIColor.init(hexString: "#3BF06E"),
-            UIColor.init(hexString: "#F9557B"),
-            UIColor.init(hexString: "#F95664"),
-            
-            UIColor.init(hexString: "#B1BDC8")
+            UIColor.init(hexString: "#2D54FF"),
+            UIColor.init(hexString: "#7869E7"),
+            UIColor.init(hexString: "#25C685"),
+            UIColor.init(hexString: "#FF6970"),
+            UIColor.init(hexString: "#FFB423"),
+            UIColor.init(hexString: "#FF8BA0"),
+            UIColor.init(hexString: "#5EABFF"),
+            UIColor.init(hexString: "#A79BFD"),
+            UIColor.init(hexString: "#6BE8B6"),
+            UIColor.init(hexString: "#C6D2DD")
         ]
     }
 }

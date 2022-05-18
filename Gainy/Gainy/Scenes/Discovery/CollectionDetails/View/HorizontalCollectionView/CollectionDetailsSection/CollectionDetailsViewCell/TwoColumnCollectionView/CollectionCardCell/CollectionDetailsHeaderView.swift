@@ -351,7 +351,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         for element in pieChartData {
             let separatoeSegment = PieChartSegment(color: .white, value: separatorValue)
             segments.append(separatoeSegment)
-            let color = (index <= 6 ? colors[index] : colors[7]) ?? UIColor.white
+            let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
             let segment = PieChartSegment(color: color, value: CGFloat((element.weight ?? 0.0) * 100.0))
             segments.append(segment)
             index = index + 1
@@ -428,7 +428,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 //            todayLabel.isHiddenWhenSkeletonIsActive = true
 //            todayLabel.text = "Today"
 //            todayLabel.sizeToFit()
-//            
+//
 //            let arrowView = UIImageView()
 //            arrowView.isSkeletonable = true
 //            arrowView.isHiddenWhenSkeletonIsActive = true
@@ -437,7 +437,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 //            arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
 //            arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
 //            arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
-//            
+//
 //            let totalChangeAbsoluteLabel = UILabel()
 //            totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
 //            totalChangeAbsoluteLabel.numberOfLines = 1
@@ -454,7 +454,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 //            ? UIColor.Gainy.mainGreen
 //            : UIColor.Gainy.mainRed
 //            totalChangeAbsoluteLabel.sizeToFit()
-//            
+//
 //            let dotView: UIView = UIView.newAutoLayout()
 //            dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
 //            dotView.layer.cornerRadius = 1.0
@@ -463,7 +463,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 //            dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
 //            dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
 //            dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
-//            
+//
 //            let totalChangeRelativeLabel = UILabel()
 //            totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
 //            totalChangeRelativeLabel.numberOfLines = 1

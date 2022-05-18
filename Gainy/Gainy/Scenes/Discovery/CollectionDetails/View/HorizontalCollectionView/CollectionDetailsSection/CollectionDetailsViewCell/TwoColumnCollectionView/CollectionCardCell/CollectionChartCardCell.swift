@@ -13,85 +13,10 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
     
     var progressView: PieChartView? = nil
     var overlayView: UIView? = nil
-    var views: [UIView] = []
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
-        self.isSkeletonable = true
-        
-        contentView.addSubview(percentBackView)
-        percentBackView.addSubview(percentLabel)
-        percentBackView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
-        percentBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
-        percentLabel.autoPinEdge(.top, to: .top, of: percentBackView, withOffset: 6)
-        percentLabel.autoPinEdge(.left, to: .left, of: percentBackView, withOffset: 22)
-        percentLabel.autoPinEdge(.right, to: .right, of: percentBackView, withOffset: -6)
-        percentLabel.autoPinEdge(.bottom, to: .bottom, of: percentBackView, withOffset: -6)
-        
-        
-        contentView.addSubview(nameLabel)
-        nameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16.0)
-        nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
-        nameLabel.autoSetDimension(.height, toSize: 24.0)
-        
-        contentView.addSubview(totalPriceLabel)
-        views.append(totalPriceLabel)
-        totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
-        totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
-        totalPriceLabel.autoSetDimension(.height, toSize: 24.0)
-        totalPriceLabel.autoPinEdge(.left, to: .right, of: nameLabel, withOffset: 12.0)
-        
-        contentView.addSubview(totalChangeRelativeLabel)
-        views.append(totalChangeRelativeLabel)
-        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
-        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
-        totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
-        
-        let dotView: UIView = UIView.newAutoLayout()
-        dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-        dotView.layer.cornerRadius = 1.0
-        dotView.layer.masksToBounds = true
-        contentView.addSubview(dotView)
-        views.append(dotView)
-        dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 59.0)
-        dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
-        dotView.autoPinEdge(.right, to: .left, of: totalChangeRelativeLabel, withOffset: -4.0)
-        
-        contentView.addSubview(totalChangeAbsoluteValue)
-        views.append(totalChangeAbsoluteValue)
-        totalChangeAbsoluteValue.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
-        totalChangeAbsoluteValue.autoSetDimension(.height, toSize: 14.0)
-        totalChangeAbsoluteValue.autoPinEdge(.right, to: .left, of: dotView, withOffset: -4.0)
-        
-
-        contentView.addSubview(arrowView)
-        views.append(arrowView)
-        arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
-        arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 56.0)
-        arrowView.autoPinEdge(.right, to: .left, of: totalChangeAbsoluteValue, withOffset: -4.0)
-       
-        
-        let todayLabel = UILabel()
-        todayLabel.font = UIFont.compactRoundedMedium(14)
-        todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
-        todayLabel.numberOfLines = 1
-        todayLabel.textAlignment = .left
-        contentView.addSubview(todayLabel)
-        views.append(todayLabel)
-        todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
-        todayLabel.autoPinEdge(.right, to: .left, of: arrowView, withOffset: -4.0)
-        todayLabel.autoSetDimension(.height, toSize: 14.0)
-        todayLabel.autoSetDimension(.width, toSize: 37.0)
-        todayLabel.isSkeletonable = true
-        todayLabel.isHiddenWhenSkeletonIsActive = true
-        todayLabel.text = "Today"
-        todayLabel.sizeToFit()
-
-        addIndicatorView()
-        
-        layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
     }
     
     @available(*, unavailable)
@@ -99,7 +24,107 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func removeContentView() {
+        
+        let subviews = self.contentView.subviews
+        for view in subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    private func setupLayout(data: GetTtfPieChartQuery.Data.CollectionPiechart, index: Int) {
+        
+        self.removeContentView()
+        self.isSkeletonable = true
+        
+        if data.entityType == "ticker" {
+            
+            contentView.addSubview(percentBackView)
+            percentBackView.addSubview(percentLabel)
+            percentBackView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+            percentBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
+            percentLabel.autoPinEdge(.top, to: .top, of: percentBackView, withOffset: 6)
+            percentLabel.autoPinEdge(.left, to: .left, of: percentBackView, withOffset: 22)
+            percentLabel.autoPinEdge(.right, to: .right, of: percentBackView, withOffset: -6)
+            percentLabel.autoPinEdge(.bottom, to: .bottom, of: percentBackView, withOffset: -6)
+            
+            contentView.addSubview(nameLabel)
+            nameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16.0)
+            nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
+            nameLabel.autoSetDimension(.height, toSize: 24.0)
+
+            contentView.addSubview(totalPriceLabel)
+            totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
+            totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
+            totalPriceLabel.autoSetDimension(.height, toSize: 24.0)
+            totalPriceLabel.autoPinEdge(.left, to: .right, of: nameLabel, withOffset: 12.0)
+            
+            contentView.addSubview(totalChangeRelativeLabel)
+            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
+            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
+            totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
+            
+            let dotView: UIView = UIView.newAutoLayout()
+            dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
+            dotView.layer.cornerRadius = 1.0
+            dotView.layer.masksToBounds = true
+            contentView.addSubview(dotView)
+            dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 59.0)
+            dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+            dotView.autoPinEdge(.right, to: .left, of: totalChangeRelativeLabel, withOffset: -4.0)
+            
+            contentView.addSubview(totalChangeAbsoluteValue)
+            totalChangeAbsoluteValue.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
+            totalChangeAbsoluteValue.autoSetDimension(.height, toSize: 14.0)
+            totalChangeAbsoluteValue.autoPinEdge(.right, to: .left, of: dotView, withOffset: -4.0)
+            
+
+            contentView.addSubview(arrowView)
+            arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
+            arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 56.0)
+            arrowView.autoPinEdge(.right, to: .left, of: totalChangeAbsoluteValue, withOffset: -4.0)
+           
+            let todayLabel = UILabel()
+            todayLabel.font = UIFont.compactRoundedMedium(14)
+            todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
+            todayLabel.numberOfLines = 1
+            todayLabel.textAlignment = .left
+            contentView.addSubview(todayLabel)
+            todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
+            todayLabel.autoPinEdge(.right, to: .left, of: arrowView, withOffset: -4.0)
+            todayLabel.autoSetDimension(.height, toSize: 14.0)
+            todayLabel.autoSetDimension(.width, toSize: 37.0)
+            todayLabel.isSkeletonable = true
+            todayLabel.isHiddenWhenSkeletonIsActive = true
+            todayLabel.text = "Today"
+            todayLabel.sizeToFit()
+        }
+        else {
+            contentView.addSubview(percentBackView)
+            percentBackView.addSubview(percentLabel)
+            percentBackView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+            percentBackView.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16)
+            percentLabel.autoPinEdge(.top, to: .top, of: percentBackView, withOffset: 6)
+            percentLabel.autoPinEdge(.left, to: .left, of: percentBackView, withOffset: 22)
+            percentLabel.autoPinEdge(.right, to: .right, of: percentBackView, withOffset: -6)
+            percentLabel.autoPinEdge(.bottom, to: .bottom, of: percentBackView, withOffset: -6)
+            
+            contentView.addSubview(nameLabel)
+            nameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16.0)
+            nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
+            nameLabel.autoSetDimension(.height, toSize: 24.0)
+        }
+        
+        
+        addIndicatorView()
+        
+        layer.isOpaque = true
+        backgroundColor = UIColor.Gainy.white
+    }
+    
     func configureWithChartData(data: GetTtfPieChartQuery.Data.CollectionPiechart, index: Int) {
+        
+        self.setupLayout(data: data, index: index)
         
         nameLabel.text = data.entityName
         nameLabel.sizeToFit()
@@ -108,7 +133,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         totalPriceLabel.sizeToFit()
         
         let colors = UIColor.Gainy.pieChartColors
-        let color = (index <= 6 ? colors[index] : colors[7]) ?? UIColor.white
+        let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
         percentBackView.backgroundColor = color
         
         percentLabel.text = ((data.weight ?? 0.0) * 100.0).percentRaw
@@ -131,12 +156,6 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         self.progressView?.segments = segments
         self.overlayView?.backgroundColor = color
         
-        if data.entityType != "ticker" {
-            for view in views {
-                view.isHidden = true
-            }
-        }
-        
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
@@ -148,9 +167,6 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         totalPriceLabel.text = ""
         totalChangeRelativeLabel.text = ""
         percentLabel.text = ""
-        for view in views {
-            view.isHidden = false
-        }
     }
     
     override func awakeFromNib() {
