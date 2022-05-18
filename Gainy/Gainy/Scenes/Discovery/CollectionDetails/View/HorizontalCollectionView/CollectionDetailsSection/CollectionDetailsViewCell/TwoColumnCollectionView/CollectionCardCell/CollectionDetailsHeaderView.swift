@@ -433,31 +433,31 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
         arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
         
-        let totalChangeAbsoluteLabel = UILabel()
-        totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
-        totalChangeAbsoluteLabel.numberOfLines = 1
-        totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
-        totalChangeAbsoluteLabel.textAlignment = .left
-        totalChangeAbsoluteLabel.isSkeletonable = true
-        totalChangeAbsoluteLabel.linesCornerRadius = 6
-        middleContentView.addSubview(totalChangeAbsoluteLabel)
-        totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-        totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
-        totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
-        totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
-        totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
-        ? UIColor.Gainy.mainGreen
-        : UIColor.Gainy.mainRed
-        totalChangeAbsoluteLabel.sizeToFit()
+//        let totalChangeAbsoluteLabel = UILabel()
+//        totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
+//        totalChangeAbsoluteLabel.numberOfLines = 1
+//        totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
+//        totalChangeAbsoluteLabel.textAlignment = .left
+//        totalChangeAbsoluteLabel.isSkeletonable = true
+//        totalChangeAbsoluteLabel.linesCornerRadius = 6
+//        middleContentView.addSubview(totalChangeAbsoluteLabel)
+//        totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+//        totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
+//        totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
+//        totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
+//        totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
+//        ? UIColor.Gainy.mainGreen
+//        : UIColor.Gainy.mainRed
+//        totalChangeAbsoluteLabel.sizeToFit()
         
-        let dotView: UIView = UIView.newAutoLayout()
-        dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-        dotView.layer.cornerRadius = 1.0
-        dotView.layer.masksToBounds = true
-        middleContentView.addSubview(dotView)
-        dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
-        dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
-        dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
+//        let dotView: UIView = UIView.newAutoLayout()
+//        dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
+//        dotView.layer.cornerRadius = 1.0
+//        dotView.layer.masksToBounds = true
+//        middleContentView.addSubview(dotView)
+//        dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
+//        dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+//        dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
         
         let totalChangeRelativeLabel = UILabel()
         totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
@@ -469,7 +469,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         middleContentView.addSubview(totalChangeRelativeLabel)
         totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
         totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
-        totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: dotView, withOffset: 4.0)
+        totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
         totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right)
         let valueString = abs((relativeSumChange * 100.0)).percentRaw
         totalChangeRelativeLabel.text = valueString

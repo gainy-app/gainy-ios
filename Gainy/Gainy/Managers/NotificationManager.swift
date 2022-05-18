@@ -88,9 +88,6 @@ class NotificationManager: NSObject {
     @UserDefault<Bool>("reviewWasShown_prod_1.0")
     private var reviewWasShown: Bool?
     
-    @UserDefault<Bool>("surveyWasShown_prod_1.0")
-    private var surveyWasShown: Bool?
-    
     public func increaseTTFsAdded() {
         
         if let shown = self.reviewWasShown, shown == true {
@@ -125,25 +122,6 @@ class NotificationManager: NSObject {
                          name: UIApplication.willEnterForegroundNotification,
                          object: nil)
         self.restartTimer()
-    }
-    
-    public func scheduleLocalSurveyNotification() {
-        
-        if let shown = self.surveyWasShown, shown == true {
-            return
-        }
-        
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "WIP"
-        notificationContent.subtitle = "Local Notifications"
-        notificationContent.body = "Survey text/link goes here..."
-        let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 20.0, repeats: false)
-        let notificationRequest = UNNotificationRequest(identifier: "survey_local_notification", content: notificationContent, trigger: notificationTrigger)
-        UNUserNotificationCenter.current().add(notificationRequest) { (error) in
-            if let error = error {
-                print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
-            }
-        }
     }
     
     @objc

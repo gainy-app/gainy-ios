@@ -31,7 +31,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationManager.registerNotifications { success in
             if success {
                 NotificationManager.shared.startObservingTimeSpent()
-                NotificationManager.shared.scheduleLocalSurveyNotification()
+//                NotificationManager.shared.scheduleSignUpReminderNotification()
             }
         }
         
