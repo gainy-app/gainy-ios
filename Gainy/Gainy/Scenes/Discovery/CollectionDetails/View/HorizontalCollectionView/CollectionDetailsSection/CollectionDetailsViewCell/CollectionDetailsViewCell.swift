@@ -721,6 +721,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             headerView.configureWithState(state: state)
             headerView.updateChargeLbl(settings.sortingText())
             headerView.updateMetrics(settings.marketDataToShow)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                headerView.setNeedsLayout()
+                headerView.layoutIfNeeded()
+            })
 
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {

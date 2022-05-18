@@ -13,6 +13,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
     
     var progressView: PieChartView? = nil
     var overlayView: UIView? = nil
+    var views: [UIView] = []
     
     override init(frame _: CGRect) {
         super.init(frame: .zero)
@@ -24,9 +25,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         percentBackView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         percentBackView.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16)
         percentLabel.autoPinEdge(.top, to: .top, of: percentBackView, withOffset: 6)
-        
         percentLabel.autoPinEdge(.left, to: .left, of: percentBackView, withOffset: 22)
-        
         percentLabel.autoPinEdge(.right, to: .right, of: percentBackView, withOffset: -6)
         percentLabel.autoPinEdge(.bottom, to: .bottom, of: percentBackView, withOffset: -6)
         
@@ -37,14 +36,14 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         nameLabel.autoSetDimension(.height, toSize: 24.0)
         
         contentView.addSubview(totalPriceLabel)
+        views.append(totalPriceLabel)
         totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
         totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
         totalPriceLabel.autoSetDimension(.height, toSize: 24.0)
         totalPriceLabel.autoPinEdge(.left, to: .right, of: nameLabel, withOffset: 12.0)
-
-        
         
         contentView.addSubview(totalChangeRelativeLabel)
+        views.append(totalChangeRelativeLabel)
         totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
         totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 16.0)
         totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
@@ -54,17 +53,20 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         dotView.layer.cornerRadius = 1.0
         dotView.layer.masksToBounds = true
         contentView.addSubview(dotView)
+        views.append(dotView)
         dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 59.0)
         dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
         dotView.autoPinEdge(.right, to: .left, of: totalChangeRelativeLabel, withOffset: -4.0)
         
         contentView.addSubview(totalChangeAbsoluteValue)
+        views.append(totalChangeAbsoluteValue)
         totalChangeAbsoluteValue.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
         totalChangeAbsoluteValue.autoSetDimension(.height, toSize: 14.0)
         totalChangeAbsoluteValue.autoPinEdge(.right, to: .left, of: dotView, withOffset: -4.0)
         
 
         contentView.addSubview(arrowView)
+        views.append(arrowView)
         arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
         arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 56.0)
         arrowView.autoPinEdge(.right, to: .left, of: totalChangeAbsoluteValue, withOffset: -4.0)
@@ -76,6 +78,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         todayLabel.numberOfLines = 1
         todayLabel.textAlignment = .left
         contentView.addSubview(todayLabel)
+        views.append(todayLabel)
         todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
         todayLabel.autoPinEdge(.right, to: .left, of: arrowView, withOffset: -4.0)
         todayLabel.autoSetDimension(.height, toSize: 14.0)
@@ -128,6 +131,12 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         self.progressView?.segments = segments
         self.overlayView?.backgroundColor = color
         
+        if data.entityType != "ticker" {
+            for view in views {
+                view.isHidden = true
+            }
+        }
+        
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
@@ -139,6 +148,9 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         totalPriceLabel.text = ""
         totalChangeRelativeLabel.text = ""
         percentLabel.text = ""
+        for view in views {
+            view.isHidden = false
+        }
     }
     
     override func awakeFromNib() {

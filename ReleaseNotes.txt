@@ -1,4 +1,4 @@
-iOS v1.3 #207 available
+iOS v1.3 #208 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -11,6 +11,7 @@ Bugfixes
 • TTF: Rec cell tags changed
 • Search header improved
 • Removed absolute value from the pie chart
+• Pie Chart UI fixes (removed not needed values)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
