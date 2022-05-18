@@ -5,7 +5,7 @@ Bugfixes
 :new: New:
 • Removed "Local pushes" for survey (will be OneSignal based)
 • App Review prompt (25 mins in app; connect portfolio; add 3 TTFs to favorite)
-• Handled "Daily movers"(Open Home Tab action) and "Most performing TTF" (Open TTF action)
+• Handled remote notifications: "Daily movers"(Open Home Tab action) and "Most performing TTF" (Open TTF action)
 
 :hammer_and_wrench: Improvements
 • TTF: Rec cell tags changed
