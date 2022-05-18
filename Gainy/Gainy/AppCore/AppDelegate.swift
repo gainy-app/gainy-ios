@@ -130,26 +130,32 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func initOneSignal(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         
-        // OneSignal initialization
+        let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
+            // This block gets called when the user reacts to a notification received - we actually don't need to handle any other options: user tapped on the notification - app reatced
+            let notification: OSNotification = result.notification
+            if let additionalData = notification.additionalData {
+                if let type = additionalData["t"] as? String {
+                    switch type {
+                    case "0":
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                        break
+                    case "1":
+                        if let id = additionalData["id"] as? String {
+                            NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                        }
+                        break
+                        
+                    default: break
+                    }
+                }
+            }
+        }
+        
+        OneSignal.setLogLevel(.LL_VERBOSE, visualLevel: .LL_NONE)
         OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId(Constants.OneSignal.appId)
-        
-        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
-          print("Received Notification: ", notification.notificationId ?? "no id")
-          print("launchURL: ", notification.launchURL ?? "no launch url")
-          print("content_available = \(notification.contentAvailable)")
-
-          if notification.notificationId == "example_silent_notif" {
-            // Complete with null means don't show a notification
-            completion(nil)
-          } else {
-            // Complete with a notification means it will show
-            completion(notification)
-          }
-        }
-        OneSignal.setNotificationWillShowInForegroundHandler(notificationWillShowInForegroundBlock)
+        OneSignal.setNotificationOpenedHandler(notificationOpenedBlock)
     }
     
     private func initBranchIO(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
