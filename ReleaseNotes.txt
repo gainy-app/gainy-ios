@@ -1,16 +1,12 @@
-iOS v1.3 #208 available
+iOS v1.3 #209 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Removed "Local pushes" for survey (will be OneSignal based)
-• App Review prompt (25 mins in app; connect portfolio; add 3 TTFs to favorite)
-• Handled remote notifications: "Daily movers"(Open Home Tab action) and "Most performing TTF" (Open TTF action)
+•
 
 :hammer_and_wrench: Improvements
-• TTF: Rec cell tags changed
-• Search header improved
-• Pie Chart UI fixes (removed not needed values)
+• 
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
