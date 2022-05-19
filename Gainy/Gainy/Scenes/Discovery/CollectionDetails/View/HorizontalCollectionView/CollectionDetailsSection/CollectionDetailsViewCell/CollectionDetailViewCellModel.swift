@@ -16,9 +16,7 @@ struct CollectionDetailViewCellModel {
     
     var chartRange: ScatterChartView.ChartPeriod = .d1
     var isDataLoaded: Bool = false
-    
-    //Charts
-    let topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
+        
     
     mutating func addCards(_ newCards: [CollectionCardViewCellModel]) {
         cards.append(contentsOf: newCards)
@@ -47,25 +45,7 @@ struct CollectionDetailViewCellModel {
         case .all:
             return "Total Gain"            
         }
-    }
-    
-    var statsDayValue: String {
-        switch chartRange {
-        case .d1:
-            return dailyGrow.percentUnsigned
-        default:
-            return topChart.chartData.startEndDiff.percentRawUnsigned
-        }
-    }
-    
-    var statsDayRaw: Float {
-        switch chartRange {
-        case .d1:
-            return dailyGrow
-        default:
-            return Float(topChart.chartData.startEndDiff)
-        }
-    }
+    }    
 }
 
 extension CollectionDetailViewCellModel: Hashable {

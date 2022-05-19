@@ -96,12 +96,30 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         self.isSkeletonable = false
     }
     
-    func configureWith(tickersCount: Int, viewModel: CollectionDetailViewCellModel) {
+    func configureWith(tickersCount: Int, viewModel: CollectionDetailViewCellModel, topChart: TTFChartViewModel) {
+        
+        var statsDayValue: String {
+            switch viewModel.chartRange {
+            case .d1:
+                return viewModel.dailyGrow.percentUnsigned
+            default:
+                return topChart.chartData.startEndDiff.percentRawUnsigned
+            }
+        }
+        
+        var statsDayRaw: Float {
+            switch viewModel.chartRange {
+            case .d1:
+                return viewModel.dailyGrow
+            default:
+                return Float(topChart.chartData.startEndDiff)
+            }
+        }
         
         tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")
         tickersCountLabel.sizeToFit()
         
-        if viewModel.statsDayRaw > 0.0 {
+        if statsDayRaw > 0.0 {
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
             percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
             percentArrowImgView.tintColor = UIColor.Gainy.mainGreen
@@ -113,18 +131,18 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             percentArrowImgView.tintColor = UIColor.Gainy.mainRed
             tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
         }
-        tickerPercentChangeLabel.text = viewModel.statsDayValue
+        tickerPercentChangeLabel.text = statsDayValue
         tickerPercentChangeLabel.sizeToFit()
         
         todaysGainLabel.text = viewModel.statsDayName
         
         //SP500
         
-        if viewModel.topChart.sypChartData.points.count > 0 {
+        if topChart.sypChartData.points.count > 0 {
             medianView.isHidden = false
-            medianPercentChangeLabel.text = viewModel.topChart.spGrow.percentRawUnsigned
+            medianPercentChangeLabel.text = topChart.spGrow.percentRawUnsigned
             
-            if viewModel.topChart.spGrow > 0.0 {
+            if topChart.spGrow > 0.0 {
                 medianPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
                 medianArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
                 medianArrowImgView.tintColor = UIColor.Gainy.mainGreen
@@ -138,6 +156,8 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
             medianView.isHidden = true
         }
     }
+    
+    
     
     func configureAsWatchlist(tickersCount: Int) {
         tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")

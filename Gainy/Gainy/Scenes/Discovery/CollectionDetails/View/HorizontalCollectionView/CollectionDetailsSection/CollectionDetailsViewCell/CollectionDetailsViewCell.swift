@@ -173,23 +173,23 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
         
-        viewModel.topChart.isLoading = false
+        topChart.isLoading = false
         
         let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
         
-        let topChart = ChartData(points: main, period: viewModel.chartRange)
+        let topChartData = ChartData(points: main, period: viewModel.chartRange)
         let medianData = ChartData(points: median, period: viewModel.chartRange)
         
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
-        viewModel.topChart.lastDayPrice = viewModel.lastDayPrice
-        viewModel.topChart.chartData = topChart
-        viewModel.topChart.sypChartData = medianData
-        viewModel.topChart.spGrow = Float(medianData.startEndDiff)
+        topChart.lastDayPrice = viewModel.lastDayPrice
+        topChart.chartData = topChartData
+        topChart.sypChartData = medianData
+        topChart.spGrow = Float(medianData.startEndDiff)
     }
     
     
@@ -324,8 +324,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     //MARK: - Chart
     private let chartHeight: CGFloat = 256
+    private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
-        var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
+        var rootView = TTFScatterChartView(viewModel: topChart,
                                            delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
@@ -345,8 +346,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         
         viewModel.chartRange = range
-        viewModel.topChart.isSPPVisible = false
-        viewModel.topChart.isLoading = true
+        topChart.isSPPVisible = false
+        topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
@@ -430,7 +431,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if viewModel.id == Constants.CollectionDetails.watchlistCollectionID {
                 cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
             } else {
-                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
+                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel, topChart: topChart)
             }
             cell.delegate = self
             cell.isSkeletonable = collectionView.isSkeletonable
@@ -1066,7 +1067,7 @@ extension CollectionDetailsViewCell: UIScrollViewDelegate {
 extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
     func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool) {
         guard let viewModel = viewModel else {return}
-        viewModel.topChart.isSPPVisible = showMedian
+        topChart.isSPPVisible = showMedian
         
         GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }
