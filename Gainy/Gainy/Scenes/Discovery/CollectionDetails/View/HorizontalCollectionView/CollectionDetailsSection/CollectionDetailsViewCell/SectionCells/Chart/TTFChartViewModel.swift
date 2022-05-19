@@ -24,11 +24,7 @@ final class TTFChartViewModel: ObservableObject {
     var isSPPVisible: Bool
     
     @Published
-    var isLoading: Bool {
-        didSet {
-            print("isLoading changed")
-        }
-    }
+    var isLoading: Bool
     
     @Published
     var lastDayPrice: Float = 0

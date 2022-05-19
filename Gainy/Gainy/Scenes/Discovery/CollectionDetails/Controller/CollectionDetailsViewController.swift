@@ -285,6 +285,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         collectionView.bounces = false
         collectionView.clipsToBounds = false
         collectionView.dataSource = dataSource
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
             collectionView: collectionView

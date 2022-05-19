@@ -52,8 +52,6 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         label.textColor = UIColor.init(hexString: "#09141F")
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
-        label.minimumScaleFactor = 0.1
-        label.adjustsFontSizeToFitWidth = true
         label.isSkeletonable = true
         label.skeletonCornerRadius = 6
         label.linesCornerRadius = 6
