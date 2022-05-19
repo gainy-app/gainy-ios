@@ -811,12 +811,31 @@ extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
-        if settings.pieChartSelected {return}
         
+        var cardToOpen: RemoteTickerDetails? = nil
+        if settings.pieChartSelected {
+            if settings.pieChartMode != .tickers {
+                return
+            }
+            
+            let chartData = self.currentChartData()
+            if indexPath.row >= chartData.count {return}
+            let data = chartData[indexPath.row]
+            
+            cardToOpen = cards.first { card in
+                guard let entityId = data.entityId else { return false }
+                return entityId == card.tickerSymbol
+            }?.rawTicker
+            
+        } else {
+            cardToOpen = cards[indexPath.row].rawTicker
+        }
+        
+        guard let card = cardToOpen else { return }
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
-                                                           "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
-                                                           "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        onCardPressed?(cards[indexPath.row].rawTicker)
+                                                           "tickerSymbol" : card.symbol,
+                                                           "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        onCardPressed?(card)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
