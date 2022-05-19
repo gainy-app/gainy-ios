@@ -151,7 +151,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         let weight = (data.weight ?? 0.0) * 100.0
         let segments: [PieChartSegment] = [
             PieChartSegment.init(color: UIColor.white, value: CGFloat(weight)),
-            PieChartSegment.init(color: UIColor.init(white: 1.0, alpha: 0.3), value: 100.0 - CGFloat(weight))
+            PieChartSegment.init(color: UIColor.init(white: 1.0, alpha: 0.15), value: 100.0 - CGFloat(weight))
         ]
         self.progressView?.segments = segments
         self.overlayView?.backgroundColor = color

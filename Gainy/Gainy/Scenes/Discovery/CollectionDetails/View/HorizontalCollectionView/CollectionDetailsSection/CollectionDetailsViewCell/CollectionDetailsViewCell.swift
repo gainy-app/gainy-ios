@@ -976,7 +976,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         if section == .cards {
-            return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+            return UIEdgeInsets.init(top: 8.0, left: 20.0, bottom: 0.0, right: 20.0)
         }
         
         return UIEdgeInsets.zero
