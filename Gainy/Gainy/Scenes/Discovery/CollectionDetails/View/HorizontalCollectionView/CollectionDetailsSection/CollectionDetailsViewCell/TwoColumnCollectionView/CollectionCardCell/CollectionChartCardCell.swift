@@ -126,7 +126,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         
         self.setupLayout(data: data, index: index)
         
-        nameLabel.text = data.entityName.companyMarkRemoved
+        nameLabel.text = data.entityName?.companyMarkRemoved
         nameLabel.sizeToFit()
         
         totalPriceLabel.text = (data.absoluteValue ?? 0.0).price
