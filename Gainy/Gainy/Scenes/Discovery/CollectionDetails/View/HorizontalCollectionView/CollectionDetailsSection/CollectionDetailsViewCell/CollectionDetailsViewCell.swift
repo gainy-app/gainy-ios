@@ -810,6 +810,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        if settings.pieChartSelected {return}
+        
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
                                                            "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
                                                            "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
