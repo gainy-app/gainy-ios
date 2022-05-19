@@ -850,7 +850,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
                 return CGSize.init(width: width, height: 60.0)
             }
-            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
+            let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
+            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 110.0 + headerHeight + 32.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width

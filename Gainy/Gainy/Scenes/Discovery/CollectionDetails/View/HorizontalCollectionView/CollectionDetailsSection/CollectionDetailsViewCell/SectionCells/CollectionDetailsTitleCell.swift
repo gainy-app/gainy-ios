@@ -17,8 +17,8 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         
         contentView.addSubview(companyNameLabel)
         companyNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24.0)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 72)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 32.0)
     }
     
     @available(*, unavailable)
@@ -50,8 +50,6 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         
         label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textColor = UIColor.init(hexString: "#09141F")
-        
-        label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
         label.minimumScaleFactor = 0.1
