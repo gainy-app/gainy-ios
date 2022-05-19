@@ -15,7 +15,7 @@ enum CollectionDetailsHeaderViewState: Int, Codable {
         switch state {
         case .grid: return 146
         case .list: return 173
-        case .chart: return 482
+        case .chart: return 422
         }
     }
 }
@@ -96,7 +96,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(chartModeButton)
         chartModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 30))
         chartModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
-        chartModeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
+        chartModeButton.autoAlignAxis(.horizontal, toSameAxisOf: ttfTickersLabel)
         chartModeButton.skeletonCornerRadius = 6
         chartModeButton.addTarget(self, action: #selector(chartModeButtonTapped), for: .touchUpInside)
 
@@ -106,7 +106,6 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(tableListModeButton)
         tableListModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         tableListModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
-        tableListModeButton.autoPinEdge(.top, to: .bottom, of: chartModeButton, withOffset: 24.0)
         tableListModeButton.skeletonCornerRadius = 6
         tableListModeButton.addTarget(self, action: #selector(tableListModeButtonTapped), for: .touchUpInside)
         
@@ -118,6 +117,8 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         sortByButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        
+        tableListModeButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)
         
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder")
@@ -155,7 +156,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
         
-        settingsButton.layer.cornerRadius = 12
+        settingsButton.layer.cornerRadius = 8.0
         settingsButton.layer.cornerCurve = .continuous
         settingsButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
@@ -360,20 +361,20 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         let pieChartView = PieChartView()
         pieChartView.translatesAutoresizingMaskIntoConstraints = false
         
-        pieChartView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 400)
+        var size = 240
+        pieChartView.frame = CGRect(x: 0, y: 0, width: size, height: size)
         pieChartView.segments = segments
         self.addSubview(pieChartView)
         pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0)
-        var size = self.frame.size.width - 40 * 2
         pieChartView.autoSetDimensions(to: CGSize.init(width: size, height: size))
-        pieChartView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
+        pieChartView.autoAlignAxis(toSuperviewAxis: .vertical)
         
         let overlayView = UIView.newAutoLayout()
         overlayView.backgroundColor = self.backgroundColor
         pieChartView.addSubview(overlayView)
-        size = self.frame.size.width - 50 * 2
+        size = size - 20
         overlayView.layer.masksToBounds = true
-        overlayView.layer.cornerRadius = size / 2
+        overlayView.layer.cornerRadius = CGFloat(size / 2)
         overlayView.autoCenterInSuperview()
         overlayView.autoSetDimensions(to: CGSize.init(width: size, height: size))
         self.chartView = pieChartView
