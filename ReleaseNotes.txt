@@ -1,4 +1,4 @@
-iOS v1.3 #211 available
+iOS v1.3 #212 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,8 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• TTF: header not blurred for small screens
-• Company name shortening improved
+• QA updates
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
