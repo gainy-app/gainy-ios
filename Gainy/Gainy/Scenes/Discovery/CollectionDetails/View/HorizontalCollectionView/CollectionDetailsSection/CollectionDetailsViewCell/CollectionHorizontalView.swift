@@ -225,7 +225,7 @@ final class CollectionHorizontalView: UIView {
         let button = ResponsiveButton()
         button.layer.cornerRadius = 12
         button.layer.cornerCurve = .continuous
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = UIColor.Gainy.grayNotDark
         
         let slidersIconImageView = UIImageView(
             frame: CGRect(x: 8, y: 4, width: 16, height: 16)
@@ -255,9 +255,9 @@ final class CollectionHorizontalView: UIView {
     lazy var settingsButton: ResponsiveButton = {
         let button = ResponsiveButton()
         settingsViews.removeAll()
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = UIColor.Gainy.grayNotDark
         
         let slidersIconImageView = UIImageView(
             frame: CGRect(x: 8, y: 4, width: 16, height: 16)
@@ -296,7 +296,7 @@ final class CollectionHorizontalView: UIView {
     lazy var sortByButton: ResponsiveButton = {
         let button = ResponsiveButton()
         
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor.Gainy.white
         

@@ -194,6 +194,9 @@ class TickerInfo {
                                  self?.medianIndustry = mainIndustry.industryId
                              }
                              self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
+                             self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
+                                 $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
+                             }).first?.uniqId ?? ""
                              if let self = self {
                                  self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
                                      self.isChartDataLoaded = true
@@ -507,4 +510,5 @@ class TickerInfo {
     
     //MARK: - Linked Collections
     var linkedCollections: [RemoteCollectionDetails] = []
+    private var prefferedLinkedCollectionID: String = ""
 }

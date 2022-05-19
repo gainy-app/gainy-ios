@@ -1,4 +1,4 @@
-iOS v1.3 #208 available
+iOS v1.3 #211 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Remote Pushes disabled after logout
+• Remote Pushes not goinf to logout users
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

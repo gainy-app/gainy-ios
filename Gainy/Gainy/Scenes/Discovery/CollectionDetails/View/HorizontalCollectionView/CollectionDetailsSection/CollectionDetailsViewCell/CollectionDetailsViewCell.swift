@@ -721,6 +721,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             headerView.configureWithState(state: state)
             headerView.updateChargeLbl(settings.sortingText())
             headerView.updateMetrics(settings.marketDataToShow)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                headerView.setNeedsLayout()
+                headerView.layoutIfNeeded()
+            })
 
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {
@@ -904,8 +908,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             var width = 0.0
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
+                let height = settings.pieChartMode == .tickers ? 88.0 : 56.0
                 width = collectionView.frame.width - 30
-                return CGSize.init(width: width, height: 88.0)
+                return CGSize.init(width: width, height: height)
             } else {
                 if settings.viewMode == .grid {
                     width = (UIScreen.main.bounds.width - 20.0 * 3.0) / 2.0

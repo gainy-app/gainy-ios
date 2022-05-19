@@ -30,6 +30,8 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     override func start() {
         showMainTabViewController()
         self.subscribeOnFailToRefreshToken()
+        self.subscribeOnOpenHome()
+        self.subscribeOnOpenTTF()
     }
     
     func subscribeOnFailToRefreshToken() {
@@ -38,9 +40,35 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         } receiveValue: { notification in
             if let finishFlow = self.finishFlow {
                 self.authorizationManager.signOut()
+                
                 finishFlow()
             }
         }.store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenHome() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenHomeNotification, object: nil)
+            .sink { [weak self] status in
+                if let vc = self?.mainTabBarViewController {
+                    if let tabBar = vc.tabBar as? CustomTabBar {
+                        tabBar.selectedIndex = CustomTabBar.Tab(rawValue: 0)!
+                        tabBar.updateTabs()
+                        vc.selectedIndex = 0
+                    }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenTTF() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenCollectionWithIdNotification, object: nil)
+            .sink { [weak self] status in
+                guard let collectionID = status.object as? Int else {
+                    return
+                }
+                self?.showCollectionDetails(collectionID: collectionID, delegate:  self, isFromSearch: true)
+            }
+            .store(in: &cancellables)
     }
     
     /// FIRUser status
@@ -58,12 +86,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private let coordinatorFactory: CoordinatorFactoryProtocol
     private(set) var viewControllerFactory: ViewControllerFactory
     private(set) var onboardingInfoBuilder: OnboardingInfoBuilder
+    private(set) var mainTabBarViewController: MainTabBarViewController?
 
     // MARK: Functions
     
     private func showMainTabViewController() {
         let vc = viewControllerFactory.instantiateMainTab(coordinator: self)
         vc.coordinator = self
+        self.mainTabBarViewController = vc
         router.setRootModule(vc, hideBar: true)
     }
 
@@ -183,4 +213,30 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     }
 }
 
-
+extension MainCoordinator: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.mutateFavouriteCollections(isAdded: isAdded, collectionID: collectionID)
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+    }
+    
+    private func mutateFavouriteCollections(isAdded: Bool, collectionID: Int) {
+        
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
+                }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
+                }
+            }
+        } else {
+            if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+                }
+            }
+        }
+    }
+}
