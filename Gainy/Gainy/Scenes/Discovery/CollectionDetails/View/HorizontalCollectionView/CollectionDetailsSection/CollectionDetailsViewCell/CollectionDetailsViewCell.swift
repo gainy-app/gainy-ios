@@ -2,6 +2,7 @@ import UIKit
 import SkeletonView
 import Combine
 import PureLayout
+import Deviice
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
@@ -294,6 +295,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if let cards = models.first?.cards {
                     self?.finishRefreshWithSorting(cards: cards) {
                         //                        self?.refreshingTickers = false
+                        self?.refreshControl.endRefreshing()
                         completion?()
                     }
                 }
@@ -307,7 +309,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     let tickers = remoteTickers.compactMap { item in
                         item.rawTicker
                     }
-                    let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
+                    let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})                    
+                    self.refreshControl.endRefreshing()
                     self.finishRefreshWithSorting(cards: cards) {
                         //                        self.refreshingTickers = false
                         completion?()
@@ -472,7 +475,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
-            print("TF: \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
             
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
@@ -874,7 +876,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return CGSize.init(width: width, height: 60.0)
             }
             let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
-            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 110.0 + headerHeight + 32.0)
+            return CGSize.init(width: width, height: (UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + headerHeight)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
@@ -917,8 +919,6 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 }
                 xPos += width + margin
             }
-            
-            print("TF: height \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             
             if viewModel.combinedTags.isEmpty {
                 return CGSize.init(width: width, height: 144.0 + 16)
