@@ -139,6 +139,7 @@ final class AuthorizationManager {
             CollectionsManager.shared.collections = []
             CollectionsManager.shared.watchlistCollection = nil
             NotificationCenter.default.post(name: NSNotification.Name.didReceiveFirebaseAuthToken, object: nil)
+            OneSignal.disablePush(true)
             
             if configuration.environment == .production {
                 Branch.getInstance().logout()

@@ -101,6 +101,7 @@ final class UserProfileManager {
             return
         }
         OneSignal.setExternalUserId("\(profileID)")
+        OneSignal.disablePush(false)
         SubscriptionManager.shared.storage.getViewedCollections()
         if configuration.environment == .production {
             Branch.getInstance().setIdentity("\(profileID)")

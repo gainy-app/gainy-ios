@@ -1,14 +1,12 @@
-iOS v1.3 #207 available
+iOS v1.3 #208 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• Local pushes for survey
-• App Review prompt
+• -
 
 :hammer_and_wrench: Improvements
-• TTF: Rec cell tags changed
-• Search header improved
+• Remote Pushes disabled after logout
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
