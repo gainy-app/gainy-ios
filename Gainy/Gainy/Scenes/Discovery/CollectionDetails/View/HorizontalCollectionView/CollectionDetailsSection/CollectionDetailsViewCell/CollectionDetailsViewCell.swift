@@ -68,7 +68,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
         
-        addUnlockButton()
+        //addUnlockButton()
     }
     
     private var unlockButton: UIButton?
@@ -528,11 +528,14 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 if type == .free {
                     if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
                         cell.removeBlur()
+                        cell.removeBlockView()
                     } else {
                         cell.addBlur()
+                        cell.addBlockView()
                     }
                 } else {
                     cell.removeBlur()
+                    cell.removeBlockView()
                 }
             })
             return cell

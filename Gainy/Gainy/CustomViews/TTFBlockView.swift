@@ -19,8 +19,14 @@ final class TTFBlockView: UIView {
         didSet {
             if state == .haveMore {
                 amountView.backgroundColor = UIColor(hexString: "#0062FF")
+                unlockBtn.setTitle("Show details".uppercased(), for: .normal)
+                header.text = "Wanna check details?"
+                tipLbl.text = "With a free plan, you can only view 3 TTFs per month."
             } else {
                 amountView.backgroundColor = UIColor(hexString: "#F9557B")
+                unlockBtn.setTitle("Unlock details".uppercased(), for: .normal)
+                header.text = "Oops, you used it all."
+                tipLbl.text = "You have watched 3 free TTFs this month. Switch to Gainy Premium to see Match Score and composition for all TTFs."
             }
         }
     }
@@ -45,7 +51,7 @@ final class TTFBlockView: UIView {
     lazy var amountLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = UIColor.Gainy.mainText
+        label.textColor = .white
         label.text = "3 / 3 TTFs opened"
         label.font = .compactRoundedSemibold(14)
         return label
@@ -55,7 +61,7 @@ final class TTFBlockView: UIView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = UIColor.Gainy.mainText
-        label.text = "3 / 3 TTFs opened"
+        label.text = "With a free plan, you can only view 3 TTFs per month."
         label.font = .compactRoundedMedium(14)
         return label
     }()
@@ -68,7 +74,10 @@ final class TTFBlockView: UIView {
     
         let backGradientView = GradientBackgroundView()
         backGradientView.startColor = UIColor(hexString: "1B44F7")
+        backGradientView.middleColor = .clear
         backGradientView.endColor = UIColor(hexString: "5ACEFF")
+        backGradientView.startPoint = .init(x: 0, y: 0.5)
+        backGradientView.endPoint = .init(x: 1, y: 0.5)
         btn.addSubview(backGradientView)
         backGradientView.autoPinEdgesToSuperviewEdges()
         
@@ -76,6 +85,7 @@ final class TTFBlockView: UIView {
         btn.layer.shadowOffset = CGSize(width: 0, height: 4)
         btn.layer.shadowRadius = 24
         btn.layer.shadowOpacity = 0.64
+        btn.layer.cornerRadius = 20.0
         return btn
     }()
     
@@ -107,20 +117,28 @@ final class TTFBlockView: UIView {
         amountLbl.autoSetDimension(.height, toSize: 16)
         
         addSubview(tipLbl)
-        tipLbl.autoPinEdge(.top, to: .top, of: amountView, withOffset: 16)
+        tipLbl.autoPinEdge(.top, to: .bottom, of: amountView, withOffset: 16)
         tipLbl.autoAlignAxis(toSuperviewAxis: .vertical)
         tipLbl.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
         tipLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         
         addSubview(unlockBtn)
-        amountView.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 16)
-        amountView.autoAlignAxis(toSuperviewAxis: .vertical)
-        tipLbl.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
-        tipLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
-        amountView.autoSetDimension(.height, toSize: 64)
+        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 16)
+        unlockBtn.autoAlignAxis(toSuperviewAxis: .vertical)
+        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
+        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
+        unlockBtn.autoSetDimension(.height, toSize: 64)
+        unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -16)
         
-        SubscriptionManager.shared.storage.collectionsViewedPublisher.sink { count in
-            print("count")
+        SubscriptionManager.shared.storage.collectionsViewedPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] count in
+            if count == SubscriptionManager.shared.storage.collectionViewLimit {
+                self?.state = .noMore
+            } else {
+                self?.state = .haveMore
+            }
+                self?.amountLbl.text = "\(count) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
         }.store(in: &cancellable)
     }
 }

@@ -30,6 +30,27 @@ extension UIView {
             blurView.removeFromSuperview()
         }
     }
+    
+    func addBlockView() {
+        guard subviews.first(where: {
+            $0.tag == -12
+        }) == nil else {return}
+        let blockView = TTFBlockView()
+        blockView.tag = -12
+        addSubview(blockView)
+        
+        blockView.autoPinEdge(toSuperviewEdge: .leading)
+        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 60.0)
+        blockView.autoPinEdge(toSuperviewEdge: .trailing)
+    }
+    
+    func removeBlockView() {
+        if let blockView = subviews.first(where: {
+            $0.tag == -12
+        }){
+            blockView.removeFromSuperview()
+        }
+    }
 }
 
 
