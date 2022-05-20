@@ -1,4 +1,4 @@
-iOS v1.3 #213 available
+iOS v1.3 #214 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Headers by Alina
+• Tasks by Alina v2
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

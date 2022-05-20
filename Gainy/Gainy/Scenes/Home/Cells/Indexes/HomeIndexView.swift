@@ -80,12 +80,12 @@ final class HomeIndexView: CornerView {
         // Improve scrolling performance with an explicit shadowPath
         layer.shadowPath = UIBezierPath(
             roundedRect: bounds,
-            cornerRadius: 8.0
+            cornerRadius: 16.0
         ).cgPath
         
         dashLayer?.path = UIBezierPath(
             roundedRect: bounds,
-            cornerRadius: 8.0
+            cornerRadius: 16.0
         ).cgPath
     }
 }

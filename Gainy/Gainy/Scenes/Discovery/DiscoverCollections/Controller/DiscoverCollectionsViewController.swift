@@ -494,8 +494,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     // MARK: Properties
     
-    private lazy var sections: [SectionLayout] = [
-        CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+    private lazy var sections: [SectionLayout] = [NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
         RecommendedCollectionsSectionLayout(),
     ]
@@ -785,8 +784,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func initViewModels() {
         
         guard let dataSource = dataSource else {return}
-        sections = [
-            CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+        sections = [NoCollectionsSectionLayout(),
             YourCollectionsSectionLayout(),
             RecommendedCollectionsSectionLayout()
         ]
@@ -802,7 +800,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snap.deleteSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
         }
         snap.appendSections(sections.count > 3 ? [.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections] : [.watchlist, .yourCollections, .recommendedCollections])
-        snap.appendItems(viewModel?.watchlistCollections ?? [], toSection: .watchlist)
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         
         if let top1 = viewModel?.topGainers, !top1.isEmpty {
@@ -889,13 +886,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             .map { CollectionViewModelMapper.map($0) }
         
         
-        if let watchlist = CollectionsManager.shared.watchlistCollection {
-            let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
-            viewModel?.watchlistCollections.removeAll()
-            viewModel?.watchlistCollections.insert(watchDTO, at: 0)
-        } else {
-            viewModel?.watchlistCollections.removeAll()
-        }
+        viewModel?.watchlistCollections.removeAll()
         //Gainers
         if let topTickers = CollectionsManager.shared.topTickers {
             let topTickers1: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topGainers, isGainers: true)
