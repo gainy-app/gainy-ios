@@ -39,8 +39,7 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
     }
     
     func configureWith(companyName: String) {
-        companyNameLabel.minimumScaleFactor = 0.1
-        companyNameLabel.adjustsFontSizeToFitWidth = true
+        companyNameLabel.minimumScaleFactor = 1.0
         companyNameLabel.text = companyName
         companyNameLabel.sizeToFit()
     }
@@ -52,6 +51,7 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         label.textColor = UIColor.init(hexString: "#09141F")
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
+        label.numberOfLines = 0
         label.isSkeletonable = true
         label.skeletonCornerRadius = 6
         label.linesCornerRadius = 6
