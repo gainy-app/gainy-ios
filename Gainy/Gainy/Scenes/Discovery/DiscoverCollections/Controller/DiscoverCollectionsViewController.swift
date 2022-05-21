@@ -1043,7 +1043,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
                 width: UIScreen.main.bounds.width - (16 + 16),
                 height: 92
             ),
-            cornerRadius: 8
+            cornerRadius: 18
         )
         previewParams.visiblePath = path
         

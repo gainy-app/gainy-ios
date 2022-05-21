@@ -95,7 +95,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
             wrongIndBtn.isHidden = true
         }
-        wrongIndBtn.isHidden = tickerInfo?.linkedCollections.isEmpty ?? true
+        wrongIndBtn.isHidden = tickerInfo?.matchTags.isEmpty ?? true
         wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
         if wrongIndBtn.isSelected {
             highlightIndustries()

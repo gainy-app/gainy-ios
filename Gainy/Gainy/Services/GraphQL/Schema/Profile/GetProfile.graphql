@@ -13,7 +13,7 @@
     profile_categories {
       category_id
     }
-    profile_favorite_collections {
+    profile_favorite_collections(where: {collection: {enabled: {_eq: "1"}}}) {
       collection_id
     }
     profile_watchlist_tickers {

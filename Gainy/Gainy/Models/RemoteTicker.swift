@@ -362,7 +362,7 @@ class TickerInfo {
         }
         
         innerGroup.enter()
-        loadMedianForRange(period, collectionUniqId: linkedCollections.first?.uniqId ?? "") {[weak self] dailyStats in
+        loadMedianForRange(period, collectionUniqId: prefferedLinkedCollectionID ) {[weak self] dailyStats in
             
             if dailyStats.count > 1 {
                 let firstDay = dailyStats.first?.adjustedClose ?? 0.0

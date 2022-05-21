@@ -25,7 +25,7 @@ extension UserProfileManager {
                         return
                     }
                     continuation.resume(returning:collections)
-                    
+                    dprint("GetFavoriteCollectionsQuery \(collections)", profileId: 30)
                 case .failure(let error):
                     dprint("Failure when making GraphQL request. Error: \(error)")
                     continuation.resume(returning: [RemoteShortCollectionDetails]())

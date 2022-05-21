@@ -27,7 +27,11 @@ final class UserProfileManager {
     
     weak var authorizationManager: AuthorizationManager?
     @UserDefaultArray(key: "favoriteCollections")
-    var favoriteCollections: [Int]
+    var favoriteCollections: [Int] {
+        didSet {
+            print("favoriteCollections \(favoriteCollections.first ?? -1)")
+        }
+    }
     
     @UserDefault<BrokerData>("selectedBrokerToTrade")
     public var selectedBrokerToTrade: BrokerData?
@@ -231,6 +235,11 @@ final class UserProfileManager {
             async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
             let (favsRes, recommenededRes, recommendedIDsRes, topTickersRes) = await (favs, recommeneded, recommendedIDs, topTickers)
             
+            dprint("favsRes \(favsRes)", profileId: 30)
+            dprint("recommenededRes \(recommenededRes)", profileId: 30)
+            dprint("recommendedIDsRes \(recommendedIDsRes)", profileId: 30)
+            dprint("topTickersRes \(topTickersRes)", profileId: 30)
+            
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
                 runOnMain {
@@ -259,6 +268,7 @@ final class UserProfileManager {
             self.yourCollections = favsRes.map {
                 CollectionDTOMapper.map($0)
             }.reorder(by: self.favoriteCollections)
+            dprint("completion loading", profileId: 30)
             completion(true)
         }
         

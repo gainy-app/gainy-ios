@@ -926,6 +926,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             array.insert(watchlist, at: 0)
         }
         viewModel?.collectionDetails = CollectionsManager.shared.convertToModel(array)
+        dprint("initViewModelsFromData ended \(viewModel?.collectionDetails.count ?? 0)", profileId: 30)
     }
     
     private func initViewModels() {
@@ -1021,14 +1022,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             let asyncGroup = DispatchGroup()
             asyncGroup.enter()
             UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
+                dprint("getProfileCollections ended", profileId: 30)
                 asyncGroup.leave()
             }
             asyncGroup.enter()
             CollectionsManager.shared.reloadTop20 {
+                dprint("reloadTop20 ended", profileId: 30)
                 asyncGroup.leave()
             }
             asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
+                dprint("reloadCollectionIfNeeded started", profileId: 30)
                 self?.reloadCollectionIfNeeded()
             }
         } else {
@@ -1049,7 +1053,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self.onDiscoverCollections?(false)
             return
         }
-        
+        dprint("getRemoteData started", profileId: 30)
         getRemoteData(loadProfile: true) {
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()

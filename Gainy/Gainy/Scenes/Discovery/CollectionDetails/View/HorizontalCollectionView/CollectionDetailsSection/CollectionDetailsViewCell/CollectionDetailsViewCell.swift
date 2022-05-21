@@ -187,6 +187,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
+        topChart.dayGrow = viewModel.dailyGrow
         topChart.lastDayPrice = viewModel.lastDayPrice
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
@@ -327,7 +328,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     //MARK: - Chart
     private let chartHeight: CGFloat = 256
-    private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
+    private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, dayGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: topChart,
                                            delegate: chartDelegate)

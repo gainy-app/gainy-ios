@@ -26,7 +26,7 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           category_id
         }
-        profile_favorite_collections {
+        profile_favorite_collections(where: {collection: {enabled: {_eq: "1"}}}) {
           __typename
           collection_id
         }
@@ -140,7 +140,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("user_id", type: .nonNull(.scalar(String.self))),
           GraphQLField("profile_interests", type: .nonNull(.list(.nonNull(.object(ProfileInterest.selections))))),
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
-          GraphQLField("profile_favorite_collections", type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
+          GraphQLField("profile_favorite_collections", arguments: ["where": ["collection": ["enabled": ["_eq": "1"]]]], type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
           GraphQLField("profile_watchlist_tickers", type: .nonNull(.list(.nonNull(.object(ProfileWatchlistTicker.selections))))),
           GraphQLField("profile_plaid_access_tokens", type: .nonNull(.list(.nonNull(.object(ProfilePlaidAccessToken.selections))))),
         ]

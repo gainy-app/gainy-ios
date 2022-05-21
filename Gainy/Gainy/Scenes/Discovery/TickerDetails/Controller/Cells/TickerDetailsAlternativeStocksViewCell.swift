@@ -16,7 +16,7 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 144.0 + 18.0 + 20 + 42
+    static let cellHeight: CGFloat = 144.0 + 18.0 + 20 + 42 + 6.0
     
     private let cellWidth: CGFloat = 144.0
     

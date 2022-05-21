@@ -95,20 +95,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         matchScoreLbl.textColor = .white
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
-            let matchVal = Int(matchScore) ?? 0
-            switch matchVal {
-            case 0..<35:
-                matchCircleView.backgroundColor = UIColor.Gainy.mainRed
-                break
-            case 35..<65:
-                matchCircleView.backgroundColor = UIColor.Gainy.mainYellow
-                break
-            case 65...:
-                matchCircleView.backgroundColor = UIColor.Gainy.mainGreen
-                break
-            default:
-                break
-            }
+            let matchVal = Int(matchScore)
+            matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(matchVal)
             matchScoreLbl.text = "\(matchScore)"
         } else {
             matchScoreLbl.text = "-"
