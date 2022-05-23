@@ -1,4 +1,4 @@
-iOS v1.3.1 #215 available
+iOS v1.3.2 #216 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,10 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Portfolio: MS color asjusted
-• TTF: chart D1 color == gains
-• Global shadows fix
-• Stock View: Median diff correction
+• Home: WL is working again
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -222,7 +222,11 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func tickerSelected(ticker: RemoteTicker) {
-        mainCoordinator?._showCardDetailsViewController(TickerInfo.init(ticker: ticker))
+        let list = viewModel.watchlist.compactMap({TickerInfo.init(ticker: $0)})
+        let currentTickerIndex = list.firstIndex(where: {
+            $0.symbol == ticker.symbol
+        }) ?? 0
+        mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
     }
     
     func tickerSortCollectionsPressed() {
