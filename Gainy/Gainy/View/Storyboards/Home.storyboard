@@ -1327,9 +1327,8 @@
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WOT-o5-8jQ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-f8-Ft5">
+                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YV7-f8-Ft5">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </view>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v48-C6-Rdr">
@@ -1468,15 +1467,19 @@
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <constraints>
+                                                                            <constraint firstItem="YV7-f8-Ft5" firstAttribute="top" secondItem="WOT-o5-8jQ" secondAttribute="top" id="BqT-03-0Oa"/>
                                                                             <constraint firstItem="w7V-CC-4Ya" firstAttribute="top" secondItem="WOT-o5-8jQ" secondAttribute="top" constant="16" id="IRI-2Y-jbN"/>
                                                                             <constraint firstItem="v48-C6-Rdr" firstAttribute="leading" secondItem="WOT-o5-8jQ" secondAttribute="leading" constant="16" id="K4O-oN-SVQ"/>
                                                                             <constraint firstAttribute="trailing" secondItem="w7V-CC-4Ya" secondAttribute="trailing" constant="16" id="Pkr-h5-10g"/>
                                                                             <constraint firstAttribute="trailing" secondItem="Xoz-0d-Tx4" secondAttribute="trailing" constant="16" id="Pr9-Pm-tdf"/>
+                                                                            <constraint firstItem="YV7-f8-Ft5" firstAttribute="leading" secondItem="WOT-o5-8jQ" secondAttribute="leading" id="W7A-IZ-chs"/>
                                                                             <constraint firstItem="v48-C6-Rdr" firstAttribute="centerY" secondItem="sM4-rm-9S4" secondAttribute="centerY" id="WKJ-2K-knu"/>
                                                                             <constraint firstItem="3wy-iW-7vt" firstAttribute="top" secondItem="WOT-o5-8jQ" secondAttribute="top" constant="16" id="b28-Cg-Qzr"/>
                                                                             <constraint firstItem="3wy-iW-7vt" firstAttribute="leading" secondItem="WOT-o5-8jQ" secondAttribute="leading" constant="48" id="dkZ-kQ-FcJ"/>
                                                                             <constraint firstAttribute="bottom" secondItem="Xoz-0d-Tx4" secondAttribute="bottom" constant="16" id="ffo-Dd-yCp"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="YV7-f8-Ft5" secondAttribute="bottom" id="hy3-KL-vmB"/>
                                                                             <constraint firstItem="cSU-bA-M4a" firstAttribute="leading" secondItem="WOT-o5-8jQ" secondAttribute="leading" constant="16" id="iSO-cl-nY1"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="YV7-f8-Ft5" secondAttribute="trailing" id="mY4-kD-cpg"/>
                                                                             <constraint firstItem="v48-C6-Rdr" firstAttribute="centerX" secondItem="sM4-rm-9S4" secondAttribute="centerX" id="nDJ-4U-kPh"/>
                                                                             <constraint firstItem="w7V-CC-4Ya" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3wy-iW-7vt" secondAttribute="trailing" constant="15" id="qFi-ED-nq6"/>
                                                                             <constraint firstItem="v48-C6-Rdr" firstAttribute="top" secondItem="WOT-o5-8jQ" secondAttribute="top" constant="16" id="tE4-Xj-mLz"/>
@@ -1598,17 +1601,17 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeArticlesTableViewCell" id="Y9f-m6-8SG" customClass="HomeArticlesTableViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1005.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="1005.5" width="414" height="384"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y9f-m6-8SG" id="df7-6l-E7Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="384"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u5H-6W-qk0" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="8" width="382" height="28"/>
+                                                    <rect key="frame" x="16" y="8" width="382" height="368"/>
                                                     <subviews>
                                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3OM-3a-t1k" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="216"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DEMO_ARTICLE" translatesAutoresizingMaskIntoConstraints="NO" id="Yc7-ek-Ku8">
                                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="200"/>
@@ -1655,7 +1658,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make Love - Not War: unity divides - division will unite" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="hBI-Mb-YJF">
-                                                            <rect key="frame" x="16" y="0.0" width="350" height="4"/>
+                                                            <rect key="frame" x="16" y="216" width="350" height="48"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="48" id="Ddf-i9-Lic"/>
                                                             </constraints>
@@ -1664,7 +1667,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FcR-ea-XDA">
-                                                            <rect key="frame" x="16" y="12" width="350" height="0.0"/>
+                                                            <rect key="frame" x="16" y="272" width="350" height="67"/>
                                                             <string key="text">Googled 10 mins for this pic. Quotes by 30STM. Today we are going to analyze your portfolio of 2-3 stocks that I asked you to pick. If you haven’t had a chance to do it yet, go to Gainy.app and pick any two stocks.</string>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="14"/>
                                                             <color key="textColor" name="mainText"/>
