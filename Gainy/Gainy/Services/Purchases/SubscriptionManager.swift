@@ -85,6 +85,8 @@ class SubscriptionManager: SubscriptionManagerProtocol {
 
 
 extension SubscriptionManager: SubscriptionServiceProtocol {
+    
+    
     func setup() {
         service.setup()
     }
@@ -101,12 +103,14 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.setName(name: name)
     }
     
-    func getSubscription(_ completion: (SuscriptionType) -> Void) {
-        service.getSubscription { type in
-            NotificationManager.broadcastSubscriptionChangeNotification(type: type)
+    func getSubscription(_ completion: @escaping (SuscriptionType) -> Void) {
+        service.getSubscription { type in            
             completion(type)
         }
-        
+    }
+    
+    func expirationDate(_ completion: @escaping (Date?) -> Void) {
+        service.expirationDate(completion)
     }
     
     func getProducts() {

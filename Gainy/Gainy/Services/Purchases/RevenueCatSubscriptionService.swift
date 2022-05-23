@@ -7,8 +7,9 @@
 
 import Foundation
 import RevenueCat
+import SwiftDate
 
-struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
+class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     private var config = Configuration()
     
     func setup() {
@@ -21,8 +22,32 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func login(profileId: Int) {
-        Purchases.shared.logIn("\(profileId)") {(customerInfo, created, error) in
+        Purchases.shared.logIn("\(profileId)") {[weak self] (customerInfo, created, error) in
             dprint("RevenueCat login \(customerInfo)")
+            self?.handleInfo(customerInfo, error: error)
+        }
+    }
+    
+    private let ettl = "pro"
+    func handleInfo(_ customerInfo:CustomerInfo?, error: Error?) {
+        if let error = error {
+            dprint("RevenueCat error: \(error)")
+            innerType = .pro
+        } else {
+            if customerInfo?.entitlements[ettl]?.isActive == true {
+                #if DEBUG
+                innerType = .free
+                #else                
+                innerType = .pro
+                #endif
+                innerDate = customerInfo?.entitlements[ettl]?.expirationDate
+                NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
+                
+            } else {
+                innerType = .free
+                NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+            }
+            dprint("RevenueCat sub: \(innerType ?? .free)")
         }
     }
     
@@ -35,8 +60,29 @@ struct RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         Purchases.shared.setDisplayName(name)
     }
     
-    func getSubscription(_ completion: (SuscriptionType) -> Void) {
-        completion(.free)
+    
+    private var innerType: SuscriptionType?
+    func getSubscription(_ completion: @escaping (SuscriptionType) -> Void) {
+        if let innerType = innerType {
+            completion(innerType)
+        } else {
+            Purchases.shared.getCustomerInfo {[weak self] (customerInfo, error) in
+                self?.handleInfo(customerInfo, error: error)
+                completion(self?.innerType ?? .free)
+            }
+        }
+    }
+    
+    private var innerDate: Date?
+    func expirationDate(_ completion: @escaping (Date?) -> Void) {
+        if let innerDate = innerDate {
+            completion(innerDate)
+        } else {
+            Purchases.shared.getCustomerInfo {[weak self] (customerInfo, error) in
+                self?.handleInfo(customerInfo, error: error)
+                completion(self?.innerDate)
+            }
+        }
     }
     
     func getProducts() {

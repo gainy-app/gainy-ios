@@ -116,6 +116,7 @@
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
 		33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */; };
 		33787FD726CD475700B11E58 /* CustomHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD626CD475700B11E58 /* CustomHostingController.swift */; };
+		337C4FCC283B7D8300BB3982 /* GradientPlainBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337C4FCB283B7D8300BB3982 /* GradientPlainBackgroundView.swift */; };
 		337D612A26D514AE0048AE62 /* VHLines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337D612926D514AE0048AE62 /* VHLines.swift */; };
 		337F242726D2CCE70087EB58 /* NWPathMonitor+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */; };
 		338142AD2754F1D3006867AE /* PortfolioSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */; };
@@ -710,6 +711,7 @@
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
 		33787FD226CD3BDE00B11E58 /* CollectionsBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsBottomView.swift; sourceTree = "<group>"; };
 		33787FD626CD475700B11E58 /* CustomHostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHostingController.swift; sourceTree = "<group>"; };
+		337C4FCB283B7D8300BB3982 /* GradientPlainBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPlainBackgroundView.swift; sourceTree = "<group>"; };
 		337D612926D514AE0048AE62 /* VHLines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHLines.swift; sourceTree = "<group>"; };
 		337F242626D2CCE70087EB58 /* NWPathMonitor+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NWPathMonitor+Combine.swift"; sourceTree = "<group>"; };
 		338142AC2754F1D3006867AE /* PortfolioSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioSettingsManager.swift; sourceTree = "<group>"; };
@@ -1451,6 +1453,7 @@
 				331C0ED826EA3E1D00C08C98 /* ResponsiveButton.swift */,
 				33E7AA6626CFD4E000DF1CBE /* CornerView.swift */,
 				855B14E026D98E34006CD1F8 /* GradientBackgroundView.swift */,
+				337C4FCB283B7D8300BB3982 /* GradientPlainBackgroundView.swift */,
 				85D4F80526E5FFFB004EC21D /* GainySliderView.swift */,
 				85BE554B26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift */,
 				33CD8DB62744E1910032C1F2 /* RectangularDashedView.swift */,
@@ -3137,6 +3140,7 @@
 				857D56B726DD4D02003F96AE /* AppInterests.graphql.swift in Sources */,
 				85E4A28C275687A100C0E5C5 /* PortfolioInfoDataViewController.swift in Sources */,
 				85F8B8B626DD335B000C73D3 /* IntroductionViewController.swift in Sources */,
+				337C4FCC283B7D8300BB3982 /* GradientPlainBackgroundView.swift in Sources */,
 				3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */,
 				33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */,
 				335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */,

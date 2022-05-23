@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SuscriptionType {
+enum SuscriptionType: Codable {
     case free, pro
 }
 
@@ -18,7 +18,8 @@ protocol SubscriptionServiceProtocol {
     
     func setEmail(email: String)
     func setName(name: String)
-    func getSubscription(_ completion: (SuscriptionType) -> Void)
+    func getSubscription(_ completion: @escaping (SuscriptionType) -> Void)
+    func expirationDate(_ completion: @escaping (Date?) -> Void)
     func getProducts()
     func purchaseProduct(productId: String)
 }

@@ -13,14 +13,14 @@ extension UIView {
         guard subviews.first(where: {
             $0.tag == -11
         }) == nil else {return}
-        let blurView = BlurEffectView(intensity: 0.3)
+        let blurView = BlurEffectView(intensity: 0.2)
         blurView.tag = -11
         addSubview(blurView)
         
-        blurView.autoPinEdge(toSuperviewEdge: .leading)
-        blurView.autoPinEdge(toSuperviewEdge: .top)
-        blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        blurView.autoPinEdge(toSuperviewEdge: .bottom)
+        blurView.autoPinEdge(toSuperviewEdge: .leading, withInset: -10)
+        blurView.autoPinEdge(toSuperviewEdge: .top, withInset: -10)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing, withInset: -10)
+        blurView.autoPinEdge(toSuperviewEdge: .bottom, withInset:-10)
     }
     
     func removeBlur() {
@@ -40,7 +40,7 @@ extension UIView {
         addSubview(blockView)
         
         blockView.autoPinEdge(toSuperviewEdge: .leading)
-        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 60.0)
+        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
         blockView.autoPinEdge(toSuperviewEdge: .trailing)
     }
     

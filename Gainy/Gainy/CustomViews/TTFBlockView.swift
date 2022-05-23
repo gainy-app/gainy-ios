@@ -72,20 +72,21 @@ final class TTFBlockView: UIView {
         btn.setTitle("Show details".uppercased(), for: .normal)
         btn.layer.cornerRadius = 20
     
-        let backGradientView = GradientBackgroundView()
-        backGradientView.startColor = UIColor(hexString: "1B44F7")
-        backGradientView.middleColor = .clear
+        let backGradientView = GradientPlainBackgroundView()
+        backGradientView.startColor = UIColor(hexString: "1B44F7")?.withAlphaComponent(0.0)
         backGradientView.endColor = UIColor(hexString: "5ACEFF")
         backGradientView.startPoint = .init(x: 0, y: 0.5)
         backGradientView.endPoint = .init(x: 1, y: 0.5)
         btn.addSubview(backGradientView)
         backGradientView.autoPinEdgesToSuperviewEdges()
         
+        btn.backgroundColor = UIColor(hexString: "#1B45FB")!
         btn.layer.shadowColor = UIColor(hexString: "4484FF")!.cgColor
         btn.layer.shadowOffset = CGSize(width: 0, height: 4)
         btn.layer.shadowRadius = 24
         btn.layer.shadowOpacity = 0.64
         btn.layer.cornerRadius = 20.0
+        btn.clipsToBounds = true
         return btn
     }()
     

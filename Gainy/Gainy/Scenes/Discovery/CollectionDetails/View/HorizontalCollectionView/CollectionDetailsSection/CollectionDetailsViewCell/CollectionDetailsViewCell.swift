@@ -318,15 +318,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         //        self.refreshingTickers = true
         
-        SubscriptionManager.shared.getSubscription {[weak self] type in
-            if type == .free {
-                unlockButton?.isHidden =  SubscriptionManager.shared.storage.isViewedCollection(viewModel.id)
-                
-            } else {
-                unlockButton?.isHidden = true
-            }
-        }
-        
         if viewModel?.id == -1 {
             CollectionsManager.shared.watchlistCollectionsLoading {[weak self] models in
                 if let cards = models.first?.cards {
@@ -523,21 +514,22 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.showAnimatedGradientSkeleton()
             } else {
                 cell.hideSkeleton()
-            }
-            SubscriptionManager.shared.getSubscription({ type in
-                if type == .free {
-                    if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                SubscriptionManager.shared.getSubscription({[weak self] type in
+                    if type == .free {
+                        if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                            cell.removeBlur()
+                            cell.removeBlockView()
+                        } else {
+                            cell.addBlur()
+                            cell.addBlockView()
+                        }
+                    } else {
                         cell.removeBlur()
                         cell.removeBlockView()
-                    } else {
-                        cell.addBlur()
-                        cell.addBlockView()
                     }
-                } else {
-                    cell.removeBlur()
-                    cell.removeBlockView()
-                }
-            })
+                })
+            }
+            cell.contentView.clipsToBounds = true
             return cell
             
         case .cards:
@@ -563,6 +555,18 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         }
         
         cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
+        
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -679,6 +683,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                            markerHeaders:  markers.map(\.shortTitle),
                            markerMetrics: vals,
                            matchScore: "\(model.matchScore)")
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -747,6 +762,20 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
         }
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                    cell.layer.shadowOpacity = 1.0
+                } else {
+                    cell.addBlur()
+                    cell.layer.shadowOpacity = 0.0
+                }
+            } else {
+                cell.removeBlur()
+                cell.layer.shadowOpacity = 1.0
+            }
+        })
         return cell
     }
     
@@ -813,9 +842,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             self.headerView = headerView
-            SubscriptionManager.shared.getSubscription({ type in
+            SubscriptionManager.shared.getSubscription({[weak self] type in
                 if type == .free {
-                    if SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) {
+                    if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
                         headerView.removeBlur()
                     } else {
                         headerView.addBlur()
