@@ -15,7 +15,7 @@ protocol TickerDetailsRecommendedViewCellDelegate: AnyObject {
 
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 168.0
+    static let cellHeight: CGFloat = 152.0
     
     public weak var delegate: TickerDetailsRecommendedViewCellDelegate?
     
@@ -81,7 +81,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
             self.tagsStack.layoutIfNeeded()
             
-            let calculatedHeight: CGFloat = (192.0 - 16.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
+            let calculatedHeight: CGFloat = (159.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
             if (tickerInfo?.matchTags ?? []).count > 0 {
                 cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
             } else {

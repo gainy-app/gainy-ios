@@ -31,15 +31,16 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         aboutLbl.text = tickerInfo?.about
         aboutLbl.numberOfLines = 3
         
-        let calculatedHeight: CGFloat = (161.0 + 88.0)
+        let calculatedHeight: CGFloat = (161.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0))
         if isMoreSelected {
             aboutLbl.numberOfLines = 0
             minHeightUpdated?(max( (152.0 + 16.0), heightBasedOnString((tickerInfo?.about ?? ""))))
         } else {
             aboutLbl.numberOfLines = 3
-            minHeightUpdated?(max( (152.0 + 16.0), calculatedHeight))
+            minHeightUpdated?(max((152.0 + 16.0), calculatedHeight))
         }
         innerCollectionView.reloadData()
+        innerCollectionView.isHidden = tickerInfo?.linkedCollections.isEmpty ?? true
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {
@@ -60,7 +61,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
             aboutLbl.numberOfLines = 3
             sender.setTitle("show more", for: .normal)
         }
-        cellHeightChanged?(sender.isSelected ? heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")) : (161.0 + 88.0))
+        cellHeightChanged?(sender.isSelected ? heightBasedOnString(sender.isSelected ? (tickerInfo?.about ?? "") : (tickerInfo?.aboutShort ?? "")) : (161.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0)))
         if sender.isSelected {
             GainyAnalytics.logEvent("ticker_about_more_pressed", params: ["tickerSymbol" : self.tickerInfo?.symbol ?? "none", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
         } else {
@@ -71,7 +72,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
-        return 60.0 + height + 48.0 + 88.0
+        return 60.0 + height + 48.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0)
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {
