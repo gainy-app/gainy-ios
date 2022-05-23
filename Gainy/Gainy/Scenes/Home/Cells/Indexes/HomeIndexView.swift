@@ -20,7 +20,7 @@ final class HomeIndexView: CornerView {
                 nameLbl.text = indexModel.name
                 if indexModel.grow != 0 {
                 growImgView.image = indexModel.grow >= 0.0 ? UIImage(named: "small_up") : UIImage(named: "small_down")
-                growLbl.text = indexModel.grow.percentUnsigned
+                    growLbl.text = indexModel.grow.percentUnsigned
                 growLbl.textColor = UIColor(named: indexModel.grow >= 0.0 ? "mainGreen" : "mainRed")
                 } else {
                     growImgView.image = nil
@@ -29,7 +29,7 @@ final class HomeIndexView: CornerView {
                 }
                 
                 if indexModel.value != 0 {
-                    valueLbl.text = indexModel.value.zeroDecimalUnsigned
+                    valueLbl.text = indexModel.name == "Bitcoin" ? indexModel.value.priceShort : indexModel.value.zeroDecimalUnsigned
                 } else {
                     valueLbl.text = "-"
                 }

@@ -1,4 +1,4 @@
-iOS v1.3.2 #216 available
+iOS v1.3.2 #217 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Home: WL is working again
+• Stock View: 1D for Compare is from Collection metrics
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

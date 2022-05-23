@@ -511,4 +511,8 @@ class TickerInfo {
     //MARK: - Linked Collections
     var linkedCollections: [RemoteCollectionDetails] = []
     private var prefferedLinkedCollectionID: String = ""
+    
+    var medianCollection: RemoteCollectionDetails? {
+        linkedCollections.first(where: {$0.uniqId == prefferedLinkedCollectionID})
+    }
 }

@@ -17,6 +17,7 @@ final class ScatterChartViewModel: ObservableObject {
         self.isSPPVisible = false
         self.isLoading = true
         self.lastDayPrice = 0.0
+        self.relatedCollection1DGain = 0.0
     }
     
     @Published
@@ -39,4 +40,7 @@ final class ScatterChartViewModel: ObservableObject {
     
     @Published
     var lastDayPrice: Float = 0
+    
+    @Published
+    var relatedCollection1DGain: Float = 0
 }

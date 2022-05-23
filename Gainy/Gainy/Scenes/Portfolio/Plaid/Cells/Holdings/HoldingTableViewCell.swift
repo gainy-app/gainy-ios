@@ -93,7 +93,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             eventLbl.text = "Earnings date • " + eventDate.toFormat("MMM dd, yy")
         }
         
-        matchScoreLbl.textColor = .white
+        matchScoreLbl.textColor = UIColor.Gainy.mainText
         if let matchScore = TickerLiveStorage.shared.getMatchData(model.tickerSymbol)?.matchScore {
             let matchVal = Int(matchScore)
             matchCircleView.backgroundColor = MatchScoreManager.circleColorFor(matchVal)

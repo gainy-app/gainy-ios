@@ -138,7 +138,11 @@ extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
                 if rawType == "crypto" {
                     return .crypto
                 } else {
-                    return .cash
+                    if rawType == "mutual fund" {
+                        return .share
+                    } else {
+                        return .cash
+                    }
                 }
             }
         }
