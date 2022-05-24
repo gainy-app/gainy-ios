@@ -2,6 +2,7 @@ import UIKit
 import SkeletonView
 import Combine
 import PureLayout
+import Deviice
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
@@ -67,24 +68,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
-    }
-    
-    private var unlockButton: UIButton?
-    fileprivate func addUnlockButton() {
-        let unlockButton = UIButton()
-        unlockButton.layer.cornerRadius = 8.0
-        unlockButton.clipsToBounds = true
-        unlockButton.backgroundColor = UIColor.Gainy.blue
-        unlockButton.setTitleColor(.white, for: .normal)
-        unlockButton.setTitle("Unlock TTF", for: .normal)
-        contentView.addSubview(unlockButton)
-        
-        unlockButton.autoSetDimension(.width, toSize: 150.0)
-        unlockButton.autoSetDimension(.height, toSize: 60.0)
-        unlockButton.autoAlignAxis(toSuperviewAxis: .vertical)
-        unlockButton.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -70)
-        unlockButton.isHidden = true
-        self.unlockButton = unlockButton
     }
     
     @available(*, unavailable)
@@ -197,30 +180,31 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
         // Load all data
-        // hideSkeleton()       
+        // hideSkeleton()
         
     }
     
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
         
-        viewModel.topChart.isLoading = false
+        topChart.isLoading = false
         
         let mainChart = topCharts.first!
         let medianChart = topCharts.last!
         
         let (main, median) = normalizeCharts(mainChart, medianChart)
         
-        let topChart = ChartData(points: main, period: viewModel.chartRange)
+        let topChartData = ChartData(points: main, period: viewModel.chartRange)
         let medianData = ChartData(points: median, period: viewModel.chartRange)
         
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
-        viewModel.topChart.lastDayPrice = viewModel.lastDayPrice
-        viewModel.topChart.chartData = topChart
-        viewModel.topChart.sypChartData = medianData
-        viewModel.topChart.spGrow = Float(medianData.startEndDiff)
+        
+        topChart.lastDayPrice = viewModel.lastDayPrice
+        topChart.chartData = topChartData
+        topChart.sypChartData = medianData
+        topChart.spGrow = Float(medianData.startEndDiff)
     }
     
     
@@ -325,6 +309,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 if let cards = models.first?.cards {
                     self?.finishRefreshWithSorting(cards: cards) {
                         //                        self?.refreshingTickers = false
+                        self?.refreshControl.endRefreshing()
                         completion?()
                     }
                 }
@@ -339,6 +324,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                         item.rawTicker
                     }
                     let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
+                    self.refreshControl.endRefreshing()
                     self.finishRefreshWithSorting(cards: cards) {
                         //                        self.refreshingTickers = false
                         completion?()
@@ -355,8 +341,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     //MARK: - Chart
     private let chartHeight: CGFloat = 256
+    private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, dayGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
-        var rootView = TTFScatterChartView(viewModel: viewModel.topChart,
+        var rootView = TTFScatterChartView(viewModel: topChart,
                                            delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
@@ -376,12 +363,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         
         viewModel.chartRange = range
-        viewModel.topChart.isSPPVisible = false
-        viewModel.topChart.isLoading = true
+        topChart.isSPPVisible = false
+        topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
-            await MainActor.run {                
+            await MainActor.run {
                 let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
                 self.collectionView.reloadSections(indesSet)
             }
@@ -461,7 +448,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             if viewModel.id == Constants.CollectionDetails.watchlistCollectionID {
                 cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
             } else {
-                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel)
+                cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel, topChart: topChart)
             }
             cell.delegate = self
             cell.isSkeletonable = collectionView.isSkeletonable
@@ -502,7 +489,6 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
-            print("TF: \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
             
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
@@ -802,6 +788,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             headerView.configureWithState(state: state)
             headerView.updateChargeLbl(settings.sortingText())
             headerView.updateMetrics(settings.marketDataToShow)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                headerView.setNeedsLayout()
+                headerView.layoutIfNeeded()
+            })
 
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {
@@ -898,10 +888,32 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+        
+        var cardToOpen: RemoteTickerDetails? = nil
+        if settings.pieChartSelected {
+            if settings.pieChartMode != .tickers {
+                return
+            }
+            
+            let chartData = self.currentChartData()
+            if indexPath.row >= chartData.count {return}
+            let data = chartData[indexPath.row]
+            
+            cardToOpen = cards.first { card in
+                guard let entityId = data.entityId else { return false }
+                return entityId == card.tickerSymbol
+            }?.rawTicker
+            
+        } else {
+            cardToOpen = cards[indexPath.row].rawTicker
+        }
+        
+        guard let card = cardToOpen else { return }
         GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
-                                                           "tickerSymbol" : cards[indexPath.row].rawTicker.symbol,
-                                                           "tickerName" : cards[indexPath.row].rawTicker.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        onCardPressed?(cards[indexPath.row].rawTicker)
+                                                           "tickerSymbol" : card.symbol,
+                                                           "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+        onCardPressed?(card)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -938,7 +950,8 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
                 return CGSize.init(width: width, height: 60.0)
             }
-            return CGSize.init(width: width, height: (collectionView.superview?.safeAreaInsets.top ?? 0.0) + 36 + 110.0 + 36.0)
+            let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
+            return CGSize.init(width: width, height: 154.0 + 24.0 + headerHeight + 32.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
             let width = collectionView.frame.width
@@ -982,12 +995,10 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 xPos += width + margin
             }
             
-            print("TF: height \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
-            
             if viewModel.combinedTags.isEmpty {
                 return CGSize.init(width: width, height: 144.0 + 32 + 32)
             } else {
-                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0 + 32
+                let calculatedHeight: CGFloat = (208.0 - 8.0) + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0
                 return CGSize.init(width: width, height: calculatedHeight)
             }
             
@@ -996,8 +1007,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             var width = 0.0
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             if settings.pieChartSelected {
+                let height = settings.pieChartMode == .tickers ? 88.0 : 56.0
                 width = collectionView.frame.width - 30
-                return CGSize.init(width: width, height: 88.0)
+                return CGSize.init(width: width, height: height)
             } else {
                 if settings.viewMode == .grid {
                     width = (UIScreen.main.bounds.width - 20.0 * 3.0) / 2.0
@@ -1062,7 +1074,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         }
         
         if section == .cards {
-            return UIEdgeInsets.init(top: 16.0, left: 20.0, bottom: 0.0, right: 20.0)
+            return UIEdgeInsets.init(top: 8.0, left: 20.0, bottom: 0.0, right: 20.0)
         }
         
         return UIEdgeInsets.zero
@@ -1130,7 +1142,7 @@ extension CollectionDetailsViewCell: UIScrollViewDelegate {
 extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
     func medianToggled(cell: CollectionDetailsGainCell, showMedian: Bool) {
         guard let viewModel = viewModel else {return}
-        viewModel.topChart.isSPPVisible = showMedian
+        topChart.isSPPVisible = showMedian
         
         GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
     }

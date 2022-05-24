@@ -62,7 +62,7 @@ extension UIView {
         
         blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8.0)
         blockView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16 + 64 + 16)
-        blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: -8.0)
+        blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8.0)
     }
     
     func removeBlockView() {

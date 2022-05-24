@@ -51,10 +51,11 @@ final class TTFBlockView: TKPassThroughView {
     lazy var header: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = UIColor.Gainy.mainText
+        label.textColor = .white
         label.text = "Wanna check details?"
         label.font = .compactRoundedSemibold(20)
         label.isUserInteractionEnabled = false
+        label.minimumScaleFactor = 0.1
         return label
     }()
     
@@ -71,7 +72,7 @@ final class TTFBlockView: TKPassThroughView {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .white
-        label.text = "3 / 3 TTFs opened"
+        label.text = "0/3 opened"
         label.font = .compactRoundedSemibold(14)
         label.isUserInteractionEnabled = false
         return label
@@ -80,7 +81,7 @@ final class TTFBlockView: TKPassThroughView {
     lazy var tipLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textColor = UIColor.Gainy.mainText
+        label.textColor = .white
         label.text = "With a free plan, you can only view 3 TTFs per month."
         label.font = .compactRoundedMedium(16)
         label.textAlignment = .left
@@ -91,7 +92,7 @@ final class TTFBlockView: TKPassThroughView {
     lazy var unlockBtn: UIButton = {
         let btn = UIButton()
         btn.titleLabel?.font = .compactRoundedMedium(16)
-        btn.setTitleColor(UIColor(hexString: "3BF06E"), for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         btn.setTitle("Show details".uppercased(), for: .normal)
         btn.layer.cornerRadius = 20
         
@@ -131,7 +132,7 @@ final class TTFBlockView: TKPassThroughView {
         header.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -143)
         
         addSubview(amountView)
-        amountView.autoPinEdge(.top, to: .bottom, of: header, withOffset: 24)
+        amountView.autoPinEdge(.top, to: .top, of: self, withOffset: 24)
         amountView.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         amountView.autoSetDimension(.height, toSize: 24)
         amountView.autoSetDimension(.width, toSize: 88)
@@ -162,7 +163,7 @@ final class TTFBlockView: TKPassThroughView {
             } else {
                 self?.state = .haveMore
             }
-                self?.amountLbl.text = "\(count) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
+                self?.amountLbl.text = "\(count)/\(SubscriptionManager.shared.storage.collectionViewLimit) opened"
         }.store(in: &cancellable)
     }
 }

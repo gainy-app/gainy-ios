@@ -81,7 +81,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
             self.tagsStack.layoutIfNeeded()
             
-            let calculatedHeight: CGFloat = (159.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
+            let calculatedHeight: CGFloat = (159.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 16.0
             if (tickerInfo?.matchTags ?? []).count > 0 {
                 cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
             } else {
