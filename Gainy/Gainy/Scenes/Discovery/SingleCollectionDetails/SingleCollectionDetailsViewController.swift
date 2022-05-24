@@ -204,8 +204,14 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                                                      animated: false)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        delegate?.collectionClosed(vc: self, collectionID: collectionId)
+//        hideLoader()
+//    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         delegate?.collectionClosed(vc: self, collectionID: collectionId)
         hideLoader()
     }

@@ -26,7 +26,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
             innerCollectionView.delegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
             innerCollectionView.isScrollEnabled = false
-            innerCollectionView.clipsToBounds = true
+            innerCollectionView.clipsToBounds = false
             innerCollectionView.contentInset = .init(top: 4, left: 0, bottom: 0, right: 0)
         }
     }
@@ -53,7 +53,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
             }
             delay(0.1) {
                 self.innerCollectionView.isScrollEnabled = false
-                self.heightUpdated?(self.watchlistHeight.constant + 54)
+                self.heightUpdated?(self.watchlistHeight.constant + 47)
             }
             layoutIfNeeded()
         }
@@ -69,7 +69,7 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         } else {
             watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 4.0
         }
-        heightUpdated?(watchlistHeight.constant + 54)
+        heightUpdated?(watchlistHeight.constant + 47)
         layoutIfNeeded()
     }
 }

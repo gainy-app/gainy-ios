@@ -283,6 +283,8 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsAlternativeStocksViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             cell.delegate = self
+            cell.contentView.clipsToBounds = false
+            cell.clipsToBounds = false
             return cell
         case .upcomingEvents:
             let cell: TickerDetailsUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)

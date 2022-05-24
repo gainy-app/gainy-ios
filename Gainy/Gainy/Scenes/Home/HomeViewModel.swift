@@ -98,6 +98,7 @@ final class HomeViewModel {
             }
             return
         }
+        Network.shared.apollo.clearCache()
         Task {
             let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                              getPortfolioGains(profileId: profielId),

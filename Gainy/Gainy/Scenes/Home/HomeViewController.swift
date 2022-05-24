@@ -218,7 +218,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
-        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, collection: collection)
+        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
     }
     
     func tickerSelected(ticker: RemoteTicker) {
@@ -285,5 +285,42 @@ extension HomeViewController: SortCollectionsViewControllerDelegate {
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortFavCollections()
         self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.mutateFavouriteCollections(isAdded: isAdded, collectionID: collectionID)
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+        self.tableView.reloadData()
+    }
+    
+    private func mutateFavouriteCollections(isAdded: Bool, collectionID: Int) {
+        
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
+                }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
+                    self.viewModel.loadHomeData {
+                        self.viewModel.sortFavCollections()
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        } else {
+            if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+                    self.viewModel.loadHomeData {
+                        self.viewModel.sortFavCollections()
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }
