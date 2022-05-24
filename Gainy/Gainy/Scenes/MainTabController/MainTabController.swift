@@ -71,6 +71,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             let appearance = self.tabBar.standardAppearance
             appearance.shadowImage = nil
             appearance.shadowColor = nil
+            appearance.backgroundColor = .white
             self.tabBar.standardAppearance = appearance
             self.tabBar.tintColor = UIColor.Gainy.mainText
         }

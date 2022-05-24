@@ -25,7 +25,7 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
         
         detailsLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
         detailsLbl.autoPinEdge(toSuperviewEdge: .right, withInset: 24)
-        detailsLbl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
+        detailsLbl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24 - 16)
         
 //        moreBtn.autoPinEdge(.top, to: .bottom, of: detailsLbl, withOffset: 8.0)
 //        moreBtn.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)

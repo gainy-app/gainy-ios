@@ -9,7 +9,24 @@ import UIKit
 import PureLayout
 import Combine
 
-final class TTFBlockView: UIView {
+class TKPassThroughView: UIView {
+    
+    // MARK - Touch Handling
+    
+    /**
+     Override this point and determine if any of the subviews of our transparent view are the ones being tapped. If that is the case, handle those touches otherwise pass the touch through.
+    */
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        for subview in subviews as [UIView] {
+            if !subview.isHidden && subview.alpha > 0 && subview.isUserInteractionEnabled && subview.point(inside: convert(point, to: subview), with: event) {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+final class TTFBlockView: TKPassThroughView {
     
     enum State {
         case haveMore, noMore
@@ -37,6 +54,7 @@ final class TTFBlockView: UIView {
         label.textColor = UIColor.Gainy.mainText
         label.text = "Wanna check details?"
         label.font = .proDisplaySemibold(20.0)
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -45,6 +63,7 @@ final class TTFBlockView: UIView {
         label.layer.cornerRadius = 8.0
         label.clipsToBounds = true
         label.backgroundColor = UIColor(hexString: "#0062FF")
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -54,6 +73,7 @@ final class TTFBlockView: UIView {
         label.textColor = .white
         label.text = "3 / 3 TTFs opened"
         label.font = .compactRoundedSemibold(14)
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -63,6 +83,8 @@ final class TTFBlockView: UIView {
         label.textColor = UIColor.Gainy.mainText
         label.text = "With a free plan, you can only view 3 TTFs per month."
         label.font = .compactRoundedMedium(14)
+        label.textAlignment = .center
+        label.isUserInteractionEnabled = false
         return label
     }()
     
@@ -87,6 +109,7 @@ final class TTFBlockView: UIView {
         btn.layer.shadowOpacity = 0.64
         btn.layer.cornerRadius = 20.0
         btn.clipsToBounds = true
+        btn.isUserInteractionEnabled = true
         return btn
     }()
     
@@ -124,7 +147,7 @@ final class TTFBlockView: UIView {
         tipLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         
         addSubview(unlockBtn)
-        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 16)
+        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 40)
         unlockBtn.autoAlignAxis(toSuperviewAxis: .vertical)
         unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
         unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)

@@ -33,8 +33,10 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         
         contentView.addSubview(tagsContainer)
         
+        let topInset: CGFloat = 16.0
+        
         titleLbl.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
-        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
+        titleLbl.autoPinEdge(toSuperviewEdge: .top, withInset: 16 + topInset)
         titleLbl.autoSetDimension(.height, toSize: 24.0)
                 
         tick1.autoPinEdge(toSuperviewEdge: .left, withInset: 32)
@@ -62,7 +64,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         risk3Lbl.autoSetDimension(.height, toSize: 16)
         
         matchCircle.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
-        matchCircle.autoPinEdge(toSuperviewEdge: .top, withInset: 24)
+        matchCircle.autoPinEdge(toSuperviewEdge: .top, withInset: 24 + topInset)
         matchCircle.autoSetDimensions(to: .init(width: 88, height: 88))
         
         msLbl.autoAlignAxis(.horizontal, toSameAxisOf: matchCircle)
@@ -81,8 +83,8 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         largeBack.layer.cornerRadius = 16
         largeBack.clipsToBounds = true
         
-        largeBack.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
-        largeBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
+        largeBack.autoPinEdge(toSuperviewEdge: .top, withInset: topInset)
+        largeBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
         largeBack.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
         largeBack.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
 //        clipsToBounds = false

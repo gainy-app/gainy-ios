@@ -67,8 +67,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
-        
-        //addUnlockButton()
     }
     
     private var unlockButton: UIButton?
@@ -183,20 +181,24 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
+                    
+                    SubscriptionManager.shared.getSubscription {[weak self] type in
+                        if type == .free {
+                            if self?.collectionView.sk.isSkeletonActive ?? true {
+                                self?.removeBlockView()
+                            } else {
+                                self?.addBlockView()
+                            }
+                        } else {
+                            self?.removeBlockView()
+                        }
+                    }
                 }
             }
         }
         // Load all data
-        // hideSkeleton()
+        // hideSkeleton()       
         
-        SubscriptionManager.shared.getSubscription {[weak unlockButton] type in
-            if type == .free {
-                unlockButton?.isHidden =  SubscriptionManager.shared.storage.isViewedCollection(viewModel.id)
-                
-            } else {
-                unlockButton?.isHidden = true
-            }
-        }
     }
     
     @MainActor
@@ -517,19 +519,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 SubscriptionManager.shared.getSubscription({[weak self] type in
                     if type == .free {
                         if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
-                            cell.removeBlur()
-                            cell.removeBlockView()
+                            collectionView.removeBlur()
                         } else {
                             cell.addBlur()
-                            cell.addBlockView()
                         }
                     } else {
-                        cell.removeBlur()
-                        cell.removeBlockView()
+                        collectionView.removeBlur()
                     }
                 })
             }
-            cell.contentView.clipsToBounds = true
+            cell.clipsToBounds = false
+            cell.contentView.clipsToBounds = false
             return cell
             
         case .cards:
@@ -768,7 +768,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     cell.removeBlur()
                     cell.layer.shadowOpacity = 1.0
                 } else {
-                    cell.addBlur()
+                    cell.addBlur(top: -8, bottom: -8, left: indexPath.row % 2 == 0 ? -20 : -10, right: indexPath.row % 2 != 0 ? -20 : -10)
                     cell.layer.shadowOpacity = 0.0
                 }
             } else {
@@ -847,7 +847,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
                         headerView.removeBlur()
                     } else {
-                        headerView.addBlur()
+                        headerView.addBlur(top: 0)
                     }
                 } else {
                     headerView.removeBlur()
@@ -956,7 +956,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             }
             
             let aboutTitleWithOffsets = 32.0
-            let bottomOffset = 24.0
+            let bottomOffset = 24.0 - 16
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)
             
@@ -985,9 +985,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             print("TF: height \(viewModel.name) - \(viewModel.combinedTags.compactMap({$0.name}))")
             
             if viewModel.combinedTags.isEmpty {
-                return CGSize.init(width: width, height: 144.0 + 32)
+                return CGSize.init(width: width, height: 144.0 + 32 + 32)
             } else {
-                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0
+                let calculatedHeight: CGFloat = 208.0 + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0 + 32
                 return CGSize.init(width: width, height: calculatedHeight)
             }
             

@@ -9,23 +9,44 @@ import UIKit
 import PureLayout
 
 extension UIView {
-    func addBlur() {
-        guard subviews.first(where: {
+    func addBlur(top: CGFloat = -8, bottom: CGFloat = -8, left: CGFloat = -8, right: CGFloat = -8) {
+        let blurAdded = subviews.first(where: {
             $0.tag == -11
-        }) == nil else {return}
+        })
+        
+        guard blurAdded == nil else {
+            (blurAdded as? BlurEffectView)?.intensity = 0.2
+            return
+        }
+        
         let blurView = BlurEffectView(intensity: 0.2)
         blurView.tag = -11
         addSubview(blurView)
         
-        blurView.autoPinEdge(toSuperviewEdge: .leading, withInset: -10)
-        blurView.autoPinEdge(toSuperviewEdge: .top, withInset: -10)
-        blurView.autoPinEdge(toSuperviewEdge: .trailing, withInset: -10)
-        blurView.autoPinEdge(toSuperviewEdge: .bottom, withInset:-10)
+        let whiteBack = UIView()
+        whiteBack.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        whiteBack.tag = -14
+        addSubview(whiteBack)
+        
+        blurView.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
+        blurView.autoPinEdge(toSuperviewEdge: .top, withInset: top)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
+        blurView.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
+        
+        whiteBack.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
+        whiteBack.autoPinEdge(toSuperviewEdge: .top, withInset: top)
+        whiteBack.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
+        whiteBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
     }
     
     func removeBlur() {
         if let blurView = subviews.first(where: {
             $0.tag == -11
+        }){
+            blurView.removeFromSuperview()
+        }
+        if let blurView = subviews.first(where: {
+            $0.tag == -14
         }){
             blurView.removeFromSuperview()
         }
@@ -40,7 +61,7 @@ extension UIView {
         addSubview(blockView)
         
         blockView.autoPinEdge(toSuperviewEdge: .leading)
-        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
+        blockView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16 + 64 + 16)
         blockView.autoPinEdge(toSuperviewEdge: .trailing)
     }
     

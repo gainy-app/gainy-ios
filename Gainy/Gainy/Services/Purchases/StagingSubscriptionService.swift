@@ -25,7 +25,7 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     }
     
     func getSubscription(_ completion: @escaping (SuscriptionType) -> Void) {
-        completion(.pro)
+        completion(.free)
     }
     
     func expirationDate(_ completion: @escaping (Date?) -> Void) {

@@ -9,7 +9,11 @@ import UIKit
 
 class BlurEffectView: UIVisualEffectView {
     
-    var intensity: Double = 0.3
+    var intensity: Double = 0.3 {
+        didSet {
+            setupBlur()
+        }
+    }
     
     init(intensity: Double = 0.3) {
         
@@ -35,7 +39,7 @@ class BlurEffectView: UIVisualEffectView {
         effect = nil
 
         animator.addAnimations { [weak self] in
-            self?.effect = UIBlurEffect(style: .regular)
+            self?.effect = UIBlurEffect(style: .prominent)
         }
         animator.fractionComplete = intensity   //This is your blur intensity in range 0 - 1
     }
