@@ -1,4 +1,4 @@
-iOS v1.3.2 #218 available
+iOS v1.3.2 #219 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -7,8 +7,6 @@ Bugfixes
 
 :hammer_and_wrench: Improvements
 • Fix Home Screen UI issues (WL and Alternative stocks shadow + offsets)
-• Fix "No pull to refresh on Home" (cleaned apolo cache - need QA for sure)
-• Fix "Impossible to add/remove the collection to/from favorites from the home screen (open single collection details -> tap add/remove button -> nothing happend)"
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

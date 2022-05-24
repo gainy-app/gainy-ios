@@ -26,8 +26,8 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
             innerCollectionView.delegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
             innerCollectionView.isScrollEnabled = false
-            innerCollectionView.clipsToBounds = false
-            innerCollectionView.contentInset = .init(top: 4, left: 0, bottom: 0, right: 0)
+            innerCollectionView.clipsToBounds = true
+            innerCollectionView.contentInset = .init(top: 8, left: 0, bottom: 0, right: 0)
         }
     }
     
@@ -47,9 +47,9 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
             innerCollectionView.reloadData()
             expandBtn.isHidden = watchlist.count < 5
             if watchlist.count < 5 {
-                watchlistHeight.constant = max(0.0, CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0) + 4.0
+                watchlistHeight.constant = max(0.0, CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0) + 12.0
             } else {
-                watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 4.0
+                watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 12.0
             }
             delay(0.1) {
                 self.innerCollectionView.isScrollEnabled = false
@@ -65,9 +65,9 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
     @IBAction func expandToggleAction(_ sender: UIButton) {
         sender.isSelected.toggle()
         if sender.isSelected {
-            watchlistHeight.constant = CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0 + 4.0
+            watchlistHeight.constant = CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0 + 12.0
         } else {
-            watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 4.0
+            watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 12.0
         }
         heightUpdated?(watchlistHeight.constant + 47)
         layoutIfNeeded()
