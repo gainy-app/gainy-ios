@@ -53,7 +53,7 @@ final class TTFBlockView: TKPassThroughView {
         label.numberOfLines = 1
         label.textColor = UIColor.Gainy.mainText
         label.text = "Wanna check details?"
-        label.font = .proDisplaySemibold(20.0)
+        label.font = .compactRoundedSemibold(20)
         label.isUserInteractionEnabled = false
         return label
     }()
@@ -82,25 +82,18 @@ final class TTFBlockView: TKPassThroughView {
         label.numberOfLines = 0
         label.textColor = UIColor.Gainy.mainText
         label.text = "With a free plan, you can only view 3 TTFs per month."
-        label.font = .compactRoundedMedium(14)
-        label.textAlignment = .center
+        label.font = .compactRoundedMedium(16)
+        label.textAlignment = .left
         label.isUserInteractionEnabled = false
         return label
     }()
     
     lazy var unlockBtn: UIButton = {
         let btn = UIButton()
+        btn.titleLabel?.font = .compactRoundedMedium(16)
         btn.setTitleColor(UIColor(hexString: "3BF06E"), for: .normal)
         btn.setTitle("Show details".uppercased(), for: .normal)
         btn.layer.cornerRadius = 20
-    
-        let backGradientView = GradientPlainBackgroundView()
-        backGradientView.startColor = UIColor(hexString: "1B44F7")?.withAlphaComponent(0.0)
-        backGradientView.endColor = UIColor(hexString: "5ACEFF")
-        backGradientView.startPoint = .init(x: 0, y: 0.5)
-        backGradientView.endPoint = .init(x: 1, y: 0.5)
-        btn.addSubview(backGradientView)
-        backGradientView.autoPinEdgesToSuperviewEdges()
         
         btn.backgroundColor = UIColor(hexString: "#1B45FB")!
         btn.layer.shadowColor = UIColor(hexString: "4484FF")!.cgColor
@@ -126,33 +119,40 @@ final class TTFBlockView: TKPassThroughView {
     private var cancellable = Set<AnyCancellable>()
     
     fileprivate func setupView() {
+        
+        backgroundColor = UIColor(hexString: "09141F")!.withAlphaComponent(0.88)
+        layer.cornerRadius = 32.0
+        clipsToBounds = true
+        
         addSubview(header)
         
-        header.autoPinEdge(.top, to: .top, of: self, withOffset: 20)
-        header.autoAlignAxis(toSuperviewAxis: .vertical)
+        header.autoPinEdge(.top, to: .top, of: self, withOffset: 24)
+        header.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
+        header.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -143)
         
         addSubview(amountView)
-        amountView.autoPinEdge(.top, to: .bottom, of: header, withOffset: 16)
-        amountView.autoAlignAxis(toSuperviewAxis: .vertical)
+        amountView.autoPinEdge(.top, to: .bottom, of: header, withOffset: 24)
+        amountView.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         amountView.autoSetDimension(.height, toSize: 24)
+        amountView.autoSetDimension(.width, toSize: 88)
         
         amountView.addSubview(amountLbl)
         amountLbl.autoPinEdgesToSuperviewEdges(with: .init(top: 4, left: 8, bottom: 4, right: 8))
         amountLbl.autoSetDimension(.height, toSize: 16)
         
         addSubview(tipLbl)
-        tipLbl.autoPinEdge(.top, to: .bottom, of: amountView, withOffset: 16)
+        tipLbl.autoPinEdge(.top, to: .bottom, of: header, withOffset: 16)
         tipLbl.autoAlignAxis(toSuperviewAxis: .vertical)
         tipLbl.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
         tipLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         
         addSubview(unlockBtn)
-        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 40)
+        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 24)
         unlockBtn.autoAlignAxis(toSuperviewAxis: .vertical)
-        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
-        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
-        unlockBtn.autoSetDimension(.height, toSize: 64)
-        unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -16)
+        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
+        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
+        unlockBtn.autoSetDimension(.height, toSize: 48)
+        unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -24)
         
         SubscriptionManager.shared.storage.collectionsViewedPublisher
             .receive(on: DispatchQueue.main)

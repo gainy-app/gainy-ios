@@ -35,11 +35,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
             innerType = .pro
         } else {
             if customerInfo?.entitlements[ettl]?.isActive == true {
-                #if DEBUG
-                innerType = .free
-                #else                
                 innerType = .pro
-                #endif
                 innerDate = customerInfo?.entitlements[ettl]?.expirationDate
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
                 

@@ -94,8 +94,6 @@
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
 		3361D929283272E600AEEC3D /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D928283272E600AEEC3D /* FetchStockMedian.graphql */; };
-		3361D92B2832730400AEEC3D /* FetchTTFMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */; };
-		3361D92D283276C300AEEC3D /* FetchTTFMedian.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */; };
 		3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92F283287C400AEEC3D /* PurchaseViewController.swift */; };
 		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
@@ -537,6 +535,7 @@
 		90A8017C275ABA21003D548D /* GetNextTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */; };
 		90B7F04B282D4492008EE097 /* StoreConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 90B7F04A282D4492008EE097 /* StoreConfiguration.storekit */; };
 		90C39E6E27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C39E6D27ADAEFD00F47338 /* FetchRecommendedCollectionIDs.graphql.swift */; };
+		90DB2ABA283D6CBB00247318 /* Branch in Frameworks */ = {isa = PBXBuildFile; productRef = 90DB2AB9283D6CBB00247318 /* Branch */; };
 		90DB672E27A07CC80007E4F8 /* IDFARequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DB672D27A07CC80007E4F8 /* IDFARequestViewController.swift */; };
 		90F2B64A2761ED1600474909 /* WebPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2B6492761ED1600474909 /* WebPresenter.swift */; };
 		90FDE6B928148CE70068F033 /* ActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 90FDE6B828148CE70068F033 /* ActivityIndicatorView */; };
@@ -686,8 +685,6 @@
 		335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTickerMatchData.graphql; sourceTree = "<group>"; };
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
 		3361D928283272E600AEEC3D /* FetchStockMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
-		3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTTFMedian.graphql; sourceTree = "<group>"; };
-		3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTTFMedian.graphql.swift; sourceTree = "<group>"; };
 		3361D92F283287C400AEEC3D /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
@@ -1155,6 +1152,7 @@
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
 				33571F21273B9F57007B587F /* CoreServices.framework in Frameworks */,
+				90DB2ABA283D6CBB00247318 /* Branch in Frameworks */,
 				33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */,
 				3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */,
 				3381D3B32797EA9F00BE7567 /* LinkKit in Frameworks */,
@@ -1201,7 +1199,6 @@
 		1C3A2C2D26AEB56600FAF107 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				3361D92C283276C300AEEC3D /* FetchTTFMedian.graphql.swift */,
 				901EDCF82825C2850043BDDE /* GetPortfolioChartMetrics.graphql.swift */,
 				857D56B626DD4D02003F96AE /* AppInterests.graphql.swift */,
 				85CD154C26F8CFA7001C060C /* AppProfilesUserIDs.graphql.swift */,
@@ -2137,7 +2134,6 @@
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
 				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
 				3361D928283272E600AEEC3D /* FetchStockMedian.graphql */,
-				3361D92A2832730400AEEC3D /* FetchTTFMedian.graphql */,
 				33264966280E90A300CE0D0F /* TTF */,
 				331243CE27BF6E85008C2BCC /* Home */,
 				85695AF42746BAD400759569 /* Metrics */,
@@ -2752,6 +2748,7 @@
 				9044595B282D9DCD008BAC4E /* FirebaseRemoteConfig */,
 				9044595D282D9DCD008BAC4E /* FirebaseStorage */,
 				909971632830EC6C00FDEA4B /* OneSignal */,
+				90DB2AB9283D6CBB00247318 /* Branch */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2851,6 +2848,7 @@
 				9006307A282857C1009EEB65 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
+				90DB2AB8283D6CBB00247318 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -2900,7 +2898,6 @@
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
-				3361D92B2832730400AEEC3D /* FetchTTFMedian.graphql in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
@@ -3303,7 +3300,6 @@
 				33BDCF7526CE8B66000DE770 /* TickerDetailsWSRViewCell.swift in Sources */,
 				90170DB2274A63F60038CE82 /* HoldingsModelMapper.swift in Sources */,
 				339A2EB626FE08390076BF52 /* SearchTickersNoSpace.graphql.swift in Sources */,
-				3361D92D283276C300AEEC3D /* FetchTTFMedian.graphql.swift in Sources */,
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,
@@ -4414,6 +4410,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		90DB2AB8283D6CBB00247318 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BranchMetrics/ios-branch-sdk-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		90FDE6B728148CE70068F033 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JoshHrach/ActivityIndicatorView";
@@ -4574,6 +4578,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */;
 			productName = OneSignalExtension;
+		};
+		90DB2AB9283D6CBB00247318 /* Branch */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90DB2AB8283D6CBB00247318 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */;
+			productName = Branch;
 		};
 		90FDE6B828148CE70068F033 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
