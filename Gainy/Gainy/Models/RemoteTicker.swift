@@ -194,6 +194,9 @@ class TickerInfo {
                                  self?.medianIndustry = mainIndustry.industryId
                              }
                              self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
+                             self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
+                                 $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
+                             }).first?.uniqId ?? ""
                              if let self = self {
                                  self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
                                      self.isChartDataLoaded = true
@@ -359,7 +362,7 @@ class TickerInfo {
         }
         
         innerGroup.enter()
-        loadMedianForRange(period, collectionUniqId: linkedCollections.first?.uniqId ?? "") {[weak self] dailyStats in
+        loadMedianForRange(period, collectionUniqId: prefferedLinkedCollectionID ) {[weak self] dailyStats in
             
             if dailyStats.count > 1 {
                 let firstDay = dailyStats.first?.adjustedClose ?? 0.0
@@ -400,11 +403,11 @@ class TickerInfo {
     }
     
     private var medianLoader: Cancellable?
-    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, collectionUniqId: String, _ completion: ( ([FetchTtfMedianQuery.Data.CollectionChart]) -> Void)? = nil) {
+    func loadMedianForRange(_ range: ScatterChartView.ChartPeriod, collectionUniqId: String, _ completion: ( ([GetTtfChartQuery.Data.CollectionChart]) -> Void)? = nil) {
         
         haveMedian = false
         
-        Network.shared.apollo.fetch(query: FetchTtfMedianQuery.init(collectionUniqId: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
+        Network.shared.apollo.fetch(query: GetTtfChartQuery.init(uniqID: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
             switch result {
             case .success(let graphQLResult):
                 if let dailyStats = graphQLResult.data?.collectionChart {
@@ -507,4 +510,9 @@ class TickerInfo {
     
     //MARK: - Linked Collections
     var linkedCollections: [RemoteCollectionDetails] = []
+    private var prefferedLinkedCollectionID: String = ""
+    
+    var medianCollection: RemoteCollectionDetails? {
+        linkedCollections.first(where: {$0.uniqId == prefferedLinkedCollectionID})
+    }
 }

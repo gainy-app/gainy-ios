@@ -15,7 +15,7 @@ protocol TickerDetailsRecommendedViewCellDelegate: AnyObject {
 
 final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 168.0
+    static let cellHeight: CGFloat = 152.0
     
     public weak var delegate: TickerDetailsRecommendedViewCellDelegate?
     
@@ -29,7 +29,6 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     @IBOutlet private weak var tagsStack: UIView!
     @IBOutlet private weak var tagsStackHeight: NSLayoutConstraint!
     @IBOutlet var colorView: UIView!
-    @IBOutlet private weak var tagsHeaderLbl: UILabel!
     
     private var lines: Int = 1
     
@@ -82,24 +81,21 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             self.tagsStackHeight.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
             self.tagsStack.layoutIfNeeded()
             
-            let calculatedHeight: CGFloat = 192.0 + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
+            let calculatedHeight: CGFloat = (159.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 24.0
             if (tickerInfo?.matchTags ?? []).count > 0 {
                 cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
-                tagsHeaderLbl.isHidden = false
             } else {
                 cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
-                tagsHeaderLbl.isHidden = true
             }
-            wrongIndBtn.isHidden = false
+            wrongIndBtn.isHidden = tagsStack.subviews.isEmpty
         } else {
             scoreLbl.text = "0"
             colorView.backgroundColor = UIColor.Gainy.mainRed
             scoreLbl.textColor = UIColor(named: "mainText")
             cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
-            tagsHeaderLbl.isHidden = true
             wrongIndBtn.isHidden = true
         }
-        wrongIndBtn.isHidden = tickerInfo?.linkedCollections.isEmpty ?? true
+        wrongIndBtn.isHidden = tickerInfo?.matchTags.isEmpty ?? true
         wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
         if wrongIndBtn.isSelected {
             highlightIndustries()

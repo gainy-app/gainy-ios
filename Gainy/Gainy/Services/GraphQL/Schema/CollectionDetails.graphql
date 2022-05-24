@@ -17,6 +17,7 @@ fragment RemoteCollectionDetails on collections {
     relative_daily_change
     updated_at
     previous_day_close_price
+    market_capitalization_sum
     }
     match_score {
     match_score

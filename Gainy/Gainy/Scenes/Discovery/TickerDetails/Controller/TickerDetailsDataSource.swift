@@ -114,6 +114,7 @@ final class TickerDetailsDataSource: NSObject {
     
     func updateChart() {
         chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
+        chartViewModel.relatedCollection1DGain = ticker.medianCollection?.metrics?.relativeDailyChange ?? 0.0
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
@@ -282,6 +283,8 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             let cell: TickerDetailsAlternativeStocksViewCell = tableView.dequeueReusableCell(for: indexPath)
             cell.tickerInfo = ticker
             cell.delegate = self
+            cell.contentView.clipsToBounds = false
+            cell.clipsToBounds = false
             return cell
         case .upcomingEvents:
             let cell: TickerDetailsUpcomingViewCell = tableView.dequeueReusableCell(for: indexPath)

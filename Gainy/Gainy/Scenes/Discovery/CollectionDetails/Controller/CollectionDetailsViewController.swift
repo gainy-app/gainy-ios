@@ -190,6 +190,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         compareButton.skeletonCornerRadius = 6
         self.compareButton = compareButton
         compareButton.showSkeleton()
+        compareButton.isHidden = true
+        compareButton.isUserInteractionEnabled = false
         
         let searchTextField = UITextField(
             frame: CGRect(
@@ -283,6 +285,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         collectionView.bounces = false
         collectionView.clipsToBounds = false
         collectionView.dataSource = dataSource
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
@@ -364,7 +367,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 86 + 16)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset - 32)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
@@ -701,6 +704,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             if let currentIndex = items.last?.indexPath.row {
                 self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+                self.currentCollectionID = currentIndex
             }
         }
         return layout
@@ -727,6 +731,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private var currentNumberView: UIView?
     private var currentNumberLabel: UILabel?
+    private var currentCollectionID: Int?
     private var compareButton: UIButton?
     private var favoriteButton: UIButton?
     
@@ -854,12 +859,24 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     @objc
     private func compareButtonTapped() {
-        
+        // TODO: Not implemented yet
     }
     
     @objc
     private func favoriteButtonTapped() {
         
+        guard let index = self.currentCollectionID else {
+            return
+        }
+        
+        guard viewModel?.collectionDetails.count ?? 0 > index, let model = viewModel?.collectionDetails[index] else {
+            return
+        }
+        
+        let collectionID = model.id
+        UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+            self.deleteItem(model.id)
+        }
     }
     
     private func createNavigationBarContainer() -> UIView {
@@ -909,6 +926,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             array.insert(watchlist, at: 0)
         }
         viewModel?.collectionDetails = CollectionsManager.shared.convertToModel(array)
+        dprint("initViewModelsFromData ended \(viewModel?.collectionDetails.count ?? 0)", profileId: 30)
     }
     
     private func initViewModels() {
@@ -1004,14 +1022,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             let asyncGroup = DispatchGroup()
             asyncGroup.enter()
             UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
+                dprint("getProfileCollections ended", profileId: 30)
                 asyncGroup.leave()
             }
             asyncGroup.enter()
             CollectionsManager.shared.reloadTop20 {
+                dprint("reloadTop20 ended", profileId: 30)
                 asyncGroup.leave()
             }
             asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
+                dprint("reloadCollectionIfNeeded started", profileId: 30)
                 self?.reloadCollectionIfNeeded()
             }
         } else {
@@ -1032,7 +1053,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             self.onDiscoverCollections?(false)
             return
         }
-        
+        dprint("getRemoteData started", profileId: 30)
         getRemoteData(loadProfile: true) {
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()

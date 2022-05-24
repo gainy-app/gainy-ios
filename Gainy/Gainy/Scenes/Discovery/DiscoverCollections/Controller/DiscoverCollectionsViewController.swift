@@ -278,14 +278,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         searchCollectionView = UICollectionView(
             frame: CGRect(
                 x: 0,
-                y: navigationBarTopOffset,
+                y: blurView.frame.origin.y + blurView.frame.height,
                 width: view.bounds.width,
                 height: view.bounds.height - navigationBarTopOffset
             ),
             collectionViewLayout: CollectionSearchController.createLayout([.loader])
         )
         view.addSubview(searchCollectionView)
-        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        searchCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 8)
         searchCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
@@ -494,8 +494,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     // MARK: Properties
     
-    private lazy var sections: [SectionLayout] = [
-        CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+    private lazy var sections: [SectionLayout] = [NoCollectionsSectionLayout(),
         YourCollectionsSectionLayout(),
         RecommendedCollectionsSectionLayout(),
     ]
@@ -785,8 +784,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func initViewModels() {
         
         guard let dataSource = dataSource else {return}
-        sections = [
-            CollectionsManager.shared.watchlistCollection != nil ? WatchlistSectionLayout() : NoCollectionsSectionLayout(),
+        sections = [NoCollectionsSectionLayout(),
             YourCollectionsSectionLayout(),
             RecommendedCollectionsSectionLayout()
         ]
@@ -802,7 +800,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snap.deleteSections([.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections])
         }
         snap.appendSections(sections.count > 3 ? [.watchlist, .yourCollections, .topGainers, .topLosers, .recommendedCollections] : [.watchlist, .yourCollections, .recommendedCollections])
-        snap.appendItems(viewModel?.watchlistCollections ?? [], toSection: .watchlist)
         snap.appendItems(viewModel?.yourCollections ?? [], toSection: .yourCollections)
         
         if let top1 = viewModel?.topGainers, !top1.isEmpty {
@@ -889,13 +886,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             .map { CollectionViewModelMapper.map($0) }
         
         
-        if let watchlist = CollectionsManager.shared.watchlistCollection {
-            let watchDTO: YourCollectionViewCellModel = CollectionViewModelMapper.map(CollectionDTOMapper.map(watchlist))
-            viewModel?.watchlistCollections.removeAll()
-            viewModel?.watchlistCollections.insert(watchDTO, at: 0)
-        } else {
-            viewModel?.watchlistCollections.removeAll()
-        }
+        viewModel?.watchlistCollections.removeAll()
         //Gainers
         if let topTickers = CollectionsManager.shared.topTickers {
             let topTickers1: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topGainers, isGainers: true)
@@ -1052,7 +1043,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
                 width: UIScreen.main.bounds.width - (16 + 16),
                 height: 92
             ),
-            cornerRadius: 8
+            cornerRadius: 18
         )
         previewParams.visiblePath = path
         

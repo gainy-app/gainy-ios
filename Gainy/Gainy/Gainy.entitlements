@@ -11,7 +11,10 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>applinks:app.gainy.application.ios</string>
-		<string>applinks:gainy.page.link</string>
+		<string>applinks:gainy.app.link</string>
+		<string>applinks:gainy-alternate.app.link</string>
+		<string>applinks:gainy.test-app.link</string>
+		<string>applinks:gainy-alternate.test-app.link</string>
 	</array>
 </dict>
 </plist>

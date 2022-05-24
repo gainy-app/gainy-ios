@@ -408,7 +408,7 @@ struct ScatterChartView: View {
                     Image(uiImage: UIImage(named:viewModel.localTicker.medianGrow >= 0 ? "small_up" : "small_down")!)
                         .resizable()
                         .frame(width: 8, height: 8)
-                    Text("\(viewModel.localTicker.medianGrow.cleanTwoDecimal)%".replacingOccurrences(of: "-", with: ""))
+                    Text("\(selectedTag == .d1 ? (viewModel.relatedCollection1DGain * 100.0).cleanOneDecimal : viewModel.localTicker.medianGrow.cleanOneDecimal)%".replacingOccurrences(of: "-", with: ""))
                         .foregroundColor(UIColor(named: viewModel.localTicker.medianGrow >= 0 ? "mainGreen" : "mainRed")!.uiColor)
                         .font(UIFont.proDisplaySemibold(12).uiFont)
                 }

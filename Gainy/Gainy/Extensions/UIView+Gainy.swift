@@ -31,4 +31,6 @@ extension UIView {
             return UIImage(cgImage: image!.cgImage!)
         }
     }
+    
+        
 }

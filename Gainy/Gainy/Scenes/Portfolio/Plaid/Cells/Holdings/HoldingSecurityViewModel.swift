@@ -99,11 +99,15 @@ struct HoldingSecurityViewModel {
 
 extension String {
     var companyMarkRemoved: String {
-        let list = ["Inc", "Ltd", "Plc", "Holdings", "(International)", "(Corporation)", "Corporation", "Incorporated", "Limited", "International S.A", "S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", "Company", "Co. Class A", "Co. Class B", "Class A", "Class B", "Warrants", "International", " & Co", "Co", "Co.", "Global Inc"]
+        let list = ["Inc", "Ltd", "Plc", "Holdings", "(International)", "(Corporation)", "Corporation", "Incorporated", "Limited", "International S.A", "S.A", "International Corporation", "Corp", "Holding Co. Ltd", "Corp. Common Shares", "Common Stock when-issued", "Common stock", " Company", "Co. Class A", "Co. Class B", "Class A", "Class B", "Warrants", "International", "& Co", "Co", "Co.", "Global Inc"]
         var old = self
         for ltd in list {
             if let dotRange = old.range(of: ltd), !old.hasPrefix(ltd){
-                old.removeSubrange(dotRange.lowerBound..<old.endIndex)
+                let replace = old[dotRange]
+                if old.hasSuffix(replace) {
+                    old.removeSubrange(dotRange.lowerBound..<old.endIndex)
+                    old = old.trimmingCharacters(in: .whitespacesAndNewlines)
+                }
             }
         }
         return old
@@ -134,7 +138,11 @@ extension GetPlaidHoldingsQuery.Data.ProfileHoldingGroup.Holding {
                 if rawType == "crypto" {
                     return .crypto
                 } else {
-                    return .cash
+                    if rawType == "mutual fund" {
+                        return .share
+                    } else {
+                        return .cash
+                    }
                 }
             }
         }

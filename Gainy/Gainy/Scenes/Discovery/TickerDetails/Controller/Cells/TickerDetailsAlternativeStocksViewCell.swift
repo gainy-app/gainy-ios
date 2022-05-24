@@ -16,7 +16,7 @@ protocol TickerDetailsAlternativeStocksViewCellDelegate: AnyObject {
 
 final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
     
-    static let cellHeight: CGFloat = 144.0 + 18.0 + 20 + 42
+    static let cellHeight: CGFloat = 144.0 + 18.0 + 20 + 42 + 6.0
     
     private let cellWidth: CGFloat = 144.0
     
@@ -27,6 +27,8 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
             innerCollectionView.register(UINib.init(nibName: HomeTickerInnerTableViewCell.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier)
+            innerCollectionView.clipsToBounds = false
+            innerCollectionView.scrollIndicatorInsets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: -5.0, right: 0.0)
         }
     }
     
@@ -43,6 +45,7 @@ extension TickerDetailsAlternativeStocksViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeTickerInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.clipsToBounds = false
         cell.stock = tickerInfo?.altStocks[indexPath.row]
         return cell
     }

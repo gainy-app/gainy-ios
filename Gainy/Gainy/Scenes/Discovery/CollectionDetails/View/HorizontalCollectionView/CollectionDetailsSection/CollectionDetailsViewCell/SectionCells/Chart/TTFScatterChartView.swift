@@ -130,6 +130,9 @@ struct TTFScatterChartView: View {
     }
     
     private var isChartGrows: Bool {
+        if selectedTag == .d1 {
+            return viewModel.dayGrow >= 0.0
+        }
         return viewModel.chartData.startEndDiff >= 0.0
     }
     

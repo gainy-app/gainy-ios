@@ -49,6 +49,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.gainy.application.ios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>gainyios</string>
@@ -60,6 +62,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>app.gainy.application.ios</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>app.gainy.application.ios</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gainy</string>
 			</array>
 		</dict>
 	</array>
@@ -168,5 +180,14 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>branch_app_domain</key>
+	<string>gainy.app.link</string>
+	<key>branch_key</key>
+	<dict>
+		<key>live</key>
+		<string>key_live_nmXSPGe8UjzCW1ozom6FNkkbswoG6p3W</string>
+		<key>test</key>
+		<string>key_test_pa0TNLe6PmqA5XdsjqrxLdafCsaO6sdk</string>
+	</dict>
 </dict>
 </plist>

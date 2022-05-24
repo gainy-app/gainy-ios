@@ -7,8 +7,13 @@
 
 import UIKit
 import AppTrackingTransparency
+import StoreKit
 
 class NotificationManager: NSObject {
+    
+    static let defaultTimerIntervalInSeconds = 30
+    static let minutesInAppRequiredToShowReview = 25
+    
     // Notifications
     static let userLogoutNotification = Notification.Name.init("userLogoutNotification")
     static let userLoginNotification = "userLoginNotification"
@@ -17,6 +22,8 @@ class NotificationManager: NSObject {
     static let portoTabPressedNotification = Notification.Name.init("portoTabPressedNotification")
     static let appBecomeActiveNotification = Notification.Name.init("appBecomeActiveNotification")
     static let subscriptionChangedNotification = Notification.Name.init("subscriptionChangedNotification")
+    static let requestOpenHomeNotification = Notification.Name.init("requestOpenHomeNotification")
+    static let requestOpenCollectionWithIdNotification = Notification.Name.init("requestOpenCollectionWithIdNotification")
     
     // Singleton
     static let shared = NotificationManager()
@@ -71,6 +78,100 @@ class NotificationManager: NSObject {
             }
             
         }
+    }
+    
+    private var timer: Timer?
+    @UserDefault<Int>("timeSpentInSeconds_prod_1.0")
+    private var timeSpentInSeconds: Int?
+    
+    @UserDefault<Int>("addedTTFsCount_prod_1.0")
+    private var addedTTFsCount: Int?
+    
+    @UserDefault<Bool>("reviewWasShown_prod_1.0")
+    private var reviewWasShown: Bool?
+    
+    public func increaseTTFsAdded() {
+        
+        if let shown = self.reviewWasShown, shown == true {
+            return
+        }
+        
+        var addedTTFsCount = self.addedTTFsCount ?? 0
+        addedTTFsCount += 1
+        self.addedTTFsCount = addedTTFsCount
+        
+        if addedTTFsCount >= 3 {
+            self.requestAppReviewForm()
+        }
+    }
+    
+    public func startObservingTimeSpent() {
+        
+        if let shown = self.reviewWasShown, shown == true {
+            return
+        }
+        
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("didEnterBackground"),
+                         name: UIApplication.didEnterBackgroundNotification,
+                         object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
+                         selector: NSSelectorFromString("willEnterForeground"),
+                         name: UIApplication.willEnterForegroundNotification,
+                         object: nil)
+        self.restartTimer()
+    }
+    
+    @objc
+    private func didEnterBackground() {
+        self.stopTimer()
+    }
+    
+    @objc
+    private func willEnterForeground() {
+        self.restartTimer()
+    }
+    
+    private func stopTimer() {
+        
+        self.timer?.invalidate()
+    }
+    
+    private func restartTimer() {
+        
+        self.stopTimer()
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(NotificationManager.defaultTimerIntervalInSeconds),
+                                          target: self,
+                                          selector: #selector(updateTimer),
+                                          userInfo: nil,
+                                          repeats: true)
+    }
+    
+    @objc
+    private func updateTimer() {
+        
+        var timeSpentInSeconds = self.timeSpentInSeconds ?? 0
+        timeSpentInSeconds += NotificationManager.defaultTimerIntervalInSeconds
+        self.timeSpentInSeconds = timeSpentInSeconds
+        
+        if timeSpentInSeconds / 60 >= NotificationManager.minutesInAppRequiredToShowReview {
+            self.requestAppReviewForm()
+        }
+    }
+    
+    public func requestAppReviewForm() {
+        
+        if let shown = self.reviewWasShown, shown == true {
+            return
+        }
+        
+        self.timer?.invalidate()
+        self.reviewWasShown = true
+        SKStoreReviewController.requestReview()
     }
     
     func showMessage(title: String, text: String, cancelTitle: String?, actions: Array<UIAlertAction>?) {

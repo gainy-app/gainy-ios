@@ -188,9 +188,9 @@ extension HomeDataSource: UITableViewDelegate {
         
         headerView.addSubview(headerLabel)
         if section == Section.articles.rawValue || section == Section.watchlist.rawValue {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 180))
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
         } else {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 0, left: 24, bottom: 16, right: 180))
+            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
         }
         
         let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
@@ -230,7 +230,7 @@ extension HomeDataSource: UITableViewDelegate {
     func newSortByButton() -> (ResponsiveButton, UILabel) {
         let button = ResponsiveButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
         button.backgroundColor = UIColor(hexString: "F7F8F9")
         
@@ -290,7 +290,7 @@ extension HomeDataSource: UITableViewDelegate {
                 return 0.0
             }
             
-            return 40.0
+            return 60.0
         }
     }
 }

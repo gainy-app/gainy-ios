@@ -14,9 +14,10 @@ import FloatingPanel
 final class HomeViewController: BaseViewController {
     
     var mainCoordinator: MainCoordinator?
+    weak var authorizationManager: AuthorizationManager?
     
     //MARK: - Inner
-    private let viewModel = HomeViewModel()
+    private var viewModel: HomeViewModel!
     private var refreshControl = UIRefreshControl()
     
     //MARK: - Inner
@@ -36,9 +37,6 @@ final class HomeViewController: BaseViewController {
             tableView.backgroundColor = .clear
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
-            tableView.dataSource = viewModel.dataSource
-            tableView.delegate = viewModel.dataSource
-            viewModel.dataSource.delegate = self
             tableView.refreshControl = refreshControl
             refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         }
@@ -60,6 +58,11 @@ final class HomeViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel = HomeViewModel(authorizationManager: authorizationManager)
+        tableView.dataSource = viewModel.dataSource
+        tableView.delegate = viewModel.dataSource
+        viewModel.dataSource.delegate = self
+        
         setupPanel()
     }
     
@@ -69,17 +72,21 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
-        if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
-            nameLbl.text = "Hi, \(first) \(last)"
-        } else {
-            nameLbl.text = ""
-        }
         tableView.isSkeletonable = true
+        nameLbl.text = ""
+        nameLbl.skeletonCornerRadius = 6
+        nameLbl.showAnimatedGradientSkeleton()
         view.showAnimatedGradientSkeleton()
-        viewModel.loadHomeData { [weak tableView, weak refreshControl] in
+        viewModel.loadHomeData { [weak tableView, weak refreshControl, weak nameLbl] in
             refreshControl?.endRefreshing()
             tableView?.hideSkeleton()
             tableView?.reloadData()
+            if let first = UserProfileManager.shared.firstName, let last = UserProfileManager.shared.lastName {
+                nameLbl?.text = "Hi, \(first) \(last)"
+            } else {
+                nameLbl?.text = ""
+            }
+            nameLbl?.hideSkeleton()
         }
     }
     
@@ -211,7 +218,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
-        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, collection: collection)
+        mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
     }
     
     func tickerSelected(ticker: RemoteTicker) {
@@ -278,5 +285,42 @@ extension HomeViewController: SortCollectionsViewControllerDelegate {
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortFavCollections()
         self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
+    
+    func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
+        self.mutateFavouriteCollections(isAdded: isAdded, collectionID: collectionID)
+    }
+    
+    func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
+        
+        self.tableView.reloadData()
+    }
+    
+    private func mutateFavouriteCollections(isAdded: Bool, collectionID: Int) {
+        
+        if isAdded {
+            if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
+                UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
+                }
+                CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
+                    self.viewModel.loadHomeData {
+                        self.viewModel.sortFavCollections()
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        } else {
+            if let _ = UserProfileManager.shared.favoriteCollections.firstIndex(of: collectionID) {
+                UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
+                    self.viewModel.loadHomeData {
+                        self.viewModel.sortFavCollections()
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
 }

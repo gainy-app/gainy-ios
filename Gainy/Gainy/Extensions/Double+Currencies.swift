@@ -122,6 +122,18 @@ extension Float {
         return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
     }
     
+    var priceShort: String {
+        guard self != 0.0 else {return ""}
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        formatter.locale = Locale.current
+        
+        let number = NSNumber(value: self)
+        let formattedValue = formatter.string(from: number)!
+        return formattedValue.hasPrefix("-") ? "-$\(String(formattedValue.dropFirst()))" : "$\(formattedValue)"
+    }
+    
     var priceRaw: String {
         guard self != 0.0 else {return ""}
         let formatter = NumberFormatter()

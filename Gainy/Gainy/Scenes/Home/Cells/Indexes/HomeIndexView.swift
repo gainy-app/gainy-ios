@@ -20,7 +20,7 @@ final class HomeIndexView: CornerView {
                 nameLbl.text = indexModel.name
                 if indexModel.grow != 0 {
                 growImgView.image = indexModel.grow >= 0.0 ? UIImage(named: "small_up") : UIImage(named: "small_down")
-                growLbl.text = indexModel.grow.percentUnsigned
+                    growLbl.text = indexModel.grow.percentUnsigned
                 growLbl.textColor = UIColor(named: indexModel.grow >= 0.0 ? "mainGreen" : "mainRed")
                 } else {
                     growImgView.image = nil
@@ -29,7 +29,7 @@ final class HomeIndexView: CornerView {
                 }
                 
                 if indexModel.value != 0 {
-                    valueLbl.text = indexModel.value.cleanTwoDecimalUnsigned
+                    valueLbl.text = indexModel.name == "Bitcoin" ? indexModel.value.priceShort : indexModel.value.zeroDecimalUnsigned
                 } else {
                     valueLbl.text = "-"
                 }
@@ -50,19 +50,28 @@ final class HomeIndexView: CornerView {
     private func setupView() {
         self.backgroundColor = .white
         
-        layer.cornerRadius = 8.0
-        layer.masksToBounds = true
+        addDashedBorder()
+    }
+    
+    private var dashLayer: CAShapeLayer?
+    func addDashedBorder() {
+        guard dashLayer == nil else {return}
+        let color = UIColor(hexString: "#B1BDC8")!.cgColor
         
-        // Set masks to bounds to false to avoid the shadow
-        // from being clipped to the corner radius
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = false
+        let shapeLayer:CAShapeLayer = CAShapeLayer()
+        let frameSize = self.frame.size
+        let shapeRect = CGRect(x: 0, y: 0, width: frameSize.width, height: frameSize.height)
         
-        // Apply a shadow
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.10
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 0)
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeColor = color
+        shapeLayer.lineWidth = 1
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPattern = [1, 3]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 16).cgPath
+        self.layer.addSublayer(shapeLayer)
+        self.dashLayer = shapeLayer
     }
     
     override func layoutSubviews() {
@@ -71,7 +80,12 @@ final class HomeIndexView: CornerView {
         // Improve scrolling performance with an explicit shadowPath
         layer.shadowPath = UIBezierPath(
             roundedRect: bounds,
-            cornerRadius: 8.0
+            cornerRadius: 16.0
+        ).cgPath
+        
+        dashLayer?.path = UIBezierPath(
+            roundedRect: bounds,
+            cornerRadius: 16.0
         ).cgPath
     }
 }

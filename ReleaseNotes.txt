@@ -1,16 +1,15 @@
-iOS v1.3 #205 available
+iOS v1.3.2 #219 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
 :new: New:
-• TTF compare median
+• -
 
 :hammer_and_wrench: Improvements
-• Purchases UI init
-• Glitches fixes
+• Fix Home Screen UI issues (WL and Alternative stocks shadow + offsets)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
 
 :eyes: What to check:
-TTF
+New + Improvements items

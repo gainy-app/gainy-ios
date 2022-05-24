@@ -68,8 +68,8 @@
                         <color key="textColor" red="0.40784313729999999" green="0.45098039220000002" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Market Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0So-wB-bOp">
-                        <rect key="frame" x="16" y="94" width="221" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Market Data Market Data Market Data Market Data Market Data" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0So-wB-bOp">
+                        <rect key="frame" x="16" y="94" width="208.5" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="KSp-DI-osd"/>
                         </constraints>
@@ -86,8 +86,8 @@
                     <constraint firstAttribute="bottom" secondItem="0So-wB-bOp" secondAttribute="bottom" constant="16" id="R01-Yn-l6D"/>
                     <constraint firstItem="WN0-rX-yuH" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" id="UQT-dx-JRa"/>
                     <constraint firstAttribute="trailing" secondItem="WN0-rX-yuH" secondAttribute="trailing" id="UYC-Zj-W30"/>
+                    <constraint firstItem="KVc-p6-0hP" firstAttribute="leading" secondItem="0So-wB-bOp" secondAttribute="trailing" constant="4" id="VNc-ga-6cX"/>
                     <constraint firstAttribute="trailing" secondItem="IjT-e4-KRd" secondAttribute="trailing" constant="16" id="VQI-Lq-N1u"/>
-                    <constraint firstAttribute="trailing" secondItem="0So-wB-bOp" secondAttribute="trailing" constant="80" id="aep-WM-TK8"/>
                     <constraint firstItem="l1y-dO-yui" firstAttribute="top" secondItem="yL9-gr-Xng" secondAttribute="top" constant="16" id="auD-Vx-Nup"/>
                     <constraint firstAttribute="bottom" secondItem="WN0-rX-yuH" secondAttribute="bottom" id="bYU-4i-1zN"/>
                     <constraint firstItem="IjT-e4-KRd" firstAttribute="leading" secondItem="KVc-p6-0hP" secondAttribute="trailing" constant="8" id="cxV-9k-jIR"/>

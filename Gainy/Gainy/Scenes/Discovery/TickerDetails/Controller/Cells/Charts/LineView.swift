@@ -58,15 +58,15 @@ public struct LineView: View {
                 ZStack{
                     GeometryReader{ reader in
                         
-                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
-                        HLine()
-                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
-                            .foregroundColor(Color(hex: "E0E6EA"))
-                            .frame(height: 1)
-                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
-                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
-                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
-                        }
+//                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
+//                        HLine()
+//                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
+//                            .foregroundColor(Color(hex: "E0E6EA"))
+//                            .frame(height: 1)
+//                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
+//                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
+//                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
+//                        }
                         
                         if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,
@@ -109,9 +109,15 @@ public struct LineView: View {
         guard data.points.count > 0 else {return .zero}
         
         let points = data.onlyPoints()
-        let lastDayPointIndex: Int = viewModel.lastDayPrice == 0.0 ? 1 : (points.firstIndex(where: {
-            viewModel.lastDayPrice < Float($0)
-        }) ?? 1)
+        var lastDayPointIndex: Int = 1
+        
+        let searchVal: Double = Double(viewModel.lastDayPrice)
+        for i in 1...points.count - 2 {
+            if points[i - 1] <= searchVal && searchVal <= points[i + 1] {
+                lastDayPointIndex = i
+                break
+            }
+        }
         let stepHeight: CGFloat = (frame.size.height - 30) / CGFloat(points.max()! - points.min()!)
         return CGPoint(x: 0,
                        y: (frame.size.height - 25) - CGFloat(points[lastDayPointIndex] - points.min()!) * stepHeight)

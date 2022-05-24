@@ -10,6 +10,7 @@ import SwiftDate
 import BugfenderSDK
 import OneSignal
 import RevenueCat
+import Branch
 
 struct AppProfileMetricsSetting {
     
@@ -26,7 +27,11 @@ final class UserProfileManager {
     
     weak var authorizationManager: AuthorizationManager?
     @UserDefaultArray(key: "favoriteCollections")
-    var favoriteCollections: [Int]
+    var favoriteCollections: [Int] {
+        didSet {
+            print("favoriteCollections \(favoriteCollections.first ?? -1)")
+        }
+    }
     
     @UserDefault<BrokerData>("selectedBrokerToTrade")
     public var selectedBrokerToTrade: BrokerData?
@@ -92,6 +97,7 @@ final class UserProfileManager {
         isPlaidLinked = false
     }
     
+    private var configuration = Configuration()
     public func fetchProfile(completion: @escaping (_ success: Bool) -> Void) {
         
         guard let profileID = self.profileID else {
@@ -99,7 +105,11 @@ final class UserProfileManager {
             return
         }
         OneSignal.setExternalUserId("\(profileID)")
+        OneSignal.disablePush(false)
         SubscriptionManager.shared.storage.getViewedCollections()
+        if configuration.environment == .production {
+            Branch.getInstance().setIdentity("\(profileID)")
+        }
         Network.shared.apollo.clearCache()
         Network.shared.apollo.fetch(query: GetProfileQuery(profileID: profileID)){ [weak self] result in
             
@@ -225,6 +235,11 @@ final class UserProfileManager {
             async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
             let (favsRes, recommenededRes, recommendedIDsRes, topTickersRes) = await (favs, recommeneded, recommendedIDs, topTickers)
             
+            dprint("favsRes \(favsRes)", profileId: 30)
+            dprint("recommenededRes \(recommenededRes)", profileId: 30)
+            dprint("recommendedIDsRes \(recommendedIDsRes)", profileId: 30)
+            dprint("topTickersRes \(topTickersRes)", profileId: 30)
+            
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
                 runOnMain {
@@ -253,6 +268,7 @@ final class UserProfileManager {
             self.yourCollections = favsRes.map {
                 CollectionDTOMapper.map($0)
             }.reorder(by: self.favoriteCollections)
+            dprint("completion loading", profileId: 30)
             completion(true)
         }
         
@@ -284,6 +300,7 @@ final class UserProfileManager {
                 
                 
                 runOnMain {
+                    NotificationManager.shared.increaseTTFsAdded()
                     completion(true)
                 }
             }

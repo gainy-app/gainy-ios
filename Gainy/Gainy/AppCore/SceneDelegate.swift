@@ -4,12 +4,13 @@ import FirebaseAuth
 import OneSignal
 import FirebaseDynamicLinks
 import GoogleSignIn
+import Branch
 
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // MARK: Internal
     private(set) var preloadVC: ConfigLoaderViewController = ConfigLoaderViewController.instantiate(.popups)
-    
+    private var configuration = Configuration()
     // MARK: Properites
     
     var window: UIWindow?
@@ -36,11 +37,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         appCoordinator.start(with: nil)
         
-        Settings.setAdvertiserTrackingEnabled(true)
-        
+        if configuration.environment == .production {
         if let userActivity = connectionOptions.userActivities.first {
-            DeeplinkHandler.shared.handleActivity(userActivity)
+            BranchScene.shared().scene(scene, continue: userActivity)
+        } else if !connectionOptions.urlContexts.isEmpty {
+            BranchScene.shared().scene(scene, openURLContexts: connectionOptions.urlContexts)
         }
+        }
+        
+        Settings.setAdvertiserTrackingEnabled(true)
         
         var isFromPush = connectionOptions.notificationResponse != nil
         var fbParams: [String : AnyHashable] = ["source": isFromPush ? "push" : "normal"]
@@ -99,6 +104,11 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        if configuration.environment == .production {
+        BranchScene.shared().scene(scene, openURLContexts: URLContexts)
+        }
+        
         guard let url = URLContexts.first?.url else {
             return
         }
@@ -113,20 +123,17 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     //MARK: - Deeplinks
     
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        if configuration.environment == .production {
+        BranchScene.shared().scene(scene, continue: userActivity)
+        }
+    }
+    
     func application(_ application: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey: Any])
     -> Bool {
-        if DeeplinkHandler.shared.handleCustomScheme(url) {
-            return true
-        }
         return GIDSignIn.sharedInstance.handle(url)
     }
-    
-    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        DeeplinkHandler.shared.handleActivity(userActivity)
-    }
-    
-    
     
     func sceneWillEnterForeground(_: UIScene) {
         if !UIDevice.current.hasTopNotch {

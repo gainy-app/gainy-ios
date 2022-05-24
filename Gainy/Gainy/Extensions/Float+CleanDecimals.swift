@@ -21,6 +21,10 @@ extension Float {
             : String(format: "%.2f", locale: .current, self).replacingOccurrences(of: "-", with: "").replacingOccurrences(of: "+", with: "")
     }
     
+    var zeroDecimalUnsigned: String {
+        String(format: "%.0f", locale: .current, self)
+    }
+    
     var zeroDecimalP: String {
         String(format: "%.0f", locale: .current, self) + "%"
     }

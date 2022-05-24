@@ -104,9 +104,8 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 frame: CGRect.zero,
                 collectionViewLayout: collectionId == Constants.CollectionDetails.compareCollectionID ? cmpLayout : layout
             )
-            let offset = self.showShortCollectionDetails ? 0 : 72
             view.addSubview(collectionView)
-            collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: CGFloat(offset))
+            collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: CGFloat(72.0))
             collectionView.autoPinEdge(.leading, to: .leading, of: view)
             collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
             collectionView.autoPinEdge(.bottom, to: .bottom, of: view)
@@ -205,8 +204,14 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                                                      animated: false)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        delegate?.collectionClosed(vc: self, collectionID: collectionId)
+//        hideLoader()
+//    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         delegate?.collectionClosed(vc: self, collectionID: collectionId)
         hideLoader()
     }

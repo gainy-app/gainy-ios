@@ -35,8 +35,12 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     fileprivate func initialSetup() {
         self.title = NSLocalizedString("Main", comment: "")
         
-        
-        selectedIndex = 1
+        //Discovery is Default
+        if Auth.auth().currentUser?.uid != nil {
+            selectedIndex = 0
+        } else {
+            selectedIndex = 1
+        }
         
         tabBar.barStyle = .default
         tabBar.isTranslucent = false
@@ -71,7 +75,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             let appearance = self.tabBar.standardAppearance
             appearance.shadowImage = nil
             appearance.shadowColor = nil
-            appearance.backgroundColor = .white
             self.tabBar.standardAppearance = appearance
             self.tabBar.tintColor = UIColor.Gainy.mainText
         }
