@@ -107,7 +107,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(tableListModeButton)
         tableListModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         tableListModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
-        tableListModeButton.autoPinEdge(.top, to: .bottom, of: chartModeButton, withOffset: 24.0)
+        //tableListModeButton.autoPinEdge(.top, to: .bottom, of: chartModeButton, withOffset: 24.0)
         tableListModeButton.skeletonCornerRadius = 6
         tableListModeButton.addTarget(self, action: #selector(tableListModeButtonTapped), for: .touchUpInside)
         
@@ -120,6 +120,8 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         sortByButton.autoSetDimension(.height, toSize: 24.0)
         sortByButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0 - topInset)
         
+        tableListModeButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)
+
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder")
         sortByButton.addSubview(reorderIconImageView)
@@ -156,7 +158,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
         
-        settingsButton.layer.cornerRadius = 12
+        settingsButton.layer.cornerRadius = 8
         settingsButton.layer.cornerCurve = .continuous
         settingsButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
@@ -352,7 +354,8 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         for element in pieChartData {
             let separatoeSegment = PieChartSegment(color: .white, value: separatorValue)
             segments.append(separatoeSegment)
-            let color = (index <= 6 ? colors[index] : colors[7]) ?? UIColor.white
+            let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
+
             let segment = PieChartSegment(color: color, value: CGFloat((element.weight ?? 0.0) * 100.0))
             segments.append(segment)
             index = index + 1
@@ -361,20 +364,22 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         let pieChartView = PieChartView()
         pieChartView.translatesAutoresizingMaskIntoConstraints = false
         
-        pieChartView.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: 400)
+        var size = 240
+        pieChartView.frame = CGRect(x: 0, y: 0, width: size, height: size)
+
         pieChartView.segments = segments
         self.addSubview(pieChartView)
         pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0 - topInset)
-        var size = self.frame.size.width - 40 * 2
+
         pieChartView.autoSetDimensions(to: CGSize.init(width: size, height: size))
         pieChartView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
         
         let overlayView = UIView.newAutoLayout()
         overlayView.backgroundColor = self.backgroundColor
         pieChartView.addSubview(overlayView)
-        size = self.frame.size.width - 50 * 2
+        size = size - 20
         overlayView.layer.masksToBounds = true
-        overlayView.layer.cornerRadius = size / 2
+        overlayView.layer.cornerRadius = CGFloat(size / 2)
         overlayView.autoCenterInSuperview()
         overlayView.autoSetDimensions(to: CGSize.init(width: size, height: size))
         self.chartView = pieChartView
@@ -401,7 +406,11 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
         middleContentView.addSubview(titleLabel)
-        titleLabel.autoPinEdge(toSuperviewEdge: .bottom)
+//        if mode != .tickers {
+            titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+//        } else {
+//            titleLabel.autoPinEdge(toSuperviewEdge: .bottom)
+//        }
         titleLabel.autoPinEdge(toSuperviewEdge: .left)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
         titleLabel.autoSetDimension(.height, toSize: 16.0)
@@ -410,74 +419,76 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         titleLabel.text = title
         titleLabel.sizeToFit()
         
-        let todayLabel = UILabel()
-        todayLabel.font = UIFont.compactRoundedMedium(14)
-        todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
-        todayLabel.numberOfLines = 1
-        todayLabel.textAlignment = .left
-        middleContentView.addSubview(todayLabel)
-        todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-        todayLabel.autoPinEdge(toSuperviewEdge: .left)
-        todayLabel.autoSetDimension(.height, toSize: 14.0)
-        todayLabel.autoSetDimension(.width, toSize: 37.0)
-        todayLabel.isSkeletonable = true
-        todayLabel.isHiddenWhenSkeletonIsActive = true
-        todayLabel.text = "Today"
-        todayLabel.sizeToFit()
-      
-        let arrowView = UIImageView()
-        arrowView.isSkeletonable = true
-        arrowView.isHiddenWhenSkeletonIsActive = true
-        middleContentView.addSubview(arrowView)
-        arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
-        arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
-        arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
-        arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
-        
-        let totalChangeAbsoluteLabel = UILabel()
-        totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
-        totalChangeAbsoluteLabel.numberOfLines = 1
-        totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
-        totalChangeAbsoluteLabel.textAlignment = .left
-        totalChangeAbsoluteLabel.isSkeletonable = true
-        totalChangeAbsoluteLabel.linesCornerRadius = 6
-        middleContentView.addSubview(totalChangeAbsoluteLabel)
-        totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-        totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
-        totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
-        totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
-        totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
-        ? UIColor.Gainy.mainGreen
-        : UIColor.Gainy.mainRed
-        totalChangeAbsoluteLabel.sizeToFit()
-        
-        let dotView: UIView = UIView.newAutoLayout()
-        dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-        dotView.layer.cornerRadius = 1.0
-        dotView.layer.masksToBounds = true
-        middleContentView.addSubview(dotView)
-        dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
-        dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
-        dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
-        
-        let totalChangeRelativeLabel = UILabel()
-        totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
-        totalChangeRelativeLabel.numberOfLines = 1
-        totalChangeRelativeLabel.lineBreakMode = .byTruncatingTail
-        totalChangeRelativeLabel.textAlignment = .left
-        totalChangeRelativeLabel.isSkeletonable = true
-        totalChangeRelativeLabel.linesCornerRadius = 6
-        middleContentView.addSubview(totalChangeRelativeLabel)
-        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-        totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
-        totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: dotView, withOffset: 4.0)
-        totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right)
-        let valueString = abs((relativeSumChange * 100.0)).percentRaw
-        totalChangeRelativeLabel.text = valueString
-        totalChangeRelativeLabel.textColor = relativeSumChange >= 0.0
-        ? UIColor.Gainy.mainGreen
-        : UIColor.Gainy.mainRed
-        totalChangeRelativeLabel.sizeToFit()
+//        if mode == .tickers {
+//            let todayLabel = UILabel()
+//            todayLabel.font = UIFont.compactRoundedMedium(14)
+//            todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
+//            todayLabel.numberOfLines = 1
+//            todayLabel.textAlignment = .left
+//            middleContentView.addSubview(todayLabel)
+//            todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+//            todayLabel.autoPinEdge(toSuperviewEdge: .left)
+//            todayLabel.autoSetDimension(.height, toSize: 14.0)
+//            todayLabel.autoSetDimension(.width, toSize: 37.0)
+//            todayLabel.isSkeletonable = true
+//            todayLabel.isHiddenWhenSkeletonIsActive = true
+//            todayLabel.text = "Today"
+//            todayLabel.sizeToFit()
+//
+//            let arrowView = UIImageView()
+//            arrowView.isSkeletonable = true
+//            arrowView.isHiddenWhenSkeletonIsActive = true
+//            middleContentView.addSubview(arrowView)
+//            arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
+//            arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+//            arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
+//            arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
+//
+//            let totalChangeAbsoluteLabel = UILabel()
+//            totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
+//            totalChangeAbsoluteLabel.numberOfLines = 1
+//            totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
+//            totalChangeAbsoluteLabel.textAlignment = .left
+//            totalChangeAbsoluteLabel.isSkeletonable = true
+//            totalChangeAbsoluteLabel.linesCornerRadius = 6
+//            middleContentView.addSubview(totalChangeAbsoluteLabel)
+//            totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+//            totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
+//            totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
+//            totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
+//            totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
+//            ? UIColor.Gainy.mainGreen
+//            : UIColor.Gainy.mainRed
+//            totalChangeAbsoluteLabel.sizeToFit()
+//
+//            let dotView: UIView = UIView.newAutoLayout()
+//            dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
+//            dotView.layer.cornerRadius = 1.0
+//            dotView.layer.masksToBounds = true
+//            middleContentView.addSubview(dotView)
+//            dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
+//            dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
+//            dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
+//
+//            let totalChangeRelativeLabel = UILabel()
+//            totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
+//            totalChangeRelativeLabel.numberOfLines = 1
+//            totalChangeRelativeLabel.lineBreakMode = .byTruncatingTail
+//            totalChangeRelativeLabel.textAlignment = .left
+//            totalChangeRelativeLabel.isSkeletonable = true
+//            totalChangeRelativeLabel.linesCornerRadius = 6
+//            middleContentView.addSubview(totalChangeRelativeLabel)
+//            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
+//            totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
+//            totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: dotView, withOffset: 4.0)
+//            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right)
+//            let valueString = abs((relativeSumChange * 100.0)).percentRaw
+//            totalChangeRelativeLabel.text = valueString
+//            totalChangeRelativeLabel.textColor = relativeSumChange >= 0.0
+//            ? UIColor.Gainy.mainGreen
+//            : UIColor.Gainy.mainRed
+//            totalChangeRelativeLabel.sizeToFit()
+//        }
         
         self.setupChartButtons(mode: mode)
     }
