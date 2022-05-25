@@ -811,6 +811,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
         }
         CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            dprint("initialCollectionsLoading ended", profileId: 30)
             DispatchQueue.main.async {
                 self?.initViewModelsFromData()
                 self?.hideLoader()
@@ -937,7 +938,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             snapshot.appendSections([.collectionWithCards])
             snapshot.appendItems((viewModel?.collectionDetails ?? []),
                                  toSection: .collectionWithCards)
-            
+            dprint("initViewModels appendItems ended", profileId: 30)
             dataSource?.apply(snapshot, animatingDifferences: false, completion: {
                 
             })
@@ -1015,6 +1016,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        dprint("viewWillAppear load", profileId: 30)
         if self.needTop20Reload {
             TickerLiveStorage.shared.clearMatchData()
             showNetworkLoader()
@@ -1032,11 +1034,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
             asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
-                dprint("reloadCollectionIfNeeded started", profileId: 30)
+                dprint("reloadCollectionIfNeeded enter", profileId: 30)
                 self?.reloadCollectionIfNeeded()
             }
         } else {
             reloadCollectionIfNeeded()
+            dprint("reloadCollectionIfNeeded enter", profileId: 30)
         }
     }
     

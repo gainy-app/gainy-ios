@@ -164,18 +164,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     self?.hideSkeleton()
                     self?.viewModel.isDataLoaded = true
                     self?.collectionView.reloadData()
-                    
-                    SubscriptionManager.shared.getSubscription {[weak self] type in
-                        if type == .free {
-                            if self?.collectionView.sk.isSkeletonActive ?? true {
-                                self?.removeBlockView()
-                            } else {
-                                self?.addBlockView()
-                            }
-                        } else {
-                            self?.removeBlockView()
-                        }
-                    }
                 }
             }
         }
@@ -835,13 +823,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 if type == .free {
                     if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
                         headerView.removeBlur()
+                        headerView.removeBlockView()
                     } else {
                         headerView.addBlur(top: 0)
+                        headerView.addBlockView()
                     }
                 } else {
                     headerView.removeBlur()
+                    headerView.removeBlockView()
                 }
             })
+            headerView.clipsToBounds = false
             result = headerView
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)

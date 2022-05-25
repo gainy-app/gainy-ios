@@ -60,9 +60,9 @@ extension UIView {
         blockView.tag = -12
         addSubview(blockView)
         
-        blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 8.0)
-        blockView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16 + 64 + 16)
-        blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 8.0)
+        blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
+        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
+        blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 0)
     }
     
     func removeBlockView() {

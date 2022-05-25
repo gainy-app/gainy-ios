@@ -38,12 +38,12 @@ final class TTFBlockView: TKPassThroughView {
                 amountView.backgroundColor = UIColor(hexString: "#0062FF")
                 unlockBtn.setTitle("Show details".uppercased(), for: .normal)
                 header.text = "Wanna check details?"
-                tipLbl.text = "With a free plan, you can only view 3 TTFs per month."
+                tipLbl.text = "With a free plan, you can only view\n3 TTFs per month."
             } else {
                 amountView.backgroundColor = UIColor(hexString: "#F9557B")
                 unlockBtn.setTitle("Unlock details".uppercased(), for: .normal)
                 header.text = "Oops, you used it all."
-                tipLbl.text = "You have watched 3 free TTFs this month. Switch to Gainy Premium to see Match Score and composition for all TTFs."
+                tipLbl.text = "You have watched 3 free TTFs this month.\nSwitch to Gainy Premium to see Match Score\nand composition for all TTFs."
             }
         }
     }
@@ -51,11 +51,10 @@ final class TTFBlockView: TKPassThroughView {
     lazy var header: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.textColor = .white
+        label.textColor = UIColor.Gainy.mainText
         label.text = "Wanna check details?"
-        label.font = .compactRoundedSemibold(20)
+        label.font = .proDisplaySemibold(20.0)
         label.isUserInteractionEnabled = false
-        label.minimumScaleFactor = 0.1
         return label
     }()
     
@@ -72,7 +71,7 @@ final class TTFBlockView: TKPassThroughView {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .white
-        label.text = "0/3 opened"
+        label.text = "3 / 3 TTFs opened"
         label.font = .compactRoundedSemibold(14)
         label.isUserInteractionEnabled = false
         return label
@@ -81,20 +80,27 @@ final class TTFBlockView: TKPassThroughView {
     lazy var tipLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textColor = .white
-        label.text = "With a free plan, you can only view 3 TTFs per month."
+        label.textColor = UIColor.Gainy.mainText
+        label.text = "With a free plan, you can only view\n3 TTFs per month."
         label.font = .compactRoundedMedium(16)
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.isUserInteractionEnabled = false
         return label
     }()
     
     lazy var unlockBtn: UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.font = .compactRoundedMedium(16)
-        btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(UIColor(hexString: "3BF06E"), for: .normal)
         btn.setTitle("Show details".uppercased(), for: .normal)
         btn.layer.cornerRadius = 20
+    
+        let backGradientView = GradientPlainBackgroundView()
+        backGradientView.startColor = UIColor(hexString: "1B44F7")
+        backGradientView.endColor = UIColor(hexString: "357CFD")
+        backGradientView.startPoint = .init(x: 0, y: 0.5)
+        backGradientView.endPoint = .init(x: 1, y: 0.5)
+        btn.addSubview(backGradientView)
+        backGradientView.autoPinEdgesToSuperviewEdges()
         
         btn.backgroundColor = UIColor(hexString: "#1B45FB")!
         btn.layer.shadowColor = UIColor(hexString: "4484FF")!.cgColor
@@ -120,40 +126,33 @@ final class TTFBlockView: TKPassThroughView {
     private var cancellable = Set<AnyCancellable>()
     
     fileprivate func setupView() {
-        
-        backgroundColor = UIColor(hexString: "09141F")!.withAlphaComponent(0.88)
-        layer.cornerRadius = 32.0
-        clipsToBounds = true
-        
         addSubview(header)
         
-        header.autoPinEdge(.top, to: .top, of: self, withOffset: 24)
-        header.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
-        header.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -143)
+        header.autoPinEdge(.top, to: .top, of: self, withOffset: 20)
+        header.autoAlignAxis(toSuperviewAxis: .vertical)
         
         addSubview(amountView)
-        amountView.autoPinEdge(.top, to: .top, of: self, withOffset: 24)
-        amountView.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
+        amountView.autoPinEdge(.top, to: .bottom, of: header, withOffset: 16)
+        amountView.autoAlignAxis(toSuperviewAxis: .vertical)
         amountView.autoSetDimension(.height, toSize: 24)
-        amountView.autoSetDimension(.width, toSize: 88)
         
         amountView.addSubview(amountLbl)
         amountLbl.autoPinEdgesToSuperviewEdges(with: .init(top: 4, left: 8, bottom: 4, right: 8))
         amountLbl.autoSetDimension(.height, toSize: 16)
         
         addSubview(tipLbl)
-        tipLbl.autoPinEdge(.top, to: .bottom, of: header, withOffset: 16)
+        tipLbl.autoPinEdge(.top, to: .bottom, of: amountView, withOffset: 16)
         tipLbl.autoAlignAxis(toSuperviewAxis: .vertical)
         tipLbl.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
         tipLbl.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
         
         addSubview(unlockBtn)
-        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 24)
+        unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 40)
         unlockBtn.autoAlignAxis(toSuperviewAxis: .vertical)
-        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 24)
-        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -24)
-        unlockBtn.autoSetDimension(.height, toSize: 48)
-        unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -24)
+        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
+        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
+        unlockBtn.autoSetDimension(.height, toSize: 56)
+        unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -16)
         
         SubscriptionManager.shared.storage.collectionsViewedPublisher
             .receive(on: DispatchQueue.main)
@@ -163,7 +162,7 @@ final class TTFBlockView: TKPassThroughView {
             } else {
                 self?.state = .haveMore
             }
-                self?.amountLbl.text = "\(count)/\(SubscriptionManager.shared.storage.collectionViewLimit) opened"
+                self?.amountLbl.text = "\(count) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
         }.store(in: &cancellable)
     }
 }
