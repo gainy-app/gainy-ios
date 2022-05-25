@@ -738,6 +738,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     // MARK: Functions
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
+        dprint("getRemoteData start", profileId: 30)
         guard haveNetwork else {
             NotificationManager.shared.showError("Sorry... No Internet connection right now.")
             GainyAnalytics.logEvent("no_internet")
@@ -752,6 +753,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                             completion()
                             return
                         }
+                        dprint("getRemoteData reauth start", profileId: 30)
                         self.getRemoteData(completion: completion)
                     } else {
                         completion()
@@ -766,7 +768,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if (loadProfile) {
             Network.shared.apollo.clearCache()
             UserProfileManager.shared.fetchProfile { success in
-                
+                dprint("fetchProfile ended", profileId: 30)
                 if let profileId = UserProfileManager.shared.profileID {
                     SubscriptionManager.shared.login(profileId: profileId)
                     SubscriptionManager.shared.getSubscription { _ in
@@ -798,8 +800,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         
         if !CollectionsManager.shared.collections.isEmpty {
+            dprint("!CollectionsManager.shared.collections.isEmpty", profileId: 30)
             if let lastLoadDate = CollectionsManager.shared.lastLoadDate {
                 if Date() < lastLoadDate + 15.minutes {
+                    dprint("Date() < lastLoadDate + 15.minutes", profileId: 30)
                     self.hideLoader()
                     completion()
                     return
@@ -810,7 +814,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 return
             }
         }
+        dprint("initialCollectionsLoading start", profileId: 30)
         CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            dprint("initialCollectionsLoading ended", profileId: 30)
             DispatchQueue.main.async {
                 self?.initViewModelsFromData()
                 self?.hideLoader()
@@ -930,6 +936,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func initViewModels() {
+        dprint("initViewModels appendItems start", profileId: 30)
         if var snapshot = dataSource?.snapshot() {
             if snapshot.sectionIdentifiers.count > 0 {
                 snapshot.deleteSections([.collectionWithCards])
@@ -937,7 +944,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             snapshot.appendSections([.collectionWithCards])
             snapshot.appendItems((viewModel?.collectionDetails ?? []),
                                  toSection: .collectionWithCards)
-            
+            dprint("initViewModels appendItems ended", profileId: 30)
             dataSource?.apply(snapshot, animatingDifferences: false, completion: {
                 
             })
@@ -1016,6 +1023,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.needTop20Reload {
+            dprint("needTop20Reload start", profileId: 30)
             TickerLiveStorage.shared.clearMatchData()
             showNetworkLoader()
             
@@ -1036,12 +1044,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.reloadCollectionIfNeeded()
             }
         } else {
+            dprint("needTop20Reload not needed start", profileId: 30)
             reloadCollectionIfNeeded()
         }
     }
     
     private func reloadCollectionIfNeeded() {
         if Auth.auth().currentUser != nil {
+            dprint("reloadCollection start", profileId: 30)
             self.reloadCollection()
         }
     }
@@ -1055,6 +1065,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         dprint("getRemoteData started", profileId: 30)
         getRemoteData(loadProfile: true) {
+            dprint("getRemoteData ended", profileId: 30)
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()

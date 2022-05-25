@@ -150,7 +150,7 @@ final class HomeWatchlistInnerTableViewCell: UICollectionViewCell {
                 self.absoluteChangeLbl.textColor = UIColor.Gainy.mainRed
             }
             
-            self.nameLbl.text = ticker?.name ?? ""
+            self.nameLbl.text = ticker?.name?.companyMarkRemoved ?? ""
             self.absoluteValueLbl.text = (ticker?.currentPrice ?? 0.0).priceRaw
             self.tickerSymbolLbl.text = "\(ticker?.symbol ?? "")"
             self.tickerSymbolLbl.sizeToFit()
