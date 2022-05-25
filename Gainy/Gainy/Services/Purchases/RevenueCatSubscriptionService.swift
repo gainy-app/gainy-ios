@@ -81,11 +81,52 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         }
     }
     
+    private var products: [StoreProduct] = []
     func getProducts() {
         
     }
     
     func purchaseProduct(productId: String) {
         
+    }
+    
+    func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
+        Purchases.shared.restorePurchases {[weak self] (customerInfo, error) in
+            self?.handleInfo(customerInfo, error: error)
+            completion(self?.innerType ?? .free)
+        }
+    }
+    
+    func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
+        func promote(_ completion: @escaping (SuscriptionType) -> Void) {
+            let headers = [
+             "Accept": "application/json",
+            "Content-Type": "application/json",
+             "Authorization": "Bearer \(Constants.RevenueCat.apiKey)"
+            ]
+        
+            let parameters = ["duration": type.rawValue] as [String : Any]
+
+            let postData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+            let request = NSMutableURLRequest(url: NSURL(string: "https://api.revenuecat.com/v1/subscribers/\(UserProfileManager.shared.profileID ?? 0)/entitlements/\(ettl)/promotional")! as URL,
+                                                    cachePolicy: .useProtocolCachePolicy,
+                                                timeoutInterval: 10.0)
+            request.httpMethod = "POST"
+            request.allHTTPHeaderFields = headers
+            request.httpBody = postData
+            
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: request as URLRequest, completionHandler: {[weak self] (data, response, error) -> Void in
+              if (error != nil) {
+                  dprint("Promotion error: \(error?.localizedDescription ?? "")")
+              } else {
+                  self?.innerType = nil
+                  self?.innerDate = nil
+                  self?.getSubscription(completion)
+              }
+            })
+            dataTask.resume()
+        }        
     }
 }

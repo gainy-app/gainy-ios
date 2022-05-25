@@ -39,4 +39,14 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     func purchaseProduct(productId: String) {
         
     }
+    
+    func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
+        print("Restored")
+        completion(.free)
+    }
+    
+    func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
+        print("Promoted")
+        completion(.free)
+    }
 }

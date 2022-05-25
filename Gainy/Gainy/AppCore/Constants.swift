@@ -59,6 +59,10 @@ struct Constants {
         
         static let showPortoCash = "showPortoCash"
         static let showPortoCrypto = "showPortoCrypto"
+        
+        static let monthPurchaseVariant = "monthPurchase"
+        static let month6PurchaseVariant = "month6Purchase"
+        static let yearPurchaseVariant = "yearPurchase"
     }
     
     struct Links {
@@ -85,6 +89,10 @@ struct Constants {
     struct RemoteConfig {
         static let isPortoCash = "isPortoCashEnabled"
         static let isPortoCrypto = "isPortoCryptoEnabled"
+        
+        static let monthPurchase = "monthPurchase"
+        static let month6Purchase = "month6Purchase"
+        static let yearPurchase = "yearPurchase"
     }
     
     struct OneSignal {
@@ -94,5 +102,6 @@ struct Constants {
     struct RevenueCat {
         static let appId = "appf92c1b5c1c"
         static let publicKey = "appl_frKqXzekPjQXwJaYRTwGkPSuCiF"
+        static let apiKey = "sk_MdiBlajVcgjEMeOCIeKVqzhRSLUfY"
     }
 }

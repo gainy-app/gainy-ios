@@ -180,10 +180,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
         // Load all data
-        // hideSkeleton()
-        
+        // hideSkeleton()        
     }
-    
+        
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
         

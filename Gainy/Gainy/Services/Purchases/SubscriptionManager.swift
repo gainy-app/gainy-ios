@@ -12,8 +12,8 @@ protocol SubscriptionManagerProtocol: SubscriptionServiceProtocol{
     var storage: PurchaseInfoStorageProtocol { get }
 }
 
-enum ProductVariant: String {
-    case a, b, c
+enum ProductVariant: String, Codable {
+    case a = "A", b = "B", c = "C"
 }
 
 enum Product {
@@ -86,7 +86,6 @@ class SubscriptionManager: SubscriptionManagerProtocol {
 
 extension SubscriptionManager: SubscriptionServiceProtocol {
     
-    
     func setup() {
         service.setup()
     }
@@ -119,5 +118,13 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
     
     func purchaseProduct(productId: String) {
         service.purchaseProduct(productId: productId)
+    }
+    
+    func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
+        service.restorePurchases(completion)
+    }
+    
+    func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
+        service.grantPromotion(type, completion)
     }
 }
