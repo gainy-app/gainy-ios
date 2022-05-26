@@ -60,7 +60,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         setupPanel()
         
         //self.toggleBtn.isHidden = self.showShortCollectionDetails
-        self.shareBtn.isHidden = self.showShortCollectionDetails
+        self.shareBtn.isHidden = true
         if self.showShortCollectionDetails {
             //self.closeButton.setImage(UIImage.init(named: "closeIconWhite24"), for: UIControl.State.normal)
             self.view.bringSubviewToFront(self.closeButton)

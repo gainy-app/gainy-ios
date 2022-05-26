@@ -140,6 +140,10 @@ extension HomeDataSource: UITableViewDelegate {
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
         }
+        
+        if section == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+            return 0.0
+        }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     

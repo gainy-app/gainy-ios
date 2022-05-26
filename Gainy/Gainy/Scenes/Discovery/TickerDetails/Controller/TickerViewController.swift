@@ -399,7 +399,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     }
     
     func collectionSelected(collection: RemoteCollectionDetails) {
-        coordinator?.showCollectionDetails(collectionID: collection.id ?? -1)
+        coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
     }
 }
 
