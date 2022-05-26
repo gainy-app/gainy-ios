@@ -208,11 +208,13 @@ extension HomeDataSource: UITableViewDelegate {
             sortLabel.sizeToFit()
         }
         
-        headerView.addSubview(button)
-        button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
-        button.autoSetDimension(.height, toSize: 24.0)
-        button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
-        button.sizeToFit()
+        if section != Section.articles.rawValue {
+            headerView.addSubview(button)
+            button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
+            button.autoSetDimension(.height, toSize: 24.0)
+            button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+            button.sizeToFit()
+        }
         
         return headerView
     }

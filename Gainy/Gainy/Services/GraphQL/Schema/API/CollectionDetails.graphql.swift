@@ -129,6 +129,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       image_url
       description
       size
+      enabled
       metrics {
         __typename
         absolute_daily_change
@@ -162,6 +163,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       GraphQLField("image_url", type: .scalar(String.self)),
       GraphQLField("description", type: .scalar(String.self)),
       GraphQLField("size", type: .scalar(Int.self)),
+      GraphQLField("enabled", type: .scalar(String.self)),
       GraphQLField("metrics", type: .object(Metric.selections)),
       GraphQLField("match_score", type: .object(MatchScore.selections)),
     ]
@@ -173,8 +175,8 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     self.resultMap = unsafeResultMap
   }
 
-  public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
-    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name, "image_url": imageUrl, "description": description, "size": size, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
+  public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil, imageUrl: String? = nil, description: String? = nil, size: Int? = nil, enabled: String? = nil, metrics: Metric? = nil, matchScore: MatchScore? = nil) {
+    self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name, "image_url": imageUrl, "description": description, "size": size, "enabled": enabled, "metrics": metrics.flatMap { (value: Metric) -> ResultMap in value.resultMap }, "match_score": matchScore.flatMap { (value: MatchScore) -> ResultMap in value.resultMap }])
   }
 
   public var __typename: String {
@@ -237,6 +239,15 @@ public struct RemoteCollectionDetails: GraphQLFragment {
     }
     set {
       resultMap.updateValue(newValue, forKey: "size")
+    }
+  }
+
+  public var enabled: String? {
+    get {
+      return resultMap["enabled"] as? String
+    }
+    set {
+      resultMap.updateValue(newValue, forKey: "enabled")
     }
   }
 

@@ -193,7 +193,7 @@ class TickerInfo {
                              if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
                                  self?.medianIndustry = mainIndustry.industryId
                              }
-                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
+                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
                              self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
                                  $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
                              }).first?.uniqId ?? ""

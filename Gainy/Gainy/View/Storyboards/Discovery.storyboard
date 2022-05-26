@@ -51,10 +51,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsHeaderViewCell" id="9Rs-wj-W18" customClass="TickerDetailsHeaderViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="412" height="102"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="412" height="134"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Rs-wj-W18" id="xdc-yJ-fA4">
-                                            <rect key="frame" x="0.0" y="0.0" width="412" height="102"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="412" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Activision" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVb-yA-YhU">
@@ -175,7 +175,7 @@
                                                 <constraint firstItem="9qX-Ul-sNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fVb-yA-YhU" secondAttribute="trailing" constant="16" id="lMu-ro-MtA"/>
                                                 <constraint firstItem="qKu-Yr-eF3" firstAttribute="leading" secondItem="lxd-Jp-DXE" secondAttribute="trailing" constant="8" id="lUm-78-QPU"/>
                                                 <constraint firstItem="LS1-5h-LtD" firstAttribute="leading" secondItem="xdc-yJ-fA4" secondAttribute="leading" constant="12" id="rUW-PK-43D"/>
-                                                <constraint firstAttribute="bottom" secondItem="fVb-yA-YhU" secondAttribute="bottom" id="rrN-Cx-hD8"/>
+                                                <constraint firstAttribute="bottom" secondItem="fVb-yA-YhU" secondAttribute="bottom" constant="32" id="rrN-Cx-hD8"/>
                                                 <constraint firstItem="qKu-Yr-eF3" firstAttribute="centerY" secondItem="LS1-5h-LtD" secondAttribute="centerY" id="sTr-DZ-d5J"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
@@ -194,7 +194,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsChartViewCell" rowHeight="100" id="kVv-wA-qYJ" customClass="TickerDetailsChartViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="146.5" width="412" height="100"/>
+                                        <rect key="frame" x="0.0" y="178.5" width="412" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kVv-wA-qYJ" id="bjb-iO-XyG">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="100"/>
@@ -202,7 +202,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsAboutViewCell" rowHeight="240" id="XUF-xV-OXl" customClass="TickerDetailsAboutViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246.5" width="412" height="240"/>
+                                        <rect key="frame" x="0.0" y="278.5" width="412" height="240"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XUF-xV-OXl" id="NYH-Ts-zTk">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="240"/>
@@ -324,7 +324,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsHighlightsViewCell" id="9HG-yh-u6N" customClass="TickerDetailsHighlightsViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="486.5" width="412" height="208"/>
+                                        <rect key="frame" x="0.0" y="518.5" width="412" height="208"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9HG-yh-u6N" id="cvG-fX-Wfk">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="208"/>
@@ -431,7 +431,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsNewsViewCell" id="Lno-YN-tiB" customClass="TickerDetailsNewsViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="694.5" width="412" height="200"/>
+                                        <rect key="frame" x="0.0" y="726.5" width="412" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lno-YN-tiB" id="YNZ-Ez-WX2">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="200"/>
@@ -487,7 +487,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsMarketDataViewCell" id="OnQ-Y7-jo1" customClass="TickerDetailsMarketDataViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="894.5" width="412" height="284"/>
+                                        <rect key="frame" x="0.0" y="926.5" width="412" height="284"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OnQ-Y7-jo1" id="TcR-SE-s3S">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="284"/>
@@ -564,7 +564,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWSRViewCell" id="BOc-Sr-OeK" customClass="TickerDetailsWSRViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1178.5" width="412" height="44"/>
+                                        <rect key="frame" x="0.0" y="1210.5" width="412" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BOc-Sr-OeK" id="EPX-im-HK4">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="44"/>
@@ -607,7 +607,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsRecommendedViewCell" rowHeight="264" id="FC0-zv-JCu" customClass="TickerDetailsRecommendedViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1222.5" width="412" height="264"/>
+                                        <rect key="frame" x="0.0" y="1254.5" width="412" height="264"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FC0-zv-JCu" id="x9l-EW-Ljd">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="264"/>
@@ -832,7 +832,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsAlternativeStocksViewCell" id="VEf-P1-4m6" customClass="TickerDetailsAlternativeStocksViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1486.5" width="412" height="229.5"/>
+                                        <rect key="frame" x="0.0" y="1518.5" width="412" height="229.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VEf-P1-4m6" id="OjT-VH-nQx">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="229.5"/>
@@ -1204,7 +1204,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsUpcomingViewCell" rowHeight="300" id="R5J-Kv-TkC" customClass="TickerDetailsUpcomingViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1716" width="412" height="300"/>
+                                        <rect key="frame" x="0.0" y="1748" width="412" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R5J-Kv-TkC" id="FO8-SI-ijb">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="300"/>
@@ -1307,7 +1307,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="TickerDetailsWatchlistViewCell" id="Aqi-Q5-n3g" customClass="TickerDetailsWatchlistViewCell" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="2016" width="412" height="44"/>
+                                        <rect key="frame" x="0.0" y="2048" width="412" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Aqi-Q5-n3g" id="oYl-nw-A2V">
                                             <rect key="frame" x="0.0" y="0.0" width="412" height="44"/>

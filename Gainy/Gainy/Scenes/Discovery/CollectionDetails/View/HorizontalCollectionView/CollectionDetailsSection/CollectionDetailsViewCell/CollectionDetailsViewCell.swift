@@ -873,9 +873,6 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section {
         case .title:
             let width = collectionView.frame.width
-            guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
-                return CGSize.init(width: width, height: 60.0)
-            }
             let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
             return CGSize.init(width: width, height: 154.0 + 24.0 + headerHeight + 32.0)
         case .gain:
