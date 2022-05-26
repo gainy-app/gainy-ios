@@ -289,9 +289,10 @@ struct ScatterChartView: View {
                 } else {
                     //no_data_graph_down
                     if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
-                        ZStack {
+                        ZStack(alignment: .center) {
                             Image(uiImage: UIImage(named: "no_data_graph_up")!)
-                            VStack(spacing: 8.0) {
+                                .padding(.all, 0)
+                            VStack(alignment: .center, spacing: 8.0) {
                                 
                                 Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
                                     .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
@@ -302,7 +303,7 @@ struct ScatterChartView: View {
                                     .foregroundColor(UIColor(named: "mainText")!.uiColor)
                                     .font(UIFont.compactRoundedSemibold(24).uiFont)
                             }
-                        }
+                        }.padding(.leading, 8)
                     }
                     
                     //                    VStack {

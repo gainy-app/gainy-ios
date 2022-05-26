@@ -816,6 +816,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
         dprint("initialCollectionsLoading start", profileId: 30)
         CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            
+            guard !CollectionsManager.shared.collections.isEmpty else {
+                self?.onDiscoverCollections?(false)
+                return
+            }
+            
             dprint("initialCollectionsLoading ended", profileId: 30)
             DispatchQueue.main.async {
                 self?.initViewModelsFromData()

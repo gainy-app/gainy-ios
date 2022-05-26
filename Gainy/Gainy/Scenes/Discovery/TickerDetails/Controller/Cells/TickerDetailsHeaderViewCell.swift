@@ -20,6 +20,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         isSkeletonable = false
+        compareStocksButton.isHidden = true
     }
     
     override func updateFromTickerData() {

@@ -130,7 +130,7 @@ extension CollectionsManager {
                 switch result {
                 case .success(let graphQLResult):
                     guard let gainersList = graphQLResult.data?.profileCollectionTickersPerformanceRanked  else {
-                        dprint("GetFavoriteCollectionsQuery empty \(graphQLResult)")
+                        dprint("HomeFetchGainersQuery empty \(graphQLResult)")
                         continuation.resume(returning: TopTickers())
                         return
                     }
