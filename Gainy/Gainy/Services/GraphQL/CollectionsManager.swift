@@ -25,7 +25,11 @@ final class CollectionsManager {
     @UserDefault("lastLoadDate")
     var lastLoadDate: Date?
     
-    var collections: [RemoteCollectionDetails] = []
+    var collections: [RemoteCollectionDetails] = [] {
+        didSet {
+            print("Hello there")
+        }
+    }
     var watchlistCollection: RemoteCollectionDetails?
     var topTickers: TopTickers?
     

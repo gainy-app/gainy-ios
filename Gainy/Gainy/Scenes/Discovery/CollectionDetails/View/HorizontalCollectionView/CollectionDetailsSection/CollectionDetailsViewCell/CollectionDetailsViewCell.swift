@@ -913,9 +913,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 32 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
-            for tag in viewModel.combinedTags {
+            for (ind, tag) in viewModel.combinedTags.enumerated() {
                 let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
-                if xPos + width + margin > totalWidth{
+                if xPos + width + margin > totalWidth && ind != 0 {
                     xPos = 0.0
                     yPos = yPos + tagHeight + margin
                     lines += 1

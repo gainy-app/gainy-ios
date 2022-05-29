@@ -115,7 +115,7 @@ extension CollectionsManager {
                                 tags.append(TickerTag(name: (category.name ?? ""), url: category.iconUrl ?? "", collectionID: category.collectionId ?? -404, id: category.id ?? -1))
                             }
                         }
-                        continuation.resume(returning: tags)
+                        continuation.resume(returning: tags.uniqued())
                         break
                     case .failure(let error):
                         dprint("Failure when making GetTtfTagsQuery request. Error: \(error)")

@@ -16,6 +16,16 @@ struct TickerTag {
     let id: Int
 }
 
+extension TickerTag: Hashable {
+    public static func == (lhs: TickerTag, rhs: TickerTag) -> Bool {
+        lhs.name == rhs.name
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.name)
+    }
+}
+
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
 typealias AltStockTicker = RemoteTickerDetails

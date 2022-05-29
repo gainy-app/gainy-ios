@@ -799,21 +799,25 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         
-        if !CollectionsManager.shared.collections.isEmpty {
-            dprint("!CollectionsManager.shared.collections.isEmpty", profileId: 30)
-            if let lastLoadDate = CollectionsManager.shared.lastLoadDate {
-                if Date() < lastLoadDate + 15.minutes {
-                    dprint("Date() < lastLoadDate + 15.minutes", profileId: 30)
-                    self.hideLoader()
-                    completion()
-                    return
-                }
-            } else {
-                self.hideLoader()
-                completion()
-                return
-            }
-        }
+//        if !CollectionsManager.shared.collections.isEmpty {
+//            dprint("!CollectionsManager.shared.collections.isEmpty", profileId: 30)
+//            if let lastLoadDate = CollectionsManager.shared.lastLoadDate {
+//                if Date() < lastLoadDate + 15.minutes {
+//                    dprint("Date() < lastLoadDate + 15.minutes", profileId: 30)
+//                    self.initViewModelsFromData()
+//                    self.hideLoader()
+//                    self.hideSkeletons()
+//                    completion()
+//                    return
+//                }
+//            } else {
+//                self.initViewModelsFromData()
+//                self.hideLoader()
+//                self.hideSkeletons()
+//                completion()
+//                return
+//            }
+//        }
         dprint("initialCollectionsLoading start", profileId: 30)
         CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
             
@@ -858,6 +862,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.addNewCollections(newModels) {
                     completion()
                     self?.hideLoader()
+                    self?.hideSkeletons()
                 }
             }
         }
@@ -1076,6 +1081,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()
                 self?.hideLoader()
+                self?.hideSkeletons()
             }
         }
     }

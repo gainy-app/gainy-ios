@@ -24,6 +24,7 @@ struct CollectionDetailViewCellModel {
     
     mutating func addTags(_ tags: [TickerTag]) {
         combinedTags.append(contentsOf: tags)
+        combinedTags = combinedTags.uniqued()
     }
     
     //Gains
