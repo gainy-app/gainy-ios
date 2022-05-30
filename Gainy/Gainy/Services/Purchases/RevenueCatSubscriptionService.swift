@@ -25,14 +25,17 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         Purchases.shared.logIn("\(profileId)") {[weak self] (customerInfo, created, error) in
             dprint("RevenueCat login \(customerInfo)")
             self?.handleInfo(customerInfo, error: error)
+            self?.getProducts()
         }
     }
     
     private let ettl = "pro"
     func handleInfo(_ customerInfo:CustomerInfo?, error: Error?) {
+        //Checking RC
         if let error = error {
             dprint("RevenueCat error: \(error)")
-            innerType = .pro
+            innerType = .free
+            innerDate = nil
         } else {
             if customerInfo?.entitlements[ettl]?.isActive == true {
                 innerType = .pro
@@ -40,15 +43,28 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
                 
             } else {
-                innerType = .free
-                NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+                //Cehcking our DB
+                if let subscriptionExpiryDate = UserProfileManager.shared.subscriptionExpiryDate {
+                    if Date() < subscriptionExpiryDate  {
+                        innerDate = subscriptionExpiryDate
+                        innerType = .pro
+                        NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
+                    } else {
+                        innerType = .free
+                        innerDate = nil
+                        NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+                    }
+                } else {
+                    innerType = .free
+                    innerDate = nil
+                    NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+                }
             }
-            dprint("RevenueCat sub: \(innerType ?? .free)")
         }
+        dprint("RevenueCat sub: \(innerType ?? .free)")
     }
     
     func setEmail(email: String) {
-
         Purchases.shared.setEmail(email)
     }
     
@@ -83,11 +99,18 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     
     private var products: [StoreProduct] = []
     func getProducts() {
-        
+        let allProducts = Product.allCases.compactMap({$0.identifier})
+        Purchases.shared.getProducts(allProducts) {[weak self] remoteProducts in
+            self?.products = remoteProducts
+        }
     }
     
-    func purchaseProduct(productId: String) {
-        
+    func purchaseProduct(product: Product) {
+        if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
+            Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
+                self?.handleInfo(customerInfo, error: error)
+            }
+        }
     }
     
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {

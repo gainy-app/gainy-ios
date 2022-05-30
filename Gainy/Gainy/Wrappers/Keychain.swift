@@ -23,3 +23,28 @@ struct KeychainString {
         }
     }
 }
+
+@propertyWrapper
+struct KeychainDate {
+    let key: String
+    init(_ key: String) {
+        self.key = key
+    }
+    
+    lazy var dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = ""
+        return df
+    }()
+
+    var wrappedValue: Date? {
+        mutating get {
+            return dateFormatter.date(from: GainyKeychain.shared[self.key] ?? "")
+        }
+        set {
+            if let newValue = newValue {
+                GainyKeychain.shared[self.key] = dateFormatter.string(from: newValue)
+            }
+        }
+    }
+}

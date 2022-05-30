@@ -85,6 +85,10 @@ final class HomeViewModel {
                 authorizationManager.refreshAuthorizationStatus { status in
                     if status == .authorizedFully {
                         guard UserProfileManager.shared.profileID != nil else {
+                            SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
+                            SubscriptionManager.shared.getSubscription { _ in
+                                
+                            }
                             completion()
                             return
                         }
@@ -99,6 +103,12 @@ final class HomeViewModel {
             return
         }
         Network.shared.apollo.clearCache()
+        
+        SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
+        SubscriptionManager.shared.getSubscription { _ in
+            
+        }
+        
         Task {
             let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                              getPortfolioGains(profileId: profielId),

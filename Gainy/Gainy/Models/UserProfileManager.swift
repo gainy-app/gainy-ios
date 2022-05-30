@@ -72,12 +72,15 @@ final class UserProfileManager {
     
     @UserDefault<Int>("linkPlaidID")
     var linkPlaidID: Int?
-    
+        
     var linkedPlaidAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
     var recommendedCollections: [Collection] = []
     var yourCollections: [Collection] = []
+    
+    @KeychainDate("subscriptionExpiryDate")
+    var subscriptionExpiryDate: Date?
     
     public func cleanup() {
         
@@ -95,6 +98,7 @@ final class UserProfileManager {
         profileID = nil
         profileLoaded = false
         isPlaidLinked = false
+        subscriptionExpiryDate = nil
     }
     
     private var configuration = Configuration()

@@ -36,7 +36,7 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
         
     }
     
-    func purchaseProduct(productId: String) {
+    func purchaseProduct(product: Product) {
         
     }
     

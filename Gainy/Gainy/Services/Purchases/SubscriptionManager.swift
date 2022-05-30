@@ -16,10 +16,15 @@ enum ProductVariant: String, Codable {
     case a = "A", b = "B", c = "C"
 }
 
-enum Product {
-    case month(variant: ProductVariant)
-    case month6(variant: ProductVariant)
-    case year(variant: ProductVariant)
+enum Product: CaseIterable {
+    
+    static var allCases: [Product] {
+        return [.month(.a), .month(.b), .month(.c), .month6(.a), .month6(.b), .month6(.c), .year(.a), .year(.b), .year(.c)]
+        }
+    
+    case month(_ variant: ProductVariant)
+    case month6(_ variant: ProductVariant)
+    case year(_ variant: ProductVariant)
     
     var identifier: String {
         switch self {
@@ -116,8 +121,8 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.getProducts()
     }
     
-    func purchaseProduct(productId: String) {
-        service.purchaseProduct(productId: productId)
+    func purchaseProduct(product: Product) {
+        service.purchaseProduct(product: product)
     }
     
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
