@@ -7,6 +7,10 @@ protocol CardDetailsViewModelProtocol {
     //    var collectionDetails: [CollectionDetailViewCellModel] { get set }
 }
 
+protocol TickerViewControllerDelegate {
+    
+    func didUpdateTickerMetrics()
+}
 
 final class TickerViewController: BaseViewController {
     
@@ -15,6 +19,7 @@ final class TickerViewController: BaseViewController {
     weak var coordinator: MainCoordinator?
     
     var viewModel: TickerDetailsViewModel?
+    var delegate: TickerViewControllerDelegate? = nil
     
     //MARK: - Outlets
     @IBOutlet private weak var wlView: UIView!
@@ -451,6 +456,7 @@ extension TickerViewController: MetricsViewControllerDelegate {
     func didDismissMetricsViewController(needRefresh: Bool) {
         
         viewModel?.dataSource.ticker.updateMarketData()
+        self.delegate?.didUpdateTickerMetrics()
         self.tableView.reloadData()
     }
 }
