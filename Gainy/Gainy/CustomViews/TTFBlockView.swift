@@ -26,7 +26,13 @@ class TKPassThroughView: UIView {
     }
 }
 
+protocol TTFBlockViewDelegate: AnyObject {
+    func unlockButtonTapped(showPurchase: Bool)
+}
+
 final class TTFBlockView: TKPassThroughView {
+    
+    weak var delegate: TTFBlockViewDelegate?
     
     enum State {
         case haveMore, noMore
@@ -110,6 +116,8 @@ final class TTFBlockView: TKPassThroughView {
         btn.layer.cornerRadius = 20.0
         btn.clipsToBounds = true
         btn.isUserInteractionEnabled = true
+        
+        btn.addTarget(self, action: #selector(unlockAction), for: .touchUpInside)
         return btn
     }()
     
@@ -164,5 +172,12 @@ final class TTFBlockView: TKPassThroughView {
             }
                 self?.amountLbl.text = "\(count) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
         }.store(in: &cancellable)
+        
+        amountLbl.text = "\(SubscriptionManager.shared.storage.viewedCount) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
+        state = SubscriptionManager.shared.storage.viewedCount == SubscriptionManager.shared.storage.collectionViewLimit ? .noMore : .haveMore
+    }
+    
+    @objc func unlockAction() {
+        delegate?.unlockButtonTapped(showPurchase: state == .noMore)
     }
 }

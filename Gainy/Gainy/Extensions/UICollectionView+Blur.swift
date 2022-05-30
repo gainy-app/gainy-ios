@@ -52,11 +52,12 @@ extension UIView {
         }
     }
     
-    func addBlockView() {
+    func addBlockView(delegate: TTFBlockViewDelegate? = nil) {
         guard subviews.first(where: {
             $0.tag == -12
         }) == nil else {return}
         let blockView = TTFBlockView()
+        blockView.delegate = delegate
         blockView.tag = -12
         addSubview(blockView)
         

@@ -826,7 +826,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                         headerView.removeBlockView()
                     } else {
                         headerView.addBlur(top: 0)
-                        headerView.addBlockView()
+                        headerView.addBlockView(delegate: self)
                     }
                 } else {
                     headerView.removeBlur()
@@ -878,6 +878,8 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) else {return}
+        
         guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
         
@@ -1136,5 +1138,17 @@ extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
         topChart.isSPPVisible = showMedian
         
         GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+    }
+}
+
+extension CollectionDetailsViewCell: TTFBlockViewDelegate {
+    func unlockButtonTapped(showPurchase: Bool) {
+        if showPurchase {
+            print("SHOW PURCHASE VIEW")
+        } else {
+            if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
+                collectionView.reloadData()
+            }            
+        }
     }
 }

@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220518090053.profile_collections"
+    /// fetch data from the table: "public_220530150048.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -1910,8 +1910,8 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("industry_id", type: .nonNull(.scalar(bigint.self))),
-        GraphQLField("industry_order", type: .scalar(bigint.self)),
+        GraphQLField("industry_id", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("industry_order", type: .scalar(Int.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
     }
@@ -1922,7 +1922,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: Int, industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -1935,18 +1935,18 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
       }
     }
 
-    public var industryId: bigint {
+    public var industryId: Int {
       get {
-        return resultMap["industry_id"]! as! bigint
+        return resultMap["industry_id"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_id")
       }
     }
 
-    public var industryOrder: bigint? {
+    public var industryOrder: Int? {
       get {
-        return resultMap["industry_order"] as? bigint
+        return resultMap["industry_order"] as? Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_order")
@@ -2607,8 +2607,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     public static var selections: [GraphQLSelection] {
       return [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("industry_id", type: .nonNull(.scalar(bigint.self))),
-        GraphQLField("industry_order", type: .scalar(bigint.self)),
+        GraphQLField("industry_id", type: .nonNull(.scalar(Int.self))),
+        GraphQLField("industry_order", type: .scalar(Int.self)),
         GraphQLField("gainy_industry", type: .object(GainyIndustry.selections)),
       ]
     }
@@ -2619,7 +2619,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(industryId: bigint, industryOrder: bigint? = nil, gainyIndustry: GainyIndustry? = nil) {
+    public init(industryId: Int, industryOrder: Int? = nil, gainyIndustry: GainyIndustry? = nil) {
       self.init(unsafeResultMap: ["__typename": "ticker_industries", "industry_id": industryId, "industry_order": industryOrder, "gainy_industry": gainyIndustry.flatMap { (value: GainyIndustry) -> ResultMap in value.resultMap }])
     }
 
@@ -2632,18 +2632,18 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
       }
     }
 
-    public var industryId: bigint {
+    public var industryId: Int {
       get {
-        return resultMap["industry_id"]! as! bigint
+        return resultMap["industry_id"]! as! Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_id")
       }
     }
 
-    public var industryOrder: bigint? {
+    public var industryOrder: Int? {
       get {
-        return resultMap["industry_order"] as? bigint
+        return resultMap["industry_order"] as? Int
       }
       set {
         resultMap.updateValue(newValue, forKey: "industry_order")

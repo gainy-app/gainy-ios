@@ -17,7 +17,9 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     
     @UserDefaultArray(key: "Purchases.viewedCollections")
     private var viewedCollections: [Int]
-    
+    var viewedCount: Int {
+        viewedCollections.count
+    }
     
     func getViewedCollections() {
         OneSignal.getTags({[weak self] tags in

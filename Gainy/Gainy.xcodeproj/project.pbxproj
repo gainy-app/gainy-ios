@@ -70,6 +70,8 @@
 		33423B402818200F0023F937 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33423B3F2818200F0023F937 /* BlurEffectView.swift */; };
 		33426C262845506300413AE1 /* DeleteProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33426C252845506300413AE1 /* DeleteProfile.graphql */; };
 		33426C282845510F00413AE1 /* DeleteProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33426C272845510F00413AE1 /* DeleteProfile.graphql.swift */; };
+		33426C2A284551C300413AE1 /* RedeemInvitation.graphq in Resources */ = {isa = PBXBuildFile; fileRef = 33426C29284551C300413AE1 /* RedeemInvitation.graphq */; };
+		33426C2C2845521300413AE1 /* PurchaseUpdate.graphq in Resources */ = {isa = PBXBuildFile; fileRef = 33426C2B2845521300413AE1 /* PurchaseUpdate.graphq */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
 		3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 3342C87926DE0E7F0049763E /* FloatingPanel */; };
 		3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* GainyAnalytics.swift */; };
@@ -664,6 +666,8 @@
 		33423B3F2818200F0023F937 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		33426C252845506300413AE1 /* DeleteProfile.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteProfile.graphql; sourceTree = "<group>"; };
 		33426C272845510F00413AE1 /* DeleteProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfile.graphql.swift; sourceTree = "<group>"; };
+		33426C29284551C300413AE1 /* RedeemInvitation.graphq */ = {isa = PBXFileReference; lastKnownFileType = text; path = RedeemInvitation.graphq; sourceTree = "<group>"; };
+		33426C2B2845521300413AE1 /* PurchaseUpdate.graphq */ = {isa = PBXFileReference; lastKnownFileType = text; path = PurchaseUpdate.graphq; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		3342C87B26DE2DC00049763E /* GainyAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalytics.swift; sourceTree = "<group>"; };
 		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
@@ -2476,6 +2480,8 @@
 				85EDC1432728019F00866AD2 /* DeleteTickerFromWatchlist.graphql */,
 				908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */,
 				33426C252845506300413AE1 /* DeleteProfile.graphql */,
+				33426C29284551C300413AE1 /* RedeemInvitation.graphq */,
+				33426C2B2845521300413AE1 /* PurchaseUpdate.graphq */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2935,6 +2941,7 @@
 				85695AEB27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib in Resources */,
 				85EDC145272801A000866AD2 /* DeleteTickerFromWatchlist.graphql in Resources */,
 				9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */,
+				33426C2A284551C300413AE1 /* RedeemInvitation.graphq in Resources */,
 				8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */,
 				33E1827F26D3999F00A1D2AC /* NewsViewCell.xib in Resources */,
 				335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */,
@@ -2965,6 +2972,7 @@
 				9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */,
+				33426C2C2845521300413AE1 /* PurchaseUpdate.graphq in Resources */,
 				33426C262845506300413AE1 /* DeleteProfile.graphql in Resources */,
 				85ED4DED2703481C00FE6926 /* Categories.graphql in Resources */,
 				85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */,
