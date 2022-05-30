@@ -68,6 +68,8 @@
 		333DAFC627C504BD009C19BE /* HomeSkeletonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */; };
 		33423B3E281814DB0023F937 /* MatchScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33423B3D281814DB0023F937 /* MatchScoreManager.swift */; };
 		33423B402818200F0023F937 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33423B3F2818200F0023F937 /* BlurEffectView.swift */; };
+		33426C262845506300413AE1 /* DeleteProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33426C252845506300413AE1 /* DeleteProfile.graphql */; };
+		33426C282845510F00413AE1 /* DeleteProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33426C272845510F00413AE1 /* DeleteProfile.graphql.swift */; };
 		3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */; };
 		3342C87A26DE0E7F0049763E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 3342C87926DE0E7F0049763E /* FloatingPanel */; };
 		3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* GainyAnalytics.swift */; };
@@ -660,6 +662,8 @@
 		333DAFC527C504BD009C19BE /* HomeSkeletonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSkeletonTableViewCell.swift; sourceTree = "<group>"; };
 		33423B3D281814DB0023F937 /* MatchScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchScoreManager.swift; sourceTree = "<group>"; };
 		33423B3F2818200F0023F937 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
+		33426C252845506300413AE1 /* DeleteProfile.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = DeleteProfile.graphql; sourceTree = "<group>"; };
+		33426C272845510F00413AE1 /* DeleteProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfile.graphql.swift; sourceTree = "<group>"; };
 		3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		3342C87B26DE2DC00049763E /* GainyAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalytics.swift; sourceTree = "<group>"; };
 		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
@@ -1221,6 +1225,7 @@
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
 				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				33426C272845510F00413AE1 /* DeleteProfile.graphql.swift */,
 				901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */,
 				85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */,
 				85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */,
@@ -2470,6 +2475,7 @@
 				85EDC1422728019F00866AD2 /* InsertTickerToWatchlist.graphql */,
 				85EDC1432728019F00866AD2 /* DeleteTickerFromWatchlist.graphql */,
 				908D5BC027A54E90005672C8 /* GetFavouriteCollections.graphql */,
+				33426C252845506300413AE1 /* DeleteProfile.graphql */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2959,6 +2965,7 @@
 				9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
 				85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */,
+				33426C262845506300413AE1 /* DeleteProfile.graphql in Resources */,
 				85ED4DED2703481C00FE6926 /* Categories.graphql in Resources */,
 				85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */,
 				85F2595D27046D5E009DEFFD /* FetchRecommendedCollections.graphql in Resources */,
@@ -3253,6 +3260,7 @@
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
+				33426C282845510F00413AE1 /* DeleteProfile.graphql.swift in Sources */,
 				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
 				85E4A28F27568FEB00C0E5C5 /* InfoDataCell.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
