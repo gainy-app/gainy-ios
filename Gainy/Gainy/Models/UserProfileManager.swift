@@ -349,6 +349,7 @@ final class UserProfileManager {
             }
             
             self.watchlist.append(symbol)
+            completion(true)
         }
     }
     
@@ -370,6 +371,7 @@ final class UserProfileManager {
             self.watchlist.removeAll { element in
                 element == symbol
             }
+            completion(true)
         }
     }
     
