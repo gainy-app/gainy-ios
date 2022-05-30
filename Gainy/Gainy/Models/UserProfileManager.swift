@@ -11,6 +11,7 @@ import BugfenderSDK
 import OneSignal
 import RevenueCat
 import Branch
+import FirebaseAnalytics
 
 struct AppProfileMetricsSetting {
     
@@ -162,6 +163,7 @@ final class UserProfileManager {
                 self.lastName = appProfile.lastName
                 self.email = appProfile.email
                 OneSignal.setEmail(appProfile.email)
+                Analytics.setUserID(appProfile.userId)
                 SubscriptionManager.shared.setEmail(email: appProfile.email)
                 SubscriptionManager.shared.setName(name: "\(appProfile.firstName) \(appProfile.lastName)")
                 self.address = appProfile.legalAddress

@@ -72,13 +72,13 @@ final class GainyAnalytics {
             newParams["uid"] = user.uid
         }
         newParams["ul"] = Locale.current.identifier
-        if Auth.auth().currentUser == nil {
-            notLoggedCache.append((name: name, params: newParams))
-        } else {
-            flushLogs()
+//        if Auth.auth().currentUser == nil {
+//            notLoggedCache.append((name: name, params: newParams))
+//        } else {
+//            flushLogs()
             Analytics.logEvent(name, parameters: newParams)
             AppsFlyerLib.shared().logEvent(name, withValues: newParams)
-        }
+        //}
         
         //    "App is limited to a maximum of 10 tags on a given player"
 //        var oneSignalPrams = newParams
