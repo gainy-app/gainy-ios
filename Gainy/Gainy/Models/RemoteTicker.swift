@@ -399,6 +399,7 @@ class TickerInfo {
             let mainData = ChartData(points: main, period: period)
             let medianData = ChartData(points: median, period: period)
             
+            self.medianGrow = Float(medianData.startEndDiff)
             self.setChartsCache(period, chartData: mainData)
             
             //if dispatchGroup == nil {
