@@ -8,7 +8,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchStockMedian($industryId: bigint!, $period: String!) {
+    query FetchStockMedian($industryId: Int!, $period: String!) {
       industry_median_chart(
         where: {industry_id: {_eq: $industryId}, period: {_eq: $period}}
       ) {
@@ -22,10 +22,10 @@ public final class FetchStockMedianQuery: GraphQLQuery {
 
   public let operationName: String = "FetchStockMedian"
 
-  public var industryId: bigint
+  public var industryId: Int
   public var period: String
 
-  public init(industryId: bigint, period: String) {
+  public init(industryId: Int, period: String) {
     self.industryId = industryId
     self.period = period
   }

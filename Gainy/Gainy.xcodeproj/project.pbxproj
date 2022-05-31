@@ -85,6 +85,7 @@
 		33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFB26C6786200811F74 /* BaseViewController.swift */; };
 		33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CFE26C698BC00811F74 /* MainTabController.swift */; };
 		334F6F5A28252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 334F6F5928252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib */; };
+		33553E412845E8F100E9C4CB /* DetectableCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33553E402845E8F100E9C4CB /* DetectableCollectionView.swift */; };
 		33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */; };
 		33559B6026E8BF9200E61D71 /* TickerLiveStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */; };
 		33559B6226E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */; };
@@ -679,6 +680,7 @@
 		33467CFB26C6786200811F74 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		33467CFE26C698BC00811F74 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		334F6F5928252B74008AA89F /* TickerDetailsMarketInnerViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TickerDetailsMarketInnerViewCell.xib; sourceTree = "<group>"; };
+		33553E402845E8F100E9C4CB /* DetectableCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectableCollectionView.swift; sourceTree = "<group>"; };
 		33559B5D26E88E6C00E61D71 /* FetchLiveTickersData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchLiveTickersData.graphql; sourceTree = "<group>"; };
 		33559B5F26E8BF9200E61D71 /* TickerLiveStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerLiveStorage.swift; sourceTree = "<group>"; };
 		33559B6126E8C00A00E61D71 /* FetchLiveTickersData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchLiveTickersData.graphql.swift; sourceTree = "<group>"; };
@@ -1468,6 +1470,7 @@
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
 				33423B3F2818200F0023F937 /* BlurEffectView.swift */,
 				903707ED2835867E00E3569B /* TTFBlockView.swift */,
+				33553E402845E8F100E9C4CB /* DetectableCollectionView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -3238,6 +3241,7 @@
 				3AFE0C412690CD6700C25A8F /* CardDetailsViewControllerProtocol.swift in Sources */,
 				339A17622714AB0900C9EE1A /* CalendarEventsManager.swift in Sources */,
 				3A3214AA26698FCC00D6778B /* YourCollectionViewCellModel.swift in Sources */,
+				33553E412845E8F100E9C4CB /* DetectableCollectionView.swift in Sources */,
 				336D09FE26D7BD0A0036EB54 /* CollectionListCardCell.swift in Sources */,
 				3A5ADA6D268DA179008659E8 /* SwipeActionTransitioningContext.swift in Sources */,
 				33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */,

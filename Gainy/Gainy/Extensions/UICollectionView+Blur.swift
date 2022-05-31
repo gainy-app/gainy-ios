@@ -52,10 +52,10 @@ extension UIView {
         }
     }
     
-    func addBlockView(delegate: TTFBlockViewDelegate? = nil) {
-        guard subviews.first(where: {
-            $0.tag == -12
-        }) == nil else {return}
+    func addBlockView(delegate: TTFBlockViewDelegate? = nil) ->  TTFBlockView? {
+        if let view = subviews.first(where: {$0.tag == -12}) {
+            return view as? TTFBlockView
+        }
         let blockView = TTFBlockView()
         blockView.delegate = delegate
         blockView.tag = -12
@@ -64,6 +64,7 @@ extension UIView {
         blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
         blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
         blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 0)
+        return blockView
     }
     
     func removeBlockView() {

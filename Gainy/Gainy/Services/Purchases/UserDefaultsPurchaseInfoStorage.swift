@@ -15,7 +15,9 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         3
     }
     
-    @UserDefaultArray(key: "Purchases.viewedCollections")
+    static let colKey: String = "Purchases.viewedCollections"
+    
+    @UserDefaultArray(key: colKey)
     private var viewedCollections: [Int]
     var viewedCount: Int {
         viewedCollections.count
@@ -24,9 +26,10 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     func getViewedCollections() {
         OneSignal.getTags({[weak self] tags in
             for tag in (tags ?? [:]) {
-                print(tag)
+                if tag.key as? String == UserDefaultsPurchaseInfoStorage.colKey {
+                    self?.viewedCollections = (tag.value as? String)?.split(separator: ",").compactMap({Int($0)}) ?? []
+                }
             }
-            self?.viewedCollections  = []
             self?.collectionsViewedSubject.value = self?.viewedCollections.count ?? 0
         }, onFailure: { error in
             dprint("Error getting tags - \(error?.localizedDescription)")
@@ -48,7 +51,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         if !viewedCollections.contains(colId) {
             viewedCollections.append(colId)
             collectionsViewedSubject.value = viewedCollections.count
-            OneSignal.sendTag("Purchases.viewedCollections", value: viewedCollections.compactMap({String($0)}).joined())
+            OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCollections.compactMap({String($0)}).joined())
         }
         return true
     }

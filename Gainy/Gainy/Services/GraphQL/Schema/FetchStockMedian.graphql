@@ -1,4 +1,4 @@
-    query FetchStockMedian($industryId: bigint!, $period: String!) {
+    query FetchStockMedian($industryId: Int!, $period: String!) {
       industry_median_chart(
         where: {industry_id: {_eq: $industryId}, period: {_eq: $period}}
       ) {

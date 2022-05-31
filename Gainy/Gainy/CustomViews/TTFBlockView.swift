@@ -54,7 +54,7 @@ final class TTFBlockView: TKPassThroughView {
         }
     }
     
-    lazy var header: UILabel = {
+    lazy private var header: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = UIColor.Gainy.mainText
@@ -64,7 +64,7 @@ final class TTFBlockView: TKPassThroughView {
         return label
     }()
     
-    lazy var amountView: UIView = {
+    lazy private var amountView: UIView = {
         let label = UIView()
         label.layer.cornerRadius = 8.0
         label.clipsToBounds = true
@@ -73,7 +73,7 @@ final class TTFBlockView: TKPassThroughView {
         return label
     }()
     
-    lazy var amountLbl: UILabel = {
+    lazy private var amountLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
         label.textColor = .white
@@ -83,7 +83,7 @@ final class TTFBlockView: TKPassThroughView {
         return label
     }()
     
-    lazy var tipLbl: UILabel = {
+    lazy private var tipLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = UIColor.Gainy.mainText
@@ -94,7 +94,7 @@ final class TTFBlockView: TKPassThroughView {
         return label
     }()
     
-    lazy var unlockBtn: UIButton = {
+    lazy private(set) var unlockBtn: UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor(hexString: "3BF06E"), for: .normal)
         btn.setTitle("Show details".uppercased(), for: .normal)

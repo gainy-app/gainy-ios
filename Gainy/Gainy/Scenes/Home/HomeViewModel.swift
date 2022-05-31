@@ -104,10 +104,12 @@ final class HomeViewModel {
         }
         Network.shared.apollo.clearCache()
         
+        //Purchasing
         SubscriptionManager.shared.login(profileId: UserProfileManager.shared.profileID ?? 0)
         SubscriptionManager.shared.getSubscription { _ in
             
         }
+        SubscriptionManager.shared.storage.getViewedCollections()
         
         Task {
             let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),

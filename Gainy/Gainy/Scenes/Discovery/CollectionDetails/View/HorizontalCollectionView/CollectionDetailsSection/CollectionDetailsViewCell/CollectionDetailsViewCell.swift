@@ -33,7 +33,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         backgroundColor = .clear
         
         let layout = UICollectionViewFlowLayout.init()
-        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = DetectableCollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
@@ -251,7 +251,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Private
     
     private var isLoadingMoreTickers: Bool = false
-    private(set) var collectionView: UICollectionView!
+    private(set) var collectionView: DetectableCollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
         control.layer.zPosition = -1
@@ -259,6 +259,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
     } ()
+    weak private var blockHeader: TTFBlockView? {
+        didSet {
+            if let blockHeader = blockHeader {
+                collectionView.headerView = blockHeader
+            }
+        }
+    }
     
     private lazy var loadMoreActivityIndicatorView: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
@@ -492,12 +499,12 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 SubscriptionManager.shared.getSubscription({[weak self] type in
                     if type == .free {
                         if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
-                            collectionView.removeBlur()
+                            cell.removeBlur()
                         } else {
                             cell.addBlur()
                         }
                     } else {
-                        collectionView.removeBlur()
+                        cell.removeBlur()
                     }
                 })
             }
@@ -752,6 +759,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         return cell
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         var result: UICollectionReusableView = UICollectionReusableView.newAutoLayout()
@@ -826,7 +834,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                         headerView.removeBlockView()
                     } else {
                         headerView.addBlur(top: 0)
-                        headerView.addBlockView(delegate: self)
+                        self?.blockHeader = headerView.addBlockView(delegate: self)
                     }
                 } else {
                     headerView.removeBlur()
