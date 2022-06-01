@@ -134,6 +134,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
             // This block gets called when the user reacts to a notification received - we actually don't need to handle any other options: user tapped on the notification - app reatced
             let notification: OSNotification = result.notification
+            dprint("Push: \(notification.additionalData ?? [:])")
             if let additionalData = notification.additionalData {
                 if let type = additionalData["t"] as? String {
                     switch type {
