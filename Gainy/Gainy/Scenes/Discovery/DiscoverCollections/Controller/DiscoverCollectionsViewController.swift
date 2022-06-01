@@ -559,9 +559,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         DispatchQueue.global(qos:.utility).async {
             CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) { remoteTickers in
-                Task {
-                    await self.reloadGainers()
-                }
                 runOnMain {
                     self.hideLoader()
                     
@@ -579,6 +576,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.viewModel?.yourCollections.insert(yourCollectionItem, at: 0)
             } else {
                 self.viewModel?.yourCollections.append(yourCollectionItem)
+            }
+            
+            Task {
+                await self.reloadGainers()
             }
             
             if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
