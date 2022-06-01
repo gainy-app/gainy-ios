@@ -319,7 +319,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
-        searchController?.coordinator = coordinator        
+        searchController?.coordinator = coordinator
         NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { _ in
@@ -495,8 +495,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [NoCollectionsSectionLayout(),
-        YourCollectionsSectionLayout(),
-        RecommendedCollectionsSectionLayout(),
+                                                  YourCollectionsSectionLayout(),
+                                                  RecommendedCollectionsSectionLayout(),
     ]
     
     private lazy var customLayout: UICollectionViewLayout = {
@@ -786,8 +786,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         guard let dataSource = dataSource else {return}
         sections = [NoCollectionsSectionLayout(),
-            YourCollectionsSectionLayout(),
-            RecommendedCollectionsSectionLayout()
+                    YourCollectionsSectionLayout(),
+                    RecommendedCollectionsSectionLayout()
         ]
         if let top1 = viewModel?.topGainers, !top1.isEmpty {
             sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
@@ -858,7 +858,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
                     dataSource.apply(snap, animatingDifferences: true)
                 } else {
-                    snap.reloadSections([.topGainers, .topLosers])
+                    snap.deleteSections([.topGainers, .topLosers])
                 }
             }
         }
@@ -899,8 +899,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
             viewModel?.topGainers.removeAll()
             viewModel?.topLosers.removeAll()
-            viewModel?.topGainers = [topTickers1]
-            viewModel?.topLosers = [topTickers2]
+            if viewModel?.yourCollections.isEmpty ?? false {
+                viewModel?.topGainers = []
+                viewModel?.topLosers = []
+            } else {
+                viewModel?.topGainers = [topTickers1]
+                viewModel?.topLosers = [topTickers2]
+            }
         } else {
             viewModel?.topGainers.removeAll()
             viewModel?.topLosers.removeAll()
