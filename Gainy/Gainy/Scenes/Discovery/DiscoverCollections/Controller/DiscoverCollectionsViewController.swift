@@ -632,9 +632,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             if removeFavourite {
                 showNetworkLoader()
                 UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
-                    Task {
-                        await self.reloadGainers()
-                    }
+                    
                     self.hideLoader()
                     self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
                 }
@@ -644,6 +642,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         UserProfileManager.shared.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
+        Task {
+            await self.reloadGainers()
+        }
         
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
@@ -829,8 +830,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
         viewModel?.topGainers.removeAll()
         viewModel?.topLosers.removeAll()
-        viewModel?.topGainers = [topTickers1]
-        viewModel?.topLosers = [topTickers2]
+        if (viewModel?.yourCollections ?? []).isEmpty {
+            viewModel?.topGainers = []
+            viewModel?.topLosers = []
+        } else {
+            viewModel?.topGainers = [topTickers1]
+            viewModel?.topLosers = [topTickers2]
+        }
         await MainActor.run {
             var snap = dataSource.snapshot()
             
