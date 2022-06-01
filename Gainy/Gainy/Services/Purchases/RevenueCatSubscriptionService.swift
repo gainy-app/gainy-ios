@@ -118,8 +118,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     func purchaseProduct(product: Product) {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
-                self?.handleInfo(customerInfo, error: error)
-                if
+                self?.handleInfo(customerInfo, error: error, informFirebase: true)                
             }
         }
     }

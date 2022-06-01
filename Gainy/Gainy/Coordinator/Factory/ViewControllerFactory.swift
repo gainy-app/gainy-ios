@@ -157,6 +157,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiatePurchases() -> PurchaseViewController {
+        let vc = PurchaseViewController.instantiate(.purchases)
+        return vc
+    }
+    
     /// Populating TabBarItem for specific tab
     /// - Parameters:
     ///   - vc: BaseViewController to update

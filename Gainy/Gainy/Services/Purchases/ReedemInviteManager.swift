@@ -10,7 +10,10 @@ import Foundation
 final class RedeemInviteManager {
     static let shared = RedeemInviteManager()
     
+    /// If we have a valid invite
     var isInviteAvaialble: Bool = false
+    
+    /// RefID from deeplink
     var fromId: Int = 0
     
     func redeemInvite() {
@@ -20,7 +23,7 @@ final class RedeemInviteManager {
             Network.shared.apollo.perform(mutation: query) { result in
                 switch result {
                 case .success(let data):
-                    isInviteAvaialble = false
+                    self.isInviteAvaialble = false
                     break
                 case .failure(let error):
                     dprint("Invite error: \(error.localizedDescription)")

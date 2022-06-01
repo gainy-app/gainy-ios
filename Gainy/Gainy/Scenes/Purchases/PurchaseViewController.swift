@@ -5,4 +5,10 @@
 //  Created by Anton Gubarenko on 16.05.2022.
 //
 
-import Foundation
+import UIKit
+
+final class PurchaseViewController: BaseViewController {
+    
+    var coordinator: MainCoordinator?
+    
+}

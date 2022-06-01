@@ -123,7 +123,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
-    
+    var onPurhaseShow: (() -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
@@ -1152,7 +1152,7 @@ extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
 extension CollectionDetailsViewCell: TTFBlockViewDelegate {
     func unlockButtonTapped(showPurchase: Bool) {
         if showPurchase {
-            print("SHOW PURCHASE VIEW")
+            onPurhaseShow?()
         } else {
             if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
                 collectionView.reloadData()

@@ -352,6 +352,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
                 }
+                cell.onPurhaseShow = { [weak self] in
+                    self?.coordinator?.showPurchaseView()
+                }
                 
             }
             return cell
