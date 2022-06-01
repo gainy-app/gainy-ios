@@ -216,6 +216,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         let vc = self.viewControllerFactory.instantiatePurchases()
         vc.coordinator = self
         vc.modalTransitionStyle = .coverVertical
+        vc.modalPresentationStyle = .fullScreen
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_purchase_view")
     }
