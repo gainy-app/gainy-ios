@@ -339,6 +339,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         showNetworkLoader()
         getRemoteData(loadProfile: true ) {
             DispatchQueue.main.async { [weak self] in
+                self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+                if let frame = UserProfileManager.shared.yourCollections.isEmpty ? self?.fullSerachFieldFrame : self?.smallSerachFieldFrame {
+                    UIView.animate(withDuration: 0.3) {
+                        self?.searchTextField?.frame = frame
+                    }
+                }
                 self?.initViewModels()
                 self?.hideLoader()
             }
@@ -442,17 +448,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         searchTextField?.resignFirstResponder()
         
-        let oldFrame = CGRect(
-            x: 16,
-            y: 24,
-            width: self.view.bounds.width - (16 + 16 + 32 + 20),
-            height: 40
-        )
+        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
         UIView.animate(withDuration: 0.3) {
             self.discoverCollectionsCollectionView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
-            self.searchTextField?.frame = oldFrame
+            self.searchTextField?.frame = frame
         }
     }
     
@@ -476,12 +477,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.discoverCollectionsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.showCollectionDetailsBtn?.alpha = 0.0
-            self.searchTextField?.frame = CGRect(
-                x: 16,
-                y: 24,
-                width: self.view.bounds.width - (16 + 16),
-                height: 40
-            )
+            self.searchTextField?.frame = self.fullSerachFieldFrame
         }
     }
     
@@ -504,6 +500,26 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
+    }()
+    
+    private var smallSerachFieldFrame: CGRect = {
+        let frame = CGRect(
+            x: 16,
+            y: 24,
+            width: UIScreen.main.bounds.width - (16 + 16 + 32 + 20),
+            height: 40
+        )
+        return frame
+    }()
+    
+    private var fullSerachFieldFrame: CGRect = {
+        let frame = CGRect(
+            x: 16,
+            y: 24,
+            width: UIScreen.main.bounds.width  - (16 + 16),
+            height: 40
+        )
+        return frame
     }()
     
     private var discoverCollectionsCollectionView: UICollectionView!
@@ -604,6 +620,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 UserProfileManager.shared.yourCollections.append(collection)
             }
             
+            self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+            let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
+            UIView.animate(withDuration: 0.3) {
+                self.searchTextField?.frame = frame
+            }
+            
             if var snapshot = self.dataSource?.snapshot() {
                 if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
                     if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
@@ -645,6 +667,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         UserProfileManager.shared.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         Task {
             await self.reloadGainers()
+        }
+        
+        showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
+        UIView.animate(withDuration: 0.3) {
+            self.searchTextField?.frame = frame
         }
         
         guard var snapshot = dataSource?.snapshot() else {return}
