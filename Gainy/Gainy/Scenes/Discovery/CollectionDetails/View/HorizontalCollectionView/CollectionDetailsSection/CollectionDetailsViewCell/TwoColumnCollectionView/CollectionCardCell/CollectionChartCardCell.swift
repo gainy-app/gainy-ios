@@ -53,11 +53,11 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
             nameLabel.autoSetDimension(.height, toSize: 24.0)
 
-            contentView.addSubview(totalPriceLabel)
-            totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
-            totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
-            totalPriceLabel.autoSetDimension(.height, toSize: 24.0)
-            totalPriceLabel.autoPinEdge(.left, to: .right, of: nameLabel, withOffset: 12.0)
+//            contentView.addSubview(totalPriceLabel)
+//            totalPriceLabel.autoPinEdge(.right, to: .right, of: contentView, withOffset: -16.0)
+//            totalPriceLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
+//            totalPriceLabel.autoSetDimension(.height, toSize: 24.0)
+//            totalPriceLabel.autoPinEdge(.left, to: .right, of: nameLabel, withOffset: 12.0)
             
             contentView.addSubview(totalChangeRelativeLabel)
             totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 53.0)
@@ -129,8 +129,8 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         nameLabel.text = data.entityName?.companyMarkRemoved
         nameLabel.sizeToFit()
         
-        totalPriceLabel.text = (data.absoluteValue ?? 0.0).price
-        totalPriceLabel.sizeToFit()
+//        totalPriceLabel.text = (data.absoluteValue ?? 0.0).price
+//        totalPriceLabel.sizeToFit()
         
         let colors = UIColor.Gainy.pieChartColors
         let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
@@ -164,7 +164,7 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         super.prepareForReuse()
         
         nameLabel.text = ""
-        totalPriceLabel.text = ""
+//        totalPriceLabel.text = ""
         totalChangeRelativeLabel.text = ""
         percentLabel.text = ""
     }
@@ -289,17 +289,17 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         return label
     }()
     
-    lazy var totalPriceLabel: UILabel = {
-        let label = UILabel()
-        
-        label.font = .proDisplayBold(16.0)
-        label.textColor = UIColor.init(hexString: "#09141F")
-        label.numberOfLines = 1
-        label.lineBreakMode = .byTruncatingTail
-        label.textAlignment = .right
-        label.isSkeletonable = true
-        label.linesCornerRadius = 6
-        
-        return label
-    }()
+//    lazy var totalPriceLabel: UILabel = {
+//        let label = UILabel()
+//
+//        label.font = .proDisplayBold(16.0)
+//        label.textColor = UIColor.init(hexString: "#09141F")
+//        label.numberOfLines = 1
+//        label.lineBreakMode = .byTruncatingTail
+//        label.textAlignment = .right
+//        label.isSkeletonable = true
+//        label.linesCornerRadius = 6
+//
+//        return label
+//    }()
 }
