@@ -170,6 +170,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let refId = params?["refId"] as? String {
                     dprint("Got invite install from \(refId)")
                     GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
+                    RedeemInviteManager.shared.isInviteAvaialble = true
+                    RedeemInviteManager.shared.fromId = Int(refId) ?? 0
                 }
                 
             })

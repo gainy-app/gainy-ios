@@ -30,7 +30,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     }
     
     private let ettl = "pro"
-    func handleInfo(_ customerInfo:CustomerInfo?, error: Error?) {
+    func handleInfo(_ customerInfo:CustomerInfo?, error: Error?, informFirebase: Bool = false) {
         //Checking RC
         if let error = error {
             dprint("RevenueCat error: \(error)")
@@ -41,7 +41,9 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
                 innerType = .pro
                 innerDate = customerInfo?.entitlements[ettl]?.expirationDate
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
-                
+                if informFirebase {
+                    informAboutPurchase()
+                }
             } else {
                 //Cehcking our DB
                 if let subscriptionExpiryDate = UserProfileManager.shared.subscriptionExpiryDate {
@@ -62,6 +64,14 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
             }
         }
         dprint("RevenueCat sub: \(innerType ?? .free)")
+    }
+    
+    private func informAboutPurchase() {
+        if let profileID = UserProfileManager.shared.profileID {
+            let query = PurchaseUpdateMutation.init(profileId: profileID)
+            Network.shared.apollo.perform(mutation: query) { _ in
+            }
+        }
     }
     
     func setEmail(email: String) {
@@ -109,6 +119,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error)
+                if
             }
         }
     }

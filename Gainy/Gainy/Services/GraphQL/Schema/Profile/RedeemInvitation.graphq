@@ -1,5 +1,0 @@
-mutation RedeemInvitation($fromId: Int!, $toId: Int!){
-  insert_app_invitations_one(object: {from_profile_id: $fromId, to_profile_id: $toId}) {
-    id
-  }
-}

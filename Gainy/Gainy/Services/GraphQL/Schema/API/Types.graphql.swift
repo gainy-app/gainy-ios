@@ -452,9 +452,10 @@ public struct app_profiles_order_by: GraphQLMapConvertible {
   ///   - profilePlaidAccessTokensAggregate
   ///   - profileScoringSetting
   ///   - profileWatchlistTickersAggregate
+  ///   - subscriptionEndDate
   ///   - userId
-  public init(avatarUrl: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, email: Swift.Optional<order_by?> = nil, firstName: Swift.Optional<order_by?> = nil, gender: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, lastName: Swift.Optional<order_by?> = nil, legalAddress: Swift.Optional<order_by?> = nil, portfolioGains: Swift.Optional<portfolio_gains_order_by?> = nil, profileCategoriesAggregate: Swift.Optional<app_profile_categories_aggregate_order_by?> = nil, profileFavoriteCollectionsAggregate: Swift.Optional<app_profile_favorite_collections_aggregate_order_by?> = nil, profileHoldingsAggregate: Swift.Optional<app_profile_holdings_aggregate_order_by?> = nil, profileInterestsAggregate: Swift.Optional<app_profile_interests_aggregate_order_by?> = nil, profilePlaidAccessTokensAggregate: Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_order_by?> = nil, profileWatchlistTickersAggregate: Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?> = nil, userId: Swift.Optional<order_by?> = nil) {
-    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories_aggregate": profileCategoriesAggregate, "profile_favorite_collections_aggregate": profileFavoriteCollectionsAggregate, "profile_holdings_aggregate": profileHoldingsAggregate, "profile_interests_aggregate": profileInterestsAggregate, "profile_plaid_access_tokens_aggregate": profilePlaidAccessTokensAggregate, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers_aggregate": profileWatchlistTickersAggregate, "user_id": userId]
+  public init(avatarUrl: Swift.Optional<order_by?> = nil, createdAt: Swift.Optional<order_by?> = nil, email: Swift.Optional<order_by?> = nil, firstName: Swift.Optional<order_by?> = nil, gender: Swift.Optional<order_by?> = nil, id: Swift.Optional<order_by?> = nil, lastName: Swift.Optional<order_by?> = nil, legalAddress: Swift.Optional<order_by?> = nil, portfolioGains: Swift.Optional<portfolio_gains_order_by?> = nil, profileCategoriesAggregate: Swift.Optional<app_profile_categories_aggregate_order_by?> = nil, profileFavoriteCollectionsAggregate: Swift.Optional<app_profile_favorite_collections_aggregate_order_by?> = nil, profileHoldingsAggregate: Swift.Optional<app_profile_holdings_aggregate_order_by?> = nil, profileInterestsAggregate: Swift.Optional<app_profile_interests_aggregate_order_by?> = nil, profilePlaidAccessTokensAggregate: Swift.Optional<app_profile_plaid_access_tokens_aggregate_order_by?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_order_by?> = nil, profileWatchlistTickersAggregate: Swift.Optional<app_profile_watchlist_tickers_aggregate_order_by?> = nil, subscriptionEndDate: Swift.Optional<order_by?> = nil, userId: Swift.Optional<order_by?> = nil) {
+    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories_aggregate": profileCategoriesAggregate, "profile_favorite_collections_aggregate": profileFavoriteCollectionsAggregate, "profile_holdings_aggregate": profileHoldingsAggregate, "profile_interests_aggregate": profileInterestsAggregate, "profile_plaid_access_tokens_aggregate": profilePlaidAccessTokensAggregate, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers_aggregate": profileWatchlistTickersAggregate, "subscription_end_date": subscriptionEndDate, "user_id": userId]
   }
 
   public var avatarUrl: Swift.Optional<order_by?> {
@@ -598,6 +599,15 @@ public struct app_profiles_order_by: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers_aggregate")
+    }
+  }
+
+  public var subscriptionEndDate: Swift.Optional<order_by?> {
+    get {
+      return graphQLMap["subscription_end_date"] as? Swift.Optional<order_by?> ?? Swift.Optional<order_by?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subscription_end_date")
     }
   }
 
@@ -9063,9 +9073,10 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
   ///   - profilePlaidAccessTokens
   ///   - profileScoringSetting
   ///   - profileWatchlistTickers
+  ///   - subscriptionEndDate
   ///   - userId
-  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, portfolioGains: Swift.Optional<portfolio_gains_obj_rel_insert_input?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> = nil, userId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
+  public init(avatarUrl: Swift.Optional<String?> = nil, createdAt: Swift.Optional<timestamptz?> = nil, email: Swift.Optional<String?> = nil, firstName: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, id: Swift.Optional<Int?> = nil, lastName: Swift.Optional<String?> = nil, legalAddress: Swift.Optional<String?> = nil, portfolioGains: Swift.Optional<portfolio_gains_obj_rel_insert_input?> = nil, profileCategories: Swift.Optional<app_profile_categories_arr_rel_insert_input?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_arr_rel_insert_input?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_arr_rel_insert_input?> = nil, profileInterests: Swift.Optional<app_profile_interests_arr_rel_insert_input?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_arr_rel_insert_input?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_obj_rel_insert_input?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_arr_rel_insert_input?> = nil, subscriptionEndDate: Swift.Optional<timestamptz?> = nil, userId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "subscription_end_date": subscriptionEndDate, "user_id": userId]
   }
 
   public var avatarUrl: Swift.Optional<String?> {
@@ -9209,6 +9220,15 @@ public struct app_profiles_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers")
+    }
+  }
+
+  public var subscriptionEndDate: Swift.Optional<timestamptz?> {
+    get {
+      return graphQLMap["subscription_end_date"] as? Swift.Optional<timestamptz?> ?? Swift.Optional<timestamptz?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subscription_end_date")
     }
   }
 
@@ -9997,9 +10017,10 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
   ///   - profilePlaidAccessTokens
   ///   - profileScoringSetting
   ///   - profileWatchlistTickers
+  ///   - subscriptionEndDate
   ///   - userId
-  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, portfolioGains: Swift.Optional<portfolio_gains_bool_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "user_id": userId]
+  public init(_and: Swift.Optional<[app_profiles_bool_exp]?> = nil, _not: Swift.Optional<app_profiles_bool_exp?> = nil, _or: Swift.Optional<[app_profiles_bool_exp]?> = nil, avatarUrl: Swift.Optional<String_comparison_exp?> = nil, createdAt: Swift.Optional<timestamptz_comparison_exp?> = nil, email: Swift.Optional<String_comparison_exp?> = nil, firstName: Swift.Optional<String_comparison_exp?> = nil, gender: Swift.Optional<Int_comparison_exp?> = nil, id: Swift.Optional<Int_comparison_exp?> = nil, lastName: Swift.Optional<String_comparison_exp?> = nil, legalAddress: Swift.Optional<String_comparison_exp?> = nil, portfolioGains: Swift.Optional<portfolio_gains_bool_exp?> = nil, profileCategories: Swift.Optional<app_profile_categories_bool_exp?> = nil, profileFavoriteCollections: Swift.Optional<app_profile_favorite_collections_bool_exp?> = nil, profileHoldings: Swift.Optional<app_profile_holdings_bool_exp?> = nil, profileInterests: Swift.Optional<app_profile_interests_bool_exp?> = nil, profilePlaidAccessTokens: Swift.Optional<app_profile_plaid_access_tokens_bool_exp?> = nil, profileScoringSetting: Swift.Optional<app_profile_scoring_settings_bool_exp?> = nil, profileWatchlistTickers: Swift.Optional<app_profile_watchlist_tickers_bool_exp?> = nil, subscriptionEndDate: Swift.Optional<timestamptz_comparison_exp?> = nil, userId: Swift.Optional<String_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "avatar_url": avatarUrl, "created_at": createdAt, "email": email, "first_name": firstName, "gender": gender, "id": id, "last_name": lastName, "legal_address": legalAddress, "portfolio_gains": portfolioGains, "profile_categories": profileCategories, "profile_favorite_collections": profileFavoriteCollections, "profile_holdings": profileHoldings, "profile_interests": profileInterests, "profile_plaid_access_tokens": profilePlaidAccessTokens, "profile_scoring_setting": profileScoringSetting, "profile_watchlist_tickers": profileWatchlistTickers, "subscription_end_date": subscriptionEndDate, "user_id": userId]
   }
 
   public var _and: Swift.Optional<[app_profiles_bool_exp]?> {
@@ -10170,6 +10191,15 @@ public struct app_profiles_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_watchlist_tickers")
+    }
+  }
+
+  public var subscriptionEndDate: Swift.Optional<timestamptz_comparison_exp?> {
+    get {
+      return graphQLMap["subscription_end_date"] as? Swift.Optional<timestamptz_comparison_exp?> ?? Swift.Optional<timestamptz_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subscription_end_date")
     }
   }
 
@@ -28446,6 +28476,8 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
   /// column name
   case legalAddress
   /// column name
+  case subscriptionEndDate
+  /// column name
   case userId
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
@@ -28460,6 +28492,7 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
       case "id": self = .id
       case "last_name": self = .lastName
       case "legal_address": self = .legalAddress
+      case "subscription_end_date": self = .subscriptionEndDate
       case "user_id": self = .userId
       default: self = .__unknown(rawValue)
     }
@@ -28475,6 +28508,7 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
       case .id: return "id"
       case .lastName: return "last_name"
       case .legalAddress: return "legal_address"
+      case .subscriptionEndDate: return "subscription_end_date"
       case .userId: return "user_id"
       case .__unknown(let value): return value
     }
@@ -28490,6 +28524,7 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
       case (.id, .id): return true
       case (.lastName, .lastName): return true
       case (.legalAddress, .legalAddress): return true
+      case (.subscriptionEndDate, .subscriptionEndDate): return true
       case (.userId, .userId): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
@@ -28506,6 +28541,7 @@ public enum app_profiles_update_column: RawRepresentable, Equatable, Hashable, C
       .id,
       .lastName,
       .legalAddress,
+      .subscriptionEndDate,
       .userId,
     ]
   }

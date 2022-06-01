@@ -1,5 +1,0 @@
-mutation PurchaseUpdate($profileId: Int!) {
-  update_purchases(profile_id: $profileId) {
-    subscription_end_date
-  }
-}
