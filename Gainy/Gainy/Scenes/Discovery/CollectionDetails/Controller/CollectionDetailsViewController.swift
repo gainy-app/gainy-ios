@@ -703,7 +703,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         layout.visibleItemsInvalidationHandler = { (items, offset, environment) in
             
             if let currentIndex = items.last?.indexPath.row {
-                if self.viewModel?.collectionDetails.count <= 1 {
+                if (self.viewModel?.collectionDetails.count ?? 0) <= 1 {
                     self.currentNumberLabel?.text = nil
                     self.currentNumberView?.alpha = 0.0
                     self.currentCollectionID = currentIndex
