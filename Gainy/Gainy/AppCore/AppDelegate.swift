@@ -149,6 +149,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     default: break
                     }
+                } else if let type = additionalData["t"] as? Int {
+                    switch type {
+                    case 0:
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                        break
+                    case 1:
+                        if let id = additionalData["id"] as? Int {
+                            NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: id)
+                        }
+                        break
+                        
+                    default: break
+                    }
                 }
             }
         }
