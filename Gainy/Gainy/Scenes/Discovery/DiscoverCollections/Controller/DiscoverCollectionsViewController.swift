@@ -862,6 +862,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         if (viewModel?.yourCollections ?? []).isEmpty {
             viewModel?.topGainers = []
             viewModel?.topLosers = []
+            CollectionsManager.shared.topTickers = nil
         } else {
             viewModel?.topGainers = [topTickers1]
             viewModel?.topLosers = [topTickers2]
@@ -931,6 +932,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             if viewModel?.yourCollections.isEmpty ?? false {
                 viewModel?.topGainers = []
                 viewModel?.topLosers = []
+                
             } else {
                 viewModel?.topGainers = [topTickers1]
                 viewModel?.topLosers = [topTickers2]
