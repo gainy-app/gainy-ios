@@ -98,7 +98,11 @@ extension RemoteTicker: Reorderable {
 
 extension RemoteCollectionDetails {
     var prefetchedTickers: [TickerDetails] {
-        CollectionsManager.shared.prefetchedCollectionsData[id ?? -1] ?? []
+        if CollectionsManager.shared != nil {
+            return CollectionsManager.shared.prefetchedCollectionsData[id ?? -1] ?? []
+        } else {
+            return []
+        }
     }
 }
 
