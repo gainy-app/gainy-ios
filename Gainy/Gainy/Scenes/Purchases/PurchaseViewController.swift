@@ -24,7 +24,7 @@ final class PurchaseViewController: BaseViewController {
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
-            titleLbl.setKern()
+            titleLbl.setKern(kern: 1.25, color: .white)
         }
     }
     
@@ -47,6 +47,7 @@ final class PurchaseViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        avPlayerLayer.isHidden = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -72,7 +73,7 @@ final class PurchaseViewController: BaseViewController {
         avPlayerLayer.frame = view.layer.bounds
         view.backgroundColor = .clear
         view.layer.insertSublayer(avPlayerLayer, at: 0)
-
+        avPlayerLayer.isHidden = true
         NotificationCenter.default.addObserver(self,
                                            selector: #selector(playerItemDidReachEnd(notification:)),
                                            name: .AVPlayerItemDidPlayToEndTime,
