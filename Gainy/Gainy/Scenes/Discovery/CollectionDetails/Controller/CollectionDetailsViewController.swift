@@ -58,7 +58,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         return
                     }
                     
-                    let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+                    let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty
                     if isEmpty {
                         self?.onDiscoverCollections?(false)
                     } else {
@@ -452,7 +452,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in
-            let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+            let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty
             if isEmpty {
                 // TODO: Proably show discovery collections
             }
@@ -706,8 +706,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         layout.visibleItemsInvalidationHandler = { (items, offset, environment) in
             
             if let currentIndex = items.last?.indexPath.row {
-                self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
-                self.currentCollectionID = currentIndex
+                if (self.viewModel?.collectionDetails.count ?? 0) <= 1 {
+                    self.currentNumberLabel?.text = nil
+                    self.currentNumberView?.alpha = 0.0
+                    self.currentCollectionID = currentIndex
+                } else {
+                    self.currentNumberView?.alpha = 1.0
+                    self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+                    self.currentCollectionID = currentIndex
+                }
             }
         }
         return layout
@@ -799,21 +806,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
             return
         }
-        
-        if !CollectionsManager.shared.collections.isEmpty {
-            if let lastLoadDate = CollectionsManager.shared.lastLoadDate {
-                if Date() < lastLoadDate + 15.minutes {
-                    self.hideLoader()
-                    completion()
-                    return
-                }
-            } else {
-                self.hideLoader()
-                completion()
+        dprint("initialCollectionsLoading start", profileId: 30)
+        CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            
+            guard !CollectionsManager.shared.collections.isEmpty else {
+                self?.onDiscoverCollections?(false)
                 return
             }
-        }
-        CollectionsManager.shared.initialCollectionsLoading {[weak self] _ in
+            
             dprint("initialCollectionsLoading ended", profileId: 30)
             DispatchQueue.main.async {
                 self?.initViewModelsFromData()
@@ -1054,17 +1054,19 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     private func reloadCollection() {
         guard let profileID = UserProfileManager.shared.profileID else { return }
-        let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty && UserProfileManager.shared.watchlist.isEmpty
+        let isEmpty = UserProfileManager.shared.favoriteCollections.isEmpty
         guard !isEmpty else {
             self.onDiscoverCollections?(false)
             return
         }
         dprint("getRemoteData started", profileId: 30)
         getRemoteData(loadProfile: true) {
+            dprint("getRemoteData ended", profileId: 30)
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()
                 self?.hideLoader()
+                self?.hideSkeletons()
             }
         }
     }
@@ -1114,7 +1116,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }) {
             snapshot.deleteItems([sourceItem])
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-                
+                if self.viewModel?.collectionDetails.count ?? 0 <= 1 {
+                    self.currentNumberLabel?.text = nil
+                    self.currentNumberView?.alpha = 0.0
+                }
+                if CollectionsManager.shared.collections.isEmpty {
+                    self.onDiscoverCollections?(false)
+                } else {
+                    self.centerInitialCollectionInTheCollectionView()
+                }
             })
         }
     }

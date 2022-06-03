@@ -187,7 +187,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
-        
+        topChart.dayGrow = viewModel.dailyGrow
         topChart.lastDayPrice = viewModel.lastDayPrice
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
@@ -972,7 +972,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             }
             
             let aboutTitleWithOffsets = 32.0
-            let bottomOffset = 24.0 - 16
+            let bottomOffset = 24.0 - 16.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)
             
