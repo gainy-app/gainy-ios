@@ -134,6 +134,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let notificationOpenedBlock: OSNotificationOpenedBlock = { result in
             // This block gets called when the user reacts to a notification received - we actually don't need to handle any other options: user tapped on the notification - app reatced
             let notification: OSNotification = result.notification
+            dprint("Push: \(notification.additionalData ?? [:])")
             if let additionalData = notification.additionalData {
                 if let type = additionalData["t"] as? String {
                     switch type {
@@ -143,6 +144,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     case "1":
                         if let id = additionalData["id"] as? String {
                             NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                        }
+                        break
+                        
+                    default: break
+                    }
+                } else if let type = additionalData["t"] as? Int {
+                    switch type {
+                    case 0:
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                        break
+                    case 1:
+                        if let id = additionalData["id"] as? Int {
+                            NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: id)
                         }
                         break
                         

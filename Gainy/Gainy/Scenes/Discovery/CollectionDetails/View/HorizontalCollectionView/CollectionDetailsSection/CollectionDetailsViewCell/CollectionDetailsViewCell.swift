@@ -948,10 +948,12 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section {
         case .title:
             let width = collectionView.frame.width
-            guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
-                return CGSize.init(width: width, height: 60.0)
-            }
             let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
+            guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
+                let height = (60.0 - 28) + headerHeight
+                return CGSize.init(width: width, height: height)
+            }
+            
             return CGSize.init(width: width, height: 154.0 + 24.0 + headerHeight + 32.0)
         case .gain:
             guard (viewModel.id != Constants.CollectionDetails.watchlistCollectionID) else {return .zero}
@@ -986,9 +988,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 32 * 2.0
             var xPos: CGFloat = 0.0
             var yPos: CGFloat = 0.0
-            for tag in viewModel.combinedTags {
+            for (ind, tag) in viewModel.combinedTags.enumerated() {
                 let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
-                if xPos + width + margin > totalWidth{
+                if xPos + width + margin > totalWidth && ind != 0 {
                     xPos = 0.0
                     yPos = yPos + tagHeight + margin
                     lines += 1

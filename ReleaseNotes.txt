@@ -1,4 +1,4 @@
-iOS v1.3.2 #219 available
+iOS v1.3.3 #227 available
 :globe_with_meridians: Server - PROD
 Bugfixes
 
@@ -6,7 +6,7 @@ Bugfixes
 • -
 
 :hammer_and_wrench: Improvements
-• Fix Home Screen UI issues (WL and Alternative stocks shadow + offsets)
+• QA
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

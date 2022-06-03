@@ -126,11 +126,12 @@ extension CollectionsManager {
     func getGainers(profileId: Int) async -> TopTickers {
         return await
         withCheckedContinuation { continuation in
+            Network.shared.apollo.clearCache()
             Network.shared.apollo.fetch(query: HomeFetchGainersQuery.init(profileId: profileId)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let gainersList = graphQLResult.data?.profileCollectionTickersPerformanceRanked  else {
-                        dprint("GetFavoriteCollectionsQuery empty \(graphQLResult)")
+                        dprint("HomeFetchGainersQuery empty \(graphQLResult)")
                         continuation.resume(returning: TopTickers())
                         return
                     }

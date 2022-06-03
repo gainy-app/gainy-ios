@@ -319,7 +319,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
-        searchController?.coordinator = coordinator        
+        searchController?.coordinator = coordinator
         NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { _ in
@@ -339,6 +339,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         showNetworkLoader()
         getRemoteData(loadProfile: true ) {
             DispatchQueue.main.async { [weak self] in
+                self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+                if let frame = UserProfileManager.shared.yourCollections.isEmpty ? self?.fullSerachFieldFrame : self?.smallSerachFieldFrame {
+                    UIView.animate(withDuration: 0.3) {
+                        self?.searchTextField?.frame = frame
+                    }
+                }
                 self?.initViewModels()
                 self?.hideLoader()
             }
@@ -442,17 +448,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         searchTextField?.resignFirstResponder()
         
-        let oldFrame = CGRect(
-            x: 16,
-            y: 24,
-            width: self.view.bounds.width - (16 + 16 + 32 + 20),
-            height: 40
-        )
+        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
         UIView.animate(withDuration: 0.3) {
             self.discoverCollectionsCollectionView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
-            self.searchTextField?.frame = oldFrame
+            self.searchTextField?.frame = frame
         }
     }
     
@@ -476,12 +477,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.discoverCollectionsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.showCollectionDetailsBtn?.alpha = 0.0
-            self.searchTextField?.frame = CGRect(
-                x: 16,
-                y: 24,
-                width: self.view.bounds.width - (16 + 16),
-                height: 40
-            )
+            self.searchTextField?.frame = self.fullSerachFieldFrame
         }
     }
     
@@ -495,8 +491,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [NoCollectionsSectionLayout(),
-        YourCollectionsSectionLayout(),
-        RecommendedCollectionsSectionLayout(),
+                                                  YourCollectionsSectionLayout(),
+                                                  RecommendedCollectionsSectionLayout(),
     ]
     
     private lazy var customLayout: UICollectionViewLayout = {
@@ -504,6 +500,26 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
+    }()
+    
+    private var smallSerachFieldFrame: CGRect = {
+        let frame = CGRect(
+            x: 16,
+            y: 24,
+            width: UIScreen.main.bounds.width - (16 + 16 + 32 + 20),
+            height: 40
+        )
+        return frame
+    }()
+    
+    private var fullSerachFieldFrame: CGRect = {
+        let frame = CGRect(
+            x: 16,
+            y: 24,
+            width: UIScreen.main.bounds.width  - (16 + 16),
+            height: 40
+        )
+        return frame
     }()
     
     private var discoverCollectionsCollectionView: UICollectionView!
@@ -559,9 +575,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         DispatchQueue.global(qos:.utility).async {
             CollectionsManager.shared.loadNewCollectionDetails(collectionItemToAdd.id) { remoteTickers in
-                Task {
-                    await self.reloadGainers()
-                }
                 runOnMain {
                     self.hideLoader()
                     
@@ -579,6 +592,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.viewModel?.yourCollections.insert(yourCollectionItem, at: 0)
             } else {
                 self.viewModel?.yourCollections.append(yourCollectionItem)
+            }
+            
+            Task {
+                await self.reloadGainers()
             }
             
             if let index = UserProfileManager.shared.recommendedCollections.firstIndex { item in
@@ -601,6 +618,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 UserProfileManager.shared.yourCollections.insert(collection, at: 0)
             } else {
                 UserProfileManager.shared.yourCollections.append(collection)
+            }
+            
+            self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+            let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
+            UIView.animate(withDuration: 0.3) {
+                self.searchTextField?.frame = frame
             }
             
             if var snapshot = self.dataSource?.snapshot() {
@@ -632,9 +655,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             if removeFavourite {
                 showNetworkLoader()
                 UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
-                    Task {
-                        await self.reloadGainers()
-                    }
+                    
                     self.hideLoader()
                     self.removeFromYourCollection(itemId: itemId, yourCollectionItemToRemove: yourCollectionItemToRemove, removeFavourite: false)
                 }
@@ -644,6 +665,15 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         viewModel?.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
         UserProfileManager.shared.yourCollections.removeAll { $0.id == yourCollectionItemToRemove.id }
+        Task {
+            await self.reloadGainers()
+        }
+        
+        showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
+        UIView.animate(withDuration: 0.3) {
+            self.searchTextField?.frame = frame
+        }
         
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
@@ -785,8 +815,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         guard let dataSource = dataSource else {return}
         sections = [NoCollectionsSectionLayout(),
-            YourCollectionsSectionLayout(),
-            RecommendedCollectionsSectionLayout()
+                    YourCollectionsSectionLayout(),
+                    RecommendedCollectionsSectionLayout()
         ]
         if let top1 = viewModel?.topGainers, !top1.isEmpty {
             sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
@@ -829,8 +859,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
         viewModel?.topGainers.removeAll()
         viewModel?.topLosers.removeAll()
-        viewModel?.topGainers = [topTickers1]
-        viewModel?.topLosers = [topTickers2]
+        if (viewModel?.yourCollections ?? []).isEmpty {
+            viewModel?.topGainers = []
+            viewModel?.topLosers = []
+            CollectionsManager.shared.topTickers = nil
+        } else {
+            viewModel?.topGainers = [topTickers1]
+            viewModel?.topLosers = [topTickers2]
+        }
         await MainActor.run {
             var snap = dataSource.snapshot()
             
@@ -852,7 +888,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
                     dataSource.apply(snap, animatingDifferences: true)
                 } else {
-                    snap.reloadSections([.topGainers, .topLosers])
+                    snap.deleteSections([.topGainers, .topLosers])
                 }
             }
         }
@@ -893,8 +929,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             let topTickers2: HomeTickersCollectionViewCellModel = HomeTickersCollectionViewCellModel.init(gainers: topTickers.topLosers, isGainers: false)
             viewModel?.topGainers.removeAll()
             viewModel?.topLosers.removeAll()
-            viewModel?.topGainers = [topTickers1]
-            viewModel?.topLosers = [topTickers2]
+            if viewModel?.yourCollections.isEmpty ?? false {
+                viewModel?.topGainers = []
+                viewModel?.topLosers = []
+                
+            } else {
+                viewModel?.topGainers = [topTickers1]
+                viewModel?.topLosers = [topTickers2]
+            }
         } else {
             viewModel?.topGainers.removeAll()
             viewModel?.topLosers.removeAll()

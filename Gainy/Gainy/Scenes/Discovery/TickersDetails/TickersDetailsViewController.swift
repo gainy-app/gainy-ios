@@ -25,6 +25,12 @@ final class TickersDetailsViewController: UIPageViewController, Storyboarded {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        for vc in stockControllers {
+            if let vc = vc as? TickerViewController {
+                vc.delegate = self
+            }
+        }
+        
         setViewControllers([stockControllers[initialIndex]], direction: .forward, animated: false, completion: nil)
         if let tickerVC = stockControllers[initialIndex] as? TickerViewController {
             tickerVC.loadTicketInfo(fromRefresh: false)
@@ -82,5 +88,17 @@ extension TickersDetailsViewController: UIPageViewControllerDelegate {
 extension TickersDetailsViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
         return true
+    }
+}
+
+extension TickersDetailsViewController: TickerViewControllerDelegate {
+    
+    func didUpdateTickerMetrics() {
+        
+        for vc in stockControllers {
+            if let vc = vc as? TickerViewController {
+                vc.viewModel?.dataSource.ticker.updateMarketData()
+            }
+        }
     }
 }

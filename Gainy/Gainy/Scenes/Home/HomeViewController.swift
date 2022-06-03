@@ -72,6 +72,7 @@ final class HomeViewController: BaseViewController {
     }
     
     private func loadBasedOnState() {
+        tableView.contentOffset = .zero
         tableView.isSkeletonable = true
         nameLbl.text = ""
         nameLbl.skeletonCornerRadius = 6

@@ -140,6 +140,10 @@ extension HomeDataSource: UITableViewDelegate {
         if section == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
             return 0.0
         }
+        
+        if section == .collections && (viewModel?.favCollections.isEmpty ?? true) {
+            return 0.0
+        }
         return cellHeights[Section(rawValue: indexPath.section)!] ?? UITableView.automaticDimension
     }
     
@@ -208,11 +212,13 @@ extension HomeDataSource: UITableViewDelegate {
             sortLabel.sizeToFit()
         }
         
-        headerView.addSubview(button)
-        button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
-        button.autoSetDimension(.height, toSize: 24.0)
-        button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
-        button.sizeToFit()
+        if section != Section.articles.rawValue {
+            headerView.addSubview(button)
+            button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
+            button.autoSetDimension(.height, toSize: 24.0)
+            button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+            button.sizeToFit()
+        }
         
         return headerView
     }

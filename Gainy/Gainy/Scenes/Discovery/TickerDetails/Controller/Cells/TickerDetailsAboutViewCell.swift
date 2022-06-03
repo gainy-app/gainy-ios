@@ -154,6 +154,7 @@ class TagView: UIButton {
         let tagImageView = UIImageView()
         tagImageView.contentMode = .scaleAspectFill
         tagImageView.image = UIImage(named: "demoRocket")
+        tagImageView.isUserInteractionEnabled = false
         return tagImageView
     }()
     
@@ -161,6 +162,7 @@ class TagView: UIButton {
         let tagLabel = UILabel()
         tagLabel.textColor = .white
         tagLabel.font = .compactRoundedSemibold(12)
+        tagLabel.isUserInteractionEnabled = false
         return tagLabel
     }()
     

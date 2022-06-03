@@ -11,6 +11,7 @@ fragment RemoteCollectionDetails on collections {
   image_url
   description
   size
+  enabled
   metrics {
     absolute_daily_change
     profile_id

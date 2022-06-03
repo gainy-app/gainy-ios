@@ -25,6 +25,7 @@ enum AnalyticFields: String {
 //    //case ClientID = "cid", case OriginalCountry = "geoid",
 //}
 
+/// General Analytics manager
 final class GainyAnalytics {
     
     static let shared = GainyAnalytics()
@@ -33,6 +34,16 @@ final class GainyAnalytics {
     
     var isLogin: Bool = false
     var isRegistration: Bool = false
+    
+    static var notLoggedCache: [(name: String, params: [String: AnyHashable])] = []
+    
+    static func flushLogs() {
+        for log in notLoggedCache {
+            Analytics.logEvent(log.name, parameters: log.params)
+            AppsFlyerLib.shared().logEvent(log.name, withValues: log.params)
+        }
+        notLoggedCache.removeAll()
+    }
     
     class func logEvent(_ name: String, params: [String: AnyHashable]? = nil) {
         var newParams = params ?? [:]
@@ -61,13 +72,14 @@ final class GainyAnalytics {
             newParams["uid"] = user.uid
         }
         newParams["ul"] = Locale.current.identifier
+        newParams["date"] = Date().timeIntervalSinceReferenceDate
+        if Auth.auth().currentUser == nil {
+            notLoggedCache.append((name: name, params: newParams))
+        } else {
+            flushLogs()
+        }
         Analytics.logEvent(name, parameters: newParams)
         AppsFlyerLib.shared().logEvent(name, withValues: newParams)
-        
-        //    "App is limited to a maximum of 10 tags on a given player"
-//        var oneSignalPrams = newParams
-//        oneSignalPrams["event"] = name
-//        OneSignal.sendTags(oneSignalPrams)
     }
     
     class func logDevEvent(_ name: String, params: [String: AnyHashable]? = nil) {

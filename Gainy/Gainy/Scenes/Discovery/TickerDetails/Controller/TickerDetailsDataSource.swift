@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import SwiftUI
+import Kingfisher
 
 protocol TickerDetailsDataSourceDelegate: AnyObject {
     func altStockPressed(stock: AltStockTicker)
@@ -127,6 +128,8 @@ final class TickerDetailsDataSource: NSObject {
     func calculateHeights() {
         print(ticker.ticker.type ?? "")
         //Highlights
+        cellHeights[.header] = ticker.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - (24.0 + 72.0), font: .proDisplayBold(24)) + 72.0 + 32.0
+        
         if ticker.highlights.count > 0 {
             cellHeights[.highlights] = 0.0
         } else {

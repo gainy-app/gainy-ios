@@ -16,6 +16,16 @@ struct TickerTag {
     let id: Int
 }
 
+extension TickerTag: Hashable {
+    public static func == (lhs: TickerTag, rhs: TickerTag) -> Bool {
+        lhs.name == rhs.name
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(self.name)
+    }
+}
+
 /// Ticker model to pupulate cells
 typealias RemoteTicker = RemoteTickerDetails
 typealias AltStockTicker = RemoteTickerDetails
@@ -193,7 +203,7 @@ class TickerInfo {
                              if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
                                  self?.medianIndustry = mainIndustry.industryId
                              }
-                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).uniqued()
+                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
                              self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
                                  $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
                              }).first?.uniqId ?? ""
@@ -389,6 +399,7 @@ class TickerInfo {
             let mainData = ChartData(points: main, period: period)
             let medianData = ChartData(points: median, period: period)
             
+            self.medianGrow = Float(medianData.startEndDiff)
             self.setChartsCache(period, chartData: mainData)
             
             //if dispatchGroup == nil {

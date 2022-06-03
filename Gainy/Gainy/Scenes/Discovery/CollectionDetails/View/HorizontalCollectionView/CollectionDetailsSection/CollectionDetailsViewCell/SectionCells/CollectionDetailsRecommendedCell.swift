@@ -236,9 +236,9 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
-        tagsContainer.subviews.forEach({
-            $0.removeFromSuperview()
-        })
+        for sub in tagsContainer.subviews {
+            sub.removeFromSuperview()
+        }
         
         if tagsContainer.subviews.count == 0 {
             let totalWidth: CGFloat = UIScreen.main.bounds.width - 34 * 2.0
@@ -258,7 +258,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
                 tagView.loadImage(url: tag.url)
                 let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
                 tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
-                if xPos + width + margin > totalWidth && tagsContainer.subviews.count > 0 {
+                if xPos + width + margin > totalWidth && tagsContainer.subviews.count > 1 {
                     xPos = 0.0
                     yPos = yPos + tagHeight + margin
                     lines += 1
@@ -269,7 +269,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
             }
         }
             
-        //self.tagsContainerHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        self.tagsContainerHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
         self.tagsContainer.layoutIfNeeded()
         
         let calculatedHeight: CGFloat = (176.0 - 32.0) + tagHeight * CGFloat(max(1, lines)) + margin * CGFloat(max(1, lines) - 1) + 8.0
