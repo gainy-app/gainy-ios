@@ -20,6 +20,15 @@ final class RemoteConfigManager {
     @UserDefaultBool(Constants.UserDefaults.showPortoCrypto)
     var showPortoCrypto: Bool
     
+    @UserDefault(Constants.UserDefaults.monthPurchaseVariant)
+    var monthPurchaseVariant: ProductVariant?
+    
+    @UserDefault(Constants.UserDefaults.month6PurchaseVariant)
+    var month6PurchaseVariant: ProductVariant?
+    
+    @UserDefault(Constants.UserDefaults.yearPurchaseVariant)
+    var yearPurchaseVariant: ProductVariant?
+    
     private var remoteConfig: RemoteConfig!
      
     func loadDefaults(_ completion: @escaping () -> Void) {
@@ -36,8 +45,14 @@ final class RemoteConfigManager {
         remoteConfig.fetch() {[weak self](status, error) -> Void in
           if status == .success {
             self?.remoteConfig.activate() { (changed, error) in
+                //Porto
                 self?.showPortoCash = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCash).boolValue ?? false
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
+                
+                //Purchases
+                self?.monthPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.monthPurchase).stringValue ?? "A") ?? .a
+                self?.month6PurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.month6Purchase).stringValue ?? "A") ?? .a
+                self?.yearPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.yearPurchase).stringValue ?? "A") ?? .a
                 completion()
             }
           } else {

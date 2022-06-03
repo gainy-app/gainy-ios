@@ -8,19 +8,35 @@
 import UIKit
 import PureLayout
 
-extension UICollectionReusableView {
-    func addBlur() {
-        guard subviews.first(where: {
+extension UIView {
+    func addBlur(top: CGFloat = -8, bottom: CGFloat = -8, left: CGFloat = -8, right: CGFloat = -8) {
+        let blurAdded = subviews.first(where: {
             $0.tag == -11
-        }) == nil else {return}
-        let blurView = BlurEffectView()
+        })
+        
+        guard blurAdded == nil else {
+            (blurAdded as? BlurEffectView)?.intensity = 0.2
+            return
+        }
+        
+        let blurView = BlurEffectView(intensity: 0.2)
         blurView.tag = -11
         addSubview(blurView)
         
-        blurView.autoPinEdge(toSuperviewEdge: .leading)
-        blurView.autoPinEdge(toSuperviewEdge: .top)
-        blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        blurView.autoPinEdge(toSuperviewEdge: .bottom)
+        let whiteBack = UIView()
+        whiteBack.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        whiteBack.tag = -14
+        addSubview(whiteBack)
+        
+        blurView.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
+        blurView.autoPinEdge(toSuperviewEdge: .top, withInset: top)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
+        blurView.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
+        
+        whiteBack.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
+        whiteBack.autoPinEdge(toSuperviewEdge: .top, withInset: top)
+        whiteBack.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
+        whiteBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
     }
     
     func removeBlur() {
@@ -28,6 +44,34 @@ extension UICollectionReusableView {
             $0.tag == -11
         }){
             blurView.removeFromSuperview()
+        }
+        if let blurView = subviews.first(where: {
+            $0.tag == -14
+        }){
+            blurView.removeFromSuperview()
+        }
+    }
+    
+    func addBlockView(delegate: TTFBlockViewDelegate? = nil) ->  TTFBlockView? {
+        if let view = subviews.first(where: {$0.tag == -12}) {
+            return view as? TTFBlockView
+        }
+        let blockView = TTFBlockView()
+        blockView.delegate = delegate
+        blockView.tag = -12
+        addSubview(blockView)
+        
+        blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)
+        blockView.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
+        blockView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 0)
+        return blockView
+    }
+    
+    func removeBlockView() {
+        if let blockView = subviews.first(where: {
+            $0.tag == -12
+        }){
+            blockView.removeFromSuperview()
         }
     }
 }

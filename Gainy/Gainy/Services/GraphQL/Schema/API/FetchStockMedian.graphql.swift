@@ -8,7 +8,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query FetchStockMedian($industryId: bigint!, $period: String!) {
+    query FetchStockMedian($industryId: Int!, $period: String!) {
       industry_median_chart(
         where: {industry_id: {_eq: $industryId}, period: {_eq: $period}}
       ) {
@@ -22,10 +22,10 @@ public final class FetchStockMedianQuery: GraphQLQuery {
 
   public let operationName: String = "FetchStockMedian"
 
-  public var industryId: bigint
+  public var industryId: Int
   public var period: String
 
-  public init(industryId: bigint, period: String) {
+  public init(industryId: Int, period: String) {
     self.industryId = industryId
     self.period = period
   }
@@ -53,7 +53,7 @@ public final class FetchStockMedianQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "industry_median_chart": industryMedianChart.map { (value: IndustryMedianChart) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220518090053.industry_median_chart"
+    /// fetch data from the table: "public_220530150048.industry_median_chart"
     public var industryMedianChart: [IndustryMedianChart] {
       get {
         return (resultMap["industry_median_chart"] as! [ResultMap]).map { (value: ResultMap) -> IndustryMedianChart in IndustryMedianChart(unsafeResultMap: value) }

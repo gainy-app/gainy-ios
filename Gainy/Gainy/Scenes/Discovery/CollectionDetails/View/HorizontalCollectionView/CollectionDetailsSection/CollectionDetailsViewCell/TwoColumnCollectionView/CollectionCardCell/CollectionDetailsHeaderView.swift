@@ -13,9 +13,9 @@ enum CollectionDetailsHeaderViewState: Int, Codable {
     static func heightForState(state: CollectionDetailsHeaderViewState) -> Int {
         
         switch state {
-        case .grid: return 146
-        case .list: return 173
-        case .chart: return 422
+        case .grid: return 146 - 16
+        case .list: return 173 - 16
+        case .chart: return 482 - 16
         }
     }
 }
@@ -84,8 +84,9 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         ttfTickersLabel.text = "TTF Details"
         self.addSubview(ttfTickersLabel)
         
+        let topInset = 16.0
         ttfTickersLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
-        ttfTickersLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0)
+        ttfTickersLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0 - topInset)
         ttfTickersLabel.autoSetDimension(.height, toSize: 24.0)
         ttfTickersLabel.sizeToFit()
         
@@ -96,7 +97,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(chartModeButton)
         chartModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 30))
         chartModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
-        chartModeButton.autoAlignAxis(.horizontal, toSameAxisOf: ttfTickersLabel)
+        chartModeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 50.0 - topInset)
         chartModeButton.skeletonCornerRadius = 6
         chartModeButton.addTarget(self, action: #selector(chartModeButtonTapped), for: .touchUpInside)
 
@@ -106,6 +107,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(tableListModeButton)
         tableListModeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         tableListModeButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        //tableListModeButton.autoPinEdge(.top, to: .bottom, of: chartModeButton, withOffset: 24.0)
         tableListModeButton.skeletonCornerRadius = 6
         tableListModeButton.addTarget(self, action: #selector(tableListModeButtonTapped), for: .touchUpInside)
         
@@ -116,10 +118,10 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(sortByButton)
         sortByButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
-        sortByButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        sortByButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0 - topInset)
         
         tableListModeButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)
-        
+
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder")
         sortByButton.addSubview(reorderIconImageView)
@@ -156,7 +158,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
         
-        settingsButton.layer.cornerRadius = 8.0
+        settingsButton.layer.cornerRadius = 8
         settingsButton.layer.cornerCurve = .continuous
         settingsButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
@@ -270,9 +272,9 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             button.removeFromSuperview()
         }
         chartButtons = []
-        
+        let topInset = 16.0
         self.addSubview(chartCategoryButton)
-        chartCategoryButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartCategoryButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0 - topInset)
         chartCategoryButton.autoAlignAxis(toSuperviewAxis: .vertical)
         chartCategoryButton.autoSetDimensions(to: CGSize.init(width: 75.0, height: 24.0))
         chartCategoryButton.addTarget(self,
@@ -285,7 +287,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         chartCategoryButton.setTitle("Categories", for: .normal)
         
         self.addSubview(chartTickerButton)
-        chartTickerButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartTickerButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0 - topInset)
         chartTickerButton.autoPinEdge(.right, to: .left, of: chartCategoryButton, withOffset: -8.0)
         chartTickerButton.autoSetDimensions(to: CGSize.init(width: 55.0, height: 24.0))
         chartTickerButton.addTarget(self,
@@ -298,7 +300,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         chartTickerButton.setTitle("Tickers", for: .normal)
         
         self.addSubview(chartInterestButton)
-        chartInterestButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0)
+        chartInterestButton.autoPinEdge(toSuperviewEdge: .top, withInset: 98.0 - topInset)
         chartInterestButton.autoPinEdge(.left, to: .right, of: chartCategoryButton, withOffset: 8.0)
         chartInterestButton.autoSetDimensions(to: CGSize.init(width: 63.0, height: 24.0))
         chartInterestButton.addTarget(self,
@@ -318,12 +320,12 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
 
         self.chartView?.removeFromSuperview()
         self.loadingView?.removeFromSuperview()
-        
+        let topInset = 16.0
         if pieChartData.count == 0 {
             let indicatorView = UIActivityIndicatorView.init(style: .medium)
             indicatorView.hidesWhenStopped = true
             self.addSubview(indicatorView)
-            indicatorView.autoPinEdge(toSuperviewEdge: .top, withInset: 146.0)
+            indicatorView.autoPinEdge(toSuperviewEdge: .top, withInset: 146.0 - topInset)
             let size = self.frame.size.width - 40 * 2
             indicatorView.autoSetDimensions(to: CGSize.init(width: size, height: size))
             indicatorView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
@@ -353,6 +355,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
             let separatoeSegment = PieChartSegment(color: .white, value: separatorValue)
             segments.append(separatoeSegment)
             let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
+
             let segment = PieChartSegment(color: color, value: CGFloat((element.weight ?? 0.0) * 100.0))
             segments.append(segment)
             index = index + 1
@@ -363,11 +366,13 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         
         var size = 240
         pieChartView.frame = CGRect(x: 0, y: 0, width: size, height: size)
+
         pieChartView.segments = segments
         self.addSubview(pieChartView)
-        pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0)
+        pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0 - topInset)
+
         pieChartView.autoSetDimensions(to: CGSize.init(width: size, height: size))
-        pieChartView.autoAlignAxis(toSuperviewAxis: .vertical)
+        pieChartView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
         
         let overlayView = UIView.newAutoLayout()
         overlayView.backgroundColor = self.backgroundColor

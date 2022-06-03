@@ -73,12 +73,15 @@ final class UserProfileManager {
     
     @UserDefault<Int>("linkPlaidID")
     var linkPlaidID: Int?
-    
+        
     var linkedPlaidAccounts: [PlaidAccountData] = []
     
     /// Kind of data source for recommended collections and your collections
     var recommendedCollections: [Collection] = []
     var yourCollections: [Collection] = []
+    
+    @KeychainDate("subscriptionExpiryDate")
+    var subscriptionExpiryDate: Date?
     
     public func cleanup() {
         
@@ -96,6 +99,7 @@ final class UserProfileManager {
         profileID = nil
         profileLoaded = false
         isPlaidLinked = false
+        subscriptionExpiryDate = nil
     }
     
     private var configuration = Configuration()
@@ -107,7 +111,7 @@ final class UserProfileManager {
         }
         OneSignal.setExternalUserId("\(profileID)")
         OneSignal.disablePush(false)
-        SubscriptionManager.shared.storage.getViewedCollections()
+        
         if configuration.environment == .production {
             Branch.getInstance().setIdentity("\(profileID)")
         }

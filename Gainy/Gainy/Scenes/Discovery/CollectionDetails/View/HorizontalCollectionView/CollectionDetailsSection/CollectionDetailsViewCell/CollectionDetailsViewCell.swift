@@ -33,7 +33,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         backgroundColor = .clear
         
         let layout = UICollectionViewFlowLayout.init()
-        collectionView = UICollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView = DetectableCollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
@@ -123,7 +123,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
-    
+    var onPurhaseShow: (() -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
@@ -168,9 +168,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
         // Load all data
-        // hideSkeleton()
+        // hideSkeleton()        
     }
-    
+        
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
         
@@ -187,7 +187,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
         
-        topChart.dayGrow = viewModel.dailyGrow
+        
         topChart.lastDayPrice = viewModel.lastDayPrice
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
@@ -251,7 +251,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     // MARK: Private
     
     private var isLoadingMoreTickers: Bool = false
-    private(set) var collectionView: UICollectionView!
+    private(set) var collectionView: DetectableCollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
         control.layer.zPosition = -1
@@ -259,6 +259,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
     } ()
+    weak private var blockHeader: TTFBlockView? {
+        didSet {
+            if let blockHeader = blockHeader {
+                collectionView.headerView = blockHeader
+            }
+        }
+    }
     
     private lazy var loadMoreActivityIndicatorView: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
@@ -310,7 +317,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                     let tickers = remoteTickers.compactMap { item in
                         item.rawTicker
                     }
-                    let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})                    
+                    let cards = tickers.compactMap({CollectionDetailsDTOMapper.mapTickerDetails($0)}).compactMap({CollectionDetailsViewModelMapper.map($0)})
                     self.refreshControl.endRefreshing()
                     self.finishRefreshWithSorting(cards: cards) {
                         //                        self.refreshingTickers = false
@@ -355,7 +362,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
-            await MainActor.run {                
+            await MainActor.run {
                 let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
                 self.collectionView.reloadSections(indesSet)
             }
@@ -489,7 +496,20 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.showAnimatedGradientSkeleton()
             } else {
                 cell.hideSkeleton()
+                SubscriptionManager.shared.getSubscription({[weak self] type in
+                    if type == .free {
+                        if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                            cell.removeBlur()
+                        } else {
+                            cell.addBlur()
+                        }
+                    } else {
+                        cell.removeBlur()
+                    }
+                })
             }
+            cell.clipsToBounds = false
+            cell.contentView.clipsToBounds = false
             return cell
             
         case .cards:
@@ -515,6 +535,18 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         }
         
         cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
+        
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -631,6 +663,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                            markerHeaders:  markers.map(\.shortTitle),
                            markerMetrics: vals,
                            matchScore: "\(model.matchScore)")
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                } else {
+                    cell.addBlur()
+                }
+            } else {
+                cell.removeBlur()
+            }
+        })
         return cell
     }
     
@@ -699,8 +742,23 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.hideSkeleton()
             }
         }
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cell.removeBlur()
+                    cell.layer.shadowOpacity = 1.0
+                } else {
+                    cell.addBlur(top: -8, bottom: -8, left: indexPath.row % 2 == 0 ? -20 : -10, right: indexPath.row % 2 != 0 ? -20 : -10)
+                    cell.layer.shadowOpacity = 0.0
+                }
+            } else {
+                cell.removeBlur()
+                cell.layer.shadowOpacity = 1.0
+            }
+        })
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -769,6 +827,21 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             self.headerView = headerView
+            SubscriptionManager.shared.getSubscription({[weak self] type in
+                if type == .free {
+                    if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                        headerView.removeBlur()
+                        headerView.removeBlockView()
+                    } else {
+                        headerView.addBlur(top: 0)
+                        self?.blockHeader = headerView.addBlockView(delegate: self)
+                    }
+                } else {
+                    headerView.removeBlur()
+                    headerView.removeBlockView()
+                }
+            })
+            headerView.clipsToBounds = false
             result = headerView
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CollectionDetailsFooterView", for: indexPath)
@@ -813,6 +886,8 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) else {return}
+        
         guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
         
@@ -897,7 +972,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             }
             
             let aboutTitleWithOffsets = 32.0
-            let bottomOffset = 24.0
+            let bottomOffset = 24.0 - 16
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)
             
@@ -924,9 +999,9 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
             }
             
             if viewModel.combinedTags.isEmpty {
-                return CGSize.init(width: width, height: 144.0 + 16)
+                return CGSize.init(width: width, height: 144.0 + 32 + 32)
             } else {
-                let calculatedHeight: CGFloat = (176.0 - 16.0) + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 16.0
+                let calculatedHeight: CGFloat = (208.0 - 8.0) + tagHeight * CGFloat(max(1, lines)) +  margin * CGFloat(max(1, lines) - 1) + 8.0
                 return CGSize.init(width: width, height: calculatedHeight)
             }
             
@@ -1073,5 +1148,22 @@ extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
         topChart.isSPPVisible = showMedian
         
         GainyAnalytics.logEvent("portfolio_chart_period_spp_pressed", params: [ "period" : viewModel.chartRange.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
+    }
+}
+
+extension CollectionDetailsViewCell: TTFBlockViewDelegate {
+    func unlockButtonTapped(showPurchase: Bool) {
+        if showPurchase {
+            onPurhaseShow?()
+        } else {
+#if DEBUG
+            onPurhaseShow?()
+#else
+            if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
+                collectionView.reloadData()
+            }
+            #endif
+                       
+        }
     }
 }

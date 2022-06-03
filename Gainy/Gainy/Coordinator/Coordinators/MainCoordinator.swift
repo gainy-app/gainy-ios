@@ -211,6 +211,15 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
         GainyAnalytics.logEvent("show_compare_collection")
     }
+    
+    func showPurchaseView() {
+        let vc = self.viewControllerFactory.instantiatePurchases()
+        vc.coordinator = self
+        vc.modalTransitionStyle = .coverVertical
+        vc.modalPresentationStyle = .fullScreen
+        router.showDetailed(vc)
+        GainyAnalytics.logEvent("show_purchase_view")
+    }
 }
 
 extension MainCoordinator: SingleCollectionDetailsViewControllerDelegate {

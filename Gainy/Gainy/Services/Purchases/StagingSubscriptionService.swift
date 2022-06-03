@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftDate
 
 struct StagingSubscriptionService: SubscriptionServiceProtocol {
     
@@ -23,15 +24,29 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
     func setName(name: String) {
     }
     
-    func getSubscription(_ completion: (SuscriptionType) -> Void) {
-        completion(.pro)
+    func getSubscription(_ completion: @escaping (SuscriptionType) -> Void) {
+        completion(.free)
+    }
+    
+    func expirationDate(_ completion: @escaping (Date?) -> Void) {
+        completion(Date() + 1.years)
     }
     
     func getProducts() {
         
     }
     
-    func purchaseProduct(productId: String) {
+    func purchaseProduct(product: Product) {
         
+    }
+    
+    func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
+        print("Restored")
+        completion(.free)
+    }
+    
+    func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
+        print("Promoted")
+        completion(.free)
     }
 }
