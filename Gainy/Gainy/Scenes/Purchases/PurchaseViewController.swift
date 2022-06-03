@@ -28,7 +28,7 @@ final class PurchaseViewController: BaseViewController {
     private var isInvite: Bool = false {
         didSet {
             UIView.animate(withDuration: 3.0, delay: 0.0, options: [.curveLinear]) {
-                self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.8 : 1.0, y: self.isInvite ? 0.8 : 1.0)
+                self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
                 self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
                 self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
             } completion: { done in
