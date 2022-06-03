@@ -5,6 +5,8 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -57,39 +59,57 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-cm-Dn5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="550.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="434" height="724.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-ys-sxV">
-                                                <rect key="frame" x="68" y="0.0" width="278.5" height="50.5"/>
+                                                <rect key="frame" x="78" y="0.0" width="278.5" height="50.5"/>
                                                 <string key="text">Wanna see more than 3 TTFs?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="eW8-b9-M4D">
-                                                <rect key="frame" x="56" y="90.5" width="302" height="178.5"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_orbits" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-Ao-HfO">
+                                                <rect key="frame" x="-84" y="-47" width="602" height="451"/>
                                             </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="eW8-b9-M4D">
+                                                <rect key="frame" x="56" y="90.5" width="322" height="176"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_extra_cover" translatesAutoresizingMaskIntoConstraints="NO" id="xUY-eU-3V2">
+                                                <rect key="frame" x="20" y="60.5" width="398" height="216.5"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Tp-ysE">
+                                                <rect key="frame" x="32" y="557.5" width="370" height="64"/>
+                                                <color key="backgroundColor" red="0.10588235294117647" green="0.27058823529411763" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="I0P-EV-XUR"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="CONTINUE">
+                                                    <color key="titleColor" red="0.23137254901960785" green="0.94117647058823528" blue="0.43137254901960786" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non-renewable subscriptions + big large text from Anton" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fod-xs-cn9">
-                                                <rect key="frame" x="61.5" y="503.5" width="291.5" height="15"/>
+                                                <rect key="frame" x="71.5" y="677.5" width="291.5" height="15"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock the full Gainy experience, explore all TTFs and more without limitations" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBY-8q-w9d">
-                                                <rect key="frame" x="48" y="299" width="318" height="38.5"/>
+                                                <rect key="frame" x="48" y="299" width="338" height="38.5"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKv-ed-TTt">
-                                                <rect key="frame" x="64" y="526.5" width="286" height="24"/>
+                                                <rect key="frame" x="96" y="700.5" width="242.5" height="24"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWL-ca-04n" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="-3.5" width="113.5" height="31"/>
+                                                        <rect key="frame" x="0.0" y="-2" width="95.5" height="28"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Privacy Policy">
-                                                            <fontDescription key="titleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                             <color key="baseForegroundColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </buttonConfiguration>
                                                         <userDefinedRuntimeAttributes>
@@ -99,19 +119,19 @@ Try Gainy Premium!</string>
                                                         </userDefinedRuntimeAttributes>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zze-D6-Kiw">
-                                                        <rect key="frame" x="121.5" y="4.5" width="6" height="15"/>
+                                                        <rect key="frame" x="103.5" y="5" width="6" height="14"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IY6-Ls-xAe" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                        <rect key="frame" x="135.5" y="3.5" width="150.5" height="20"/>
+                                                        <rect key="frame" x="117.5" y="3.5" width="125" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="YAm-hB-Acs"/>
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Terms &amp; Conditions">
-                                                            <fontDescription key="titleFontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                             <color key="baseForegroundColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </buttonConfiguration>
                                                         <userDefinedRuntimeAttributes>
@@ -133,24 +153,79 @@ Try Gainy Premium!</string>
                                                     <constraint firstAttribute="trailing" secondItem="IY6-Ls-xAe" secondAttribute="trailing" id="uZL-4J-428"/>
                                                 </constraints>
                                             </view>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="jtg-iw-NC1">
+                                                <rect key="frame" x="168.5" y="515.5" width="97.5" height="26"/>
+                                            </pageControl>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dWN-3a-qbx">
+                                                <rect key="frame" x="0.0" y="357.5" width="434" height="152"/>
+                                                <color key="backgroundColor" systemColor="systemTealColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="152" id="ohX-mC-mr6"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ns5-oO-GYt">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="f8k-fc-aRb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kgg-bG-yiL">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xI-Z2-PRI" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                                <rect key="frame" x="144.5" y="633" width="145" height="33"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Restore Purchase">
+                                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                    <color key="baseForegroundColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="centerX" secondItem="WKv-ed-TTt" secondAttribute="centerX" id="1FY-63-UuQ"/>
                                             <constraint firstItem="WKv-ed-TTt" firstAttribute="top" secondItem="Fod-xs-cn9" secondAttribute="bottom" constant="8" id="2Yd-x9-Xbi"/>
-                                            <constraint firstAttribute="bottom" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="500" id="5P0-Kz-A22"/>
+                                            <constraint firstAttribute="trailing" secondItem="5e5-Tp-ysE" secondAttribute="trailing" constant="32" id="3Co-AZ-cPJ"/>
+                                            <constraint firstItem="dWN-3a-qbx" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" id="5P6-J3-slR"/>
                                             <constraint firstAttribute="trailing" secondItem="eW8-b9-M4D" secondAttribute="trailing" constant="56" id="5sn-de-8yt"/>
                                             <constraint firstItem="pBY-8q-w9d" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="48" id="8E0-kf-2kl"/>
                                             <constraint firstItem="eW8-b9-M4D" firstAttribute="top" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="40" id="8qF-pv-nPc"/>
+                                            <constraint firstAttribute="trailing" secondItem="dWN-3a-qbx" secondAttribute="trailing" id="DFf-Y7-i8k"/>
+                                            <constraint firstItem="xUY-eU-3V2" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="20" id="EfC-h4-NHb"/>
                                             <constraint firstItem="n3s-ys-sxV" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="F4U-3P-IoS"/>
+                                            <constraint firstItem="5e5-Tp-ysE" firstAttribute="top" secondItem="pBY-8q-w9d" secondAttribute="bottom" constant="220" id="GFv-cf-3rV"/>
                                             <constraint firstItem="n3s-ys-sxV" firstAttribute="top" secondItem="CIU-cm-Dn5" secondAttribute="top" id="LRb-Js-pMj"/>
+                                            <constraint firstItem="5e5-Tp-ysE" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="32" id="MSx-Vd-Bc7"/>
                                             <constraint firstItem="eW8-b9-M4D" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="56" id="NOk-5d-xoa"/>
+                                            <constraint firstAttribute="trailing" secondItem="xUY-eU-3V2" secondAttribute="trailing" constant="16" id="Nyf-FD-j09"/>
+                                            <constraint firstItem="dWN-3a-qbx" firstAttribute="top" secondItem="pBY-8q-w9d" secondAttribute="bottom" constant="20" id="PN9-LB-xwY"/>
+                                            <constraint firstItem="Fod-xs-cn9" firstAttribute="top" secondItem="5e5-Tp-ysE" secondAttribute="bottom" constant="56" id="R1R-I1-1bq"/>
                                             <constraint firstItem="WKv-ed-TTt" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="TsV-Si-dme"/>
-                                            <constraint firstItem="pBY-8q-w9d" firstAttribute="top" secondItem="eW8-b9-M4D" secondAttribute="bottom" constant="30" id="bNy-HB-dfR"/>
+                                            <constraint firstItem="pBY-8q-w9d" firstAttribute="top" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="248.5" id="Wff-R8-j2r"/>
+                                            <constraint firstItem="8Li-Ao-HfO" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" id="Wnn-HY-FEa"/>
+                                            <constraint firstItem="8Li-Ao-HfO" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="-84" id="dmm-ww-XSl"/>
                                             <constraint firstAttribute="bottom" secondItem="WKv-ed-TTt" secondAttribute="bottom" id="gXJ-uq-dNU"/>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="height" secondItem="WKv-ed-TTt" secondAttribute="height" multiplier="0.625" id="gXf-9C-Ht0"/>
+                                            <constraint firstItem="9xI-Z2-PRI" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="h9R-Qf-Df0"/>
+                                            <constraint firstItem="jtg-iw-NC1" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="hyz-MS-S8h"/>
                                             <constraint firstItem="n3s-ys-sxV" firstAttribute="centerX" secondItem="eW8-b9-M4D" secondAttribute="centerX" id="ilr-ib-4QN"/>
                                             <constraint firstAttribute="trailing" secondItem="pBY-8q-w9d" secondAttribute="trailing" constant="48" id="lNp-tC-m9Y"/>
+                                            <constraint firstItem="xUY-eU-3V2" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" constant="-10" id="tDo-46-5xi"/>
+                                            <constraint firstItem="5e5-Tp-ysE" firstAttribute="top" secondItem="jtg-iw-NC1" secondAttribute="bottom" constant="16" id="u0N-pw-NWI"/>
+                                            <constraint firstAttribute="trailing" secondItem="8Li-Ao-HfO" secondAttribute="trailing" constant="-84" id="vMR-x6-BdC"/>
+                                            <constraint firstItem="9xI-Z2-PRI" firstAttribute="top" secondItem="5e5-Tp-ysE" secondAttribute="bottom" constant="11.5" id="zcy-DD-yei"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -184,6 +259,10 @@ Try Gainy Premium!</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="extraCover" destination="xUY-eU-3V2" id="Q32-kS-eWV"/>
+                        <outlet property="orbitView" destination="8Li-Ao-HfO" id="jkT-8F-6Na"/>
+                        <outlet property="purchaseBtn" destination="5e5-Tp-ysE" id="O47-zN-gFg"/>
+                        <outlet property="spacemanView" destination="eW8-b9-M4D" id="tqX-31-9Ak"/>
                         <outlet property="titleLbl" destination="aqm-x2-uay" id="MCM-Gj-HgD"/>
                     </connections>
                 </viewController>
@@ -193,16 +272,24 @@ Try Gainy Premium!</string>
         </scene>
     </scenes>
     <designables>
+        <designable name="9xI-Z2-PRI">
+            <size key="intrinsicContentSize" width="145" height="33.5"/>
+        </designable>
         <designable name="FWL-ca-04n">
-            <size key="intrinsicContentSize" width="113.5" height="31"/>
+            <size key="intrinsicContentSize" width="95.5" height="28.5"/>
         </designable>
         <designable name="IY6-Ls-xAe">
-            <size key="intrinsicContentSize" width="150.5" height="31"/>
+            <size key="intrinsicContentSize" width="125" height="28.5"/>
         </designable>
     </designables>
     <resources>
         <image name="close_modal_white" width="34" height="34"/>
         <image name="purchases_circles" width="187.5" height="406"/>
-        <image name="purchases_spaceman" width="264" height="178.5"/>
+        <image name="purchases_extra_cover" width="338" height="216.5"/>
+        <image name="purchases_orbits" width="544" height="451"/>
+        <image name="purchases_spaceman" width="264" height="176"/>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

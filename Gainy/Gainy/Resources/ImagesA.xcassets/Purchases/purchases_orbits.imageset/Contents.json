@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "!!! Space Man Fly.png",
+      "filename" : "!!! Orbits.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "!!! Space Man Fly@2x.png",
+      "filename" : "!!! Orbits@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "!!! Space Man Fly@3x.png",
+      "filename" : "!!! Orbits@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

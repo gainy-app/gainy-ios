@@ -21,6 +21,24 @@ final class PurchaseViewController: BaseViewController {
     private var paused: Bool = false
     
     //MARK: - Outlets
+    @IBOutlet private weak var spacemanView: UIImageView!
+    @IBOutlet private weak var extraCover: UIImageView!
+    @IBOutlet private weak var orbitView: UIImageView!
+    
+    private var isInvite: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 3.0, delay: 0.0, options: [.curveLinear]) {
+                self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.8 : 1.0, y: self.isInvite ? 0.8 : 1.0)
+                self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
+                self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
+            } completion: { done in
+                if done {
+                    
+                }
+            }
+
+        }
+    }
     
     @IBOutlet private weak var titleLbl: UILabel! {
         didSet {
@@ -28,12 +46,36 @@ final class PurchaseViewController: BaseViewController {
         }
     }
     
+    @IBOutlet private weak var purchaseBtn: UIButton! {
+        didSet {
+            purchaseBtn.layer.cornerRadius = 20
+        
+            let backGradientView = GradientPlainBackgroundView()
+            backGradientView.startColor = UIColor(hexString: "1B44F7")
+            backGradientView.endColor = UIColor(hexString: "357CFD")
+            backGradientView.startPoint = .init(x: 0, y: 0.5)
+            backGradientView.endPoint = .init(x: 1, y: 0.5)
+            purchaseBtn.addSubview(backGradientView)
+            backGradientView.autoPinEdgesToSuperviewEdges()
+            
+            purchaseBtn.backgroundColor = UIColor(hexString: "#1B45FB")!
+            purchaseBtn.layer.shadowColor = UIColor(hexString: "4484FF")!.cgColor
+            purchaseBtn.layer.shadowOffset = CGSize(width: 0, height: 4)
+            purchaseBtn.layer.shadowRadius = 24
+            purchaseBtn.layer.shadowOpacity = 0.64
+            purchaseBtn.layer.cornerRadius = 20.0
+            purchaseBtn.clipsToBounds = true
+            purchaseBtn.isUserInteractionEnabled = true
+            
+            purchaseBtn.addTarget(self, action: #selector(purchaseAction), for: .touchUpInside)
+        }
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.modalPresentationStyle = .fullScreen
         self.setupPlayer()
-        
+        self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
         avPlayer.play()
         paused = false
     }
@@ -43,6 +85,18 @@ final class PurchaseViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        delay(5.0) {
+            self.isInvite = true
+        }
+        
+        delay(15.0) {
+            self.isInvite = false
+        }
+        
+        delay(20.0) {
+            self.isInvite = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -85,6 +139,10 @@ final class PurchaseViewController: BaseViewController {
     
     @IBAction private func closeAction() {
         dismiss(animated: true)
+    }
+    
+    @objc func purchaseAction() {
+        
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
