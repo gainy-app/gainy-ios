@@ -58,6 +58,29 @@ enum Product: CaseIterable {
             }
         }
     }
+    
+    var name: String {
+        switch self {
+        case .month(_):
+            return "One Month"
+        case .month6(_):
+            return "6 Months"
+        case .year(_):
+            return "One Year"
+        }
+    }
+    
+    var info: String {
+        switch self {
+        case .month(_):
+            return "Easy start"
+        case .month6(_):
+            return "You save 15%"
+        case .year(_):
+            return "You save 20%"
+        }
+    }
+
 }
 
 class SubscriptionManager: SubscriptionManagerProtocol {
@@ -123,6 +146,10 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
     
     func purchaseProduct(product: Product) {
         service.purchaseProduct(product: product)
+    }
+    
+    func priceForProduct(product: Product) -> String {
+        service.priceForProduct(product: product)
     }
     
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {

@@ -24,10 +24,18 @@ final class PurchaseViewController: BaseViewController {
     @IBOutlet private weak var spacemanView: UIImageView!
     @IBOutlet private weak var extraCover: UIImageView!
     @IBOutlet private weak var orbitView: UIImageView!
+    @IBOutlet private weak var purchasesView: PurchasesProductsView!
+    @IBOutlet private weak var purchasesScroll: UIScrollView! {
+        didSet {
+            purchasesScroll.delegate = self
+        }
+    }
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var inviteView: PurchaseInviteView!
     
     private var isInvite: Bool = false {
         didSet {
-            UIView.animate(withDuration: 3.0, delay: 0.0, options: [.curveLinear]) {
+            UIView.animate(withDuration: 3.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
                 self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
                 self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
                 self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
@@ -85,18 +93,6 @@ final class PurchaseViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        delay(5.0) {
-            self.isInvite = true
-        }
-        
-        delay(15.0) {
-            self.isInvite = false
-        }
-        
-        delay(20.0) {
-            self.isInvite = true
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,5 +143,21 @@ final class PurchaseViewController: BaseViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+}
+
+extension PurchaseViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {
+            inviteView.isSelected = true
+            purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
+            self.isInvite = true
+            pageControl.currentPage = 2
+        } else {
+            inviteView.isSelected = false
+            purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
+            self.isInvite = false
+            pageControl.currentPage = 1
+        }
     }
 }

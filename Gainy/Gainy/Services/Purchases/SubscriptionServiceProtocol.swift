@@ -26,6 +26,7 @@ protocol SubscriptionServiceProtocol {
     func expirationDate(_ completion: @escaping (Date?) -> Void)
     
     func getProducts()
+    func priceForProduct(product: Product) -> String
     func purchaseProduct(product: Product)
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void)
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void)

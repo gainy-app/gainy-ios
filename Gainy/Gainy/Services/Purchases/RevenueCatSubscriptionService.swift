@@ -123,6 +123,13 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         }
     }
     
+    func priceForProduct(product: Product) -> String {
+        if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
+            return product.localizedPriceString
+        }
+        return "-"
+    }
+    
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void) {
         Purchases.shared.restorePurchases {[weak self] (customerInfo, error) in
             self?.handleInfo(customerInfo, error: error)

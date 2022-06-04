@@ -36,6 +36,10 @@ struct StagingSubscriptionService: SubscriptionServiceProtocol {
         
     }
     
+    func priceForProduct(product: Product) -> String {
+        return ""
+    }
+    
     func purchaseProduct(product: Product) {
         
     }
