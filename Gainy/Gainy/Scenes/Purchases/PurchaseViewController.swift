@@ -44,7 +44,14 @@ final class PurchaseViewController: BaseViewController {
                     
                 }
             }
-
+            
+            if isInvite {
+                inviteView.isSelected = true
+                purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
+            } else {
+                inviteView.isSelected = false
+                purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
+            }
         }
     }
     
@@ -57,7 +64,7 @@ final class PurchaseViewController: BaseViewController {
     @IBOutlet private weak var purchaseBtn: UIButton! {
         didSet {
             purchaseBtn.layer.cornerRadius = 20
-        
+            
             let backGradientView = GradientPlainBackgroundView()
             backGradientView.startColor = UIColor(hexString: "1B44F7")
             backGradientView.endColor = UIColor(hexString: "357CFD")
@@ -86,6 +93,19 @@ final class PurchaseViewController: BaseViewController {
         self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
         avPlayer.play()
         paused = false
+        
+        NotificationCenter.default.publisher(for: NotificationManager.subscriptionChangedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] notif in
+                if let subscriptionType = notif.userInfo?["type"] as? SuscriptionType {
+                    if subscriptionType == .pro {
+                        self?.dismiss(animated: true)
+                    } else {
+                        
+                    }
+                }
+            }
+            .store(in: &self.cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -113,32 +133,68 @@ final class PurchaseViewController: BaseViewController {
     
     func setupPlayer() {
         let theURL = Bundle.main.url(forResource:"Gradient_Stars", withExtension: "mp4")
-
+        
         avPlayer = AVPlayer(url: theURL!)
         avPlayerLayer = AVPlayerLayer(player: avPlayer)
         avPlayerLayer.videoGravity = .resizeAspectFill
         avPlayer.volume = 0
         avPlayer.actionAtItemEnd = .none
-
+        
         avPlayerLayer.frame = view.layer.bounds
         view.backgroundColor = .clear
         view.layer.insertSublayer(avPlayerLayer, at: 0)
         avPlayerLayer.isHidden = true
         NotificationCenter.default.addObserver(self,
-                                           selector: #selector(playerItemDidReachEnd(notification:)),
-                                           name: .AVPlayerItemDidPlayToEndTime,
-                                           object: avPlayer.currentItem)
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: avPlayer.currentItem)
     }
     
     
-//MARK: - Actions
+    //MARK: - Actions
     
     @IBAction private func closeAction() {
         dismiss(animated: true)
     }
     
-    @objc func purchaseAction() {
+    @IBAction @objc func purchaseAction() {
+        if isInvite {
+            
+        } else {
+            if let product = purchasesView.selectedProduct {
+                SubscriptionManager.shared.purchaseProduct(product: product)
+            }
+        }
+    }
+    
+    private func generateInvite() {
         
+    }
+    
+    @IBAction @objc func restoreAction() {
+        SubscriptionManager.shared.restorePurchases {[weak self] subscriptionType in
+            DispatchQueue.main.async {
+                if subscriptionType == .pro {
+                    self?.dismiss(animated: true)
+                } else {
+                    NotificationManager.shared.showError("Purchase is not completed. If payment completed - Restore the purchase.")
+                }
+            }
+        }
+    }
+    
+    @IBAction @objc func policyAction() {
+        GainyAnalytics.logEvent("content_privacy_policy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PurchaseViewController"])
+        if let url = URL(string: Constants.Links.privacy) {
+            WebPresenter.openLink(vc: self, url: url)
+        }
+    }
+    
+    @IBAction @objc func termsAction() {
+        GainyAnalytics.logEvent("content_terms_of_service_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PurchaseViewController"])
+        if let url = URL(string: Constants.Links.tos) {
+            WebPresenter.openLink(vc: self, url: url)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -149,13 +205,11 @@ final class PurchaseViewController: BaseViewController {
 extension PurchaseViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {
-            inviteView.isSelected = true
-            purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
+            
             self.isInvite = true
             pageControl.currentPage = 2
         } else {
-            inviteView.isSelected = false
-            purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
+            
             self.isInvite = false
             pageControl.currentPage = 1
         }
