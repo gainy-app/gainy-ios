@@ -105,6 +105,7 @@ final class TTFBlockView: TKPassThroughView {
         backGradientView.endColor = UIColor(hexString: "357CFD")
         backGradientView.startPoint = .init(x: 0, y: 0.5)
         backGradientView.endPoint = .init(x: 1, y: 0.5)
+        backGradientView.isUserInteractionEnabled = false
         btn.addSubview(backGradientView)
         backGradientView.autoPinEdgesToSuperviewEdges()
         

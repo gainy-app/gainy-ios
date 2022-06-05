@@ -274,6 +274,10 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         self.currentCollectionViewCell = cell
         self.coordinator?.showMetricsViewController(ticker:ticker, collectionID: collectionID, delegate: self)
     }
+    
+    func purchasePressed(source: SingleCollectionDetailsViewModel) {
+        coordiantor?.showPurchaseView()
+    }
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Branch
 
 protocol SubscriptionManagerProtocol: SubscriptionServiceProtocol{
     var service: SubscriptionServiceProtocol { get }
@@ -158,5 +159,32 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
     
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void) {
         service.grantPromotion(type, completion)
+    }
+    
+    func generateInviteLink(_ completion: @escaping (URL) -> Void){
+        
+        let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
+        buo.title = "Gainy invite"
+        buo.contentDescription = "Invite Description"
+        buo.imageUrl = "https://lorempixel.com/400/400"
+        buo.publiclyIndex = true
+        buo.locallyIndex = true
+        
+        let linkProperties: BranchLinkProperties = BranchLinkProperties()
+        linkProperties.feature = "Purchase_swipe"
+        linkProperties.campaign = "Referral_Invite"
+        linkProperties.channel = "Share"
+        linkProperties.addControlParam("refId", withValue: "\(UserProfileManager.shared.profileID ?? 0)")
+        linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
+        
+        buo.getShortUrl(with: linkProperties) { (url, error) in
+                if (error == nil) {
+                    if let url = url {
+                        completion(URL(string: url)!)
+                    }
+                } else {
+                    dprint(String(format: "Branch error : %@", error! as CVarArg))
+                }
+            }
     }
 }

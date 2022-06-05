@@ -35,7 +35,7 @@ final class PurchaseViewController: BaseViewController {
     
     private var isInvite: Bool = false {
         didSet {
-            UIView.animate(withDuration: 3.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
+            UIView.animate(withDuration: 2.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
                 self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
                 self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
                 self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
@@ -70,6 +70,7 @@ final class PurchaseViewController: BaseViewController {
             backGradientView.endColor = UIColor(hexString: "357CFD")
             backGradientView.startPoint = .init(x: 0, y: 0.5)
             backGradientView.endPoint = .init(x: 1, y: 0.5)
+            backGradientView.isUserInteractionEnabled = false
             purchaseBtn.addSubview(backGradientView)
             backGradientView.autoPinEdgesToSuperviewEdges()
             
@@ -168,7 +169,13 @@ final class PurchaseViewController: BaseViewController {
     }
     
     private func generateInvite() {
-        
+        SubscriptionManager.shared.generateInviteLink {[weak self] url in
+            let items = [url]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            runOnMain {
+                self?.present(ac, animated: true)
+            }
+        }
     }
     
     @IBAction @objc func restoreAction() {
@@ -207,11 +214,11 @@ extension PurchaseViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {
             
             self.isInvite = true
-            pageControl.currentPage = 2
+            pageControl.currentPage = 1
         } else {
             
             self.isInvite = false
-            pageControl.currentPage = 1
+            pageControl.currentPage = 0
         }
     }
 }
