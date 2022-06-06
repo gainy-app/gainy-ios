@@ -18,6 +18,7 @@ public final class GetProfileQuery: GraphQLQuery {
         legal_address
         id
         user_id
+        subscription_end_date
         profile_interests {
           __typename
           interest_id
@@ -138,6 +139,7 @@ public final class GetProfileQuery: GraphQLQuery {
           GraphQLField("legal_address", type: .scalar(String.self)),
           GraphQLField("id", type: .nonNull(.scalar(Int.self))),
           GraphQLField("user_id", type: .nonNull(.scalar(String.self))),
+          GraphQLField("subscription_end_date", type: .scalar(timestamptz.self)),
           GraphQLField("profile_interests", type: .nonNull(.list(.nonNull(.object(ProfileInterest.selections))))),
           GraphQLField("profile_categories", type: .nonNull(.list(.nonNull(.object(ProfileCategory.selections))))),
           GraphQLField("profile_favorite_collections", arguments: ["where": ["collection": ["enabled": ["_eq": "1"]]]], type: .nonNull(.list(.nonNull(.object(ProfileFavoriteCollection.selections))))),
@@ -152,8 +154,8 @@ public final class GetProfileQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker], profilePlaidAccessTokens: [ProfilePlaidAccessToken]) {
-        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, "profile_plaid_access_tokens": profilePlaidAccessTokens.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }])
+      public init(avatarUrl: String? = nil, email: String, firstName: String, lastName: String, legalAddress: String? = nil, id: Int, userId: String, subscriptionEndDate: timestamptz? = nil, profileInterests: [ProfileInterest], profileCategories: [ProfileCategory], profileFavoriteCollections: [ProfileFavoriteCollection], profileWatchlistTickers: [ProfileWatchlistTicker], profilePlaidAccessTokens: [ProfilePlaidAccessToken]) {
+        self.init(unsafeResultMap: ["__typename": "app_profiles", "avatar_url": avatarUrl, "email": email, "first_name": firstName, "last_name": lastName, "legal_address": legalAddress, "id": id, "user_id": userId, "subscription_end_date": subscriptionEndDate, "profile_interests": profileInterests.map { (value: ProfileInterest) -> ResultMap in value.resultMap }, "profile_categories": profileCategories.map { (value: ProfileCategory) -> ResultMap in value.resultMap }, "profile_favorite_collections": profileFavoriteCollections.map { (value: ProfileFavoriteCollection) -> ResultMap in value.resultMap }, "profile_watchlist_tickers": profileWatchlistTickers.map { (value: ProfileWatchlistTicker) -> ResultMap in value.resultMap }, "profile_plaid_access_tokens": profilePlaidAccessTokens.map { (value: ProfilePlaidAccessToken) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -225,6 +227,15 @@ public final class GetProfileQuery: GraphQLQuery {
         }
         set {
           resultMap.updateValue(newValue, forKey: "user_id")
+        }
+      }
+
+      public var subscriptionEndDate: timestamptz? {
+        get {
+          return resultMap["subscription_end_date"] as? timestamptz
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "subscription_end_date")
         }
       }
 

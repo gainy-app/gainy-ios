@@ -188,6 +188,7 @@ Try Gainy Premium!</string>
                                                     </view>
                                                 </subviews>
                                                 <viewLayoutGuide key="safeArea" id="K1e-cA-XUm"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="yhp-42-cbc" secondAttribute="trailing" id="01P-JJ-X30"/>
                                                     <constraint firstItem="yhp-42-cbc" firstAttribute="leading" secondItem="uNd-qD-ibB" secondAttribute="leading" id="6d9-60-vap"/>
@@ -223,35 +224,35 @@ Try Gainy Premium!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKv-ed-TTt">
-                                                <rect key="frame" x="86" y="724" width="242.5" height="24"/>
+                                                <rect key="frame" x="109.5" y="724" width="195" height="24"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWL-ca-04n">
-                                                        <rect key="frame" x="0.0" y="-2" width="95.5" height="28"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Privacy Policy">
-                                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
-                                                            <color key="baseForegroundColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </buttonConfiguration>
+                                                        <rect key="frame" x="0.0" y="-1.5" width="72" height="27"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Privacy Policy">
+                                                            <color key="titleColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="policyAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Uhi-tY-9gz"/>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zze-D6-Kiw">
-                                                        <rect key="frame" x="103.5" y="5" width="6" height="14"/>
+                                                        <rect key="frame" x="80" y="5" width="6" height="14"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IY6-Ls-xAe">
-                                                        <rect key="frame" x="117.5" y="3.5" width="125" height="20"/>
+                                                        <rect key="frame" x="94" y="3.5" width="101" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="YAm-hB-Acs"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Terms &amp; Conditions">
-                                                            <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
-                                                            <color key="baseForegroundColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </buttonConfiguration>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Terms &amp; Conditions">
+                                                            <color key="titleColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
                                                         <connections>
                                                             <action selector="termsAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="E1h-XW-rXk"/>
                                                         </connections>
@@ -304,6 +305,7 @@ Try Gainy Premium!</string>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="zkp-vB-tss" firstAttribute="trailing" secondItem="CIU-cm-Dn5" secondAttribute="trailing" id="SKc-1u-BgC"/>
                                     <constraint firstItem="CIU-cm-Dn5" firstAttribute="top" secondItem="lSa-qJ-QZE" secondAttribute="top" id="T8P-6k-7gM"/>

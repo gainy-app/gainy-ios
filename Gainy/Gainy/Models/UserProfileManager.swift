@@ -12,6 +12,7 @@ import OneSignal
 import RevenueCat
 import Branch
 import FirebaseAnalytics
+import SwiftDate
 
 struct AppProfileMetricsSetting {
     
@@ -175,6 +176,7 @@ final class UserProfileManager {
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
+                self.subscriptionExpiryDate = (appProfile.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date
                 self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
                     let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker")
                     return result

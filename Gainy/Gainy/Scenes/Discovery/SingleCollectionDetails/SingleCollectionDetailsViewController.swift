@@ -15,7 +15,7 @@ protocol SingleCollectionDetailsViewControllerDelegate: AnyObject {
 }
 
 final class SingleCollectionDetailsViewController: BaseViewController {
-    
+        
     //MARK: - Outlets
     @IBOutlet weak var toggleBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
@@ -38,7 +38,6 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     private var currentCollectionViewCell: CollectionDetailsViewCell?
     
     //MARK: - DI
-    var coordiantor: MainCoordinator?
     var collectionId: Int!
     var model: CollectionDetailViewCellModel!
     var isFromSearch: Bool = false
@@ -276,7 +275,7 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     }
     
     func purchasePressed(source: SingleCollectionDetailsViewModel) {
-        coordiantor?.showPurchaseView()
+        coordinator?.showPurchaseView()
     }
 }
 

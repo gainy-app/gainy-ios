@@ -770,7 +770,17 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
             var state = CollectionDetailsHeaderViewState.grid
             if settings.pieChartSelected {
-                state = CollectionDetailsHeaderViewState.chart
+                SubscriptionManager.shared.getSubscription({[weak self] type in
+                    if type == .free {
+                        if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                            state = CollectionDetailsHeaderViewState.chart
+                        } else {
+                            state = CollectionDetailsHeaderViewState.list
+                        }
+                    } else {
+                        state = CollectionDetailsHeaderViewState.list
+                    }
+                })                
             } else {
                 if settings.viewMode == .grid {
                     state = CollectionDetailsHeaderViewState.grid
