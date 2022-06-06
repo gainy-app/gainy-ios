@@ -68,6 +68,38 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
+        
+        contentView.addSubview(collectionInvestButtonView)
+        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .bottom)
+        collectionInvestButtonView.autoSetDimension(.height, toSize: 96.0)
+        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .left)
+        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
+        
+        collectionInvestButtonView.investButtonPressed = {
+            NotificationManager.shared.showMessage(title: "", text: "The feature will be available soon.", cancelTitle: "OK", actions: nil)
+        }
+        
+        let blurView = BlurEffectView()
+        contentView.addSubview(blurView)
+
+        blurView.autoPinEdge(toSuperviewEdge: .leading)
+        blurView.autoPinEdge(toSuperviewEdge: .bottom)
+        blurView.autoPinEdge(toSuperviewEdge: .trailing)
+        blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+        contentView.bringSubviewToFront(blurView)
+        contentView.bringSubviewToFront(collectionInvestButtonView)
+
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    self?.collectionInvestButtonView.removeBlur()
+                } else {
+                    self?.collectionInvestButtonView.addBlur()
+                }
+            } else {
+                self?.collectionInvestButtonView.removeBlur()
+            }
+        })
     }
     
     @available(*, unavailable)
@@ -79,6 +111,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         didSet {
             //collectionHorizontalView.isCompare = isCompare
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
     // MARK: Internal
@@ -143,6 +180,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         self.viewModel = viewModel
         self.cards = viewModel.cards
         sortSections()
+        
+        collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
         
         NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
         } receiveValue: { notification in
@@ -266,6 +305,15 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
     }
+    
+    lazy var collectionInvestButtonView: CollectionInvestButtonView = {
+        let view = CollectionInvestButtonView()
+        view.backgroundColor = .clear
+        view.investButtonPressed = {
+            
+        }
+        return view
+    }()
     
     private lazy var loadMoreActivityIndicatorView: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
