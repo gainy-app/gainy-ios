@@ -16,6 +16,7 @@ final class PurchaseInviteView: UIView {
         yourViewBorder.lineDashPattern = [2, 2]
         yourViewBorder.frame = self.bounds
         yourViewBorder.fillColor = nil
+        yourViewBorder.cornerRadius = 16.0
         yourViewBorder.path = UIBezierPath(rect: self.bounds).cgPath
         return yourViewBorder
     }()

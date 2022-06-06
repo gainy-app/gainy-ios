@@ -31,14 +31,29 @@ final class PurchaseViewController: BaseViewController {
         }
     }
     @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet private weak var restoreBtn: BorderButton!
     @IBOutlet private weak var inviteView: PurchaseInviteView!
+    @IBOutlet private weak var infoLbl: UILabel!
+    
+    private var isPurchasing: Bool = false {
+        didSet {
+            purchaseBtn.isEnabled = !isPurchasing
+            restoreBtn.isEnabled = !isPurchasing
+            if isPurchasing {
+                indicatorView.startAnimating()
+            } else {
+                indicatorView.stopAnimating()
+            }
+        }
+    }
     
     private var isInvite: Bool = false {
         didSet {
-            UIView.animate(withDuration: 2.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
                 self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
                 self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
-                self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
+                self.orbitView.transform = .init(scaleX: self.isInvite ? 0.9 : 0.7, y: self.isInvite ? 0.9 : 0.7)
             } completion: { done in
                 if done {
                     
@@ -48,9 +63,11 @@ final class PurchaseViewController: BaseViewController {
             if isInvite {
                 inviteView.isSelected = true
                 purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
+                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profiel in gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."
             } else {
                 inviteView.isSelected = false
                 purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
+                infoLbl.text = "Premium subscription is required to get access to unlimited TTF views for selected period. The subscription will not renew automatically with the price and duration given above. Payment will be charged to your Apple ID account at the confirmation of purchase. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase."
             }
         }
     }
@@ -104,6 +121,7 @@ final class PurchaseViewController: BaseViewController {
                     } else {
                         
                     }
+                    self?.isPurchasing = false
                 }
             }
             .store(in: &self.cancellables)
@@ -160,9 +178,10 @@ final class PurchaseViewController: BaseViewController {
     
     @IBAction @objc func purchaseAction() {
         if isInvite {
-            
+            generateInvite()
         } else {
             if let product = purchasesView.selectedProduct {
+                isPurchasing = true
                 SubscriptionManager.shared.purchaseProduct(product: product)
             }
         }
@@ -179,6 +198,7 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction @objc func restoreAction() {
+        isPurchasing = true
         SubscriptionManager.shared.restorePurchases {[weak self] subscriptionType in
             DispatchQueue.main.async {
                 if subscriptionType == .pro {
@@ -186,6 +206,7 @@ final class PurchaseViewController: BaseViewController {
                 } else {
                     NotificationManager.shared.showError("Purchase is not completed. If payment completed - Restore the purchase.")
                 }
+                self?.isPurchasing = false
             }
         }
     }
@@ -211,8 +232,7 @@ final class PurchaseViewController: BaseViewController {
 
 extension PurchaseViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {
-            
+        if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {            
             self.isInvite = true
             pageControl.currentPage = 1
         } else {
