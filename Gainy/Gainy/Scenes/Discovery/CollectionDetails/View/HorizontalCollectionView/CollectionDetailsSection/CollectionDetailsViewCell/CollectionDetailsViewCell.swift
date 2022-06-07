@@ -3,6 +3,8 @@ import SkeletonView
 import Combine
 import PureLayout
 import Deviice
+import OneSignal
+import FirebaseAuth
 
 private enum CollectionDetailsSection: Int, CaseIterable {
     case title = 0
@@ -77,6 +79,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionInvestButtonView.investButtonPressed = {
             NotificationManager.shared.showMessage(title: "", text: "The feature will be available soon.", cancelTitle: "OK", actions: nil)
+            GainyAnalytics.logEvent("invest_pressed", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous", "collection_id" : self.viewModel.id])
         }
         
         let blurView = BlurEffectView()

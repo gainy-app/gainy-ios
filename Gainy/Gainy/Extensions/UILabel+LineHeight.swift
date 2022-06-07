@@ -9,8 +9,8 @@ extension UILabel {
             style.alignment = textAlignment
             style.maximumLineHeight = styleLineHeight
         style.minimumLineHeight = styleLineHeight
-        let range = NSMakeRange(0, text.count)
-        attributeString.addAttribute(.kern, value: NSNumber(-1), range: range)
+        let range = NSMakeRange(0, text.utf16.count)
+        attributeString.addAttribute(.kern, value: NSNumber(1), range: range)
         attributeString.addAttribute(.paragraphStyle, value: style, range: range)
         attributeString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
         attributeString.addAttribute(.font, value: self.font, range: range)

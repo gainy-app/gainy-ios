@@ -194,6 +194,31 @@ final class UserProfileManager {
         }
     }
     
+    public func deleteProfile(completion: @escaping (Bool) -> Void) {
+        guard let profileID = self.profileID else {
+            completion(false)
+            return
+        }
+        
+        let query = DeleteProfileMutation.init(profileID: profileID)
+        DispatchQueue.global(qos: .background).async {
+            Network.shared.apollo.perform(mutation: query) { result in
+                guard (try? result.get().data) != nil else {
+                    NotificationManager.shared.showError("Sorry... Something went wrong, please tyr again later.")
+                    runOnMain {
+                        completion(false)
+                    }
+                    return
+                }
+            
+                runOnMain {
+                    completion(true)
+                }
+            }
+        }
+        
+    }
+    
     public func getProfileCollections(loadProfile: Bool = false, forceReload: Bool = false, completion: @escaping (Bool) -> Void) {
         
         guard let profileID = self.profileID else {

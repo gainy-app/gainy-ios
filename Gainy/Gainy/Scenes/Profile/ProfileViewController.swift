@@ -32,6 +32,7 @@ final class ProfileViewController: BaseViewController {
     
     @IBOutlet private weak var addProfilePictureButton: UIButton!
     @IBOutlet private weak var logoutButton: BorderButton!
+    @IBOutlet private weak var deleteAccountButton: BorderButton!
     @IBOutlet private weak var requestFeatureButton: BorderButton!
     @IBOutlet private weak var sendFeedbackButton: BorderButton! {
         didSet {
@@ -41,6 +42,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var privacyButton: UIButton!
     @IBOutlet private weak var relLaunchOnboardingQuestionnaireButton: UIButton!
     @IBOutlet private weak var personalInfoButton: UIButton!
+    @IBOutlet private weak var currentSubscriptionButton: UIButton!
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     @IBOutlet private weak var interestsCollectionView: UICollectionView!
     @IBOutlet private weak var profilePictureImageView: UIImageView!
@@ -289,6 +291,17 @@ final class ProfileViewController: BaseViewController {
         }
     }
     
+    @IBAction func currentSubscriptionButtonTap(_ sender: Any) {
+        
+        GainyAnalytics.logEvent("profile_subscription_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        
+        if let mainCoordinator = self.mainCoordinator {
+            let vc = mainCoordinator.viewControllerFactory.instantiateProfileSubscription(coordinator: mainCoordinator)
+            let navigationController = UINavigationController.init(rootViewController: vc)
+            self.present(navigationController, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func subscriptionButtonTap(_ sender: Any) {
         
         var components = URLComponents()
@@ -386,6 +399,32 @@ final class ProfileViewController: BaseViewController {
         }
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func onDeleteAccountTap(_ sender: Any) {
+        
+        let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
+            
+        }
+        let proceedAction = UIAlertAction(title: NSLocalizedString("Proceed", comment: ""), style: .destructive) { (action) in
+            
+            GainyAnalytics.logEvent("profile_delete_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            UserProfileManager.shared.deleteProfile { success in
+                guard success == true else {
+                    return
+                }
+                
+                self.authorizationManager?.signOut()
+                NotificationCenter.default.post(name: NotificationManager.userLogoutNotification, object: nil)
+                if let finishFlow = self.mainCoordinator?.finishFlow {
+                    finishFlow()
+                }
+            }
+        }
+        alertController.addAction(proceedAction)
+        alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -633,6 +672,24 @@ final class ProfileViewController: BaseViewController {
         personalInfoImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
         personalInfoImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         personalInfoImageView.isUserInteractionEnabled = false
+        
+        let currentSubscription = NSLocalizedString("Current subscription", comment: "Current subscription")
+        currentSubscriptionButton.setTitle("", for: UIControl.State.normal)
+        currentSubscriptionButton.titleLabel?.alpha = 0.0
+        let subscriptionLabel = UILabel.newAutoLayout()
+        subscriptionLabel.font = UIFont.proDisplaySemibold(20.0)
+        subscriptionLabel.textAlignment = NSTextAlignment.left
+        subscriptionLabel.text = currentSubscription
+        currentSubscriptionButton.addSubview(subscriptionLabel)
+        subscriptionLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero, excludingEdge: ALEdge.right)
+        subscriptionLabel.sizeToFit()
+        subscriptionLabel.isUserInteractionEnabled = false
+        let subscriptionImageView = UIImageView.newAutoLayout()
+        subscriptionImageView.image = UIImage.init(named: "iconChevronRight")
+        currentSubscriptionButton.addSubview(subscriptionImageView)
+        subscriptionImageView.autoPinEdge(toSuperviewEdge: ALEdge.right)
+        subscriptionImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
+        subscriptionImageView.isUserInteractionEnabled = false
         
         let onboadring = NSLocalizedString("Re-launch onboarding", comment: "Re-launch onboarding")
         relLaunchOnboardingQuestionnaireButton.setTitle("", for: UIControl.State.normal)

@@ -87,6 +87,12 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiateProfileSubscription(coordinator: MainCoordinator) -> ProfileSubscriptionViewController {
+        let vc = ProfileSubscriptionViewController.instantiate(.profile)
+        vc.mainCoordinator = coordinator
+        return vc
+    }
+    
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
         vc.viewModel = DiscoverCollectionsViewModel()

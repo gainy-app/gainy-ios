@@ -347,6 +347,7 @@
 		8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */; };
 		85070BF5281991F300AB6506 /* CollectionChartCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85070BF4281991F300AB6506 /* CollectionChartCardCell.swift */; };
 		85070BF72819965100AB6506 /* RoundedDashedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85070BF62819965100AB6506 /* RoundedDashedCollectionViewCell.swift */; };
+		8509209E284ED274002CF286 /* ProfileSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */; };
 		851E588C278F630C00B49585 /* WatchlistSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */; };
 		851E774E26FCB44E00CCA382 /* BetaDisclaimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */; };
 		8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */; };
@@ -959,6 +960,7 @@
 		8505FCFC2739E67D0061AB36 /* BrokerFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BrokerFooterView.xib; sourceTree = "<group>"; };
 		85070BF4281991F300AB6506 /* CollectionChartCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionChartCardCell.swift; sourceTree = "<group>"; };
 		85070BF62819965100AB6506 /* RoundedDashedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedDashedCollectionViewCell.swift; sourceTree = "<group>"; };
+		8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSubscriptionViewController.swift; sourceTree = "<group>"; };
 		851E588B278F630C00B49585 /* WatchlistSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatchlistSectionLayout.swift; sourceTree = "<group>"; };
 		851E774D26FCB44E00CCA382 /* BetaDisclaimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetaDisclaimerViewController.swift; sourceTree = "<group>"; };
 		8520F9F62722B90B002234B2 /* FloatingPanelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelManager.swift; sourceTree = "<group>"; };
@@ -1630,6 +1632,7 @@
 				85ED4DDE2701FE0200FE6926 /* EditProfileCollectionViewController.swift */,
 				85ED4DE22701FE7500FE6926 /* EditPersonalInfoViewController.swift */,
 				85ED4DE42701FEC300FE6926 /* PrivacyViewController.swift */,
+				8509209D284ED274002CF286 /* ProfileSubscriptionViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -3285,6 +3288,7 @@
 				85E4A2CE2762115400C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
+				8509209E284ED274002CF286 /* ProfileSubscriptionViewController.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
 				331243D927BF72EF008C2BCC /* HomeDataSource.swift in Sources */,

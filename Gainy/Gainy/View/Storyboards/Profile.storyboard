@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -60,7 +60,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1094"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1216"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-dE-E2a">
@@ -226,8 +226,16 @@
                                             <action selector="personalInfoButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="jtG-QX-stH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-Hb-aF4">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcF-yN-TYY">
                                         <rect key="frame" x="28" y="740" width="347" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="currentSubscriptionButtonTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="XQx-sr-9Om"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l8n-Hb-aF4">
+                                        <rect key="frame" x="28" y="807" width="347" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -235,7 +243,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd7-zi-omX">
-                                        <rect key="frame" x="28" y="807" width="347" height="31"/>
+                                        <rect key="frame" x="28" y="874" width="347" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                         <connections>
@@ -243,7 +251,7 @@
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="5Lj-n7-Atc">
-                                        <rect key="frame" x="24" y="880" width="366" height="64"/>
+                                        <rect key="frame" x="24" y="947" width="366" height="64"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-YX-kmP" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="171.5" height="64"/>
@@ -291,7 +299,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="968" width="53" height="31"/>
+                                        <rect key="frame" x="179.5" y="1035" width="55" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -310,8 +318,28 @@
                                             <action selector="onLogOutTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="zHy-lD-Vw4"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-0r-iWN" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                        <rect key="frame" x="140" y="1090" width="134" height="31"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31" id="MU9-HI-3dE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Delete my account">
+                                            <color key="titleColor" red="0.91533547640000001" green="0.36521488429999999" blue="0.36860951780000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onDeleteAccountTap:" destination="ahC-ff-waI" eventType="touchUpInside" id="GJ6-Lq-Roc"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version: 1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKX-vB-M9Z">
-                                        <rect key="frame" x="24" y="1023" width="366" height="24"/>
+                                        <rect key="frame" x="24" y="1145" width="366" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="HcS-fT-eIZ"/>
                                         </constraints>
@@ -325,7 +353,9 @@
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="leading" secondItem="e0W-47-zcf" secondAttribute="trailing" constant="15" id="0ub-KJ-aFD"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="3Vn-2t-vM1"/>
                                     <constraint firstItem="dd7-zi-omX" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="3c7-6L-HDZ"/>
+                                    <constraint firstItem="lcF-yN-TYY" firstAttribute="top" secondItem="J7E-BH-aNc" secondAttribute="bottom" constant="36" id="6Xr-GA-Cvs"/>
                                     <constraint firstItem="5Lj-n7-Atc" firstAttribute="top" secondItem="dd7-zi-omX" secondAttribute="bottom" constant="42" id="8Vc-bP-umu"/>
+                                    <constraint firstItem="l8n-Hb-aF4" firstAttribute="top" secondItem="lcF-yN-TYY" secondAttribute="bottom" constant="36" id="9ld-2B-GWT"/>
                                     <constraint firstItem="l1e-sc-Ubw" firstAttribute="top" secondItem="coX-nZ-qMJ" secondAttribute="bottom" constant="40" id="B0P-VK-cN5"/>
                                     <constraint firstItem="8AG-GZ-RBx" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="32" id="BBx-qc-la0"/>
                                     <constraint firstItem="e0W-47-zcf" firstAttribute="top" secondItem="coX-nZ-qMJ" secondAttribute="bottom" constant="38" id="CK4-o9-GxR"/>
@@ -333,17 +363,19 @@
                                     <constraint firstAttribute="trailing" secondItem="8AG-GZ-RBx" secondAttribute="trailing" constant="4" id="EXr-i7-ECd"/>
                                     <constraint firstItem="5Lj-n7-Atc" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="FLv-Wg-G7b"/>
                                     <constraint firstItem="Tkh-yK-8sU" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="GCS-gm-4ni"/>
-                                    <constraint firstItem="l8n-Hb-aF4" firstAttribute="top" secondItem="J7E-BH-aNc" secondAttribute="bottom" constant="36" id="GLo-9o-Ax3"/>
                                     <constraint firstItem="wKX-vB-M9Z" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="24" id="Iw5-ay-itW"/>
                                     <constraint firstAttribute="trailing" secondItem="YdM-LP-G3m" secondAttribute="trailing" id="LOf-Qf-MeJ"/>
+                                    <constraint firstItem="lcF-yN-TYY" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="LzF-vB-6lD"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="N6l-Gt-Gay"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="Ngm-3c-eFe"/>
                                     <constraint firstItem="YdM-LP-G3m" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" id="Qbk-MH-cKW"/>
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="bottom" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="4" id="QsV-Ec-5dm"/>
                                     <constraint firstAttribute="trailing" secondItem="l1e-sc-Ubw" secondAttribute="trailing" constant="4" id="Rga-9L-L7y"/>
+                                    <constraint firstAttribute="trailing" secondItem="lcF-yN-TYY" secondAttribute="trailing" constant="39" id="Rwn-fq-8TO"/>
                                     <constraint firstItem="J7E-BH-aNc" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="SNS-v0-pca"/>
                                     <constraint firstItem="Okm-BU-joa" firstAttribute="top" secondItem="k6u-eu-s6j" secondAttribute="bottom" constant="30" id="TUP-HG-G9w"/>
                                     <constraint firstAttribute="trailing" secondItem="wKX-vB-M9Z" secondAttribute="trailing" constant="24" id="TjU-BE-nwQ"/>
+                                    <constraint firstItem="5pv-0r-iWN" firstAttribute="top" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="24" id="Wod-Wg-8d0"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="XVq-Kw-Du8"/>
                                     <constraint firstItem="J7E-BH-aNc" firstAttribute="top" secondItem="Tkh-yK-8sU" secondAttribute="bottom" constant="42" id="Zif-0S-ge4"/>
                                     <constraint firstAttribute="bottom" secondItem="wKX-vB-M9Z" secondAttribute="bottom" constant="47" id="aeV-PT-Uyb"/>
@@ -353,15 +385,16 @@
                                     <constraint firstAttribute="trailing" secondItem="l8n-Hb-aF4" secondAttribute="trailing" constant="39" id="gVc-4x-qQa"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" constant="39" id="gyW-Xv-98t"/>
                                     <constraint firstItem="Tkh-yK-8sU" firstAttribute="top" secondItem="Okm-BU-joa" secondAttribute="bottom" constant="20" id="i81-UQ-98m"/>
-                                    <constraint firstItem="wKX-vB-M9Z" firstAttribute="top" secondItem="NW4-FE-EBm" secondAttribute="bottom" constant="24" id="jKF-AN-gbq"/>
                                     <constraint firstAttribute="trailing" secondItem="dd7-zi-omX" secondAttribute="trailing" constant="39" id="kZN-tE-e44"/>
                                     <constraint firstAttribute="bottom" secondItem="YdM-LP-G3m" secondAttribute="bottom" id="kib-z9-Ofl"/>
                                     <constraint firstAttribute="trailing" secondItem="Tkh-yK-8sU" secondAttribute="trailing" id="ku6-dz-zlb"/>
                                     <constraint firstItem="k6u-eu-s6j" firstAttribute="top" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="120" id="l79-EK-R3M"/>
+                                    <constraint firstItem="5pv-0r-iWN" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="otR-ke-3EX"/>
                                     <constraint firstItem="8AG-GZ-RBx" firstAttribute="leading" secondItem="Okm-BU-joa" secondAttribute="trailing" constant="15" id="pSA-IZ-Lqy"/>
                                     <constraint firstItem="l8n-Hb-aF4" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" constant="28" id="rgI-7y-i4Z"/>
                                     <constraint firstItem="coX-nZ-qMJ" firstAttribute="top" secondItem="WJl-dE-E2a" secondAttribute="bottom" constant="19" id="sFr-aJ-TmO"/>
                                     <constraint firstItem="1uY-zd-xer" firstAttribute="trailing" secondItem="WJl-dE-E2a" secondAttribute="trailing" constant="4" id="ulA-k0-8x0"/>
+                                    <constraint firstItem="wKX-vB-M9Z" firstAttribute="top" secondItem="5pv-0r-iWN" secondAttribute="bottom" constant="24" id="w5b-tq-ORQ"/>
                                     <constraint firstItem="NW4-FE-EBm" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="w9X-6L-39q"/>
                                     <constraint firstItem="NW4-FE-EBm" firstAttribute="top" secondItem="5Lj-n7-Atc" secondAttribute="bottom" constant="24" id="zHf-Rc-TTg"/>
                                     <constraint firstItem="WJl-dE-E2a" firstAttribute="centerX" secondItem="2H8-Tw-fYy" secondAttribute="centerX" id="zp7-5d-X3B"/>
@@ -388,6 +421,8 @@
                         <outlet property="addProfilePictureButton" destination="1uY-zd-xer" id="yZ2-3S-kpx"/>
                         <outlet property="categoriesCollectionView" destination="Tkh-yK-8sU" id="0bq-fN-qaq"/>
                         <outlet property="categoriesHeightConstraint" destination="fkC-XQ-9H6" id="93p-we-1hF"/>
+                        <outlet property="currentSubscriptionButton" destination="lcF-yN-TYY" id="APz-Na-1jG"/>
+                        <outlet property="deleteAccountButton" destination="5pv-0r-iWN" id="XKh-XD-Mue"/>
                         <outlet property="fullNameTitle" destination="coX-nZ-qMJ" id="n7l-4p-YaX"/>
                         <outlet property="interestsCollectionView" destination="k6u-eu-s6j" id="lTn-TX-l6t"/>
                         <outlet property="interestsHeightConstraint" destination="Yy5-QT-rba" id="jUb-IS-2IO"/>
@@ -926,6 +961,140 @@
             </objects>
             <point key="canvasLocation" x="3511.594202898551" y="135.9375"/>
         </scene>
+        <!--Profile Subscription View Controller-->
+        <scene sceneID="xxg-Eb-6PG">
+            <objects>
+                <viewController storyboardIdentifier="ProfileSubscriptionViewController" id="Smz-rt-023" customClass="ProfileSubscriptionViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OqP-QV-H5f">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BB0-gq-HvM" customClass="GradientBackgroundView" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.94732671980000005" green="0.65168184039999999" blue="0.61959731579999999" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="middleColor">
+                                        <color key="value" red="0.90254080299999995" green="0.75627362730000003" blue="0.98433905840000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.93363767860000002" green="0.92457252739999995" blue="0.97647839780000001" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="startPoint">
+                                        <point key="value" x="0.0" y="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="point" keyPath="endPoint">
+                                        <point key="value" x="0.0" y="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="middleLocation">
+                                        <real key="value" value="0.34599999999999997"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currentSubscriptionImage" translatesAutoresizingMaskIntoConstraints="NO" id="93H-KV-scP">
+                                <rect key="frame" x="0.0" y="84" width="414" height="323"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="323" id="odR-e1-rPj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any active subscription" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-ee-FK4">
+                                <rect key="frame" x="32" y="554" width="350" height="75"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
+                                <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB5-65-Pjo">
+                                <rect key="frame" x="32" y="650" width="350" height="56"/>
+                                <string key="text">That’s not cool. Switch to Gainy Premium to see Match Score and composition for all TTFs.
+😃</string>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jr-YC-CXh" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="755" width="350" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="SbK-z2-IUF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Cancel my sbscription">
+                                    <color key="titleColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onCancelSubscriptionTap:" destination="Smz-rt-023" eventType="touchUpInside" id="4gZ-qx-PWH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6V-m9-NOa" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="755" width="350" height="64"/>
+                                <color key="backgroundColor" red="0.15990483759999999" green="0.3759166598" blue="0.96475762129999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Jo0-ln-ztn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Try Gainy Premium!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onSubscribeButtonTap:" destination="Smz-rt-023" eventType="touchUpInside" id="cKP-Oh-Bft"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JXv-OS-rem"/>
+                        <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="y6V-m9-NOa" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" constant="32" id="4mo-wb-S9m"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="bottom" secondItem="6jr-YC-CXh" secondAttribute="bottom" constant="43" id="6o5-1B-DsO"/>
+                            <constraint firstItem="OB5-65-Pjo" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" constant="32" id="FE5-xt-ySE"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="y6V-m9-NOa" secondAttribute="trailing" constant="32" id="G3J-r5-H5t"/>
+                            <constraint firstItem="6jr-YC-CXh" firstAttribute="top" secondItem="OB5-65-Pjo" secondAttribute="bottom" constant="49" id="Gfd-gO-55i"/>
+                            <constraint firstItem="BB0-gq-HvM" firstAttribute="leading" secondItem="OqP-QV-H5f" secondAttribute="leading" id="LrU-rX-ond"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="iO2-ee-FK4" secondAttribute="trailing" constant="32" id="OdQ-Zw-f3E"/>
+                            <constraint firstItem="BB0-gq-HvM" firstAttribute="top" secondItem="OqP-QV-H5f" secondAttribute="top" id="Sw2-oN-nne"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="93H-KV-scP" secondAttribute="trailing" id="Ttz-hs-WtX"/>
+                            <constraint firstItem="93H-KV-scP" firstAttribute="top" secondItem="JXv-OS-rem" secondAttribute="top" constant="40" id="WCq-YS-9FL"/>
+                            <constraint firstItem="6jr-YC-CXh" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" constant="32" id="XMp-nF-ixp"/>
+                            <constraint firstAttribute="bottom" secondItem="BB0-gq-HvM" secondAttribute="bottom" id="afx-Aw-jTS"/>
+                            <constraint firstAttribute="trailing" secondItem="BB0-gq-HvM" secondAttribute="trailing" id="bRh-BJ-xkU"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="6jr-YC-CXh" secondAttribute="trailing" constant="32" id="gTs-vu-ufb"/>
+                            <constraint firstItem="iO2-ee-FK4" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" constant="32" id="gkQ-8T-cPi"/>
+                            <constraint firstItem="OB5-65-Pjo" firstAttribute="trailing" secondItem="JXv-OS-rem" secondAttribute="trailing" constant="-32" id="iHN-IR-GGf"/>
+                            <constraint firstItem="93H-KV-scP" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" id="kIi-tv-VE0"/>
+                            <constraint firstItem="OB5-65-Pjo" firstAttribute="top" secondItem="iO2-ee-FK4" secondAttribute="bottom" constant="21" id="rqE-q3-cGj"/>
+                            <constraint firstItem="JXv-OS-rem" firstAttribute="bottom" secondItem="y6V-m9-NOa" secondAttribute="bottom" constant="43" id="tjH-yA-qbv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelSubscriptionButton" destination="6jr-YC-CXh" id="Nt9-54-IyH"/>
+                        <outlet property="descriptionLabel" destination="OB5-65-Pjo" id="cZe-Qi-gFz"/>
+                        <outlet property="subscribeButton" destination="y6V-m9-NOa" id="byr-x0-7IW"/>
+                        <outlet property="titleLabel" destination="iO2-ee-FK4" id="hmp-iD-aGT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a41-Ji-eia" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4238" y="138"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="1uY-zd-xer">
@@ -934,11 +1103,17 @@
         <designable name="5JR-eZ-bgj">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
+        <designable name="5pv-0r-iWN">
+            <size key="intrinsicContentSize" width="134" height="31"/>
+        </designable>
+        <designable name="6jr-YC-CXh">
+            <size key="intrinsicContentSize" width="160" height="31"/>
+        </designable>
         <designable name="8AG-GZ-RBx">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="BIg-BP-mtL">
-            <size key="intrinsicContentSize" width="116" height="32"/>
+            <size key="intrinsicContentSize" width="118" height="31"/>
         </designable>
         <designable name="BUb-bn-GzG">
             <size key="intrinsicContentSize" width="16" height="22"/>
@@ -950,16 +1125,19 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="Jma-YX-kmP">
-            <size key="intrinsicContentSize" width="110" height="32"/>
+            <size key="intrinsicContentSize" width="113" height="31"/>
         </designable>
         <designable name="JoU-5e-oXP">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="NW4-FE-EBm">
-            <size key="intrinsicContentSize" width="53" height="32"/>
+            <size key="intrinsicContentSize" width="55" height="31"/>
         </designable>
         <designable name="l1e-sc-Ubw">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
+        </designable>
+        <designable name="y6V-m9-NOa">
+            <size key="intrinsicContentSize" width="140" height="31"/>
         </designable>
         <designable name="yj6-GW-26L">
             <size key="intrinsicContentSize" width="16" height="22"/>
@@ -969,6 +1147,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="currentSubscriptionImage" width="375" height="291"/>
         <image name="externalLink" width="16" height="16"/>
         <image name="onboardingGradient" width="375" height="812"/>
         <image name="plus" width="16" height="16"/>
