@@ -54,7 +54,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         blurView.autoPinEdge(toSuperviewEdge: .top)
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
         blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
-        
+        blurView.intensity = 0.3
         view.backgroundColor = UIColor.Gainy.white
         
         let discoverCollectionsButton = UIButton(

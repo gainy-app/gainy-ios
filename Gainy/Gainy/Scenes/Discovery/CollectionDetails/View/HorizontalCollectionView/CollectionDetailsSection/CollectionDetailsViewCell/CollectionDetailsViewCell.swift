@@ -91,18 +91,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
         contentView.bringSubviewToFront(blurView)
         contentView.bringSubviewToFront(collectionInvestButtonView)
-
-        SubscriptionManager.shared.getSubscription({[weak self] type in
-            if type == .free {
-                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
-                    self?.collectionInvestButtonView.removeBlur()
-                } else {
-                    self?.collectionInvestButtonView.addBlur()
-                }
-            } else {
-                self?.collectionInvestButtonView.removeBlur()
-            }
-        })
     }
     
     @available(*, unavailable)
