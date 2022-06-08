@@ -457,6 +457,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 // TODO: Proably show discovery collections
             }
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.subscriptionChangedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] notif in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &self.cancellables)
     }
     
     override func userLoggedOut() {

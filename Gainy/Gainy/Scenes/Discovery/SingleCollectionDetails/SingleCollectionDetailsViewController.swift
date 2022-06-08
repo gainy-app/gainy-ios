@@ -71,6 +71,13 @@ final class SingleCollectionDetailsViewController: BaseViewController {
             self.closeButton.autoPinEdge(toSuperviewEdge: .top, withInset: 22)
             self.closeButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         }
+        
+        NotificationCenter.default.publisher(for: NotificationManager.subscriptionChangedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] notif in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &self.cancellables)
     }
     
     fileprivate func setupViewModel() {

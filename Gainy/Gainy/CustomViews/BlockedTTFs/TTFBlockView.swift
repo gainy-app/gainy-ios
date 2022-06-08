@@ -44,7 +44,7 @@ final class TTFBlockView: TKPassThroughView {
                 amountView.backgroundColor = UIColor(hexString: "#0062FF")
                 unlockBtn.setTitle("Show details".uppercased(), for: .normal)
                 header.text = "Wanna check details?"
-                tipLbl.text = "With a free plan, you can only view\n3 TTFs per month."
+                tipLbl.text = "With a free plan, you can only view\n\(SubscriptionManager.shared.storage.collectionViewLimit) TTFs per month."
             } else {
                 amountView.backgroundColor = UIColor(hexString: "#F9557B")
                 unlockBtn.setTitle("Unlock details".uppercased(), for: .normal)

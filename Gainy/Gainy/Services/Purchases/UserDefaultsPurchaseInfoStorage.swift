@@ -61,7 +61,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
                     viewedCols = []
                     self?.viewedCollections = viewedCols
                     //Updating OS
-                    OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCols.compactMap({String($0)}).joined())
+                    OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCols.compactMap({String($0)}).joined(separator: ","))
                     OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.firstAddKey, value: UserDefaultsPurchaseInfoStorage.iso8601DateFormatter.string(from: Date()))
                 }
             } else {
@@ -90,7 +90,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         if !viewedCollections.contains(colId) {
             viewedCollections.append(colId)
             collectionsViewedSubject.value = viewedCollections.count
-            OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCollections.compactMap({String($0)}).joined())
+            OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCollections.compactMap({String($0)}).joined(separator: ","))
             if firstAddDate == nil {
                 firstAddDate = Date()
                 OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.firstAddKey, value: UserDefaultsPurchaseInfoStorage.iso8601DateFormatter.string(from: Date()))

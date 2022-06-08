@@ -26,6 +26,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
             dprint("RevenueCat login \(customerInfo)")
             self?.handleInfo(customerInfo, error: error)
             self?.getProducts()
+            
         }
     }
     
@@ -45,31 +46,47 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
                     informAboutPurchase()
                 }
             } else {
-                //Cehcking our DB
-                if let subscriptionExpiryDate = UserProfileManager.shared.subscriptionExpiryDate {
-                    if Date() < subscriptionExpiryDate  {
-                        innerDate = subscriptionExpiryDate
-                        innerType = .pro
-                        NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
-                    } else {
-                        innerType = .free
-                        innerDate = nil
-                        NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
-                    }
-                } else {
-                    innerType = .free
-                    innerDate = nil
-                    NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
-                }
+                checkDBForSub()
             }
         }
         dprint("RevenueCat sub: \(innerType ?? .free)")
     }
     
+    private func checkDBForSub() {
+        guard UserProfileManager.shared.profileID != nil else {
+            return
+        }
+        //Cehcking our DB
+        if let subscriptionExpiryDate = UserProfileManager.shared.subscriptionExpiryDate {
+            if Date() < subscriptionExpiryDate  {
+                innerDate = subscriptionExpiryDate
+                innerType = .pro
+                NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
+            } else {
+                innerType = .free
+                innerDate = nil
+                NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+            }
+        } else {
+            innerType = .free
+            innerDate = nil
+            NotificationManager.broadcastSubscriptionChangeNotification(type: .free)
+        }
+    }
+    
     private func informAboutPurchase() {
         if let profileID = UserProfileManager.shared.profileID {
             let query = PurchaseUpdateMutation.init(profileId: profileID)
-            Network.shared.apollo.perform(mutation: query) { _ in
+            Network.shared.apollo.perform(mutation: query) {[weak self] response in
+                switch response {
+                case .success(let data):
+                    UserProfileManager.shared.subscriptionExpiryDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date
+                    self?.checkDBForSub()
+                    break
+                case .failure(let error):
+                    GainyAnalytics.logEvent("informAboutPurchase error \(error)")
+                    break
+                }
             }
         }
     }
@@ -88,9 +105,12 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         if let innerType = innerType {
             completion(innerType)
         } else {
-            Purchases.shared.getCustomerInfo {[weak self] (customerInfo, error) in
-                self?.handleInfo(customerInfo, error: error)
-                completion(self?.innerType ?? .free)
+            if UserProfileManager.shared.profileID != nil {
+                checkDBForSub()
+            } else {
+                UserProfileManager.shared.fetchProfile {[weak self] _ in
+                    self?.checkDBForSub()
+                }
             }
         }
     }
@@ -100,9 +120,12 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         if let innerDate = innerDate {
             completion(innerDate)
         } else {
-            Purchases.shared.getCustomerInfo {[weak self] (customerInfo, error) in
-                self?.handleInfo(customerInfo, error: error)
-                completion(self?.innerDate)
+            if UserProfileManager.shared.profileID != nil {
+                checkDBForSub()
+            } else {
+                UserProfileManager.shared.fetchProfile {[weak self] _ in
+                    self?.checkDBForSub()
+                }
             }
         }
     }

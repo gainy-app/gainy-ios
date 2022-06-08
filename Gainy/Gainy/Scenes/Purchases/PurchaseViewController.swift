@@ -232,7 +232,7 @@ final class PurchaseViewController: BaseViewController {
 
 extension PurchaseViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) {            
+        if scrollView.contentOffset.x > (UIScreen.main.bounds.width - 48) / 2.0 {            
             self.isInvite = true
             pageControl.currentPage = 1
         } else {
