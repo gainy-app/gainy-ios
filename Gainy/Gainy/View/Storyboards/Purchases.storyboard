@@ -27,7 +27,7 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="PurchaseViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="PurchaseViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -58,10 +58,10 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-cm-Dn5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="835"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="821.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-ys-sxV" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
-                                                <rect key="frame" x="68" y="0.0" width="278" height="64"/>
+                                                <rect key="frame" x="68" y="0.0" width="278" height="50.5"/>
                                                 <string key="text">Wanna see more than 5 TTFs?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
@@ -69,16 +69,16 @@ Try Gainy Premium!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_orbits" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-Ao-HfO">
-                                                <rect key="frame" x="-84" y="-33.5" width="582" height="451"/>
+                                                <rect key="frame" x="-84" y="-47" width="582" height="451"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="eW8-b9-M4D">
-                                                <rect key="frame" x="56" y="104" width="302" height="176"/>
+                                                <rect key="frame" x="56" y="90.5" width="302" height="176"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_extra_cover" translatesAutoresizingMaskIntoConstraints="NO" id="xUY-eU-3V2">
-                                                <rect key="frame" x="20" y="74" width="378" height="216.5"/>
+                                                <rect key="frame" x="20" y="60.5" width="378" height="216.5"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock the full Gainy experience, explore all TTFs and more without limitations" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBY-8q-w9d">
-                                                <rect key="frame" x="48" y="312.5" width="318" height="38.5"/>
+                                                <rect key="frame" x="48" y="299" width="318" height="38.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38.5" id="FxD-DW-YR6"/>
                                                 </constraints>
@@ -86,18 +86,17 @@ Try Gainy Premium!</string>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="uNd-qD-ibB">
-                                                <rect key="frame" x="0.0" y="371" width="414" height="152"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWw-2e-m5b">
+                                                <rect key="frame" x="0.0" y="357.5" width="414" height="152"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhp-42-cbc">
-                                                        <rect key="frame" x="0.0" y="0.0" width="722" height="152"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="788" height="152"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PhW-Nb-yIS" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                                 <rect key="frame" x="273" y="0.0" width="117" height="24"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Best value" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X36-Gl-Ixh">
-                                                                        <rect key="frame" x="30.5" y="5" width="56" height="14.5"/>
+                                                                        <rect key="frame" x="30.5" y="5" width="56" height="14"/>
                                                                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                         <color key="textColor" name="mainText"/>
                                                                         <nil key="highlightedColor"/>
@@ -105,7 +104,9 @@ Try Gainy Premium!</string>
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.23137254901960785" green="0.94117647058823528" blue="0.43137254901960786" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="X36-Gl-Ixh" firstAttribute="leading" secondItem="PhW-Nb-yIS" secondAttribute="leading" constant="30.5" id="Gnx-Oh-VAn"/>
                                                                     <constraint firstItem="X36-Gl-Ixh" firstAttribute="centerX" secondItem="PhW-Nb-yIS" secondAttribute="centerX" id="Wir-PA-kN9"/>
+                                                                    <constraint firstItem="X36-Gl-Ixh" firstAttribute="top" secondItem="PhW-Nb-yIS" secondAttribute="top" constant="5" id="aF2-6l-783"/>
                                                                     <constraint firstItem="X36-Gl-Ixh" firstAttribute="centerY" secondItem="PhW-Nb-yIS" secondAttribute="centerY" id="mEy-Xd-70T"/>
                                                                     <constraint firstAttribute="height" constant="24" id="wvH-YD-Zs0"/>
                                                                 </constraints>
@@ -123,7 +124,7 @@ Try Gainy Premium!</string>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GnJ-Ga-Ql4" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
-                                                                <rect key="frame" x="468" y="0.0" width="160" height="24"/>
+                                                                <rect key="frame" x="501" y="0.0" width="160" height="24"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your friends!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-Wv-V5l">
                                                                         <rect key="frame" x="29.5" y="5" width="101.5" height="14.5"/>
@@ -146,48 +147,46 @@ Try Gainy Premium!</string>
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="diI-cj-3Rb" customClass="PurchaseInviteView" customModule="Gainy" customModuleProvider="target">
-                                                                <rect key="frame" x="398" y="32" width="300" height="120"/>
+                                                                <rect key="frame" x="398" y="32" width="366" height="120"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="120" id="PYx-Nv-Kg3"/>
-                                                                    <constraint firstAttribute="width" constant="300" id="wIb-AW-9gW"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="PhW-Nb-yIS" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" id="6Qu-eb-iTI"/>
                                                             <constraint firstItem="diI-cj-3Rb" firstAttribute="bottom" secondItem="sDJ-bt-TMD" secondAttribute="bottom" id="8uL-ob-iCL"/>
                                                             <constraint firstItem="diI-cj-3Rb" firstAttribute="top" secondItem="sDJ-bt-TMD" secondAttribute="top" id="CVH-IP-wVK"/>
-                                                            <constraint firstItem="sDJ-bt-TMD" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" constant="32" id="HKL-w7-Vrz"/>
-                                                            <constraint firstAttribute="height" constant="152" id="RzO-zi-lAO"/>
-                                                            <constraint firstAttribute="bottom" secondItem="sDJ-bt-TMD" secondAttribute="bottom" id="V83-jb-ns0"/>
-                                                            <constraint firstAttribute="trailing" secondItem="diI-cj-3Rb" secondAttribute="trailing" constant="24" id="cx9-HN-QhH"/>
-                                                            <constraint firstItem="sDJ-bt-TMD" firstAttribute="leading" secondItem="yhp-42-cbc" secondAttribute="leading" constant="24" id="eej-kY-veI"/>
+                                                            <constraint firstAttribute="bottom" secondItem="sDJ-bt-TMD" secondAttribute="bottom" id="OUP-7j-PxR"/>
+                                                            <constraint firstItem="PhW-Nb-yIS" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" id="UcO-XZ-ch4"/>
                                                             <constraint firstItem="PhW-Nb-yIS" firstAttribute="width" secondItem="sDJ-bt-TMD" secondAttribute="width" multiplier="0.33" constant="-4" id="es6-t8-FKV"/>
+                                                            <constraint firstItem="sDJ-bt-TMD" firstAttribute="leading" secondItem="yhp-42-cbc" secondAttribute="leading" constant="24" id="kXt-q7-J6I"/>
+                                                            <constraint firstItem="GnJ-Ga-Ql4" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" id="nGI-CM-DzT"/>
                                                             <constraint firstItem="diI-cj-3Rb" firstAttribute="leading" secondItem="sDJ-bt-TMD" secondAttribute="trailing" constant="8" id="q7g-K5-BOB"/>
+                                                            <constraint firstAttribute="trailing" secondItem="diI-cj-3Rb" secondAttribute="trailing" constant="24" id="rEH-Fd-Bqt"/>
                                                             <constraint firstItem="GnJ-Ga-Ql4" firstAttribute="centerX" secondItem="diI-cj-3Rb" secondAttribute="centerX" id="rLc-rV-Kp3"/>
+                                                            <constraint firstItem="diI-cj-3Rb" firstAttribute="width" secondItem="sDJ-bt-TMD" secondAttribute="width" id="sU6-AI-mkL"/>
                                                             <constraint firstItem="PhW-Nb-yIS" firstAttribute="trailing" secondItem="sDJ-bt-TMD" secondAttribute="trailing" id="twN-4J-Skr"/>
-                                                            <constraint firstItem="GnJ-Ga-Ql4" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" id="wFp-sI-Xyi"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <viewLayoutGuide key="safeArea" id="K1e-cA-XUm"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="yhp-42-cbc" secondAttribute="trailing" id="01P-JJ-X30"/>
-                                                    <constraint firstItem="yhp-42-cbc" firstAttribute="leading" secondItem="uNd-qD-ibB" secondAttribute="leading" id="6d9-60-vap"/>
-                                                    <constraint firstItem="yhp-42-cbc" firstAttribute="top" secondItem="uNd-qD-ibB" secondAttribute="top" id="AAa-Mw-16f"/>
-                                                    <constraint firstAttribute="bottom" secondItem="yhp-42-cbc" secondAttribute="bottom" id="RqX-oi-jI0"/>
+                                                    <constraint firstItem="yhp-42-cbc" firstAttribute="bottom" secondItem="vik-Bi-tLU" secondAttribute="bottom" id="2cp-RP-2hy"/>
+                                                    <constraint firstItem="yhp-42-cbc" firstAttribute="trailing" secondItem="vik-Bi-tLU" secondAttribute="trailing" id="98v-vO-Cpf"/>
+                                                    <constraint firstAttribute="height" constant="152" id="csZ-hY-5Fj"/>
+                                                    <constraint firstItem="vik-Bi-tLU" firstAttribute="leading" secondItem="yhp-42-cbc" secondAttribute="leading" id="eea-ZZ-4JB"/>
+                                                    <constraint firstItem="vik-Bi-tLU" firstAttribute="top" secondItem="yhp-42-cbc" secondAttribute="top" id="gIZ-HU-Lnx"/>
+                                                    <constraint firstItem="yhp-42-cbc" firstAttribute="height" secondItem="MMS-SX-Jem" secondAttribute="height" id="j6b-ZG-ywF"/>
                                                 </constraints>
-                                                <viewLayoutGuide key="contentLayoutGuide" id="GfJ-gl-JZp"/>
-                                                <viewLayoutGuide key="frameLayoutGuide" id="e0h-XN-2gt"/>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="vik-Bi-tLU"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="MMS-SX-Jem"/>
                                             </scrollView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="jtg-iw-NC1">
-                                                <rect key="frame" x="158.5" y="539" width="97.5" height="26"/>
+                                                <rect key="frame" x="158.5" y="525.5" width="97.5" height="26"/>
                                             </pageControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Tp-ysE">
-                                                <rect key="frame" x="32" y="581" width="350" height="64"/>
+                                                <rect key="frame" x="32" y="567.5" width="350" height="64"/>
                                                 <color key="backgroundColor" red="0.10588235294117647" green="0.27058823529411763" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="I0P-EV-XUR"/>
@@ -202,11 +201,11 @@ Try Gainy Premium!</string>
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ord-i7-uGz">
-                                                <rect key="frame" x="197" y="603" width="20" height="20"/>
+                                                <rect key="frame" x="197" y="589.5" width="20" height="20"/>
                                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </activityIndicatorView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xI-Z2-PRI" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                <rect key="frame" x="149.5" y="656.5" width="115" height="28"/>
+                                                <rect key="frame" x="149.5" y="643" width="115" height="28"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Restore Purchase">
                                                     <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
@@ -222,14 +221,14 @@ Try Gainy Premium!</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fod-xs-cn9">
-                                                <rect key="frame" x="32" y="701" width="350" height="86"/>
+                                                <rect key="frame" x="32" y="687.5" width="350" height="86"/>
                                                 <string key="text">Premium subscription is required to get access to unlimited TTF views for selected period. The subscription will not renew automatically with the price and duration given above. Payment will be charged to your Apple ID account at the confirmation of purchase. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKv-ed-TTt">
-                                                <rect key="frame" x="109.5" y="795" width="195" height="24"/>
+                                                <rect key="frame" x="109.5" y="781.5" width="195" height="24"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWL-ca-04n">
                                                         <rect key="frame" x="0.0" y="-1.5" width="72" height="27"/>
@@ -278,13 +277,14 @@ Try Gainy Premium!</string>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="JWw-2e-m5b" firstAttribute="top" secondItem="pBY-8q-w9d" secondAttribute="bottom" constant="20" id="0dO-Tm-nhs"/>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="centerX" secondItem="WKv-ed-TTt" secondAttribute="centerX" id="1FY-63-UuQ"/>
+                                            <constraint firstItem="sDJ-bt-TMD" firstAttribute="width" secondItem="CIU-cm-Dn5" secondAttribute="width" constant="-48" id="2HN-xg-cOL"/>
                                             <constraint firstItem="WKv-ed-TTt" firstAttribute="top" secondItem="Fod-xs-cn9" secondAttribute="bottom" constant="8" id="2Yd-x9-Xbi"/>
                                             <constraint firstAttribute="trailing" secondItem="5e5-Tp-ysE" secondAttribute="trailing" constant="32" id="3Co-AZ-cPJ"/>
                                             <constraint firstAttribute="trailing" secondItem="eW8-b9-M4D" secondAttribute="trailing" constant="56" id="5sn-de-8yt"/>
                                             <constraint firstItem="pBY-8q-w9d" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="48" id="8E0-kf-2kl"/>
                                             <constraint firstItem="eW8-b9-M4D" firstAttribute="top" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="40" id="8qF-pv-nPc"/>
-                                            <constraint firstItem="uNd-qD-ibB" firstAttribute="top" secondItem="pBY-8q-w9d" secondAttribute="bottom" constant="20" id="Av3-d6-937"/>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="leading" secondItem="5e5-Tp-ysE" secondAttribute="leading" id="BDM-oh-h8R"/>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="trailing" secondItem="5e5-Tp-ysE" secondAttribute="trailing" id="EMH-BB-8Hs"/>
                                             <constraint firstItem="xUY-eU-3V2" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="20" id="EfC-h4-NHb"/>
@@ -298,17 +298,19 @@ Try Gainy Premium!</string>
                                             <constraint firstItem="pBY-8q-w9d" firstAttribute="top" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="248.5" id="Wff-R8-j2r"/>
                                             <constraint firstItem="8Li-Ao-HfO" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" id="Wnn-HY-FEa"/>
                                             <constraint firstItem="Ord-i7-uGz" firstAttribute="centerX" secondItem="5e5-Tp-ysE" secondAttribute="centerX" id="YM0-aj-wVV"/>
+                                            <constraint firstItem="jtg-iw-NC1" firstAttribute="top" secondItem="JWw-2e-m5b" secondAttribute="bottom" constant="16" id="ZB2-Db-o2c"/>
                                             <constraint firstItem="8Li-Ao-HfO" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="-84" id="dmm-ww-XSl"/>
                                             <constraint firstAttribute="bottom" secondItem="WKv-ed-TTt" secondAttribute="bottom" constant="16" id="gXJ-uq-dNU"/>
                                             <constraint firstItem="9xI-Z2-PRI" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="h9R-Qf-Df0"/>
                                             <constraint firstItem="jtg-iw-NC1" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="hyz-MS-S8h"/>
                                             <constraint firstItem="n3s-ys-sxV" firstAttribute="centerX" secondItem="eW8-b9-M4D" secondAttribute="centerX" id="ilr-ib-4QN"/>
-                                            <constraint firstItem="jtg-iw-NC1" firstAttribute="top" secondItem="uNd-qD-ibB" secondAttribute="bottom" constant="16" id="kUJ-yV-cTS"/>
                                             <constraint firstAttribute="trailing" secondItem="pBY-8q-w9d" secondAttribute="trailing" constant="48" id="lNp-tC-m9Y"/>
                                             <constraint firstItem="Ord-i7-uGz" firstAttribute="centerY" secondItem="5e5-Tp-ysE" secondAttribute="centerY" id="n0F-x9-wGp"/>
+                                            <constraint firstItem="JWw-2e-m5b" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" id="pBX-8i-RAc"/>
                                             <constraint firstItem="xUY-eU-3V2" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" constant="-10" id="tDo-46-5xi"/>
                                             <constraint firstItem="5e5-Tp-ysE" firstAttribute="top" secondItem="jtg-iw-NC1" secondAttribute="bottom" constant="16" id="u0N-pw-NWI"/>
                                             <constraint firstAttribute="trailing" secondItem="8Li-Ao-HfO" secondAttribute="trailing" constant="-84" id="vMR-x6-BdC"/>
+                                            <constraint firstAttribute="trailing" secondItem="JWw-2e-m5b" secondAttribute="trailing" id="vzf-YU-HbZ"/>
                                             <constraint firstItem="9xI-Z2-PRI" firstAttribute="top" secondItem="5e5-Tp-ysE" secondAttribute="bottom" constant="11.5" id="zcy-DD-yei"/>
                                         </constraints>
                                     </view>
@@ -334,7 +336,6 @@ Try Gainy Premium!</string>
                             <constraint firstItem="lSa-qJ-QZE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Dyd-LA-lov"/>
                             <constraint firstItem="6J7-xh-1w0" firstAttribute="centerY" secondItem="aqm-x2-uay" secondAttribute="centerY" id="G5x-Ul-4hD"/>
                             <constraint firstAttribute="trailing" secondItem="lSa-qJ-QZE" secondAttribute="trailing" id="NLK-z9-Q8A"/>
-                            <constraint firstItem="sDJ-bt-TMD" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" constant="-48" id="Sma-UW-y9f"/>
                             <constraint firstItem="axt-BU-tgH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cz8-pV-XO9"/>
                             <constraint firstAttribute="bottom" secondItem="axt-BU-tgH" secondAttribute="bottom" id="hVQ-Hu-3qJ"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="axt-BU-tgH" secondAttribute="trailing" id="iDF-gX-uQ7"/>
@@ -352,7 +353,7 @@ Try Gainy Premium!</string>
                         <outlet property="orbitView" destination="8Li-Ao-HfO" id="jkT-8F-6Na"/>
                         <outlet property="pageControl" destination="jtg-iw-NC1" id="CxM-nW-79v"/>
                         <outlet property="purchaseBtn" destination="5e5-Tp-ysE" id="O47-zN-gFg"/>
-                        <outlet property="purchasesScroll" destination="uNd-qD-ibB" id="Xcz-d4-co1"/>
+                        <outlet property="purchasesScroll" destination="JWw-2e-m5b" id="SiS-qQ-awV"/>
                         <outlet property="purchasesView" destination="sDJ-bt-TMD" id="SXm-wx-Zbn"/>
                         <outlet property="restoreBtn" destination="9xI-Z2-PRI" id="kYn-vc-sdZ"/>
                         <outlet property="spacemanView" destination="eW8-b9-M4D" id="tqX-31-9Ak"/>

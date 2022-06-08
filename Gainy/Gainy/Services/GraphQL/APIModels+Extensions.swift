@@ -161,20 +161,6 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
     }
 }
 
-extension FetchStockMedianQuery.Data.IndustryMedianChart: ChartMergable {
-    var date: Date {
-        if let zDate = (datetime).toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
-            return zDate
-        } else {
-            return (datetime).toDate("yyy-MM-dd'T'HH:mm:ss")?.date ?? Date()
-        }
-    }
-    
-    var val: Float {
-        Float(medianPrice ?? 0.0)
-    }
-}
-
 extension GetTtfChartQuery.Data.CollectionChart: ChartMergable {
     var val: Float {
         Float(adjustedClose ?? 0.0)

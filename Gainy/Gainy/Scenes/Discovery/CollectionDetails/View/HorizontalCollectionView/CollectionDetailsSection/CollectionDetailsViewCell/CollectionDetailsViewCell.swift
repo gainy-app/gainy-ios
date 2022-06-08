@@ -71,26 +71,28 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.skeletonCornerRadius = 6.0
         initViewModels()
         
-        contentView.addSubview(collectionInvestButtonView)
-        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .bottom)
-        collectionInvestButtonView.autoSetDimension(.height, toSize: 96.0)
-        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .left)
-        collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
-        
-        collectionInvestButtonView.investButtonPressed = {
-            NotificationManager.shared.showMessage(title: "", text: "The feature will be available soon.", cancelTitle: "OK", actions: nil)
-            GainyAnalytics.logEvent("invest_pressed", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous", "collection_id" : self.viewModel.id])
+        if RemoteConfigManager.shared.isInvestBtnVisible {
+            contentView.addSubview(collectionInvestButtonView)
+            collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .bottom)
+            collectionInvestButtonView.autoSetDimension(.height, toSize: 96.0)
+            collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .left)
+            collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
+            
+            collectionInvestButtonView.investButtonPressed = {
+                NotificationManager.shared.showMessage(title: "", text: "The feature will be available soon.", cancelTitle: "OK", actions: nil)
+                GainyAnalytics.logEvent("invest_pressed", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous", "collection_id" : self.viewModel.id])
+            }
+            
+            let blurView = BlurEffectView()
+            contentView.addSubview(blurView)
+            
+            blurView.autoPinEdge(toSuperviewEdge: .leading)
+            blurView.autoPinEdge(toSuperviewEdge: .bottom)
+            blurView.autoPinEdge(toSuperviewEdge: .trailing)
+            blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+            contentView.bringSubviewToFront(blurView)
+            contentView.bringSubviewToFront(collectionInvestButtonView)
         }
-        
-        let blurView = BlurEffectView()
-        contentView.addSubview(blurView)
-
-        blurView.autoPinEdge(toSuperviewEdge: .leading)
-        blurView.autoPinEdge(toSuperviewEdge: .bottom)
-        blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
-        contentView.bringSubviewToFront(blurView)
-        contentView.bringSubviewToFront(collectionInvestButtonView)
     }
     
     @available(*, unavailable)
@@ -198,9 +200,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             }
         }
         // Load all data
-        // hideSkeleton()        
+        // hideSkeleton()
     }
-        
+    
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
         
@@ -819,7 +821,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     } else {
                         state = CollectionDetailsHeaderViewState.list
                     }
-                })                
+                })
             } else {
                 if settings.viewMode == .grid {
                     state = CollectionDetailsHeaderViewState.grid
@@ -836,7 +838,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 headerView.setNeedsLayout()
                 headerView.layoutIfNeeded()
             })
-
+            
             headerView.onSettingsPressed = {
                 guard self.cards.count > 0 else {
                     return
@@ -1211,8 +1213,8 @@ extension CollectionDetailsViewCell: TTFBlockViewDelegate {
             if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
                 collectionView.reloadData()
             }
-            #endif
-                       
+#endif
+            
         }
     }
 }

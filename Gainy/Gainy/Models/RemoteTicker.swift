@@ -428,7 +428,7 @@ class TickerInfo {
                 }
                 break
             case .failure(let error):
-                dprint("Failure when making FetchStockMedianQuery request. Error: \(error)")
+                dprint("Failure when making GetTtfChartQuery request. Error: \(error)")
                 completion?([])
                 break
             }

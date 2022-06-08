@@ -20,6 +20,9 @@ final class RemoteConfigManager {
     @UserDefaultBool(Constants.UserDefaults.showPortoCrypto)
     var showPortoCrypto: Bool
     
+    @UserDefaultBool(Constants.UserDefaults.isInvestBtnVisible)
+    var isInvestBtnVisible: Bool
+    
     @UserDefault(Constants.UserDefaults.monthPurchaseVariant)
     var monthPurchaseVariant: ProductVariant?
     
@@ -48,6 +51,7 @@ final class RemoteConfigManager {
                 //Porto
                 self?.showPortoCash = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCash).boolValue ?? false
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
+                self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
                 
                 //Purchases
                 self?.monthPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.monthPurchase).stringValue ?? "A") ?? .a

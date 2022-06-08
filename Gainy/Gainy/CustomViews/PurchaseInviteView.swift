@@ -17,13 +17,13 @@ final class PurchaseInviteView: UIView {
         yourViewBorder.frame = self.bounds
         yourViewBorder.fillColor = nil
         yourViewBorder.cornerRadius = 16.0
-        yourViewBorder.path = UIBezierPath(rect: self.bounds).cgPath
+        yourViewBorder.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 16.0).cgPath
         return yourViewBorder
     }()
     
     lazy private var containerView: UIView = {
         let view = UIView()
-        view.clipsToBounds = true
+        view.clipsToBounds = false
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(hexString: "0062FF")!.cgColor
@@ -124,7 +124,7 @@ final class PurchaseInviteView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        dashLayer.path = UIBezierPath(rect: self.bounds).cgPath
+        dashLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: 16.0).cgPath
     }
 }
  
