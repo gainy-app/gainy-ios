@@ -33,7 +33,7 @@ struct KeychainDate {
     
     lazy var dateFormatter: DateFormatter = {
         let df = DateFormatter()
-        df.dateFormat = ""
+        df.dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
         return df
     }()
 

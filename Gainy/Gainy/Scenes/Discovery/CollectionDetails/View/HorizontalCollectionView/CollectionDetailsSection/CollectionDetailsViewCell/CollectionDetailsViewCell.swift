@@ -1218,14 +1218,10 @@ extension CollectionDetailsViewCell: TTFBlockViewDelegate {
         if showPurchase {
             onPurhaseShow?()
         } else {
-#if DEBUG
-            onPurhaseShow?()
-#else
+
             if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
                 collectionView.reloadData()
-            }
-#endif
-            
+            }            
         }
     }
 }
