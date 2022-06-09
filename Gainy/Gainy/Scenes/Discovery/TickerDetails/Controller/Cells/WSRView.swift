@@ -82,10 +82,10 @@ struct WSRView: View {
                     
                     VStack {
                         Text("\(totalPriceString)")
-                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
+                            .foregroundColor(totalColor)
                             .font(UIFont.compactRoundedSemibold(28).uiFont)
                         Text(totalText)
-                            .foregroundColor(UIColor(hexString: "25C685")!.uiColor)
+                            .foregroundColor(totalColor)
                             .font(UIFont.compactRoundedRegular(11).uiFont)
                     }
                 }
@@ -125,10 +125,13 @@ struct WSRView: View {
         }
     }
     
+    
+    private var pieColors = Array([UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "F3BD00")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor].reversed())
+    
     func loadStats() {
         var lastAngle: Angle = .degrees(0.0)
-        var colors = Array([UIColor(hexString: "009459")!.uiColor, UIColor(hexString: "2FDD97")!.uiColor, UIColor(hexString: "F3BD00")!.uiColor, UIColor(hexString: "FC5058")!.uiColor, UIColor(hexString: "C60009")!.uiColor].reversed())
         
+        var colors = pieColors
         let totalCount = Double(viewModel.progress.map(\.count).reduce(0, +))
         
         pieData.removeAll()
@@ -151,6 +154,11 @@ struct WSRView: View {
         let list = Array(["VERY BULLISH", "BULLISH", "NEUTRAL", "BEARISH", "VERY BEARISH"].reversed())
         let index = Int(round(viewModel.totalScore)) - 1
         return index >= 0 && index <= 4 ? list[index] : ""
+    }
+    
+    var totalColor: Color {
+        let index = Int(round(viewModel.totalScore)) - 1
+        return index >= 0 && index <= 4 ? pieColors[index] : UIColor(hexString: "25C685")!.uiColor
     }
     
     var targetView: some View {

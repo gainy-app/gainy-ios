@@ -21,7 +21,7 @@ enum Product: CaseIterable {
     
     static var allCases: [Product] {
         return [.month(.a), .month(.b), .month(.c), .month6(.a), .month6(.b), .month6(.c), .year(.a), .year(.b), .year(.c)]
-        }
+    }
     
     case month(_ variant: ProductVariant)
     case month6(_ variant: ProductVariant)
@@ -32,30 +32,30 @@ enum Product: CaseIterable {
         case .month(let variant):
             switch variant {
             case .a:
-                return "gainy_5_m1"
+                return "gainy_10_r_m1"
             case .b:
-                return "gainy_10_m1"
+                return "gainy_20_r_m1"
             case .c:
-                return "gainy_20_m1"
+                return "gainy_40_r_m1"
             }
             
         case .month6(let variant):
             switch variant {
             case .a:
-                return "gainy_25_m6"
+                return "gainy_50_r_m6"
             case .b:
-                return "gainy_50_m6"
+                return "gainy_100_r_m6"
             case .c:
-                return "gainy_100_m6"
+                return "gainy_200_r_m6"
             }
         case .year(let variant):
             switch variant {
             case .a:
-                return "gainy_40_y1"
+                return "gainy_80_r_y1"
             case .b:
-                return "gainy_80_y1"
+                return "gainy_160_r_y1"
             case .c:
-                return "gainy_160_y1"
+                return "gainy_320_r_y1"
             }
         }
     }
@@ -63,11 +63,11 @@ enum Product: CaseIterable {
     var name: String {
         switch self {
         case .month(_):
-            return "One Month"
+            return "Monthly"
         case .month6(_):
             return "6 Months"
         case .year(_):
-            return "One Year"
+            return "Annualy"
         }
     }
     
@@ -81,7 +81,41 @@ enum Product: CaseIterable {
             return "You save 20%"
         }
     }
-
+    
+    var price: String {
+        let price = SubscriptionManager.shared.priceForProduct(product: self)
+        switch self {
+        case .month(_):
+            return "\(price) / Month"
+        case .month6(_):
+            return "\(price) / 6 Months"
+        case .year(_):
+            return "\(price) / Year"
+        }
+    }
+    
+    var terms: String {
+        switch self {
+        case .month(_):
+            return """
+Monthly subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period. Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Removing the app doesn’t automatically cancel the subscription.
+"""
+        case .month6(_):
+            return """
+6 Months subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period.
+Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Removing the app doesn’t automatically cancel the subscription.
+"""
+        case .year(_):
+            return """
+Annually subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period. Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Removing the app doesn’t automatically cancel the subscription.
+"""
+        }
+        
+    }
+    
 }
 
 class SubscriptionManager: SubscriptionManagerProtocol {
@@ -132,7 +166,7 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
     }
     
     func getSubscription(_ completion: @escaping (SuscriptionType) -> Void) {
-        service.getSubscription { type in            
+        service.getSubscription { type in
             completion(type)
         }
     }
@@ -178,13 +212,13 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
         
         buo.getShortUrl(with: linkProperties) { (url, error) in
-                if (error == nil) {
-                    if let url = url {
-                        completion(URL(string: url)!)
-                    }
-                } else {
-                    dprint(String(format: "Branch error : %@", error! as CVarArg))
+            if (error == nil) {
+                if let url = url {
+                    completion(URL(string: url)!)
                 }
+            } else {
+                dprint(String(format: "Branch error : %@", error! as CVarArg))
             }
+        }
     }
 }

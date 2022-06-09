@@ -28,17 +28,21 @@ final class PurchaseProductView: UIView {
     
     lazy private var rangeLbl: UILabel = {
         let view = UILabel()
-        view.font = .compactRoundedSemibold(16.0)
+        view.font = .compactRoundedRegular(14.0)
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
+        view.isUserInteractionEnabled = false
         return view
     }()
     
     lazy private var priceLbl: UILabel = {
         let view = UILabel()
         view.font = .compactRoundedSemibold(16.0)
+        view.minimumScaleFactor = 0.1
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
+        view.numberOfLines = 0
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -47,6 +51,7 @@ final class PurchaseProductView: UIView {
         view.font = .compactRoundedMedium(12.0)
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -82,7 +87,7 @@ final class PurchaseProductView: UIView {
             if let product = product {
                 rangeLbl.text = product.name
                 infoLbl.text = product.info
-                priceLbl.text = SubscriptionManager.shared.priceForProduct(product: product)
+                priceLbl.text = product.price
             }
         }
     }
@@ -120,7 +125,8 @@ final class PurchaseProductView: UIView {
         }
         
         priceLbl.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().offset(-12)
             make.centerY.equalToSuperview()
         }
         

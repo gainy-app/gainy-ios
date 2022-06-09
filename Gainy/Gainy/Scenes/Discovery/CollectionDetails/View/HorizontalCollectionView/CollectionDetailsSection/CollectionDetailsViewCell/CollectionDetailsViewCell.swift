@@ -819,7 +819,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                             state = CollectionDetailsHeaderViewState.list
                         }
                     } else {
-                        state = CollectionDetailsHeaderViewState.list
+                        state = CollectionDetailsHeaderViewState.chart
                     }
                 })
             } else {
@@ -937,35 +937,46 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
 
 extension CollectionDetailsViewCell: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard SubscriptionManager.shared.storage.isViewedCollection(viewModel.id) else {return}
+        SubscriptionManager.shared.getSubscription({[weak self] type in
+            if type == .free {
+                if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
+                    cardTapLogic()
+                }
+            } else {
+                cardTapLogic()
+            }
+        })
         
-        guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
-        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
-        
-        var cardToOpen: RemoteTickerDetails? = nil
-        if settings.pieChartSelected {
-            if settings.pieChartMode != .tickers {
-                return
+        func cardTapLogic() {
+            guard indexPath.section == CollectionDetailsSection.cards.rawValue else {return}
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
+            
+            var cardToOpen: RemoteTickerDetails? = nil
+            if settings.pieChartSelected {
+                if settings.pieChartMode != .tickers {
+                    return
+                }
+                
+                let chartData = self.currentChartData()
+                if indexPath.row >= chartData.count {return}
+                let data = chartData[indexPath.row]
+                
+                cardToOpen = cards.first { card in
+                    guard let entityId = data.entityId else { return false }
+                    return entityId == card.tickerSymbol
+                }?.rawTicker
+                
+            } else {
+                cardToOpen = cards[indexPath.row].rawTicker
             }
             
-            let chartData = self.currentChartData()
-            if indexPath.row >= chartData.count {return}
-            let data = chartData[indexPath.row]
-            
-            cardToOpen = cards.first { card in
-                guard let entityId = data.entityId else { return false }
-                return entityId == card.tickerSymbol
-            }?.rawTicker
-            
-        } else {
-            cardToOpen = cards[indexPath.row].rawTicker
+            guard let card = cardToOpen else { return }
+            GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
+                                                               "tickerSymbol" : card.symbol,
+                                                               "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+            onCardPressed?(card)
         }
         
-        guard let card = cardToOpen else { return }
-        GainyAnalytics.logEvent("ticker_pressed", params: ["collectionID": viewModel.id,
-                                                           "tickerSymbol" : card.symbol,
-                                                           "tickerName" : card.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
-        onCardPressed?(card)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {

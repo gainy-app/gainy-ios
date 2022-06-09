@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol PurchasesProductsViewDelegate: AnyObject {
+    func productChanged(view: PurchasesProductsView, product: Product)
+}
+
 final class PurchasesProductsView: UIView {
+    
+    weak var delegate: PurchasesProductsViewDelegate?
     
     /// Selected Product to buy
     var selectedProduct: Product? {
@@ -91,5 +97,8 @@ extension PurchasesProductsView: PurchaseProductViewDelegate {
         secondProductView.isSelected = false
         thirdProductView.isSelected = false
         view.isSelected = true
+        if let selectedProduct = selectedProduct {
+            delegate?.productChanged(view: self, product: selectedProduct)
+        }
     }
 }

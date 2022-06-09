@@ -1,146 +1,7 @@
 {
   "identifier" : "18A230F8",
   "nonRenewingSubscriptions" : [
-    {
-      "displayPrice" : "10.00",
-      "familyShareable" : false,
-      "internalID" : "32DA54EA",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Month 1",
-          "locale" : "en_GB"
-        },
-        {
-          "description" : "Demo",
-          "displayName" : "Month 1",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_5_m1",
-      "referenceName" : "Monthly 1",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "20",
-      "familyShareable" : false,
-      "internalID" : "54F14572",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Month 2",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_10_m1",
-      "referenceName" : "Monthly 2",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "40",
-      "familyShareable" : false,
-      "internalID" : "89965472",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Month 3",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_20_m1",
-      "referenceName" : "Monthly 3",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "50",
-      "familyShareable" : false,
-      "internalID" : "51DC298C",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "6 Month",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_25_m6",
-      "referenceName" : "6 Month 1",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "100",
-      "familyShareable" : false,
-      "internalID" : "D948A262",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "6 Month",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_50_m6",
-      "referenceName" : "6 Month 2",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "200",
-      "familyShareable" : false,
-      "internalID" : "80479E43",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "6 Month",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_100_m6",
-      "referenceName" : "6 Month 3",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "80",
-      "familyShareable" : false,
-      "internalID" : "57FBE1DD",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Year 1",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_40_y1",
-      "referenceName" : "Annually 1",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "160",
-      "familyShareable" : false,
-      "internalID" : "3038BB5D",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Year 2",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_80_y1",
-      "referenceName" : "Annually 2",
-      "type" : "NonRenewingSubscription"
-    },
-    {
-      "displayPrice" : "320",
-      "familyShareable" : false,
-      "internalID" : "B05CB61C",
-      "localizations" : [
-        {
-          "description" : "Demo",
-          "displayName" : "Year 3",
-          "locale" : "en_US"
-        }
-      ],
-      "productID" : "gainy_160_y1",
-      "referenceName" : "Annually 3",
-      "type" : "NonRenewingSubscription"
-    }
+
   ],
   "products" : [
 
@@ -149,7 +10,240 @@
 
   },
   "subscriptionGroups" : [
+    {
+      "id" : "D04F6F74",
+      "localizations" : [
 
+      ],
+      "name" : "Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "E66FFADC",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_10_r_m1",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly 1",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "19.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "BE8C21C7",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_20_r_m1",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly 2",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "39.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "FA800CFB",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Monthly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_40_r_m1",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly 3",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "64AC0536",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "",
+              "displayName" : "",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_50_r_m6",
+          "recurringSubscriptionPeriod" : "P6M",
+          "referenceName" : "Monthly 6-1",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "5771E010",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "6 Month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_100_r_m6",
+          "recurringSubscriptionPeriod" : "P6M",
+          "referenceName" : "Monthly 6-2",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "199.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "3DF72855",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "6 Month",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_200_r_m6",
+          "recurringSubscriptionPeriod" : "P6M",
+          "referenceName" : "Monthly 6-3",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "79.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EB6648F6",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_80_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 1",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "159.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "70FD330C",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_160_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 2",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "329.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "EE17384D",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_320_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 3",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
   ],
   "version" : {
     "major" : 1,

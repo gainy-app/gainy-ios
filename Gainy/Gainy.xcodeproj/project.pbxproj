@@ -1486,9 +1486,9 @@
 				339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */,
 				33F4066326D90F5900A07713 /* PieChartView.swift */,
 				9057DACC279C9A1200EC747C /* LottieRefreshControl.swift */,
-				901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */,
 				901F34AA284B803800E9E22B /* PurchaseProductView.swift */,
 				901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */,
+				901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */,
 				901F34A9284B801300E9E22B /* BlockedTTFs */,
 			);
 			path = CustomViews;

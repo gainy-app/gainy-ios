@@ -24,7 +24,11 @@ final class PurchaseViewController: BaseViewController {
     @IBOutlet private weak var spacemanView: UIImageView!
     @IBOutlet private weak var extraCover: UIImageView!
     @IBOutlet private weak var orbitView: UIImageView!
-    @IBOutlet private weak var purchasesView: PurchasesProductsView!
+    @IBOutlet private weak var purchasesView: PurchasesProductsView! {
+        didSet {
+            purchasesView.delegate = self
+        }
+    }
     @IBOutlet private weak var purchasesScroll: UIScrollView! {
         didSet {
             purchasesScroll.delegate = self
@@ -63,7 +67,7 @@ final class PurchaseViewController: BaseViewController {
             if isInvite {
                 inviteView.isSelected = true
                 purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
-                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profiel in gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."
+                infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
             } else {
                 inviteView.isSelected = false
                 purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
@@ -131,6 +135,7 @@ final class PurchaseViewController: BaseViewController {
         
         super.viewWillAppear(animated)
         
+        infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -240,5 +245,13 @@ extension PurchaseViewController: UIScrollViewDelegate {
             self.isInvite = false
             pageControl.currentPage = 0
         }
+    }
+}
+
+extension PurchaseViewController: PurchasesProductsViewDelegate {
+    func productChanged(view: PurchasesProductsView, product: Product) {
+        guard !isInvite else {return}
+        
+        infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
     }
 }
