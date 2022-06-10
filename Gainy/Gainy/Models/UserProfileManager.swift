@@ -54,6 +54,10 @@ final class UserProfileManager {
     
     var lastName: String?
     
+    var fullName: String {
+        "\(firstName ?? "") \(lastName ?? "")"
+    }
+    
     var email: String?
     
     var avatarUrl: String?

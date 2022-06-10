@@ -198,8 +198,8 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
     func generateInviteLink(_ completion: @escaping (URL) -> Void){
         
         let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
-        buo.title = "Gainy invite"
-        buo.contentDescription = "Invite Description"
+        buo.title = "\(UserProfileManager.shared.fullName) invited you to Gainy Premium"
+        buo.contentDescription = "Track all your investment accounts in one place. Follow stock collections from leading analysts. Safe and balanced investing in sectors you believe in with Thematic Trading Fractional."
         buo.imageUrl = "https://lorempixel.com/400/400"
         buo.publiclyIndex = true
         buo.locallyIndex = true

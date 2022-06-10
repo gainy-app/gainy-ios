@@ -122,6 +122,7 @@ final class PurchaseViewController: BaseViewController {
                 if let subscriptionType = notif.userInfo?["type"] as? SuscriptionType {
                     if subscriptionType == .pro {
                         self?.dismiss(animated: true)
+                        GainyAnalytics.logEvent("dismiss_purchase_view")
                     } else {
                         
                     }
@@ -179,15 +180,18 @@ final class PurchaseViewController: BaseViewController {
     
     @IBAction private func closeAction() {
         dismiss(animated: true)
+        GainyAnalytics.logEvent("hide_purchase_view")
     }
     
     @IBAction @objc func purchaseAction() {
         if isInvite {
             generateInvite()
+            GainyAnalytics.logEvent("purchase_invite_tap")
         } else {
             if let product = purchasesView.selectedProduct {
                 isPurchasing = true
                 SubscriptionManager.shared.purchaseProduct(product: product)
+                GainyAnalytics.logEvent("purchase_subscribe_tap")
             }
         }
     }
@@ -196,6 +200,7 @@ final class PurchaseViewController: BaseViewController {
         SubscriptionManager.shared.generateInviteLink {[weak self] url in
             let items = [url]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            GainyAnalytics.logEvent("purchase_invite_show")
             runOnMain {
                 self?.present(ac, animated: true)
             }
@@ -203,6 +208,7 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction @objc func restoreAction() {
+        GainyAnalytics.logEvent("purchase_restore_tap")
         isPurchasing = true
         SubscriptionManager.shared.restorePurchases {[weak self] subscriptionType in
             DispatchQueue.main.async {
@@ -217,6 +223,7 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction @objc func policyAction() {
+        GainyAnalytics.logEvent("purchase_policy_tap")
         GainyAnalytics.logEvent("content_privacy_policy_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PurchaseViewController"])
         if let url = URL(string: Constants.Links.privacy) {
             WebPresenter.openLink(vc: self, url: url)
@@ -224,6 +231,7 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction @objc func termsAction() {
+        GainyAnalytics.logEvent("purchase_tos_tap")
         GainyAnalytics.logEvent("content_terms_of_service_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PurchaseViewController"])
         if let url = URL(string: Constants.Links.tos) {
             WebPresenter.openLink(vc: self, url: url)
@@ -251,7 +259,7 @@ extension PurchaseViewController: UIScrollViewDelegate {
 extension PurchaseViewController: PurchasesProductsViewDelegate {
     func productChanged(view: PurchasesProductsView, product: Product) {
         guard !isInvite else {return}
-        
+        GainyAnalytics.logEvent("purchase_product_selected", params: ["productID" : purchasesView.selectedProduct?.identifier ?? ""])
         infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
     }
 }

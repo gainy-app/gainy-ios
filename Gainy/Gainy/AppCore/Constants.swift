@@ -64,6 +64,9 @@ struct Constants {
         static let monthPurchaseVariant = "monthPurchase"
         static let month6PurchaseVariant = "month6Purchase"
         static let yearPurchaseVariant = "yearPurchase"
+        
+        static let isInviteAvaialble = "isInviteAvaialble"
+        static let fromInviteId = "fromInviteId"
     }
     
     struct Links {

@@ -87,7 +87,7 @@ final class TTFBlockView: TKPassThroughView {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = UIColor.Gainy.mainText
-        label.text = "With a free plan, you can only view\n3 TTFs per month."
+        label.text = "With a free plan, you can only view\n\(SubscriptionManager.shared.storage.collectionViewLimit) TTFs per month."
         label.font = .compactRoundedMedium(16)
         label.textAlignment = .center
         label.isUserInteractionEnabled = false
