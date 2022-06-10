@@ -24,7 +24,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     func login(profileId: Int) {
         Purchases.shared.logIn("\(profileId)") {[weak self] (customerInfo, created, error) in
             dprint("RevenueCat login \(customerInfo)")
-            self?.handleInfo(customerInfo, error: error)
+            self?.handleInfo(customerInfo, error: error, informFirebase: true)
             self?.getProducts()
             
         }
@@ -42,11 +42,11 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
                 innerType = .pro
                 innerDate = customerInfo?.entitlements[ettl]?.expirationDate
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
-                if informFirebase {
-                    informAboutPurchase()
-                }
             } else {
                 checkDBForSub()
+            }
+            if informFirebase {
+                reloadPurchase()
             }
         }
         dprint("RevenueCat sub: \(innerType ?? .free)")
@@ -74,13 +74,17 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         }
     }
     
-    private func informAboutPurchase() {
+    func reloadPurchase() {
         if let profileID = UserProfileManager.shared.profileID {
             let query = PurchaseUpdateMutation.init(profileId: profileID)
             Network.shared.apollo.perform(mutation: query) {[weak self] response in
                 switch response {
                 case .success(let data):
-                    UserProfileManager.shared.subscriptionExpiryDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date
+                    if let subExpDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+                        UserProfileManager.shared.subscriptionExpiryDate = subExpDate
+                    } else {
+                        UserProfileManager.shared.subscriptionExpiryDate = Date() - 1.weeks
+                    }
                     self?.checkDBForSub()
                     break
                 case .failure(let error):

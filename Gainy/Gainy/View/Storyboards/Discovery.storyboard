@@ -30,7 +30,7 @@
             <objects>
                 <tabBarController storyboardIdentifier="MainTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nva-4r-ZU1" customClass="MainTabBarViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Csj-gs-Oyi" customClass="CustomTabBar" customModule="Gainy" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" backgroundImage="clear" id="Csj-gs-Oyi" customClass="CustomTabBar" customModule="Gainy" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1950,6 +1950,7 @@ added to your watchlist!</string>
     </designables>
     <resources>
         <image name="add_coll_to_wl" width="14" height="20"/>
+        <image name="clear" width="1" height="1"/>
         <image name="close_modal" width="24" height="24"/>
         <image name="demo_lamp" width="16" height="16"/>
         <image name="iconClose" width="24" height="24"/>

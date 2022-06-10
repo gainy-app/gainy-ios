@@ -98,6 +98,12 @@ class CustomTabBar: UITabBar {
     }
     
     fileprivate func setupView() {
+        
+//        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+//        frost.frame = bounds
+//        frost.autoresizingMask = .flexibleWidth
+//        insertSubview(frost, at: 0)
+        
         addSubview(profileView)
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))
         profileView.addSubview(profileImageView)

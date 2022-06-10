@@ -118,11 +118,12 @@ final class ProfileSubscriptionViewController: BaseViewController {
         }
     }
     
-    @IBAction func onCancelSubscriptionTap(_ sender: Any) {
-        
+    @IBAction func onCancelSubscriptionTap(_ sender: Any) {        
         GainyAnalytics.logEvent("cancel_subscription_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileSubscriptionViewController"])
-        self.dismiss(animated: true) {
-            
+        if let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:])
+            }
         }
     }
 }

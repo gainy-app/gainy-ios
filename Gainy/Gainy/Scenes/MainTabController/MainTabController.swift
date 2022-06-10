@@ -7,6 +7,22 @@
 import UIKit
 import FirebaseAuth
 
+extension UIImage {
+    class func imageWithColor(_ color: UIColor) -> UIImage {
+        let rect = CGRect(origin: CGPoint(x: 0, y:0), size: CGSize(width: 1, height: 1))
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return image!
+    }
+}
+
 class MainTabBarViewController: UITabBarController, Storyboarded {
     
     //Coordinators
@@ -43,7 +59,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         }
         
         tabBar.barStyle = .default
-        tabBar.isTranslucent = false
+        tabBar.isTranslucent = true
         setupTabBarLayout()
         //setupTabBarItems()
         tabBarHeight = self.tabBar.bounds.height + keyWindow.safeAreaInsets.bottom
@@ -72,10 +88,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
     
     fileprivate func setupTabBarLayout() {
         if #available(iOS 13.0, *) {
-            let appearance = self.tabBar.standardAppearance
-            appearance.shadowImage = nil
-            appearance.shadowColor = nil
-            self.tabBar.standardAppearance = appearance
+            self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor.clear)
+            self.tabBar.backgroundColor = .clear
             self.tabBar.tintColor = UIColor.Gainy.mainText
         }
     }
@@ -151,7 +165,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         //                vc.coordinator = self.coordinator
         //            }
         //        }
-        tabBar.isTranslucent = false
     }
     
     fileprivate func updatedNotifIcon() -> String? {

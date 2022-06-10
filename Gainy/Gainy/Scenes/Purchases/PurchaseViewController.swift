@@ -111,9 +111,9 @@ final class PurchaseViewController: BaseViewController {
         
         super.viewDidLoad()
         self.modalPresentationStyle = .fullScreen
-        self.setupPlayer()
+        
         self.orbitView.transform = .init(scaleX: self.isInvite ? 1.0 : 0.7, y: self.isInvite ? 1.0 : 0.7)
-        avPlayer.play()
+        
         paused = false
         
         NotificationCenter.default.publisher(for: NotificationManager.subscriptionChangedNotification)
@@ -142,6 +142,8 @@ final class PurchaseViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        setupPlayer()
+        avPlayer.play()
         avPlayerLayer.isHidden = false
     }
     

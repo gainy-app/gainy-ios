@@ -1216,9 +1216,10 @@ extension CollectionDetailsViewCell: CollectionDetailsGainCellDelegate {
 extension CollectionDetailsViewCell: TTFBlockViewDelegate {
     func unlockButtonTapped(showPurchase: Bool) {
         if showPurchase {
+            GainyAnalytics.logDevEvent("purchase_details", params: ["collectionID" : viewModel.id])
             onPurhaseShow?()
         } else {
-
+            GainyAnalytics.logDevEvent("unlock_details", params: ["collectionID" : viewModel.id])
             if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
                 collectionView.reloadData()
             }            

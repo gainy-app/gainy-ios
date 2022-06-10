@@ -67,7 +67,7 @@ enum Product: CaseIterable {
         case .month6(_):
             return "6 Months"
         case .year(_):
-            return "Annualy"
+            return "One Year"
         }
     }
     
@@ -82,15 +82,15 @@ enum Product: CaseIterable {
         }
     }
     
-    var price: String {
+    var price: NSAttributedString {
         let price = SubscriptionManager.shared.priceForProduct(product: self)
         switch self {
         case .month(_):
-            return "\(price) / Month"
+            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / mo".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
         case .month6(_):
-            return "\(price) / 6 Months"
+            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / 6mo".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
         case .year(_):
-            return "\(price) / Year"
+            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / yr".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
         }
     }
     
@@ -98,24 +98,27 @@ enum Product: CaseIterable {
         switch self {
         case .month(_):
             return """
-Monthly subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period. Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Monthly subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period.
+Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to
+your account settings on the App Store after purchase.
 Removing the app doesn’t automatically cancel the subscription.
 """
         case .month6(_):
             return """
 6 Months subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period.
-Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to
+your account settings on the App Store after purchase.
 Removing the app doesn’t automatically cancel the subscription.
 """
         case .year(_):
             return """
-Annually subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period. Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.
+Annually subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period.
+Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to
+your account settings on the App Store after purchase.
 Removing the app doesn’t automatically cancel the subscription.
 """
         }
-        
     }
-    
 }
 
 class SubscriptionManager: SubscriptionManagerProtocol {
@@ -200,7 +203,7 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
         buo.title = "\(UserProfileManager.shared.fullName) invited you to Gainy Premium"
         buo.contentDescription = "Track all your investment accounts in one place. Follow stock collections from leading analysts. Safe and balanced investing in sectors you believe in with Thematic Trading Fractional."
-        buo.imageUrl = "https://lorempixel.com/400/400"
+        buo.imageUrl = "https://uceb1323dc638e314608dee3acec.previews.dropboxusercontent.com/p/thumb/ABgYr7N88APNt8iacn0Ki8PMR6AiXdc1jr5wm31Z2qNQ_5kF5oQjGWu7u6p-3T7tPajrMrVRldMPc5A8s5jFO9E8Xq4t83_E8j1IkowAC0nzN5on6eqlj4RpLqhtHxIQmx3kz_opmyNTy-LCw16WhMZR_tZjN3lIZbbIxHoNhYrN8TACOj5Z9KYAHCG9Aycc8JMkUbx3R2c3warCGI1K8v_AegNY9r9f6ma8xJr02pNghC3OllugVJ-vQ_UuGB2sVbvZUirShEFBzIfWTPaWwfNPHB5l3FnI3VNyqJQeO6BuQvh4mSdE2C_i47RCSgtkVf8axwMAJGKCAO-hx2XqgHwVqjzfToA0wE7yymn3YAO4YL53jstWZzI31y3sXiTG8dQ0888IMczRUjgX1yyjhFD4AXjXJpgmmYf869qjvmfcjA/p.jpeg"
         buo.publiclyIndex = true
         buo.locallyIndex = true
         

@@ -106,8 +106,8 @@
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "",
-              "displayName" : "",
+              "description" : "Demo",
+              "displayName" : "6 Month",
               "locale" : "en_US"
             }
           ],

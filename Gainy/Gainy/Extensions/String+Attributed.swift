@@ -50,3 +50,12 @@ extension NSAttributedString {
             return boundingBox.height
         }
 }
+
+extension NSMutableAttributedString {
+    func alignCenter() -> NSMutableAttributedString {
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.center
+        self.setAttributes([.paragraphStyle : style], range: NSMakeRange(0, self.length))
+        return self
+    }
+}

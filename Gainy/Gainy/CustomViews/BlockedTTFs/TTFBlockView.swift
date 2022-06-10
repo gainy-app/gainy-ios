@@ -42,14 +42,16 @@ final class TTFBlockView: TKPassThroughView {
         didSet {
             if state == .haveMore {
                 amountView.backgroundColor = UIColor(hexString: "#0062FF")
-                unlockBtn.setTitle("Show details".uppercased(), for: .normal)
+                btnLbl.text = "Show details".uppercased()
+                btnLbl.setKern(kern: 2.0, color: .white)
                 header.text = "Wanna check details?"
                 tipLbl.text = "With a free plan, you can only view\n\(SubscriptionManager.shared.storage.collectionViewLimit) TTFs per month."
             } else {
                 amountView.backgroundColor = UIColor(hexString: "#F9557B")
-                unlockBtn.setTitle("Unlock details".uppercased(), for: .normal)
+                btnLbl.text = "Unlock details".uppercased()
+                btnLbl.setKern(kern: 2.0, color: .white)
                 header.text = "Oops, you used it all."
-                tipLbl.text = "You have watched 3 free TTFs this month.\nSwitch to Gainy Premium to see Match Score\nand composition for all TTFs."
+                tipLbl.text = "You have watched \(SubscriptionManager.shared.storage.collectionViewLimit) free TTFs this month.\nSwitch to Gainy Premium to see Match Score\nand composition for all TTFs."
             }
         }
     }
@@ -83,6 +85,17 @@ final class TTFBlockView: TKPassThroughView {
         return label
     }()
     
+    lazy private var btnLbl: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textColor = .white
+        label.text = "SHOW DETAILS"
+        label.font = .compactRoundedMedium(20)
+        label.isUserInteractionEnabled = false
+        label.setKern(kern: 2.0, color: .white)
+        return label
+    }()
+    
     lazy private var tipLbl: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -97,7 +110,7 @@ final class TTFBlockView: TKPassThroughView {
     lazy private(set) var unlockBtn: UIButton = {
         let btn = UIButton()
         btn.setTitleColor(UIColor(hexString: "3BF06E"), for: .normal)
-        btn.setTitle("Show details".uppercased(), for: .normal)
+        btn.setTitle("", for: .normal)
         btn.layer.cornerRadius = 20
     
         let backGradientView = GradientPlainBackgroundView()
@@ -162,6 +175,10 @@ final class TTFBlockView: TKPassThroughView {
         unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
         unlockBtn.autoSetDimension(.height, toSize: 56)
         unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -16)
+        
+        unlockBtn.addSubview(btnLbl)
+        btnLbl.autoAlignAxis(toSuperviewAxis: .vertical)
+        btnLbl.autoAlignAxis(toSuperviewAxis: .horizontal)
         
         SubscriptionManager.shared.storage.collectionsViewedPublisher
             .receive(on: DispatchQueue.main)

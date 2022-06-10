@@ -87,7 +87,7 @@ final class PurchaseProductView: UIView {
             if let product = product {
                 rangeLbl.text = product.name
                 infoLbl.text = product.info
-                priceLbl.text = product.price
+                priceLbl.attributedText = product.price
             }
         }
     }
