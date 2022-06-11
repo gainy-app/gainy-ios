@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class ProfileSubscriptionViewController: BaseViewController {
     
     weak var mainCoordinator: MainCoordinator?
     
+    @IBOutlet private weak var refundBtn: BorderButton!
     @IBOutlet private weak var subscribeButton: BorderButton!
     @IBOutlet private weak var cancelSubscriptionButton: BorderButton! {
         didSet {
@@ -46,7 +48,7 @@ final class ProfileSubscriptionViewController: BaseViewController {
     }
     
     private func updateUI() {
-        
+        //refundBtn.isHidden = true
         SubscriptionManager.shared.getSubscription({[weak self] type in
             if type == .free {
                 if let button = self?.subscribeButton {
@@ -80,6 +82,9 @@ final class ProfileSubscriptionViewController: BaseViewController {
                     label.setLineHeight(lineHeight: 24.0, textAlignment: .left)
                     label.sizeToFit()
                 }
+                if #available(iOS 15.0, *) {
+                    self?.refundBtn.isHidden = false
+                }
             }
         })
     }
@@ -110,7 +115,7 @@ final class ProfileSubscriptionViewController: BaseViewController {
         }
     }
     
-    @IBAction func onSubscribeButtonTap(_ sender: Any) {
+    @IBAction private func onSubscribeButtonTap(_ sender: Any) {
         
         GainyAnalytics.logEvent("try_premium_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileSubscriptionViewController"])
         self.dismiss(animated: true) {
@@ -118,12 +123,24 @@ final class ProfileSubscriptionViewController: BaseViewController {
         }
     }
     
-    @IBAction func onCancelSubscriptionTap(_ sender: Any) {        
+    @IBAction private func onCancelSubscriptionTap(_ sender: Any) {
         GainyAnalytics.logEvent("cancel_subscription_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileSubscriptionViewController"])
         if let url = URL(string: "itms-apps://apps.apple.com/account/subscriptions") {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:])
             }
         }
+    }
+    
+    
+    @IBAction private func presentSwiftUISettingsScreen() {
+        if #available(iOS 15.0, *) {
+            let refundTransactionsView = RefundTransactionsView()
+            let hostingController = UIHostingController(rootView: refundTransactionsView)
+            present(hostingController, animated: true, completion: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+        
     }
 }

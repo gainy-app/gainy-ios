@@ -1235,7 +1235,7 @@
                             <constraint firstItem="gea-qs-nwO" firstAttribute="trailing" secondItem="7WZ-EL-cnw" secondAttribute="trailing" constant="6" id="3W3-us-SIb"/>
                             <constraint firstItem="zCB-dr-0Nk" firstAttribute="top" secondItem="TdJ-OH-1BV" secondAttribute="top" constant="64" id="Gp7-hb-q7i"/>
                             <constraint firstItem="7WZ-EL-cnw" firstAttribute="centerY" secondItem="zCB-dr-0Nk" secondAttribute="centerY" id="Ni6-jh-0km"/>
-                            <constraint firstItem="gea-qs-nwO" firstAttribute="bottom" secondItem="Beq-YE-Scz" secondAttribute="bottom" id="TNa-36-uxP"/>
+                            <constraint firstAttribute="bottom" secondItem="Beq-YE-Scz" secondAttribute="bottom" id="TNa-36-uxP"/>
                             <constraint firstItem="zCB-dr-0Nk" firstAttribute="leading" secondItem="gea-qs-nwO" secondAttribute="leading" constant="16" id="UTm-B8-9T7"/>
                             <constraint firstItem="Beq-YE-Scz" firstAttribute="leading" secondItem="gea-qs-nwO" secondAttribute="leading" id="pVE-OR-jGT"/>
                             <constraint firstItem="Beq-YE-Scz" firstAttribute="top" secondItem="zCB-dr-0Nk" secondAttribute="bottom" constant="8" id="ppp-xC-XMl"/>

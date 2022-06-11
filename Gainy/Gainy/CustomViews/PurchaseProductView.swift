@@ -35,9 +35,26 @@ final class PurchaseProductView: UIView {
         return view
     }()
     
+    lazy private var pricesContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    
     lazy private var priceLbl: UILabel = {
         let view = UILabel()
         view.font = .compactRoundedSemibold(16.0)
+        view.minimumScaleFactor = 0.1
+        view.textColor = UIColor(hexString: "3BF06E")!
+        view.textAlignment = .center
+        view.numberOfLines = 0
+        view.isUserInteractionEnabled = false
+        return view
+    }()
+    
+    lazy private var periodLbl: UILabel = {
+        let view = UILabel()
+        view.font = .compactRoundedSemibold(14.0)
         view.minimumScaleFactor = 0.1
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
@@ -87,7 +104,8 @@ final class PurchaseProductView: UIView {
             if let product = product {
                 rangeLbl.text = product.name
                 infoLbl.text = product.info
-                priceLbl.attributedText = product.price
+                priceLbl.text = product.price
+                periodLbl.text = product.period
             }
         }
     }
@@ -106,7 +124,9 @@ final class PurchaseProductView: UIView {
         
         addSubview(containerView)
         containerView.addSubview(rangeLbl)
-        containerView.addSubview(priceLbl)
+        containerView.addSubview(pricesContainer)
+        pricesContainer.addSubview(priceLbl)
+        pricesContainer.addSubview(periodLbl)
         containerView.addSubview(infoLbl)
         containerView.addSubview(tickImageView)
         containerView.addSubview(button)
@@ -124,10 +144,23 @@ final class PurchaseProductView: UIView {
             make.trailing.equalToSuperview().offset(-12)
         }
         
-        priceLbl.snp.makeConstraints { make in
+        pricesContainer.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
             make.centerY.equalToSuperview()
+        }
+        
+        priceLbl.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.top.equalToSuperview()
+            make.bottom.equalTo(periodLbl.snp.top)
+        }
+        
+        periodLbl.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         infoLbl.snp.makeConstraints { make in

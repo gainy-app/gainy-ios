@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -57,7 +58,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2H8-Tw-fYy">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-LP-G3m">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1216"/>
@@ -412,7 +413,7 @@
                             <constraint firstItem="FMH-xl-iJL" firstAttribute="leading" secondItem="Ks4-yc-Rc4" secondAttribute="leading" id="Egq-1J-viQ"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" id="GVR-Qt-Zr4"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="2H8-Tw-fYy" secondAttribute="trailing" id="Jfd-hb-gHG"/>
-                            <constraint firstItem="QpC-CG-5Nq" firstAttribute="bottom" secondItem="2H8-Tw-fYy" secondAttribute="bottom" id="bph-Ty-Zo2"/>
+                            <constraint firstAttribute="bottom" secondItem="2H8-Tw-fYy" secondAttribute="bottom" id="bph-Ty-Zo2"/>
                             <constraint firstAttribute="trailing" secondItem="FMH-xl-iJL" secondAttribute="trailing" id="jy5-B8-VnB"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="z3S-M1-caF"/>
                         </constraints>
@@ -1059,6 +1060,30 @@
                                     <action selector="onSubscribeButtonTap:" destination="Smz-rt-023" eventType="touchUpInside" id="cKP-Oh-Bft"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-ny-VlB" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="60" width="80" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="kio-TN-aM9"/>
+                                    <constraint firstAttribute="width" constant="80" id="rh9-2H-mhT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="REFUND">
+                                    <color key="titleColor" name="mainText"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="mainText"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="17"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="presentSwiftUISettingsScreen" destination="Smz-rt-023" eventType="touchUpInside" id="4gU-wa-hEF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JXv-OS-rem"/>
                         <color key="backgroundColor" red="0.96869248149999998" green="0.97245675330000003" blue="0.97647255659999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -1069,8 +1094,10 @@
                             <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="y6V-m9-NOa" secondAttribute="trailing" constant="32" id="G3J-r5-H5t"/>
                             <constraint firstItem="6jr-YC-CXh" firstAttribute="top" secondItem="OB5-65-Pjo" secondAttribute="bottom" constant="49" id="Gfd-gO-55i"/>
                             <constraint firstItem="BB0-gq-HvM" firstAttribute="leading" secondItem="OqP-QV-H5f" secondAttribute="leading" id="LrU-rX-ond"/>
+                            <constraint firstItem="oUc-ny-VlB" firstAttribute="leading" secondItem="OqP-QV-H5f" secondAttribute="leading" constant="32" id="NIl-Hk-Uqp"/>
                             <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="iO2-ee-FK4" secondAttribute="trailing" constant="32" id="OdQ-Zw-f3E"/>
                             <constraint firstItem="BB0-gq-HvM" firstAttribute="top" secondItem="OqP-QV-H5f" secondAttribute="top" id="Sw2-oN-nne"/>
+                            <constraint firstItem="oUc-ny-VlB" firstAttribute="top" secondItem="JXv-OS-rem" secondAttribute="top" constant="16" id="TIY-uD-EF8"/>
                             <constraint firstItem="JXv-OS-rem" firstAttribute="trailing" secondItem="93H-KV-scP" secondAttribute="trailing" id="Ttz-hs-WtX"/>
                             <constraint firstItem="93H-KV-scP" firstAttribute="top" secondItem="JXv-OS-rem" secondAttribute="top" constant="40" id="WCq-YS-9FL"/>
                             <constraint firstItem="6jr-YC-CXh" firstAttribute="leading" secondItem="JXv-OS-rem" secondAttribute="leading" constant="32" id="XMp-nF-ixp"/>
@@ -1087,6 +1114,7 @@
                     <connections>
                         <outlet property="cancelSubscriptionButton" destination="6jr-YC-CXh" id="Nt9-54-IyH"/>
                         <outlet property="descriptionLabel" destination="OB5-65-Pjo" id="cZe-Qi-gFz"/>
+                        <outlet property="refundBtn" destination="oUc-ny-VlB" id="XeH-ba-f9A"/>
                         <outlet property="subscribeButton" destination="y6V-m9-NOa" id="byr-x0-7IW"/>
                         <outlet property="titleLabel" destination="iO2-ee-FK4" id="hmp-iD-aGT"/>
                     </connections>
@@ -1136,6 +1164,9 @@
         <designable name="l1e-sc-Ubw">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
+        <designable name="oUc-ny-VlB">
+            <size key="intrinsicContentSize" width="62" height="32"/>
+        </designable>
         <designable name="y6V-m9-NOa">
             <size key="intrinsicContentSize" width="137" height="32"/>
         </designable>
@@ -1152,6 +1183,9 @@
         <image name="onboardingGradient" width="375" height="812"/>
         <image name="plus" width="16" height="16"/>
         <image name="profilePlaceholder" width="128" height="128"/>
+        <namedColor name="mainText">
+            <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

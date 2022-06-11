@@ -82,15 +82,19 @@ enum Product: CaseIterable {
         }
     }
     
-    var price: NSAttributedString {
+    var price: String {
         let price = SubscriptionManager.shared.priceForProduct(product: self)
+        return price
+    }
+    
+    var period: String {
         switch self {
         case .month(_):
-            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / mo".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
+            return "per month"
         case .month6(_):
-            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / 6mo".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
+            return "per 6 month"
         case .year(_):
-            return ("\(price)".attr(font: .compactRoundedSemibold(16), color: UIColor(hexString: "#3BF06E")!) + " / yr".attr(font: .compactRoundedMedium(12.0), color: UIColor(hexString: "#3BF06E")!)).alignCenter()
+            return "per year"
         }
     }
     

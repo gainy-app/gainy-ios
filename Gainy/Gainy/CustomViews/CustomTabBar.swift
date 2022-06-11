@@ -10,6 +10,7 @@ import PureLayout
 import Combine
 import FirebaseStorage
 import Kingfisher
+import SnapKit
 
 protocol CustomTabBarDelegate: AnyObject {
     func profileTabPressed(tabBar: CustomTabBar)
@@ -99,10 +100,18 @@ class CustomTabBar: UITabBar {
     
     fileprivate func setupView() {
         
-//        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-//        frost.frame = bounds
-//        frost.autoresizingMask = .flexibleWidth
-//        insertSubview(frost, at: 0)
+        let frost = BlurEffectView()
+        insertSubview(frost, at: 0)
+        
+        let window = UIApplication.shared.windows.first
+        let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
+        frost.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(bounds.height + bottomPadding)
+        }
+        unselectedItemTintColor = UIColor.Gainy.mainText
         
         addSubview(profileView)
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))

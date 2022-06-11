@@ -1,13 +1,11 @@
-iOS v1.4 #228 available
+iOS v1.4 #229 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
 :new: New:
-• Blurred TTFs
-• Profile: Current Subscription
-• TTF: Purchase view
-• Purchases: Auto-renewable susbcriptions
-• Purchases: Demo invite logic
+• TabBar tricks (requested by Alina)
+• New Purchase View prices UI
+• Refund logic for iOS 15
 
 :hammer_and_wrench: Improvements
 • QA
