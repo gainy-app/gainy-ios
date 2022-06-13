@@ -16,7 +16,7 @@ enum CollectionDetailsHeaderViewState: Int, Codable {
         switch state {
         case .grid: return 146 - 16
         case .list: return 173 - 16
-        case .chart: return 482 - 16
+        case .chart: return 422 - 16
         }
     }
 }
@@ -372,7 +372,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.addSubview(pieChartView)
         pieChartView.autoPinEdge(toSuperviewEdge: .top, withInset: 154.0 - topInset)
         pieChartView.autoSetDimensions(to: CGSize.init(width: size, height: size))
-        pieChartView.autoPinEdge(toSuperviewEdge: .left, withInset: 40.0)
+        pieChartView.autoAlignAxis(toSuperviewAxis: .vertical)
         
         let overlayView = UIView.newAutoLayout()
         overlayView.backgroundColor = self.backgroundColor
