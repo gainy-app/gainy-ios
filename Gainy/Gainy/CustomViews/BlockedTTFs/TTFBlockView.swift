@@ -109,7 +109,7 @@ final class TTFBlockView: TKPassThroughView {
     
     lazy private(set) var unlockBtn: UIButton = {
         let btn = UIButton()
-        btn.titleLabel?.font = compactRoundedMedium(16.0)
+        btn.titleLabel?.font = .compactRoundedMedium(16.0)
         btn.setTitle("", for: .normal)
         btn.layer.cornerRadius = 20
     
