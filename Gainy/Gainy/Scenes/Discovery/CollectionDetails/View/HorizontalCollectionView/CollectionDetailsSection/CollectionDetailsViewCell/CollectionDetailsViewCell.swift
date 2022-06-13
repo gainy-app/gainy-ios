@@ -62,7 +62,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.contentInset = .init(top: 0, left: 0, bottom: 111, right: 0)
+        collectionView.contentInset = .init(top: 0, left: 0, bottom: 65, right: 0)
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.clipsToBounds = false
         contentView.addSubview(collectionView)

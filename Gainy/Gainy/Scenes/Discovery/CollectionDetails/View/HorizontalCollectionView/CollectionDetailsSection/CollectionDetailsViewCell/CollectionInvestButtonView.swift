@@ -74,7 +74,9 @@ final class CollectionInvestButtonView: UIView {
                          action: #selector(investButtonTapped(_:)),
                          for: .touchUpInside)
         
-        button.setTitle("Invest in TTF", for: .normal)
+        button.setTitle("Invest".uppercased(), for: .normal)
+        button.titleLabel?.font = .compactRoundedMedium(16.0)
+        button.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
         button.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.adjustsFontSizeToFitWidth = true
@@ -166,7 +168,10 @@ final class CollectionInvestButtonView: UIView {
         self.imageIsLoading = false
         self.collectionId = collectionId
         
-        investButton.setTitle("Invest in \(name)", for: .normal)
+        investButton.setTitle("Invest".uppercased(), for: .normal)
+        investButton.titleLabel?.font = .compactRoundedMedium(16.0)
+        investButton.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
+        
         loadImage()
         layoutIfNeeded()
     }
