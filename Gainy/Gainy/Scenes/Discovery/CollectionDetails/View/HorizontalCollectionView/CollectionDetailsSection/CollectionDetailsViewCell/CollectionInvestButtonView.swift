@@ -11,7 +11,7 @@ final class CollectionInvestButtonView: UIView {
         investButton.autoPinEdge(toSuperviewEdge: .left, withInset: 28.0)
         investButton.autoPinEdge(toSuperviewEdge: .right, withInset: 28.0)
         investButton.autoSetDimension(.height, toSize: 64.0)
-        investButton.autoAlignAxis(toSuperviewAxis: .horizontal)
+        investButton.autoPinEdge(toSuperviewEdge: .top, withInset: 16.0)
         
         self.alphaOverlay = UIView.newAutoLayout()
         self.alphaOverlay?.backgroundColor = UIColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.56)

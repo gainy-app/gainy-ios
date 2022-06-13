@@ -55,6 +55,7 @@ final class SingleCollectionDetailsViewModel: NSObject {
             ))
             
             if let cell = cell as? CollectionDetailsViewCell {
+                cell.investButtonHeightLayoutConstraint?.constant = 116.0
                 cell.shortCollection = shortCollection
                 cell.collectionView.tag = collectionView.tag
                 cell.tag = modelItem.id

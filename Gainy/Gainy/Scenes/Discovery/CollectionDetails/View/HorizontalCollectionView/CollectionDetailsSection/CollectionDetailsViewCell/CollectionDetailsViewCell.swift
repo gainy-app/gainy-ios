@@ -74,7 +74,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         if RemoteConfigManager.shared.isInvestBtnVisible {
             contentView.addSubview(collectionInvestButtonView)
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .bottom)
-            collectionInvestButtonView.autoSetDimension(.height, toSize: 96.0)
+            self.investButtonHeightLayoutConstraint = collectionInvestButtonView.autoSetDimension(.height, toSize: 96.0)
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .left)
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
             
@@ -157,6 +157,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var model: CollectionCardViewCellModel?
     fileprivate var lastOffset: CGFloat = 0.0
     var cancellables = Set<AnyCancellable>()
+    var investButtonHeightLayoutConstraint: NSLayoutConstraint? = nil
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
     var onSortingPressed: (() -> Void)?
