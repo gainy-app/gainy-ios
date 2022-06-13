@@ -137,7 +137,9 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
     private var products: [StoreProduct] = []
     func getProducts() {
         let allProducts = Product.allCases.compactMap({$0.identifier})
+        dprint("getProducts \(allProducts)")
         Purchases.shared.getProducts(allProducts) {[weak self] remoteProducts in
+            dprint("getProducts res \(remoteProducts)")
             self?.products = remoteProducts
         }
     }
@@ -154,6 +156,7 @@ class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             return product.localizedPriceString
         }
+        dprint("priceForProduct noprice \(product.identifier) \(products.count)")
         return "-"
     }
     

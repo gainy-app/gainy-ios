@@ -86,11 +86,22 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let blurView = BlurEffectView()
             contentView.addSubview(blurView)
             
+            let blurWhiteView = UIView()
+            blurWhiteView.backgroundColor = .white.withAlphaComponent(0.3)
+            contentView.addSubview(blurWhiteView)
+            
             blurView.autoPinEdge(toSuperviewEdge: .leading)
             blurView.autoPinEdge(toSuperviewEdge: .bottom)
             blurView.autoPinEdge(toSuperviewEdge: .trailing)
             blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+            
+            blurWhiteView.autoPinEdge(toSuperviewEdge: .leading)
+            blurWhiteView.autoPinEdge(toSuperviewEdge: .bottom)
+            blurWhiteView.autoPinEdge(toSuperviewEdge: .trailing)
+            blurWhiteView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+            
             contentView.bringSubviewToFront(blurView)
+            contentView.bringSubviewToFront(blurWhiteView)
             contentView.bringSubviewToFront(collectionInvestButtonView)
         }
     }

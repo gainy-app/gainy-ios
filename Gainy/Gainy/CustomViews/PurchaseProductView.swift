@@ -28,7 +28,7 @@ final class PurchaseProductView: UIView {
     
     lazy private var rangeLbl: UILabel = {
         let view = UILabel()
-        view.font = .compactRoundedRegular(14.0)
+        view.font = .compactRoundedRegular(12.0)
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
         view.isUserInteractionEnabled = false
@@ -65,7 +65,7 @@ final class PurchaseProductView: UIView {
     
     lazy private var infoLbl: UILabel = {
         let view = UILabel()
-        view.font = .compactRoundedMedium(12.0)
+        view.font = .compactRoundedRegular(12.0)
         view.textColor = UIColor(hexString: "3BF06E")!
         view.textAlignment = .center
         view.isUserInteractionEnabled = false

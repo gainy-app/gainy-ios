@@ -48,7 +48,9 @@ final class ProfileSubscriptionViewController: BaseViewController {
     }
     
     private func updateUI() {
-        //refundBtn.isHidden = true
+        if let button = self.refundBtn {
+            button.isHidden = true
+        }
         SubscriptionManager.shared.getSubscription({[weak self] type in
             if type == .free {
                 if let button = self?.subscribeButton {
@@ -83,7 +85,9 @@ final class ProfileSubscriptionViewController: BaseViewController {
                     label.sizeToFit()
                 }
                 if #available(iOS 15.0, *) {
-                    self?.refundBtn.isHidden = false
+                    if let button = self?.refundBtn {
+                        button.isHidden = false
+                    }
                 }
             }
         })

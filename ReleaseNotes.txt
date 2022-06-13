@@ -1,11 +1,9 @@
-iOS v1.4 #229 available
+iOS v1.4 #230 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
 :new: New:
-• TabBar tricks (requested by Alina)
-• New Purchase View prices UI
-• Refund logic for iOS 15
+-
 
 :hammer_and_wrench: Improvements
 • QA

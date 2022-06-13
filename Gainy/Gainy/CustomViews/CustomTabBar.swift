@@ -113,6 +113,8 @@ class CustomTabBar: UITabBar {
         }
         unselectedItemTintColor = UIColor.Gainy.mainText
         
+        
+        
         addSubview(profileView)
         profileView.autoSetDimensions(to: .init(width: profileWidth, height: profileWidth))
         profileView.addSubview(profileImageView)

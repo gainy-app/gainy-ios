@@ -44,6 +44,12 @@ class BlurEffectView: UIVisualEffectView {
         animator.fractionComplete = intensity   //This is your blur intensity in range 0 - 1
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        
+    }
+    
     deinit {
         animator.stopAnimation(true)
     }

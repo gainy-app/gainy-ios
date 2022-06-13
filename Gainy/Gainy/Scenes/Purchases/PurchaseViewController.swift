@@ -67,11 +67,11 @@ final class PurchaseViewController: BaseViewController {
             if isInvite {
                 inviteView.isSelected = true
                 purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
-                infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
+                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profiel in gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."                
             } else {
                 inviteView.isSelected = false
                 purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
-                infoLbl.text = "Premium subscription is required to get access to unlimited TTF views for selected period. The subscription will not renew automatically with the price and duration given above. Payment will be charged to your Apple ID account at the confirmation of purchase. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase."
+                infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
             }
         }
     }
