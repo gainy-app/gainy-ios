@@ -241,6 +241,81 @@
           "referenceName" : "Year 3",
           "subscriptionGroupID" : "D04F6F74",
           "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "56.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "BB61D750",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_56_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 1 Promo",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "111.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "11813133",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_112_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 2 Promo",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "223.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "95F1F02D",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Demo",
+              "displayName" : "Year",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "gainy_224_r_y1",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Year 3 Promo",
+          "subscriptionGroupID" : "D04F6F74",
+          "type" : "RecurringSubscription"
         }
       ]
     }

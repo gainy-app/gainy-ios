@@ -81,13 +81,13 @@ final class PromoPurchaseProductView: UIView {
         }
         
         rangeLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(16)
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
         }
         
         infoLbl.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-16)
             make.leading.equalToSuperview().offset(12)
             make.trailing.equalToSuperview().offset(-12)
         }

@@ -35,6 +35,7 @@ final class PromoPurchaseViewController: BaseViewController {
     
     private var isPurchasing: Bool = false {
         didSet {
+            productsView.blockUI = isPurchasing
             purchaseBtn.isEnabled = !isPurchasing
             restoreBtn.isEnabled = !isPurchasing
             if isPurchasing {
@@ -201,9 +202,46 @@ final class PromoPurchaseViewController: BaseViewController {
 
 extension PromoPurchaseViewController: PromoPurchasesProductsViewDelegate {
     func applyPromo(view: PromoPurchasesProductsView) {
+        self.isPurchasing = true
+        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: productsView.promoCode)) {[weak self] result in
+            switch result {
+            case .success(let data):
+                if let config = data.data?.getPromocode?.config {
+                    if let productsMap = self?.getDictionary(config)?["tariff_mapping"] as? [String : String] {
+                        let productId = productsMap[self?.productsView.selectedProduct?.identifier ?? ""]
+                        let product = Product.getProductByID(productId ?? "")
+                    DispatchQueue.main.async {
+                        self?.isPurchasing = false
+                        self?.productsView.selectedProduct = product
+                        self?.infoLbl.text = self?.productsView.selectedProduct?.terms ?? ""
+                    }
+                }
+                }
+                break
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self?.isPurchasing = false
+                }
+                break
+            }
+        }
         
         
-        infoLbl.text = productsView.selectedProduct?.terms ?? ""
+    }
+    
+    private func getDictionary(_ str: String) -> [String: Any]? {
+        let data = Data(str.utf8)
+
+        do {
+            // make sure this JSON is in the format we expect
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                // try to read out a string array
+                return json
+            }
+        } catch let error as NSError {
+            print("Failed to load: \(error.localizedDescription)")
+        }
+        return nil
     }
 }
 

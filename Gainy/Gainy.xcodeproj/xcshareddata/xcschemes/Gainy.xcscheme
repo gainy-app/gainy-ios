@@ -50,6 +50,9 @@
             ReferencedContainer = "container:Gainy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../Gainy/Gainy/Supporting Files/StoreConfiguration.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

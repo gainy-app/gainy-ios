@@ -20,12 +20,17 @@ enum ProductVariant: String, Codable {
 enum Product: CaseIterable {
     
     static var allCases: [Product] {
-        return [.month(.a), .month(.b), .month(.c), .month6(.a), .month6(.b), .month6(.c), .year(.a), .year(.b), .year(.c)]
+        return [.month(.a), .month(.b), .month(.c), .month6(.a), .month6(.b), .month6(.c), .year(.a), .year(.b), .year(.c), .yearPromo(.a), .yearPromo(.b), .yearPromo(.c)]
     }
     
     case month(_ variant: ProductVariant)
     case month6(_ variant: ProductVariant)
     case year(_ variant: ProductVariant)
+    case yearPromo(_ variant: ProductVariant)
+    
+    static func getProductByID(_ id: String) -> Product? {
+        allCases.first(where: {$0.identifier == id})
+    }
     
     var identifier: String {
         switch self {
@@ -57,6 +62,16 @@ enum Product: CaseIterable {
             case .c:
                 return "gainy_320_r_y1"
             }
+            
+        case .yearPromo(let variant):
+            switch variant {
+            case .a:
+                return "gainy_56_r_y1"
+            case .b:
+                return "gainy_112_r_y1"
+            case .c:
+                return "gainy_224_r_y1"
+            }
         }
     }
     
@@ -66,7 +81,7 @@ enum Product: CaseIterable {
             return "Monthly"
         case .month6(_):
             return "6 Months"
-        case .year(_):
+        case .year(_), .yearPromo(_):
             return "One Year"
         }
     }
@@ -77,7 +92,7 @@ enum Product: CaseIterable {
             return "Easy start"
         case .month6(_):
             return "You save 15%"
-        case .year(_):
+        case .year(_), .yearPromo(_):
             return "You save 20%"
         }
     }
@@ -93,7 +108,7 @@ enum Product: CaseIterable {
             return "per month"
         case .month6(_):
             return "per 6 month"
-        case .year(_):
+        case .year(_), .yearPromo(_):
             return "per year"
         }
     }
@@ -114,7 +129,7 @@ Payment will be charged to your Apple ID account at the confirmation of purchase
 your account settings on the App Store after purchase.
 Removing the app doesn’t automatically cancel the subscription.
 """
-        case .year(_):
+        case .year(_), .yearPromo(_):
             return """
 Annually subscription is required to get access to premium features of the app. Subscription automatically renews with the price and duration given above unless it is canceled at least 24 hours before the end of the current period.
 Payment will be charged to your Apple ID account at the confirmation of purchase. Your account will be charged for renewal within 24 hours prior to the end of the current period. You can manage and cancel your subscriptions by going to

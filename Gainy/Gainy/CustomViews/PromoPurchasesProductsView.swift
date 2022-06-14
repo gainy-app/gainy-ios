@@ -18,11 +18,23 @@ final class PromoPurchasesProductsView: UIView {
     
     /// Selected Product to buy
     var selectedProduct: Product? {
-        productView.product
+        get {
+            productView.product
+        }
+        set {
+            productView.product = newValue
+        }
     }
     
     var promoCode: String {
         promoField.text ?? ""
+    }
+    
+    var blockUI: Bool = false {
+        didSet {
+            applyBtn.isEnabled = !blockUI
+            promoField.isEnabled = !blockUI
+        }
     }
     
     lazy private var productView: PromoPurchaseProductView = {
@@ -56,7 +68,7 @@ final class PromoPurchasesProductsView: UIView {
         let promoField = UITextField()
         promoField.backgroundColor = .clear
         promoField.font = .compactRoundedMedium(12.0)
-        promoField.textColor = UIColor.Gainy.mainText
+        promoField.textColor = .white
         promoField.attributedPlaceholder = NSAttributedString(string: "Enter promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)])
         return promoField
     }()
@@ -78,7 +90,7 @@ final class PromoPurchasesProductsView: UIView {
         promoContainer.addSubview(promoField)
         
         productView.snp.makeConstraints { make in
-            make.height.equalTo(64.0)
+            make.height.equalTo(72.0)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.top.equalToSuperview()
