@@ -8,8 +8,9 @@
 import Foundation
 import RevenueCat
 import SwiftDate
+import StoreKit
 
-class RevenueCatSubscriptionService: SubscriptionServiceProtocol {
+class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     private var config = Configuration()
     
     func setup() {

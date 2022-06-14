@@ -123,7 +123,7 @@ final class ProfileSubscriptionViewController: BaseViewController {
         
         GainyAnalytics.logEvent("try_premium_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileSubscriptionViewController"])
         self.dismiss(animated: true) {
-            self.mainCoordinator?.showPurchaseView()
+            self.mainCoordinator?.showPromoPurchaseView()
         }
     }
     

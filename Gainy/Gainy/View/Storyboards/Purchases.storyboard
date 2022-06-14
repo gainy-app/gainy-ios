@@ -46,7 +46,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aqm-x2-uay">
-                                <rect key="frame" x="174.5" y="56" width="65.5" height="24"/>
+                                <rect key="frame" x="177" y="56" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Vrf-nj-i1u"/>
                                 </constraints>
@@ -58,10 +58,10 @@
                                 <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIU-cm-Dn5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="821.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-ys-sxV" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
-                                                <rect key="frame" x="64" y="0.0" width="286" height="49"/>
+                                                <rect key="frame" x="68" y="0.0" width="278" height="50.5"/>
                                                 <string key="text">Wanna see more than 5 TTFs?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
@@ -69,16 +69,16 @@ Try Gainy Premium!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_orbits" translatesAutoresizingMaskIntoConstraints="NO" id="8Li-Ao-HfO">
-                                                <rect key="frame" x="-84" y="-48.5" width="582" height="451"/>
+                                                <rect key="frame" x="-84" y="-47" width="582" height="451"/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="eW8-b9-M4D">
-                                                <rect key="frame" x="56" y="89" width="302" height="176"/>
+                                                <rect key="frame" x="56" y="90.5" width="302" height="176"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_extra_cover" translatesAutoresizingMaskIntoConstraints="NO" id="xUY-eU-3V2">
-                                                <rect key="frame" x="20" y="59" width="378" height="216.5"/>
+                                                <rect key="frame" x="20" y="60.5" width="378" height="216.5"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock the full Gainy experience, explore all TTFs and more without limitations" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBY-8q-w9d">
-                                                <rect key="frame" x="48" y="297.5" width="318" height="38.5"/>
+                                                <rect key="frame" x="48" y="299" width="318" height="38.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38.5" id="FxD-DW-YR6"/>
                                                 </constraints>
@@ -87,7 +87,7 @@ Try Gainy Premium!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWw-2e-m5b">
-                                                <rect key="frame" x="0.0" y="356" width="414" height="152"/>
+                                                <rect key="frame" x="0.0" y="357.5" width="414" height="152"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhp-42-cbc">
                                                         <rect key="frame" x="0.0" y="0.0" width="788" height="152"/>
@@ -127,7 +127,7 @@ Try Gainy Premium!</string>
                                                                 <rect key="frame" x="501" y="0.0" width="160" height="24"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your friends!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1F-Wv-V5l">
-                                                                        <rect key="frame" x="31" y="5" width="98.5" height="14"/>
+                                                                        <rect key="frame" x="29.5" y="5" width="101.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                         <color key="textColor" name="mainText"/>
                                                                         <nil key="highlightedColor"/>
@@ -183,10 +183,10 @@ Try Gainy Premium!</string>
                                                 <viewLayoutGuide key="frameLayoutGuide" id="MMS-SX-Jem"/>
                                             </scrollView>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="jtg-iw-NC1">
-                                                <rect key="frame" x="158.5" y="524" width="97.5" height="26"/>
+                                                <rect key="frame" x="158.5" y="525.5" width="97.5" height="26"/>
                                             </pageControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e5-Tp-ysE">
-                                                <rect key="frame" x="32" y="566" width="350" height="64"/>
+                                                <rect key="frame" x="32" y="567.5" width="350" height="64"/>
                                                 <color key="backgroundColor" red="0.10588235294117647" green="0.27058823529411763" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="64" id="I0P-EV-XUR"/>
@@ -201,11 +201,11 @@ Try Gainy Premium!</string>
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ord-i7-uGz">
-                                                <rect key="frame" x="197" y="588" width="20" height="20"/>
+                                                <rect key="frame" x="197" y="589.5" width="20" height="20"/>
                                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </activityIndicatorView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xI-Z2-PRI">
-                                                <rect key="frame" x="159" y="641.5" width="96" height="26"/>
+                                                <rect key="frame" x="161.5" y="643" width="91" height="27"/>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Restore Purchase">
@@ -216,17 +216,17 @@ Try Gainy Premium!</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fod-xs-cn9">
-                                                <rect key="frame" x="32" y="686" width="350" height="84"/>
+                                                <rect key="frame" x="32" y="687.5" width="350" height="86"/>
                                                 <string key="text">Premium subscription is required to get access to unlimited TTF views for selected period. The subscription will not renew automatically with the price and duration given above. Payment will be charged to your Apple ID account at the confirmation of purchase. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WKv-ed-TTt">
-                                                <rect key="frame" x="106.5" y="778" width="201.5" height="24"/>
+                                                <rect key="frame" x="109.5" y="781.5" width="195" height="24"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FWL-ca-04n">
-                                                        <rect key="frame" x="0.0" y="-1" width="76" height="26"/>
+                                                        <rect key="frame" x="0.0" y="-1.5" width="72" height="27"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Privacy Policy">
@@ -237,13 +237,13 @@ Try Gainy Premium!</string>
                                                         </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zze-D6-Kiw">
-                                                        <rect key="frame" x="84" y="5" width="4.5" height="14"/>
+                                                        <rect key="frame" x="80" y="5" width="6" height="14"/>
                                                         <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IY6-Ls-xAe">
-                                                        <rect key="frame" x="96.5" y="3.5" width="105" height="20"/>
+                                                        <rect key="frame" x="94" y="3.5" width="101" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="YAm-hB-Acs"/>
                                                         </constraints>
@@ -359,12 +359,245 @@ Try Gainy Premium!</string>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
+        <!--Promo Purchase View Controller-->
+        <scene sceneID="DfB-yD-YQ9">
+            <objects>
+                <viewController storyboardIdentifier="PromoPurchaseViewController" modalPresentationStyle="fullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="r3k-3r-vlc" customClass="PromoPurchaseViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="FmC-Am-zHw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_circles" translatesAutoresizingMaskIntoConstraints="NO" id="cTn-gb-pz0">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JE4-mP-19v">
+                                <rect key="frame" x="358" y="46" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1Jr-wP-xMh"/>
+                                    <constraint firstAttribute="width" constant="44" id="zRA-fg-OEo"/>
+                                </constraints>
+                                <state key="normal" image="close_modal_white"/>
+                                <connections>
+                                    <action selector="closeAction" destination="r3k-3r-vlc" eventType="touchUpInside" id="nRu-DL-nWH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r73-cD-vie">
+                                <rect key="frame" x="177" y="56" width="60" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="CAm-WJ-d1h"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q51-iZ-vXP">
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iHZ-UO-tUY">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="803.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aGI-kY-ST1" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
+                                                <rect key="frame" x="68" y="0.0" width="278" height="50.5"/>
+                                                <string key="text">Wanna see more than 5 TTFs?
+Try Gainy Premium!</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_orbits" translatesAutoresizingMaskIntoConstraints="NO" id="G7y-uM-UeG">
+                                                <rect key="frame" x="-84" y="-47" width="582" height="451"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_spaceman" translatesAutoresizingMaskIntoConstraints="NO" id="aXD-BR-eoL">
+                                                <rect key="frame" x="56" y="90.5" width="302" height="176"/>
+                                            </imageView>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_extra_cover" translatesAutoresizingMaskIntoConstraints="NO" id="70d-5Z-9qJ">
+                                                <rect key="frame" x="20" y="60.5" width="378" height="216.5"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlock the full Gainy experience, explore all TTFs and more without limitations" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WVC-Vj-BAQ">
+                                                <rect key="frame" x="48" y="299" width="318" height="38.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="38.5" id="m5J-Ar-bU4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXc-S8-2l8">
+                                                <rect key="frame" x="32" y="549.5" width="350" height="64"/>
+                                                <color key="backgroundColor" red="0.1058823529" green="0.27058823529999998" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="64" id="fob-VZ-KHf"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="CONTINUE">
+                                                    <color key="titleColor" red="0.23137254900000001" green="0.94117647059999998" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="purchaseAction" destination="r3k-3r-vlc" eventType="touchUpInside" id="fbb-dB-MTD"/>
+                                                </connections>
+                                            </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Je1-Mj-RL5">
+                                                <rect key="frame" x="197" y="571.5" width="20" height="20"/>
+                                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnZ-mo-5vc">
+                                                <rect key="frame" x="161.5" y="625" width="91" height="27"/>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Restore Purchase">
+                                                    <color key="titleColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="restoreAction" destination="r3k-3r-vlc" eventType="touchUpInside" id="mhD-ao-hNw"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTw-4s-Y6l">
+                                                <rect key="frame" x="32" y="669.5" width="350" height="86"/>
+                                                <string key="text">Premium subscription is required to get access to unlimited TTF views for selected period. The subscription will not renew automatically with the price and duration given above. Payment will be charged to your Apple ID account at the confirmation of purchase. You can manage and cancel your subscriptions by going to your account settings on the App Store after purchase.</string>
+                                                <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ta3-ah-qhK">
+                                                <rect key="frame" x="109.5" y="763.5" width="195" height="24"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLg-Aq-VgX">
+                                                        <rect key="frame" x="0.0" y="-1.5" width="72" height="27"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Privacy Policy">
+                                                            <color key="titleColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="policyAction" destination="r3k-3r-vlc" eventType="touchUpInside" id="EO9-qW-cgL"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="•" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g4h-FE-RVc">
+                                                        <rect key="frame" x="80" y="5" width="6" height="14"/>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                        <color key="textColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HqN-Gg-uwP">
+                                                        <rect key="frame" x="94" y="3.5" width="101" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="PjW-cJ-peU"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Terms &amp; Conditions">
+                                                            <color key="titleColor" red="0.0" green="0.38431372549999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="termsAction" destination="r3k-3r-vlc" eventType="touchUpInside" id="A67-uJ-dhd"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="HqN-Gg-uwP" secondAttribute="trailing" id="4p3-PY-HqA"/>
+                                                    <constraint firstAttribute="height" constant="24" id="5kZ-qN-iGx"/>
+                                                    <constraint firstItem="g4h-FE-RVc" firstAttribute="leading" secondItem="LLg-Aq-VgX" secondAttribute="trailing" constant="8" id="La1-dy-omk"/>
+                                                    <constraint firstItem="g4h-FE-RVc" firstAttribute="centerY" secondItem="Ta3-ah-qhK" secondAttribute="centerY" id="NH2-WS-WvA"/>
+                                                    <constraint firstAttribute="bottom" secondItem="HqN-Gg-uwP" secondAttribute="bottom" constant="0.5" id="bSs-cU-YZ2"/>
+                                                    <constraint firstItem="LLg-Aq-VgX" firstAttribute="leading" secondItem="Ta3-ah-qhK" secondAttribute="leading" id="fjP-tO-4SG"/>
+                                                    <constraint firstItem="LLg-Aq-VgX" firstAttribute="centerY" secondItem="Ta3-ah-qhK" secondAttribute="centerY" id="psx-U2-Kau"/>
+                                                    <constraint firstItem="HqN-Gg-uwP" firstAttribute="leading" secondItem="g4h-FE-RVc" secondAttribute="trailing" constant="8" id="wef-Kc-JpU"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iCa-3x-Ekf" customClass="PromoPurchasesProductsView" customModule="Gainy" customModuleProvider="target">
+                                                <rect key="frame" x="24" y="381.5" width="366" height="120"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="C5N-qd-XFR"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Je1-Mj-RL5" firstAttribute="centerY" secondItem="hXc-S8-2l8" secondAttribute="centerY" id="1JR-xP-874"/>
+                                            <constraint firstItem="WVC-Vj-BAQ" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="48" id="60V-Qr-Pku"/>
+                                            <constraint firstItem="YTw-4s-Y6l" firstAttribute="top" secondItem="hXc-S8-2l8" secondAttribute="bottom" constant="56" id="6jP-GM-qxe"/>
+                                            <constraint firstItem="WVC-Vj-BAQ" firstAttribute="top" secondItem="aGI-kY-ST1" secondAttribute="bottom" constant="248.5" id="Asp-IK-28S"/>
+                                            <constraint firstItem="aXD-BR-eoL" firstAttribute="top" secondItem="aGI-kY-ST1" secondAttribute="bottom" constant="40" id="CIq-lS-zrf"/>
+                                            <constraint firstAttribute="trailing" secondItem="WVC-Vj-BAQ" secondAttribute="trailing" constant="48" id="G1y-3X-Nxf"/>
+                                            <constraint firstAttribute="trailing" secondItem="iCa-3x-Ekf" secondAttribute="trailing" constant="24" id="KfY-rc-awg"/>
+                                            <constraint firstItem="YTw-4s-Y6l" firstAttribute="trailing" secondItem="hXc-S8-2l8" secondAttribute="trailing" id="Lw4-Ic-eog"/>
+                                            <constraint firstItem="YTw-4s-Y6l" firstAttribute="centerX" secondItem="Ta3-ah-qhK" secondAttribute="centerX" id="MTw-Xh-zXd"/>
+                                            <constraint firstItem="aGI-kY-ST1" firstAttribute="centerX" secondItem="iHZ-UO-tUY" secondAttribute="centerX" id="PsI-dD-YN3"/>
+                                            <constraint firstAttribute="trailing" secondItem="aXD-BR-eoL" secondAttribute="trailing" constant="56" id="QF4-Yc-B3A"/>
+                                            <constraint firstItem="aGI-kY-ST1" firstAttribute="top" secondItem="iHZ-UO-tUY" secondAttribute="top" id="QhV-wu-WPb"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ta3-ah-qhK" secondAttribute="bottom" constant="16" id="VFh-Av-miu"/>
+                                            <constraint firstItem="Ta3-ah-qhK" firstAttribute="centerX" secondItem="iHZ-UO-tUY" secondAttribute="centerX" id="Y2T-VW-21p"/>
+                                            <constraint firstItem="mnZ-mo-5vc" firstAttribute="centerX" secondItem="iHZ-UO-tUY" secondAttribute="centerX" id="YRO-Vw-2n8"/>
+                                            <constraint firstItem="Je1-Mj-RL5" firstAttribute="centerX" secondItem="hXc-S8-2l8" secondAttribute="centerX" id="a1M-wW-KSa"/>
+                                            <constraint firstItem="iCa-3x-Ekf" firstAttribute="top" secondItem="WVC-Vj-BAQ" secondAttribute="bottom" constant="44" id="aip-IH-wsk"/>
+                                            <constraint firstItem="aXD-BR-eoL" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="56" id="dWS-Lq-Uyg"/>
+                                            <constraint firstItem="aGI-kY-ST1" firstAttribute="centerX" secondItem="aXD-BR-eoL" secondAttribute="centerX" id="f8u-Kj-pfk"/>
+                                            <constraint firstItem="YTw-4s-Y6l" firstAttribute="leading" secondItem="hXc-S8-2l8" secondAttribute="leading" id="hVB-6F-chp"/>
+                                            <constraint firstItem="hXc-S8-2l8" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="32" id="hwB-bi-gSu"/>
+                                            <constraint firstAttribute="trailing" secondItem="hXc-S8-2l8" secondAttribute="trailing" constant="32" id="iNW-c1-gIB"/>
+                                            <constraint firstItem="70d-5Z-9qJ" firstAttribute="centerY" secondItem="aXD-BR-eoL" secondAttribute="centerY" constant="-10" id="kRF-0I-lT1"/>
+                                            <constraint firstAttribute="trailing" secondItem="G7y-uM-UeG" secondAttribute="trailing" constant="-84" id="l7Z-fC-mOY"/>
+                                            <constraint firstItem="mnZ-mo-5vc" firstAttribute="top" secondItem="hXc-S8-2l8" secondAttribute="bottom" constant="11.5" id="nBS-gj-m8u"/>
+                                            <constraint firstItem="iCa-3x-Ekf" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="24" id="nWs-HX-Zqk"/>
+                                            <constraint firstItem="70d-5Z-9qJ" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="20" id="sGe-iD-grX"/>
+                                            <constraint firstAttribute="trailing" secondItem="70d-5Z-9qJ" secondAttribute="trailing" constant="16" id="txC-dq-Kyv"/>
+                                            <constraint firstItem="G7y-uM-UeG" firstAttribute="leading" secondItem="iHZ-UO-tUY" secondAttribute="leading" constant="-84" id="vMy-13-AdA"/>
+                                            <constraint firstItem="hXc-S8-2l8" firstAttribute="top" secondItem="iCa-3x-Ekf" secondAttribute="bottom" constant="48" id="w3R-ZG-Q4a"/>
+                                            <constraint firstItem="Ta3-ah-qhK" firstAttribute="top" secondItem="YTw-4s-Y6l" secondAttribute="bottom" constant="8" id="yt9-OH-3GF"/>
+                                            <constraint firstItem="G7y-uM-UeG" firstAttribute="centerY" secondItem="aXD-BR-eoL" secondAttribute="centerY" id="yzg-2z-nOg"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="iHZ-UO-tUY" secondAttribute="trailing" id="Jlh-fy-kF7"/>
+                                    <constraint firstItem="iHZ-UO-tUY" firstAttribute="leading" secondItem="Q51-iZ-vXP" secondAttribute="leading" id="eQB-fG-Cd0"/>
+                                    <constraint firstItem="iHZ-UO-tUY" firstAttribute="top" secondItem="Q51-iZ-vXP" secondAttribute="top" id="ebL-OR-MUR"/>
+                                    <constraint firstAttribute="bottom" secondItem="iHZ-UO-tUY" secondAttribute="bottom" id="oER-vm-WBq"/>
+                                    <constraint firstItem="EcO-Rp-nmc" firstAttribute="trailing" secondItem="iHZ-UO-tUY" secondAttribute="trailing" id="wVf-VN-gaV"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="UNX-Zt-1Wp"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="EcO-Rp-nmc"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="AUO-ng-LXt"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Q51-iZ-vXP" firstAttribute="centerX" secondItem="FmC-Am-zHw" secondAttribute="centerX" id="0S7-Xt-t9D"/>
+                            <constraint firstItem="AUO-ng-LXt" firstAttribute="trailing" secondItem="cTn-gb-pz0" secondAttribute="trailing" id="0py-jp-21d"/>
+                            <constraint firstAttribute="bottom" secondItem="cTn-gb-pz0" secondAttribute="bottom" id="75D-Nm-KyQ"/>
+                            <constraint firstItem="cTn-gb-pz0" firstAttribute="top" secondItem="FmC-Am-zHw" secondAttribute="top" id="Cwa-OS-xyG"/>
+                            <constraint firstItem="Q51-iZ-vXP" firstAttribute="top" secondItem="r73-cD-vie" secondAttribute="bottom" constant="20" id="EmZ-Fo-fxF"/>
+                            <constraint firstItem="r73-cD-vie" firstAttribute="top" secondItem="AUO-ng-LXt" secondAttribute="top" constant="12" id="K7w-G3-fid"/>
+                            <constraint firstItem="cTn-gb-pz0" firstAttribute="leading" secondItem="AUO-ng-LXt" secondAttribute="leading" id="Tdn-bS-jMq"/>
+                            <constraint firstAttribute="bottom" secondItem="Q51-iZ-vXP" secondAttribute="bottom" id="aFn-YK-ygf"/>
+                            <constraint firstItem="AUO-ng-LXt" firstAttribute="trailing" secondItem="JE4-mP-19v" secondAttribute="trailing" constant="12" id="gBp-b8-YKb"/>
+                            <constraint firstItem="r73-cD-vie" firstAttribute="centerX" secondItem="FmC-Am-zHw" secondAttribute="centerX" id="kWf-eC-Y2z"/>
+                            <constraint firstItem="JE4-mP-19v" firstAttribute="centerY" secondItem="r73-cD-vie" secondAttribute="centerY" id="kay-XN-8Sa"/>
+                            <constraint firstItem="Q51-iZ-vXP" firstAttribute="leading" secondItem="AUO-ng-LXt" secondAttribute="leading" id="tpd-Cy-R8M"/>
+                            <constraint firstAttribute="trailing" secondItem="Q51-iZ-vXP" secondAttribute="trailing" id="zwZ-VH-kjd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="extraCover" destination="70d-5Z-9qJ" id="aaP-t6-5Gv"/>
+                        <outlet property="indicatorView" destination="Je1-Mj-RL5" id="Pdo-Bw-aox"/>
+                        <outlet property="infoLbl" destination="YTw-4s-Y6l" id="Sde-IB-nDo"/>
+                        <outlet property="orbitView" destination="G7y-uM-UeG" id="eVF-7V-UEU"/>
+                        <outlet property="productsView" destination="iCa-3x-Ekf" id="pbh-8n-3ZP"/>
+                        <outlet property="purchaseBtn" destination="hXc-S8-2l8" id="iEA-nh-h1P"/>
+                        <outlet property="restoreBtn" destination="mnZ-mo-5vc" id="j4t-DE-Kii"/>
+                        <outlet property="spacemanView" destination="aXD-BR-eoL" id="aaT-rS-TxV"/>
+                        <outlet property="titleLbl" destination="r73-cD-vie" id="4pc-7z-nz2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DSL-XN-0cA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="836" y="138"/>
+        </scene>
     </scenes>
-    <designables>
-        <designable name="9xI-Z2-PRI">
-            <size key="intrinsicContentSize" width="96" height="26"/>
-        </designable>
-    </designables>
     <resources>
         <image name="close_modal_white" width="34" height="34"/>
         <image name="purchases_circles" width="187.5" height="406"/>

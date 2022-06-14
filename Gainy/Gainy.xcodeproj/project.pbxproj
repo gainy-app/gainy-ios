@@ -29,7 +29,6 @@
 		3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */; };
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
-		330D8AAA27BFD72F009D9152 /* FetchStockMedian.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330D8AA927BFD72F009D9152 /* FetchStockMedian.graphql.swift */; };
 		330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */; };
 		331243D027BF6EA8008C2BCC /* HomeFetchCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 331243CF27BF6EA8008C2BCC /* HomeFetchCollections.graphql */; };
 		331243D227BF7241008C2BCC /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 331243D127BF7241008C2BCC /* Home.storyboard */; };
@@ -97,7 +96,6 @@
 		335D7D7B27061ED500337262 /* NoCollectionsSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */; };
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
-		3361D929283272E600AEEC3D /* FetchStockMedian.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361D928283272E600AEEC3D /* FetchStockMedian.graphql */; };
 		3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92F283287C400AEEC3D /* PurchaseViewController.swift */; };
 		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
@@ -144,6 +142,11 @@
 		339BDA7527C3716B00E3D9D2 /* HomeFetchGainers.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339BDA7327C3716A00E3D9D2 /* HomeFetchGainers.graphql.swift */; };
 		339BDA7627C3716B00E3D9D2 /* InsertFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339BDA7427C3716A00E3D9D2 /* InsertFavouriteCollection.graphql.swift */; };
 		339BDA7827C3745300E3D9D2 /* HomeFetchCollections.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */; };
+		339E2A8928588CC400555CD1 /* PromoPurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8828588CC400555CD1 /* PromoPurchaseViewController.swift */; };
+		339E2A8B28588DF100555CD1 /* PromoPurchasesProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */; };
+		339E2A8D28588EAB00555CD1 /* PromoPurchaseProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */; };
+		339E2A8F2858A97C00555CD1 /* ValidatePromoCode.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 339E2A8E2858A97C00555CD1 /* ValidatePromoCode.graphql */; };
+		339E2A912858AE1600555CD1 /* ValidatePromoCode.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339E2A902858AE1600555CD1 /* ValidatePromoCode.graphql.swift */; };
 		339FB3AE2747A46800C95748 /* PlainCircullarProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */; };
 		33A1F56F2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F56E2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift */; };
 		33A1F5712702F5EC000DAF33 /* CachedLivePrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */; };
@@ -628,7 +631,6 @@
 		3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityTableViewCell.swift; sourceTree = "<group>"; };
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
-		330D8AA927BFD72F009D9152 /* FetchStockMedian.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchStockMedian.graphql.swift; sourceTree = "<group>"; };
 		330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradient_Stars.mp4; sourceTree = "<group>"; };
 		331243CF27BF6EA8008C2BCC /* HomeFetchCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = HomeFetchCollections.graphql; sourceTree = "<group>"; };
 		331243D127BF7241008C2BCC /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -703,7 +705,6 @@
 		335D7D7A27061ED500337262 /* NoCollectionsSectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCollectionsSectionLayout.swift; sourceTree = "<group>"; };
 		335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTickerMatchData.graphql; sourceTree = "<group>"; };
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
-		3361D928283272E600AEEC3D /* FetchStockMedian.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchStockMedian.graphql; sourceTree = "<group>"; };
 		3361D92F283287C400AEEC3D /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
@@ -753,6 +754,11 @@
 		339BDA7327C3716A00E3D9D2 /* HomeFetchGainers.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFetchGainers.graphql.swift; sourceTree = "<group>"; };
 		339BDA7427C3716A00E3D9D2 /* InsertFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
 		339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeFetchCollections.graphql.swift; sourceTree = "<group>"; };
+		339E2A8828588CC400555CD1 /* PromoPurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchaseViewController.swift; sourceTree = "<group>"; };
+		339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchasesProductsView.swift; sourceTree = "<group>"; };
+		339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoPurchaseProductView.swift; sourceTree = "<group>"; };
+		339E2A8E2858A97C00555CD1 /* ValidatePromoCode.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = ValidatePromoCode.graphql; sourceTree = "<group>"; };
+		339E2A902858AE1600555CD1 /* ValidatePromoCode.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidatePromoCode.graphql.swift; sourceTree = "<group>"; };
 		339FB3AD2747A46800C95748 /* PlainCircullarProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainCircullarProgressBarView.swift; sourceTree = "<group>"; };
 		33A1F56E2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickersMatchData.graphql.swift; sourceTree = "<group>"; };
 		33A1F5702702F5EC000DAF33 /* CachedLivePrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedLivePrice.swift; sourceTree = "<group>"; };
@@ -1252,6 +1258,7 @@
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
 				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				339E2A902858AE1600555CD1 /* ValidatePromoCode.graphql.swift */,
 				33BD00F628476076009637FF /* PurchaseUpdate.graphql.swift */,
 				33BD00F228475A88009637FF /* RedeemInvitation.graphql.swift */,
 				33BD00F028475A7F009637FF /* DeleteProfile.graphql.swift */,
@@ -1278,7 +1285,6 @@
 				33A1F57827032721000DAF33 /* FetchRecommendedCollections.graphql.swift */,
 				33A1F57C27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift */,
 				85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */,
-				330D8AA927BFD72F009D9152 /* FetchStockMedian.graphql.swift */,
 				33019614273E836700BE4FDC /* CreatePlaidLink.graphql.swift */,
 				33019616273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift */,
 				338464F8274582DD000DE5BC /* GetPlaidHoldings.graphql.swift */,
@@ -1457,6 +1463,7 @@
 			isa = PBXGroup;
 			children = (
 				3361D92F283287C400AEEC3D /* PurchaseViewController.swift */,
+				339E2A852858872200555CD1 /* PromoPurchase */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -1494,6 +1501,8 @@
 				901F34AA284B803800E9E22B /* PurchaseProductView.swift */,
 				901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */,
 				901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */,
+				339E2A8A28588DF100555CD1 /* PromoPurchasesProductsView.swift */,
+				339E2A8C28588EAB00555CD1 /* PromoPurchaseProductView.swift */,
 				901F34A9284B801300E9E22B /* BlockedTTFs */,
 			);
 			path = CustomViews;
@@ -1549,6 +1558,14 @@
 				9075CD10281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib */,
 			);
 			path = Gainers;
+			sourceTree = "<group>";
+		};
+		339E2A852858872200555CD1 /* PromoPurchase */ = {
+			isa = PBXGroup;
+			children = (
+				339E2A8828588CC400555CD1 /* PromoPurchaseViewController.swift */,
+			);
+			path = PromoPurchase;
 			sourceTree = "<group>";
 		};
 		33AA5EB7281AAE960026EA82 /* OneSignalNotificationServiceExtension */ = {
@@ -2171,7 +2188,7 @@
 				3394BA1F2750F3A000AAE7B8 /* GetMatchScoreForTickers.graphql */,
 				85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */,
 				3381D3B42798423800BE7567 /* GetTickersByMSForCollection.graphql */,
-				3361D928283272E600AEEC3D /* FetchStockMedian.graphql */,
+				339E2A8E2858A97C00555CD1 /* ValidatePromoCode.graphql */,
 				33264966280E90A300CE0D0F /* TTF */,
 				331243CE27BF6E85008C2BCC /* Home */,
 				85695AF42746BAD400759569 /* Metrics */,
@@ -2954,6 +2971,7 @@
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
+				339E2A8F2858A97C00555CD1 /* ValidatePromoCode.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
 				85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */,
@@ -3000,7 +3018,6 @@
 				85E4A2992756C80000C0E5C5 /* UnlinkPlaidAccount.graphql in Resources */,
 				3396C8F627CD13A200D85BF0 /* FetchRealtimeMetrics.graphql in Resources */,
 				9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */,
-				3361D929283272E600AEEC3D /* FetchStockMedian.graphql in Resources */,
 				3302E0B126DCBE90008DBC76 /* SearchCollectionDetails.graphql in Resources */,
 				85DF212C278CA25000F2899B /* investment_failure.mp4 in Resources */,
 				331243D227BF7241008C2BCC /* Home.storyboard in Resources */,
@@ -3229,6 +3246,7 @@
 				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
 				3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */,
 				9006308728285CBF009EEB65 /* SubscriptionManager.swift in Sources */,
+				339E2A912858AE1600555CD1 /* ValidatePromoCode.graphql.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
 				901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */,
@@ -3273,6 +3291,7 @@
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
 				335D7D77270617CF00337262 /* YourCollectionTipCell.swift in Sources */,
+				339E2A8928588CC400555CD1 /* PromoPurchaseViewController.swift in Sources */,
 				33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */,
 				3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */,
 				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
@@ -3296,6 +3315,7 @@
 				85E4A2CE2762115400C0E5C5 /* SearchCollectionDetailsAlgolia.graphql.swift in Sources */,
 				3A859406268A28DB00CB8DD6 /* CollectionDetailViewCellModel.swift in Sources */,
 				3AFE1A6D266E4A600091E799 /* UINavigationController+SetStatusBar.swift in Sources */,
+				339E2A8D28588EAB00555CD1 /* PromoPurchaseProductView.swift in Sources */,
 				8509209E284ED274002CF286 /* ProfileSubscriptionViewController.swift in Sources */,
 				33E1827A26D3804600A1D2AC /* WSRView.swift in Sources */,
 				3ABECD3D26810052003D27D9 /* CollectionDetailsViewCell.swift in Sources */,
@@ -3425,7 +3445,6 @@
 				900CEAF02749752E00CF1597 /* HoldingChartViewModel.swift in Sources */,
 				331243D527BF7276008C2BCC /* HomeViewController.swift in Sources */,
 				3A5ADA6C268DA179008659E8 /* SwipeAction.swift in Sources */,
-				330D8AAA27BFD72F009D9152 /* FetchStockMedian.graphql.swift in Sources */,
 				33BD00F128475A7F009637FF /* DeleteProfile.graphql.swift in Sources */,
 				33D3D50026CBB8D0005A859B /* PortfolioViewController.swift in Sources */,
 				85D4F81026E697DC004EC21D /* PersonalizationMoneySourceSectionView.swift in Sources */,
@@ -3464,6 +3483,7 @@
 				333DAFC627C504BD009C19BE /* HomeSkeletonTableViewCell.swift in Sources */,
 				339A2EB526FE08390076BF52 /* SearchTickersWithSpace.graphql.swift in Sources */,
 				854F1AC2274F8700001900C7 /* SortPortfolioDetailsViewController.swift in Sources */,
+				339E2A8B28588DF100555CD1 /* PromoPurchasesProductsView.swift in Sources */,
 				3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */,
 				9068DDEB274B7350007C588A /* GetPortfolioCharts.graphql.swift in Sources */,
 				33787FD326CD3BDE00B11E58 /* CollectionsBottomView.swift in Sources */,

@@ -168,6 +168,11 @@ final class ViewControllerFactory {
         return vc
     }
     
+    func instantiatePromoPurchases() -> PromoPurchaseViewController {
+        let vc = PromoPurchaseViewController.instantiate(.purchases)
+        return vc
+    }
+    
     /// Populating TabBarItem for specific tab
     /// - Parameters:
     ///   - vc: BaseViewController to update
