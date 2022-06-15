@@ -29,6 +29,11 @@ final class PurchaseViewController: BaseViewController {
             purchasesView.delegate = self
         }
     }
+    @IBOutlet weak var promoProductView: PromoPurchasesProductsView! {
+        didSet {
+            promoProductView.delegate = self
+        }
+    }
     @IBOutlet private weak var purchasesScroll: UIScrollView! {
         didSet {
             purchasesScroll.delegate = self
@@ -39,6 +44,8 @@ final class PurchaseViewController: BaseViewController {
     @IBOutlet private weak var restoreBtn: BorderButton!
     @IBOutlet private weak var inviteView: PurchaseInviteView!
     @IBOutlet private weak var infoLbl: UILabel!
+    @IBOutlet private weak var bottomMargin: NSLayoutConstraint!
+    @IBOutlet private weak var mainScroll: UIScrollView!
     
     private var isPurchasing: Bool = false {
         didSet {
@@ -177,6 +184,29 @@ final class PurchaseViewController: BaseViewController {
                                                object: avPlayer.currentItem)
     }
     
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        
+        bottomMargin.constant = 16.0 + (keyboardSize?.height ?? 0.0)
+        
+        mainScroll.setContentOffset(.init(x: 0, y: 350), animated: true)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        
+        bottomMargin.constant = 16.0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+
+    }
     
     //MARK: - Actions
     
@@ -240,6 +270,10 @@ final class PurchaseViewController: BaseViewController {
         }
     }
     
+    @IBAction func applyCodeAction(_ sender: Any) {
+        
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -263,5 +297,51 @@ extension PurchaseViewController: PurchasesProductsViewDelegate {
         guard !isInvite else {return}
         GainyAnalytics.logEvent("purchase_product_selected", params: ["productID" : purchasesView.selectedProduct?.identifier ?? ""])
         infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
+    }
+}
+
+
+extension PurchaseViewController: PromoPurchasesProductsViewDelegate {
+    func applyPromo(view: PromoPurchasesProductsView) {
+        self.isPurchasing = true
+        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: promoProductView.promoCode)) {[weak self] result in
+            switch result {
+            case .success(let data):
+                if let config = data.data?.getPromocode?.config {
+                    if let productsMap = self?.getDictionary(config)?["tariff_mapping"] as? [String : String] {
+                        let productId = productsMap[self?.promoProductView.selectedProduct?.identifier ?? ""]
+                        let product = Product.getProductByID(productId ?? "")
+                    DispatchQueue.main.async {
+                        self?.isPurchasing = false
+                        self?.promoProductView.selectedProduct = product
+                        self?.infoLbl.text = self?.promoProductView.selectedProduct?.terms ?? ""
+                    }
+                }
+                }
+                break
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self?.isPurchasing = false
+                }
+                break
+            }
+        }
+        
+        
+    }
+    
+    private func getDictionary(_ str: String) -> [String: Any]? {
+        let data = Data(str.utf8)
+
+        do {
+            // make sure this JSON is in the format we expect
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                // try to read out a string array
+                return json
+            }
+        } catch let error as NSError {
+            print("Failed to load: \(error.localizedDescription)")
+        }
+        return nil
     }
 }

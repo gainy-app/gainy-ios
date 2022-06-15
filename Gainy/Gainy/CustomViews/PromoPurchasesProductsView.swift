@@ -70,8 +70,23 @@ final class PromoPurchasesProductsView: UIView {
         promoField.font = .compactRoundedMedium(12.0)
         promoField.textColor = .white
         promoField.attributedPlaceholder = NSAttributedString(string: "Enter promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)])
+        promoField.addTarget(self, action: #selector(textChanged), for: .editingChanged)
+        promoField.delegate = self
         return promoField
     }()
+    
+    var isCodeValid: Bool = true {
+        didSet {
+            if isCodeValid {
+                promoField.attributedPlaceholder = NSAttributedString(string: "Enter promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)])
+                promoContainer.layer.borderColor = UIColor(hexString: "3BF06E")!.cgColor
+            } else {
+                promoField.text = ""
+                promoField.attributedPlaceholder = NSAttributedString(string: "Invalid promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexString: "FC506F")!.withAlphaComponent(0.7)])
+                promoContainer.layer.borderColor = UIColor(hexString: "FC506F")!.cgColor
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -118,9 +133,25 @@ final class PromoPurchasesProductsView: UIView {
         }
     }
     
-    //MARK:- Actions
+    //MARK: - Actions
     
     @objc private func applyAction() {
         delegate?.applyPromo(view: self)
+    }
+    
+    @objc private func textChanged() {
+        isCodeValid = true
+    }
+}
+
+extension PromoPurchasesProductsView : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        isCodeValid = true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

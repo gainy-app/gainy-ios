@@ -32,6 +32,8 @@ final class PromoPurchaseViewController: BaseViewController {
             productsView.delegate = self
         }
     }
+    @IBOutlet private weak var mainScroll: UIScrollView!
+    @IBOutlet private weak var bottomMargin: NSLayoutConstraint!
     
     private var isPurchasing: Bool = false {
         didSet {
@@ -195,6 +197,30 @@ final class PromoPurchaseViewController: BaseViewController {
         }
     }
     
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        
+        bottomMargin.constant = 16.0 + (keyboardSize?.height ?? 0.0)
+        
+        mainScroll.setContentOffset(.init(x: 0, y: 350), animated: true)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        
+        bottomMargin.constant = 16.0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -212,15 +238,28 @@ extension PromoPurchaseViewController: PromoPurchasesProductsViewDelegate {
                         let product = Product.getProductByID(productId ?? "")
                     DispatchQueue.main.async {
                         self?.isPurchasing = false
+                        self?.productsView.isCodeValid = true
                         self?.productsView.selectedProduct = product
                         self?.infoLbl.text = self?.productsView.selectedProduct?.terms ?? ""
                     }
+                    } else {
+                        DispatchQueue.main.async {
+                            self?.productsView.isCodeValid = false
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self?.productsView.isCodeValid = false
+                    }
                 }
+                DispatchQueue.main.async {
+                    self?.isPurchasing = false
                 }
                 break
             case .failure(_):
                 DispatchQueue.main.async {
                     self?.isPurchasing = false
+                    self?.productsView.isCodeValid = false
                 }
                 break
             }
