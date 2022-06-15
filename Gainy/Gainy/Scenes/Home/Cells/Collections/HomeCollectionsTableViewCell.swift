@@ -115,6 +115,12 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.cleanupImage()
+    }
+    
     //MARK: - Properties
     private var imageUrl: String = ""
     private var imageLoaded: Bool = false
@@ -158,6 +164,7 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             return
         }
         
+        let lastCollectionID = self.collection?.id
         let processor = DownsamplingImageProcessor(size: backImgView.bounds.size)
         backImgView.kf.setImage(with: URL(string: imageUrl), placeholder: UIImage(), options: [
             .processor(processor),
@@ -168,13 +175,24 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
             //            print("-----\(receivedSize), \(totalSize)")
         } completionHandler: { result in
             //            print("-----\(result)")
+            let currentCollectionID = self.collection?.id
+            if let last = lastCollectionID, let current = currentCollectionID, last == current {
+                self.imageLoaded = true
+            } else {
+                self.cleanupImage()
+            }
         }
-        self.imageLoaded = true
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         self.loadImage()
+    }
+    
+    private func cleanupImage() {
+        self.imageUrl = ""
+        self.imageLoaded = false
+        self.backImgView.image = nil
     }
 }
