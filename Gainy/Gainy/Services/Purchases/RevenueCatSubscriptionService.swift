@@ -81,7 +81,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
             Network.shared.apollo.perform(mutation: query) {[weak self] response in
                 switch response {
                 case .success(let data):
-                    if let subExpDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date {
+                    if let subExpDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                         UserProfileManager.shared.subscriptionExpiryDate = subExpDate
                     } else {
                         UserProfileManager.shared.subscriptionExpiryDate = Date() - 1.weeks
