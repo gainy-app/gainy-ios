@@ -84,7 +84,11 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
                     if let subExpDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
                         UserProfileManager.shared.subscriptionExpiryDate = subExpDate
                     } else {
-                        UserProfileManager.shared.subscriptionExpiryDate = Date() - 1.weeks
+                        if let subExpDate = (data.data?.updatePurchases?.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ss.SSSZ")?.date {
+                            UserProfileManager.shared.subscriptionExpiryDate = subExpDate
+                        } else {
+                            UserProfileManager.shared.subscriptionExpiryDate = Date() - 1.weeks
+                        }
                     }
                     self?.checkDBForSub()
                     break

@@ -180,7 +180,15 @@ final class UserProfileManager {
                 self.avatarUrl = appProfile.avatarUrl
                 self.profileLoaded = true
                 self.isPlaidLinked = appProfile.profilePlaidAccessTokens.count > 0
-                self.subscriptionExpiryDate = (appProfile.subscriptionEndDate ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date
+                if let date = (appProfile.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
+                    self.subscriptionExpiryDate = date
+                } else {
+                    if let date = (appProfile.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ss.SSSZ")?.date {
+                        self.subscriptionExpiryDate = date
+                    } else {
+                        self.subscriptionExpiryDate = nil
+                    }
+                }
                 self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
                     let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker")
                     return result

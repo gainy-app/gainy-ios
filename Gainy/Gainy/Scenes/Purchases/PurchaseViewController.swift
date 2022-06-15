@@ -223,6 +223,9 @@ final class PurchaseViewController: BaseViewController {
             if let product = purchasesView.selectedProduct {
                 isPurchasing = true
                 SubscriptionManager.shared.purchaseProduct(product: product)
+                //Split to ranges - add product_id
+                //Success event to track for ranges
+                //
                 GainyAnalytics.logEvent("purchase_subscribe_tap")
             }
         }
