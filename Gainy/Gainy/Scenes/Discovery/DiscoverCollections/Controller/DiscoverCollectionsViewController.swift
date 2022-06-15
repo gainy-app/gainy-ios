@@ -259,7 +259,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
                 )
                 : CollectionHeaderViewModel(
-                    title: "Recommended TTFs",
+                    title: "TTFs you might like",
                     description: "All collections are sorted by relevancy based on your profile and goals "
                 )
                 
