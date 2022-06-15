@@ -74,7 +74,7 @@ final class PurchaseViewController: BaseViewController {
             if isInvite {
                 inviteView.isSelected = true
                 purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
-                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profiel in gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."                
+                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profile in Gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."
             } else {
                 inviteView.isSelected = false
                 purchaseBtn.setTitle("Continue".uppercased(), for: .normal)

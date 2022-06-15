@@ -32,7 +32,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     }
     
     private let ettl = "pro"
-    func handleInfo(_ customerInfo:CustomerInfo?, error: Error?, informFirebase: Bool = false) {
+    func handleInfo(_ customerInfo:CustomerInfo?, error: Error?, informFirebase: Bool = false, fromPurchase: Bool = false) {
         //Checking RC
         if let error = error {
             dprint("RevenueCat error: \(error)")
@@ -43,6 +43,9 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
                 innerType = .pro
                 innerDate = customerInfo?.entitlements[ettl]?.expirationDate
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
+                if fromPurchase {
+                    GainyAnalytics.logEvent("purchase_completed", params: ["productId" : customerInfo?.entitlements[ettl]?.productIdentifier ?? ""])
+                }
             } else {
                 checkDBForSub()
             }
@@ -142,9 +145,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     private var products: [StoreProduct] = []
     func getProducts() {
         let allProducts = Product.allCases.compactMap({$0.identifier})
-        dprint("getProducts \(allProducts)")
         Purchases.shared.getProducts(allProducts) {[weak self] remoteProducts in
-            dprint("getProducts res \(remoteProducts)")
             self?.products = remoteProducts
         }
     }
@@ -152,7 +153,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     func purchaseProduct(product: Product) {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
-                self?.handleInfo(customerInfo, error: error, informFirebase: true)                
+                self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
             }
         }
     }

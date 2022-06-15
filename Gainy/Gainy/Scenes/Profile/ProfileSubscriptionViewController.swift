@@ -84,11 +84,11 @@ final class ProfileSubscriptionViewController: BaseViewController {
                     label.setLineHeight(lineHeight: 24.0, textAlignment: .left)
                     label.sizeToFit()
                 }
-                if #available(iOS 15.0, *) {
-                    if let button = self?.refundBtn {
-                        button.isHidden = false
-                    }
-                }
+//                if #available(iOS 15.0, *) {
+//                    if let button = self?.refundBtn {
+//                        button.isHidden = false
+//                    }
+//                }
             }
         })
     }
@@ -123,7 +123,7 @@ final class ProfileSubscriptionViewController: BaseViewController {
         
         GainyAnalytics.logEvent("try_premium_tapped", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileSubscriptionViewController"])
         self.dismiss(animated: true) {
-            self.mainCoordinator?.showPromoPurchaseView()
+            self.mainCoordinator?.showPurchaseView()
         }
     }
     
