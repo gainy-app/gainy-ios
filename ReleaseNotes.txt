@@ -1,4 +1,4 @@
-iOS v1.4.1 #233 available
+iOS v1.4.2 #234 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
@@ -6,7 +6,7 @@ Subscriptions
 -
 
 :hammer_and_wrench: Improvements
-• Heading updates
+• Promo codes added to Purchase
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

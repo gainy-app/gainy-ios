@@ -80,10 +80,12 @@ final class PromoPurchasesProductsView: UIView {
             if isCodeValid {
                 promoField.attributedPlaceholder = NSAttributedString(string: "Enter promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)])
                 promoContainer.layer.borderColor = UIColor(hexString: "3BF06E")!.cgColor
+                promoContainer.backgroundColor = UIColor(hexString: "0062FF")!.withAlphaComponent(0.56)
             } else {
                 promoField.text = ""
                 promoField.attributedPlaceholder = NSAttributedString(string: "Invalid promocode", attributes: [NSAttributedString.Key.foregroundColor: UIColor(hexString: "FC506F")!.withAlphaComponent(0.7)])
                 promoContainer.layer.borderColor = UIColor(hexString: "FC506F")!.cgColor
+                promoContainer.backgroundColor = UIColor.white.withAlphaComponent(0.56)
             }
         }
     }

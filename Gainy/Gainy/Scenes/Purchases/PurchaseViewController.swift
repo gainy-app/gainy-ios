@@ -42,6 +42,7 @@ final class PurchaseViewController: BaseViewController {
     @IBOutlet private weak var pageControl: UIPageControl!
     @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var restoreBtn: BorderButton!
+    @IBOutlet private weak var applyCodeButton: UIButton!
     @IBOutlet private weak var inviteView: PurchaseInviteView!
     @IBOutlet private weak var infoLbl: UILabel!
     @IBOutlet private weak var bottomMargin: NSLayoutConstraint!
@@ -59,27 +60,49 @@ final class PurchaseViewController: BaseViewController {
         }
     }
     
+    private var isPromoMode: Bool = false {
+        didSet {
+            if isPromoMode {
+                pageControl.isHidden = true
+                purchasesScroll.isHidden = true
+                promoProductView.isHidden = false
+                applyCodeButton.setTitle("Cancel code", for: .normal)
+                infoLbl.text = promoProductView.selectedProduct?.terms ?? ""
+            } else {
+                pageControl.isHidden = false
+                purchasesScroll.isHidden = false
+                promoProductView.isHidden = true
+                applyCodeButton.setTitle("Apply code", for: .normal)
+                updateWithInvite(isInvite)
+            }
+        }
+    }
+    
     private var isInvite: Bool = false {
         didSet {
-            UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
-                self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
-                self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
-                self.orbitView.transform = .init(scaleX: self.isInvite ? 0.9 : 0.7, y: self.isInvite ? 0.9 : 0.7)
-            } completion: { done in
-                if done {
-                    
-                }
+            updateWithInvite(isInvite)
+        }
+    }
+    
+    private func updateWithInvite(_ isInvite: Bool) {
+        UIView.animate(withDuration: 1.0, delay: 0.0, options: [.curveLinear, .beginFromCurrentState]) {
+            self.spacemanView.transform = .init(scaleX: self.isInvite ? 0.83 : 1.0, y: self.isInvite ? 0.83 : 1.0)
+            self.extraCover.alpha = self.isInvite ? 1.0 : 0.0
+            self.orbitView.transform = .init(scaleX: self.isInvite ? 0.9 : 0.7, y: self.isInvite ? 0.9 : 0.7)
+        } completion: { done in
+            if done {
+                
             }
-            
-            if isInvite {
-                inviteView.isSelected = true
-                purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
-                infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profile in Gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."
-            } else {
-                inviteView.isSelected = false
-                purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
-                infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
-            }
+        }
+        
+        if isInvite {
+            inviteView.isSelected = true
+            purchaseBtn.setTitle("Share link".uppercased(), for: .normal)
+            infoLbl.text = "Free month will be granted after other user will signup using the provided link. You need to check the Profile regarding your subscription status.\nIf user already created a profile in Gainy - no promotion will be granted.\nInvite can be used only once by other user. Amount of invites are unlimited."
+        } else {
+            inviteView.isSelected = false
+            purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
+            infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
         }
     }
     
@@ -274,7 +297,7 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction func applyCodeAction(_ sender: Any) {
-        
+        isPromoMode.toggle()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -303,34 +326,50 @@ extension PurchaseViewController: PurchasesProductsViewDelegate {
     }
 }
 
-
 extension PurchaseViewController: PromoPurchasesProductsViewDelegate {
     func applyPromo(view: PromoPurchasesProductsView) {
+        GainyAnalytics.logEvent("purchase_promo_apply_tap", params: ["code" : promoProductView.promoCode])
         self.isPurchasing = true
-        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: promoProductView.promoCode)) {[weak self] result in
+        let promoCode = promoProductView.promoCode
+        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: promoCode)) {[weak self] result in
             switch result {
             case .success(let data):
                 if let config = data.data?.getPromocode?.config {
                     if let productsMap = self?.getDictionary(config)?["tariff_mapping"] as? [String : String] {
                         let productId = productsMap[self?.promoProductView.selectedProduct?.identifier ?? ""]
+                        GainyAnalytics.logEvent("purchase_promo_apply_done", params: ["code" : promoCode, "productId" : productId])
                         let product = Product.getProductByID(productId ?? "")
                     DispatchQueue.main.async {
                         self?.isPurchasing = false
+                        self?.promoProductView.isCodeValid = true
                         self?.promoProductView.selectedProduct = product
                         self?.infoLbl.text = self?.promoProductView.selectedProduct?.terms ?? ""
                     }
+                    } else {
+                        DispatchQueue.main.async {
+                            GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
+                            self?.promoProductView.isCodeValid = false
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
+                        self?.promoProductView.isCodeValid = false
+                    }
                 }
-                }
-                break
-            case .failure(_):
                 DispatchQueue.main.async {
                     self?.isPurchasing = false
                 }
                 break
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
+                    self?.isPurchasing = false
+                    self?.promoProductView.isCodeValid = false
+                }
+                break
             }
         }
-        
-        
     }
     
     private func getDictionary(_ str: String) -> [String: Any]? {

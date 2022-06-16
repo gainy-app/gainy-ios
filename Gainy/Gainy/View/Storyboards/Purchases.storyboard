@@ -87,7 +87,7 @@ Try Gainy Premium!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wn7-AI-bCy" customClass="PromoPurchasesProductsView" customModule="Gainy" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="357.5" width="414" height="128"/>
+                                                <rect key="frame" x="24" y="381.5" width="366" height="128"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="128" id="BcA-iG-8Sg"/>
@@ -295,14 +295,14 @@ Try Gainy Premium!</string>
                                             <constraint firstItem="5e5-Tp-ysE" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="32" id="MSx-Vd-Bc7"/>
                                             <constraint firstItem="eW8-b9-M4D" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="56" id="NOk-5d-xoa"/>
                                             <constraint firstAttribute="trailing" secondItem="xUY-eU-3V2" secondAttribute="trailing" constant="16" id="Nyf-FD-j09"/>
-                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="top" secondItem="JWw-2e-m5b" secondAttribute="top" id="QSv-fn-isL"/>
+                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="top" secondItem="JWw-2e-m5b" secondAttribute="top" constant="24" id="QSv-fn-isL"/>
                                             <constraint firstItem="Fod-xs-cn9" firstAttribute="top" secondItem="5e5-Tp-ysE" secondAttribute="bottom" constant="56" id="R1R-I1-1bq"/>
                                             <constraint firstItem="WKv-ed-TTt" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="TsV-Si-dme"/>
                                             <constraint firstItem="pBY-8q-w9d" firstAttribute="top" secondItem="n3s-ys-sxV" secondAttribute="bottom" constant="248.5" id="Wff-R8-j2r"/>
                                             <constraint firstItem="8Li-Ao-HfO" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" id="Wnn-HY-FEa"/>
                                             <constraint firstItem="Ord-i7-uGz" firstAttribute="centerX" secondItem="5e5-Tp-ysE" secondAttribute="centerX" id="YM0-aj-wVV"/>
                                             <constraint firstItem="jtg-iw-NC1" firstAttribute="top" secondItem="JWw-2e-m5b" secondAttribute="bottom" constant="16" id="ZB2-Db-o2c"/>
-                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="trailing" secondItem="JWw-2e-m5b" secondAttribute="trailing" id="dkS-N4-4wY"/>
+                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="trailing" secondItem="JWw-2e-m5b" secondAttribute="trailing" constant="-24" id="dkS-N4-4wY"/>
                                             <constraint firstItem="8Li-Ao-HfO" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" constant="-84" id="dmm-ww-XSl"/>
                                             <constraint firstAttribute="bottom" secondItem="WKv-ed-TTt" secondAttribute="bottom" constant="16" id="gXJ-uq-dNU"/>
                                             <constraint firstItem="9xI-Z2-PRI" firstAttribute="centerX" secondItem="CIU-cm-Dn5" secondAttribute="centerX" id="h9R-Qf-Df0"/>
@@ -311,7 +311,7 @@ Try Gainy Premium!</string>
                                             <constraint firstAttribute="trailing" secondItem="pBY-8q-w9d" secondAttribute="trailing" constant="48" id="lNp-tC-m9Y"/>
                                             <constraint firstItem="Ord-i7-uGz" firstAttribute="centerY" secondItem="5e5-Tp-ysE" secondAttribute="centerY" id="n0F-x9-wGp"/>
                                             <constraint firstItem="JWw-2e-m5b" firstAttribute="leading" secondItem="CIU-cm-Dn5" secondAttribute="leading" id="pBX-8i-RAc"/>
-                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="leading" secondItem="JWw-2e-m5b" secondAttribute="leading" id="qQE-mU-CeJ"/>
+                                            <constraint firstItem="Wn7-AI-bCy" firstAttribute="leading" secondItem="JWw-2e-m5b" secondAttribute="leading" constant="24" id="qQE-mU-CeJ"/>
                                             <constraint firstItem="xUY-eU-3V2" firstAttribute="centerY" secondItem="eW8-b9-M4D" secondAttribute="centerY" constant="-10" id="tDo-46-5xi"/>
                                             <constraint firstItem="5e5-Tp-ysE" firstAttribute="top" secondItem="jtg-iw-NC1" secondAttribute="bottom" constant="16" id="u0N-pw-NWI"/>
                                             <constraint firstAttribute="trailing" secondItem="8Li-Ao-HfO" secondAttribute="trailing" constant="-84" id="vMR-x6-BdC"/>
@@ -331,7 +331,7 @@ Try Gainy Premium!</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Sgo-nW-Rvs"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="zkp-vB-tss"/>
                             </scrollView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBH-0Y-dum">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBH-0Y-dum">
                                 <rect key="frame" x="16" y="60" width="64" height="16"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.19" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <constraints>
@@ -372,6 +372,7 @@ Try Gainy Premium!</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="applyCodeButton" destination="hBH-0Y-dum" id="nnh-6L-eIx"/>
                         <outlet property="bottomMargin" destination="gXJ-uq-dNU" id="1Nj-nc-evL"/>
                         <outlet property="extraCover" destination="xUY-eU-3V2" id="Q32-kS-eWV"/>
                         <outlet property="indicatorView" destination="Ord-i7-uGz" id="GkD-7O-DGX"/>

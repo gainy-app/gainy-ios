@@ -228,13 +228,16 @@ final class PromoPurchaseViewController: BaseViewController {
 
 extension PromoPurchaseViewController: PromoPurchasesProductsViewDelegate {
     func applyPromo(view: PromoPurchasesProductsView) {
+        GainyAnalytics.logEvent("purchase_promo_apply_tap", params: ["code" : productsView.promoCode])
         self.isPurchasing = true
-        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: productsView.promoCode)) {[weak self] result in
+        let promoCode = productsView.promoCode
+        Network.shared.apollo.fetch(query: ValidatePromoCodeQuery.init(code: promoCode)) {[weak self] result in
             switch result {
             case .success(let data):
                 if let config = data.data?.getPromocode?.config {
                     if let productsMap = self?.getDictionary(config)?["tariff_mapping"] as? [String : String] {
                         let productId = productsMap[self?.productsView.selectedProduct?.identifier ?? ""]
+                        GainyAnalytics.logEvent("purchase_promo_apply_done", params: ["code" : promoCode, "productId" : productId])
                         let product = Product.getProductByID(productId ?? "")
                     DispatchQueue.main.async {
                         self?.isPurchasing = false
@@ -244,11 +247,13 @@ extension PromoPurchaseViewController: PromoPurchasesProductsViewDelegate {
                     }
                     } else {
                         DispatchQueue.main.async {
+                            GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
                             self?.productsView.isCodeValid = false
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
+                        GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
                         self?.productsView.isCodeValid = false
                     }
                 }
@@ -258,14 +263,13 @@ extension PromoPurchaseViewController: PromoPurchasesProductsViewDelegate {
                 break
             case .failure(_):
                 DispatchQueue.main.async {
+                    GainyAnalytics.logEvent("purchase_promo_apply_failed", params: ["code" : promoCode])
                     self?.isPurchasing = false
                     self?.productsView.isCodeValid = false
                 }
                 break
             }
         }
-        
-        
     }
     
     private func getDictionary(_ str: String) -> [String: Any]? {
