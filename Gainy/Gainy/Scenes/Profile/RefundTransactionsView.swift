@@ -12,7 +12,9 @@ import SwiftDate
 @available(iOS 15.0, *)
 struct RefundTransactionsView: View {
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var transactions = [StoreKit.Transaction]()
+    @State var selectedTransactionID: UInt64?
     
     var body: some View {
         VStack {
@@ -41,11 +43,15 @@ struct RefundTransactionsView: View {
                         .foregroundColor(UIColor.Gainy.mainText?.uiColor)
                 } else {
                     List(transactions) { tr in
-                        VStack {
-                            Text(tr.productID)
-                                .foregroundColor(UIColor.Gainy.mainText?.uiColor)
-                            Text("\(tr.purchaseDate)")
-                                .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                        Button {
+                            selectedTransactionID = tr.id
+                        } label: {
+                            VStack {
+                                Text(tr.productID)
+                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                                Text("\(tr.purchaseDate)")
+                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                            }
                         }
                     }
                     .background(Color.clear)
@@ -55,7 +61,7 @@ struct RefundTransactionsView: View {
                 await fetchTransactions()
             }
             Spacer()
-            RefundView()
+            RefundView(selectedTransactionID: $selectedTransactionID)
                 .padding(.top, 24)
                 .frame(height: 40)
         }
@@ -69,7 +75,7 @@ struct RefundTransactionsView: View {
     }
     
     struct RefundView: View {
-        @State private var selectedTransactionID: UInt64?
+        @Binding var selectedTransactionID: UInt64?
         @State private var refundSheetIsPresented = false
         @Environment(\.dismiss) private var dismiss
         var body: some View {

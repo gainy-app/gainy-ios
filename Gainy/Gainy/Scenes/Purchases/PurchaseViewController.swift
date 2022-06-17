@@ -50,6 +50,7 @@ final class PurchaseViewController: BaseViewController {
     
     private var isPurchasing: Bool = false {
         didSet {
+            promoProductView.blockUI = isPurchasing
             purchaseBtn.isEnabled = !isPurchasing
             restoreBtn.isEnabled = !isPurchasing
             if isPurchasing {

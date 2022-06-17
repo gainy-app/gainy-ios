@@ -84,11 +84,14 @@ final class ProfileSubscriptionViewController: BaseViewController {
                     label.setLineHeight(lineHeight: 24.0, textAlignment: .left)
                     label.sizeToFit()
                 }
-//                if #available(iOS 15.0, *) {
-//                    if let button = self?.refundBtn {
-//                        button.isHidden = false
-//                    }
-//                }
+                #if DEBUG
+                if #available(iOS 15.0, *) {
+                    if let button = self?.refundBtn {
+                        button.isHidden = false
+                    }
+                }
+                #endif
+                
             }
         })
     }
