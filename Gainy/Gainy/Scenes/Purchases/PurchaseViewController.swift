@@ -68,6 +68,7 @@ final class PurchaseViewController: BaseViewController {
                 promoProductView.isHidden = false
                 applyCodeButton.setTitle("Cancel code", for: .normal)
                 infoLbl.text = promoProductView.selectedProduct?.terms ?? ""
+                purchaseBtn.setTitle("Continue".uppercased(), for: .normal)
             } else {
                 pageControl.isHidden = false
                 purchasesScroll.isHidden = false
@@ -239,25 +240,24 @@ final class PurchaseViewController: BaseViewController {
     }
     
     @IBAction @objc func purchaseAction() {
-        if isInvite {
-            generateInvite()
-            GainyAnalytics.logEvent("purchase_invite_tap")
-        } else {
-            if isPromoMode {
-                if let product = promoProductView.selectedProduct {
-                    isPurchasing = true
-                    SubscriptionManager.shared.purchaseProduct(product: product)
-                    GainyAnalytics.logEvent("purchase_subscribe_tap")
-                }
-            } else {
-                if let product = purchasesView.selectedProduct {
-                    isPurchasing = true
-                    SubscriptionManager.shared.purchaseProduct(product: product)
-                    GainyAnalytics.logEvent("purchase_subscribe_tap")
-                }
+        if isPromoMode {
+            if let product = promoProductView.selectedProduct {
+                isPurchasing = true
+                SubscriptionManager.shared.purchaseProduct(product: product)
+                GainyAnalytics.logEvent("purchase_subscribe_tap")
             }
-            
-        }
+        } else {
+            if isInvite {
+                generateInvite()
+                GainyAnalytics.logEvent("purchase_invite_tap")
+            } else {
+                    if let product = purchasesView.selectedProduct {
+                        isPurchasing = true
+                        SubscriptionManager.shared.purchaseProduct(product: product)
+                        GainyAnalytics.logEvent("purchase_subscribe_tap")
+                    }
+            }
+        }      
     }
     
     private func generateInvite() {
