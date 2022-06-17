@@ -50,7 +50,7 @@ final class PromoPurchaseProductView: UIView {
     var product: Product? {
         didSet {
             if let product = product {
-                rangeLbl.text = "Get the hole Year for \(product.price) only!"
+                rangeLbl.text = "Get the whole Year for \(product.price) only!"
             }
         }
     }
