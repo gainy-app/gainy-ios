@@ -243,14 +243,20 @@ final class PurchaseViewController: BaseViewController {
             generateInvite()
             GainyAnalytics.logEvent("purchase_invite_tap")
         } else {
-            if let product = purchasesView.selectedProduct {
-                isPurchasing = true
-                SubscriptionManager.shared.purchaseProduct(product: product)
-                //Split to ranges - add product_id
-                //Success event to track for ranges
-                //
-                GainyAnalytics.logEvent("purchase_subscribe_tap")
+            if isPromoMode {
+                if let product = promoProductView.selectedProduct {
+                    isPurchasing = true
+                    SubscriptionManager.shared.purchaseProduct(product: product)
+                    GainyAnalytics.logEvent("purchase_subscribe_tap")
+                }
+            } else {
+                if let product = purchasesView.selectedProduct {
+                    isPurchasing = true
+                    SubscriptionManager.shared.purchaseProduct(product: product)
+                    GainyAnalytics.logEvent("purchase_subscribe_tap")
+                }
             }
+            
         }
     }
     
@@ -298,6 +304,12 @@ final class PurchaseViewController: BaseViewController {
     
     @IBAction func applyCodeAction(_ sender: Any) {
         isPromoMode.toggle()
+        if isPromoMode {
+            GainyAnalytics.logEvent("purchase_enter_code_tap")
+        } else {
+            GainyAnalytics.logEvent("purchase_cancel_code_tap")
+            promoProductView.clearPromoText()
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

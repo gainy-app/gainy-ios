@@ -140,7 +140,7 @@ final class CollectionSearchController: NSObject {
                 let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: CollectionSearchController.sectionHeaderElementKind, withReuseIdentifier: SearchCollectionHeaderView.identifier, for: indexPath) as? SearchCollectionHeaderView
                 switch self.sections[indexPath.section] {
                 case .suggestedCollection:
-                    headerView?.headerLbl.text = "\("Inflation-Proof Portfolio".uppercased()) (\(min(self.resultsLimit, self.suggestedCollections.count)))"
+                    headerView?.headerLbl.text = "\("TTFs you might like".uppercased()) (\(min(self.resultsLimit, self.suggestedCollections.count)))"
                 case .stocks:
                     headerView?.headerLbl.text = "STOCKS (\(min(self.resultsLimit, self.stocks.count)))"
                 case .collections:

@@ -90,6 +90,10 @@ final class PromoPurchasesProductsView: UIView {
         }
     }
     
+    func clearPromoText() {
+        promoField.text = ""
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
