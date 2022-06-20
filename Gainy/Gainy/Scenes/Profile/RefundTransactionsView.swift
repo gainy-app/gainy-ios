@@ -15,7 +15,6 @@ struct RefundTransactionsView: View {
     
     @State private var transactions = [StoreKit.Transaction]()
     @State var selectedTransactionID: UInt64?
-    
     var body: some View {
         VStack {
             ZStack {
@@ -27,15 +26,19 @@ struct RefundTransactionsView: View {
                         
                     }
                     .padding(.top, 16)
-                    .padding(.trailing, 16)
+                    .padding(.leading, 16)
                     Spacer()
                 }
+                .background(Color.clear)
+                
                 Text("Available transactions".uppercased())
                     .kerning(1.25)
                 .foregroundColor(UIColor.Gainy.mainText?.uiColor)
                 .font(UIFont.compactRoundedSemibold(14).uiFont)
                 .padding(.top, 24)
+                .background(Color.clear)
             }
+            .background(Color.clear)
             Spacer()
             Group {
                 if transactions.isEmpty {
@@ -43,28 +46,36 @@ struct RefundTransactionsView: View {
                         .foregroundColor(UIColor.Gainy.mainText?.uiColor)
                 } else {
                     List(transactions) { tr in
-                        Button {
-                            selectedTransactionID = tr.id
-                        } label: {
+                        Button(action: {
+                            self.selectedTransactionID = tr.id
+                        }, label: {
                             VStack {
                                 Text(tr.productID)
                                     .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                                    .font(UIFont.compactRoundedRegular(14).uiFont)
                                 Text("\(tr.purchaseDate)")
                                     .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                                    .font(UIFont.compactRoundedRegular(14).uiFont)
                             }
-                        }
+                            .background(Color.clear)
+                        })
                     }
                     .background(Color.clear)
                 }
             }
+            .background(Color.clear)
             .task {
                 await fetchTransactions()
             }
             Spacer()
-            RefundView(selectedTransactionID: $selectedTransactionID)
+            RefundView(selectedTransactionID: self.$selectedTransactionID)
                 .padding(.top, 24)
                 .frame(height: 40)
         }
+        .background(
+            Image("onboardingGradient")
+                .resizable()
+        )
     }
     
     func fetchTransactions() async {
@@ -106,6 +117,7 @@ struct RefundTransactionsView: View {
                 }
             }
         }
+        
         var activeColor: Color {
             selectedTransactionID == nil ? Color.gray : UIColor.Gainy.mainText!.uiColor
         }
