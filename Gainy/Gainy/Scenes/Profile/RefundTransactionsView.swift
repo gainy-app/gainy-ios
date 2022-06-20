@@ -22,8 +22,7 @@ struct RefundTransactionsView: View {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Image(uiImage: UIImage.init(named: "iconClose")!)
-                        
+                        Image(uiImage: UIImage.init(named: "iconClose")!)                        
                     }
                     .padding(.top, 16)
                     .padding(.leading, 16)

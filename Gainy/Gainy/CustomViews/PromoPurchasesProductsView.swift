@@ -142,6 +142,7 @@ final class PromoPurchasesProductsView: UIView {
     //MARK: - Actions
     
     @objc private func applyAction() {
+        guard !promoCode.isEmpty else {return}                
         delegate?.applyPromo(view: self)
     }
     

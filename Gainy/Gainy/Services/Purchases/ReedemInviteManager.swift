@@ -31,7 +31,7 @@ final class RedeemInviteManager {
                     self.isInviteAvaialble = false
                     dprint("Invite redeem received \(fromId)")
                     GainyAnalytics.logDevEvent("invite_done", params: ["refID" : fromId])
-                    UserProfileManager.shared.fetchProfile { _ in                        
+                    UserProfileManager.shared.fetchProfile { _ in
                     }
                     break
                 case .failure(let error):
