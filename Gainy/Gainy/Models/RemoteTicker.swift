@@ -397,7 +397,18 @@ class TickerInfo {
             let (main, median) = normalizeCharts(mainChart, medianChart)
             
             let mainData = ChartData(points: main, period: period)
-            let medianData = ChartData(points: median, period: period)
+            
+            var medianData: ChartData!
+            if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
+                var pcts: [Float] = []
+                for val in median.compactMap({$0.val}) {
+                    let cur = val / firstMedian
+                    pcts.append(firstMain * cur)
+                }
+                medianData = ChartData(points: pcts)
+            } else {
+                medianData = ChartData(points: median, period: period)
+            }            
             
             self.medianGrow = Float(medianData.startEndDiff)
             self.setChartsCache(period, chartData: mainData)

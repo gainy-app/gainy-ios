@@ -3,7 +3,7 @@ iOS v1.4.2 #234 available
 Subscriptions
 
 :new: New:
--
+• Median compare by @Mike
 
 :hammer_and_wrench: Improvements
 • QA

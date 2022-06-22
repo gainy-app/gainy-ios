@@ -103,10 +103,20 @@ struct HoldingsModelMapper {
     static func topChartGains(range: ScatterChartView.ChartPeriod, chartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]], sypChartsCache: [ScatterChartView.ChartPeriod : [ChartNormalized]], portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?) -> PortfolioChartGainsViewModel {
             
         let spChart = sypChartsCache[range] ?? [ChartNormalized]()
-        let balancedCharts = normalizeCharts(chartsCache[range] ?? [ChartNormalized](), spChart)
-        let chartDataPort = ChartData.init(points: balancedCharts.0, period: range)
-        let chartDataSP = ChartData.init(points: balancedCharts.1, period: range)
+        let (main, median) = normalizeCharts(chartsCache[range] ?? [ChartNormalized](), spChart)
         
+        var chartDataSP: ChartData!
+        if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
+            var pcts: [Float] = []
+            for val in median.compactMap({$0.val}) {
+                let cur = val / firstMedian
+                pcts.append(firstMain * cur)
+            }
+            chartDataSP = ChartData(points: pcts)
+        } else {
+            chartDataSP = ChartData.init(points: median, period: range)
+        } 
+        let chartDataPort = ChartData.init(points: main, period: range)        
             switch range {
             case .d1:
                 let chartGainModel = PortfolioChartGainsViewModel.init(rangeGrow: (portfolioGains?.relativeGain_1d ?? 0.0) * 100.0,

@@ -234,24 +234,23 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         let (main, median) = normalizeCharts(mainChart, medianChart)
         
         let topChartData = ChartData(points: main, period: viewModel.chartRange)
-//        var medianData: ChartData!
-//        if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
-//            var pcts: [Float] = []
-//            for val in median.compactMap({$0.val}) {
-//                let cur = val / firstMedian
-//                pcts.append(firstMain * cur)
-//            }
-//            medianData = ChartData(points: pcts)
-//        } else {
-//            medianData = ChartData(points: median, period: viewModel.chartRange)
-//    }
-        
-        let medianData = ChartData(points: median, period: viewModel.chartRange)
+        var medianData: ChartData!
+        if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
+            var pcts: [Float] = []
+            for val in median.compactMap({$0.val}) {
+                let cur = val / firstMedian
+                pcts.append(firstMain * cur)
+            }
+            medianData = ChartData(points: pcts)
+        } else {
+            medianData = ChartData(points: median, period: viewModel.chartRange)
+        }
+        //let medianData = ChartData(points: median, period: viewModel.chartRange)
         
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
-        print("\(topChartData.onlyPoints().min()) \(topChartData.onlyPoints().max())")
-        print("\(medianData.onlyPoints().min()) \(medianData.onlyPoints().max())")
+        //print("\(topChartData.onlyPoints().min()) \(topChartData.onlyPoints().max())")
+        //print("\(medianData.onlyPoints().min()) \(medianData.onlyPoints().max())")
         
         topChart.dayGrow = viewModel.dailyGrow
         topChart.lastDayPrice = viewModel.lastDayPrice
@@ -1257,7 +1256,7 @@ extension CollectionDetailsViewCell: TTFBlockViewDelegate {
             GainyAnalytics.logDevEvent("unlock_details", params: ["collectionID" : viewModel.id])
             if SubscriptionManager.shared.storage.viewCollection(viewModel.id) {
                 collectionView.reloadData()
-            }            
+            }
         }
     }
 }
