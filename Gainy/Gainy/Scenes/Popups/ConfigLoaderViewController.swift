@@ -44,9 +44,9 @@ final class ConfigLoaderViewController: BaseViewController {
                             print("User accepted notification: \(accepted)")
                             GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
                         })
-//                            self.view.removeFromSuperview()
-//                            self.avPlayer.pause()
-//                            self.paused = true
+                            self.view.removeFromSuperview()
+                            self.avPlayer.pause()
+                            self.paused = true
                     }
                 }
             }
