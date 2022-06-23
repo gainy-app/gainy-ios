@@ -191,10 +191,17 @@ extension HomeDataSource: UITableViewDelegate {
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        if section == Section.articles.rawValue || section == Section.watchlist.rawValue {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+        if section == Section.articles.rawValue {
+            //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+            headerLabel.autoPinEdge(.bottom, to: .bottom, of: headerView, withOffset: -8)
+            headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
+            headerLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -180)
+            headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
         } else {
-            headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+            //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+            headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
+            headerLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -180)
+            headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
         }
         
         let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
@@ -296,7 +303,7 @@ extension HomeDataSource: UITableViewDelegate {
                 return 0.0
             }
             
-            return 60.0
+            return 40.0
         }
     }
 }

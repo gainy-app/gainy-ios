@@ -75,6 +75,11 @@
 		3342C87C26DE2DC00049763E /* GainyAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87B26DE2DC00049763E /* GainyAnalytics.swift */; };
 		3342C87E26DE59760049763E /* CollectionsDetailsSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */; };
 		3342C88026DE617D0049763E /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3342C87F26DE617D0049763E /* UserDefaults.swift */; };
+		3344CADD286480740021CF19 /* Space.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3344CADC286480740021CF19 /* Space.mp4 */; };
+		3344CAE128648AAF0021CF19 /* Splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 3344CADE28648AAF0021CF19 /* Splashscreen.png */; };
+		3344CAE228648AAF0021CF19 /* Splashscreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3344CADF28648AAF0021CF19 /* Splashscreen@2x.png */; };
+		3344CAE328648AAF0021CF19 /* Splashscreen@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3344CAE028648AAF0021CF19 /* Splashscreen@3x.png */; };
+		3344CAE528648D0B0021CF19 /* ImagesA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3344CAE428648D0A0021CF19 /* ImagesA.xcassets */; };
 		33467CDD26C6565600811F74 /* Charts.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 33467CDC26C6565600811F74 /* Charts.graphql */; };
 		33467CE226C6575A00811F74 /* Types.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE026C6575A00811F74 /* Types.graphql.swift */; };
 		33467CE326C6575A00811F74 /* News.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33467CE126C6575A00811F74 /* News.graphql.swift */; };
@@ -173,7 +178,6 @@
 		33BD00F328475A88009637FF /* RedeemInvitation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD00F228475A88009637FF /* RedeemInvitation.graphql.swift */; };
 		33BD00F528475FDD009637FF /* ReedemInviteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD00F428475FDD009637FF /* ReedemInviteManager.swift */; };
 		33BD00F728476077009637FF /* PurchaseUpdate.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BD00F628476076009637FF /* PurchaseUpdate.graphql.swift */; };
-		33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */; };
 		33BDCF6426CE4612000DE770 /* TickerDetailsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */; };
 		33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */; };
 		33BDCF6926CE8AF7000DE770 /* TickerDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BDCF6826CE8AF7000DE770 /* TickerDetailsViewCell.swift */; };
@@ -684,6 +688,11 @@
 		3342C87B26DE2DC00049763E /* GainyAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyAnalytics.swift; sourceTree = "<group>"; };
 		3342C87D26DE59760049763E /* CollectionsDetailsSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsDetailsSettingsManager.swift; sourceTree = "<group>"; };
 		3342C87F26DE617D0049763E /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		3344CADC286480740021CF19 /* Space.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Space.mp4; sourceTree = "<group>"; };
+		3344CADE28648AAF0021CF19 /* Splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Splashscreen.png; sourceTree = "<group>"; };
+		3344CADF28648AAF0021CF19 /* Splashscreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splashscreen@2x.png"; sourceTree = "<group>"; };
+		3344CAE028648AAF0021CF19 /* Splashscreen@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Splashscreen@3x.png"; sourceTree = "<group>"; };
+		3344CAE428648D0A0021CF19 /* ImagesA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesA.xcassets; sourceTree = "<group>"; };
 		33467CDC26C6565600811F74 /* Charts.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = Charts.graphql; sourceTree = "<group>"; };
 		33467CE026C6575A00811F74 /* Types.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.graphql.swift; sourceTree = "<group>"; };
 		33467CE126C6575A00811F74 /* News.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.graphql.swift; sourceTree = "<group>"; };
@@ -783,7 +792,6 @@
 		33BD00F228475A88009637FF /* RedeemInvitation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedeemInvitation.graphql.swift; sourceTree = "<group>"; };
 		33BD00F428475FDD009637FF /* ReedemInviteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReedemInviteManager.swift; sourceTree = "<group>"; };
 		33BD00F628476076009637FF /* PurchaseUpdate.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseUpdate.graphql.swift; sourceTree = "<group>"; };
-		33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesA.xcassets; sourceTree = "<group>"; };
 		33BDCF6326CE4612000DE770 /* TickerDetailsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsDataSource.swift; sourceTree = "<group>"; };
 		33BDCF6526CE4659000DE770 /* TickerDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewModel.swift; sourceTree = "<group>"; };
 		33BDCF6826CE8AF7000DE770 /* TickerDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerDetailsViewCell.swift; sourceTree = "<group>"; };
@@ -2091,7 +2099,11 @@
 		3A930F1B265C1B96000FD3EB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3344CADE28648AAF0021CF19 /* Splashscreen.png */,
+				3344CADF28648AAF0021CF19 /* Splashscreen@2x.png */,
+				3344CAE028648AAF0021CF19 /* Splashscreen@3x.png */,
 				330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */,
+				3344CADC286480740021CF19 /* Space.mp4 */,
 				854299242769F24D00E8C433 /* intro.mp4 */,
 				85DF2129278CA25000F2899B /* investment_failure.mp4 */,
 				85DF2127278CA24F00F2899B /* investment_goals.mp4 */,
@@ -2100,7 +2112,7 @@
 				33B9116C2706E21E00C00B0D /* UploadDsym */,
 				3AFE1A74266E4F1F0091E799 /* Fonts */,
 				3A930EE1265C190C000FD3EB /* Assets.xcassets */,
-				33BDCF6126CE42C7000DE770 /* ImagesA.xcassets */,
+				3344CAE428648D0A0021CF19 /* ImagesA.xcassets */,
 				855B14DE26D931D8006CD1F8 /* ImagesB.xcassets */,
 			);
 			path = Resources;
@@ -2969,6 +2981,7 @@
 				33559B5E26E88E6C00E61D71 /* FetchLiveTickersData.graphql in Resources */,
 				859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */,
 				8505FCFE2739E67E0061AB36 /* BrokerFooterView.xib in Resources */,
+				3344CAE328648AAF0021CF19 /* Splashscreen@3x.png in Resources */,
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				339E2A8F2858A97C00555CD1 /* ValidatePromoCode.graphql in Resources */,
@@ -2984,12 +2997,15 @@
 				85695AFB2746BAD400759569 /* DeleteMetricsSessingsForTicker.graphql in Resources */,
 				85D4F81B26E6A00D004EC21D /* RoundedTextCollectionViewCell.xib in Resources */,
 				339BDA7227C36F3C00E3D9D2 /* HomeFetchGainers.graphql in Resources */,
+				3344CAE528648D0B0021CF19 /* ImagesA.xcassets in Resources */,
+				3344CAE228648AAF0021CF19 /* Splashscreen@2x.png in Resources */,
 				8579517626E26D8F003B751C /* PersonalizationPickInterestsHeaderView.xib in Resources */,
 				333CC16226DCB34700690245 /* StockViewCell.xib in Resources */,
 				33D3D4F126CBA2B6005A859B /* Discovery.storyboard in Resources */,
 				85DF212427848DCF00F2899B /* UpdateProfileScoringSettings.graphql in Resources */,
 				3302E0BD26DD0CE2008DBC76 /* SearchCollectionHeaderView.xib in Resources */,
 				85E4A2CA2762101A00C0E5C5 /* SearchCollectionDetailsAlgolia.graphql in Resources */,
+				3344CAE128648AAF0021CF19 /* Splashscreen.png in Resources */,
 				859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */,
 				3A930EE5265C190C000FD3EB /* LaunchScreen.storyboard in Resources */,
 				85DF212A278CA25000F2899B /* investment_goals.mp4 in Resources */,
@@ -3011,7 +3027,6 @@
 				85C873CF2796AC4E0060BAF3 /* GetTickersForCollection.graphql in Resources */,
 				85C5926A26FA2A82001EBABC /* CreateProfile.graphql in Resources */,
 				33B9886D26CA6E79008B8AC9 /* News.graphql in Resources */,
-				33BDCF6226CE42C7000DE770 /* ImagesA.xcassets in Resources */,
 				335D7D79270619D500337262 /* YourCollectionTipCell.xib in Resources */,
 				908D5BC127A54E90005672C8 /* GetFavouriteCollections.graphql in Resources */,
 				85E4A2972756C4C100C0E5C5 /* ButtonTableViewCell.xib in Resources */,
@@ -3038,6 +3053,7 @@
 				85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */,
 				85F2595D27046D5E009DEFFD /* FetchRecommendedCollections.graphql in Resources */,
 				3AFE1A8A266E540C0091E799 /* SFProDisplay-Bold.ttf in Resources */,
+				3344CADD286480740021CF19 /* Space.mp4 in Resources */,
 				8505FCFA27399DF10061AB36 /* BrokerViewCell.xib in Resources */,
 				854299252769F24D00E8C433 /* intro.mp4 in Resources */,
 				33D3D4EF26CBA2A8005A859B /* Onboarding.storyboard in Resources */,
@@ -3651,7 +3667,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3680,7 +3696,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3709,7 +3725,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3739,7 +3755,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev.OneSignalNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -3819,7 +3835,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 234;
+				CURRENT_PROJECT_VERSION = 235;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3829,7 +3845,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3944,7 +3960,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 234;
+				CURRENT_PROJECT_VERSION = 235;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3954,7 +3970,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4130,7 +4146,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 234;
+				CURRENT_PROJECT_VERSION = 235;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4140,7 +4156,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4160,7 +4176,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 234;
+				CURRENT_PROJECT_VERSION = 235;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4170,7 +4186,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = app.gainy.application.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";

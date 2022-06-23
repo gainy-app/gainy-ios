@@ -111,7 +111,7 @@ class CustomTabBar: UITabBar {
             make.trailing.equalToSuperview()
             make.height.equalTo(bounds.height + bottomPadding)
         }
-        unselectedItemTintColor = UIColor.Gainy.mainText
+        unselectedItemTintColor = UIColor.Gainy.grayLight
         
         
         

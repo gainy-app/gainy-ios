@@ -90,7 +90,7 @@ final class TTFBlockView: TKPassThroughView {
         label.numberOfLines = 1
         label.textColor = .white
         label.text = "SHOW DETAILS"
-        label.font = .compactRoundedMedium(20)
+        label.font = .compactRoundedMedium(16)
         label.isUserInteractionEnabled = false
         label.setKern(kern: 2.0, color: .white)
         return label

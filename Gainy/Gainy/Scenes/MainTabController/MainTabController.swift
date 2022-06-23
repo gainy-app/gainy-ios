@@ -90,7 +90,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         if #available(iOS 13.0, *) {
             self.tabBar.backgroundImage = UIImage.imageWithColor(UIColor.clear)
             self.tabBar.backgroundColor = .clear
-            self.tabBar.tintColor = UIColor.Gainy.mainText
+            self.tabBar.tintColor = UIColor.Gainy.grayLight
         }
     }
     

@@ -35,22 +35,23 @@ class BlurEffectView: UIVisualEffectView {
     }
     
     private func setupBlur() {
-        animator.stopAnimation(true)
-        effect = nil
-
-        animator.addAnimations { [weak self] in
-            self?.effect = UIBlurEffect(style: .prominent)
+//        animator.stopAnimation(true)
+//        effect = nil
+//
+//        animator.addAnimations { [weak self] in
+//            self?.effect = UIBlurEffect(style: .prominent)
+//        }
+//        animator.fractionComplete = intensity   //This is your blur intensity in range 0 - 1
+        if effect == nil {
+            effect = UIBlurEffect(style: .prominent)
         }
-        animator.fractionComplete = intensity   //This is your blur intensity in range 0 - 1
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        
     }
     
     deinit {
-        animator.stopAnimation(true)
+        //animator.stopAnimation(true)
     }
 }

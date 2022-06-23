@@ -9,7 +9,7 @@ import UIKit
 
 final class HomeIndexesTableViewCell: UITableViewCell {
     static let cellHeight: CGFloat = 70 + 107.0 + 24.0
-    static let smallCellHeight: CGFloat = 70 + 16.0 + 24.0
+    static let smallCellHeight: CGFloat = 70 + 16.0 + 4.0
     
     enum HomeIndex: Int, CaseIterable {
         case dow = 0, spp, nasdaq, bitcoin

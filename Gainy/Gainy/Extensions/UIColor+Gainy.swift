@@ -76,6 +76,7 @@ extension UIColor {
         static let secondaryYellow = UIColor(named: "secondaryYellow")
         static let thirdGreen = UIColor(named: "thirdGreen")
         static let tickerSymbol = UIColor(hexString: "6C5DD3", alpha: 1.0)!
+        static let grayLight = UIColor(hexString: "B1BDC8")
         
         static let pieChartColors = [
             UIColor.init(hexString: "#2D54FF"),
