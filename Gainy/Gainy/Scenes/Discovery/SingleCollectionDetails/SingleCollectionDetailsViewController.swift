@@ -284,6 +284,14 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
     func purchasePressed(source: SingleCollectionDetailsViewModel) {
         coordinator?.showPurchaseView()
     }
+    
+    func investPressed(source: SingleCollectionDetailsViewModel) {
+        
+        let notifyViewController = NotifyViewController.instantiate(.popups)
+        let navigationController = UINavigationController.init(rootViewController: notifyViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
 }
 
 extension SingleCollectionDetailsViewController: SortCollectionDetailsViewControllerDelegate {

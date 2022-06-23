@@ -396,6 +396,7 @@
 		857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */; };
 		857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */; };
 		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
+		85983D552864863300E2D5AD /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85983D542864863300E2D5AD /* NotifyViewController.swift */; };
 		859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 859B2EC7270614040084CCDC /* InsertFavouriteCollection.graphql */; };
 		859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */; };
 		859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */; };
@@ -1017,6 +1018,7 @@
 		857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickInterestOrCategoryCell.swift; sourceTree = "<group>"; };
 		857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickInterestOrCategoryCell.xib; sourceTree = "<group>"; };
 		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
+		85983D542864863300E2D5AD /* NotifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
 		859B2EC7270614040084CCDC /* InsertFavouriteCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertFavouriteCollection.graphql; sourceTree = "<group>"; };
 		859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteFavouriteCollection.graphql; sourceTree = "<group>"; };
 		859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
@@ -1448,6 +1450,7 @@
 		3342C87526DE0C5B0049763E /* Popups */ = {
 			isa = PBXGroup;
 			children = (
+				85983D542864863300E2D5AD /* NotifyViewController.swift */,
 				3342C87626DE0C730049763E /* SortCollectionDetailsViewController.swift */,
 				85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */,
 				85E4A28127551CCB00C0E5C5 /* Portfolio */,
@@ -3359,6 +3362,7 @@
 				33467CE326C6575A00811F74 /* News.graphql.swift in Sources */,
 				33BD00F528475FDD009637FF /* ReedemInviteManager.swift in Sources */,
 				331243DE27BF7493008C2BCC /* HomeCollectionsTableViewCell.swift in Sources */,
+				85983D552864863300E2D5AD /* NotifyViewController.swift in Sources */,
 				859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */,
 				900CEAF627497BC200CF1597 /* HoldingSecurityViewModel.swift in Sources */,
 				9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */,

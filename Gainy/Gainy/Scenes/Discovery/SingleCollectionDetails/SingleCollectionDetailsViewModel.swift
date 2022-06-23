@@ -14,6 +14,7 @@ protocol SingleCollectionDetailsViewModelDelegate: AnyObject {
     func tickerPressed(source: SingleCollectionDetailsViewModel, tickers: [RemoteTickerDetails], ticker: RemoteTickerDetails)
     func sortingPressed(source: SingleCollectionDetailsViewModel, model: CollectionDetailViewCellModel, cell: CollectionDetailsViewCell)
     func purchasePressed(source: SingleCollectionDetailsViewModel)
+    func investPressed(source: SingleCollectionDetailsViewModel)
 }
 
 final class SingleCollectionDetailsViewModel: NSObject {
@@ -78,6 +79,11 @@ final class SingleCollectionDetailsViewModel: NSObject {
                 cell.onPurhaseShow = { [weak self] in
                     guard let self = self else {return}
                     self.delegate?.purchasePressed(source: self)
+                }
+                
+                cell.investButtonPressed = { [weak self] in
+                    guard let self = self else {return}
+                    self.delegate?.investPressed(source: self)
                 }
             }
             return cell

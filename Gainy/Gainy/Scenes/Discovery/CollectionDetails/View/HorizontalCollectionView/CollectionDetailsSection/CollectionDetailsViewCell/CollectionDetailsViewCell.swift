@@ -79,8 +79,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
             
             collectionInvestButtonView.investButtonPressed = {
-                NotificationManager.shared.showMessage(title: "", text: "The feature will be available soon.", cancelTitle: "OK", actions: nil)
+                
                 GainyAnalytics.logEvent("invest_pressed", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous", "collection_id" : self.viewModel.id])
+                self.investButtonPressed?()
             }
             
 //            let blurView = BlurEffectView()
@@ -166,6 +167,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onNewCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onPurhaseShow: (() -> Void)?
+    var investButtonPressed: (() -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {

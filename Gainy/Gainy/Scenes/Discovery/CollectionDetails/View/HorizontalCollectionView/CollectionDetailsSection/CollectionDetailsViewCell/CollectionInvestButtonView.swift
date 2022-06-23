@@ -21,6 +21,7 @@ final class CollectionInvestButtonView: UIView {
         self.backgroundImageView = UIImageView.newAutoLayout()
         self.backgroundImageView?.isUserInteractionEnabled = false
         self.backgroundImageView?.backgroundColor = UIColor.blue
+        self.backgroundImageView?.contentMode = .scaleAspectFill
         investButton.titleLabel?.superview?.addSubview(self.backgroundImageView!)
         self.backgroundImageView?.autoPinEdgesToSuperviewEdges()
         

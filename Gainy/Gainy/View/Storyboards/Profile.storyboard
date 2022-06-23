@@ -300,7 +300,7 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NW4-FE-EBm" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="180.5" y="1035" width="53" height="31"/>
+                                        <rect key="frame" x="179.5" y="1035" width="55" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="hU9-9G-L3D"/>
@@ -320,7 +320,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pv-0r-iWN" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="141" y="1090" width="132" height="31"/>
+                                        <rect key="frame" x="140" y="1090" width="134" height="31"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="31" id="MU9-HI-3dE"/>
@@ -742,7 +742,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lm1-OB-d0F">
-                                <rect key="frame" x="28" y="75" width="98" height="24"/>
+                                <rect key="frame" x="28" y="75" width="100.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Ddd-4a-69M"/>
                                 </constraints>
@@ -768,7 +768,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terms of Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWw-yQ-QEp">
-                                <rect key="frame" x="28" y="125" width="117" height="24"/>
+                                <rect key="frame" x="28" y="125" width="119" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="AIR-rN-e3R"/>
                                 </constraints>
@@ -794,7 +794,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2kP-Wf-Rxw">
-                                <rect key="frame" x="28" y="175" width="99.5" height="24"/>
+                                <rect key="frame" x="28" y="175" width="101" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="EOF-bQ-q57"/>
                                 </constraints>
@@ -820,7 +820,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Form CRS (Q&amp;A)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-bd-0PJ">
-                                <rect key="frame" x="28" y="225" width="119.5" height="24"/>
+                                <rect key="frame" x="28" y="225" width="120.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="uU2-BH-8Z5"/>
                                 </constraints>
@@ -846,7 +846,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADV Part 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOY-H9-YFb">
-                                <rect key="frame" x="28" y="275" width="77" height="24"/>
+                                <rect key="frame" x="28" y="275" width="79" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="trU-KV-Uv6"/>
                                 </constraints>
@@ -872,7 +872,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client Agreement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4q-Jx-nbl">
-                                <rect key="frame" x="28" y="325" width="123.5" height="24"/>
+                                <rect key="frame" x="28" y="325" width="124" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="QG2-9s-w48"/>
                                 </constraints>
@@ -898,7 +898,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consent to E-Delivery and Brochure (ADV Part 2A)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEe-NA-PFy">
-                                <rect key="frame" x="28" y="375" width="184" height="48"/>
+                                <rect key="frame" x="28" y="375" width="188" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="6sF-GB-dFk"/>
                                 </constraints>
@@ -1001,13 +1001,13 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don’t have any active subscription" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-ee-FK4">
-                                <rect key="frame" x="32" y="551" width="350" height="76.5"/>
+                                <rect key="frame" x="32" y="554" width="350" height="75"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB5-65-Pjo">
-                                <rect key="frame" x="32" y="648.5" width="350" height="57.5"/>
+                                <rect key="frame" x="32" y="650" width="350" height="56"/>
                                 <string key="text">That’s not cool. Switch to Gainy Premium to see Match Score and composition for all TTFs.
 😃</string>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -1132,16 +1132,16 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="5pv-0r-iWN">
-            <size key="intrinsicContentSize" width="132" height="32"/>
+            <size key="intrinsicContentSize" width="134" height="31"/>
         </designable>
         <designable name="6jr-YC-CXh">
-            <size key="intrinsicContentSize" width="166" height="32"/>
+            <size key="intrinsicContentSize" width="169" height="31"/>
         </designable>
         <designable name="8AG-GZ-RBx">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="BIg-BP-mtL">
-            <size key="intrinsicContentSize" width="116" height="32"/>
+            <size key="intrinsicContentSize" width="118" height="31"/>
         </designable>
         <designable name="BUb-bn-GzG">
             <size key="intrinsicContentSize" width="16" height="22"/>
@@ -1153,22 +1153,22 @@
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="Jma-YX-kmP">
-            <size key="intrinsicContentSize" width="110" height="32"/>
+            <size key="intrinsicContentSize" width="113" height="31"/>
         </designable>
         <designable name="JoU-5e-oXP">
             <size key="intrinsicContentSize" width="16" height="22"/>
         </designable>
         <designable name="NW4-FE-EBm">
-            <size key="intrinsicContentSize" width="53" height="32"/>
+            <size key="intrinsicContentSize" width="55" height="31"/>
         </designable>
         <designable name="l1e-sc-Ubw">
             <size key="intrinsicContentSize" width="71.5" height="31"/>
         </designable>
         <designable name="oUc-ny-VlB">
-            <size key="intrinsicContentSize" width="62" height="32"/>
+            <size key="intrinsicContentSize" width="65" height="31"/>
         </designable>
         <designable name="y6V-m9-NOa">
-            <size key="intrinsicContentSize" width="137" height="32"/>
+            <size key="intrinsicContentSize" width="140" height="31"/>
         </designable>
         <designable name="yj6-GW-26L">
             <size key="intrinsicContentSize" width="16" height="22"/>

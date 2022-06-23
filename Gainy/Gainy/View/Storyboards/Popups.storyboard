@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="274"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acQ-D0-DjJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="155" y="0.0" width="104" height="44"/>
+                                        <rect key="frame" x="155.5" y="0.0" width="103" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1fm-PB-N2R"/>
@@ -97,7 +97,7 @@
                                         <rect key="frame" x="156" y="90" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2M-Ac-MJ8" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="139" y="92" width="136" height="44"/>
+                                        <rect key="frame" x="139.5" y="92" width="135" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="1ka-OJ-pmN"/>
@@ -155,7 +155,7 @@
                                         <rect key="frame" x="156" y="182" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfI-UU-s1W" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="119" y="184" width="176" height="44"/>
+                                        <rect key="frame" x="120.5" y="184" width="173" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uBi-iR-wN3"/>
@@ -184,7 +184,7 @@
                                         <rect key="frame" x="156" y="228" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSX-Kd-21I" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="126.5" y="230" width="161" height="44"/>
+                                        <rect key="frame" x="124.5" y="230" width="165" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="lTx-P9-pWB"/>
@@ -212,7 +212,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-VB-HTb">
-                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
+                                <rect key="frame" x="177" y="69" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="TTy-iw-jLP"/>
                                 </constraints>
@@ -412,7 +412,7 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="322"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fus-uX-UAL" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="142.5" y="0.0" width="129" height="44"/>
+                                        <rect key="frame" x="143.5" y="0.0" width="127" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="41j-CE-a9C"/>
@@ -473,7 +473,7 @@
                                         <rect key="frame" x="156" y="92" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="avr-6y-FL5" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="152.5" y="94" width="109" height="44"/>
+                                        <rect key="frame" x="151" y="94" width="112" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="APd-OS-iC3"/>
@@ -531,7 +531,7 @@
                                         <rect key="frame" x="156" y="184" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xb-XL-NNV" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="182.5" y="186" width="49" height="44"/>
+                                        <rect key="frame" x="183" y="186" width="48" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="uD0-mS-BhC"/>
@@ -617,7 +617,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="dSr-Yb-B6Y">
-                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
+                                <rect key="frame" x="177" y="69" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="9Z9-Pw-DiQ"/>
                                 </constraints>
@@ -677,7 +677,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="ifda_prompt_space" translatesAutoresizingMaskIntoConstraints="NO" id="m9R-WX-Zq3">
-                                <rect key="frame" x="0.0" y="134" width="414" height="449.5"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="451.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKe-Fi-Pis" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="766" width="350" height="64"/>
@@ -703,7 +703,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please allow us to know where you came from so we can give you more personalized content." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QX2-yb-bdK">
-                                <rect key="frame" x="32" y="641" width="350" height="72"/>
+                                <rect key="frame" x="32" y="643" width="350" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="EGp-2G-qdz"/>
                                 </constraints>
@@ -712,7 +712,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKS-kk-3pt">
-                                <rect key="frame" x="32" y="563.5" width="350" height="61.5"/>
+                                <rect key="frame" x="32" y="565.5" width="350" height="61.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Improve your experience">
                                         <attributes>
@@ -804,7 +804,7 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="228"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w2T-2E-mBa" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="155" y="0.0" width="104" height="44"/>
+                                        <rect key="frame" x="155.5" y="0.0" width="103" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="40b-fL-VYM"/>
@@ -862,7 +862,7 @@
                                         <rect key="frame" x="156" y="90" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3qV-Td-XDj" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="139" y="92" width="136" height="44"/>
+                                        <rect key="frame" x="139.5" y="92" width="135" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="sFl-bw-7uR"/>
@@ -920,7 +920,7 @@
                                         <rect key="frame" x="156" y="182" width="102" height="2"/>
                                     </imageView>
                                     <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsm-dg-gMo" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                        <rect key="frame" x="119" y="184" width="176" height="44"/>
+                                        <rect key="frame" x="120.5" y="184" width="173" height="44"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="vTr-Tp-YpT"/>
@@ -948,7 +948,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SORT BY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ecB-p1-k9f">
-                                <rect key="frame" x="178.5" y="69" width="57" height="24"/>
+                                <rect key="frame" x="177" y="69" width="60" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="76Z-AM-8d8"/>
                                 </constraints>
@@ -997,52 +997,164 @@
             </objects>
             <point key="canvasLocation" x="138" y="797"/>
         </scene>
+        <!--Notify View Controller-->
+        <scene sceneID="9NX-Od-GLq">
+            <objects>
+                <viewController storyboardIdentifier="NotifyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uHR-yQ-4yB" customClass="NotifyViewController" customModule="Gainy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lSW-K5-gEF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="notify_me_bg" translatesAutoresizingMaskIntoConstraints="NO" id="kAz-2G-giJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BPf-nz-TCa" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="766" width="350" height="64"/>
+                                <color key="backgroundColor" red="0.0" green="0.2784313725" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="K1K-pw-xgh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Notify me">
+                                    <fontDescription key="titleFontDescription" name="SFProDisplay-Medium" family="SF Pro Display" pointSize="16"/>
+                                    <color key="baseForegroundColor" red="0.1450980392" green="0.91764705879999997" blue="0.36078431370000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="notifyButtonTap:" destination="uHR-yQ-4yB" eventType="touchUpInside" id="7N4-0r-lsu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNX-SD-Xb1">
+                                <rect key="frame" x="24" y="76" width="366" height="100"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Enter your email to be notified when you can start investing in  our TTFs">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" size="24" name="SFProDisplay-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineSpacing="8" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tyk-X9-Gej" customClass="GainyTextField" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="32" y="678" width="350" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Wwy-0d-DJf"/>
+                                </constraints>
+                                <color key="textColor" red="0.043910741810000001" green="0.077600471680000005" blue="0.1176521257" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="yes" smartQuotesType="no" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fl-K6-yLS">
+                                <rect key="frame" x="32" y="692" width="350" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12" id="YiR-Av-HT5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="10"/>
+                                <color key="textColor" red="0.76868981120000002" green="0.7684744" blue="0.7764726877" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sgn-op-Lhb"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BPf-nz-TCa" firstAttribute="leading" secondItem="Sgn-op-Lhb" secondAttribute="leading" constant="32" id="27n-3e-JeQ"/>
+                            <constraint firstItem="Sgn-op-Lhb" firstAttribute="trailing" secondItem="BPf-nz-TCa" secondAttribute="trailing" constant="32" id="3mj-Ct-SZL"/>
+                            <constraint firstItem="3Fl-K6-yLS" firstAttribute="trailing" secondItem="tyk-X9-Gej" secondAttribute="trailing" id="4A4-cw-12V"/>
+                            <constraint firstItem="3Fl-K6-yLS" firstAttribute="top" secondItem="tyk-X9-Gej" secondAttribute="top" constant="14" id="EL4-g9-Nk8"/>
+                            <constraint firstItem="BPf-nz-TCa" firstAttribute="top" secondItem="tyk-X9-Gej" secondAttribute="bottom" constant="24" id="En3-Vo-o1y"/>
+                            <constraint firstItem="3Fl-K6-yLS" firstAttribute="leading" secondItem="tyk-X9-Gej" secondAttribute="leading" id="Jfy-SC-5wP"/>
+                            <constraint firstItem="kAz-2G-giJ" firstAttribute="top" secondItem="lSW-K5-gEF" secondAttribute="top" id="Jx0-UZ-8L7"/>
+                            <constraint firstAttribute="bottom" secondItem="kAz-2G-giJ" secondAttribute="bottom" id="Rpu-dt-Mfs"/>
+                            <constraint firstItem="bNX-SD-Xb1" firstAttribute="top" secondItem="Sgn-op-Lhb" secondAttribute="top" constant="32" id="VfH-wT-UZX"/>
+                            <constraint firstItem="tyk-X9-Gej" firstAttribute="leading" secondItem="Sgn-op-Lhb" secondAttribute="leading" constant="32" id="dc7-o3-gbo"/>
+                            <constraint firstItem="Sgn-op-Lhb" firstAttribute="trailing" secondItem="tyk-X9-Gej" secondAttribute="trailing" constant="32" id="iax-D6-HnC"/>
+                            <constraint firstItem="Sgn-op-Lhb" firstAttribute="trailing" secondItem="bNX-SD-Xb1" secondAttribute="trailing" constant="24" id="pJa-w3-nCF"/>
+                            <constraint firstItem="kAz-2G-giJ" firstAttribute="leading" secondItem="lSW-K5-gEF" secondAttribute="leading" id="rUt-z1-zx3"/>
+                            <constraint firstAttribute="trailing" secondItem="kAz-2G-giJ" secondAttribute="trailing" id="reT-j5-DRh"/>
+                            <constraint firstItem="Sgn-op-Lhb" firstAttribute="bottom" secondItem="BPf-nz-TCa" secondAttribute="bottom" constant="32" id="xG1-bn-hka"/>
+                            <constraint firstItem="bNX-SD-Xb1" firstAttribute="leading" secondItem="Sgn-op-Lhb" secondAttribute="leading" constant="24" id="yZg-4m-s6m"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emailSmallPlaceholder" destination="3Fl-K6-yLS" id="hrA-wC-2GH"/>
+                        <outlet property="emailTextField" destination="tyk-X9-Gej" id="ZOg-rC-kVL"/>
+                        <outlet property="notifyMeButton" destination="BPf-nz-TCa" id="7Fd-eT-juK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jkJ-f4-O8R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="873.91304347826099" y="796.875"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="3qV-Td-XDj">
-            <size key="intrinsicContentSize" width="136" height="34"/>
+            <size key="intrinsicContentSize" width="135" height="33"/>
         </designable>
         <designable name="4FW-wy-DAv">
-            <size key="intrinsicContentSize" width="95" height="34"/>
+            <size key="intrinsicContentSize" width="95" height="33"/>
         </designable>
         <designable name="5OH-9d-xFr">
-            <size key="intrinsicContentSize" width="114" height="34"/>
+            <size key="intrinsicContentSize" width="114" height="33"/>
         </designable>
         <designable name="9wq-O2-coc">
-            <size key="intrinsicContentSize" width="40" height="34"/>
+            <size key="intrinsicContentSize" width="40" height="33"/>
         </designable>
         <designable name="9xb-XL-NNV">
-            <size key="intrinsicContentSize" width="49" height="34"/>
+            <size key="intrinsicContentSize" width="48" height="33"/>
+        </designable>
+        <designable name="BPf-nz-TCa">
+            <size key="intrinsicContentSize" width="93" height="33"/>
         </designable>
         <designable name="Bsm-dg-gMo">
-            <size key="intrinsicContentSize" width="176" height="34"/>
+            <size key="intrinsicContentSize" width="173" height="33"/>
         </designable>
         <designable name="Fus-uX-UAL">
-            <size key="intrinsicContentSize" width="129" height="34"/>
+            <size key="intrinsicContentSize" width="127" height="33"/>
         </designable>
         <designable name="I7w-gW-qkW">
-            <size key="intrinsicContentSize" width="40" height="34"/>
+            <size key="intrinsicContentSize" width="40" height="33"/>
         </designable>
         <designable name="MAF-bt-lMq">
-            <size key="intrinsicContentSize" width="95" height="34"/>
+            <size key="intrinsicContentSize" width="95" height="33"/>
         </designable>
         <designable name="OZW-JY-2Ki">
-            <size key="intrinsicContentSize" width="95" height="34"/>
+            <size key="intrinsicContentSize" width="95" height="33"/>
         </designable>
         <designable name="PKe-Fi-Pis">
-            <size key="intrinsicContentSize" width="57" height="33.5"/>
+            <size key="intrinsicContentSize" width="57.5" height="33"/>
         </designable>
         <designable name="VyM-fK-98V">
-            <size key="intrinsicContentSize" width="166" height="34"/>
+            <size key="intrinsicContentSize" width="166" height="33"/>
         </designable>
         <designable name="ZSX-Kd-21I">
-            <size key="intrinsicContentSize" width="161" height="34"/>
+            <size key="intrinsicContentSize" width="165" height="33"/>
         </designable>
         <designable name="acQ-D0-DjJ">
-            <size key="intrinsicContentSize" width="104" height="34"/>
+            <size key="intrinsicContentSize" width="103" height="33"/>
         </designable>
         <designable name="avr-6y-FL5">
-            <size key="intrinsicContentSize" width="109" height="34"/>
+            <size key="intrinsicContentSize" width="112" height="33"/>
         </designable>
         <designable name="dK2-HQ-jxb">
             <size key="intrinsicContentSize" width="30" height="34"/>
@@ -1051,24 +1163,25 @@
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="gfI-UU-s1W">
-            <size key="intrinsicContentSize" width="176" height="34"/>
+            <size key="intrinsicContentSize" width="173" height="33"/>
         </designable>
         <designable name="kzP-zA-30h">
             <size key="intrinsicContentSize" width="30" height="34"/>
         </designable>
         <designable name="o2M-Ac-MJ8">
-            <size key="intrinsicContentSize" width="136" height="34"/>
+            <size key="intrinsicContentSize" width="135" height="33"/>
         </designable>
         <designable name="p6C-ym-eft">
-            <size key="intrinsicContentSize" width="101" height="34"/>
+            <size key="intrinsicContentSize" width="101" height="33"/>
         </designable>
         <designable name="w2T-2E-mBa">
-            <size key="intrinsicContentSize" width="104" height="34"/>
+            <size key="intrinsicContentSize" width="103" height="33"/>
         </designable>
     </designables>
     <resources>
         <image name="Stars" width="375" height="812"/>
         <image name="ifda_prompt_space" width="375" height="438.5"/>
+        <image name="notify_me_bg" width="375" height="812"/>
         <image name="sort_dots" width="102" height="2"/>
         <image name="splash_logo" width="151" height="53"/>
         <namedColor name="mainLightGray">

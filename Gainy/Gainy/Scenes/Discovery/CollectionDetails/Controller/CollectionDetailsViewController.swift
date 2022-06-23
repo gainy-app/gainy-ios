@@ -356,6 +356,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self?.coordinator?.showPurchaseView()
                 }
                 
+                cell.investButtonPressed = { [weak self] in
+                    
+                    let notifyViewController = NotifyViewController.instantiate(.popups)
+                    let navigationController = UINavigationController.init(rootViewController: notifyViewController)
+                    navigationController.modalPresentationStyle = .fullScreen
+                    self?.present(navigationController, animated: true, completion: nil)
+                }
             }
             return cell
         }
