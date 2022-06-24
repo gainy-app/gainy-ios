@@ -168,6 +168,7 @@ final class PurchaseViewController: BaseViewController {
         
         super.viewWillAppear(animated)
         
+        applyCodeButton.isHidden = !RemoteConfigManager.shared.isApplyCodeBtnVisible
         infoLbl.text = purchasesView.selectedProduct?.terms ?? ""
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }

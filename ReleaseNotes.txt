@@ -3,10 +3,10 @@ iOS v1.4.2 #234 available
 Subscriptions
 
 :new: New:
-• Median compare by @Mike
+-
 
 :hammer_and_wrench: Improvements
-• QA
+• Promo fixes
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

@@ -23,6 +23,10 @@ final class RemoteConfigManager {
     @UserDefaultBool(Constants.UserDefaults.isInvestBtnVisible)
     var isInvestBtnVisible: Bool
     
+    
+    @UserDefaultBool(Constants.UserDefaults.isApplyCodeBtnVisible)
+    var isApplyCodeBtnVisible: Bool
+    
     @UserDefault(Constants.UserDefaults.monthPurchaseVariant)
     var monthPurchaseVariant: ProductVariant?
     
@@ -32,6 +36,7 @@ final class RemoteConfigManager {
     @UserDefault(Constants.UserDefaults.yearPurchaseVariant)
     var yearPurchaseVariant: ProductVariant?
     
+       
     private var remoteConfig: RemoteConfig!
      
     func loadDefaults(_ completion: @escaping () -> Void) {
@@ -52,6 +57,7 @@ final class RemoteConfigManager {
                 self?.showPortoCash = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCash).boolValue ?? false
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
                 self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
+                self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
                 
                 //Purchases
                 self?.monthPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.monthPurchase).stringValue ?? "A") ?? .a
