@@ -224,6 +224,10 @@ final class HoldingsViewModel {
                         if self.dataSource.chartViewModel == nil {
                             self.dataSource.chartViewModel = live
                         } else {
+                            
+                            self.dataSource.chartViewModel.min = Double(min(live.sypChartData.onlyPoints().min() ?? 0.0, live.chartData.onlyPoints().min() ?? 0.0))
+                            self.dataSource.chartViewModel.max = Double(max(live.sypChartData.onlyPoints().max() ?? 0.0, live.chartData.onlyPoints().max() ?? 0.0))
+                            
                             self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
                             self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow

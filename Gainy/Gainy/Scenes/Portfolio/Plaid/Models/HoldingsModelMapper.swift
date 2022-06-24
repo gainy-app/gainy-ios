@@ -115,7 +115,8 @@ struct HoldingsModelMapper {
             chartDataSP = ChartData(points: pcts)
         } else {
             chartDataSP = ChartData.init(points: median, period: range)
-        } 
+        }
+              
         let chartDataPort = ChartData.init(points: main, period: range)        
             switch range {
             case .d1:

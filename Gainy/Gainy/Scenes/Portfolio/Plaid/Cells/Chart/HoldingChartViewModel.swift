@@ -31,6 +31,12 @@ final class HoldingChartViewModel: ObservableObject {
     
     @Published
     var lastDayPrice: Float = 0
+
+    @Published
+    var min: Double?
+    
+    @Published
+    var max: Double?
     
     init(balance: Float, rangeGrow: Float, rangeGrowBalance: Float, spGrow: Float, chartData: ChartData, sypChartData: ChartData) {
         self.balance = balance

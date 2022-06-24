@@ -18,6 +18,9 @@ final class ScatterChartViewModel: ObservableObject {
         self.isLoading = true
         self.lastDayPrice = 0.0
         self.relatedCollection1DGain = 0.0
+        self.compareTTFName = ""
+        self.min = -1
+        self.max = -1
     }
     
     @Published
@@ -43,4 +46,13 @@ final class ScatterChartViewModel: ObservableObject {
     
     @Published
     var relatedCollection1DGain: Float = 0
+    
+    @Published
+    var compareTTFName: String
+    
+    @Published
+    var min: Double?
+    
+    @Published
+    var max: Double?
 }

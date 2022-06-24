@@ -277,13 +277,19 @@ struct ScatterChartView: View {
                     LineView(data: viewModel.chartData,
                              title: "Full chart",
                              style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                             viewModel: lineViewModel).offset(y: -60)
+                             viewModel: lineViewModel,
+                             minDataValue: nil,
+                             maxDataValue: nil
+                    ).offset(y: -60)
                     
                     if viewModel.medianData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.medianData,
                                  title: "Full chart",
                                  style: Styles.lineChartStyleMedian,
-                                 viewModel: lineViewModel).offset(y: -60)
+                                 viewModel: lineViewModel,
+                                 minDataValue: nil,
+                                 maxDataValue: nil
+                        ).offset(y: -60)
                             .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                     }
                 } else {

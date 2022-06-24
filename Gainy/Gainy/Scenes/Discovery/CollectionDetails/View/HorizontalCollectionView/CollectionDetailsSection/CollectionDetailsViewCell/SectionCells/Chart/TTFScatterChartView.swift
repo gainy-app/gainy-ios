@@ -149,7 +149,10 @@ struct TTFScatterChartView: View {
                     LineView(data: viewModel.chartData,
                              title: "Full chart",
                              style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
-                             viewModel: lineViewModel)
+                             viewModel: lineViewModel,
+                             minDataValue: viewModel.min,
+                             maxDataValue: viewModel.max
+                    )
                 }  else {
                     VStack {
                         Spacer()
@@ -167,7 +170,9 @@ struct TTFScatterChartView: View {
                     LineView(data: viewModel.sypChartData,
                              title: Constants.Chart.sypChartName,
                              style: Styles.lineChartStyleMedian,
-                             viewModel: lineViewModel)
+                             viewModel: lineViewModel,
+                             minDataValue: viewModel.min,
+                             maxDataValue: viewModel.max)
                     .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                 }                
             }

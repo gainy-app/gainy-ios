@@ -32,6 +32,12 @@ final class TTFChartViewModel: ObservableObject {
     @Published
     var lastDayPrice: Float = 0
     
+    @Published
+    var min: Double?
+    
+    @Published
+    var max: Double?
+      
     init(spGrow: Float, dayGrow: Float, chartData: ChartData, sypChartData: ChartData, isSPPVisible: Bool) {
         self.spGrow = spGrow
         self.dayGrow = dayGrow

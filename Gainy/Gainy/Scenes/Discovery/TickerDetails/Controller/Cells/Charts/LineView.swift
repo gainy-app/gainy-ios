@@ -9,6 +9,22 @@
 import SwiftUI
 
 public struct LineView: View {
+    init(data: ChartData, title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleGrow, valueSpecifier: String = "%.1f", legendSpecifier: String = "%.2f", viewModel: LineViewModel,
+         minDataValue: Double? = nil,
+         maxDataValue: Double? = nil
+    ) {
+        self.data = data
+        self.title = title
+        self.legend = legend
+        self.style = style
+        self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
+        self.valueSpecifier = valueSpecifier
+        self.legendSpecifier = legendSpecifier
+        self.viewModel = viewModel
+        self.minDataValue = minDataValue
+        self.maxDataValue = maxDataValue
+    }
+    
     
     @ObservedObject var data: ChartData
     public var title: String?
@@ -17,6 +33,8 @@ public struct LineView: View {
     public var darkModeStyle: ChartStyle
     public var valueSpecifier: String
     public var legendSpecifier: String
+    var minDataValue: Double?
+    var maxDataValue: Double?
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false {
@@ -27,28 +45,36 @@ public struct LineView: View {
         }
     }
     
+    
     @ObservedObject
     var viewModel: LineViewModel
-    
+        
     //MARK:- Haptics
     private let hapticTouch = UISelectionFeedbackGenerator()
     
-    init(data: ChartData,
-                title: String? = nil,
-                legend: String? = nil,
-                style: ChartStyle = Styles.lineChartStyleGrow,
-                valueSpecifier: String? = "%.1f",
-                legendSpecifier: String? = "%.2f",
-                viewModel: LineViewModel) {
-        self.data = data
-        self.viewModel = viewModel
-        self.title = title
-        self.legend = legend
-        self.style = style
-        self.valueSpecifier = valueSpecifier!
-        self.legendSpecifier = legendSpecifier!
-        self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
-    }
+    
+//    self.data = data
+//    self.title = title
+//    self.legend = legend
+//    self.style = style
+//    self.valueSpecifier = valueSpecifier!
+//    self.legendSpecifier = legendSpecifier!
+//    self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
+//    self.viewModel = viewModel
+//    self.minDataValue = minDataValue
+//    self.maxDataValue = maxDataValue
+    
+//    init(data: ChartData,
+//                title: String? = nil,
+//                legend: String? = nil,
+//                style: ChartStyle = Styles.lineChartStyleGrow,
+//                valueSpecifier: String? = "%.1f",
+//                legendSpecifier: String? = "%.2f",
+//                minDataValue: Double? = nil,
+//                maxDataValue: Double? = nil,
+//                viewModel: LineViewModel) {
+//
+//    }
     
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
@@ -79,8 +105,8 @@ public struct LineView: View {
                              touchLocation: $viewModel.indicatorLocation,
                              showIndicator: $viewModel.hideHorizontalLines,
                              isSPYVisible:$viewModel.isSPYVisible,
-                             minDataValue: .constant(nil),
-                             maxDataValue: .constant(nil),
+                             minDataValue: .constant(minDataValue),
+                             maxDataValue:.constant(maxDataValue),
                              indicatorVal: $viewModel.currentDataNumber,
                              showBackground: false,
                              gradient: self.style.gradientColor
