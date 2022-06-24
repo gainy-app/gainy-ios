@@ -219,15 +219,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
-        
-        func pctDiff(_ x1: Float, _ x2: Float) -> Float {
-            var diff = (x2 - x1) / x1
-            if x1 < 0 && x2 < 0 {
-                diff = -diff
-            }
-            return Float(round(100 * (diff * 100)) / 100)
-        }
-        
         topChart.isLoading = false
         
         let mainChart = topCharts.first!

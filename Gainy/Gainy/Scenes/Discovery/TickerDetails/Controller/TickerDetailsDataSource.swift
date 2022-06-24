@@ -333,6 +333,9 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
         ticker.loadNewChartData(period: period) {[weak self] in
             guard let self = self else {return}
             self.chartViewModel.isLoading = false
+            
+            self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
+            self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData

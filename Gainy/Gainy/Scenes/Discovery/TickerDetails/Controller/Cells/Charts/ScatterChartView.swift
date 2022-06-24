@@ -278,8 +278,8 @@ struct ScatterChartView: View {
                              title: "Full chart",
                              style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel,
-                             minDataValue: nil,
-                             maxDataValue: nil
+                             minDataValue: viewModel.min,
+                             maxDataValue: viewModel.max
                     ).offset(y: -60)
                     
                     if viewModel.medianData.onlyPoints().uniqued().count > 1 {
@@ -287,8 +287,8 @@ struct ScatterChartView: View {
                                  title: "Full chart",
                                  style: Styles.lineChartStyleMedian,
                                  viewModel: lineViewModel,
-                                 minDataValue: nil,
-                                 maxDataValue: nil
+                                 minDataValue: viewModel.min,
+                                 maxDataValue: viewModel.max
                         ).offset(y: -60)
                             .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                     }

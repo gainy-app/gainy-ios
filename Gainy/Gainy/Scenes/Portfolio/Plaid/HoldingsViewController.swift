@@ -303,6 +303,9 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
                     
                     viewModel.lastDayPrice = Float(self?.viewModel.metrics?.lastDayPrice(range: range) ?? 0.0)
                     
+                    viewModel.min = Double(min(model.sypChartData.onlyPoints().min() ?? 0.0, model.chartData.onlyPoints().min() ?? 0.0))
+                    viewModel.max = Double(max(model.sypChartData.onlyPoints().max() ?? 0.0, model.chartData.onlyPoints().max() ?? 0.0))
+                    
                     viewModel.chartData = model.chartData
                     viewModel.rangeGrow = model.rangeGrow
                     viewModel.rangeGrowBalance = model.rangeGrowBalance
