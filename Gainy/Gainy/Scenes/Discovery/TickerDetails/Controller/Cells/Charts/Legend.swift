@@ -13,6 +13,8 @@ struct Legend: View {
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
     @Binding var minMaxPercent: Bool
+    @Binding var minDataValue: Double?
+    @Binding var maxDataValue: Double?
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     var specifier: String = "%.2f"
@@ -26,8 +28,19 @@ struct Legend: View {
         return frame.size.width / CGFloat(data.points.count-1)
     }
     var stepHeight: CGFloat {
+        var min: Double?
+        var max: Double?
         let points = self.data.onlyPoints()
-        if let min = points.min(), let max = points.max(), min != max {
+        if minDataValue != nil && maxDataValue != nil {
+            min = minDataValue!
+            max = maxDataValue!
+        }else if let minPoint = points.min(), let maxPoint = points.max(), minPoint != maxPoint {
+            min = minPoint
+            max = maxPoint
+        }else {
+            return 0
+        }
+        if let min = min, let max = max, min != max {
             if (min < 0){
                 return (frame.size.height-padding) / CGFloat(max - min)
             }else{
@@ -38,14 +51,13 @@ struct Legend: View {
     }
     
     var min: CGFloat {
-        let points = self.data.onlyPoints()
-        return CGFloat(points.min() ?? 0)
+        return CGFloat(minDataValue ?? 0)
     }
-    
-    var max: CGFloat {
-        let points = self.data.onlyPoints()
-        return CGFloat(points.max() ?? 0)
-    }
+
+//    var max: CGFloat {
+//        let points = self.data.onlyPoints()
+//        return CGFloat(points.max() ?? 0)
+//    }
     
     var body: some View {
         ZStack(alignment: .topLeading){
@@ -149,7 +161,8 @@ struct Legend: View {
 struct Legend_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader{ geometry in
-            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false), minMaxPercent: .constant(false))
+            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false), minMaxPercent: .constant(false),minDataValue: .constant(0.2),
+                   maxDataValue:.constant(4.5))
         }.frame(width: 320, height: 200)
     }
 }

@@ -96,7 +96,12 @@ public struct LineView: View {
                         
                         if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
                             Legend(data: self.data,
-                                   frame: .constant(reader.frame(in: .local)), hideHorizontalLines: $viewModel.hideHorizontalLines, minMaxPercent: $viewModel.minMaxPercent, specifier: legendSpecifier)
+                                   frame: .constant(reader.frame(in: .local)),
+                                   hideHorizontalLines: $viewModel.hideHorizontalLines,
+                                   minMaxPercent: $viewModel.minMaxPercent,
+                                   minDataValue: .constant(minDataValue),
+                                   maxDataValue:.constant(maxDataValue),
+                                   specifier: legendSpecifier)
                                 .animation(.none)
                         }
                                                 
