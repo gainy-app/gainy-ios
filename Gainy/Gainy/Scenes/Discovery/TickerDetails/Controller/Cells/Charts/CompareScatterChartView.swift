@@ -112,8 +112,6 @@ struct CompareScatterChartView: View {
                 .padding(.all, 0)
                 .animation(.linear)
             }
-        }.onAppear {
-            lineViewModel.showCloseLine = false
         }
     }
     

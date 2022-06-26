@@ -31,6 +31,7 @@ struct TTFScatterChartView: View {
             lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
+            lineViewModel.showCloseLine = selectedTag == .d1
             delegate.changeRange(range: selectedTag, viewModel: viewModel)
             hapticTouch.impactOccurred()
             GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : selectedTag.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])

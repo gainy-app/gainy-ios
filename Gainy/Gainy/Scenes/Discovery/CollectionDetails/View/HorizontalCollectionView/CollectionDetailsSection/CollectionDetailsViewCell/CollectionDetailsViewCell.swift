@@ -247,8 +247,13 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
         topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
-        topChart.dayGrow = viewModel.dailyGrow
         topChart.lastDayPrice = viewModel.lastDayPrice
+        
+        if viewModel.lastDayPrice != 0.0 {
+            topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
+            topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
+        }
+        topChart.dayGrow = viewModel.dailyGrow
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
         topChart.spGrow = Float(medianData.startEndDiff)

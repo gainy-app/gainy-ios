@@ -48,110 +48,93 @@ public struct LineView: View {
     
     @ObservedObject
     var viewModel: LineViewModel
-        
+    
     //MARK:- Haptics
     private let hapticTouch = UISelectionFeedbackGenerator()
     
     
-//    self.data = data
-//    self.title = title
-//    self.legend = legend
-//    self.style = style
-//    self.valueSpecifier = valueSpecifier!
-//    self.legendSpecifier = legendSpecifier!
-//    self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
-//    self.viewModel = viewModel
-//    self.minDataValue = minDataValue
-//    self.maxDataValue = maxDataValue
+    //    self.data = data
+    //    self.title = title
+    //    self.legend = legend
+    //    self.style = style
+    //    self.valueSpecifier = valueSpecifier!
+    //    self.legendSpecifier = legendSpecifier!
+    //    self.darkModeStyle = style.darkModeStyle != nil ? style.darkModeStyle! : Styles.lineViewDarkMode
+    //    self.viewModel = viewModel
+    //    self.minDataValue = minDataValue
+    //    self.maxDataValue = maxDataValue
     
-//    init(data: ChartData,
-//                title: String? = nil,
-//                legend: String? = nil,
-//                style: ChartStyle = Styles.lineChartStyleGrow,
-//                valueSpecifier: String? = "%.1f",
-//                legendSpecifier: String? = "%.2f",
-//                minDataValue: Double? = nil,
-//                maxDataValue: Double? = nil,
-//                viewModel: LineViewModel) {
-//
-//    }
+    //    init(data: ChartData,
+    //                title: String? = nil,
+    //                legend: String? = nil,
+    //                style: ChartStyle = Styles.lineChartStyleGrow,
+    //                valueSpecifier: String? = "%.1f",
+    //                legendSpecifier: String? = "%.2f",
+    //                minDataValue: Double? = nil,
+    //                maxDataValue: Double? = nil,
+    //                viewModel: LineViewModel) {
+    //
+    //    }
     
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
     public var body: some View {
         
-         GeometryReader{ geometry in
-                ZStack{
-                    GeometryReader{ reader in
-                        
-//                        if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
+        GeometryReader{ geometry in
+            ZStack{
+                GeometryReader{ reader in
+                    
+//                    if viewModel.showCloseLine && title != Constants.Chart.sypChartName {
 //                        HLine()
 //                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
 //                            .foregroundColor(Color(hex: "E0E6EA"))
 //                            .frame(height: 1)
-//                            .offset(x: 0, y: getOpenLinePoint(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)).y)
+//                            .offset(x: 0, y: getOpenLineY(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)))
 //                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
 //                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
-//                        }
-                        
-                        if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
-                            Legend(data: self.data,
-                                   frame: .constant(reader.frame(in: .local)),
-                                   hideHorizontalLines: $viewModel.hideHorizontalLines,
-                                   minMaxPercent: $viewModel.minMaxPercent,
-                                   minDataValue: .constant(minDataValue),
-                                   maxDataValue:.constant(maxDataValue),
-                                   specifier: legendSpecifier)
-                                .animation(.none)
-                        }
-                                                
-                        Line(data: self.data,
-                             frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)),
-                             touchLocation: $viewModel.indicatorLocation,
-                             showIndicator: $viewModel.hideHorizontalLines,
-                             isSPYVisible:$viewModel.isSPYVisible,
-                             minDataValue: .constant(minDataValue),
-                             maxDataValue:.constant(maxDataValue),
-                             indicatorVal: $viewModel.currentDataNumber,
-                             showBackground: false,
-                             gradient: self.style.gradientColor
-                        )
-                        .offset(x: chartOffset)
-                        .onAppear(){
-                            self.showLegend = true
-                        }
-                        .onDisappear(){
-                            self.showLegend = false
-                        }
+//                    }
+//
+                    if(self.showLegend && viewModel.isSPYVisible == false && viewModel.indicatorLocation == .zero){
+                        Legend(data: self.data,
+                               frame: .constant(reader.frame(in: .local)),
+                               hideHorizontalLines: $viewModel.hideHorizontalLines,
+                               showCloseLine: $viewModel.showCloseLine,
+                               closeLineValue: $viewModel.lastDayPrice,
+                               minMaxPercent: $viewModel.minMaxPercent,
+                               minDataValue: .constant(minDataValue),
+                               maxDataValue:.constant(maxDataValue),
+                               specifier: legendSpecifier)
+                        .animation(.none)
                     }
-                    .frame(width: geometry.frame(in: .local).size.width, height: chartHeight)
-                                  
+                    
+                    Line(data: self.data,
+                         frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)),
+                         touchLocation: $viewModel.indicatorLocation,
+                         showIndicator: $viewModel.hideHorizontalLines,
+                         isSPYVisible:$viewModel.isSPYVisible,
+                         minDataValue: .constant(minDataValue),
+                         maxDataValue:.constant(maxDataValue),
+                         indicatorVal: $viewModel.currentDataNumber,
+                         showBackground: false,
+                         gradient: self.style.gradientColor
+                    )
+                    .offset(x: chartOffset)
+                    .onAppear(){
+                        self.showLegend = true
+                    }
+                    .onDisappear(){
+                        self.showLegend = false
+                    }
                 }
-                .offset(x: 0, y: 40)
                 .frame(width: geometry.frame(in: .local).size.width, height: chartHeight)
                 
+            }
+            .offset(x: 0, y: 40)
+            .frame(width: geometry.frame(in: .local).size.width, height: chartHeight)
+            
         }.onAppear(perform: {
             hapticTouch.prepare()
         })
-    }
-    
-    
-    func getOpenLinePoint(frame: CGRect) -> CGPoint {
-        guard data.points.count > 0 else {return .zero}
-        
-        let points = data.onlyPoints()
-        var lastDayPointIndex: Int = 1
-        
-        let searchVal: Double = Double(viewModel.lastDayPrice)
-        for i in 1...points.count - 2 {
-            if points[i - 1] <= searchVal && searchVal <= points[i + 1] {
-                lastDayPointIndex = i
-                break
-            }
-        }
-        let stepHeight: CGFloat = (frame.size.height - 30) / CGFloat(points.max()! - points.min()!)
-        return CGPoint(x: 0,
-                       y: (frame.size.height - 25) - CGFloat(points[lastDayPointIndex] - points.min()!) * stepHeight)
     }
 }
 

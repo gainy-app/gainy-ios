@@ -29,6 +29,7 @@ struct PortfolioScatterChartView: View {
             isSPPVisible = false
             lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
+            lineViewModel.showCloseLine = selectedTag == .d1
             isLeftDurationVis = selectedTag == .d1
             delegate.changeRange(range: selectedTag, viewModel: viewModel)
             hapticTouch.impactOccurred()

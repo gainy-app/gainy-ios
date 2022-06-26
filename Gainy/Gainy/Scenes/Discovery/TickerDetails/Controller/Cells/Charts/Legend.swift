@@ -12,6 +12,8 @@ struct Legend: View {
     @ObservedObject var data: ChartData
     @Binding var frame: CGRect
     @Binding var hideHorizontalLines: Bool
+    @Binding var showCloseLine: Bool
+    @Binding var closeLineValue: Float
     @Binding var minMaxPercent: Bool
     @Binding var minDataValue: Double?
     @Binding var maxDataValue: Double?
@@ -53,11 +55,11 @@ struct Legend: View {
     var min: CGFloat {
         return CGFloat(minDataValue ?? 0)
     }
-
-//    var max: CGFloat {
-//        let points = self.data.onlyPoints()
-//        return CGFloat(points.max() ?? 0)
-//    }
+    
+    //    var max: CGFloat {
+    //        let points = self.data.onlyPoints()
+    //        return CGFloat(points.max() ?? 0)
+    //    }
     
     var body: some View {
         ZStack(alignment: .topLeading){
@@ -77,6 +79,14 @@ struct Legend: View {
                         .animation(.easeOut(duration: 0.2))
                         .clipped()
                 }.background(Color.clear)
+            }
+            if closeLineValue != 0.0 && showCloseLine {
+                self.line(atHeight: CGFloat(closeLineValue), width: self.frame.width)
+                    .stroke(Color.yellow, style: StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [5, 10]))
+                    .rotationEffect(.degrees(180), anchor: .center)
+                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                    .animation(.easeOut(duration: 0.2))
+                    .clipped()
             }
         }
     }
@@ -161,7 +171,10 @@ struct Legend: View {
 struct Legend_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader{ geometry in
-            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false), minMaxPercent: .constant(false),minDataValue: .constant(0.2),
+            Legend(data: ChartData(points: [0.2,0.4,1.4,4.5]), frame: .constant(geometry.frame(in: .local)), hideHorizontalLines: .constant(false),
+                   showCloseLine: .constant(true),
+                   closeLineValue: .constant(0.0),
+                   minMaxPercent: .constant(false),minDataValue: .constant(0.2),
                    maxDataValue:.constant(4.5))
         }.frame(width: 320, height: 200)
     }

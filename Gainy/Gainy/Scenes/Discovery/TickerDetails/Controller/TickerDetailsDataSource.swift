@@ -117,6 +117,11 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
         chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
         chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
+        if chartViewModel.lastDayPrice != 0.0 {
+            chartViewModel.min = min(Double(chartViewModel.min ?? 0.0), Double(chartViewModel.lastDayPrice))
+            chartViewModel.max = max(Double(chartViewModel.max ?? 0.0), Double(chartViewModel.lastDayPrice))
+        }
+        
         chartViewModel.relatedCollection1DGain = ticker.medianCollection?.metrics?.relativeDailyChange ?? 0.0
         chartViewModel.ticker = ticker.ticker
         chartViewModel.localTicker = ticker
