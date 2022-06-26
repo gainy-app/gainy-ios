@@ -60,6 +60,7 @@ struct Constants {
         static let showPortoCash = "showPortoCash"
         static let showPortoCrypto = "showPortoCrypto"
         static let isInvestBtnVisible = "isInvestBtnVisible"
+        static let isApplyCodeBtnVisible = "isApplyCodeBtnVisible"
         
         static let monthPurchaseVariant = "monthPurchase"
         static let month6PurchaseVariant = "month6Purchase"
@@ -94,6 +95,7 @@ struct Constants {
         static let isPortoCash = "isPortoCashEnabled"
         static let isPortoCrypto = "isPortoCryptoEnabled"
         static let isInvestBtnVisible = "isInvestBtnVisible"
+        static let isApplyCodeBtnVisible = "isApplyCodeBtnVisible"
         
         static let monthPurchase = "monthPurchase"
         static let month6Purchase = "month6Purchase"
