@@ -36,7 +36,7 @@
                     </label>
                     <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="td3-B3-wSs">
                         <rect key="frame" x="0.0" y="96" width="795" height="144"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="144" id="EW4-jH-pPg"/>
                         </constraints>
@@ -52,6 +52,7 @@
                         </userDefinedRuntimeAttributes>
                     </collectionView>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="td3-B3-wSs" secondAttribute="trailing" id="4dA-dd-HU3"/>
                     <constraint firstItem="td3-B3-wSs" firstAttribute="leading" secondItem="dNO-BM-Mg1" secondAttribute="leading" id="FYY-cx-C8V"/>
@@ -61,6 +62,7 @@
                     <constraint firstItem="dQH-7G-Zrk" firstAttribute="top" secondItem="dNO-BM-Mg1" secondAttribute="top" constant="16" id="tfN-SX-dM7"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="innerCollectionView" destination="td3-B3-wSs" id="baf-vu-dbc"/>
             </connections>

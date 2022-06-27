@@ -108,6 +108,7 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
             layer.shadowOpacity = 0.10
             layer.shadowColor = UIColor.black.cgColor
             layer.shadowOffset = CGSize(width: 0, height: 0)
+            shadowView.fillRemoteButtonBack()
         }
         
         override func layoutSubviews() {

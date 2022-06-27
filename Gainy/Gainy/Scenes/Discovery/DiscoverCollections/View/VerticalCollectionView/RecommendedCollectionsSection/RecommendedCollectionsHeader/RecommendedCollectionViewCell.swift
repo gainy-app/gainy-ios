@@ -59,7 +59,8 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         plusButton.autoSetDimensions(to: .init(width: 48, height: 48))
         
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        fillRemoteBack()
+        contentView.fillRemoteBack()
     }
 
     @available(*, unavailable)

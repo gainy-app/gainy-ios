@@ -28,7 +28,8 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
         backImageView.layer.cornerCurve = .continuous
         
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        fillRemoteBack()
+        contentView.fillRemoteBack()
         
         stocksView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
         stocksView.autoPinEdge(.leading, to: .leading, of: contentView, withOffset: 48.0)
