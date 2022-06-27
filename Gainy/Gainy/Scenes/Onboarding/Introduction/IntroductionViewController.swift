@@ -21,17 +21,17 @@ class IntroductionViewController: UIViewController, Storyboarded {
     
     public weak var coordinator: OnboardingCoordinator?
 
-    private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewProgress?
+    private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewObject?
     private var indicatorView: UIView?
     
     private var nextButtonImage: UIImageView = UIImageView.newAutoLayout()
     
     private var currentCaptionIndex = 0
     private let captions = [
-        NSLocalizedString("Discover collections\nof stocks that match\nyour goals", comment: "Discover collections\nof stocks that match\nyour goals"),
-        NSLocalizedString("See highlights\nand benchmarks\nto support your\ndecisions", comment: "See highlights\nand benchmarks\nto support your\ndecisions"),
-        NSLocalizedString("Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them", comment: "Connect all your\nbrokerage accounts\nand get insights on\nhow to improve them"),
-        NSLocalizedString("Compare and sell\nunderperforming\nstocks and improve\nyour gains", comment: "Compare and sell\nunderperforming\nstocks and improve\nyour gains")
+        NSLocalizedString("Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity.", comment: "Every TTF is made up of carefully picked stocks around a central theme or cause, e.g. EV, FinTech, Cybersecurity."),
+        NSLocalizedString("TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming.", comment: "TTFs are automatically rebalanced when a new company becomes available or an existing stock is underperforming."),
+        NSLocalizedString("Invest a set amount starting from $10 into a theme that excites you and Gainy will do the rest.", comment: "Invest a set amount starting from $10 into a theme that excites you and Gainy will do the rest."),
+        NSLocalizedString("Safely connect all your brokerage accounts and track how your portfolio performs in one place.", comment: "Safely connect all your brokerage accounts and track how your portfolio performs in one place.")
     ]
     private let imageNames = [
         "Screen 1",
@@ -55,6 +55,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
+        self.setUpNavigationBar()
     }
     
     // MARK: - Status Bar
@@ -152,19 +153,19 @@ class IntroductionViewController: UIViewController, Storyboarded {
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.black,
-            NSAttributedString.Key.font: UIFont.compactRoundedRegular(14),
-                NSAttributedString.Key.kern: 1.25]
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.compactRoundedSemibold(14),
+                NSAttributedString.Key.kern: 1.1]
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
         let backImage = UIImage(named: "iconArrowLeft")
         let backItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backButtonTap(sender:)))
-        backItem.tintColor = UIColor.black
+        backItem.tintColor = UIColor.white
         let closeImage = UIImage(named: "iconClose")
         let closeItem = UIBarButtonItem(image: closeImage, style: .plain, target: self, action: #selector(closeButtonTap(sender:)))
-        closeItem.tintColor = UIColor.black
+        closeItem.tintColor = UIColor.white
         self.navigationItem.leftBarButtonItems = [backItem]
         self.navigationItem.rightBarButtonItems = [closeItem]
         
@@ -177,7 +178,7 @@ class IntroductionViewController: UIViewController, Storyboarded {
     }
     
     public func addIndicatorView() {
-        let progressObject = ClockwiseProgressIndicatorViewProgress.init(progress: 0.0)
+        let progressObject = ClockwiseProgressIndicatorViewObject.init(progress: 0.0, color: UIColor.white)
         let progressView = ClockwiseProgressIndicatorView(progressObject: progressObject)
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: progressView)
         hosting.view.frame = CGRect.init(x: 0, y: 0, width: 35, height: 35)

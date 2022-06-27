@@ -1,8 +1,11 @@
 import UIKit
 
 extension UILabel {
-    public func setLineHeight(lineHeight: CGFloat, textAlignment: NSTextAlignment ) {
+    public func setLineHeight(lineHeight: CGFloat, textAlignment: NSTextAlignment, color: UIColor = UIColor.black) {
+       
         guard let text = self.text else { return }
+        guard let font = self.font else { return }
+        
         let attributeString = NSMutableAttributedString(string: text)
         let styleLineHeight = lineHeight
         let style = NSMutableParagraphStyle()
@@ -10,16 +13,18 @@ extension UILabel {
             style.maximumLineHeight = styleLineHeight
         style.minimumLineHeight = styleLineHeight
         let range = NSMakeRange(0, text.utf16.count)
-        attributeString.addAttribute(.kern, value: NSNumber(1), range: range)
         attributeString.addAttribute(.paragraphStyle, value: style, range: range)
-        attributeString.addAttribute(.foregroundColor, value: UIColor.black, range: range)
-        attributeString.addAttribute(.font, value: self.font, range: range)
+        attributeString.addAttribute(.foregroundColor, value: color, range: range)
+        attributeString.addAttribute(.font, value: font, range: range)
         
         self.attributedText = attributeString
     }
     
     public func setKern(kern: CGFloat = 1.25, color: UIColor = UIColor.black) {
+        
         guard let text = self.text else { return }
+        guard let font = self.font else { return }
+        
         let attributeString = NSMutableAttributedString(string: text)
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment
@@ -27,7 +32,7 @@ extension UILabel {
         attributeString.addAttribute(.kern, value: kern, range: range)
         attributeString.addAttribute(.paragraphStyle, value: style, range: range)
         attributeString.addAttribute(.foregroundColor, value: color, range: range)
-        attributeString.addAttribute(.font, value: self.font, range: range)
+        attributeString.addAttribute(.font, value: font, range: range)
         self.attributedText = attributeString
     }
 }

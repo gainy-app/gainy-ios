@@ -40,8 +40,8 @@ final class IntroductionCaptionCell: UICollectionViewCell {
         textLabel.layer.masksToBounds = false
         textLabel.clipsToBounds = false
         textLabel.numberOfLines = 0
-        textLabel.font = UIFont.proDisplaySemibold(32)
-        textLabel.setLineHeight(lineHeight: 32, textAlignment: NSTextAlignment.left)
+        textLabel.font = UIFont.proDisplayMedium(18)
+        textLabel.setLineHeight(lineHeight: 32, textAlignment: NSTextAlignment.left, color: UIColor.white)
         textLabel.text = captionText
     }
 }

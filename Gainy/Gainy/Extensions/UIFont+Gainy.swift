@@ -30,6 +30,10 @@ extension UIFont {
         UIFont.init(name: "SFProDisplay-Regular", size: size)!
     }
     
+    static func proDisplayMedium(_ size: CGFloat = defaultSize) -> UIFont {
+        UIFont.init(name: "SFProDisplay-Medium", size: size)!
+    }
+    
     static func proDisplaySemibold(_ size: CGFloat = defaultSize) -> UIFont {
         UIFont.init(name: "SFProDisplay-Semibold", size: size)!
     }

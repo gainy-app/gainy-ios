@@ -7,28 +7,32 @@
 
 import SwiftUI
 
-class ClockwiseProgressIndicatorViewProgress: ObservableObject {
+class ClockwiseProgressIndicatorViewObject: ObservableObject {
     
     @Published
     var progress: Float = 0.25
     
-    init(progress: Float) {
+    @Published
+    var color: UIColor = UIColor.black
+    
+    init(progress: Float, color: UIColor) {
         
         self.progress = progress
+        self.color = color
     }
 }
 
 struct ClockwiseProgressIndicatorView: View {
     
     @ObservedObject
-    var progressObject: ClockwiseProgressIndicatorViewProgress
+    var progressObject: ClockwiseProgressIndicatorViewObject
     
     var body: some View {
         ZStack {
             ForEach(0..<12) { tick in
                 VStack {
                     Circle()
-                        .fill(Color.init(UIColor.black.withAlphaComponent(0.3)))
+                        .fill(Color.init(self.progressObject.color.withAlphaComponent(0.3)))
                         .frame(width: 3, height: 3)
                     Spacer()
                 }
@@ -39,7 +43,7 @@ struct ClockwiseProgressIndicatorView: View {
             ForEach(0..<180) { tick in
                 VStack {
                     Circle()
-                        .fill(Color.black)
+                        .fill(Color.init(self.progressObject.color))
                         .frame(width: 3, height: 3)
                     Spacer()
                 }

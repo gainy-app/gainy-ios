@@ -56,7 +56,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     }
     
     @IBOutlet weak var scrollView: UIScrollView!
-    private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewProgress?
+    private var indicatorViewProgressObject: ClockwiseProgressIndicatorViewObject?
     private var indicatorView: UIView?
     private var currentTab: PersonalizationTab = .investmentsGoals
     
@@ -363,7 +363,7 @@ class PersonalizationIndicatorsViewController: BaseViewController {
     
     public func addIndicatorView() {
         
-        let progressObject = ClockwiseProgressIndicatorViewProgress.init(progress: 0.0)
+        let progressObject = ClockwiseProgressIndicatorViewObject.init(progress: 0.0, color: UIColor.black)
         let progressView = ClockwiseProgressIndicatorView(progressObject: progressObject)
         let hosting = CustomHostingController.init(shouldShowNavigationBar: false, rootView: progressView)
         hosting.view.frame = CGRect.init(x: 0, y: 0, width: 35, height: 35)
