@@ -104,6 +104,7 @@ struct ScatterChartView: View {
                     chartView
                         .padding(.top, 20)
                         .activityIndicator(isVisible: viewModel.isLoading)
+                    compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
@@ -125,6 +126,7 @@ struct ScatterChartView: View {
                     chartView
                         .padding(.top, 20)
                         .activityIndicator(isVisible: viewModel.isLoading)
+                    compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
@@ -161,8 +163,8 @@ struct ScatterChartView: View {
                                 .padding(.leading, 8)
                                 .padding(.trailing, 8)
                         }
-                            .background(UIColor(hexString: "#F7F8F9")!.uiColor)
-                            .cornerRadius(8.0)
+                        .background(UIColor(hexString: "#F7F8F9")!.uiColor)
+                        .cornerRadius(8.0)
                         
                         Spacer()
                         
@@ -380,6 +382,23 @@ struct ScatterChartView: View {
         return .zero
     }
     
+    var compareLegend: some View {
+        HStack(alignment: .center, spacing: 8.0) {
+            Rectangle()
+                .frame(width: 40, height: 1.5)
+                .foregroundColor(UIColor(hexString: "0062FF")!.uiColor)
+            Text("\(viewModel.compareTTFName)")
+                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                .font(UIFont.compactRoundedSemibold(12).uiFont)
+                .multilineTextAlignment(.center)
+            Spacer()
+        }
+        .frame(height: 20)
+        .opacity(isMedianVisible ? 1.0 : 0.0)
+        .padding(.leading, 30)
+        .offset(y: -16)
+    }
+    
     var bottomMedian: some View {
         HStack(spacing: 8) {
             //            Button(action: {
@@ -431,8 +450,8 @@ struct ScatterChartView: View {
             
             Spacer()
         }
-            .padding(.top, 8)
-            .frame(height: 24)
+        .padding(.top, 8)
+        .frame(height: 24)
     }
     
     private func bottomMenu(_ geometry: GeometryProxy) -> some View {

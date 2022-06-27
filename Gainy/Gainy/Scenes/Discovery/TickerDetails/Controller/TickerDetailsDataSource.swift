@@ -127,6 +127,7 @@ final class TickerDetailsDataSource: NSObject {
         chartViewModel.localTicker = ticker
         chartViewModel.chartData = ticker.localChartData
         chartViewModel.medianData = ticker.localMedianData
+        chartViewModel.compareTTFName = ticker.medianCollection?.name ?? ""
         wsrModel.totalScore = ticker.wsjData.rate
         wsrModel.priceTarget = ticker.wsjData.targetPrice
         wsrModel.progress = ticker.wsjData.detailedStats

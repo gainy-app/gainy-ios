@@ -80,15 +80,15 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func addPreloadOverlay() {
-//        guard Auth.auth().currentUser == nil else {
-//            RemoteConfigManager.shared.loadDefaults {
-//            }
-//            OneSignal.promptForPushNotifications(userResponse: { accepted in
-//                print("User accepted notification: \(accepted)")
-//                GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
-//            })
-//            return
-//        }
+        guard Auth.auth().currentUser == nil else {
+            RemoteConfigManager.shared.loadDefaults {
+            }
+            OneSignal.promptForPushNotifications(userResponse: { accepted in
+                print("User accepted notification: \(accepted)")
+                GainyAnalytics.logEvent("pushes_status", params: ["accepted" : accepted])
+            })
+            return
+        }
         
         insertPreloadOverlay()
     }
