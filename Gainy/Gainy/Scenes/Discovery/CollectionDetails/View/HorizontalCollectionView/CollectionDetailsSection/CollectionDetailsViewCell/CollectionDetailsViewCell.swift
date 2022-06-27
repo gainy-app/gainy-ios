@@ -536,6 +536,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
             }
             chartHosting.view.clipsToBounds = false
+            chartHosting.view.fillRemoteBack()
             cell.isSkeletonable = collectionView.isSkeletonable
             if collectionView.sk.isSkeletonActive {
                 cell.showAnimatedGradientSkeleton()

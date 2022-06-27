@@ -7,7 +7,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.Gainy.white
+        fillRemoteBack()
 
         addSubview(titleLabel)
         addSubview(descriptionLabel)
@@ -62,7 +62,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
 
         label.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
         label.textColor = UIColor.Gainy.textDark
-        label.backgroundColor = UIColor.Gainy.white
+        label.backgroundColor = .clear
         label.isOpaque = true
 
         label.numberOfLines = 1
@@ -78,7 +78,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
 
         label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
         label.textColor = UIColor.Gainy.darkGray
-        label.backgroundColor = UIColor.Gainy.white
+        label.backgroundColor = .clear
         label.isOpaque = true
 
         label.numberOfLines = 0

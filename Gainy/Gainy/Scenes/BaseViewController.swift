@@ -81,8 +81,21 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         
         observeNetworkStatus()
         setupAnimation()
-        
-        
+        fillBackColor()
+    }
+    
+    //MARK: - Remote colors
+    
+    private let vcToFill: [String] = [String(describing: HomeViewController.self),
+                                      String(describing: CollectionDetailsViewController.self),
+                                      String(describing: SingleCollectionDetailsViewController.self),
+                                    String(describing: DiscoverCollectionsViewController.self)]
+    
+    private func fillBackColor() {
+        let curName = String(describing: type(of: self))
+        if vcToFill.contains(curName) {
+            view.fillRemoteBack()
+        }
     }
     
     // MARK: - Network Status Observation

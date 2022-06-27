@@ -36,6 +36,19 @@ final class RemoteConfigManager {
     @UserDefault(Constants.UserDefaults.yearPurchaseVariant)
     var yearPurchaseVariant: ProductVariant?
     
+    @UserDefault(Constants.UserDefaults.mainBackColor)
+    var mainBackColorHex: String?
+    
+    var mainBackColor: UIColor {
+        UIColor(hexString: mainBackColorHex ?? "#FFFFFF") ?? .white
+    }
+    
+    @UserDefault(Constants.UserDefaults.mainButtonColor)
+    var mainButtonColorHex: String?
+    
+    var mainButtonColor: UIColor {
+        UIColor(hexString: mainButtonColorHex ?? "#FFFFFF") ?? .white
+    }
        
     private var remoteConfig: RemoteConfig!
      
@@ -58,6 +71,9 @@ final class RemoteConfigManager {
                 self?.showPortoCrypto = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isPortoCrypto).boolValue ?? false
                 self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
+                
+                self?.mainBackColorHex = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.mainBackColor).stringValue ?? "#FFFFFF"
+                self?.mainButtonColorHex = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.mainButtonColor).stringValue ?? "#FFFFFF"
                 
                 //Purchases
                 self?.monthPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.monthPurchase).stringValue ?? "A") ?? .a

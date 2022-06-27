@@ -245,7 +245,7 @@ extension HomeDataSource: UITableViewDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 8
         button.layer.cornerCurve = .continuous
-        button.backgroundColor = UIColor(hexString: "F7F8F9")
+        button.fillRemoteButtonBack()
         
         let reorderIconImageView = UIImageView(
             frame: CGRect(x: 0, y: 0, width: 16, height: 16)

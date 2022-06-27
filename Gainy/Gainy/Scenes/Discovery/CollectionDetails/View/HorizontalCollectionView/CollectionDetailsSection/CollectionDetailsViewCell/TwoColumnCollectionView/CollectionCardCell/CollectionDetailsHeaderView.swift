@@ -113,7 +113,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
-        sortByButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        sortByButton.fillRemoteButtonBack()
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
         self.addSubview(sortByButton)
         sortByButton.autoPinEdge(toSuperviewEdge: .left, withInset: 20.0)
@@ -221,7 +221,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     }
     
     private func setupSettingViews() {
-        backgroundColor = .white
+        backgroundColor = RemoteConfigManager.shared.mainBackColor
         self.addSubview(tickerLbl)
         tickerLbl.autoSetDimensions(to: CGSize.init(width: 42, height: 24))
         tickerLbl.autoPinEdge(.left, to: .left, of: self, withOffset: 32)

@@ -115,7 +115,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
         blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
         
-        view.backgroundColor = UIColor.Gainy.white
+        view.fillRemoteBack()
         
         
         let discoverCollectionsButton = UIButton(
@@ -228,13 +228,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchIconContainerView.addSubview(searchIconImageView)
         
         searchIconImageView.contentMode = .center
-        searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
+        searchIconImageView.fillRemoteButtonBack()
         searchIconImageView.image = UIImage(named: "search")
         
         searchTextField.leftView = searchIconContainerView
         searchTextField.leftViewMode = .always
         searchTextField.rightViewMode = .whileEditing
-        searchTextField.backgroundColor = UIColor.Gainy.lightBack
         searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
@@ -255,6 +254,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextField.addTarget(self, action: #selector(textFieldEditingDidEnd(_:)), for: .editingDidEnd)
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         searchTextField.delegate = self
+        searchTextField.fillRemoteButtonBack()
         navigationBarContainer.addSubview(searchTextField)
         self.searchTextField = searchTextField
         
@@ -382,7 +382,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         searchCollectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
         
-        searchCollectionView.backgroundColor = .white
+        searchCollectionView.fillRemoteBack()
         searchCollectionView.showsVerticalScrollIndicator = false
         searchCollectionView.dragInteractionEnabled = true
         searchCollectionView.bounces = false

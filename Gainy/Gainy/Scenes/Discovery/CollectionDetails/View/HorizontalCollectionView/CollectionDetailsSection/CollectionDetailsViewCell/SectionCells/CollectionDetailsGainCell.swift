@@ -76,7 +76,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         medianBtn.autoPinEdge(.top, to: .top, of: medianView)
         medianBtn.autoPinEdge(.bottom, to: .bottom, of: medianView)
         medianView.isHidden = true
-        contentView.backgroundColor = .white
+        contentView.fillRemoteBack()
     }
     
     @available(*, unavailable)
@@ -173,7 +173,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         let view = UIView()
         
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        view.fillRemoteButtonBack()
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
         view.isSkeletonable = true
@@ -248,7 +248,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
     lazy var medianView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        view.fillRemoteButtonBack()
         view.layer.cornerRadius = 8.0
         view.layer.masksToBounds = true
         view.isSkeletonable = true

@@ -34,7 +34,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.Gainy.white
         let navigationBarContainer = UIView(
             frame: CGRect(
                 x: 0,
@@ -55,7 +54,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
         blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
         blurView.intensity = 0.3
-        view.backgroundColor = UIColor.Gainy.white
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
@@ -113,7 +111,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         searchTextField.leftView = searchIconContainerView
         searchTextField.leftViewMode = .always
         searchTextField.rightViewMode = .whileEditing
-        searchTextField.backgroundColor = UIColor.Gainy.lightBack
+        searchTextField.fillRemoteButtonBack()
         searchTextField.returnKeyType = .done
         
         let btnFrame = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 24 + 12, height: 24))
@@ -164,7 +162,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.register(UINib.init(nibName: HomeTickersCollectionViewCell.cellIdentifier, bundle: nil), forCellWithReuseIdentifier: HomeTickersCollectionViewCell.cellIdentifier)
         
         
-        discoverCollectionsCollectionView.backgroundColor = UIColor.Gainy.white
+        discoverCollectionsCollectionView.fillRemoteBack()
         discoverCollectionsCollectionView.showsVerticalScrollIndicator = false
         discoverCollectionsCollectionView.dragInteractionEnabled = true
         

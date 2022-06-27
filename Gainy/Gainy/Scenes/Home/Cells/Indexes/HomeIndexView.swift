@@ -48,9 +48,10 @@ final class HomeIndexView: CornerView {
     }
     
     private func setupView() {
-        self.backgroundColor = .white
-        
+        self.backgroundColor = .clear
         addDashedBorder()
+        fillRemoteButtonBack()
+        clipsToBounds = true
     }
     
     private var dashLayer: CAShapeLayer?

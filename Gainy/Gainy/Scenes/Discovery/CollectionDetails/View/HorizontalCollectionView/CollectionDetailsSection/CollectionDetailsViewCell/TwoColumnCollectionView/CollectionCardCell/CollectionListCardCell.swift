@@ -74,7 +74,7 @@ final class CollectionListCardCell: RoundedWithShadowCollectionViewCell {
         firstMarkerLabel.autoSetDimension(.width, toSize: 48.0)
         
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = RemoteConfigManager.shared.mainButtonColor
     }
     
     @available(*, unavailable)

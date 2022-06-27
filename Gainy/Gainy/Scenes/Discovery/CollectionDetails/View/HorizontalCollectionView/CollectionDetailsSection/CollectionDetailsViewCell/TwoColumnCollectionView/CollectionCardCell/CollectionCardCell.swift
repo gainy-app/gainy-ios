@@ -70,7 +70,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
         addRemoveWatchlistButton.autoPinEdge(toSuperviewEdge: .bottom)
         
         layer.isOpaque = true
-        backgroundColor = UIColor.Gainy.white
+        backgroundColor = RemoteConfigManager.shared.mainButtonColor
     }
     
     @available(*, unavailable)

@@ -209,7 +209,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        contentView.fillRemoteBack()
     }
     
     override func prepareForReuse() {

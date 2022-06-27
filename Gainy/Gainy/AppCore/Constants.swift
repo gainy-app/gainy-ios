@@ -68,6 +68,9 @@ struct Constants {
         
         static let isInviteAvaialble = "isInviteAvaialble"
         static let fromInviteId = "fromInviteId"
+        
+        static let mainBackColor = "mainBackColor"
+        static let mainButtonColor = "mainButtonColor"
     }
     
     struct Links {
@@ -100,6 +103,9 @@ struct Constants {
         static let monthPurchase = "monthPurchase"
         static let month6Purchase = "month6Purchase"
         static let yearPurchase = "yearPurchase"
+        
+        static let mainBackColor = "mainBackColor"
+        static let mainButtonColor = "mainButtonColor"
     }
     
     struct OneSignal {

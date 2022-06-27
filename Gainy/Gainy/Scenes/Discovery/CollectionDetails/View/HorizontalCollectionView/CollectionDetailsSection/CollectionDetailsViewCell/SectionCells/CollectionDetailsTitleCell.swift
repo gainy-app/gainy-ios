@@ -28,7 +28,7 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        backgroundColor = RemoteConfigManager.shared.mainBackColor
         self.isSkeletonable = true
     }
     

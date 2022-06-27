@@ -93,7 +93,7 @@ struct TTFScatterChartView: View {
 //                    .frame(height: 24)
 //                    .offset(y: -16)
             }
-            .background(Color.white)
+            .background(RemoteConfigManager.shared.mainBackColor.uiColor)
             .onAppear(perform: {
                 hapticTouch.prepare()
             })

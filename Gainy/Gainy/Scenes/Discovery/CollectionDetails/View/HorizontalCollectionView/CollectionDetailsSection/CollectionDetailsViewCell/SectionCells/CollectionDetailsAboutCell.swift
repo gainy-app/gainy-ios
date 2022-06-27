@@ -31,7 +31,7 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
 //        moreBtn.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
 //        moreBtn.autoPinEdge(toSuperviewEdge: .bottom, withInset: 24)
         
-        contentView.backgroundColor = .white
+        contentView.fillRemoteBack()
     }
     
     
@@ -78,7 +78,6 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
     }
     
     override func prepareForReuse() {

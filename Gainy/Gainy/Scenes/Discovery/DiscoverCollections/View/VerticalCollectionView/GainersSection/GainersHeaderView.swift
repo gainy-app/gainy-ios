@@ -13,7 +13,7 @@ final class GainersHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.Gainy.white
+        fillRemoteBack()
 
         addSubview(titleLabel)
 
@@ -52,7 +52,7 @@ final class GainersHeaderView: UICollectionReusableView {
 
         label.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
         label.textColor = UIColor.Gainy.textDark
-        label.backgroundColor = UIColor.Gainy.white
+        label.backgroundColor = .clear
         label.isOpaque = true
 
         label.numberOfLines = 1
