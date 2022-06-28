@@ -190,6 +190,12 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
         if let rangeData = profileGains[period] {            
             viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
             viewModel.max = Double(max(rangeData.sypChartData.onlyPoints().max() ?? 0.0, rangeData.chartData.onlyPoints().max() ?? 0.0))
+            
+            if rangeData.sypChartData.onlyPoints().isEmpty {
+                viewModel.min = rangeData.chartData.onlyPoints().min() ?? 0.0
+                viewModel.max = rangeData.chartData.onlyPoints().max() ?? 0.0
+            }
+            
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
             viewModel.rangeGrowBalance = rangeData.rangeGrowBalance

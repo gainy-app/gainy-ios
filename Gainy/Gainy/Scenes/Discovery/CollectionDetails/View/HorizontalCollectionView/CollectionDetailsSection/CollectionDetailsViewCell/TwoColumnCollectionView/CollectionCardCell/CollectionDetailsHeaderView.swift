@@ -707,7 +707,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     lazy var firstMarketMarkerButton: UIButton = {
         let button = UIButton()
 
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = .clear
 
         button.addTarget(self,
                          action: #selector(firstMarketMarkerTapped(_:)),
@@ -719,7 +719,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     lazy var secondMarketMarkerButton: UIButton = {
         let button = UIButton()
 
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = .clear
 
         button.addTarget(self,
                          action: #selector(secondMarketMarkerTapped(_:)),
@@ -731,7 +731,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     lazy var thirdMarketMarkerButton: UIButton = {
         let button = UIButton()
 
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = .clear
 
         button.addTarget(self,
                          action: #selector(thirdMarketMarkerTapped(_:)),
@@ -743,7 +743,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     lazy var fourthMarketMarkerButton: UIButton = {
         let button = UIButton()
 
-        button.backgroundColor = UIColor.Gainy.white
+        button.backgroundColor = .clear
 
         button.addTarget(self,
                          action: #selector(fourthMarketMarkerTapped(_:)),

@@ -116,6 +116,10 @@ final class TickerDetailsDataSource: NSObject {
     func updateChart() {
         chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
         chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
+        if ticker.localMedianData.onlyPoints().isEmpty {
+            chartViewModel.min = ticker.localChartData.onlyPoints().min() ?? 0.0
+            chartViewModel.max = ticker.localChartData.onlyPoints().max() ?? 0.0
+        }
         chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
         if chartViewModel.lastDayPrice != 0.0 {
             chartViewModel.min = min(Double(chartViewModel.min ?? 0.0), Double(chartViewModel.lastDayPrice))
@@ -342,6 +346,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             
             self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
             self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
+            if self.ticker.localMedianData.onlyPoints().isEmpty {
+                self.chartViewModel.min = self.ticker.localChartData.onlyPoints().min() ?? 0.0
+                self.chartViewModel.max = self.ticker.localChartData.onlyPoints().max() ?? 0.0
+            }
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData

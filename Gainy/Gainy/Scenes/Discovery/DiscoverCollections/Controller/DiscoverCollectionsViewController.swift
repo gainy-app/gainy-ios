@@ -105,7 +105,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         searchIconContainerView.addSubview(searchIconImageView)
         searchIconImageView.contentMode = .center
-        searchIconImageView.backgroundColor = UIColor.Gainy.lightBack
+        searchIconImageView.backgroundColor = .clear
         searchIconImageView.image = UIImage(named: "search")
         
         searchTextField.leftView = searchIconContainerView

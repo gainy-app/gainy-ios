@@ -82,6 +82,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
         largeBack.autoPinEdge(toSuperviewEdge: .right, withInset: 16)
         largeBack.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
 //        clipsToBounds = false
+        contentView.fillRemoteBack()
     }
     
     
@@ -214,7 +215,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        contentView.fillRemoteBack()
         
     }
     

@@ -119,7 +119,8 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         addIndicatorView()
         
         layer.isOpaque = true
-        backgroundColor = RemoteConfigManager.shared.mainButtonColor
+        contentView.fillRemoteButtonBack()
+        contentView.layer.cornerRadius = 16.0
     }
     
     func configureWithChartData(data: GetTtfPieChartQuery.Data.CollectionPiechart, index: Int) {

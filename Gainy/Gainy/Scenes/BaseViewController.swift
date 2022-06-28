@@ -81,6 +81,13 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
         
         observeNetworkStatus()
         setupAnimation()
+        
+        NotificationCenter.default.publisher(for: NotificationManager.remoteConfigLoadedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: {[weak self] _ in
+                self?.fillBackColor()
+            }.store(in: &cancellables)
         fillBackColor()
     }
     

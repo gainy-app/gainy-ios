@@ -24,6 +24,7 @@ class NotificationManager: NSObject {
     static let subscriptionChangedNotification = Notification.Name.init("subscriptionChangedNotification")
     static let requestOpenHomeNotification = Notification.Name.init("requestOpenHomeNotification")
     static let requestOpenCollectionWithIdNotification = Notification.Name.init("requestOpenCollectionWithIdNotification")
+    static let remoteConfigLoadedNotification = Notification.Name.init("remoteConfigLoadedNotification")
     
     // Singleton
     static let shared = NotificationManager()

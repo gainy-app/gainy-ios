@@ -247,6 +247,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
         topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
+        if medianData.onlyPoints().isEmpty {
+            topChart.min = topChartData.onlyPoints().min() ?? 0.0
+            topChart.max = topChartData.onlyPoints().max() ?? 0.0
+        }
         topChart.lastDayPrice = viewModel.lastDayPrice
         
         if viewModel.lastDayPrice != 0.0 {

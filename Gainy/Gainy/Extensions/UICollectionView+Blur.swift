@@ -15,28 +15,28 @@ extension UIView {
         })
         
         guard blurAdded == nil else {
-            (blurAdded as? BlurEffectView)?.intensity = 0.2
+            (blurAdded as? BlurEffectView)?.intensity = 0.3
             return
         }
         
-        let blurView = BlurEffectView(intensity: 0.2)
+        let blurView = BlurEffectView(intensity: 0.3)
         blurView.tag = -11
         addSubview(blurView)
         
-        let whiteBack = UIView()
-        whiteBack.backgroundColor = UIColor.white.withAlphaComponent(0.7)
-        whiteBack.tag = -14
-        addSubview(whiteBack)
+//        let whiteBack = UIView()
+//        whiteBack.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+//        whiteBack.tag = -14
+//        addSubview(whiteBack)
         
         blurView.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
         blurView.autoPinEdge(toSuperviewEdge: .top, withInset: top)
         blurView.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
         blurView.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
         
-        whiteBack.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
-        whiteBack.autoPinEdge(toSuperviewEdge: .top, withInset: top)
-        whiteBack.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
-        whiteBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
+//        whiteBack.autoPinEdge(toSuperviewEdge: .leading, withInset: left)
+//        whiteBack.autoPinEdge(toSuperviewEdge: .top, withInset: top)
+//        whiteBack.autoPinEdge(toSuperviewEdge: .trailing, withInset: right)
+//        whiteBack.autoPinEdge(toSuperviewEdge: .bottom, withInset: bottom)
     }
     
     func removeBlur() {
@@ -45,11 +45,11 @@ extension UIView {
         }){
             blurView.removeFromSuperview()
         }
-        if let blurView = subviews.first(where: {
-            $0.tag == -14
-        }){
-            blurView.removeFromSuperview()
-        }
+//        if let blurView = subviews.first(where: {
+//            $0.tag == -14
+//        }){
+//            blurView.removeFromSuperview()
+//        }
     }
     
     func addBlockView(delegate: TTFBlockViewDelegate? = nil) ->  TTFBlockView? {
@@ -59,6 +59,7 @@ extension UIView {
         let blockView = TTFBlockView()
         blockView.delegate = delegate
         blockView.tag = -12
+        blockView.backgroundColor = .clear
         addSubview(blockView)
         
         blockView.autoPinEdge(toSuperviewEdge: .leading, withInset: 0)

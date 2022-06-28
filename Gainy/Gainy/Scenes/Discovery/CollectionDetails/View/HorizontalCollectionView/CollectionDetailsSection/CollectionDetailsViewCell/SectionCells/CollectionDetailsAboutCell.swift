@@ -78,11 +78,12 @@ final class CollectionDetailsAboutCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        contentView.fillRemoteBack()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        contentView.fillRemoteBack()
         
     }
     
