@@ -30,7 +30,14 @@ final class IntroductionCaptionCell: UICollectionViewCell {
         guard let imageView = imageView else {return}
         guard imageName.count > 0 else {return}
         guard let image = UIImage(named: imageName) else {return}
-        imageView.contentMode = .scaleAspectFit
+        
+        if UIScreen.main.bounds.size.height <= 736.0 {
+            imageView.transform = CGAffineTransform.init(scaleX: 0.7, y: 0.7)
+        } else {
+            imageView.transform = CGAffineTransform.identity
+        }
+        imageView.clipsToBounds = false
+        imageView.contentMode = .center
         imageView.image = image
     }
     
