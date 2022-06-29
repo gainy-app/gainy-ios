@@ -28,8 +28,6 @@ final class TickerDetailsDataSource: NSObject {
     
     private let totalRows = 10
     
-    
-    
     init(ticker: TickerInfo) {
         self.ticker = ticker
         super.init()
@@ -121,7 +119,7 @@ final class TickerDetailsDataSource: NSObject {
             chartViewModel.max = ticker.localChartData.onlyPoints().max() ?? 0.0
         }
         chartViewModel.lastDayPrice = Float(ticker.ticker.realtimeMetrics?.previousDayClosePrice ?? 0.0)
-        if chartViewModel.lastDayPrice != 0.0 {
+        if chartViewModel.lastDayPrice != 0.0 && ticker.chartRange == .d1 {
             chartViewModel.min = min(Double(chartViewModel.min ?? 0.0), Double(chartViewModel.lastDayPrice))
             chartViewModel.max = max(Double(chartViewModel.max ?? 0.0), Double(chartViewModel.lastDayPrice))
         }
@@ -350,6 +348,12 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
                 self.chartViewModel.min = self.ticker.localChartData.onlyPoints().min() ?? 0.0
                 self.chartViewModel.max = self.ticker.localChartData.onlyPoints().max() ?? 0.0
             }
+            
+            if self.chartViewModel.lastDayPrice != 0.0 && self.ticker.chartRange == .d1 {
+                self.chartViewModel.min = min(Double(self.chartViewModel.min ?? 0.0), Double(self.chartViewModel.lastDayPrice))
+                self.chartViewModel.max = max(Double(self.chartViewModel.max ?? 0.0), Double(self.chartViewModel.lastDayPrice))
+            }
+            
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData

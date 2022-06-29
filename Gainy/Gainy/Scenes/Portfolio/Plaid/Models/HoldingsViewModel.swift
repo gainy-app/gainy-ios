@@ -232,11 +232,11 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             }
                             
-                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
-                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 {
-                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-                            }
+//                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
+//                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 {
+//                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
+//                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
+//                            }
                             
                             self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow

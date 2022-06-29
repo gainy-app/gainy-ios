@@ -196,6 +196,11 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
                 viewModel.max = rangeData.chartData.onlyPoints().max() ?? 0.0
             }
             
+//            if viewModel.lastDayPrice != 0.0 && period == .d1 {
+//                viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
+//                viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
+//            }
+            
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
             viewModel.rangeGrowBalance = rangeData.rangeGrowBalance
