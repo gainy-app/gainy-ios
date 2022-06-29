@@ -6,6 +6,7 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
+• UI Adjustments
 • Charts median state saved
 
 :red_circle: Important Notes:

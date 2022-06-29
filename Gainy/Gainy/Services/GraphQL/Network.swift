@@ -129,7 +129,8 @@ final class CustomInterceptor: ApolloInterceptor {
                 chain.proceedAsync(request: request,
                                    response: response,
                                    completion: completion)
-            }            
+            }
+            dprint("\(request.additionalHeaders)", profileId: 22002)
         }
         
         if let token = self.firebaseAuthToken {

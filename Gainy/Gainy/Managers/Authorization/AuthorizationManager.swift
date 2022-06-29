@@ -484,7 +484,9 @@ final class AuthorizationManager {
                     completion(false)
                     return
                 }
-                
+                if appProfiles.isEmpty {
+                    dprint("ALI: \(appProfiles)")
+                }
                 processProfs(appProfiles: appProfiles)
                 
             case .failure(let error):
