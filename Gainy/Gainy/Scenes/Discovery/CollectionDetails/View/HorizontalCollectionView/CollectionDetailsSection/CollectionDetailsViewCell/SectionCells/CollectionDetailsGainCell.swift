@@ -302,7 +302,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
     
     var isMedianVisible: Bool = false {
         didSet {
-            medianView.backgroundColor = isMedianVisible ? UIColor.init(hexString: "0062FF")! : UIColor(hexString: "F7F8F9", alpha: 1.0)!
+            medianView.backgroundColor = isMedianVisible ? UIColor.init(hexString: "0062FF")! : RemoteConfigManager.shared.mainBackColor
             toggleImgView.image = UIImage(named: isMedianVisible ? "toggle_on" : "toggle_off")
             medianTitleLbl.textColor = isMedianVisible ? .white : UIColor(hexString: "B1BDC8", alpha: 1.0)
         }

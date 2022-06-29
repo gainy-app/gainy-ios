@@ -430,12 +430,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
         
-        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
-            gainsCell.isMedianVisible = false
-        }
+//        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
+//            gainsCell.isMedianVisible = false
+//        }
         
         viewModel.chartRange = range
-        topChart.isSPPVisible = false
+        //topChart.isSPPVisible = false
         topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
@@ -521,6 +521,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                 cell.configureAsWatchlist(tickersCount: viewModel.stocksAmount)
             } else {
                 cell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel, topChart: topChart)
+                cell.isMedianVisible = topChart.isSPPVisible
             }
             cell.delegate = self
             cell.isSkeletonable = collectionView.isSkeletonable
@@ -1229,7 +1230,6 @@ extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
         self.loadChartForRange(period)
     }
 }
-
 
 extension CollectionDetailsViewCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

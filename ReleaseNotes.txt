@@ -1,14 +1,12 @@
-iOS v1.4.3 #236 available
+iOS v1.4.3 #238 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
 :new: New:
-• New Splash
+• -
 
 :hammer_and_wrench: Improvements
-• Charts median adjusted
-• Charts last day price
-• UI adjustments
+• Charts median state saved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

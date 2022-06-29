@@ -73,8 +73,6 @@ struct ScatterChartView: View {
     private var selectedTag: ChartPeriod = .d1 {
         didSet {
             guard  lineViewModel.chartPeriod != selectedTag else {return}
-            isMedianVisible = false
-            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             lineViewModel.showCloseLine = selectedTag == .d1
@@ -422,11 +420,12 @@ struct ScatterChartView: View {
             
             Button(action: {
                 isMedianVisible.toggle()
+                viewModel.isSPPVisible = isMedianVisible
                 lineViewModel.isSPYVisible = isMedianVisible
                 hapticTouch.impactOccurred()
             }, label: {
                 HStack(spacing: 4) {
-                    Image(isMedianVisible ? "toggle_on" : "toggle_off")
+                    Image(viewModel.isSPPVisible ? "toggle_on" : "toggle_off")
                         .renderingMode(.original)
                     Text("Compare to TTF")
                         .padding(.all, 0)
@@ -443,7 +442,7 @@ struct ScatterChartView: View {
                 .padding(.trailing, 8)
                 .padding(.top, 4)
                 .padding(.bottom, 4)
-                .background(Rectangle().fill(isMedianVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
+                .background(Rectangle().fill(viewModel.isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
             })
             .opacity(viewModel.localTicker.haveMedian ? 1 : 0.0)
             

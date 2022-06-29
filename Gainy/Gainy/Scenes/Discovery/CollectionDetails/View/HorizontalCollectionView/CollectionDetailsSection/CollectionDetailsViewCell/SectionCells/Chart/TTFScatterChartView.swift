@@ -27,8 +27,8 @@ struct TTFScatterChartView: View {
     private var selectedTag: ScatterChartView.ChartPeriod = .d1 {
         didSet {
             guard  lineViewModel.chartPeriod != selectedTag else {return}
-            isSPPVisible = false
-            lineViewModel.isSPYVisible = false
+//            isSPPVisible = false
+//            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
             isLeftDurationVis = selectedTag == .d1
             lineViewModel.showCloseLine = selectedTag == .d1
@@ -41,9 +41,7 @@ struct TTFScatterChartView: View {
     @State
     private var isSPPVisible: Bool = false {
         didSet {
-            if isSPPVisible {
-                
-            }
+            viewModel.isSPPVisible = isSPPVisible
             lineViewModel.isSPYVisible = isSPPVisible
         }
     }
@@ -69,6 +67,7 @@ struct TTFScatterChartView: View {
                 hapticTouch.prepare()
             })
             .onChange(of: viewModel.isSPPVisible, perform: { newValue in
+                isSPPVisible = newValue
                 lineViewModel.isSPYVisible = newValue
             })
             .frame(height: 320)
@@ -218,7 +217,7 @@ struct TTFScatterChartView: View {
                 hapticTouch.impactOccurred()
             }, label: {
                 HStack(spacing: 4.0) {
-                    Image(isSPPVisible ? "toggle_on" : "toggle_off")
+                    Image(viewModel.isSPPVisible  ? "toggle_on" : "toggle_off")
                         .renderingMode(.original)
                     Text("S&P500")
                         .padding(.all, 0)
@@ -239,7 +238,7 @@ struct TTFScatterChartView: View {
                 .padding(.bottom, 6)
             })
             .frame(height: 24)
-            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
+            .background(Rectangle().fill(viewModel.isSPPVisible  ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(8))
             Spacer()
         }
     }
