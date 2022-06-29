@@ -313,7 +313,7 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9K7-6E-QR2">
-                                <rect key="frame" x="0.0" y="44" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vkg-d4-aZM">
                                     <size key="itemSize" width="128" height="128"/>
@@ -356,13 +356,13 @@ BETA testing is free for users, Gainy Inc. does not demand any remuneration for 
                         <viewLayoutGuide key="safeArea" id="zFk-4A-9Vb"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="9K7-6E-QR2" firstAttribute="top" secondItem="0Px-EE-4DE" secondAttribute="top" id="D0h-B2-Ua9"/>
+                            <constraint firstAttribute="bottom" secondItem="9K7-6E-QR2" secondAttribute="bottom" id="J9e-9A-9oi"/>
                             <constraint firstItem="Xzu-k0-XRA" firstAttribute="leading" secondItem="zFk-4A-9Vb" secondAttribute="leading" priority="999" constant="40" id="KAk-dL-5FC"/>
-                            <constraint firstItem="zFk-4A-9Vb" firstAttribute="trailing" secondItem="9K7-6E-QR2" secondAttribute="trailing" id="RTL-8i-aKj"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="trailing" secondItem="Xzu-k0-XRA" secondAttribute="trailing" constant="24" id="TL4-bH-ORr"/>
+                            <constraint firstItem="9K7-6E-QR2" firstAttribute="leading" secondItem="0Px-EE-4DE" secondAttribute="leading" id="buT-uY-mdJ"/>
+                            <constraint firstAttribute="trailing" secondItem="9K7-6E-QR2" secondAttribute="trailing" id="bwn-gO-F0C"/>
                             <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="Xzu-k0-XRA" secondAttribute="bottom" constant="19" id="kwe-FO-jbF"/>
-                            <constraint firstItem="9K7-6E-QR2" firstAttribute="top" secondItem="zFk-4A-9Vb" secondAttribute="top" id="m4Q-w3-KnX"/>
-                            <constraint firstItem="zFk-4A-9Vb" firstAttribute="bottom" secondItem="9K7-6E-QR2" secondAttribute="bottom" constant="96" id="mGX-Jo-7Qh"/>
-                            <constraint firstItem="9K7-6E-QR2" firstAttribute="leading" secondItem="zFk-4A-9Vb" secondAttribute="leading" id="q8a-HJ-94P"/>
                         </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>

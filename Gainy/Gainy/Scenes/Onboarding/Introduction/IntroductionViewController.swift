@@ -7,6 +7,7 @@
 
 import UIKit
 import PureLayout
+import AVFoundation
 
 class IntroductionViewController: UIViewController, Storyboarded {
     
@@ -40,6 +41,10 @@ class IntroductionViewController: UIViewController, Storyboarded {
         "Screen 4",
     ]
     
+    private var avPlayer: AVPlayer!
+    private var avPlayerLayer: AVPlayerLayer!
+    private var paused: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -56,11 +61,55 @@ class IntroductionViewController: UIViewController, Storyboarded {
         self.navigationController?.navigationBar.backgroundColor = UIColor.clear
         self.title = NSLocalizedString("Introduction", comment: "Introduction").uppercased()
         self.setUpNavigationBar()
+        self.startLoading()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        stopLoading()
     }
     
     // MARK: - Status Bar
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    
+    
+    func startLoading() {
+        setupPlayer()
+        avPlayer.play()
+    }
+    
+    func stopLoading() {
+        avPlayer.pause()
+        avPlayerLayer.removeFromSuperlayer()
+    }
+    
+    func setupPlayer() {
+        let theURL = Bundle.main.url(forResource:"Space", withExtension: "mp4")
+        
+        avPlayer = AVPlayer(url: theURL!)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer.videoGravity = .resizeAspectFill
+        avPlayer.volume = 0
+        avPlayer.actionAtItemEnd = .none
+        
+        avPlayerLayer.frame = view.layer.bounds
+        self.view.layer.insertSublayer(avPlayerLayer, at: 0)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(playerItemDidReachEnd(notification:)),
+                                               name: .AVPlayerItemDidPlayToEndTime,
+                                               object: avPlayer.currentItem)
+    }
+    
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        let p: AVPlayerItem = notification.object as! AVPlayerItem
+        p.seek(to: .zero, completionHandler: nil)
     }
     
     @objc func backButtonTap(sender: UIBarButtonItem) {
