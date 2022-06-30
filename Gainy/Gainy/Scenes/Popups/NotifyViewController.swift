@@ -1,17 +1,90 @@
 import Foundation
 import UIKit
+import AVFoundation
 
 final class NotifyViewController: BaseViewController {
     
     @IBOutlet private weak var emailTextField: GainyTextField!
     @IBOutlet private weak var emailSmallPlaceholder: UILabel!
     @IBOutlet private weak var notifyMeButton: UIButton!
+    @IBOutlet private weak var bottomMarigin: NSLayoutConstraint!
+    @IBOutlet private weak var cosmoImageView: UIImageView!
+    
+    private var avPlayer: AVPlayer!
+    private var avPlayerLayer: AVPlayerLayer!
+    private var paused: Bool = false
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         self.setUp()
+        self.setupPlayer()
+        avPlayer.play()
+        paused = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if paused {
+            avPlayer.play()
+            paused = false
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        avPlayer.pause()
+        paused = true
+    }
+    
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        
+        self.bottomMarigin.constant = 16.0 + (keyboardSize?.height ?? 0.0)
+        UIView.animate(withDuration: 0.3) {
+            self.cosmoImageView.alpha = 0.0
+            self.cosmoImageView.transform = CGAffineTransform.init(scaleX: 0.1, y: 0.1)
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        
+        self.bottomMarigin.constant = 32.0
+        UIView.animate(withDuration: 0.3) {
+            self.cosmoImageView.alpha = 1.0
+            self.cosmoImageView.transform = CGAffineTransform.identity
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func playerItemDidReachEnd(notification: Notification) {
+        let p: AVPlayerItem = notification.object as! AVPlayerItem
+        p.seek(to: .zero, completionHandler: nil)
+    }
+    
+    func setupPlayer() {
+        let theURL = Bundle.main.url(forResource:"Gradient_Stars", withExtension: "mp4")
+
+        avPlayer = AVPlayer(url: theURL!)
+        avPlayerLayer = AVPlayerLayer(player: avPlayer)
+        avPlayerLayer.videoGravity = .resizeAspectFill
+        avPlayer.volume = 0
+        avPlayer.actionAtItemEnd = .none
+
+        avPlayerLayer.frame = view.layer.bounds
+        view.layer.insertSublayer(avPlayerLayer, at: 0)
+
+        NotificationCenter.default.addObserver(self,
+                                           selector: #selector(playerItemDidReachEnd(notification:)),
+                                           name: .AVPlayerItemDidPlayToEndTime,
+                                           object: avPlayer.currentItem)
     }
     
     private func setUp() {
@@ -22,7 +95,9 @@ final class NotifyViewController: BaseViewController {
         self.emailTextField.delegate = self
         self.emailSmallPlaceholder.alpha = 1.0
         self.emailTextField.layer.cornerRadius = 20.0
-        self.updatePlaceholderState("")
+        let email = UserProfileManager.shared.email ?? ""
+        self.emailTextField.text = email
+        self.updatePlaceholderState(email)
     }
     
     private func setUpNavigationBar() {
@@ -82,7 +157,17 @@ extension NotifyViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        self.emailTextField.becomeFirstResponder()
+        guard let notifyButton = self.notifyMeButton else {
+            textField.resignFirstResponder()
+            return true
+        }
+        
+        textField.resignFirstResponder()
+        let notifyButtonEnabled = self.hasValidChanges(textField.text ?? "")
+        if notifyButtonEnabled {
+            self.notifyButtonTap(notifyButton)
+        }
+        
         return true
     }
     
@@ -99,7 +184,6 @@ extension NotifyViewController: UITextFieldDelegate {
             gainyTextField?.setNeedsDisplay()
             gainyTextField?.setNeedsLayout()
             placeholderLabel?.alpha = ((text.count > 0) ? 1.0 : 0.0)
-//            notifyButton?.isUserInteractionEnabled = notifyButtonEnabled
             notifyButton?.alpha = notifyButtonEnabled ? 1.0 : 0.65
         }
     }
