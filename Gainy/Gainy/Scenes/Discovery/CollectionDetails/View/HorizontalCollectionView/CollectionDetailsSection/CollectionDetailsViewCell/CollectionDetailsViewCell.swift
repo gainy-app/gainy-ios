@@ -891,12 +891,13 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             headerView.onChartModeButtonPressed = { showChart in
-                
+                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "chart"])
                 CollectionsDetailsSettingsManager.shared.changePieChartSelectedForId(self.viewModel?.id ?? -1, pieChartSelected: showChart)
                 self.collectionView.reloadData()
             }
             
             headerView.onTableListModeButtonPressed = { showList in
+                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "grid"])
                 let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
                 CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
                 self.collectionView.reloadData()

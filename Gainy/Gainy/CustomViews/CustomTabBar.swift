@@ -40,6 +40,19 @@ class CustomTabBar: UITabBar {
                 self = .discovery
             }
         }
+        
+        var title: String {
+            switch self {
+            case .home:
+                return "Home"
+            case .discovery:
+                return "Discovery"
+            case .portfolio:
+                return "Portfolio"
+            case .profile:
+                return "Profile"
+            }
+        }
     }
     
     private let profileWidth: CGFloat = 24.0
@@ -150,7 +163,7 @@ class CustomTabBar: UITabBar {
     
     @objc func pressAction(_ recognizer: UILongPressGestureRecognizer) {
         self.customDelegate?.profileTabPressed(tabBar: self)
-        GainyAnalytics.logEvent("tab_changed", params: ["tab" : "Profile", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
+        GainyAnalytics.logEvent("tab_changed", params: ["tab" : selectedIndex.title, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TabBar"])
     }
     
     override func layoutSubviews() {
