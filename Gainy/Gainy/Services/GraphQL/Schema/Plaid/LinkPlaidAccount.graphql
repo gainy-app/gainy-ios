@@ -1,6 +1,13 @@
 query LinkPlaidAccount($profileId: Int!, $publicToken: String!, $env: String!) {
-link_plaid_account(profile_id: $profileId, public_token: $publicToken, env: $env) {
-result
-plaid_access_token_id
+    link_plaid_account(profile_id: $profileId, public_token: $publicToken, env: $env) {
+        result
+        plaid_access_token_id
+    }
 }
+
+query ReLinkPlaidAccount($profileId: Int!, $accessTokenId: Int!, $publicToken: String!, $env: String!) {
+    link_plaid_account(access_token_id: $accessTokenId, profile_id: $profileId, public_token: $publicToken, env: $env) {
+        result
+        plaid_access_token_id
+    }
 }

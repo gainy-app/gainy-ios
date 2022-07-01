@@ -39,6 +39,7 @@ public final class GetProfileQuery: GraphQLQuery {
           __typename
           id
           created_at
+          needs_reauth_since
           institution {
             __typename
             id
@@ -453,6 +454,7 @@ public final class GetProfileQuery: GraphQLQuery {
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("id", type: .nonNull(.scalar(Int.self))),
             GraphQLField("created_at", type: .nonNull(.scalar(timestamptz.self))),
+            GraphQLField("needs_reauth_since", type: .scalar(timestamptz.self)),
             GraphQLField("institution", type: .object(Institution.selections)),
           ]
         }
@@ -463,8 +465,8 @@ public final class GetProfileQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(id: Int, createdAt: timestamptz, institution: Institution? = nil) {
-          self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "created_at": createdAt, "institution": institution.flatMap { (value: Institution) -> ResultMap in value.resultMap }])
+        public init(id: Int, createdAt: timestamptz, needsReauthSince: timestamptz? = nil, institution: Institution? = nil) {
+          self.init(unsafeResultMap: ["__typename": "app_profile_plaid_access_tokens", "id": id, "created_at": createdAt, "needs_reauth_since": needsReauthSince, "institution": institution.flatMap { (value: Institution) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -491,6 +493,15 @@ public final class GetProfileQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "created_at")
+          }
+        }
+
+        public var needsReauthSince: timestamptz? {
+          get {
+            return resultMap["needs_reauth_since"] as? timestamptz
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "needs_reauth_since")
           }
         }
 

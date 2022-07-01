@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -68,12 +68,45 @@
                             <action selector="disconnectButtonTouchUpInside:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eSe-wd-2AP"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SrV-iI-ADb" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                        <rect key="frame" x="227" y="16" width="93" height="28"/>
+                        <color key="backgroundColor" red="0.4133016169" green="0.7988345027" blue="0.59212917089999995" alpha="0.16" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="1FO-QK-gWE"/>
+                            <constraint firstAttribute="height" constant="28" id="S7b-bF-Y0n"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <attributedString key="attributedTitle">
+                                <fragment content="Connect">
+                                    <attributes>
+                                        <font key="NSFont" size="12" name="SFProRounded-Medium"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <color key="baseForegroundColor" red="0.4133016169" green="0.7988345027" blue="0.59212917089999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </buttonConfiguration>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="14"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="0.9114225507" green="0.36523270610000003" blue="0.36860847470000002" alpha="0.09905136816" colorSpace="custom" customColorSpace="displayP3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="connectButtonTouchUpInside:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3YX-hR-c1m"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="I5I-AB-B0c" firstAttribute="leading" secondItem="6NC-bF-pIX" secondAttribute="trailing" constant="15" id="6LS-DO-eF6"/>
                     <constraint firstItem="I5I-AB-B0c" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Rrx-6w-ZmG"/>
                     <constraint firstAttribute="trailing" secondItem="I5I-AB-B0c" secondAttribute="trailing" id="ZSA-9O-n3X"/>
+                    <constraint firstAttribute="trailing" secondItem="SrV-iI-ADb" secondAttribute="trailing" id="bnp-Yp-Nik"/>
                     <constraint firstItem="6NC-bF-pIX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="g9H-ZA-INP"/>
+                    <constraint firstItem="SrV-iI-ADb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uUb-GX-Uch"/>
                     <constraint firstItem="6NC-bF-pIX" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="vxl-8k-ga9"/>
                 </constraints>
             </tableViewCellContentView>
@@ -84,6 +117,7 @@
                 <constraint firstItem="njF-e1-oar" firstAttribute="bottom" secondItem="2dt-KE-LKm" secondAttribute="bottom" id="v2m-mw-euQ"/>
             </constraints>
             <connections>
+                <outlet property="connectButton" destination="SrV-iI-ADb" id="oSK-iI-vQI"/>
                 <outlet property="customTitleLabel" destination="6NC-bF-pIX" id="OdV-aO-vrI"/>
                 <outlet property="disconnectButton" destination="I5I-AB-B0c" id="Xfe-mz-ZTB"/>
                 <outlet property="dotsImageView" destination="2dt-KE-LKm" id="gwb-U7-UWi"/>

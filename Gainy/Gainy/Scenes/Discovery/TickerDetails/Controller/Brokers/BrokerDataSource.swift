@@ -12,6 +12,7 @@ struct PlaidAccountData: Codable {
     let id: Int
     let institutionID: Int
     let name: String
+    let needReauthSince: String?
 }
 
 struct PlaidAccountDataSource {

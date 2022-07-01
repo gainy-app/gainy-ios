@@ -136,6 +136,9 @@ extension LinkUnlinkPlaidViewController: UITableViewDelegate, UITableViewDataSou
         
         let cell: ButtonTableViewCell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.cellIdentifier, for: indexPath) as! ButtonTableViewCell
         let accountName = self.accounts[indexPath.row].name
+        let needReconnect = self.accounts[indexPath.row].needReauthSince != nil
+        cell.disconnectButton.isHidden = needReconnect
+        cell.connectButton.isHidden = !needReconnect
         cell.customTitleLabel.text = accountName
         cell.dotsImageView.isHidden = false
         cell.delegate = self
@@ -181,6 +184,30 @@ extension LinkUnlinkPlaidViewController: ButtonTableViewCellDelegate {
             self.unlinkAccount(accountID)
         }
         NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to unlink this Account?", cancelTitle: "No", actions: [yesAction])
+    }
+    
+    func connectButtonTouchUpInside(_ sender: ButtonTableViewCell) {
+        
+        guard let indexPath = tableView.indexPath(for: sender) else {return}
+        let accountID = self.accounts[indexPath.row].id
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        
+        showNetworkLoader()
+        
+        Network.shared.apollo.fetch(query: ReCreatePlaidLinkQuery.init(profileId: profileID, accessTokenId: accountID, redirectUri: Constants.Plaid.redirectURI, env: "production")) {[weak self] result in
+            self?.hideLoader()
+            switch result {
+            case .success(let graphQLResult):
+                guard let linkToken = graphQLResult.data?.createPlaidLinkToken?.linkToken else {
+                    return
+                }
+                self?.presentPlaidLinkUsingLinkToken(linkToken, reLink: true, accessTokenId: accountID)
+                break
+            case .failure(let error):
+                dprint("Failure when making GraphQL request. Error: \(error)")
+                break
+            }
+        }
     }
     
     private func unlinkAccount(_ accountID: Int) {

@@ -131,7 +131,12 @@ final class HoldingsViewController: BaseViewController {
         self.showFilteringPanel()
     }
     
-    
+    func onConnectButtonTapped() {
+        guard self.presentedViewController == nil else {return}
+        
+        GainyAnalytics.logEvent("reauth_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        self.showLinkUnlinkPlaid()
+    }
     
     private func setupPanel() {
         fpc = FloatingPanelController()

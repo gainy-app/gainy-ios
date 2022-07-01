@@ -23,6 +23,7 @@
     profile_plaid_access_tokens {
       id
       created_at
+      needs_reauth_since
       institution {
         id
         name

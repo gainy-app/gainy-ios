@@ -16,15 +16,33 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     func requestOpenCollection(withID id: Int)
     func scrollChanged(_ offsetY: CGFloat)
     
-        func onSortButtonTapped()
-        func onSettingsButtonTapped()
+    func onSortButtonTapped()
+    func onSettingsButtonTapped()
+
+    func onConnectButtonTapped()
 }
 
 final class HoldingsDataSource: NSObject {
     
     weak var delegate: HoldingsDataSourceDelegate?
     
-    private let sectionsCount = 2
+    private var userClosedReauth: Bool = false
+    private var needReauth: Bool {
+        if userClosedReauth {
+            return false
+        }
+        
+        let result = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
+            item.needReauthSince
+        }.count > 0
+
+        return result
+    }
+    
+    private var sectionsCount: Int {
+        
+        return self.needReauth ? 3 : 2
+    }
     
     private var cellHeights: [Int: CGFloat] = [:]
     private var expandedCells: Set<String> = Set<String>()
@@ -105,11 +123,12 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
+        
+        if section == self.sectionsCount - 1 {
             return holdings.count
         }
+        
+        return 1
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -118,25 +137,14 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         self.tableView = tableView
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
-            if cell.addSwiftUIIfPossible(chartHosting.view) {
-                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
-                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 24.0)
-                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
-            }
-            cell.updateButtons()
-            cell.delegate = self
-            return cell
-        } else {
+        if indexPath.section == self.sectionsCount - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
             cell.delegate = self
             cell.setModel(holdings[indexPath.row], chartRange)
             cell.isExpanded = expandedCells.contains(holdings[indexPath.row].name)
             cell.cellHeightChanged = {[weak self] model in
                 guard let self = self else {return}
-                if let index = self.holdings.first(where: {$0 == model}) {
+                if let _ = self.holdings.first(where: {$0 == model}) {
                     
                     if self.expandedCells.contains(model.name) {
                         self.expandedCells.remove(model.name)
@@ -154,20 +162,41 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             }
             return cell
         }
+        
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
+            if cell.addSwiftUIIfPossible(chartHosting.view) {
+                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
+                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 24.0)
+                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+            }
+            cell.updateButtons()
+            cell.delegate = self
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingNeedReconnectPlaidTableViewCell.cellIdentifier, for: indexPath) as! HoldingNeedReconnectPlaidTableViewCell
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.delegate = self
+            return cell
+        }
     }
 }
 
 extension HoldingsDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == self.sectionsCount - 1 {
+            return cellHeights[indexPath.row] ?? 0.0
+        }
         if indexPath.section == 0 {
             return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 + 24.0
         } else {
-            return cellHeights[indexPath.row] ?? 0.0
+            return 120.0
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section != 0 else {return}
+        guard indexPath.section == (self.sectionsCount - 1) else {return}
         if let stock = holdings[indexPath.row].rawTicker {
             let symbol = stock.fragments.remoteTickerDetails.symbol ?? ""
             guard !symbol.hasSuffix(".CC") else {
@@ -239,5 +268,16 @@ extension HoldingsDataSource: HoldingChartTableViewCellDelegate {
     
     func onSettingsButtonTapped() {
         delegate?.onSettingsButtonTapped()
+    }
+}
+
+extension HoldingsDataSource: HoldingNeedReconnectPlaidTableViewCellDelegate {
+    func onConnectButtonTapped() {
+        delegate?.onConnectButtonTapped()
+    }
+    
+    func onCloseButtonTapped() {
+        userClosedReauth = true
+        tableView?.reloadData()
     }
 }

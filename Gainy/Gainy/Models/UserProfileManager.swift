@@ -72,6 +72,7 @@ final class UserProfileManager {
     var profileLoaded: Bool?
     
     var isPlaidLinked: Bool = false
+    var plaidNeed: String?
     
     @UserDefault<Date>("linkPlaidDate")
     var linkPlaidDate: Date?
@@ -191,9 +192,10 @@ final class UserProfileManager {
                     }
                 }
                 self.linkedPlaidAccounts = appProfile.profilePlaidAccessTokens.map({ item in
-                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker")
+                    let result = PlaidAccountData.init(id: item.id, institutionID: item.institution?.id ?? -1, name: item.institution?.name ?? "Broker", needReauthSince: item.needsReauthSince)
                     return result
                 })
+                
                 Bugfender.setDeviceString("\(profileID)", forKey: "ProfileID")
                 NotificationCenter.default.post(name: NSNotification.Name.didLoadProfile, object: nil)
                 completion(true)

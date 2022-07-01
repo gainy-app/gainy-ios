@@ -10,6 +10,7 @@ import UIKit
 protocol ButtonTableViewCellDelegate: AnyObject {
     
     func disconnectButtonTouchUpInside(_ sender: ButtonTableViewCell)
+    func connectButtonTouchUpInside(_ sender: ButtonTableViewCell)
 }
 
 final class ButtonTableViewCell: UITableViewCell {
@@ -20,10 +21,16 @@ final class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dotsImageView: UIImageView!
     @IBOutlet weak var disconnectButton: BorderButton!
+    @IBOutlet weak var connectButton: BorderButton!
     
     @IBAction func disconnectButtonTouchUpInside(_ sender: Any) {
         self.delegate?.disconnectButtonTouchUpInside(self)
     }
+    
+    @IBAction func connectButtonTouchUpInside(_ sender: Any) {
+        self.delegate?.connectButtonTouchUpInside(self)
+    }
+    
     
     public override func prepareForReuse() {
         
