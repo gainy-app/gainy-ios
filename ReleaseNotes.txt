@@ -1,4 +1,4 @@
-iOS v1.4.3 #239 available
+iOS v1.4.3 #240 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
@@ -7,8 +7,6 @@ Subscriptions
 
 :hammer_and_wrench: Improvements
 • UI Adjustments
-• Plaid reauth flow in app implemented
-• Notify Me screen bugfix
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
