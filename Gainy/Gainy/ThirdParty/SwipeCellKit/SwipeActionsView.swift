@@ -32,7 +32,7 @@ class SwipeActionsView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
 
-        backgroundColor = UIColor.Gainy.white
+        fillRemoteBack()
 
         buttons = addButtons(for: self.actions,
                              withMaximum: maxSize,

@@ -61,6 +61,7 @@ struct TTFScatterChartView: View {
                 }
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
                 })
             }
             .onAppear(perform: {
@@ -165,6 +166,7 @@ struct TTFScatterChartView: View {
                         }
                         Spacer()
                     }
+                    .opacity(viewModel.isLoading ? 0.0 : 1.0)
                 }
                 if viewModel.sypChartData.points.count > 2 {
                     LineView(data: viewModel.sypChartData,

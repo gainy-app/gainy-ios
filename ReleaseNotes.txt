@@ -6,7 +6,8 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
-• UI Adjustments
+• Sorting for TTF removed by @Boris
+• Empty TTFs chart blink removed by @Ali
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

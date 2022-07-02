@@ -92,13 +92,12 @@ struct CollectionSettings: Codable {
 struct CollectionsSortingSettings: Codable {
     
     enum SortingField: Int, Codable, CaseIterable {
-        case matchScore = 0, todaysGain, timeUpdated, numberOfStocks, name
+        case matchScore = 0, todaysGain, numberOfStocks, name
         
         var title: String {
             switch self {
             case .matchScore: return "Match Score"
             case .todaysGain: return "Todays Gain"
-            case .timeUpdated: return "Time Updated"
             case .numberOfStocks: return "Stocks Count"
             case .name: return "Name"
             }

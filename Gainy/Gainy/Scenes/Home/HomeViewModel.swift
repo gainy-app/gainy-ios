@@ -160,8 +160,6 @@ final class HomeViewModel {
                     return lhs.matchScore?.matchScore ?? 0.0 < rhs.matchScore?.matchScore ?? 0.0
                 case .todaysGain:
                     return lhs.metrics?.relativeDailyChange ?? 0.0 < rhs.metrics?.relativeDailyChange ?? 0.0
-                case .timeUpdated:
-                    return lhs.metrics?.updatedAt ?? "" < rhs.metrics?.updatedAt ?? ""
                 case .numberOfStocks:
                     return lhs.size ?? 0 < rhs.size ?? 0
                 case .name:
@@ -173,8 +171,6 @@ final class HomeViewModel {
                     return lhs.matchScore?.matchScore ?? 0.0 > rhs.matchScore?.matchScore ?? 0.0
                 case .todaysGain:
                     return lhs.metrics?.relativeDailyChange ?? 0.0 > rhs.metrics?.relativeDailyChange ?? 0.0
-                case .timeUpdated:
-                    return lhs.metrics?.updatedAt ?? "" > rhs.metrics?.updatedAt ?? ""
                 case .numberOfStocks:
                     return lhs.size ?? 0 > rhs.size ?? 0
                 case .name:
