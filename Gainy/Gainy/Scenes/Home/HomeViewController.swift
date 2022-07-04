@@ -156,9 +156,9 @@ final class HomeViewController: BaseViewController {
         let initialState: FloatingPanelState = .tip
         var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
             return [
-                .full: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
-                .half: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
-                .tip: FloatingPanelLayoutAnchor(absoluteInset: 300, edge: .bottom, referenceGuide: .safeArea),
+                .full: FloatingPanelLayoutAnchor(absoluteInset: 240, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: 240, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: 240, edge: .bottom, referenceGuide: .safeArea),
             ]
         }
 
