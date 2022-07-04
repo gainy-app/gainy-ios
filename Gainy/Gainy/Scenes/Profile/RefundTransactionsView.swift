@@ -9,12 +9,34 @@ import SwiftUI
 import StoreKit
 import SwiftDate
 
+
+@available(iOS 15.0, *)
+struct RefundGradientBackgroundView: UIViewRepresentable {
+    
+    func makeUIView(context: Context) -> GradientBackgroundView {
+        let view = GradientBackgroundView()
+        view.startColor = UIColor.init(hexString: "#FFA29B")?.withAlphaComponent(0.2)
+        view.middleColor = UIColor.init(hexString: "#EEBFFF")?.withAlphaComponent(0.2)
+        view.endColor = UIColor.init(hexString: "#EFECFA")?.withAlphaComponent(0.2)
+        view.middleLocation = 0.346
+        return view
+    }
+
+    func updateUIView(_ uiView: GradientBackgroundView, context: Context) {
+        uiView.startColor = UIColor.init(hexString: "#FFA29B")?.withAlphaComponent(0.2)
+        uiView.middleColor = UIColor.init(hexString: "#EEBFFF")?.withAlphaComponent(0.2)
+        uiView.endColor = UIColor.init(hexString: "#EFECFA")?.withAlphaComponent(0.2)
+        uiView.middleLocation = 0.346
+    }
+}
+
 @available(iOS 15.0, *)
 struct RefundTransactionsView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State private var transactions = [StoreKit.Transaction]()
     @State var selectedTransactionID: UInt64?
+    
     var body: some View {
         VStack {
             ZStack {
@@ -44,22 +66,38 @@ struct RefundTransactionsView: View {
                     Text("You have no transactions")
                         .foregroundColor(UIColor.Gainy.mainText?.uiColor)
                 } else {
-                    List(transactions) { tr in
-                        Button(action: {
-                            self.selectedTransactionID = tr.id
-                        }, label: {
-                            VStack {
-                                Text(tr.productID)
-                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
-                                    .font(UIFont.compactRoundedRegular(14).uiFont)
-                                Text("\(tr.purchaseDate)")
-                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
-                                    .font(UIFont.compactRoundedRegular(14).uiFont)
+                    
+                    ScrollView {
+                        VStack {
+                            ForEach(transactions, id: \.self) { tr in
+                                HStack {
+                                    HStack {
+                                        Button(action: {
+                                            self.selectedTransactionID = tr.id
+                                        }, label: {
+                                            VStack(alignment: .leading, spacing: 8.0, content: {
+                                                Text( Product.getProductByID(tr.productID)?.name ?? "Transaction from" )
+                                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                                                    .font(UIFont.proDisplayMedium(16).uiFont)
+                                                    .multilineTextAlignment(.leading)
+                                                Text("\(tr.purchaseDate)")
+                                                    .foregroundColor(UIColor.Gainy.mainText?.uiColor)
+                                                    .font(UIFont.proDisplayMedium(16).uiFont)
+                                                    .multilineTextAlignment(.leading)
+                                            })
+                                            .background(Color.clear)
+                                            .lineSpacing(8.0)
+                                        })
+                                    }
+                                    .padding()
+                                    .background(tr.id == self.selectedTransactionID ? UIColor.init(hexString: "#F0F0F0")!.uiColor : UIColor.white.uiColor)
+                                    .contentShape(Rectangle())
+                                    .cornerRadius(8.0)
+                                }
+                                .padding([.top, .bottom], 0)
                             }
-                            .background(Color.clear)
-                        })
-                    }
-                    .background(Color.clear)
+                        }
+                    }.padding([.top], 32.0)
                 }
             }
             .background(Color.clear)
@@ -69,11 +107,12 @@ struct RefundTransactionsView: View {
             Spacer()
             RefundView(selectedTransactionID: self.$selectedTransactionID)
                 .padding(.top, 24)
-                .frame(height: 40)
+                .padding([.leading, .trailing], 32.0)
+                .padding([.bottom], 43.0)
+                .frame(height: 64)
         }
         .background(
-            Image("onboardingGradient")
-                .resizable()
+            RefundGradientBackgroundView.init()
         )
     }
     
@@ -98,14 +137,13 @@ struct RefundTransactionsView: View {
                     .bold()
                     .frame(maxWidth: .infinity)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 16)
-                            .stroke(activeColor, lineWidth: 1)
-                            .frame(height: 40)
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(activeColor, lineWidth: 2)
+                            .frame(height: 64)
                     )
-                    .frame(height: 40)
+                    .frame(height: 64)
                 
             }
-            .padding([.horizontal, .bottom])
             .disabled(selectedTransactionID == nil)
             .refundRequestSheet(
                 for: selectedTransactionID ?? 0,
