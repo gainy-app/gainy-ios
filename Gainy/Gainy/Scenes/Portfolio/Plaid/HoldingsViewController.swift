@@ -240,6 +240,7 @@ extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
         
+        self.tableView.reloadData()
     }
     
     func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {

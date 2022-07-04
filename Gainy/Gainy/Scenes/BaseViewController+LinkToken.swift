@@ -29,7 +29,9 @@ extension BaseViewController {
                         }
                         if linkData.result {
                             UserProfileManager.shared.linkPlaidID = linkData.plaidAccessTokenId
-                            self?.plaidLinked()
+                            UserProfileManager.shared.fetchProfile { success in
+                                self?.plaidLinked()
+                            }
                         } else {
                             self?.plaidLinkFailed()
                         }
@@ -51,7 +53,9 @@ extension BaseViewController {
                         }
                         if linkData.result {
                             UserProfileManager.shared.linkPlaidID = linkData.plaidAccessTokenId
-                            self?.plaidLinked()
+                            UserProfileManager.shared.fetchProfile { success in
+                                self?.plaidLinked()
+                            }
                         } else {
                             self?.plaidLinkFailed()
                         }
