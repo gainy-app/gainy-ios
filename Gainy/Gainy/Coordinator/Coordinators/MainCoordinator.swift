@@ -99,6 +99,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     func showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
+        vc.hidesBottomBarWhenPushed = false
         vc.coordinator = self
         vc.onGoToCollectionDetails = onGoToCollectionDetails
         vc.onSwapItems = onSwapItems

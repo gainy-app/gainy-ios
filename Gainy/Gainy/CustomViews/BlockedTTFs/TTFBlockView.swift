@@ -171,8 +171,8 @@ final class TTFBlockView: TKPassThroughView {
         addSubview(unlockBtn)
         unlockBtn.autoPinEdge(.top, to: .bottom, of: tipLbl, withOffset: 40)
         unlockBtn.autoAlignAxis(toSuperviewAxis: .vertical)
-        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 32)
-        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -32)
+        unlockBtn.autoPinEdge(.leading, to: .leading, of: self, withOffset: 64)
+        unlockBtn.autoPinEdge(.trailing, to: .trailing, of: self, withOffset: -64)
         unlockBtn.autoSetDimension(.height, toSize: 56)
         unlockBtn.autoPinEdge(.bottom, to: .bottom, of: self, withOffset: -16)
         

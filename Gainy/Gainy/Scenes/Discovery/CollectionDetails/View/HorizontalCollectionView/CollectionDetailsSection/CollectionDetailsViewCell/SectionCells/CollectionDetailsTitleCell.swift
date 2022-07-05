@@ -47,7 +47,7 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
     lazy var companyNameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 32)
         label.textColor = UIColor.init(hexString: "#09141F")
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left

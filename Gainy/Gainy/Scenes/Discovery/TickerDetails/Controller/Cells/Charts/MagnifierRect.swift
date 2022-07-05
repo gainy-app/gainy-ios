@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct MagnifierRect: View {
     @Binding var currentNumber: String
+    @Binding var frame: CGRect
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     public var body: some View {
         VStack(spacing: 0){
@@ -19,6 +20,7 @@ public struct MagnifierRect: View {
                 .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
                 .foregroundColor(Color(hex: "E0E6EA"))
                 .frame(width: 1)
-        }.frame(height: 180)
+        }
+        .frame(height: frame.size.height)
     }
 }

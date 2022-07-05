@@ -44,7 +44,12 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
                 innerDate = customerInfo?.entitlements[ettl]?.expirationDate
                 NotificationManager.broadcastSubscriptionChangeNotification(type: .pro)
                 if fromPurchase {
+#if targetEnvironment(simulator)
+    GainyAnalytics.logEvent("demo_purchase_completed", params: ["productId" : customerInfo?.entitlements[ettl]?.productIdentifier ?? ""])
+#else
                     GainyAnalytics.logEvent("purchase_completed", params: ["productId" : customerInfo?.entitlements[ettl]?.productIdentifier ?? ""])
+#endif
+                    
                 }
             } else {
                 checkDBForSub()

@@ -412,7 +412,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     
     //MARK: - Chart
-    private let chartHeight: CGFloat = 256
+    private let chartHeight: CGFloat = 256 + 90.0
     private var topChart: TTFChartViewModel = TTFChartViewModel.init(spGrow: 0.0, dayGrow: 0.0, chartData: .init(points: [0.0]), sypChartData: .init(points: [15, 20, 25, 10]), isSPPVisible: false)
     private lazy var chartHosting: CustomHostingController<TTFScatterChartView> = {
         var rootView = TTFScatterChartView(viewModel: topChart,
@@ -563,9 +563,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
-            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
-            dprint("Recommended \(viewModel.id) \(viewModel.name) \(viewModel.matchScore) \(viewModel.combinedTags)")
-            
+            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)            
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
             } receiveValue: { notif in
                 if let transform = notif.userInfo?["transform"] as? CGAffineTransform {
@@ -884,6 +882,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     return
                 }
                 self.onSettingsPressed?(self.cards[0].rawTicker)
+                GainyAnalytics.logEvent("settings_pressed", params: ["collectionID" : self.viewModel?.id ?? -1])
             }
             
             headerView.onSortingPressed = {
@@ -897,7 +896,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             }
             
             headerView.onTableListModeButtonPressed = { showList in
-                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : "grid"])
+                GainyAnalytics.logEvent("stocks_view_changed", params: ["collectionID" : self.viewModel?.id ?? -1, "view" : showList ? "list" : "grid"])
                 let viewMode = showList ? CollectionSettings.ViewMode.list : .grid
                 CollectionsDetailsSettingsManager.shared.changeViewModeForId(self.viewModel?.id ?? -1, viewMode: viewMode)
                 self.collectionView.reloadData()
@@ -1051,7 +1050,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
         switch section {
         case .title:
             let width = collectionView.frame.width
-            let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 24)!)
+            let headerHeight = viewModel.name.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 - 71, font: UIFont(name: "SFProDisplay-Bold", size: 32)!)
             guard collectionView.tag != Constants.CollectionDetails.singleCollectionId else {
                 let height = (60.0 - 28) + headerHeight
                 return CGSize.init(width: width, height: height)

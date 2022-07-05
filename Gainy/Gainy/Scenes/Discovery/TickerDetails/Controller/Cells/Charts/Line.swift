@@ -106,8 +106,9 @@ public struct Line: View {
             }
             
             if(self.showIndicator && !isSPYVisible) {
-                MagnifierRect(currentNumber: $indicatorVal)
-                    .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80))
+                MagnifierRect(currentNumber: $indicatorVal,
+                              frame: $frame)
+                    .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80)) 
                 IndicatorPoint()
                     .position(self.getClosestPointOnPath(touchLocation: self.touchLocation))
                     .rotationEffect(.degrees(180), anchor: .center)

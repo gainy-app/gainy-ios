@@ -52,16 +52,15 @@ struct TTFScatterChartView: View {
     var body: some View {
         if #available(iOS 14.0, *) {
             VStack {
-//                sppView
-//                    .frame(height: 24).offset(x: 24, y: 12)
                 ZStack {
                     chartView
-                        .frame(height: 220)
+                        .frame(height: 240)
                         .activityIndicator(isVisible: viewModel.isLoading)
                 }
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                        .offset(y: 50)
                 })
             }
             .onAppear(perform: {
@@ -71,7 +70,7 @@ struct TTFScatterChartView: View {
                 isSPPVisible = newValue
                 lineViewModel.isSPYVisible = newValue
             })
-            .frame(height: 320)
+            .frame(height: 360)
             .ignoresSafeArea()
             .padding(.top, 0)
             .padding(.leading, 0)
@@ -80,24 +79,23 @@ struct TTFScatterChartView: View {
                 lineViewModel.lastDayPrice = newValue
             }
         } else {
-            VStack {
-                
+            VStack {                
                 ZStack {
                     chartView
-                        .frame(height: 136)
+                        .frame(height: 240)
+                        .activityIndicator(isVisible: viewModel.isLoading)
                 }
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                        .offset(y: 50)
                 })
-//                sppView
-//                    .frame(height: 24)
-//                    .offset(y: -16)
             }
             .background(RemoteConfigManager.shared.mainBackColor.uiColor)
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 320)
+            .frame(height: 360)
             .padding(.top, 0)
         }
     }
@@ -152,7 +150,8 @@ struct TTFScatterChartView: View {
                              style: isChartGrows ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel,
                              minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max
+                             maxDataValue: viewModel.max,
+                             chartHeight: 240.0
                     )
                 }  else {
                     VStack {
@@ -174,7 +173,8 @@ struct TTFScatterChartView: View {
                              style: Styles.lineChartStyleMedian,
                              viewModel: lineViewModel,
                              minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max)
+                             maxDataValue: viewModel.max,
+                             chartHeight: 240.0)
                     .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                 }                
             }

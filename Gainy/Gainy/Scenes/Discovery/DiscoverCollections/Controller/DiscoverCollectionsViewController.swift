@@ -254,7 +254,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
                     title: Constants.CollectionDetails.yourCollections,
-                    description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd Recommended collections from below to browse them."
+                    description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd TTFs you might like from below to browse them."
                 )
                 : CollectionHeaderViewModel(
                     title: "TTFs you might like",

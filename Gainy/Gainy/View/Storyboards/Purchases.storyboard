@@ -34,26 +34,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchases_circles" translatesAutoresizingMaskIntoConstraints="NO" id="axt-BU-tgH">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6J7-xh-1w0">
-                                <rect key="frame" x="358" y="46" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="b1e-mh-1Dw"/>
-                                    <constraint firstAttribute="height" constant="44" id="oAK-QG-h13"/>
-                                </constraints>
-                                <state key="normal" image="close_modal_white"/>
-                                <connections>
-                                    <action selector="closeAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ppe-hI-RpO"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aqm-x2-uay">
-                                <rect key="frame" x="177" y="56" width="60" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="Vrf-nj-i1u"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSa-qJ-QZE">
                                 <rect key="frame" x="0.0" y="100" width="414" height="796"/>
                                 <subviews>
@@ -331,6 +311,26 @@ Try Gainy Premium!</string>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Sgo-nW-Rvs"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="zkp-vB-tss"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6J7-xh-1w0">
+                                <rect key="frame" x="358" y="46" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="b1e-mh-1Dw"/>
+                                    <constraint firstAttribute="height" constant="44" id="oAK-QG-h13"/>
+                                </constraints>
+                                <state key="normal" image="close_modal_white"/>
+                                <connections>
+                                    <action selector="closeAction" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ppe-hI-RpO"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREMIUM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aqm-x2-uay">
+                                <rect key="frame" x="177" y="56" width="60" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Vrf-nj-i1u"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hBH-0Y-dum">
                                 <rect key="frame" x="16" y="60" width="64" height="16"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.19" colorSpace="custom" customColorSpace="calibratedRGB"/>

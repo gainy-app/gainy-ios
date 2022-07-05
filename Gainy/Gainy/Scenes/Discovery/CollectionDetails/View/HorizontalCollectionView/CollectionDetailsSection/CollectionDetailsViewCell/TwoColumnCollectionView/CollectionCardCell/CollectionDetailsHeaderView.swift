@@ -160,7 +160,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         
         settingsButton.layer.cornerRadius = 8.0
         settingsButton.layer.cornerCurve = .continuous
-        settingsButton.backgroundColor = UIColor.init(hexString: "#F7F8F9")
+        settingsButton.fillRemoteButtonBack()
         settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
         self.addSubview(settingsButton)
         settingsButton.autoAlignAxis(.horizontal, toSameAxisOf: sortByButton)

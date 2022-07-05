@@ -11,7 +11,8 @@ import SwiftUI
 public struct LineView: View {
     init(data: ChartData, title: String? = nil, legend: String? = nil, style: ChartStyle = Styles.lineChartStyleGrow, valueSpecifier: String = "%.1f", legendSpecifier: String = "%.2f", viewModel: LineViewModel,
          minDataValue: Double? = nil,
-         maxDataValue: Double? = nil
+         maxDataValue: Double? = nil,
+         chartHeight: CGFloat = 147.0
     ) {
         self.data = data
         self.title = title
@@ -23,6 +24,7 @@ public struct LineView: View {
         self.viewModel = viewModel
         self.minDataValue = minDataValue
         self.maxDataValue = maxDataValue
+        self.chartHeight = chartHeight
     }
     
     
@@ -35,6 +37,7 @@ public struct LineView: View {
     public var legendSpecifier: String
     var minDataValue: Double?
     var maxDataValue: Double?
+    var chartHeight: CGFloat = 147.0
     
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State private var showLegend = false {
@@ -76,8 +79,7 @@ public struct LineView: View {
     //
     //    }
     
-    private let chartHeight: CGFloat = 147.0
-    private let chartOffset: CGFloat = 0.0
+    
     public var body: some View {
         
         GeometryReader{ geometry in
@@ -89,7 +91,7 @@ public struct LineView: View {
 //                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [5]))
 //                            .foregroundColor(Color(hex: "E0E6EA"))
 //                            .frame(height: 1)
-//                            .offset(x: 0, y: getOpenLineY(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)))
+//                            .offset(x: 0, y: getOpenLineY(frame: CGRect(x: 0, y: 0, width: reader.frame(in: .local).width, height: reader.frame(in: .local).height + 25)))
 //                            .opacity(viewModel.chartPeriod == .d1 ? 1.0 : 0.0)
 //                            .opacity(viewModel.isSPYVisible ? 0.0 : 1.0)
 //                    }
@@ -108,7 +110,7 @@ public struct LineView: View {
                     }
                     
                     Line(data: self.data,
-                         frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width - chartOffset, height: reader.frame(in: .local).height + 25)),
+                         frame: .constant(CGRect(x: 0, y: 0, width: reader.frame(in: .local).width, height: reader.frame(in: .local).height + 25)),
                          touchLocation: $viewModel.indicatorLocation,
                          showIndicator: $viewModel.hideHorizontalLines,
                          isSPYVisible:$viewModel.isSPYVisible,
@@ -118,7 +120,6 @@ public struct LineView: View {
                          showBackground: false,
                          gradient: self.style.gradientColor
                     )
-                    .offset(x: chartOffset)
                     .onAppear(){
                         self.showLegend = true
                     }

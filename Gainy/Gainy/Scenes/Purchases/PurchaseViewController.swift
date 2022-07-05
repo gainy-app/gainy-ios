@@ -153,10 +153,9 @@ final class PurchaseViewController: BaseViewController {
             .sink {[weak self] notif in
                 if let subscriptionType = notif.userInfo?["type"] as? SuscriptionType {
                     if subscriptionType == .pro {
-                        self?.dismiss(animated: true)
-                        GainyAnalytics.logEvent("dismiss_purchase_view")
-                    } else {
-                        
+                            self?.dismiss(animated: true)
+                            self?.cancellables.removeAll()
+                            GainyAnalytics.logEvent("dismiss_purchase_view")
                     }
                     self?.isPurchasing = false
                 }
