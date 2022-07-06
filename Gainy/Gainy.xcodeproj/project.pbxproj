@@ -388,6 +388,7 @@
 		85695B022746C18200759569 /* InsertMetricsSessingsForTicker.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */; };
 		85695B032746C18200759569 /* DeleteMetricsSessingsForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */; };
 		85695B042746C18200759569 /* InsertMetricsSessingsForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */; };
+		8578528428756DBE00E417CB /* GainyPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8578528328756DBE00E417CB /* GainyPageControl.swift */; };
 		8579517126E22EFE003B751C /* IntroductionCaptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */; };
 		8579517226E22EFE003B751C /* IntroductionCaptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */; };
 		8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */; };
@@ -1012,6 +1013,7 @@
 		85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertMetricsSessingsForTicker.graphql.swift; sourceTree = "<group>"; };
 		85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteMetricsSessingsForCollection.graphql.swift; sourceTree = "<group>"; };
 		85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertMetricsSessingsForCollection.graphql.swift; sourceTree = "<group>"; };
+		8578528328756DBE00E417CB /* GainyPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GainyPageControl.swift; sourceTree = "<group>"; };
 		8579516F26E22EFE003B751C /* IntroductionCaptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionCaptionCell.swift; sourceTree = "<group>"; };
 		8579517026E22EFE003B751C /* IntroductionCaptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroductionCaptionCell.xib; sourceTree = "<group>"; };
 		8579517326E26D8E003B751C /* PersonalizationPickInterestsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizationPickInterestsHeaderView.swift; sourceTree = "<group>"; };
@@ -1497,6 +1499,7 @@
 			isa = PBXGroup;
 			children = (
 				33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */,
+				8578528328756DBE00E417CB /* GainyPageControl.swift */,
 				33787FD626CD475700B11E58 /* CustomHostingController.swift */,
 				33E7AA6226CF870600DF1CBE /* LeftAlignedIconButton.swift */,
 				33E7AA6426CF8FBA00DF1CBE /* BorderButton.swift */,
@@ -3321,6 +3324,7 @@
 				3394BA242751048C00AAE7B8 /* PortfolioChartGainsViewModel.swift in Sources */,
 				33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */,
 				33F6DC382738F6C500CBE4DA /* HorizontalCompareFlowSectionLayout.swift in Sources */,
+				8578528428756DBE00E417CB /* GainyPageControl.swift in Sources */,
 				3A498F6A266C3779008437F1 /* HorizontalFlowSectionLayout.swift in Sources */,
 				854427E4286E9596005A8DD2 /* HoldingNeedReconnectPlaidTableViewCell.swift in Sources */,
 				3A5ADA74268DA179008659E8 /* SwipeCollectionViewCell.swift in Sources */,
