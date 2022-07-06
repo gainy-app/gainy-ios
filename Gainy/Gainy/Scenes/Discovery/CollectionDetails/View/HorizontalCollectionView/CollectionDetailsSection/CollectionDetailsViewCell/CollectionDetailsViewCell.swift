@@ -389,6 +389,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             return
         }
         
+        self.refreshControl.beginRefreshing()
         DispatchQueue.global(qos:.utility).async {
             CollectionsManager.shared.loadNewCollectionDetails(self.viewModel.id) { remoteTickers in
                 runOnMain {

@@ -51,6 +51,7 @@ final class CollectionsManager {
     //MARK: - Fetching
     
     func loadNewCollectionDetails(_ colID: Int, completion: @escaping ([TickerDetails]) -> Void) {
+        Network.shared.apollo.clearCache()
         Task {
             async let newCols = loadCollections([colID])
             async let tickersMap = getTickersForCollections(collectionIDs: [colID])

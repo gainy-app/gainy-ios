@@ -262,10 +262,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     description: "All collections are sorted by relevancy based on your profile and goals "
                 )
                 
-                if UserProfileManager.shared.yourCollections.isEmpty {
+                if UserProfileManager.shared.yourCollections.isEmpty && indexPath.section == DiscoverCollectionsSection.watchlist.rawValue {
                     headerViewModel = CollectionHeaderViewModel(
                         title: Constants.CollectionDetails.yourCollections,
-                        description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon"
+                        description: "Add at least one TTF from the list below,\njust click on the plus icon"
                     )
                     headerViewModel.showOutline = true
                 }
