@@ -23,6 +23,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     var onDiscoverCollections: ((Bool) -> Void)?
     var onShowCardDetails: (([RemoteTickerDetails], Int) -> Void)?
+    private var skipReload: Bool = false
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -347,6 +348,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     
                     let notifyViewController = NotifyViewController.instantiate(.popups)
                     let navigationController = UINavigationController.init(rootViewController: notifyViewController)
+                    notifyViewController.delegate = self
                     navigationController.modalPresentationStyle = .fullScreen
                     self?.present(navigationController, animated: true, completion: nil)
                 }
@@ -1021,6 +1023,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if self.skipReload {
+            self.skipReload = false
+            return
+        }
+        
         dprint("viewWillAppear load", profileId: 30)
         if self.needTop20Reload {
             TickerLiveStorage.shared.clearMatchData()
@@ -1184,5 +1192,11 @@ extension CollectionDetailsViewController: MetricsViewControllerDelegate {
         } else {
             self.collectionView.reloadData()
         }
+    }
+}
+
+extension CollectionDetailsViewController: NotifyViewControllerDelegate {
+    func notifyViewControllerWillClosePopup() {
+        self.skipReload = true
     }
 }

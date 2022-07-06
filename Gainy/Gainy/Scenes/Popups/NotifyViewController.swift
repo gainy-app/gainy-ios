@@ -2,6 +2,10 @@ import Foundation
 import UIKit
 import AVFoundation
 
+protocol NotifyViewControllerDelegate: AnyObject {
+    func notifyViewControllerWillClosePopup()
+}
+
 final class NotifyViewController: BaseViewController {
     
     @IBOutlet private weak var emailTextField: GainyTextField!
@@ -10,6 +14,7 @@ final class NotifyViewController: BaseViewController {
     @IBOutlet private weak var bottomMarigin: NSLayoutConstraint!
     @IBOutlet private weak var cosmoImageView: UIImageView!
     
+    weak var delegate: NotifyViewControllerDelegate? = nil
     private var avPlayer: AVPlayer!
     private var avPlayerLayer: AVPlayerLayer!
     private var paused: Bool = false
@@ -38,6 +43,7 @@ final class NotifyViewController: BaseViewController {
         
         avPlayer.pause()
         paused = true
+        self.delegate?.notifyViewControllerWillClosePopup()
     }
     
     //MARK: - Keyboard
