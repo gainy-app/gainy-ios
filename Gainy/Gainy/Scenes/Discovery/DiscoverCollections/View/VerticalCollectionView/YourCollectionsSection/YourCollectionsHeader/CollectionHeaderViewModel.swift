@@ -1,6 +1,7 @@
 struct CollectionHeaderViewModel {
     let title: String
     let description: String
+    var showOutline: Bool = false
 }
 
 extension CollectionHeaderViewModel: Hashable {

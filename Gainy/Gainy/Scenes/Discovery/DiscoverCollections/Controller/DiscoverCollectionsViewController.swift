@@ -152,6 +152,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         discoverCollectionsCollectionView.addSubview(refreshControl)
         
+        discoverCollectionsCollectionView.registerSectionHeader(NoCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(YourCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(RecommendedCollectionsHeaderView.self)
         discoverCollectionsCollectionView.registerSectionHeader(GainersHeaderView.self)
@@ -251,7 +252,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
             switch kind {
             case UICollectionView.elementKindSectionHeader:
-                let headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
+                var headerViewModel = indexPath.section == DiscoverCollectionsSection.watchlist.rawValue
                 ? CollectionHeaderViewModel(
                     title: Constants.CollectionDetails.yourCollections,
                     description: "Tap to view, swipe to edit or drag & drop to reorder.\nAdd TTFs you might like from below to browse them."
@@ -260,6 +261,14 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     title: "TTFs you might like",
                     description: "All collections are sorted by relevancy based on your profile and goals "
                 )
+                
+                if UserProfileManager.shared.yourCollections.isEmpty {
+                    headerViewModel = CollectionHeaderViewModel(
+                        title: Constants.CollectionDetails.yourCollections,
+                        description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon"
+                    )
+                    headerViewModel.showOutline = true
+                }
                 
                 return self?.sections[indexPath.section].header(
                     collectionView: collectionView,
@@ -488,17 +497,29 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     // MARK: Properties
     
-    private lazy var sections: [SectionLayout] = [NoCollectionsSectionLayout(),
-                                                  YourCollectionsSectionLayout(),
-                                                  RecommendedCollectionsSectionLayout(),
-    ]
+    private lazy var sections: [SectionLayout] =  {
+        return self.sectionsNew
+    }()
     
-    private lazy var customLayout: UICollectionViewLayout = {
+    private var sectionsNew: [SectionLayout] {
+        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
+        self.noCollectionSectionLayout.headerHeight = headerHeight
+        return [self.noCollectionSectionLayout,
+         YourCollectionsSectionLayout(),
+         RecommendedCollectionsSectionLayout()]
+    }
+    
+    private var customLayout: UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
-            self?.sections[sectionIndex].layoutSection(within: env)
+            if (sectionIndex == 0) {
+                let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
+                self?.noCollectionSectionLayout.headerHeight = headerHeight
+                return self?.noCollectionSectionLayout.layoutSection(within: env)
+            }
+            return self?.sections[sectionIndex].layoutSection(within: env)
         }
         return layout
-    }()
+    }
     
     private var smallSerachFieldFrame: CGRect = {
         let frame = CGRect(
@@ -520,6 +541,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         return frame
     }()
     
+    private var noCollectionSectionLayout = NoCollectionsSectionLayout()
     private var discoverCollectionsCollectionView: UICollectionView!
     
     private var dataSource: UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>?
@@ -624,6 +646,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.searchTextField?.frame = frame
             }
             
+            self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
             if var snapshot = self.dataSource?.snapshot() {
                 if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
                     if let first = snapshot.itemIdentifiers(inSection: .yourCollections).first {
@@ -639,6 +662,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.viewModel?.recommendedCollections.removeAll(where: { item in
                     item.id == yourCollectionItem.id
                 })
+                self.updateHeaderHeight()
                 self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.addNextButtonAsNeeded()
                 })
@@ -711,6 +735,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.deleteItems([yourCollectionItemToRemove])
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
             
+            self.updateHeaderHeight()
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                 self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
             })
@@ -765,6 +790,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 snapshot.deleteItems([deleteItems])
                 snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
                 
+                self.updateHeaderHeight()
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
                 })
@@ -772,6 +798,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
         }
         
+    }
+    
+    private func updateHeaderHeight() {
+        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
+        self.noCollectionSectionLayout.headerHeight = headerHeight
+        self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
     }
     
     private func reorderItems(
@@ -804,6 +836,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.moveItem(sourceItem, beforeItem: destItem)
         }
         
+        self.updateHeaderHeight()
         dataSource?.apply(snapshot, animatingDifferences: true, completion: {
         })
         dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
@@ -812,10 +845,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     private func initViewModels() {
         
         guard let dataSource = dataSource else {return}
-        sections = [NoCollectionsSectionLayout(),
-                    YourCollectionsSectionLayout(),
-                    RecommendedCollectionsSectionLayout()
-        ]
+        sections = self.sectionsNew
         if let top1 = viewModel?.topGainers, !top1.isEmpty {
             sections.insert(GainersCollectionSectionLayout(isGainers: true), at: sections.count - 1)
         }
@@ -838,6 +868,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         }
         
         snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
+        self.updateHeaderHeight()
         dataSource.apply(snap, animatingDifferences: true)
         discoverCollectionsCollectionView.reloadData()
         if showNextButton {
@@ -884,6 +915,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(top1, toSection: .topGainers)
                     snap.appendItems(top2, toSection: .topLosers)
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
+                    self.updateHeaderHeight()
                     dataSource.apply(snap, animatingDifferences: true)
                 } else {
                     snap.deleteSections([.topGainers, .topLosers])
