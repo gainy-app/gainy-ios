@@ -18,7 +18,7 @@ protocol HoldingsDataSourceDelegate: AnyObject {
     
     func onSortButtonTapped()
     func onSettingsButtonTapped()
-
+    
     func onConnectButtonTapped()
 }
 
@@ -35,7 +35,7 @@ final class HoldingsDataSource: NSObject {
         let result = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item in
             item.needReauthSince
         }.count > 0
-
+        
         return result
     }
     
@@ -76,7 +76,7 @@ final class HoldingsDataSource: NSObject {
     var chartViewModel: HoldingChartViewModel = HoldingChartViewModel.init(balance: 0.0, rangeGrow: 0.0, rangeGrowBalance: 0.0, spGrow: 0.0, chartData: ChartData(points: HoldingsDataSource.emptyData), sypChartData: ChartData(points: HoldingsDataSource.emptyData))
     private lazy var chartHosting: CustomHostingController<PortfolioScatterChartView> = {
         var rootView = PortfolioScatterChartView(viewModel: chartViewModel,
-                                        delegate: chartDelegate)
+                                                 delegate: chartDelegate)
         let chartHosting = CustomHostingController(shouldShowNavigationBar: false, rootView: rootView)
         chartHosting.view.tag = TickerDetailsDataSource.hostingTag
         return chartHosting
@@ -86,9 +86,9 @@ final class HoldingsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
-//        chartViewModel.ticker = ticker.ticker
-//        chartViewModel.localTicker = ticker
-//        chartViewModel.chartData = ticker.localChartData
+        //        chartViewModel.ticker = ticker.ticker
+        //        chartViewModel.localTicker = ticker
+        //        chartViewModel.chartData = ticker.localChartData
     }
     
     private lazy var chartDelegate: HoldingScatterChartDelegate = {
@@ -96,7 +96,7 @@ final class HoldingsDataSource: NSObject {
         delegateObject.delegate = self
         return delegateObject
     }()
-
+    
 }
 
 extension HoldingsDataSource: SkeletonTableViewDataSource {
@@ -128,6 +128,10 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
             return holdings.count
         }
         
+        if section == 0 {
+            return 2
+        }
+        
         return 1
     }
     
@@ -154,7 +158,7 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     
                     tableView.beginUpdates()
                     self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
-                                                                            isExpaned: self.expandedCells.contains(model.name))
+                                                                           isExpaned: self.expandedCells.contains(model.name))
                     tableView.endUpdates()
                     
                     cell.isExpanded = self.expandedCells.contains(model.name)
@@ -164,16 +168,23 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         }
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
-            if cell.addSwiftUIIfPossible(chartHosting.view) {
-                chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
-                chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
-                chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: -48.0 - 24.0)
-                chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: HoldingChartTableViewCell.cellIdentifier, for: indexPath) as! HoldingChartTableViewCell
+                if cell.addSwiftUIIfPossible(chartHosting.view) {
+                    chartHosting.view.autoSetDimension(.height, toSize: chartHeight)
+                    chartHosting.view.autoPinEdge(.leading, to: .leading, of: cell)
+                    chartHosting.view.autoPinEdge(.bottom, to: .bottom, of: cell, withOffset: 0)
+                    chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell)
+                }
+                
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: HoldingsSettingsTableViewCell.cellIdentifier, for: indexPath) as! HoldingsSettingsTableViewCell
+                cell.updateButtons()
+                cell.delegate = self
+                return cell
             }
-            cell.updateButtons()
-            cell.delegate = self
-            return cell
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingNeedReconnectPlaidTableViewCell.cellIdentifier, for: indexPath) as! HoldingNeedReconnectPlaidTableViewCell
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -189,7 +200,11 @@ extension HoldingsDataSource: UITableViewDelegate {
             return cellHeights[indexPath.row] ?? 0.0
         }
         if indexPath.section == 0 {
-            return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 + 24.0
+            if indexPath.row == 0 {
+                return tableView.sk.isSkeletonActive ? 252.0 : 426.0 - 8.0 - 48.0
+            } else {
+                return tableView.sk.isSkeletonActive ? 252.0 : 24.0 + 48.0
+            }
         } else {
             return 120.0
         }
@@ -205,7 +220,7 @@ extension HoldingsDataSource: UITableViewDelegate {
             delegate?.stockSelected(source: self, stock: stock)
             GainyAnalytics.logEvent("portfolio_ticker_pressed", params: [
                 "tickerSymbol" : stock.fragments.remoteTickerDetails.symbol,
-                                                               "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+                "tickerName" : stock.fragments.remoteTickerDetails.name, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         }
     }
 }
@@ -216,7 +231,7 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
         if let settings = self.settings {
             self.sortAndFilterHoldingsBy(settings)
         }
-        if let rangeData = profileGains[period] {            
+        if let rangeData = profileGains[period] {
             viewModel.min = Double(min(rangeData.sypChartData.onlyPoints().min() ?? 0.0, rangeData.chartData.onlyPoints().min() ?? 0.0))
             viewModel.max = Double(max(rangeData.sypChartData.onlyPoints().max() ?? 0.0, rangeData.chartData.onlyPoints().max() ?? 0.0))
             
@@ -225,10 +240,10 @@ extension HoldingsDataSource: HoldingScatterChartViewDelegate {
                 viewModel.max = rangeData.chartData.onlyPoints().max() ?? 0.0
             }
             
-//            if viewModel.lastDayPrice != 0.0 && period == .d1 {
-//                viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
-//                viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
-//            }
+            //            if viewModel.lastDayPrice != 0.0 && period == .d1 {
+            //                viewModel.min = min(Double(viewModel.min ?? 0.0), Double(viewModel.lastDayPrice))
+            //                viewModel.max = max(Double(viewModel.max ?? 0.0), Double(viewModel.lastDayPrice))
+            //            }
             
             viewModel.chartData = rangeData.chartData
             viewModel.rangeGrow = rangeData.rangeGrow
@@ -261,7 +276,7 @@ extension HoldingsDataSource: HoldingTableViewCellDelegate {
     }
 }
 
-extension HoldingsDataSource: HoldingChartTableViewCellDelegate {
+extension HoldingsDataSource: HoldingsSettingsTableViewCellDelegate {
     func onSortButtonTapped() {
         delegate?.onSortButtonTapped()
     }

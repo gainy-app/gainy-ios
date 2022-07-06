@@ -65,9 +65,6 @@ struct PortfolioScatterChartView: View {
                 })
                 
             }
-            .background(LinearGradient(
-                colors: [UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor, UIColor(hexString: "#F7F8F9", alpha: 0.0)!.uiColor],
-                    startPoint: .bottom, endPoint: .top))
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
@@ -96,7 +93,6 @@ struct PortfolioScatterChartView: View {
                 })
                 
             }
-            .background(Color.white)
             .onAppear(perform: {
                 hapticTouch.prepare()
             })

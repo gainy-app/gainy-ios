@@ -264,6 +264,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
         label.textAlignment = .center
+        label.isSkeletonable = true
         label.isHiddenWhenSkeletonIsActive = true
         label.skeletonCornerRadius = 6
         label.linesCornerRadius = 6

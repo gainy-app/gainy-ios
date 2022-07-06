@@ -202,6 +202,7 @@
 		33CDEC9E26D61BD400E82329 /* GraphQL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */; };
 		33CDECA026D6229300E82329 /* Double+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CDEC9F26D6229300E82329 /* Double+Currencies.swift */; };
 		33CDECA326D627ED00E82329 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 33CDECA226D627ED00E82329 /* SwiftDate */; };
+		33CFE0F22875861F0077FC52 /* HoldingsSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */; };
 		33D3D4E526CB8C3A005A859B /* UIFont+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */; };
 		33D3D4E826CB8F63005A859B /* SwiftHEXColors in Frameworks */ = {isa = PBXBuildFile; productRef = 33D3D4E726CB8F63005A859B /* SwiftHEXColors */; };
 		33D3D4EB26CB9D21005A859B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D3D4EA26CB9D21005A859B /* NotificationManager.swift */; };
@@ -818,6 +819,7 @@
 		33CD8DB82744E4140032C1F2 /* GetPlaidTransactions.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPlaidTransactions.graphql.swift; sourceTree = "<group>"; };
 		33CDEC9D26D61BD400E82329 /* GraphQL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GraphQL+Extensions.swift"; sourceTree = "<group>"; };
 		33CDEC9F26D6229300E82329 /* Double+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Currencies.swift"; sourceTree = "<group>"; };
+		33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		33D3D4E326CB89A4005A859B /* Gainy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gainy.entitlements; sourceTree = "<group>"; };
 		33D3D4E426CB8C39005A859B /* UIFont+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Gainy.swift"; sourceTree = "<group>"; };
 		33D3D4EA26CB9D21005A859B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -2697,6 +2699,7 @@
 				854427E3286E9596005A8DD2 /* HoldingNeedReconnectPlaidTableViewCell.swift */,
 				33CD8DB42744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift */,
 				900CEAF727497BE900CF1597 /* HoldingRangeableCell.swift */,
+				33CFE0F12875861F0077FC52 /* HoldingsSettingsTableViewCell.swift */,
 				900CEAF12749769B00CF1597 /* Chart */,
 				900CEAF2274976A400CF1597 /* Holdings */,
 			);
@@ -3420,6 +3423,7 @@
 				33FE9E3B26D518FE00FABC70 /* Legend.swift in Sources */,
 				8520F9F72722B90B002234B2 /* FloatingPanelManager.swift in Sources */,
 				336D0A0026D7C5840036EB54 /* ScatterChartDelegate.swift in Sources */,
+				33CFE0F22875861F0077FC52 /* HoldingsSettingsTableViewCell.swift in Sources */,
 				3A930ED9265C1909000FD3EB /* AppDelegate.swift in Sources */,
 				3A5ADA7D268DA179008659E8 /* SwipeCollectionViewCellDelegate.swift in Sources */,
 				33E7AA6526CF8FBA00DF1CBE /* BorderButton.swift in Sources */,

@@ -6,9 +6,8 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
-• Reauth for Plaid
-• Refund View finishing
-• Sorting for TTF removed by @Boris
+• TTF: Bigger chart and header
+• Home: margins adjusted
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

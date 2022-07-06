@@ -243,7 +243,7 @@ final class ProfileViewController: BaseViewController {
 
             // Upload the file to the path "images/rivers.jpg"
             let uploadTask = avatarImageRef.putData(data, metadata: nil) { (metadata, error) in
-                guard error != nil else {
+                guard error == nil else {
                     return
                 }
                 GainyAnalytics.logEvent("profile_finished_pick_image", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
