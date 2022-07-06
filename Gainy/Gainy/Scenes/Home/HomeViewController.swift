@@ -210,7 +210,6 @@ extension HomeViewController: HomeDataSourceDelegate {
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
-        GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : stock.symbol])
     }
     
     func articlePressed(article: WebArticle) {
@@ -232,6 +231,7 @@ extension HomeViewController: HomeDataSourceDelegate {
             $0.symbol == ticker.symbol
         }) ?? 0
         mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
+        GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
     }
     
     func tickerSortCollectionsPressed() {

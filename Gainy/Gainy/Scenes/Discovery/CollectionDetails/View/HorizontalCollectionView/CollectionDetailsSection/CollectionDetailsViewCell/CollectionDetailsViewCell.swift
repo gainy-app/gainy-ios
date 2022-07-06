@@ -198,6 +198,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
             }
         }.store(in: &cancellables)
+        reloadTTF()
+        // Load all data
+        // hideSkeleton()
+    }
+    
+    private func reloadTTF() {
         if Constants.CollectionDetails.watchlistCollectionID != viewModel.id {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
@@ -213,8 +219,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
             }
         }
-        // Load all data
-        // hideSkeleton()
     }
     
     @MainActor
@@ -363,6 +367,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let indesSet = IndexSet.init(integer: CollectionDetailsSection.cards.rawValue)
             self.collectionView.reloadSections(indesSet)
             self.headerView?.updateChargeLbl(settings.sortingText())
+            completion?()
         }
     }
     
@@ -408,8 +413,10 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }
     
     @objc func refresh(_ sender:AnyObject) {
-        
-        self.refreshData()
+        viewModel.isDataLoaded = false
+        self.refreshData { [weak self] in
+            self?.reloadTTF()
+        }
     }
     
     //MARK: - Chart
