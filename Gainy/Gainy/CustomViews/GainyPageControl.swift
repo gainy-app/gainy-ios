@@ -2,6 +2,8 @@
 import UIKit
 
 open class GainyPageControl: UIControl {
+    fileprivate let defaultOffset: CGFloat = 24
+    fileprivate var extraOffset: CGFloat = 0
     fileprivate let limit = 5
     fileprivate var fullScaleIndex = [0, 1, 2]
     fileprivate var dotLayers: [CALayer] = []
@@ -135,8 +137,11 @@ private extension GainyPageControl {
     }
     
     func updateDotLayersLayout() {
-        let floatCount = CGFloat(numberOfPages)
-        let x = (bounds.size.width - diameter * floatCount - padding * (floatCount - 1)) * 0.5
+        
+        var x = self.defaultOffset
+        if numberOfPages > limit {
+            x += self.extraOffset
+        }
         let y = (bounds.size.height - diameter) * 0.5
         var frame = CGRect(x: x, y: y, width: diameter, height: diameter)
         
@@ -149,7 +154,13 @@ private extension GainyPageControl {
     
     func setupDotLayersPosition() {
         let centerLayer = dotLayers[centerIndex]
-        centerLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
+        
+        var centerX = frame.width / 2.0
+        if numberOfPages > limit {
+            centerX += self.extraOffset
+        }
+        
+        centerLayer.position = CGPoint(x: centerX, y: frame.height / 2)
         
         dotLayers.enumerated().filter{ $0.offset != centerIndex }.forEach {
             let index = abs($0.offset - centerIndex)
@@ -159,6 +170,8 @@ private extension GainyPageControl {
     }
     
     func setupDotLayersScale() {
+        var didSetupOffset = false
+        self.extraOffset = 0.0
         dotLayers.enumerated().forEach {
             guard let first = fullScaleIndex.first, let last = fullScaleIndex.last else {
                 return
@@ -175,6 +188,16 @@ private extension GainyPageControl {
                     scaleValue = 0
                 }
                 transform = transform.scaledBy(x: scaleValue, y: scaleValue)
+                
+                if !didSetupOffset {
+                    if abs($0.offset - first) == 2 {
+                        self.extraOffset = (diameter + padding) * 2
+                        didSetupOffset = true
+                    } else if abs($0.offset - first) == 1 {
+                        self.extraOffset = (diameter + padding)
+                        didSetupOffset = true
+                    }
+                }
             }
             
             $0.element.setAffineTransform(transform)
@@ -191,8 +214,8 @@ private extension GainyPageControl {
         }
         
         changeFullScaleIndexsIfNeeded()
-        setupDotLayersPosition()
         setupDotLayersScale()
+        setupDotLayersPosition()
     }
     
     func changeFullScaleIndexsIfNeeded() {
