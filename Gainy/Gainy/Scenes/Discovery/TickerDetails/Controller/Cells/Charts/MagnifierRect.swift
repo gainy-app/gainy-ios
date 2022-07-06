@@ -22,5 +22,6 @@ public struct MagnifierRect: View {
                 .frame(width: 1)
         }
         .frame(height: frame.size.height)
+        .offset(y: frame.size.height > 200 ? 30.0 : 0.0)
     }
 }

@@ -55,6 +55,7 @@ struct TTFScatterChartView: View {
                 ZStack {
                     chartView
                         .frame(height: 240)
+                        .offset(y: -20)
                         .activityIndicator(isVisible: viewModel.isLoading)
                 }
                 GeometryReader(content: { geometry in
@@ -70,7 +71,7 @@ struct TTFScatterChartView: View {
                 isSPPVisible = newValue
                 lineViewModel.isSPYVisible = newValue
             })
-            .frame(height: 360)
+            .frame(height: 256 + 90.0)
             .ignoresSafeArea()
             .padding(.top, 0)
             .padding(.leading, 0)
@@ -83,6 +84,7 @@ struct TTFScatterChartView: View {
                 ZStack {
                     chartView
                         .frame(height: 240)
+                        .offset(y: -20)
                         .activityIndicator(isVisible: viewModel.isLoading)
                 }
                 GeometryReader(content: { geometry in
@@ -95,7 +97,7 @@ struct TTFScatterChartView: View {
             .onAppear(perform: {
                 hapticTouch.prepare()
             })
-            .frame(height: 360)
+            .frame(height: 256 + 90.0)
             .padding(.top, 0)
         }
     }
