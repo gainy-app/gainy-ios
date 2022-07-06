@@ -210,16 +210,20 @@ extension HomeViewController: HomeDataSourceDelegate {
     
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell) {
         showWLView(stock: stock, cell: cell)
+        GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : stock.symbol])
     }
     
     func articlePressed(article: WebArticle) {
         let articleVC = ArticleViewController.instantiate(.home)
         articleVC.articleUrl = article.url ?? ""
         present(articleVC, animated: true, completion: nil)
+        
+        GainyAnalytics.logEvent("home_article_tap", params: ["articleId" : article.id])
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
         mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
+        GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
     }
     
     func tickerSelected(ticker: RemoteTicker) {
