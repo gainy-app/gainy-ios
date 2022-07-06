@@ -135,31 +135,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
         
-        let currentNumberView = UIView.newAutoLayout()
-        currentNumberView.backgroundColor = UIColor.init(hexString: "#F7F8F9")
-        currentNumberView.layer.cornerRadius = 8.0
-        currentNumberView.layer.masksToBounds = true
-        navigationBarContainer.addSubview(currentNumberView)
-        currentNumberView.autoPinEdge(toSuperviewEdge: .left, withInset: 24.0)
-        currentNumberView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
-        currentNumberView.autoSetDimension(.height, toSize: 24.0)
-        self.currentNumberView = currentNumberView
-        
-        let currentNumberLabel = UILabel()
-        currentNumberLabel.font = .compactRoundedSemibold(14)
-        currentNumberLabel.textColor = UIColor.init(hexString: "#09141F")
-        currentNumberLabel.numberOfLines = 1
-        currentNumberLabel.lineBreakMode = .byTruncatingTail
-        currentNumberLabel.textAlignment = .center
-        currentNumberLabel.isSkeletonable = true
-        currentNumberLabel.linesCornerRadius = 6
-        currentNumberView.addSubview(currentNumberLabel)
-        currentNumberLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
-        currentNumberLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
-        currentNumberLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
-        currentNumberLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4.0)
-        self.currentNumberLabel = currentNumberLabel
-        currentNumberLabel.showSkeleton()
+        let count = self.viewModel?.collectionDetails.count ?? 0
+        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 50, height: 24), numberOfPages: count)
+        pageControl.currentPage = self.currentCollectionID ?? 0
+        pageControl.isUserInteractionEnabled = false
+        pageControl.translatesAutoresizingMaskIntoConstraints = false
+        pageControl.hideForSinglePage = true
+        navigationBarContainer.addSubview(pageControl)
+        let inset = count <= 5 ? 24.0 : 0.0
+        self.pageControlLeftConstraint = pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: inset)
+        pageControl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
+        pageControl.autoSetDimension(.height, toSize: 24.0)
+        self.pageControl = pageControl
         
         let favoriteButton = ResponsiveButton.newAutoLayout()
         favoriteButton.isSkeletonable = true
@@ -172,7 +159,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         favoriteButton.tintColor = UIColor.init(hexString: "#000000")
         navigationBarContainer.addSubview(favoriteButton)
         favoriteButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
-        favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
         favoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         self.favoriteButton = favoriteButton
@@ -184,7 +171,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         compareButton.setImage(UIImage.init(named: "compare"), for: .selected)
         navigationBarContainer.addSubview(compareButton)
         compareButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
-        compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: currentNumberView)
+        compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
         compareButton.autoPinEdge(.right, to: .left, of: favoriteButton, withOffset: -16.0)
         compareButton.addTarget(self, action: #selector(compareButtonTapped), for: .touchUpInside)
         compareButton.skeletonCornerRadius = 6
@@ -259,7 +246,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         self.searchTextField = searchTextField
         
         view.addSubview(navigationBarContainer)
-        
+        navigationBarContainer.setNeedsLayout()
+        navigationBarContainer.layoutIfNeeded()
         
         
         collectionView = UICollectionView(
@@ -721,12 +709,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             if let currentIndex = items.last?.indexPath.row {
                 if (self.viewModel?.collectionDetails.count ?? 0) <= 1 {
-                    self.currentNumberLabel?.text = nil
-                    self.currentNumberView?.alpha = 0.0
+                    self.pageControl?.isHidden = true
                     self.currentCollectionID = currentIndex
                 } else {
-                    self.currentNumberView?.alpha = 1.0
-                    self.currentNumberLabel?.text = "\(currentIndex + 1)" + " \\ " +  "\(self.viewModel?.collectionDetails.count ?? 0)"
+                    let count = self.viewModel?.collectionDetails.count ?? 0
+                    self.pageControl?.isHidden = false
+                    self.pageControl?.numberOfPages = count
+                    self.pageControl?.currentPage = currentIndex
+                    self.pageControlLeftConstraint?.constant = count <= 5 ? 24.0 : 0.0
                     self.currentCollectionID = currentIndex
                 }
             }
@@ -753,8 +743,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     private var searchTextField: UITextField?
     
     
-    private var currentNumberView: UIView?
-    private var currentNumberLabel: UILabel?
+    private var pageControl: GainyPageControl?
+    private var pageControlLeftConstraint: NSLayoutConstraint?
     private var currentCollectionID: Int?
     private var compareButton: UIButton?
     private var favoriteButton: UIButton?
@@ -838,7 +828,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func hideSkeletons() {
-        currentNumberLabel?.hideSkeleton()
         compareButton?.hideSkeleton()
         favoriteButton?.hideSkeleton()
         collectionView?.hideSkeleton()
@@ -944,6 +933,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             array.insert(watchlist, at: 0)
         }
         viewModel?.collectionDetails = CollectionsManager.shared.convertToModel(array)
+        let count = self.viewModel?.collectionDetails.count ?? 0
+        let inset = count <= 5 ? 24.0 : 0.0
+        self.pageControl?.setNeedsLayout()
+        self.pageControlLeftConstraint?.constant = inset
+        self.pageControl?.numberOfPages = count
+        self.pageControl?.layoutIfNeeded()
         dprint("initViewModelsFromData ended \(viewModel?.collectionDetails.count ?? 0)", profileId: 30)
     }
     
@@ -1131,8 +1126,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             snapshot.deleteItems([sourceItem])
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                 if self.viewModel?.collectionDetails.count ?? 0 <= 1 {
-                    self.currentNumberLabel?.text = nil
-                    self.currentNumberView?.alpha = 0.0
+                    self.pageControl?.isHidden = true
                 }
                 if CollectionsManager.shared.collections.isEmpty {
                     self.onDiscoverCollections?(false)
