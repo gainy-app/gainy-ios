@@ -135,13 +135,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         navigationBarContainer.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
         
-        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 50, height: 24), numberOfPages: self.viewModel?.collectionDetails.count ?? 0)
+        let count = self.viewModel?.collectionDetails.count ?? 0
+        let pageControl = GainyPageControl.init(frame: CGRect.init(x: 24, y: 0, width: 50, height: 24), numberOfPages: count)
         pageControl.currentPage = self.currentCollectionID ?? 0
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.hideForSinglePage = true
         navigationBarContainer.addSubview(pageControl)
-        self.pageControlLeftConstraint = pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: 0.0)
+        let inset = count <= 5 ? 24.0 : 0.0
+        self.pageControlLeftConstraint = pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: inset)
         pageControl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
         pageControl.autoSetDimension(.height, toSize: 24.0)
         self.pageControl = pageControl
@@ -714,6 +716,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.pageControl?.isHidden = false
                     self.pageControl?.numberOfPages = count
                     self.pageControl?.currentPage = currentIndex
+                    self.pageControlLeftConstraint?.constant = count <= 5 ? 24.0 : 0.0
                     self.currentCollectionID = currentIndex
                 }
             }
@@ -930,6 +933,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             array.insert(watchlist, at: 0)
         }
         viewModel?.collectionDetails = CollectionsManager.shared.convertToModel(array)
+        let count = self.viewModel?.collectionDetails.count ?? 0
+        let inset = count <= 5 ? 24.0 : 0.0
+        self.pageControl?.setNeedsLayout()
+        self.pageControlLeftConstraint?.constant = inset
+        self.pageControl?.numberOfPages = count
+        self.pageControl?.layoutIfNeeded()
         dprint("initViewModelsFromData ended \(viewModel?.collectionDetails.count ?? 0)", profileId: 30)
     }
     
