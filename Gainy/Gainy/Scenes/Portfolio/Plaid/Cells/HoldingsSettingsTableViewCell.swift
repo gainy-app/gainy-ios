@@ -22,12 +22,14 @@ final class HoldingsSettingsTableViewCell: HoldingRangeableCell {
         didSet {
             sortButton.layer.cornerRadius = 12.0
             sortButton.clipsToBounds = true
+            sortButton.fillRemoteButtonBack()
         }
     }
     @IBOutlet private weak var settingsButton: ResponsiveButton! {
         didSet {
             settingsButton.layer.cornerRadius = 12.0
             settingsButton.clipsToBounds = true
+            settingsButton.fillRemoteButtonBack()
         }
     }
     

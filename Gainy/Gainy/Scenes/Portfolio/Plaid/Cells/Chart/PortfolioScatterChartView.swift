@@ -74,6 +74,7 @@ struct PortfolioScatterChartView: View {
             .onChange(of: viewModel.lastDayPrice) { newValue in
                 lineViewModel.lastDayPrice = newValue
             }
+            .background(RemoteConfigManager.shared.mainBackColor.uiColor)
         } else {
             VStack {
                 headerView
@@ -98,6 +99,7 @@ struct PortfolioScatterChartView: View {
             })
             .frame(height: 360)
             .padding(.top, 0)
+            .background(RemoteConfigManager.shared.mainBackColor.uiColor)
         }
     }
     //MARK:- Haptics
@@ -285,7 +287,7 @@ struct PortfolioScatterChartView: View {
                 .padding(.bottom, 6)
             })
             .frame(height: 24)            
-            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : UIColor(hexString: "F7F8F9", alpha: 1.0)!.uiColor).cornerRadius(12))
+            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : RemoteConfigManager.shared.mainButtonColor.uiColor).cornerRadius(12))
             Spacer()
         }
         .padding(.leading, 16)
