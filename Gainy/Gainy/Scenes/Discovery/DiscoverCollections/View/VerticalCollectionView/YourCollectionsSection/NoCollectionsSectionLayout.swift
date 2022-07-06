@@ -1,6 +1,8 @@
 import UIKit
 
 struct NoCollectionsSectionLayout: SectionLayout {
+    public var headerHeight: CGFloat = 74.0
+    
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
         let yourCollectionItem = NSCollectionLayoutItem(
@@ -24,7 +26,7 @@ struct NoCollectionsSectionLayout: SectionLayout {
         let yourCollectionsHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(74)
+                heightDimension: .estimated(self.headerHeight)
             ),
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .top
@@ -46,17 +48,29 @@ struct NoCollectionsSectionLayout: SectionLayout {
         indexPath: IndexPath,
         viewModel: AnyHashable
     ) -> UICollectionReusableView? {
-        let headerView: YourCollectionsHeaderView =
-            collectionView.dequeueReusableSectionHeader(for: indexPath)
-
+        
+        var result: UICollectionReusableView? = nil
         if let viewModel = viewModel as? CollectionHeaderViewModel {
-            headerView.configureWith(
-                title: viewModel.title,
-                description: viewModel.description
-            )
+            if viewModel.showOutline {
+                let outlineHeaderView: NoCollectionsHeaderView =
+                collectionView.dequeueReusableSectionHeader(for: indexPath)
+                outlineHeaderView.configureWith(
+                    title: viewModel.title,
+                    description: viewModel.description
+                )
+                result = outlineHeaderView
+            } else {
+                let headerView: YourCollectionsHeaderView =
+                    collectionView.dequeueReusableSectionHeader(for: indexPath)
+                headerView.configureWith(
+                    title: viewModel.title,
+                    description: viewModel.description
+                )
+                result = headerView
+            }
         }
         
-        return headerView
+        return result
     }
 
     func configureCell(
