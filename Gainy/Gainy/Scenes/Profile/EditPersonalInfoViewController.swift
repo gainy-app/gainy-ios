@@ -113,6 +113,13 @@ final class EditPersonalInfoViewController: BaseViewController {
             return
         }
         
+        guard self.firstNameTextField.text?.count == 0,
+              self.lastNameTextField.text?.count == 0,
+              self.emailTextField.text?.count == 0,
+              self.legalAddressTextView.text?.count == 0 else {
+            return
+        }
+        
         self.firstNameTextField.text = firstName
         self.lastNameTextField.text = lastName
         self.emailTextField.text = email
