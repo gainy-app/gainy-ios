@@ -44,30 +44,28 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
             innerCollectionView.isScrollEnabled = false
             expandBtn.isSelected = false
             expandBtn.isHidden = collections.count < 5
-            if collections.count < 5 {
-                collectionHeight.constant = max(0.0, CGFloat(collections.count) * cellWidth + CGFloat(collections.count - 1) * 8.0)
-            } else {
-                collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0
-            }
-            delay(0.1) {
-                self.heightUpdated?(self.collectionHeight.constant + 47)
-            }
-            layoutIfNeeded()
+            calcSize(isSelected: collections.count < 5)
         }
     }
     
-    
+    func calcSize(isSelected: Bool = false) {
+        if isSelected {
+            collectionHeight.constant = max(0.0, CGFloat(collections.count) * cellWidth + CGFloat(collections.count) * 8.0)
+        } else {
+            collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4) * 8.0
+        }
+        let bottomOffset: CGFloat = collections.count > 4 ? 32.0 : 32.0
+        delay(0.1) {
+            self.innerCollectionView.isScrollEnabled = false
+            self.heightUpdated?(8.0 + self.collectionHeight.constant + bottomOffset)
+        }
+        layoutIfNeeded()
+    }
     
     //MARK: - Actions
     @IBAction func expandToggleAction(_ sender: UIButton) {
         sender.isSelected.toggle()
-        if sender.isSelected {
-            collectionHeight.constant = CGFloat(collections.count) * cellWidth + CGFloat(collections.count - 1) * 8.0
-        } else {
-            collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0
-        }
-        heightUpdated?(collectionHeight.constant + 47)
-        layoutIfNeeded()
+        calcSize(isSelected: sender.isSelected)
     }
 }
 

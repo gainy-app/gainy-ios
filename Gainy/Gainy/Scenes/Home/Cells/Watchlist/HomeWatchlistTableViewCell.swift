@@ -39,38 +39,42 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         return layout
     }()
     
-    @IBOutlet weak var watchlistHeight: NSLayoutConstraint!
-    @IBOutlet weak var expandBtn: UIButton!
+    @IBOutlet private weak var watchlistHeight: NSLayoutConstraint!
+    @IBOutlet private weak var expandBtn: UIButton!
+    @IBOutlet private weak var dotsView: UIImageView!
     
     var watchlist: [RemoteTickerDetails] = [] {
         didSet {
             innerCollectionView.reloadData()
             expandBtn.isHidden = watchlist.count < 5
-            if watchlist.count < 5 {
-                watchlistHeight.constant = max(0.0, CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0) + 12.0
-            } else {
-                watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 12.0
-            }
-            delay(0.1) {
-                self.innerCollectionView.isScrollEnabled = false
-                self.heightUpdated?(self.watchlistHeight.constant + 47)
-            }
-            layoutIfNeeded()
+            dotsView.isHidden = watchlist.isEmpty
+            calcSize(isSelected: watchlist.count < 5)
         }
     }
     
+    private func calcSize(isSelected: Bool = false) {
+        guard !watchlist.isEmpty else {
+            heightUpdated?(0.0)
+            return
+        }
+        if isSelected {
+            watchlistHeight.constant = max(0.0, CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0) + 8.0
+        } else {
+            watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4) * 8.0 + 8.0
+        }
+        let bottomOffset: CGFloat = watchlist.count > 4 ? 24.0 : 24.0
+        delay(0.1) {
+            self.innerCollectionView.isScrollEnabled = false
+            self.heightUpdated?(8.0 + self.watchlistHeight.constant + bottomOffset)
+        }
+        layoutIfNeeded()
+    }
     
     
     //MARK: - Actions
     @IBAction func expandToggleAction(_ sender: UIButton) {
         sender.isSelected.toggle()
-        if sender.isSelected {
-            watchlistHeight.constant = CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0 + 12.0
-        } else {
-            watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4 - 1) * 8.0 + 12.0
-        }
-        heightUpdated?(watchlistHeight.constant + 47)
-        layoutIfNeeded()
+        calcSize(isSelected: sender.isSelected)
     }
 }
 

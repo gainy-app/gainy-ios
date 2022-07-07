@@ -187,22 +187,16 @@ extension HomeDataSource: UITableViewDelegate {
         headerLabel.font = .proDisplaySemibold(20)        
         headerLabel.text = sectionType.name
         
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40.0))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 20, width: UIScreen.main.bounds.width, height: 40.0))
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
-        if section == Section.articles.rawValue {
+        
             //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
-            headerLabel.autoPinEdge(.bottom, to: .bottom, of: headerView, withOffset: -8)
+            headerLabel.autoPinEdge(.bottom, to: .bottom, of: headerView, withOffset: -16)
             headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
             headerLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -180)
             headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
-        } else {
-            //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
-            headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
-            headerLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -180)
-            headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
-        }
         
         let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
         let button = buttonWithLabel.0
@@ -226,7 +220,6 @@ extension HomeDataSource: UITableViewDelegate {
             button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
             button.sizeToFit()
         }
-        
         return headerView
     }
     
@@ -303,7 +296,7 @@ extension HomeDataSource: UITableViewDelegate {
                 return 0.0
             }
             
-            return 40.0
+            return 60.0
         }
     }
 }
