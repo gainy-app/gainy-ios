@@ -1,4 +1,4 @@
-iOS v1.4.3 #243 available
+iOS v1.4.3 #244 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
@@ -6,7 +6,7 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
-• Home: margins adjusted
+• TTF header adjusted
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
