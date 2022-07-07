@@ -6,7 +6,6 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
-• TTF: Bigger chart and header
 • Home: margins adjusted
 
 :red_circle: Important Notes:
