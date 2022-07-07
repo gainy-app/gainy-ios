@@ -31,7 +31,7 @@ open class GainyPageControl: UIControl {
         }
     }
     
-    @IBInspectable open var radius: CGFloat = 5 {
+    @IBInspectable open var radius: CGFloat = 3 {
         didSet {
             updateDotLayersLayout()
         }

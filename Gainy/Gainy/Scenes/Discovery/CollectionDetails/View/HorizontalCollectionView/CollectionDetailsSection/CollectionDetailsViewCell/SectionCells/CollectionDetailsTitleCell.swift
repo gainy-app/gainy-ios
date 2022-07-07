@@ -15,10 +15,19 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
+        contentView.addSubview(companyContainer)
+        
+        companyContainer.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
+        companyContainer.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
+        companyContainer.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
+        companyContainer.autoSetDimension(.height, toSize: 94.0)
+        
         contentView.addSubview(companyNameLabel)
         companyNameLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 24)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 72)
-        companyNameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 32.0)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 48)
+        companyNameLabel.autoPinEdge(.top, to: .top, of: companyContainer, withOffset: 0, relation: .greaterThanOrEqual)
+        companyNameLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0, relation: .greaterThanOrEqual)
+        companyNameLabel.autoAlignAxis(.horizontal, toSameAxisOf: companyContainer)
     }
     
     @available(*, unavailable)
@@ -39,15 +48,22 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
     }
     
     func configureWith(companyName: String) {
-        companyNameLabel.minimumScaleFactor = 1.0
+        companyNameLabel.minimumScaleFactor = 0.1
         companyNameLabel.text = companyName
         companyNameLabel.sizeToFit()
     }
     
+    lazy var companyContainer: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isSkeletonable = false
+        return view
+    }()
+    
     lazy var companyNameLabel: UILabel = {
         let label = UILabel()
         
-        label.font = UIFont(name: "SFProDisplay-Bold", size: 32)
+        label.font = UIFont(name: "SFProDisplay-Bold", size: 24)
         label.textColor = UIColor.init(hexString: "#09141F")
         label.lineBreakMode = .byTruncatingTail
         label.textAlignment = .left
