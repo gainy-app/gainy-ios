@@ -1,4 +1,4 @@
-iOS v1.4.3 #244 available
+iOS v1.4.3 #245 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
@@ -6,7 +6,7 @@ Subscriptions
 • -
 
 :hammer_and_wrench: Improvements
-• TTF header adjusted
+• Profile ID added to Analytics for @Dmitry Pesegov
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

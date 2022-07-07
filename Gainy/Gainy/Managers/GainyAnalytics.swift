@@ -71,6 +71,7 @@ final class GainyAnalytics {
         if  let user = Auth.auth().currentUser {
             newParams["uid"] = user.uid
         }
+        newParams["profileId"] = UserProfileManager.shared.profileID ?? 0
         newParams["ul"] = Locale.current.identifier
         newParams["date"] = Date().timeIntervalSinceReferenceDate
         if Auth.auth().currentUser == nil {
