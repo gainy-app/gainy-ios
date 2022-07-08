@@ -232,6 +232,11 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             }
                             
+                            dprint("MIN-MAX RANGE")
+                            dprint("\(live.chartData.onlyPoints().min()) \(live.chartData.onlyPoints().max())")
+                            dprint("\(live.sypChartData.onlyPoints().min()) \(live.sypChartData.onlyPoints().max())")
+                            dprint("\(self.dataSource.chartViewModel.min) \(self.dataSource.chartViewModel.max)")
+                            
 //                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
 //                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 {
 //                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
