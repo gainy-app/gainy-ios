@@ -19,8 +19,8 @@ final class ScatterChartViewModel: ObservableObject {
         self.lastDayPrice = 0.0
         self.relatedCollection1DGain = 0.0
         self.compareTTFName = ""
-        self.min = -1
-        self.max = -1
+        self.min = nil
+        self.max = nil
     }
     
     @Published

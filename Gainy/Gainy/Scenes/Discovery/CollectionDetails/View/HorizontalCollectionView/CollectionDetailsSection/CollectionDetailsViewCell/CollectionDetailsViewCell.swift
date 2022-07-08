@@ -246,9 +246,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         //let topChart = ChartData(points: [15, 20,12,30])
         //let medianData = ChartData(points: [15, 20,12,30].shuffled())
-        //print("\(topChartData.onlyPoints().min()) \(topChartData.onlyPoints().max())")
-        //print("\(medianData.onlyPoints().min()) \(medianData.onlyPoints().max())")
+        dprint("TTF MIN-MAX range")
+        dprint("\(topChartData.onlyPoints().min()) \(topChartData.onlyPoints().max())")
+        dprint("\(medianData.onlyPoints().min()) \(medianData.onlyPoints().max())")
         
+        if !topChartData.onlyPoints().isEmpty {
         topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
         topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
         if medianData.onlyPoints().isEmpty {
@@ -261,6 +263,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
             topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
         }
+        }
+        
         topChart.dayGrow = viewModel.dailyGrow
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
