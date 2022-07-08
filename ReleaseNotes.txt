@@ -1,4 +1,4 @@
-iOS v1.4.4 #246 available
+iOS v1.4.4 #247 available
 :globe_with_meridians: Server - PROD
 Subscriptions
 
