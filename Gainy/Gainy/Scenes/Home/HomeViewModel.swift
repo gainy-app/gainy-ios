@@ -49,7 +49,6 @@ final class HomeViewModel {
                     }
                     
                     await MainActor.run {
-                        print("Indexes updated \(Date())")
                         self.dataSource.updateIndexes(models: self.topIndexes)
                     }
                 }

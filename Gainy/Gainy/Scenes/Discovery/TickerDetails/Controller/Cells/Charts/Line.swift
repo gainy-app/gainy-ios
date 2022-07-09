@@ -107,8 +107,9 @@ public struct Line: View {
             
             if(self.showIndicator && !isSPYVisible) {
                 MagnifierRect(currentNumber: $indicatorVal,
-                              frame: $frame)
-                    .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80)) 
+                              frame: $frame,
+                              textOffset: getClosestPointOnPath(touchLocation: self.touchLocation).x)
+                    .position(CGPoint.init(x: self.getClosestPointOnPath(touchLocation: self.touchLocation).x, y: 80))
                 IndicatorPoint()
                     .position(self.getClosestPointOnPath(touchLocation: self.touchLocation))
                     .rotationEffect(.degrees(180), anchor: .center)
@@ -117,7 +118,7 @@ public struct Line: View {
         }
     }
     
-    func getClosestPointOnPath(touchLocation: CGPoint) -> CGPoint {
+    private func getClosestPointOnPath(touchLocation: CGPoint) -> CGPoint {
         if data.points.count > 2 {
             let closest = self.curvedPath.point(to: touchLocation.x)
             return closest
@@ -126,7 +127,6 @@ public struct Line: View {
             return closest
         }
     }
-    
 }
 
 struct Line_Previews: PreviewProvider {
