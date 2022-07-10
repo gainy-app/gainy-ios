@@ -1,12 +1,12 @@
 iOS v1.4.4 #248 available
-:globe_with_meridians: Server - PROD
-Subscriptions
+:globe_with_meridians: Server - TEST
+UI Improvements
 
 :new: New:
-• -
+• Discovery: Navigation changed
 
 :hammer_and_wrench: Improvements
-• Chart: tap selection value adjusted on borders
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
