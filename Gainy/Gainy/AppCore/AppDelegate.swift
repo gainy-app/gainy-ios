@@ -183,7 +183,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             BranchScene.shared().initSession(launchOptions: launchOptions, registerDeepLinkHandler: { (params, error, scene) in
                 if let refId = params?["refId"] as? String {
                     dprint("Got invite install from \(refId)")
-                    GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
+                    GainyAnalytics.logEvent("invite_received", params: ["refID" : refId])
                     RedeemInviteManager.shared.isInviteAvaialble = true
                     RedeemInviteManager.shared.fromId = Int(refId) ?? 0
                 }

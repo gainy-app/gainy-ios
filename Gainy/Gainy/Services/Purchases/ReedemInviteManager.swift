@@ -22,7 +22,7 @@ final class RedeemInviteManager {
         guard isInviteAvaialble else {return}
         
         dprint("Invite redeem started \(fromId ?? -1)")
-        GainyAnalytics.logDevEvent("invite_started", params: ["refID" : fromId ?? -1])
+        GainyAnalytics.logEvent("invite_started", params: ["refID" : fromId ?? -1])
         if let profileID = UserProfileManager.shared.profileID, let fromId = fromId {
             let query = RedeemInvitationMutation(fromId: fromId, toId: profileID)
             Network.shared.apollo.perform(mutation: query) { result in
@@ -30,7 +30,7 @@ final class RedeemInviteManager {
                 case .success(let data):
                     self.isInviteAvaialble = false
                     dprint("Invite redeem received \(fromId)")
-                    GainyAnalytics.logDevEvent("invite_done", params: ["refID" : fromId])
+                    GainyAnalytics.logEvent("invite_done", params: ["refID" : fromId])
                     UserProfileManager.shared.fetchProfile { _ in
                     }
                     break

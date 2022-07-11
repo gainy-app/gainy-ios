@@ -25,7 +25,7 @@ class DeeplinkHandler {
             
             if let refId = params.first(where: { $0.name == "refID" })?.value {
                 dprint("Dynamic link ref found: \(refId)")
-                GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
+                GainyAnalytics.logEvent("invite_received", params: ["refID" : refId])
             } else {
                 dprint("No ref found")
             }
@@ -54,7 +54,7 @@ class DeeplinkHandler {
             
             if let refId = params.first(where: { $0.name == "refID" })?.value {
                 dprint("Dynamic link ref found: \(refId)")
-                GainyAnalytics.logDevEvent("invite_received", params: ["refID" : refId])
+                GainyAnalytics.logEvent("invite_received", params: ["refID" : refId])
                 
             } else {
                 dprint("No ref found")
