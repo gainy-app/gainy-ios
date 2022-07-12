@@ -1,12 +1,13 @@
-iOS v1.4.4 #248 available
+iOS v1.4.4 #249 available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• Discovery: Navigation changed
+• Discovery: TabBar is hidden in no TTFs (by @Ali)
 
 :hammer_and_wrench: Improvements
-• -
+• TabBar have no top line
+• TTF Margins by @Ali
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
