@@ -155,12 +155,14 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     // MARK: Properties
     
+    var currentOffset: CGFloat = 0.0
     var model: CollectionCardViewCellModel?
     fileprivate var lastOffset: CGFloat = 0.0
     var cancellables = Set<AnyCancellable>()
     var investButtonHeightLayoutConstraint: NSLayoutConstraint? = nil
     
     var onCardPressed: ((RemoteTickerDetails) -> Void)?
+    var onScroll: ((CGFloat) -> Void)?
     var onSortingPressed: (() -> Void)?
     var onAddStockPressed: (() -> Void)?
     var onSettingsPressed: (((RemoteTickerDetails)) -> Void)?
@@ -1249,6 +1251,8 @@ extension CollectionDetailsViewCell: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let topOffset = scrollView.contentOffset.y
+        self.onScroll?(topOffset)
+        self.currentOffset = topOffset
         if abs(lastOffset - topOffset) > 10 {
             lastOffset = topOffset
             let angle = -(topOffset * 0.5) * 2 * CGFloat(Double.pi / 180)

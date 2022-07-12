@@ -24,6 +24,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     var onDiscoverCollections: ((Bool) -> Void)?
     var onShowCardDetails: (([RemoteTickerDetails], Int) -> Void)?
     private var skipReload: Bool = false
+    private var navigationBarContainer: UIView = UIView()
+    private var blurViewHeightConstraint: NSLayoutConstraint?
+    private var lastOffset: CGFloat = 0.0
     
     //Panel
     private var fpc: FloatingPanelController!
@@ -95,18 +98,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navigationBarContainer = UIView(
-            frame: CGRect(
-                x: 0,
-                y: view.safeAreaInsets.top + 36,
-                width: view.bounds.width,
-                height: 110
-            )
+        let navBarFrame = CGRect(
+            x: 0,
+            y: view.safeAreaInsets.top + 36,
+            width: view.bounds.width,
+            height: 110
         )
-        navigationBarContainer.backgroundColor = .clear
+        let navigationBarContainerView = UIView(frame:navBarFrame)
+        navigationBarContainerView.backgroundColor = .clear
         
         let navigationBarTopOffset =
-        navigationBarContainer.frame.origin.y + navigationBarContainer.bounds.height
+        navigationBarContainerView.frame.origin.y + navigationBarContainerView.bounds.height
         
         let blurView = BlurEffectView()
         view.addSubview(blurView)
@@ -114,14 +116,14 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         blurView.autoPinEdge(toSuperviewEdge: .leading)
         blurView.autoPinEdge(toSuperviewEdge: .top)
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+        self.blurViewHeightConstraint = blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
         
         view.fillRemoteBack()
         
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
-                x: navigationBarContainer.bounds.width - (32 + 20),
+                x: navigationBarContainerView.bounds.width - (32 + 20),
                 y: 28,
                 width: 32,
                 height: 32
@@ -133,7 +135,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                                             action: #selector(discoverCollectionsButtonTapped),
                                             for: .touchUpInside)
         
-        navigationBarContainer.addSubview(discoverCollectionsButton)
+        navigationBarContainerView.addSubview(discoverCollectionsButton)
         discoverCollectionsBtn = discoverCollectionsButton
         
         let count = self.viewModel?.collectionDetails.count ?? 0
@@ -142,7 +144,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         pageControl.isUserInteractionEnabled = false
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         pageControl.hideForSinglePage = true
-        navigationBarContainer.addSubview(pageControl)
+        navigationBarContainerView.addSubview(pageControl)
         pageControl.autoPinEdge(toSuperviewEdge: .left, withInset: 0.0)
         pageControl.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0.0)
         pageControl.autoSetDimension(.height, toSize: 24.0)
@@ -157,7 +159,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         favoriteButton.setImage(selectedImage, for: .selected)
         favoriteButton.isSelected = true
         favoriteButton.tintColor = UIColor.init(hexString: "#000000")
-        navigationBarContainer.addSubview(favoriteButton)
+        navigationBarContainerView.addSubview(favoriteButton)
         favoriteButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         favoriteButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
         favoriteButton.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
@@ -169,7 +171,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         compareButton.isSkeletonable = true
         compareButton.setImage(UIImage.init(named: "compare"), for: .normal)
         compareButton.setImage(UIImage.init(named: "compare"), for: .selected)
-        navigationBarContainer.addSubview(compareButton)
+        navigationBarContainerView.addSubview(compareButton)
         compareButton.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
         compareButton.autoAlignAxis(ALAxis.horizontal, toSameAxisOf: pageControl)
         compareButton.autoPinEdge(.right, to: .left, of: favoriteButton, withOffset: -16.0)
@@ -184,7 +186,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             frame: CGRect(
                 x: 16,
                 y: 24,
-                width: navigationBarContainer.bounds.width - (16 + 16 + 32 + 20),
+                width: navigationBarContainerView.bounds.width - (16 + 16 + 32 + 20),
                 height: 40
             )
         )
@@ -242,13 +244,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         searchTextField.delegate = self
         searchTextField.fillRemoteButtonBack()
-        navigationBarContainer.addSubview(searchTextField)
+        navigationBarContainerView.addSubview(searchTextField)
         self.searchTextField = searchTextField
         
-        view.addSubview(navigationBarContainer)
-        navigationBarContainer.setNeedsLayout()
-        navigationBarContainer.layoutIfNeeded()
-        
+        view.addSubview(navigationBarContainerView)
+        navigationBarContainerView.setNeedsLayout()
+        navigationBarContainerView.layoutIfNeeded()
+        self.navigationBarContainer = navigationBarContainerView
         
         collectionView = UICollectionView(
             frame: CGRect(
@@ -295,6 +297,10 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             
             if let cell = cell as? CollectionDetailsViewCell {
                 cell.tag = modelItem.id
+                cell.onScroll = {[weak self]  offset in
+                    self?.updateNavigationBarAppearence(withOffset: offset)
+                }
+                
                 cell.onCardPressed = {[weak self]  ticker in
                     if !(ticker.name?.hasPrefix(Constants.CollectionDetails.demoNamePrefix) ?? false) {
                         if let model = self?.viewModel?.collectionDetails[indexPath.row] {
@@ -468,6 +474,58 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         if var snapshot = self.dataSource?.snapshot() {
             snapshot.deleteAllItems()
             self.dataSource?.apply(snapshot)
+        }
+    }
+    
+    private func updateNavigationBarAppearence(withOffset offset:CGFloat, forceShow: Bool = false) {
+        
+        var needHide = false
+        if !forceShow {
+            if offset - self.lastOffset >= 100 {
+                needHide = true
+                self.lastOffset = offset
+            } else if offset - self.lastOffset <= -100 {
+                needHide = false
+                self.lastOffset = offset
+            } else  {
+                return
+            }
+        }
+        
+        let count = self.viewModel?.collectionDetails.count ?? 0
+        let isHidden = (self.favoriteButton?.isHidden ?? true) && (self.pageControl?.isHidden ?? true)
+        
+        var height: CGFloat = 110.0
+        var hidden = false
+        if !isHidden && needHide {
+            height = 80.0
+            hidden = true
+        } else if isHidden && !needHide {
+            height = 110.0
+            hidden = false
+        } else if !forceShow {
+            return
+        }
+        
+        let navBarFrame = CGRect(
+            x: 0,
+            y: self.navigationBarContainer.frame.origin.y,
+            width: view.bounds.width,
+            height: height
+        )
+        
+        self.view.setNeedsLayout()
+        UIView.animate(withDuration: 0.25) {
+            self.pageControl?.alpha = (count <= 1 || hidden) ? 0.0 : 1.0
+            self.favoriteButton?.alpha = hidden ? 0.0 : 1.0
+            self.navigationBarContainer.frame = navBarFrame
+            let navigationBarTopOffset =
+            self.navigationBarContainer.frame.origin.y + self.navigationBarContainer.bounds.height
+            self.blurViewHeightConstraint?.constant = navigationBarTopOffset + 8.0
+            self.view.layoutIfNeeded()
+        } completion: { success in
+            self.pageControl?.isHidden = (count <= 1 || hidden)
+            self.favoriteButton?.isHidden = hidden
         }
     }
     
@@ -719,6 +777,12 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.pageControl?.currentPage = currentIndex
                     self.currentCollectionID = currentIndex
                 }
+                if let indexPath = items.last?.indexPath {
+                    if let cell = self.collectionView.cellForItem(at: indexPath) as? CollectionDetailsViewCell {
+                        self.lastOffset = cell.currentOffset
+                        self.updateNavigationBarAppearence(withOffset: 0.0, forceShow: true)
+                    }
+                }
             }
         }
         return layout
@@ -885,10 +949,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         }
     }
     
-    private func createNavigationBarContainer() -> UIView {
-        UIView()
-    }
-    
     func centerInitialCollectionInTheCollectionView() {
         guard let snap = dataSource?.snapshot() else {return}
         guard viewModel?.initialCollectionIndex ?? 0 < viewModel?.collectionDetails.count ?? 0 else {
@@ -1023,6 +1083,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let navBarFrame = CGRect(
+            x: 0,
+            y: self.navigationBarContainer.frame.origin.y,
+            width: view.bounds.width,
+            height: self.navigationBarContainer.frame.size.height
+        )
+        self.navigationBarContainer.frame = navBarFrame
+        let navigationBarTopOffset =
+        self.navigationBarContainer.frame.origin.y + self.navigationBarContainer.bounds.height
+        self.blurViewHeightConstraint?.constant = navigationBarTopOffset + 8.0
+        
         
         if self.skipReload {
             self.skipReload = false
