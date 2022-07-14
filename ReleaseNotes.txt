@@ -1,4 +1,4 @@
-iOS v1.4.4 #249 available
+iOS v1.4.4 #250 available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
@@ -9,7 +9,7 @@ UI Improvements
 • TabBar have no top line
 • TTF Margins by @Ali
 • TTF: add to WL replaced to icon by @Ali
-• 
+• Purhcase variants for @Dmitry Pesegov
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
