@@ -73,14 +73,13 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qKu-Yr-eF3" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="284" y="26" width="104" height="24"/>
-                                                    <color key="backgroundColor" red="0.1598863304" green="0.37592905760000001" blue="0.9647575021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <rect key="frame" x="364" y="26" width="24" height="24"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="104" id="4SE-sf-xVF"/>
                                                         <constraint firstAttribute="height" constant="24" id="7Pt-0f-A85"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
-                                                    <state key="normal" title=" Add to watchlist ">
+                                                    <state key="normal" image="save">
                                                         <color key="titleColor" red="0.043908372520000002" green="0.077603302900000004" blue="0.11765200639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                     <state key="selected" title=" Added to watchlist ">
@@ -142,7 +141,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxd-Jp-DXE" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
-                                                    <rect key="frame" x="170" y="26" width="106" height="24"/>
+                                                    <rect key="frame" x="250" y="26" width="106" height="24"/>
                                                     <color key="backgroundColor" red="0.96867948770000001" green="0.97248011830000003" blue="0.97647124529999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="106" id="P6p-66-jdT"/>
@@ -190,7 +189,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="addToWatchlistButton" destination="qKu-Yr-eF3" id="dOC-ZL-ldc"/>
-                                            <outlet property="addToWatchlistButtonWidthConstraint" destination="4SE-sf-xVF" id="LzD-Nf-q7d"/>
                                             <outlet property="compareStocksButton" destination="lxd-Jp-DXE" id="c0l-wG-8HV"/>
                                             <outlet property="symbolLbl" destination="9qX-Ul-sNd" id="y6P-VA-VvQ"/>
                                             <outlet property="tickerNameLbl" destination="fVb-yA-YhU" id="1Dw-VB-nVj"/>
@@ -1958,6 +1956,7 @@ added to your watchlist!</string>
         <image name="mark_wrong_selected" width="24" height="24"/>
         <image name="match_circle" width="25" height="25"/>
         <image name="remove_coll_from_wl" width="14" height="20"/>
+        <image name="save" width="24" height="24"/>
         <image name="small_down" width="8" height="8"/>
         <image name="stock_separator" width="105" height="1"/>
         <image name="ticker_pfr" width="88" height="88"/>

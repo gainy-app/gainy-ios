@@ -8,6 +8,8 @@ UI Improvements
 :hammer_and_wrench: Improvements
 • TabBar have no top line
 • TTF Margins by @Ali
+• TTF: add to WL replaced to icon by @Ali
+• 
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

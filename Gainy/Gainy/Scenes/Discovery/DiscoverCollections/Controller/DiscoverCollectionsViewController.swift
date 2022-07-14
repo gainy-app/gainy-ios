@@ -512,6 +512,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     private var customLayout: UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
+            if sectionIndex >= self?.sections.count ?? 0  {
+                return NoCollectionsSectionLayout().layoutSection(within: env)
+            }
             if (sectionIndex == 0) {
                 let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
                 self?.noCollectionSectionLayout.headerHeight = headerHeight

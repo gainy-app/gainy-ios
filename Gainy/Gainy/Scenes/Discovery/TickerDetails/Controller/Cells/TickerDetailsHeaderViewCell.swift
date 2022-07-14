@@ -13,9 +13,16 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
-    @IBOutlet private weak var addToWatchlistButton: UIButton!
+    @IBOutlet private weak var addToWatchlistButton: UIButton! {
+        didSet {
+            let selectedImage = UIImage.init(named: "save")
+            let normalImage = UIImage.init(named: "save")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+            addToWatchlistButton.setImage(normalImage, for: .normal)
+            addToWatchlistButton.setImage(selectedImage, for: .selected)
+            addToWatchlistButton.tintColor = UIColor.init(hexString: "#000000")
+        }
+    }
     @IBOutlet private weak var compareStocksButton: UIButton!
-    @IBOutlet private weak var addToWatchlistButtonWidthConstraint: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,8 +63,5 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
         
         self.contentView.setNeedsLayout()
         self.addToWatchlistButton.isSelected = addedToWatchlist
-        self.addToWatchlistButton.backgroundColor = addedToWatchlist ? UIColor(hex: 0x0062FF) : UIColor(hex: 0xF7F8F9)
-        self.addToWatchlistButtonWidthConstraint.constant = addedToWatchlist ? 118.0 : 104.0
-        self.contentView.layoutIfNeeded()
     }
 }
