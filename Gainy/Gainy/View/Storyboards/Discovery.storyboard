@@ -82,7 +82,7 @@
                                                     <state key="normal" image="save">
                                                         <color key="titleColor" red="0.043908372520000002" green="0.077603302900000004" blue="0.11765200639999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
-                                                    <state key="selected" title=" Added to watchlist ">
+                                                    <state key="selected">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>

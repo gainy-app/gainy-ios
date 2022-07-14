@@ -3,6 +3,7 @@ iOS v1.4.4 #250 available
 UI Improvements
 
 :new: New:
+• TTF: page control and bookmark now sliding on scroll (thx to @Serhii)
 • Discovery: TabBar is hidden in no TTFs (by @Ali)
 
 :hammer_and_wrench: Improvements
