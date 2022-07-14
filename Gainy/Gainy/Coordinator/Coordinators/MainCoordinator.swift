@@ -220,7 +220,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.modalTransitionStyle = .coverVertical
         vc.modalPresentationStyle = .fullScreen
         router.showDetailed(vc)
-        GainyAnalytics.logEvent("show_purchase_view")
+        
+        let variants = [Product.month(RemoteConfigManager.shared.monthPurchaseVariant ?? .a).identifier,
+                        Product.month6(RemoteConfigManager.shared.month6PurchaseVariant ?? .a).identifier,
+                        Product.year(RemoteConfigManager.shared.yearPurchaseVariant ?? .a).identifier
+        ]
+        
+        GainyAnalytics.logEvent("show_purchase_view", params: ["variants" : variants])
     }
     
     func showPromoPurchaseView() {
