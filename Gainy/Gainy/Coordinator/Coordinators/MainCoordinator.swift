@@ -97,6 +97,8 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.setRootModule(vc, hideBar: true)
     }
 
+    var collectionRouter: RouterProtocol?
+    
     func showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
         vc.hidesBottomBarWhenPushed = false
@@ -106,7 +108,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.onItemDelete = onItemDelete
         vc.showNextButton = showNextButton
         lastDiscoverCollectionsVC = vc
-        router.push(vc, transition: FadeTransitionAnimator(), animated: true)
+        collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
     }
 
     func showCollectionDetailsViewController(with initialCollectionIndex: Int, for vc: CollectionDetailsViewController) {
@@ -135,12 +137,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                 }
 
             } else {
-                router.popModule(transition: FadeTransitionAnimator(), animated: true)
+                collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
             }
         } else {
-            router.popModule(transition: FadeTransitionAnimator(), animated: true)
+            collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
         }
-        print("\(frame)")
     }
 
     func _showCardDetailsViewController(_ tickerInfo: TickerInfo) {
@@ -219,7 +220,13 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         vc.modalTransitionStyle = .coverVertical
         vc.modalPresentationStyle = .fullScreen
         router.showDetailed(vc)
-        GainyAnalytics.logEvent("show_purchase_view")
+        
+        let variants = [Product.month(RemoteConfigManager.shared.monthPurchaseVariant ?? .a).identifier,
+                        Product.month6(RemoteConfigManager.shared.month6PurchaseVariant ?? .a).identifier,
+                        Product.year(RemoteConfigManager.shared.yearPurchaseVariant ?? .a).identifier
+        ]
+        
+        GainyAnalytics.logEvent("show_purchase_view", params: ["variants" : variants])
     }
     
     func showPromoPurchaseView() {

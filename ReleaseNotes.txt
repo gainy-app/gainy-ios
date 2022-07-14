@@ -1,12 +1,15 @@
-iOS v1.4.4 #248 available
-:globe_with_meridians: Server - PROD
-Subscriptions
+iOS v1.4.4 #250 available
+:globe_with_meridians: Server - TEST
+UI Improvements
 
 :new: New:
-• -
+• Discovery: TabBar is hidden in no TTFs (by @Ali)
 
 :hammer_and_wrench: Improvements
-• Chart: tap selection value adjusted on borders
+• TabBar have no top line
+• TTF Margins by @Ali
+• TTF: add to WL replaced to icon by @Ali
+• Purhcase variants for @Dmitry Pesegov
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

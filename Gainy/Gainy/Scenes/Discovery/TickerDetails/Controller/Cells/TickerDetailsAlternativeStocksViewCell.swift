@@ -29,6 +29,7 @@ final class TickerDetailsAlternativeStocksViewCell: TickerDetailsViewCell {
             innerCollectionView.register(UINib.init(nibName: HomeTickerInnerTableViewCell.cellIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: HomeTickerInnerTableViewCell.reuseIdentifier)
             innerCollectionView.clipsToBounds = false
             innerCollectionView.scrollIndicatorInsets = UIEdgeInsets.init(top: 0.0, left: 0.0, bottom: -5.0, right: 0.0)
+            innerCollectionView.showsHorizontalScrollIndicator = false
         }
     }
     

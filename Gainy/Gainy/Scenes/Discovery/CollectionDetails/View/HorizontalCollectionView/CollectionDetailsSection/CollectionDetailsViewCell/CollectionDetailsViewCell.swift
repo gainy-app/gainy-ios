@@ -1089,7 +1089,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
                 return .zero
             }
             
-            let aboutTitleWithOffsets = 32.0
+            let aboutTitleWithOffsets = 32.0 + 30
             let bottomOffset = 24.0 - 16.0
             let height = aboutTitleWithOffsets + viewModel.description.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 24.0 * 2.0, font: .proDisplayRegular(14.0)) + bottomOffset
             return CGSize.init(width: collectionView.frame.width, height: height)

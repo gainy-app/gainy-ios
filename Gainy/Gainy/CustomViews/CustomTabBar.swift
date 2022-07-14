@@ -176,6 +176,10 @@ class CustomTabBar: UITabBar {
         
         let lastTabFrame = frameForTab(atIndex: 3)
         profileView.center = CGPoint(x: lastTabFrame.midX, y: lastTabFrame.midY - 5)
+        
+        layer.borderWidth = 0.50
+        layer.borderColor = UIColor.clear.cgColor
+        clipsToBounds = true
     }
     
     private func frameForTab(atIndex index: Int) -> CGRect {

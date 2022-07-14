@@ -41,6 +41,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
         }
         innerCollectionView.reloadData()
         innerCollectionView.isHidden = tickerInfo?.linkedCollections.isEmpty ?? true
+        innerCollectionView.showsHorizontalScrollIndicator = false
     }
     
     @objc func tagViewTouchUpInside(_ tagView: TagView) {

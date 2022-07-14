@@ -16,6 +16,7 @@ final class TickerDetailsNewsViewCell: TickerDetailsViewCell {
             innerCollectionView.register(UINib(nibName: "NewsViewCell", bundle: nil), forCellWithReuseIdentifier: NewsViewCell.cellIdentifier)
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.showsHorizontalScrollIndicator = false
         }
     }
     

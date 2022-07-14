@@ -72,13 +72,26 @@ final class RemoteConfigManager {
                 self?.isInvestBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isInvestBtnVisible).boolValue ?? false
                 self?.isApplyCodeBtnVisible = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.isApplyCodeBtnVisible).boolValue ?? false
                 
+                Analytics.setUserProperty(("\(self?.showPortoCash ?? false)"), forName: "showPortoCash")
+                Analytics.setUserProperty(("\(self?.showPortoCrypto ?? false)"), forName: "showPortoCrypto")
+                Analytics.setUserProperty(("\(self?.isInvestBtnVisible ?? false)"), forName: "isInvestBtnVisible")
+                Analytics.setUserProperty(("\(self?.isApplyCodeBtnVisible ?? false)"), forName: "isApplyCodeBtnVisible")
+                
                 self?.mainBackColorHex = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.mainBackColor).stringValue ?? "#FFFFFF"
                 self?.mainButtonColorHex = self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.mainButtonColor).stringValue ?? "#FFFFFF"
+                
+                Analytics.setUserProperty(("\(self?.mainBackColorHex ?? "")"), forName: "mainBackColorHex")
+                Analytics.setUserProperty(("\(self?.mainButtonColorHex ?? "")"), forName: "mainButtonColorHex")
                 
                 //Purchases
                 self?.monthPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.monthPurchase).stringValue ?? "A") ?? .a
                 self?.month6PurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.month6Purchase).stringValue ?? "A") ?? .a
                 self?.yearPurchaseVariant = ProductVariant(rawValue: self?.remoteConfig.configValue(forKey: Constants.RemoteConfig.yearPurchase).stringValue ?? "A") ?? .a
+                
+                Analytics.setUserProperty(("\(self?.monthPurchaseVariant ?? .a)"), forName: "monthPurchase")
+                Analytics.setUserProperty(("\(self?.month6PurchaseVariant ?? .a)"), forName: "month6PurchaseVariant")
+                Analytics.setUserProperty(("\(self?.yearPurchaseVariant ?? .a)"), forName: "yearPurchaseVariant")
+                
                 NotificationCenter.default.post(name: NotificationManager.remoteConfigLoadedNotification, object: nil)
                 completion()
             }
