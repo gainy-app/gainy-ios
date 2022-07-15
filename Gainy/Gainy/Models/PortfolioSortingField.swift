@@ -24,7 +24,7 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
         case .purchasedDate:
             return "Purchased Date"
         case .priceChangeForPeriod:
-            return "Period Price Change"
+            return "Percent change"
         case .percentOFPortfolio:
             return "% of Portfolio"
         case .matchScore:
