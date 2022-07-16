@@ -1,16 +1,13 @@
-iOS v1.4.4 #250 available
+iOS v1.4.4 #251 available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• TTF: page control and bookmark now sliding on scroll (thx to @Serhii)
-• Discovery: TabBar is hidden in no TTFs (by @Ali)
+• Copy change (by @Boris)
 
 :hammer_and_wrench: Improvements
-• TabBar have no top line
-• TTF Margins by @Ali
-• TTF: add to WL replaced to icon by @Ali
-• Purhcase variants for @Dmitry Pesegov
+• Rec text for TTF text changes (by @Mikhail Astashkevich)
+• Sorting panel TTF height change (by @Mike Stukalo)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

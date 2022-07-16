@@ -88,6 +88,8 @@ final class HomeViewController: BaseViewController {
                 nameLbl?.text = ""
             }
             nameLbl?.hideSkeleton()
+            
+            DeeplinkManager.shared.showDelayedTTF()
         }
     }
     

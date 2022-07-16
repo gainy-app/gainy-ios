@@ -140,7 +140,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     lazy var risk2Lbl: UILabel = {
         let label = UILabel()
-        label.text = "Fit your investments categories"
+        label.text = "Fits your investments categories"
         label.font = .proDisplayRegular(14)
         label.textColor = UIColor.Gainy.mainText
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +154,7 @@ final class CollectionDetailsRecommendedCell: UICollectionViewCell {
     
     lazy var risk3Lbl: UILabel = {
         let label = UILabel()
-        label.text = "Fit your interests"
+        label.text = "Fits your interests"
         label.font = .proDisplayRegular(14)
         label.textColor = UIColor.Gainy.mainText
         label.translatesAutoresizingMaskIntoConstraints = false

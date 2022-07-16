@@ -249,7 +249,7 @@ final class AuthorizationManager {
                     completion(self.authorizationStatus)
                     return
                 }
-                RedeemInviteManager.shared.redeemInvite()
+                DeeplinkManager.shared.redeemInvite()
                 self.authorizationStatus = .authorizedFully
                 completion(self.authorizationStatus)
             }

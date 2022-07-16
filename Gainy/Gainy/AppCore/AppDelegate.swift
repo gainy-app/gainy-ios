@@ -184,8 +184,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let refId = params?["refId"] as? String {
                     dprint("Got invite install from \(refId)")
                     GainyAnalytics.logEvent("invite_received", params: ["refID" : refId])
-                    RedeemInviteManager.shared.isInviteAvaialble = true
-                    RedeemInviteManager.shared.fromId = Int(refId) ?? 0
+                    DeeplinkManager.shared.isInviteAvaialble = true
+                    DeeplinkManager.shared.fromId = Int(refId) ?? 0
+                }
+                
+                if let ttfId = params?["ttfId"] as? String {
+                    dprint("Got link to TTF \(ttfId)")
+                    GainyAnalytics.logEvent("ttf_deeplink_received", params: ["ttfId" : ttfId])
+                    
+                    if Auth.auth().currentUser == nil {
+                        DeeplinkManager.shared.isTTFAvaialble = true
+                        DeeplinkManager.shared.ttfId = Int(ttfId) ?? 0
+                    } else {
+                        if let ttf = Int(ttfId) {
+                            dprint("ttf_deeplink_open \(ttfId)")
+                            GainyAnalytics.logEvent("ttf_deeplink_open", params: ["ttfId" : ttfId])
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
+                        }
+                    }
                 }
                 
             })
