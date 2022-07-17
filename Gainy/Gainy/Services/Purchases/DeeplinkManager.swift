@@ -53,6 +53,7 @@ final class DeeplinkManager {
     func showDelayedTTF() {
         guard isTTFAvaialble else {return}
         
+        isTTFAvaialble = false
         dprint("Invite redeem started \(ttfId ?? -1)")
         GainyAnalytics.logEvent("ttf_deeplink_open_delayed", params: ["ttfID" : ttfId ?? -1])
         

@@ -84,22 +84,22 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 self.investButtonPressed?()
             }
             
-//            let blurView = BlurEffectView()
-//            contentView.addSubview(blurView)
-//
-//            let blurWhiteView = UIView()
-//            blurWhiteView.backgroundColor = .white.withAlphaComponent(0.3)
-//            contentView.addSubview(blurWhiteView)
-//
-//            blurView.autoPinEdge(toSuperviewEdge: .leading)
-//            blurView.autoPinEdge(toSuperviewEdge: .bottom)
-//            blurView.autoPinEdge(toSuperviewEdge: .trailing)
-//            blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
-//
-//            blurWhiteView.autoPinEdge(toSuperviewEdge: .leading)
-//            blurWhiteView.autoPinEdge(toSuperviewEdge: .bottom)
-//            blurWhiteView.autoPinEdge(toSuperviewEdge: .trailing)
-//            blurWhiteView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+            //            let blurView = BlurEffectView()
+            //            contentView.addSubview(blurView)
+            //
+            //            let blurWhiteView = UIView()
+            //            blurWhiteView.backgroundColor = .white.withAlphaComponent(0.3)
+            //            contentView.addSubview(blurWhiteView)
+            //
+            //            blurView.autoPinEdge(toSuperviewEdge: .leading)
+            //            blurView.autoPinEdge(toSuperviewEdge: .bottom)
+            //            blurView.autoPinEdge(toSuperviewEdge: .trailing)
+            //            blurView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
+            //
+            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .leading)
+            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .bottom)
+            //            blurWhiteView.autoPinEdge(toSuperviewEdge: .trailing)
+            //            blurWhiteView.autoMatch(.height, to: .height, of: collectionInvestButtonView)
             
             //contentView.bringSubviewToFront(blurView)
             //contentView.bringSubviewToFront(blurWhiteView)
@@ -252,19 +252,19 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         dprint("\(topChartData.onlyPoints().min()) \(topChartData.onlyPoints().max())")
         dprint("\(medianData.onlyPoints().min()) \(medianData.onlyPoints().max())")
         
-        if !topChartData.onlyPoints().isEmpty {
-        topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
-        topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
-        if medianData.onlyPoints().isEmpty {
-            topChart.min = topChartData.onlyPoints().min() ?? 0.0
-            topChart.max = topChartData.onlyPoints().max() ?? 0.0
-        }
-        topChart.lastDayPrice = viewModel.lastDayPrice
-        
-        if viewModel.lastDayPrice != 0.0 && viewModel.chartRange == .d1 {
-            topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
-            topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
-        }
+        if !topChartData.onlyPoints().isEmpty && !medianData.onlyPoints().isEmpty{
+            topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
+            topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
+            if medianData.onlyPoints().isEmpty {
+                topChart.min = topChartData.onlyPoints().min() ?? 0.0
+                topChart.max = topChartData.onlyPoints().max() ?? 0.0
+            }
+            topChart.lastDayPrice = viewModel.lastDayPrice
+            
+            if viewModel.lastDayPrice != 0.0 && viewModel.chartRange == .d1 {
+                topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
+                topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
+            }
         }
         
         topChart.dayGrow = viewModel.dailyGrow
@@ -444,9 +444,9 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
         
-//        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
-//            gainsCell.isMedianVisible = false
-//        }
+        //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
+        //            gainsCell.isMedianVisible = false
+        //        }
         
         viewModel.chartRange = range
         //topChart.isSPPVisible = false
@@ -577,7 +577,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             
         case .recommended:
             let cell: CollectionDetailsRecommendedCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsRecommendedCell.cellIdentifier, for: indexPath) as!CollectionDetailsRecommendedCell
-            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)            
+            cell.configureWith(matchData: viewModel.matchScore, tags: viewModel.combinedTags)
             NotificationCenter.default.publisher(for: NotificationManager.tickerScrollNotification).sink { _ in
             } receiveValue: { notif in
                 if let transform = notif.userInfo?["transform"] as? CGAffineTransform {

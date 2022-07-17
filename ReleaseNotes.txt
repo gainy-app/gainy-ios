@@ -1,13 +1,12 @@
-iOS v1.4.4 #251 available
+iOS v1.4.4 #252 available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• Copy change (by @Boris)
+• TTF share deeplink
 
 :hammer_and_wrench: Improvements
-• Rec text for TTF text changes (by @Mikhail Astashkevich)
-• Sorting panel TTF height change (by @Mike Stukalo)
+• Chart range adjustments
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

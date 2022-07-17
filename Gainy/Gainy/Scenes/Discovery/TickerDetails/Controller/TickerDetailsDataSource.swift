@@ -112,7 +112,7 @@ final class TickerDetailsDataSource: NSObject {
     //MARK: - Updating UI
     
     func updateChart() {
-        if !ticker.localChartData.onlyPoints().isEmpty {
+        if !ticker.localChartData.onlyPoints().isEmpty && !ticker.localMedianData.onlyPoints().isEmpty  {
         chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
         chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
         if ticker.localMedianData.onlyPoints().isEmpty {
@@ -344,7 +344,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             guard let self = self else {return}
             self.chartViewModel.isLoading = false
             
-            if !self.ticker.localChartData.onlyPoints().isEmpty {
+            if !self.ticker.localChartData.onlyPoints().isEmpty && !self.ticker.localMedianData.onlyPoints().isEmpty {
             self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
             self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
             if self.ticker.localMedianData.onlyPoints().isEmpty {
