@@ -228,10 +228,11 @@ final class HoldingsViewModel {
                             if !live.chartData.onlyPoints().isEmpty && !live.sypChartData.onlyPoints().isEmpty  {
                             self.dataSource.chartViewModel.min = Double(min(live.sypChartData.onlyPoints().min() ?? 0.0, live.chartData.onlyPoints().min() ?? 0.0))
                             self.dataSource.chartViewModel.max = Double(max(live.sypChartData.onlyPoints().max() ?? 0.0, live.chartData.onlyPoints().max() ?? 0.0))
+                            }
+                            
                             if live.sypChartData.onlyPoints().isEmpty {
                                 self.dataSource.chartViewModel.min = live.chartData.onlyPoints().min() ?? 0.0
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
-                            }
                             }
                             
 //                            dprint("MIN-MAX RANGE")

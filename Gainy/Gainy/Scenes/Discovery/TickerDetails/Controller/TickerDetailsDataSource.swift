@@ -115,6 +115,8 @@ final class TickerDetailsDataSource: NSObject {
         if !ticker.localChartData.onlyPoints().isEmpty && !ticker.localMedianData.onlyPoints().isEmpty  {
         chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
         chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
+        }
+        
         if ticker.localMedianData.onlyPoints().isEmpty {
             chartViewModel.min = ticker.localChartData.onlyPoints().min() ?? 0.0
             chartViewModel.max = ticker.localChartData.onlyPoints().max() ?? 0.0
@@ -123,7 +125,6 @@ final class TickerDetailsDataSource: NSObject {
         if chartViewModel.lastDayPrice != 0.0 && ticker.chartRange == .d1 {
             chartViewModel.min = min(Double(chartViewModel.min ?? 0.0), Double(chartViewModel.lastDayPrice))
             chartViewModel.max = max(Double(chartViewModel.max ?? 0.0), Double(chartViewModel.lastDayPrice))
-        }
         }
         
         chartViewModel.relatedCollection1DGain = ticker.medianCollection?.metrics?.relativeDailyChange ?? 0.0
@@ -347,6 +348,8 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             if !self.ticker.localChartData.onlyPoints().isEmpty && !self.ticker.localMedianData.onlyPoints().isEmpty {
             self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
             self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
+            }
+                
             if self.ticker.localMedianData.onlyPoints().isEmpty {
                 self.chartViewModel.min = self.ticker.localChartData.onlyPoints().min() ?? 0.0
                 self.chartViewModel.max = self.ticker.localChartData.onlyPoints().max() ?? 0.0
@@ -355,7 +358,6 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             if self.chartViewModel.lastDayPrice != 0.0 && self.ticker.chartRange == .d1 {
                 self.chartViewModel.min = min(Double(self.chartViewModel.min ?? 0.0), Double(self.chartViewModel.lastDayPrice))
                 self.chartViewModel.max = max(Double(self.chartViewModel.max ?? 0.0), Double(self.chartViewModel.lastDayPrice))
-            }
             }
             
             self.chartViewModel.localTicker = self.ticker

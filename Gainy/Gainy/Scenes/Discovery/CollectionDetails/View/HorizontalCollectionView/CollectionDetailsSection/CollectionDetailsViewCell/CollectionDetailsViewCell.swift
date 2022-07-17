@@ -255,16 +255,16 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         if !topChartData.onlyPoints().isEmpty && !medianData.onlyPoints().isEmpty{
             topChart.min = Double(min(medianData.onlyPoints().min() ?? 0.0, topChartData.onlyPoints().min() ?? 0.0))
             topChart.max = Double(max(medianData.onlyPoints().max() ?? 0.0, topChartData.onlyPoints().max() ?? 0.0))
-            if medianData.onlyPoints().isEmpty {
-                topChart.min = topChartData.onlyPoints().min() ?? 0.0
-                topChart.max = topChartData.onlyPoints().max() ?? 0.0
-            }
-            topChart.lastDayPrice = viewModel.lastDayPrice
-            
-            if viewModel.lastDayPrice != 0.0 && viewModel.chartRange == .d1 {
-                topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
-                topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
-            }
+        }
+        if medianData.onlyPoints().isEmpty {
+            topChart.min = topChartData.onlyPoints().min() ?? 0.0
+            topChart.max = topChartData.onlyPoints().max() ?? 0.0
+        }
+        topChart.lastDayPrice = viewModel.lastDayPrice
+        
+        if viewModel.lastDayPrice != 0.0 && viewModel.chartRange == .d1 {
+            topChart.min = min(Double(topChart.min ?? 0.0), Double(viewModel.lastDayPrice))
+            topChart.max = max(Double(topChart.max ?? 0.0), Double(viewModel.lastDayPrice))
         }
         
         topChart.dayGrow = viewModel.dailyGrow
