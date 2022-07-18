@@ -11,12 +11,14 @@ import UIKit
 enum MarketDataField: Int, Codable, CaseIterable {
     
     /// Order to place on sorting
-    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    static let rawOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, weight]
     
     /// Default metrics for ticker details
-    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin]
+    static let metricsOrder: [MarketDataField] = [revenueGrowthYoy, enterpriseValueToSales, marketCapitalization, priceChange1m, profitMargin, weight]
     
     case
+    
+    weight = -1,
     
     // MATCH SCORE
     matchScore = 0,
@@ -221,6 +223,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var title: String {
         switch self {
+        case .weight:
+            return "Weight"
         case .matchScore:
             return "Match Score"
         case .avgVolume10d:
@@ -318,6 +322,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var shortTitle: String {
         switch self {
+        case .weight:
+            return "Weight"
         case .matchScore:
             return Constants.CollectionDetails.matchScore
         case .avgVolume10d:
@@ -415,6 +421,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var fieldName: String {
         switch self {
+        case .weight:
+            return "none1"
         case .matchScore:
             return "none"
         case .avgVolume10d:
@@ -512,6 +520,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var isPercent: Bool {
         switch self {
+        case .weight:
+            return true
         case .matchScore:
             return false
         case .avgVolume10d:
@@ -607,10 +617,20 @@ enum MarketDataField: Int, Codable, CaseIterable {
         }
     }
     
+    func weightSortFunc (isAsc: Bool, _ lhs: Float, _ rhs: Float) -> Bool {
+        if isAsc {
+            return lhs < rhs
+        } else {
+            return lhs > rhs
+        }
+    }
+    
     func sortFunc (isAsc: Bool, _ lhs: CollectionCardViewCellModel, _ rhs: CollectionCardViewCellModel) -> Bool {
         
         if isAsc {
             switch self {
+            case .weight:
+                return (lhs.rawTicker.matchScore?.matchScore ?? 0) < (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .matchScore:
                 return (lhs.rawTicker.matchScore?.matchScore ?? 0) < (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .sharesOutstanding:
@@ -706,6 +726,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
             }
         } else {
             switch self {
+            case .weight:
+                return (lhs.rawTicker.matchScore?.matchScore ?? 0) > (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .matchScore:
                 return (lhs.rawTicker.matchScore?.matchScore ?? 0) > (rhs.rawTicker.matchScore?.matchScore ?? 0)
             case .sharesOutstanding:
@@ -804,6 +826,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
      
     var explanationTitle: String {
         switch self {
+        case .weight:
+            return "Weight"
         case .matchScore:
             return "Profile matching score"
         case .avgVolume10d:
@@ -901,6 +925,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var explanationDescription: String {
         switch self {
+        case .weight:
+            return "Ticker weight in percent"
         case .matchScore:
             return "This metric is built based on your profile. We use data like your investments goals, risk profile, investment interests and existing portfolio."
         case .avgVolume10d:
@@ -998,6 +1024,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var explanationLinkString: String? {
         switch self {
+        case .weight:
+            return nil
         case .matchScore:
             return nil
         case .avgVolume10d:
@@ -1095,6 +1123,8 @@ enum MarketDataField: Int, Codable, CaseIterable {
     
     var explanationLink: String? {
         switch self {
+        case .weight:
+            return nil
         case .matchScore:
             return nil
         case .avgVolume10d:
