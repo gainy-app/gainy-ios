@@ -153,8 +153,8 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let favoriteButton = ResponsiveButton.newAutoLayout()
         favoriteButton.isSkeletonable = true
         favoriteButton.skeletonCornerRadius = 6
-        let selectedImage = UIImage.init(named: "save")
-        let normalImage = UIImage.init(named: "save")?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
+        let selectedImage = UIImage.init(named: "add_coll_from_wl")
+        let normalImage = UIImage.init(named: "remove_coll_from_wl")
         favoriteButton.setImage(normalImage, for: .normal)
         favoriteButton.setImage(selectedImage, for: .selected)
         favoriteButton.isSelected = true
@@ -946,6 +946,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         let collectionID = model.id
         UserProfileManager.shared.removeFavouriteCollection(collectionID) { success in
             self.deleteItem(model.id)
+            GainyAnalytics.logEvent( "single_removed_from_yours", params: ["collectionID" : collectionID])
         }
     }
     

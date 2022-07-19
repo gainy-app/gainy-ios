@@ -462,6 +462,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
             self.searchTextField?.frame = frame
+            
+            self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
+            self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
         }
     }
     
