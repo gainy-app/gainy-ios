@@ -280,10 +280,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         dataSource = UICollectionViewDiffableDataSource<CollectionDetailsSection, CollectionDetailViewCellModel>(
             collectionView: collectionView
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
+            var adjModel = modelItem
+            if !Constants.CollectionDetails.loadingCellIDs.contains(modelItem.id) {
+            if let oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
+                adjModel.setRange(oldModel.chartRange)
+            }
+            }
             let cell = self?.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
                 indexPath: indexPath,
-                viewModel: modelItem,
+                viewModel: adjModel,
                 position: indexPath.row
             )
             
@@ -333,6 +339,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     
                     if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
                         oldModel.addCards(newCards)
+                        self?.viewModel?.collectionDetails[indexPath.row] = oldModel
+                    }
+                }
+                cell.onRangeChange = { [weak self] range in
+                    
+                    if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
+                        oldModel.setRange(range)
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
                     }
                 }
@@ -402,6 +415,17 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             if let self = self {
                 WebPresenter.openLink(vc: self, url: newsUrl)
             }
+        }
+        
+        searchController?.loading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showNetworkLoader()
+                } else {
+                    self?.hideLoader()
+                }
+            }
+            
         }
         
         searchController?.coordinator = coordinator
@@ -756,6 +780,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     // MARK: Private
     
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        
+        searchCollectionView.contentInset = .init(top: 0, left: 0, bottom: self.keyboardSize?.height ?? 0.0, right: 0)
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        searchCollectionView.contentInset = .zero
+    }
     // MARK: Properties
     
     private lazy var sections: [SectionLayout] = [

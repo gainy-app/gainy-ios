@@ -326,6 +326,17 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             }
         }
         
+        searchController?.loading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showNetworkLoader()
+                } else {
+                    self?.hideLoader()
+                }
+            }
+            
+        }
+        
         searchController?.coordinator = coordinator
         NotificationCenter.default.publisher(for: NotificationManager.appBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
@@ -498,6 +509,19 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     
     
     // MARK: Private
+    
+    //MARK: - Keyboard
+    
+    override func keyboardWillShow(_ notification: Notification) {
+        super.keyboardWillShow(notification)
+        
+        searchCollectionView.contentInset = .init(top: 0, left: 0, bottom: self.keyboardSize?.height ?? 0.0, right: 0)
+    }
+    
+    override func keyboardWillHide(_ notification: Notification) {
+        super.keyboardWillHide(notification)
+        searchCollectionView.contentInset = .zero
+    }
     
     // MARK: Properties
     

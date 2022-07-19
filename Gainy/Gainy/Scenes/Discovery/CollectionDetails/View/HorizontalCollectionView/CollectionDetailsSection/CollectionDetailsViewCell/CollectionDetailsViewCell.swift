@@ -170,6 +170,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     var onRefreshedCardsLoaded: ((([CollectionCardViewCellModel])) -> Void)?
     var onPurhaseShow: (() -> Void)?
     var investButtonPressed: (() -> Void)?
+    var onRangeChange: (((ScatterChartView.ChartPeriod)) -> Void)?
     var shortCollection: RemoteShortCollectionDetails? = nil {
         didSet {
             if shortCollection != nil {
@@ -210,7 +211,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             guard !viewModel.isDataLoaded else {return}
             showGradientSkeleton()
             guard !Constants.CollectionDetails.loadingCellIDs.contains(viewModel.id) else {return}
-            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
+            CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID, range: viewModel.chartRange) {[weak self] uniqID, topCharts, pieData, tags in
                 if uniqID == self?.viewModel.uniqID {
                     self?.pieChartData = pieData
                     self?.sortCards()
@@ -473,8 +474,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
         //            gainsCell.isMedianVisible = false
         //        }
-        
-        viewModel.chartRange = range
+        viewModel.setRange(range)
+        //viewModel.chartRange = range
         //topChart.isSPPVisible = false
         topChart.isLoading = true
         Task {
@@ -1285,6 +1286,7 @@ extension CollectionDetailsViewCell: UICollectionViewDelegateFlowLayout {
 
 extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
     func chartPeriodChanged(period: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
+        onRangeChange?(period)
         self.loadChartForRange(period)
     }
 }

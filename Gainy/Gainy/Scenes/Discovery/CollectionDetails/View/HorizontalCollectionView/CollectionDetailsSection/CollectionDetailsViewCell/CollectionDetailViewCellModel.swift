@@ -27,6 +27,11 @@ struct CollectionDetailViewCellModel {
         combinedTags = combinedTags.uniqued()
     }
     
+    mutating func setRange(_ range: ScatterChartView.ChartPeriod) {
+        chartRange = range
+    }
+
+    
     //Gains
     
     var statsDayName: String {

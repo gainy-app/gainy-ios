@@ -581,6 +581,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
     
     private func mutateFavouriteCollections(senderCell: RecommendedCollectionViewCell? = nil, isAdded: Bool, collectionID: Int) {
         
+        loading?(true)
         if isAdded {
             if !UserProfileManager.shared.favoriteCollections.contains(collectionID) {
                 UserProfileManager.shared.addFavouriteCollection(collectionID) { success in
