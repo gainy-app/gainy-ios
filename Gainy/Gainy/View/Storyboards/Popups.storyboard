@@ -278,7 +278,9 @@
                     </view>
                     <connections>
                         <outlet property="ascBtn" destination="kzP-zA-30h" id="zfq-Ce-oLA"/>
+                        <outlet property="dotImageView" destination="ixH-pH-MLq" id="Hfo-dc-yzk"/>
                         <outlet property="titleLbl" destination="7cz-VB-HTb" id="yf1-dg-N9v"/>
+                        <outlet property="weightButton" destination="anp-hZ-dwb" id="4OQ-fo-cPc"/>
                         <outletCollection property="sortBtns" destination="acQ-D0-DjJ" collectionClass="NSMutableArray" id="7Kz-Qj-VPz"/>
                         <outletCollection property="sortBtns" destination="9wq-O2-coc" collectionClass="NSMutableArray" id="l07-Uv-ply"/>
                         <outletCollection property="sortBtns" destination="o2M-Ac-MJ8" collectionClass="NSMutableArray" id="zUi-kA-rZW"/>

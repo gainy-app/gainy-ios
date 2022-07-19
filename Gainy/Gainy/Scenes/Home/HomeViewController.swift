@@ -125,6 +125,7 @@ final class HomeViewController: BaseViewController {
         // Set a content view controller.
         sortingCollectionsVC.delegate = self
         sortingWatchlistVC.delegate = self
+        sortingWatchlistVC.showWeight = false
         fpc.set(contentViewController: sortingCollectionsVC)
         fpc.isRemovalInteractionEnabled = true
         

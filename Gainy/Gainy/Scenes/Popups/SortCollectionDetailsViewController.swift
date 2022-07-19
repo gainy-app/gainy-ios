@@ -21,13 +21,15 @@ protocol SortCollectionDetailsViewControllerDelegate: AnyObject {
 final class SortCollectionDetailsViewController: BaseViewController {
     
     weak var delegate: SortCollectionDetailsViewControllerDelegate?
-    
+    var showWeight: Bool = true
     
     @IBOutlet weak var titleLbl: UILabel! {
         didSet {
             titleLbl.setKern()
         }
     }
+    @IBOutlet var dotImageView: UIImageView!
+    @IBOutlet var weightButton: UIButton!
     @IBOutlet var sortBtns: [UIButton]!
     @IBOutlet weak var ascBtn: UIButton! {
         didSet {
@@ -70,7 +72,12 @@ final class SortCollectionDetailsViewController: BaseViewController {
         var sortingList: [MarketDataField] = []
         
         if tickerMetrics.count == 0 {
-            sortingList = defaultSortingList
+            if self.showWeight {
+                sortingList = defaultSortingList
+            } else {
+                sortingList = defaultSortingList
+                sortingList.removeLast()
+            }
         } else {
             for item in tickerMetrics {
                 for metric in MarketDataField.allCases {
@@ -79,7 +86,9 @@ final class SortCollectionDetailsViewController: BaseViewController {
                     }
                 }
             }
-            sortingList.append(.weight)
+            if self.showWeight {
+                sortingList.append(.weight)
+            }
         }
         
         sortingList.insert(.matchScore, at: 0)
@@ -115,6 +124,11 @@ final class SortCollectionDetailsViewController: BaseViewController {
         let colorHex = settings.ascending ? "#25EA5C" : "#FC506F"
         let color = UIColor.init(hexString: colorHex, alpha: 0.1)
         ascBtn.backgroundColor = color
+        
+        if !self.showWeight {
+            self.dotImageView.removeFromSuperview()
+            self.weightButton.removeFromSuperview()
+        }
         
         for (index, val) in sortBtns.enumerated() {
             
