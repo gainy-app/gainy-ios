@@ -1,12 +1,13 @@
-iOS v1.4.4 #253 available
+iOS v1.4.4 #252 available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• -
+• TTF share deeplink
 
 :hammer_and_wrench: Improvements
-• -
+• Chart range adjustments
+• Add Weight in TTF to sorting
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

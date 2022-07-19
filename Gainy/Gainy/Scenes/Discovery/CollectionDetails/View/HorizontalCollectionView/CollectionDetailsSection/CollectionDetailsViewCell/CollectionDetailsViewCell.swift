@@ -213,6 +213,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             CollectionsManager.shared.populateTTFCard(uniqID: viewModel.uniqID) {[weak self] uniqID, topCharts, pieData, tags in
                 if uniqID == self?.viewModel.uniqID {
                     self?.pieChartData = pieData
+                    self?.sortCards()
                     self?.updateCharts(topCharts)
                     self?.viewModel.addTags(tags)
                     self?.hideSkeleton()
@@ -318,13 +319,40 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func sortSections(_ completion: (() -> Void)? = nil) {
         runOnMain {
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
-            self.cards = self.cards.sorted(by: { lhs, rhs in
-                settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
-            })
+            self.sortCards()
             self.collectionView.reloadData()
             completion?()
         }
+    }
+    
+    func sortCards() {
+        let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
+        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        chartData = self.pieChartData.filter { data in
+            data.entityType == "ticker"
+        }
+        var chartDataRes: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        for card in self.cards {
+            if let data = chartData.first(where: { localChartData in
+                (localChartData.entityId ?? "" == card.rawTicker.symbol)
+            }) {
+                chartDataRes.append(data)
+            }
+        }
+        let value: MarketDataField = settings.sortingValue()
+        self.cards = self.cards.sorted(by: { lhs, rhs in
+            if value == .weight {
+                let lhsWeightData = chartDataRes.first { data in
+                    lhs.rawTicker.symbol == data.entityId
+                }
+                let rhsWeightData = chartDataRes.first { data in
+                    rhs.rawTicker.symbol == data.entityId
+                }
+                return value.weightSortFunc(isAsc: settings.ascending, lhsWeightData?.weight ?? 0.0, rhsWeightData?.weight ?? 0.0)
+            } else {
+                return value.sortFunc(isAsc: settings.ascending, lhs, rhs)
+            }
+        })
     }
     
     // MARK: Private
@@ -365,13 +393,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     private func finishRefreshWithSorting(cards: [CollectionCardViewCellModel], _ completion: (() -> Void)? = nil) {
         runOnMain {
             
-            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
-            self.cards = cards.sorted(by: { lhs, rhs in
-                settings.sortingValue().sortFunc(isAsc: settings.ascending, lhs, rhs)
-            })
+            self.sortCards()
             self.onRefreshedCardsLoaded?(self.cards)
             let indesSet = IndexSet.init(integer: CollectionDetailsSection.cards.rawValue)
             self.collectionView.reloadSections(indesSet)
+            let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
             self.headerView?.updateChargeLbl(settings.sortingText())
             completion?()
         }
@@ -654,6 +680,22 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         var vals: [String] = []
         for marker in markers {
             switch marker {
+            case .weight:
+                var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+                chartData = self.pieChartData.filter { data in
+                    data.entityType == "ticker"
+                }
+                var chartDataRes: GetTtfPieChartQuery.Data.CollectionPiechart? = nil
+                if let data = chartData.first(where: { localChartData in
+                    (localChartData.entityId ?? "" == model.rawTicker.symbol)
+                }) {
+                    chartDataRes = data
+                }
+                if let weight = chartDataRes {
+                    vals.append((weight.weight ?? 0.0).percent)
+                } else {
+                    vals.append("N/A")
+                }
             case .matchScore:
                 vals.append("\(model.matchScore)")
             case .sharesOutstanding:

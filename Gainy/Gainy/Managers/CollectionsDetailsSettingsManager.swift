@@ -225,12 +225,14 @@ final class CollectionsDetailsSettingsManager {
         settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: ascending, viewMode: cur.viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: cur.pieChartSelected)
     }
     
-    func tickerMetricsOrderForMarketData(filed: MarketDataField, ascending: Bool) -> ticker_metrics_order_by {
+    func tickerMetricsOrderForMarketData(filed: MarketDataField, ascending: Bool) -> ticker_metrics_order_by? {
 
         let order = ascending ? order_by.ascNullsFirst : order_by.descNullsLast
         var orderBy = ticker_metrics_order_by.init()
         switch filed {
-            
+        case .weight:
+            // Fetch ordered by match score - sorting by is local so far
+            orderBy = ticker_metrics_order_by.init(ticker: tickers_order_by(matchScore: app_profile_ticker_match_score_order_by(matchScore: order)))
         case .matchScore:
             orderBy = ticker_metrics_order_by.init(ticker: tickers_order_by(matchScore: app_profile_ticker_match_score_order_by(matchScore: order)))
         case .avgVolume10d:
