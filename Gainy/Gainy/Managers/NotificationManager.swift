@@ -8,7 +8,7 @@
 import UIKit
 import AppTrackingTransparency
 import StoreKit
-import Auth
+import FirebaseAuth
 
 class NotificationManager: NSObject {
     
