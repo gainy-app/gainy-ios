@@ -251,6 +251,7 @@ final class AuthorizationManager {
                 }
                 DeeplinkManager.shared.redeemInvite()
                 self.authorizationStatus = .authorizedFully
+                NotificationManager.shared.cancelSignUpReminderNotification()
                 completion(self.authorizationStatus)
             }
         }
@@ -328,6 +329,7 @@ final class AuthorizationManager {
                                 }
                                 
                                 self.authorizationStatus = .authorizedFully
+                                NotificationManager.shared.cancelSignUpReminderNotification()
                                 completion(self.authorizationStatus)
                             }
                             return
@@ -384,6 +386,7 @@ final class AuthorizationManager {
                                     }
                                     
                                     self.authorizationStatus = .authorizedFully
+                                    NotificationManager.shared.cancelSignUpReminderNotification()
                                     completion(self.authorizationStatus)
                                 }
                                 return
@@ -425,6 +428,7 @@ final class AuthorizationManager {
                         }
                         
                         self.authorizationStatus = .authorizedFully
+                        NotificationManager.shared.cancelSignUpReminderNotification()
                         completion()
                     }
                 }

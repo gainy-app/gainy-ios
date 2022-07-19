@@ -8,11 +8,14 @@
 import UIKit
 import AppTrackingTransparency
 import StoreKit
+import Auth
 
 class NotificationManager: NSObject {
     
     static let defaultTimerIntervalInSeconds = 30
     static let minutesInAppRequiredToShowReview = 25
+    static let secondsInDay = 60 * 60 * 24
+    static let signupNotificationTimes = [secondsInDay, secondsInDay * 3, secondsInDay * 5]
     
     // Notifications
     static let userLogoutNotification = Notification.Name.init("userLogoutNotification")
@@ -91,6 +94,9 @@ class NotificationManager: NSObject {
     @UserDefault<Bool>("reviewWasShown_prod_1.0")
     private var reviewWasShown: Bool?
     
+    @UserDefault<Bool>("signupReminderScheduled_prod_1.0")
+    private var signupReminderScheduled: Bool?
+    
     public func increaseTTFsAdded() {
         
         if let shown = self.reviewWasShown, shown == true {
@@ -161,6 +167,39 @@ class NotificationManager: NSObject {
         
         if timeSpentInSeconds / 60 >= NotificationManager.minutesInAppRequiredToShowReview {
             self.requestAppReviewForm()
+        }
+    }
+    
+    public func cancelSignUpReminderNotification() {
+        
+        let center = UNUserNotificationCenter.current()
+        let identifiers = ["signup_reminder_local_notification_0", "signup_reminder_local_notification_1", "signup_reminder_local_notification_2"]
+        center.removePendingNotificationRequests(withIdentifiers: identifiers)
+        center.removeDeliveredNotifications(withIdentifiers: identifiers)
+    }
+    
+    public func scheduleSignUpReminderNotification() {
+
+        if Auth.auth().currentUser?.uid != nil {
+            return
+        }
+        if let signupReminderScheduled = self.signupReminderScheduled, signupReminderScheduled == true {
+            return
+        }
+        
+        self.signupReminderScheduled = true
+        let center = UNUserNotificationCenter.current()
+        for (index, timeInterval) in NotificationManager.signupNotificationTimes.enumerated() {
+            let notificationContent = UNMutableNotificationContent()
+            notificationContent.title = "You’re almost ready! 🧑‍🚀"
+            notificationContent.body = "Tap to complete your registration and get personalized investment recommendations"
+            let notificationTrigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeInterval), repeats: false)
+            let notificationRequest = UNNotificationRequest(identifier: "signup_reminder_local_notification_\(index)", content: notificationContent, trigger: notificationTrigger)
+            center.add(notificationRequest) { (error) in
+                if let error = error {
+                    print("Unable to Add Notification Request (\(error), \(error.localizedDescription))")
+                }
+            }
         }
     }
     
