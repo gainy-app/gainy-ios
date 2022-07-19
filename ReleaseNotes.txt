@@ -1,13 +1,15 @@
-iOS v1.4.4 #252 available
+iOS v1.4.4 #253 available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• TTF share deeplink
+•
 
 :hammer_and_wrench: Improvements
-• Chart range adjustments
-• Add Weight in TTF to sorting
+• Add missing events for sorting actions on Home and Portfolio screens
+• Finish signup local notification implemented (1, 3 and 5 days)
+• Fix Crash if reorder sorting options and then sort by Weight
+• Fix "TTF: pie chart interests overlap" issue
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
