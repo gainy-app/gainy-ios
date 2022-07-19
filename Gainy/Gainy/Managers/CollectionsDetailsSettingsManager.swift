@@ -72,6 +72,7 @@ struct CollectionSettings: Codable {
                     }
                 }
             }
+            sortingList.append(.weight)
         }
         
         if let index = sortingList.firstIndex(where: {$0 == sorting}) {
@@ -176,6 +177,7 @@ final class CollectionsDetailsSettingsManager {
                     }
                 }
             }
+            sortingList.append(.weight)
         }
         
         sortingList.insert(.matchScore, at: 0)

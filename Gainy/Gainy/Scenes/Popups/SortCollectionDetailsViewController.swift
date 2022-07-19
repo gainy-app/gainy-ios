@@ -79,6 +79,7 @@ final class SortCollectionDetailsViewController: BaseViewController {
                     }
                 }
             }
+            sortingList.append(.weight)
         }
         
         sortingList.insert(.matchScore, at: 0)
