@@ -109,10 +109,18 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             percentLabel.autoPinEdge(.right, to: .right, of: percentBackView, withOffset: -6)
             percentLabel.autoPinEdge(.bottom, to: .bottom, of: percentBackView, withOffset: -6)
             
+            let dummyView = UIView.newAutoLayout()
+            contentView.addSubview(dummyView)
+            dummyView.backgroundColor = UIColor.clear
+            dummyView.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: -16)
+            dummyView.autoSetDimension(.width, toSize: 16.0)
+            percentBackView.autoPinEdge(.left, to: .right, of: dummyView)
+            
             contentView.addSubview(nameLabel)
             nameLabel.autoPinEdge(.left, to: .left, of: contentView, withOffset: 16.0)
             nameLabel.autoPinEdge(.top, to: .top, of: contentView, withOffset: 16.0)
             nameLabel.autoSetDimension(.height, toSize: 24.0)
+            nameLabel.autoPinEdge(.right, to: .left, of: dummyView, withOffset: 0.0, relation: .lessThanOrEqual)
         }
         
         
@@ -128,7 +136,8 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         self.setupLayout(data: data, index: index)
         
         nameLabel.text = data.entityName?.companyMarkRemoved
-        nameLabel.sizeToFit()
+        nameLabel.adjustsFontSizeToFitWidth = true
+//        nameLabel.sizeToFit()
         
 //        totalPriceLabel.text = (data.absoluteValue ?? 0.0).price
 //        totalPriceLabel.sizeToFit()
