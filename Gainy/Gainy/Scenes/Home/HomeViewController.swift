@@ -242,6 +242,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         fpc.layout = SortCollectionsPanelLayout()
         self.fpc.set(contentViewController: sortingCollectionsVC)
         self.present(self.fpc, animated: true, completion: nil)
+        GainyAnalytics.logEvent("home_col_sorting_pressed", params: [:])
     }
     
     func tickerSortWLPressed() {
@@ -251,6 +252,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         fpc.layout = SortWLPanelLayout()
         self.fpc.set(contentViewController: sortingWatchlistVC)
         self.present(self.fpc, animated: true, completion: nil)
+        GainyAnalytics.logEvent("home_wl_sorting_pressed", params: [:])
     }
 }
 
@@ -279,6 +281,7 @@ extension HomeViewController: FloatingPanelControllerDelegate {
 extension HomeViewController: SortCollectionDetailsViewControllerDelegate {
     func selectionChanged(vc: SortCollectionDetailsViewController, sorting: String) {
         
+        GainyAnalytics.logEvent("home_wl_sorting_changed", params: ["sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortWatchlist()
         self.tableView.reloadData()
@@ -289,6 +292,7 @@ extension HomeViewController: SortCollectionsViewControllerDelegate {
     
     func selectionChanged(vc: SortCollectionsViewController, sorting: String) {
         
+        GainyAnalytics.logEvent("home_col_sorting_changed", params: ["sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
         viewModel.sortFavCollections()
         self.tableView.reloadData()

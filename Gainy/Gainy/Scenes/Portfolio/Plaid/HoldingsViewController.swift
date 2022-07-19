@@ -127,7 +127,7 @@ final class HoldingsViewController: BaseViewController {
         
         guard self.presentedViewController == nil else {return}
         
-        GainyAnalytics.logEvent("sorting_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
+        GainyAnalytics.logEvent("filter_portfolio_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showFilteringPanel()
     }
     
@@ -225,6 +225,8 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
             return
         }
         
+        
+        GainyAnalytics.logEvent("sorting_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "sorting" : sorting.title, "ec" : "HoldingsViewController"])
         vc.dismiss(animated: true)
         viewModel.settings = settings
         tableView.reloadData()
@@ -255,6 +257,8 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        
+        GainyAnalytics.logEvent("filter_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         viewModel.settings = settings
         tableView.reloadData()
         
