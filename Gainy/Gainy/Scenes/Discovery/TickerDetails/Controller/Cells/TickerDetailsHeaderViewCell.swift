@@ -13,15 +13,7 @@ final class TickerDetailsHeaderViewCell: TickerDetailsViewCell {
     
     @IBOutlet private weak var tickerNameLbl: UILabel!
     @IBOutlet private weak var symbolLbl: UILabel!
-    @IBOutlet private weak var addToWatchlistButton: UIButton! {
-        didSet {
-            let selectedImage = UIImage.init(named: "add_coll_from_wl")
-            let normalImage = UIImage.init(named: "remove_coll_from_wl")
-            addToWatchlistButton.setImage(normalImage, for: .normal)
-            addToWatchlistButton.setImage(selectedImage, for: .selected)
-            addToWatchlistButton.tintColor = UIColor.init(hexString: "#000000")
-        }
-    }
+    @IBOutlet private weak var addToWatchlistButton: UIButton!
     @IBOutlet private weak var compareStocksButton: UIButton!
     
     override func awakeFromNib() {
