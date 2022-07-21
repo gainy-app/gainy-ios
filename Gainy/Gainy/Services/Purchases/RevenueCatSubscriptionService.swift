@@ -167,7 +167,6 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             return product.localizedPriceString
         }
-        dprint("priceForProduct noprice \(product.identifier) \(products.count)")
         return "-"
     }
     
