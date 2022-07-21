@@ -227,7 +227,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     @MainActor
     fileprivate func updateCharts(_ topCharts: [[ChartNormalized]]) {
-        topChart.isLoading = false
+        
         
         let mainChart = topCharts.first!
         let medianChart = topCharts.last!
@@ -270,9 +270,12 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         }
         
         topChart.dayGrow = viewModel.dailyGrow
+        print("RT: \(viewModel.name) \(viewModel.chartRange)")
         topChart.chartData = topChartData
         topChart.sypChartData = medianData
         topChart.spGrow = Float(medianData.startEndDiff)
+        
+        topChart.isLoading = false
     }
     
     

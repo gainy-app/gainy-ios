@@ -343,7 +343,6 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
         chartViewModel.isLoading = true
         ticker.loadNewChartData(period: period) {[weak self] in
             guard let self = self else {return}
-            self.chartViewModel.isLoading = false
             
             if !self.ticker.localChartData.onlyPoints().isEmpty && !self.ticker.localMedianData.onlyPoints().isEmpty {
             self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
@@ -363,7 +362,8 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData
-            self.delegate?.loadingState(started: false)
+            self.delegate?.loadingState(started: false)            
+            self.chartViewModel.isLoading = false
         }
     }
     func comparePressed() {
