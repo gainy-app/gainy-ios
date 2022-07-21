@@ -50,7 +50,7 @@ final class GainyAnalytics {
         newParams["sn"] = ""
         
 #if DEBUG
-        print("\n###ANALYTICS### \(name)")
+        print("\n###ANALYTICS### \(name) \(params)")
         if let params = params {
             print(params)
         }

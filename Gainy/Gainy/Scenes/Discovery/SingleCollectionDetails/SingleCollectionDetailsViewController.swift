@@ -201,6 +201,15 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         
         toggleBtn.isSelected = UserProfileManager.shared.favoriteCollections.contains(collectionId)
         GainyAnalytics.logEvent("open_single_collection", params: ["collectionID" : collectionId, "isFromSearch" : isFromSearch])
+        SubscriptionManager.shared.getSubscription {[weak self] type in
+            guard let self = self else {return}
+            if type == .free {
+                let isBlocked = !SubscriptionManager.shared.storage.isViewedCollection(self.collectionId) && SubscriptionManager.shared.storage.viewedCount == SubscriptionManager.shared.storage.collectionViewLimit
+                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : self.collectionId, "isFromSearch" : self.isFromSearch, "isBlocked" : isBlocked])
+            } else {
+                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : self.collectionId, "isFromSearch" : self.isFromSearch, "isBlocked" : false ])
+            }
+        }
     }
     
     fileprivate func centerInitialCollectionInTheCollectionView() {

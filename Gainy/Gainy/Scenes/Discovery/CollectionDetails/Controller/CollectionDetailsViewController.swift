@@ -844,7 +844,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     
     private var pageControl: GainyPageControl?
-    private var currentCollectionID: Int?
+    private var currentCollectionID: Int? {
+        didSet {
+            if let currentCollectionID = currentCollectionID {
+                if oldValue != currentCollectionID {
+                    logTTFView()
+                }
+            }
+        }
+    }
     private var compareButton: UIButton?
     private var favoriteButton: UIButton?
     
@@ -933,6 +941,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         
         searchTextField?.isEnabled = true
         discoverCollectionsBtn?.isEnabled = true
+        logTTFView()
     }
     
     private func fetchFailedCollections(completion: @escaping () -> Void) {
@@ -966,6 +975,28 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     @objc
     private func compareButtonTapped() {
         // TODO: Not implemented yet
+    }
+    
+    private func logTTFView() {
+        guard let index = self.currentCollectionID else {
+            return
+        }
+        
+        guard viewModel?.collectionDetails.count ?? 0 > index, let model = viewModel?.collectionDetails[index] else {
+            return
+        }
+        
+        let collectionID = model.id
+        
+        SubscriptionManager.shared.getSubscription {[weak self] type in
+            guard let self = self else {return}
+            if type == .free {
+                let isBlocked = !SubscriptionManager.shared.storage.isViewedCollection(collectionID) && SubscriptionManager.shared.storage.viewedCount == SubscriptionManager.shared.storage.collectionViewLimit
+                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : collectionID, "isFromSearch" : false, "isBlocked" : isBlocked])
+            } else {
+                GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : collectionID, "isFromSearch" : false, "isBlocked" : false ])
+            }
+        }
     }
     
     @objc
@@ -1185,7 +1216,6 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()
                 self?.hideLoader()
-                self?.hideSkeletons()
             }
         }
     }

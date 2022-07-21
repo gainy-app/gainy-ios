@@ -362,7 +362,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             self.chartViewModel.localTicker = self.ticker
             self.chartViewModel.chartData = self.ticker.localChartData
             self.chartViewModel.medianData = self.ticker.localMedianData
-            self.delegate?.loadingState(started: false)            
+            self.delegate?.loadingState(started: false)
             self.chartViewModel.isLoading = false
         }
     }
