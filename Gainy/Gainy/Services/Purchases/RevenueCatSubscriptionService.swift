@@ -24,10 +24,9 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     
     func login(profileId: Int) {
         Purchases.shared.logIn("\(profileId)") {[weak self] (customerInfo, created, error) in
-            dprint("RevenueCat login \(customerInfo)")
+            dprint("RevenueCat login")
             self?.handleInfo(customerInfo, error: error, informFirebase: true)
-            self?.getProducts()
-            
+            self?.getProducts()            
         }
     }
     
