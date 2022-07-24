@@ -110,21 +110,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         
         //Tags
         
-        let industries = model.industries.compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
-                                                                     url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404,
-                                                                     id: $0.gainyIndustry?.id ?? -1)  })
-        let categories = model.categories.compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404,
-                                                                     id: $0.categories?.id ?? -1)})
-        let tags = categories + industries
-        
-        
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
         let totalWidth: CGFloat = UIScreen.main.bounds.width - 81.0 - 32.0
         var xPos: CGFloat = 0.0
         
-        for tag in tags {
+        for tag in model.tickerTags {
             let tagView = TagView()
             tagView.addTarget(self, action: #selector(tagViewTouchUpInside(_:)),
                               for: .touchUpInside)

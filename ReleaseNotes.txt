@@ -1,4 +1,4 @@
-iOS v1.4.5 #257
+iOS v1.4.5 #258
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,7 +7,7 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• Looking for @Ali crush
+• Articles: WTTF on top always
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

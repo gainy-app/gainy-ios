@@ -71,12 +71,21 @@ struct HoldingsModelMapper {
             let institutionIds = holdingGroup.holdings.compactMap { item in
                 item.holdingDetails?.holding?.accessToken?.institution?.id
             }
+            
+            let industriesTags = (ticker?.tickerIndustries ?? []).compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                                                                         url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404,
+                                                                         id: $0.gainyIndustry?.id ?? -1)  })
+            let categoriesTags = (ticker?.tickerCategories ?? []).compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404,
+                                                                         id: $0.categories?.id ?? -1)})
+            let tags = categoriesTags + industriesTags
+            
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
-                                             industries: ticker?.tickerIndustries ?? [],
-                                             categories: ticker?.tickerCategories ?? [],
+                                             tickerTags: tags,
+//                                             ticker?.tickerIndustries ?? [],
+//                                             categories: ticker?.tickerCategories ?? [],
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,

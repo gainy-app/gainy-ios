@@ -521,6 +521,9 @@
 		901F34AE284B80B100E9E22B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 901F34AD284B80B100E9E22B /* SnapKit */; };
 		901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */; };
 		901F34B2284BE3B400E9E22B /* PurchasesProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */; };
+		9025837F288BFD040033EC5D /* GetTickerLinkedCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 9025837E288BFD040033EC5D /* GetTickerLinkedCollection.graphql */; };
+		90258381288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */; };
+		90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */; };
 		9027955B274AD6E900EC0705 /* CategoriesTipsGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */; };
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
 		903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903707ED2835867E00E3569B /* TTFBlockView.swift */; };
@@ -1145,6 +1148,9 @@
 		901F34AA284B803800E9E22B /* PurchaseProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseProductView.swift; sourceTree = "<group>"; };
 		901F34AF284B86A300E9E22B /* PurchaseInviteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInviteView.swift; sourceTree = "<group>"; };
 		901F34B1284BE3B400E9E22B /* PurchasesProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesProductsView.swift; sourceTree = "<group>"; };
+		9025837E288BFD040033EC5D /* GetTickerLinkedCollection.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = GetTickerLinkedCollection.graphql; sourceTree = "<group>"; };
+		90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickerLinkedCollection.graphql.swift; sourceTree = "<group>"; };
+		90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HoldingsViewModel+Collections.swift"; sourceTree = "<group>"; };
 		9027955A274AD6E900EC0705 /* CategoriesTipsGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTipsGenerator.swift; sourceTree = "<group>"; };
 		9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrongIndustryManager.swift; sourceTree = "<group>"; };
 		903707ED2835867E00E3569B /* TTFBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTFBlockView.swift; sourceTree = "<group>"; };
@@ -1278,6 +1284,7 @@
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
 				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */,
 				339E2A902858AE1600555CD1 /* ValidatePromoCode.graphql.swift */,
 				33BD00F628476076009637FF /* PurchaseUpdate.graphql.swift */,
 				33BD00F228475A88009637FF /* RedeemInvitation.graphql.swift */,
@@ -2238,6 +2245,7 @@
 				90C39E6C27ADADF200F47338 /* FetchRecommendedCollectionIDs.graphql */,
 				85F2595C27046D5E009DEFFD /* FetchSelectedCollections.graphql */,
 				85F2595527045966009DEFFD /* UpdateProfile.graphql */,
+				9025837E288BFD040033EC5D /* GetTickerLinkedCollection.graphql */,
 			);
 			path = Schema;
 			sourceTree = "<group>";
@@ -2716,6 +2724,7 @@
 			isa = PBXGroup;
 			children = (
 				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
+				90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */,
 				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
 				90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */,
 			);
@@ -3005,6 +3014,7 @@
 				339E2A8F2858A97C00555CD1 /* ValidatePromoCode.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
+				9025837F288BFD040033EC5D /* GetTickerLinkedCollection.graphql in Resources */,
 				85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */,
 				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
 				9075EF192831979A00917718 /* Purchases.storyboard in Resources */,
@@ -3212,6 +3222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9006307F282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift in Sources */,
+				90258381288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift in Sources */,
 				3305EAB42743984C00A95FA0 /* HoldingsDataSource.swift in Sources */,
 				85ED4DEB27032CDF00FE6926 /* UICollectionViewLeftAlignedHorizontalLayout.swift in Sources */,
 				3AD40FBE266923C1005679DE /* RecommendedCollectionsSectionLayout.swift in Sources */,
@@ -3554,6 +3565,7 @@
 				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
 				3A85944F268B057900CB8DD6 /* TickerFinancialMetrics.swift in Sources */,
+				90258383288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift in Sources */,
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
 				85695B012746C18200759569 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
@@ -3678,7 +3690,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3707,7 +3719,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3736,7 +3748,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3766,7 +3778,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
@@ -3859,7 +3871,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -3984,7 +3996,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4170,7 +4182,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";
@@ -4200,7 +4212,7 @@
 				CODE_SIGN_ENTITLEMENTS = Gainy/Gainy.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 257;
+				CURRENT_PROJECT_VERSION = 258;
 				DEVELOPMENT_TEAM = M32KF6X3YN;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Gainy/ThirdParty";
 				INFOPLIST_FILE = "Gainy/Supporting Files/Info.plist";

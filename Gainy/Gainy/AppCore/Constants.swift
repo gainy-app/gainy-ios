@@ -119,4 +119,8 @@ struct Constants {
         static let publicKey = "appl_frKqXzekPjQXwJaYRTwGkPSuCiF"
         static let apiKey = "sk_MdiBlajVcgjEMeOCIeKVqzhRSLUfY"
     }
+    
+    struct Articles {
+        static let wttfId = "62dadc9ea760201a7c2052f8"
+    }
 }

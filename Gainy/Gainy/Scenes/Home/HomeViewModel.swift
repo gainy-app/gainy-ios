@@ -121,6 +121,9 @@ final class HomeViewModel {
             
             self.gains = gainsAsync
             self.articles = articlesAsync
+            self.articles.sort(by: { art1, art2 in
+                art1.id == Constants.Articles.wttfId
+            })
             self.watchlist = watchlistAsync
             self.sortWatchlist()
             
