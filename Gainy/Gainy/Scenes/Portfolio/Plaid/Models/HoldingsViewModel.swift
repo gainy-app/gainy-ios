@@ -20,6 +20,8 @@ final class HoldingsViewModel {
     private var holdingGroups: [GetPlaidHoldingsQuery.Data.ProfileHoldingGroup] = []
     private var portfolioGains: GetPlaidHoldingsQuery.Data.PortfolioGain?
     
+    private var collectionTagsData: [CollectionDetailsTagsInfo] = []
+    
     var settings: PortfolioSettings? {
         didSet {
             if let settings = settings {
@@ -82,7 +84,7 @@ final class HoldingsViewModel {
                     loadGroup.leave()
                 }
                 
-                
+                self.collectionTagsData.removeAll()
                 
                 loadGroup.notify(queue: .main) {[weak self] in
                     guard let self = self else {
@@ -193,6 +195,18 @@ final class HoldingsViewModel {
                         }
                     }
                     
+                    
+                    let loadSymbols = tickSymbols
+                    innerChartsGroup.enter()
+                    Task {
+                        let tagsData = await self.getTickersCollectionData(for: loadSymbols)
+                        
+                        await MainActor.run {
+                            self.collectionTagsData = tagsData
+                            innerChartsGroup.leave()
+                        }
+                    }
+                    
                     innerChartsGroup.enter()
                     dprint("\(Date()) Metrics for Porto load start")
                     HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] metrics in
@@ -220,7 +234,7 @@ final class HoldingsViewModel {
                         
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
                                                                              profileHoldings: self.portfolioGains)
-                        dprint("\(Date()) Holdings match score end")
+                       
                         if self.dataSource.chartViewModel == nil {
                             self.dataSource.chartViewModel = live
                         } else {

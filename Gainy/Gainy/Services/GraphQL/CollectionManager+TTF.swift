@@ -124,7 +124,6 @@ extension CollectionsManager {
                     }
                 }
             }
-           
         }
     
     //MARK: - Pie
