@@ -13,7 +13,7 @@ import SwiftDate
 class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     
     var collectionViewLimit: Int {
-        3
+        1
     }
     
     static let colKey: String = "Purchases.viewedCollections"

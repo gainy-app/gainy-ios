@@ -41,8 +41,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="821.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3s-ys-sxV" userLabel="Wanna see more than 3 TTFs? Try Gainy Premium!">
-                                                <rect key="frame" x="68" y="0.0" width="278.5" height="50.5"/>
-                                                <string key="text">Wanna see more than 3 TTFs?
+                                                <rect key="frame" x="74.5" y="0.0" width="265" height="50.5"/>
+                                                <string key="text">Wanna see more than 1 TTF?
 Try Gainy Premium!</string>
                                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
