@@ -87,6 +87,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter
             .default
             .addObserver(self,
+                         selector: NSSelectorFromString("sendClose"),
+                         name: UIApplication.willTerminateNotification,
+                         object: nil)
+        NotificationCenter
+            .default
+            .addObserver(self,
                          selector: NSSelectorFromString("trackOpen"),
                          name: UIApplication.willEnterForegroundNotification,
                          object: nil)
