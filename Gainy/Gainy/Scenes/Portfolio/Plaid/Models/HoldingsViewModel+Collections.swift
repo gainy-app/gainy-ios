@@ -138,19 +138,17 @@ extension HoldingsViewModel {
         let collections = await getLinkedCollections(for: symbols)
         
         //Getting tags
-        let tags = await getLinkedCollectionTags(for: collections.compactMap({$0.details.uniqId}))
+        //let tags = await getLinkedCollectionTags(for: collections.compactMap({$0.details.uniqId}))
         
         var info: [CollectionDetailsTagsInfo] = []
         for symbol in symbols {
             
             if let collectionInfo = collections.first(where: {$0.symbol == symbol}) {
-                if let tagsInfo = tags.first(where: {$0.uniqID == collectionInfo.details.uniqId}) {
                     info.append(CollectionDetailsTagsInfo.init(symbol: symbol,
                                                                details: collectionInfo.details,
-                                                               uniqID: tagsInfo.uniqID,
-                                                               tags: tagsInfo.tags))
+                                                               uniqID: "tagsInfo.uniqID",
+                                                               tags: []))
                 }
-            }
         }
         return info
     }

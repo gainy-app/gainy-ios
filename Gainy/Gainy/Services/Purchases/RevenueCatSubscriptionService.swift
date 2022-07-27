@@ -154,10 +154,22 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         }
     }
     
+    
     func purchaseProduct(product: Product) {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
+                Purchases.shared.setAttributes(["promo_сode" : ""])
+            }
+        }
+    }
+    
+    //Demo EEKUA1AE
+    func purchaseProduct(product: Product, with promocode: String) {
+        if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
+            Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
+                self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
+                Purchases.shared.setAttributes(["promo_сode" : promocode])
             }
         }
     }

@@ -84,8 +84,6 @@ struct HoldingsModelMapper {
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              tickerTags: tags,
-//                                             ticker?.tickerIndustries ?? [],
-//                                             categories: ticker?.tickerCategories ?? [],
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,

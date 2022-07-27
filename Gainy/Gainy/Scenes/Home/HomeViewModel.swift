@@ -121,9 +121,6 @@ final class HomeViewModel {
             
             self.gains = gainsAsync
             self.articles = articlesAsync
-            self.articles.sort(by: { art1, art2 in
-                art1.id == Constants.Articles.wttfId
-            })
             self.watchlist = watchlistAsync
             self.sortWatchlist()
             
@@ -138,6 +135,7 @@ final class HomeViewModel {
                                                               grow: metric.relativeDailyChange ?? 0.0,
                                                               value: metric.actualPrice ?? 0.0))
                 } else  {
+                    dprint("loadHomeData zero val \(ind) \(val)")
                     topIndexes.append(HomeIndexViewModel.init(name: val,
                                                               grow: 0.0,
                                                               value: 0.0))

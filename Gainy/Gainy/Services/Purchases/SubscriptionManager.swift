@@ -202,6 +202,10 @@ extension SubscriptionManager: SubscriptionServiceProtocol {
         service.purchaseProduct(product: product)
     }
     
+    func purchaseProduct(product: Product, with promocode: String) {
+        service.purchaseProduct(product: product, with: promocode)
+    }
+    
     func priceForProduct(product: Product) -> String {
         service.priceForProduct(product: product)
     }

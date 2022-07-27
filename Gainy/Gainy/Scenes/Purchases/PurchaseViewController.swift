@@ -244,7 +244,7 @@ final class PurchaseViewController: BaseViewController {
         if isPromoMode {
             if let product = promoProductView.selectedProduct {
                 isPurchasing = true
-                SubscriptionManager.shared.purchaseProduct(product: product)
+                SubscriptionManager.shared.purchaseProduct(product: product, with: promoProductView.isCodeValid ? promoProductView.promoCode : "")
                 GainyAnalytics.logEvent("purchase_subscribe_tap")
             }
         } else {

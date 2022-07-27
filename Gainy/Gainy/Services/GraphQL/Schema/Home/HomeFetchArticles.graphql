@@ -1,5 +1,5 @@
 query HomeFetchArticles {
-    website_blog_articles(order_by: {published_on: desc}) {
+website_blog_articles(order_by: {priority: desc, published_on: desc}) {
         id
         category_name
         main_image

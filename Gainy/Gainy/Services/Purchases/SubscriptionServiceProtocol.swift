@@ -28,6 +28,7 @@ protocol SubscriptionServiceProtocol {
     func getProducts()
     func priceForProduct(product: Product) -> String
     func purchaseProduct(product: Product)
+    func purchaseProduct(product: Product, with promocode: String)
     func restorePurchases(_ completion: @escaping (SuscriptionType) -> Void)
     func grantPromotion(_ type: SuscriptionPromotionType, _ completion: @escaping (SuscriptionType) -> Void)
 }

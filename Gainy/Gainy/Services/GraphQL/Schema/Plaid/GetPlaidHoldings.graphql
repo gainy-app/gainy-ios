@@ -18,6 +18,25 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
         relative_gain_total
     }
     profile_holding_groups(where:{profile_id: {_eq: $profileId}}) {
+    
+    tags{
+            collection{
+                id
+                  uniq_id
+                name
+            }
+                interest {
+          id
+          name
+          icon_url
+        }
+        category {
+          id
+          name
+          icon_url
+          collection_id
+        }
+        }
         details {
             ltt_quantity_total
             market_capitalization

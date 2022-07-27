@@ -9,7 +9,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query HomeFetchArticles {
-      website_blog_articles(order_by: {published_on: desc}) {
+      website_blog_articles(order_by: {priority: desc, published_on: desc}) {
         __typename
         id
         category_name
@@ -35,7 +35,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("website_blog_articles", arguments: ["order_by": ["published_on": "desc"]], type: .nonNull(.list(.nonNull(.object(WebsiteBlogArticle.selections))))),
+        GraphQLField("website_blog_articles", arguments: ["order_by": ["priority": "desc", "published_on": "desc"]], type: .nonNull(.list(.nonNull(.object(WebsiteBlogArticle.selections))))),
       ]
     }
 
@@ -49,7 +49,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "website_blog_articles": websiteBlogArticles.map { (value: WebsiteBlogArticle) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220627120743.website_blog_articles"
+    /// fetch data from the table: "public_220727102416.website_blog_articles"
     public var websiteBlogArticles: [WebsiteBlogArticle] {
       get {
         return (resultMap["website_blog_articles"] as! [ResultMap]).map { (value: ResultMap) -> WebsiteBlogArticle in WebsiteBlogArticle(unsafeResultMap: value) }

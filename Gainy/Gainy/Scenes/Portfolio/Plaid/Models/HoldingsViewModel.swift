@@ -97,6 +97,7 @@ final class HoldingsViewModel {
                     var interestsRaw: [RemoteTickerDetailsFull.TickerInterest] = []
                     var categoriesRaw: [RemoteTickerDetailsFull.TickerCategory] = []
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
+                    var linkedCollectionId: Int?
                     
                     for holdingGroup in self.holdingGroups {
                         
@@ -126,8 +127,7 @@ final class HoldingsViewModel {
                         if let metric = holdingGroup.ticker?.realtimeMetrics {
                             let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
                             realtimeMetrics.append(localMetric)
-                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol ?? "", data: localMetric)
-                            dprint("Got \(metric.actualPrice ?? 0.0) - \(metric.relativeDailyChange ?? 0.0) for \(metric.symbol ?? "")")
+                            TickerLiveStorage.shared.setSymbolData(localMetric.symbol, data: localMetric)
                         }
                         
                         if let mScore = holdingGroup.ticker?.fragments.remoteTickerDetailsFull.fragments.remoteTickerDetails.matchScore {
@@ -195,18 +195,6 @@ final class HoldingsViewModel {
                         }
                     }
                     
-                    
-                    let loadSymbols = tickSymbols
-                    innerChartsGroup.enter()
-                    Task {
-                        let tagsData = await self.getTickersCollectionData(for: loadSymbols)
-                        
-                        await MainActor.run {
-                            self.collectionTagsData = tagsData
-                            innerChartsGroup.leave()
-                        }
-                    }
-                    
                     innerChartsGroup.enter()
                     dprint("\(Date()) Metrics for Porto load start")
                     HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] metrics in
@@ -248,17 +236,6 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.min = live.chartData.onlyPoints().min() ?? 0.0
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             }
-                            
-//                            dprint("MIN-MAX RANGE")
-//                            dprint("\(live.chartData.onlyPoints().min()) \(live.chartData.onlyPoints().max())")
-//                            dprint("\(live.sypChartData.onlyPoints().min()) \(live.sypChartData.onlyPoints().max())")
-//                            dprint("\(self.dataSource.chartViewModel.min) \(self.dataSource.chartViewModel.max)")
-                            
-//                            self.dataSource.chartViewModel.lastDayPrice = Float(self.metrics?.prevClose_1d ?? 0.0)
-//                            if self.dataSource.chartViewModel.lastDayPrice != 0.0 {
-//                                self.dataSource.chartViewModel.min = min(Double(self.dataSource.chartViewModel.min ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-//                                self.dataSource.chartViewModel.max = max(Double(self.dataSource.chartViewModel.max ?? 0.0), Double(self.dataSource.chartViewModel.lastDayPrice))
-//                            }
                             
                             self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
