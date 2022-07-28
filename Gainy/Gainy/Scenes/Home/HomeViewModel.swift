@@ -216,7 +216,7 @@ final class HomeViewModel {
                     
                 case .failure(let error):
                     continuation.resume(returning: [])
-                    dprint("Failure when making GraphQL request. Error: \(error)")
+                    dprint("Failure when making FetchTickersQuery request. Error: \(error)")
                 }
             }
         }
@@ -236,7 +236,7 @@ final class HomeViewModel {
                     continuation.resume(returning: metrics)
                     break
                 case .failure(let error):
-                    dprint("Failure when making FetchTickersQuery request. Error: \(error)")
+                    dprint("Failure when making FetchRealtimeMetricsQuery request. Error: \(error)")
                     continuation.resume(returning: [FetchRealtimeMetricsQuery.Data.TickerRealtimeMetric]())
                     break
                 }
