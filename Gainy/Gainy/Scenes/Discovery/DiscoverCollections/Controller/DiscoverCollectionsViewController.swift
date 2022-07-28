@@ -217,6 +217,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     
                     cell.isUserInteractionEnabled = true
                     GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+                    GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
                 }
                 
                 cell.onCheckButtonPressed = { [weak self] in

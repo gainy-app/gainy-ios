@@ -252,6 +252,10 @@ final class SingleCollectionDetailsViewController: BaseViewController {
         } else {
             GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
         }
+        
+        if toggleBtn.isSelected {
+            GainyAnalytics.logEvent("wl_add", params: ["collectionID" : self.collectionId])
+        }
     }
 }
 
