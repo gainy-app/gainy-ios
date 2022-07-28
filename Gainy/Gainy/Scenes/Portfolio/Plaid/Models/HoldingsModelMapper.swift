@@ -72,18 +72,51 @@ struct HoldingsModelMapper {
                 item.holdingDetails?.holding?.accessToken?.institution?.id
             }
             
-            let industriesTags = (ticker?.tickerIndustries ?? []).compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
-                                                                         url: "", collectionID: $0.gainyIndustry?.collectionId ?? -404,
-                                                                         id: $0.gainyIndustry?.id ?? -1)  })
-            let categoriesTags = (ticker?.tickerCategories ?? []).compactMap({TickerTag.init(name: $0.categories?.name ?? "", url: $0.categories?.iconUrl ?? "", collectionID: $0.categories?.collectionId ?? -404,
-                                                                         id: $0.categories?.id ?? -1)})
-            let tags = categoriesTags + industriesTags
+            if symbol == "VORB" {
+                print("STOP")
+            }
+            
+            var tags: [TickerTag] = []
+            var linkedCollection: Int = Constants.CollectionDetails.noCollectionId
+            if holdingGroup.tags.isEmpty {
+                
+                let industriesTags = (ticker?.tickerIndustries ?? []).compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
+                                                                                                 url: "",
+                                                                                                 collectionID: $0.gainyIndustry?.collectionId ?? -404,
+                                                                                                 id: $0.gainyIndustry?.id ?? -1)  })
+                let categoriesTags = (ticker?.tickerCategories ?? []).compactMap({TickerTag.init(name: $0.categories?.name ?? "",
+                                                                                                 url: $0.categories?.iconUrl ?? "",
+                                                                                                 collectionID: $0.categories?.collectionId ?? -404,
+                                                                                                 id: $0.categories?.id ?? -1)})
+                tags = categoriesTags + industriesTags
+            } else {
+                var interestsTags: [TickerTag] = []
+                var categoriesTags: [TickerTag] = []
+                linkedCollection = holdingGroup.tags.first?.collection?.id ?? Constants.CollectionDetails.noCollectionId
+                for tag in holdingGroup.tags {
+                    if let interest = tag.interest {
+                        interestsTags.append(TickerTag.init(name: interest.name ?? "",
+                                                            url: interest.iconUrl ?? "",
+                                                            collectionID: tag.collection?.id ?? -404,
+                                                            id: interest.id) )
+                    }
+                    
+                    if let category = tag.category {
+                        categoriesTags.append(TickerTag.init(name: category.name ?? "",
+                                                             url: category.iconUrl ?? "",
+                                                             collectionID: tag.collection?.id ?? -404,
+                                                             id: category.id) )
+                    }
+                }
+                tags = interestsTags + categoriesTags
+            }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              tickerTags: tags,
+                                             linkedCollection: linkedCollection,
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,

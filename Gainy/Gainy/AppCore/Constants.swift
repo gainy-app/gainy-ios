@@ -44,6 +44,7 @@ struct Constants {
         static let demoNamePrefix = "GDEMO:"
         static let matchScore = "Match\nScore"
         static let yourCollections = "Your TTFs"
+        static let noCollectionId = -4
     }
     
     struct Auth {

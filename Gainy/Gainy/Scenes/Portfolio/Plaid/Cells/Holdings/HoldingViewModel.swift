@@ -15,6 +15,7 @@ struct HoldingViewModel {
     
     
     let tickerTags: [TickerTag]
+    let linkedCollection: Int
     
     let showLTT: Bool
     

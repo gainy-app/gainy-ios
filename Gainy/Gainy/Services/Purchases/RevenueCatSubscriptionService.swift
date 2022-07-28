@@ -9,6 +9,7 @@ import Foundation
 import RevenueCat
 import SwiftDate
 import StoreKit
+import FirebaseAnalytics
 
 class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     private var config = Configuration()
@@ -48,7 +49,6 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
 #else
                     GainyAnalytics.logEvent("purchase_completed", params: ["productId" : customerInfo?.entitlements[ettl]?.productIdentifier ?? ""])
 #endif
-                    
                 }
             } else {
                 checkDBForSub()
@@ -170,6 +170,7 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
                 self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
                 Purchases.shared.setAttributes(["promo_сode" : promocode])
+                Analytics.setUserProperty(promocode, forName: "promo_сode")
             }
         }
     }
