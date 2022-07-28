@@ -109,6 +109,9 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         categoriesView.subviews.forEach({$0.removeFromSuperview()})
         
         //Tags
+        if symbolLbl.text == "VORB" {
+            print("STOP")
+        }
         
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
@@ -137,6 +140,12 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
             tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: 0)
             xPos += width + margin
+            
+            if model.linkedCollection != Constants.CollectionDetails.noCollectionId {
+                tagView.setBorderForCollection()
+            } else {
+                tagView.setBorderForTicker()
+            }
         }
         
         lttView.isHidden = true

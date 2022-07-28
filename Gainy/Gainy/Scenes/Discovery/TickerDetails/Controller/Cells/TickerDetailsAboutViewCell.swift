@@ -219,4 +219,16 @@ class TagView: UIButton {
             .cacheOriginalImage
         ], progressBlock: nil, completionHandler: nil)
     }
+    
+    //Highlight
+    
+    func setBorderForCollection() {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.Gainy.blue.withAlphaComponent(0.5).cgColor
+    }
+    
+    func setBorderForTicker() {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor(hexString: "#E7EAEE", alpha: 1.0)?.cgColor
+    }
 }
