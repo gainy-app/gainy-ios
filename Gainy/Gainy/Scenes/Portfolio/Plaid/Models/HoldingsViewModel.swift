@@ -94,8 +94,8 @@ final class HoldingsViewModel {
                     
                     var tickSymbols: [String] = []
                     var securityTypesRaw: [String] = []
-                    var interestsRaw: [RemoteTickerDetailsFull.TickerInterest] = []
-                    var categoriesRaw: [RemoteTickerDetailsFull.TickerCategory] = []
+                    var interestsRaw: [UnifiedTagContainer] = []
+                    var categoriesRaw: [UnifiedTagContainer] = []
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
                     var linkedCollectionId: Int?
                     
@@ -121,8 +121,14 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                         }
                         
-                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.compactMap({$0}) ?? [])
-                        categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.compactMap({$0}) ?? [])
+                        if holdingGroup.tags.isEmpty {
+                            interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
+                            categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
+                        } else {
+                            let tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()})
+                            interestsRaw.append(contentsOf: tags.filter({$0.type == .interest}))
+                            categoriesRaw.append(contentsOf: tags.filter({$0.type == .category}))
+                        }
                         
                         if let metric = holdingGroup.ticker?.realtimeMetrics {
                             let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
@@ -146,17 +152,17 @@ final class HoldingsViewModel {
                     
                     let interests = interestsRaw.map { item -> InfoDataSource in
                         let selected = settings?.interests.contains(where: { interestItem in
-                            interestItem.selected && interestItem.id == (item.interest?.id ?? 0)
+                            interestItem.selected && interestItem.id == item.id
                         }) ?? false
-                        return InfoDataSource.init(type: .Interst, id:item.interest?.id ?? 0, title: item.interest?.name ?? "", iconURL: item.interest?.iconUrl ?? "", selected: selected)
+                        return InfoDataSource.init(type: .Interst, id: item.id, title: item.name, iconURL: item.url, selected: selected)
                     }.uniqueUsingKey{$0.id}
                     self.interestsCount = interests.count
                     
                     let categories = categoriesRaw.map { item -> InfoDataSource in
                         let selected = settings?.categories.contains(where: { categoryItem in
-                            categoryItem.selected && categoryItem.id == (item.categories?.id ?? 0)
+                            categoryItem.selected && categoryItem.id == item.id
                         }) ?? false
-                        return InfoDataSource.init(type: .Category, id:item.categories?.id ?? 0, title: item.categories?.name ?? "", iconURL: item.categories?.iconUrl ?? "", selected: selected)
+                        return InfoDataSource.init(type: .Category, id:item.id, title: item.name, iconURL: item.url, selected: selected)
                     }.uniqueUsingKey{$0.id}
                     self.categoriesCount = categories.count
                     
@@ -222,7 +228,7 @@ final class HoldingsViewModel {
                         
                         let originalHoldings = HoldingsModelMapper.modelsFor(holdingGroups: self.holdingGroups,
                                                                              profileHoldings: self.portfolioGains)
-                       
+                        
                         if self.dataSource.chartViewModel == nil {
                             self.dataSource.chartViewModel = live
                         } else {
@@ -261,7 +267,7 @@ final class HoldingsViewModel {
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         
         if let profileID = UserProfileManager.shared.profileID {
-                        
+            
             let loadGroup = DispatchGroup()
             var haveSomethingToLoad = false
             

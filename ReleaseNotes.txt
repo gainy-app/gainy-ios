@@ -8,6 +8,10 @@ UI Improvements
 
 :hammer_and_wrench: Improvements
 • TTF: correct SP500 index by @Mikhail & @Polina
+• UI updates
+• Promocode linking
+• TTF tags in Porto
+• TTF tags linked to TTF in Porto
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

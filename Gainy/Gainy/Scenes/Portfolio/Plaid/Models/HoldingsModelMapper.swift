@@ -62,12 +62,6 @@ struct HoldingsModelMapper {
                 .all : (holdingGroup.gains?.relativeGainTotal ?? 0.0) * 100.0
             ]
             
-            let categories: [Int] = ticker?.tickerCategories.compactMap({ item in
-                item.categories.flatMap { catItem in
-                    catItem.id
-                }
-            }) ?? []
-            
             let institutionIds = holdingGroup.holdings.compactMap { item in
                 item.holdingDetails?.holding?.accessToken?.institution?.id
             }
@@ -76,23 +70,25 @@ struct HoldingsModelMapper {
                 print("STOP")
             }
             
-            var tags: [TickerTag] = []
+            var tags: [UnifiedTagContainer] = []
             var linkedCollection: Int = Constants.CollectionDetails.noCollectionId
+            
+            
+            
             if holdingGroup.tags.isEmpty {
-                
-                let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
-                let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
+                let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
+                let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
                 tags = categoriesTags + industriesTags
             } else {                
                 linkedCollection = holdingGroup.tags.first?.collection?.id ?? Constants.CollectionDetails.noCollectionId
-                tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
+                tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()})
             }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
-                                             tickerTags: tags,
+                                             tickerTags: tags.compactMap({$0.tickerTag()}),
                                              linkedCollection: linkedCollection,
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
@@ -106,8 +102,8 @@ struct HoldingsModelMapper {
                                              event: holdingGroup.details?.nextEarningsDate,
                                              institutionIds: institutionIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
-                                             tickerInterests: ticker?.tickerInterests.compactMap({$0.interestId}) ?? [],
-                                             tickerCategories:categories,
+                                             tickerInterests: tags.filter({$0.type == .interest}).compactMap({$0.id}),
+                                             tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
                                              rawTicker: ticker)
             
             holds.append(holdModel)
