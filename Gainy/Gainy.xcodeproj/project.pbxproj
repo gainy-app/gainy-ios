@@ -102,6 +102,9 @@
 		335D7D7D27061F8000337262 /* FetchTickerMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */; };
 		335D7D7F270621F800337262 /* FetchTickerMatchData.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */; };
 		3361D930283287C400AEEC3D /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361D92F283287C400AEEC3D /* PurchaseViewController.swift */; };
+		3361E1242893D24E00725B5D /* HoldingsViewModel+Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E1232893D24E00725B5D /* HoldingsViewModel+Tags.swift */; };
+		3361E1262893E22100725B5D /* UploadPromo.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 3361E1252893E21E00725B5D /* UploadPromo.graphql */; };
+		3361E12A2893E32600725B5D /* UploadPromo.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3361E1292893E32600725B5D /* UploadPromo.graphql.swift */; };
 		33626A98271826190013EE6C /* APIModels+Caching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33626A97271826190013EE6C /* APIModels+Caching.swift */; };
 		336970B32716BA2F0001625C /* BugfenderLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 336970B22716BA2F0001625C /* BugfenderLibrary */; };
 		336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 336970AE2716B97A0001625C /* CoreGraphics.framework */; };
@@ -724,6 +727,9 @@
 		335D7D7C27061F8000337262 /* FetchTickerMatchData.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchTickerMatchData.graphql; sourceTree = "<group>"; };
 		335D7D7E270621F800337262 /* FetchTickerMatchData.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickerMatchData.graphql.swift; sourceTree = "<group>"; };
 		3361D92F283287C400AEEC3D /* PurchaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
+		3361E1232893D24E00725B5D /* HoldingsViewModel+Tags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HoldingsViewModel+Tags.swift"; sourceTree = "<group>"; };
+		3361E1252893E21E00725B5D /* UploadPromo.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = UploadPromo.graphql; sourceTree = "<group>"; };
+		3361E1292893E32600725B5D /* UploadPromo.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPromo.graphql.swift; sourceTree = "<group>"; };
 		33626A97271826190013EE6C /* APIModels+Caching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIModels+Caching.swift"; sourceTree = "<group>"; };
 		336970A42716B9440001625C /* BugfenderSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BugfenderSDK.framework; path = ../../../Downloads/BugfenderSDK.framework; sourceTree = "<group>"; };
 		336970A82716B9560001625C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1284,6 +1290,7 @@
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
 				3396C8F727CD148D00D85BF0 /* FetchRealtimeMetrics.graphql.swift */,
 				859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */,
+				3361E1292893E32600725B5D /* UploadPromo.graphql.swift */,
 				90258380288BFD6F0033EC5D /* GetTickerLinkedCollection.graphql.swift */,
 				339E2A902858AE1600555CD1 /* ValidatePromoCode.graphql.swift */,
 				33BD00F628476076009637FF /* PurchaseUpdate.graphql.swift */,
@@ -2245,6 +2252,7 @@
 				90C39E6C27ADADF200F47338 /* FetchRecommendedCollectionIDs.graphql */,
 				85F2595C27046D5E009DEFFD /* FetchSelectedCollections.graphql */,
 				85F2595527045966009DEFFD /* UpdateProfile.graphql */,
+				3361E1252893E21E00725B5D /* UploadPromo.graphql */,
 				9025837E288BFD040033EC5D /* GetTickerLinkedCollection.graphql */,
 			);
 			path = Schema;
@@ -2725,6 +2733,7 @@
 			children = (
 				3305EAB12743983B00A95FA0 /* HoldingsViewModel.swift */,
 				90258382288BFD9A0033EC5D /* HoldingsViewModel+Collections.swift */,
+				3361E1232893D24E00725B5D /* HoldingsViewModel+Tags.swift */,
 				3305EAB32743984C00A95FA0 /* HoldingsDataSource.swift */,
 				90170DB1274A63F60038CE82 /* HoldingsModelMapper.swift */,
 			);
@@ -3044,6 +3053,7 @@
 				85695AFA2746BAD400759569 /* InsertMetricsSessingsForCollection.graphql in Resources */,
 				3AFE1A7E266E51DC0091E799 /* SFProDisplay-Regular.ttf in Resources */,
 				85695AEB27457AAF00759569 /* LongTickerDetailsMarketInnerViewCell.xib in Resources */,
+				3361E1262893E22100725B5D /* UploadPromo.graphql in Resources */,
 				85EDC145272801A000866AD2 /* DeleteTickerFromWatchlist.graphql in Resources */,
 				9068DDE5274B6F5E007C588A /* GetProfileGains.graphql in Resources */,
 				33426C2A284551C300413AE1 /* RedeemInvitation.graphql in Resources */,
@@ -3380,6 +3390,7 @@
 				33CBAF7827A28581008F6F88 /* UpdatePlaidPortfolio.graphql.swift in Sources */,
 				85D1E00127955C480097046A /* CollectionsManager+Tickers.swift in Sources */,
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
+				3361E12A2893E32600725B5D /* UploadPromo.graphql.swift in Sources */,
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
 				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
@@ -3461,6 +3472,7 @@
 				3A01FBEB26863417007F6FA3 /* CollectionCardCell.swift in Sources */,
 				901944C827766BCE000213DA /* GetSelectedInterests.graphql.swift in Sources */,
 				9075CD0F281F1D5800747A09 /* HomeTickersCollectionViewCell.swift in Sources */,
+				3361E1242893D24E00725B5D /* HoldingsViewModel+Tags.swift in Sources */,
 				85E4A2CD2762115400C0E5C5 /* SearchTickersAlgolia.graphql.swift in Sources */,
 				3A85944B268B056800CB8DD6 /* TickerDetails.swift in Sources */,
 				337D612A26D514AE0048AE62 /* VHLines.swift in Sources */,

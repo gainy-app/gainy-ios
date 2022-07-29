@@ -50,7 +50,6 @@ public final class ValidatePromoCodeQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "get_promocode": getPromocode.flatMap { (value: GetPromocode) -> ResultMap in value.resultMap }])
     }
 
-    /// get_promocode
     public var getPromocode: GetPromocode? {
       get {
         return (resultMap["get_promocode"] as? ResultMap).flatMap { GetPromocode(unsafeResultMap: $0) }

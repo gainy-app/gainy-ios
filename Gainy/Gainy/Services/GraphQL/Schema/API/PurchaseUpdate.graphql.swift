@@ -47,7 +47,6 @@ public final class PurchaseUpdateMutation: GraphQLMutation {
       self.init(unsafeResultMap: ["__typename": "mutation_root", "update_purchases": updatePurchases.flatMap { (value: UpdatePurchase) -> ResultMap in value.resultMap }])
     }
 
-    /// update_purchases
     public var updatePurchases: UpdatePurchase? {
       get {
         return (resultMap["update_purchases"] as? ResultMap).flatMap { UpdatePurchase(unsafeResultMap: $0) }

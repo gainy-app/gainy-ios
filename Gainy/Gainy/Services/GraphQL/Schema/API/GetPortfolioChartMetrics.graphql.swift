@@ -72,7 +72,6 @@ public final class GetPortfolioChartMetricsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "get_portfolio_chart_previous_period_close": getPortfolioChartPreviousPeriodClose.flatMap { (value: GetPortfolioChartPreviousPeriodClose) -> ResultMap in value.resultMap }])
     }
 
-    /// get_portfolio_chart_previous_period_close
     public var getPortfolioChartPreviousPeriodClose: GetPortfolioChartPreviousPeriodClose? {
       get {
         return (resultMap["get_portfolio_chart_previous_period_close"] as? ResultMap).flatMap { GetPortfolioChartPreviousPeriodClose(unsafeResultMap: $0) }

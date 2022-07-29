@@ -107,6 +107,31 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
         }
     }
     
+    func uploadPromo(promocode: String, productId: String) {
+        if let profileID = UserProfileManager.shared.profileID {
+            let query = UploadPromoMutation.init(profile_id: profileID, promocode: promocode, tariff: productId)
+            Network.shared.apollo.perform(mutation: query) {[weak self] response in
+                switch response {
+                case .success(let data):
+                    if let subExpDate = (data.data?.applyPromocode?.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ssZ")?.date {
+                        UserProfileManager.shared.subscriptionExpiryDate = subExpDate
+                    } else {
+                        if let subExpDate = (data.data?.applyPromocode?.subscriptionEndDate ?? "").toDate("yyyy-MM-dd'T'HH:mm:ss.SSSZ")?.date {
+                            UserProfileManager.shared.subscriptionExpiryDate = subExpDate
+                        } else {
+                            UserProfileManager.shared.subscriptionExpiryDate = Date() - 1.weeks
+                        }
+                    }
+                    self?.checkDBForSub()
+                    break
+                case .failure(let error):
+                    GainyAnalytics.logEvent("UploadPromoMutation error \(error)")
+                    break
+                }
+            }
+        }
+    }
+    
     func setEmail(email: String) {
         Purchases.shared.setEmail(email)
     }
@@ -168,7 +193,8 @@ class RevenueCatSubscriptionService: NSObject, SubscriptionServiceProtocol {
     func purchaseProduct(product: Product, with promocode: String) {
         if let product = products.first(where: {$0.productIdentifier == product.identifier}) {
             Purchases.shared.purchase(product: product) {[weak self] tr, customerInfo, error, userCancelled in
-                self?.handleInfo(customerInfo, error: error, informFirebase: true, fromPurchase: true)
+                self?.handleInfo(customerInfo, error: error, informFirebase: false, fromPurchase: true)
+                self?.uploadPromo(promocode: promocode, productId: product.productIdentifier)
                 Purchases.shared.setAttributes(["promo_сode" : promocode])
                 Analytics.setUserProperty(promocode, forName: "promo_сode")
             }

@@ -80,35 +80,12 @@ struct HoldingsModelMapper {
             var linkedCollection: Int = Constants.CollectionDetails.noCollectionId
             if holdingGroup.tags.isEmpty {
                 
-                let industriesTags = (ticker?.tickerIndustries ?? []).compactMap({TickerTag.init(name:$0.gainyIndustry?.name ?? "",
-                                                                                                 url: "",
-                                                                                                 collectionID: $0.gainyIndustry?.collectionId ?? -404,
-                                                                                                 id: $0.gainyIndustry?.id ?? -1)  })
-                let categoriesTags = (ticker?.tickerCategories ?? []).compactMap({TickerTag.init(name: $0.categories?.name ?? "",
-                                                                                                 url: $0.categories?.iconUrl ?? "",
-                                                                                                 collectionID: $0.categories?.collectionId ?? -404,
-                                                                                                 id: $0.categories?.id ?? -1)})
+                let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
+                let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
                 tags = categoriesTags + industriesTags
-            } else {
-                var interestsTags: [TickerTag] = []
-                var categoriesTags: [TickerTag] = []
+            } else {                
                 linkedCollection = holdingGroup.tags.first?.collection?.id ?? Constants.CollectionDetails.noCollectionId
-                for tag in holdingGroup.tags {
-                    if let interest = tag.interest {
-                        interestsTags.append(TickerTag.init(name: interest.name ?? "",
-                                                            url: interest.iconUrl ?? "",
-                                                            collectionID: tag.collection?.id ?? -404,
-                                                            id: interest.id) )
-                    }
-                    
-                    if let category = tag.category {
-                        categoriesTags.append(TickerTag.init(name: category.name ?? "",
-                                                             url: category.iconUrl ?? "",
-                                                             collectionID: tag.collection?.id ?? -404,
-                                                             id: category.id) )
-                    }
-                }
-                tags = interestsTags + categoriesTags
+                tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()}).compactMap({$0.tickerTag()})
             }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,

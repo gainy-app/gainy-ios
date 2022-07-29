@@ -78,7 +78,6 @@ public final class GetPortfolioChartsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "get_portfolio_chart": getPortfolioChart.flatMap { (value: [GetPortfolioChart?]) -> [ResultMap?] in value.map { (value: GetPortfolioChart?) -> ResultMap? in value.flatMap { (value: GetPortfolioChart) -> ResultMap in value.resultMap } } }])
     }
 
-    /// get_portfolio_chart
     public var getPortfolioChart: [GetPortfolioChart?]? {
       get {
         return (resultMap["get_portfolio_chart"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [GetPortfolioChart?] in value.map { (value: ResultMap?) -> GetPortfolioChart? in value.flatMap { (value: ResultMap) -> GetPortfolioChart in GetPortfolioChart(unsafeResultMap: value) } } }
