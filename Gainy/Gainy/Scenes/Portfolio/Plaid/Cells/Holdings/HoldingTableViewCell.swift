@@ -48,31 +48,34 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             //            shadowView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         }
     }
-    @IBOutlet weak var holdingProgressView: PlainCircularProgressBar!
-    @IBOutlet weak var holdingProgressLbl: UILabel!
-    @IBOutlet weak var avgArrowView: UIImageView!
-    @IBOutlet weak var avgPriceLbl: UILabel!
-    @IBOutlet weak var avgGrowLbl: UILabel!
-    @IBOutlet var dots: [UIImageView]!
-    @IBOutlet weak var secsTopMargin: NSLayoutConstraint!
+    @IBOutlet private weak var holdingProgressView: PlainCircularProgressBar!
+    @IBOutlet private weak var holdingProgressLbl: UILabel!
+    @IBOutlet private weak var avgArrowView: UIImageView!
+    @IBOutlet private weak var avgPriceLbl: UILabel!
+    @IBOutlet private weak var avgGrowLbl: UILabel!
+    @IBOutlet private var dots: [UIImageView]!
+    @IBOutlet private weak var secsTopMargin: NSLayoutConstraint!
     
-    @IBOutlet weak var rangeArrowView: UIImageView!
-    @IBOutlet weak var rangeNameLbl: UILabel!
-    @IBOutlet weak var rangePriceLbl: UILabel!
+    @IBOutlet private weak var rangeArrowView: UIImageView!
+    @IBOutlet private weak var rangeNameLbl: UILabel!
+    @IBOutlet private weak var rangePriceLbl: UILabel!
     
-    @IBOutlet weak var eventsView: RectangularDashedView!
-    @IBOutlet weak var rangeGrowLbl: UILabel!
-    @IBOutlet weak var eventLbl: UILabel!
+    @IBOutlet private weak var eventsView: RectangularDashedView!
+    @IBOutlet private weak var rangeGrowLbl: UILabel!
+    @IBOutlet private weak var eventLbl: UILabel!
     
     
-    @IBOutlet weak var transactionsTotalLbl: UILabel!
-    @IBOutlet weak var securitiesTableView: UITableView! {
+    @IBOutlet private weak var transactionsTotalLbl: UILabel!
+    @IBOutlet private weak var securitiesTableView: UITableView! {
         didSet {
             securitiesTableView.dataSource = self
             securitiesTableView.isScrollEnabled = false
         }
     }
-    @IBOutlet weak var secTableHeight: NSLayoutConstraint!
+    @IBOutlet private weak var secTableHeight: NSLayoutConstraint!
+    @IBOutlet weak var tagsHeight: NSLayoutConstraint!
+    
+    private var lines: Int = 1
     
     func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod) {
         holding = model
@@ -105,17 +108,16 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         symbolLbl.superview?.isHidden = false
         
         categoriesView.subviews.forEach({$0.removeFromSuperview()})
+        categoriesView.backgroundColor = .white
         
         //Tags
-        if symbolLbl.text == "VORB" {
-            print("STOP")
-        }
         
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 81.0 - 32.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 32.0
         var xPos: CGFloat = 0.0
+        var yPos: CGFloat = 0.0
         
         for tag in model.tickerTags {
             let tagView = TagView()
@@ -132,11 +134,12 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
             tagView.autoSetDimensions(to: CGSize.init(width: width, height: tagHeight))
             if xPos + width + margin > totalWidth && categoriesView.subviews.count > 0 {
-                tagView.removeFromSuperview()
-                break
+                xPos = 0.0
+                yPos = yPos + tagHeight + margin
+                lines += 1
             }
             tagView.autoPinEdge(.leading, to: .leading, of: categoriesView, withOffset: xPos)
-            tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: 0)
+            tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: yPos)
             xPos += width + margin
             
             if model.linkedCollection != Constants.CollectionDetails.noCollectionId {
@@ -145,6 +148,8 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 tagView.setBorderForTicker()
             }
         }
+        self.tagsHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        self.categoriesView.layoutIfNeeded()
         
         lttView.isHidden = true
         
@@ -178,6 +183,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
         securitiesTableView.reloadData()
         
+        enum SecMargin: CGFloat {
+            case cash = 56.0
+            case normal = 128.0
+        }
+        
         if model.isCash {
             matchCircleView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
             matchScoreLbl.text = "$"
@@ -185,7 +195,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             
             symbolLbl.isHidden = true
             symbolLbl.superview?.isHidden = true
-            secsTopMargin.constant = 56.0
+            secsTopMargin.constant = SecMargin.cash.rawValue + model.tagsHeight()
             transactionsTotalLbl.isHidden = true
             categoriesView.isHidden = true
         } else {
@@ -193,11 +203,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                 matchScoreLbl.text = "C"
                 
-                secsTopMargin.constant = 128.0
+                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight()
                 transactionsTotalLbl.isHidden = false
                 categoriesView.isHidden = false
             } else {
-                secsTopMargin.constant = 128.0
+                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight()
                 transactionsTotalLbl.isHidden = false
                 categoriesView.isHidden = false
             }

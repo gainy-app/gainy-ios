@@ -1,4 +1,4 @@
-iOS v1.4.5 #258
+iOS v1.4.5 #259
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,11 +7,7 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• TTF: correct SP500 index by @Mikhail & @Polina
-• UI updates
-• Promocode linking
-• TTF tags in Porto
-• TTF tags linked to TTF in Porto
+• TTF tags in Porto show all tags
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

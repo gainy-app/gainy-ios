@@ -60,6 +60,29 @@ struct HoldingViewModel {
         }
     }
     
+    func tagsHeight() -> CGFloat {
+        let tagHeight: CGFloat = 24.0
+        let margin: CGFloat = 8.0
+        
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 32.0
+        var xPos: CGFloat = 0.0
+        var yPos: CGFloat = 0.0
+        var lines: Int = 1
+        
+        var subCount: Int = 0
+        for tag in tickerTags {
+            let width = (tag.url.isEmpty ? 8.0 : 26.0) + tag.name.uppercased().widthOfString(usingFont: UIFont.compactRoundedSemibold(12)) + margin
+            if xPos + width + margin > totalWidth && subCount > 0 {
+                xPos = 0.0
+                yPos = yPos + tagHeight + margin
+                lines += 1
+            }
+            xPos += width + margin
+            subCount += 1
+        }
+        return -tagHeight + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+    }
+    
     //Height calc
     func heightForState(range: ScatterChartView.ChartPeriod, isExpaned: Bool) -> CGFloat {
         let eventHeight: CGFloat = 16.0 + 32.0
@@ -72,16 +95,16 @@ struct HoldingViewModel {
             if event != nil {
                 height += eventHeight
             }
-            return height + 8.0
+            return height + 8.0 + tagsHeight()
         } else {
             
             if isCash {
                 return 112.0 + 16.0
             }
             if event != nil {
-                return 232.0 + 22.0
+                return 232.0 + 22.0 + tagsHeight()
             } else {
-                return 184.0 + 22.0
+                return 184.0 + 22.0 + tagsHeight()
             }
             
         }

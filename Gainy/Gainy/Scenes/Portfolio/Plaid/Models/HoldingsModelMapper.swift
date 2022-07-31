@@ -66,10 +66,6 @@ struct HoldingsModelMapper {
                 item.holdingDetails?.holding?.accessToken?.institution?.id
             }
             
-            if symbol == "VORB" {
-                print("STOP")
-            }
-            
             var tags: [UnifiedTagContainer] = []
             var linkedCollection: Int = Constants.CollectionDetails.noCollectionId
             
