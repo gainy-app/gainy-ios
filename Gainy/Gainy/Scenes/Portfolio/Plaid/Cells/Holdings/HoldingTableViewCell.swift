@@ -75,7 +75,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     @IBOutlet private weak var secTableHeight: NSLayoutConstraint!
     @IBOutlet weak var tagsHeight: NSLayoutConstraint!
     
-    private var lines: Int = 1
+    //private var lines: Int = 1
     
     func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod) {
         holding = model
@@ -118,6 +118,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 32.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
+        var lines: Int = 1
         
         for tag in model.tickerTags {
             let tagView = TagView()

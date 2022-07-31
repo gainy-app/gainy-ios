@@ -1,4 +1,4 @@
-iOS v1.4.5 #259
+iOS v1.4.5 #260
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,7 +7,7 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• TTF tags in Porto show all tags
+• TTF tags in Porto show all tags (improved)
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
