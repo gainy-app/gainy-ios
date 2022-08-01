@@ -262,6 +262,21 @@ public class ChartData: ObservableObject, Identifiable {
         guard points.count > 1 else { return 0.0}
         return pctDiff(points.first!, points.last!)
     }
+    
+    func startEndDiff(to index: Int) -> Double {
+        func pctDiff(_ x1: Double, _ x2: Double) -> Double {
+            var diff = (x2 - x1) / x1
+            if x1 < 0 && x2 < 0 {
+                diff = -diff
+            }
+            return Double(round(100 * (diff * 100)) / 100)
+        }
+        
+        let points = onlyPoints()
+        guard points.count > 1 else { return 0.0}
+        guard index < points.count else {return 0.0}
+        return pctDiff(points.first!, points[index])
+    }
 }
 
 extension ChartData: Hashable {

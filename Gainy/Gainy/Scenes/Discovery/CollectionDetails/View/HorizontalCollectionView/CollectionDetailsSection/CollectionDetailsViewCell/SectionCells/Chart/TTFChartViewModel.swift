@@ -31,6 +31,10 @@ final class TTFChartViewModel: ObservableObject {
     
     @Published
     var lastDayPrice: Float = 0
+        
+    var dragActive: Bool = false
+    
+    var currentDataDiff: Double = 0.0
     
     @Published
     var min: Double?

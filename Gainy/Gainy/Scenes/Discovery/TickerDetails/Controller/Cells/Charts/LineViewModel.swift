@@ -26,6 +26,7 @@ class LineViewModel: ObservableObject {
     
     @Published
     var currentDataValue: String = ""
+      
     
     @Published
     var hideHorizontalLines: Bool = false

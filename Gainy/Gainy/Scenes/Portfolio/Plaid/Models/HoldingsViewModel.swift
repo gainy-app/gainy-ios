@@ -97,7 +97,6 @@ final class HoldingsViewModel {
                     var interestsRaw: [UnifiedTagContainer] = []
                     var categoriesRaw: [UnifiedTagContainer] = []
                     var realtimeMetrics: [RemoteTickerDetails.RealtimeMetric] = []
-                    var linkedCollectionId: Int?
                     
                     for holdingGroup in self.holdingGroups {
                         

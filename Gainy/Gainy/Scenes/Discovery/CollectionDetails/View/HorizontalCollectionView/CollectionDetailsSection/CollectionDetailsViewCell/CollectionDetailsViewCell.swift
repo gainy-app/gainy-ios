@@ -1292,6 +1292,13 @@ extension CollectionDetailsViewCell: TTFScatterChartViewDelegate {
         onRangeChange?(period)
         self.loadChartForRange(period)
     }
+    
+    func dragOnChartChanged(showDiff: Bool, diffVal: Double) {
+        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
+            gainsCell.configureWith(tickersCount: viewModel.stocksAmount, viewModel: viewModel, topChart: topChart)
+            gainsCell.isMedianVisible = topChart.isSPPVisible
+        }
+    }
 }
 
 extension CollectionDetailsViewCell: UIScrollViewDelegate {

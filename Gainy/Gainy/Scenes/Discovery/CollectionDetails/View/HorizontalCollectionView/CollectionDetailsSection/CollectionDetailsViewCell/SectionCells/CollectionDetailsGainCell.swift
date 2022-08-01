@@ -16,7 +16,7 @@ protocol CollectionDetailsGainCellDelegate: AnyObject {
 final class CollectionDetailsGainCell: UICollectionViewCell {
     
     weak var delegate: CollectionDetailsGainCellDelegate?
-
+    
     override init(frame _: CGRect) {
         super.init(frame: .zero)
         
@@ -98,43 +98,62 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
     
     func configureWith(tickersCount: Int, viewModel: CollectionDetailViewCellModel, topChart: TTFChartViewModel) {
         
-        var statsDayValue: String {
-            switch viewModel.chartRange {
-            case .d1:
-                return viewModel.dailyGrow.percentUnsigned
-            default:
-                return topChart.chartData.startEndDiff.percentRawUnsigned
-            }
-        }
-        
-        var statsDayRaw: Float {
-            switch viewModel.chartRange {
-            case .d1:
-                return viewModel.dailyGrow
-            default:
-                return Float(topChart.chartData.startEndDiff)
-            }
-        }
-        
+        //Stocks amount
         tickersCountLabel.text = "\(tickersCount) " + (tickersCount == 1 ? "stock" : "stocks")
         tickersCountLabel.sizeToFit()
         
-        if statsDayRaw > 0.0 {
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
-            percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
-            percentArrowImgView.tintColor = UIColor.Gainy.mainGreen
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
+        //Chart data
+        if topChart.dragActive {
+            todaysGainLabel.text = ""
+            if topChart.currentDataDiff > 0.0 {
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
+                percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                percentArrowImgView.tintColor = UIColor.Gainy.mainGreen
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
+                
+            } else {
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+                percentArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                percentArrowImgView.tintColor = UIColor.Gainy.mainRed
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+            }
+            tickerPercentChangeLabel.text = topChart.currentDataDiff.percentRawUnsigned
             
         } else {
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
-            percentArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
-            percentArrowImgView.tintColor = UIColor.Gainy.mainRed
-            tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+            var statsDayValue: String {
+                switch viewModel.chartRange {
+                case .d1:
+                    return viewModel.dailyGrow.percentUnsigned
+                default:
+                    return topChart.chartData.startEndDiff.percentRawUnsigned
+                }
+            }
+            
+            var statsDayRaw: Float {
+                switch viewModel.chartRange {
+                case .d1:
+                    return viewModel.dailyGrow
+                default:
+                    return Float(topChart.chartData.startEndDiff)
+                }
+            }
+            
+            if statsDayRaw > 0.0 {
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
+                percentArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                percentArrowImgView.tintColor = UIColor.Gainy.mainGreen
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainGreen
+                
+            } else {
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+                percentArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                percentArrowImgView.tintColor = UIColor.Gainy.mainRed
+                tickerPercentChangeLabel.textColor = UIColor.Gainy.mainRed
+            }
+            tickerPercentChangeLabel.text = statsDayValue
+            tickerPercentChangeLabel.sizeToFit()
+            todaysGainLabel.text = viewModel.statsDayName
         }
-        tickerPercentChangeLabel.text = statsDayValue
-        tickerPercentChangeLabel.sizeToFit()
-        
-        todaysGainLabel.text = viewModel.statsDayName
         
         //SP500
         
@@ -151,7 +170,7 @@ final class CollectionDetailsGainCell: UICollectionViewCell {
                 medianPercentChangeLabel.textColor = UIColor.Gainy.mainRed
                 medianArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
                 medianArrowImgView.tintColor = UIColor.Gainy.mainRed
-            }            
+            }
         } else {
             medianView.isHidden = true
         }

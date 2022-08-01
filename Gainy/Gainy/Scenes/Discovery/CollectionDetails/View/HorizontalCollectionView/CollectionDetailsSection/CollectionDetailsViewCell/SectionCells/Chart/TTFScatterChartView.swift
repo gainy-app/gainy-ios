@@ -189,11 +189,15 @@ struct TTFScatterChartView: View {
                     lineViewModel.opacity = 1
                     lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
                     lineViewModel.hideHorizontalLines = true
+                    viewModel.dragActive = true
+                     delegate.dragOnChartChanged(showDiff: true, diffVal: viewModel.currentDataDiff)
                 })
                     .onEnded({ value in
                         lineViewModel.opacity = 0
                         lineViewModel.hideHorizontalLines = false
                         lineViewModel.indicatorLocation = .zero
+                        viewModel.dragActive = false
+                        delegate.dragOnChartChanged(showDiff: false, diffVal: viewModel.currentDataDiff)
                     }
                             )
             )
@@ -210,6 +214,7 @@ struct TTFScatterChartView: View {
         if (index >= 0 && index < points.count){
             lineViewModel.currentDataNumber = viewModel.chartData.points[index].0
             lineViewModel.currentDataValue = Float(viewModel.chartData.points[index].1).price
+            viewModel.currentDataDiff = viewModel.chartData.startEndDiff(to: index)
             return CGPoint(x: CGFloat(index)*stepWidth, y: CGFloat(points[index])*stepHeight)
         }
         return .zero
