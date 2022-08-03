@@ -18,25 +18,12 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
         relative_gain_total
     }
     profile_holding_groups(where:{profile_id: {_eq: $profileId}}) {
-    
-    tags{
+        tags(order_by: {priority: desc}) {
             collection{
                 id
-                  uniq_id
                 name
             }
-                interest {
-          id
-          name
-          icon_url
-        }
-        category {
-          id
-          name
-          icon_url
-          collection_id
-        }
-        }
+        }    
         details {
             ltt_quantity_total
             market_capitalization
@@ -117,10 +104,10 @@ portfolio_gains (where:{profile_id: {_eq: $profileId}}) {
         quantity
         symbol
                         
-                    ticker {
-                    name
-                        ...RemoteTickerDetailsFull
-                            realtime_metrics {
+    ticker {
+     name
+    ...RemoteTickerDetailsFull
+    realtime_metrics {
       absolute_daily_change
       actual_price
       daily_volume

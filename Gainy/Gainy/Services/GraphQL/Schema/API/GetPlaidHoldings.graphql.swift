@@ -29,26 +29,12 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       }
       profile_holding_groups(where: {profile_id: {_eq: $profileId}}) {
         __typename
-        tags {
+        tags(order_by: {priority: desc}) {
           __typename
           collection {
             __typename
             id
-            uniq_id
             name
-          }
-          interest {
-            __typename
-            id
-            name
-            icon_url
-          }
-          category {
-            __typename
-            id
-            name
-            icon_url
-            collection_id
           }
         }
         details {
@@ -195,7 +181,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "portfolio_gains": portfolioGains.map { (value: PortfolioGain) -> ResultMap in value.resultMap }, "profile_holding_groups": profileHoldingGroups.map { (value: ProfileHoldingGroup) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220728115209.portfolio_gains"
+    /// fetch data from the table: "public_220802101701.portfolio_gains"
     public var portfolioGains: [PortfolioGain] {
       get {
         return (resultMap["portfolio_gains"] as! [ResultMap]).map { (value: ResultMap) -> PortfolioGain in PortfolioGain(unsafeResultMap: value) }
@@ -205,7 +191,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       }
     }
 
-    /// fetch data from the table: "public_220728115209.profile_holding_groups"
+    /// fetch data from the table: "public_220802101701.profile_holding_groups"
     public var profileHoldingGroups: [ProfileHoldingGroup] {
       get {
         return (resultMap["profile_holding_groups"] as! [ResultMap]).map { (value: ResultMap) -> ProfileHoldingGroup in ProfileHoldingGroup(unsafeResultMap: value) }
@@ -400,7 +386,7 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("tags", type: .nonNull(.list(.nonNull(.object(Tag.selections))))),
+          GraphQLField("tags", arguments: ["order_by": ["priority": "desc"]], type: .nonNull(.list(.nonNull(.object(Tag.selections))))),
           GraphQLField("details", type: .object(Detail.selections)),
           GraphQLField("gains", type: .object(Gain.selections)),
           GraphQLField("holdings", type: .nonNull(.list(.nonNull(.object(Holding.selections))))),
@@ -504,8 +490,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           return [
             GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
             GraphQLField("collection", type: .object(Collection.selections)),
-            GraphQLField("interest", type: .object(Interest.selections)),
-            GraphQLField("category", type: .object(Category.selections)),
           ]
         }
 
@@ -515,8 +499,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(collection: Collection? = nil, interest: Interest? = nil, category: Category? = nil) {
-          self.init(unsafeResultMap: ["__typename": "portfolio_holding_group_tags", "collection": collection.flatMap { (value: Collection) -> ResultMap in value.resultMap }, "interest": interest.flatMap { (value: Interest) -> ResultMap in value.resultMap }, "category": category.flatMap { (value: Category) -> ResultMap in value.resultMap }])
+        public init(collection: Collection? = nil) {
+          self.init(unsafeResultMap: ["__typename": "portfolio_holding_group_tags", "collection": collection.flatMap { (value: Collection) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -538,26 +522,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
           }
         }
 
-        /// An object relationship
-        public var interest: Interest? {
-          get {
-            return (resultMap["interest"] as? ResultMap).flatMap { Interest(unsafeResultMap: $0) }
-          }
-          set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "interest")
-          }
-        }
-
-        /// An object relationship
-        public var category: Category? {
-          get {
-            return (resultMap["category"] as? ResultMap).flatMap { Category(unsafeResultMap: $0) }
-          }
-          set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "category")
-          }
-        }
-
         public struct Collection: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["collections"]
 
@@ -565,7 +529,6 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             return [
               GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
               GraphQLField("id", type: .scalar(Int.self)),
-              GraphQLField("uniq_id", type: .scalar(String.self)),
               GraphQLField("name", type: .scalar(String.self)),
             ]
           }
@@ -576,8 +539,8 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             self.resultMap = unsafeResultMap
           }
 
-          public init(id: Int? = nil, uniqId: String? = nil, name: String? = nil) {
-            self.init(unsafeResultMap: ["__typename": "collections", "id": id, "uniq_id": uniqId, "name": name])
+          public init(id: Int? = nil, name: String? = nil) {
+            self.init(unsafeResultMap: ["__typename": "collections", "id": id, "name": name])
           }
 
           public var __typename: String {
@@ -598,149 +561,12 @@ public final class GetPlaidHoldingsQuery: GraphQLQuery {
             }
           }
 
-          public var uniqId: String? {
-            get {
-              return resultMap["uniq_id"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "uniq_id")
-            }
-          }
-
           public var name: String? {
             get {
               return resultMap["name"] as? String
             }
             set {
               resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-        }
-
-        public struct Interest: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["interests"]
-
-          public static var selections: [GraphQLSelection] {
-            return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(Int.self))),
-              GraphQLField("name", type: .scalar(String.self)),
-              GraphQLField("icon_url", type: .scalar(String.self)),
-            ]
-          }
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: Int, name: String? = nil, iconUrl: String? = nil) {
-            self.init(unsafeResultMap: ["__typename": "interests", "id": id, "name": name, "icon_url": iconUrl])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var id: Int {
-            get {
-              return resultMap["id"]! as! Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "id")
-            }
-          }
-
-          public var name: String? {
-            get {
-              return resultMap["name"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var iconUrl: String? {
-            get {
-              return resultMap["icon_url"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "icon_url")
-            }
-          }
-        }
-
-        public struct Category: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["categories"]
-
-          public static var selections: [GraphQLSelection] {
-            return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("id", type: .nonNull(.scalar(Int.self))),
-              GraphQLField("name", type: .scalar(String.self)),
-              GraphQLField("icon_url", type: .scalar(String.self)),
-              GraphQLField("collection_id", type: .scalar(Int.self)),
-            ]
-          }
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(id: Int, name: String? = nil, iconUrl: String? = nil, collectionId: Int? = nil) {
-            self.init(unsafeResultMap: ["__typename": "categories", "id": id, "name": name, "icon_url": iconUrl, "collection_id": collectionId])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var id: Int {
-            get {
-              return resultMap["id"]! as! Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "id")
-            }
-          }
-
-          public var name: String? {
-            get {
-              return resultMap["name"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "name")
-            }
-          }
-
-          public var iconUrl: String? {
-            get {
-              return resultMap["icon_url"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "icon_url")
-            }
-          }
-
-          public var collectionId: Int? {
-            get {
-              return resultMap["collection_id"] as? Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "collection_id")
             }
           }
         }
