@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "collection-details.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "collection-details@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "collection-details@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "collection-details.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

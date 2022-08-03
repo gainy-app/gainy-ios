@@ -47,9 +47,9 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.about] = aboutMinHeight
         cellHeights[.chart] = chatHeight
         cellHeights[.highlights] = 0.0
-        cellHeights[.marketData] = TickerDetailsMarketDataViewCell.cellHeight
-        cellHeights[.wsr] = TickerDetailsWSRViewCell.cellHeight
-        cellHeights[.recommended] = TickerDetailsRecommendedViewCell.cellHeight
+        cellHeights[.marketData] = ticker.hideMetrics ? 0.0 : TickerDetailsMarketDataViewCell.cellHeight
+        cellHeights[.wsr] = ticker.hideMetrics ? 0.0 : TickerDetailsWSRViewCell.cellHeight
+        cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
         cellHeights[.alternativeStocks] = TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
@@ -113,8 +113,8 @@ final class TickerDetailsDataSource: NSObject {
     
     func updateChart() {
         if !ticker.localChartData.onlyPoints().isEmpty && !ticker.localMedianData.onlyPoints().isEmpty  {
-        chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
-        chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
+            chartViewModel.min = Double(min(ticker.localMedianData.onlyPoints().min() ?? 0.0, ticker.localChartData.onlyPoints().min() ?? 0.0))
+            chartViewModel.max = Double(max(ticker.localMedianData.onlyPoints().max() ?? 0.0, ticker.localChartData.onlyPoints().max() ?? 0.0))
         }
         
         if ticker.localMedianData.onlyPoints().isEmpty {
@@ -174,7 +174,7 @@ final class TickerDetailsDataSource: NSObject {
             cellHeights[.wsr] = 0.0
         }
         
-        if ticker.isETF {
+        if ticker.isETF || ticker.isCrypto || ticker.isIndex {
             cellHeights[.recommended] = 0.0
             cellHeights[.marketData] = 0.0
         }
@@ -211,10 +211,10 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 chartHosting.view.autoPinEdge(.trailing, to: .trailing, of: cell.contentView)
                 chartHosting.view.alpha = 0.0
             }
-                cell.contentView.addSubview(chartLoader)
-                chartLoader.translatesAutoresizingMaskIntoConstraints = false
-                chartLoader.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
-                chartLoader.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
+            cell.contentView.addSubview(chartLoader)
+            chartLoader.translatesAutoresizingMaskIntoConstraints = false
+            chartLoader.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor).isActive = true
+            chartLoader.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
             cell.contentView.bringSubviewToFront(chartLoader)
             return cell
         case .about:
@@ -222,15 +222,17 @@ extension TickerDetailsDataSource: UITableViewDataSource {
             cell.delegate = self
             
             cell.cellHeightChanged = { [weak self] newHeight in
+                let headerSkip = (self?.ticker.hideRecommendations ?? false)  ? -84.0 : 0.0
                 DispatchQueue.main.async {
                     tableView.beginUpdates()
-                    self?.cellHeights[.about] = max((self?.aboutMinHeight ?? 208.0), newHeight)
+                    self?.cellHeights[.about] = max(((self?.aboutMinHeight ?? 208.0) + headerSkip), newHeight)
                     tableView.endUpdates()
                 }
             }
             cell.minHeightUpdated = { [weak self] minHeight in
                 DispatchQueue.main.async {
-                    self?.aboutMinHeight = max(minHeight, self?.aboutMinHeight ?? 0.0)
+                    let headerSkip = (self?.ticker.hideRecommendations ?? false) ? -84.0 : 0.0
+                    self?.aboutMinHeight = max(minHeight, (self?.aboutMinHeight ?? 0.0) + headerSkip)
                     tableView.beginUpdates()
                     self?.cellHeights[.about] = minHeight
                     tableView.endUpdates()
@@ -282,11 +284,13 @@ extension TickerDetailsDataSource: UITableViewDataSource {
                 }
             }.store(in: &cancellable)
             
-            cell.cellHeightChanged = { [weak self] newHeight in
-                DispatchQueue.main.async {
-                    tableView.beginUpdates()
-                    self?.cellHeights[.recommended] = max(168.0, newHeight)
-                    tableView.endUpdates()
+            if !ticker.isIndex && !ticker.isCrypto {
+                cell.cellHeightChanged = { [weak self] newHeight in
+                    DispatchQueue.main.async {
+                        tableView.beginUpdates()
+                        self?.cellHeights[.recommended] = max(168.0, newHeight)
+                        tableView.endUpdates()
+                    }
                 }
             }
             
@@ -345,10 +349,10 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             guard let self = self else {return}
             
             if !self.ticker.localChartData.onlyPoints().isEmpty && !self.ticker.localMedianData.onlyPoints().isEmpty {
-            self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
-            self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
+                self.chartViewModel.min = Double(min(self.ticker.localMedianData.onlyPoints().min() ?? 0.0, self.ticker.localChartData.onlyPoints().min() ?? 0.0))
+                self.chartViewModel.max = Double(max(self.ticker.localMedianData.onlyPoints().max() ?? 0.0, self.ticker.localChartData.onlyPoints().max() ?? 0.0))
             }
-                
+            
             if self.ticker.localMedianData.onlyPoints().isEmpty {
                 self.chartViewModel.min = self.ticker.localChartData.onlyPoints().min() ?? 0.0
                 self.chartViewModel.max = self.ticker.localChartData.onlyPoints().max() ?? 0.0
@@ -385,7 +389,7 @@ extension TickerDetailsDataSource: TickerDetailsAlternativeStocksViewCellDelegat
         delegate?.altStockPressed(stock: stock)
     }
     
-    func comparePressed(stock: AltStockTicker) {        
+    func comparePressed(stock: AltStockTicker) {
         GainyAnalytics.logEvent("ticker_alt_stock_compared", params: ["tickerSymbol" : stock.symbol ?? ""])
         delegate?.comparedStocksChanged(stock: stock)
     }

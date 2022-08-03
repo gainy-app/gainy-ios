@@ -223,12 +223,14 @@ class TagView: UIButton {
     //Highlight
     
     func setBorderForCollection() {
-        layer.borderWidth = 2.0
+        layer.borderWidth = 1.0
         layer.borderColor = UIColor(hexString: "#6C5DD3", alpha: 1.0)?.cgColor
+        tagLabel.textColor = UIColor(hexString: "#6C5DD3", alpha: 1.0)
     }
     
     func setBorderForTicker() {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor(hexString: "#E7EAEE", alpha: 1.0)?.cgColor
+        tagLabel.textColor = UIColor.Gainy.mainText
     }
 }

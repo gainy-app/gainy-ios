@@ -1,13 +1,14 @@
-iOS v1.4.5 #260
+iOS v1.4.5 #261
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• -
+• Home: indexes are tappable
+• Stock View: Crypto and Index sections reduced
 
 :hammer_and_wrench: Improvements
-• TTF tags in Porto show all tags (improved)
+• Porto Tags updated
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

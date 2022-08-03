@@ -57,10 +57,6 @@ class TickerInfo {
         
         self.updateMarketData()
     }
-
-    var isETF: Bool {
-        (ticker.type ?? "") == "ETF"
-    }
     
     let debugStr =
     """
@@ -537,4 +533,28 @@ class TickerInfo {
     var medianCollection: RemoteCollectionDetails? {
         linkedCollections.first(where: {$0.uniqId == prefferedLinkedCollectionID})
     }
+    
+    var isETF: Bool {
+        (ticker.type ?? "") == "etf"
+    }
+    
+    var isIndex: Bool {
+        (ticker.type ?? "") == "index"
+    }
+    
+    var isCrypto: Bool {
+        (ticker.type ?? "") == "crypto"
+    }
+    
+    //General types logic
+    
+    var hideRecommendations: Bool {
+        isIndex || isCrypto
+    }
+    
+    var hideMetrics: Bool {
+        isETF || isCrypto || isIndex
+    }
 }
+
+
