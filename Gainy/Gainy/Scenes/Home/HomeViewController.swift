@@ -57,17 +57,16 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         viewModel = HomeViewModel(authorizationManager: authorizationManager)
         tableView.dataSource = viewModel.dataSource
         tableView.delegate = viewModel.dataSource
         viewModel.dataSource.delegate = self
-        
         setupPanel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         loadBasedOnState()
     }
     
@@ -96,6 +95,7 @@ final class HomeViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             view.showAnimatedSkeleton()
+        tableView.setContentOffset(.zero, animated: false)
         }
     
     override func userLoggedOut() {

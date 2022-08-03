@@ -128,7 +128,7 @@ final class NotifyViewController: BaseViewController {
             self.emailTextField.becomeFirstResponder()
             return
         }
-        GainyAnalytics.logEvent("notify_me_tap_notify", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "eamil" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+        GainyAnalytics.logEvent("notify_me_tap_notify", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
         self.dismiss(animated: true)
     }
     

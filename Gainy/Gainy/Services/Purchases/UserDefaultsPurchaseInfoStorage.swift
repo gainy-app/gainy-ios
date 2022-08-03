@@ -33,7 +33,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
     private var firstAddDate: Date?
     
     var viewedCount: Int {
-        viewedCollections.count
+        min(viewedCollections.count, collectionViewLimit)
     }
     
     func getViewedCollections() {
@@ -68,7 +68,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
                 self?.viewedCollections = viewedCols
             }
             
-            self?.collectionsViewedSubject.value = self?.viewedCollections.count ?? 0
+            self?.collectionsViewedSubject.value = self?.viewedCount ?? 0
             self?.firstAddDate = viewedDate
         }, onFailure: { error in
             dprint("Error getting tags - \(error?.localizedDescription)")
@@ -89,7 +89,7 @@ class UserDefaultsPurchaseInfoStorage: PurchaseInfoStorageProtocol {
         guard viewedCollections.count < collectionViewLimit else {return false}
         if !viewedCollections.contains(colId) {
             viewedCollections.append(colId)
-            collectionsViewedSubject.value = viewedCollections.count
+            collectionsViewedSubject.value = viewedCount
             OneSignal.sendTag(UserDefaultsPurchaseInfoStorage.colKey, value: viewedCollections.compactMap({String($0)}).joined(separator: ","))
             if firstAddDate == nil {
                 firstAddDate = Date()

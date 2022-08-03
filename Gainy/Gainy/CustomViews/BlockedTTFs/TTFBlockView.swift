@@ -192,7 +192,7 @@ final class TTFBlockView: TKPassThroughView {
         }.store(in: &cancellable)
         
         amountLbl.text = "\(SubscriptionManager.shared.storage.viewedCount) / \(SubscriptionManager.shared.storage.collectionViewLimit) TTFs opened"
-        state = SubscriptionManager.shared.storage.viewedCount == SubscriptionManager.shared.storage.collectionViewLimit ? .noMore : .haveMore
+        state = SubscriptionManager.shared.storage.viewedCount >= SubscriptionManager.shared.storage.collectionViewLimit ? .noMore : .haveMore
     }
     
     @objc func unlockAction() {
