@@ -30,7 +30,6 @@ struct UserDefault<T: Codable> {
             cachedObject = newValue
             let data = try? JSONEncoder().encode(newValue)
             UserDefaults.standard.set(data, forKey: key)
-            UserDefaults.standard.synchronize()
         }
     }
 }

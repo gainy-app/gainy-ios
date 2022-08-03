@@ -40,11 +40,14 @@ final class HomeViewModel {
                             
                             self.topIndexes.append(HomeIndexViewModel.init(name: val,
                                                                            grow: metric.relativeDailyChange ?? 0.0,
-                                                                           value: metric.actualPrice ?? 0.0))
+                                                                           value: metric.actualPrice ?? 0.0,
+                                                                           symbol: self.indexSymbols[ind])
+                                                   )
                         } else  {
                             self.topIndexes.append(HomeIndexViewModel.init(name: val,
                                                                            grow: 0.0,
-                                                                           value: 0.0))
+                                                                           value: 0.0,
+                                                                           symbol: self.indexSymbols[ind]))
                         }
                     }
                     
@@ -70,6 +73,11 @@ final class HomeViewModel {
     //MARK: - Collections
     var favCollections: [RemoteShortCollectionDetails] = []
     var watchlist: [RemoteTicker] = []     
+    var topTickers: [RemoteTicker] = []
+    
+    func getTopIndexBy(symbol: String) -> RemoteTicker? {
+        topTickers.first(where: {$0.symbol == symbol})
+    }
     
     //
     var gains: GetPlaidHoldingsQuery.Data.PortfolioGain?
@@ -111,17 +119,19 @@ final class HomeViewModel {
         SubscriptionManager.shared.storage.getViewedCollections()
         
         Task {
-            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
+            let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
                                                                                              getPortfolioGains(profileId: profielId),
                                                                                              getArticles(),
                                                                                              getRealtimeMetrics(symbols: indexSymbols),
-                                                                                             getWatchlist())
+                                                                                             getWatchlist(),
+                                                                                                              getTopTickers())
             self.favCollections = colAsync
             self.sortFavCollections()
             
             self.gains = gainsAsync
             self.articles = articlesAsync
             self.watchlist = watchlistAsync
+            self.topTickers = topTickersAsync
             self.sortWatchlist()
             
             let indexes = indexesAsync
@@ -133,12 +143,14 @@ final class HomeViewModel {
 
                     topIndexes.append(HomeIndexViewModel.init(name: val,
                                                               grow: metric.relativeDailyChange ?? 0.0,
-                                                              value: metric.actualPrice ?? 0.0))
+                                                              value: metric.actualPrice ?? 0.0,
+                                                              symbol: self.indexSymbols[ind]))
                 } else  {
                     dprint("loadHomeData zero val \(ind) \(val)")
                     topIndexes.append(HomeIndexViewModel.init(name: val,
                                                               grow: 0.0,
-                                                              value: 0.0))
+                                                              value: 0.0,
+                                                              symbol: self.indexSymbols[ind]))
                 }
             }
             await MainActor.run {
@@ -196,6 +208,37 @@ final class HomeViewModel {
         withCheckedContinuation { continuation in
             
             Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: UserProfileManager.shared.watchlist)) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    guard let tickers = graphQLResult.data?.tickers else {
+                        continuation.resume(returning: [])
+                        return
+                    }
+                    
+                    for tickLivePrice in tickers.compactMap({$0.fragments.remoteTickerDetails.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                    }
+                    
+                    for tickMatch in tickers.compactMap({$0.fragments.remoteTickerDetails.matchScore}) {
+                        TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
+                    }
+                    
+                    let remoteTickers = tickers.compactMap({$0.fragments.remoteTickerDetails})
+                    continuation.resume(returning: remoteTickers)
+                    
+                case .failure(let error):
+                    continuation.resume(returning: [])
+                    dprint("Failure when making FetchTickersQuery request. Error: \(error)")
+                }
+            }
+        }
+    }
+    
+    func getTopTickers() async -> [RemoteTicker] {
+        return await
+        withCheckedContinuation { continuation in
+            
+            Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: indexSymbols)) { result in
                 switch result {
                 case .success(let graphQLResult):
                     guard let tickers = graphQLResult.data?.tickers else {

@@ -18,6 +18,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func tickerSelected(ticker: RemoteTicker)
     func tickerSortCollectionsPressed()
     func tickerSortWLPressed()
+    func topTickerTapped(symbol: String)
 }
 
 final class HomeDataSource: NSObject {
@@ -99,6 +100,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             cell.updateIndexes(models: indexes)
             cell.gains = viewModel?.gains
             cell.bottomDots.isHidden = (viewModel?.gains == nil)
+            cell.delegate = self
             return cell
         case .watchlist:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
@@ -317,6 +319,12 @@ extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
 extension HomeDataSource: HomeWatchlistTableViewCellDelegate {
     func tickerSelected(ticker: RemoteTicker) {
         delegate?.tickerSelected(ticker: ticker)
+    }
+}
+
+extension HomeDataSource: HomeIndexesTableViewCellDelegate {
+    func tickerTapped(symbol: String) {
+        delegate?.topTickerTapped(symbol: symbol)
     }
 }
 

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol HomeIndexesTableViewCellDelegate: AnyObject {
+    func tickerTapped(symbol: String)
+}
+
 final class HomeIndexesTableViewCell: UITableViewCell {
     static let cellHeight: CGFloat = 70 + 107.0 + 24.0
     static let smallCellHeight: CGFloat = 70 + 16.0 + 4.0
@@ -14,6 +18,8 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     enum HomeIndex: Int, CaseIterable {
         case dow = 0, spp, nasdaq, bitcoin
     }
+    
+    weak var delegate: HomeIndexesTableViewCellDelegate?
     
     @IBOutlet private var indexViews: [HomeIndexView]!
     @IBOutlet private weak var balanceLbl: UILabel!
@@ -25,6 +31,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     func updateIndexes(models: [HomeIndexViewModel]) {        
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val
+            indexViews[ind].delegate = self
         }
     }
     var gains: GetPlaidHoldingsQuery.Data.PortfolioGain? {
@@ -44,5 +51,11 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                 bottomDots.isHidden = true
             }
         }
+    }
+}
+
+extension HomeIndexesTableViewCell: HomeIndexViewDelegate {
+    func tickerTapped(symbol: String) {
+        delegate?.tickerTapped(symbol: symbol)
     }
 }

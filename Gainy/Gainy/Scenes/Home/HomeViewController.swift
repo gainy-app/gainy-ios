@@ -221,11 +221,13 @@ extension HomeViewController: HomeDataSourceDelegate {
         present(articleVC, animated: true, completion: nil)
         
         GainyAnalytics.logEvent("home_article_tap", params: ["articleId" : article.id])
+        feedbackGenerator?.impactOccurred()
     }
     
     func collectionSelected(collection: RemoteShortCollectionDetails) {
         mainCoordinator?.showCollectionDetails(collectionID: collection.id ?? 0, delegate: self, collection: collection)
         GainyAnalytics.logEvent("home_coll_tap", params: ["colId" : collection.id ?? 0])
+        feedbackGenerator?.impactOccurred()
     }
     
     func tickerSelected(ticker: RemoteTicker) {
@@ -235,8 +237,9 @@ extension HomeViewController: HomeDataSourceDelegate {
         }) ?? 0
         mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
+        feedbackGenerator?.impactOccurred()
     }
-    
+
     func tickerSortCollectionsPressed() {
         guard self.presentedViewController == nil else {return}
         sortingCollectionsVC.delegate = self
@@ -244,6 +247,7 @@ extension HomeViewController: HomeDataSourceDelegate {
         self.fpc.set(contentViewController: sortingCollectionsVC)
         self.present(self.fpc, animated: true, completion: nil)
         GainyAnalytics.logEvent("home_col_sorting_pressed", params: [:])
+        feedbackGenerator?.impactOccurred()
     }
     
     func tickerSortWLPressed() {
@@ -254,6 +258,19 @@ extension HomeViewController: HomeDataSourceDelegate {
         self.fpc.set(contentViewController: sortingWatchlistVC)
         self.present(self.fpc, animated: true, completion: nil)
         GainyAnalytics.logEvent("home_wl_sorting_pressed", params: [:])
+        feedbackGenerator?.impactOccurred()
+    }
+    
+    func topTickerTapped(symbol: String) {
+        if let ticker = viewModel?.getTopIndexBy(symbol: symbol) {
+            let list = viewModel.topTickers.compactMap({TickerInfo.init(ticker: $0)})
+            let currentTickerIndex = list.firstIndex(where: {
+                $0.symbol == ticker.symbol
+            }) ?? 0
+            mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)            
+            GainyAnalytics.logEvent("home_index_tap", params: ["symbol" : symbol])
+            feedbackGenerator?.impactOccurred()
+        }
     }
 }
 
