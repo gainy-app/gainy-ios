@@ -15,7 +15,6 @@ struct HoldingViewModel {
     
     
     let tickerTags: [TickerTag]
-    let linkedCollection: Int
     
     let showLTT: Bool
     
@@ -60,11 +59,11 @@ struct HoldingViewModel {
         }
     }
     
-    func tagsHeight() -> CGFloat {
+    func tagsHeight(isExpanded: Bool) -> CGFloat {
         let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 32.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 64.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
@@ -80,11 +79,20 @@ struct HoldingViewModel {
             xPos += width + margin
             subCount += 1
         }
-        return -tagHeight + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        if lines <= 2 {
+            return -tagHeight + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        } else {
+            if isExpanded {
+                return -tagHeight + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+            } else {
+                return -tagHeight + tagHeight * CGFloat(2) + margin * CGFloat(1)
+            }
+        }
+        
     }
     
     //Height calc
-    func heightForState(range: ScatterChartView.ChartPeriod, isExpaned: Bool) -> CGFloat {
+    func heightForState(range: ScatterChartView.ChartPeriod, isExpaned: Bool, isTagExpanded: Bool) -> CGFloat {
         let eventHeight: CGFloat = 16.0 + 32.0
         if isExpaned {
             let secHeight: CGFloat = Double(securities.count) * 80.0 + Double(securities.count - 1) * 8.0
@@ -95,16 +103,16 @@ struct HoldingViewModel {
             if event != nil {
                 height += eventHeight
             }
-            return height + 8.0 + tagsHeight()
+            return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
         } else {
             
             if isCash {
                 return 112.0 + 16.0
             }
             if event != nil {
-                return 232.0 + 22.0 + tagsHeight()
+                return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
             } else {
-                return 184.0 + 22.0 + tagsHeight()
+                return 184.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)
             }
             
         }

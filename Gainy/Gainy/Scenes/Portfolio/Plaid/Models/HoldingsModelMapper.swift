@@ -67,25 +67,29 @@ struct HoldingsModelMapper {
             }
             
             var tags: [UnifiedTagContainer] = []
-            var linkedCollection: Int = Constants.CollectionDetails.noCollectionId
             
+            var ttfTags: [UnifiedTagContainer] = []
             
-            
-            if holdingGroup.tags.isEmpty {
-                let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
-                let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
-                tags = categoriesTags + industriesTags
-            } else {                
-                linkedCollection = holdingGroup.tags.first?.collection?.id ?? Constants.CollectionDetails.noCollectionId
-                tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()})
+            for tag in holdingGroup.tags {
+                if let col = tag.collection {
+                    ttfTags.append(UnifiedTagContainer.init(id: col.id ?? Constants.CollectionDetails.noCollectionId, name: col.name ?? "" , url: "", collectionId: col.id ?? Constants.CollectionDetails.noCollectionId, type: .ttf))
+                }
             }
+            ttfTags = ttfTags.uniqued()
+            
+            let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
+            let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
+            tags = ttfTags + categoriesTags + industriesTags
+            
+            //            if ticker.fragments.remoteTickerDetailsFull. {
+            //                for tag in
+            //            }
             
             let holdModel = HoldingViewModel(matchScore: TickerLiveStorage.shared.getMatchData(symbol)?.matchScore ?? 0,
                                              name: (holdingGroup.details?.tickerName ?? "").companyMarkRemoved,
                                              balance: Float(holdingGroup.gains?.actualValue ?? 0.0),
                                              tickerSymbol: symbol,
                                              tickerTags: tags.compactMap({$0.tickerTag()}),
-                                             linkedCollection: linkedCollection,
                                              showLTT: holdingGroup.details?.lttQuantityTotal ?? 0.0 > 0.0,
                                              todayPrice: TickerLiveStorage.shared.getSymbolData(symbol)?.currentPrice ?? 0.0,
                                              todayGrow: TickerLiveStorage.shared.getSymbolData(symbol)?.priceChangeToday ?? 0.0,

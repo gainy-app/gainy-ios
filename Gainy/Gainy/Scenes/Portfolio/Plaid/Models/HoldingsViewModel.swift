@@ -120,15 +120,9 @@ final class HoldingsViewModel {
                             securityTypesRaw.append(holding.type ?? "")
                         }
                         
-                        if holdingGroup.tags.isEmpty {
-                            interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
-                            categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
-                        } else {
-                            let tags = holdingGroup.tags.flatMap({$0.toUnifiedContainers()})
-                            interestsRaw.append(contentsOf: tags.filter({$0.type == .interest}))
-                            categoriesRaw.append(contentsOf: tags.filter({$0.type == .category}))
-                        }
-                        
+                        interestsRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerInterests.flatMap({$0.toUnifiedContainers()}) ?? [])
+                        categoriesRaw.append(contentsOf:  holdingGroup.ticker?.fragments.remoteTickerDetailsFull.tickerCategories.flatMap({$0.toUnifiedContainers()}) ?? [])
+                            
                         if let metric = holdingGroup.ticker?.realtimeMetrics {
                             let localMetric = RemoteTickerDetails.RealtimeMetric.init(actualPrice: metric.actualPrice, relativeDailyChange: metric.relativeDailyChange, time: metric.time, symbol: metric.symbol)
                             realtimeMetrics.append(localMetric)
@@ -241,6 +235,8 @@ final class HoldingsViewModel {
                                 self.dataSource.chartViewModel.min = live.chartData.onlyPoints().min() ?? 0.0
                                 self.dataSource.chartViewModel.max = live.chartData.onlyPoints().max() ?? 0.0
                             }
+                            dprint("total Porto min: \(self.dataSource.chartViewModel.min)")
+                            dprint("total Porto max: \(self.dataSource.chartViewModel.max)")
                             
                             self.dataSource.chartViewModel.balance = live.balance
                             self.dataSource.chartViewModel.rangeGrow = live.rangeGrow
@@ -256,6 +252,7 @@ final class HoldingsViewModel {
                             self.dataSource.sortAndFilterHoldingsBy(settings)
                         }
                         dprint("\(Date()) Holdings final end")
+                        
                         completion?()
                     }
                 }

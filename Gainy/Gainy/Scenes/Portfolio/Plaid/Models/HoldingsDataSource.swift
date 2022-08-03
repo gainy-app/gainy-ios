@@ -45,6 +45,7 @@ final class HoldingsDataSource: NSObject {
     }
     
     private var cellHeights: [Int: CGFloat] = [:]
+    private var expandedTagsCells: Set<String> = Set<String>()
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
@@ -56,8 +57,9 @@ final class HoldingsDataSource: NSObject {
         didSet {
             guard holdings.count > 0 else {return}
             expandedCells.removeAll()
+            expandedTagsCells.removeAll()
             for ind in 0..<holdings.count {
-                cellHeights[ind] = holdings[ind].heightForState(range: chartRange, isExpaned: false)
+                cellHeights[ind] = holdings[ind].heightForState(range: chartRange, isExpaned: false, isTagExpanded: false)
             }
         }
     }
@@ -144,8 +146,9 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
         if indexPath.section == self.sectionsCount - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: HoldingTableViewCell.cellIdentifier, for: indexPath) as! HoldingTableViewCell
             cell.delegate = self
-            cell.setModel(holdings[indexPath.row], chartRange)
+            cell.setModel(holdings[indexPath.row], chartRange, isTagExpanded: expandedTagsCells.contains(holdings[indexPath.row].name))
             cell.isExpanded = expandedCells.contains(holdings[indexPath.row].name)
+            cell.isTagExpanded = expandedTagsCells.contains(holdings[indexPath.row].name)
             cell.cellHeightChanged = {[weak self] model in
                 guard let self = self else {return}
                 if let _ = self.holdings.first(where: {$0 == model}) {
@@ -158,10 +161,30 @@ extension HoldingsDataSource: SkeletonTableViewDataSource {
                     
                     tableView.beginUpdates()
                     self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
-                                                                           isExpaned: self.expandedCells.contains(model.name))
+                                                                           isExpaned: self.expandedCells.contains(model.name),
+                                                                           isTagExpanded: self.expandedTagsCells.contains(model.name))
                     tableView.endUpdates()
                     
                     cell.isExpanded = self.expandedCells.contains(model.name)
+                }
+            }
+            cell.cellTagExpanded = {[weak self] model in
+                guard let self = self else {return}
+                if let _ = self.holdings.first(where: {$0 == model}) {
+                    
+                    if self.expandedTagsCells.contains(model.name) {
+                        self.expandedTagsCells.remove(model.name)
+                    } else {
+                        self.expandedTagsCells.insert(model.name)
+                    }
+                    
+                    tableView.beginUpdates()
+                    self.cellHeights[indexPath.row] = model.heightForState(range: self.chartRange,
+                                                                           isExpaned: self.expandedCells.contains(model.name),
+                                                                           isTagExpanded: self.expandedTagsCells.contains(model.name))
+                    tableView.endUpdates()
+                    
+                    cell.isTagExpanded = self.expandedTagsCells.contains(model.name)
                 }
             }
             return cell

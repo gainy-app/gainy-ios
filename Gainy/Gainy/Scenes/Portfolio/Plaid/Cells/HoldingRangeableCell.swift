@@ -22,4 +22,6 @@ class HoldingRangeableCell: UITableViewCell {
     
     //Cell height cahnge notifier
     var cellHeightChanged: ((HoldingViewModel) -> Void)?
+    
+    var cellTagExpanded: ((HoldingViewModel) -> Void)?
 }

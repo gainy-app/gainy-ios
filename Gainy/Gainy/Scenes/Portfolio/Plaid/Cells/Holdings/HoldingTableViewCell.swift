@@ -20,9 +20,9 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     static let heightWithEvents: CGFloat = 252.0
     
     //MARK: - Outlet
-    @IBOutlet weak var nameLbl: UILabel!
-    @IBOutlet weak var amountLbl: UILabel!
-    @IBOutlet weak var symbolLbl: UILabel!
+    @IBOutlet private weak var nameLbl: UILabel!
+    @IBOutlet private weak var amountLbl: UILabel!
+    @IBOutlet private weak var symbolLbl: UILabel!
     
     @IBOutlet weak var matchCircleView: UIView!
     @IBOutlet weak var matchCircleImgView: UIImageView! {
@@ -30,12 +30,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             matchCircleImgView.backgroundColor = .clear
         }
     }
-    @IBOutlet weak var matchScoreLbl: UILabel!
-    @IBOutlet weak var lttView: CornerView!
-    @IBOutlet weak var categoriesView: UIView!
+    @IBOutlet private weak var matchScoreLbl: UILabel!
+    @IBOutlet private weak var lttView: CornerView!
+    @IBOutlet private weak var categoriesView: UIView!
     
-    @IBOutlet weak var expandBtn: UIButton!
-    @IBOutlet weak var shadowView: CornerView! {
+    @IBOutlet private weak var expandBtn: UIButton!
+    @IBOutlet private weak var tagsExpandBtn: UIButton!
+    @IBOutlet private weak var shadowView: CornerView! {
         didSet {
             shadowView.layer.shadowColor = UIColor.black.withAlphaComponent(0.1).cgColor
             shadowView.layer.shadowOpacity = 1
@@ -77,7 +78,14 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     
     //private var lines: Int = 1
     
-    func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod) {
+    private let tagHeight: CGFloat = 24.0
+    
+    enum SecMargin: CGFloat {
+        case cash = 56.0
+        case normal = 128.0
+    }
+    
+    func setModel(_ model: HoldingViewModel, _ range: ScatterChartView.ChartPeriod, isTagExpanded: Bool) {
         holding = model
         chartRange = range
         
@@ -111,14 +119,13 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         categoriesView.backgroundColor = .white
         
         //Tags
-        
-        let tagHeight: CGFloat = 24.0
         let margin: CGFloat = 8.0
         
-        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 32.0
+        let totalWidth: CGFloat = UIScreen.main.bounds.width - 80.0 - 64.0
         var xPos: CGFloat = 0.0
         var yPos: CGFloat = 0.0
         var lines: Int = 1
+        categoriesView.clipsToBounds = true
         
         for tag in model.tickerTags {
             let tagView = TagView()
@@ -143,14 +150,34 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             tagView.autoPinEdge(.top, to: .top, of: categoriesView, withOffset: yPos)
             xPos += width + margin
             
-            if model.linkedCollection != Constants.CollectionDetails.noCollectionId {
+            if tag.collectionID != Constants.CollectionDetails.noCollectionId {
                 tagView.setBorderForCollection()
             } else {
                 tagView.setBorderForTicker()
             }
         }
-        self.tagsHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        
+        if isTagExpanded {
+            self.tagsHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+        } else {
+            if lines <= 2 {
+                self.tagsHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+            } else {
+                if isTagExpanded {
+                    self.tagsHeight?.constant = tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1)
+                } else {
+                    self.tagsHeight?.constant = tagHeight * CGFloat(2) + margin * CGFloat(1)
+                }
+            }
+        }
         self.categoriesView.layoutIfNeeded()
+        
+        //Tags expand
+        if lines <= 2 {
+            tagsExpandBtn.isHidden = true
+        } else {
+            tagsExpandBtn.isHidden = false
+        }
         
         lttView.isHidden = true
         
@@ -184,10 +211,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
         securitiesTableView.reloadData()
         
-        enum SecMargin: CGFloat {
-            case cash = 56.0
-            case normal = 128.0
-        }
+        
         
         if model.isCash {
             matchCircleView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
@@ -196,7 +220,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
             
             symbolLbl.isHidden = true
             symbolLbl.superview?.isHidden = true
-            secsTopMargin.constant = SecMargin.cash.rawValue + model.tagsHeight()
+            secsTopMargin.constant = SecMargin.cash.rawValue
             transactionsTotalLbl.isHidden = true
             categoriesView.isHidden = true
         } else {
@@ -204,11 +228,11 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 matchCircleView.backgroundColor = UIColor(hexString: "0062FF", alpha: 1.0)
                 matchScoreLbl.text = "C"
                 
-                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight()
+                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight(isExpanded: isTagExpanded)
                 transactionsTotalLbl.isHidden = false
                 categoriesView.isHidden = false
             } else {
-                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight()
+                secsTopMargin.constant = SecMargin.normal.rawValue + model.tagsHeight(isExpanded: isTagExpanded)
                 transactionsTotalLbl.isHidden = false
                 categoriesView.isHidden = false
             }
@@ -232,6 +256,17 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
     }
     
+    var isTagExpanded: Bool = false {
+        didSet {
+            tagsExpandBtn.isSelected = isTagExpanded
+            if let holding = holding {
+                tagsHeight?.constant = tagHeight  + holding.tagsHeight(isExpanded: isTagExpanded)
+                secsTopMargin.constant = SecMargin.normal.rawValue + holding.tagsHeight(isExpanded: isTagExpanded)
+                layoutIfNeeded()
+            }
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -250,6 +285,23 @@ final class HoldingTableViewCell: HoldingRangeableCell {
         }
         if let holding = holding {
             cellHeightChanged?(holding)
+        }
+    }
+    
+    @IBAction func toggleTagsExpandAction(_ sender: Any) {
+        
+        isTagExpanded.toggle()
+        
+        if isTagExpanded {
+            GainyAnalytics.logEvent("portfolio_pl_tag_det_expanded")
+        } else {
+            GainyAnalytics.logEvent("portfolio_pl_tag_det_collapsed")
+        }
+                    
+        if let holding = holding {
+            self.tagsHeight?.constant = tagHeight  + holding.tagsHeight(isExpanded: isTagExpanded)
+            self.categoriesView.layoutIfNeeded()
+            cellTagExpanded?(holding)
         }
     }
     
