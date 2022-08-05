@@ -266,7 +266,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 if UserProfileManager.shared.yourCollections.isEmpty && indexPath.section == DiscoverCollectionsSection.watchlist.rawValue {
                     headerViewModel = CollectionHeaderViewModel(
                         title: Constants.CollectionDetails.yourCollections,
-                        description: "Add at least one TTF from the list below,\njust click on the plus icon"
+                        description: "Add at least one TTF from the Recommended\nlist below, just click on the plus icon"
                     )
                     headerViewModel.showOutline = true
                 }
@@ -978,7 +978,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         guard let yourCollections = viewModel?.yourCollections else {return}
         guard let watchlistCollections = viewModel?.watchlistCollections else {return}
         let empty = yourCollections.isEmpty && watchlistCollections.isEmpty
-        if (!empty) {
+        if (empty) {
             let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
             let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
             if !shown {
@@ -1102,7 +1102,8 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: index + increment)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
-                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self)
+                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: showNextButton)
+                showNextButton = false
             }
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])
         }

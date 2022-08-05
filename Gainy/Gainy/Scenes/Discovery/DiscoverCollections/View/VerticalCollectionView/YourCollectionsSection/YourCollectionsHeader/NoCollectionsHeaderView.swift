@@ -25,14 +25,14 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         descriptionOutline.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16 - sectionHorizontalInset)
         descriptionOutline.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 16)
         
-        descriptionLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 32)
-        descriptionLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 67)
-        descriptionLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 28)
-        descriptionLabel.autoSetDimension(.height, toSize: 32.0)
+        descriptionLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 24)
+        descriptionLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 35)
+        descriptionLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 16)
+        descriptionLabel.autoSetDimension(.height, toSize: 48.0)
         
-        descriptionImageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 28.5)
-        descriptionImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 40)
-        descriptionImageView.autoSetDimensions(to: CGSize.init(width: 24, height: 24))
+        descriptionImageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 16)
+        descriptionImageView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 16)
+        descriptionImageView.autoSetDimensions(to: CGSize.init(width: 63, height: 27))
     }
 
     @available(*, unavailable)
@@ -62,16 +62,16 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
 
     lazy var descriptionOutline: UIView = {
         let view = RectangularDashedView.newAutoLayout()
-        view.backgroundColor = UIColor.clear
+        view.backgroundColor = UIColor(hexString: "#6C5DD3")
         view.cornerRadius = 16.0
-        view.dashColor = UIColor(hexString: "#B1BDC8") ?? UIColor.gray
+        view.dashColor = .clear
         
         return view
     }()
     
     lazy var descriptionImageView: UIImageView = {
         let imageView = UIImageView.newAutoLayout()
-        imageView.image = UIImage.init(named: "bottom_arrow")
+        imageView.image = UIImage.init(named: "no_ttfs_arrow")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -81,8 +81,8 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        label.font = UIFont.compactRoundedSemibold(12)
-        label.textColor = UIColor.Gainy.mainText
+        label.font = UIFont.compactRoundedSemibold(14)
+        label.textColor = UIColor.white
         label.backgroundColor = .clear
         label.isOpaque = true
         label.numberOfLines = 0
@@ -97,9 +97,9 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
     func configureWith(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
-        descriptionLabel.setLineHeight(lineHeight: 16.0,
+        descriptionLabel.setLineHeight(lineHeight: 24.0,
                                        textAlignment: .left,
-                                       color: UIColor.Gainy.mainText!)
+                                       color: UIColor.white)
         if title == Constants.CollectionDetails.yourCollections {
             topConstraint?.constant = 4
         } else {

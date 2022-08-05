@@ -41,6 +41,7 @@ final class SingleCollectionDetailsViewController: BaseViewController {
     var collectionId: Int!
     var model: CollectionDetailViewCellModel!
     var isFromSearch: Bool = false
+    var haveNoFav: Bool = false
     var shortCollection: RemoteShortCollectionDetails?
     
     var showShortCollectionDetails: Bool {
@@ -208,6 +209,20 @@ final class SingleCollectionDetailsViewController: BaseViewController {
                 GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : self.collectionId, "isFromSearch" : self.isFromSearch, "isBlocked" : isBlocked])
             } else {
                 GainyAnalytics.logEvent("ttf_view", params: ["collectionID" : self.collectionId, "isFromSearch" : self.isFromSearch, "isBlocked" : false ])
+            }
+        }
+        
+        if haveNoFav {
+            toggleBtn.isSelected = true
+            delegate?.collectionToggled(vc: self, isAdded: toggleBtn.isSelected, collectionID: collectionId)
+            if isFromSearch {
+                GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_searched_added_to_yours" :  "single_searched_removed_from_yours", params: ["collectionID" : collectionId])
+            } else {
+                GainyAnalytics.logEvent(toggleBtn.isSelected ? "single_collection_added_to_yours" :  "single_collection_removed_from_yours", params: ["collectionID" : collectionId])
+            }
+            
+            if toggleBtn.isSelected {
+                GainyAnalytics.logEvent("wl_add", params: ["collectionID" : self.collectionId])
             }
         }
     }

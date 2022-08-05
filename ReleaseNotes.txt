@@ -7,9 +7,10 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• Unlock TTF: improved
-• Discovery: empty collections header updated
-• Home: scroll to top on return
+• Tab tap scrolls Home to top
+• Stock View: INVEST button added
+• Home: def sorting for TTFs are name now
+• Discovery: empty TTFs header updated
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
