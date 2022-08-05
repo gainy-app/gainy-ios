@@ -82,7 +82,7 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
         label.translatesAutoresizingMaskIntoConstraints = false
 
         label.font = UIFont.compactRoundedSemibold(12)
-        label.textColor = UIColor(hexString: "#B1BDC8")
+        label.textColor = UIColor.Gainy.mainText
         label.backgroundColor = .clear
         label.isOpaque = true
         label.numberOfLines = 0
@@ -97,7 +97,9 @@ final class NoCollectionsHeaderView: UICollectionReusableView {
     func configureWith(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
-        descriptionLabel.setLineHeight(lineHeight: 16.0, textAlignment: .left, color: UIColor(hexString: "#B1BDC8") ?? UIColor.gray)
+        descriptionLabel.setLineHeight(lineHeight: 16.0,
+                                       textAlignment: .left,
+                                       color: UIColor.Gainy.mainText!)
         if title == Constants.CollectionDetails.yourCollections {
             topConstraint?.constant = 4
         } else {
