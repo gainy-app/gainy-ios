@@ -56,7 +56,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         
         plusButton.autoPinEdge(.trailing, to: .trailing, of: contentView, withOffset: 0)
         plusButton.autoPinEdge(.bottom, to: .bottom, of: contentView, withOffset: 0)
-        plusButton.autoSetDimensions(to: .init(width: 48, height: 48))
+        plusButton.autoSetDimensions(to: .init(width: 56, height: 56))
         
         layer.isOpaque = true
         fillRemoteBack()
@@ -85,7 +85,7 @@ final class RecommendedCollectionViewCell: RoundedCollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.isOpaque = true        
         imageView.backgroundColor = .lightGray
-        imageView.layer.cornerRadius = 16
+        imageView.layer.cornerRadius = 17
         imageView.clipsToBounds = true
         return imageView
     }()
