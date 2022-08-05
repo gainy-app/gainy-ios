@@ -1,4 +1,4 @@
-iOS v1.4.5 #262
+iOS v1.4.5 #263
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -11,6 +11,7 @@ UI Improvements
 • Stock View: INVEST button added
 • Home: def sorting for TTFs are name now
 • Discovery: empty TTFs header updated
+• Discovery: after Onboarding add first viewed TTF to WL
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
