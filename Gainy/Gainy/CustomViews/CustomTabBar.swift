@@ -207,6 +207,12 @@ class CustomTabBar: UITabBar {
             if newTab == .portfolio {
                 NotificationCenter.default.post(name: NotificationManager.portoTabPressedNotification, object: nil)
             }
+            if newTab == .discovery {
+                NotificationCenter.default.post(name: NotificationManager.discoveryTabPressedNotification, object: nil)
+            }
+            if newTab == .home {
+                NotificationCenter.default.post(name: NotificationManager.homeTabPressedNotification, object: nil)
+            }
         }
     }
     

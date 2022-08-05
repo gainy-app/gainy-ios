@@ -1316,16 +1316,17 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="412" height="64"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="hf2-oz-6u6">
-                                                                    <rect key="frame" x="24" y="0.0" width="364" height="64"/>
+                                                                    <rect key="frame" x="27" y="0.0" width="358" height="64"/>
                                                                     <subviews>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6LO-Wt-bCC" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="170.5" height="64"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="358" height="64"/>
+                                                                            <color key="backgroundColor" red="0.0" green="0.38431372549019605" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="64" id="ygO-7U-R0L"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
-                                                                            <state key="normal" title="Trade">
-                                                                                <color key="titleColor" name="mainText"/>
+                                                                            <state key="normal" title="INVEST">
+                                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             </state>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -1339,38 +1340,16 @@
                                                                                 <action selector="tradeAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="Xkf-KV-SPb"/>
                                                                             </connections>
                                                                         </button>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qTS-4x-R9i" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
-                                                                            <rect key="frame" x="193.5" y="0.0" width="170.5" height="64"/>
-                                                                            <color key="backgroundColor" red="0.15990483759999999" green="0.3759166598" blue="0.96475762129999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="64" id="GHS-lG-tiT"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
-                                                                            <state key="normal" title="Add to Watchlist">
-                                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            </state>
-                                                                            <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                                    <real key="value" value="20"/>
-                                                                                </userDefinedRuntimeAttribute>
-                                                                            </userDefinedRuntimeAttributes>
-                                                                            <connections>
-                                                                                <action selector="addToWatchAction:" destination="Aqi-Q5-n3g" eventType="touchUpInside" id="b5H-Yk-ESN"/>
-                                                                            </connections>
-                                                                        </button>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="64" id="Aqa-NH-DnD"/>
-                                                                <constraint firstAttribute="trailing" secondItem="hf2-oz-6u6" secondAttribute="trailing" constant="24" id="JtR-OX-W3L"/>
+                                                                <constraint firstAttribute="trailing" secondItem="hf2-oz-6u6" secondAttribute="trailing" constant="27" id="JtR-OX-W3L"/>
                                                                 <constraint firstItem="hf2-oz-6u6" firstAttribute="top" secondItem="w9B-Qo-jQw" secondAttribute="top" id="TKG-UQ-Y8V"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hf2-oz-6u6" secondAttribute="bottom" id="hz8-Oe-hbw"/>
-                                                                <constraint firstItem="hf2-oz-6u6" firstAttribute="leading" secondItem="w9B-Qo-jQw" secondAttribute="leading" constant="24" id="wCU-xs-9zO"/>
+                                                                <constraint firstItem="hf2-oz-6u6" firstAttribute="leading" secondItem="w9B-Qo-jQw" secondAttribute="leading" constant="27" id="wCU-xs-9zO"/>
                                                             </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0t3-Xo-fXL" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
@@ -1407,7 +1386,6 @@
                                         <connections>
                                             <outlet property="changeCurrentBrokerBtn" destination="0t3-Xo-fXL" id="0fe-61-l4A"/>
                                             <outlet property="tradeBtn" destination="6LO-Wt-bCC" id="R08-Ii-fNs"/>
-                                            <outlet property="watchBtn" destination="qTS-4x-R9i" id="Ehj-O5-tnF"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1936,10 +1914,7 @@ added to your watchlist!</string>
             <size key="intrinsicContentSize" width="280" height="33"/>
         </designable>
         <designable name="6LO-Wt-bCC">
-            <size key="intrinsicContentSize" width="40" height="31"/>
-        </designable>
-        <designable name="qTS-4x-R9i">
-            <size key="intrinsicContentSize" width="118" height="31"/>
+            <size key="intrinsicContentSize" width="55" height="31"/>
         </designable>
     </designables>
     <resources>

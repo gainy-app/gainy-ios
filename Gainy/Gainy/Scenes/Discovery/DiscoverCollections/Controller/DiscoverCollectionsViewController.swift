@@ -345,6 +345,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             } receiveValue: {[weak self] _ in
                 self?.refreshAction()
             }.store(in: &cancellables)
+        NotificationCenter.default.publisher(for: NotificationManager.discoveryTabPressedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                self?.discoverCollectionsCollectionView.setContentOffset(.zero, animated: true)
+            }
+            .store(in: &cancellables)
         view.bringSubviewToFront(blurView)
         view.bringSubviewToFront(navigationBarContainer)
     }
@@ -352,7 +358,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshAction()
-    }
+    } 
     
     @objc func refreshAction() {
         showNetworkLoader()
@@ -369,6 +375,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self?.hideLoader()
             }
         }
+    }
+    
+    deinit {
+        cancellables.removeAll()
     }
     
     public func snapshotForYourCollectionCell(at index: Int) -> UIImage? {

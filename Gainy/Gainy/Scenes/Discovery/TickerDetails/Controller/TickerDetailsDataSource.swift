@@ -21,6 +21,7 @@ protocol TickerDetailsDataSourceDelegate: AnyObject {
     func wrongIndPressed(isTicked: Bool)
     func wlPressed(stock: AltStockTicker, cell: HomeTickerInnerTableViewCell)
     func collectionSelected(collection: RemoteCollectionDetails)
+    func didTapInvest()
 }
 
 final class TickerDetailsDataSource: NSObject {
@@ -400,6 +401,10 @@ extension TickerDetailsDataSource: TickerDetailsWatchlistViewCellDelegate {
     func didRequestShowBrokersListForSymbol(symbol: String) {
         
         self.delegate?.didRequestShowBrokersListForSymbol(symbol: symbol)
+    }
+    
+    func didTapInvest() {
+        delegate?.didTapInvest()
     }
 }
 

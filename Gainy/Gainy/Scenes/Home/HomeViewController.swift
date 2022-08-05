@@ -69,6 +69,13 @@ final class HomeViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadBasedOnState()
+        
+        NotificationCenter.default.publisher(for: NotificationManager.homeTabPressedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                self?.tableView.setContentOffset(.zero, animated: true)
+            }
+            .store(in: &cancellables)
     }
     
     private func loadBasedOnState() {
@@ -97,6 +104,10 @@ final class HomeViewController: BaseViewController {
             super.viewDidAppear(animated)
             view.showAnimatedSkeleton()
         }
+    
+    deinit {
+        cancellables.removeAll()
+    }
     
     override func userLoggedOut() {
         super.userLoggedOut()

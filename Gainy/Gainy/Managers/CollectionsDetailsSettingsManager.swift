@@ -129,7 +129,7 @@ final class CollectionsSortingSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .matchScore, ascending: false)
+            let defSettigns = CollectionsSortingSettings.init(profileID: id, sorting: .name, ascending: false)
             settings?[id] = defSettigns
             return defSettigns
         }

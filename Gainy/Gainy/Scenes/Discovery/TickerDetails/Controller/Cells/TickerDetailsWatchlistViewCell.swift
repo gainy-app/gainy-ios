@@ -11,6 +11,7 @@ import Deviice
 protocol TickerDetailsWatchlistViewCellDelegate: AnyObject {
     
     func didRequestShowBrokersListForSymbol(symbol: String)
+    func didTapInvest()
 }
 
 final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
@@ -20,15 +21,16 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     
     public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
     
-    @IBOutlet weak var watchBtn: BorderButton! {
-        didSet {
-            watchBtn.titleLabel?.lineBreakMode = .byWordWrapping
-            watchBtn.titleLabel?.textAlignment = .center
-        }
-    }
     @IBOutlet weak var tradeBtn: BorderButton! {
         didSet {
-            tradeBtn.layer.borderWidth = 2.0
+            tradeBtn.layer.borderWidth = 0.0
+            tradeBtn.setTitle("Invest".uppercased(), for: .normal)
+            tradeBtn.titleLabel?.font = .compactRoundedMedium(16.0)
+            tradeBtn.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
+            tradeBtn.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
+            tradeBtn.titleLabel?.textAlignment = .center
+            tradeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+            tradeBtn.setTitleColor(UIColor.white, for: .normal)
         }
     }
     @IBOutlet weak var changeCurrentBrokerBtn: BorderButton!
@@ -41,8 +43,6 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         
         super.layoutSubviews()
         
-        watchBtn.layer.borderWidth = 2.0
-        updateTitle()
         
         if let selectedBroker = UserProfileManager.shared.selectedBrokerToTrade {
             changeCurrentBrokerBtn.isHidden = false
@@ -53,77 +53,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
         }
     }
     
-    @IBAction func addToWatchAction(_ sender: Any) {
-        
-        guard let symbol = tickerInfo?.symbol else {
-            return
-        }
-        
-        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
-            item == symbol
-        }
-        if addedToWatchlist {
-            GainyAnalytics.logEvent("remove_from_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
-                self.updateTitle()
-            }
-        } else {
-            GainyAnalytics.logEvent("add_to_watch_pressed", params: ["tickerSymbol" : symbol, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "StockCard"])
-            UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
-                self.updateTitle()
-            }
-        }
-    }
-    
     @IBAction func tradeAction(_ sender: Any) {
-        
-        guard let symbol = tickerInfo?.symbol else {
-            return
-        }
-        GainyAnalytics.logEvent("ticker_trade_pressed", params: ["tickerSymbol" : symbol])
-        if let currentBroker = UserProfileManager.shared.selectedBrokerToTrade {
-            if let url = currentBroker.brokerURLWithSymbol(symbol: symbol) {
-                
-                if let vc = self.window?.rootViewController {
-                    WebPresenter.openLink(vc: vc, url: url)
-                }
-                GainyAnalytics.logEvent("ticker_trade_link_shared", params: ["tickerSymbol" : symbol])
-                
-            }
-            return
-        }
-        
-        self.showBrokersList()
-    }
-    
-    @IBAction func changeCurrentBrokerAction(_ sender: Any) {
-        
-        self.showBrokersList()
-    }
-    
-    private func showBrokersList() {
-        
-        guard let symbol = tickerInfo?.symbol else {
-            return
-        }
-        
-        self.delegate?.didRequestShowBrokersListForSymbol(symbol: symbol)
-    }
-    
-    private func updateTitle() {
-        
-        guard let symbol = tickerInfo?.symbol else {
-            return
-        }
-        
-        let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in
-            item == symbol
-        }
-        var title = NSLocalizedString("Add to Watchlist", comment: "Add to Watchlist")
-        if addedToWatchlist {
-            title = NSLocalizedString("Remove from\nWatchlist", comment: "Remove from Watchlist")
-        }
-        watchBtn.setTitle(title, for: UIControl.State.normal)
-        watchBtn.titleLabel?.font = .proDisplayRegular(Deviice.current.size == .screen4Dot7Inches ? 13 : 16)
+        delegate?.didTapInvest()
     }
 }

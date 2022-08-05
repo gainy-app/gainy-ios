@@ -406,6 +406,13 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
     func collectionSelected(collection: RemoteCollectionDetails) {
         coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
     }
+    
+    func didTapInvest() {
+        let notifyViewController = NotifyViewController.instantiate(.popups)
+        let navigationController = UINavigationController.init(rootViewController: notifyViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
+    }
 }
 
 extension TickerViewController: SingleCollectionDetailsViewControllerDelegate {
