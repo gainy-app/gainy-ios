@@ -477,9 +477,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
         //            gainsCell.isMedianVisible = false
         //        }
+        guard topChart.selectedTag != range else {return}
         viewModel.setRange(range)
         //viewModel.chartRange = range
         //topChart.isSPPVisible = false
+        topChart.selectedTag = range
         topChart.isLoading = true
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
@@ -592,6 +594,8 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
             } else {
                 cell.hideSkeleton()
             }
+            topChart.selectedTag = viewModel.chartRange
+            print("VM \(Unmanaged.passUnretained(topChart).toOpaque()) \(viewModel.name) \(topChart.selectedTag)")
             return cell
             
         case .about:

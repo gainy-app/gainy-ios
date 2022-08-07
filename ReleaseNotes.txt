@@ -1,4 +1,4 @@
-iOS v1.4.5 #263
+iOS v1.4.5 #264
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,11 +7,8 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• Tab tap scrolls Home to top
-• Stock View: INVEST button added
-• Home: def sorting for TTFs are name now
-• Discovery: empty TTFs header updated
-• Discovery: after Onboarding add first viewed TTF to WL
+• Tab tap scrolls Discovery to top
+• Discovery: range selection corrected
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

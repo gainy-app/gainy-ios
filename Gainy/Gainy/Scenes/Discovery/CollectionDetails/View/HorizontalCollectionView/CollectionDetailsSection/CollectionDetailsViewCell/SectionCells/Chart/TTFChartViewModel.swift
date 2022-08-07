@@ -27,6 +27,9 @@ final class TTFChartViewModel: ObservableObject {
     var isSPPVisible: Bool
     
     @Published
+    var selectedTag: ScatterChartView.ChartPeriod
+    
+    @Published
     var isLoading: Bool
     
     @Published
@@ -50,5 +53,6 @@ final class TTFChartViewModel: ObservableObject {
         self.isSPPVisible = isSPPVisible
         self.isLoading = true
         self.lastDayPrice = 0.0
+        self.selectedTag = .d1
     }
 }

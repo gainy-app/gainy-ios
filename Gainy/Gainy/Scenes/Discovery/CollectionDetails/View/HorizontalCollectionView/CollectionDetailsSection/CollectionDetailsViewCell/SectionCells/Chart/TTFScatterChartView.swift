@@ -26,7 +26,7 @@ struct TTFScatterChartView: View {
     @State
     private var selectedTag: ScatterChartView.ChartPeriod = .d1 {
         didSet {
-            guard  lineViewModel.chartPeriod != selectedTag else {return}
+            //guard  lineViewModel.chartPeriod != selectedTag else {return}
 //            isSPPVisible = false
 //            lineViewModel.isSPYVisible = false
             lineViewModel.chartPeriod = selectedTag
@@ -70,6 +70,9 @@ struct TTFScatterChartView: View {
             .onChange(of: viewModel.isSPPVisible, perform: { newValue in
                 isSPPVisible = newValue
                 lineViewModel.isSPYVisible = newValue
+            })
+            .onChange(of: viewModel.selectedTag, perform: { newValue in
+                selectedTag = newValue
             })
             .frame(height: 256 + 90.0)
             .ignoresSafeArea()
@@ -260,13 +263,13 @@ struct TTFScatterChartView: View {
                 }, label: {
                     ZStack {
                         Rectangle()
-                            .fill(tag == selectedTag ? Color.selectorColor : Color.clear)
+                            .fill(tag == lineViewModel.chartPeriod ? Color.selectorColor : Color.clear)
                             .cornerRadius(8.0)
                             .frame(height: 24)
                             .frame(minWidth: 48)
                             .padding(.all, 0)
                         Text(tag.rawValue)
-                            .foregroundColor(tag == selectedTag ? Color.white : Color.textColor)
+                            .foregroundColor(tag == lineViewModel.chartPeriod ? Color.white : Color.textColor)
                             .font(UIFont.compactRoundedMedium(12).uiFont)
                             .padding(.all, 0)
                     }

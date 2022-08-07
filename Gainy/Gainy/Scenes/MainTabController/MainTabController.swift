@@ -23,7 +23,7 @@ extension UIImage {
     }
 }
 
-class MainTabBarViewController: UITabBarController, Storyboarded {
+class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarControllerDelegate {
     
     //Coordinators
     weak var coordinator: MainCoordinator?
@@ -61,7 +61,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
         } else {
             selectedIndex = 1
         }
-        
+        delegate = self
         tabBar.barStyle = .default
         tabBar.isTranslucent = true
         setupTabBarLayout()
@@ -72,6 +72,10 @@ class MainTabBarViewController: UITabBarController, Storyboarded {
             tabBar.customDelegate = self
         }
     }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+            return viewController != selectedViewController
+        }
     
     lazy var keyWindow: UIView =  { UIApplication.shared.connectedScenes
             .filter({$0.activationState == .foregroundActive})
