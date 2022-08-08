@@ -62,7 +62,7 @@ final class TickerDetailsDataSource: NSObject {
         if UserProfileManager.shared.selectedBrokerToTrade != nil {
             cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeightExpanded
         } else {
-            cellHeights[.watchlist] = TickerDetailsWatchlistViewCell.cellHeight
+            cellHeights[.watchlist] = ticker.isIndex ? 0.0 : TickerDetailsWatchlistViewCell.cellHeight
         }
     }
     

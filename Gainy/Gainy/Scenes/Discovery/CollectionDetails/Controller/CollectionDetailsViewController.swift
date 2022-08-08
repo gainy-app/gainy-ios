@@ -369,6 +369,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     let navigationController = UINavigationController.init(rootViewController: notifyViewController)
                     notifyViewController.delegate = self
                     navigationController.modalPresentationStyle = .fullScreen
+                    GainyAnalytics.logEvent("notify_me_ttf_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     self?.present(navigationController, animated: true, completion: nil)
                 }
             }
@@ -490,6 +491,15 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 self?.collectionView.reloadData()
             }
             .store(in: &self.cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.discoveryTabPressedNotification)
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] _ in
+                if let currentCollectionViewCell = self?.collectionView.visibleCells.first as? CollectionDetailsViewCell {
+                    currentCollectionViewCell.collectionView.setContentOffset(.zero, animated: true)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     override func userLoggedOut() {

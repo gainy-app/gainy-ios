@@ -411,6 +411,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         let notifyViewController = NotifyViewController.instantiate(.popups)
         let navigationController = UINavigationController.init(rootViewController: notifyViewController)
         navigationController.modalPresentationStyle = .fullScreen
+        GainyAnalytics.logEvent("notify_me_stock_pressed", params: ["ticker_symbol": viewModel?.ticker.symbol ?? "", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "TickerViewController"])
         self.present(navigationController, animated: true, completion: nil)
     }
 }

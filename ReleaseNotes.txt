@@ -1,4 +1,4 @@
-iOS v1.4.5 #264
+iOS v1.4.5 #265
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
@@ -7,8 +7,9 @@ UI Improvements
 • -
 
 :hammer_and_wrench: Improvements
-• Tab tap scrolls Discovery to top
-• Discovery: range selection corrected
+• Stock View: new event for Invest
+• Stock View: Invest removed for Indexes
+• Collection Details: tap to scroll
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
