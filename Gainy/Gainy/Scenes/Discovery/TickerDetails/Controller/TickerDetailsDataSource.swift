@@ -52,7 +52,7 @@ final class TickerDetailsDataSource: NSObject {
         cellHeights[.wsr] = ticker.hideMetrics ? 0.0 : TickerDetailsWSRViewCell.cellHeight
         cellHeights[.recommended] = ticker.hideRecommendations ? 0.0 : TickerDetailsRecommendedViewCell.cellHeight
         cellHeights[.news] = TickerDetailsNewsViewCell.cellHeight
-        cellHeights[.alternativeStocks] = TickerDetailsAlternativeStocksViewCell.cellHeight
+        cellHeights[.alternativeStocks] = ticker.isCrypto ? 0.0 : TickerDetailsAlternativeStocksViewCell.cellHeight
         cellHeights[.upcomingEvents] = TickerDetailsUpcomingViewCell.cellHeight
         updateWatchlistCellHeight()
     }
@@ -178,6 +178,10 @@ final class TickerDetailsDataSource: NSObject {
         if ticker.isETF || ticker.isCrypto || ticker.isIndex {
             cellHeights[.recommended] = 0.0
             cellHeights[.marketData] = 0.0
+        }
+        
+        if ticker.isCrypto {
+            cellHeights[.upcomingEvents] = 0.0
         }
     }
     
