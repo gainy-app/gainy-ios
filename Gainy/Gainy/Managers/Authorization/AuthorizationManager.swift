@@ -249,6 +249,7 @@ final class AuthorizationManager {
                     completion(self.authorizationStatus)
                     return
                 }
+                NotificationCenter.default.post(name: NotificationManager.userSignUpNotification, object: nil)
                 DeeplinkManager.shared.redeemInvite()
                 self.authorizationStatus = .authorizedFully
                 NotificationManager.shared.cancelSignUpReminderNotification()

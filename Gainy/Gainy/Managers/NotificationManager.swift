@@ -25,6 +25,7 @@ class NotificationManager: NSObject {
     static let portoTabPressedNotification = Notification.Name.init("portoTabPressedNotification")
     static let homeTabPressedNotification = Notification.Name.init("homeTabPressedNotification")
     static let discoveryTabPressedNotification = Notification.Name.init("discoveryTabPressedNotification")
+    static let userSignUpNotification = Notification.Name.init("userSignUpNotification")
     
     static let appBecomeActiveNotification = Notification.Name.init("appBecomeActiveNotification")
     static let subscriptionChangedNotification = Notification.Name.init("subscriptionChangedNotification")

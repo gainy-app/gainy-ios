@@ -6,6 +6,7 @@
 //
 import UIKit
 import FirebaseAuth
+import Combine
 
 extension UIImage {
     class func imageWithColor(_ color: UIColor) -> UIImage {
@@ -30,7 +31,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     
     fileprivate var tabBarHeight: CGFloat = 49.0
     fileprivate var collectionDetailsViewController: CollectionDetailsViewController? = nil
-    
+    fileprivate var cancellables = Set<AnyCancellable>()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,17 +51,19 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
                                 coordinator.viewControllerFactory.instantiatePortfolioVC(coordinator: coordinator),
                                 coordinator.viewControllerFactory.instantiateProfileVC(coordinator: coordinator)], animated: false)
         }
+        
+        NotificationCenter.default.publisher(for: NotificationManager.userSignUpNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            self?.setMainTab()
+        }.store(in: &cancellables)
     }
     
     fileprivate func initialSetup() {
         self.title = NSLocalizedString("Main", comment: "")
         
-        //Discovery is Default
-        if Auth.auth().currentUser?.uid != nil {
-            selectedIndex = 0
-        } else {
-            selectedIndex = 1
-        }
+        setMainTab()
         delegate = self
         tabBar.barStyle = .default
         tabBar.isTranslucent = true
@@ -71,6 +74,23 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         if let tabBar = self.tabBar as? CustomTabBar {
             tabBar.customDelegate = self
         }
+    }
+    
+    private func setMainTab() {
+        //Discovery is Default
+        if Auth.auth().currentUser?.uid != nil {
+            if UserProfileManager.shared.favoriteCollections.isEmpty {
+                selectedIndex = 1
+            } else {
+                selectedIndex = 0
+            }
+        } else {
+            selectedIndex = 1
+        }
+    }
+    
+    deinit {
+        cancellables.removeAll()
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
