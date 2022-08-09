@@ -38,7 +38,12 @@ class TickerInfo {
         
         self.name = ticker.name ?? ""
         self.symbol = ticker.symbol ?? ""
-        self.about = String((ticker.description ?? "").dropFirst().dropLast())
+        if (ticker.type ?? "") == "index" || (ticker.type ?? "") == "crypto" {
+            self.about = String((ticker.description ?? ""))
+        } else {
+            self.about = String((ticker.description ?? "").dropFirst().dropLast())
+        }
+            
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         self.tags = []

@@ -223,10 +223,6 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    deinit {
-        //NotificationCenter.default.removeObserver(self)
-    }
 }
 
 extension MainTabBarViewController: CustomTabBarDelegate {
