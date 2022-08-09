@@ -11,7 +11,6 @@ import Deviice
 protocol TickerDetailsWatchlistViewCellDelegate: AnyObject {
     
     func didRequestShowBrokersListForSymbol(symbol: String)
-    func didTapInvest()
 }
 
 final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
@@ -21,18 +20,7 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     
     public weak var delegate: TickerDetailsWatchlistViewCellDelegate?
     
-    @IBOutlet weak var tradeBtn: BorderButton! {
-        didSet {
-            tradeBtn.layer.borderWidth = 0.0
-            tradeBtn.setTitle("Invest".uppercased(), for: .normal)
-            tradeBtn.titleLabel?.font = .compactRoundedMedium(16.0)
-            tradeBtn.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
-            tradeBtn.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
-            tradeBtn.titleLabel?.textAlignment = .center
-            tradeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-            tradeBtn.setTitleColor(UIColor.white, for: .normal)
-        }
-    }
+    
     @IBOutlet weak var changeCurrentBrokerBtn: BorderButton!
     
     override func updateFromTickerData() {
@@ -54,6 +42,5 @@ final class TickerDetailsWatchlistViewCell: TickerDetailsViewCell {
     }
     
     @IBAction func tradeAction(_ sender: Any) {
-        delegate?.didTapInvest()
     }
 }

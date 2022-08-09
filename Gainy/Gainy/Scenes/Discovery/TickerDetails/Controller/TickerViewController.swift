@@ -36,6 +36,19 @@ final class TickerViewController: BaseViewController {
     }
     @IBOutlet private weak var wrongIndView: UIView!
     @IBOutlet private weak var wrongIndLbl: UILabel!
+    @IBOutlet private weak var tradeBtn: BorderButton! {
+        didSet {
+            tradeBtn.layer.borderWidth = 0.0
+            tradeBtn.setTitle("Invest".uppercased(), for: .normal)
+            tradeBtn.titleLabel?.font = .compactRoundedMedium(16.0)
+            tradeBtn.titleLabel?.setKern(kern: 2.0, color: UIColor.white)
+            tradeBtn.titleLabel?.font = UIFont.proDisplaySemibold(16.0)
+            tradeBtn.titleLabel?.textAlignment = .center
+            tradeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+            tradeBtn.setTitleColor(UIColor.white, for: .normal)
+            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
+        }
+    }
     
     //MARK:- Inner
     
@@ -407,7 +420,7 @@ extension TickerViewController: TickerDetailsDataSourceDelegate {
         coordinator?.showCollectionDetails(collectionID: collection.id ?? -1, delegate: self)
     }
     
-    func didTapInvest() {
+    @IBAction @objc private func didTapInvest() {
         let notifyViewController = NotifyViewController.instantiate(.popups)
         let navigationController = UINavigationController.init(rootViewController: notifyViewController)
         navigationController.modalPresentationStyle = .fullScreen
