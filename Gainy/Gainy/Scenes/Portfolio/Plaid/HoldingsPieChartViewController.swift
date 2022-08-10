@@ -37,7 +37,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
-        
+        collectionView.delaysContentTouches = false
         collectionView.register(CollectionChartCardCell.self)
         
         collectionView.register(CollectionDetailsFooterView.self,
