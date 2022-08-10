@@ -39,7 +39,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 x: 0,
                 y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
-                height: 80
+                height: 146
             )
         )
         navigationBarContainer.backgroundColor = .clear
@@ -54,6 +54,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
         blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
         blurView.intensity = 0.3
+        
+        let titleLbl = UILabel(frame: CGRect.init(x: 24, y: 28, width: 110, height: 32))
+        titleLbl.text = "Discovery"
+        titleLbl.textColor = UIColor.Gainy.mainText
+        titleLbl.font = .proDisplayBold(24)
+        titleLbl.textAlignment = .left
+        navigationBarContainer.addSubview(titleLbl)
         
         let discoverCollectionsButton = UIButton(
             frame: CGRect(
@@ -74,8 +81,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let searchTextField = UITextField(
             frame: CGRect(
                 x: 16,
-                y: 24,
-                width: navigationBarContainer.bounds.width - (16 + 16 + 32 + 20),
+                y: 90,
+                width: navigationBarContainer.bounds.width - (16 + 16),
                 height: 40
             )
         )
@@ -366,11 +373,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             DispatchQueue.main.async { [weak self] in
                 self?.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
                 self?.tabBarController?.tabBar.isHidden = self?.showCollectionDetailsBtn?.isHidden ?? false
-                if let frame = UserProfileManager.shared.yourCollections.isEmpty ? self?.fullSerachFieldFrame : self?.smallSerachFieldFrame {
-                    UIView.animate(withDuration: 0.3) {
-                        self?.searchTextField?.frame = frame
-                    }
-                }
                 self?.initViewModels()
                 self?.hideLoader()
             }
@@ -478,12 +480,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         searchTextField?.resignFirstResponder()
         
-        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
         UIView.animate(withDuration: 0.3) {
             self.discoverCollectionsCollectionView.alpha = 1.0
             self.searchCollectionView.alpha = 0.0
             self.showCollectionDetailsBtn?.alpha = 1.0
-            self.searchTextField?.frame = frame
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
@@ -510,7 +510,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.discoverCollectionsCollectionView.alpha = 0.0
             self.searchCollectionView.alpha = 1.0
             self.showCollectionDetailsBtn?.alpha = 0.0
-            self.searchTextField?.frame = self.fullSerachFieldFrame
         }
     }
     
@@ -684,10 +683,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
-            let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
-            UIView.animate(withDuration: 0.3) {
-                self.searchTextField?.frame = frame
-            }
             
             self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
             if var snapshot = self.dataSource?.snapshot() {
@@ -736,10 +731,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
         self.tabBarController?.tabBar.isHidden = showCollectionDetailsBtn?.isHidden ?? false
-        let frame = UserProfileManager.shared.yourCollections.isEmpty ? self.fullSerachFieldFrame : self.smallSerachFieldFrame
-        UIView.animate(withDuration: 0.3) {
-            self.searchTextField?.frame = frame
-        }
         
         guard var snapshot = dataSource?.snapshot() else {return}
         if let recommendedItem = yourCollectionItemToRemove.recommendedIdentifier {
