@@ -27,6 +27,7 @@
 		3305EAB6274399EB00A95FA0 /* HoldingChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */; };
 		3305EAB8274399F800A95FA0 /* HoldingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */; };
 		3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */; };
+		33075D7F28A3BD1A005206BC /* HomeShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33075D7E28A3BD1A005206BC /* HomeShadowView.swift */; };
 		330B986226F1E93A00099A46 /* FetchAltStocks.graphql in Sources */ = {isa = PBXBuildFile; fileRef = 330B986126F1E93A00099A46 /* FetchAltStocks.graphql */; };
 		330B986426F1EBD200099A46 /* FetchAltStocks.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */; };
 		330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */; };
@@ -649,6 +650,7 @@
 		3305EAB5274399EB00A95FA0 /* HoldingChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingChartTableViewCell.swift; sourceTree = "<group>"; };
 		3305EAB7274399F800A95FA0 /* HoldingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingTableViewCell.swift; sourceTree = "<group>"; };
 		3305EAB927439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingSecurityTableViewCell.swift; sourceTree = "<group>"; };
+		33075D7E28A3BD1A005206BC /* HomeShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeShadowView.swift; sourceTree = "<group>"; };
 		330B986126F1E93A00099A46 /* FetchAltStocks.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = FetchAltStocks.graphql; sourceTree = "<group>"; };
 		330B986326F1EBD200099A46 /* FetchAltStocks.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchAltStocks.graphql.swift; sourceTree = "<group>"; };
 		330DAE2F27A1757800BE4D75 /* Gradient_Stars.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradient_Stars.mp4; sourceTree = "<group>"; };
@@ -2708,6 +2710,7 @@
 			children = (
 				331243DB27BF7488008C2BCC /* HomeIndexesTableViewCell.swift */,
 				9004AECA27C2C50000821A29 /* HomeIndexView.swift */,
+				33075D7E28A3BD1A005206BC /* HomeShadowView.swift */,
 				9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */,
 			);
 			path = Indexes;
@@ -3639,6 +3642,7 @@
 				3326496C280EA11D00CE0D0F /* CollectionManager+TTF.swift in Sources */,
 				33BDCF6626CE4659000DE770 /* TickerDetailsViewModel.swift in Sources */,
 				855B14E126D98E34006CD1F8 /* GradientBackgroundView.swift in Sources */,
+				33075D7F28A3BD1A005206BC /* HomeShadowView.swift in Sources */,
 				3394BA222750F4E500AAE7B8 /* GetMatchScoreForTickers.graphql.swift in Sources */,
 				900CEAF827497BE900CF1597 /* HoldingRangeableCell.swift in Sources */,
 				901F34B0284B86A300E9E22B /* PurchaseInviteView.swift in Sources */,

@@ -319,8 +319,8 @@ extension SingleCollectionDetailsViewController: SingleCollectionDetailsViewMode
         let navigationController = UINavigationController.init(rootViewController: notifyViewController)
         navigationController.modalPresentationStyle = .fullScreen
         notifyViewController.isFromTTF = true
-        notifyViewController.sourceId = "\(model.id)"
-        GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : model.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
+        notifyViewController.sourceId = "\(collectionId)"
+        GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : collectionId, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SingleCollectionDetails"])
         self.present(navigationController, animated: true, completion: nil)
     }
 }
