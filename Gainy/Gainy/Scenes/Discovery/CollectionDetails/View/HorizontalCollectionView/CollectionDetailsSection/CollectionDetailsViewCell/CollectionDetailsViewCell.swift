@@ -280,7 +280,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     
     private(set) var cards: [CollectionCardViewCellModel] = []
-    private var pieChartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+    public var pieChartData: [PieChartData] = []
     
     private func loadMoreTickers() {
         
@@ -331,11 +331,11 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     
     func sortCards() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel.id)
-        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        var chartData: [PieChartData] = []
         chartData = self.pieChartData.filter { data in
             data.entityType == "ticker"
         }
-        var chartDataRes: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        var chartDataRes: [PieChartData] = []
         for card in self.cards {
             if let data = chartData.first(where: { localChartData in
                 (localChartData.entityId ?? "" == card.rawTicker.symbol)
@@ -530,7 +530,16 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
                     return self.pieChartData.filter { item in
                         item.entityType == "interest"
                     }.count
+                case .securityType:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "security_type"
+                    }.count
+                case .collections:
+                    return self.pieChartData.filter { item in
+                        item.entityType == "collection"
+                    }.count
                 }
+                
             } else {
                 return self.cards.count
             }
@@ -689,11 +698,11 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         for marker in markers {
             switch marker {
             case .weight:
-                var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+                var chartData: [PieChartData] = []
                 chartData = self.pieChartData.filter { data in
                     data.entityType == "ticker"
                 }
-                var chartDataRes: GetTtfPieChartQuery.Data.CollectionPiechart? = nil
+                var chartDataRes: PieChartData? = nil
                 if let data = chartData.first(where: { localChartData in
                     (localChartData.entityId ?? "" == model.rawTicker.symbol)
                 }) {
@@ -1009,10 +1018,10 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         return result
     }
     
-    func currentChartData() -> [GetTtfPieChartQuery.Data.CollectionPiechart] {
+    func currentChartData() -> [PieChartData] {
         
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(viewModel?.id ?? -1)
-        var chartData: [GetTtfPieChartQuery.Data.CollectionPiechart] = []
+        var chartData: [PieChartData] = []
         if settings.pieChartSelected {
             if settings.pieChartMode == .categories {
                 chartData = self.pieChartData.filter { data in

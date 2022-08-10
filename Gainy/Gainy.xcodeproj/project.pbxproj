@@ -118,7 +118,6 @@
 		3372ED352710490300D8D8E1 /* DDLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3372ED342710490300D8D8E1 /* DDLog.swift */; };
 		33765BF227A8215700D1F0A9 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33765BF127A8215700D1F0A9 /* Bundle+Version.swift */; };
 		3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */; };
-		3376FE16276B44060098CDF7 /* SFCompactRounded-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */; };
 		33787FCC26CD064800B11E58 /* AnalyticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */; };
 		33787FCF26CD0DCA00B11E58 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */; };
 		33787FD126CD0EAF00B11E58 /* UIView+Gainy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */; };
@@ -404,6 +403,7 @@
 		857D56B926DE5D2A003F96AE /* PickInterestOrCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */; };
 		857D56BE26DE7407003F96AE /* PickInterestOrCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */; };
 		857D56C026DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */; };
+		85980A0128A31863002895CA /* SFCompactRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 85980A0028A31863002895CA /* SFCompactRounded-Bold.otf */; };
 		85983D552864863300E2D5AD /* NotifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85983D542864863300E2D5AD /* NotifyViewController.swift */; };
 		859B2EC9270614040084CCDC /* InsertFavouriteCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 859B2EC7270614040084CCDC /* InsertFavouriteCollection.graphql */; };
 		859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */; };
@@ -422,6 +422,10 @@
 		85C5926C26FB3416001EBABC /* UITextView+DoneButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */; };
 		85C873CF2796AC4E0060BAF3 /* GetTickersForCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */; };
 		85C873D12796ACE10060BAF3 /* GetTickersForCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C873D02796ACE10060BAF3 /* GetTickersForCollection.graphql.swift */; };
+		85C8DB6E28A1D76200C3EB86 /* GetPortfolioPieChart.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85C8DB6D28A1D76100C3EB86 /* GetPortfolioPieChart.graphql */; };
+		85C8DB7028A1DB9900C3EB86 /* GetPortfolioPieChart.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8DB6F28A1DB9900C3EB86 /* GetPortfolioPieChart.graphql.swift */; };
+		85C8DB7228A2504700C3EB86 /* HoldingsPieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8DB7128A2504700C3EB86 /* HoldingsPieChartViewController.swift */; };
+		85C8DB7428A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C8DB7328A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift */; };
 		85CD14E326F3650B001C060C /* TextInsetsLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD14E226F3650A001C060C /* TextInsetsLabel.swift */; };
 		85CD14E526F37009001C060C /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD14E426F37009001C060C /* AuthorizationViewController.swift */; };
 		85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD153E26F874F2001C060C /* AuthorizationManager.swift */; };
@@ -746,7 +750,6 @@
 		3372ED342710490300D8D8E1 /* DDLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLog.swift; sourceTree = "<group>"; };
 		33765BF127A8215700D1F0A9 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		3376FE13276B1E040098CDF7 /* HoldingsInProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsInProgressViewController.swift; sourceTree = "<group>"; };
-		3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.ttf"; sourceTree = "<group>"; };
 		33787FCB26CD064800B11E58 /* AnalyticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsViewController.swift; sourceTree = "<group>"; };
 		33787FCE26CD0DCA00B11E58 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		33787FD026CD0EAF00B11E58 /* UIView+Gainy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Gainy.swift"; sourceTree = "<group>"; };
@@ -1037,6 +1040,7 @@
 		857D56B826DE5D29003F96AE /* PickInterestOrCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickInterestOrCategoryCell.swift; sourceTree = "<group>"; };
 		857D56BD26DE7407003F96AE /* PickInterestOrCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickInterestOrCategoryCell.xib; sourceTree = "<group>"; };
 		857D56BF26DE7A03003F96AE /* UICollectionViewCenterAlignedLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCenterAlignedLayout.swift; sourceTree = "<group>"; };
+		85980A0028A31863002895CA /* SFCompactRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFCompactRounded-Bold.otf"; sourceTree = "<group>"; };
 		85983D542864863300E2D5AD /* NotifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyViewController.swift; sourceTree = "<group>"; };
 		859B2EC7270614040084CCDC /* InsertFavouriteCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertFavouriteCollection.graphql; sourceTree = "<group>"; };
 		859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteFavouriteCollection.graphql; sourceTree = "<group>"; };
@@ -1055,6 +1059,10 @@
 		85C5926B26FB3416001EBABC /* UITextView+DoneButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+DoneButton.swift"; sourceTree = "<group>"; };
 		85C873CE2796AC4E0060BAF3 /* GetTickersForCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetTickersForCollection.graphql; sourceTree = "<group>"; };
 		85C873D02796ACE10060BAF3 /* GetTickersForCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetTickersForCollection.graphql.swift; sourceTree = "<group>"; };
+		85C8DB6D28A1D76100C3EB86 /* GetPortfolioPieChart.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetPortfolioPieChart.graphql; sourceTree = "<group>"; };
+		85C8DB6F28A1DB9900C3EB86 /* GetPortfolioPieChart.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetPortfolioPieChart.graphql.swift; sourceTree = "<group>"; };
+		85C8DB7128A2504700C3EB86 /* HoldingsPieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingsPieChartViewController.swift; sourceTree = "<group>"; };
+		85C8DB7328A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoldingPieChartCollectionHeaderView.swift; sourceTree = "<group>"; };
 		85CD14E226F3650A001C060C /* TextInsetsLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInsetsLabel.swift; sourceTree = "<group>"; };
 		85CD14E426F37009001C060C /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
 		85CD153E26F874F2001C060C /* AuthorizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
@@ -1276,6 +1284,7 @@
 				33264969280E940200CE0D0F /* GetTTFChart.graphql.swift */,
 				33264972280ED6C700CE0D0F /* GetTTFPieChart.graphql.swift */,
 				33264971280ED6C700CE0D0F /* GetTTFTags.graphql.swift */,
+				85C8DB6F28A1DB9900C3EB86 /* GetPortfolioPieChart.graphql.swift */,
 				33B9887426CA9781008B8AC9 /* CollectionDetails.graphql.swift */,
 				906D009427516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift */,
 				90A8017B275ABA21003D548D /* GetNextTickersForCollection.graphql.swift */,
@@ -1350,6 +1359,7 @@
 				33019618273E9B7F00BE4FDC /* GetPlaidHoldings.graphql */,
 				33EEECD0274237A4004C41FE /* GetPlaidTransactions.graphql */,
 				9068DDE4274B6F5E007C588A /* GetProfileGains.graphql */,
+				85C8DB6D28A1D76100C3EB86 /* GetPortfolioPieChart.graphql */,
 				9068DDE6274B6FE4007C588A /* GetPortfolioCharts.graphql */,
 				9071A8BC2825BB0C0031106E /* GetPortfolioChartMetrics.graphql */,
 				33CBAF7527A2846B008F6F88 /* UpdatePlaidPortfolio.graphql */,
@@ -1767,6 +1777,8 @@
 			isa = PBXGroup;
 			children = (
 				33EEECD727424696004C41FE /* HoldingsViewController.swift */,
+				85C8DB7128A2504700C3EB86 /* HoldingsPieChartViewController.swift */,
+				85C8DB7328A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift */,
 				900CEAEE274974ED00CF1597 /* Models */,
 				900CEAED274974DE00CF1597 /* Cells */,
 			);
@@ -2463,7 +2475,7 @@
 				3AFE1A91266E5C7A0091E799 /* SFCompactRounded-Medium.otf */,
 				3A01FC1426885926007F6FA3 /* SFCompactRounded-Regular.otf */,
 				3AFE1A92266E5C7A0091E799 /* SFCompactRounded-Semibold.otf */,
-				3376FE15276B43CD0098CDF7 /* SFCompactRounded-Bold.ttf */,
+				85980A0028A31863002895CA /* SFCompactRounded-Bold.otf */,
 				3AFE1A7D266E51DC0091E799 /* SFProDisplay-Regular.ttf */,
 				3AFE1A84266E540C0091E799 /* SFProDisplay-Semibold.ttf */,
 				907C717927A1E5B200B24535 /* SFProDisplay-Medium.ttf */,
@@ -2994,7 +3006,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3376FE16276B44060098CDF7 /* SFCompactRounded-Bold.ttf in Resources */,
 				3302E0B926DD073F008DBC76 /* SearchLoadingCell.xib in Resources */,
 				907C717A27A1E5B200B24535 /* SFProDisplay-Medium.ttf in Resources */,
 				85E4A2C92762101A00C0E5C5 /* SearchTickersAlgolia.graphql in Resources */,
@@ -3021,9 +3032,11 @@
 				33BC513128167DC800AF1004 /* HomeTickerInnerTableViewCell.xib in Resources */,
 				33B9116D2706E21E00C00B0D /* UploadDsym in Resources */,
 				339E2A8F2858A97C00555CD1 /* ValidatePromoCode.graphql in Resources */,
+				85C8DB6E28A1D76200C3EB86 /* GetPortfolioPieChart.graphql in Resources */,
 				3AFE1A88266E540C0091E799 /* SFProDisplay-Semibold.ttf in Resources */,
 				339A2EB026FDF0000076BF52 /* SearchTickersWithSpace.graphql in Resources */,
 				9025837F288BFD040033EC5D /* GetTickerLinkedCollection.graphql in Resources */,
+				85980A0128A31863002895CA /* SFCompactRounded-Bold.otf in Resources */,
 				85ED4DE7270314B400FE6926 /* GetProfile.graphql in Resources */,
 				3302E0B326DCBEC0008DBC76 /* SearchTickers.graphql in Resources */,
 				9075EF192831979A00917718 /* Purchases.storyboard in Resources */,
@@ -3301,6 +3314,7 @@
 				3381A570271D48CA001A1EDA /* CollectionsManager.swift in Sources */,
 				3333A0D7278C0EEA008FB78E /* APIModels+Async.swift in Sources */,
 				9006308728285CBF009EEB65 /* SubscriptionManager.swift in Sources */,
+				85C8DB7228A2504700C3EB86 /* HoldingsPieChartViewController.swift in Sources */,
 				339E2A912858AE1600555CD1 /* ValidatePromoCode.graphql.swift in Sources */,
 				3AE79525266219F3002B40D6 /* Collection.swift in Sources */,
 				331675082704623400CA92F6 /* Array-Reorder.swift in Sources */,
@@ -3336,6 +3350,7 @@
 				339BDA7827C3745300E3D9D2 /* HomeFetchCollections.graphql.swift in Sources */,
 				85ED4DEF2703486600FE6926 /* Categories.graphql.swift in Sources */,
 				3381D3B6279842B400BE7567 /* GetTickersByMSForCollection.graphql.swift in Sources */,
+				85C8DB7428A2591600C3EB86 /* HoldingPieChartCollectionHeaderView.swift in Sources */,
 				33D3D50226CBB8DC005A859B /* ProfileViewController.swift in Sources */,
 				3302E0BB26DD0756008DBC76 /* SearchLoadingCell.swift in Sources */,
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
@@ -3446,6 +3461,7 @@
 				85BE554C26DCD66E00896894 /* ClockwiseProgressIndicatorView.swift in Sources */,
 				33BDCF6F26CE8B45000DE770 /* TickerDetailsAboutViewCell.swift in Sources */,
 				85059CBF26D910010034A9E4 /* OnboardingCoordinator.swift in Sources */,
+				85C8DB7028A1DB9900C3EB86 /* GetPortfolioPieChart.graphql.swift in Sources */,
 				3A67232C268F1D7000DB04D1 /* Array+Move.swift in Sources */,
 				3AE79541266276DC002B40D6 /* RecommendedCollectionViewCell.swift in Sources */,
 				85ED4DDB2701B95F00FE6926 /* Notification+Name.swift in Sources */,

@@ -7,10 +7,18 @@
 
 import UIKit
 
-typealias PieChartData = GetTtfPieChartQuery.Data.CollectionPiechart
+public struct PieChartData {
+    public let weight: float8?
+    public let entityType: String?
+    public let relativeDailyChange: float8?
+    public let entityName: String?
+    public let entityId: String?
+    public let absoluteValue: float8?
+    public let absoluteDailyChange: float8?
+}
 
 extension CollectionsManager {
-    func populateTTFCard(uniqID: String, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [GetTtfPieChartQuery.Data.CollectionPiechart], [TickerTag]) -> Void) {
+    func populateTTFCard(uniqID: String, range: ScatterChartView.ChartPeriod, _ completion: @escaping (String, [[ChartNormalized]], [PieChartData], [TickerTag]) -> Void) {
         
         Task {
         //Load D1 Top
@@ -135,7 +143,16 @@ extension CollectionsManager {
                     switch result {
                     case .success(let graphQLResult):
                         if let fetchedData = graphQLResult.data?.collectionPiechart {
-                            continuation.resume(returning: fetchedData)
+                            let data = fetchedData.compactMap { item in
+                                return PieChartData.init(weight: item.weight,
+                                                         entityType: item.entityType,
+                                                         relativeDailyChange: item.relativeDailyChange,
+                                                         entityName: item.entityName,
+                                                         entityId: item.entityId,
+                                                         absoluteValue: item.absoluteValue,
+                                                         absoluteDailyChange: item.absoluteDailyChange)
+                            }
+                            continuation.resume(returning: data)
                         } else {
                             continuation.resume(returning: [PieChartData]())
                         }

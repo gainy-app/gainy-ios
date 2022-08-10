@@ -16,7 +16,7 @@ struct CollectionSettings: Codable {
     }
     
     enum PieChartMode: Int, Codable {
-        case tickers = 0, categories, interests
+        case tickers = 0, categories, interests, securityType, collections
     }
     
     let collectionID: Int

@@ -25,6 +25,10 @@ extension UIFont {
         UIFont.init(name: "SFCompactRounded-Semibold", size: size)!
     }
     
+    static func compactRoundedBold(_ size: CGFloat = defaultSize) -> UIFont {
+        UIFont.init(name: "SFCompactRounded-Bold", size: size)!
+    }
+    
     //MARK: - Pro Display
     static func proDisplayRegular(_ size: CGFloat = defaultSize) -> UIFont {
         UIFont.init(name: "SFProDisplay-Regular", size: size)!

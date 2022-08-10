@@ -32,12 +32,12 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         }
     }
     
-    private func setupLayout(data: GetTtfPieChartQuery.Data.CollectionPiechart, index: Int) {
+    private func setupLayout(data: PieChartData, index: Int, customTickerLayout: Bool = true) {
         
         self.removeContentView()
         self.isSkeletonable = true
         
-        if data.entityType == "ticker" {
+        if data.entityType == "ticker" && customTickerLayout {
             
             contentView.addSubview(percentBackView)
             percentBackView.addSubview(percentLabel)
@@ -131,11 +131,16 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
         contentView.layer.cornerRadius = 16.0
     }
     
-    func configureWithChartData(data: GetTtfPieChartQuery.Data.CollectionPiechart, index: Int) {
+    func configureWithChartData(data: PieChartData, index: Int, customTickerLayout: Bool = true) {
         
-        self.setupLayout(data: data, index: index)
+        self.setupLayout(data: data, index: index, customTickerLayout: customTickerLayout)
         
-        nameLabel.text = data.entityName?.companyMarkRemoved
+        if let companyMarkRemoved = data.entityName?.companyMarkRemoved {
+            let text = companyMarkRemoved.prefix(1).capitalized + companyMarkRemoved.dropFirst()
+            nameLabel.text = text
+        } else {
+            nameLabel.text = nil
+        }
         nameLabel.adjustsFontSizeToFitWidth = true
 //        nameLabel.sizeToFit()
         

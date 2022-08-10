@@ -318,7 +318,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.mode = mode
     }
     
-    public func configureWithPieChartData(pieChartData: [GetTtfPieChartQuery.Data.CollectionPiechart], mode: CollectionSettings.PieChartMode) {
+    public func configureWithPieChartData(pieChartData: [PieChartData], mode: CollectionSettings.PieChartMode) {
 
         self.chartView?.removeFromSuperview()
         self.loadingView?.removeFromSuperview()
@@ -406,11 +406,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         titleLabel.numberOfLines = 1
         titleLabel.textAlignment = .center
         middleContentView.addSubview(titleLabel)
-//        if mode != .tickers {
-            titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
-//        } else {
-//            titleLabel.autoPinEdge(toSuperviewEdge: .bottom)
-//        }
+        titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
         titleLabel.autoPinEdge(toSuperviewEdge: .left)
         titleLabel.autoPinEdge(toSuperviewEdge: .right)
         titleLabel.autoSetDimension(.height, toSize: 16.0)
@@ -418,77 +414,6 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         titleLabel.isHiddenWhenSkeletonIsActive = true
         titleLabel.text = title
         titleLabel.sizeToFit()
-        
-//        if mode == .tickers {
-//            let todayLabel = UILabel()
-//            todayLabel.font = UIFont.compactRoundedMedium(14)
-//            todayLabel.textColor = UIColor.init(hexString: "#B1BDC8")
-//            todayLabel.numberOfLines = 1
-//            todayLabel.textAlignment = .left
-//            middleContentView.addSubview(todayLabel)
-//            todayLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-//            todayLabel.autoPinEdge(toSuperviewEdge: .left)
-//            todayLabel.autoSetDimension(.height, toSize: 14.0)
-//            todayLabel.autoSetDimension(.width, toSize: 37.0)
-//            todayLabel.isSkeletonable = true
-//            todayLabel.isHiddenWhenSkeletonIsActive = true
-//            todayLabel.text = "Today"
-//            todayLabel.sizeToFit()
-//
-//            let arrowView = UIImageView()
-//            arrowView.isSkeletonable = true
-//            arrowView.isHiddenWhenSkeletonIsActive = true
-//            middleContentView.addSubview(arrowView)
-//            arrowView.autoSetDimensions(to: CGSize.init(width: 8, height: 8))
-//            arrowView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
-//            arrowView.autoPinEdge(.left, to: .right, of: todayLabel, withOffset: 4.0)
-//            arrowView.image = relativeSumChange >= 0.0 ? UIImage(named: "arrow-up-green") : UIImage(named: "arrow-down-red")
-//
-//            let totalChangeAbsoluteLabel = UILabel()
-//            totalChangeAbsoluteLabel.font = UIFont.compactRoundedSemibold(14)
-//            totalChangeAbsoluteLabel.numberOfLines = 1
-//            totalChangeAbsoluteLabel.lineBreakMode = .byTruncatingTail
-//            totalChangeAbsoluteLabel.textAlignment = .left
-//            totalChangeAbsoluteLabel.isSkeletonable = true
-//            totalChangeAbsoluteLabel.linesCornerRadius = 6
-//            middleContentView.addSubview(totalChangeAbsoluteLabel)
-//            totalChangeAbsoluteLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-//            totalChangeAbsoluteLabel.autoSetDimension(.height, toSize: 14.0)
-//            totalChangeAbsoluteLabel.autoPinEdge(.left, to: .right, of: arrowView, withOffset: 4.0)
-//            totalChangeAbsoluteLabel.text = (abs(sumChangeValue)).price
-//            totalChangeAbsoluteLabel.textColor = relativeSumChange >= 0.0
-//            ? UIColor.Gainy.mainGreen
-//            : UIColor.Gainy.mainRed
-//            totalChangeAbsoluteLabel.sizeToFit()
-//
-//            let dotView: UIView = UIView.newAutoLayout()
-//            dotView.backgroundColor = UIColor.init(hexString: "#B1BDC8")
-//            dotView.layer.cornerRadius = 1.0
-//            dotView.layer.masksToBounds = true
-//            middleContentView.addSubview(dotView)
-//            dotView.autoPinEdge(toSuperviewEdge: .top, withInset: 7.0)
-//            dotView.autoSetDimensions(to: CGSize.init(width: 2, height: 2))
-//            dotView.autoPinEdge(.left, to: .right, of: totalChangeAbsoluteLabel, withOffset: 4.0)
-//
-//            let totalChangeRelativeLabel = UILabel()
-//            totalChangeRelativeLabel.font = UIFont.compactRoundedSemibold(14)
-//            totalChangeRelativeLabel.numberOfLines = 1
-//            totalChangeRelativeLabel.lineBreakMode = .byTruncatingTail
-//            totalChangeRelativeLabel.textAlignment = .left
-//            totalChangeRelativeLabel.isSkeletonable = true
-//            totalChangeRelativeLabel.linesCornerRadius = 6
-//            middleContentView.addSubview(totalChangeRelativeLabel)
-//            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 1.0)
-//            totalChangeRelativeLabel.autoSetDimension(.height, toSize: 14.0)
-//            totalChangeRelativeLabel.autoPinEdge(.left, to: .right, of: dotView, withOffset: 4.0)
-//            totalChangeRelativeLabel.autoPinEdge(toSuperviewEdge: .right)
-//            let valueString = abs((relativeSumChange * 100.0)).percentRaw
-//            totalChangeRelativeLabel.text = valueString
-//            totalChangeRelativeLabel.textColor = relativeSumChange >= 0.0
-//            ? UIColor.Gainy.mainGreen
-//            : UIColor.Gainy.mainRed
-//            totalChangeRelativeLabel.sizeToFit()
-//        }
         
         self.setupChartButtons(mode: mode)
     }

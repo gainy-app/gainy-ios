@@ -18,6 +18,7 @@ protocol HoldingsViewControllerDelegate: AnyObject {
 final class HoldingsViewController: BaseViewController {
     
     var coordinator: MainCoordinator?
+    var pieChartViewController: HoldingsPieChartViewController?
     
     //MARK: - Hosted VCs
     private lazy var sortingVC = SortPortfolioDetailsViewController.instantiate(.popups)
@@ -32,7 +33,7 @@ final class HoldingsViewController: BaseViewController {
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
     
-    @IBOutlet weak var linkPlaidButton: UIButton!
+    @IBOutlet weak var viewModeButton: UIButton!
     
     //MARK: - Outlets
     
@@ -84,8 +85,8 @@ final class HoldingsViewController: BaseViewController {
         guard UserProfileManager.shared.profileID != nil else {
             return
         }
-        guard linkPlaidButton.isUserInteractionEnabled else {return}
-        linkPlaidButton.isUserInteractionEnabled = false
+        guard viewModeButton.isUserInteractionEnabled else {return}
+        viewModeButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
         view.showAnimatedGradientSkeleton()
         viewModel.loadHoldingsAndSecurities {[weak self] in
@@ -95,7 +96,7 @@ final class HoldingsViewController: BaseViewController {
                 }
             }
             self?.tableView.hideSkeleton()
-            self?.linkPlaidButton.isUserInteractionEnabled = true
+            self?.viewModeButton.isUserInteractionEnabled = true
             self?.tableView.reloadData()
             self?.refreshControl.endRefreshing()
         }
@@ -115,12 +116,43 @@ final class HoldingsViewController: BaseViewController {
         self.showSortingPanel()
     }
     
-    @IBAction func onLinkButtonTapped(_ sender: Any) {
+    @IBAction func onLinkButtonTapped(_ sender: UIButton) {
         
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showLinkUnlinkPlaid()
+    }
+    
+    @IBAction func onViewModeButtonTapped(_ sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected
+        if !sender.isSelected {
+            self.pieChartViewController?.willMove(toParent: nil)
+            self.pieChartViewController?.view.removeFromSuperview()
+            self.pieChartViewController?.removeFromParent()
+            self.pieChartViewController = nil
+            tableView.reloadData()
+            return
+        }
+        let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
+        self.addChild(holdingPieChartViewController)
+        holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
+        self.view.addSubview(holdingPieChartViewController.view)
+        holdingPieChartViewController.didMove(toParent: self)
+        holdingPieChartViewController.view.isUserInteractionEnabled = true
+        
+        holdingPieChartViewController.onSettingsPressed = {
+            self.onSettingsButtonTapped()
+        }
+        
+        holdingPieChartViewController.onSortingPressed = {
+            self.onSortButtonTapped()
+        }
+        
+        self.pieChartViewController = holdingPieChartViewController
+        GainyAnalytics.logEvent("pie_chart_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
     }
     
     func onSettingsButtonTapped() {
@@ -235,6 +267,8 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
+        self.pieChartViewController?.loadChartData()
+        
     }
 }
 
@@ -243,11 +277,13 @@ extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
         
         self.tableView.reloadData()
+        self.pieChartViewController?.loadChartData()
     }
     
     func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {
         
         self.delegate?.plaidUnlinked(controller: self)
+        self.pieChartViewController?.loadChartData()
     }
 }
 
@@ -264,7 +300,9 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         
         viewModel.clearChats()
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
-                                viewModel: viewModel.dataSource.chartViewModel)        
+                                viewModel: viewModel.dataSource.chartViewModel)
+        
+        self.pieChartViewController?.loadChartData()
     }
 }
 
