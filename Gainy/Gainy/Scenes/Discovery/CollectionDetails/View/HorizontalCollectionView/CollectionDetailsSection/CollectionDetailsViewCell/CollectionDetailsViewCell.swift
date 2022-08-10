@@ -79,8 +79,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             collectionInvestButtonView.autoPinEdge(toSuperviewEdge: .right)
             
             collectionInvestButtonView.investButtonPressed = {
-                
-                GainyAnalytics.logEvent("invest_pressed", params: ["user_id" : Auth.auth().currentUser?.uid ?? "anonymous", "collection_id" : self.viewModel.id])
                 self.investButtonPressed?()
             }
             

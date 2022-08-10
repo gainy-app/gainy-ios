@@ -67,7 +67,7 @@ final class HomeViewModel {
     //MARK: - Indexes
     private var cancellable: Cancellable?
     private let indexNames = ["Dow Jones", "S&P 500", "Nasdaq", "Bitcoin"]
-    private let indexSymbols = ["DJI.INDX", "IXIC.INDX", "GSPC.INDX", "BTC.CC"]
+    private let indexSymbols = ["DJI.INDX", "GSPC.INDX", "IXIC.INDX", "BTC.CC"]
     var topIndexes: [HomeIndexViewModel] = []
     
     //MARK: - Collections

@@ -19,6 +19,10 @@ final class NotifyViewController: BaseViewController {
     private var avPlayerLayer: AVPlayerLayer!
     private var paused: Bool = false
     
+    //DI
+    var isFromTTF: Bool = false
+    var sourceId: String = ""
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -128,7 +132,11 @@ final class NotifyViewController: BaseViewController {
             self.emailTextField.becomeFirstResponder()
             return
         }
-        GainyAnalytics.logEvent("notify_me_tap_notify", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+        if isFromTTF {
+            GainyAnalytics.logEvent("notify_me_ttf_pressed", params: ["collection_id": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+        } else {
+            GainyAnalytics.logEvent("notify_me_stock_pressed", params: ["ticker_symbol": sourceId, "email" : self.emailTextField.text ?? "", "ec" : "NotifyViewController"])
+        }
         self.dismiss(animated: true)
     }
     

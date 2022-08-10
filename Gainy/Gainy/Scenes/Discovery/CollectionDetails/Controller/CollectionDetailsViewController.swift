@@ -369,7 +369,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     let navigationController = UINavigationController.init(rootViewController: notifyViewController)
                     notifyViewController.delegate = self
                     navigationController.modalPresentationStyle = .fullScreen
-                    GainyAnalytics.logEvent("notify_me_ttf_pressed", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
+                    notifyViewController.isFromTTF = true
+                    notifyViewController.sourceId = "\(modelItem.id)"
+                    GainyAnalytics.logEvent("invest_pressed_ttf", params: ["collectionID" : modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "CollectionDetails"])
                     self?.present(navigationController, animated: true, completion: nil)
                 }
             }
