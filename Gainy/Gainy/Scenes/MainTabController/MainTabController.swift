@@ -81,6 +81,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         if Auth.auth().currentUser?.uid != nil {
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 selectedIndex = 1
+                tabBar.isHidden = true
             } else {
                 selectedIndex = 0
             }
