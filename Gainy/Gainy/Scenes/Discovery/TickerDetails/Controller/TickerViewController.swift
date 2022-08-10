@@ -68,16 +68,20 @@ final class TickerViewController: BaseViewController {
         delay(0.5) {
             self.loadTicketInfo()
         }
-        if let viewModel = viewModel {
-            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible && !viewModel.ticker.isIndex && !viewModel.ticker.isCrypto
-        } else {
-            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
-        }
     }
     
     @objc func loadTicketInfo(fromRefresh: Bool = true) {
         refreshControl.endRefreshing()
         viewModel?.dataSource.ticker.isChartDataLoaded = false
+        if let viewModel = viewModel {
+            if RemoteConfigManager.shared.isInvestBtnVisible {
+                tradeBtn.isHidden = viewModel.ticker.isIndex || viewModel.ticker.isCrypto
+            } else {
+                tradeBtn.isHidden = true
+            }
+        } else {
+            tradeBtn.isHidden = !RemoteConfigManager.shared.isInvestBtnVisible
+        }
         
         if !fromRefresh {
             guard !(self.viewModel?.dataSource.ticker.isMainDataLoaded ?? false) else {return}

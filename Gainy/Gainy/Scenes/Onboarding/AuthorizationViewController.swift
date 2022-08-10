@@ -103,7 +103,7 @@ final class AuthorizationViewController: BaseViewController {
                 self.coordinator?.pushIntroductionViewController()
             }
         } else if authorizationStatus != .authorizingCancelled {
-            GainyAnalytics.logEvent("authorization_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
+            GainyAnalytics.logEvent("authorization_failed", params: ["type" : authorizationStatus.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
             NotificationManager.shared.showError("Sorry... Failed to authorize. Please try again later.")
         } else if authorizationStatus == .authorizingCancelled {
             GainyAnalytics.logEvent("authorization_cancelled", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "AuthorizationView"])
