@@ -287,7 +287,7 @@ struct PortfolioScatterChartView: View {
                 .padding(.bottom, 6)
             })
             .frame(height: 24)            
-            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : RemoteConfigManager.shared.mainButtonColor.uiColor).cornerRadius(12))
+            .background(Rectangle().fill(isSPPVisible ? UIColor.init(hexString: "0062FF")!.uiColor : RemoteConfigManager.shared.mainButtonColor.uiColor).cornerRadius(8))
             Spacer()
         }
         .padding(.leading, 16)

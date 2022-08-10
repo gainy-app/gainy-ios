@@ -704,6 +704,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 self.dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.addNextButtonAsNeeded()
                 })
+                self.discoverCollectionsCollectionView.reloadData()
             }
         }
         
@@ -774,6 +775,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                 self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
             })
+            self.discoverCollectionsCollectionView.reloadData()
         } else {
             if let deleteItems = snapshot.itemIdentifiers(inSection: .yourCollections).first { AnyHashable in
                 if let model = AnyHashable as? YourCollectionViewCellModel {
@@ -829,6 +831,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
                 })
+                self.discoverCollectionsCollectionView.reloadData()
             }
             
         }
