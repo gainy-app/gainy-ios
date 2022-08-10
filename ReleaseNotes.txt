@@ -4,12 +4,14 @@ iOS v1.4.5 #265
 UI Improvements
 
 :new: New:
-• -
+• Portfolio PieChart implemented
 
 :hammer_and_wrench: Improvements
 • Stock View: new event for Invest
 • Stock View: Invest removed for Indexes
 • Collection Details: tap to scroll
+• Onboarding: address is optional, remove on Onboarding, keep in Profile
+• Profile: disable email editing
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
