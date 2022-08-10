@@ -153,11 +153,13 @@ final class EditPersonalInfoViewController: BaseViewController {
         self.firstNameTextField.delegate = self
         self.lastNameTextField.delegate = self
         self.emailTextField.delegate = self
+        self.emailTextField.isEnabled = false
+        self.emailTextField.alpha = 0.5
         self.legalAddressTextView.delegate = self
         
         self.legalAddressPlaceholder.alpha = 0.0
         self.legalAddressSmallPlaceholder.alpha = 1.0
-        self.emailSmallPlaceholder.alpha = 1.0
+        self.emailSmallPlaceholder.alpha = 0.5
         self.firstNameSmallPlaceholder.alpha = 1.0
         self.lastNameSmallPlaceholder.alpha = 1.0
         
@@ -195,9 +197,6 @@ extension EditPersonalInfoViewController: UITextFieldDelegate {
             self.lastNameTextField.becomeFirstResponder()
         }
         if textField == self.lastNameTextField {
-            self.emailTextField.becomeFirstResponder()
-        }
-        if textField == self.emailTextField {
             self.legalAddressTextView.becomeFirstResponder()
         }
         

@@ -185,7 +185,8 @@ extension PersonalInfoViewController: UITextFieldDelegate {
             self.emailTextField.becomeFirstResponder()
         }
         if textField == self.emailTextField {
-            self.legalAddressTextView.becomeFirstResponder()
+            self.emailTextField.resignFirstResponder()
+            self.updateRegisterButtonEnabledState()
         }
         
         return true
