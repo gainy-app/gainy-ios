@@ -19,6 +19,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func tickerSortCollectionsPressed()
     func tickerSortWLPressed()
     func topTickerTapped(symbol: String)
+    func balanceTapped()
 }
 
 final class HomeDataSource: NSObject {
@@ -323,8 +324,12 @@ extension HomeDataSource: HomeWatchlistTableViewCellDelegate {
 }
 
 extension HomeDataSource: HomeIndexesTableViewCellDelegate {
-    func tickerTapped(symbol: String) {
+    func tickerTapped(cell: HomeIndexesTableViewCell?, symbol: String) {
         delegate?.topTickerTapped(symbol: symbol)
+    }
+    
+    func balanceTapped(cell: HomeIndexesTableViewCell?) {
+        delegate?.balanceTapped()
     }
 }
 

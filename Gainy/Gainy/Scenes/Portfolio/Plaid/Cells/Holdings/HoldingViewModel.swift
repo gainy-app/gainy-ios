@@ -105,9 +105,8 @@ struct HoldingViewModel {
             }
             return height + 8.0 + tagsHeight(isExpanded: isTagExpanded)
         } else {
-            
             if isCash {
-                return 112.0 + 16.0
+                return 112.0 + 16
             }
             if event != nil {
                 return 232.0 + 22.0 + tagsHeight(isExpanded: isTagExpanded)

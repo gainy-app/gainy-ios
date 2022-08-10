@@ -8,7 +8,8 @@
 import UIKit
 
 protocol HomeIndexesTableViewCellDelegate: AnyObject {
-    func tickerTapped(symbol: String)
+    func tickerTapped(cell: HomeIndexesTableViewCell?, symbol: String)
+    func balanceTapped(cell: HomeIndexesTableViewCell?)
 }
 
 final class HomeIndexesTableViewCell: UITableViewCell {
@@ -28,7 +29,14 @@ final class HomeIndexesTableViewCell: UITableViewCell {
     @IBOutlet weak var bottomDots: UIImageView!
     @IBOutlet private weak var growPriceLbl: UILabel!
     
-    func updateIndexes(models: [HomeIndexViewModel]) {        
+    @IBOutlet weak var balanceView: HomeShadowView! {
+        didSet {
+            balanceView.tapCallback = { [weak self] in
+                self?.delegate?.balanceTapped(cell: self)
+            }
+        }
+    }
+    func updateIndexes(models: [HomeIndexViewModel]) {
         for (ind, val) in models.enumerated() {
             indexViews[ind].indexModel = val
             indexViews[ind].delegate = self
@@ -56,6 +64,6 @@ final class HomeIndexesTableViewCell: UITableViewCell {
 
 extension HomeIndexesTableViewCell: HomeIndexViewDelegate {
     func tickerTapped(symbol: String) {
-        delegate?.tickerTapped(symbol: symbol)
+        delegate?.tickerTapped(cell: self, symbol: symbol)
     }
 }

@@ -283,6 +283,11 @@ extension HomeViewController: HomeDataSourceDelegate {
             feedbackGenerator?.impactOccurred()
         }
     }
+    
+    func balanceTapped() {
+        tabBarController?.selectedIndex = CustomTabBar.Tab.portfolio.rawValue
+        feedbackGenerator?.impactOccurred()
+    }
 }
 
 extension HomeViewController: FloatingPanelControllerDelegate {

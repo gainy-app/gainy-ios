@@ -237,6 +237,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
                 categoriesView.isHidden = false
             }
         }
+        layoutIfNeeded()
     }
     
     private var holding: HoldingViewModel?
@@ -259,7 +260,7 @@ final class HoldingTableViewCell: HoldingRangeableCell {
     var isTagExpanded: Bool = false {
         didSet {
             tagsExpandBtn.isSelected = isTagExpanded
-            if let holding = holding {
+            if let holding = holding, !holding.isCash {
                 tagsHeight?.constant = tagHeight  + holding.tagsHeight(isExpanded: isTagExpanded)
                 secsTopMargin.constant = SecMargin.normal.rawValue + holding.tagsHeight(isExpanded: isTagExpanded)
                 layoutIfNeeded()
