@@ -39,7 +39,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 x: 0,
                 y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
-                height: 146
+                height: 146 + 16
             )
         )
         navigationBarContainer.backgroundColor = .clear
