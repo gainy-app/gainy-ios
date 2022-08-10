@@ -95,9 +95,14 @@ final class ViewControllerFactory {
     
     func instantiateDiscoverCollections(coordinator: MainCoordinator) -> DiscoverCollectionsViewController {
         let vc = DiscoverCollectionsViewController()
+        vc.coordinator = coordinator
         vc.viewModel = DiscoverCollectionsViewModel()
         vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .discovery)
+        vc.onGoToCollectionDetails = { initialCollectionIndex in
+            let detailsVC = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
+            coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: detailsVC)
+        }
         return vc
     }
     
@@ -108,13 +113,14 @@ final class ViewControllerFactory {
         vc.authorizationManager = authorizationManager
         setupTabWithIndex(vc: vc, tab: .discovery)
         vc.onDiscoverCollections = { showNextButton in
-            coordinator.showDiscoverCollectionsViewController(showNextButton: showNextButton) {initialCollectionIndex in
-                coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
-            } onSwapItems:  { source, dest in
-                vc.swapItemsAt(source, destId: dest)
-            } onItemDelete: { section, itemId in
-                vc.deleteItem(itemId)
-            }
+            coordinator.showDiscoverCollectionsViewController()
+//            coordinator.showDiscoverCollectionsViewController(showNextButton: showNextButton) {initialCollectionIndex in
+//                coordinator.showCollectionDetailsViewController(with: initialCollectionIndex, for: vc)
+//            } onSwapItems:  { source, dest in
+//                vc.swapItemsAt(source, destId: dest)
+//            } onItemDelete: { section, itemId in
+//                vc.deleteItem(itemId)
+//            }
         }
         vc.onShowCardDetails = { tickers, index in
             vc.postLeaveAnalytics()

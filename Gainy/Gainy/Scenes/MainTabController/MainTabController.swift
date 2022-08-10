@@ -40,10 +40,8 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
     }
     
     fileprivate func setupTabs() {
-        if let coordinator = coordinator {
-            collectionDetailsViewController = coordinator.viewControllerFactory.instantiateCollectionDetails(coordinator: coordinator)
-            
-            let detailsNav = UINavigationController.init(rootViewController: collectionDetailsViewController!)
+        if let coordinator = coordinator {            
+            let detailsNav = UINavigationController.init(rootViewController: coordinator.viewControllerFactory.instantiateDiscoverCollections(coordinator: coordinator))
             coordinator.collectionRouter = Router(rootController: detailsNav)
             detailsNav.setNavigationBarHidden(true, animated: false)
             setViewControllers([coordinator.viewControllerFactory.instantiateHomeVC(coordinator: coordinator),
@@ -81,6 +79,7 @@ class MainTabBarViewController: UITabBarController, Storyboarded, UITabBarContro
         if Auth.auth().currentUser?.uid != nil {
             if UserProfileManager.shared.favoriteCollections.isEmpty {
                 selectedIndex = 1
+                tabBar.isHidden = true
             } else {
                 selectedIndex = 0
             }
