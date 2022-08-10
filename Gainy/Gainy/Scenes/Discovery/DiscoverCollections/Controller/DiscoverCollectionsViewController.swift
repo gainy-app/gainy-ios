@@ -1031,7 +1031,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
-        
+        guard let profileID = UserProfileManager.shared.profileID else {
+            completion()
+            return
+        }
         guard haveNetwork else {
             completion()
             NotificationManager.shared.showError("Sorry... No Internet connection right now.") { [weak self] in
@@ -1041,8 +1044,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             refreshControl.endRefreshing()
             return
         }
-        
-        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: showNextButton) { success in
+        let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
+        let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
+        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: showNextButton || !shown) { success in
             self.refreshControl.endRefreshing()
             guard success == true  else {
                 self.initViewModels()

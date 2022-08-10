@@ -67,7 +67,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                         self?.onDiscoverCollections?(false)
                     } else {
                         if self?.searchCollectionView.alpha ?? 0.0 == 0.0 {
-                            self?.getRemoteData(loadProfile: true) {
+                            self?.getRemoteData(loadProfile: false) {
                                 DispatchQueue.main.async {
                                     self?.initViewModelsFromData()
                                     self?.initViewModels()
@@ -404,7 +404,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
         })
         searchController?.collectionsUpdated = { [weak self] in
-            self?.getRemoteData(loadProfile: true) {
+            self?.getRemoteData(loadProfile: false) {
                 DispatchQueue.main.async { [weak self] in
                     self?.initViewModels()
                     self?.centerInitialCollectionInTheCollectionView()
@@ -1187,16 +1187,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             showNetworkLoader()
             
             let asyncGroup = DispatchGroup()
-            asyncGroup.enter()
-            UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
-                dprint("getProfileCollections ended", profileId: 30)
-                asyncGroup.leave()
-            }
-            asyncGroup.enter()
-            CollectionsManager.shared.reloadTop20 {
-                dprint("reloadTop20 ended", profileId: 30)
-                asyncGroup.leave()
-            }
+//            asyncGroup.enter()
+//            UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
+//                dprint("getProfileCollections ended", profileId: 30)
+//                asyncGroup.leave()
+//            }
+//            asyncGroup.enter()
+//            CollectionsManager.shared.reloadTop20 {
+//                dprint("reloadTop20 ended", profileId: 30)
+//                asyncGroup.leave()
+//            }
             asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
                 dprint("reloadCollectionIfNeeded enter", profileId: 30)
@@ -1222,7 +1222,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             return
         }
         dprint("getRemoteData started", profileId: 30)
-        getRemoteData(loadProfile: true) {
+        getRemoteData(loadProfile: false) {
             dprint("getRemoteData ended", profileId: 30)
             DispatchQueue.main.async { [weak self] in
                 self?.initViewModels()

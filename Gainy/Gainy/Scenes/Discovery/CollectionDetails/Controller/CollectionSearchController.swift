@@ -395,8 +395,7 @@ final class CollectionSearchController: NSObject {
                 self.loading?(false)
             }
         }
-    }
-    
+    } 
 }
 
 
@@ -568,6 +567,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
         
         self.mutateFavouriteCollections(senderCell: nil, isAdded: isAdded, collectionID: collectionID)
+        
     }
     
     func collectionClosed(vc: SingleCollectionDetailsViewController, collectionID: Int) {
@@ -590,6 +590,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                         cell.setButtonChecked(isChecked: success)
                     }
                     self.collectionsUpdated?()
+                    self.collectionView?.reloadData()
                 }
                 CollectionsManager.shared.loadNewCollectionDetails(collectionID) { remoteTickers in
                     
@@ -602,6 +603,7 @@ extension CollectionSearchController: SingleCollectionDetailsViewControllerDeleg
                         cell.setButtonChecked(isChecked: !success)
                     }
                     self.collectionsUpdated?()
+                    self.collectionView?.reloadData()
                 }
                 onCollectionDelete?(collectionID)
             }

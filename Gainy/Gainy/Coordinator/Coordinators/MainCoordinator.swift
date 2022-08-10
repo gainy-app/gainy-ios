@@ -99,7 +99,11 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
 
     var collectionRouter: RouterProtocol?
     
-    func showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
+    func showDiscoverCollectionsViewController( ) {
+        collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
+    }
+    
+    func _showDiscoverCollectionsViewController(showNextButton:Bool, onGoToCollectionDetails: ((Int) -> Void)?, onSwapItems: ((Int, Int) -> Void)?, onItemDelete: ((DiscoverCollectionsSection, Int) -> Void)?  ) {
         let vc = viewControllerFactory.instantiateDiscoverCollections(coordinator: self)
         vc.hidesBottomBarWhenPushed = false
         vc.coordinator = self
@@ -128,7 +132,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                 
                 UIView.animate(withDuration: 0.35) {
                     
-                    self.router.popModule(transition: FadeTransitionAnimator(), animated: true)
+                    self.collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
                     imageView.frame.origin.y = frame.origin.y
                     
                 } completion: { finished in
@@ -137,12 +141,14 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                 }
 
             } else {
-                collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
+                collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
             }
         } else {
-            collectionRouter?.popModule(transition: FadeTransitionAnimator(), animated: true)
+            collectionRouter?.push(vc, transition: FadeTransitionAnimator(), animated: true)
         }
     }
+    
+    
 
     func _showCardDetailsViewController(_ tickerInfo: TickerInfo) {
         let vc = self.viewControllerFactory.instantiateTickerDetails()
