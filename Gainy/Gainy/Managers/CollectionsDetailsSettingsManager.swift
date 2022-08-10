@@ -194,7 +194,7 @@ final class CollectionsDetailsSettingsManager {
         if let settings = settings?[id] {
             return settings
         } else {
-            let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.matchScore, ascending: false, viewMode: .grid, pieChartMode: .categories, pieChartSelected: false)
+            let defSettigns = CollectionSettings(collectionID: id, sorting: MarketDataField.matchScore, ascending: true, viewMode: .grid, pieChartMode: .categories, pieChartSelected: false)
             settings?[id] = defSettigns
             return defSettigns
         }
