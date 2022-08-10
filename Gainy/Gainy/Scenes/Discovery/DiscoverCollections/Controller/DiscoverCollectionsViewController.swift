@@ -1039,7 +1039,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             return
         }
         
-        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile) { success in
+        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: showNextButton) { success in
             self.refreshControl.endRefreshing()
             guard success == true  else {
                 self.initViewModels()
