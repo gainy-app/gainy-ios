@@ -98,7 +98,7 @@ struct CollectionsSortingSettings: Codable {
         var title: String {
             switch self {
             case .matchScore: return "Match Score"
-            case .todaysGain: return "Todays Gain"
+            case .todaysGain: return "Today's Gain"
             case .numberOfStocks: return "Stocks Count"
             case .name: return "Name"
             }

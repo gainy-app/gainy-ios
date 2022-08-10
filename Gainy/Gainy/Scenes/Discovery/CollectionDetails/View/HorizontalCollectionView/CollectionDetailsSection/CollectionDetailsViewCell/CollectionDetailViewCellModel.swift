@@ -37,7 +37,7 @@ struct CollectionDetailViewCellModel {
     var statsDayName: String {
         switch chartRange {
         case .d1:
-            return "Today Gain"
+            return "Today's Gain"
         case .w1:
             return "Week Gain"
         case .m1:
