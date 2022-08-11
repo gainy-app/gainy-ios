@@ -37,7 +37,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
     private var chartInterestButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartSecurityTypeButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartButtons: [UIView] = []
-    private var mode: CollectionSettings.PieChartMode = .categories
+    private var mode: PieChartMode = .categories
 //    private var marketDataToShow: [MarketDataField]?
     
     override init(frame: CGRect) {
@@ -75,7 +75,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupChartButtons(mode: CollectionSettings.PieChartMode) {
+    private func setupChartButtons(mode: PieChartMode) {
         
         for button in chartButtons {
             button.removeFromSuperview()
@@ -86,7 +86,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         let edgeOffset = (self.frame.width - allButtonsSize - interItemOffset * 3.0) / 2.0
         let topInset = 32.0
         self.addSubview(chartSecurityTypeButton)
-        chartSecurityTypeButton.autoSetDimensions(to: CGSize.init(width: 53.0, height: 24.0))
+        chartSecurityTypeButton.autoSetDimensions(to: CGSize.init(width: 55.0, height: 24.0))
         chartSecurityTypeButton.autoPinEdge(toSuperviewEdge: .top, withInset: topInset)
         chartSecurityTypeButton.autoPinEdge(toSuperviewEdge: .left, withInset: edgeOffset)
         chartSecurityTypeButton.addTarget(self,
@@ -95,10 +95,10 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         chartSecurityTypeButton.layer.cornerRadius = 8.0
         chartSecurityTypeButton.layer.masksToBounds = true
         chartSecurityTypeButton.titleLabel?.font = UIFont.proDisplaySemibold(12.0)
-        chartSecurityTypeButton.setTitle("Assets", for: .normal)
+        chartSecurityTypeButton.setTitle("Classes", for: .normal)
         
         self.addSubview(chartTickerButton)
-        chartTickerButton.autoSetDimensions(to: CGSize.init(width: 55.0, height: 24.0))
+        chartTickerButton.autoSetDimensions(to: CGSize.init(width: 53.0, height: 24.0))
         chartTickerButton.autoPinEdge(toSuperviewEdge: .top, withInset: topInset)
         chartTickerButton.autoPinEdge(.left, to: .right, of: chartSecurityTypeButton, withOffset: interItemOffset)
         chartTickerButton.addTarget(self,
@@ -107,7 +107,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         chartTickerButton.layer.cornerRadius = 8.0
         chartTickerButton.layer.masksToBounds = true
         chartTickerButton.titleLabel?.font = UIFont.proDisplaySemibold(12.0)
-        chartTickerButton.setTitle("Tickers", for: .normal)
+        chartTickerButton.setTitle("Assets", for: .normal)
         
         self.addSubview(chartCategoryButton)
         chartCategoryButton.autoSetDimensions(to: CGSize.init(width: 75.0, height: 24.0))
@@ -138,8 +138,12 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         self.mode = mode
     }
     
-    public func configureWithPieChartData(pieChartData: [PieChartData], mode: CollectionSettings.PieChartMode) {
+    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode) {
 
+        let chartData = pieChartData.sorted(by: { itemLeft, itemRight in
+            itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
+        })
+        
         self.chartView?.removeFromSuperview()
         self.loadingView?.removeFromSuperview()
         self.sortByButton.removeFromSuperview()
@@ -158,7 +162,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         self.setupChartButtons(mode: mode)
         
-        if pieChartData.count == 0 {
+        if chartData.count == 0 {
             let noDataLabel = UILabel()
             noDataLabel.font = UIFont.compactRoundedMedium(18)
             noDataLabel.textColor = UIColor.black
@@ -176,7 +180,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         let topInset = 16.0
 
-        if pieChartData.count == 0 {
+        if chartData.count == 0 {
             let indicatorView = UIActivityIndicatorView.init(style: .medium)
             indicatorView.hidesWhenStopped = true
             self.addSubview(indicatorView)
@@ -189,13 +193,13 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
             return
         }
         
-        let sumValue = pieChartData.map { item in
+        let sumValue = chartData.map { item in
             item.absoluteValue ?? 0.0
         }.reduce(0, +)
-        let sumChangeValue = pieChartData.map { item in
+        let sumChangeValue = chartData.map { item in
             item.absoluteDailyChange ?? 0.0
         }.reduce(0, +)
-        let sumWeights = pieChartData.map { item in
+        let sumWeights = chartData.map { item in
             CGFloat((item.weight ?? 0.0) * 100.0)
         }.reduce(0, +)
         
@@ -206,7 +210,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         var index = 0
         let separatorValue = sumWeights / 360.0
-        for element in pieChartData {
+        for element in chartData {
             let separatoeSegment = PieChartSegment(color: .white, value: separatorValue)
             segments.append(separatoeSegment)
             let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
@@ -227,7 +231,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         pieChartView.autoAlignAxis(toSuperviewAxis: .vertical)
         
         let overlayView = UIView.newAutoLayout()
-        overlayView.backgroundColor = self.backgroundColor
+        overlayView.backgroundColor = UIColor(hexString: "#F7F8F9")
         pieChartView.addSubview(overlayView)
         size = size - 20
         overlayView.layer.masksToBounds = true
@@ -243,15 +247,15 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         
         var title = ""
-        let count = pieChartData.count
+        let count = chartData.count
         if mode == .categories {
             title = "\(count)" + (count > 1 ? " categories" : " category")
         } else if mode == .interests {
             title = "\(count)" + (count > 1 ? " interests" : " interest")
         } else if mode == .tickers {
-            title = "\(count)" + (count > 1 ? " tickers" : " ticker")
-        } else if mode == .securityType {
             title = "\(count)" + (count > 1 ? " assets" : " asset")
+        } else if mode == .securityType {
+            title = "\(count)" + (count > 1 ? " classes" : " class")
         }
         
         let titleLabel = UILabel()
@@ -340,7 +344,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         
         
         let toalPriceAbsoluteValueLabel = UILabel()
-        toalPriceAbsoluteValueLabel.font = UIFont.compactRoundedBold(21)
+        toalPriceAbsoluteValueLabel.font = UIFont.compactRoundedSemibold(21)
         toalPriceAbsoluteValueLabel.textColor = UIColor.black
         toalPriceAbsoluteValueLabel.numberOfLines = 1
         toalPriceAbsoluteValueLabel.textAlignment = .center

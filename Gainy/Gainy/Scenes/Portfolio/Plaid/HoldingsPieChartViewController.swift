@@ -184,7 +184,6 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             
             let pieChartSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(-42)
             
-            headerView.backgroundColor = self.view.backgroundColor
             headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: pieChartSettings.pieChartMode)
             headerView.updateChargeLbl(settings.sortingText())
 

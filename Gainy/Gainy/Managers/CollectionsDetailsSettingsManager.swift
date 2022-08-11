@@ -10,13 +10,13 @@ import UIKit
 typealias CollectionId = Int
 typealias ProfileId = Int
 
+enum PieChartMode: Int, Codable {
+    case tickers = 0, categories, interests, securityType, collections
+}
+
 struct CollectionSettings: Codable {
     enum ViewMode: Int, Codable {
         case list = 0, grid
-    }
-    
-    enum PieChartMode: Int, Codable {
-        case tickers = 0, categories, interests, securityType, collections
     }
     
     let collectionID: Int
@@ -217,7 +217,7 @@ final class CollectionsDetailsSettingsManager {
         settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: cur.viewMode, pieChartMode: cur.pieChartMode, pieChartSelected: pieChartSelected)
     }
     
-    func changePieChartModeForId(_ id: Int, pieChartMode: CollectionSettings.PieChartMode) {
+    func changePieChartModeForId(_ id: Int, pieChartMode: PieChartMode) {
         let cur = getSettingByID(id)
         settings?[id] = CollectionSettings(collectionID: id, sorting: cur.sorting, ascending: cur.ascending, viewMode: cur.viewMode, pieChartMode: pieChartMode, pieChartSelected: cur.pieChartSelected)
     }

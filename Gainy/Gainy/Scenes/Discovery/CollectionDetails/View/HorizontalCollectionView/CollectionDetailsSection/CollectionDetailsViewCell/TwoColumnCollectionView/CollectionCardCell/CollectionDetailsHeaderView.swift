@@ -47,7 +47,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
     private var chartCategoryButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartInterestButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var chartButtons: [UIView] = []
-    private var mode: CollectionSettings.PieChartMode = .categories
+    private var mode: PieChartMode = .categories
     private var marketDataToShow: [MarketDataField]?
     
     override init(frame: CGRect) {
@@ -266,7 +266,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         settingsViews = [tickerLbl, firstMarketMarkerButton, netLbl, secondMarketMarkerButton, monthPriceLbl, thirdMarketMarkerButton, capLbl, fourthMarketMarkerButton, peLbl]
     }
     
-    private func setupChartButtons(mode: CollectionSettings.PieChartMode) {
+    private func setupChartButtons(mode: PieChartMode) {
         
         for button in chartButtons {
             button.removeFromSuperview()
@@ -318,7 +318,7 @@ final class CollectionDetailsHeaderView: UICollectionReusableView {
         self.mode = mode
     }
     
-    public func configureWithPieChartData(pieChartData: [PieChartData], mode: CollectionSettings.PieChartMode) {
+    public func configureWithPieChartData(pieChartData: [PieChartData], mode: PieChartMode) {
 
         self.chartView?.removeFromSuperview()
         self.loadingView?.removeFromSuperview()
