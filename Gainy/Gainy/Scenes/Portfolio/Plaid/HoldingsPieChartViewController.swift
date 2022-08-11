@@ -236,7 +236,22 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             return cell
         }
         
-        cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row, customTickerLayout: false)
+        let chartDataObj = chartData[indexPath.row]
+        cell.configureWithChartData(data: chartDataObj, index: indexPath.row, customTickerLayout: false)
+        
+        let chartDataSorted = chartData.sorted(by: { itemLeft, itemRight in
+            itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
+        })
+        let colors = UIColor.Gainy.pieChartColors
+        if let colorIndex = chartDataSorted.firstIndex(where: { item in
+            (item.entityId ?? "").lowercased() == (chartDataObj.entityId ?? "").lowercased()
+        }) {
+            let color = (colorIndex <= 8 ? colors[colorIndex] : colors[9]) ?? UIColor.white
+            cell.configureWithColor(color: color)
+        } else {
+            cell.configureWithColor(color: colors[9] ?? UIColor.white)
+        }
+
         cell.removeBlur()
         
         return cell

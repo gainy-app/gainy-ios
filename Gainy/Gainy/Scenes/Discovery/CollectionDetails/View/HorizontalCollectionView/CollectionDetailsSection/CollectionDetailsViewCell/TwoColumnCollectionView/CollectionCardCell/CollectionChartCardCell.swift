@@ -147,10 +147,6 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
 //        totalPriceLabel.text = (data.absoluteValue ?? 0.0).price
 //        totalPriceLabel.sizeToFit()
         
-        let colors = UIColor.Gainy.pieChartColors
-        let color = (index <= 8 ? colors[index] : colors[9]) ?? UIColor.white
-        percentBackView.backgroundColor = color
-        
         percentLabel.text = ((data.weight ?? 0.0) * 100.0).percentRaw
         
         let valueString = abs(((data.relativeDailyChange ?? 0.0) * 100.0)).percentRaw
@@ -169,6 +165,15 @@ final class CollectionChartCardCell: RoundedDashedCollectionViewCell {
             PieChartSegment.init(color: UIColor.init(white: 1.0, alpha: 0.15), value: 100.0 - CGFloat(weight))
         ]
         self.progressView?.segments = segments
+        
+        
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
+    }
+    
+    func configureWithColor(color: UIColor) {
+        
+        self.percentBackView.backgroundColor = color
         self.overlayView?.backgroundColor = color
         
         self.setNeedsLayout()

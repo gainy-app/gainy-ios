@@ -670,7 +670,9 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         }
         
         cell.configureWithChartData(data: chartData[indexPath.row], index: indexPath.row)
-        
+        let colors = UIColor.Gainy.pieChartColors
+        let color = (indexPath.row <= 8 ? colors[indexPath.row] : colors[9]) ?? UIColor.white
+        cell.configureWithColor(color: color)
         SubscriptionManager.shared.getSubscription({[weak self] type in
             if type == .free {
                 if SubscriptionManager.shared.storage.isViewedCollection(self?.viewModel.id ?? 0) {
