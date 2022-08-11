@@ -57,7 +57,7 @@ class TTFScatterChartDelegate: ObservableObject {
     weak var delegate: TTFScatterChartViewDelegate?
     
     func changeRange(range: ScatterChartView.ChartPeriod, viewModel: TTFChartViewModel) {
-        delegate?.chartPeriodChanged(period: range, viewModel: viewModel)
+        delegate?.chartPeriodChanged(period: range, viewModel: viewModel)       
     }
     
     func dragOnChartChanged(showDiff: Bool, diffVal: Double) {

@@ -39,7 +39,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 x: 0,
                 y: view.safeAreaInsets.top + 36,
                 width: view.bounds.width,
-                height: 146 + 16
+                height: 130.0 + 16
             )
         )
         navigationBarContainer.backgroundColor = .clear
@@ -224,7 +224,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     
                     cell.isUserInteractionEnabled = true
                     GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-                    GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
+                    
+                    if !(self?.showNextButton ?? false) {
+                        GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
+                    }
                 }
                 
                 cell.onCheckButtonPressed = { [weak self] in
@@ -981,7 +984,8 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 //addBottomButton()
                 return
             }
-        }
+        }        
+        searchController?.isOnboarding = showNextButton
     }
     
     private func initViewModelsFromData() {

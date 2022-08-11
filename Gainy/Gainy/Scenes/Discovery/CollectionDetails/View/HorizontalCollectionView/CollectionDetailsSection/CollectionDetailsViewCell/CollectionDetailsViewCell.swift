@@ -471,6 +471,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
     }()
     
     func loadChartForRange(_ range: ScatterChartView.ChartPeriod) {
+        GainyAnalytics.logEvent("ttf_chart_period_changed", params: ["period" : range.rawValue, "ec" : "CollectionDetails"])
         
         //        if let gainsCell = collectionView.cellForItem(at: .init(row: 0, section: CollectionDetailsSection.gain.rawValue)) as? CollectionDetailsGainCell {
         //            gainsCell.isMedianVisible = false

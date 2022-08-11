@@ -100,7 +100,7 @@ extension HomeDataSource: SkeletonTableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeIndexesTableViewCell.cellIdentifier, for: indexPath) as! HomeIndexesTableViewCell
             cell.updateIndexes(models: indexes)
             cell.gains = viewModel?.gains
-            cell.bottomDots.isHidden = (viewModel?.gains == nil)
+            //cell.bottomDots.isHidden = (viewModel?.gains == nil)
             cell.delegate = self
             return cell
         case .watchlist:

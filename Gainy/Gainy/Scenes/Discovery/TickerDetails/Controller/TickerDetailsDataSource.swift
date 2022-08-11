@@ -345,7 +345,7 @@ extension TickerDetailsDataSource: UITableViewDelegate {
 
 
 extension TickerDetailsDataSource: ScatterChartViewDelegate {
-    func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {
+    func chartPeriodChanged(period: ScatterChartView.ChartPeriod) {        
         delegate?.loadingState(started: true)
         ticker.chartRange = period
         chartViewModel.isLoading = true

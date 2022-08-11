@@ -54,7 +54,7 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                 
                 growLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
                 growPriceLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
-                bottomDots.isHidden = false
+                bottomDots.isHidden = true
             } else {
                 bottomDots.isHidden = true
             }
