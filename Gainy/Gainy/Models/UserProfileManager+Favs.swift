@@ -51,6 +51,7 @@ extension UserProfileManager {
     }
     
     func getRecommenedCollections(forceReload: Bool = false) async -> [RemoteShortCollectionDetails] {
+        print("FORCE RELOAD: \(forceReload)")
         guard let profileID = self.profileID else {
             dprint("Err_FetchRecommendedCollectionsQuery_1 [No profile ID]")
             return [RemoteShortCollectionDetails]()

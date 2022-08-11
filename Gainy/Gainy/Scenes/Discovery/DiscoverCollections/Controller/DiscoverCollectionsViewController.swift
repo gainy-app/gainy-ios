@@ -961,6 +961,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 } else {
                     snap.deleteSections([.topGainers, .topLosers])
                 }
+            } else {
+                if snap.sectionIdentifiers.contains(.topGainers) && snap.sectionIdentifiers.contains(.topLosers) {
+                    snap.deleteSections([.topGainers, .topLosers])
+                }
+                dataSource.apply(snap, animatingDifferences: true)
             }
         }
     }
@@ -1052,6 +1057,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
         UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: showNextButton || !shown) { success in
             self.refreshControl.endRefreshing()
+            self.searchController?.reloadSuggestedCollections()
             guard success == true  else {
                 self.initViewModels()
                 completion()

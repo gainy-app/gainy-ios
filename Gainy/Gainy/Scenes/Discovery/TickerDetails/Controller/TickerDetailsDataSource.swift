@@ -181,6 +181,7 @@ final class TickerDetailsDataSource: NSObject {
         
         if ticker.isCrypto {
             cellHeights[.upcomingEvents] = 0.0
+            cellHeights[.alternativeStocks] = 0.0
         }
     }
     

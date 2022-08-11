@@ -1225,6 +1225,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         getRemoteData(loadProfile: false) {
             dprint("getRemoteData ended", profileId: 30)
             DispatchQueue.main.async { [weak self] in
+                self?.searchController?.reloadSuggestedCollections()
                 self?.initViewModels()
                 self?.centerInitialCollectionInTheCollectionView()
                 self?.hideLoader()

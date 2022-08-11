@@ -245,7 +245,7 @@ final class UserProfileManager {
                             completion(false)
                             return
                         }
-                        self.getProfileCollections(completion: completion)
+                        self.getProfileCollections(forceReload: forceReload, completion: completion)
                     } else {
                         completion(false)
                         return
@@ -264,14 +264,14 @@ final class UserProfileManager {
                 guard success == true else {
                     runOnMain {
                         NotificationManager.shared.showError("Sorry... Profile fetching failed.") {[weak self] in
-                            self?.getProfileCollections(loadProfile: loadProfile, completion: completion)
+                            self?.getProfileCollections(loadProfile: loadProfile, forceReload: forceReload, completion: completion)
                         }
                     }                    
                     completion(false)
                     return
                 }
                 
-                self.getProfileCollections(completion: completion)
+                self.getProfileCollections(forceReload: forceReload, completion: completion)
             }
             return
         }
@@ -291,7 +291,7 @@ final class UserProfileManager {
                 dprint("getProfileCollections empty")
                 runOnMain {
                     NotificationManager.shared.showError("Sorry... No Collections to display.") {[weak self] in
-                        self?.getProfileCollections(loadProfile: loadProfile, completion: completion)
+                        self?.getProfileCollections(loadProfile: loadProfile, forceReload: forceReload, completion: completion)
                     }
                 }
                 await MainActor.run {

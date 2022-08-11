@@ -46,10 +46,7 @@ final class CollectionSearchController: NSObject {
     init(collectionView: UICollectionView? = nil, callback: @escaping (([RemoteTickerDetails], RemoteTickerDetails) -> Void)) {
         self.collectionView = collectionView
         self.onShowCardDetails = callback
-        super.init()
-        
-        self.reloadSuggestedCollections()
-        
+        super.init()        
         if let collectionView = collectionView {
             
             //Registering the cells
@@ -214,8 +211,11 @@ final class CollectionSearchController: NSObject {
     }
     
     func reloadSuggestedCollections() {
+        guard let profileID = UserProfileManager.shared.profileID else {return}
+        let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
+        let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
         
-        UserProfileManager.shared.getProfileCollections(loadProfile: true) { success in
+        UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: !shown) { success in
             if success {
                 self.suggestedCollections = UserProfileManager.shared
                     .recommendedCollections
