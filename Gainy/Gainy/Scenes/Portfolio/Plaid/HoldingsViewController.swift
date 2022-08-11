@@ -147,13 +147,10 @@ final class HoldingsViewController: BaseViewController {
         self.view.addSubview(holdingPieChartViewController.view)
         holdingPieChartViewController.didMove(toParent: self)
         holdingPieChartViewController.view.isUserInteractionEnabled = true
+        holdingPieChartViewController.viewModel = self.viewModel
         
         holdingPieChartViewController.onSettingsPressed = {
             self.onSettingsButtonTapped()
-        }
-        
-        holdingPieChartViewController.onSortingPressed = {
-            self.onSortButtonTapped()
         }
         
         holdingPieChartViewController.onPlusPressed = {
@@ -276,6 +273,7 @@ extension HoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
+        self.pieChartViewController?.viewModel = self.viewModel
         self.pieChartViewController?.loadChartData()
         
     }
@@ -286,12 +284,14 @@ extension HoldingsViewController: LinkUnlinkPlaidViewControllerDelegate {
     func plaidLinked(controller: LinkUnlinkPlaidViewController) {
         
         self.tableView.reloadData()
+        self.pieChartViewController?.viewModel = self.viewModel
         self.pieChartViewController?.loadChartData()
     }
     
     func plaidUnlinked(controller: LinkUnlinkPlaidViewController) {
         
         self.delegate?.plaidUnlinked(controller: self)
+        self.pieChartViewController?.viewModel = self.viewModel
         self.pieChartViewController?.loadChartData()
     }
 }
@@ -311,6 +311,7 @@ extension HoldingsViewController: PortfolioFilteringViewControllerDelegate {
         chartsForRangeRequested(range: viewModel.dataSource.chartRange,
                                 viewModel: viewModel.dataSource.chartViewModel)
         
+        self.pieChartViewController?.viewModel = self.viewModel
         self.pieChartViewController?.loadChartData()
     }
 }

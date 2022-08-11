@@ -17,7 +17,8 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
     matchScore,
     name,
     marketCap,
-    earningsDate
+    earningsDate,
+    weight
     
     var title: String {
         switch self {
@@ -35,9 +36,17 @@ enum PortfolioSortingField: Int, Codable, CaseIterable {
             return "Market Cap"
         case .earningsDate:
             return "Earnings Date"
+        case .weight:
+            return "Weight"
         }
     }
     
-    /// Order to place on sorting
+    /// Portfolio: Order to place on sorting for po
     static let rawOrder: [PortfolioSortingField] = [purchasedDate, priceChangeForPeriod, percentOFPortfolio, matchScore, name, marketCap, earningsDate]
+    
+    /// PieChart: Order to place on sorting for tickers
+    static let tickersRawOrder: [PortfolioSortingField] = [purchasedDate, priceChangeForPeriod, percentOFPortfolio, matchScore, name, marketCap, earningsDate, weight]
+    
+    /// PieChart: Order to place on sorting for categories/interests/classes
+    static let othersRawOrder: [PortfolioSortingField] = [name, weight]
 }

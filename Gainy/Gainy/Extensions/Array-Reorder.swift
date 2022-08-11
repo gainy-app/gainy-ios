@@ -136,6 +136,12 @@ extension Array where Element == HoldingViewModel {
                 } else {
                     return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
                 }
+            case .weight:
+                if ascending {
+                    return lhs.percentInProfile < rhs.percentInProfile
+                } else {
+                    return lhs.percentInProfile > rhs.percentInProfile
+                }
             }
         }.filter { model in
             

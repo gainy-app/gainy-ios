@@ -12,7 +12,6 @@ import Combine
 
 final class HoldingsPieChartViewController: BaseViewController {
     
-    public var onSortingPressed: (() -> Void)?
     public var onSettingsPressed: (() -> Void)?
     public var onPlusPressed: (() -> Void)?
     
@@ -25,6 +24,20 @@ final class HoldingsPieChartViewController: BaseViewController {
         control.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
         return control
     } ()
+    
+    public weak var viewModel: HoldingsViewModel? = nil
+    
+    //MARK: - Hosted VCs
+    private lazy var sortingVC = SortPortfolioPieChartViewController.instantiate(.popups)
+    private lazy var sortingTickersVC = SortPortfolioPieChartTickersViewController.instantiate(.popups)
+    
+    public weak var delegate: HoldingsViewControllerDelegate?
+    
+    //Panel
+    private var fpc: FloatingPanelController!
+    private var shouldDismissFloatingPanel = false
+    private var floatingPanelPreviousYPosition: CGFloat? = nil
+    
     
     override func viewDidLoad() {
         
@@ -62,6 +75,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         collectionView.isSkeletonable = true
         collectionView.skeletonCornerRadius = 6.0
         loadChartData()
+        setupPanel()
     }
     
     @objc func refresh(_ sender:AnyObject) {
@@ -132,6 +146,66 @@ final class HoldingsPieChartViewController: BaseViewController {
             dprint("\(Date()) PieChart for Porto load end")
         }
     }
+    
+    private func setupPanel() {
+        fpc = FloatingPanelController()
+        let appearance = SurfaceAppearance()
+        appearance.cornerRadius = 16.0
+        appearance.backgroundColor = .clear
+        fpc.surfaceView.appearance = appearance
+        fpc.delegate = self // Optional
+    }
+    
+    private func showSortingPanel() {
+        
+        guard let userID = UserProfileManager.shared.profileID else {
+            return
+        }
+        guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
+            return
+        }
+        
+        let layout = MyFloatingPanelLayout()
+        
+        fpc.layout = layout
+        sortingVC.delegate = self
+        sortingTickersVC.delegate = self
+        
+        let mode = settings.pieChartMode
+        if mode == .tickers {
+            layout.height = 440.0
+            fpc.set(contentViewController: sortingTickersVC)
+        } else {
+            layout.height = 160.0
+            fpc.set(contentViewController: sortingVC)
+        }
+        
+        fpc.isRemovalInteractionEnabled = true
+        self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    
+    class MyFloatingPanelLayout: FloatingPanelLayout {
+        public var height: CGFloat = 0.0
+        let position: FloatingPanelPosition = .bottom
+        let initialState: FloatingPanelState = .tip
+        var anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] {
+            return [
+                .full: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
+                .half: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
+                .tip: FloatingPanelLayoutAnchor(absoluteInset: self.height, edge: .bottom, referenceGuide: .safeArea),
+            ]
+        }
+        
+        func backdropAlpha(for state: FloatingPanelState) -> CGFloat {
+            switch state {
+            case .full,
+                    .half,
+                    .tip: return 0.3
+            default: return 0.0
+            }
+        }
+    }
 }
 
 
@@ -182,10 +256,8 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 return headerView
             }
             
-            let pieChartSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(-42)
-            
-            headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: pieChartSettings.pieChartMode)
-            headerView.updateChargeLbl(settings.sortingText())
+            headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: settings.pieChartMode)
+            headerView.updateChargeLbl(settings.sortingText(mode: settings.pieChartMode))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
                 headerView.setNeedsLayout()
@@ -197,7 +269,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
             
             headerView.onSortingPressed = {
-                self.onSortingPressed?()
+                self.showSortingPanel()
             }
             
             headerView.onPlusPressed = {
@@ -205,22 +277,22 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
             
             headerView.onChartTickerButtonPressed = {
-                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(-42, pieChartMode: .tickers)
+                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .tickers)
                 self.collectionView.reloadData()
             }
             
             headerView.onChartCategoryButtonPressed = {
-                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(-42, pieChartMode: .categories)
+                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .categories)
                 self.collectionView.reloadData()
             }
             
             headerView.onChartInterestButtonPressed = {
-                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(-42, pieChartMode: .interests)
+                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .interests)
                 self.collectionView.reloadData()
             }
             
             headerView.onChartSecurityTypeButtonPressed = {
-                CollectionsDetailsSettingsManager.shared.changePieChartModeForId(-42, pieChartMode: .securityType)
+                PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .securityType)
                 self.collectionView.reloadData()
             }
             headerView.removeBlur()
@@ -245,6 +317,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             return []
         }
         
+        // TODO: Move filtering/sorting somewhere else
         let selectedInterests = settings.interests.filter { item in
             item.selected
         }
@@ -255,25 +328,24 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             item.selected
         }
         
-        let pieChartSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(-42)
         var chartData: [PieChartData] = []
-        if pieChartSettings.pieChartMode == .categories {
+        if settings.pieChartMode == .categories {
             chartData = self.pieChartData.filter { data in
                 data.entityType == "category" && (selectedCategories.isEmpty || selectedCategories.contains(where: { selectedItem in
                     selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
                 }))
             }
-        } else if pieChartSettings.pieChartMode == .interests {
+        } else if settings.pieChartMode == .interests {
             chartData = self.pieChartData.filter { data in
                 data.entityType == "interest" && (selectedInterests.isEmpty || selectedInterests.contains(where: { selectedItem in
                     selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
                 }))
             }
-        } else if pieChartSettings.pieChartMode == .tickers {
+        } else if settings.pieChartMode == .tickers {
             chartData = self.pieChartData.filter { data in
                 data.entityType == "ticker"
             }
-        } else if pieChartSettings.pieChartMode == .securityType {
+        } else if settings.pieChartMode == .securityType {
             chartData = self.pieChartData.filter { data in
                 data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
                     selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
@@ -281,25 +353,154 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         }
         
-        if settings.sorting == .name {
-            chartData = chartData.sorted(by: { itemLeft, itemRight in
-                if settings.ascending {
+        guard let viewModel = self.viewModel else {
+            return chartData
+        }
+        
+        let sorting = settings.sortingValue(mode: settings.pieChartMode)
+        let ascending = settings.ascending(mode: settings.pieChartMode)
+        let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
+        
+        chartData = chartData.sorted {  itemLeft, itemRight in
+            
+            var leftHolding: HoldingViewModel? = nil
+            var rightHolding: HoldingViewModel? = nil
+            for holding in viewModel.dataSource.originalHoldings {
+                let symbol = holding.tickerSymbol.lowercased()
+                if symbol == (itemLeft.entityId ?? "").lowercased() {
+                    leftHolding = holding
+                }
+                if symbol == (itemRight.entityId ?? "").lowercased() {
+                    rightHolding = holding
+                }
+            }
+            
+            var canSort = (sorting == .name || sorting == .weight)
+            if !canSort && (leftHolding != nil) && (rightHolding != nil) {
+                canSort = true
+            }
+            let lhs = leftHolding
+            let rhs = rightHolding
+            
+            if !canSort {
+                return true
+            }
+            switch sorting {
+            case .purchasedDate:
+                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
+                    return false
+                }
+                
+                if ascending {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.purchaseDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
+                
+            case .priceChangeForPeriod:
+                let chartRange = viewModel.dataSource.chartRange
+                guard let lhd = lhs?.relativeGains[chartRange], let rhd = rhs?.relativeGains[chartRange] else {
+                    return false
+                }
+                
+                if ascending {
+                    return lhd < rhd
+                } else {
+                    return lhd > rhd
+                }
+            case .percentOFPortfolio:
+                if ascending {
+                    return lhs?.percentInProfile ?? 0.0 < rhs?.percentInProfile ?? 0.0
+                } else {
+                    return lhs?.percentInProfile ?? 0.0 > rhs?.percentInProfile ?? 0.0
+                }
+                
+            case .matchScore:
+                if ascending {
+                    return lhs?.matchScore ?? 0 < rhs?.matchScore ?? 0
+                } else {
+                    return lhs?.matchScore ?? 0 > rhs?.matchScore ?? 0
+                }
+                
+            case .name:
+                if ascending {
+                    return itemLeft.entityName ?? "" < itemRight.entityName ?? ""
+                } else {
                     return itemLeft.entityName ?? "" > itemRight.entityName ?? ""
-                } else {
-                    return itemLeft.entityName ?? "" <= itemRight.entityName ?? ""
                 }
-            })
-        } else {
-            chartData = chartData.sorted(by: { itemLeft, itemRight in
-                if settings.ascending {
+                
+            case .marketCap:
+                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
+                    return false
+                }
+                
+                if ascending {
+                    return lhd.marketCapitalization ?? 0 < rhd.marketCapitalization ?? 0
+                } else {
+                    return lhd.marketCapitalization ?? 0 > rhd.marketCapitalization ?? 0
+                }
+                
+            case .earningsDate:
+                guard let lhd = lhs?.holdingDetails, let rhd = rhs?.holdingDetails else {
+                    return false
+                }
+                
+                if ascending {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() < (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                } else {
+                    return (lhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date() > (rhd.nextEarningsDate ?? "").toDate(dateFormat)?.date ?? Date()
+                }
+            case .weight:
+                if ascending {
+                    return itemLeft.weight ?? 0.0 < itemRight.weight ?? 0.0
+                } else {
                     return itemLeft.weight ?? 0.0 > itemRight.weight ?? 0.0
-                } else {
-                    return itemLeft.weight ?? 0.0 <= itemRight.weight ?? 0.0
                 }
-            })
+            }
         }
         
         return chartData
+    }
+}
+
+// MARK: FloatingPanelControllerDelegate
+
+extension HoldingsPieChartViewController: FloatingPanelControllerDelegate {
+    func floatingPanelDidMove(_ vc: FloatingPanelController) {
+        if vc.isAttracting == false {
+            
+            if let prevY = floatingPanelPreviousYPosition {
+                shouldDismissFloatingPanel = prevY < vc.surfaceLocation.y
+            }
+            let loc = vc.surfaceLocation
+            let minY = vc.surfaceLocation(for: .full).y
+            vc.surfaceLocation = CGPoint(x: loc.x, y: max(loc.y, minY))
+            floatingPanelPreviousYPosition = max(loc.y, minY)
+        }
+    }
+    
+    func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
+        if shouldDismissFloatingPanel {
+            self.fpc.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: SortPortfolioPieChartViewControllerDelegate
+
+extension HoldingsPieChartViewController: SortPortfolioPieChartViewControllerDelegate {
+    func selectionChanged(vc: SortPortfolioPieChartViewController, sorting: PortfolioSortingField, ascending: Bool) {
+        self.fpc.dismiss(animated: true, completion: nil)
+        self.collectionView.reloadData()
+    }
+}
+
+// MARK: SortPortfolioPieChartTickersViewControllerDelegate
+
+extension HoldingsPieChartViewController: SortPortfolioPieChartTickersViewControllerDelegate {
+    func selectionChanged(vc: SortPortfolioPieChartTickersViewController, sorting: PortfolioSortingField, ascending: Bool) {
+        self.fpc.dismiss(animated: true, completion: nil)
+        self.collectionView.reloadData()
     }
 }
 

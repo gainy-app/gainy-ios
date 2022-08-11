@@ -159,7 +159,24 @@ final class HoldingsViewModel {
                     }.uniqueUsingKey{$0.id}
                     self.categoriesCount = categories.count
                     
+                    
+                    let pieChartSorting: [PieChartMode : PortfolioSortingField] = [
+                        .securityType : .weight,
+                        .tickers : .weight,
+                        .categories : .weight,
+                        .interests : .weight,
+                        .collections : .weight
+                    ]
+                    let pieChartAscending: [PieChartMode : Bool] = [
+                        .securityType : false,
+                        .tickers : false,
+                        .categories : false,
+                        .interests : false,
+                        .collections : false
+                    ]
                     let defaultSettings = PortfolioSettings.init(sorting: .matchScore,
+                                                                 pieChartSorting: pieChartSorting,
+                                                                 pieChartAscending: pieChartAscending,
                                                                  pieChartMode: .categories,
                                                                  ascending: false,
                                                                  includeClosedPositions: true,

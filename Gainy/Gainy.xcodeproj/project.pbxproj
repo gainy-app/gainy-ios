@@ -410,6 +410,8 @@
 		859B2ECA270614040084CCDC /* DeleteFavouriteCollection.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */; };
 		859B2ECD270615C70084CCDC /* InsertFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */; };
 		859B2ECE270615C70084CCDC /* DeleteFavouriteCollection.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */; };
+		85A2339B28A5464300F39355 /* SortPortfolioPieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A2339928A5464300F39355 /* SortPortfolioPieChartViewController.swift */; };
+		85A2339C28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85A2339A28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift */; };
 		85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */; };
 		85B4DD382824A29B006CE0FC /* SortCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */; };
 		85B90DE7280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */; };
@@ -1048,6 +1050,8 @@
 		859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteFavouriteCollection.graphql; sourceTree = "<group>"; };
 		859B2ECB270615C60084CCDC /* InsertFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
 		859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteFavouriteCollection.graphql.swift; sourceTree = "<group>"; };
+		85A2339928A5464300F39355 /* SortPortfolioPieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortPortfolioPieChartViewController.swift; sourceTree = "<group>"; };
+		85A2339A28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortPortfolioPieChartTickersViewController.swift; sourceTree = "<group>"; };
 		85AFD58626FB5F6D00ED0D51 /* CreateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateProfile.graphql.swift; sourceTree = "<group>"; };
 		85B4DD372824A29B006CE0FC /* SortCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCollectionsViewController.swift; sourceTree = "<group>"; };
 		85B90DE6280D50AE00F21DB2 /* CollectionDetailsHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetailsHeaderView.swift; sourceTree = "<group>"; };
@@ -2649,6 +2653,8 @@
 			isa = PBXGroup;
 			children = (
 				854F1AC1274F86FF001900C7 /* SortPortfolioDetailsViewController.swift */,
+				85A2339A28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift */,
+				85A2339928A5464300F39355 /* SortPortfolioPieChartViewController.swift */,
 				85E4A27D27550ECB00C0E5C5 /* PortfolioFilteringViewController.swift */,
 				85E4A28B275687A100C0E5C5 /* PortfolioInfoDataViewController.swift */,
 				85E4A28A27551D4100C0E5C5 /* Cells */,
@@ -3324,6 +3330,7 @@
 				901944C727766BCE000213DA /* GetSelectedCategories.graphql.swift in Sources */,
 				906D009527516AEA00EE0400 /* GetTickerExtraDetails.graphql.swift in Sources */,
 				3342C88026DE617D0049763E /* UserDefaults.swift in Sources */,
+				85A2339C28A5464300F39355 /* SortPortfolioPieChartTickersViewController.swift in Sources */,
 				3342C87726DE0C730049763E /* SortCollectionDetailsViewController.swift in Sources */,
 				33BD00F328475A88009637FF /* RedeemInvitation.graphql.swift in Sources */,
 				33E1828126D399BB00A1D2AC /* NewsViewCell.swift in Sources */,
@@ -3545,6 +3552,7 @@
 				3AA1CA74266A643C005C0712 /* UIFont+Rounded.swift in Sources */,
 				3AE7957B2663837F002B40D6 /* ViewControllerFactory.swift in Sources */,
 				85E4A2962756C4C100C0E5C5 /* ButtonTableViewCell.swift in Sources */,
+				85A2339B28A5464300F39355 /* SortPortfolioPieChartViewController.swift in Sources */,
 				8579517926E2740A003B751C /* PersonalizationPickInterestsFooterView.swift in Sources */,
 				3AE7954C2662A85D002B40D6 /* UIColor+Gainy.swift in Sources */,
 				85AFD58726FB5F6E00ED0D51 /* CreateProfile.graphql.swift in Sources */,
