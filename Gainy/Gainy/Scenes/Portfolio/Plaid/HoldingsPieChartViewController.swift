@@ -14,6 +14,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     
     public var onSortingPressed: (() -> Void)?
     public var onSettingsPressed: (() -> Void)?
+    public var onPlusPressed: (() -> Void)?
     
     private var pieChartData: [PieChartData] = []
     private(set) var collectionView: DetectableCollectionView!
@@ -198,6 +199,10 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             
             headerView.onSortingPressed = {
                 self.onSortingPressed?()
+            }
+            
+            headerView.onPlusPressed = {
+                self.onPlusPressed?()
             }
             
             headerView.onChartTickerButtonPressed = {

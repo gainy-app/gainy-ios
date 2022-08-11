@@ -116,12 +116,17 @@ final class HoldingsViewController: BaseViewController {
         self.showSortingPanel()
     }
     
-    @IBAction func onLinkButtonTapped(_ sender: UIButton) {
+    func onLinkButtonTapped() {
         
         guard self.presentedViewController == nil else {return}
         
         GainyAnalytics.logEvent("link_button_pressed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
         self.showLinkUnlinkPlaid()
+    }
+    
+    @IBAction func onLinkButtonTapped(_ sender: UIButton) {
+        
+        self.onLinkButtonTapped()
     }
     
     @IBAction func onViewModeButtonTapped(_ sender: UIButton) {
@@ -149,6 +154,10 @@ final class HoldingsViewController: BaseViewController {
         
         holdingPieChartViewController.onSortingPressed = {
             self.onSortButtonTapped()
+        }
+        
+        holdingPieChartViewController.onPlusPressed = {
+            self.onLinkButtonTapped()
         }
         
         self.pieChartViewController = holdingPieChartViewController

@@ -15,6 +15,7 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
     
     public var onSortingPressed: (() -> Void)?
     public var onSettingsPressed: (() -> Void)?
+    public var onPlusPressed: (() -> Void)?
     
     public var onChartTickerButtonPressed: (() -> Void)?
     public var onChartCategoryButtonPressed: (() -> Void)?
@@ -26,6 +27,8 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
     private var settingsLbl: UILabel?
     private var sortByButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
     private var settingsButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var plusButton: ResponsiveButton = ResponsiveButton.newAutoLayout()
+    private var buttonsView: UIView?
     private var chartView: UIView? = nil
     private var loadingView: UIActivityIndicatorView? = nil
     
@@ -143,6 +146,9 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         self.sortByButton = ResponsiveButton.newAutoLayout()
         self.settingsButton.removeFromSuperview()
         self.settingsButton = ResponsiveButton.newAutoLayout()
+        self.plusButton.removeFromSuperview()
+        self.plusButton = ResponsiveButton.newAutoLayout()
+        self.buttonsView?.removeFromSuperview()
         self.sortLbl?.removeFromSuperview()
         self.sortLbl = nil
         self.settingsLbl?.removeFromSuperview()
@@ -348,14 +354,70 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         toalPriceAbsoluteValueLabel.text = sumValue.priceRaw// "$ 156,228.50"
         toalPriceAbsoluteValueLabel.sizeToFit()
         
+        let buttonsView = UIView.newAutoLayout()
+        buttonsView.backgroundColor = UIColor.clear
+        self.addSubview(buttonsView)
+        buttonsView.autoSetDimension(.height, toSize: 24.0)
+        buttonsView.autoPinEdge(.top, to: .bottom, of: pieChartView, withOffset: 32.0)
+        buttonsView.autoAlignAxis(toSuperviewAxis: .vertical)
+        buttonsView.autoSetDimension(.width, toSize: 10, relation: NSLayoutConstraint.Relation.greaterThanOrEqual)
+        self.buttonsView = buttonsView
+        
+        
+        settingsButton.layer.cornerRadius = 8.0
+        settingsButton.layer.cornerCurve = .continuous
+        settingsButton.fillRemoteButtonBack()
+        settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
+        buttonsView.addSubview(settingsButton)
+        settingsButton.autoPinEdge(toSuperviewEdge: .left)
+        settingsButton.autoPinEdge(toSuperviewEdge: .top)
+        settingsButton.autoPinEdge(toSuperviewEdge: .bottom)
+        settingsButton.autoSetDimension(.height, toSize: 24.0)
+        
+        let slidersIconImageView = UIImageView.newAutoLayout()
+        slidersIconImageView.image = UIImage(named: "sliders")
+        settingsButton.addSubview(slidersIconImageView)
+        slidersIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
+        slidersIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        slidersIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        
+        let settingsByLabel = UILabel.newAutoLayout()
+        settingsByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        settingsByLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsByLabel.numberOfLines = 1
+        settingsByLabel.textAlignment = .center
+        settingsByLabel.text = "View"
+        settingsButton.addSubview(settingsByLabel)
+        settingsByLabel.autoSetDimensions(to: CGSize.init(width: 25, height: 16))
+        settingsByLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 26.0)
+        settingsByLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        settingsByLabel.sizeToFit()
+        
+        let settingsLabel = UILabel.newAutoLayout()
+        settingsLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
+        settingsLabel.textColor = UIColor.init(hexString: "#09141F")
+        settingsLabel.numberOfLines = 1
+        settingsLabel.textAlignment = .center
+        settingsLabel.text = "All platforms"
+        settingsButton.addSubview(settingsLabel)
+        settingsLabel.autoSetDimension(.height, toSize: 16)
+        settingsLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 53.0)
+        settingsLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        settingsLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        
+        settingsLabel.sizeToFit()
+        settingsLbl = settingsLabel
+        
+        
         sortByButton.layer.cornerRadius = 8
         sortByButton.layer.cornerCurve = .continuous
         sortByButton.fillRemoteButtonBack()
         sortByButton.addTarget(self, action: #selector(sortTapped), for: .touchUpInside)
-        self.addSubview(sortByButton)
-        sortByButton.autoPinEdge(.left, to: .left, of: self, withOffset: self.center.x + 2.5)
+        buttonsView.addSubview(sortByButton)
+        sortByButton.autoPinEdge(.left, to: .right, of: settingsButton, withOffset: 5.0)
+        sortByButton.autoPinEdge(toSuperviewEdge: .top)
+        sortByButton.autoPinEdge(toSuperviewEdge: .bottom)
         sortByButton.autoSetDimension(.height, toSize: 24.0)
-        sortByButton.autoPinEdge(.top, to: .bottom, of: pieChartView, withOffset: 32.0)
 
         let reorderIconImageView = UIImageView.newAutoLayout()
         reorderIconImageView.image = UIImage(named: "reorder")
@@ -391,48 +453,18 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
         textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
         textLabel.sizeToFit()
         
-        settingsButton.layer.cornerRadius = 8.0
-        settingsButton.layer.cornerCurve = .continuous
-        settingsButton.fillRemoteButtonBack()
-        settingsButton.addTarget(self,action: #selector(settingsTapped), for: .touchUpInside)
-        self.addSubview(settingsButton)
-        settingsButton.autoPinEdge(.right, to: .right, of: self, withOffset: -self.center.x - 2.5)
-        settingsButton.autoSetDimension(.height, toSize: 24.0)
-        settingsButton.autoPinEdge(.top, to: .bottom, of: pieChartView, withOffset: 32.0)
         
-        let slidersIconImageView = UIImageView.newAutoLayout()
-        slidersIconImageView.image = UIImage(named: "sliders")
-        settingsButton.addSubview(slidersIconImageView)
-        slidersIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
-        slidersIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
-        slidersIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        plusButton.setImage(UIImage.init(named: "add_account"), for: .normal)
+        plusButton.fillRemoteButtonBack()
+        plusButton.addTarget(self, action: #selector(plusTapped), for: .touchUpInside)
+        buttonsView.addSubview(plusButton)
+        plusButton.autoPinEdge(.left, to: .right, of: sortByButton, withOffset: 5.0)
+        plusButton.autoPinEdge(toSuperviewEdge: .top)
+        plusButton.autoPinEdge(toSuperviewEdge: .bottom)
+        plusButton.autoSetDimension(.height, toSize: 24.0)
+        plusButton.autoSetDimension(.width, toSize: 24.0)
+        plusButton.autoPinEdge(toSuperviewEdge: .trailing)
         
-        let settingsByLabel = UILabel.newAutoLayout()
-        settingsByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
-        settingsByLabel.textColor = UIColor.init(hexString: "#09141F")
-        settingsByLabel.numberOfLines = 1
-        settingsByLabel.textAlignment = .center
-        settingsByLabel.text = "View"
-        settingsButton.addSubview(settingsByLabel)
-        settingsByLabel.autoSetDimensions(to: CGSize.init(width: 25, height: 16))
-        settingsByLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 26.0)
-        settingsByLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
-        settingsByLabel.sizeToFit()
-        
-        let settingsLabel = UILabel.newAutoLayout()
-        settingsLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
-        settingsLabel.textColor = UIColor.init(hexString: "#09141F")
-        settingsLabel.numberOfLines = 1
-        settingsLabel.textAlignment = .center
-        settingsLabel.text = "All platforms"
-        settingsButton.addSubview(settingsLabel)
-        settingsLabel.autoSetDimension(.height, toSize: 16)
-        settingsLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 53.0)
-        settingsLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
-        settingsLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
-        
-        settingsLabel.sizeToFit()
-        settingsLbl = settingsLabel
         updateFilterButtonTitle()
     }
     
@@ -478,6 +510,14 @@ final class HoldingPieChartCollectionHeaderView: UICollectionReusableView {
     private func settingsTapped() {
         
         if let block = self.onSettingsPressed {
+            block()
+        }
+    }
+    
+    @objc
+    private func plusTapped() {
+        
+        if let block = self.onPlusPressed {
             block()
         }
     }
