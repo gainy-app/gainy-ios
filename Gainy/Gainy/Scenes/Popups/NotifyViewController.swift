@@ -145,6 +145,10 @@ final class NotifyViewController: BaseViewController {
         GainyAnalytics.logEvent("notify_me_tap_close", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "NotifyViewController"])
         self.dismiss(animated: true)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
 
 extension NotifyViewController: UITextFieldDelegate {

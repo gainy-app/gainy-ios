@@ -74,6 +74,10 @@ final class HomeTickerInnerTableViewCell: UICollectionViewCell {
                   
             growLbl.text = storedData?.priceChangeToday.percentUnsigned ?? ""
             growLbl.textColor = priceChange >= 0.0 ? UIColor(named: "mainGreen") : UIColor(named: "mainRed")
+            if priceChange == 0.0 {
+                growLbl.textColor = .lightGray
+                priceLbl.textColor = .lightGray
+            }
             arrowImgView.image = UIImage(named: priceChange >= 0.0 ? "small_up" : "small_down")
             
             let addedToWatchlist = UserProfileManager.shared.watchlist.contains { item in

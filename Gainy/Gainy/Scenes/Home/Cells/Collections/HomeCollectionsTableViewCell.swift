@@ -137,10 +137,18 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
                 growLbl.textColor = UIColor.Gainy.mainText
                 
             } else {
-                growContainer.backgroundColor = UIColor.Gainy.mainRed
-                arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
-                arrowImgView.tintColor = .white
-                growLbl.textColor = .white
+                if (collection.metrics?.relativeDailyChange ?? 0.0) < 0.0 {
+                    growContainer.backgroundColor = UIColor.Gainy.mainRed
+                    arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = .white
+                    growLbl.textColor = .white
+                    
+                } else {
+                    growContainer.backgroundColor = .lightGray
+                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = .darkGray
+                    growLbl.textColor = .darkGray
+                }
             }
             growLbl.text = (collection.metrics?.relativeDailyChange ?? 0.0).percentUnsigned
             

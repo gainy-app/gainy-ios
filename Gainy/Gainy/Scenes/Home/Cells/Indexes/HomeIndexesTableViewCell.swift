@@ -48,12 +48,18 @@ final class HomeIndexesTableViewCell: UITableViewCell {
                 balanceLbl.text = gains.actualValue?.price ?? ""
                 
                 let isGrowing = (gains.relativeGain_1d ?? 0.0) > 0.0
+                let isEmpty = (gains.relativeGain_1d ?? 0.0) == 0.0
                 growLbl.text = gains.relativeGain_1d?.percentUnsigned ?? ""
                 growPriceLbl.text = gains.absoluteGain_1d?.price ?? ""
                 growArrow.image = UIImage(named: isGrowing ? "small_up" : "small_down")
                 
-                growLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
-                growPriceLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
+                if !isEmpty {
+                    growLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
+                    growPriceLbl.textColor = UIColor(named: isGrowing ? "mainGreen" : "mainRed")
+                } else {
+                    growLbl.textColor = .lightGray
+                    growPriceLbl.textColor = .lightGray
+                }
                 bottomDots.isHidden = true
             } else {
                 bottomDots.isHidden = true

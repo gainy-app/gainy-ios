@@ -71,6 +71,18 @@ struct WSRView: View {
         return formatter.string(from: NSNumber(value: viewModel.totalScore)) ?? ""
     }
     var body: some View {
+        if #available(iOS 14.0, *) {
+            pieBody
+                .ignoresSafeArea()
+                .padding(.top, 0)
+        } else {
+            pieBody
+                .padding(.top, 0)
+        }
+    }
+    
+    var pieBody: some View {
+        Group {
         ZStack {
             HStack {
                 ZStack {
@@ -90,7 +102,7 @@ struct WSRView: View {
                     }
                 }
                 .frame(width: 119, height: 119)
-                .offset(y: 32)
+                .offset(y: 0)
                 
                 Spacer().frame(width: 62)
                 VStack(alignment: .center, spacing: 10) {
@@ -107,7 +119,7 @@ struct WSRView: View {
                                 .frame(height: 16)
                         }
                     }
-                }
+                }.offset(y: -20)
                 
             }
             .fixedSize(horizontal: false, vertical: false)
@@ -116,12 +128,14 @@ struct WSRView: View {
                     self.loadStats()
                 }
             })
-            targetView
-                .offset(x:8, y: 30)
-        }.onReceive(viewModel.progressUpdate) { _ in
-            DispatchQueue.main.async {
-                self.loadStats()
+            .onReceive(viewModel.progressUpdate) { _ in
+                DispatchQueue.main.async {
+                    self.loadStats()
+                }
             }
+            targetView
+                .offset(x:6, y: -10)
+        }
         }
     }
     

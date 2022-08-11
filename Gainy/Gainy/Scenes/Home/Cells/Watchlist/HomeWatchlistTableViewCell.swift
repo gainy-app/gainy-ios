@@ -140,18 +140,22 @@ final class HomeWatchlistInnerTableViewCell: UICollectionViewCell {
             self.todayLbl.sizeToFit()
             self.growContainer.sizeToFit()
             if (ticker?.realtimeMetrics?.relativeDailyChange ?? 0.0) > 0.0 {
-                
                 arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
                 arrowImgView.tintColor = UIColor.Gainy.mainGreen
                 self.relativeChangeLbl.textColor = UIColor.Gainy.mainGreen
                 self.absoluteChangeLbl.textColor = UIColor.Gainy.mainGreen
-                
             } else {
-                
-                arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
-                arrowImgView.tintColor = UIColor.Gainy.mainRed
-                self.relativeChangeLbl.textColor = UIColor.Gainy.mainRed
-                self.absoluteChangeLbl.textColor = UIColor.Gainy.mainRed
+                if (ticker?.realtimeMetrics?.relativeDailyChange ?? 0.0) == 0.0 {
+                    arrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = .lightGray
+                    self.relativeChangeLbl.textColor = .lightGray
+                    self.absoluteChangeLbl.textColor = .lightGray
+                } else {
+                    arrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
+                    arrowImgView.tintColor = UIColor.Gainy.mainRed
+                    self.relativeChangeLbl.textColor = UIColor.Gainy.mainRed
+                    self.absoluteChangeLbl.textColor = UIColor.Gainy.mainRed
+                }
             }
             
             self.nameLbl.text = ticker?.name?.companyMarkRemoved ?? ""

@@ -52,7 +52,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         blurView.autoPinEdge(toSuperviewEdge: .leading)
         blurView.autoPinEdge(toSuperviewEdge: .top)
         blurView.autoPinEdge(toSuperviewEdge: .trailing)
-        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset + 8.0)
+        blurView.autoSetDimension(.height, toSize: navigationBarTopOffset)
         blurView.intensity = 0.3
         
         let titleLbl = UILabel(frame: CGRect.init(x: 24, y: 28, width: 110, height: 32))
@@ -150,7 +150,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             collectionViewLayout: customLayout
         )
         view.addSubview(discoverCollectionsCollectionView)
-        discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset)
+        discoverCollectionsCollectionView.autoPinEdge(.top, to: .top, of: view, withOffset: navigationBarTopOffset + 16.0)
         discoverCollectionsCollectionView.autoPinEdge(.leading, to: .leading, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.trailing, to: .trailing, of: view)
         discoverCollectionsCollectionView.autoPinEdge(.bottom, to: .bottom, of: view)

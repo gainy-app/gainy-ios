@@ -30,7 +30,7 @@ final class HomeIndexView: CornerView {
                 growLbl.textColor = UIColor(named: indexModel.grow >= 0.0 ? "mainGreen" : "mainRed")
                 } else {
                     growImgView.image = nil
-                    growLbl.text = "0.0"
+                    growLbl.text = "0.0%"
                     growLbl.textColor = .lightGray
                 }
                 
