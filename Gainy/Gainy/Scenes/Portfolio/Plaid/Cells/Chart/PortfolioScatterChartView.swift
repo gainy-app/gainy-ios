@@ -146,8 +146,8 @@ struct PortfolioScatterChartView: View {
                     .animation(.none)
             }
         }
-        .padding(.leading, 16)
-        .padding(.trailing, 16)
+        .padding(.leading, 24)
+        .padding(.trailing, 24)
         .frame(height: 48)
         .animation(.easeIn)
     }
