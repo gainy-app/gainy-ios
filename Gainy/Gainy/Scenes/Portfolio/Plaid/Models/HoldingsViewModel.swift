@@ -160,6 +160,7 @@ final class HoldingsViewModel {
                     self.categoriesCount = categories.count
                     
                     let defaultSettings = PortfolioSettings.init(sorting: .matchScore,
+                                                                 pieChartMode: .categories,
                                                                  ascending: false,
                                                                  includeClosedPositions: true,
                                                                  onlyLongCapitalGainTax: false,
