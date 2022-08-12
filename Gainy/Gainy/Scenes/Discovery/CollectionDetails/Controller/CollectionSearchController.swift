@@ -210,12 +210,8 @@ final class CollectionSearchController: NSObject {
         }
     }
     
-    func reloadSuggestedCollections() {
-        guard let profileID = UserProfileManager.shared.profileID else {return}
-        let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
-        let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-        
-        UserProfileManager.shared.getProfileCollections(loadProfile: true, forceReload: !shown) { success in
+    func reloadSuggestedCollections() {        
+        UserProfileManager.shared.getProfileCollections(loadProfile: true) { success in
             if success {
                 self.suggestedCollections = UserProfileManager.shared
                     .recommendedCollections

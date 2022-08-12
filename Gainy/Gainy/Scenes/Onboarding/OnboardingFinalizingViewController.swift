@@ -94,6 +94,7 @@ final class OnboardingFinalizingViewController: BaseViewController {
             
             
             if authorizationStatus == .authorizedFully {
+                UserProfileManager.shared.isFromOnboard = true
                 self.coordinator?.dismissModule(animated: true, completion: {
                     if let finishFlow = self.coordinator?.finishFlow {
                         finishFlow()

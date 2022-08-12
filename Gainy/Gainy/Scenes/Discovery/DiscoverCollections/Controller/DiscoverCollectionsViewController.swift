@@ -225,7 +225,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     cell.isUserInteractionEnabled = true
                     GainyAnalytics.logEvent("add_to_your_collection_action", params: ["collectionID": modelItem.id, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
                     
-                    if !(self?.showNextButton ?? false) {
+                    if !(self?.isFromOnboard ?? false) {
                         GainyAnalytics.logEvent("wl_add", params: ["collectionID" : modelItem.id])
                     }
                 }
@@ -365,8 +365,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         view.bringSubviewToFront(navigationBarContainer)
     }
     
+    private var isFromOnboard: Bool = false
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        isFromOnboard = UserProfileManager.shared.isFromOnboard
         refreshAction()
     } 
     
@@ -1053,10 +1055,9 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             refreshControl.endRefreshing()
             return
         }
-        let discoverShownForProfileKey = String(profileID) + "DiscoverCollectionsShownKey"
-        let shown = UserDefaults.standard.bool(forKey: discoverShownForProfileKey)
-        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: showNextButton || !shown) { success in
+        UserProfileManager.shared.getProfileCollections(loadProfile: loadProfile, forceReload: UserProfileManager.shared.isFromOnboard) { success in
             self.refreshControl.endRefreshing()
+            UserProfileManager.shared.isFromOnboard = false
             self.searchController?.reloadSuggestedCollections()
             guard success == true  else {
                 self.initViewModels()
@@ -1110,7 +1111,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
             self.goToCollectionDetails(at: index + increment)
         } else {
             if let recColl = viewModel?.recommendedCollections[indexPath.row] {
-                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: showNextButton)
+                coordinator?.showCollectionDetails(collectionID: recColl.id, delegate: self, haveNoFav: self.isFromOnboard)
                 showNextButton = false
             }
             GainyAnalytics.logEvent("recommended_collection_pressed", params: ["collectionID": UserProfileManager.shared.recommendedCollections[indexPath.row].id, "type" : "recommended", "ec" : "DiscoverCollections"])

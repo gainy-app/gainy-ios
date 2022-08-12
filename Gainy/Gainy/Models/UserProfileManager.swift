@@ -89,6 +89,8 @@ final class UserProfileManager {
     @KeychainDate("subscriptionExpiryDate")
     var subscriptionExpiryDate: Date?
     
+    var isFromOnboard: Bool = false
+    
     public func cleanup() {
         
         favoriteCollections.removeAll()
