@@ -689,6 +689,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             self.showCollectionDetailsBtn?.isHidden = UserProfileManager.shared.yourCollections.isEmpty
             self.tabBarController?.tabBar.isHidden = self.showCollectionDetailsBtn?.isHidden ?? false
             
+            if UserProfileManager.shared.yourCollections.count == 1 {
+                self.discoverCollectionsCollectionView.setContentOffset(.zero, animated: true)
+            }
+            
             self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
             if var snapshot = self.dataSource?.snapshot() {
                 if yourCollectionItem.id == Constants.CollectionDetails.top20ID {
@@ -959,16 +963,11 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(top2, toSection: .topLosers)
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
                     self.updateHeaderHeight()
-                    dataSource.apply(snap, animatingDifferences: true)
                 } else {
                     snap.deleteSections([.topGainers, .topLosers])
                 }
-            } else {
-                if snap.sectionIdentifiers.contains(.topGainers) && snap.sectionIdentifiers.contains(.topLosers) {
-                    snap.deleteSections([.topGainers, .topLosers])
-                }
-                dataSource.apply(snap, animatingDifferences: true)
             }
+            dataSource.apply(snap, animatingDifferences: true)
         }
     }
     
@@ -1042,10 +1041,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
     }
     
     private func getRemoteData(loadProfile: Bool = false, completion: @escaping () -> Void) {
-        guard let profileID = UserProfileManager.shared.profileID else {
-            completion()
-            return
-        }
         guard haveNetwork else {
             completion()
             NotificationManager.shared.showError("Sorry... No Internet connection right now.") { [weak self] in
