@@ -963,11 +963,12 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(top2, toSection: .topLosers)
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
                     self.updateHeaderHeight()
+                    
+                    dataSource.apply(snap, animatingDifferences: true)
                 } else {
                     snap.deleteSections([.topGainers, .topLosers])
                 }
             }
-            dataSource.apply(snap, animatingDifferences: true)
         }
     }
     
