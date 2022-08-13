@@ -73,7 +73,7 @@ final class TickerDetailsAboutViewCell: TickerDetailsViewCell {
     private func heightBasedOnString(_ str: String) -> CGFloat {
         //
         let height = str.heightWithConstrainedWidth(width: UIScreen.main.bounds.width - 60.0 * 2.0, font: UIFont.compactRoundedSemibold(12))
-        return 60.0 + height + 48.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0)
+        return 60.0 + height + 48.0 + ((tickerInfo?.linkedCollections.isEmpty ?? true) ? 0.0 : 88.0 + 16.0)
     }
     
     private func showExplanationWith(title: String, description: String, height: CGFloat, linkText: String? = nil, link: String? = nil) {

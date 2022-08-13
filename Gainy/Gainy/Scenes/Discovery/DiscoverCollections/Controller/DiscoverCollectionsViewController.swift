@@ -702,6 +702,10 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                         snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
                     }
                 } else {
+                    if !snapshot.sectionIdentifiers.contains(.yourCollections) {
+                        snapshot.insertSections([.yourCollections], afterSection: .watchlist)
+                        self.sections.insert(YourCollectionsSectionLayout(), at: 1)
+                    }
                     snapshot.appendItems([yourCollectionItem], toSection: .yourCollections)
                 }
                 snapshot.deleteItems([collectionItemToAdd])
@@ -780,7 +784,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             snapshot.deleteItems([yourCollectionItemToRemove])
             snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
             
-            self.updateHeaderHeight()
+            self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
             dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                 self.onItemDelete?(DiscoverCollectionsSection.yourCollections ,itemId)
             })
@@ -836,21 +840,23 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 snapshot.deleteItems([deleteItems])
                 snapshot.appendItems([updatedRecommendedItem], toSection: .recommendedCollections)
                 
-                self.updateHeaderHeight()
+                self.updateHeaderHeight(snapIsEmpty: snapshot.numberOfItems(inSection: .yourCollections) == 0)
                 dataSource?.apply(snapshot, animatingDifferences: true, completion: {
                     self.onItemDelete?(DiscoverCollectionsSection.yourCollections, itemId)
                 })
                 self.discoverCollectionsCollectionView.reloadData()
             }
-            
         }
         
     }
     
-    private func updateHeaderHeight() {
-        let headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
+    private func updateHeaderHeight(snapIsEmpty: Bool = false ) {
+        var headerHeight: CGFloat = UserProfileManager.shared.yourCollections.isEmpty ? 104.0 : 74.0
+        if snapIsEmpty {
+            headerHeight = 104.0
+        }
         self.noCollectionSectionLayout.headerHeight = headerHeight
-        self.discoverCollectionsCollectionView.collectionViewLayout = self.customLayout
+        self.discoverCollectionsCollectionView.setCollectionViewLayout(self.customLayout, animated: true)
     }
     
     private func reorderItems(
@@ -963,12 +969,13 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                     snap.appendItems(top2, toSection: .topLosers)
                     snap.appendItems(viewModel?.recommendedCollections ?? [], toSection: .recommendedCollections)
                     self.updateHeaderHeight()
-                    
-                    dataSource.apply(snap, animatingDifferences: true)
-                } else {
-                    snap.deleteSections([.topGainers, .topLosers])
                 }
+            } else {
+                sections = [NoCollectionsSectionLayout(headerHeight: 124.0), RecommendedCollectionsSectionLayout()]
+                snap.deleteSections([.yourCollections, .topGainers, .topLosers])
             }
+            dataSource.apply(snap, animatingDifferences: true)
+            self.discoverCollectionsCollectionView.reloadData()
         }
     }
     
@@ -1123,7 +1130,7 @@ extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
     ) -> [UIDragItem] {
         switch indexPath.section {
         case DiscoverCollectionsSection.yourCollections.rawValue:
-            
+            guard !CollectionsManager.shared.collections.isEmpty else { return[] }
             if CollectionsManager.shared.collections.contains(where: { item in
                 (item.id ?? 0) == Constants.CollectionDetails.top20ID
             }), indexPath.row == 0 {

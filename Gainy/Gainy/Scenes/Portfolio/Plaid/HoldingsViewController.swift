@@ -351,6 +351,7 @@ extension HoldingsViewController: HoldingsDataSourceDelegate {
         
         guard let userID = UserProfileManager.shared.profileID else {return}
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
+        GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : range.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Portfolio"])
         
         self.viewModel.clearChats()
         showNetworkLoader()
