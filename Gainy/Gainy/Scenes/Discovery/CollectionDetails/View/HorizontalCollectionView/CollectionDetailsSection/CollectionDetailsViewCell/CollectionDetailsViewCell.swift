@@ -480,8 +480,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         viewModel.setRange(range)
         //viewModel.chartRange = range
         //topChart.isSPPVisible = false
-        topChart.selectedTag = range
         topChart.isLoading = true
+        topChart.selectedTag = range
         Task {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)

@@ -55,7 +55,10 @@ struct TTFScatterChartView: View {
                     chartView
                         .frame(height: 240)
                         .offset(y: -20)
-                        .activityIndicator(isVisible: viewModel.isLoading)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                    ActivityIndicatorView()
+                        .frame(width: 50, height: 50)
+                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
                 }
                 GeometryReader(content: { geometry in
                     bottomMenu(geometry)
