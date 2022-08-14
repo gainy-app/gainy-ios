@@ -973,9 +973,15 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
             } else {
                 sections = [NoCollectionsSectionLayout(headerHeight: 124.0), RecommendedCollectionsSectionLayout()]
                 snap.deleteSections([.yourCollections, .topGainers, .topLosers])
+                self.updateHeaderHeight(snapIsEmpty: true)
             }
-            dataSource.apply(snap, animatingDifferences: true)
-            self.discoverCollectionsCollectionView.reloadData()
+            if #available(iOS 15.0, *) {
+                dataSource.applySnapshotUsingReloadData(snap)
+            } else {
+                dataSource.apply(snap, animatingDifferences: false) {
+                    self.discoverCollectionsCollectionView.reloadData()
+                }
+            }
         }
     }
     
