@@ -344,11 +344,16 @@ final class YourCollectionViewCell: SwipeCollectionViewCell {
             growArrowImgView.tintColor = UIColor.Gainy.mainText
             gainsLabel.textColor = UIColor.Gainy.mainText
             
-        } else {
+        } else if dailyGrow < 0.0 {
             gainsView.backgroundColor = UIColor.Gainy.mainRed
             growArrowImgView.image = UIImage(named: "small_down")?.withRenderingMode(.alwaysTemplate)
             growArrowImgView.tintColor = .white
             gainsLabel.textColor = .white
+        }  else {
+            gainsView.backgroundColor = .lightGray
+            growArrowImgView.image = UIImage(named: "small_up")?.withRenderingMode(.alwaysTemplate)
+            growArrowImgView.tintColor = .darkGray
+            gainsLabel.textColor = .darkGray
         }
         gainsLabel.text = dailyGrow.percentUnsigned
         

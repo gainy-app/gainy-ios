@@ -824,6 +824,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                     self.pageControl?.numberOfPages = count
                     self.pageControl?.currentPage = currentIndex
                     self.currentCollectionID = currentIndex
+                    if !self.collectionView.sk.isSkeletonActive {
+                        self.viewModel?.initialCollectionIndex = currentIndex
+                    }
                 }
                 if let indexPath = items.last?.indexPath {
                     if let cell = self.collectionView.cellForItem(at: indexPath) as? CollectionDetailsViewCell {
