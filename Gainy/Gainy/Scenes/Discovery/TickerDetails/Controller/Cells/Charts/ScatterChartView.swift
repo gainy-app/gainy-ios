@@ -305,53 +305,46 @@ struct ScatterChartView: View {
                 } else {
                     //no_data_graph_down
                     if let metrics = viewModel.ticker.realtimeMetrics, let date =  ((metrics.lastKnownPriceDatetime ?? "").toDate("yyy-MM-dd'T'HH:mm:ssZ")?.date ?? Date()).convertTo(region: Region.current).date {
-                        ZStack(alignment: .center) {
-                            Image(uiImage: UIImage(named: "no_data_graph_up")!)
-                                .padding(.all, 0)
-                            VStack(alignment: .center, spacing: 8.0) {
-                                
-                                Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
-                                    .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
-                                    .font(UIFont.compactRoundedSemibold(14).uiFont)
-                                    .multilineTextAlignment(.center)
-                                
-                                Text(metrics.lastKnownPrice?.price ?? "")
-                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                                    .font(UIFont.compactRoundedSemibold(24).uiFont)
+                            if #available(iOS 15.0, *) {
+                                Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                                    .resizable()
+                                    .padding(.all, 0)
+                                    .frame(maxWidth: .infinity)
+                                    .overlay {
+                                        VStack(alignment: .center, spacing: 8.0) {
+                                            
+                                            Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                                .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                                .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                                .multilineTextAlignment(.center)
+                                            
+                                            Text(metrics.lastKnownPrice?.price ?? "")
+                                                .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                                .font(UIFont.compactRoundedSemibold(24).uiFont)
+                                        }
+                                    }
+                                    .background(Rectangle().stroke())
+                            } else {
+                                ZStack {
+                                    Image(uiImage: UIImage(named: "no_data_graph_up")!)
+                                        .padding(.all, 0)
+                                        .frame(maxWidth: .infinity)
+                                    VStack(alignment: .center, spacing: 8.0) {
+                                        
+                                        Text("Market is closed.\nLast known price for \(date.toRelative(style: RelativeFormatter.defaultStyle(), locale: Locales.current))")
+                                            .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
+                                            .font(UIFont.compactRoundedSemibold(14).uiFont)
+                                            .multilineTextAlignment(.center)
+                                        
+                                        Text(metrics.lastKnownPrice?.price ?? "")
+                                            .foregroundColor(UIColor(named: "mainText")!.uiColor)
+                                            .font(UIFont.compactRoundedSemibold(24).uiFont)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
                             }
-                        }.padding(.leading, 8)
                     }
-                    
-                    //                    VStack {
-                    //                        Spacer()
-                    //                        HStack {
-                    //                            Spacer()
-                    //                            VStack {
-                    //                                Text("Not enough data")
-                    //                                    .foregroundColor(UIColor(named: "mainText")!.uiColor)
-                    //                                    .font(UIFont.proDisplaySemibold(12).uiFont)
-                    //                                Rectangle()
-                    //                                    .fill(UIColor(named: "mainGreen")!.uiColor)
-                    //                                    .frame(height: 2)
-                    //                            }
-                    //                            Spacer()
-                    //                        }
-                    //                        Spacer()
-                    //                    }
                 }
-                //            VStack(alignment: .leading) {
-                //                Spacer()
-                //                HStack {
-                //                    Text("Market closes in 15 MIN".uppercased())
-                //                        .padding(.leading, 20)
-                //                        .foregroundColor(Color(hex: "879095"s))
-                //                        .font(UIFont.proDisplayRegular(9).uiFont)
-                //                    Spacer()
-                //                }
-                //            }
-                //            .opacity(isLeftDurationVis ? 1.0 : 0.0)
-                //            .opacity(isMedianVisible ? 0.0 : 1.0)
-                //            .padding(.bottom, -5)
             }
             .padding(.all, 0)
             .animation(.linear)
