@@ -16,6 +16,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     public var onPlusPressed: (() -> Void)?
     
     private var pieChartData: [PieChartData] = []
+    private var pieChartDataFilteredSorted: [PieChartData] = []
     private(set) var collectionView: DetectableCollectionView!
     private lazy var refreshControl: LottieRefreshControl = {
         let control = LottieRefreshControl()
@@ -126,21 +127,21 @@ final class HoldingsPieChartViewController: BaseViewController {
                         }
                         return nil
                     }
-                    self.pieChartData = [PieChartData]()
+                    self.pieChartDataFilteredSorted = [PieChartData]()
                     self.collectionView.reloadData()
                     self.pieChartData = data
-                    self.collectionView.reloadData()
+                    self.reloadData()
                     
                 } else {
-                    self.pieChartData = [PieChartData]()
-                    self.collectionView.reloadData()
+                    self.pieChartDataFilteredSorted = [PieChartData]()
+                    self.reloadData()
                 }
                 
                 break
             case .failure(let error):
                 dprint("Failure when making GetPortfolioPieChartQuery request. Error: \(error)")
-                self.pieChartData = [PieChartData]()
-                self.collectionView.reloadData()
+                self.pieChartDataFilteredSorted = [PieChartData]()
+                self.reloadData()
                 break
             }
             dprint("\(Date()) PieChart for Porto load end")
@@ -215,7 +216,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return self.currentChartData().count
+        return self.pieChartDataFilteredSorted.count
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -231,7 +232,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
     func chartCardCellForItemAtIndexPath(indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell: CollectionChartCardCell = self.collectionView.dequeueReusableCell(withReuseIdentifier: CollectionChartCardCell.cellIdentifier, for: indexPath) as! CollectionChartCardCell
-        let chartData = self.currentChartData()
+        let chartData = self.pieChartDataFilteredSorted
         guard indexPath.row < chartData.count else {
             return cell
         }
@@ -271,7 +272,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
                 return headerView
             }
             
-            headerView.configureWithPieChartData(pieChartData: self.currentChartData(), mode: settings.pieChartMode)
+            headerView.configureWithPieChartData(pieChartData: self.pieChartDataFilteredSorted, mode: settings.pieChartMode)
             headerView.updateChargeLbl(settings.sortingText(mode: settings.pieChartMode))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
@@ -293,22 +294,22 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             
             headerView.onChartTickerButtonPressed = {
                 PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .tickers)
-                self.collectionView.reloadData()
+                self.reloadData()
             }
             
             headerView.onChartCategoryButtonPressed = {
                 PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .categories)
-                self.collectionView.reloadData()
+                self.reloadData()
             }
             
             headerView.onChartInterestButtonPressed = {
                 PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .interests)
-                self.collectionView.reloadData()
+                self.reloadData()
             }
             
             headerView.onChartSecurityTypeButtonPressed = {
                 PortfolioSettingsManager.shared.changePieChartModeForUserId(userID, pieChartMode: .securityType)
-                self.collectionView.reloadData()
+                self.reloadData()
             }
             headerView.removeBlur()
             headerView.removeBlockView()
@@ -322,14 +323,20 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         return result
     }
     
-    func currentChartData() -> [PieChartData] {
+    private func reloadData() {
+        
+        self.filterAndSortPieChartData()
+        self.collectionView.reloadData()
+    }
+    
+    private func filterAndSortPieChartData() {
         
         guard let profileID = UserProfileManager.shared.profileID else {
             dprint("Missing profileID")
-            return []
+            return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
-            return []
+            return
         }
         
         // TODO: Move filtering/sorting somewhere else
@@ -369,27 +376,28 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         }
         
         guard let viewModel = self.viewModel else {
-            return chartData
+            return
         }
         
         let sorting = settings.sortingValue(mode: settings.pieChartMode)
         let ascending = settings.ascending(mode: settings.pieChartMode)
         let dateFormat = "yyy-MM-dd'T'HH:mm:ssZ"
         
-        chartData = chartData.sorted {  itemLeft, itemRight in
-            
-            var leftHolding: HoldingViewModel? = nil
-            var rightHolding: HoldingViewModel? = nil
+        var symbolToHolding = [String : HoldingViewModel]()
+        for (_, item) in chartData.enumerated() {
             for holding in viewModel.dataSource.originalHoldings {
                 let symbol = holding.tickerSymbol.lowercased()
-                if symbol == (itemLeft.entityId ?? "").lowercased() {
-                    leftHolding = holding
-                }
-                if symbol == (itemRight.entityId ?? "").lowercased() {
-                    rightHolding = holding
+                if symbol == (item.entityId ?? "").lowercased() {
+                    symbolToHolding[symbol] = holding
+                    break;
                 }
             }
+        }
+        
+        chartData = chartData.sorted {  itemLeft, itemRight in
             
+            var leftHolding: HoldingViewModel? = symbolToHolding[(itemLeft.entityId ?? "").lowercased()]
+            var rightHolding: HoldingViewModel? = symbolToHolding[(itemRight.entityId ?? "").lowercased()]
             var canSort = (sorting == .name || sorting == .weight)
             if !canSort && (leftHolding != nil) && (rightHolding != nil) {
                 canSort = true
@@ -474,7 +482,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         }
         
-        return chartData
+        self.pieChartDataFilteredSorted = chartData
     }
 }
 
@@ -506,7 +514,7 @@ extension HoldingsPieChartViewController: FloatingPanelControllerDelegate {
 extension HoldingsPieChartViewController: SortPortfolioPieChartViewControllerDelegate {
     func selectionChanged(vc: SortPortfolioPieChartViewController, sorting: PortfolioSortingField, ascending: Bool) {
         self.fpc.dismiss(animated: true, completion: nil)
-        self.collectionView.reloadData()
+        self.reloadData()
     }
 }
 
@@ -515,7 +523,7 @@ extension HoldingsPieChartViewController: SortPortfolioPieChartViewControllerDel
 extension HoldingsPieChartViewController: SortPortfolioPieChartTickersViewControllerDelegate {
     func selectionChanged(vc: SortPortfolioPieChartTickersViewController, sorting: PortfolioSortingField, ascending: Bool) {
         self.fpc.dismiss(animated: true, completion: nil)
-        self.collectionView.reloadData()
+        self.reloadData()
     }
 }
 
