@@ -78,7 +78,9 @@ final class HistoricalChartsLoader {
             dateString = "1900-01-01"
             periodString = "all"
         }
+        print("Thread \(Thread.isMainThread) \(Date()) DiscoverChartsQuery start")
         Network.shared.apollo.fetch(query: DiscoverChartsQuery(period: periodString, symbol: symbol)) {result in
+            print("Thread \(Thread.isMainThread) \(Date()) DiscoverChartsQuery done")
             switch result {
             case .success(let graphQLResult):
                 if var fetchedData = graphQLResult.data?.chart.filter({$0.close != nil}) {

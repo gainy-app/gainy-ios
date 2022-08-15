@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftDate
+import ActivityIndicatorView
 
 extension Color {
     init(hex: String) {
@@ -101,7 +102,11 @@ struct ScatterChartView: View {
                     headerView
                     chartView
                         .padding(.top, 20)
-                        .activityIndicator(isVisible: viewModel.isLoading)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                    ActivityIndicatorView()
+                        .frame(width: 50, height: 50)
+                        .offset(y: -70)
+                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
@@ -123,7 +128,11 @@ struct ScatterChartView: View {
                     headerView
                     chartView
                         .padding(.top, 20)
-                        .activityIndicator(isVisible: viewModel.isLoading)
+                        .opacity(viewModel.isLoading ? 0.0 : 1.0)
+                    ActivityIndicatorView()
+                        .frame(width: 50, height: 50)
+                        .offset(y: -70)
+                        .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)

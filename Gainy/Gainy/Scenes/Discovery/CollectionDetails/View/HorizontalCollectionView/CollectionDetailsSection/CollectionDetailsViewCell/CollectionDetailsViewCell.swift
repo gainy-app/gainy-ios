@@ -234,8 +234,8 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         let topChartData = ChartData(points: main, period: viewModel.chartRange)
         var medianData: ChartData!
-        if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
-            var pcts: [Float] = []
+        if let firstMedian: Double = median.first?.val, let firstMain: Double = main.first?.val {
+            var pcts: [Double] = []
             for val in median.compactMap({$0.val}) {
                 let cur = val / firstMedian
                 pcts.append(firstMain * cur)

@@ -43,14 +43,14 @@ class TickerInfo {
         } else {
             self.about = String((ticker.description ?? ""))
         }
-            
+        
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         self.tags = []
         self.matchTags = []
         self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
         self.wsjData = WSRData(rate: 0.0, targetPrice: 0.0, analystsCount: 0, detailedStats: [])
-       
+        
         self.wsrAnalystsCount = 0
         self.recommendedScore = 0.0
         self.medianIndustry = 1
@@ -126,7 +126,7 @@ class TickerInfo {
     private(set) var isMainDataLoaded: Bool = false
     var isChartDataLoaded: Bool = false
     private var matchLoadTask: Task<Void, Never>?
-
+    
     func loadDetails(mainDataLoaded:  @escaping () -> Void, chartsLoaded:  @escaping () -> Void) {
         let queue = DispatchQueue.init(label: "TickerInfo.loadDetails")
         let mainDS = DispatchGroup()
@@ -180,9 +180,9 @@ class TickerInfo {
                     switch result {
                     case .success(let graphQLResult):
                         
-                         if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
+                        if let tickerDetails = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerExtraDetails}).first {
                             self?.upcomingEvents = tickerDetails.tickerEvents
-                             let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name: ($0.gainyIndustry?.name ?? ""),
+                            let industries = tickerDetails.tickerIndustries.compactMap({TickerTag.init(name: ($0.gainyIndustry?.name ?? ""),
                                                                                                        url: "",
                                                                                                        collectionID: $0.gainyIndustry?.collectionId ?? -404,
                                                                                                        id: $0.gainyIndustry?.id ?? -404
@@ -194,33 +194,33 @@ class TickerInfo {
                             
                             self?.tags = categories + industries
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
-                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
-                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "NEUTRAL", count: tickerDetails.tickerAnalystRatings?.hold ?? 0),
-                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "BEARISH", count: tickerDetails.tickerAnalystRatings?.sell ?? 0),
-                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "VERY BEARISH", count: tickerDetails.tickerAnalystRatings?.strongSell ?? 0)])
+                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
+                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "NEUTRAL", count: tickerDetails.tickerAnalystRatings?.hold ?? 0),
+                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "BEARISH", count: tickerDetails.tickerAnalystRatings?.sell ?? 0),
+                                                                                                                                                                                                                      WSRData.WSRDataDetails(name: "VERY BEARISH", count: tickerDetails.tickerAnalystRatings?.strongSell ?? 0)])
                             let wsrParts = [(tickerDetails.tickerAnalystRatings?.strongBuy ?? 0), (tickerDetails.tickerAnalystRatings?.buy ?? 0), (tickerDetails.tickerAnalystRatings?.hold ?? 0), (tickerDetails.tickerAnalystRatings?.sell ?? 0), (tickerDetails.tickerAnalystRatings?.strongSell ?? 0)]
                             self?.wsrAnalystsCount = wsrParts.reduce(0, +)
-                             
-                             if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
-                                 self?.medianIndustry = mainIndustry.industryId
-                             }
-                             self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
-                             self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
-                                 $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
-                             }).first?.uniqId ?? ""
-                             if let self = self {
-                                 self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
-                                     self.isChartDataLoaded = true
-                                     if let chartCache = self.chartsCache[.d1] {
-                                         self.updateChartData(chartCache.chartData)
-                                         self.medianGrow = chartCache.medianGrow
-                                         self.haveMedian = chartCache.haveMedian
-                                     }
-                                     DispatchQueue.main.async {
-                                         chartsLoaded()
-                                     }
-                                 }
-                             }                             
+                            
+                            if let mainIndustry  = tickerDetails.tickerIndustries.sorted(by: {($0.industryOrder ?? 1) < ($1.industryOrder ?? 1)}).first  {
+                                self?.medianIndustry = mainIndustry.industryId
+                            }
+                            self?.linkedCollections = tickerDetails.tickerCollections.compactMap({$0.collection?.fragments.remoteCollectionDetails}).filter({$0.enabled == "1"}).uniqued()
+                            self?.prefferedLinkedCollectionID = (self?.linkedCollections ?? []).sorted(by: {
+                                $0.metrics?.marketCapitalizationSum ?? 0 > $1.metrics?.marketCapitalizationSum ?? 0
+                            }).first?.uniqId ?? ""
+                            if let self = self {
+                                self.loadChartFromServer(period: self.chartRange, dispatchGroup: chartsDS) {
+                                    self.isChartDataLoaded = true
+                                    if let chartCache = self.chartsCache[.d1] {
+                                        self.updateChartData(chartCache.chartData)
+                                        self.medianGrow = chartCache.medianGrow
+                                        self.haveMedian = chartCache.haveMedian
+                                    }
+                                    DispatchQueue.main.async {
+                                        chartsLoaded()
+                                    }
+                                }
+                            }
                         }
                         
                         mainDS.leave()
@@ -263,7 +263,7 @@ class TickerInfo {
                         self?.altStocks = tickers.filter({$0.symbol != self?.symbol}).uniqued().sorted(by: {
                             ($0.matchScore?.matchScore ?? 0) > ($1.matchScore?.matchScore ?? 0)
                         })
-
+                        
                         for tickLivePrice in tickers.compactMap(\.realtimeMetrics) {
                             TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
                         }
@@ -330,7 +330,11 @@ class TickerInfo {
             self.haveMedian = chartCache.haveMedian
             completion?()
         } else {
-            loadChartFromServer(period: period, completion)
+            print("Thread loadNewChartData \(Thread.isMainThread)")
+            DispatchQueue.global(qos: .background).async {[weak self] in
+                print("Thread \(Date()) started")
+                self?.loadChartFromServer(period: period, completion)
+            }
         }
     }
     
@@ -354,54 +358,60 @@ class TickerInfo {
     
     private func loadChartFromServer(period: ScatterChartView.ChartPeriod, dispatchGroup: DispatchGroup? = nil, _ completion: ( () -> Void)?) {
         dispatchGroup?.enter()
+        print("Thread \(Date()) loadChartFromServer group")
         
         var mainChart: [ChartNormalized] = []
         var medianChart: [ChartNormalized] = []
         
         let innerGroup = DispatchGroup()
         innerGroup.enter()
-        HistoricalChartsLoader.shared.loadChart(symbol: symbol, range: period) {[weak self] chartData, chartRemData in
-            
-            self?.setChartsCache(period, chartData: chartData)
-            
-            if dispatchGroup == nil {
-                self?.updateChartData(chartData)
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            HistoricalChartsLoader.shared.loadChart(symbol: self?.symbol ?? "", range: period) {[weak self] chartData, chartRemData in
+                
+                self?.setChartsCache(period, chartData: chartData)
+                
+                if dispatchGroup == nil {
+                    self?.updateChartData(chartData)
+                }
+                mainChart = chartRemData
+                
+                innerGroup.leave()
             }
-            mainChart = chartRemData
-            
-            innerGroup.leave()
         }
         
         innerGroup.enter()
-        loadMedianForRange(period, collectionUniqId: prefferedLinkedCollectionID ) {[weak self] dailyStats in
-            
-            if dailyStats.count > 1 {
-                let firstDay = dailyStats.first?.adjustedClose ?? 0.0
-                let lastDay = dailyStats.last?.adjustedClose  ?? 0.0
-                self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
-                self?.haveMedian = true
-                self?.setMedianData(period, medianGrow: self?.pctDiff(firstDay, lastDay) ?? 0.0, haveMedian: true)
-            } else {
-                self?.medianGrow = 0.0
-                self?.haveMedian = false
-                self?.setMedianData(period, medianGrow: 0.0, haveMedian: false)
+        DispatchQueue.global(qos: .background).async {[weak self] in
+            self?.loadMedianForRange(period, collectionUniqId: self?.prefferedLinkedCollectionID ?? "") {[weak self] dailyStats in
+                
+                if dailyStats.count > 1 {
+                    let firstDay = dailyStats.first?.adjustedClose ?? 0.0
+                    let lastDay = dailyStats.last?.adjustedClose  ?? 0.0
+                    self?.medianGrow = self?.pctDiff(firstDay, lastDay) ?? 0.0
+                    self?.haveMedian = true
+                    self?.setMedianData(period, medianGrow: self?.pctDiff(firstDay, lastDay) ?? 0.0, haveMedian: true)
+                } else {
+                    self?.medianGrow = 0.0
+                    self?.haveMedian = false
+                    self?.setMedianData(period, medianGrow: 0.0, haveMedian: false)
+                }
+                medianChart = dailyStats
+                
+                innerGroup.leave()
             }
-            medianChart = dailyStats
-            
-            innerGroup.leave()
         }
         
-        innerGroup.notify(queue: .main) { [weak self] in
+        innerGroup.notify(queue: DispatchQueue.global(qos: .background)) { [weak self] in
             guard let self = self else {return}
-            
+            print("Thread \(Thread.isMainThread) \(Date()) innerGroup notify")
             //Normalize
             let (main, median) = normalizeCharts(mainChart, medianChart)
-            
+            print("Thread \(Date()) norm done1")
             let mainData = ChartData(points: main, period: period)
             
+            print("Thread \(Date()) norm done2")
             var medianData: ChartData!
-            if let firstMedian: Float = median.first?.val, let firstMain: Float = main.first?.val {
-                var pcts: [Float] = []
+            if let firstMedian: Double = median.first?.val, let firstMain: Double = main.first?.val {
+                var pcts: [Double] = []
                 for val in median.compactMap({$0.val}) {
                     let cur = val / firstMedian
                     pcts.append(firstMain * cur)
@@ -409,7 +419,8 @@ class TickerInfo {
                 medianData = ChartData(points: pcts)
             } else {
                 medianData = ChartData(points: median, period: period)
-            }            
+            }
+            print("Thread \(Date()) norm done3")
             
             self.medianGrow = Float(medianData.startEndDiff)
             self.setChartsCache(period, chartData: mainData)
@@ -420,7 +431,11 @@ class TickerInfo {
             //}
             
             self.setMedianData(period, medianGrow: self.medianGrow, haveMedian: self.haveMedian, medianChart: medianData)
-            completion?()
+            print("Thread \(Date()) median set")
+            DispatchQueue.main.async {
+                print("Thread \(Date()) 1 loaded")
+                completion?()
+            }
             dispatchGroup?.leave()
         }
     }
@@ -431,6 +446,8 @@ class TickerInfo {
         haveMedian = false
         
         Network.shared.apollo.fetch(query: GetTtfChartQuery.init(uniqID: collectionUniqId, period: range.rawValue.lowercased())) {[weak self] result in
+            
+            print("Thread \(Thread.isMainThread) \(Date()) GetTtfChartQuery done")
             switch result {
             case .success(let graphQLResult):
                 if let dailyStats = graphQLResult.data?.collectionChart {

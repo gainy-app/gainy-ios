@@ -373,6 +373,7 @@ extension TickerDetailsDataSource: ScatterChartViewDelegate {
             self.chartViewModel.medianData = self.ticker.localMedianData
             self.delegate?.loadingState(started: false)
             self.chartViewModel.isLoading = false
+            print("Thread \(Date()) loaded")
         }
     }
     func comparePressed() {

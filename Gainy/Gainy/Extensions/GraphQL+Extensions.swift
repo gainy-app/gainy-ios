@@ -114,8 +114,17 @@ extension DiscoverNewsQuery.Data.FetchNewsDatum: RemoteDateTimeConvertable {
 
 typealias RemoteChartData = DiscoverChartsQuery.Data.Chart
 
+class SharedFormatters {
+    static let shared = SharedFormatters()
+    
+    lazy var yearFormatter: DateFormatter = {
+        let dt = DateFormatter()
+        dt.dateFormat = "MM-yy"
+        return dt
+    }()
+}
+
 extension RemoteChartData: RemoteDateTimeConvertable {
-        
     func labelForPeriod(_ period: ScatterChartView.ChartPeriod) -> String {
         let formatter = DateFormatter()
         
@@ -126,18 +135,25 @@ extension RemoteChartData: RemoteDateTimeConvertable {
         case .w1:
             formatter.dateFormat = "MM-dd HH:mm"
             break
-        case .y5,.all:
+        case .y5:
             if date.year == Date().year {
                 formatter.dateFormat = "MM-dd"
             } else {
                 formatter.dateFormat = "MM-dd-yy"
             }
             break
+            
+        case .all:
+            break
         default:
             formatter.dateFormat = "MM-dd"
             break
         }
-        return formatter.string(from: date)
+        if period == .all {
+            return SharedFormatters.shared.yearFormatter.string(from: date)
+        } else {
+            return formatter.string(from: date)
+        }
     }
 }
 

@@ -136,14 +136,14 @@ protocol ChartMergable {
         get
     }
     
-    var val: Float {
+    var val: Double {
         get
     }
 }
 
 extension DiscoverChartsQuery.Data.Chart: ChartMergable {
-    var val: Float {
-        adjustedClose ?? 0.0
+    var val: Double {
+        Double(adjustedClose ?? 0.0)
     }
 }
 
@@ -156,14 +156,14 @@ extension GetPortfolioChartsQuery.Data.GetPortfolioChart {
 }
 
 extension GetPortfolioChartsQuery.Data.GetPortfolioChart: ChartMergable {
-    var val: Float {
-        Float(adjustedClose ?? 0.0)
+    var val: Double {
+        Double(adjustedClose ?? 0.0)
     }
 }
 
 extension GetTtfChartQuery.Data.CollectionChart: ChartMergable {
-    var val: Float {
-        Float(adjustedClose ?? 0.0)
+    var val: Double {
+        Double(adjustedClose ?? 0.0)
     }
 }
 
