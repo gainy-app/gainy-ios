@@ -339,42 +339,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             return
         }
         
-        // TODO: Move filtering/sorting somewhere else
-        let selectedInterests = settings.interests.filter { item in
-            item.selected
-        }
-        let selectedCategories = settings.categories.filter { item in
-            item.selected
-        }
-        let selectedSecurityTypes = settings.securityTypes.filter { item in
-            item.selected
-        }
-        
-        var chartData: [PieChartData] = []
-        if settings.pieChartMode == .categories {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "category" && (selectedCategories.isEmpty || selectedCategories.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        } else if settings.pieChartMode == .interests {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "interest" && (selectedInterests.isEmpty || selectedInterests.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        } else if settings.pieChartMode == .tickers {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "ticker"
-            }
-        } else if settings.pieChartMode == .securityType {
-            chartData = self.pieChartData.filter { data in
-                data.entityType == "security_type" && (selectedSecurityTypes.isEmpty || selectedSecurityTypes.contains(where: { selectedItem in
-                    selectedItem.title.lowercased() == data.entityName?.lowercased() ?? ""
-                }))
-            }
-        }
-        
+        var chartData: [PieChartData] = self.pieChartData
         guard let viewModel = self.viewModel else {
             return
         }
@@ -394,10 +359,81 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
             }
         }
         
+        chartData = chartData.filter({ item in
+            
+            guard let model = symbolToHolding[(item.entityId ?? "").lowercased()] else { return false }
+            let notInAccount = settings.disabledAccounts.contains(where: {model.institutionIds.contains($0.institutionID)})
+            
+            let selectedInterestsFilter = settings.interests.filter { item in
+                item.selected
+            }
+            let selectedCategoriesFilter = settings.categories.filter { item in
+                item.selected
+            }
+            let selectedSecurityTypesFilter = settings.securityTypes.filter { item in
+                item.selected
+            }
+            
+            let inInterests = model.tickerInterests.contains { item in
+                return settings.interests.contains { dataSource in
+                    dataSource.selected && item == dataSource.id
+                }
+            }
+            
+            let inCats = model.tickerCategories.contains { item in
+                return settings.categories.contains { dataSource in
+                    dataSource.selected && item == dataSource.id
+                }
+            }
+            
+            var inSec = false
+            let modelSecs = model.securityTypes
+            inSec = Set(settings.securityTypes.filter({$0.selected}).compactMap({$0.title})).union(Set(modelSecs)).count > 0
+        
+            let inAccount = !notInAccount
+            let showFilteredByAll = (inInterests && inCats && inSec)
+            let showFilteredByInterests = inInterests
+            let showFilteredByInterestsAndCategories = inInterests && inCats
+            let showFilteredByInterestsAndSec = inInterests && inSec
+            let showFilteredByCategories = inCats
+            let showFilteredByCategoriesAndSec = inCats && inSec
+            let showFilteredBySec = inSec
+            
+            var show = true
+            if selectedInterestsFilter.count > 0
+                && selectedCategoriesFilter.count > 0
+                && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByAll
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedCategoriesFilter.count > 0 {
+                show = showFilteredByInterestsAndCategories
+                
+            } else if selectedInterestsFilter.count > 0
+                        && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByInterestsAndSec
+                
+            } else if      selectedCategoriesFilter.count > 0
+                            && selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredByCategoriesAndSec
+                
+            } else if selectedInterestsFilter.count > 0 {
+                show = showFilteredByInterests
+                
+            } else if selectedCategoriesFilter.count > 0 {
+                show = showFilteredByCategories
+                
+            } else if selectedSecurityTypesFilter.count > 0 {
+                show = showFilteredBySec
+            }
+            
+            return inAccount && show
+        })
+        
         chartData = chartData.sorted {  itemLeft, itemRight in
             
-            var leftHolding: HoldingViewModel? = symbolToHolding[(itemLeft.entityId ?? "").lowercased()]
-            var rightHolding: HoldingViewModel? = symbolToHolding[(itemRight.entityId ?? "").lowercased()]
+            let leftHolding: HoldingViewModel? = symbolToHolding[(itemLeft.entityId ?? "").lowercased()]
+            let rightHolding: HoldingViewModel? = symbolToHolding[(itemRight.entityId ?? "").lowercased()]
             var canSort = (sorting == .name || sorting == .weight)
             if !canSort && (leftHolding != nil) && (rightHolding != nil) {
                 canSort = true

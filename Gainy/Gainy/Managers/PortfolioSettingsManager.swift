@@ -77,7 +77,7 @@ struct PortfolioSettings: Codable {
     
     func ascending(mode: PieChartMode) -> Bool {
         
-        return pieChartAscending[mode] ?? true
+        return pieChartAscending[mode] ?? false
     }
     
     func sortingText(mode: PieChartMode) -> String {
