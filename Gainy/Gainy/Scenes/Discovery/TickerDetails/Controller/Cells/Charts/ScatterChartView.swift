@@ -97,52 +97,51 @@ struct ScatterChartView: View {
     
     var body: some View {
         if #available(iOS 14.0, *) {
-            GeometryReader(content: { rootGeo in
                 VStack {
                     headerView
                     chartView
+                        .frame(height: 310)
                         .padding(.top, 20)
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
                     ActivityIndicatorView()
                         .frame(width: 50, height: 50)
-                        .offset(y: -70)
                         .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
-                    
+                        .offset(y: -54)
                 }
-                .frame(height: 341)
-            }).onAppear(perform: {
+                .frame(height: 491)
+                .onAppear(perform: {
                 hapticTouch.prepare()
-            }).frame(height: 341)
+            })
                 .ignoresSafeArea()
                 .padding(.top, 0)
                 .onChange(of: viewModel.lastDayPrice) { newValue in
                     lineViewModel.lastDayPrice = newValue
                 }
         } else {
-            GeometryReader(content: { rootGeo in
+            
                 VStack {
                     headerView
                     chartView
+                        .frame(height: 310)
                         .padding(.top, 20)
                         .opacity(viewModel.isLoading ? 0.0 : 1.0)
                     ActivityIndicatorView()
                         .frame(width: 50, height: 50)
-                        .offset(y: -70)
                         .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
+                        .offset(y: -54)
                     
                 }
-                .frame(height: 341)
-            }).onAppear(perform: {
+            .onAppear(perform: {
                 hapticTouch.prepare()
-            }).frame(height: 341)
+            }).frame(height: 491)
                 .padding(.top, 0)
             //.background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         }
@@ -179,15 +178,17 @@ struct ScatterChartView: View {
                             .foregroundColor(UIColor(hexString: "B1BDC8", alpha: 1.0)!.uiColor)
                             .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                             .padding(.top, 2)
+                            .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                         Image(uiImage: UIImage(named: statsDayValueRaw >= 0 ? "small_up" : "small_down")!)
                             .resizable()
                             .frame(width: 8, height: 8)
+                            .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
                         Text(statsDayValue.replacingOccurrences(of: "-", with: ""))
                             .foregroundColor(statsDayValue.hasPrefix("-") ? UIColor(named: "mainRed")!.uiColor : UIColor(named: "mainGreen")!.uiColor)
                             .font(UIFont.compactRoundedSemibold(14.0).uiFont)
                             .padding(.trailing, 24)
-                        
-                    }.opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                            .opacity(lineViewModel.hideHorizontalLines ? 0.0 : 1.0)
+                    }
                         .padding(.top, 10)
                     HStack {
                         
@@ -209,8 +210,6 @@ struct ScatterChartView: View {
             }
             .padding(.leading, 24)
             .padding(.top, 0)
-            .offset(y: -10)
-            
         }
         .padding(.all, 0)
         .animation(.easeIn)
@@ -289,8 +288,9 @@ struct ScatterChartView: View {
                              style: statsDayValueRaw >= 0.0 ? Styles.lineChartStyleGrow : Styles.lineChartStyleDrop,
                              viewModel: lineViewModel,
                              minDataValue: viewModel.min,
-                             maxDataValue: viewModel.max
-                    ).offset(y: -60)
+                             maxDataValue: viewModel.max,
+                             chartHeight: 270.0
+                    ).offset(y: -40)
                     
                     if viewModel.medianData.onlyPoints().uniqued().count > 1 {
                         LineView(data: viewModel.medianData,
@@ -298,8 +298,9 @@ struct ScatterChartView: View {
                                  style: Styles.lineChartStyleMedian,
                                  viewModel: lineViewModel,
                                  minDataValue: viewModel.min,
-                                 maxDataValue: viewModel.max
-                        ).offset(y: -60)
+                                 maxDataValue: viewModel.max,
+                                 chartHeight: 270.0
+                        ).offset(y: -40)
                             .opacity(lineViewModel.isSPYVisible ? 1.0 : 0.0)
                     }
                 } else {
@@ -323,7 +324,6 @@ struct ScatterChartView: View {
                                                 .font(UIFont.compactRoundedSemibold(24).uiFont)
                                         }
                                     }
-                                    .background(Rectangle().stroke())
                             } else {
                                 ZStack {
                                     Image(uiImage: UIImage(named: "no_data_graph_up")!)
@@ -364,7 +364,8 @@ struct ScatterChartView: View {
                     }
                             )
             )
-        }
+        }.offset(y: 20)
+
     }
     
     func getClosestDataPoint(toPoint: CGPoint, width:CGFloat, height: CGFloat) -> CGPoint {
