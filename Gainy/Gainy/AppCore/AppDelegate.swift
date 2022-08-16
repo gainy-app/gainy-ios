@@ -210,6 +210,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 }
                 
+                if let stockSymbol = params?["stockSymbol"] as? String {
+                    dprint("Got link to Stock \(stockSymbol)")
+                    GainyAnalytics.logEvent("stock_deeplink_received", params: ["symbol" : stockSymbol])
+                    
+                    if Auth.auth().currentUser == nil {
+                        DeeplinkManager.shared.isStockAvaialble = true
+                        DeeplinkManager.shared.stockSymbol = stockSymbol
+                    } else {
+                            dprint("stock_deeplink_open \(stockSymbol)")
+                            GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
+                        //NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
+                    }
+                }
+                
             })
             //Branch.getInstance().validateSDKIntegration()
         }

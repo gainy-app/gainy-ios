@@ -69,8 +69,10 @@ struct Constants {
         
         static let isInviteAvaialble = "isInviteAvaialble"
         static let isTTFAvaialble = "isTTFAvaialble"
+        static let isStockAvaialble = "isStockAvaialble"
         static let fromInviteId = "fromInviteId"
         static let toTTFId = "toTTFId"
+        static let toStockSymbol = "toStockSymbol"
         
         static let mainBackColor = "mainBackColor"
         static let mainButtonColor = "mainButtonColor"

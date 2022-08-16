@@ -18,6 +18,10 @@ final class DeeplinkManager {
     @UserDefaultBool(Constants.UserDefaults.isTTFAvaialble)
     var isTTFAvaialble: Bool
     
+    /// If we have a valid Stock link
+    @UserDefaultBool(Constants.UserDefaults.isStockAvaialble)
+    var isStockAvaialble: Bool
+    
     /// RefID from deeplink
     @UserDefault(Constants.UserDefaults.fromInviteId)
     var fromId: Int?
@@ -25,6 +29,10 @@ final class DeeplinkManager {
     /// TTF ID from deeplink
     @UserDefault(Constants.UserDefaults.toTTFId)
     var ttfId: Int?
+    
+    /// Stock symbol from deeplink
+    @UserDefault(Constants.UserDefaults.toStockSymbol)
+    var stockSymbol: String?
     
     func redeemInvite() {
         guard isInviteAvaialble else {return}
@@ -54,11 +62,23 @@ final class DeeplinkManager {
         guard isTTFAvaialble else {return}
         
         isTTFAvaialble = false
-        dprint("Invite redeem started \(ttfId ?? -1)")
+        dprint("TTF view started \(ttfId ?? -1)")
         GainyAnalytics.logEvent("ttf_deeplink_open_delayed", params: ["ttfID" : ttfId ?? -1])
         
         if let ttfId = ttfId {
         NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: ttfId)
+        }
+    }
+    
+    func showDelayedStock() {
+        guard isTTFAvaialble else {return}
+        
+        isTTFAvaialble = false
+        dprint("Stock view started \(stockSymbol ?? "")")
+        GainyAnalytics.logEvent("stock_deeplink_open_delayed", params: ["symbol" : stockSymbol ?? ""])
+        
+        if let stockSymbol = stockSymbol {
+        //NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: ttfId)
         }
     }
 }
