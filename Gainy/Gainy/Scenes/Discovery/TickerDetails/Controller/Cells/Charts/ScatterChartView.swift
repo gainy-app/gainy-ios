@@ -107,12 +107,13 @@ struct ScatterChartView: View {
                         .frame(width: 50, height: 50)
                         .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
+                        .offset(y: -54)
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
-                        .offset(y: -54)
+                        .offset(y: -44)
                 }
-                .frame(height: 491)
+                .frame(height: 521)
                 .onAppear(perform: {
                 hapticTouch.prepare()
             })
@@ -133,15 +134,16 @@ struct ScatterChartView: View {
                         .frame(width: 50, height: 50)
                         .opacity(viewModel.isLoading ? 1.0 : 0.0)
                     compareLegend
+                        .offset(y: -54)
                     GeometryReader(content: { geometry in
                         bottomMenu(geometry)
                     }).frame(maxHeight: 40)
-                        .offset(y: -54)
+                        .offset(y: -44)
                     
                 }
             .onAppear(perform: {
                 hapticTouch.prepare()
-            }).frame(height: 491)
+            }).frame(height: 521)
                 .padding(.top, 0)
             //.background(LinearGradient(colors: [UIColor(hexString: "F7F8F9")!.uiColor, Color.white], startPoint: .top, endPoint: .bottom))
         }
@@ -310,7 +312,7 @@ struct ScatterChartView: View {
                                 Image(uiImage: UIImage(named: "no_data_graph_up")!)
                                     .resizable()
                                     .padding(.all, 0)
-                                    .frame(maxWidth: .infinity)
+                                    .frame(maxWidth: .infinity, maxHeight: 230)
                                     .overlay {
                                         VStack(alignment: .center, spacing: 8.0) {
                                             
