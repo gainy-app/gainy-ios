@@ -492,14 +492,6 @@
 		85EDC1492728065B00866AD2 /* DeleteTickerFromWatchlist.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EDC1472728065A00866AD2 /* DeleteTickerFromWatchlist.graphql.swift */; };
 		85EDC14B27281EA700866AD2 /* FetchTickers.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85EDC14A27281EA700866AD2 /* FetchTickers.graphql */; };
 		85EDC14D2728282400866AD2 /* FetchTickers.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EDC14C2728282400866AD2 /* FetchTickers.graphql.swift */; };
-		85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */; };
-		85F2594A2703C58F009DEFFD /* DeleteProfileInterest.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */; };
-		85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */; };
-		85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */; };
-		85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */; };
-		85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */; };
-		85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */; };
-		85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */; };
 		85F2595627045968009DEFFD /* UpdateProfile.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595527045966009DEFFD /* UpdateProfile.graphql */; };
 		85F2595827045AB5009DEFFD /* UpdateProfile.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */; };
 		85F2595A27046D3F009DEFFD /* FetchTickersMatchData.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */; };
@@ -1133,14 +1125,6 @@
 		85EDC1472728065A00866AD2 /* DeleteTickerFromWatchlist.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTickerFromWatchlist.graphql.swift; sourceTree = "<group>"; };
 		85EDC14A27281EA700866AD2 /* FetchTickers.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchTickers.graphql; sourceTree = "<group>"; };
 		85EDC14C2728282400866AD2 /* FetchTickers.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchTickers.graphql.swift; sourceTree = "<group>"; };
-		85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertProfileCategory.graphql; sourceTree = "<group>"; };
-		85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteProfileInterest.graphql; sourceTree = "<group>"; };
-		85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DeleteProfileCategory.graphql; sourceTree = "<group>"; };
-		85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InsertProfileInterest.graphql; sourceTree = "<group>"; };
-		85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfileCategory.graphql.swift; sourceTree = "<group>"; };
-		85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteProfileInterest.graphql.swift; sourceTree = "<group>"; };
-		85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertProfileCategory.graphql.swift; sourceTree = "<group>"; };
-		85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertProfileInterest.graphql.swift; sourceTree = "<group>"; };
 		85F2595527045966009DEFFD /* UpdateProfile.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UpdateProfile.graphql; sourceTree = "<group>"; };
 		85F2595727045AB5009DEFFD /* UpdateProfile.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfile.graphql.swift; sourceTree = "<group>"; };
 		85F2595927046D3F009DEFFD /* FetchTickersMatchData.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FetchTickersMatchData.graphql; sourceTree = "<group>"; };
@@ -1302,8 +1286,6 @@
 				859B2ECC270615C60084CCDC /* DeleteFavouriteCollection.graphql.swift */,
 				85695AFF2746C18100759569 /* DeleteMetricsSessingsForCollection.graphql.swift */,
 				85695AFD2746C18100759569 /* DeleteMetricsSessingsForTicker.graphql.swift */,
-				85F2594D2703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift */,
-				85F2594E2703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift */,
 				85EDC1472728065A00866AD2 /* DeleteTickerFromWatchlist.graphql.swift */,
 				85ED4DE82703166A00FE6926 /* GetProfile.graphql.swift */,
 				339BDA7727C3745300E3D9D2 /* HomeFetchCollections.graphql.swift */,
@@ -1319,8 +1301,6 @@
 				901D5EDD27DA6CA7001B1697 /* HomeFetchArticles.graphql.swift */,
 				85695B002746C18100759569 /* InsertMetricsSessingsForCollection.graphql.swift */,
 				85695AFE2746C18100759569 /* InsertMetricsSessingsForTicker.graphql.swift */,
-				85F2594F2703C6F7009DEFFD /* InsertProfileCategory.graphql.swift */,
-				85F259502703C6F7009DEFFD /* InsertProfileInterest.graphql.swift */,
 				85EDC1462728065A00866AD2 /* InsertTickerToWatchlist.graphql.swift */,
 				1C3A2C2F26AEB64700FAF107 /* DiscoverCollections.graphql.swift */,
 				33467CE126C6575A00811F74 /* News.graphql.swift */,
@@ -2584,10 +2564,6 @@
 				85C5926926FA2A82001EBABC /* CreateProfile.graphql */,
 				85DF212327848DCE00F2899B /* UpdateProfileScoringSettings.graphql */,
 				85ED4DE6270314B300FE6926 /* GetProfile.graphql */,
-				85F259482703C58E009DEFFD /* InsertProfileInterest.graphql */,
-				85F259462703C58E009DEFFD /* DeleteProfileInterest.graphql */,
-				85F259452703C58E009DEFFD /* InsertProfileCategory.graphql */,
-				85F259472703C58E009DEFFD /* DeleteProfileCategory.graphql */,
 				859B2EC7270614040084CCDC /* InsertFavouriteCollection.graphql */,
 				859B2EC8270614040084CCDC /* DeleteFavouriteCollection.graphql */,
 				85EDC1422728019F00866AD2 /* InsertTickerToWatchlist.graphql */,
@@ -3028,9 +3004,7 @@
 				85E4A28527551D2300C0E5C5 /* SwitchTableViewCell.xib in Resources */,
 				33264968280E910E00CE0D0F /* GetTTFChart.graphql in Resources */,
 				85E4A28927551D3600C0E5C5 /* ListTableViewCell.xib in Resources */,
-				85F2594C2703C58F009DEFFD /* InsertProfileInterest.graphql in Resources */,
 				33467CDD26C6565600811F74 /* Charts.graphql in Resources */,
-				85F2594B2703C58F009DEFFD /* DeleteProfileCategory.graphql in Resources */,
 				907B227C275029C900FB4B1E /* loader3.json in Resources */,
 				330DAE3027A1757800BE4D75 /* Gradient_Stars.mp4 in Resources */,
 				9075CD11281F1D8F00747A09 /* HomeTickersCollectionViewCell.xib in Resources */,
@@ -3113,7 +3087,6 @@
 				33CBAF7627A2846D008F6F88 /* UpdatePlaidPortfolio.graphql in Resources */,
 				9068DDE7274B6FE4007C588A /* GetPortfolioCharts.graphql in Resources */,
 				3AFE1A94266E5C7A0091E799 /* SFCompactRounded-Semibold.otf in Resources */,
-				85F259492703C58F009DEFFD /* InsertProfileCategory.graphql in Resources */,
 				33426C2C2845521300413AE1 /* PurchaseUpdate.graphql in Resources */,
 				33426C262845506300413AE1 /* DeleteProfile.graphql in Resources */,
 				85ED4DED2703481C00FE6926 /* Categories.graphql in Resources */,
@@ -3131,7 +3104,6 @@
 				33D3D4F726CBA2D2005A859B /* Popups.storyboard in Resources */,
 				85E4A29027568FEB00C0E5C5 /* InfoDataCell.xib in Resources */,
 				33D3D4FE26CBB8BC005A859B /* Portfolio.storyboard in Resources */,
-				85F2594A2703C58F009DEFFD /* DeleteProfileInterest.graphql in Resources */,
 				8579517A26E2740A003B751C /* PersonalizationPickInterestsFooterView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3373,7 +3345,6 @@
 				3A85946F268B74AE00CB8DD6 /* Float+CleanDecimals.swift in Sources */,
 				33FE9E4026D5194400FABC70 /* MagnifierRect.swift in Sources */,
 				3A3214B226698FCC00D6778B /* RecommendedCellButtonState.swift in Sources */,
-				85F259512703C6F7009DEFFD /* DeleteProfileCategory.graphql.swift in Sources */,
 				903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */,
 				33D84A92282EE0D2008DAE39 /* DeeplinkHandler.swift in Sources */,
 				90759393282AE72E0004F9A9 /* StagingSubscriptionService.swift in Sources */,
@@ -3424,7 +3395,6 @@
 				85CD154426F8A951001C060C /* GoogleAuth.swift in Sources */,
 				3361E12A2893E32600725B5D /* UploadPromo.graphql.swift in Sources */,
 				3305EABA27439A0B00A95FA0 /* HoldingSecurityTableViewCell.swift in Sources */,
-				85F259522703C6F7009DEFFD /* DeleteProfileInterest.graphql.swift in Sources */,
 				8505FCF927399DF10061AB36 /* BrokerViewCell.swift in Sources */,
 				85E4A28F27568FEB00C0E5C5 /* InfoDataCell.swift in Sources */,
 				33467CFC26C6786200811F74 /* BaseViewController.swift in Sources */,
@@ -3607,7 +3577,6 @@
 				85ED4DDD2701F47D00FE6926 /* UIImage+Serialization.swift in Sources */,
 				33019617273E836E00BE4FDC /* LinkPlaidAccount.graphql.swift in Sources */,
 				33BD00F728476077009637FF /* PurchaseUpdate.graphql.swift in Sources */,
-				85F259542703C6F7009DEFFD /* InsertProfileInterest.graphql.swift in Sources */,
 				3302E0BF26DD0CEE008DBC76 /* SearchCollectionHeaderView.swift in Sources */,
 				85CD153F26F874F3001C060C /* AuthorizationManager.swift in Sources */,
 				3A5ADA7A268DA179008659E8 /* SwipeTransitionLayout.swift in Sources */,
@@ -3616,7 +3585,6 @@
 				3AE795AB2663866E002B40D6 /* UIViewController+Presentable.swift in Sources */,
 				33BDCF7326CE8B5C000DE770 /* TickerDetailsMarketDataViewCell.swift in Sources */,
 				85695B012746C18200759569 /* DeleteMetricsSessingsForTicker.graphql.swift in Sources */,
-				85F259532703C6F7009DEFFD /* InsertProfileCategory.graphql.swift in Sources */,
 				8579517526E26D8F003B751C /* PersonalizationPickInterestsHeaderView.swift in Sources */,
 				9075CD15281F2CAA00747A09 /* GainersHeaderView.swift in Sources */,
 				339BDA7627C3716B00E3D9D2 /* InsertFavouriteCollection.graphql.swift in Sources */,

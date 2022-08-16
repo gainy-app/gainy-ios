@@ -244,7 +244,7 @@ final class AuthorizationManager {
             GainyAnalytics.logEvent("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID
             
-            UserProfileManager.shared.setRecommendationSettings(interests: onboardingInfo.profileInterestIDs, categories: nil, recommendedCollectionsCount: nil) { success in
+            UserProfileManager.shared.setRecommendationSettings(interests: onboardingInfo.profileInterestIDs, categories: nil, recommendedCollectionsCount: 0) { success in
                 if success {
                     GainyAnalytics.logEvent("set_recommendation_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 } else {

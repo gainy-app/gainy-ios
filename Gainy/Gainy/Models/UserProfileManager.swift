@@ -246,7 +246,6 @@ final class UserProfileManager {
         let query = SetRecommendationSettingsMutation(profileId: profileID, interests: interests, categories: categories, recommended_collections_count: recommendedCollectionsCount)
         Network.shared.apollo.perform(mutation: query) { result in
             guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... Failed to finalize setup of your profile. Please, try again later")
                 completion(false)
                 return
             }
