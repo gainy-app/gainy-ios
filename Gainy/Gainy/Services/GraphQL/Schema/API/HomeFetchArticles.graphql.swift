@@ -49,7 +49,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "website_blog_articles": websiteBlogArticles.map { (value: WebsiteBlogArticle) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220802101701.website_blog_articles"
+    /// fetch data from the table: "public_220815100829.website_blog_articles"
     public var websiteBlogArticles: [WebsiteBlogArticle] {
       get {
         return (resultMap["website_blog_articles"] as! [ResultMap]).map { (value: ResultMap) -> WebsiteBlogArticle in WebsiteBlogArticle(unsafeResultMap: value) }
@@ -71,7 +71,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
           GraphQLField("post_summary", type: .scalar(String.self)),
           GraphQLField("published_on", type: .scalar(timestamp.self)),
           GraphQLField("rate_rating", type: .scalar(float8.self)),
-          GraphQLField("rate_votes", type: .scalar(Int.self)),
+          GraphQLField("rate_votes", type: .scalar(float8.self)),
           GraphQLField("title", type: .scalar(String.self)),
           GraphQLField("updated_on", type: .scalar(timestamp.self)),
           GraphQLField("url", type: .scalar(String.self)),
@@ -84,7 +84,7 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(id: String, categoryName: String? = nil, mainImage: String? = nil, postSummary: String? = nil, publishedOn: timestamp? = nil, rateRating: float8? = nil, rateVotes: Int? = nil, title: String? = nil, updatedOn: timestamp? = nil, url: String? = nil) {
+      public init(id: String, categoryName: String? = nil, mainImage: String? = nil, postSummary: String? = nil, publishedOn: timestamp? = nil, rateRating: float8? = nil, rateVotes: float8? = nil, title: String? = nil, updatedOn: timestamp? = nil, url: String? = nil) {
         self.init(unsafeResultMap: ["__typename": "website_blog_articles", "id": id, "category_name": categoryName, "main_image": mainImage, "post_summary": postSummary, "published_on": publishedOn, "rate_rating": rateRating, "rate_votes": rateVotes, "title": title, "updated_on": updatedOn, "url": url])
       }
 
@@ -151,9 +151,9 @@ public final class HomeFetchArticlesQuery: GraphQLQuery {
         }
       }
 
-      public var rateVotes: Int? {
+      public var rateVotes: float8? {
         get {
-          return resultMap["rate_votes"] as? Int
+          return resultMap["rate_votes"] as? float8
         }
         set {
           resultMap.updateValue(newValue, forKey: "rate_votes")

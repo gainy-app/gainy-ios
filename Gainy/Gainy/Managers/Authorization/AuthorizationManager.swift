@@ -243,17 +243,27 @@ final class AuthorizationManager {
             
             GainyAnalytics.logEvent("sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
             UserProfileManager.shared.profileID = profileID
-            UserProfileManager.shared.fetchProfile { success in
-                guard success == true else {
-                    self.authorizationStatus = .authorizingFailed
-                    completion(self.authorizationStatus)
-                    return
+            
+            UserProfileManager.shared.setRecommendationSettings(interests: onboardingInfo.profileInterestIDs, categories: nil, recommendedCollectionsCount: nil) { success in
+                if success {
+                    GainyAnalytics.logEvent("set_recommendation_settings_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+                } else {
+                    GainyAnalytics.logEvent("set_recommendation_settings_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
                 }
-                NotificationCenter.default.post(name: NotificationManager.userSignUpNotification, object: nil)
-                DeeplinkManager.shared.redeemInvite()
-                self.authorizationStatus = .authorizedFully
-                NotificationManager.shared.cancelSignUpReminderNotification()
-                completion(self.authorizationStatus)
+                UserProfileManager.shared.fetchProfile { success in
+                    guard success == true else {
+                        GainyAnalytics.logEvent("fetch_profile_after_sign_up_failed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+                        self.authorizationStatus = .authorizingFailed
+                        completion(self.authorizationStatus)
+                        return
+                    }
+                    GainyAnalytics.logEvent("fetch_profile_after_sign_up_success", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "SignUpView"])
+                    NotificationCenter.default.post(name: NotificationManager.userSignUpNotification, object: nil)
+                    DeeplinkManager.shared.redeemInvite()
+                    self.authorizationStatus = .authorizedFully
+                    NotificationManager.shared.cancelSignUpReminderNotification()
+                    completion(self.authorizationStatus)
+                }
             }
         }
     }
