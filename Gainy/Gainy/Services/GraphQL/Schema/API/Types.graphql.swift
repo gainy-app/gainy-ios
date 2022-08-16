@@ -9019,8 +9019,9 @@ public struct app_profile_interests_insert_input: GraphQLMapConvertible {
   ///   - interestId
   ///   - profile
   ///   - profileId
-  public init(interestId: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil) {
-    graphQLMap = ["interest_id": interestId, "profile": profile, "profile_id": profileId]
+  ///   - skipTrigger
+  public init(interestId: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, skipTrigger: Swift.Optional<Bool?> = nil) {
+    graphQLMap = ["interest_id": interestId, "profile": profile, "profile_id": profileId, "skip_trigger": skipTrigger]
   }
 
   public var interestId: Swift.Optional<Int?> {
@@ -9047,6 +9048,15 @@ public struct app_profile_interests_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var skipTrigger: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["skip_trigger"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "skip_trigger")
     }
   }
 }
@@ -10664,8 +10674,9 @@ public struct app_profile_categories_bool_exp: GraphQLMapConvertible {
   ///   - categoryId
   ///   - profile
   ///   - profileId
-  public init(_and: Swift.Optional<[app_profile_categories_bool_exp]?> = nil, _not: Swift.Optional<app_profile_categories_bool_exp?> = nil, _or: Swift.Optional<[app_profile_categories_bool_exp]?> = nil, categoryId: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_id": categoryId, "profile": profile, "profile_id": profileId]
+  ///   - skipTrigger
+  public init(_and: Swift.Optional<[app_profile_categories_bool_exp]?> = nil, _not: Swift.Optional<app_profile_categories_bool_exp?> = nil, _or: Swift.Optional<[app_profile_categories_bool_exp]?> = nil, categoryId: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, skipTrigger: Swift.Optional<Boolean_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "category_id": categoryId, "profile": profile, "profile_id": profileId, "skip_trigger": skipTrigger]
   }
 
   public var _and: Swift.Optional<[app_profile_categories_bool_exp]?> {
@@ -10719,6 +10730,115 @@ public struct app_profile_categories_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var skipTrigger: Swift.Optional<Boolean_comparison_exp?> {
+    get {
+      return graphQLMap["skip_trigger"] as? Swift.Optional<Boolean_comparison_exp?> ?? Swift.Optional<Boolean_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "skip_trigger")
+    }
+  }
+}
+
+/// Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
+public struct Boolean_comparison_exp: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - _eq
+  ///   - _gt
+  ///   - _gte
+  ///   - _in
+  ///   - _isNull
+  ///   - _lt
+  ///   - _lte
+  ///   - _neq
+  ///   - _nin
+  public init(_eq: Swift.Optional<Bool?> = nil, _gt: Swift.Optional<Bool?> = nil, _gte: Swift.Optional<Bool?> = nil, _in: Swift.Optional<[Bool]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<Bool?> = nil, _lte: Swift.Optional<Bool?> = nil, _neq: Swift.Optional<Bool?> = nil, _nin: Swift.Optional<[Bool]?> = nil) {
+    graphQLMap = ["_eq": _eq, "_gt": _gt, "_gte": _gte, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
+  }
+
+  public var _eq: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_eq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_eq")
+    }
+  }
+
+  public var _gt: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_gt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gt")
+    }
+  }
+
+  public var _gte: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_gte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_gte")
+    }
+  }
+
+  public var _in: Swift.Optional<[Bool]?> {
+    get {
+      return graphQLMap["_in"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_in")
+    }
+  }
+
+  public var _isNull: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_is_null")
+    }
+  }
+
+  public var _lt: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_lt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lt")
+    }
+  }
+
+  public var _lte: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_lte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_lte")
+    }
+  }
+
+  public var _neq: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["_neq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_neq")
+    }
+  }
+
+  public var _nin: Swift.Optional<[Bool]?> {
+    get {
+      return graphQLMap["_nin"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "_nin")
     }
   }
 }
@@ -13433,106 +13553,6 @@ public struct app_profile_ticker_match_score_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "updated_at")
-    }
-  }
-}
-
-/// Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'.
-public struct Boolean_comparison_exp: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - _eq
-  ///   - _gt
-  ///   - _gte
-  ///   - _in
-  ///   - _isNull
-  ///   - _lt
-  ///   - _lte
-  ///   - _neq
-  ///   - _nin
-  public init(_eq: Swift.Optional<Bool?> = nil, _gt: Swift.Optional<Bool?> = nil, _gte: Swift.Optional<Bool?> = nil, _in: Swift.Optional<[Bool]?> = nil, _isNull: Swift.Optional<Bool?> = nil, _lt: Swift.Optional<Bool?> = nil, _lte: Swift.Optional<Bool?> = nil, _neq: Swift.Optional<Bool?> = nil, _nin: Swift.Optional<[Bool]?> = nil) {
-    graphQLMap = ["_eq": _eq, "_gt": _gt, "_gte": _gte, "_in": _in, "_is_null": _isNull, "_lt": _lt, "_lte": _lte, "_neq": _neq, "_nin": _nin]
-  }
-
-  public var _eq: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_eq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_eq")
-    }
-  }
-
-  public var _gt: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_gt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_gt")
-    }
-  }
-
-  public var _gte: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_gte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_gte")
-    }
-  }
-
-  public var _in: Swift.Optional<[Bool]?> {
-    get {
-      return graphQLMap["_in"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_in")
-    }
-  }
-
-  public var _isNull: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_is_null"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_is_null")
-    }
-  }
-
-  public var _lt: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_lt"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_lt")
-    }
-  }
-
-  public var _lte: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_lte"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_lte")
-    }
-  }
-
-  public var _neq: Swift.Optional<Bool?> {
-    get {
-      return graphQLMap["_neq"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_neq")
-    }
-  }
-
-  public var _nin: Swift.Optional<[Bool]?> {
-    get {
-      return graphQLMap["_nin"] as? Swift.Optional<[Bool]?> ?? Swift.Optional<[Bool]?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "_nin")
     }
   }
 }
@@ -16938,8 +16958,9 @@ public struct app_profile_interests_bool_exp: GraphQLMapConvertible {
   ///   - interestId
   ///   - profile
   ///   - profileId
-  public init(_and: Swift.Optional<[app_profile_interests_bool_exp]?> = nil, _not: Swift.Optional<app_profile_interests_bool_exp?> = nil, _or: Swift.Optional<[app_profile_interests_bool_exp]?> = nil, interestId: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil) {
-    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "interest_id": interestId, "profile": profile, "profile_id": profileId]
+  ///   - skipTrigger
+  public init(_and: Swift.Optional<[app_profile_interests_bool_exp]?> = nil, _not: Swift.Optional<app_profile_interests_bool_exp?> = nil, _or: Swift.Optional<[app_profile_interests_bool_exp]?> = nil, interestId: Swift.Optional<Int_comparison_exp?> = nil, profile: Swift.Optional<app_profiles_bool_exp?> = nil, profileId: Swift.Optional<Int_comparison_exp?> = nil, skipTrigger: Swift.Optional<Boolean_comparison_exp?> = nil) {
+    graphQLMap = ["_and": _and, "_not": _not, "_or": _or, "interest_id": interestId, "profile": profile, "profile_id": profileId, "skip_trigger": skipTrigger]
   }
 
   public var _and: Swift.Optional<[app_profile_interests_bool_exp]?> {
@@ -16993,6 +17014,15 @@ public struct app_profile_interests_bool_exp: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var skipTrigger: Swift.Optional<Boolean_comparison_exp?> {
+    get {
+      return graphQLMap["skip_trigger"] as? Swift.Optional<Boolean_comparison_exp?> ?? Swift.Optional<Boolean_comparison_exp?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "skip_trigger")
     }
   }
 }
@@ -17376,8 +17406,9 @@ public struct app_profile_categories_insert_input: GraphQLMapConvertible {
   ///   - categoryId
   ///   - profile
   ///   - profileId
-  public init(categoryId: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil) {
-    graphQLMap = ["category_id": categoryId, "profile": profile, "profile_id": profileId]
+  ///   - skipTrigger
+  public init(categoryId: Swift.Optional<Int?> = nil, profile: Swift.Optional<app_profiles_obj_rel_insert_input?> = nil, profileId: Swift.Optional<Int?> = nil, skipTrigger: Swift.Optional<Bool?> = nil) {
+    graphQLMap = ["category_id": categoryId, "profile": profile, "profile_id": profileId, "skip_trigger": skipTrigger]
   }
 
   public var categoryId: Swift.Optional<Int?> {
@@ -17404,6 +17435,15 @@ public struct app_profile_categories_insert_input: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "profile_id")
+    }
+  }
+
+  public var skipTrigger: Swift.Optional<Bool?> {
+    get {
+      return graphQLMap["skip_trigger"] as? Swift.Optional<Bool?> ?? Swift.Optional<Bool?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "skip_trigger")
     }
   }
 }
@@ -17492,6 +17532,8 @@ public enum app_profile_categories_update_column: RawRepresentable, Equatable, H
   case categoryId
   /// column name
   case profileId
+  /// column name
+  case skipTrigger
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
@@ -17499,6 +17541,7 @@ public enum app_profile_categories_update_column: RawRepresentable, Equatable, H
     switch rawValue {
       case "category_id": self = .categoryId
       case "profile_id": self = .profileId
+      case "skip_trigger": self = .skipTrigger
       default: self = .__unknown(rawValue)
     }
   }
@@ -17507,6 +17550,7 @@ public enum app_profile_categories_update_column: RawRepresentable, Equatable, H
     switch self {
       case .categoryId: return "category_id"
       case .profileId: return "profile_id"
+      case .skipTrigger: return "skip_trigger"
       case .__unknown(let value): return value
     }
   }
@@ -17515,6 +17559,7 @@ public enum app_profile_categories_update_column: RawRepresentable, Equatable, H
     switch (lhs, rhs) {
       case (.categoryId, .categoryId): return true
       case (.profileId, .profileId): return true
+      case (.skipTrigger, .skipTrigger): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -17524,6 +17569,7 @@ public enum app_profile_categories_update_column: RawRepresentable, Equatable, H
     return [
       .categoryId,
       .profileId,
+      .skipTrigger,
     ]
   }
 }
@@ -27860,6 +27906,8 @@ public enum app_profile_interests_update_column: RawRepresentable, Equatable, Ha
   case interestId
   /// column name
   case profileId
+  /// column name
+  case skipTrigger
   /// Auto generated constant for unknown enum values
   case __unknown(RawValue)
 
@@ -27867,6 +27915,7 @@ public enum app_profile_interests_update_column: RawRepresentable, Equatable, Ha
     switch rawValue {
       case "interest_id": self = .interestId
       case "profile_id": self = .profileId
+      case "skip_trigger": self = .skipTrigger
       default: self = .__unknown(rawValue)
     }
   }
@@ -27875,6 +27924,7 @@ public enum app_profile_interests_update_column: RawRepresentable, Equatable, Ha
     switch self {
       case .interestId: return "interest_id"
       case .profileId: return "profile_id"
+      case .skipTrigger: return "skip_trigger"
       case .__unknown(let value): return value
     }
   }
@@ -27883,6 +27933,7 @@ public enum app_profile_interests_update_column: RawRepresentable, Equatable, Ha
     switch (lhs, rhs) {
       case (.interestId, .interestId): return true
       case (.profileId, .profileId): return true
+      case (.skipTrigger, .skipTrigger): return true
       case (.__unknown(let lhsValue), .__unknown(let rhsValue)): return lhsValue == rhsValue
       default: return false
     }
@@ -27892,6 +27943,7 @@ public enum app_profile_interests_update_column: RawRepresentable, Equatable, Ha
     return [
       .interestId,
       .profileId,
+      .skipTrigger,
     ]
   }
 }

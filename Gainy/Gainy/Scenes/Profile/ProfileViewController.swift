@@ -56,6 +56,7 @@ final class ProfileViewController: BaseViewController {
     
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
+    private var updateSettingsTimer: Timer?
     
     private var disclaimerShownKey: String? {
         get {
@@ -765,6 +766,35 @@ final class ProfileViewController: BaseViewController {
         self.categoriesCollectionView.deselectItem(at: indexPath, animated: false)
         self.collectionView(collectionView, didDeselectItemAt: indexPath)
     }
+    
+    private func setRecommendationSettings() {
+        
+        self.updateSettingsTimer?.invalidate()
+        self.updateSettingsTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false, block: { [weak self] (timer) in
+            self?.performSetRecommendationSettings()
+        })
+    }
+    
+    private func performSetRecommendationSettings() {
+        
+        guard self.haveNetwork else {
+            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
+            NotificationManager.shared.showError("Sorry... No Internet connection right now. Failed to sync your profile data")
+            GainyAnalytics.logEvent("no_internet")
+            return
+        }
+        
+        self.updateSettingsTimer?.invalidate()
+        let interestsIDs = self.profileInterestsSelected?.compactMap({ item in
+            return item.id
+        })
+        let categoriesIDs = self.profileCategoriesSelected?.compactMap({ item in
+            return item.id
+        })
+        UserProfileManager.shared.setRecommendationSettings(interests: interestsIDs, categories: categoriesIDs, recommendedCollectionsCount: 0) { success in
+            NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileSettings, object: nil)
+        }
+    }
 }
 
 extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewLeftAlignedHorizontalLayoutDelegate {
@@ -938,51 +968,15 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         let interestID = interest.id
         
-        guard self.haveNetwork else {
-            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            GainyAnalytics.logEvent("no_internet")
-            return
+        GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        self.profileInterestsSelected?.append(interest)
+        let index = self.profileInterests?.lastIndex(where: { element in
+            element.id == interest.id
+        })
+        if index == nil {
+            self.profileInterests?.append(interest)
         }
-        
-        let query = InsertProfileInterestMutation.init(profileID: profileID, interestID: interestID)
-        Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
-            
-            guard self.haveNetwork else {
-                GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-                NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-                GainyAnalytics.logEvent("no_internet")
-                return
-            }
-            
-            if let error = (try? result.get().errors?.first) {
-                
-                let extensions: [String : Any]? = error.extensions
-                let code: String? = extensions?["code"] as? String
-                if let code = code, code == "constraint-violation" {
-                    return
-                }
-                else {
-                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                }
-            }
-            
-            guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                return
-            }
-            
-            GainyAnalytics.logEvent("profile_select_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-            self.profileInterestsSelected?.append(interest)
-            let index = self.profileInterests?.lastIndex(where: { element in
-                element.id == interest.id
-            })
-            if index == nil {
-                self.profileInterests?.append(interest)
-            }
-            NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
-        }
+        self.setRecommendationSettings()
     }
     
     func didDeselectInterest(_ sender: EditProfileCollectionViewController?, _ interest: AppInterestsQuery.Data.Interest) {
@@ -992,54 +986,18 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
         }
         let interestID = interest.id
         
-        guard self.haveNetwork else {
-            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            GainyAnalytics.logEvent("no_internet")
-            return
-        }
-        
         let index = self.profileInterestsSelected?.lastIndex(where: { element in
             element.id == interest.id
         })
         if index != nil {
-            let query = DeleteProfileInterestMutation.init(profileID: profileID, interestID: interestID)
-            Network.shared.apollo.perform(mutation: query) { result in
-                dprint("\(result)")
-                
-                guard self.haveNetwork else {
-                    GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-                    NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-                    GainyAnalytics.logEvent("no_internet")
-                    return
-                }
-                
-                if let error = (try? result.get().errors?.first) {
-                    
-                    let extensions: [String : Any]? = error.extensions
-                    let code: String? = extensions?["code"] as? String
-                    if let code = code, code == "constraint-violation" {
-                        return
-                    }
-                    else {
-                        NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                    }
-                }
-                
-                guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                    return
-                }
-                
-                GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-                self.profileInterestsSelected?.removeAll(where: { element in
-                    element.id == interestID
-                })
-                self.profileInterests?.removeAll(where: { element in
-                    element.id == interestID
-                })
-                NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileInterests, object: nil)
-            }
+            GainyAnalytics.logEvent("profile_deselect_interest", params: ["profileID" : "\(profileID)", "interestID" : "\(interestID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.profileInterestsSelected?.removeAll(where: { element in
+                element.id == interestID
+            })
+            self.profileInterests?.removeAll(where: { element in
+                element.id == interestID
+            })
+            self.setRecommendationSettings()
         }
     }
     
@@ -1049,53 +1007,15 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         let categoryID = category.id
-        
-        guard haveNetwork else {
-            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            GainyAnalytics.logEvent("no_internet")
-            return
+        GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+        self.profileCategoriesSelected?.append(category)
+        let index = self.profileCategories?.lastIndex(where: { element in
+            element.id == category.id
+        })
+        if index == nil {
+            self.profileCategories?.append(category)
         }
-        
-        let query = InsertProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
-        Network.shared.apollo.perform(mutation: query) { result in
-            dprint("\(result)")
-            
-            guard self.haveNetwork else {
-                GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-                NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-                GainyAnalytics.logEvent("no_internet")
-                return
-            }
-            
-            if let error = (try? result.get().errors?.first) {
-                
-                let extensions: [String : Any]? = error.extensions
-                let code: String? = extensions?["code"] as? String
-                if let code = code, code == "constraint-violation" {
-                    return
-                }
-                else {
-                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                }
-            }
-            
-            guard (try? result.get().data) != nil else {
-                NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                return
-            }
-            
-            GainyAnalytics.logEvent("profile_select_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-            self.profileCategoriesSelected?.append(category)
-            let index = self.profileCategories?.lastIndex(where: { element in
-                element.id == category.id
-            })
-            if index == nil {
-                self.profileCategories?.append(category)
-            }
-            
-            NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
-        }
+        self.setRecommendationSettings()
     }
     
     func didDeselectCategory(_ sender: EditProfileCollectionViewController?, _ category: CategoriesQuery.Data.Category) {
@@ -1104,55 +1024,18 @@ extension ProfileViewController: EditProfileCollectionViewControllerDelegate {
             return
         }
         let categoryID = category.id
-        
-        guard self.haveNetwork else {
-            GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-            NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-            GainyAnalytics.logEvent("no_internet")
-            return
-        }
-        
         let index = self.profileCategoriesSelected?.lastIndex(where: { element in
             element.id == category.id
         })
         if index != nil {
-            let query = DeleteProfileCategoryMutation.init(profileID: profileID, categoryID: categoryID)
-            Network.shared.apollo.perform(mutation: query) { result in
-                dprint("\(result)")
-                
-                guard self.haveNetwork else {
-                    GainyAnalytics.logEvent("no_internet", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileViewController"])
-                    NotificationManager.shared.showError("Sorry... No Internet connection right now.")
-                    GainyAnalytics.logEvent("no_internet")
-                    return
-                }
-                
-                if let error = (try? result.get().errors?.first) {
-                    
-                    let extensions: [String : Any]? = error.extensions
-                    let code: String? = extensions?["code"] as? String
-                    if let code = code, code == "constraint-violation" {
-                        return
-                    }
-                    else {
-                        NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                    }
-                }
-                
-                guard (try? result.get().data) != nil else {
-                    NotificationManager.shared.showError("Sorry... We couldn't save your profile information. Please, try again later.")
-                    return
-                }
-                
-                GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
-                self.profileCategoriesSelected?.removeAll(where: { element in
-                    element.id == categoryID
-                })
-                self.profileCategories?.removeAll(where: { element in
-                    element.id == categoryID
-                })
-                NotificationCenter.default.post(name: NSNotification.Name.didChangeProfileCategories, object: nil)
-            }
+            GainyAnalytics.logEvent("profile_deselect_category", params: ["profileID" : "\(profileID)", "categoryID" : "\(categoryID)", "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "ProfileView"])
+            self.profileCategoriesSelected?.removeAll(where: { element in
+                element.id == categoryID
+            })
+            self.profileCategories?.removeAll(where: { element in
+                element.id == categoryID
+            })
+            self.setRecommendationSettings()
         }
     }
     

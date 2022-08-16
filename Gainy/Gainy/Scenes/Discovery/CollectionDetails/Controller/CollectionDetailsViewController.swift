@@ -80,14 +80,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             }
         }.store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileInterests)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-            } receiveValue: {[weak self] notification in
-                self?.needTop20Reload = true
-            }.store(in: &cancellables)
-        
-        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileCategories)
+        NotificationCenter.default.publisher(for: Notification.Name.didChangeProfileSettings)
             .receive(on: DispatchQueue.main)
             .sink { _ in
             } receiveValue: {[weak self] notification in
