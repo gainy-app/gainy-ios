@@ -403,6 +403,29 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="ln2-FD-eUW"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="dWb-RO-Oiu"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otT-Js-gAr" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
+                                <rect key="frame" x="330" y="768" width="100" height="54"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="cxx-aH-gt1"/>
+                                    <constraint firstAttribute="width" constant="100" id="zyi-E3-aYf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="16"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Tools"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="devToolsAction:" destination="ahC-ff-waI" eventType="touchUpInside" id="8ew-V0-6Zz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QpC-CG-5Nq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -412,8 +435,10 @@
                             <constraint firstItem="YdM-LP-G3m" firstAttribute="width" secondItem="Ks4-yc-Rc4" secondAttribute="width" id="Bd3-qd-oNh"/>
                             <constraint firstItem="FMH-xl-iJL" firstAttribute="leading" secondItem="Ks4-yc-Rc4" secondAttribute="leading" id="Egq-1J-viQ"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="top" secondItem="2H8-Tw-fYy" secondAttribute="top" id="GVR-Qt-Zr4"/>
+                            <constraint firstItem="QpC-CG-5Nq" firstAttribute="bottom" secondItem="otT-Js-gAr" secondAttribute="bottom" constant="40" id="Ig9-Yh-oYx"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="2H8-Tw-fYy" secondAttribute="trailing" id="Jfd-hb-gHG"/>
                             <constraint firstAttribute="bottom" secondItem="2H8-Tw-fYy" secondAttribute="bottom" id="bph-Ty-Zo2"/>
+                            <constraint firstItem="QpC-CG-5Nq" firstAttribute="trailing" secondItem="otT-Js-gAr" secondAttribute="trailing" constant="-16" id="iJU-sh-NjG"/>
                             <constraint firstAttribute="trailing" secondItem="FMH-xl-iJL" secondAttribute="trailing" id="jy5-B8-VnB"/>
                             <constraint firstItem="QpC-CG-5Nq" firstAttribute="leading" secondItem="2H8-Tw-fYy" secondAttribute="leading" id="z3S-M1-caF"/>
                         </constraints>
@@ -424,6 +449,7 @@
                         <outlet property="categoriesHeightConstraint" destination="fkC-XQ-9H6" id="93p-we-1hF"/>
                         <outlet property="currentSubscriptionButton" destination="lcF-yN-TYY" id="APz-Na-1jG"/>
                         <outlet property="deleteAccountButton" destination="5pv-0r-iWN" id="XKh-XD-Mue"/>
+                        <outlet property="devToolsBtn" destination="otT-Js-gAr" id="ldY-3h-yXw"/>
                         <outlet property="fullNameTitle" destination="coX-nZ-qMJ" id="n7l-4p-YaX"/>
                         <outlet property="interestsCollectionView" destination="k6u-eu-s6j" id="lTn-TX-l6t"/>
                         <outlet property="interestsHeightConstraint" destination="Yy5-QT-rba" id="jUb-IS-2IO"/>
@@ -1186,6 +1212,9 @@
         <namedColor name="mainText">
             <color red="0.035294117647058823" green="0.078431372549019607" blue="0.12156862745098039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

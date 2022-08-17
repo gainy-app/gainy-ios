@@ -503,6 +503,9 @@
 		85F8B8BC26DD43E3000C73D3 /* AppInterests.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */; };
 		9004AECB27C2C50000821A29 /* HomeIndexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECA27C2C50000821A29 /* HomeIndexView.swift */; };
 		9004AECE27C2C6EC00821A29 /* HomeIndexViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */; };
+		900628B328AD36AC00E86BF8 /* DeepLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900628B028AD36AC00E86BF8 /* DeepLinksView.swift */; };
+		900628B428AD36AC00E86BF8 /* ToolsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900628B128AD36AC00E86BF8 /* ToolsContentView.swift */; };
+		900628B528AD36AC00E86BF8 /* DeepLinksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900628B228AD36AC00E86BF8 /* DeepLinksViewModel.swift */; };
 		9006307C282857C1009EEB65 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9006307B282857C1009EEB65 /* RevenueCat */; };
 		9006307F282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006307E282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift */; };
 		9006308128285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */; };
@@ -1136,6 +1139,9 @@
 		85F8B8BB26DD43E3000C73D3 /* AppInterests.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppInterests.graphql; sourceTree = "<group>"; };
 		9004AECA27C2C50000821A29 /* HomeIndexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexView.swift; sourceTree = "<group>"; };
 		9004AECD27C2C6EC00821A29 /* HomeIndexViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIndexViewModel.swift; sourceTree = "<group>"; };
+		900628B028AD36AC00E86BF8 /* DeepLinksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeepLinksView.swift; path = Gainy/Scenes/Tools/DeepLinksView.swift; sourceTree = SOURCE_ROOT; };
+		900628B128AD36AC00E86BF8 /* ToolsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToolsContentView.swift; path = Gainy/Scenes/Tools/ToolsContentView.swift; sourceTree = SOURCE_ROOT; };
+		900628B228AD36AC00E86BF8 /* DeepLinksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeepLinksViewModel.swift; path = Gainy/Scenes/Tools/DeepLinksViewModel.swift; sourceTree = SOURCE_ROOT; };
 		9006307E282857FC009EEB65 /* PurchaseInfoStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseInfoStorageProtocol.swift; sourceTree = "<group>"; };
 		9006308028285873009EEB65 /* UserDefaultsPurchaseInfoStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsPurchaseInfoStorage.swift; sourceTree = "<group>"; };
 		90063082282859B0009EEB65 /* SubscriptionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -1864,6 +1870,7 @@
 				33D3D4FA26CBA393005A859B /* Profile */,
 				3342C87526DE0C5B0049763E /* Popups */,
 				3361D92E283287AE00AEEC3D /* Purchases */,
+				900628AF28AD369400E86BF8 /* Tools */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -2704,6 +2711,16 @@
 			path = Indexes;
 			sourceTree = "<group>";
 		};
+		900628AF28AD369400E86BF8 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				900628B128AD36AC00E86BF8 /* ToolsContentView.swift */,
+				900628B028AD36AC00E86BF8 /* DeepLinksView.swift */,
+				900628B228AD36AC00E86BF8 /* DeepLinksViewModel.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		9006307D282857CE009EEB65 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
@@ -3334,6 +3351,7 @@
 				3A5ADA72268DA179008659E8 /* SwipeAnimator.swift in Sources */,
 				900CEAF4274976D600CF1597 /* HoldingViewModel.swift in Sources */,
 				85D4F80626E5FFFB004EC21D /* GainySliderView.swift in Sources */,
+				900628B428AD36AC00E86BF8 /* ToolsContentView.swift in Sources */,
 				33FE9E4426D5195800FABC70 /* Helpers.swift in Sources */,
 				3AE79561266382B0002B40D6 /* CoordinatorFactoryProtocol.swift in Sources */,
 				339BDA7827C3745300E3D9D2 /* HomeFetchCollections.graphql.swift in Sources */,
@@ -3560,6 +3578,7 @@
 				33E7AA6726CFD4E000DF1CBE /* CornerView.swift in Sources */,
 				33CD8DB52744D6ED0032C1F2 /* HoldingsSkeletonTableViewCell.swift in Sources */,
 				8544525128AB908300A88F09 /* SetRecommendationSettings.graphql.swift in Sources */,
+				900628B328AD36AC00E86BF8 /* DeepLinksView.swift in Sources */,
 				3AD40FA326682A27005679DE /* UICollectionView+ReuseCells.swift in Sources */,
 				3376FE14276B1E050098CDF7 /* HoldingsInProgressViewController.swift in Sources */,
 				3A5ADA70268DA179008659E8 /* SwipeExpanding.swift in Sources */,
@@ -3616,6 +3635,7 @@
 				331243DC27BF7488008C2BCC /* HomeIndexesTableViewCell.swift in Sources */,
 				33A1F57D27032CA5000DAF33 /* FetchSelectedCollections.graphql.swift in Sources */,
 				3A01FBE52682396F007F6FA3 /* CollectionInvestButtonView.swift in Sources */,
+				900628B528AD36AC00E86BF8 /* DeepLinksViewModel.swift in Sources */,
 				33467CFF26C698BC00811F74 /* MainTabController.swift in Sources */,
 				33A1F56F2702F36D000DAF33 /* FetchTickersMatchData.graphql.swift in Sources */,
 				33722497270D9EC900C8C18F /* SingleCollectionDetailsViewController.swift in Sources */,
