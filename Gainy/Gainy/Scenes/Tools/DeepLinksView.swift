@@ -152,7 +152,13 @@ struct DeepLinksView: View {
             VStack {
                 Spacer()
                 Button {
-                    print("done")
+                    Task {
+                        if let shareLink = await viewModel.getShareLink() {
+                            await MainActor.run {
+                                showShareSheet(with: shareLink)
+                            }
+                        }
+                    }
                 } label: {
                     Text("Share")
                         .font(Font.headline)
@@ -169,6 +175,11 @@ struct DeepLinksView: View {
         }
         .navigationTitle("DeepLink Creation")
     }
+    
+    private func showShareSheet(with urlShare: URL) {
+            let activityVC = UIActivityViewController(activityItems: [urlShare], applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.presentedViewController?.present(activityVC, animated: true, completion: nil)
+        }
 }
 
 @available(iOS 15.0, *)

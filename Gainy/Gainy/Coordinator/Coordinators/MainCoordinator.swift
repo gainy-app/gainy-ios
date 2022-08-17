@@ -2,6 +2,7 @@ import Firebase
 import Combine
 import UIKit
 
+
 final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     // MARK: Lifecycle
 
@@ -60,6 +61,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .store(in: &cancellables)
     }
     
+    @MainActor
     private func subscribeOnOpenTTF() {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenCollectionWithIdNotification, object: nil)
             .sink { [weak self] status in
@@ -67,6 +69,21 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                     return
                 }
                 self?.showCollectionDetails(collectionID: collectionID, delegate:  self, isFromSearch: true)
+            }
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenStockWithIdNotification, object: nil)
+            .sink { [weak self] status in
+                guard let stockSymbol = status.object as? String else {
+                    return
+                }
+                CollectionsManager.shared.getStocks(symbols: [stockSymbol]) { tickers in
+                    DispatchQueue.main.async {
+                        if let firstStock = tickers.first {
+                            self?.showCardsDetailsViewController([TickerInfo.init(ticker: firstStock)], index: 0)
+                        }
+                    }
+                }
             }
             .store(in: &cancellables)
     }

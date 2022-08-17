@@ -155,7 +155,7 @@ extension CollectionsManager {
         }
     }
     
-    internal func getStocks(symbols: [String]) async -> [RemoteTicker] {
+    func getStocks(symbols: [String]) async -> [RemoteTicker] {
         return await
         withCheckedContinuation { continuation in
             Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: symbols)) { result in
@@ -181,6 +181,33 @@ extension CollectionsManager {
                     continuation.resume(returning: [RemoteTicker]())
                     break
                 }
+            }
+        }
+    }
+    
+    func getStocks(symbols: [String], completion: (([RemoteTicker]) -> Void)) {
+        Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: symbols)) { result in
+            switch result {
+            case .success(let graphQLResult):
+                guard let tickers = graphQLResult.data?.tickers.compactMap({$0.fragments.remoteTickerDetails}) else {
+                    completion([RemoteTicker]())
+                    return
+                }
+                
+                for tickLivePrice in tickers.compactMap({$0.realtimeMetrics}) {
+                    TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol ?? "", data: tickLivePrice)
+                }
+                
+                for tickMatch in tickers.compactMap({$0.matchScore}) {
+                    TickerLiveStorage.shared.setMatchData(tickMatch.symbol, data: tickMatch)
+                }
+                
+                completion(tickers)
+                break
+            case .failure(let error):
+                dprint("Failure when making FetchTickersQuery request. Error: \(error)")
+                completion([RemoteTicker]())
+                break
             }
         }
     }

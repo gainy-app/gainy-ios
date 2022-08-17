@@ -96,6 +96,7 @@ final class HomeViewController: BaseViewController {
             nameLbl?.hideSkeleton()
             
             DeeplinkManager.shared.showDelayedTTF()
+            DeeplinkManager.shared.showDelayedStock()
         }
     }
     

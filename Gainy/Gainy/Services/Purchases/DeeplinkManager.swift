@@ -66,19 +66,19 @@ final class DeeplinkManager {
         GainyAnalytics.logEvent("ttf_deeplink_open_delayed", params: ["ttfID" : ttfId ?? -1])
         
         if let ttfId = ttfId {
-        NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: ttfId)
+            NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: ttfId)
         }
     }
     
     func showDelayedStock() {
-        guard isTTFAvaialble else {return}
+        guard isStockAvaialble else {return}
         
-        isTTFAvaialble = false
+        isStockAvaialble = false
         dprint("Stock view started \(stockSymbol ?? "")")
         GainyAnalytics.logEvent("stock_deeplink_open_delayed", params: ["symbol" : stockSymbol ?? ""])
         
         if let stockSymbol = stockSymbol {
-        //NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: ttfId)
+            NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
         }
     }
 }

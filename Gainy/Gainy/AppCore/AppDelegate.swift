@@ -220,7 +220,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     } else {
                             dprint("stock_deeplink_open \(stockSymbol)")
                             GainyAnalytics.logEvent("stock_deeplink_open", params: ["symbol" : stockSymbol])
-                        //NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int(ttf))
+                        NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                     }
                 }
                 

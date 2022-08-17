@@ -7,20 +7,7 @@
 
 import SwiftUI
 import Combine
-
-//let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
-//buo.title = "\(UserProfileManager.shared.fullName) invited you to Gainy Premium"
-//buo.contentDescription = "Track all your investment accounts in one place. Follow stock collections from leading analysts. Safe and balanced investing in sectors you believe in with Thematic Trading Fractional."
-//buo.imageUrl = "https://uceb1323dc638e314608dee3acec.previews.dropboxusercontent.com/p/thumb/ABgYr7N88APNt8iacn0Ki8PMR6AiXdc1jr5wm31Z2qNQ_5kF5oQjGWu7u6p-3T7tPajrMrVRldMPc5A8s5jFO9E8Xq4t83_E8j1IkowAC0nzN5on6eqlj4RpLqhtHxIQmx3kz_opmyNTy-LCw16WhMZR_tZjN3lIZbbIxHoNhYrN8TACOj5Z9KYAHCG9Aycc8JMkUbx3R2c3warCGI1K8v_AegNY9r9f6ma8xJr02pNghC3OllugVJ-vQ_UuGB2sVbvZUirShEFBzIfWTPaWwfNPHB5l3FnI3VNyqJQeO6BuQvh4mSdE2C_i47RCSgtkVf8axwMAJGKCAO-hx2XqgHwVqjzfToA0wE7yymn3YAO4YL53jstWZzI31y3sXiTG8dQ0888IMczRUjgX1yyjhFD4AXjXJpgmmYf869qjvmfcjA/p.jpeg"
-//buo.publiclyIndex = true
-//buo.locallyIndex = true
-//
-//let linkProperties: BranchLinkProperties = BranchLinkProperties()
-//linkProperties.feature = "Purchase_swipe"
-//linkProperties.campaign = "Referral_Invite"
-//linkProperties.channel = "Share"
-//linkProperties.addControlParam("refId", withValue: "\(UserProfileManager.shared.profileID ?? 0)")
-//linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
+import Branch
 
 @available(iOS 15.0, *)
 class DeepLinksViewModel: ObservableObject {
@@ -110,4 +97,35 @@ class DeepLinksViewModel: ObservableObject {
     
     @Published
     var parameterPlaceholder: String = "profile_id"
+    
+    func getShareLink() async -> URL? {
+        let buo = BranchUniversalObject.init(canonicalIdentifier: "invite")
+        buo.title = self.title
+        buo.contentDescription = self.contentDescription
+        buo.imageUrl = self.imageUrl
+        buo.publiclyIndex = true
+        buo.locallyIndex = true
+        
+        let linkProperties: BranchLinkProperties = BranchLinkProperties()
+        linkProperties.feature = self.feature
+        linkProperties.campaign = self.campaign
+        linkProperties.channel = self.channel
+        linkProperties.addControlParam(parameterName, withValue: parameterValue)
+        linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
+        
+        return await withCheckedContinuation { continuation in
+            buo.getShortUrl(with: linkProperties) { (url, error) in
+                if (error == nil) {
+                    if let url = url {
+                        continuation.resume(returning: URL(string: url))
+                    } else {
+                        continuation.resume(returning: nil)
+                    }
+                } else {
+                    continuation.resume(returning: nil)
+                    dprint(String(format: "Branch error : %@", error! as CVarArg))
+                }
+            }
+        }
+    }
 }
