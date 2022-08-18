@@ -110,7 +110,7 @@ class DeepLinksViewModel: ObservableObject {
         linkProperties.feature = self.feature
         linkProperties.campaign = self.campaign
         linkProperties.channel = self.channel
-        linkProperties.addControlParam(parameterName, withValue: parameterValue)
+        linkProperties.addControlParam(parameterName, withValue: parameterValue.uppercased())
         linkProperties.addControlParam("$ios_passive_deepview_", withValue: "false")
         
         return await withCheckedContinuation { continuation in
