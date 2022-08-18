@@ -211,13 +211,9 @@ final class CollectionSearchController: NSObject {
     }
     
     func reloadSuggestedCollections() {        
-        UserProfileManager.shared.getProfileCollections(loadProfile: true) { success in
-            if success {
-                self.suggestedCollections = UserProfileManager.shared
-                    .recommendedCollections
-                    .map { CollectionViewModelMapper.map($0) }
-            }
-        }
+        self.suggestedCollections = UserProfileManager.shared
+            .recommendedCollections
+            .map { CollectionViewModelMapper.map($0) }
     }
     
     func clearAll() {        

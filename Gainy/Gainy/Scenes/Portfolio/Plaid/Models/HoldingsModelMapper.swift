@@ -77,6 +77,7 @@ struct HoldingsModelMapper {
             }
             ttfTags = ttfTags.uniqued()
             
+            let interests = (ticker?.tickerInterests ?? []).flatMap({$0.toUnifiedContainers()})
             let industriesTags = (ticker?.tickerIndustries ?? []).flatMap({$0.toUnifiedContainers()})
             let categoriesTags = (ticker?.tickerCategories ?? []).flatMap({$0.toUnifiedContainers()})
             tags = ttfTags + categoriesTags + industriesTags
@@ -102,7 +103,7 @@ struct HoldingsModelMapper {
                                              event: holdingGroup.details?.nextEarningsDate,
                                              institutionIds: institutionIds,
                                              accountIds: holdingGroup.holdings.compactMap(\.accountId),
-                                             tickerInterests: tags.filter({$0.type == .interest}).compactMap({$0.id}),
+                                             tickerInterests: interests.compactMap({$0.id}),
                                              tickerCategories: tags.filter({$0.type == .category}).compactMap({$0.id}),
                                              rawTicker: ticker)
             
