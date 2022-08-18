@@ -11,7 +11,6 @@ import FloatingPanel
 import Combine
 
 final class HoldingsPieChartViewController: BaseViewController {
-    
     public var onSettingsPressed: (() -> Void)?
     public var onPlusPressed: (() -> Void)?
     
@@ -39,6 +38,14 @@ final class HoldingsPieChartViewController: BaseViewController {
     private var shouldDismissFloatingPanel = false
     private var floatingPanelPreviousYPosition: CGFloat? = nil
     
+    var isDemoProfile: Bool = false
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
     
     override func viewDidLoad() {
         
@@ -86,7 +93,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     
     public func loadChartData() {
         
-        guard let profileID = UserProfileManager.shared.profileID else {
+        guard let profileID = profileToUse else {
             dprint("Missing profileID")
             return
         }
@@ -159,7 +166,7 @@ final class HoldingsPieChartViewController: BaseViewController {
     
     private func showSortingPanel() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
+        guard let userID = profileToUse else {
             return
         }
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -265,7 +272,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HoldingPieChartCollectionHeaderView.reuseIdentifier, for: indexPath) as! HoldingPieChartCollectionHeaderView
             
-            guard let userID = UserProfileManager.shared.profileID else {
+            guard let userID = profileToUse else {
                 return headerView
             }
             guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
@@ -331,7 +338,7 @@ extension HoldingsPieChartViewController: UICollectionViewDataSource {
     
     private func filterAndSortPieChartData() {
         
-        guard let profileID = UserProfileManager.shared.profileID else {
+        guard let profileID = profileToUse else {
             dprint("Missing profileID")
             return
         }

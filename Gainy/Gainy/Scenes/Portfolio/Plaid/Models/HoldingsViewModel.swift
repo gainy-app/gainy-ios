@@ -50,6 +50,16 @@ final class HoldingsViewModel {
     
     //MARK: - Network
     
+    var isDemoProfile: Bool = false
+    
+    var profileToUse: Int? {
+        if isDemoProfile {
+            return Constants.Plaid.demoProfileID
+        } else {
+            return UserProfileManager.shared.profileID
+        }
+    }
+    
     private var config = Configuration()
     
     func loadHoldingsAndSecurities(_ completion: (() -> Void)?) {
@@ -58,7 +68,7 @@ final class HoldingsViewModel {
         Network.shared.apollo.clearCache()
         
         DispatchQueue.global().async {
-            if let profileID = UserProfileManager.shared.profileID {
+            if let profileID = self.profileToUse {
                 
                 let loadGroup = DispatchGroup()
                 loadGroup.enter()
@@ -280,7 +290,7 @@ final class HoldingsViewModel {
     
     func loadChartsForRange(range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, _ completion: ((PortfolioChartGainsViewModel?) -> Void)?) {
         
-        if let profileID = UserProfileManager.shared.profileID {
+        if let profileID = profileToUse {
             
             let loadGroup = DispatchGroup()
             var haveSomethingToLoad = false
@@ -327,30 +337,6 @@ final class HoldingsViewModel {
         } else {
             completion?(nil)
         }
-    }
-    
-    private func loadPieChart(profileId: Int, accessTokenIds: [Int]) async -> [PieChartData] {
-        return await
-        withCheckedContinuation { continuation in
-
-            
-            let query = GetPortfolioPieChartQuery.init(profileId: profileId, accessTokenIds: accessTokenIds)
-            Network.shared.apollo.fetch(query: query) {result in
-//                    switch result {
-//                    case .success(let graphQLResult):
-//                        if let fetchedData = graphQLResult.data?.collectionPiechart {
-//                            continuation.resume(returning: fetchedData)
-//                        } else {
-//                            continuation.resume(returning: [PieChartData]())
-//                        }
-//                        break
-//                    case .failure(let error):
-//                        dprint("Failure when making GetTtfChartQuery request. Error: \(error)")
-//                        continuation.resume(returning: [PieChartData]())
-//                        break
-//                    }
-                }
-            }
     }
     
     init() {

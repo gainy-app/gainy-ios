@@ -78,9 +78,7 @@ final class DemoHoldingsViewController: BaseViewController {
     }
     
     @objc func loadData() {
-        guard UserProfileManager.shared.profileID != nil else {
-            return
-        }
+        viewModel.isDemoProfile = true
         guard viewModeButton.isUserInteractionEnabled else {return}
         viewModeButton.isUserInteractionEnabled = false
         tableView.isSkeletonable = true
@@ -157,6 +155,7 @@ final class DemoHoldingsViewController: BaseViewController {
             return
         }
         let holdingPieChartViewController = HoldingsPieChartViewController.init()
+        holdingPieChartViewController.isDemoProfile = true
         holdingPieChartViewController.view.backgroundColor = self.view.backgroundColor
         self.addChild(holdingPieChartViewController)
         holdingPieChartViewController.view.frame = CGRect.init(x: 0, y: sender.frame.maxY, width: self.view.frame.width, height: self.view.frame.height)
@@ -203,9 +202,7 @@ final class DemoHoldingsViewController: BaseViewController {
     
     private func showFilteringPanel() {
         
-        guard let userID = UserProfileManager.shared.profileID else {
-            return
-        }
+        let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
@@ -253,9 +250,7 @@ final class DemoHoldingsViewController: BaseViewController {
 extension DemoHoldingsViewController: SortPortfolioDetailsViewControllerDelegate {
     
     func selectionChanged(vc: SortPortfolioDetailsViewController, sorting: PortfolioSortingField, ascending: Bool) {
-        guard let userID = UserProfileManager.shared.profileID else {
-            return
-        }
+        let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {
             return
         }
@@ -280,7 +275,7 @@ extension DemoHoldingsViewController: PortfolioFilteringViewControllerDelegate {
     
     func didChangeFilterSettings(_ sender: PortfolioFilteringViewController) {
         
-        guard let userID = UserProfileManager.shared.profileID else {return}
+        let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         
         GainyAnalytics.logEvent("filter_portfolio_changed", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "HoldingsViewController"])
@@ -333,7 +328,7 @@ extension DemoHoldingsViewController: HoldingsDataSourceDelegate {
     
     func chartsForRangeRequested(range: ScatterChartView.ChartPeriod, viewModel: HoldingChartViewModel) {
         
-        guard let userID = UserProfileManager.shared.profileID else {return}
+        let userID = Constants.Plaid.demoProfileID
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(userID) else {return}
         GainyAnalytics.logEvent("portfolio_chart_period_changed", params: ["period" : range.rawValue, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Portfolio"])
         

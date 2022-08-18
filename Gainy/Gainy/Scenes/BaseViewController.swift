@@ -97,7 +97,8 @@ class BaseViewController: UIViewController, LinkOAuthHandling {
                                       String(describing: CollectionDetailsViewController.self),
                                       String(describing: SingleCollectionDetailsViewController.self),
                                     String(describing: DiscoverCollectionsViewController.self),
-                                      String(describing: HoldingsViewController.self)]
+                                      String(describing: HoldingsViewController.self),
+                                      String(describing: DemoHoldingsViewController.self)]
     
     private func fillBackColor() {
         let curName = String(describing: type(of: self))
