@@ -8,7 +8,7 @@
 import UIKit
 
 protocol NoPlaidViewControllerDelegate: AnyObject {
-    func plaidLinked(controller: NoPlaidViewController)
+    func plaidLinked(controller: BaseViewController)
 }
 
 final class NoPlaidViewController: BaseViewController {

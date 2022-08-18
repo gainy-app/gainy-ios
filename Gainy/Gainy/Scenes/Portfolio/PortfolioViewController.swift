@@ -14,7 +14,7 @@ final class PortfolioViewController: BaseViewController {
     var mainCoordinator: MainCoordinator?
     
     //MARK: - Child VCs
-    lazy var noPlaidVC = NoPlaidViewController.instantiate(.portfolio)
+    lazy var noPlaidVC = DemoHoldingsViewController.instantiate(.portfolio)
     lazy var holdingsVC = HoldingsViewController.instantiate(.portfolio)
     lazy var noHoldingsVC = NoHoldingsViewController.instantiate(.portfolio)
     lazy var inProgressHoldingsVC = HoldingsInProgressViewController.instantiate(.portfolio)
@@ -37,6 +37,7 @@ final class PortfolioViewController: BaseViewController {
                     removeAllChildVCs()
                     noPlaidVC.delegate = self
                     addViewController(noPlaidVC, view: containerView)
+                    noPlaidVC.loadData()
                 }
             case .linkedNoHoldings:
                 if !children.contains(noHoldingsVC) {
@@ -84,7 +85,11 @@ final class PortfolioViewController: BaseViewController {
     
     private func loadBasedOnState() {
         if UserProfileManager.shared.isPlaidLinked {
+            #if DEBUG
+            state = .noLink
+            #else
             state = .linkHasHoldings
+            #endif
         } else {
             state = .noLink
         }
@@ -105,7 +110,7 @@ final class PortfolioViewController: BaseViewController {
 }
 
 extension PortfolioViewController: NoPlaidViewControllerDelegate {
-    func plaidLinked(controller: NoPlaidViewController) {
+    func plaidLinked(controller: BaseViewController) {
         UserProfileManager.shared.isPlaidLinked = true        
         state = .linkHasHoldings
     }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "portf_plaid_hello.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

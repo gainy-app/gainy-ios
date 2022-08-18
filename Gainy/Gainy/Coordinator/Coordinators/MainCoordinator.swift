@@ -61,7 +61,6 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
             .store(in: &cancellables)
     }
     
-    @MainActor
     private func subscribeOnOpenTTF() {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenCollectionWithIdNotification, object: nil)
             .sink { [weak self] status in
@@ -78,6 +77,9 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                     return
                 }
                 CollectionsManager.shared.getStocks(symbols: [stockSymbol]) { tickers in
+                    for tickLivePrice in tickers.compactMap({$0.realtimeMetrics}) {
+                        TickerLiveStorage.shared.setSymbolData(tickLivePrice.symbol, data: tickLivePrice)
+                    }
                     DispatchQueue.main.async {
                         if let firstStock = tickers.first {
                             self?.showCardsDetailsViewController([TickerInfo.init(ticker: firstStock)], index: 0)

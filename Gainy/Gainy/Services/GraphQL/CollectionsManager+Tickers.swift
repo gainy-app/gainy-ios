@@ -185,7 +185,7 @@ extension CollectionsManager {
         }
     }
     
-    func getStocks(symbols: [String], completion: (([RemoteTicker]) -> Void)) {
+    func getStocks(symbols: [String], completion: @escaping (([RemoteTicker]) -> Void)) {
         Network.shared.apollo.fetch(query: FetchTickersQuery.init(symbols: symbols)) { result in
             switch result {
             case .success(let graphQLResult):

@@ -53,7 +53,7 @@ class DeepLinksViewModel: ObservableObject {
     
     
     @Published
-    var imageUrl: String = "https://www.hackingwithswift.com/img/paul-2.png"
+    var imageUrl: String = "https://scontent.fhel3-1.fna.fbcdn.net/v/t39.30808-6/242423507_224879329681015_8261017465975889589_n.png?_nc_cat=110&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Mk3bLigvc4YAX-YgC6n&_nc_ht=scontent.fhel3-1.fna&oh=00_AT8PyqGKa3H_npwyNJhrCRBXQgCxenJ7fsWCpCr9W7NDNw&oe=6302F178"
     
     
     @Published
