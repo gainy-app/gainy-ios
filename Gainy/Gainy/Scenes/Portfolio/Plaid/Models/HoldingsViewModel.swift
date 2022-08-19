@@ -208,7 +208,7 @@ final class HoldingsViewModel {
                     dprint("\(Date()) Holdings charts start")
                     for range in [self.dataSource.chartRange]{
                         innerChartsGroup.enter()
-                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
+                        HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] chartData in
                             self?.chartsCache[range] = chartData
                             dprint("Holdings charts last \(chartData.last?.datetime ?? "")")
                             innerChartsGroup.leave()
@@ -224,7 +224,7 @@ final class HoldingsViewModel {
                     
                     innerChartsGroup.enter()
                     dprint("\(Date()) Metrics for Porto load start")
-                    HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] metrics in
+                    HistoricalChartsLoader.shared.loadPlaidPortfolioChartMetrics(profileID: profileID, settings: defaultSettings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] metrics in
                         self?.metrics = metrics
                         dprint("\(Date()) Metrics for Porto load end")
                         innerChartsGroup.leave()
@@ -297,7 +297,7 @@ final class HoldingsViewModel {
             
             if chartsCache[range] == nil {
                 loadGroup.enter()
-                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount) {[weak self] chartData in
+                HistoricalChartsLoader.shared.loadPlaidPortfolioChart(profileID: profileID, range: range, settings: settings, interestsCount: self.interestsCount, categoriesCount: self.categoriesCount, isDemo: self.isDemoProfile) {[weak self] chartData in
                     self?.chartsCache[range] = chartData
                     loadGroup.leave()
                 }

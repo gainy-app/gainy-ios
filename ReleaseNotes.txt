@@ -1,10 +1,10 @@
-iOS v1.4.7 #270
+iOS v1.4.8 #271
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• Stock DeepLink
+• Demo Porto
 
 :hammer_and_wrench: Improvements
 • QA updates

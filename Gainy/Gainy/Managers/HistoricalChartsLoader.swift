@@ -115,7 +115,7 @@ final class HistoricalChartsLoader {
     ///   - profileID: User Profile ID
     ///   - range: Chart range
     ///   - completion: response clouser with ChartData
-    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int,  completion: @escaping ([ChartNormalized]) -> Void) {
+    func loadPlaidPortfolioChart(profileID: Int, range: ScatterChartView.ChartPeriod, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int, isDemo: Bool,  completion: @escaping ([ChartNormalized]) -> Void) {
         
         var dateString = ""
         var periodString = ""
@@ -171,7 +171,7 @@ final class HistoricalChartsLoader {
         Network.shared.apollo.fetch(query: GetPortfolioChartsQuery.init(profileId: profileID,
                                                                         periods: [periodString],
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
-                                                                        accessTokenIds: accountIds,
+                                                                        accessTokenIds: isDemo ? nil : accountIds,
                                                                         accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         institutionIds: nil,
@@ -202,7 +202,7 @@ final class HistoricalChartsLoader {
         }        
     }
     
-    func loadPlaidPortfolioChartMetrics(profileID: Int, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int, completion: @escaping (PortofolioMetrics?) -> Void) {
+    func loadPlaidPortfolioChartMetrics(profileID: Int, settings: PortfolioSettings, interestsCount: Int , categoriesCount: Int, isDemo: Bool, completion: @escaping (PortofolioMetrics?) -> Void) {
         let intersIDs = settings.interests.filter { item in
             item.selected
         }.compactMap({$0.id})
@@ -222,7 +222,7 @@ final class HistoricalChartsLoader {
         dprint("GetPortfolioChartMetricsQuery profile: \(profileID) inter: \(intersIDs) send: \(String(describing: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs)) accessTokenIds: \(accountIds) cats: \(catsIDs)) send: \(String(describing: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs)) ltt: \(settings.onlyLongCapitalGainTax) secs: \(securityTypes)")
         Network.shared.apollo.fetch(query: GetPortfolioChartMetricsQuery.init(profileId: profileID,
                                                                         interestIds: intersIDs.count == interestsCount || intersIDs.isEmpty ? nil : intersIDs,
-                                                                        accessTokenIds: accountIds,
+                                                                              accessTokenIds: isDemo ? nil : accountIds,
                                                                         accountIds: nil,
                                                                         categoryIds: catsIDs.count == categoriesCount || catsIDs.isEmpty ? nil : catsIDs,
                                                                         lttOnly: settings.onlyLongCapitalGainTax,

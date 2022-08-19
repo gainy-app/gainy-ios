@@ -110,7 +110,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         }
         
         view.showAnimatedGradientSkeleton()
-        let query = GetPortfolioPieChartQuery.init(profileId: profileID, accessTokenIds: accessTokenIds)
+        let query = GetPortfolioPieChartQuery.init(profileId: profileID, accessTokenIds: isDemoProfile ? nil : accessTokenIds)
         Network.shared.apollo.fetch(query: query) {result in
             self.view.hideSkeleton()
             self.refreshControl.endRefreshing()

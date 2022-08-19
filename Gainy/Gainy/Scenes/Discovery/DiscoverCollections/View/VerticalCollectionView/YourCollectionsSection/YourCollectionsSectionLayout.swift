@@ -3,33 +3,35 @@ import UIKit
 struct YourCollectionsSectionLayout: SectionLayout {
     func layoutSection(within _: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
         // Items
-        let yourCollectionItem = NSCollectionLayoutItem(
+        let recommendedItem = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0),
-                heightDimension: .fractionalHeight(1.0)
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalWidth(0.5)
             )
         )
 
         // Group
-        let yourCollectionGroup = NSCollectionLayoutGroup.horizontal(
+        let recommendedGroup = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .estimated(92)
+                heightDimension: .fractionalWidth(0.5)
             ),
-            subitems: [yourCollectionItem]
+            subitem: recommendedItem,
+            count: 2
         )
+        recommendedGroup.interItemSpacing = .fixed(16)
 
         // Section
-        let yourCollectionsSection = NSCollectionLayoutSection(group: yourCollectionGroup)
-        yourCollectionsSection.interGroupSpacing = 8
-        yourCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
-            top: 16.0,
+        let recommendedCollectionsSection = NSCollectionLayoutSection(group: recommendedGroup)
+        recommendedCollectionsSection.interGroupSpacing = 8
+        recommendedCollectionsSection.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
             leading: 16.0,
             bottom: 0,
             trailing: 16.0
         )
 
-        return yourCollectionsSection
+        return recommendedCollectionsSection
     }
 
     func header(
@@ -56,7 +58,7 @@ struct YourCollectionsSectionLayout: SectionLayout {
         viewModel: AnyHashable,
         position _: Int
     ) -> UICollectionViewCell {
-        let cell: YourCollectionViewCell =
+        let cell: SquareYourCollectionViewCell =
             collectionView.dequeueReusableCell(for: indexPath)
 
         if let viewModel = viewModel as? YourCollectionViewCellModel {
@@ -66,7 +68,8 @@ struct YourCollectionsSectionLayout: SectionLayout {
                                stocksAmount: viewModel.stocksAmount,
                                matchScore: viewModel.matchScore,
                                dailyGrow: viewModel.dailyGrow,
-                               imageName: viewModel.image)
+                               imageName: viewModel.image,
+                               plusButtonState: .checked)
         }
 
         return cell

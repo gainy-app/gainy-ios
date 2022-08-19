@@ -165,7 +165,7 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         discoverCollectionsCollectionView.registerSectionHeader(GainersHeaderView.self)
         
         discoverCollectionsCollectionView.register(YourCollectionTipCell.self)
-        discoverCollectionsCollectionView.register(YourCollectionViewCell.self)
+        discoverCollectionsCollectionView.register(SquareYourCollectionViewCell.self)
         discoverCollectionsCollectionView.register(RecommendedCollectionViewCell.self)
         discoverCollectionsCollectionView.register(UINib.init(nibName: HomeTickersCollectionViewCell.cellIdentifier, bundle: nil), forCellWithReuseIdentifier: HomeTickersCollectionViewCell.cellIdentifier)
         
@@ -176,8 +176,6 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
         
         discoverCollectionsCollectionView.delegate = self
         
-        discoverCollectionsCollectionView.dragDelegate = self
-        discoverCollectionsCollectionView.dropDelegate = self
         discoverCollectionsCollectionView.contentInset = .init(top: 0, left: 0, bottom: 45.0, right: 0)
         dataSource = UICollectionViewDiffableDataSource<DiscoverCollectionsSection, AnyHashable>(
             collectionView: discoverCollectionsCollectionView
@@ -213,6 +211,23 @@ final class DiscoverCollectionsViewController: BaseViewController, DiscoverColle
                 }
                 
                 cell.delegate = cell
+                
+            case let (cell as SquareYourCollectionViewCell, modelItem as YourCollectionViewCellModel):
+                
+                cell.tag = modelItem.id
+                cell.onPlusButtonPressed = nil
+                
+                cell.onCheckButtonPressed = { [weak self] in
+                    cell.isUserInteractionEnabled = false
+                    
+                    let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
+                        GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+                        self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+                        
+                    }
+                    NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
+                    
+                }
                 
             case let (cell as RecommendedCollectionViewCell, modelItem as RecommendedCollectionViewCellModel):
                 cell.tag = modelItem.id
@@ -1128,136 +1143,136 @@ extension DiscoverCollectionsViewController: UICollectionViewDelegate {
     }
 }
 
-extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
-    func collectionView(
-        _: UICollectionView,
-        itemsForBeginning _: UIDragSession,
-        at indexPath: IndexPath
-    ) -> [UIDragItem] {
-        switch indexPath.section {
-        case DiscoverCollectionsSection.yourCollections.rawValue:
-            guard !CollectionsManager.shared.collections.isEmpty else { return[] }
-            if CollectionsManager.shared.collections.contains(where: { item in
-                (item.id ?? 0) == Constants.CollectionDetails.top20ID
-            }), indexPath.row == 0 {
-                return []
-            }
-            
-            let item = viewModel!.yourCollections[indexPath.row]
-            // swiftlint:disable legacy_objc_type
-            let itemProvider = NSItemProvider(object: item.name as NSString)
-            // swiftlint:enable legacy_objc_type
-            let dragItem = UIDragItem(itemProvider: itemProvider)
-            
-            // TODO: Consider assigning a value to the localObject property of each drag item.
-            // This step is optional but makes it faster to drag and drop content within the same app.
-            
-            return [dragItem]
-        default:
-            return []
-        }
-    }
-    
-    func collectionView(
-        _: UICollectionView,
-        dragSessionIsRestrictedToDraggingApplication _: UIDragSession
-    ) -> Bool {
-        true
-    }
-    
-    func collectionView(
-        _: UICollectionView,
-        dragPreviewParametersForItemAt _: IndexPath
-    ) -> UIDragPreviewParameters? {
-        let previewParams = UIDragPreviewParameters()
-        
-        let path = UIBezierPath(
-            roundedRect: CGRect(
-                x: 0,
-                y: 0,
-                width: UIScreen.main.bounds.width - (16 + 16),
-                height: 92
-            ),
-            cornerRadius: 18
-        )
-        previewParams.visiblePath = path
-        
-        return previewParams
-    }
-}
+//extension DiscoverCollectionsViewController: UICollectionViewDragDelegate {
+//    func collectionView(
+//        _: UICollectionView,
+//        itemsForBeginning _: UIDragSession,
+//        at indexPath: IndexPath
+//    ) -> [UIDragItem] {
+//        switch indexPath.section {
+//        case DiscoverCollectionsSection.yourCollections.rawValue:
+//            guard !CollectionsManager.shared.collections.isEmpty else { return[] }
+//            if CollectionsManager.shared.collections.contains(where: { item in
+//                (item.id ?? 0) == Constants.CollectionDetails.top20ID
+//            }), indexPath.row == 0 {
+//                return []
+//            }
+//
+//            let item = viewModel!.yourCollections[indexPath.row]
+//            // swiftlint:disable legacy_objc_type
+//            let itemProvider = NSItemProvider(object: item.name as NSString)
+//            // swiftlint:enable legacy_objc_type
+//            let dragItem = UIDragItem(itemProvider: itemProvider)
+//
+//            // TODO: Consider assigning a value to the localObject property of each drag item.
+//            // This step is optional but makes it faster to drag and drop content within the same app.
+//
+//            return [dragItem]
+//        default:
+//            return []
+//        }
+//    }
+//
+//    func collectionView(
+//        _: UICollectionView,
+//        dragSessionIsRestrictedToDraggingApplication _: UIDragSession
+//    ) -> Bool {
+//        true
+//    }
+//
+//    func collectionView(
+//        _: UICollectionView,
+//        dragPreviewParametersForItemAt _: IndexPath
+//    ) -> UIDragPreviewParameters? {
+//        let previewParams = UIDragPreviewParameters()
+//
+//        let path = UIBezierPath(
+//            roundedRect: CGRect(
+//                x: 0,
+//                y: 0,
+//                width: UIScreen.main.bounds.width - (16 + 16),
+//                height: 92
+//            ),
+//            cornerRadius: 18
+//        )
+//        previewParams.visiblePath = path
+//
+//        return previewParams
+//    }
+//}
 
-extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
-    func collectionView(_: UICollectionView,
-                        performDropWith coordinator: UICollectionViewDropCoordinator) {
-        guard let destinationIndexPath = coordinator.destinationIndexPath else {
-            return
-        }
-        
-        if coordinator.proposal.operation == .move {
-            reorderItems(dropCoordinator: coordinator,
-                         destinationIndexPath: destinationIndexPath)
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView,
-                        dropSessionDidUpdate session: UIDropSession,
-                        withDestinationIndexPath _: IndexPath?) -> UICollectionViewDropProposal {
-        let dragItemLocation = session.location(in: collectionView)
-        var dragItemIndexPath: IndexPath?
-        
-        collectionView.performUsingPresentationValues {
-            dragItemIndexPath = collectionView.indexPathForItem(at: dragItemLocation)
-        }
-        
-        guard let destination = dragItemIndexPath else {
-            return UICollectionViewDropProposal(
-                operation: .cancel,
-                intent: .unspecified
-            )
-        }
-        
-        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
-            return UICollectionViewDropProposal(
-                operation: .cancel,
-                intent: .unspecified
-            )
-        }
-        
-        if CollectionsManager.shared.collections.contains(where: { item in
-            (item.id ?? 0) == Constants.CollectionDetails.top20ID
-        }), destination.row == 0 {
-            return UICollectionViewDropProposal(
-                operation: .cancel,
-                intent: .unspecified
-            )
-        }
-        
-        return UICollectionViewDropProposal(
-            operation: .move,
-            intent: .insertAtDestinationIndexPath
-        )
-    }
-    
-    func collectionView(
-        _: UICollectionView,
-        dropPreviewParametersForItemAt _: IndexPath
-    ) -> UIDragPreviewParameters? {
-        let previewParams = UIDragPreviewParameters()
-        
-        let path = UIBezierPath(
-            roundedRect: CGRect(
-                x: 0,
-                y: 0,
-                width: UIScreen.main.bounds.width - (16 + 16),
-                height: 92
-            ),
-            cornerRadius: 8
-        )
-        previewParams.visiblePath = path
-        
-        return previewParams
-    }
-}
+//extension DiscoverCollectionsViewController: UICollectionViewDropDelegate {
+//    func collectionView(_: UICollectionView,
+//                        performDropWith coordinator: UICollectionViewDropCoordinator) {
+//        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+//            return
+//        }
+//
+//        if coordinator.proposal.operation == .move {
+//            reorderItems(dropCoordinator: coordinator,
+//                         destinationIndexPath: destinationIndexPath)
+//        }
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        dropSessionDidUpdate session: UIDropSession,
+//                        withDestinationIndexPath _: IndexPath?) -> UICollectionViewDropProposal {
+//        let dragItemLocation = session.location(in: collectionView)
+//        var dragItemIndexPath: IndexPath?
+//
+//        collectionView.performUsingPresentationValues {
+//            dragItemIndexPath = collectionView.indexPathForItem(at: dragItemLocation)
+//        }
+//
+//        guard let destination = dragItemIndexPath else {
+//            return UICollectionViewDropProposal(
+//                operation: .cancel,
+//                intent: .unspecified
+//            )
+//        }
+//
+//        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
+//            return UICollectionViewDropProposal(
+//                operation: .cancel,
+//                intent: .unspecified
+//            )
+//        }
+//
+//        if CollectionsManager.shared.collections.contains(where: { item in
+//            (item.id ?? 0) == Constants.CollectionDetails.top20ID
+//        }), destination.row == 0 {
+//            return UICollectionViewDropProposal(
+//                operation: .cancel,
+//                intent: .unspecified
+//            )
+//        }
+//
+//        return UICollectionViewDropProposal(
+//            operation: .move,
+//            intent: .insertAtDestinationIndexPath
+//        )
+//    }
+//
+//    func collectionView(
+//        _: UICollectionView,
+//        dropPreviewParametersForItemAt _: IndexPath
+//    ) -> UIDragPreviewParameters? {
+//        let previewParams = UIDragPreviewParameters()
+//
+//        let path = UIBezierPath(
+//            roundedRect: CGRect(
+//                x: 0,
+//                y: 0,
+//                width: UIScreen.main.bounds.width - (16 + 16),
+//                height: 92
+//            ),
+//            cornerRadius: 8
+//        )
+//        previewParams.visiblePath = path
+//
+//        return previewParams
+//    }
+//}
 
 extension DiscoverCollectionsViewController : SingleCollectionDetailsViewControllerDelegate {
     func collectionToggled(vc: SingleCollectionDetailsViewController, isAdded: Bool, collectionID: Int) {
