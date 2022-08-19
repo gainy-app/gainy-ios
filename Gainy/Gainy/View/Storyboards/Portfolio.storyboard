@@ -73,7 +73,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="portf_plaid_intro" translatesAutoresizingMaskIntoConstraints="NO" id="JTh-Wo-coU">
-                                <rect key="frame" x="0.0" y="35" width="375" height="336"/>
+                                <rect key="frame" x="0.0" y="35" width="375" height="333"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lut-SQ-IjF" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="587" width="311" height="64"/>
@@ -99,13 +99,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Gainy helps to manage your assets. Connect your broker or bank accounts and manage your investments in one place." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tq7-BQ-NOr">
-                                <rect key="frame" x="32" y="478" width="311" height="56"/>
+                                <rect key="frame" x="32" y="476.5" width="311" height="57.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Manage your portfolios efficiently" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z3-dd-48u">
-                                <rect key="frame" x="32" y="387" width="311" height="75"/>
+                                <rect key="frame" x="32" y="384" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1566,13 +1566,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have more that one account?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiE-jS-vvq">
-                                <rect key="frame" x="32" y="434" width="311" height="75"/>
+                                <rect key="frame" x="32" y="432.5" width="311" height="76.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cph-OU-3m1">
-                                <rect key="frame" x="32" y="32" width="311" height="370"/>
+                                <rect key="frame" x="32" y="32" width="311" height="368.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
@@ -1611,7 +1611,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="no_holdings_back" translatesAutoresizingMaskIntoConstraints="NO" id="G8Y-tg-Sgt">
-                                <rect key="frame" x="-60" y="90" width="495" height="292.5"/>
+                                <rect key="frame" x="-60" y="90" width="495" height="291.5"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZc-w8-DmJ" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1644,7 +1644,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not enough data" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXe-2w-RgT">
-                                <rect key="frame" x="32" y="398.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="397.5" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1692,7 +1692,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="250" image="holdings_in_progress" translatesAutoresizingMaskIntoConstraints="NO" id="zyM-gv-H6K">
-                                <rect key="frame" x="0.0" y="30" width="375" height="398.5"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="396"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8f-cx-pen" customClass="BorderButton" customModule="Gainy" customModuleProvider="target">
                                 <rect key="frame" x="32" y="571" width="311" height="64"/>
@@ -1718,7 +1718,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To connect your portfolio it might take a few minutes to a couple hours. Please get back shortly." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-NV-Kiz">
-                                <rect key="frame" x="32" y="462" width="311" height="56"/>
+                                <rect key="frame" x="32" y="460.5" width="311" height="57.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sAJ-U9-vw5"/>
                                 </constraints>
@@ -1727,7 +1727,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Work in progress" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh3-qn-c7V">
-                                <rect key="frame" x="32" y="408.5" width="311" height="37.5"/>
+                                <rect key="frame" x="32" y="406" width="311" height="38.5"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1769,13 +1769,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demo Portfolio" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2PI-gj-suj">
-                                <rect key="frame" x="24" y="210" width="161" height="28"/>
+                                <rect key="frame" x="24" y="210" width="162" height="29"/>
                                 <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHR-Ir-fyz">
-                                <rect key="frame" x="323" y="208" width="32" height="32"/>
+                                <rect key="frame" x="323" y="208.5" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="32" id="lEs-es-Vnp"/>
                                     <constraint firstAttribute="height" constant="32" id="sx0-HJ-FQc"/>
@@ -1788,7 +1788,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="232" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vIc-m4-cST">
-                                <rect key="frame" x="0.0" y="262" width="375" height="405"/>
+                                <rect key="frame" x="0.0" y="263" width="375" height="404"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HoldingsSettingsTableViewCell" rowHeight="70" id="4w0-GT-1Vw" customClass="HoldingsSettingsTableViewCell" customModule="Gainy" customModuleProvider="target">
@@ -1799,9 +1799,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxk-Nn-Td8">
-                                                    <rect key="frame" x="51.5" y="22" width="272.5" height="24"/>
+                                                    <rect key="frame" x="53.5" y="22" width="268" height="24"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qka-39-PVI" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="-0.5" width="77" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sliders" translatesAutoresizingMaskIntoConstraints="NO" id="mPs-eV-yAd">
@@ -1811,14 +1811,14 @@
                                                                         <constraint firstAttribute="height" constant="16" id="s4x-Ek-FTe"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
-                                                                    <rect key="frame" x="28" y="5" width="25.5" height="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwY-RI-ogL">
+                                                                    <rect key="frame" x="28" y="5" width="25" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="All" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
-                                                                    <rect key="frame" x="55.5" y="5" width="13.5" height="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kH7-sw-8iZ">
+                                                                    <rect key="frame" x="55" y="5" width="14" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
@@ -1844,8 +1844,8 @@
                                                                 <action selector="settingsButtonAction" destination="4w0-GT-1Vw" eventType="touchUpInside" id="jlq-cA-rh4"/>
                                                             </connections>
                                                         </view>
-                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
-                                                            <rect key="frame" x="82" y="-0.5" width="161.5" height="24"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QZP-v4-xyT" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                            <rect key="frame" x="82" y="-0.5" width="157" height="24"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reorder" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-97-X6v">
                                                                     <rect key="frame" x="8" y="4" width="16" height="16"/>
@@ -1854,14 +1854,14 @@
                                                                         <constraint firstAttribute="height" constant="16" id="9Nv-ZA-xGE"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
-                                                                    <rect key="frame" x="28" y="5" width="39" height="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wo-aG-5mu">
+                                                                    <rect key="frame" x="28" y="5" width="36" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="12"/>
                                                                     <color key="textColor" name="mainLightGray"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
-                                                                    <rect key="frame" x="69" y="5" width="84.5" height="14"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7e-Lv-kgW">
+                                                                    <rect key="frame" x="66" y="5" width="83" height="14.5"/>
                                                                     <fontDescription key="fontDescription" name="SFProDisplay-Semibold" family="SF Pro Display" pointSize="12"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1888,7 +1888,7 @@
                                                             </connections>
                                                         </view>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWF-UZ-B8d">
-                                                            <rect key="frame" x="248.5" y="-0.5" width="24" height="24"/>
+                                                            <rect key="frame" x="244" y="-0.5" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="6cj-Xc-wfD"/>
                                                                 <constraint firstAttribute="width" constant="24" id="PYw-ut-Alk"/>
@@ -1954,10 +1954,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJ4-yj-Ex8">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oJ4-yj-Ex8">
                                                     <rect key="frame" x="16" y="0.0" width="343" height="96"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agr-4N-vdW" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agr-4N-vdW" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="248" y="48" width="71" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="71" id="3Re-LO-zMe"/>
@@ -1969,7 +1969,7 @@
                                                                 <action selector="connectButtonAction" destination="2NV-9t-dqB" eventType="touchUpInside" id="8ib-tm-j2D"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZl-aa-axi" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZl-aa-axi" customClass="ResponsiveButton" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="311" y="16" width="16" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="SJz-t1-WHC"/>
@@ -1981,7 +1981,7 @@
                                                                 <action selector="closeButtonAction" destination="2NV-9t-dqB" eventType="touchUpInside" id="KDr-V3-SLx"/>
                                                             </connections>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-ey-gkR">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nOw-ey-gkR">
                                                             <rect key="frame" x="24" y="22" width="209" height="52"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment>
@@ -2040,25 +2040,25 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="432"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tID-yN-6ru" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tID-yN-6ru" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                     <rect key="frame" x="16" y="5" width="343" height="411"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-dw-5nM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="Activision 1" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mo1-dw-5nM">
                                                             <rect key="frame" x="48" y="18.5" width="182.5" height="19"/>
                                                             <fontDescription key="fontDescription" name="SFProDisplay-Bold" family="SF Pro Display" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15,427.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcT-us-E43">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$15,427.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcT-us-E43">
                                                             <rect key="frame" x="246.5" y="18.5" width="80.5" height="19"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Ultralight" family="SF Compact Rounded" pointSize="16"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaQ-l4-laY" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZaQ-l4-laY" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="16" y="56" width="40" height="24"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATIV" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0P-1o-OkI">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ATIV" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q0P-1o-OkI">
                                                                     <rect key="frame" x="8" y="5" width="24" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                     <color key="textColor" red="0.42352941179999998" green="0.36470588240000001" blue="0.82745098039999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2079,10 +2079,10 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zAB-Tg-dKU" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAB-Tg-dKU" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="272" y="56" width="55" height="24"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⌛ LTT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v78-6x-ek0">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="⌛ LTT" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v78-6x-ek0">
                                                                     <rect key="frame" x="8" y="5" width="39" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
@@ -2105,72 +2105,72 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-X2-E1X">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcK-X2-E1X">
                                                             <rect key="frame" x="16" y="93" width="43" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="681-uE-vPy">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="681-uE-vPy">
                                                             <rect key="frame" x="81" y="93" width="41.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWV-Qp-lyb">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWV-Qp-lyb">
                                                             <rect key="frame" x="184" y="94.5" width="32.5" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="swN-G9-8iC">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="swN-G9-8iC">
                                                             <rect key="frame" x="63" y="100.5" width="2" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="2" id="w72-Sq-LgN"/>
                                                                 <constraint firstAttribute="height" constant="2" id="xMK-LW-hKZ"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="jdN-Zv-UpD">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="jdN-Zv-UpD">
                                                             <rect key="frame" x="69" y="97.5" width="8" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="6RN-9w-fij"/>
                                                                 <constraint firstAttribute="width" constant="8" id="OV1-aN-Wpc"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVi-B1-cBM">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVi-B1-cBM">
                                                             <rect key="frame" x="232.5" y="93" width="43" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ow-J5-9sN">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ow-J5-9sN">
                                                             <rect key="frame" x="285.5" y="93" width="41.5" height="16.5"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                             <color key="textColor" name="mainRed"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="xvT-oD-3BR">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="xvT-oD-3BR">
                                                             <rect key="frame" x="279.5" y="100.5" width="2" height="2"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="2" id="2S9-7m-g0X"/>
                                                                 <constraint firstAttribute="width" constant="2" id="Vke-Ul-H8u"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="uKP-yk-1o2">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="uKP-yk-1o2">
                                                             <rect key="frame" x="220.5" y="97.5" width="8" height="8"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="8" id="lkh-47-D9e"/>
                                                                 <constraint firstAttribute="width" constant="8" id="zwq-4t-KSe"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-O2-1x8">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pnF-O2-1x8">
                                                             <rect key="frame" x="16" y="128" width="311" height="1"/>
                                                             <color key="backgroundColor" red="0.96862745100000003" green="0.97254901959999995" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="1" id="mr1-TK-uWi"/>
                                                             </constraints>
                                                         </view>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3h-ns-Gkm">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3h-ns-Gkm">
                                                             <rect key="frame" x="295" y="78" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="5By-E0-mec"/>
@@ -2183,7 +2183,7 @@
                                                                 <action selector="toggleTagsExpandAction:" destination="F3M-YU-czz" eventType="touchUpInside" id="HCE-i1-SPk"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgo-Me-yWC">
+                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgo-Me-yWC">
                                                             <rect key="frame" x="295" y="135" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="CgG-1x-LiX"/>
@@ -2196,7 +2196,7 @@
                                                                 <action selector="toggleExpandAction:" destination="F3M-YU-czz" eventType="touchUpInside" id="PMK-fl-Zit"/>
                                                             </connections>
                                                         </button>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHH-gj-eHv" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHH-gj-eHv" customClass="CornerView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="16" y="145" width="60" height="24"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpF-FD-B5b" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
@@ -2212,7 +2212,7 @@
                                                                         </userDefinedRuntimeAttribute>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Do0-LB-Poy">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Do0-LB-Poy">
                                                                     <rect key="frame" x="22" y="4" width="30" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                     <color key="textColor" name="mainText"/>
@@ -2235,16 +2235,16 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vcr-Or-jKb" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vcr-Or-jKb" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
                                                             <rect key="frame" x="16" y="363" width="311" height="32"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earnings date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iky-TR-zBE">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Earnings date" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iky-TR-zBE">
                                                                     <rect key="frame" x="12" y="8" width="291" height="16.5"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                     <color key="textColor" name="mainText"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📣" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74a-XN-pZ2">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="📣" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74a-XN-pZ2">
                                                                     <rect key="frame" x="287" y="9" width="16" height="14"/>
                                                                     <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                     <color key="textColor" name="mainText"/>
@@ -2261,7 +2261,7 @@
                                                                 <constraint firstAttribute="height" constant="32" id="u58-Ik-3Hy"/>
                                                             </constraints>
                                                         </view>
-                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3uI-xd-Cc0">
+                                                        <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3uI-xd-Cc0">
                                                             <rect key="frame" x="16" y="185" width="311" height="162"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -2275,10 +2275,10 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="88"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-i2-oiD" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LpJ-i2-oiD" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="80"/>
                                                                                 <subviews>
-                                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mUO-06-X3f" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
+                                                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUO-06-X3f" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
                                                                                         <rect key="frame" x="183.5" y="18.5" width="12" height="12"/>
                                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <constraints>
@@ -2291,7 +2291,7 @@
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDD-MV-gZX">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDD-MV-gZX">
                                                                                         <rect key="frame" x="199.5" y="16.5" width="30" height="16.5"/>
                                                                                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                         <color key="textColor" name="mainText"/>
@@ -2310,56 +2310,56 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,035.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQD-gA-cGM">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$5,035.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQD-gA-cGM">
                                                                                 <rect key="frame" x="223.5" y="16" width="71.5" height="19"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Ultralight" family="SF Compact Rounded" pointSize="16"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktR-aV-AkB">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktR-aV-AkB">
                                                                                 <rect key="frame" x="16" y="56" width="0.0" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" name="mainLightGray"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="jra-iC-kbh">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="jra-iC-kbh">
                                                                                 <rect key="frame" x="16" y="16" width="159.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIJ-9k-WxO">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIJ-9k-WxO">
                                                                                 <rect key="frame" x="16" y="56" width="0.0" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPv-E0-cKp">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Today" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPv-E0-cKp">
                                                                                 <rect key="frame" x="152" y="49" width="32.5" height="14"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                                                 <color key="textColor" red="0.69411764710000001" green="0.74117647060000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ex-Hd-3z9">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$53.53" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ex-Hd-3z9">
                                                                                 <rect key="frame" x="200.5" y="47.5" width="43" height="16.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainRed"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-ZX-rnJ">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0.56%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhk-ZX-rnJ">
                                                                                 <rect key="frame" x="253.5" y="47.5" width="41.5" height="16.5"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainRed"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="ghu-ac-wMT">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_dot" translatesAutoresizingMaskIntoConstraints="NO" id="ghu-ac-wMT">
                                                                                 <rect key="frame" x="247.5" y="55" width="2" height="2"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="2" id="3vS-Ps-DJV"/>
                                                                                     <constraint firstAttribute="width" constant="2" id="cZb-fJ-gJS"/>
                                                                                 </constraints>
                                                                             </imageView>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-R6-LyH">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="small_down" translatesAutoresizingMaskIntoConstraints="NO" id="Vs1-R6-LyH">
                                                                                 <rect key="frame" x="188.5" y="52" width="8" height="8"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="8" id="lE7-Cl-ul3"/>
@@ -2416,7 +2416,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="80"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uob-HN-bPb" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
+                                                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uob-HN-bPb" customClass="RectangularDashedView" customModule="Gainy" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="72"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6SO-w3-Ask" customClass="PlainCircularProgressBar" customModule="Gainy" customModuleProvider="target">
@@ -2432,7 +2432,7 @@
                                                                                             </userDefinedRuntimeAttribute>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </view>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-ti-5sM">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="16%" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-ti-5sM">
                                                                                         <rect key="frame" x="32" y="40" width="30" height="16.5"/>
                                                                                         <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                         <color key="textColor" name="mainText"/>
@@ -2453,13 +2453,13 @@
                                                                                     </userDefinedRuntimeAttribute>
                                                                                 </userDefinedRuntimeAttributes>
                                                                             </view>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5,035.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbY-NU-Qh9">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="$5,035.00" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbY-NU-Qh9">
                                                                                 <rect key="frame" x="223.5" y="16" width="71.5" height="19"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Ultralight" family="SF Compact Rounded" pointSize="16"/>
                                                                                 <color key="textColor" name="mainText"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="1mh-0l-FpT">
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="Shares x 95 Shares x 95 Shares x 9545454545" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" translatesAutoresizingMaskIntoConstraints="NO" id="1mh-0l-FpT">
                                                                                 <rect key="frame" x="16" y="16" width="199.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="14"/>
                                                                                 <color key="textColor" name="mainText"/>
@@ -2488,13 +2488,13 @@
                                                                 </tableViewCell>
                                                             </prototypes>
                                                         </tableView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Shares x 95" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsP-y3-eun">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" ambiguous="YES" text="Shares x 95" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jsP-y3-eun">
                                                             <rect key="frame" x="84" y="150" width="211" height="14"/>
                                                             <fontDescription key="fontDescription" name="SFCompactRounded-Semibold" family="SF Compact Rounded" pointSize="12"/>
                                                             <color key="textColor" name="mainText"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JA-ik-c2B">
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8JA-ik-c2B">
                                                             <rect key="frame" x="64" y="56" width="231" height="24"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -3011,7 +3011,7 @@
                                 <rect key="frame" x="16" y="18" width="343" height="168"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTo-d9-Dht">
-                                        <rect key="frame" x="24" y="20" width="243" height="75"/>
+                                        <rect key="frame" x="24" y="20" width="243" height="57.5"/>
                                         <string key="text">Don’t you think this portfolio 
 looks amazing? Wanna your own? Just click on this lovely button</string>
                                         <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
@@ -3091,19 +3091,19 @@ looks amazing? Wanna your own? Just click on this lovely button</string>
     </scenes>
     <designables>
         <designable name="3a4-vs-Joh">
-            <size key="intrinsicContentSize" width="125" height="31"/>
+            <size key="intrinsicContentSize" width="121" height="32"/>
         </designable>
         <designable name="X8f-cx-pen">
-            <size key="intrinsicContentSize" width="111.5" height="33"/>
+            <size key="intrinsicContentSize" width="109.5" height="33.5"/>
         </designable>
         <designable name="arh-iU-hih">
-            <size key="intrinsicContentSize" width="185.5" height="33"/>
+            <size key="intrinsicContentSize" width="187" height="33.5"/>
         </designable>
         <designable name="lut-SQ-IjF">
-            <size key="intrinsicContentSize" width="147" height="33"/>
+            <size key="intrinsicContentSize" width="149" height="33.5"/>
         </designable>
         <designable name="wZc-w8-DmJ">
-            <size key="intrinsicContentSize" width="74.5" height="33"/>
+            <size key="intrinsicContentSize" width="74.5" height="33.5"/>
         </designable>
     </designables>
     <resources>

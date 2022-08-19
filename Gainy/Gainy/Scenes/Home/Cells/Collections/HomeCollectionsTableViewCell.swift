@@ -16,6 +16,7 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
     
     weak var delegate: HomeCollectionsTableViewCellDelegate?
     private let cellWidth: CGFloat = 88
+    private var indexOfCellBeingDragged: Int?
     
     var heightUpdated: ((CGFloat) -> Void)?
     
@@ -23,6 +24,8 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.dragDelegate = self
+            innerCollectionView.dropDelegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
         }
     }
@@ -77,6 +80,26 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeCollectionsInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.collection = collections[indexPath.row]
+        
+        cell.onDeleteButtonPressed = { [weak self] in
+            let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
+//                GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+//                self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+            }
+            NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
+        }
+        
+        cell.onCellLifted = { [weak self] in
+            self?.indexOfCellBeingDragged = indexPath.row
+        }
+        
+        cell.onCellStopDragging = { [weak self] in
+            if let dragCellIndex = self?.indexOfCellBeingDragged, dragCellIndex == indexPath.row {
+                self?.indexOfCellBeingDragged = nil
+            }
+        }
+        
+        cell.delegate = cell
         return cell
     }
 }
@@ -87,9 +110,171 @@ extension HomeCollectionsTableViewCell: UICollectionViewDelegate {
     }
 }
 
+extension HomeCollectionsTableViewCell: UICollectionViewDragDelegate {
+    func collectionView(
+        _: UICollectionView,
+        itemsForBeginning _: UIDragSession,
+        at indexPath: IndexPath
+    ) -> [UIDragItem] {
+        
+        guard !collections.isEmpty else { return[] }
+            if CollectionsManager.shared.collections.contains(where: { item in
+                (item.id ?? 0) == Constants.CollectionDetails.top20ID
+            }), indexPath.row == 0 {
+                return []
+            }
+
+            let item = self.collections[indexPath.row]
+            // swiftlint:disable legacy_objc_type
+            let itemProvider = NSItemProvider(object: (item.name ?? "") as NSString)
+            // swiftlint:enable legacy_objc_type
+            let dragItem = UIDragItem(itemProvider: itemProvider)
+
+            // TODO: Consider assigning a value to the localObject property of each drag item.
+            // This step is optional but makes it faster to drag and drop content within the same app.
+
+            return [dragItem]
+    }
+
+    func collectionView(
+        _: UICollectionView,
+        dragSessionIsRestrictedToDraggingApplication _: UIDragSession
+    ) -> Bool {
+        true
+    }
+
+    func collectionView(
+        _: UICollectionView,
+        dragPreviewParametersForItemAt _: IndexPath
+    ) -> UIDragPreviewParameters? {
+        let previewParams = UIDragPreviewParameters()
+
+        let path = UIBezierPath(
+            roundedRect: CGRect(
+                x: 0,
+                y: 0,
+                width: UIScreen.main.bounds.width - (16 + 16),
+                height: 92
+            ),
+            cornerRadius: 18
+        )
+        previewParams.visiblePath = path
+
+        return previewParams
+    }
+}
+
+extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
+    func collectionView(_: UICollectionView,
+                        performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return
+        }
+
+        if coordinator.proposal.operation == .move {
+            reorderItems(dropCoordinator: coordinator,
+                         destinationIndexPath: destinationIndexPath)
+        }
+    }
+    
+    private func reorderItems(
+        dropCoordinator: UICollectionViewDropCoordinator,
+        destinationIndexPath: IndexPath
+    ) {
+//        guard var snapshot = dataSource?.snapshot() else {return}
+//        let draggedItems = dropCoordinator.items
+//        guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {
+//            return
+//        }
+//
+//        let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row] as? YourCollectionViewCellModel
+//        let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row] as? YourCollectionViewCellModel
+//
+//        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
+//
+//        let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
+//
+//
+//        let fromIndex = sourceIndexPath.row
+//        let toIndex = destinationIndexPath.row
+//        UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+//        UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
+//
+//        if dragDirectionIsTopBottom {
+//            snapshot.moveItem(sourceItem, afterItem: destItem)
+//        } else {
+//            snapshot.moveItem(sourceItem, beforeItem: destItem)
+//        }
+//
+//        self.updateHeaderHeight()
+//        dataSource?.apply(snapshot, animatingDifferences: true, completion: {
+//        })
+//        dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        dropSessionDidUpdate session: UIDropSession,
+                        withDestinationIndexPath _: IndexPath?) -> UICollectionViewDropProposal {
+        let dragItemLocation = session.location(in: collectionView)
+        var dragItemIndexPath: IndexPath?
+
+        collectionView.performUsingPresentationValues {
+            dragItemIndexPath = collectionView.indexPathForItem(at: dragItemLocation)
+        }
+
+        guard let destination = dragItemIndexPath else {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+
+        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+
+        if CollectionsManager.shared.collections.contains(where: { item in
+            (item.id ?? 0) == Constants.CollectionDetails.top20ID
+        }), destination.row == 0 {
+            return UICollectionViewDropProposal(
+                operation: .cancel,
+                intent: .unspecified
+            )
+        }
+
+        return UICollectionViewDropProposal(
+            operation: .move,
+            intent: .insertAtDestinationIndexPath
+        )
+    }
+
+    func collectionView(
+        _: UICollectionView,
+        dropPreviewParametersForItemAt _: IndexPath
+    ) -> UIDragPreviewParameters? {
+        let previewParams = UIDragPreviewParameters()
+
+        let path = UIBezierPath(
+            roundedRect: CGRect(
+                x: 0,
+                y: 0,
+                width: UIScreen.main.bounds.width - (16 + 16),
+                height: 92
+            ),
+            cornerRadius: 8
+        )
+        previewParams.visiblePath = path
+
+        return previewParams
+    }
+}
+
 
 //Will be used further
-final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
+final class HomeCollectionsInnerTableViewCell: SwipeCollectionViewCell {
     
     
     //MARK: - Outlets
@@ -118,6 +303,10 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
         
         self.cleanupImage()
     }
+    
+    var onDeleteButtonPressed: (() -> Void)?
+    var onCellLifted: (() -> Void)?
+    var onCellStopDragging: (() -> Void)?
     
     //MARK: - Properties
     private var imageUrl: String = ""
@@ -202,3 +391,21 @@ final class HomeCollectionsInnerTableViewCell: UICollectionViewCell {
         self.backImgView.image = nil
     }
 }
+
+extension HomeCollectionsInnerTableViewCell: SwipeCollectionViewCellDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        editActionsForItemAt _: IndexPath,
+        for orientation: SwipeActionsOrientation
+    ) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        guard self.tag != Constants.CollectionDetails.watchlistCollectionID else { return nil }
+        let deleteAction = SwipeAction(style: .default) { [weak self]  _, position in
+            self?.onDeleteButtonPressed?()
+        }
+        deleteAction.image = UIImage(named: "trash")
+        
+        return [deleteAction]
+    }
+}
+
