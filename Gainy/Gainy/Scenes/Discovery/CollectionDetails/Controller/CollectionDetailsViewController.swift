@@ -905,6 +905,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 
                 guard success == true else {
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    reportNonFatal(.noCollections(reason: "fetchProfile returned []", suggestion: "success is false"))
                     completion()
                     self.hideLoader()
                     return

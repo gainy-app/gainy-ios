@@ -118,6 +118,7 @@ class PersonalizationPickInterestsViewController: BaseViewController {
                 guard let appInterests = graphQLResult.data?.interests else {
                     GainyAnalytics.logEvent("no_interests", params: ["sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "PersonalizationPickInterests"])
                     NotificationManager.shared.showError("Sorry... No Collections to display.")
+                    reportNonFatal(.noCollections(reason: "AppInterestsQuery returned []", suggestion: "appInterests is empty"))
                     self.hideLoader()
                     completion()
                     return

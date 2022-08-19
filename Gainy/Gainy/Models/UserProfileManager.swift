@@ -308,6 +308,7 @@ final class UserProfileManager {
             
             guard !recommenededRes.isEmpty else {
                 dprint("getProfileCollections empty")
+                reportNonFatal(.noCollections(reason: "getRecommenedCollectionsWithRetry returned []", suggestion: "recommenededRes is empty"))
                 runOnMain {
                     NotificationManager.shared.showError("Sorry... No Collections to display.") {[weak self] in
                         self?.getProfileCollections(loadProfile: loadProfile, forceReload: forceReload, completion: completion)
