@@ -532,6 +532,8 @@
 		9035E31927B6E4E100ECA3D6 /* WrongIndustryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9035E31827B6E4E100ECA3D6 /* WrongIndustryManager.swift */; };
 		903707EE2835867E00E3569B /* TTFBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903707ED2835867E00E3569B /* TTFBlockView.swift */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
+		90423CE428B03C110010700C /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 90423CE328B03C110010700C /* Logging */; };
+		90423CE728B03C410010700C /* LoggingSlack in Frameworks */ = {isa = PBXBuildFile; productRef = 90423CE628B03C410010700C /* LoggingSlack */; };
 		9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */; };
 		90445950282D9DCD008BAC4E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9044594F282D9DCD008BAC4E /* FirebaseAnalytics */; };
 		90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 90445951282D9DCD008BAC4E /* FirebaseAuth */; };
@@ -1218,6 +1220,8 @@
 				336970B42716BA5C0001625C /* CoreGraphics.framework in Frameworks */,
 				90445956282D9DCD008BAC4E /* FirebaseDatabase in Frameworks */,
 				85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */,
+				90423CE728B03C410010700C /* LoggingSlack in Frameworks */,
+				90423CE428B03C110010700C /* Logging in Frameworks */,
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
@@ -2871,6 +2875,8 @@
 				909971632830EC6C00FDEA4B /* OneSignal */,
 				90DB2AB9283D6CBB00247318 /* Branch */,
 				901F34AD284B80B100E9E22B /* SnapKit */,
+				90423CE328B03C110010700C /* Logging */,
+				90423CE628B03C410010700C /* LoggingSlack */,
 			);
 			productName = Gainy;
 			productReference = 3A930ED5265C1909000FD3EB /* Gainy.app */;
@@ -2972,6 +2978,8 @@
 				909971622830EC6C00FDEA4B /* XCRemoteSwiftPackageReference "OneSignal-iOS-SDK" */,
 				90DB2AB8283D6CBB00247318 /* XCRemoteSwiftPackageReference "ios-branch-sdk-spm" */,
 				901F34AC284B80B100E9E22B /* XCRemoteSwiftPackageReference "SnapKit" */,
+				90423CE228B03C110010700C /* XCRemoteSwiftPackageReference "swift-log" */,
+				90423CE528B03C410010700C /* XCRemoteSwiftPackageReference "swift-log-slack" */,
 			);
 			productRefGroup = 3A930ED6265C1909000FD3EB /* Products */;
 			projectDirPath = "";
@@ -4542,6 +4550,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		90423CE228B03C110010700C /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		90423CE528B03C410010700C /* XCRemoteSwiftPackageReference "swift-log-slack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wlisac/swift-log-slack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		9044594E282D9DCD008BAC4E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -4687,6 +4711,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 901F34AC284B80B100E9E22B /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		90423CE328B03C110010700C /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90423CE228B03C110010700C /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+		90423CE628B03C410010700C /* LoggingSlack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90423CE528B03C410010700C /* XCRemoteSwiftPackageReference "swift-log-slack" */;
+			productName = LoggingSlack;
 		};
 		9044594F282D9DCD008BAC4E /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

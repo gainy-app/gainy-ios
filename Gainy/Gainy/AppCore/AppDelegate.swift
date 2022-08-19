@@ -12,6 +12,8 @@ import FirebaseCore
 import FirebaseFirestore
 import FirebaseAuth
 import Branch
+import Logging
+import LoggingSlack
 
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        initSwiftLogging()
         initializeAppsFlyer()
         initFirebase()
         initDataDog()
@@ -113,6 +116,20 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func initFirebase() {
         FirebaseApp.configure()
+    }
+    
+    private func initSwiftLogging() {
+        let webhookURL = URL(string: "https://hooks.slack.com/services/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")!
+    
+        LoggingSystem.bootstrap { label in
+            MultiplexLogHandler([
+                // Setup SlackLogHandler with a webhook URL
+                SlackLogHandler(label: label, webhookURL: webhookURL),
+                // Setup the standard logging backend to enable console logging
+                StreamLogHandler.standardOutput(label: label)
+            ])
+        }
+        SlackLogHandler.globalLogLevelThreshold = .warning
     }
     
     private func initDataDog() {
