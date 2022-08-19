@@ -289,22 +289,62 @@ final class AuthorizationManager {
                 if error == GoogleAuthError.authorizationCancelled {
                     self.authorizationStatus = .authorizingCancelled
                 }
-            } else if let error = error as? AppleAuthError {
-                if error == AppleAuthError.authorizationCancelled {
+                switch error {
+                case .inconsistencyCall:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.inconsistencyCall", suggestion: "fromViewController is nil - there is no view controller to present login UI from"))
+                    self.authorizationStatus = .authorizingFailed
+                case .noClientID:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noClientID", suggestion: "FirebaseApp.app()?.options.clientID is nil"))
+                    self.authorizationStatus = .authorizingFailed
+                case .noToken:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.noToken", suggestion: "Google auth didn't return us user token for some reason"))
+                    self.authorizationStatus = .authorizingFailed
+                case .authorizationFailed:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.authorizingFailed", suggestion: "Google auth failed internally for some reason"))
+                    self.authorizationStatus = .authorizingFailed
+                case .authorizationCancelled:
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.authorizingCancelled", suggestion: "Google auth is cancelled - valid case"))
                     self.authorizationStatus = .authorizingCancelled
+                case .unexpected(let code):
+                    reportNonFatal(.authFailed(reason: "GoogleAuthError.unexpected(\(code))", suggestion: "Google auth unexpected error with internal code"))
+                    self.authorizationStatus = .authorizingFailed
+                }
+            } else if let error = error as? AppleAuthError {
+                switch error {
+                case .inconsistencyCall:
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.inconsistencyCall", suggestion: "A login callback was received, but no login request was sent."))
+                    self.authorizationStatus = .authorizingFailed
+                case .noToken:
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.noToken", suggestion: "Apple auth didn't return us user token for some reason"))
+                    self.authorizationStatus = .authorizingFailed
+                case .tokenDecodingError:
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.tokenDecodingError", suggestion: "Apple auth returned us invalid user token we are not able to decode"))
+                    self.authorizationStatus = .authorizingFailed
+                case .authorizationFailed:
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.authorizationFailed", suggestion: "Apple auth failed internally for some reason"))
+                    self.authorizationStatus = .authorizingFailed
+                case .authorizationCancelled:
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.authorizingCancelled", suggestion: "Apple auth is cancelled - valid case"))
+                    self.authorizationStatus = .authorizingCancelled
+                case .unexpected(let code):
+                    reportNonFatal(.authFailed(reason: "AppleAuthError.unexpected(\(code))", suggestion: "Apple auth unexpected error with internal code"))
+                    self.authorizationStatus = .authorizingFailed
                 }
             } else if self.authorizationStatus != .authorizedNeedCreateProfile {
+                reportNonFatal(.authFailed(reason: "Auth: Invalid status", suggestion: "Expected .authorizedNeedCreateProfile, but got another status"))
                 self.authorizationStatus = .authorizingFailed
             }
             completion(self.authorizationStatus)
             return
         }
         guard let user = Auth.auth().currentUser else {
+            reportNonFatal(.authFailed(reason: "Auth: no user", suggestion: "Auth.auth().currentUser is nil"))
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
         }
         guard let userID = Auth.auth().currentUser?.uid  else {
+            reportNonFatal(.authFailed(reason: "Auth: no user id", suggestion: "Auth.auth().currentUser?.uid is nil"))
             self.authorizationStatus = .authorizingFailed
             completion(self.authorizationStatus)
             return
@@ -313,16 +353,18 @@ final class AuthorizationManager {
         // TODO: Borysov - Cleanup get Auth code
         user.getIDTokenResult(forcingRefresh: true) { authTokenResult, error in
             
-            if let claimsToken = authTokenResult?.claims[Constants.Auth.claims] {
+            if authTokenResult?.claims[Constants.Auth.claims] != nil {
                 self.getFirebaseAuthToken { success in
                     
                     if !success {
+                        reportNonFatal(.authFailed(reason: "Auth: no Firebase auth token", suggestion: "getFirebaseAuthToken failed: NO success"))
                         self.authorizationStatus = .authorizingFailed
                         completion(self.authorizationStatus)
                         return
                     }
                     
-                    guard let token = self.firebaseAuthToken else {
+                    guard self.firebaseAuthToken != nil else {
+                        reportNonFatal(.authFailed(reason: "Auth: no Firebase auth token", suggestion: "getFirebaseAuthToken failed: firebaseAuthToken is nil"))
                         self.authorizationStatus = .authorizingFailed
                         completion(self.authorizationStatus)
                         return
@@ -334,6 +376,7 @@ final class AuthorizationManager {
                             
                             UserProfileManager.shared.fetchProfile { success in
                                 guard success == true else {
+                                    reportNonFatal(.authFailed(reason: "Auth: can't fetch profile", suggestion: "hasProfilesMatchingUserID returns us true, but we failed to fetch the profile"))
                                     self.authorizationStatus = .authorizingFailed
                                     completion(self.authorizationStatus)
                                     return
@@ -352,7 +395,7 @@ final class AuthorizationManager {
                 }
                 
             } else {
-                var config = Configuration()
+                let config = Configuration()
                 let session = URLSession.shared
                 var url = URL(string: "\(Constants.Auth.claimsPost)\(user.uid)")!
                 if config.environment == .staging {
@@ -361,26 +404,30 @@ final class AuthorizationManager {
                 let task = session.dataTask(with: url, completionHandler: { data, response, error in
 
                     if error != nil {
+                        reportNonFatal(.authFailed(reason: "Auth: can't fetch claims", suggestion: "Fetch claims returns error: \(error?.localizedDescription ?? "unknown error")"))
                         self.authorizationStatus = .authorizingFailed
                         completion(self.authorizationStatus)
                         return
                     }
                     guard let httpResponse = response as? HTTPURLResponse,
                           (200...299).contains(httpResponse.statusCode) else {
-                              self.authorizationStatus = .authorizingFailed
-                              completion(self.authorizationStatus)
-                              return
+                        reportNonFatal(.authFailed(reason: "Auth: can't fetch claims", suggestion: "Fetch claims returns invalid HTTPURLResponse: (200...299)"))
+                        self.authorizationStatus = .authorizingFailed
+                        completion(self.authorizationStatus)
+                        return
                     }
                     
                     self.getFirebaseAuthToken { success in
                         
                         if !success {
+                            reportNonFatal(.authFailed(reason: "Auth: no Firebase auth token", suggestion: "getFirebaseAuthToken failed: NO success"))
                             self.authorizationStatus = .authorizingFailed
                             completion(self.authorizationStatus)
                             return
                         }
                         
-                        guard let token = self.firebaseAuthToken else {
+                        guard self.firebaseAuthToken != nil else {
+                            reportNonFatal(.authFailed(reason: "Auth: no Firebase auth token", suggestion: "getFirebaseAuthToken failed: firebaseAuthToken is nil"))
                             self.authorizationStatus = .authorizingFailed
                             completion(self.authorizationStatus)
                             return
@@ -391,6 +438,7 @@ final class AuthorizationManager {
                             if (hasProfiles) {
                                 UserProfileManager.shared.fetchProfile { success in
                                     guard success == true else {
+                                        reportNonFatal(.authFailed(reason: "Auth: can't fetch profile", suggestion: "hasProfilesMatchingUserID returns us true, but we failed to fetch the profile"))
                                         self.authorizationStatus = .authorizingFailed
                                         completion(self.authorizationStatus)
                                         return
