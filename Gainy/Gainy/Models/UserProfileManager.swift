@@ -298,10 +298,9 @@ final class UserProfileManager {
         Task {
             async let favs = getFavCollections()
             async let recommeneded = getRecommenedCollectionsWithRetry(forceReload: forceReload)
-            async let recommendedIDs = getRecommenedCollectionIDs(forceReload: forceReload)
             async let topTickers = CollectionsManager.shared.getGainers(profileId: profileID)
-            let (favsRes, recommenededRes, recommendedIDsRes, topTickersRes) = await (favs, recommeneded, recommendedIDs, topTickers)
-            
+            let (favsRes, recommenededRes, topTickersRes) = await (favs, recommeneded, topTickers)
+            let recommendedIDsRes = recommenededRes.compactMap({$0.id})
             dprint("favsRes \(favsRes.count)", profileId: 30)
             dprint("recommenededRes \(recommenededRes.count)", profileId: 30)
             dprint("recommendedIDsRes \(recommendedIDsRes)", profileId: 30)
