@@ -37,7 +37,7 @@ class DeepLinksViewModel: ObservableObject {
                 title = "Stock in Gainy"
                 feature = "Purchase_swipe"
                 campaign = "Referral_Invite"
-                parameterName = "Stock Symbol"
+                parameterName = "stockSymbol"
                 parameterValue = ""
                 parameterPlaceholder = "Stock Symbol"
                 break
