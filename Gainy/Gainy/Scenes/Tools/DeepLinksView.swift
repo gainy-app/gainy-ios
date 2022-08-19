@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import ActivityIndicatorView
 
 @available(iOS 15.0, *)
 struct DeepLinksView: View {
@@ -31,6 +32,9 @@ struct DeepLinksView: View {
     
     @FocusState
     private var isFocused: Bool
+    
+    @State
+    private var isLoadingLink: Bool = false
     
     var body: some View {
         ZStack {
@@ -152,8 +156,10 @@ struct DeepLinksView: View {
             VStack {
                 Spacer()
                 Button {
+                    isLoadingLink = true
                     Task {
                         if let shareLink = await viewModel.getShareLink() {
+                            isLoadingLink = false
                             await MainActor.run {
                                 showShareSheet(with: shareLink)
                             }
@@ -169,6 +175,12 @@ struct DeepLinksView: View {
                 
                 .foregroundColor(.white)
                 .background(RoundedRectangle(cornerRadius: 16).fill(Color.blue))
+                .overlay {
+                    ActivityIndicatorView()
+                        .frame(height: 30)
+                        .frame(height: 30)
+                        .opacity(isLoadingLink ? 1.0 : 0.0)
+                }
 
             }.padding(.leading, 16)
                 .padding(.trailing, 16)

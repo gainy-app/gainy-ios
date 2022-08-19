@@ -47,9 +47,12 @@ final class CollectionDetailsTitleCell: UICollectionViewCell {
         self.isSkeletonable = false
     }
     
-    func configureWith(companyName: String) {
+    func configureWith(companyName: String, id: Int) {
         companyNameLabel.minimumScaleFactor = 0.1
         companyNameLabel.text = companyName
+        if Configuration().environment == .staging {
+            companyNameLabel.text = "\(companyName) ID:\(id)"
+        }
         companyNameLabel.sizeToFit()
     }
     

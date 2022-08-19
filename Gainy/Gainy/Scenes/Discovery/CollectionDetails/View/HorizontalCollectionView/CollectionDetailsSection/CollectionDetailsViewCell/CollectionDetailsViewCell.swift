@@ -560,7 +560,7 @@ extension CollectionDetailsViewCell: UICollectionViewDataSource {
         case .title:
             let cell: CollectionDetailsTitleCell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionDetailsTitleCell.cellIdentifier, for: indexPath) as! CollectionDetailsTitleCell
             
-            cell.configureWith(companyName: viewModel.name)
+            cell.configureWith(companyName: viewModel.name, id: viewModel.id)
             cell.isSkeletonable = collectionView.isSkeletonable
             if collectionView.sk.isSkeletonActive {
                 cell.showAnimatedGradientSkeleton()
