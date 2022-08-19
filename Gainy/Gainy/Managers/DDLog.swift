@@ -7,6 +7,8 @@
 
 @_exported import BugfenderSDK
 import FirebaseCrashlytics
+import Logging
+import LoggingSlack
 
 func dprint(_ msg: CustomStringConvertible, _ error: Error? = nil) {
     bfprint(msg.description)
@@ -27,11 +29,14 @@ enum ReportError: Error {
     case requestFailed(reason: String, suggestion: String)
 }
 
-func reportNonFatal(_ error: ReportError) {
+func reportNonFatal(_ error: ReportError, file: String = #fileID, function: String = #function, line: Int = #line) {
     
     var userInfo = [
       "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
     ]
+    
+    let header: String = "Profile ID: \(UserProfileManager.shared.profileID ?? 0)\nEnv: \(Configuration().environment == .production ? "Prod" : "Test")\n"
+    let fileInfo: String = "\(file): \(line) \(function)"
     
     switch error {
     case .noCollections(let reason, let suggestion):
@@ -41,6 +46,8 @@ func reportNonFatal(_ error: ReportError) {
           NSLocalizedRecoverySuggestionErrorKey: suggestion,
           "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
         ]
+        
+        GainyLogger.shared.logger.warning("\(header)No Collections to display\n\nReason: \(reason)\nSuggestion: \(suggestion)\n\(fileInfo)")
     case .authFailed(let reason, let suggestion):
         userInfo = [
           NSLocalizedDescriptionKey: "Auth Failed",
@@ -48,6 +55,7 @@ func reportNonFatal(_ error: ReportError) {
           NSLocalizedRecoverySuggestionErrorKey: suggestion,
           "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
         ]
+        GainyLogger.shared.logger.warning("\(header)\nAuth Failed\n\nReason: \(reason)\nSuggestion: \(suggestion)\(fileInfo)")
     case .popupShowned(let reason):
         userInfo = [
           NSLocalizedDescriptionKey: "Alert popup",
@@ -55,6 +63,7 @@ func reportNonFatal(_ error: ReportError) {
           NSLocalizedRecoverySuggestionErrorKey: "",
           "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
         ]
+        GainyLogger.shared.logger.warning("\(header)\nAlert popup\n\nReason: \(reason)\n\(fileInfo)")
     case .requestFailed(let reason, let suggestion):
         userInfo = [
           NSLocalizedDescriptionKey: "Request Failed",
@@ -62,6 +71,7 @@ func reportNonFatal(_ error: ReportError) {
           NSLocalizedRecoverySuggestionErrorKey: suggestion,
           "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
         ]
+        GainyLogger.shared.logger.warning("\(header)\nRequest failed\n\nReason: \(reason)\nSuggestion: \(suggestion)\n\(fileInfo)")
     }
     
     Crashlytics.crashlytics().setCustomValue(UserProfileManager.shared.profileID ?? 0, forKey: "ProfileID")
@@ -71,6 +81,17 @@ func reportNonFatal(_ error: ReportError) {
     Crashlytics.crashlytics().record(error: error)
 }
 
+
+final class GainyLogger {
+    static let shared = GainyLogger()
+    
+    let logger = Logger(label: "Gainy-iOS")
+    
+    init() {
+        
+        
+    }
+}
 //final class DDLog {
 //
 //    static let logger =  Logger.builder
