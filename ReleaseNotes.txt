@@ -1,13 +1,14 @@
-iOS v1.4.8 #272
+iOS v1.4.9 #272
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• Custom Instant logger
+• -
 
 :hammer_and_wrench: Improvements
 • Auth flow tracing
+• Custom Instant logger improvements
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

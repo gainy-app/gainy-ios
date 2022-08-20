@@ -35,7 +35,7 @@ func reportNonFatal(_ error: ReportError, file: String = #fileID, function: Stri
       "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
     ]
     
-    let header: String = "Profile ID: \(UserProfileManager.shared.profileID ?? 0)\nEnv: \(Configuration().environment == .production ? "Prod" : "Test")\n"
+    let header: String = "Profile ID: \(UserProfileManager.shared.profileID ?? 0)\nEnv: \(Configuration().environment == .production ? "Prod" : "Test")\nVersion: \(Bundle.main.releaseVersionNumberPretty) Build: \(Bundle.main.buildVersionNumber ?? "")\nBF ID: \(Bugfender.deviceIdentifierUrl()?.absoluteString ?? "")\n"
     let fileInfo: String = "\(file): \(line) \(function)"
     
     switch error {
@@ -55,7 +55,7 @@ func reportNonFatal(_ error: ReportError, file: String = #fileID, function: Stri
           NSLocalizedRecoverySuggestionErrorKey: suggestion,
           "ProfileID": "\(UserProfileManager.shared.profileID ?? 0)"
         ]
-        GainyLogger.shared.logger.warning("\(header)\nAuth Failed\n\nReason: \(reason)\nSuggestion: \(suggestion)\(fileInfo)")
+        GainyLogger.shared.logger.warning("\(header)\nAuth Failed\n\nReason: \(reason)\nSuggestion: \(suggestion)\n\(fileInfo)")
     case .popupShowned(let reason):
         userInfo = [
           NSLocalizedDescriptionKey: "Alert popup",
