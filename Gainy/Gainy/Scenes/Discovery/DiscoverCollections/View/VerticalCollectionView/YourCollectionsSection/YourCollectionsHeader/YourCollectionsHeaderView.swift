@@ -23,7 +23,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel
                 .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
+                .constraint(equalTo: leadingAnchor, constant: 8),
             titleLabel
                 .trailingAnchor
                 .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
@@ -31,17 +31,17 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
             ,
             titleLabel
                 .bottomAnchor
-                .constraint(equalTo: descriptionLabel.topAnchor, constant: -4),
+                .constraint(equalTo: descriptionLabel.topAnchor, constant: -8),
 
             descriptionLabel
                 .leadingAnchor
-                .constraint(equalTo: leadingAnchor, constant: 28 - sectionHorizontalInset),
+                .constraint(equalTo: leadingAnchor, constant: 8),
             descriptionLabel
                 .trailingAnchor
-                .constraint(equalTo: trailingAnchor, constant: -28 + sectionHorizontalInset),
+                .constraint(equalTo: trailingAnchor, constant: -8),
             descriptionLabel
                 .bottomAnchor
-                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 16),
+                .constraint(lessThanOrEqualTo: bottomAnchor, constant: 4),
 
             
         ])
@@ -61,7 +61,7 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         label.translatesAutoresizingMaskIntoConstraints = false
 
         label.font = UIFont(name: "SFProDisplay-Semibold", size: 20)
-        label.textColor = UIColor.Gainy.textDark
+        label.textColor = UIColor.Gainy.mainText
         label.backgroundColor = .clear
         label.isOpaque = true
 
@@ -76,8 +76,8 @@ final class YourCollectionsHeaderView: UICollectionReusableView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
 
-        label.font = UIFont(name: "SFProDisplay-Regular", size: 14)
-        label.textColor = UIColor.Gainy.darkGray
+        label.font = .compactRoundedMedium(15)
+        label.textColor = UIColor.Gainy.mainText
         label.backgroundColor = .clear
         label.isOpaque = true
 

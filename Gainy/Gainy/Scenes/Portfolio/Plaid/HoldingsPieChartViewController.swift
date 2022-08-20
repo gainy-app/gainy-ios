@@ -100,7 +100,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         guard let settings = PortfolioSettingsManager.shared.getSettingByUserID(profileID) else {
             return
         }
-        collectionView.contentInset = .init(top: 0.0, left: 0, bottom: isDemoProfile ? 85.0 + 210 : 85, right: 0)
+        collectionView.contentInset = .init(top: 0.0, left: 0, bottom: 85, right: 0)
         
         dprint("\(Date()) PieChart for Porto load start")
         let accessTokenIds = UserProfileManager.shared.linkedPlaidAccounts.compactMap { item -> Int? in

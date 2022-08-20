@@ -45,7 +45,7 @@ final class HomeDataSource: NSObject {
             case .index:
                 return ""
             case .collections:
-                return "Updates in TTFs"
+                return "Updates in your TTFs"
             case .watchlist:
                 return "Watchlist"
             case .articles:
@@ -70,7 +70,7 @@ final class HomeDataSource: NSObject {
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
-
+    
     //
 }
 
@@ -167,7 +167,7 @@ extension HomeDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell:
-    UITableViewCell, forRowAt indexPath: IndexPath) {
+                   UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? HomeArticlesTableViewCell {
             cell.coverImgView.kf.cancelDownloadTask()
         }
@@ -187,19 +187,38 @@ extension HomeDataSource: UITableViewDelegate {
         
         let headerLabel = UILabel()
         headerLabel.textColor = UIColor(named: "mainText")!
-        headerLabel.font = .proDisplaySemibold(20)        
+        headerLabel.font = .proDisplaySemibold(20)
         headerLabel.text = sectionType.name
+        
+        let subHeaderLabel = UILabel()
+        subHeaderLabel.textColor = UIColor(named: "mainText")!
+        subHeaderLabel.font = .proDisplayMedium(16)
+        subHeaderLabel.text = "Tap to see details, drag&drop to organise,\nswipe left to delete"
+        subHeaderLabel.numberOfLines = 2
         
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 20, width: UIScreen.main.bounds.width, height: 40.0))
         headerView.backgroundColor = .clear
         
         headerView.addSubview(headerLabel)
         
-            //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+        //headerLabel.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.init(top: 20, left: 24, bottom: 16, right: 180))
+        if section == Section.collections.rawValue {
+            headerLabel.autoPinEdge(.top, to: .top, of: headerView)
+            headerLabel.autoPinEdge(.right, to: .right, of: headerView)
+        } else {
             headerLabel.autoPinEdge(.bottom, to: .bottom, of: headerView, withOffset: -16)
-            headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
             headerLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -180)
-            headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+        }
+        headerLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
+        
+        headerLabel.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+        
+        if section == Section.collections.rawValue {
+            headerView.addSubview(subHeaderLabel)
+            subHeaderLabel.autoPinEdge(.top, to: .bottom, of: headerLabel, withOffset: 16)
+            subHeaderLabel.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
+            subHeaderLabel.autoPinEdge(.right, to: .right, of: headerView, withOffset: -20)
+        }
         
         let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
         let button = buttonWithLabel.0
@@ -218,9 +237,16 @@ extension HomeDataSource: UITableViewDelegate {
         
         if section != Section.articles.rawValue {
             headerView.addSubview(button)
-            button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
+            
+            if section == Section.collections.rawValue {
+                button.autoPinEdge(.bottom, to: .bottom, of: headerView, withOffset: -16)
+                button.autoPinEdge(.left, to: .left, of: headerView, withOffset: 24)
+            } else {
+                button.autoPinEdge(.right, to: .right, of: headerView, withOffset: -24.0)
+                button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
+            }
+            
             button.autoSetDimension(.height, toSize: 24.0)
-            button.autoAlignAxis(.horizontal, toSameAxisOf: headerLabel)
             button.sizeToFit()
         }
         return headerView
@@ -292,8 +318,12 @@ extension HomeDataSource: UITableViewDelegate {
             return 0.0
         } else {
             let sectionType = Section(rawValue: section)!
-            if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
-                return 0.0
+            if sectionType == .collections {
+                if (viewModel?.favCollections.isEmpty ?? true) {
+                    return 0.0
+                } else {
+                    return 60.0 + 48.0 + 32.0
+                }
             }
             if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
                 return 0.0
