@@ -539,6 +539,8 @@
 		903F52B428B17E4900F51C2B /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 903F52B328B17E4900F51C2B /* Logging */; };
 		903F52B728B17EA200F51C2B /* LoggingSlack in Frameworks */ = {isa = PBXBuildFile; productRef = 903F52B628B17EA200F51C2B /* LoggingSlack */; };
 		9040F3B6275BF12800080596 /* HistoricalChartsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9040F3B5275BF12800080596 /* HistoricalChartsLoader.swift */; };
+		90423CE428B03C110010700C /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 90423CE328B03C110010700C /* Logging */; };
+		90423CE728B03C410010700C /* LoggingSlack in Frameworks */ = {isa = PBXBuildFile; productRef = 90423CE628B03C410010700C /* LoggingSlack */; };
 		9044594A282D8C19008BAC4E /* StoreKitTestCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 90445949282D8C19008BAC4E /* StoreKitTestCertificate.cer */; };
 		90445950282D9DCD008BAC4E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 9044594F282D9DCD008BAC4E /* FirebaseAnalytics */; };
 		90445952282D9DCD008BAC4E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 90445951282D9DCD008BAC4E /* FirebaseAuth */; };
@@ -1234,6 +1236,7 @@
 				85CD154926F8B22C001C060C /* GoogleSignIn in Frameworks */,
 				903F52B728B17EA200F51C2B /* LoggingSlack in Frameworks */,
 				903F52B428B17E4900F51C2B /* Logging in Frameworks */,
+
 				1C3A2C2826A48D4500FAF107 /* Apollo in Frameworks */,
 				1C3A2C2C26A4A51200FAF107 /* AppsFlyerLib in Frameworks */,
 				33467CFA26C6728700811F74 /* MBProgressHUD in Frameworks */,
