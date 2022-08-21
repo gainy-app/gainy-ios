@@ -199,6 +199,18 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
                 }
             }
         }.store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let range = notification.userInfo?["range"] as? ScatterChartView.ChartPeriod, let sourceId = notification.userInfo?["sourceId"] as? Int {
+                if viewModel.id != sourceId {
+                    self?.onRangeChange?(range)
+                    self?.loadChartForRange(range)
+                }
+            }
+        }.store(in: &cancellables)
         reloadTTF()
         // Load all data
         // hideSkeleton()
@@ -486,6 +498,7 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
             let topCharts = await CollectionsManager.shared.loadChartsForRange(uniqID: viewModel.uniqID,  range: range)
             updateCharts(topCharts)
             await MainActor.run {
+                NotificationCenter.default.post(name: NotificationManager.ttfRangeSyncNotification, object: nil, userInfo: ["range" : range, "sourceId" : viewModel.id])
                 let indesSet = IndexSet.init(integer: CollectionDetailsSection.gain.rawValue)
                 self.collectionView.reloadSections(indesSet)
             }

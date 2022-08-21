@@ -49,4 +49,9 @@ class LineViewModel: ObservableObject {
     init(minMaxPercent: Bool = false) {
         self.minMaxPercent = minMaxPercent
     }
+    
+    init(chartPeriod: ScatterChartView.ChartPeriod, minMaxPercent: Bool = false) {
+        self.chartPeriod = chartPeriod
+        self.minMaxPercent = minMaxPercent
+    }
 }

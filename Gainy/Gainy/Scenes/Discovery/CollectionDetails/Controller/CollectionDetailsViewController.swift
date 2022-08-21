@@ -259,7 +259,7 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         collectionView.autoPinEdge(.top, to: .top, of: view, withOffset: 0)
         collectionView.autoPinEdge(.leading, to: .leading, of: view)
         collectionView.autoPinEdge(.trailing, to: .trailing, of: view)
-        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)        
+        collectionView.autoPinEdge(toSuperviewSafeArea: .bottom)
         collectionView.register(CollectionDetailsViewCell.self)
         
         collectionView.backgroundColor = .clear
@@ -275,9 +275,9 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
         ) { [weak self] collectionView, indexPath, modelItem -> UICollectionViewCell? in
             var adjModel = modelItem
             if !Constants.CollectionDetails.loadingCellIDs.contains(modelItem.id) {
-            if let oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
-                adjModel.setRange(oldModel.chartRange)
-            }
+                if let oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
+                    adjModel.setRange(oldModel.chartRange)
+                }
             }
             let cell = self?.sections[indexPath.section].configureCell(
                 collectionView: collectionView,
@@ -337,16 +337,18 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
                 }
                 cell.onRangeChange = { [weak self] range in
                     
-                    if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
-                        oldModel.setRange(range)
-                        self?.viewModel?.collectionDetails[indexPath.row] = oldModel
+                    for idx in 0..<(self?.viewModel?.collectionDetails.count ?? 0) {
+                        if var oldModel = self?.viewModel?.collectionDetails[idx] {
+                            oldModel.setRange(range)
+                            self?.viewModel?.collectionDetails[idx] = oldModel
+                        }
                     }
                 }
                 
                 cell.onRefreshedCardsLoaded = { [weak self] newCards in
                     if newCards.count == 0 {
                         return
-                    }                    
+                    }
                     if var oldModel = self?.viewModel?.collectionDetails[indexPath.row] {
                         oldModel.cards = newCards
                         self?.viewModel?.collectionDetails[indexPath.row] = oldModel
@@ -628,37 +630,37 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     }
     
     private func appendWatchlistCollectionsFromModels(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
-//        runOnMain {
-//            let lock = NSLock()
-//            lock.lock()
-//            let watchlistCollections = models.filter { item in
-//                item.id < 0
-//            }
-//            if let firstItem = watchlistCollections.first {
-//                deleteCollections(watchlistCollections)
-//                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
-//                if var snapshot = self.dataSource?.snapshot() {
-//                    if snapshot.indexOfSection(.collectionWithCards) != nil {
-//                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
-//                            snapshot.insertItems(watchlistCollections, beforeItem: first)
-//                        } else {
-//                            snapshot.appendItems(watchlistCollections,
-//                                                 toSection: .collectionWithCards)
-//                        }
-//                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
-//                            completed?()
-//                        })
-//                    } else {
-//                        completed?()
-//                    }
-//                } else {
-//                    completed?()
-//                }
-//            } else {
-//                completed?()
-//            }
-//            lock.unlock()
-//        }
+        //        runOnMain {
+        //            let lock = NSLock()
+        //            lock.lock()
+        //            let watchlistCollections = models.filter { item in
+        //                item.id < 0
+        //            }
+        //            if let firstItem = watchlistCollections.first {
+        //                deleteCollections(watchlistCollections)
+        //                self.viewModel?.collectionDetails.insert(firstItem, at: 0)
+        //                if var snapshot = self.dataSource?.snapshot() {
+        //                    if snapshot.indexOfSection(.collectionWithCards) != nil {
+        //                        if let first = snapshot.itemIdentifiers(inSection: .collectionWithCards).first {
+        //                            snapshot.insertItems(watchlistCollections, beforeItem: first)
+        //                        } else {
+        //                            snapshot.appendItems(watchlistCollections,
+        //                                                 toSection: .collectionWithCards)
+        //                        }
+        //                        self.dataSource?.apply(snapshot, animatingDifferences: false, completion: {
+        //                            completed?()
+        //                        })
+        //                    } else {
+        //                        completed?()
+        //                    }
+        //                } else {
+        //                    completed?()
+        //                }
+        //            } else {
+        //                completed?()
+        //            }
+        //            lock.unlock()
+        //        }
     }
     
     private func addNewCollections(_ models: [CollectionDetailViewCellModel], _ completed: (() -> Void)? = nil) {
@@ -1053,13 +1055,13 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
     
     func currentBackgroundImageFrame() -> CGRect {
         
-//        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
-//        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
-//            let horizontalView = cell.collectionHorizontalView
-//            return self.view.convert(horizontalView.frame, from: horizontalView)
-//        } else {
-            return CGRect.zero
-//        }
+        //        let initialItemToShow = viewModel?.initialCollectionIndex ?? 0
+        //        if let cell: CollectionDetailsViewCell = collectionView.cellForItem(at: IndexPath(item: initialItemToShow, section: 0)) as? CollectionDetailsViewCell {
+        //            let horizontalView = cell.collectionHorizontalView
+        //            return self.view.convert(horizontalView.frame, from: horizontalView)
+        //        } else {
+        return CGRect.zero
+        //        }
     }
     
     private func initViewModelsFromData() {
@@ -1184,16 +1186,16 @@ final class CollectionDetailsViewController: BaseViewController, CollectionDetai
             showNetworkLoader()
             
             let asyncGroup = DispatchGroup()
-//            asyncGroup.enter()
-//            UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
-//                dprint("getProfileCollections ended", profileId: 30)
-//                asyncGroup.leave()
-//            }
-//            asyncGroup.enter()
-//            CollectionsManager.shared.reloadTop20 {
-//                dprint("reloadTop20 ended", profileId: 30)
-//                asyncGroup.leave()
-//            }
+            //            asyncGroup.enter()
+            //            UserProfileManager.shared.getProfileCollections(loadProfile: false, forceReload: true) { _ in
+            //                dprint("getProfileCollections ended", profileId: 30)
+            //                asyncGroup.leave()
+            //            }
+            //            asyncGroup.enter()
+            //            CollectionsManager.shared.reloadTop20 {
+            //                dprint("reloadTop20 ended", profileId: 30)
+            //                asyncGroup.leave()
+            //            }
             asyncGroup.notify(queue: .main) { [weak self] in
                 CollectionsManager.shared.collections.removeAll()
                 dprint("reloadCollectionIfNeeded enter", profileId: 30)

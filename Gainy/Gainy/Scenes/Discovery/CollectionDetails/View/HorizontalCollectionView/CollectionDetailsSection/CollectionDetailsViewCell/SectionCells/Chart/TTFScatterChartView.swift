@@ -24,7 +24,7 @@ struct TTFScatterChartView: View {
     
     
     @State
-    private var selectedTag: ScatterChartView.ChartPeriod = .d1 {
+    private var selectedTag: ScatterChartView.ChartPeriod = .w1 {
         didSet {
             //guard  lineViewModel.chartPeriod != selectedTag else {return}
 //            isSPPVisible = false
@@ -143,7 +143,7 @@ struct TTFScatterChartView: View {
     }
     
     @ObservedObject
-    var lineViewModel: LineViewModel = LineViewModel(minMaxPercent: true)
+    var lineViewModel: LineViewModel = LineViewModel(chartPeriod: .w1, minMaxPercent: true)
     
     private let chartHeight: CGFloat = 147.0
     private let chartOffset: CGFloat = 0.0
