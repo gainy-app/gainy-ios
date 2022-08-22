@@ -1,13 +1,13 @@
-iOS v1.4.10 #273
+iOS v1.4.10 #275
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• Demo Porto
+• -
 
 :hammer_and_wrench: Improvements
-• QA updates
+• Apple logs improved
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

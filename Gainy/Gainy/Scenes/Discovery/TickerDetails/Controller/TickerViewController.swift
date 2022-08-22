@@ -59,25 +59,25 @@ final class TickerViewController: BaseViewController {
         super.viewDidLoad()
         addBottomView()
         
-        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-        } receiveValue: {[weak self] notification in
-            if let dy = notification.userInfo?["v"] as? CGFloat, let curOff = self?.tableView.contentOffset {
-                if self?.lastYOffset == nil {
-                    self?.lastYOffset = curOff.y
-                }
-                
-                if let lastYOffset = self?.lastYOffset {
-                    print(dy)
-                    self?.tableView.contentOffset = CGPoint(x: curOff.x, y: lastYOffset + dy)
-                    print(CGPoint(x: curOff.x, y: lastYOffset + dy))
-                }
-            } else {
-                self?.lastYOffset = nil
-                print("reset")
-            }
-        }.store(in: &cancellables)
+//        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
+//            .receive(on: DispatchQueue.main)
+//            .sink { _ in
+//        } receiveValue: {[weak self] notification in
+//            if let dy = notification.userInfo?["v"] as? CGFloat, let curOff = self?.tableView.contentOffset {
+//                if self?.lastYOffset == nil {
+//                    self?.lastYOffset = curOff.y
+//                }
+//
+//                if let lastYOffset = self?.lastYOffset {
+//                    print(dy)
+//                    self?.tableView.contentOffset = CGPoint(x: curOff.x, y: lastYOffset + dy)
+//                    print(CGPoint(x: curOff.x, y: lastYOffset + dy))
+//                }
+//            } else {
+//                self?.lastYOffset = nil
+//                print("reset")
+//            }
+//        }.store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {

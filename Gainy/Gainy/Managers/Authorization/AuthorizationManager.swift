@@ -303,7 +303,7 @@ final class AuthorizationManager {
                     reportNonFatal(.authFailed(reason: "GoogleAuthError.authorizingFailed", suggestion: "Google auth failed internally for some reason"))
                     self.authorizationStatus = .authorizingFailed
                 case .authorizationCancelled:
-                    reportNonFatal(.authFailed(reason: "GoogleAuthError.authorizingCancelled", suggestion: "Google auth is cancelled - valid case"))
+                    //reportNonFatal(.authFailed(reason: "GoogleAuthError.authorizingCancelled", suggestion: "Google auth is cancelled - valid case"))
                     self.authorizationStatus = .authorizingCancelled
                 case .unexpected(let code):
                     reportNonFatal(.authFailed(reason: "GoogleAuthError.unexpected(\(code))", suggestion: "Google auth unexpected error with internal code"))
@@ -324,7 +324,7 @@ final class AuthorizationManager {
                     reportNonFatal(.authFailed(reason: "AppleAuthError.authorizationFailed", suggestion: "Apple auth failed internally for some reason"))
                     self.authorizationStatus = .authorizingFailed
                 case .authorizationCancelled:
-                    reportNonFatal(.authFailed(reason: "AppleAuthError.authorizingCancelled", suggestion: "Apple auth is cancelled - valid case"))
+                    //reportNonFatal(.authFailed(reason: "AppleAuthError.authorizingCancelled", suggestion: "Apple auth is cancelled - valid case"))
                     self.authorizationStatus = .authorizingCancelled
                 case .unexpected(let code):
                     reportNonFatal(.authFailed(reason: "AppleAuthError.unexpected(\(code))", suggestion: "Apple auth unexpected error with internal code"))

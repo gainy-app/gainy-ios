@@ -14,7 +14,7 @@ struct CollectionDetailViewCellModel {
     
     var combinedTags: [TickerTag] = []
     
-    var chartRange: ScatterChartView.ChartPeriod = .w1
+    var chartRange: ScatterChartView.ChartPeriod = .m1
     var isDataLoaded: Bool = false
         
     

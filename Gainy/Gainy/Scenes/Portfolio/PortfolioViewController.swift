@@ -38,6 +38,7 @@ final class PortfolioViewController: BaseViewController {
                     noPlaidVC.delegate = self
                     addViewController(noPlaidVC, view: containerView)
                     noPlaidVC.loadData()
+                    noPlaidVC.coordinator = mainCoordinator
                 }
             case .linkedNoHoldings:
                 if !children.contains(noHoldingsVC) {

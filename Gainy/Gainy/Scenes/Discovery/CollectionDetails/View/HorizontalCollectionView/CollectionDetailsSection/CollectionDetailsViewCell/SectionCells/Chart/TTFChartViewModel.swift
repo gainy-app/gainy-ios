@@ -53,6 +53,6 @@ final class TTFChartViewModel: ObservableObject {
         self.isSPPVisible = isSPPVisible
         self.isLoading = true
         self.lastDayPrice = 0.0
-        self.selectedTag = .d1
+        self.selectedTag = .m1
     }
 }
