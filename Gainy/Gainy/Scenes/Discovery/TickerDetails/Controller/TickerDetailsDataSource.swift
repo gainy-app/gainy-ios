@@ -173,9 +173,12 @@ final class TickerDetailsDataSource: NSObject {
         } else {
             cellHeights[.wsr] = 0.0
         }
+        if ticker.hideRecommendations {
+            cellHeights[.recommended] = 0.0
+        }
         
         if ticker.isETF || ticker.isCrypto || ticker.isIndex {
-            cellHeights[.recommended] = 0.0
+            
             cellHeights[.marketData] = 0.0
         }
         

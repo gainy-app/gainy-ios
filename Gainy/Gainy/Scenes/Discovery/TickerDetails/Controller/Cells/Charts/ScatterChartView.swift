@@ -358,8 +358,10 @@ struct ScatterChartView: View {
                     lineViewModel.opacity = 1
                     lineViewModel.closestPoint = self.getClosestDataPoint(toPoint: value.location, width: geometry.frame(in: .local).size.width-chartOffset, height: chartHeight)
                     lineViewModel.hideHorizontalLines = true
+                    NotificationCenter.default.post(name: NotificationManager.ttfChartVscrollNotification, object: nil, userInfo: ["v" : value.translation.height])
                 })
                     .onEnded({ value in
+                        NotificationCenter.default.post(name: NotificationManager.ttfChartVscrollNotification, object: nil, userInfo: nil)
                         lineViewModel.opacity = 0
                         lineViewModel.hideHorizontalLines = false
                         lineViewModel.indicatorLocation = .zero

@@ -52,12 +52,32 @@ final class TickerViewController: BaseViewController {
     
     //MARK:- Inner
     
-    private var lastYOffset = 0.0
+    private var lastYOffset: CGFloat? = nil
     
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addBottomView()
+        
+        NotificationCenter.default.publisher(for: NotificationManager.ttfChartVscrollNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+        } receiveValue: {[weak self] notification in
+            if let dy = notification.userInfo?["v"] as? CGFloat, let curOff = self?.tableView.contentOffset {
+                if self?.lastYOffset == nil {
+                    self?.lastYOffset = curOff.y
+                }
+                
+                if let lastYOffset = self?.lastYOffset {
+                    print(dy)
+                    self?.tableView.contentOffset = CGPoint(x: curOff.x, y: lastYOffset + dy)
+                    print(CGPoint(x: curOff.x, y: lastYOffset + dy))
+                }
+            } else {
+                self?.lastYOffset = nil
+                print("reset")
+            }
+        }.store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -1,11 +1,10 @@
-iOS v1.4.10 #273
+iOS v1.4.10 #274
  available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• TTFs: 1W is default range
-• TTFs: range sync between cells
+• ETF: Rec section returned
 
 :hammer_and_wrench: Improvements
 • -
