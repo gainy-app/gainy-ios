@@ -81,7 +81,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
             }
             return
         }
-        
+        dprint("Apple Auth error: \(error)")
         if let completion = self.completion {
             completion(false, AppleAuthError.authorizationFailed)
             self.completion = nil
