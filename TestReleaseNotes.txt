@@ -1,10 +1,11 @@
-iOS v1.4.10 #274
+iOS v1.4.11 #276
  available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• ETF: Rec section returned
+• Tools: Profile info
+• Home: TTFs re-order by drag-and-drop added
 
 :hammer_and_wrench: Improvements
 • -
