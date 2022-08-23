@@ -12,7 +12,14 @@ struct ToolsContentView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section {
+                Section(header: Text("Info")) {
+                    NavigationLink {
+                        UserInfoView()
+                    } label: {
+                        Text("Profile Info")
+                    }
+                }
+                Section(header: Text("Creator")) {
                     NavigationLink {
                         DeepLinksView()
                     } label: {
