@@ -14,7 +14,6 @@ import AvatarImagePicker
 import FirebaseStorage
 import Kingfisher
 import Firebase
-import SwiftUI
 
 final class ProfileViewController: BaseViewController {
     
@@ -54,7 +53,6 @@ final class ProfileViewController: BaseViewController {
         }
     }
     @IBOutlet weak var subscriptionBtn: UIButton!
-    @IBOutlet weak var devToolsBtn: UIButton!
     
     private var currentCollectionView: UICollectionView?
     private var currentIndexPath: IndexPath?
@@ -386,8 +384,7 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onLogOutTap(_ sender: Any) {
-        reportNonFatal(.popupShowned(reason: "Logout tap"))
-
+        
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure you want to log out?", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action) in
             
@@ -406,17 +403,8 @@ final class ProfileViewController: BaseViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func devToolsAction(_ sender: Any) {
-        
-        if #available(iOS 15, *) {
-            let hostingCV = UIHostingController.init(rootView: ToolsContentView())
-            present(hostingCV, animated: true)
-        }
-    }
-    
     @IBAction func onDeleteAccountTap(_ sender: Any) {
         reportNonFatal(.popupShowned(reason: "Delete account tap"))
-
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
             
@@ -722,7 +710,6 @@ final class ProfileViewController: BaseViewController {
         onboardingImageView.autoAlignAxis(toSuperviewAxis: ALAxis.horizontal)
         onboardingImageView.isUserInteractionEnabled = false
         
-        devToolsBtn.isHidden = Configuration().environment == .production
     }
     
     private func setUpCollectionView(_ collectionView: UICollectionView!) {

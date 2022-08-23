@@ -24,6 +24,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
     
     private var currentNonce: String?
     private var completion: ((Bool, Error?) -> Void)?
+    private var authorizationController: ASAuthorizationController? = nil
     
     @UserDefault<String>("appleAuthorizedUserIdKey")
     private(set) var appleAuthorizedUserId: String?
@@ -52,6 +53,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
+        self.authorizationController = authorizationController
         self.completion = completion
     }
     
@@ -73,6 +75,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         
+        self.authorizationController = nil
         let error = error as NSError
         if error.code == ASAuthorizationError.Code.canceled.rawValue {
             if let completion = self.completion {
@@ -81,7 +84,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
             }
             return
         }
-        
+        dprint("Apple Auth error: \(error)")
         if let completion = self.completion {
             completion(false, AppleAuthError.authorizationFailed)
             self.completion = nil
@@ -90,6 +93,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         
+        self.authorizationController = nil
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
             // Save authorised user ID for future reference
