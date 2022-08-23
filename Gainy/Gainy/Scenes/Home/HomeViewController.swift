@@ -289,6 +289,11 @@ extension HomeViewController: HomeDataSourceDelegate {
         tabBarController?.selectedIndex = CustomTabBar.Tab.portfolio.rawValue
         feedbackGenerator?.impactOccurred()
     }
+    
+    func collectionMoved(from fromIndex: Int, to toIndex: Int) {
+        viewModel.swapCollections(from: fromIndex, to: toIndex)
+        impactOccured()
+    }
 }
 
 extension HomeViewController: FloatingPanelControllerDelegate {

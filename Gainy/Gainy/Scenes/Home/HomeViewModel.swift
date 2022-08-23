@@ -199,6 +199,10 @@ final class HomeViewModel {
         }
     }
     
+    func swapCollections(from fromIndex: Int, to toIndex: Int) {
+        favCollections.move(from: fromIndex, to: toIndex)
+    }
+    
     func sortWatchlist() {
         let settings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
         let watchlistAsyncSorted = self.watchlist.sorted(by: { lhs, rhs in

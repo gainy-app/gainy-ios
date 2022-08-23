@@ -10,6 +10,7 @@ import Kingfisher
 
 protocol HomeCollectionsTableViewCellDelegate: AnyObject {
     func collectionSelected(collection: RemoteShortCollectionDetails)
+    func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int)
 }
 
 final class HomeCollectionsTableViewCell: UITableViewCell {
@@ -24,6 +25,8 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
         didSet {
             innerCollectionView.dataSource = self
             innerCollectionView.delegate = self
+            innerCollectionView.showsVerticalScrollIndicator = false
+            innerCollectionView.dragInteractionEnabled = true
             innerCollectionView.dragDelegate = self
             innerCollectionView.dropDelegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
@@ -80,7 +83,6 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeCollectionsInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
         cell.collection = collections[indexPath.row]
-        
         cell.onDeleteButtonPressed = { [weak self] in
             let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
                 GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": self?.collections[indexPath.row].id ?? 0,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
@@ -107,12 +109,12 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         
         if let delIndex = collections.firstIndex(where: {$0.id == itemId}) {
             
-                UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
-                    //self.removeFromYourCollection(itemId: itemId)
-                }
+            UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
+                //self.removeFromYourCollection(itemId: itemId)
+            }
             innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
             
-        collections.remove(at: delIndex)
+            collections.remove(at: delIndex)
             UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
         }
     }
@@ -132,48 +134,48 @@ extension HomeCollectionsTableViewCell: UICollectionViewDragDelegate {
     ) -> [UIDragItem] {
         
         guard !collections.isEmpty else { return[] }
-            if CollectionsManager.shared.collections.contains(where: { item in
-                (item.id ?? 0) == Constants.CollectionDetails.top20ID
-            }), indexPath.row == 0 {
-                return []
-            }
-
-            let item = self.collections[indexPath.row]
-            // swiftlint:disable legacy_objc_type
-            let itemProvider = NSItemProvider(object: (item.name ?? "") as NSString)
-            // swiftlint:enable legacy_objc_type
-            let dragItem = UIDragItem(itemProvider: itemProvider)
-
-            // TODO: Consider assigning a value to the localObject property of each drag item.
-            // This step is optional but makes it faster to drag and drop content within the same app.
-
-            return [dragItem]
+        if CollectionsManager.shared.collections.contains(where: { item in
+            (item.id ?? 0) == Constants.CollectionDetails.top20ID
+        }), indexPath.row == 0 {
+            return []
+        }
+        
+        let item = self.collections[indexPath.row]
+        // swiftlint:disable legacy_objc_type
+        let itemProvider = NSItemProvider(object: (item.name ?? "") as NSString)
+        // swiftlint:enable legacy_objc_type
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        
+        // TODO: Consider assigning a value to the localObject property of each drag item.
+        // This step is optional but makes it faster to drag and drop content within the same app.
+        
+        return [dragItem]
     }
-
+    
     func collectionView(
         _: UICollectionView,
         dragSessionIsRestrictedToDraggingApplication _: UIDragSession
     ) -> Bool {
         true
     }
-
+    
     func collectionView(
         _: UICollectionView,
         dragPreviewParametersForItemAt _: IndexPath
     ) -> UIDragPreviewParameters? {
         let previewParams = UIDragPreviewParameters()
-
+        
         let path = UIBezierPath(
             roundedRect: CGRect(
                 x: 0,
                 y: 0,
                 width: UIScreen.main.bounds.width - (16 + 16),
-                height: 92
+                height: 88
             ),
             cornerRadius: 18
         )
         previewParams.visiblePath = path
-
+        
         return previewParams
     }
 }
@@ -184,94 +186,68 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
             return
         }
-
+        
         if coordinator.proposal.operation == .move {
             reorderItems(dropCoordinator: coordinator,
                          destinationIndexPath: destinationIndexPath)
         }
     }
     
-    private func reorderItems(
-        dropCoordinator: UICollectionViewDropCoordinator,
-        destinationIndexPath: IndexPath
-    ) {
-        UserProfileManager.shared.collectionsReordered = true
-//        guard var snapshot = dataSource?.snapshot() else {return}
-//        let draggedItems = dropCoordinator.items
-//        guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {
-//            return
-//        }
-//
-//        let sourceItem = snapshot.itemIdentifiers(inSection: .yourCollections)[sourceIndexPath.row] as? YourCollectionViewCellModel
-//        let destItem = snapshot.itemIdentifiers(inSection: .yourCollections)[destinationIndexPath.row] as? YourCollectionViewCellModel
-//
-//        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": sourceItem?.id ?? 0, "destCollectionID" : destItem?.id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-//
-//        let dragDirectionIsTopBottom = sourceIndexPath.row < destinationIndexPath.row
-//
-//
-//        let fromIndex = sourceIndexPath.row
-//        let toIndex = destinationIndexPath.row
-//        UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
-//        UserProfileManager.shared.yourCollections.move(from: fromIndex, to: toIndex)
-//
-//        if dragDirectionIsTopBottom {
-//            snapshot.moveItem(sourceItem, afterItem: destItem)
-//        } else {
-//            snapshot.moveItem(sourceItem, beforeItem: destItem)
-//        }
-//
-//        self.updateHeaderHeight()
-//        dataSource?.apply(snapshot, animatingDifferences: true, completion: {
-//        })
-//        dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        dropSessionDidUpdate session: UIDropSession,
-                        withDestinationIndexPath _: IndexPath?) -> UICollectionViewDropProposal {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        
         let dragItemLocation = session.location(in: collectionView)
         var dragItemIndexPath: IndexPath?
-
+        
         collectionView.performUsingPresentationValues {
             dragItemIndexPath = collectionView.indexPathForItem(at: dragItemLocation)
         }
-
-        guard let destination = dragItemIndexPath else {
+        
+        guard dragItemIndexPath != nil else {
             return UICollectionViewDropProposal(
                 operation: .cancel,
                 intent: .unspecified
             )
         }
-
-        guard destination.section == DiscoverCollectionsSection.yourCollections.rawValue else {
-            return UICollectionViewDropProposal(
-                operation: .cancel,
-                intent: .unspecified
-            )
-        }
-
-        if CollectionsManager.shared.collections.contains(where: { item in
-            (item.id ?? 0) == Constants.CollectionDetails.top20ID
-        }), destination.row == 0 {
-            return UICollectionViewDropProposal(
-                operation: .cancel,
-                intent: .unspecified
-            )
-        }
-
+        
         return UICollectionViewDropProposal(
             operation: .move,
             intent: .insertAtDestinationIndexPath
         )
     }
-
+    
+    
+    
+    private func reorderItems(
+        dropCoordinator: UICollectionViewDropCoordinator,
+        destinationIndexPath: IndexPath
+    ) {
+        UserProfileManager.shared.collectionsReordered = true
+        let draggedItems = dropCoordinator.items
+        guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {
+            return
+        }
+        
+        GainyAnalytics.logEvent("your_collection_reordered", params: ["sourceCollectionID": collections[sourceIndexPath.row].id, "destCollectionID" : collections[destinationIndexPath.row].id ?? 0, "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
+        
+        
+        dropCoordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
+        
+        let fromIndex = sourceIndexPath.row
+        let toIndex = destinationIndexPath.row
+        
+        collections.move(from: fromIndex, to: toIndex)
+        innerCollectionView.moveItem(at: sourceIndexPath, to: destinationIndexPath)
+        
+        UserProfileManager.shared.favoriteCollections.move(from: fromIndex, to: toIndex)
+        delegate?.collectionMoved(collection: collections[sourceIndexPath.row], from: fromIndex, to: toIndex)
+    }
+    
     func collectionView(
         _: UICollectionView,
         dropPreviewParametersForItemAt _: IndexPath
     ) -> UIDragPreviewParameters? {
         let previewParams = UIDragPreviewParameters()
-
+        
         let path = UIBezierPath(
             roundedRect: CGRect(
                 x: 0,
@@ -282,7 +258,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
             cornerRadius: 8
         )
         previewParams.visiblePath = path
-
+        
         return previewParams
     }
 }

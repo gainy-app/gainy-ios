@@ -20,6 +20,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func tickerSortWLPressed()
     func topTickerTapped(symbol: String)
     func balanceTapped()
+    func collectionMoved(from fromIndex: Int, to toIndex: Int)
 }
 
 final class HomeDataSource: NSObject {
@@ -344,6 +345,9 @@ extension HomeDataSource: HomeTickersTableViewCellDelegate {
 extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
     func collectionSelected(collection: RemoteShortCollectionDetails) {
         delegate?.collectionSelected(collection: collection)
+    }
+    func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int) {
+        delegate?.collectionMoved(from: fromIndex, to: toIndex)
     }
 }
 
