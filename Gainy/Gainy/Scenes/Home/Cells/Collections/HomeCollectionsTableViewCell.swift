@@ -195,6 +195,7 @@ extension HomeCollectionsTableViewCell: UICollectionViewDropDelegate {
         dropCoordinator: UICollectionViewDropCoordinator,
         destinationIndexPath: IndexPath
     ) {
+        UserProfileManager.shared.collectionsReordered = true
 //        guard var snapshot = dataSource?.snapshot() else {return}
 //        let draggedItems = dropCoordinator.items
 //        guard let item = draggedItems.first, let sourceIndexPath = item.sourceIndexPath else {

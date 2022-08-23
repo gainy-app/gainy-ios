@@ -42,7 +42,7 @@ final class HomeViewModel {
                                                                            grow: metric.relativeDailyChange ?? 0.0,
                                                                            value: metric.actualPrice ?? 0.0,
                                                                            symbol: self.indexSymbols[ind])
-                                                   )
+                            )
                         } else  {
                             self.topIndexes.append(HomeIndexViewModel.init(name: val,
                                                                            grow: 0.0,
@@ -72,7 +72,7 @@ final class HomeViewModel {
     
     //MARK: - Collections
     var favCollections: [RemoteShortCollectionDetails] = []
-    var watchlist: [RemoteTicker] = []     
+    var watchlist: [RemoteTicker] = []
     var topTickers: [RemoteTicker] = []
     
     func getTopIndexBy(symbol: String) -> RemoteTicker? {
@@ -86,7 +86,7 @@ final class HomeViewModel {
     
     //MARK: - Loading
     
-    func loadHomeData(_ completion: @escaping (() -> Void)) {        
+    func loadHomeData(_ completion: @escaping (() -> Void)) {
         guard let profielId = UserProfileManager.shared.profileID else {
             if let authorizationManager = self.authorizationManager {
                 authorizationManager.refreshAuthorizationStatus { status in
@@ -120,10 +120,10 @@ final class HomeViewModel {
         
         Task {
             let (colAsync, gainsAsync, articlesAsync, indexesAsync, watchlistAsync, topTickersAsync) = await (UserProfileManager.shared.getFavCollections().reorder(by: UserProfileManager.shared.favoriteCollections),
-                                                                                             getPortfolioGains(profileId: profielId),
-                                                                                             getArticles(),
-                                                                                             getRealtimeMetrics(symbols: indexSymbols),
-                                                                                             getWatchlist(),
+                                                                                                              getPortfolioGains(profileId: profielId),
+                                                                                                              getArticles(),
+                                                                                                              getRealtimeMetrics(symbols: indexSymbols),
+                                                                                                              getWatchlist(),
                                                                                                               getTopTickers())
             self.favCollections = colAsync
             self.sortFavCollections()
@@ -138,9 +138,9 @@ final class HomeViewModel {
             topIndexes.removeAll()
             
             for (ind, val) in indexNames.enumerated() {
-
+                
                 if let metric = indexes.first(where: { $0.symbol == indexSymbols[ind]}) {
-
+                    
                     topIndexes.append(HomeIndexViewModel.init(name: val,
                                                               grow: metric.relativeDailyChange ?? 0.0,
                                                               value: metric.actualPrice ?? 0.0,
@@ -158,39 +158,45 @@ final class HomeViewModel {
                 completion()
             }
         }
-    }    
+    }
     
     func sortFavCollections() {
         guard let profielId = UserProfileManager.shared.profileID else { return }
-        let colAsyncSorted = self.favCollections.sorted { lhs, rhs in
-            
-            let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profielId)
-            let sorting = settings.sorting
-            if settings.ascending {
-                switch sorting {
-                case .matchScore:
-                    return lhs.matchScore?.matchScore ?? 0.0 < rhs.matchScore?.matchScore ?? 0.0
-                case .todaysGain:
-                    return lhs.metrics?.relativeDailyChange ?? 0.0 < rhs.metrics?.relativeDailyChange ?? 0.0
-                case .numberOfStocks:
-                    return lhs.size ?? 0 < rhs.size ?? 0
-                case .name:
-                    return lhs.name ?? "" < rhs.name ?? ""
-                }
-            } else {
-                switch sorting {
-                case .matchScore:
-                    return lhs.matchScore?.matchScore ?? 0.0 > rhs.matchScore?.matchScore ?? 0.0
-                case .todaysGain:
-                    return lhs.metrics?.relativeDailyChange ?? 0.0 > rhs.metrics?.relativeDailyChange ?? 0.0
-                case .numberOfStocks:
-                    return lhs.size ?? 0 > rhs.size ?? 0
-                case .name:
-                    return lhs.name ?? "" > rhs.name ?? ""
+        
+        if UserProfileManager.shared.collectionsReordered {
+            self.favCollections = self.favCollections.reorder(by: UserProfileManager.shared.favoriteCollections)
+        } else {
+            let colAsyncSorted = self.favCollections.sorted { lhs, rhs in
+                
+                let settings = CollectionsSortingSettingsManager.shared.getSettingByID(profielId)
+                let sorting = settings.sorting
+                if settings.ascending {
+                    switch sorting {
+                    case .matchScore:
+                        return lhs.matchScore?.matchScore ?? 0.0 < rhs.matchScore?.matchScore ?? 0.0
+                    case .todaysGain:
+                        return lhs.metrics?.relativeDailyChange ?? 0.0 < rhs.metrics?.relativeDailyChange ?? 0.0
+                    case .numberOfStocks:
+                        return lhs.size ?? 0 < rhs.size ?? 0
+                    case .name:
+                        return lhs.name ?? "" < rhs.name ?? ""
+                    }
+                } else {
+                    switch sorting {
+                    case .matchScore:
+                        return lhs.matchScore?.matchScore ?? 0.0 > rhs.matchScore?.matchScore ?? 0.0
+                    case .todaysGain:
+                        return lhs.metrics?.relativeDailyChange ?? 0.0 > rhs.metrics?.relativeDailyChange ?? 0.0
+                    case .numberOfStocks:
+                        return lhs.size ?? 0 > rhs.size ?? 0
+                    case .name:
+                        return lhs.name ?? "" > rhs.name ?? ""
+                    }
                 }
             }
+            
+            self.favCollections = colAsyncSorted
         }
-        self.favCollections = colAsyncSorted
     }
     
     func sortWatchlist() {

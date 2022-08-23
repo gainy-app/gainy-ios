@@ -386,7 +386,8 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onLogOutTap(_ sender: Any) {
-        
+        reportNonFatal(.popupShowned(reason: "Logout tap"))
+
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure you want to log out?", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .cancel) { (action) in
             
@@ -414,7 +415,8 @@ final class ProfileViewController: BaseViewController {
     }
     
     @IBAction func onDeleteAccountTap(_ sender: Any) {
-        
+        reportNonFatal(.popupShowned(reason: "Delete account tap"))
+
         let alertController = UIAlertController(title: nil, message: NSLocalizedString("Are you sure that you want to delete your profile? All your portfolio data and recommendations will be deleted and could not be restored.", comment: ""), preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .default) { (action) in
             
