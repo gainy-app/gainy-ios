@@ -83,8 +83,8 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         
         cell.onDeleteButtonPressed = { [weak self] in
             let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
-//                GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": modelItem.id,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "DiscoverCollections"])
-//                self?.removeFromYourCollection(itemId: modelItem.id, yourCollectionItemToRemove: modelItem)
+                GainyAnalytics.logEvent("your_collection_deleted", params: ["collectionID": self?.collections[indexPath.row].id ?? 0,  "sn": String(describing: self).components(separatedBy: ".").last!, "ec" : "Home"])
+                self?.removeFromYourCollection(itemId: self?.collections[indexPath.row].id ?? 0)
             }
             NotificationManager.shared.showMessage(title: "Warning", text: "Are you sure you want to delete this TTF?", cancelTitle: "No", actions: [yesAction])
         }
@@ -101,6 +101,20 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         
         cell.delegate = cell
         return cell
+    }
+    
+    private func removeFromYourCollection(itemId: Int) {
+        
+        if let delIndex = collections.firstIndex(where: {$0.id == itemId}) {
+            
+                UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
+                    //self.removeFromYourCollection(itemId: itemId)
+                }
+            innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
+            
+        collections.remove(at: delIndex)
+            UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
+        }
     }
 }
 

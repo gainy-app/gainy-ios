@@ -35,6 +35,9 @@ final class UserProfileManager {
         }
     }
     
+    @UserDefaultBool("collectionsReordered")
+    var collectionsReordered: Bool
+    
     @UserDefault<BrokerData>("selectedBrokerToTrade")
     public var selectedBrokerToTrade: BrokerData?
     
