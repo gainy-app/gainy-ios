@@ -243,6 +243,7 @@ class NotificationManager: NSObject {
     }
     
     func showError(_ errorText: String) {
+        reportNonFatal(.popupShowned(reason: errorText))
         let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: errorText, preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil)

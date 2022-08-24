@@ -4,11 +4,11 @@ iOS v1.4.11 #277
 UI Improvements
 
 :new: New:
-• Tools: Profile info
+• Stock: all tags for Rec
 • Home: TTFs re-order by drag-and-drop added
 
 :hammer_and_wrench: Improvements
-• -
+• Analytics for Dmitriy
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE

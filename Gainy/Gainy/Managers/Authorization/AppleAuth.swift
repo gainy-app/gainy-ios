@@ -77,7 +77,7 @@ final class AppleAuth: NSObject, AuthorizationProtocol, ASAuthorizationControlle
         
         self.authorizationController = nil
         let error = error as NSError
-        if error.code == ASAuthorizationError.Code.canceled.rawValue {
+        if error.code == ASAuthorizationError.Code.canceled.rawValue || error.code ==  ASAuthorizationError.Code.unknown.rawValue {
             if let completion = self.completion {
                 completion(false, AppleAuthError.authorizationCancelled)
                 self.completion = nil
