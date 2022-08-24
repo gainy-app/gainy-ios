@@ -50,7 +50,7 @@ final class ProfileViewController: BaseViewController {
     @IBOutlet private weak var fullNameTitle: UILabel!
     @IBOutlet private weak var versionLbl: UILabel! {
         didSet {
-            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")"
+            versionLbl.text = "\(Bundle.main.releaseVersionNumberPretty) #\(Bundle.main.buildVersionNumber ?? "")\nProfile ID \(UserProfileManager.shared.profileID ?? 0)"
         }
     }
     @IBOutlet weak var subscriptionBtn: UIButton!
