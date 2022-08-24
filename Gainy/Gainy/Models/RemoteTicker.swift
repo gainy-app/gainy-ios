@@ -47,6 +47,7 @@ class TickerInfo {
         self.aboutShort = self.about.count < debugStr.count ? self.about : String(self.about.prefix(debugStr.count)) + "..."
         
         self.tags = []
+        self.interestsAndCategories = []
         self.matchTags = []
         self.highlights = ticker.tickerHighlights.compactMap(\.highlight)
         self.wsjData = WSRData(rate: 0.0, targetPrice: 0.0, analystsCount: 0, detailedStats: [])
@@ -192,7 +193,13 @@ class TickerInfo {
                                                                                                        id: $0.categories?.id ?? -404
                             )})
                             
+                            let interests = tickerDetails.tickerInterests.compactMap({TickerTag.init(name: ($0.interest?.name ?? ""), url: $0.interest?.iconUrl ?? "",
+                                                                                                     collectionID: -404,
+                                                                                                     id: $0.interest?.id ?? -404
+                            )})
+                            
                             self?.tags = categories + industries
+                            self?.interestsAndCategories = interests + categories
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
                                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "NEUTRAL", count: tickerDetails.tickerAnalystRatings?.hold ?? 0),
@@ -239,6 +246,7 @@ class TickerInfo {
                     if let matchLoadTask = self.matchLoadTask {
                         matchLoadTask.cancel()
                     }
+                    
                     self.matchLoadTask = Task {
                         let loadedTags = await matchData.combinedTags()
                         self.matchTags = loadedTags
@@ -495,7 +503,7 @@ class TickerInfo {
     let aboutShort: String
     var tags: [TickerTag]
     var matchTags: [TickerTag]
-    
+    var interestsAndCategories: [TickerTag]
     
     
     //MARK: - Highlights
