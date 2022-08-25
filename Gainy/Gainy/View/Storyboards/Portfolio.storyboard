@@ -3033,6 +3033,9 @@
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="plaidLinkAction:" destination="Rn1-ce-c2n" eventType="touchUpInside" id="Yxu-mC-sax"/>
+                                        </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="portf_plaid_hello" translatesAutoresizingMaskIntoConstraints="NO" id="4aX-SB-zY5">
                                         <rect key="frame" x="162" y="0.0" width="181" height="120"/>
