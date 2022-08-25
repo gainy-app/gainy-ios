@@ -1,11 +1,10 @@
-iOS v1.4.11 #277
+iOS v1.4.11 #278
  available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• Stock: all tags for Rec
-• Home: TTFs re-order by drag-and-drop added
+• Stock: tags improvements
 
 :hammer_and_wrench: Improvements
 • Analytics for Dmitriy

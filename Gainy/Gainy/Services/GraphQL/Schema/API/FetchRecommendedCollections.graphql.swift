@@ -313,7 +313,7 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
-        GraphQLField("updated_at", type: .scalar(timestamp.self)),
+        GraphQLField("updated_at", type: .scalar(timestamptz.self)),
       ]
     }
 
@@ -323,7 +323,7 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil) {
+    public init(absoluteDailyChange: float8? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil) {
       self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt])
     }
 
@@ -354,9 +354,9 @@ public struct RemoteShortCollectionDetails: GraphQLFragment {
       }
     }
 
-    public var updatedAt: timestamp? {
+    public var updatedAt: timestamptz? {
       get {
-        return resultMap["updated_at"] as? timestamp
+        return resultMap["updated_at"] as? timestamptz
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")

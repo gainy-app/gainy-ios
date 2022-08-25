@@ -53,7 +53,7 @@ public final class DiscoverCollectionDetailsQuery: GraphQLQuery {
       self.init(unsafeResultMap: ["__typename": "query_root", "collections": collections.map { (value: Collection) -> ResultMap in value.resultMap }])
     }
 
-    /// fetch data from the table: "public_220815100829.profile_collections"
+    /// fetch data from the table: "public_220825141227.profile_collections"
     public var collections: [Collection] {
       get {
         return (resultMap["collections"] as! [ResultMap]).map { (value: ResultMap) -> Collection in Collection(unsafeResultMap: value) }
@@ -280,7 +280,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
         GraphQLField("absolute_daily_change", type: .scalar(float8.self)),
         GraphQLField("profile_id", type: .scalar(Int.self)),
         GraphQLField("relative_daily_change", type: .scalar(float8.self)),
-        GraphQLField("updated_at", type: .scalar(timestamp.self)),
+        GraphQLField("updated_at", type: .scalar(timestamptz.self)),
         GraphQLField("previous_day_close_price", type: .scalar(float8.self)),
         GraphQLField("market_capitalization_sum", type: .scalar(bigint.self)),
       ]
@@ -292,7 +292,7 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       self.resultMap = unsafeResultMap
     }
 
-    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamp? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil) {
+    public init(absoluteDailyChange: float8? = nil, profileId: Int? = nil, relativeDailyChange: float8? = nil, updatedAt: timestamptz? = nil, previousDayClosePrice: float8? = nil, marketCapitalizationSum: bigint? = nil) {
       self.init(unsafeResultMap: ["__typename": "collection_metrics", "absolute_daily_change": absoluteDailyChange, "profile_id": profileId, "relative_daily_change": relativeDailyChange, "updated_at": updatedAt, "previous_day_close_price": previousDayClosePrice, "market_capitalization_sum": marketCapitalizationSum])
     }
 
@@ -332,9 +332,9 @@ public struct RemoteCollectionDetails: GraphQLFragment {
       }
     }
 
-    public var updatedAt: timestamp? {
+    public var updatedAt: timestamptz? {
       get {
-        return resultMap["updated_at"] as? timestamp
+        return resultMap["updated_at"] as? timestamptz
       }
       set {
         resultMap.updateValue(newValue, forKey: "updated_at")
@@ -1529,7 +1529,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     fragment RemoteTickerDetailsFull on tickers {
       __typename
       ...RemoteTickerDetails
-      ticker_categories {
+      ticker_categories(where: {rank: {_lte: 3}}) {
         __typename
         categories {
           __typename
@@ -1539,7 +1539,7 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
           icon_url
         }
       }
-      ticker_interests {
+      ticker_interests(where: {rank: {_lte: 3}}) {
         __typename
         symbol
         interest_id
@@ -1588,8 +1588,8 @@ public struct RemoteTickerDetailsFull: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLFragmentSpread(RemoteTickerDetails.self),
-      GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
-      GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
+      GraphQLField("ticker_categories", arguments: ["where": ["rank": ["_lte": 3]]], type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
+      GraphQLField("ticker_interests", arguments: ["where": ["rank": ["_lte": 3]]], type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
       GraphQLField("ticker_events", type: .nonNull(.list(.nonNull(.object(TickerEvent.selections))))),
       GraphQLField("ticker_analyst_ratings", type: .object(TickerAnalystRating.selections)),
@@ -2220,7 +2220,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     fragment RemoteTickerExtraDetails on tickers {
       __typename
       symbol
-      ticker_categories {
+      ticker_categories(where: {rank: {_lte: 3}}) {
         __typename
         categories {
           __typename
@@ -2230,7 +2230,7 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
           icon_url
         }
       }
-      ticker_interests {
+      ticker_interests(where: {rank: {_lte: 3}}) {
         __typename
         symbol
         interest_id
@@ -2287,8 +2287,8 @@ public struct RemoteTickerExtraDetails: GraphQLFragment {
     return [
       GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
       GraphQLField("symbol", type: .nonNull(.scalar(String.self))),
-      GraphQLField("ticker_categories", type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
-      GraphQLField("ticker_interests", type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
+      GraphQLField("ticker_categories", arguments: ["where": ["rank": ["_lte": 3]]], type: .nonNull(.list(.nonNull(.object(TickerCategory.selections))))),
+      GraphQLField("ticker_interests", arguments: ["where": ["rank": ["_lte": 3]]], type: .nonNull(.list(.nonNull(.object(TickerInterest.selections))))),
       GraphQLField("ticker_industries", type: .nonNull(.list(.nonNull(.object(TickerIndustry.selections))))),
       GraphQLField("ticker_events", type: .nonNull(.list(.nonNull(.object(TickerEvent.selections))))),
       GraphQLField("ticker_analyst_ratings", type: .object(TickerAnalystRating.selections)),

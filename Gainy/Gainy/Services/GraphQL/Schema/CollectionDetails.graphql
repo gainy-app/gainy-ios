@@ -134,7 +134,7 @@ previous_day_close_price
 
 fragment RemoteTickerDetailsFull on tickers {
     ...RemoteTickerDetails
-    ticker_categories {
+    ticker_categories (where: {rank: {_lte: 3}}) {
       categories {
         id
         name
@@ -142,7 +142,7 @@ fragment RemoteTickerDetailsFull on tickers {
         icon_url
       }
     }
-    ticker_interests {
+    ticker_interests (where: {rank: {_lte: 3}}) {
       symbol
       interest_id
       interest {
@@ -180,7 +180,7 @@ fragment RemoteTickerDetailsFull on tickers {
 
 fragment RemoteTickerExtraDetails on tickers {
     symbol
-    ticker_categories {
+    ticker_categories (where: {rank: {_lte: 3}}) {
       categories {
         id
         name
@@ -188,7 +188,7 @@ fragment RemoteTickerExtraDetails on tickers {
         icon_url
       }
     }
-    ticker_interests {
+    ticker_interests (where: {rank: {_lte: 3}}) {
       symbol
       interest_id
       interest {
