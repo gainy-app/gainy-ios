@@ -198,7 +198,7 @@ class TickerInfo {
                                                                                                      id: $0.interest?.id ?? -404
                             )})
                             
-                            self?.tags = categories + industries
+                            self?.tags.append(contentsOf: interests + categories)
                             self?.interestsAndCategories = interests + categories
                             self?.wsjData = WSRData(rate: tickerDetails.tickerAnalystRatings?.rating ?? 0.0, targetPrice: tickerDetails.tickerAnalystRatings?.targetPrice ?? 0.0,  analystsCount: 39, detailedStats: [WSRData.WSRDataDetails(name: "VERY BULLISH", count: tickerDetails.tickerAnalystRatings?.strongBuy ?? 0),
                                                                                                                                                                                                                       WSRData.WSRDataDetails(name: "BULLISH", count: tickerDetails.tickerAnalystRatings?.buy ?? 0),
@@ -250,6 +250,11 @@ class TickerInfo {
                     self.matchLoadTask = Task {
                         let loadedTags = await matchData.combinedTags()
                         self.matchTags = loadedTags
+                        self.tags.append(contentsOf: loadedTags)
+                        self.tags = self.tags.uniqued()
+                        self.tags.sort { lhs, rhs in
+                            loadedTags.isInList(lhs) && !loadedTags.isInList(rhs)
+                        }
                         mainDS.leave()
                     }
                 }

@@ -53,7 +53,8 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                 let totalWidth: CGFloat = UIScreen.main.bounds.width - 32.0 - 71.0
                 var xPos: CGFloat = 0.0
                 var yPos: CGFloat = 0.0
-                for tag in tickerInfo?.interestsAndCategories ?? [] {
+                let matchedTags = tickerInfo?.matchTags ?? []
+                for tag in tickerInfo?.tags ?? [] {
                     let tagView = TagView()
                     
                     tagView.backgroundColor = UIColor.white
@@ -75,6 +76,13 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
                     tagView.autoPinEdge(.leading, to: .leading, of: tagsStack, withOffset: xPos)
                     tagView.autoPinEdge(.top, to: .top, of: tagsStack, withOffset: yPos)
                     xPos += width + margin
+                    
+                    if matchedTags.isInList(tag) {
+                        tagView.setBorderForCollection()
+                    } else {
+                        tagView.setBorderForTicker()
+                    }
+                    
                 }
             }
                 
@@ -82,7 +90,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             self.tagsStack.layoutIfNeeded()
             
             let calculatedHeight: CGFloat = (159.0) + tagHeight * CGFloat(lines) + margin * CGFloat(lines - 1) + 16.0
-            if (tickerInfo?.interestsAndCategories ?? []).count > 0 {
+            if (tickerInfo?.tags ?? []).count > 0 {
                 cellHeightChanged?(max((TickerDetailsRecommendedViewCell.cellHeight), calculatedHeight))
             } else {
                 cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
@@ -95,7 +103,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
             cellHeightChanged?(TickerDetailsRecommendedViewCell.cellHeight)
             wrongIndBtn.isHidden = true
         }
-        wrongIndBtn.isHidden = tickerInfo?.interestsAndCategories.isEmpty ?? true
+        wrongIndBtn.isHidden = tickerInfo?.tags.isEmpty ?? true
         wrongIndBtn.isSelected = WrongIndustryManager.shared.isIndWrong(tickerInfo?.symbol ?? "")
         if wrongIndBtn.isSelected {
             highlightIndustries()
@@ -143,7 +151,7 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     func highlightIndustries() {
         wrongIndBtn.isSelected = true
-        for (ind, tagInfo) in (tickerInfo?.interestsAndCategories ?? []).enumerated() {
+        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 
                 tagView.backgroundColor = UIColor(hexString: "B1BDC8", alpha: 1.0)
@@ -155,8 +163,8 @@ final class TickerDetailsRecommendedViewCell: TickerDetailsViewCell {
     
     func unhighlightIndustries() {
         wrongIndBtn.isSelected = false
-        guard (tickerInfo?.interestsAndCategories ?? []).count == tagsStack.subviews.count else {return}
-        for (ind, tagInfo) in (tickerInfo?.interestsAndCategories ?? []).enumerated() {
+        guard (tickerInfo?.tags ?? []).count == tagsStack.subviews.count else {return}
+        for (ind, tagInfo) in (tickerInfo?.tags ?? []).enumerated() {
             if let tagView = tagsStack.subviews[ind] as? TagView {
                 if tagInfo.collectionID < 0 {
                     tagView.backgroundColor = UIColor.white

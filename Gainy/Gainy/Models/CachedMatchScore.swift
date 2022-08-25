@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CryptoKit
 
 struct CachedMatchScore: Codable {
     let symbol: String
@@ -109,5 +110,13 @@ struct CachedMatchScore: Codable {
         var (interestsList, categoriesList) = await (interests, categories)
         interestsList.append(contentsOf: categoriesList)
         return interestsList
+    }
+}
+
+extension Array where Element == TickerTag {
+    func isInList(_ tag: Element) -> Bool {
+        return self.firstIndex { el in
+            el.id == tag.id
+        } != nil
     }
 }
