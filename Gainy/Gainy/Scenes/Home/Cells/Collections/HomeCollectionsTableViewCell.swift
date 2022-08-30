@@ -42,15 +42,12 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
     }()
     
     @IBOutlet weak var collectionHeight: NSLayoutConstraint!
-    @IBOutlet weak var expandBtn: UIButton!
     
     var collections: [RemoteShortCollectionDetails] = [] {
         didSet {
             innerCollectionView.reloadData()
             innerCollectionView.isScrollEnabled = false
-            expandBtn.isSelected = false
-            expandBtn.isHidden = collections.count < 5
-            calcSize(isSelected: collections.count < 5)
+            calcSize(isSelected: true)
         }
     }
     
@@ -60,18 +57,12 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
         } else {
             collectionHeight.constant = CGFloat(4) * cellWidth + CGFloat(4) * 8.0
         }
-        let bottomOffset: CGFloat = collections.count > 4 ? 32.0 : 32.0
+        let bottomOffset: CGFloat = 0.0
         delay(0.1) {
             self.innerCollectionView.isScrollEnabled = false
             self.heightUpdated?(8.0 + self.collectionHeight.constant + bottomOffset)
         }
         layoutIfNeeded()
-    }
-    
-    //MARK: - Actions
-    @IBAction func expandToggleAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        calcSize(isSelected: sender.isSelected)
     }
 }
 
