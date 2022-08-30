@@ -79,6 +79,7 @@ final class HoldingsViewController: BaseViewController {
                 self?.tableView.setContentOffset(.zero, animated: true)
             }
             .store(in: &cancellables)
+        subscribeOnOpenTicker()
     }
     
     @objc func loadData() {
@@ -194,6 +195,36 @@ final class HoldingsViewController: BaseViewController {
         fpc.set(contentViewController: sortingVC)
         fpc.isRemovalInteractionEnabled = true
         self.present(self.fpc, animated: true, completion: nil)
+    }
+    
+    private func subscribeOnOpenTicker() {
+        
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                guard let stockSymbol = status.object as? String else {
+                    return
+                }
+                
+                if let index = self?.viewModel.dataSource.holdings.firstIndex(where: { holding in
+                    holding.tickerSymbol == stockSymbol
+                }) {
+                    let section = (self?.viewModel.dataSource.sectionsCount ?? 1) - 1
+                    let indexPath = IndexPath.init(row: index, section: section)
+                    
+                    let numberOfSections = self?.tableView.numberOfSections
+                    guard section < numberOfSections ?? 0 else {
+                        return
+                    }
+                    let numberOfItems = self?.tableView.numberOfRows(inSection: section)
+                    guard index < numberOfItems ?? 0 else {
+                        return
+                    }
+                    
+                    self?.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: true)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     private func showFilteringPanel() {

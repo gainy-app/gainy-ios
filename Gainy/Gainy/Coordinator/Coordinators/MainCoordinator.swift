@@ -32,7 +32,30 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         showMainTabViewController()
         self.subscribeOnFailToRefreshToken()
         self.subscribeOnOpenHome()
+        self.subscribeOnOpenPortfolio()
         self.subscribeOnOpenTTF()
+    }
+    
+    private func openHome() {
+        if let vc = self.mainTabBarViewController {
+            if let tabBar = vc.tabBar as? CustomTabBar {
+                guard vc.selectedIndex != 0 else { return }
+                tabBar.selectedIndex = CustomTabBar.Tab(rawValue: 0)!
+                tabBar.updateTabs()
+                vc.selectedIndex = 0
+            }
+        }
+    }
+    
+    private func openPortfolio() {
+        if let vc = self.mainTabBarViewController {
+            if let tabBar = vc.tabBar as? CustomTabBar {
+                guard vc.selectedIndex != 2 else { return }
+                tabBar.selectedIndex = CustomTabBar.Tab(rawValue: 2)!
+                tabBar.updateTabs()
+                vc.selectedIndex = 2
+            }
+        }
     }
     
     func subscribeOnFailToRefreshToken() {
@@ -50,13 +73,16 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
     private func subscribeOnOpenHome() {
         NotificationCenter.default.publisher(for: NotificationManager.requestOpenHomeNotification, object: nil)
             .sink { [weak self] status in
-                if let vc = self?.mainTabBarViewController {
-                    if let tabBar = vc.tabBar as? CustomTabBar {
-                        tabBar.selectedIndex = CustomTabBar.Tab(rawValue: 0)!
-                        tabBar.updateTabs()
-                        vc.selectedIndex = 0
-                    }
-                }
+                self?.openHome()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func subscribeOnOpenPortfolio() {
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenPortfolioNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                self?.openPortfolio()
             }
             .store(in: &cancellables)
     }

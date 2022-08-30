@@ -39,7 +39,7 @@ final class HoldingsDataSource: NSObject {
         return result
     }
     
-    private var sectionsCount: Int {
+    var sectionsCount: Int {
         
         return self.needReauth ? 3 : 2
     }

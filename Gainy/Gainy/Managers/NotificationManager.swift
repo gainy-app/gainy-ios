@@ -9,6 +9,7 @@ import UIKit
 import AppTrackingTransparency
 import StoreKit
 import FirebaseAuth
+import OneSignal
 
 class NotificationManager: NSObject {
     
@@ -32,6 +33,10 @@ class NotificationManager: NSObject {
     static let requestOpenHomeNotification = Notification.Name.init("requestOpenHomeNotification")
     static let requestOpenCollectionWithIdNotification = Notification.Name.init("requestOpenCollectionWithIdNotification")
     static let requestOpenStockWithIdNotification = Notification.Name.init("requestOpenStockWithIdNotification")
+    
+    static let requestOpenArticleWithIdNotification = Notification.Name.init("requestOpenArticleWithIdNotification")
+    static let requestOpenStockWithSymbolOnPortfolioNotification = Notification.Name.init("requestOpenStockWithSymbolOnPortfolioNotification")
+    static let requestOpenPortfolioNotification = Notification.Name.init("requestOpenPortfolioNotification")
     static let remoteConfigLoadedNotification = Notification.Name.init("remoteConfigLoadedNotification")
     static let ttfRangeSyncNotification = Notification.Name.init("ttfRangeSyncNotification")
     static let ttfChartVscrollNotification = Notification.Name.init("ttfChartVscrollNotification")
@@ -287,6 +292,94 @@ class NotificationManager: NSObject {
         NotificationCenter.default.post(name: subscriptionChangedNotification, object: nil, userInfo: ["type": type])
     }
     
+    class func handlePushNotification(notification: OSNotification) {
+        
+        dprint("Push: \(notification.additionalData ?? [:])")
+        guard let additionalData = notification.additionalData else {
+            return
+        }
+        
+        if let type = additionalData["t"] as? String {
+            switch type {
+            case "0":
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                break
+            case "1":
+                if let id = additionalData["id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                } else if let id = additionalData["id"] as? Int {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                }
+                break
+            case "4":
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                if let id = additionalData["article_id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: id)
+                } else if let id = additionalData["article_id"] as? Int {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: "\(id)")
+                }
+                break
+            case "6":
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
+                }
+                break
+            case "7":
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
+                }
+                break
+            case "8":
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
+                }
+                break
+            default: break
+            }
+        } else if let type = additionalData["t"] as? Int {
+            switch type {
+            case 0:
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                break
+            case 1:
+                if let id = additionalData["id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                } else if let id = additionalData["id"] as? Int {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenCollectionWithIdNotification, object: Int.init(id))
+                }
+                break
+            case 4:
+                NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
+                if let id = additionalData["article_id"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: id)
+                } else if let id = additionalData["article_id"] as? Int {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: "\(id)")
+                }
+                break
+            case 6:
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
+                }
+                break
+            case 7:
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
+                }
+                break
+            case 8:
+                if let stockSymbol = additionalData["symbol"] as? String {
+                    NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
+                }
+                break
+                
+            default: break
+            }
+        }
+    }
     
     func handleErrors(status: Int, errors: [String]) {
         //        if status == 524 {

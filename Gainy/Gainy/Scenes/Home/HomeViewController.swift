@@ -62,6 +62,7 @@ final class HomeViewController: BaseViewController {
         tableView.delegate = viewModel.dataSource
         viewModel.dataSource.delegate = self
         setupPanel()
+        subscribeOnOpenArticle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +99,33 @@ final class HomeViewController: BaseViewController {
             DeeplinkManager.shared.showDelayedTTF()
             DeeplinkManager.shared.showDelayedStock()
         }
+    }
+    
+    private func subscribeOnOpenArticle() {
+        
+        NotificationCenter.default.publisher(for: NotificationManager.requestOpenArticleWithIdNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] status in
+                guard let articleID = status.object as? String else {
+                    return
+                }
+                
+                if let index = self?.viewModel.articles.firstIndex(where: { article in
+                    article.id == articleID
+                }) {
+                    let indexPath = IndexPath.init(row: index, section: HomeDataSource.Section.articles.rawValue )
+                    let numberOfSections = self?.tableView.numberOfSections
+                    guard HomeDataSource.Section.articles.rawValue < numberOfSections ?? 0 else {
+                        return
+                    }
+                    let numberOfItems = self?.tableView.numberOfRows(inSection: HomeDataSource.Section.articles.rawValue)
+                    guard index < numberOfItems ?? 0 else {
+                        return
+                    }
+                    self?.tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.middle, animated: true)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     override func viewDidAppear(_ animated: Bool) {
