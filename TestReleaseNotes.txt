@@ -1,13 +1,17 @@
-iOS v1.4.11 #278
+iOS v1.4.11 #279
  available
 :globe_with_meridians: Server - TEST
 UI Improvements
 
 :new: New:
-• Stock: tags improvements
+• Wrapped up re-arranged by user TTFs on Home screen
+• Handle new push notifications:
+- Scroll to the appropriate article on the home screen (or open Home)
+- Scroll to the appropriate ticker on portfolio tab (or open Porto)
+- Open appropriate symbol screen
 
 :hammer_and_wrench: Improvements
-• Analytics for Dmitriy
+• QA updates
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
