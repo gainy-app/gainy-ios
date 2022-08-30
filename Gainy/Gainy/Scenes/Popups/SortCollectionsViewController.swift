@@ -77,6 +77,9 @@ final class SortCollectionsViewController: BaseViewController {
         if let storedBtnIdx = btnsMapping()[settings.sorting] {
             for (_, val) in sortBtns.enumerated() {
                 val.isSelected = val.tag == storedBtnIdx
+                if UserProfileManager.shared.collectionsReordered {
+                    val.isSelected = false
+                }
                 
                 if val.tag == storedBtnIdx {
                     
@@ -86,6 +89,7 @@ final class SortCollectionsViewController: BaseViewController {
             }
         }
         
+        ascBtn.isHidden = UserProfileManager.shared.collectionsReordered
         //Setting Asc/Desc
         ascBtn.isSelected = settings.ascending
         ascBtn.setImage(UIImage(named: settings.ascending ? "arrow-up-green" : "arrow-down-red"), for: .normal)

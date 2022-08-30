@@ -321,6 +321,7 @@ extension HomeViewController: HomeDataSourceDelegate {
     func collectionMoved(from fromIndex: Int, to toIndex: Int) {
         viewModel.swapCollections(from: fromIndex, to: toIndex)
         impactOccured()
+        self.tableView.reloadData()
     }
 }
 
@@ -362,6 +363,7 @@ extension HomeViewController: SortCollectionsViewControllerDelegate {
         
         GainyAnalytics.logEvent("home_col_sorting_changed", params: ["sorting" : sorting])
         self.fpc.dismiss(animated: true, completion: nil)
+        UserProfileManager.shared.collectionsReordered = false
         viewModel.sortFavCollections()
         self.tableView.reloadData()
     }

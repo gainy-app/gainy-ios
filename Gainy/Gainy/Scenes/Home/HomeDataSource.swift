@@ -232,7 +232,11 @@ extension HomeDataSource: UITableViewDelegate {
         } else if section == Section.collections.rawValue, let profileID = UserProfileManager.shared.profileID {
             button.addTarget(self, action: #selector(sortCollectionsTapped), for: .touchUpInside)
             let settings: CollectionsSortingSettings = CollectionsSortingSettingsManager.shared.getSettingByID(profileID)
-            sortLabel.text = settings.sorting.title
+            if UserProfileManager.shared.collectionsReordered {
+                sortLabel.text = "Custom"
+            } else {
+                sortLabel.text = settings.sorting.title
+            }
             sortLabel.sizeToFit()
         }
         
