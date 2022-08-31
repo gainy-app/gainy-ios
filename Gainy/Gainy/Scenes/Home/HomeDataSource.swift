@@ -71,7 +71,7 @@ final class HomeDataSource: NSObject {
     private var expandedCells: Set<String> = Set<String>()
     private weak var tableView: UITableView?
     private let refreshControl = LottieRefreshControl()
-    
+    private var watchlistExpanded = false
     //
 }
 
@@ -111,6 +111,13 @@ extension HomeDataSource: SkeletonTableViewDataSource {
                 self?.cellHeights[.watchlist] = newHeight
                 self?.tableView?.endUpdates()
             }
+            cell.sortingPressed = {[weak self] in
+                self?.sortWatchlistTapped()
+            }
+            cell.expandPressed = {[weak self] in
+                self?.watchlistExpanded = !cell.expandBtn.isSelected
+            }
+            cell.expandBtn.isSelected = !watchlistExpanded
             cell.watchlist = viewModel?.watchlist ?? []
             cell.delegate = self
             return cell
@@ -182,8 +189,10 @@ extension HomeDataSource: UITableViewDelegate {
         if sectionType == .collections && (viewModel?.favCollections.isEmpty ?? true) {
             return nil
         }
-        if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
-            return nil
+        if sectionType == .watchlist {
+            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.size.width, height: 24.0))
+            view.backgroundColor = UIColor.clear
+            return view
         }
         
         let headerLabel = UILabel()
@@ -330,8 +339,8 @@ extension HomeDataSource: UITableViewDelegate {
                     return 60.0 + 48.0 + 32.0
                 }
             }
-            if sectionType == .watchlist && (viewModel?.watchlist.isEmpty ?? true) {
-                return 0.0
+            if sectionType == .watchlist {
+                return 24.0
             }
             
             return 60.0

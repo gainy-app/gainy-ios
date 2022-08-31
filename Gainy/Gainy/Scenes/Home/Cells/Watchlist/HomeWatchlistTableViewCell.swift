@@ -16,9 +16,56 @@ protocol HomeWatchlistTableViewCellDelegate: AnyObject {
 final class HomeWatchlistTableViewCell: UITableViewCell {
     
     weak var delegate: HomeWatchlistTableViewCellDelegate?
-    private let cellWidth: CGFloat = 88
-    
+    private let cellHeight: CGFloat = 88
+    let expandBtn = ResponsiveButton()
     var heightUpdated: ((CGFloat) -> Void)?
+    var sortingPressed: (() -> Void)?
+    var expandPressed: (() -> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let buttonWithLabel: (ResponsiveButton, UILabel) = self.newSortByButton()
+        let button = buttonWithLabel.0
+        let sortLabel = buttonWithLabel.1
+        button.addTarget(self, action: #selector(sortWatchlistTapped), for: .touchUpInside)
+        let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
+        sortLabel.text = settings.sortingText()
+        sortLabel.sizeToFit()
+        
+        self.contentView.addSubview(button)
+        button.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        button.autoPinEdge(toSuperviewEdge: .top, withInset: 72.0)
+        button.autoSetDimension(.height, toSize: 24.0)
+        button.sizeToFit()
+        
+        let titleLabel = UILabel.newAutoLayout()
+        titleLabel.font = UIFont.proDisplaySemibold(20)
+        titleLabel.textColor = UIColor.Gainy.textDark
+        titleLabel.numberOfLines = 1
+        titleLabel.textAlignment = .left
+        titleLabel.text = "Watchlist"
+        
+        self.contentView.addSubview(titleLabel)
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
+        titleLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 28.0)
+        titleLabel.autoSetDimension(.height, toSize: 20.0)
+        titleLabel.sizeToFit()
+        
+        self.contentView.addSubview(expandBtn)
+        expandBtn.addTarget(self, action: #selector(expandToggleAction), for: .touchUpInside)
+        expandBtn.translatesAutoresizingMaskIntoConstraints = false
+        expandBtn.backgroundColor = UIColor.clear
+        expandBtn.setTitle("show all".uppercased(), for: .selected)
+        expandBtn.setTitle("show less".uppercased(), for: .normal)
+        expandBtn.setTitleColor(UIColor.Gainy.textDark, for: .normal)
+        expandBtn.setTitleColor(UIColor.Gainy.textDark, for: .selected)
+        expandBtn.titleLabel?.font = UIFont.compactRoundedSemibold(12)
+        expandBtn.autoPinEdge(toSuperviewEdge: .right, withInset: 24.0)
+        expandBtn.autoPinEdge(toSuperviewEdge: .top, withInset: 24.0)
+        expandBtn.autoSetDimension(.height, toSize: 24.0)
+        expandBtn.sizeToFit()
+    }
     
     @IBOutlet private weak var innerCollectionView: UICollectionView! {
         didSet {
@@ -31,6 +78,15 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet private weak var backgroundImageView: UIImageView! {
+        didSet {
+            backgroundImageView.contentMode = .scaleToFill
+            backgroundImageView.image = UIImage.init(named: "homeWLBackground")
+            backgroundImageView.layer.cornerRadius = 24.0
+            backgroundImageView.layer.masksToBounds = true
+        }
+    }
+    
     private let homeLayout: HomeWatchlistFlowLayout = HomeWatchlistFlowLayout()
     private lazy var customLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, env -> NSCollectionLayoutSection? in
@@ -39,16 +95,11 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         return layout
     }()
     
-    @IBOutlet private weak var watchlistHeight: NSLayoutConstraint!
-    @IBOutlet private weak var expandBtn: UIButton!
-    @IBOutlet private weak var dotsView: UIImageView!
-    
     var watchlist: [RemoteTickerDetails] = [] {
         didSet {
             innerCollectionView.reloadData()
             expandBtn.isHidden = watchlist.count < 5
-            dotsView.isHidden = watchlist.isEmpty
-            calcSize(isSelected: watchlist.count < 5)
+            calcSize(isSelected: expandBtn.isSelected)
         }
     }
     
@@ -57,24 +108,83 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
             heightUpdated?(0.0)
             return
         }
+        let topOffset: CGFloat = 120.0
+        let bottomOffset: CGFloat = 8.0
+        var height = topOffset + max(0.0, CGFloat(watchlist.count) * cellHeight + CGFloat(watchlist.count) * 8.0) - 8.0 + bottomOffset
         if isSelected {
-            watchlistHeight.constant = max(0.0, CGFloat(watchlist.count) * cellWidth + CGFloat(watchlist.count) * 8.0) + 8.0
-        } else {
-            watchlistHeight.constant = CGFloat(4) * cellWidth + CGFloat(4) * 8.0 + 8.0
+            let count = (watchlist.count < 5) ? CGFloat(watchlist.count) : CGFloat(4)
+            height = topOffset + max(0.0,count * cellHeight + count * 8.0) - 8.0 + bottomOffset
         }
-        let bottomOffset: CGFloat = watchlist.count > 4 ? 24.0 : 24.0
+        
         delay(0.1) {
             self.innerCollectionView.isScrollEnabled = false
-            self.heightUpdated?(8.0 + self.watchlistHeight.constant + bottomOffset)
+            self.heightUpdated?(height)
         }
         layoutIfNeeded()
     }
     
+    func newSortByButton() -> (ResponsiveButton, UILabel) {
+        let button = ResponsiveButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 8
+        button.layer.cornerCurve = .continuous
+        button.fillRemoteButtonBack()
+        
+        let reorderIconImageView = UIImageView(
+            frame: CGRect(x: 0, y: 0, width: 16, height: 16)
+        )
+        reorderIconImageView.image = UIImage(named: "reorder")
+        button.addSubview(reorderIconImageView)
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 8.0)
+        reorderIconImageView.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        reorderIconImageView.autoSetDimensions(to: CGSize.init(width: 16, height: 16))
+        
+        let sortByLabel = UILabel(
+            frame: CGRect(x: 0, y: 0, width: 36, height: 16)
+        )
+        
+        sortByLabel.font = UIFont(name: "SFProDisplay-Regular", size: 12)
+        sortByLabel.textColor = UIColor.Gainy.grayNotDark
+        sortByLabel.numberOfLines = 1
+        sortByLabel.textAlignment = .center
+        sortByLabel.text = "Sort by"
+        
+        button.addSubview(sortByLabel)
+        sortByLabel.autoSetDimensions(to: CGSize.init(width: 36, height: 16))
+        sortByLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 26.0)
+        sortByLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        
+        let textLabel = UILabel(
+            frame: CGRect(x: 0, y: 0, width: 77, height: 16)
+        )
+        
+        textLabel.font = UIFont(name: "SFProDisplay-Semibold", size: 12)
+        textLabel.textColor = UIColor.Gainy.grayNotDark
+        textLabel.numberOfLines = 1
+        textLabel.textAlignment = .center
+        textLabel.text = "Watchlist"
+        textLabel.minimumScaleFactor = 0.1
+        button.addSubview(textLabel)
+        textLabel.autoSetDimension(.height, toSize: 16)
+        textLabel.autoPinEdge(.left, to: .right, of: sortByLabel, withOffset: 2.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 4.0)
+        textLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 8.0)
+        textLabel.sizeToFit()
+        
+        return (button, textLabel)
+    }
     
     //MARK: - Actions
-    @IBAction func expandToggleAction(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        calcSize(isSelected: sender.isSelected)
+    @objc private func expandToggleAction() {
+        
+        expandBtn.isSelected.toggle()
+        calcSize(isSelected: expandBtn.isSelected)
+        self.expandPressed?()
+    }
+    
+    @objc private func sortWatchlistTapped() {
+        
+        self.sortingPressed?()
     }
 }
 

@@ -313,26 +313,26 @@ class NotificationManager: NSObject {
                 break
             case "4":
                 NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
-                if let id = additionalData["article_id"] as? String {
+                if let id = additionalData["id"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: id)
-                } else if let id = additionalData["article_id"] as? Int {
+                } else if let id = additionalData["id"] as? Int {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: "\(id)")
                 }
                 break
             case "6":
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
                 }
                 break
             case "7":
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
                 }
                 break
             case "8":
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
@@ -352,26 +352,26 @@ class NotificationManager: NSObject {
                 break
             case 4:
                 NotificationCenter.default.post(name: NotificationManager.requestOpenHomeNotification, object: nil)
-                if let id = additionalData["article_id"] as? String {
+                if let id = additionalData["id"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: id)
-                } else if let id = additionalData["article_id"] as? Int {
+                } else if let id = additionalData["id"] as? Int {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenArticleWithIdNotification, object: "\(id)")
                 }
                 break
             case 6:
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
                 }
                 break
             case 7:
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenPortfolioNotification, object: stockSymbol)
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithSymbolOnPortfolioNotification, object: stockSymbol)
                 }
                 break
             case 8:
-                if let stockSymbol = additionalData["symbol"] as? String {
+                if let stockSymbol = additionalData["s"] as? String {
                     NotificationCenter.default.post(name: NotificationManager.requestOpenStockWithIdNotification, object: stockSymbol)
                 }
                 break
