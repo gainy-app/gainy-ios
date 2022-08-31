@@ -108,7 +108,7 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
                     }
                     DispatchQueue.main.async {
                         if let firstStock = tickers.first {
-                            self?.showCardsDetailsViewController([TickerInfo.init(ticker: firstStock)], index: 0)
+                            _ = self?.showCardsDetailsViewController([TickerInfo.init(ticker: firstStock)], index: 0)
                         }
                     }
                 }
@@ -203,20 +203,23 @@ final class MainCoordinator: BaseCoordinator, CoordinatorFinishOutput {
         router.showDetailed(vc)
     }
     
-    func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int) {
+    func showCardsDetailsViewController(_ tickerInfos: [TickerInfo], index: Int) -> [TickerViewController]  {
         
         let vc = viewControllerFactory.instantiateTickersPages()
         var controllers: [UIViewController] = []
+        var tickerDetails: [TickerViewController] = []
         for tickerInfo in tickerInfos {
             let vcInner = self.viewControllerFactory.instantiateTickerDetails()
             vcInner.coordinator = self
             vcInner.viewModel = TickerDetailsViewModel(ticker: tickerInfo)
             controllers.append(vcInner)
+            tickerDetails.append(vcInner)
         }
         vc.stockControllers = controllers
         vc.initialIndex = index
         vc.modalTransitionStyle = .coverVertical
         router.showDetailed(vc)
+        return tickerDetails
     }
     
     func showBrokersViewController(symbol: String, delegate: BrokersViewControllerDelegate?) {

@@ -12,6 +12,11 @@ protocol TickerViewControllerDelegate {
     func didUpdateTickerMetrics()
 }
 
+protocol TickerViewControllerModifyDelegate {
+    
+    func didModifyWatchlistTickers(isAdded: Bool, tickerSymbol: String)
+}
+
 final class TickerViewController: BaseViewController {
     
     //MARK: - Properties
@@ -20,6 +25,7 @@ final class TickerViewController: BaseViewController {
     
     var viewModel: TickerDetailsViewModel?
     var delegate: TickerViewControllerDelegate? = nil
+    var modifyDelegate: TickerViewControllerModifyDelegate? = nil
     
     //MARK: - Outlets
     @IBOutlet private weak var wlView: UIView!
@@ -219,6 +225,7 @@ final class TickerViewController: BaseViewController {
                         return
                     }
                     cell.updateAddToWatchlistToggle()
+                    self.modifyDelegate?.didModifyWatchlistTickers(isAdded: false, tickerSymbol: symbol)
                 }
             }
         } else {
@@ -230,6 +237,7 @@ final class TickerViewController: BaseViewController {
                         return
                     }
                     cell.updateAddToWatchlistToggle()
+                    self.modifyDelegate?.didModifyWatchlistTickers(isAdded: true, tickerSymbol: symbol)
                 }
             }
         }

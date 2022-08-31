@@ -19,7 +19,7 @@ final class HomeViewController: BaseViewController {
     //MARK: - Inner
     private var viewModel: HomeViewModel!
     private var refreshControl = UIRefreshControl()
-    
+    private var needReloadData = false
     //MARK: - Inner
     @IBOutlet private weak var nameLbl: UILabel!
     
@@ -275,9 +275,15 @@ extension HomeViewController: HomeDataSourceDelegate {
         let currentTickerIndex = list.firstIndex(where: {
             $0.symbol == ticker.symbol
         }) ?? 0
-        mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
+        let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
         GainyAnalytics.logEvent("home_wl_tap", params: ["symbol" : ticker.symbol])
         feedbackGenerator?.impactOccurred()
+        
+        if let controllers = controllers {
+            for controller in controllers {
+                controller.modifyDelegate = self
+            }
+        }
     }
 
     func tickerSortCollectionsPressed() {
@@ -307,7 +313,12 @@ extension HomeViewController: HomeDataSourceDelegate {
             let currentTickerIndex = list.firstIndex(where: {
                 $0.symbol == ticker.symbol
             }) ?? 0
-            mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)            
+            let controllers = mainCoordinator?.showCardsDetailsViewController(list, index: currentTickerIndex)
+            if let controllers = controllers {
+                for controller in controllers {
+                    controller.modifyDelegate = self
+                }
+            }
             GainyAnalytics.logEvent("home_index_tap", params: ["symbol" : symbol])
             feedbackGenerator?.impactOccurred()
         }
@@ -322,6 +333,14 @@ extension HomeViewController: HomeDataSourceDelegate {
         viewModel.swapCollections(from: fromIndex, to: toIndex)
         impactOccured()
         self.tableView.reloadData()
+    }
+    
+    func collectionDeleted() {
+        
+        self.viewModel.loadHomeData {
+            self.viewModel.sortFavCollections()
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -402,6 +421,22 @@ extension HomeViewController: SingleCollectionDetailsViewControllerDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+extension HomeViewController: TickerViewControllerModifyDelegate {
+    
+    func didModifyWatchlistTickers(isAdded: Bool, tickerSymbol: String) {
+        
+        self.reloadWatchlistTickers(isAdded: isAdded, tickerSymbol: tickerSymbol)
+    }
+    
+    private func reloadWatchlistTickers(isAdded: Bool, tickerSymbol: String) {
+        
+        self.viewModel.loadHomeData {
+            self.viewModel.sortWatchlist()
+            self.tableView.reloadData()
         }
     }
 }

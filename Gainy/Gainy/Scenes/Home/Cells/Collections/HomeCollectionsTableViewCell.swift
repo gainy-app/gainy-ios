@@ -11,6 +11,7 @@ import Kingfisher
 protocol HomeCollectionsTableViewCellDelegate: AnyObject {
     func collectionSelected(collection: RemoteShortCollectionDetails)
     func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int)
+    func collectionDeleted(collection: RemoteShortCollectionDetails, collectionID: Int)
 }
 
 final class HomeCollectionsTableViewCell: UITableViewCell {
@@ -30,6 +31,8 @@ final class HomeCollectionsTableViewCell: UITableViewCell {
             innerCollectionView.dragDelegate = self
             innerCollectionView.dropDelegate = self
             innerCollectionView.setCollectionViewLayout(customLayout, animated: true)
+            innerCollectionView.clipsToBounds = false
+            innerCollectionView.layer.masksToBounds = false
         }
     }
     
@@ -73,6 +76,8 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: HomeCollectionsInnerTableViewCell = collectionView.dequeueReusableCell(for: indexPath)
+        cell.clipsToBounds = false
+        cell.layer.masksToBounds = false
         cell.collection = collections[indexPath.row]
         cell.onDeleteButtonPressed = { [weak self] in
             let yesAction = UIAlertAction.init(title: "Yes", style: .default) { action in
@@ -105,8 +110,9 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
             }
             innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
             
-            collections.remove(at: delIndex)
+            let collection = collections.remove(at: delIndex)
             UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
+            self.delegate?.collectionDeleted(collection: collection, collectionID: itemId)
         }
     }
 }

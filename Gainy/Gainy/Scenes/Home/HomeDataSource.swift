@@ -21,6 +21,7 @@ protocol HomeDataSourceDelegate: AnyObject {
     func topTickerTapped(symbol: String)
     func balanceTapped()
     func collectionMoved(from fromIndex: Int, to toIndex: Int)
+    func collectionDeleted()
 }
 
 final class HomeDataSource: NSObject {
@@ -107,9 +108,11 @@ extension HomeDataSource: SkeletonTableViewDataSource {
         case .watchlist:
             let cell = tableView.dequeueReusableCell(withIdentifier: HomeWatchlistTableViewCell.cellIdentifier, for: indexPath) as! HomeWatchlistTableViewCell
             cell.heightUpdated = {[weak self] newHeight in
+                UIView.setAnimationsEnabled(false)
                 self?.tableView?.beginUpdates()
                 self?.cellHeights[.watchlist] = newHeight
                 self?.tableView?.endUpdates()
+                UIView.setAnimationsEnabled(true)
             }
             cell.sortingPressed = {[weak self] in
                 self?.sortWatchlistTapped()
@@ -361,6 +364,9 @@ extension HomeDataSource: HomeCollectionsTableViewCellDelegate {
     }
     func collectionMoved(collection: RemoteShortCollectionDetails, from fromIndex: Int, to toIndex: Int) {
         delegate?.collectionMoved(from: fromIndex, to: toIndex)
+    }
+    func collectionDeleted(collection: RemoteShortCollectionDetails, collectionID: Int) {
+        delegate?.collectionDeleted()
     }
 }
 
