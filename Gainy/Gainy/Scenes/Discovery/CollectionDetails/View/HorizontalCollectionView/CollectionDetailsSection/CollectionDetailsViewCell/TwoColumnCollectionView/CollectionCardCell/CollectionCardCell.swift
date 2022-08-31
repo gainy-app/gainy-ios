@@ -328,6 +328,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             UserProfileManager.shared.removeTickerFromWatchlist(symbol) { success in
                 if success {
                     self.addRemoveWatchlistButton.isSelected = false
+                    NotificationCenter.default.post(name: Notification.Name.didUpdateWatchlist, object: nil)
                 }
             }
         } else {
@@ -335,6 +336,7 @@ final class CollectionCardCell: RoundedWithShadowCollectionViewCell {
             UserProfileManager.shared.addTickerToWatchlist(symbol) { success in
                 if success {
                     self.addRemoveWatchlistButton.isSelected = true
+                    NotificationCenter.default.post(name: Notification.Name.didUpdateWatchlist, object: nil)
                 }
             }
         }
