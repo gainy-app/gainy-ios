@@ -191,15 +191,6 @@ final class CollectionDetailsViewCell: UICollectionViewCell {
         
         collectionInvestButtonView.configureWith(name: viewModel.name, imageName: viewModel.image, imageUrl: viewModel.imageUrl, collectionId: viewModel.id)
         
-        NotificationCenter.default.publisher(for: Notification.Name.didUpdateWatchlist).sink { _ in
-        } receiveValue: { notification in
-            if Constants.CollectionDetails.watchlistCollectionID == viewModel.id {
-                self.refreshData {
-                    
-                }
-            }
-        }.store(in: &cancellables)
-        
         NotificationCenter.default.publisher(for: NotificationManager.ttfRangeSyncNotification)
             .receive(on: DispatchQueue.main)
             .sink { _ in
