@@ -1,19 +1,13 @@
-iOS v1.4.11 #280
+iOS v1.4.12 #281
  available
 :globe_with_meridians: Server - PROD
 UI Improvements
 
 :new: New:
-• Home: TTFs re-order by drag-and-drop added
-• TTFs: 1W is default range
-• TTFs: range sync between cells
-• Stock: all tags for Rec
-• ETF: Rec section returned
-• Handle new push notifications (Home, Portfolio, Ticker)
+• -
 
 :hammer_and_wrench: Improvements
-• Apple logs improved
-• QA UI improvements
+• -
 
 :red_circle: Important Notes:
 If feature is not listed in New or in Improvements - IT’S NOT DONE
