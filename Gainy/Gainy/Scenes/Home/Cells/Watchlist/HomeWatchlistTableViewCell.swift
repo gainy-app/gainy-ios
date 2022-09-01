@@ -18,6 +18,8 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
     weak var delegate: HomeWatchlistTableViewCellDelegate?
     private let cellHeight: CGFloat = 88
     let expandBtn = ResponsiveButton()
+    var sortingButton: ResponsiveButton? = nil
+    var sortingLabel: UILabel? = nil
     var heightUpdated: ((CGFloat) -> Void)?
     var sortingPressed: (() -> Void)?
     var expandPressed: (() -> Void)?
@@ -32,6 +34,8 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
         let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
         sortLabel.text = settings.sortingText()
         sortLabel.sizeToFit()
+        self.sortingLabel = sortLabel
+        self.sortingButton = button
         
         self.contentView.addSubview(button)
         button.autoPinEdge(toSuperviewEdge: .left, withInset: 16.0)
@@ -97,6 +101,11 @@ final class HomeWatchlistTableViewCell: UITableViewCell {
     
     var watchlist: [RemoteTickerDetails] = [] {
         didSet {
+            let settings: CollectionSettings = CollectionsDetailsSettingsManager.shared.getSettingByID(Constants.CollectionDetails.watchlistCollectionID)
+            self.sortingLabel?.text = settings.sortingText()
+            self.sortingLabel?.sizeToFit()
+            self.sortingButton?.sizeToFit()
+            
             innerCollectionView.reloadData()
             expandBtn.isHidden = watchlist.count < 5
             calcSize(isSelected: expandBtn.isSelected)
