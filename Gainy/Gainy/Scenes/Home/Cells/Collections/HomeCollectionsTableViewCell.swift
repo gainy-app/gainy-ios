@@ -106,13 +106,12 @@ extension HomeCollectionsTableViewCell: UICollectionViewDataSource {
         if let delIndex = collections.firstIndex(where: {$0.id == itemId}) {
             
             UserProfileManager.shared.removeFavouriteCollection(itemId) { success in
-                //self.removeFromYourCollection(itemId: itemId)
+                
+                self.innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
+                let collection = self.collections.remove(at: delIndex)
+                UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
+                self.delegate?.collectionDeleted(collection: collection, collectionID: itemId)
             }
-            innerCollectionView.deleteItems(at: [IndexPath(row: delIndex, section: 0)])
-            
-            let collection = collections.remove(at: delIndex)
-            UserProfileManager.shared.yourCollections.removeAll { $0.id == itemId }
-            self.delegate?.collectionDeleted(collection: collection, collectionID: itemId)
         }
     }
 }
