@@ -48,6 +48,7 @@ final class HoldingsViewController: BaseViewController {
             tableView.estimatedSectionFooterHeight = 0
             tableView.estimatedSectionHeaderHeight = 0
             tableView.backgroundColor = .clear
+            tableView.contentInsetAdjustmentBehavior = .never
             tableView.showsHorizontalScrollIndicator = false
             tableView.showsVerticalScrollIndicator = false
             tableView.dataSource = viewModel.dataSource

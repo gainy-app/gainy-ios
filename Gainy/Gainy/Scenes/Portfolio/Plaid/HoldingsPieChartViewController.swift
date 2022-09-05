@@ -56,6 +56,7 @@ final class HoldingsPieChartViewController: BaseViewController {
         
         let layout = UICollectionViewFlowLayout.init()
         collectionView = DetectableCollectionView.init(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.normalizeAdjustedContentInset = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.addSubview(refreshControl)
         collectionView.alwaysBounceVertical = true
